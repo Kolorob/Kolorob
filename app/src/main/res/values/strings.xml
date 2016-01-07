@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">KolorobDemoVersion</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_location_ask">LocationAskActivity</string>
+    <string name="title_activity_button_click_baunia">ButtonClickBaunia</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="txt_cd_icon_cat">Icon of the category</string>
+    <string name="txt_cd_header_icon_ofcat_subcatlist">header icon of the category</string>
+    <string name="txt_inst_sub_cat_choose">লিস্ট দেখতে চাইলে এখানে টিপ দেন</string>
+    <string name="txt_sub_cat_inst">যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর টিপ দেন</string>
+</resources>
