@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String ENT_TRAINING_CENTER = "ent_training_center";
 
     // TODO Write table names for all other tables
-
+public static final String FINANCIAL_SERVICE_PROVIDER="finance_provider";
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
