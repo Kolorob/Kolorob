@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String EDU_SUB_CAT_TABLE = "edu_sub_category";
 
     public static final String ENT_PROVIDER_TABLE = "ent_provider";
+    public static final String HEALTH_PROVIDER_TABLE = "health_provider";
     public static final String ENT_BOOKSHOP_TABLE = "ent_bookshop";
     public static final String ENT_FIELD = "ent_field";
     public static final String ENT_FIT_BEAUTY = "ent_fit_beauty";
