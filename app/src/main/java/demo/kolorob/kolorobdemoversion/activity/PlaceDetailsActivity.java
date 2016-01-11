@@ -278,7 +278,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                     case AppConstants.ENTERTAINMENT:
                         EntertainmentServiceProviderTable entertainmentServiceProviderTables = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
-                        entertainmentServiceProviderItems = entertainmentServiceProviderTables.getAllEntertainmentSubCategoriesInfo( subcategoryId);
+                        entertainmentServiceProviderItems = entertainmentServiceProviderTables.getAllEntertainmentSubCategoriesInfo( currentCategoryID, subcategoryId);
                         ArrayList<String> itemNameEnt = new ArrayList<String>();
                         currentEntertainmentServiceProvider = entertainmentServiceProviderItems;
                         for (EntertainmentServiceProviderItem si : entertainmentServiceProviderItems) {

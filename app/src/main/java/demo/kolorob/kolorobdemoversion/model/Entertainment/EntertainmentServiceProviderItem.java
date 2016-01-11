@@ -31,6 +31,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
     private String address;
     private String latitude;
     private String longitude;
+    private int categoryId;
 
 
 
@@ -55,7 +56,8 @@ public class EntertainmentServiceProviderItem implements Serializable {
             String area,
             String address,
             String latitude,
-            String longitude){
+            String longitude,
+            int categoryId){
 
             this.nodeId=nodeId;
             this.entSubCategoryId=entSubCategoryId;
@@ -78,7 +80,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
             this.address=address;
             this.latitude=latitude;
             this.longitude=longitude;
-
+            this.categoryId=categoryId;
 
 
             }
@@ -107,7 +109,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
         String _address = jo.getString("address");
         String _latitude = jo.getString("latitude");
         String _longitude= jo.getString("longitude");
-
+        int _categoryId= jo.getInt("category_id");
 
         return new EntertainmentServiceProviderItem(
                 _nodeId,
@@ -130,14 +132,14 @@ public class EntertainmentServiceProviderItem implements Serializable {
                 _area,
                 _address,
                 _latitude,
-                _longitude
+                _longitude,
+                _categoryId
 
 
 
 
                 );
     }
-
 
 
     public String getNodeId() {
@@ -223,4 +225,8 @@ public class EntertainmentServiceProviderItem implements Serializable {
     public String getLongitude() {
         return longitude;
     }
+    public int getCategoryId() {
+        return categoryId;
+    }
+
 }
