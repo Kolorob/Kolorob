@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
-/**
- * Created by Yeakub Hassan Rafi on 26-Dec-15.
- */
+
 public class MapInfoWindowAdapter implements InfoWindowAdapter {
 
     private final View myContentsView ;
@@ -37,12 +38,14 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     private ArrayList<EducationServiceProviderItem> educationServiceProvider;
     private ArrayList<EntertainmentServiceProviderItem>entertainmentServiceProvider;
     private ArrayList<HealthServiceProviderItem>healthServiceProvider;
-
+    private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+    private ArrayList<JobServiceProviderItem> jobServiceProvider;
+    private ArrayList<FinancialServiceProviderItem> financialServiceProvider;
 
 
     /********Override the MapInfoWindowAdapter method for Education with getting Education Item object***********/
 
-    public MapInfoWindowAdapter(final Context context,int cat_id,ArrayList<EducationServiceProviderItem> et){
+    public MapInfoWindowAdapter(int cat_id,ArrayList<EducationServiceProviderItem> et,final Context context){
         inflater = (LayoutInflater)context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -104,12 +107,59 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     /********Override the MapInfoWindowAdapter method for Legal with getting Legal Item object***********/
 
 
+    public  MapInfoWindowAdapter(final Context context,int cat_id,ArrayList<LegalAidServiceProviderItem> et){
+        inflater = (LayoutInflater)context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        legalaidServiceProvider = et;//setting the legal object
+
+        categoryId=cat_id;
+        myContentsView= inflater.inflate(R.layout.small_info, null);
+        myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        close = (ImageView) myContentsView.findViewById(R.id.iv_close);
+        itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+
+    }
     /********Override the MapInfoWindowAdapter method for Financial with getting Financial Item object***********/
+    public  MapInfoWindowAdapter(ArrayList<FinancialServiceProviderItem> et,int cat_id,final Context context){
+        inflater = (LayoutInflater)context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        financialServiceProvider = et;//setting the financial object
+
+        categoryId=cat_id;
+        myContentsView= inflater.inflate(R.layout.small_info, null);
+        myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        close = (ImageView) myContentsView.findViewById(R.id.iv_close);
+        itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+
+    }
 
 
     /********Override the MapInfoWindowAdapter method for Job with getting Job Item object***********/
+
+    public  MapInfoWindowAdapter(ArrayList<JobServiceProviderItem> et,final Context context,int cat_id){
+        inflater = (LayoutInflater)context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        jobServiceProvider = et;//setting the job object
+
+        categoryId=cat_id;
+        myContentsView= inflater.inflate(R.layout.small_info, null);
+        myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        close = (ImageView) myContentsView.findViewById(R.id.iv_close);
+        itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+
+    }
 
 
 
@@ -172,13 +222,47 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
-                //TODO write necessary codes for legal
+                for(LegalAidServiceProviderItem et:legalaidServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        itemName.setText(et.getLegalaidNameEng());
+                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
+                        itemType.setText("ধরন ঃ  "+et.getArea());
+                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
+                    }
+                }
                 break;
             case AppConstants.FINANCIAL:
-                //TODO write necessary codes for financial
+                for(FinancialServiceProviderItem et:financialServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        itemName.setText(et.getNodeName());
+                        itemType.setText("ঠিকানা ঃ  "+et.getArea());
+                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+                    }
+                }
                 break;
             case AppConstants.JOB:
-                //TODO write necessary codes for job
+                for(JobServiceProviderItem et:jobServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        itemName.setText(et.getAddress());
+                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
+                        itemType.setText("ধরন ঃ  "+et.getArea());
+                    }
+                }
                 break;
             default:
                 break;
