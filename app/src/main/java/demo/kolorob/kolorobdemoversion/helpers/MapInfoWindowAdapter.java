@@ -247,6 +247,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                         itemName.setText(et.getNodeName());
                         itemType.setText("ঠিকানা ঃ  "+et.getArea());
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+
                     }
                 }
                 break;
