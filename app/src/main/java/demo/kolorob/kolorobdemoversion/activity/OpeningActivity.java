@@ -23,13 +23,19 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.parser.VolleyApiParser;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -173,6 +179,58 @@ public class OpeningActivity extends BaseActivity {
                     }
                 }
             });
+            VolleyApiParser.getRequest(OpeningActivity.this, "legal_aid", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+
+            VolleyApiParser.getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveJobServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            VolleyApiParser.getRequest(OpeningActivity.this, "finance", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
 
 
@@ -274,11 +332,53 @@ public class OpeningActivity extends BaseActivity {
             }
         }
 
-        //TODO write this at the end of the last API saving method
+    }
+    private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
+        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
+        int legalaidServiceProviderCount = legalaidServiceProvider.length();
+
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+            try {
+                JSONObject jo = legalaidServiceProvider.getJSONObject(i);
+                LegalAidServiceProviderItem et = LegalAidServiceProviderItem.parseLegalAidServiceProviderItem(jo);
+                legalAidServiceProviderTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveJobServiceProvider(JSONArray jobServiceProvider) {
+        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(OpeningActivity.this);
+        int jobServiceProviderCount = jobServiceProvider.length();
+
+        for (int i = 0; i < jobServiceProviderCount; i++) {
+            try {
+                JSONObject jo = jobServiceProvider.getJSONObject(i);
+                JobServiceProviderItem et = JobServiceProviderItem.parseJobServiceProviderItem(jo);
+                jobServiceProviderTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveFinancialServiceProvider(JSONArray financialServiceProvider) {
+        FinancialServiceProviderTable financialServiceProviderTable = new  FinancialServiceProviderTable(OpeningActivity.this);
+        int financialServiceProviderCount = financialServiceProvider.length();
+
+        for (int i = 0; i < financialServiceProviderCount; i++) {
+            try {
+                JSONObject jo = financialServiceProvider.getJSONObject(i);
+                FinancialServiceProviderItem et = FinancialServiceProviderItem.parseFinancialServiceProviderItem(jo);
+                financialServiceProviderTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
         startActivity(i);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
