@@ -100,8 +100,10 @@ public class AppConstants {
     public static final String KEY_ERROR = "error";
     //endregion
 
+    public static final String KEY_DETAILS_JOB = "jobprovider";
     public static final String KEY_DETAILS_VIEW = "eduProvider";
-
+    public static final String KEY_DETAILS_LEGAL = "legalaidprovider";
+    public static final String KEY_DETAILS_FINANCIAL = "financialprovider";
     public static final int EDUCATION= 1;
     public static final int HEALTH = 2;
     public static final int ENTERTAINMENT = 3;
