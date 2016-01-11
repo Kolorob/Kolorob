@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
 import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
 import demo.kolorob.kolorobdemoversion.helpers.MapInfoWindowAdapter;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -249,9 +250,9 @@ public class MapFragment extends Fragment implements
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        Intent ii = new Intent(getActivity(),DetailsInfoActivity.class);
-                        ii.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
-                        startActivity(ii);
+                        Intent hel = new Intent(getActivity(),DetailsInfoActivityHealth.class);
+                        hel.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
+                        startActivity(hel);
                         break;
                     }
                 }

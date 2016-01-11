@@ -43,6 +43,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.DetailsInfoActivity"
             android:theme="@style/Theme.Transparent"></activity>
+
+        <activity android:name=".activity.DetailsInfoActivityHealth"
+            android:theme="@style/Theme.Transparent"></activity>
     </application>
 
 </manifest>

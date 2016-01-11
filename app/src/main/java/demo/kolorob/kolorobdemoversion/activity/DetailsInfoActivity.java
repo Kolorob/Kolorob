@@ -2,7 +2,6 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,19 +55,19 @@ public class DetailsInfoActivity extends Activity  {
         /**
         *following codes only for education. This may vary for different category.
         * */
-        itemName = (TextView) findViewById(R.id.tv_header);
-        itemAddress = (TextView) findViewById(R.id.tv_item_location);
-        itemType = (TextView) findViewById(R.id.tv_item_type);
-        itemContact = (TextView) findViewById(R.id.tv_item_contact);
+        itemName = (TextView) findViewById(R.id.tv_header_health);
+        itemAddress = (TextView) findViewById(R.id.tv_item_location_health);
+        itemType = (TextView) findViewById(R.id.tv_item_type_health);
+        itemContact = (TextView) findViewById(R.id.tv_item_contact_health);
         totalStudents = (TextView) findViewById(R.id.tv_total_students);
         totalClasses = (TextView) findViewById(R.id.tv_total_class);
         totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
         playground = (TextView) findViewById(R.id.tv_playground);
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-        email = (TextView) findViewById(R.id.tv_email);
-        website = (TextView) findViewById(R.id.tv_website);
-        fb = (TextView) findViewById(R.id.tv_fb);
+        email = (TextView) findViewById(R.id.tv_email_health);
+        website = (TextView) findViewById(R.id.tv_website_health);
+        fb = (TextView) findViewById(R.id.tv_fb_health);
 
 
         itemName.setText(educationServiceProviderItem.getEduNameEng());

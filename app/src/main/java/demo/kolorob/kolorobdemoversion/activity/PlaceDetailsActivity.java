@@ -257,7 +257,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                                         currHealthItem = et;
                                     }
                                 }
-                                Intent hel = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
+                                Intent hel = new Intent(PlaceDetailsActivity.this, DetailsInfoActivityHealth.class);
                                 hel.putExtra(AppConstants.KEY_DETAILS_VIEW, currHealthItem);
                                 startActivity(hel);
                             }

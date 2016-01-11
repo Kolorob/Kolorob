@@ -1,18 +1,14 @@
 package demo.kolorob.kolorobdemoversion.helpers;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -20,7 +16,6 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Education.Entertainment;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -58,9 +53,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_health);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_health);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_health);
 
     }
 
@@ -77,9 +72,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_health);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_health);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_health);
 
     }
 
@@ -96,9 +91,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_health);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_health);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_health);
 
     }
 

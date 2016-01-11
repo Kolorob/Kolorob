@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -157,105 +157,9 @@
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
-                android:layout_below="@+id/tv_transport_facility"
                 android:layout_alignLeft="@+id/textView12_health"
-                android:layout_alignStart="@+id/textView12_health" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView5"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/green_line_horizontal"
-                android:layout_below="@+id/textView13_health"
-                android:layout_alignParentLeft="true"
-                android:padding="5dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Total Students :"
-                android:id="@+id/tv_total_students"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/imageView4"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Total Classes"
-                android:id="@+id/tv_total_class"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/tv_total_students"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Total Teachers :"
-                android:id="@+id/tv_total_teachers"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/tv_total_class"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Hostel Facility :"
-                android:id="@+id/tv_hostel_fac"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/tv_total_teachers"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Playground :"
-                android:id="@+id/tv_playground"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/tv_hostel_fac"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Transport Facility :"
-                android:id="@+id/tv_transport_facility"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/tv_playground"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
+                android:layout_alignStart="@+id/textView12_health"
+                android:layout_below="@+id/imageView4" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -268,9 +172,9 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="4dp"
-                android:layout_below="@+id/imageView5"
                 android:layout_alignLeft="@+id/tv_website_health"
-                android:layout_alignStart="@+id/tv_website_health" />
+                android:layout_alignStart="@+id/tv_website_health"
+                android:layout_below="@+id/textView13_health" />
 
             <TextView
                 android:layout_width="wrap_content"
