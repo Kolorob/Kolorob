@@ -55,19 +55,19 @@ public class DetailsInfoActivity extends Activity  {
         /**
         *following codes only for education. This may vary for different category.
         * */
-        itemName = (TextView) findViewById(R.id.tv_header_health);
-        itemAddress = (TextView) findViewById(R.id.tv_item_location_health);
-        itemType = (TextView) findViewById(R.id.tv_item_type_health);
-        itemContact = (TextView) findViewById(R.id.tv_item_contact_health);
+        itemName = (TextView) findViewById(R.id.tv_header_entertainment);
+        itemAddress = (TextView) findViewById(R.id.tv_item_location_entertainment);
+        itemType = (TextView) findViewById(R.id.tv_item_type_entertainment);
+        itemContact = (TextView) findViewById(R.id.tv_item_contact_entertainment);
         totalStudents = (TextView) findViewById(R.id.tv_total_students);
         totalClasses = (TextView) findViewById(R.id.tv_total_class);
         totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
         playground = (TextView) findViewById(R.id.tv_playground);
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-        email = (TextView) findViewById(R.id.tv_email_health);
-        website = (TextView) findViewById(R.id.tv_website_health);
-        fb = (TextView) findViewById(R.id.tv_fb_health);
+        email = (TextView) findViewById(R.id.tv_email_entertainment);
+        website = (TextView) findViewById(R.id.tv_website_entertainment);
+        fb = (TextView) findViewById(R.id.tv_fb_entertainment);
 
 
         itemName.setText(educationServiceProviderItem.getEduNameEng());

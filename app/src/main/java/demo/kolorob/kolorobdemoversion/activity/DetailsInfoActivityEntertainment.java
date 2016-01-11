@@ -1,29 +1,27 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 /**
- * Created by Mazharul.Islam1 on 1/11/2016.
+ * Created by Mazharul.Islam1 on 1/10/2016.
  */
 
 import android.app.Activity;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
-
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
-public class DetailsInfoActivityHealth extends Activity  {
+public class DetailsInfoActivityEntertainment extends Activity  {
 
     ImageView close;
     TextView close_tv;
 
     /**
-     * Following components are only for education
+     * Following components are only for entertainment
      * For other categories this components may vary
      * In that case design the layout for specific category and call them in  setContentView(R.layout.activity_details_info);
      * */
@@ -31,7 +29,6 @@ public class DetailsInfoActivityHealth extends Activity  {
 
     private TextView itemName;
     private TextView itemAddress;
-    private TextView itemType;
     private TextView itemContact;
 
     private TextView email;
@@ -39,42 +36,41 @@ public class DetailsInfoActivityHealth extends Activity  {
     private TextView fb;
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
-    HealthServiceProviderItem healthServiceProviderItem;
+    EntertainmentServiceProviderItem entertainmentServiceProviderItem;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.health_details_info);
+        setContentView(R.layout.activity_details_info_entertainment);
         Intent intent = getIntent();
         if (null != intent)
         {
-            healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_VIEW);
+            entertainmentServiceProviderItem = (EntertainmentServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_VIEW);
 
         }
         /**
          *following codes only for education. This may vary for different category.
          * */
-        itemName = (TextView) findViewById(R.id.tv_header_entertainment);
-        itemAddress = (TextView) findViewById(R.id.tv_item_location_entertainment);
-        itemType = (TextView) findViewById(R.id.tv_item_type_entertainment);
-        itemContact = (TextView) findViewById(R.id.tv_item_contact_entertainment);
+        itemName = (TextView) findViewById(R.id.tv_header);
+        itemAddress = (TextView) findViewById(R.id.tv_item_locationEnt);
 
-        email = (TextView) findViewById(R.id.tv_email_entertainment);
-        website = (TextView) findViewById(R.id.tv_website_entertainment);
-        fb = (TextView) findViewById(R.id.tv_fb_entertainment);
+        itemContact = (TextView) findViewById(R.id.tv_item_locationEnt);
+
+        email = (TextView) findViewById(R.id.tv_email);
+        website = (TextView) findViewById(R.id.tv_website);
+        fb = (TextView) findViewById(R.id.tv_fb);
 
 
-        itemName.setText(healthServiceProviderItem.getNodeName());
-        itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getArea());
-        itemType.setText("ধরন ঃ  "+healthServiceProviderItem.getNodeType());
-        itemContact.setText("যোগাযোগের উপায় ঃ  "+healthServiceProviderItem.getNodeContact());
+        itemName.setText(entertainmentServiceProviderItem.getNodeNameBn());
+        itemAddress.setText("ঠিকানা ঃ  "+ AppConstants.BAUNIABADH);
 
-        email.setText("ইমেইল ঃ  "+healthServiceProviderItem.getNodeEmail());
-        website.setText("ওয়েবসাইট ঃ  "+healthServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getNodeFacebook());
+        itemContact.setText("যোগাযোগের উপায় :"+entertainmentServiceProviderItem.getNodeContact());
 
+        email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
+        website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
+        fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
 
 
         //common for all category
@@ -101,4 +97,3 @@ public class DetailsInfoActivityHealth extends Activity  {
         super.onBackPressed();
     }
 }
-

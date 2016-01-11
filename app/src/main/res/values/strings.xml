@@ -8,4 +8,7 @@
     <string name="txt_cd_header_icon_ofcat_subcatlist">header icon of the category</string>
     <string name="txt_inst_sub_cat_choose">লিস্ট দেখতে চাইলে এখানে টিপ দেন</string>
     <string name="txt_sub_cat_inst">যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর টিপ দেন</string>
+    <string name="title_activity_details_info_activity_entertainment">
+        DetailsInfoActivityEntertainment
+    </string>
 </resources>

@@ -53,9 +53,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_health);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_health);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_health);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_entertainment);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_entertainment);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_entertainment);
 
     }
 
@@ -72,9 +72,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_health);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_health);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_health);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_entertainment);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_entertainment);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_entertainment);
 
     }
 
@@ -91,9 +91,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_health);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_health);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_health);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_entertainment);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_entertainment);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_entertainment);
 
     }
 

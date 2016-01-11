@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
 import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
 import demo.kolorob.kolorobdemoversion.helpers.MapInfoWindowAdapter;
@@ -76,8 +77,7 @@ public class MapFragment extends Fragment implements
     }
 
 
-    //TODO Implement the set function for all subcategory item.
-
+    //TODO Implement the set function for all subcategory item.ি
     /********************set function for Education subcategory***********************/
 
     public void setEducationServiceProvider(ArrayList<EducationServiceProviderItem> et)
@@ -267,12 +267,15 @@ public class MapFragment extends Fragment implements
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        Intent ii = new Intent(getActivity(),DetailsInfoActivity.class);
-                        ii.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
-                        startActivity(ii);
+                        Intent ent = new Intent(getActivity(),DetailsInfoActivityEntertainment.class);
+                        ent.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
+                        startActivity(ent);
                         break;
                     }
                 }
+
+
+
 
                 //TODO write necessary codes for entertainment
                 break;

@@ -257,7 +257,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                                         currHealthItem = et;
                                     }
                                 }
-                                Intent hel = new Intent(PlaceDetailsActivity.this, DetailsInfoActivityHealth.class);
+                                Intent hel = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
                                 hel.putExtra(AppConstants.KEY_DETAILS_VIEW, currHealthItem);
                                 startActivity(hel);
                             }
@@ -297,7 +297,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                                         currEntItem = et;
                                     }
                                 }
-                                Intent iiEnt = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
+                                Intent iiEnt = new Intent(PlaceDetailsActivity.this, DetailsInfoActivityEntertainment.class);
                                 iiEnt.putExtra(AppConstants.KEY_DETAILS_VIEW, currEntItem);
                                 startActivity(iiEnt);
                             }
