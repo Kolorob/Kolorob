@@ -32,7 +32,10 @@ import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
 import demo.kolorob.kolorobdemoversion.helpers.MapInfoWindowAdapter;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class MapFragment extends Fragment implements
@@ -54,7 +57,9 @@ public class MapFragment extends Fragment implements
     private ArrayList<HealthServiceProviderItem> healthServiceProvider=null;
 
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider=null;
-
+    private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider=null;
+    private ArrayList<JobServiceProviderItem> jobServiceProvider=null;
+    private ArrayList<FinancialServiceProviderItem> financialServiceProvider=null;
     public MapFragment()
     {
 
@@ -105,16 +110,25 @@ public class MapFragment extends Fragment implements
 
     /********************set function for Legal subcategory***********************/
 
-
+    public void setLegalaidServiceProvider(ArrayList<LegalAidServiceProviderItem> et)
+    {
+        legalaidServiceProvider=et;
+    }
 
     /********************set function for Financial subcategory***********************/
 
 
+    public void setFinancialServiceProvider(ArrayList<FinancialServiceProviderItem> et)
+    {
+        financialServiceProvider=et;
+    }
 
     /********************set function for Job subcategory***********************/
 
-
-
+    public void setJobServiceProvider(ArrayList<JobServiceProviderItem> et)
+    {
+        jobServiceProvider=et;
+    }
 
 
     @Override
@@ -206,13 +220,31 @@ public class MapFragment extends Fragment implements
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
-                //TODO write necessary codes for legal
+                googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(getActivity(), categoryId, legalaidServiceProvider));
+                if(legalaidServiceProvider!=null) {
+                    for (LegalAidServiceProviderItem et :legalaidServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        drawMarker(location, et.getLegalaidNameEng());
+                    }
+                }
                 break;
             case AppConstants.FINANCIAL:
-                //TODO write necessary codes for financial
+                googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(financialServiceProvider,categoryId ,getActivity() ));
+                if(financialServiceProvider!=null) {
+                    for (FinancialServiceProviderItem et :financialServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        drawMarker(location, et.getNodeName());
+                    }
+                }
                 break;
             case AppConstants.JOB:
-                //TODO write necessary codes for job
+                googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(jobServiceProvider,getActivity(), categoryId ));
+                if(jobServiceProvider!=null) {
+                    for (JobServiceProviderItem et :jobServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        drawMarker(location, et.getIdentifierId());
+                    }
+                }
                 break;
             default:
                 break;
@@ -283,13 +315,51 @@ public class MapFragment extends Fragment implements
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
-                //TODO write necessary codes for legal
+
+                for(LegalAidServiceProviderItem et:legalaidServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        Intent ii = new Intent(getActivity(),DetailsLegalActivity.class);
+                        ii.putExtra(AppConstants.KEY_DETAILS_LEGAL,et);
+                        startActivity(ii);
+                        break;
+                    }
+                }
                 break;
             case AppConstants.FINANCIAL:
-                //TODO write necessary codes for financial
+
+                for(FinancialServiceProviderItem et:financialServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        Intent ii = new Intent(getActivity(),DetailsFinancialActivity.class);
+                        ii.putExtra(AppConstants.KEY_DETAILS_FINANCIAL,et);
+                        startActivity(ii);
+                        break;
+                    }
+                }
                 break;
             case AppConstants.JOB:
-                //TODO write necessary codes for job
+                for(JobServiceProviderItem et:jobServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        Intent ii = new Intent(getActivity(), DetailsJobActivity.class);
+                        ii.putExtra(AppConstants.KEY_DETAILS_JOB,et);
+                        startActivity(ii);
+                        break;
+                    }
+                }
                 break;
             default:
                 break;
