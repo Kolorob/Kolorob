@@ -25,9 +25,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
+import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity;
 import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
 import demo.kolorob.kolorobdemoversion.helpers.MapInfoWindowAdapter;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -182,7 +185,7 @@ public class MapFragment extends Fragment implements
         switch (categoryId)
         {
             case AppConstants.EDUCATION:
-                googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(getActivity(),categoryId,educationServiceProvider));
+                googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(categoryId,educationServiceProvider,getActivity()));
                 if(educationServiceProvider!=null) {
                     for (EducationServiceProviderItem et : educationServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
@@ -339,9 +342,9 @@ public class MapFragment extends Fragment implements
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        Intent ii = new Intent(getActivity(),DetailsFinancialActivity.class);
-                        ii.putExtra(AppConstants.KEY_DETAILS_FINANCIAL,et);
-                        startActivity(ii);
+                        Intent iij = new Intent(getActivity(),DetailsFinancialActivity.class);
+                        iij.putExtra(AppConstants.KEY_DETAILS_FINANCIAL,et);
+                        startActivity(iij);
                         break;
                     }
                 }
