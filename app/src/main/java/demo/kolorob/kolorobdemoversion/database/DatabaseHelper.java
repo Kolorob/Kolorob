@@ -37,8 +37,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String ENT_THEATRE = "ent_theatre";
     public static final String ENT_TRAINING_CENTER = "ent_training_center";
 
+    public static final String LEGAL_AID_SERVICE_PROVIDER_TABLE="legal_aid_provider";
+    public static final String LEGAL_AID_LEGAL_ADVICE_TABLE="legal_aid_legal_advice";
+    public static final String LEGAL_AID_SALISHI_TABLE="legal_aid_salishi";
+
     // TODO Write table names for all other tables
-public static final String FINANCIAL_SERVICE_PROVIDER="finance_provider";
+    public static final String JOB_SERVICE_PROVIDER_TABLE="job_provider";
+    public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -58,7 +63,11 @@ public static final String FINANCIAL_SERVICE_PROVIDER="finance_provider";
         db.execSQL("DROP TABLE IF EXISTS " + SUB_CATEGORY);
 
         db.execSQL("DROP TABLE IF EXISTS " + EDU_PROVIDER_TABLE);
-
+        db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_SERVICE_PROVIDER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_LEGAL_ADVICE_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_SALISHI_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_SERVICE_PROVIDER_TABLE);
         // TODO Write drop commands for all the available tables
 
         onCreate(db);
