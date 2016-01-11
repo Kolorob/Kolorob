@@ -8,9 +8,9 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +30,7 @@ import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
 import demo.kolorob.kolorobdemoversion.helpers.MapInfoWindowAdapter;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class MapFragment extends Fragment implements
@@ -48,6 +49,8 @@ public class MapFragment extends Fragment implements
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> educationServiceProvider=null;
+    private ArrayList<HealthServiceProviderItem> healthServiceProvider=null;
+
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider=null;
 
     public MapFragment()
@@ -83,7 +86,10 @@ public class MapFragment extends Fragment implements
 
     /********************set function for Health subcategory***********************/
 
-
+    public void setHealthServiceProvider(ArrayList<HealthServiceProviderItem> et)
+    {
+        healthServiceProvider=et;
+    }
 
     /********************set function for Entertainment subcategory*****************/
 
@@ -170,7 +176,17 @@ public class MapFragment extends Fragment implements
                 }
                 break;
             case AppConstants.HEALTH:
-                //TODO write necessary codes for health
+
+                googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(categoryId,getActivity(),healthServiceProvider));
+                if(healthServiceProvider!=null) {
+                    for (HealthServiceProviderItem et : healthServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        drawMarker(location, et.getNodeName());
+                    }
+                }
+
+
+
                 break;
             case AppConstants.ENTERTAINMENT:
 
@@ -225,6 +241,20 @@ public class MapFragment extends Fragment implements
                 }
                 break;
             case AppConstants.HEALTH:
+
+                for(HealthServiceProviderItem et:healthServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        Intent ii = new Intent(getActivity(),DetailsInfoActivity.class);
+                        ii.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
+                        startActivity(ii);
+                        break;
+                    }
+                }
                 //TODO write necessary codes for health
                 break;
             case AppConstants.ENTERTAINMENT:

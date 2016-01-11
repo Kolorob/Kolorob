@@ -5,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.Education.Entertainment;
+
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 
 /**
@@ -69,14 +71,14 @@ public class HealthServiceProviderTable {
                 + KEY_NODE_REGISTRATION_NUMBER + " TEXT, "
                 + KEY_EDITED_BY + " TEXT, "
                 + KEY_REF_NUM + " INTEGER, "
-
+                + KEY_NAME_BN + " TEXT, "
                 + KEY_TIME_STAMP + " TEXT, "
                 + KEY_NODE_TYPE + " TEXT, "
                 + KEY_AREA + " TEXT, "
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, , PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_REF_NUM + "))";
+                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_REF_NUM + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -90,8 +92,8 @@ public class HealthServiceProviderTable {
     }
 
 
-    public long insertItem(HealthServiceProviderItem healthServiceProviderItem) {
-        return insertItem(
+    public long insertItemHealth(HealthServiceProviderItem healthServiceProviderItem) {
+        return insertItemHealth(
                 healthServiceProviderItem.getNodeId(),
                 healthServiceProviderItem.getNodeName(),
                 healthServiceProviderItem.getDateName(),
@@ -111,14 +113,13 @@ public class HealthServiceProviderTable {
                 healthServiceProviderItem.getNodeType(),
                 healthServiceProviderItem.getArea(),
                 healthServiceProviderItem.getAddress(),
-
                 healthServiceProviderItem.getLatitude(),
                 healthServiceProviderItem.getLongitude(),
                 healthServiceProviderItem.getCategoryId()
         );
     }
 
-    public long insertItem(String nodeId,
+    public long insertItemHealth(String nodeId,
                            String nodeName,
                            String dateName,
                            String dateDate,
@@ -181,13 +182,14 @@ public class HealthServiceProviderTable {
         rowValue.put(KEY_NODE_REGISTRATION_NUMBER ,nodeRegistationNumber);
         rowValue.put(KEY_EDITED_BY , editedBy  );
         rowValue.put(KEY_REF_NUM   , refNum);
-        rowValue.put(KEY_TIME_STAMP  , nameBn);
-        rowValue.put(KEY_NODE_TYPE  , nameBn);
-        rowValue.put(KEY_AREA   , timeStamp );
-        rowValue.put(KEY_ADDRESS   , nodeType );
-        rowValue.put(KEY_LATITUDE  , area );
-        rowValue.put(KEY_LONGITUDE  , address );
-        rowValue.put(KEY_CATEGORY_ID , totalTeachers);
+        rowValue.put(KEY_NAME_BN   , nameBn);
+        rowValue.put(KEY_TIME_STAMP  , timeStamp);
+        rowValue.put(KEY_NODE_TYPE  , nodeType);
+        rowValue.put(KEY_AREA   , area );
+        rowValue.put(KEY_ADDRESS   , address );
+        rowValue.put(KEY_LATITUDE  , longitude );
+        rowValue.put(KEY_LONGITUDE  , latitude );
+        rowValue.put(KEY_CATEGORY_ID , categoryId);
 
 
         SQLiteDatabase db = openDB();
@@ -202,7 +204,7 @@ public class HealthServiceProviderTable {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(3))==cat_id&&Integer.parseInt(cursor.getString(2))==sub_cat_id) {
+                if (id.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(21))==cat_id&&Integer.parseInt(cursor.getString(13))==sub_cat_id) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -214,61 +216,162 @@ public class HealthServiceProviderTable {
         return false;
     }
 
-    private long updateItem(String identifierId,
-                            String serviceProviderId,
-                            int eduSubCategoryId,
-                            int categoryId,
-                            String eduNameEng,
-                            String eduNameBan,
-                            String eduType,
-                            String hostelFacility,
-                            String transportFacility,
-                            String playground,
-                            String contactPersonDesignation,
-                            String contactNo,
-                            String emailAddress,
-                            String websiteLink,
-                            String fbLink,
-                            String registeredWith,
-                            String registrationNo,
-                            String totalStudents,
-                            String totalClasses,
-                            String totalTeachers,
-                            String courseProvided,
-                            String shift,
-                            String canteenFacility,
-                            String additionalInfo,
+    private long updateItem(String nodeId,
+                            String nodeName,
+                            String dateName,
+                            String dateDate,
+                            String nodeDesignation,
+                            String nodeContact,
+                            String nodeEmail,
+                            String nodeAdditional,
+                            String nodeWebsite,
+                            String nodeFacebook,
+                            String nodeRegisteredwith,
+                            String nodeRegistationNumber,
+                            String editedBy,
+                            int refNum,
+                            String nameBn,
+                            String timeStamp,
+                            String nodeType,
+                            String area,
+                            String address,
+                            String longitude,
                             String latitude,
-                            String longitude) {
+                            int categoryId) {
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , identifierId);
-        rowValue.put(KEY_NODE_NAME , serviceProviderId);
-        rowValue.put(KEY_DATE_NAME  , eduSubCategoryId);
-        rowValue.put(KEY_DATE_DATE,categoryId);
-        rowValue.put(KEY_NODE_DESIGNATION , eduNameEng);
-        rowValue.put(KEY_NODE_CONTACT ,eduNameBan );
-        rowValue.put(KEY_NODE_EMAIL  , eduType);
-        rowValue.put(KEY_NODE_ADDITIONAL , hostelFacility);
-        rowValue.put(KEY_NODE_WEBSITE,transportFacility);
-        rowValue.put(KEY_NODE_FACEBOOK , playground);
-        rowValue.put(KEY_NODE_REGISTERED_WITH ,contactPersonDesignation);
-        rowValue.put(KEY_NODE_REGISTRATION_NUMBER ,nodeRegisteredwith );
-        rowValue.put(KEY_EDITED_BY , contactNo);
-        rowValue.put(KEY_REF_NUM   , emailAddress);
-        rowValue.put(KEY_TIME_STAMP  , websiteLink);
-        rowValue.put(KEY_NODE_TYPE  , fbLink);
-        rowValue.put(KEY_AREA   , registeredWith);
-        rowValue.put(KEY_ADDRESS   , registrationNo);
-        rowValue.put(KEY_LATITUDE  , totalStudents);
-        rowValue.put(KEY_LONGITUDE  , totalClasses);
-        rowValue.put(KEY_CATEGORY_ID , totalTeachers);
+        rowValue.put(KEY_NODE_ID , nodeId);
+        rowValue.put(KEY_NODE_NAME , nodeName);
+        rowValue.put(KEY_DATE_NAME  , dateName);
+        rowValue.put(KEY_DATE_DATE, dateDate );
+        rowValue.put(KEY_NODE_DESIGNATION , nodeDesignation );
+        rowValue.put(KEY_NODE_CONTACT ,nodeContact  );
+        rowValue.put(KEY_NODE_EMAIL  , nodeEmail );
+        rowValue.put(KEY_NODE_ADDITIONAL , nodeAdditional );
+        rowValue.put(KEY_NODE_WEBSITE,nodeWebsite );
+        rowValue.put(KEY_NODE_FACEBOOK , nodeFacebook );
+        rowValue.put(KEY_NODE_REGISTERED_WITH ,nodeRegisteredwith );
+        rowValue.put(KEY_NODE_REGISTRATION_NUMBER ,nodeRegistationNumber);
+        rowValue.put(KEY_EDITED_BY , editedBy  );
+        rowValue.put(KEY_REF_NUM   , refNum);
+        rowValue.put(KEY_NAME_BN   , nameBn);
+        rowValue.put(KEY_TIME_STAMP  , timeStamp);
+        rowValue.put(KEY_NODE_TYPE  , nodeType);
+        rowValue.put(KEY_AREA   , area );
+        rowValue.put(KEY_ADDRESS   , address );
+        rowValue.put(KEY_LATITUDE  , longitude );
+        rowValue.put(KEY_LONGITUDE  , latitude );
+        rowValue.put(KEY_CATEGORY_ID , categoryId);
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND "+KEY_EDU_SUBCATEGORY_ID + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
-                new String[]{identifierId + "",eduSubCategoryId+"",categoryId+""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+KEY_REF_NUM + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
+                new String[]{nodeId + "",refNum+"",categoryId+""});
         closeDB();
         return ret;
     }
 
+
+    public ArrayList<HealthServiceProviderItem> getAllHealthSubCategoriesInfo(int cat_id,int sub_cat_id) {
+        ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id+" AND "+KEY_REF_NUM+"="+sub_cat_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+    public ArrayList<HealthServiceProviderItem> getAllHealthSubCategoriesInfo(int cat_id) {
+        ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+    public ArrayList<HealthServiceProviderItem> getAllHealthSubCategoriesInfoWithHead(int cat_id,String header) {
+        ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id
+                + " AND " +KEY_REF_NUM + " in (SELECT _sub_cat_id from "+ DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_header = '"+header+"')", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+    private HealthServiceProviderItem cursorToSubCatList(Cursor cursor) {
+        String _nodeId=cursor.getString(0);
+        String _nodeName=cursor.getString(1);
+        String _dateName=cursor.getString(2);
+        String _dateDate=cursor.getString(3);
+        String _nodeDesignation=cursor.getString(4);
+        String _nodeContact=cursor.getString(5);
+        String _nodeEmail=cursor.getString(6);
+        String _nodeAdditional=cursor.getString(7);
+        String _nodeWebsite=cursor.getString(8);
+        String _nodeFacebook=cursor.getString(9);
+        String _nodeRegisteredwith=cursor.getString(10);
+        String _nodeRegistationNumber=cursor.getString(11);
+        String _editedBy=cursor.getString(12);
+        int _refNum=cursor.getInt(13);
+        String _nameBn=cursor.getString(14);
+        String _timeStamp=cursor.getString(15);
+        String _nodeType=cursor.getString(16);
+        String _area=cursor.getString(17);
+        String _address=cursor.getString(18);
+        String _longitude=cursor.getString(19);
+        String _latitude=cursor.getString(20);
+        int _categoryId=cursor.getInt(21);
+
+
+        return new HealthServiceProviderItem(
+                _nodeId,
+                _nodeName,
+                _dateName,
+                _dateDate,
+                _nodeDesignation,
+                _nodeContact,
+                _nodeEmail,
+                _nodeAdditional,
+                _nodeWebsite,
+                _nodeFacebook,
+                _nodeRegisteredwith,
+                _nodeRegistationNumber,
+                _editedBy,
+                _refNum,
+                _nameBn,
+                _timeStamp,
+                _nodeType,
+                _area,
+                _address,
+                _longitude,
+                _latitude,
+                _categoryId);
+    }
+
 }
+

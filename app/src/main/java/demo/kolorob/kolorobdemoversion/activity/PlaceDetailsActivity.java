@@ -30,11 +30,13 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Education.Entertainment;
+
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -43,7 +45,7 @@ import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
 /**
  * Created by touhid on 12/3/15.
  *
- * @author touhid
+ * @author touhid,arafat
  */
 public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickListener {
 
@@ -74,6 +76,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> currentEducationServiceProvider;
     private ArrayList<EntertainmentServiceProviderItem> currentEntertainmentServiceProvider;
+    private ArrayList<HealthServiceProviderItem> currentHealthServiceProvider;
 
 
     //common for all categories
@@ -224,8 +227,46 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         });
                         break;
                     case AppConstants.HEALTH:
-                        //TODO write necessary codes for health
+
+                        HealthServiceProviderTable healthServiceProviderTables = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+                        ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
+                        healthServiceProviderItems = healthServiceProviderTables.getAllHealthSubCategoriesInfo(currentCategoryID, subcategoryId);
+                        ArrayList<String> itemNameHealth = new ArrayList<String>();
+                        currentHealthServiceProvider = healthServiceProviderItems;
+                        for (HealthServiceProviderItem si : healthServiceProviderItems) {
+                            itemNameHealth.add(si.getNodeName());
+                        }
+                        AlertDialog.Builder alertDialogHealth = new AlertDialog.Builder(PlaceDetailsActivity.this);
+                        LayoutInflater inflaterHealth = getLayoutInflater();
+                        View convertViewHealth = (View) inflaterHealth.inflate(R.layout.subcat_item_list, null);
+                        TextView headHealth = (TextView) convertViewHealth.findViewById(R.id.tv_item_hd);
+                        String headerHealth = subCatItemList.getItemAtPosition(position).toString();
+                        headHealth.setText(headerHealth);
+                        alertDialogHealth.setView(convertViewHealth);
+                        ListView lvHealth = (ListView) convertViewHealth.findViewById(R.id.subcat_list);
+                        ArrayAdapter<String> adapterHealth = new ArrayAdapter<String>(PlaceDetailsActivity.this, R.layout.sub_cat_item_list_item, R.id.textView5, itemNameHealth);
+                        lvHealth.setAdapter(adapterHealth);
+                        alertDialogHealth.show();
+                        lvHealth.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                HealthServiceProviderItem currHealthItem = null;
+                                int i = 0;
+                                for (HealthServiceProviderItem et : currentHealthServiceProvider) {
+                                    if (i == position) {
+                                        currHealthItem = et;
+                                    }
+                                }
+                                Intent hel = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
+                                hel.putExtra(AppConstants.KEY_DETAILS_VIEW, currHealthItem);
+                                startActivity(hel);
+                            }
+                        });
                         break;
+
+
+                        //TODO write necessary codes for health
+
                     case AppConstants.ENTERTAINMENT:
                         EntertainmentServiceProviderTable entertainmentServiceProviderTables = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
@@ -264,6 +305,8 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         //TODO write necessary codes for entertainment
                         break;
                     case AppConstants.GOVERNMENT:
+
+
                         //TODO write necessary codes for government
                         break;
                     case AppConstants.LEGAL:
@@ -390,8 +433,15 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         callMapFragmentWithEducationInfo(ci.getCatName(),ci.getId(),educationServiceProvider);
                         break;
                     case AppConstants.HEALTH:
-                        //TODO write necessary codes for health
+
+                        ArrayList<HealthServiceProviderItem> healthServiceProvider;
+                        healthServiceProvider = constructHealthListItem(ci.getId());
+                        callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         break;
+
+
+                        //TODO write necessary codes for health
+
                     case AppConstants.ENTERTAINMENT:
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
@@ -509,24 +559,27 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                 * category id 5 means legal
                 * category id 6 means financial
                 * category id 7 means job*/
-                switch (currentCategoryID)
-                {
+                switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
-                        ArrayList<EducationServiceProviderItem>eduItem;
-                        eduItem = constructEducationListItemForHeader(cat_id,si.getSubcatHeader());
-                        callMapFragmentWithEducationInfo(si.getSubcatHeader(),cat_id,eduItem);
+                        ArrayList<EducationServiceProviderItem> eduItem;
+                        eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
+                        callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
+                        ArrayList<HealthServiceProviderItem> healthItem;
+                        healthItem = constructHealthListItemForHeader(cat_id, si.getSubcatHeader());
+                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
+
                         break;
                     case AppConstants.ENTERTAINMENT:
 
 
-                        ArrayList<EntertainmentServiceProviderItem>entItem;
-                        entItem = constructEntertainmentListItemForHeader(cat_id,si.getSubcatHeader());
-                        callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(),cat_id,entItem);
+                        ArrayList<EntertainmentServiceProviderItem> entItem;
+                        entItem = constructEntertainmentListItemForHeader(cat_id, si.getSubcatHeader());
+                        callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, entItem);
                         break;
-                        //TODO write necessary codes for entertainment
+                    //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
                         //TODO write necessary codes for government
@@ -546,7 +599,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                 /*code for all*/
                 showSubCatListItem.setEnabled(true);
                 subCatItemListHeader.setText(si.getSubcatHeader());
-                constructSubCategoryItemList(cat_id,si.getSubcatHeader());
+                constructSubCategoryItemList(cat_id, si.getSubcatHeader());
             }
         });
 
@@ -662,7 +715,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
     {
         ArrayList<EducationServiceProviderItem> educationServiceProvider;
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
-        educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfoWithHead(cat_id,header);
+        educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfoWithHead(cat_id, header);
         return educationServiceProvider;
     }
 
@@ -682,9 +735,34 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
 
     /***********************************************************Methods for Health*************************************************/
 
+    private ArrayList<HealthServiceProviderItem> constructHealthListItem(int cat_id)
+    {
+        ArrayList<HealthServiceProviderItem> healthServiceProvider;
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo(cat_id);
+        return healthServiceProvider;
+    }
 
-
-
+    private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
+    {
+        MapFragment mapFragment = new MapFragment();
+        mapFragment.setLocationName(locationName);
+        mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+        mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+        mapFragment.setLocationNameId(locationNameId);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.commit();
+    }
+    private ArrayList<HealthServiceProviderItem> constructHealthListItemForHeader(int cat_id,String header)
+    {
+        ArrayList<HealthServiceProviderItem> healthServiceProvider;
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, header);
+        return healthServiceProvider;
+    }
 
     /**********************************************************Methods for entertainment*******************************************/
 

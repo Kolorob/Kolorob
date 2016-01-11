@@ -22,6 +22,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Education.Entertainment;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
@@ -40,6 +41,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> educationServiceProvider;
     private ArrayList<EntertainmentServiceProviderItem>entertainmentServiceProvider;
+    private ArrayList<HealthServiceProviderItem>healthServiceProvider;
 
 
 
@@ -64,7 +66,22 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
 
     /********Override the MapInfoWindowAdapter method for Health with getting Health Item object***********/
 
+    public MapInfoWindowAdapter(int cat_id,final Context context,ArrayList<HealthServiceProviderItem> et){
+        inflater = (LayoutInflater)context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        healthServiceProvider = et;//setting the entertainment object
+
+        categoryId=cat_id;
+        myContentsView = inflater.inflate(R.layout.small_info, null);
+        myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        close = (ImageView) myContentsView.findViewById(R.id.iv_close);
+        itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
+
+    }
 
     /********Override the MapInfoWindowAdapter method for Entertainment with getting Entertainment Item object***********/
 
@@ -122,6 +139,21 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                 }
                 break;
             case AppConstants.HEALTH:
+
+                for(HealthServiceProviderItem et:healthServiceProvider)
+                {
+                    Double lat = Double.parseDouble(et.getLatitude());
+                    Double lon = Double.parseDouble(et.getLongitude());
+                    System.out.println(lat +"  "+loc.latitude);
+                    if(loc.latitude== lat && loc.longitude==lon)
+                    {
+                        itemName.setText(et.getNodeName());
+                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
+                        itemType.setText("ধরন ঃ  "+et.getDateName());
+                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+                    }
+                }
+
                 //TODO write necessary codes for health
                 break;
             case AppConstants.ENTERTAINMENT:

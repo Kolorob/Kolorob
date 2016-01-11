@@ -4,7 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -23,11 +23,13 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.parser.VolleyApiParser;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -154,6 +156,24 @@ public class OpeningActivity extends BaseActivity {
                 }
             });
 
+            VolleyApiParser.getRequest(OpeningActivity.this, "health", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if(status == AppConstants.SUCCESS_CODE){
+
+                        try{
+                            JSONObject jo= new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if(apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveHealthServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
 
 
         }
@@ -216,7 +236,7 @@ public class OpeningActivity extends BaseActivity {
             }
         }
 
-        //TODO write this at the end of the last API saving method
+
 
     }
 
@@ -235,11 +255,29 @@ public class OpeningActivity extends BaseActivity {
             }
         }
 
+
+
+    }
+
+    private void saveHealthServiceProvider(JSONArray healthServiceProvider)
+    {
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
+        int healthServiceProviderCount = healthServiceProvider.length();
+
+        for (int i = 0; i < healthServiceProviderCount; i++) {
+            try {
+                JSONObject jo = healthServiceProvider.getJSONObject(i);
+                HealthServiceProviderItem et = HealthServiceProviderItem.parseHealthServiceProviderItem(jo);
+                healthServiceProviderTable.insertItemHealth(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         //TODO write this at the end of the last API saving method
         Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
         startActivity(i);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
