@@ -30,13 +30,19 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -77,7 +83,9 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
     private ArrayList<EducationServiceProviderItem> currentEducationServiceProvider;
     private ArrayList<EntertainmentServiceProviderItem> currentEntertainmentServiceProvider;
     private ArrayList<HealthServiceProviderItem> currentHealthServiceProvider;
-
+    private ArrayList<LegalAidServiceProviderItem> currentLegalAidServiceProvider;
+    private ArrayList<JobServiceProviderItem> currentJobServiceProvider;
+    private ArrayList<FinancialServiceProviderItem> currentFinancialServiceProvider;
 
     //common for all categories
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
@@ -310,13 +318,115 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         //TODO write necessary codes for government
                         break;
                     case AppConstants.LEGAL:
-                        //TODO write necessary codes for legal
+                        LegalAidServiceProviderTable legalAidServiceProviderTables = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+                        ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
+                        legalAidServiceProviderItems = legalAidServiceProviderTables.getAllLegalAidSubCategoriesInfo (currentCategoryID,subcategoryId);
+                        ArrayList<String> itemNamelegal = new ArrayList<String>();
+                        currentLegalAidServiceProvider = legalAidServiceProviderItems;
+                        for (LegalAidServiceProviderItem si : legalAidServiceProviderItems) {
+                            itemNamelegal.add(si.getLegalaidNameEng());
+                        }
+                        AlertDialog.Builder alertDialoglegal = new AlertDialog.Builder(PlaceDetailsActivity.this);
+                        LayoutInflater inflaterlegal = getLayoutInflater();
+                        View convertViewlegal = (View) inflaterlegal.inflate(R.layout.subcat_item_list, null);
+                        TextView headlegal = (TextView) convertViewlegal.findViewById(R.id.tv_item_hd);
+                        String headerlegal = subCatItemList.getItemAtPosition(position).toString();
+                        headlegal.setText(headerlegal);
+                        alertDialoglegal.setView(convertViewlegal);
+                        ListView lvlegal = (ListView) convertViewlegal.findViewById(R.id.subcat_list);
+                        ArrayAdapter<String> adapterlegal = new ArrayAdapter<String>(PlaceDetailsActivity.this, R.layout.sub_cat_item_list_item, R.id.textView5, itemNamelegal);
+                        lvlegal.setAdapter(adapterlegal);
+                        alertDialoglegal.show();
+                        lvlegal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                LegalAidServiceProviderItem currLegalAidItem = null;
+                                int i = 0;
+                                for (LegalAidServiceProviderItem et : currentLegalAidServiceProvider) {
+                                    if (i == position) {
+                                        currLegalAidItem = et;
+                                    }
+                                }
+                                Lg.i(TAG, "s" );
+                                Intent iilegal = new Intent(PlaceDetailsActivity.this,DetailsLegalActivity.class);
+                                iilegal .putExtra(AppConstants.KEY_DETAILS_LEGAL, currLegalAidItem);
+                                startActivity(iilegal );
+                            }
+                        });
                         break;
                     case AppConstants.FINANCIAL:
-                        //TODO write necessary codes for financial
+                        FinancialServiceProviderTable financialServiceProviderTables = new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+                        ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
+                        financialServiceProviderItems = financialServiceProviderTables.getAllFinancialSubCategoriesInfo(currentCategoryID, subcategoryId);
+                        ArrayList<String> itemNamefinancial = new ArrayList<String>();
+                        currentFinancialServiceProvider = financialServiceProviderItems;
+                        for (FinancialServiceProviderItem si : financialServiceProviderItems) {
+                            itemNamefinancial.add(si.getNodeId());
+                        }
+                        AlertDialog.Builder alertDialogfinancial = new AlertDialog.Builder(PlaceDetailsActivity.this);
+                        LayoutInflater inflaterfinancial  = getLayoutInflater();
+                        View convertViewfinancial  = (View) inflaterfinancial .inflate(R.layout.subcat_item_list, null);
+                        TextView headfinancial  = (TextView) convertViewfinancial .findViewById(R.id.tv_item_hd);
+                        String headerfinancial = subCatItemList.getItemAtPosition(position).toString();
+                        headfinancial .setText(headerfinancial);
+                        alertDialogfinancial .setView(convertViewfinancial );
+                        ListView lvfinancial  = (ListView) convertViewfinancial .findViewById(R.id.subcat_list);
+                        ArrayAdapter<String> adapterfinancial  = new ArrayAdapter<String>(PlaceDetailsActivity.this, R.layout.sub_cat_item_list_item, R.id.textView5, itemNamefinancial );
+                        lvfinancial.setAdapter(adapterfinancial );
+                        alertDialogfinancial.show();
+                        lvfinancial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                FinancialServiceProviderItem currFinancialItem = null;
+                                int i = 0;
+                                for (FinancialServiceProviderItem et : currentFinancialServiceProvider) {
+                                    if (i == position) {
+                                        currFinancialItem = et;
+                                    }
+                                }
+                                Lg.i(TAG, "s");
+                                Intent iifinancial = new Intent(PlaceDetailsActivity.this, DetailsFinancialActivity.class);
+                                iifinancial.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, currFinancialItem);
+                                startActivity(iifinancial);
+                            }
+                        });
                         break;
                     case AppConstants.JOB:
-                        //TODO write necessary codes for job
+                        JobServiceProviderTable jobServiceProviderTables = new   JobServiceProviderTable(PlaceDetailsActivity.this);
+                        ArrayList<JobServiceProviderItem> jobServiceProviderItems;
+                        jobServiceProviderItems = jobServiceProviderTables.getAllJobSubCategoriesInfo(currentCategoryID, subcategoryId);
+                        ArrayList<String> itemNamejob = new ArrayList<String>();
+                        currentJobServiceProvider = jobServiceProviderItems;
+                        for (JobServiceProviderItem si : jobServiceProviderItems) {
+                            itemNamejob.add(si.getIdentifierId());
+                        }
+                        AlertDialog.Builder alertDialogjob = new AlertDialog.Builder(PlaceDetailsActivity.this);
+                        LayoutInflater inflaterjob = getLayoutInflater();
+                        View convertViewjob = (View) inflaterjob.inflate(R.layout.subcat_item_list, null);
+                        TextView headjob = (TextView) convertViewjob.findViewById(R.id.tv_item_hd);
+                        String headerjob = subCatItemList.getItemAtPosition(position).toString();
+                        headjob.setText(headerjob);
+                        alertDialogjob.setView(convertViewjob);
+                        ListView lvjob = (ListView) convertViewjob.findViewById(R.id.subcat_list);
+                        ArrayAdapter<String> adapterjob = new ArrayAdapter<String>(PlaceDetailsActivity.this, R.layout.sub_cat_item_list_item, R.id.textView5, itemNamejob);
+                        lvjob.setAdapter(adapterjob);
+                        alertDialogjob.show();
+                        lvjob.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                JobServiceProviderItem currJobItem = null;
+                                int i = 0;
+                                for (JobServiceProviderItem et : currentJobServiceProvider) {
+                                    if (i == position) {
+                                        currJobItem = et;
+                                    }
+                                }
+                                Lg.i(TAG, "s" );
+                                Intent iijob = new Intent(PlaceDetailsActivity.this,DetailsJobActivity.class);
+                                iijob .putExtra(AppConstants.KEY_DETAILS_JOB, currJobItem);
+                                startActivity(iijob );
+                            }
+                        });
                         break;
                     default:
                         break;
@@ -454,13 +564,19 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         //TODO write necessary codes for government
                         break;
                     case AppConstants.LEGAL:
-                        //TODO write necessary codes for legal
+                        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                        callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
                         break;
                     case AppConstants.FINANCIAL:
-                        //TODO write necessary codes for financial
+                        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
+                        financialServiceProvider = constructfinancialListItem(ci.getId());
+                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
                         break;
                     case AppConstants.JOB:
-                        //TODO write necessary codes for job
+                        ArrayList<JobServiceProviderItem> jobServiceProvider;
+                        jobServiceProvider = constructjobListItem(ci.getId());
+                        callMapFragmentWithJobInfo(ci.getCatName(), ci.getId(), jobServiceProvider);
                         break;
                     default:
                         break;
@@ -585,13 +701,19 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         //TODO write necessary codes for government
                         break;
                     case AppConstants.LEGAL:
-                        //TODO write necessary codes for legal
+                        ArrayList<LegalAidServiceProviderItem>legalItem;
+                        legalItem = constructlegalaidListItemForHeader(cat_id,si.getSubcatHeader());
+                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(),cat_id,legalItem);
                         break;
                     case AppConstants.FINANCIAL:
-                        //TODO write necessary codes for financial
+                        ArrayList<FinancialServiceProviderItem>financialItem;
+                        financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
+                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
                     case AppConstants.JOB:
-                        //TODO write necessary codes for job
+                        ArrayList<JobServiceProviderItem>jobItem;
+                        jobItem = constructjobListItemForHeader(cat_id, si.getSubcatHeader());
+                        callMapFragmentWithJobInfo(si.getSubcatHeader(), cat_id, jobItem);
                         break;
                     default:
                         break;
@@ -802,14 +924,71 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
 
 
 
-
     /**********************************************************Methods for legal***************************************************/
 
+    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItem(int cat_id)
+    {
+        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
+        return legalaidServiceProvider;
+    }
+
+    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItemForHeader(int cat_id,String header)
+    {
+        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, header);
+        return legalaidServiceProvider;
+    }
+
+    private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
+    {
+        MapFragment mapFragment = new MapFragment();
+        mapFragment.setLocationName(locationName);
+        mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+        mapFragment.setLegalaidServiceProvider(legalaidServiceProviderItems);
+        mapFragment.setLocationNameId(locationNameId);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.commit();
+    }
 
 
 
 
     /**********************************************************Methods for financial**********************************************/
+    private ArrayList<FinancialServiceProviderItem> constructfinancialListItem(int cat_id)
+    {
+        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
+        FinancialServiceProviderTable financialServiceProviderTable = new  FinancialServiceProviderTable (PlaceDetailsActivity.this);
+        financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfo(cat_id);
+        return financialServiceProvider;
+    }
+
+    private ArrayList<FinancialServiceProviderItem> constructfinancialListItemForHeader(int cat_id,String header)
+    {
+        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
+        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+        financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
+        return financialServiceProvider;
+    }
+
+    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
+    {
+        MapFragment mapFragment = new MapFragment();
+        mapFragment.setLocationName(locationName);
+        mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+        mapFragment.setLocationNameId(locationNameId);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.commit();
+    }
 
 
 
@@ -817,8 +996,35 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
 
     /**********************************************************Methods for job*****************************************************/
 
+    private ArrayList<JobServiceProviderItem> constructjobListItem(int cat_id)
+    {
+        ArrayList<JobServiceProviderItem> jobServiceProvider;
+        JobServiceProviderTable jobServiceProviderTable = new  JobServiceProviderTable (PlaceDetailsActivity.this);
+        jobServiceProvider = jobServiceProviderTable.getAllJobSubCategoriesInfo(cat_id);
+        return jobServiceProvider;
+    }
 
+    private ArrayList<JobServiceProviderItem> constructjobListItemForHeader(int cat_id,String header)
+    {
+        ArrayList<JobServiceProviderItem> jobServiceProvider;
+        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivity.this);
+        jobServiceProvider = jobServiceProviderTable.getAllJobSubCategoriesInfoWithHead(cat_id, header);
+        return jobServiceProvider;
+    }
 
+    private void callMapFragmentWithJobInfo(String item_name,int cat_id,ArrayList<JobServiceProviderItem> jobServiceProviderItems)
+    {
+        MapFragment mapFragment = new MapFragment();
+        mapFragment.setLocationName(locationName);
+        mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+        mapFragment.setJobServiceProvider(jobServiceProviderItems);
+        mapFragment.setLocationNameId(locationNameId);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.commit();
+    }
 
 
 
