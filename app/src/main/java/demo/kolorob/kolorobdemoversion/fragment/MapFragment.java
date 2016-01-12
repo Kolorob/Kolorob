@@ -326,9 +326,9 @@ public class MapFragment extends Fragment implements
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        Intent ii = new Intent(getActivity(),DetailsLegalActivity.class);
-                        ii.putExtra(AppConstants.KEY_DETAILS_LEGAL,et);
-                        startActivity(ii);
+                        Intent legal = new Intent(getActivity(),DetailsLegalActivity.class);
+                        legal.putExtra(AppConstants.KEY_DETAILS_LEGAL,et);
+                        startActivity(legal);
                         break;
                     }
                 }
@@ -357,9 +357,9 @@ public class MapFragment extends Fragment implements
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        Intent ii = new Intent(getActivity(), DetailsJobActivity.class);
-                        ii.putExtra(AppConstants.KEY_DETAILS_JOB,et);
-                        startActivity(ii);
+                        Intent iijob = new Intent(getActivity(), DetailsJobActivity.class);
+                        iijob.putExtra(AppConstants.KEY_DETAILS_JOB,et);
+                        startActivity(iijob);
                         break;
                     }
                 }

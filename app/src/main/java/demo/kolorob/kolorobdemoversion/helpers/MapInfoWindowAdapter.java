@@ -56,9 +56,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_entertainment);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_entertainment);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_entertainment);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
 
     }
 
@@ -75,9 +75,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_entertainment);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_entertainment);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_entertainment);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
 
     }
 
@@ -94,9 +94,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
-        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location_entertainment);
-        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type_entertainment);
-        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact_entertainment);
+        itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
+        itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
 
     }
 
@@ -230,9 +230,9 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getLegalaidNameEng());
-                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
-                        itemType.setText("ধরন ঃ  "+et.getArea());
+                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
+
                     }
                 }
                 break;
@@ -244,9 +244,11 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
+
                         itemName.setText(et.getNodeName());
-                        itemType.setText("ঠিকানা ঃ  "+et.getArea());
+                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+
 
                     }
                 }
@@ -261,7 +263,8 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     {
                         itemName.setText(et.getAddress());
                         itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
-                        itemType.setText("ধরন ঃ  "+et.getArea());
+                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
+
                     }
                 }
                 break;

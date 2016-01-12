@@ -43,6 +43,7 @@ public class EntertainmentServiceProviderTable {
     public static final String KEY_ADDRESS = "_address";
     public static final String KEY_LATITUDE = "_latitude";
     public static final String KEY_LONGITUDE = "_longitude";
+    public static final String KEY_CATEGORY_ID = "_categoryId";
 
     private Context tContext;
 
@@ -77,7 +78,8 @@ public class EntertainmentServiceProviderTable {
                 + KEY_AREA + " TEXT, "
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
-                + KEY_LONGITUDE + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
+                + KEY_LONGITUDE + " TEXT, "
+                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -112,7 +114,9 @@ public class EntertainmentServiceProviderTable {
                 entertainmentServiceProviderItem.getArea(),
                 entertainmentServiceProviderItem.getAddress(),
                 entertainmentServiceProviderItem.getLatitude(),
-                entertainmentServiceProviderItem.getLongitude()
+                entertainmentServiceProviderItem.getLongitude(),
+                entertainmentServiceProviderItem.getCategoryId()
+
         );
     }
 
@@ -136,7 +140,8 @@ public class EntertainmentServiceProviderTable {
                                         String area,
                                         String address,
                                         String latitude,
-                                        String longitude) {
+                                        String longitude,
+                                        int categoryId) {
         if (isFieldExist(nodeId, entSubCategoryId)) {
             return updateItem(nodeId,
                     entSubCategoryId,
@@ -158,7 +163,8 @@ public class EntertainmentServiceProviderTable {
                     area,
                     address,
                     latitude,
-                    longitude);
+                    longitude,
+                    categoryId);
         }
 
         ContentValues rowValue = new ContentValues();
@@ -183,6 +189,7 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_ADDRESS , address);
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
+        rowValue.put(KEY_CATEGORY_ID,categoryId);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -211,26 +218,27 @@ public class EntertainmentServiceProviderTable {
     }
 
     private long updateItem( String nodeId,
-                            int entSubCategoryId,
-                            String nodeName,
-                            String nodeNameBn,
-                            String dataName,
-                            String dateDate,
-                            String nodeDesignation,
-                            String nodeContact,
-                            String nodeEmail,
-                            String nodeAdditional,
-                            String nodeWebsite,
-                            String nodeFacebook,
-                            String nodeRegisteredWith,
-                            String nodeRegistrationNumber,
-                            String editedBy,
-                            String uploadingTime,
-                            String nodeType,
-                            String area,
-                            String address,
-                            String latitude,
-                            String longitude) {
+                             int entSubCategoryId,
+                             String nodeName,
+                             String nodeNameBn,
+                             String dataName,
+                             String dateDate,
+                             String nodeDesignation,
+                             String nodeContact,
+                             String nodeEmail,
+                             String nodeAdditional,
+                             String nodeWebsite,
+                             String nodeFacebook,
+                             String nodeRegisteredWith,
+                             String nodeRegistrationNumber,
+                             String editedBy,
+                             String uploadingTime,
+                             String nodeType,
+                             String area,
+                             String address,
+                             String latitude,
+                             String longitude,
+                             int categoryId) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
         rowValue.put(KEY_SUB_CATEGORY_ID , entSubCategoryId);
@@ -253,10 +261,16 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_ADDRESS , address);
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
+        rowValue.put(KEY_CATEGORY_ID,categoryId);
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+KEY_SUB_CATEGORY_ID + " = ?  ",
-                new String[]{nodeId + "",entSubCategoryId+""});
+
+//        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND " + KEY_EDU_SUBCATEGORY_ID + " = ? AND " + KEY_CATEGORY_ID + " = ? ",
+//                new String[]{identifierId + "", eduSubCategoryId + "", categoryId + ""});
+
+
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+ KEY_SUB_CATEGORY_ID + " = ? AND "+ KEY_CATEGORY_ID + " = ? ",
+                new String[]{nodeId + "", entSubCategoryId+ "", categoryId + ""});
         closeDB();
         return ret;
     }
@@ -264,8 +278,29 @@ public class EntertainmentServiceProviderTable {
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
+
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_SUB_CATEGORY_ID + " in (SELECT _sub_cat_id from "+ DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_header = '"+header+"')", null);
+
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id+" AND "+KEY_SUB_CATEGORY_ID + " in (SELECT _sub_cat_id from "+ DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_header = '"+header+"')", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+    public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id,int sub_cat_id) {
+        ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id+" AND "+KEY_SUB_CATEGORY_ID+"="+sub_cat_id, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -279,11 +314,32 @@ public class EntertainmentServiceProviderTable {
     }
 
 
+//    public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id) {
+//        ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
+//        //System.out.println(cat_id+"  "+sub_cat_id);
+//        SQLiteDatabase db = openDB();
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                //System.out.println("abc="+cursor.getString(4));
+//                subCatList.add(cursorToSubCatList(cursor));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        closeDB();
+//        return subCatList;
+//    }
+
+
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_CATEGORY_ID+"="+cat_id, null);
+
+
 
         if (cursor.moveToFirst()) {
             do {
@@ -320,6 +376,7 @@ public class EntertainmentServiceProviderTable {
         String _address = cursor.getString(18);
         String _latitude = cursor.getString(19);
         String _longitude= cursor.getString(20);
+        int _categoryId= cursor.getInt(21);
 
         return new EntertainmentServiceProviderItem(
                 _nodeId,
@@ -342,7 +399,8 @@ public class EntertainmentServiceProviderTable {
                 _area,
                 _address,
                 _latitude,
-                _longitude);
+                _longitude,
+                _categoryId);
     }
 
 

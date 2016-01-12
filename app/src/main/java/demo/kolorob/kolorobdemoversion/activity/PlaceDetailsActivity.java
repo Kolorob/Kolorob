@@ -278,7 +278,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                     case AppConstants.ENTERTAINMENT:
                         EntertainmentServiceProviderTable entertainmentServiceProviderTables = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
-                        entertainmentServiceProviderItems = entertainmentServiceProviderTables.getAllEntertainmentSubCategoriesInfo( subcategoryId);
+                        entertainmentServiceProviderItems = entertainmentServiceProviderTables.getAllEntertainmentSubCategoriesInfo( currentCategoryID, subcategoryId);
                         ArrayList<String> itemNameEnt = new ArrayList<String>();
                         currentEntertainmentServiceProvider = entertainmentServiceProviderItems;
                         for (EntertainmentServiceProviderItem si : entertainmentServiceProviderItems) {
@@ -312,6 +312,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         });
                         //TODO write necessary codes for entertainment
                         break;
+
                     case AppConstants.GOVERNMENT:
 
 
@@ -558,7 +559,8 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
                         break;
 
-                        //TODO write necessary codes for entertainment
+
+                    //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
                         //TODO write necessary codes for government
@@ -917,6 +919,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, header);
         return entertainmentServiceProvider;
     }
+
 
 
     /**********************************************************Methods for government**********************************************/
