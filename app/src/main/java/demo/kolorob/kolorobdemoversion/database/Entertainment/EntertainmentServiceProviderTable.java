@@ -265,11 +265,12 @@ public class EntertainmentServiceProviderTable {
 
         SQLiteDatabase db = openDB();
 
+//        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND " + KEY_EDU_SUBCATEGORY_ID + " = ? AND " + KEY_CATEGORY_ID + " = ? ",
+//                new String[]{identifierId + "", eduSubCategoryId + "", categoryId + ""});
 
 
-
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+KEY_SUB_CATEGORY_ID + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
-                new String[]{nodeId + "",entSubCategoryId+"",categoryId+""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+ KEY_SUB_CATEGORY_ID + " = ? AND "+ KEY_CATEGORY_ID + " = ? ",
+                new String[]{nodeId + "", entSubCategoryId+ "", categoryId + ""});
         closeDB();
         return ret;
     }
@@ -277,7 +278,7 @@ public class EntertainmentServiceProviderTable {
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
-        cat_id=1;
+
         SQLiteDatabase db = openDB();
 
 
@@ -313,12 +314,30 @@ public class EntertainmentServiceProviderTable {
     }
 
 
+//    public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id) {
+//        ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
+//        //System.out.println(cat_id+"  "+sub_cat_id);
+//        SQLiteDatabase db = openDB();
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                //System.out.println("abc="+cursor.getString(4));
+//                subCatList.add(cursorToSubCatList(cursor));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        closeDB();
+//        return subCatList;
+//    }
+
+
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_CATEGORY_ID+"="+cat_id, null);
 
 
 
