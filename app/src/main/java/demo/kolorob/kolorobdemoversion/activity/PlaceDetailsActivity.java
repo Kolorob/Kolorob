@@ -467,9 +467,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         for (int j = 0; j < print.size(); j++) {
             Group group = new Group(print.get(j));
             printnames=null;
-
-    group.children.add("hello");
-
+            printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j));
+for(int i=0;i<printnames.size();i++) {
+    group.children.add(printnames.get(i));
+}
             groups.add(j, group);
         }
     }
