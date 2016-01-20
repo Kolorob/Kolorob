@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
@@ -39,6 +41,7 @@ import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderIte
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.parser.VolleyApiParser;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+
 
 
 public class OpeningActivity extends BaseActivity {
@@ -260,6 +263,7 @@ public class OpeningActivity extends BaseActivity {
                 JSONObject jo = categoryArray.getJSONObject(i);
                 CategoryItem ci = CategoryItem.parseCategoryItem(jo);
                 catTable.insertItem(ci);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -284,11 +288,15 @@ public class OpeningActivity extends BaseActivity {
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
         int eduServiceProviderCount = educationServiceProvider.length();
 
+
+
         for (int i = 0; i < eduServiceProviderCount; i++) {
             try {
+
                 JSONObject jo = educationServiceProvider.getJSONObject(i);
                 EducationServiceProviderItem et = EducationServiceProviderItem.parseEducationServiceProviderItem(jo);
                 educationServiceProviderTable.insertItem(et);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

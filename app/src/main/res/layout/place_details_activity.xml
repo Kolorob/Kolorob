@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@drawable/place_details_bg"
-             android:orientation="vertical"
-             tools:context=".activity.PlaceDetailsActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/place_details_bg"
+    android:orientation="vertical"
+    tools:context=".activity.PlaceDetailsActivity"
     android:id="@+id/place_details_layout">
 
     <ScrollView
@@ -30,37 +30,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_edu"/>
-
             <ImageView
                 android:id="@+id/ivHealthCatListPlaceDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_health"/>
-
             <ImageView
                 android:id="@+id/ivGovtCatListPlaceDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_govt"/>
-
             <ImageView
                 android:id="@+id/ivLawCatListPlaceDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_law"/>
-
             <ImageView
                 android:id="@+id/ivMoneyCatListPlaceDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_money"/>
-
             <ImageView
                 android:id="@+id/ivJobCatListPlaceDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ico_job"/>
-
             <ImageView
                 android:id="@+id/ivFunCatListPlaceDetails"
                 android:layout_width="wrap_content"
@@ -75,7 +69,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/semi_transparent">
-
     </LinearLayout>-->
     <RelativeLayout
         android:id="@+id/rlSubCatHolder"
@@ -107,31 +100,31 @@
                 android:id="@+id/tv_cat_name" />
         </LinearLayout>
 
-            <HorizontalScrollView
-                android:id="@+id/svSubCategoryListHolder"
-                android:layout_width="match_parent"
-                android:layout_height="108dp"
-                android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
-                android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
-                android:background="@color/semi_transparent"
-                android:visibility="visible">
-                <ScrollView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/llSubCatListHolder"
+        <HorizontalScrollView
+            android:id="@+id/svSubCategoryListHolder"
             android:layout_width="match_parent"
             android:layout_height="108dp"
-
+            android:layout_marginTop="6dp"
             android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
             android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
-            android:orientation="horizontal"
-            android:padding="7dp" />
-                </ScrollView>
-            </HorizontalScrollView>
+            android:background="@color/semi_transparent"
+            android:visibility="visible">
+            <ScrollView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llSubCatListHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+
+                    android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
+                    android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
+                    android:orientation="horizontal"
+                    android:padding="7dp" />
+            </ScrollView>
+        </HorizontalScrollView>
 
 
 
@@ -168,6 +161,11 @@
                 android:visibility="gone"
                 android:layout_marginTop="5dp" />
 
+            <ExpandableListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ExpandableListView>
             <TextView
                 android:id="@+id/tvInstructionSubCat"
                 android:layout_width="wrap_content"

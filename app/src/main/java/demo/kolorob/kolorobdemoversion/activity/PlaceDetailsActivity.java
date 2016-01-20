@@ -1,5 +1,4 @@
-package demo.kolorob.kolorobdemoversion.activity;
-
+package  demo.kolorob.kolorobdemoversion.activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -16,6 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,8 +25,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.Group;
+import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -48,12 +52,13 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
+
 /**
  * Created by touhid on 12/3/15.
  *
  * @author touhid,arafat
  */
-public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickListener {
+public class PlaceDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = PlaceDetailsActivity.class.getSimpleName();
     private static final int ANIM_INTERVAL = 100;
@@ -66,7 +71,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
     private TextView categoryHeader;
     private ImageView categoryHeaderIcon;
     private TextView subCatItemListHeader;
-    private ListView subCatItemList;
+    private ExpandableListView subCatItemList;
     private Button showSubCatListItem;
     private Button seeMap;
     private static TextView insSubCat;
@@ -91,13 +96,21 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     private int currentCategoryID;
 
+    Vector<Group> groups = new Vector<Group>();
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_details_activity);
 
-        Intent intent = getIntent();
+
+        Intent intent;
+        intent = getIntent();
         if (null != intent)
         {
             locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
@@ -129,7 +142,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
 
 
         subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
-        subCatItemList = (ListView) findViewById(R.id.sub_cat_item_list);
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         seeMap = (Button) findViewById(R.id.btn_see_map);
@@ -146,7 +159,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
 
         /**
          * constructing category list
-        **/
+         **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivity.this);
         constructCategoryList(categoryTable.getAllCategories());
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
@@ -179,10 +192,12 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
 
                 int subcategoryId=0;
                 int i=0;
+
                 for(SubCategoryItem ct:currentSubCategoryItem)
                 {
                     if(i==position)
                     {
+
                         subcategoryId=ct.getId();
                     }
                     i++;
@@ -201,6 +216,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                     case AppConstants.EDUCATION:
                         EducationServiceProviderTable educationServiceProviderTables = new EducationServiceProviderTable(PlaceDetailsActivity.this);
                         ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
+
                         educationServiceProviderItems = educationServiceProviderTables.getAllEducationSubCategoriesInfo(currentCategoryID, subcategoryId);
                         ArrayList<String> itemName = new ArrayList<String>();
                         currentEducationServiceProvider = educationServiceProviderItems;
@@ -273,7 +289,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         break;
 
 
-                        //TODO write necessary codes for health
+                    //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
                         EntertainmentServiceProviderTable entertainmentServiceProviderTables = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
@@ -436,6 +452,32 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
             }
         });
     }
+    public void createData(String head) {
+
+        ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
+        SubCategoryTable subCategoryTable= new SubCategoryTable(PlaceDetailsActivity.this);
+        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+
+     ArrayList<String>print=  null;
+        ArrayList<String>printnames=  null;
+        groups.removeAllElements();
+        print=subCategoryTable.getSubnameedu(currentCategoryID, head);
+
+
+        for (int j = 0; j < print.size(); j++) {
+            Group group = new Group(print.get(j));
+            printnames=null;
+
+    group.children.add("hello");
+
+            groups.add(j, group);
+        }
+    }
+
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -525,7 +567,8 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
             @Override
             public void onClick(View v) {
 
-                currentCategoryID=ci.getId();
+                currentCategoryID = ci.getId();
+                //
 
                 /*code for category*/
                 /*following code will be different for each category*/
@@ -536,12 +579,11 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                 * category id 5 means legal
                 * category id 6 means financial
                 * category id 7 means job*/
-                switch (currentCategoryID)
-                {
+                switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
-                        callMapFragmentWithEducationInfo(ci.getCatName(),ci.getId(),educationServiceProvider);
+                        callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
                         break;
                     case AppConstants.HEALTH:
 
@@ -551,7 +593,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         break;
 
 
-                        //TODO write necessary codes for health
+                    //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
@@ -598,9 +640,9 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                 categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, .3,AppConstants.ALL_CAT_ICONS[ci.getId() - 1],ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, .3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                 else
-                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1],ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -610,14 +652,20 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
+        createData(header);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
         for(SubCategoryItem si : subCategoryItems)
         {
             itemName.add(si.getSubCatName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PlaceDetailsActivity.this, R.layout.sub_cat_item_list_item,R.id.textView5, itemName);
+        int i=0;
+
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+
+        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups);
         subCatItemList.setAdapter(adapter);
+
     }
     private ArrayList<SubCategoryItem> constructSubCategoryListItem(int cat_id,String header)
     {
@@ -633,9 +681,11 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
         llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         for (SubCategoryItem si : subCategoryList) {
+
             if(!header.contains(si.getSubcatHeader()))
             {
                 header.add(si.getSubcatHeader());
+
                 llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
             }
         }
@@ -703,17 +753,17 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
                         //TODO write necessary codes for government
                         break;
                     case AppConstants.LEGAL:
-                        ArrayList<LegalAidServiceProviderItem>legalItem;
-                        legalItem = constructlegalaidListItemForHeader(cat_id,si.getSubcatHeader());
-                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(),cat_id,legalItem);
+                        ArrayList<LegalAidServiceProviderItem> legalItem;
+                        legalItem = constructlegalaidListItemForHeader(cat_id, si.getSubcatHeader());
+                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
-                        ArrayList<FinancialServiceProviderItem>financialItem;
+                        ArrayList<FinancialServiceProviderItem> financialItem;
                         financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
                     case AppConstants.JOB:
-                        ArrayList<JobServiceProviderItem>jobItem;
+                        ArrayList<JobServiceProviderItem> jobItem;
                         jobItem = constructjobListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithJobInfo(si.getSubcatHeader(), cat_id, jobItem);
                         break;
@@ -735,6 +785,7 @@ public class PlaceDetailsActivity extends BaseActivity  implements View.OnClickL
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
         return subCategoryTable.getAllSubCategories(id);
     }
+
 
     private void showAnimatedSubcategories(final ArrayList<SubCategoryItem> subCatList, double dwPerc, int iconId, final int cat_id) {
         isCatExpandedOnce = true;

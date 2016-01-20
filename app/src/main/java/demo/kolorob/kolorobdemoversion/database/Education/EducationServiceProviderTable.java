@@ -6,11 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
+
 
 
 /**
@@ -56,6 +59,7 @@ public class EducationServiceProviderTable  {
         tContext = context;
         createTable();
     }
+
     private void createTable() {
         SQLiteDatabase db = openDB();
 
@@ -214,6 +218,7 @@ public class EducationServiceProviderTable  {
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+
         closeDB();
         return ret;
     }
@@ -317,21 +322,56 @@ public class EducationServiceProviderTable  {
 
     public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id) {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
+
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
 
         if (cursor.moveToFirst()) {
             do {
+
+
                 //System.out.println("abc="+cursor.getString(4));
                 subCatList.add(cursorToSubCatList(cursor));
+
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
         return subCatList;
     }
+    public ArrayList<String> Edunames(int cat_id,String head) {
+        ArrayList<String>subcatnames=null;
+        SubCategoryTable sub  = new SubCategoryTable();
+       subcatnames=sub.getSubnameedu(cat_id, head);
 
+        ArrayList<String> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        int i=0;
+        int namelistindex=0;
+        for(String s:  subcatnames) {
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
+                    + " AND " + KEY_EDU_SUBCATEGORY_ID + " in (SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+s+"')", null);
+
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    String name = cursor.getString(4);
+
+                    nameslist.add(namelistindex, name);
+                    namelistindex++;
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            i++;
+        }
+
+        closeDB();
+        return  nameslist;
+    }
     public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);

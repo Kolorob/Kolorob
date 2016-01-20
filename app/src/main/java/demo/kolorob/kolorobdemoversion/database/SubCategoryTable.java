@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
@@ -32,6 +33,10 @@ public class SubCategoryTable {
     public SubCategoryTable(Context context) {
         tContext = context;
         createTable();
+    }
+
+    public SubCategoryTable() {
+
     }
 
     private void createTable() {
@@ -116,7 +121,7 @@ public class SubCategoryTable {
         ArrayList<SubCategoryItem> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -127,7 +132,46 @@ public class SubCategoryTable {
         closeDB();
         return siList;
     }
+    public ArrayList<String> getSubnameedu(int id,String head) {
+        ArrayList<String> siList=new ArrayList<>();
 
+        SQLiteDatabase db = openDB();
+        int i=0;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(2);
+                int subid=cursor.getInt(1);
+                siList.add(i,name);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
+   /* public ArrayList<Integer> getSubid(int id,String head) {
+        ArrayList<Integer> siList2=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        int i=0;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+               ;
+                int subid=cursor.getInt(1);
+                siList2.add(i,subid);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList2;
+    }*/
     public ArrayList<SubCategoryItem> getAllSubCategoriesHeader(int id,String head) {
         ArrayList<SubCategoryItem> siList = new ArrayList<>();
 

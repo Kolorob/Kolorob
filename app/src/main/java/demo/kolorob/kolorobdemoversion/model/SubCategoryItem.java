@@ -5,6 +5,8 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+
 /**
  * Created by Yeakub Hassan Rafi on 26-Dec-15.
  */
