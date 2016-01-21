@@ -37,6 +37,10 @@ public class EducationServiceProviderItem implements Serializable {
     private String latitude;
     private String longitude;
 
+    public void setEduNameEng(String eduNameEng) {
+        this.eduNameEng = eduNameEng;
+    }
+
     public EducationServiceProviderItem(  String identifierId,
                                           String serviceProviderId,
                                           int eduSubCategoryId,

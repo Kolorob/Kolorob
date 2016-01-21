@@ -340,16 +340,19 @@ public class EducationServiceProviderTable  {
         closeDB();
         return subCatList;
     }
-    public ArrayList<String> Edunames(int cat_id,String head,String a) {
+
+    public static String getKeyEduNameEng() {
+        return KEY_EDU_NAME_ENG;
+    }
+
+    public ArrayList<EducationServiceProviderItem> Edunames(int cat_id,String head,String a) {
         String subcatnames=null;
         SubCategoryTable sub  = new SubCategoryTable();
        subcatnames=a;
 
-        ArrayList<String> nameslist=new ArrayList<>();
+        ArrayList<EducationServiceProviderItem> nameslist=new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-
-        int namelistindex=0;
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
                     + " AND " + KEY_EDU_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
@@ -358,17 +361,12 @@ public class EducationServiceProviderTable  {
             if (cursor.moveToFirst()) {
                 do {
 
-                    String name = cursor.getString(4);
 
-                    nameslist.add(namelistindex, name);
-                    namelistindex++;
+                    nameslist.add(cursorToSubCatList(cursor));
 
                 } while (cursor.moveToNext());
             }
             cursor.close();
-
-
-
         closeDB();
         return  nameslist;
     }

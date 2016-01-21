@@ -91,7 +91,8 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<LegalAidServiceProviderItem> currentLegalAidServiceProvider;
     private ArrayList<JobServiceProviderItem> currentJobServiceProvider;
     private ArrayList<FinancialServiceProviderItem> currentFinancialServiceProvider;
-
+    ArrayList<String> service = new ArrayList<String>();
+    ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     private int currentCategoryID;
@@ -459,7 +460,8 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
 
      ArrayList<String>print=  null;
-        ArrayList<String>printnames=  null;
+
+
         groups.removeAllElements();
         print=subCategoryTable.getSubnameedu(currentCategoryID, head);
 
@@ -469,12 +471,20 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             printnames=null;
             printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j));
 for(int i=0;i<printnames.size();i++) {
-    group.children.add(printnames.get(i));
+    ArrayList<String> itemName = new ArrayList<String>();
+    EducationServiceProviderItem currEduItem = null;
+    String printt;
+    for(EducationServiceProviderItem si : printnames)
+    {
+
+        itemName.add(si.getEduNameEng());
+        service.add(si.getIdentifierId());
+    }
+    //group.children.add("jas","asd");
 }
             groups.add(j, group);
         }
     }
-
 
 
 
@@ -664,7 +674,7 @@ for(int i=0;i<printnames.size();i++) {
 
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups);
+        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups,printnames);
         subCatItemList.setAdapter(adapter);
 
     }
