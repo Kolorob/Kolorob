@@ -4,6 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+
+
+
 /**
  * Created by Yeakub Hassan Rafi on 27-Dec-15.
  */
@@ -34,6 +37,8 @@ public class EducationServiceProviderItem implements Serializable {
     private String shift;
     private String canteenFacility;
     private String additionalInfo;
+    private String area;
+    private String address;
     private String latitude;
     private String longitude;
 
@@ -65,8 +70,11 @@ public class EducationServiceProviderItem implements Serializable {
                                           String shift,
                                           String canteenFacility,
                                           String additionalInfo,
+                                          String area,
+                                          String address,
                                           String latitude,
                                           String longitude) {
+
         this.identifierId = identifierId ;
         this.serviceProviderId = serviceProviderId;
         this.eduSubCategoryId = eduSubCategoryId;
@@ -91,6 +99,8 @@ public class EducationServiceProviderItem implements Serializable {
         this.shift = shift;
         this.canteenFacility = canteenFacility;
         this.additionalInfo = additionalInfo;
+        this.area = area;
+        this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -104,6 +114,23 @@ public class EducationServiceProviderItem implements Serializable {
     public String getHostelFacility(){return hostelFacility;}
     public String getTransportFacility(){return transportFacility;}
     public String getPlayground(){return playground;}
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getContactPersonDesignation(){return contactPersonDesignation;}
     public String getContactNo(){return contactNo;}
     public String getEmailAddress(){return emailAddress;}
@@ -146,6 +173,8 @@ public class EducationServiceProviderItem implements Serializable {
         String _shift=jo.getString("shift");
         String _canteenFacility=jo.getString("canteen_facility");
         String _additionalInfo=jo.getString("additional_info");
+        String _area=jo.getString("area");
+        String _address=jo.getString("address");
         String _latitude = jo.getString("latitude");
         String _longitude = jo.getString("longitude");
 
@@ -172,7 +201,7 @@ public class EducationServiceProviderItem implements Serializable {
                 _courseProvided,
                 _shift,
                 _canteenFacility,
-                _additionalInfo,
+                _additionalInfo,_area,_address,
                 _latitude,
                 _longitude);
     }

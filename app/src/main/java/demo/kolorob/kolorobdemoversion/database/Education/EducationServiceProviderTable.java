@@ -49,6 +49,8 @@ public class EducationServiceProviderTable  {
     private static final String KEY_SHIFT = "_shift"; //
     private static final String KEY_CANTEEN_FACILITY = "_canteen_facility"; //
     private static final String KEY_ADDITIONAL_INFO = "_additional_info"; //
+    private static final String KEY_AREA = "_area"; //
+    private static final String KEY_ADDRESS = "_address"; //
     private static final String KEY_LATITUDE= "_latitude"; //
     private static final String KEY_LONGITUDE = "_longitude"; //
 
@@ -89,6 +91,8 @@ public class EducationServiceProviderTable  {
                 + KEY_SHIFT + " TEXT, "
                 + KEY_CANTEEN_FACILITY + " TEXT, "
                 + KEY_ADDITIONAL_INFO + " TEXT, "
+                + KEY_AREA + " TEXT, "
+                + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_EDU_SUBCATEGORY_ID + ", " + KEY_SERVICE_PROVIDER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
@@ -128,6 +132,8 @@ public class EducationServiceProviderTable  {
                 educationServiceProviderItem.getShift(),
                 educationServiceProviderItem.getCanteenFacility(),
                 educationServiceProviderItem.getAdditionalInfo(),
+                educationServiceProviderItem.getArea(),
+                educationServiceProviderItem.getAddress(),
                 educationServiceProviderItem.getLatitude(),
                 educationServiceProviderItem.getLongitude()
         );
@@ -157,6 +163,8 @@ public class EducationServiceProviderTable  {
                            String shift,
                            String canteenFacility,
                            String additionalInfo,
+                           String area,
+                           String address,
                            String latitude,
                            String longitude) {
         if (isFieldExist(identifierId,categoryId,eduSubCategoryId)) {
@@ -185,6 +193,8 @@ public class EducationServiceProviderTable  {
                     shift,
                     canteenFacility,
                     additionalInfo,
+                    area,
+                    address,
                     latitude,
                     longitude);
         }
@@ -213,6 +223,8 @@ public class EducationServiceProviderTable  {
         rowValue.put(KEY_SHIFT , shift);
         rowValue.put(KEY_CANTEEN_FACILITY , canteenFacility);
         rowValue.put(KEY_ADDITIONAL_INFO , additionalInfo);
+        rowValue.put(KEY_AREA, area);
+        rowValue.put(KEY_ADDRESS, address);
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
 
@@ -265,6 +277,8 @@ public class EducationServiceProviderTable  {
                             String shift,
                             String canteenFacility,
                             String additionalInfo,
+                            String area,
+                            String address,
                             String latitude,
                             String longitude) {
         ContentValues rowValue = new ContentValues();
@@ -292,6 +306,8 @@ public class EducationServiceProviderTable  {
         rowValue.put(KEY_SHIFT , shift);
         rowValue.put(KEY_CANTEEN_FACILITY , canteenFacility);
         rowValue.put(KEY_ADDITIONAL_INFO , additionalInfo);
+        rowValue.put(KEY_AREA,area);
+        rowValue.put(KEY_ADDRESS,address);
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
 
@@ -341,13 +357,9 @@ public class EducationServiceProviderTable  {
         return subCatList;
     }
 
-    public static String getKeyEduNameEng() {
-        return KEY_EDU_NAME_ENG;
-    }
 
-    public ArrayList<EducationServiceProviderItem> Edunames(int cat_id,String head,String a) {
+    public ArrayList<EducationServiceProviderItem> Edunames(int cat_id,String head,String a,String place) {
         String subcatnames=null;
-        SubCategoryTable sub  = new SubCategoryTable();
        subcatnames=a;
 
         ArrayList<EducationServiceProviderItem> nameslist=new ArrayList<>();
@@ -355,7 +367,7 @@ public class EducationServiceProviderTable  {
         SQLiteDatabase db = openDB();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
-                    + " AND " + KEY_EDU_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+                    + " AND "+KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_EDU_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
 
 
             if (cursor.moveToFirst()) {
@@ -413,8 +425,10 @@ public class EducationServiceProviderTable  {
         String _shift=cursor.getString(21);
         String _canteenFacility=cursor.getString(22);
         String _additionalInfo=cursor.getString(23);
-        String _latitude = cursor.getString(24);
-        String _longitude = cursor.getString(25);
+        String _area=cursor.getString(24);
+        String _address=cursor.getString(25);
+        String _latitude = cursor.getString(26);
+        String _longitude = cursor.getString(27);
 
         return new EducationServiceProviderItem(
                 _identifierId,
@@ -441,6 +455,7 @@ public class EducationServiceProviderTable  {
                 _shift,
                 _canteenFacility,
                 _additionalInfo,
+                _area,_address,
                 _latitude,
                 _longitude);
     }
