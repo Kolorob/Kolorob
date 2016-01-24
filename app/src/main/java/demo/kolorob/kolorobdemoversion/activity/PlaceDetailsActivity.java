@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
-//import demo.kolorob.kolorobdemoversion.adapters.Group;
-//import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.Group;
+import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -101,7 +101,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     private int currentCategoryID;
 
-    //Vector<Group> groups = new Vector<Group>();
+    Vector<Group> groups = new Vector<Group>();
 
 
 
@@ -437,16 +437,16 @@ private String placeChoice;
         currentCategoryID=cat_id;
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
         ArrayList<String>print=  null;
-      //  groups.removeAllElements();
+        groups.removeAllElements();
         print=subCategoryTable.getSubnameedu(currentCategoryID, head);
         for (int j = 0; j < print.size(); j++) {
-            //Group group = new Group(print.get(j));
+            Group group = new Group(print.get(j));
             printnames=null;
             printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j),placeChoice);
         for(int i=0;i<printnames.size();i++) {
             group.children.add(i,printnames.get(i));
             }
-          //  groups.add(j, group);
+           groups.add(j, group);
         }
     }
 
