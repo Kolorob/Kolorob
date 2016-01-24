@@ -480,7 +480,7 @@ for(int i=0;i<printnames.size();i++) {
         itemName.add(si.getEduNameEng());
         service.add(si.getIdentifierId());
     }
-    //group.children.add("jas","asd");
+    //group.children.add(itemName.get(i),service.get(i));
 }
             groups.add(j, group);
         }
