@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.ChildrenEducation;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -55,34 +56,34 @@ public class DetailsInfoActivity extends Activity  {
         /**
         *following codes only for education. This may vary for different category.
         * */
-        itemName = (TextView) findViewById(R.id.tv_header_entertainment);
-        itemAddress = (TextView) findViewById(R.id.tv_item_location_entertainment);
-        itemType = (TextView) findViewById(R.id.tv_item_type_entertainment);
-        itemContact = (TextView) findViewById(R.id.tv_item_contact_entertainment);
-        totalStudents = (TextView) findViewById(R.id.tv_total_students);
-        totalClasses = (TextView) findViewById(R.id.tv_total_class);
-        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-        playground = (TextView) findViewById(R.id.tv_playground);
-        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
+        itemName = (TextView) findViewById(R.id.tv_header);
+        itemAddress = (TextView) findViewById(R.id.tv_item_location);
+        itemType = (TextView) findViewById(R.id.tv_item_type);
+        itemContact = (TextView) findViewById(R.id.tv_item_contact);
+       totalStudents = (TextView) findViewById(R.id.tv_total_students);
+       totalClasses = (TextView) findViewById(R.id.tv_total_class);
+       totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
+       playground = (TextView) findViewById(R.id.tv_playground);
+       hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-        email = (TextView) findViewById(R.id.tv_email_entertainment);
-        website = (TextView) findViewById(R.id.tv_website_entertainment);
-        fb = (TextView) findViewById(R.id.tv_fb_entertainment);
+       email = (TextView) findViewById(R.id.tv_email);
+       website = (TextView) findViewById(R.id.tv_website);
+        fb = (TextView) findViewById(R.id.tv_fb);
 
 
         itemName.setText(educationServiceProviderItem.getEduNameEng());
-        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
+       itemAddress.setText("ঠিকানা ঃ  "+educationServiceProviderItem.getArea());
         itemType.setText("ধরন ঃ  "+educationServiceProviderItem.getEduType());
         itemContact.setText("যোগাযোগের উপায় ঃ  "+educationServiceProviderItem.getContactNo());
-        totalStudents.setText("মোট ছাত্র সংখ্যা ঃ  "+educationServiceProviderItem.getTotalStudents());
+       totalStudents.setText("মোট ছাত্র সংখ্যা ঃ  "+educationServiceProviderItem.getTotalStudents());
         totalClasses.setText("মোট শ্রেণি সংখ্যা ঃ  "+educationServiceProviderItem.getTotalClasses());
-        totalTeachers.setText("মোট শিক্ষক সংখ্যা ঃ  "+educationServiceProviderItem.getTotalTeachers());
-        playground.setText("খেলার মাঠ ঃ  "+educationServiceProviderItem.getPlayground());
+       totalTeachers.setText("মোট শিক্ষক সংখ্যা ঃ  "+educationServiceProviderItem.getTotalTeachers());
+      playground.setText("খেলার মাঠ ঃ  "+educationServiceProviderItem.getPlayground());
         hostel.setText("হোস্টেল ঃ  "+educationServiceProviderItem.getHostelFacility());
         transport.setText("যাতায়াত ঃ  "+educationServiceProviderItem.getHostelFacility());
         email.setText("ইমেইল ঃ  "+educationServiceProviderItem.getEmailAddress());
         website.setText("ওয়েবসাইট ঃ  "+educationServiceProviderItem.getWebsiteLink());
-        fb.setText("ফেসবুক ঃ  "+educationServiceProviderItem.getFbLink());
+       fb.setText("ফেসবুক ঃ  "+educationServiceProviderItem.getFbLink());
 
 
 

@@ -25,10 +25,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.ChildrenEducation;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
@@ -101,8 +101,15 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
 
+private String placeChoice;
 
+    public String getPlaceChoice() {
+        return placeChoice;
+    }
 
+    public void setPlaceChoice(String placeChoice) {
+        this.placeChoice = placeChoice;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,10 +124,12 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
             if(locationNameId==AppConstants.PLACE_BAUNIABADH)
             {
+                setPlaceChoice("Baunia Badh");
                 locationName = AppConstants.BAUNIABADH;
             }
             else if(locationNameId==AppConstants.PLACE_PARIS_ROAD)
             {
+                setPlaceChoice("Paris Road");
                 locationName = AppConstants.PARIS_ROAD;
             }
         }
@@ -214,43 +223,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 * category id 7 means job*/
                 switch (currentCategoryID)
                 {
-                    case AppConstants.EDUCATION:
-                        EducationServiceProviderTable educationServiceProviderTables = new EducationServiceProviderTable(PlaceDetailsActivity.this);
-                        ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
 
-                        educationServiceProviderItems = educationServiceProviderTables.getAllEducationSubCategoriesInfo(currentCategoryID, subcategoryId);
-                        ArrayList<String> itemName = new ArrayList<String>();
-                        currentEducationServiceProvider = educationServiceProviderItems;
-                        for (EducationServiceProviderItem si : educationServiceProviderItems) {
-                            itemName.add(si.getEduNameEng());
-                        }
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PlaceDetailsActivity.this);
-                        LayoutInflater inflater = getLayoutInflater();
-                        View convertView = (View) inflater.inflate(R.layout.subcat_item_list, null);
-                        TextView head = (TextView) convertView.findViewById(R.id.tv_item_hd);
-                        String header = subCatItemList.getItemAtPosition(position).toString();
-                        head.setText(header);
-                        alertDialog.setView(convertView);
-                        ListView lv = (ListView) convertView.findViewById(R.id.subcat_list);
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PlaceDetailsActivity.this, R.layout.sub_cat_item_list_item, R.id.textView5, itemName);
-                        lv.setAdapter(adapter);
-                        alertDialog.show();
-                        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                EducationServiceProviderItem currEduItem = null;
-                                int i = 0;
-                                for (EducationServiceProviderItem et : currentEducationServiceProvider) {
-                                    if (i == position) {
-                                        currEduItem = et;
-                                    }
-                                }
-                                Intent ii = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
-                                ii.putExtra(AppConstants.KEY_DETAILS_VIEW, currEduItem);
-                                startActivity(ii);
-                            }
-                        });
-                        break;
                     case AppConstants.HEALTH:
 
                         HealthServiceProviderTable healthServiceProviderTables = new HealthServiceProviderTable(PlaceDetailsActivity.this);
@@ -453,35 +426,22 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
-    public void createData(String head) {
+    public void createData(int cat_id, String head,String placeChoice) {
 
-        ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
+       // ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
         SubCategoryTable subCategoryTable= new SubCategoryTable(PlaceDetailsActivity.this);
+        currentCategoryID=cat_id;
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
-
-     ArrayList<String>print=  null;
-
-
+        ArrayList<String>print=  null;
         groups.removeAllElements();
         print=subCategoryTable.getSubnameedu(currentCategoryID, head);
-
-
         for (int j = 0; j < print.size(); j++) {
             Group group = new Group(print.get(j));
             printnames=null;
-            printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j));
-for(int i=0;i<printnames.size();i++) {
-    ArrayList<String> itemName = new ArrayList<String>();
-    EducationServiceProviderItem currEduItem = null;
-    String printt;
-    for(EducationServiceProviderItem si : printnames)
-    {
-
-        itemName.add(si.getEduNameEng());
-        service.add(si.getIdentifierId());
-    }
-    //group.children.add(itemName.get(i),service.get(i));
-}
+            printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j),placeChoice);
+        for(int i=0;i<printnames.size();i++) {
+            group.children.add(i,printnames.get(i));
+            }
             groups.add(j, group);
         }
     }
@@ -663,7 +623,7 @@ for(int i=0;i<printnames.size();i++) {
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
-        createData(header);
+        createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
         for(SubCategoryItem si : subCategoryItems)
@@ -674,7 +634,7 @@ for(int i=0;i<printnames.size();i++) {
 
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups,printnames);
+        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups,cat_id);
         subCatItemList.setAdapter(adapter);
 
     }
