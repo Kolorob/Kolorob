@@ -2,10 +2,13 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -15,6 +18,7 @@ public class DetailsInfoActivity extends Activity  {
 
     ImageView close;
     TextView close_tv;
+    Button edukivabejaben;
 
     /**
     * Following components are only for education
@@ -68,7 +72,7 @@ public class DetailsInfoActivity extends Activity  {
         email = (TextView) findViewById(R.id.tv_email_entertainment);
         website = (TextView) findViewById(R.id.tv_website_entertainment);
         fb = (TextView) findViewById(R.id.tv_fb_entertainment);
-
+        edukivabejaben=(Button)findViewById(R.id.kivabejabenedu);
 
         itemName.setText(educationServiceProviderItem.getEduNameEng());
         itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
@@ -99,6 +103,46 @@ public class DetailsInfoActivity extends Activity  {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        edukivabejaben.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String lat= educationServiceProviderItem.getLatitude().toString();
+                // double latitude = Double.parseDouble(lat);
+                String lon = educationServiceProviderItem.getLongitude().toString();
+                // double longitude = Double.parseDouble(lon);
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Latitude",lat);
+                editor.putString("Longitude",lon);
+                editor.commit();
+
+
+                String Longitude=pref.getString("Latitude", null);
+                String Latitude=pref.getString("Longitude", null);
+
+                if (Latitude != null && Longitude != null )
+                {
+                    Double Lon= Double.parseDouble(Longitude);
+                    Double Lat= Double.parseDouble(Latitude);
+                    Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                    // implementFragment();
+
+                    //username and password are present, do your stuff
+                }
+
+
+
+
+
+                finish();
+
+
             }
         });
 

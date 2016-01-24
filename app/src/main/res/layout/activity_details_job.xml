@@ -196,6 +196,19 @@
         android:background="@drawable/detailed_info_panel_bottom"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:id="@+id/linearLayout4"></LinearLayout>
+        android:id="@+id/linearLayout4"
+        android:foregroundGravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/kivabejabenJob"
+            android:text="কিভাবে যাবেন"
+            android:foregroundGravity="center"
+            android:gravity="center" />
+
+
+
+    </LinearLayout>
 
 </RelativeLayout>

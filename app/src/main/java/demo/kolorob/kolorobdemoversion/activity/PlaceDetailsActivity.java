@@ -3,10 +3,13 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -23,14 +26,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Group;
-import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
+//import demo.kolorob.kolorobdemoversion.adapters.Group;
+//import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -39,6 +43,7 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTabl
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+import demo.kolorob.kolorobdemoversion.fragment.MapRouteDrawingFragment;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 
@@ -97,7 +102,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     private int currentCategoryID;
 
-    Vector<Group> groups = new Vector<Group>();
+    //Vector<Group> groups = new Vector<Group>();
 
 
 
@@ -462,12 +467,12 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
      ArrayList<String>print=  null;
 
 
-        groups.removeAllElements();
+      //  groups.removeAllElements();
         print=subCategoryTable.getSubnameedu(currentCategoryID, head);
 
 
         for (int j = 0; j < print.size(); j++) {
-            Group group = new Group(print.get(j));
+            //Group group = new Group(print.get(j));
             printnames=null;
             printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j));
 for(int i=0;i<printnames.size();i++) {
@@ -482,7 +487,7 @@ for(int i=0;i<printnames.size();i++) {
     }
     //group.children.add("jas","asd");
 }
-            groups.add(j, group);
+          //  groups.add(j, group);
         }
     }
 
@@ -674,8 +679,8 @@ for(int i=0;i<printnames.size();i++) {
 
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups,printnames);
-        subCatItemList.setAdapter(adapter);
+        //MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups,printnames);
+      //  subCatItemList.setAdapter(adapter);
 
     }
     private ArrayList<SubCategoryItem> constructSubCategoryListItem(int cat_id,String header)
@@ -1092,5 +1097,101 @@ for(int i=0;i<printnames.size();i++) {
     }
 
 
+    public void implementRouteDrawingFragment()
+    {
+        MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
 
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapRouteDrawingFragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean dispatchKeyShortcutEvent(KeyEvent event) {
+        return super.dispatchKeyShortcutEvent(event);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+       // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+        String Longitude = pref.getString("Latitude", null);
+        String Latitude = pref.getString("Longitude", null);
+
+
+        Intent intent;
+        intent = getIntent();
+        if (null != intent)
+        {
+            locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
+            if(locationNameId==AppConstants.PLACE_BAUNIABADH)
+            {
+                locationName = AppConstants.BAUNIABADH;
+            }
+            else if(locationNameId==AppConstants.PLACE_PARIS_ROAD)
+            {
+                locationName = AppConstants.PARIS_ROAD;
+            }
+        }
+        editor.putInt("LocationNameId", locationNameId);
+        editor.commit();
+
+        if (Latitude != null) {
+            Double Lon = Double.parseDouble(Longitude);
+            Double Lat = Double.parseDouble(Latitude);
+
+            implementRouteDrawingFragment();
+
+
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
+
+    @Override
+    public void supportNavigateUpTo(Intent upIntent) {
+        super.supportNavigateUpTo(upIntent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

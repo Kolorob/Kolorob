@@ -2,10 +2,13 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -21,7 +24,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
         ImageView close;
         TextView close_tv;
-
+        Button legal;
         /**
          * Following components are only for LegalAid
          * For other categories this components may vary
@@ -62,6 +65,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             email = (TextView) findViewById(R.id.tv_email);
             website = (TextView) findViewById(R.id.tv_website);
             fb = (TextView) findViewById(R.id.tv_fb);
+            legal=(Button)findViewById(R.id.kivabejabenLegal);
 
 
             itemName.setText(legalAidServiceProviderItem.getLegalaidNameEng());
@@ -73,7 +77,41 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             email.setText("ইমেইলঃ "+legalAidServiceProviderItem.getEmailAddress());
             website.setText("ওয়েবসাইটঃ "+legalAidServiceProviderItem.getWebsiteLink());
             fb.setText("ফেসবুকঃ "+legalAidServiceProviderItem.getFbLink());
+            legal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String lat= legalAidServiceProviderItem.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = legalAidServiceProviderItem.getLongitude().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude",lat);
+                    editor.putString("Longitude",lon);
+                    editor.commit();
 
+
+                    String Longitude=pref.getString("Latitude", null);
+                    String Latitude=pref.getString("Longitude", null);
+
+                    if (Latitude != null && Longitude != null )
+                    {
+                        Double Lon= Double.parseDouble(Longitude);
+                        Double Lat= Double.parseDouble(Latitude);
+                       // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                        // implementFragment();
+
+                        //username and password are present, do your stuff
+                    }
+
+
+
+
+
+                    finish();
+                }
+            });
 
 
             //common for all category
