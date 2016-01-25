@@ -53,7 +53,7 @@ public class DetailsInfoActivityHealth extends Activity  {
         Intent intent = getIntent();
         if (null != intent)
         {
-            healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_VIEW);
+            healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH);
 
         }
         /**

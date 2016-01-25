@@ -157,6 +157,30 @@ public class LegalAidServiceProviderTable {
         closeDB();
         return ret;
     }
+    public ArrayList<LegalAidServiceProviderItem> Legnames(int cat_id,String head,String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+
+        ArrayList<LegalAidServiceProviderItem> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
+                + " AND "+KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_LEGAL_AID_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
+    }
 
     public boolean isFieldExist(String id, int cat_id, int sub_cat_id) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);

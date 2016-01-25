@@ -50,7 +50,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         Intent intent = getIntent();
         if (null != intent)
         {
-            entertainmentServiceProviderItem = (EntertainmentServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_VIEW);
+            entertainmentServiceProviderItem = (EntertainmentServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
 
         }
         /**

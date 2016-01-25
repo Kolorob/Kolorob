@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -195,6 +196,30 @@ public class FinancialServiceProviderTable {
         cursor.close();
         closeDB();
         return subCatList;
+    }
+    public ArrayList<FinancialServiceProviderItem> Finnames(int cat_id,String head,String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+
+        ArrayList<FinancialServiceProviderItem> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
+                + " AND "+KEY_FIN_AREA+" = '"+place+"'"  + " AND "+ KEY_FIN_REF_NUM + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
     }
     public ArrayList<FinancialServiceProviderItem> getAllFinancialSubCategoriesInfo(int cat_id) {
         ArrayList<FinancialServiceProviderItem> subCatList = new ArrayList<>();

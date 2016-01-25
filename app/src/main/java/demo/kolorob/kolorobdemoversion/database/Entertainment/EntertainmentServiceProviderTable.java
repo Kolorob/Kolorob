@@ -275,6 +275,30 @@ public class EntertainmentServiceProviderTable {
         return ret;
     }
 
+    public ArrayList<EntertainmentServiceProviderItem> Entnames(int cat_id,String head,String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+
+        ArrayList<EntertainmentServiceProviderItem> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
+                + " AND "+KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_SUB_CATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
+    }
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);

@@ -95,7 +95,13 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<LegalAidServiceProviderItem> currentLegalAidServiceProvider;
     private ArrayList<JobServiceProviderItem> currentJobServiceProvider;
     private ArrayList<FinancialServiceProviderItem> currentFinancialServiceProvider;
-    ArrayList<String> service = new ArrayList<String>();
+
+    ArrayList<EntertainmentServiceProviderItem> printnamesent;
+    ArrayList<JobServiceProviderItem> printnamesjob;
+    ArrayList<LegalAidServiceProviderItem> printnamesleg;
+    ArrayList<HealthServiceProviderItem> printnameshea;
+    ArrayList<FinancialServiceProviderItem> printnamesfin;
+
     ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
@@ -431,22 +437,116 @@ private String placeChoice;
         });
     }
     public void createData(int cat_id, String head,String placeChoice) {
+        switch (cat_id) {
+            case AppConstants.EDUCATION:
 
-      ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
-        SubCategoryTable subCategoryTable= new SubCategoryTable(PlaceDetailsActivity.this);
-        currentCategoryID=cat_id;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
-        ArrayList<String>print=  null;
-        groups.removeAllElements();
-        print=subCategoryTable.getSubnameedu(currentCategoryID, head);
-        for (int j = 0; j < print.size(); j++) {
-            Group group = new Group(print.get(j));
-            printnames=null;
-            printnames=  educationServiceProviderTable.Edunames(currentCategoryID,head,print.get(j),placeChoice);
-        for(int i=0;i<printnames.size();i++) {
-            group.children.add(i,printnames.get(i));
+            SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
+            currentCategoryID = cat_id;
+            EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+            ArrayList<String> print = null;
+            groups.removeAllElements();
+            print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+            for (int j = 0; j < print.size(); j++) {
+                Group group = new Group(print.get(j));
+                printnames = null;
+                printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+                for (int i = 0; i < printnames.size(); i++) {
+                    group.children.add(i, printnames.get(i));
+                }
+                groups.add(j, group);
             }
-           groups.add(j, group);
+        break;
+            case AppConstants.ENTERTAINMENT:
+
+                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> printent = null;
+                groups.removeAllElements();
+                printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printent.size(); j++) {
+                    Group group = new Group(printent.get(j));
+                    printnamesent = null;
+                    printnamesent = entertainmentServiceProviderTable.Entnames(currentCategoryID, head, printent.get(j), placeChoice);
+                    for (int i = 0; i < printnamesent.size(); i++) {
+                        group.childrenent.add(i, printnamesent.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.HEALTH:
+
+                SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> printhea = null;
+                groups.removeAllElements();
+                printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printhea.size(); j++) {
+                    Group group = new Group(printhea.get(j));
+                    printnameshea = null;
+                    printnameshea = healthServiceProviderTable.Heanames(currentCategoryID, head, printhea.get(j), placeChoice);
+                    for (int i = 0; i <  printnameshea .size(); i++) {
+                        group.childrenhea.add(i,printnameshea .get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.FINANCIAL:
+
+                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> printfin = null;
+                groups.removeAllElements();
+                printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j <  printfin.size(); j++) {
+                    Group group = new Group(printfin.get(j));
+                    printnamesfin = null;
+                    printnamesfin= financialServiceProviderTable.Finnames(currentCategoryID, head, printfin.get(j), placeChoice);
+                    for (int i = 0; i < printnamesfin.size(); i++) {
+                        group.childrenfin.add(i, printnamesfin.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.LEGAL:
+
+                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> printleg = null;
+                groups.removeAllElements();
+                printleg = subCategoryTable5.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printleg.size(); j++) {
+                    Group group = new Group(printleg.get(j));
+                    printnamesleg = null;
+                    printnamesleg = legalAidServiceProviderTable.Legnames(currentCategoryID, head, printleg.get(j), placeChoice);
+                    for (int i = 0; i < printnamesleg.size(); i++) {
+                        group.childrenleg.add(i, printnamesleg.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.JOB:
+
+                SubCategoryTable subCategoryTable6= new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> printjob = null;
+                groups.removeAllElements();
+                printjob  = subCategoryTable6.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printjob.size(); j++) {
+                    Group group = new Group(printjob.get(j));
+                    printnamesjob = null;
+                    printnamesjob = jobServiceProviderTable.Jobnames(currentCategoryID, head, printjob.get(j), placeChoice);
+                    for (int i = 0; i < printnamesjob.size(); i++) {
+                        group.childrenjob.add(i, printnamesjob.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            default:break;
         }
     }
 
