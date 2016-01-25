@@ -240,7 +240,7 @@ private String placeChoice;
                         }
                         AlertDialog.Builder alertDialogHealth = new AlertDialog.Builder(PlaceDetailsActivity.this);
                         LayoutInflater inflaterHealth = getLayoutInflater();
-                        View convertViewHealth = (View) inflaterHealth.inflate(R.layout.subcat_item_list, null);
+                        View convertViewHealth = inflaterHealth.inflate(R.layout.subcat_item_list, null);
                         TextView headHealth = (TextView) convertViewHealth.findViewById(R.id.tv_item_hd);
                         String headerHealth = subCatItemList.getItemAtPosition(position).toString();
                         headHealth.setText(headerHealth);
@@ -280,7 +280,7 @@ private String placeChoice;
                         }
                         AlertDialog.Builder alertDialogEnt = new AlertDialog.Builder(PlaceDetailsActivity.this);
                         LayoutInflater inflaterEnt = getLayoutInflater();
-                        View convertViewEnt = (View) inflaterEnt.inflate(R.layout.subcat_item_list, null);
+                        View convertViewEnt = inflaterEnt.inflate(R.layout.subcat_item_list, null);
                         TextView headEnt = (TextView) convertViewEnt.findViewById(R.id.tv_item_hd);
                         String headerEnt = subCatItemList.getItemAtPosition(position).toString();
                         headEnt.setText(headerEnt);
@@ -323,7 +323,7 @@ private String placeChoice;
                         }
                         AlertDialog.Builder alertDialoglegal = new AlertDialog.Builder(PlaceDetailsActivity.this);
                         LayoutInflater inflaterlegal = getLayoutInflater();
-                        View convertViewlegal = (View) inflaterlegal.inflate(R.layout.subcat_item_list, null);
+                        View convertViewlegal = inflaterlegal.inflate(R.layout.subcat_item_list, null);
                         TextView headlegal = (TextView) convertViewlegal.findViewById(R.id.tv_item_hd);
                         String headerlegal = subCatItemList.getItemAtPosition(position).toString();
                         headlegal.setText(headerlegal);
@@ -360,7 +360,7 @@ private String placeChoice;
                         }
                         AlertDialog.Builder alertDialogfinancial = new AlertDialog.Builder(PlaceDetailsActivity.this);
                         LayoutInflater inflaterfinancial  = getLayoutInflater();
-                        View convertViewfinancial  = (View) inflaterfinancial .inflate(R.layout.subcat_item_list, null);
+                        View convertViewfinancial  = inflaterfinancial .inflate(R.layout.subcat_item_list, null);
                         TextView headfinancial  = (TextView) convertViewfinancial .findViewById(R.id.tv_item_hd);
                         String headerfinancial = subCatItemList.getItemAtPosition(position).toString();
                         headfinancial .setText(headerfinancial);
@@ -397,7 +397,7 @@ private String placeChoice;
                         }
                         AlertDialog.Builder alertDialogjob = new AlertDialog.Builder(PlaceDetailsActivity.this);
                         LayoutInflater inflaterjob = getLayoutInflater();
-                        View convertViewjob = (View) inflaterjob.inflate(R.layout.subcat_item_list, null);
+                        View convertViewjob = inflaterjob.inflate(R.layout.subcat_item_list, null);
                         TextView headjob = (TextView) convertViewjob.findViewById(R.id.tv_item_hd);
                         String headerjob = subCatItemList.getItemAtPosition(position).toString();
                         headjob.setText(headerjob);
@@ -432,7 +432,7 @@ private String placeChoice;
     }
     public void createData(int cat_id, String head,String placeChoice) {
 
-       // ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
+      ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
         SubCategoryTable subCategoryTable= new SubCategoryTable(PlaceDetailsActivity.this);
         currentCategoryID=cat_id;
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
@@ -636,10 +636,13 @@ private String placeChoice;
         }
         int i=0;
 
+
+
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
-        //MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups,printnames);
-      //  subCatItemList.setAdapter(adapter);
+        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
+        subCatItemList.setAdapter(adapter);
+
 
     }
     private ArrayList<SubCategoryItem> constructSubCategoryListItem(int cat_id,String header)
