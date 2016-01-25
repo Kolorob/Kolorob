@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -384,9 +385,29 @@ public class OpeningActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
-        Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
-        startActivity(i);
+        //setContentView(R.layout.activity_main); //we don't need this line
+        SharedPreferences settings=getSharedPreferences("prefs",0);
+        boolean firstRun=settings.getBoolean("firstRun",false);
+        if(firstRun==false)//if running for first time
+        {
+            SharedPreferences.Editor editor=settings.edit();
+            editor.putBoolean("firstRun",true);
+            editor.commit();
+            Intent i=new Intent(OpeningActivity.this,LocationAskActivity.class);//Activity to be     launched For the First time
+            startActivity(i);
+            finish();
+        }
+        else
+        {
+            Intent a=new Intent(OpeningActivity.this,PlaceChoiceActivity.class);//Default Activity
+            startActivity(a);
+            finish();
+        }
     }
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
