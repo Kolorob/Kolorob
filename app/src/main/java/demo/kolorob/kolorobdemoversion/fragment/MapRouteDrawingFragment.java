@@ -65,13 +65,12 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // inflat and return the layout
         View v = inflater.inflate(R.layout.route_drawer_fragment, container,
                 false);
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
 
-        mMapView.onResume();// needed to get the map to display immediately
+        mMapView.onResume();
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -80,13 +79,12 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         }
 
         googleMap = mMapView.getMap();
-        // latitude and longitude
+
         double latitude = 17.385044;
         double longitude = 78.486671;
 
         SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
         String Latitude=pref.getString("Latitude", null);
         String Longitude =pref.getString("Longitude", null);
@@ -102,15 +100,13 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
 
 
-        // create marker
+
         MarkerOptions marker = new MarkerOptions().position(
                 new LatLng(Lat, Lon)).title("Hello Maps");
 
-        // Changing marker icon
         marker.icon(BitmapDescriptorFactory
                 .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
-        // adding marker
         googleMap.addMarker(marker);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(Lat, Lon)).zoom(13).build();
@@ -122,9 +118,8 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
-        //getYourRoute();
 
-        // googleMap.setMyLocationEnabled(true);
+
 
         mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
                 .addConnectionCallbacks(this)
@@ -138,7 +133,6 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                 .setFastestInterval(1 * 1000);
 
 
-        // Perform any camera updates here
         return v;
     }
 
@@ -148,32 +142,20 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
     private String getDirectionsUrl(double lat1,double lon1, double lat2, double lon2){
 
-        // Origin of route
         String str_origin = "origin="+lat1+","+lon1;
 
-        // Destination of route
         String str_dest = "destination="+lat2+","+lon2;
 
-        // Sensor enabled
         String sensor = "sensor=false";
 
-        // Waypoints
         String waypoints = "";
-//        for(int i=2;i<2;i++){
-//            LatLng point  = (LatLng) markerPoints.get(i);
-//            if(i==2)
-//                waypoints = "waypoints=";
-//            waypoints += point.latitude + "," + point.longitude + "|";
-//        }
 
 
-        // Building the parameters to the web service
+
         String parameters = str_origin+"&"+str_dest+"&"+sensor+"&"+waypoints;
 
-        // Output format
         String output = "json";
 
-        // Building the url to the web service
         String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
 
 
@@ -191,13 +173,10 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         try{
             URL url = new URL(strUrl);
 
-            // Creating an http connection to communicate with url
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            // Connecting to url
             urlConnection.connect();
 
-            // Reading data from url
             iStream = urlConnection.getInputStream();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
@@ -260,7 +239,6 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         // Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,                Toast.LENGTH_SHORT).show();
         //implementFragment();
 
-        //username and password are present, do your stuff
 
         LatLng latLng1 =new LatLng(Lat,Lon);
 
@@ -315,7 +293,6 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         editor.clear();
         editor.commit();
 
-        //  googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     @Override
@@ -328,21 +305,13 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         if (connectionResult.hasResolution()) {
             try {
-                // Start an Activity that tries to resolve the error
                 connectionResult.startResolutionForResult(this.getActivity(), CONNECTION_FAILURE_RESOLUTION_REQUEST);
-                /*
-                 * Thrown if Google Play services canceled the original
-                 * PendingIntent
-                 */
+
             } catch (IntentSender.SendIntentException e) {
-                // Log the error
                 e.printStackTrace();
             }
         } else {
-            /*
-             * If no resolution is available, display a dialog to the
-             * user with the error.
-             */
+
             Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
         }
 
@@ -356,7 +325,6 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
 
-        // Parsing the data in non-ui thread
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
@@ -367,7 +335,6 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                 jObject = new JSONObject(jsonData[0]);
                 RouteDrawer routeDrawer = new RouteDrawer();
 
-                // Starts parsing data
                 routes = routeDrawer.parse(jObject);
             }catch(Exception e){
                 e.printStackTrace();
@@ -375,22 +342,18 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
             return routes;
         }
 
-        // Executes in UI thread, after the parsing process
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
 
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
 
-            // Traversing through all the routes
             for(int i=0;i<result.size();i++){
                 points = new ArrayList<LatLng>();
                 lineOptions = new PolylineOptions();
 
-                // Fetching i-th route
                 List<HashMap<String, String>> path = result.get(i);
 
-                // Fetching all the points in i-th route
                 for(int j=0;j<path.size();j++){
                     HashMap<String,String> point = path.get(j);
 
@@ -401,13 +364,11 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                     points.add(position);
                 }
 
-                // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
                 lineOptions.width(5);
                 lineOptions.color(Color.BLUE);
             }
             //setUpMapIfNeeded();
-            // Drawing polyline in the Google Map for the i-th route
             googleMap.addPolyline(lineOptions);
 
         }
@@ -418,31 +379,24 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
-        // Downloading data in non-ui thread
         @Override
         protected String doInBackground(String... url) {
 
-            // For storing data from web service
             String data = "";
 
             try{
-                // Fetching the data from web service
                 data = downloadUrl(url[0]);
             }catch(Exception e){
                 Log.d("Background Task", e.toString());
             }
             return data;
         }
-
-        // Executes in UI thread, after the execution of
-        // doInBackground()
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
             ParserTask parserTask = new ParserTask();
 
-            // Invokes the thread for parsing the JSON data
             parserTask.execute(result);
 
         }

@@ -70,17 +70,17 @@ public class DetailsInfoActivity extends Activity  {
        playground = (TextView) findViewById(R.id.tv_playground);
        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-<<<<<<< HEAD
+
         email = (TextView) findViewById(R.id.tv_email_entertainment);
         website = (TextView) findViewById(R.id.tv_website_entertainment);
         fb = (TextView) findViewById(R.id.tv_fb_entertainment);
         edukivabejaben=(Button)findViewById(R.id.kivabejabenedu);
-=======
+
        email = (TextView) findViewById(R.id.tv_email);
        website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
 
->>>>>>> 0b6e0d548633583c7124a40e6849a11dcb2e1a8f
+
 
         itemName.setText(educationServiceProviderItem.getEduNameEng());
        itemAddress.setText("ঠিকানা ঃ  "+educationServiceProviderItem.getArea());
