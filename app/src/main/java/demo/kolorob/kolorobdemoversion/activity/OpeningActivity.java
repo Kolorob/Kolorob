@@ -60,6 +60,8 @@ public class OpeningActivity extends BaseActivity {
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
+        Toast.makeText(getApplicationContext(), "Your Phone Screen height is " + height, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Your Phone Screen width is " + width, Toast.LENGTH_SHORT).show();
         LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
         LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
         LinearLayout shadowBoy = (LinearLayout) findViewById(R.id.shadow_boy);

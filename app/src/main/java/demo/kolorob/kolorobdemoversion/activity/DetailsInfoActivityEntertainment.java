@@ -23,6 +23,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
     ImageView close;
     TextView close_tv;
 
+
     /**
      * Following components are only for entertainment
      * For other categories this components may vary
@@ -33,7 +34,13 @@ public class DetailsInfoActivityEntertainment extends Activity  {
     private TextView itemName;
     private TextView itemAddress;
     private TextView itemContact;
+    private TextView nodeRegistrationNumber;
+    private TextView itemarea;
+    private TextView itemopeningTime;
+    private TextView itemClosingTIme;
+    private TextView itemBreakTime;
 
+  //  private TextView nodeRegistedwith;
     private TextView email;
     private TextView website;
     private TextView fb;
@@ -56,24 +63,39 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         /**
          *following codes only for education. This may vary for different category.
          * */
-        itemName = (TextView) findViewById(R.id.tv_header);
-        itemAddress = (TextView) findViewById(R.id.tv_item_locationEnt);
+        itemName = (TextView) findViewById(R.id.tv_header_entertainment);
+        itemAddress = (TextView) findViewById(R.id.tv_item_type_ent);
 
-        itemContact = (TextView) findViewById(R.id.tv_item_locationEnt);
+       itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
+
+        nodeRegistrationNumber=(TextView)findViewById(R.id.tv_item_registration_nunmber);
+        itemarea=(TextView)findViewById(R.id.tv_item_location_ent);
+        itemopeningTime=(TextView)findViewById(R.id.opening_time);
+        itemClosingTIme=(TextView)findViewById(R.id.closing_time);
+        itemBreakTime=(TextView)findViewById(R.id.break_time);
 
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
-        kivabejaben=(Button)findViewById(R.id.kivabejaben);
+
+
+        kivabejaben=(Button)findViewById(R.id.kivabejabenedu);
 
         itemName.setText(entertainmentServiceProviderItem.getNodeNameBn());
-        itemAddress.setText("ঠিকানা ঃ  "+ AppConstants.BAUNIABADH);
-
+        itemAddress.setText("ঠিকানা :"+ entertainmentServiceProviderItem.getAddress());
+        itemarea.setText("এলাকা : "+entertainmentServiceProviderItem.getArea());
         itemContact.setText("যোগাযোগের উপায় :"+entertainmentServiceProviderItem.getNodeContact());
+        nodeRegistrationNumber.setText("রেজিস্ট্রেশন নম্বর: "+entertainmentServiceProviderItem.getNodeFacebook());
+
+
+        itemopeningTime.setText("খোলার সময়: " +entertainmentServiceProviderItem.getOpeningTime() );
+        itemClosingTIme.setText("বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingTime() );
+        itemBreakTime.setText("বিরতির সময়: "+entertainmentServiceProviderItem.getBreakTime());
 
         email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
         website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
         fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
+
 
 
         //common for all category

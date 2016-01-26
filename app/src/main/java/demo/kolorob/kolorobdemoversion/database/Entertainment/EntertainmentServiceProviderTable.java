@@ -44,6 +44,10 @@ public class EntertainmentServiceProviderTable {
     public static final String KEY_LATITUDE = "_latitude";
     public static final String KEY_LONGITUDE = "_longitude";
     public static final String KEY_CATEGORY_ID = "_categoryId";
+    public static final String KEY_OPENING_TIME = "_openingTime";
+    public static final String KEY_BREAK_TIME = "_breakTime";
+    public static final String KEY_CLOSING_TIME = "_closingTime";
+
 
     private Context tContext;
 
@@ -79,7 +83,10 @@ public class EntertainmentServiceProviderTable {
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
+                + KEY_CATEGORY_ID + " INTEGER, "
+                + KEY_OPENING_TIME + " TEXT, "
+                + KEY_BREAK_TIME + " TEXT, "
+                + KEY_CLOSING_TIME + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -115,7 +122,11 @@ public class EntertainmentServiceProviderTable {
                 entertainmentServiceProviderItem.getAddress(),
                 entertainmentServiceProviderItem.getLatitude(),
                 entertainmentServiceProviderItem.getLongitude(),
-                entertainmentServiceProviderItem.getCategoryId()
+                entertainmentServiceProviderItem.getCategoryId(),
+                entertainmentServiceProviderItem.getOpeningTime(),
+                entertainmentServiceProviderItem.getBreakTime(),
+                entertainmentServiceProviderItem.getClosingTime()
+
 
         );
     }
@@ -141,7 +152,12 @@ public class EntertainmentServiceProviderTable {
                                         String address,
                                         String latitude,
                                         String longitude,
-                                        int categoryId) {
+                                        int categoryId,
+                                        String openingTime,
+                                        String breakTime,
+                                        String closingTime
+
+    ) {
         if (isFieldExist(nodeId, entSubCategoryId)) {
             return updateItem(nodeId,
                     entSubCategoryId,
@@ -164,7 +180,10 @@ public class EntertainmentServiceProviderTable {
                     address,
                     latitude,
                     longitude,
-                    categoryId);
+                    categoryId,
+                    openingTime,
+                    breakTime,
+                    closingTime);
         }
 
         ContentValues rowValue = new ContentValues();
@@ -190,6 +209,9 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
         rowValue.put(KEY_CATEGORY_ID,categoryId);
+        rowValue.put(KEY_OPENING_TIME,openingTime);
+        rowValue.put(KEY_BREAK_TIME,breakTime);
+        rowValue.put(KEY_CLOSING_TIME,closingTime);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -238,7 +260,11 @@ public class EntertainmentServiceProviderTable {
                              String address,
                              String latitude,
                              String longitude,
-                             int categoryId) {
+                             int categoryId,
+                             String openingTime,
+                             String breakTime,
+                             String closingTime
+                             ) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
         rowValue.put(KEY_SUB_CATEGORY_ID , entSubCategoryId);
@@ -262,6 +288,9 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
         rowValue.put(KEY_CATEGORY_ID,categoryId);
+        rowValue.put(KEY_OPENING_TIME,openingTime);
+        rowValue.put(KEY_BREAK_TIME,breakTime);
+        rowValue.put(KEY_CLOSING_TIME,closingTime);
 
         SQLiteDatabase db = openDB();
 
@@ -377,6 +406,9 @@ public class EntertainmentServiceProviderTable {
         String _latitude = cursor.getString(19);
         String _longitude= cursor.getString(20);
         int _categoryId= cursor.getInt(21);
+        String _openingTime=cursor.getString(22);
+        String _breakTime= cursor.getString(23);
+        String _closingTime = cursor.getString(24);
 
         return new EntertainmentServiceProviderItem(
                 _nodeId,
@@ -400,7 +432,10 @@ public class EntertainmentServiceProviderTable {
                 _address,
                 _latitude,
                 _longitude,
-                _categoryId);
+                _categoryId,
+                _openingTime,
+                _breakTime,
+                _closingTime);
     }
 
 

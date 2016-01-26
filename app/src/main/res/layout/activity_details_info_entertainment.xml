@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityhEntertainment">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="স্কুল এর নাম"
-                android:id="@+id/tv_header"
+                android:id="@+id/tv_header_entertainment"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
@@ -72,7 +72,7 @@
                 android:id="@+id/imageView2"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/green_line_horizontal"
-                android:layout_below="@+id/tv_header"
+                android:layout_below="@+id/tv_header_entertainment"
                 android:layout_alignParentLeft="true"
                 android:padding="5dp"
                 android:layout_alignRight="@+id/imageView4"
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="ঠিকানা :"
-                android:id="@+id/tv_item_locationEnt"
+                android:id="@+id/tv_item_location_ent"
                 android:textColor="@color/small_window_text_color"
                 android:textSize="20sp"
                 android:layout_below="@+id/imageView2"
@@ -96,11 +96,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="ধরন :"
-                android:id="@+id/tv_item_typeEnt"
+                android:text="এলাকা :"
+                android:id="@+id/tv_item_type_ent"
                 android:textColor="@color/small_window_text_color"
                 android:textSize="20sp"
-                android:layout_below="@+id/tv_item_locationEnt"
+                android:layout_below="@+id/tv_item_location_ent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="যোগাযোগের উপায়  :"
+                android:id="@+id/tv_item_contact_ent"
+                android:textColor="@color/small_window_text_color"
+                android:textSize="20sp"
+                android:layout_below="@+id/tv_item_type_ent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="রেজিস্ট্রেশন নম্বর:"
+                android:id="@+id/tv_item_registration_nunmber"
+                android:textColor="@color/small_window_text_color"
+                android:textSize="20sp"
+                android:layout_below="@+id/tv_item_contact_ent"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
@@ -112,15 +141,15 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="অন্যান্য তথ্য"
-                android:id="@+id/textView12"
+                android:id="@+id/textView12_health"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
+                android:layout_below="@+id/tv_item_registration_nunmber"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:padding="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_below="@+id/tv_item_typeEnt" />
+                android:layout_marginLeft="5dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -128,7 +157,7 @@
                 android:id="@+id/imageView4"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/green_line_horizontal"
-                android:layout_below="@+id/textView12"
+                android:layout_below="@+id/textView12_health"
                 android:layout_alignParentLeft="true"
                 android:padding="5dp" />
 
@@ -137,14 +166,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="আরো তথ্য"
-                android:id="@+id/textView13"
+                android:id="@+id/textView13_health"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
-                android:layout_alignLeft="@+id/textView12"
-                android:layout_alignStart="@+id/textView12"
-                android:layout_below="@+id/imageView4" />
+                android:layout_alignLeft="@+id/textView12_health"
+                android:layout_alignStart="@+id/textView12_health"
+                android:layout_below="@+id/closing_time" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -152,7 +181,7 @@
                 android:id="@+id/imageView5"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/green_line_horizontal"
-                android:layout_below="@+id/textView13"
+                android:layout_below="@+id/textView13_health"
                 android:layout_alignParentLeft="true"
                 android:padding="5dp" />
 
@@ -160,7 +189,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Email : "
+                android:text="খোলার সময় :"
+                android:id="@+id/opening_time"
+                android:textColor="@color/small_window_text_color"
+                android:textSize="20sp"
+                android:layout_below="@+id/imageView4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="মধ্যান্যবিরতির সময়"
+                android:id="@+id/break_time"
+                android:textColor="@color/small_window_text_color"
+                android:textSize="20sp"
+                android:layout_below="@+id/opening_time"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="বন্ধ্রে সময় :"
+                android:id="@+id/closing_time"
+                android:textColor="@color/small_window_text_color"
+                android:textSize="20sp"
+                android:layout_below="@+id/break_time"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ই-মেইল : "
                 android:id="@+id/tv_email"
                 android:textColor="@color/small_window_text_color"
                 android:textSize="20sp"
@@ -199,7 +271,7 @@
                 android:paddingBottom="4dp"
 
                 android:layout_below="@+id/tv_website"
-                android:layout_alignLeft="@+id/textView13" />
+                android:layout_alignLeft="@+id/textView13_health" />
 
         </RelativeLayout>
     </ScrollView>
@@ -211,15 +283,16 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:id="@+id/linearLayout4"
-        android:gravity="center_horizontal">
-
+        android:gravity="center">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/kivabejaben"
-            android:layout_gravity="center"
-            android:text="কিভাবে যাবেন" />
+            android:id="@+id/kivabejabenedu"
+            android:text="কিভাবে যাবেন"
+            android:foregroundGravity="center_vertical|center_horizontal" />
+
+
     </LinearLayout>
 
 </RelativeLayout>

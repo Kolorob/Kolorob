@@ -205,7 +205,8 @@
             android:id="@+id/kivabejabenJob"
             android:text="কিভাবে যাবেন"
             android:foregroundGravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:allowUndo="false" />
 
 
 

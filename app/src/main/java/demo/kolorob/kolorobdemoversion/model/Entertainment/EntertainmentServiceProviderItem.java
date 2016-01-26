@@ -32,6 +32,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
     private String latitude;
     private String longitude;
     private int categoryId;
+    private String openingTime;
+    private String breakTime;
+    private String closingTime;
+
 
 
 
@@ -57,7 +61,11 @@ public class EntertainmentServiceProviderItem implements Serializable {
             String address,
             String latitude,
             String longitude,
-            int categoryId){
+            int categoryId,
+            String openingTime,
+            String breakTime,
+            String closingTime
+            ){
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;
@@ -81,6 +89,9 @@ public class EntertainmentServiceProviderItem implements Serializable {
         this.latitude=latitude;
         this.longitude=longitude;
         this.categoryId=categoryId;
+        this.openingTime=openingTime;
+        this.breakTime=breakTime;
+        this.closingTime=closingTime;
 
 
     }
@@ -110,6 +121,9 @@ public class EntertainmentServiceProviderItem implements Serializable {
         String _latitude = jo.getString("latitude");
         String _longitude= jo.getString("longitude");
         int _categoryId= jo.getInt("category_id");
+        String _openingTime = jo.getString("opening_time");
+        String _breakTime = jo.getString("break_time");
+        String _closingTime = jo.getString("closing_time");
 
         return new EntertainmentServiceProviderItem(
                 _nodeId,
@@ -133,7 +147,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
                 _address,
                 _latitude,
                 _longitude,
-                _categoryId
+                _categoryId,
+                _openingTime,
+                _breakTime,
+                _closingTime
 
 
 
@@ -229,4 +246,31 @@ public class EntertainmentServiceProviderItem implements Serializable {
         return categoryId;
     }
 
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
+    }
+
+    public String getOpeningTime() {
+        return openingTime;
+    }
+
+    public void setOpeningTime(String openingTime) {
+        this.openingTime = openingTime;
+    }
+
+    public String getBreakTime() {
+        return breakTime;
+    }
+
+    public void setBreakTime(String breakTime) {
+        this.breakTime = breakTime;
+    }
+
+    public String getClosingTime() {
+        return closingTime;
+    }
+
+    public void setClosingTime(String closingTime) {
+        this.closingTime = closingTime;
+    }
 }
