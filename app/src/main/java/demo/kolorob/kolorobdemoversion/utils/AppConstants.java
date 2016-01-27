@@ -26,6 +26,8 @@ public class AppConstants {
             };
     public static final int[] ALL_CAT_MARKER_ICONS = {R.drawable.pin_blue,R.drawable.pin_red,R.drawable.pin_pink,
         R.drawable.pin_green,R.drawable.pin_brown,R.drawable.pin_feroza,R.drawable.pin_yellow};
+    public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.pin_blue1,R.drawable.pin_red1,R.drawable.pin_pink1,
+            R.drawable.pin_green1,R.drawable.pin_brown1,R.drawable.pin_feroza1,R.drawable.pin_yellow1};
     public static final float[] MARKER_HUE_COLOR = {BitmapDescriptorFactory.HUE_RED,BitmapDescriptorFactory.HUE_BLUE,
             BitmapDescriptorFactory.HUE_RED,(float)300,BitmapDescriptorFactory.HUE_GREEN,
             (float)324.8,(float)168.8,BitmapDescriptorFactory.HUE_YELLOW};

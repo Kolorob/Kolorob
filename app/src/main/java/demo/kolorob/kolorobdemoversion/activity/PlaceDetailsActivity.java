@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -118,7 +119,17 @@ private String placeChoice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        if(height>1000)
         setContentView(R.layout.place_details_activity);
+        else
+        setContentView(R.layout.place_details_activity_mobiles);
+
+
+
+
 
 
         Intent intent;
@@ -615,7 +626,7 @@ private String placeChoice;
                 categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, .3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 1.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                 else
                     showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
@@ -667,11 +678,21 @@ private String placeChoice;
     }
     private View getSubCategoryListItemView(final SubCategoryItem si, double dwPercentage, final int cat_id)
     {
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        View v;
         LayoutInflater li = LayoutInflater.from(this);
-        View v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+        if(height>1000)
+        v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
+        else
+            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
+        if(height>1000)
         ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[cat_id-1]);
+        else
+            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[cat_id-1]);
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);

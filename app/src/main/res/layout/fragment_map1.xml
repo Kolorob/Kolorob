@@ -7,13 +7,13 @@
     android:orientation="vertical" android:layout_weight="1"
     android:background="#EBDED5" android:padding="6dp">
 
-<com.google.android.gms.maps.MapView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mapView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/red"
-    android:padding="3dp" />
+    <com.google.android.gms.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:padding="3dp" />
 
     <LinearLayout
         android:id="@+id/ll"
@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/main_nav_road_name_holder"
+        android:background="@drawable/main_nav_road_name_holder_small"
         android:gravity="center_vertical|center_horizontal">
 
         <TextView
@@ -33,7 +33,7 @@
             android:text="প্যারিস রোড"
             android:id="@+id/tv_location_name"
             android:textColor="#FFFFFF"
-            android:textSize="23sp"
+            android:textSize="12sp"
             android:gravity="center_vertical|center_horizontal"
             android:layout_marginTop="10dp" />
     </LinearLayout>

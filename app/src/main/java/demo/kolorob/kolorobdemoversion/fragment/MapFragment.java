@@ -5,10 +5,12 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -46,7 +48,7 @@ public class MapFragment extends Fragment implements
 
     MapView mMapView;
 
-    private static final int MAP_ZOOM_AMOUNT=17;
+
     private TextView locName;
     private TextView mapIndicator;
     private GoogleMap googleMap;
@@ -54,6 +56,7 @@ public class MapFragment extends Fragment implements
     private String mapIndicatorText;
     private int categoryId;
     private int locationNameId;
+    LinearLayout ll;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> educationServiceProvider=null;
@@ -137,8 +140,18 @@ public class MapFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_map, container,
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        View rootView;
+
+        if(height>1000)
+        rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
+        else
+            rootView = inflater.inflate(R.layout.fragment_map1, container,
+                    false);
+
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         locName = (TextView) rootView.findViewById(R.id.tv_location_name);
         mapIndicator = (TextView) rootView.findViewById(R.id.tv_map_indicator);
@@ -154,6 +167,21 @@ public class MapFragment extends Fragment implements
 
         googleMap = mMapView.getMap();
         googleMap.setOnInfoWindowClickListener(this);
+
+       // LinearLayout ll=(LinearLayout) mMapView.findViewById(R.id.ll);
+
+
+
+        int MAP_ZOOM_AMOUNT;
+        if(height>1000){
+            MAP_ZOOM_AMOUNT = 17;
+
+        }
+
+        else {
+            MAP_ZOOM_AMOUNT = 16;
+
+        }
         if(locationNameId==1) {
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(AppConstants.BAUNIA).zoom(MAP_ZOOM_AMOUNT).build();
