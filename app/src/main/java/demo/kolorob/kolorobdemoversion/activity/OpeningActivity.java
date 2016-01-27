@@ -1,9 +1,12 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -16,14 +19,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
+import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
@@ -31,6 +40,8 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTabl
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
+import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -42,16 +53,26 @@ import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderIte
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.parser.VolleyApiParser;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 
 public class OpeningActivity extends BaseActivity {
 
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
+        DatabaseHelper dbhelper = new DatabaseHelper(OpeningActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening);
 
@@ -94,10 +115,11 @@ public class OpeningActivity extends BaseActivity {
         kolorob_logo.setMargins(0, 15, 0, 0);
         kolorobLogo.setLayoutParams(kolorob_logo);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
-                == PackageManager.PERMISSION_GRANTED) {
+        if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
+                ) {
 
-            VolleyApiParser.getRequest(OpeningActivity.this, "get_categories", new VolleyApiCallback() {
+
+            getRequest(OpeningActivity.this, "get_categories", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -114,7 +136,7 @@ public class OpeningActivity extends BaseActivity {
                     }
             );
 
-            VolleyApiParser.getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -131,7 +153,7 @@ public class OpeningActivity extends BaseActivity {
                     }
             );
 
-            VolleyApiParser.getRequest(OpeningActivity.this, "get_edu_service_provider", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "get_edu_service_provider", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -148,42 +170,40 @@ public class OpeningActivity extends BaseActivity {
                     }
             );
 
-            VolleyApiParser.getRequest(OpeningActivity.this, "entertainment", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "entertainment", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
-                    if(status == AppConstants.SUCCESS_CODE){
+                    if (status == AppConstants.SUCCESS_CODE) {
 
-                        try{
-                            JSONObject jo= new JSONObject(apiContent);
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
                             String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                            if(apiSt.equals(AppConstants.KEY_SUCCESS))
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
                                 saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-                        }
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 }
             });
 
-            VolleyApiParser.getRequest(OpeningActivity.this, "health", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "health", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
-                    if(status == AppConstants.SUCCESS_CODE){
+                    if (status == AppConstants.SUCCESS_CODE) {
 
-                        try{
-                            JSONObject jo= new JSONObject(apiContent);
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
                             String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                            if(apiSt.equals(AppConstants.KEY_SUCCESS))
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
                                 saveHealthServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-                        }
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 }
             });
-            VolleyApiParser.getRequest(OpeningActivity.this, "legal_aid", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "legal_aid", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
 
@@ -201,7 +221,7 @@ public class OpeningActivity extends BaseActivity {
                     }
             );
 
-            VolleyApiParser.getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
 
@@ -218,7 +238,7 @@ public class OpeningActivity extends BaseActivity {
                         }
                     }
             );
-            VolleyApiParser.getRequest(OpeningActivity.this, "finance", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "finance", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
 
@@ -237,13 +257,36 @@ public class OpeningActivity extends BaseActivity {
             );
 
 
+        } else {
+            if (!AppUtils.isNetConnected(getApplicationContext())) {
+                DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                if (db.checkDataBase()) {
+                    Intent a = new Intent(getApplicationContext(),PlaceDetailsActivity.class);//Default Activity
+                    a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //getApplicationContext().startActivity(a);
+                    (getApplicationContext()).startActivity(a);
 
-        }
-        else
-        {
+                    (getApplicationContext()).stopService(getIntent());
+                } else {
+                    AppDialogManager.showNoInternetDialog(ctx, new RetryCallBackForNoInternet() {
+                        @Override
+                        public void retry() {
+
+                        }
+                    });
+                }
+
+
+            }
+
+
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
                     INTERNET_PERMISSION);
         }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
 
        /* new Handler().postDelayed(new Runnable() {
 
@@ -253,9 +296,11 @@ public class OpeningActivity extends BaseActivity {
             }
         }, SPLASH_TIME_OUT);*/
 
-    }
 
-    /** Written by : Touhid */
+
+    /**
+     * Written by : Touhid
+     */
     private void saveCategoryList(JSONArray categoryArray) {
         CategoryTable catTable = new CategoryTable(OpeningActivity.this);
         int catCount = categoryArray.length();
@@ -284,11 +329,10 @@ public class OpeningActivity extends BaseActivity {
             }
         }
     }
-    private void saveEducationServiceProvider(JSONArray educationServiceProvider)
-    {
+
+    private void saveEducationServiceProvider(JSONArray educationServiceProvider) {
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
         int eduServiceProviderCount = educationServiceProvider.length();
-
 
 
         for (int i = 0; i < eduServiceProviderCount; i++) {
@@ -304,11 +348,9 @@ public class OpeningActivity extends BaseActivity {
         }
 
 
-
     }
 
-    private void saveEntertainmentServiceProvider(JSONArray entertainmentServiceProvider)
-    {
+    private void saveEntertainmentServiceProvider(JSONArray entertainmentServiceProvider) {
         EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(OpeningActivity.this);
         int entServiceProviderCount = entertainmentServiceProvider.length();
 
@@ -323,11 +365,9 @@ public class OpeningActivity extends BaseActivity {
         }
 
 
-
     }
 
-    private void saveHealthServiceProvider(JSONArray healthServiceProvider)
-    {
+    private void saveHealthServiceProvider(JSONArray healthServiceProvider) {
         HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
         int healthServiceProviderCount = healthServiceProvider.length();
 
@@ -342,6 +382,7 @@ public class OpeningActivity extends BaseActivity {
         }
 
     }
+
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
         int legalaidServiceProviderCount = legalaidServiceProvider.length();
@@ -357,6 +398,7 @@ public class OpeningActivity extends BaseActivity {
         }
 
     }
+
     private void saveJobServiceProvider(JSONArray jobServiceProvider) {
         JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(OpeningActivity.this);
         int jobServiceProviderCount = jobServiceProvider.length();
@@ -372,8 +414,9 @@ public class OpeningActivity extends BaseActivity {
         }
 
     }
+
     private void saveFinancialServiceProvider(JSONArray financialServiceProvider) {
-        FinancialServiceProviderTable financialServiceProviderTable = new  FinancialServiceProviderTable(OpeningActivity.this);
+        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(OpeningActivity.this);
         int financialServiceProviderCount = financialServiceProvider.length();
 
         for (int i = 0; i < financialServiceProviderCount; i++) {
@@ -386,26 +429,22 @@ public class OpeningActivity extends BaseActivity {
             }
         }
         //setContentView(R.layout.activity_main); //we don't need this line
-        SharedPreferences settings=getSharedPreferences("prefs",0);
-        boolean firstRun=settings.getBoolean("firstRun",false);
-        if(firstRun==false)//if running for first time
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        boolean firstRun = settings.getBoolean("firstRun", false);
+        if (firstRun == false)//if running for first time
         {
-            SharedPreferences.Editor editor=settings.edit();
-            editor.putBoolean("firstRun",true);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("firstRun", true);
             editor.commit();
-            Intent i=new Intent(OpeningActivity.this,LocationAskActivity.class);//Activity to be     launched For the First time
+            Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);//Activity to be     launched For the First time
             startActivity(i);
             finish();
-        }
-        else
-        {
-            Intent a=new Intent(OpeningActivity.this,PlaceChoiceActivity.class);//Default Activity
+        } else {
+            Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);//Default Activity
             startActivity(a);
             finish();
         }
     }
-
-
 
 
     @Override
@@ -464,4 +503,5 @@ public class OpeningActivity extends BaseActivity {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 }

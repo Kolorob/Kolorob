@@ -2,7 +2,10 @@ package demo.kolorob.kolorobdemoversion.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.io.File;
 
 /**
  * Created by touhid on 12/26/15.
@@ -11,6 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String DB_NAME = "kolorob.db";
+    public static final String DB_PATH = "/data/data/demo.kolorob.kolorobdemoversion/databases/";
     public static final int DB_VERSION = 1;
 
     public static final String SERVICE_CATEGORY = "service_category";
@@ -72,4 +76,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         onCreate(db);
     }
+    public boolean checkDataBase() {
+        SQLiteDatabase checkDB = null;
+        try {
+            checkDB = SQLiteDatabase.openDatabase(DB_PATH, null,
+                    SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (SQLiteException e) {
+            // database doesn't exist yet.
+        }
+        return checkDB != null;
+    }
+
 }

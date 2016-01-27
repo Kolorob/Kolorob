@@ -12,6 +12,7 @@ import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 
 import demo.kolorob.kolorobdemoversion.model.Education.Entertainment;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 
 /**
@@ -298,6 +299,13 @@ public class EntertainmentServiceProviderTable {
         cursor.close();
         closeDB();
         return  nameslist;
+    }
+    public void dropTable() {
+        SQLiteDatabase db = openDB();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        createTable();
+        Lg.d(TAG, "Table dropped and recreated.");
+        closeDB();
     }
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();

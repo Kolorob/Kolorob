@@ -11,6 +11,7 @@ import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by Mazharul.Islam1 on 1/10/2016.
@@ -293,7 +294,13 @@ public class HealthServiceProviderTable {
         return ret;
     }
 
-
+    public void dropTable() {
+        SQLiteDatabase db = openDB();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        createTable();
+        Lg.d(TAG, "Table dropped and recreated.");
+        closeDB();
+    }
     public ArrayList<HealthServiceProviderItem> getAllHealthSubCategoriesInfo(int cat_id,int sub_cat_id) {
         ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
