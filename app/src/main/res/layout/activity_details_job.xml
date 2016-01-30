@@ -197,7 +197,8 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:id="@+id/linearLayout4"
-        android:foregroundGravity="center">
+        android:foregroundGravity="center"
+        android:gravity="center">
 
         <Button
             android:layout_width="wrap_content"

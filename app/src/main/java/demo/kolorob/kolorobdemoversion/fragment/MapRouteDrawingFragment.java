@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -55,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
+    TextView distance,car,walk,cng,rickshaw;
     MapView mMapView;
     private GoogleMap googleMap;
     private GoogleApiClient mGoogleApiClient;
@@ -82,7 +84,11 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         double latitude = 17.385044;
         double longitude = 78.486671;
-
+        car=(TextView)v.findViewById(R.id.car);
+        distance=(TextView)v.findViewById(R.id.distance);
+        walk=(TextView)v.findViewById(R.id.walk);
+        cng=(TextView)v.findViewById(R.id.cng);
+        rickshaw=(TextView)v.findViewById(R.id.rickshaw);
         SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
@@ -284,10 +290,25 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         float distanceInMeters = loc1.distanceTo(loc2)/1000;
         float timeneeded= (distanceInMeters/5)*60;
         float drivingtime= (distanceInMeters/60)*60;
+        String strAmount=String.valueOf(timeneeded);
+        String strAmount1=String.valueOf(distanceInMeters);
+        String strAmount2=String.valueOf(drivingtime);
+        String strAmount3=String.valueOf(drivingtime);
+        String strAmount4=String.valueOf(drivingtime);
+//        Toast.makeText(getActivity(),"দূরত্ব "+distanceInMeters+" কিলোমিটার", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(),"আপনি হেটে "+timeneeded+"মিনিটের মধ্যে পৌছাতে পারবেন", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(),"আপনি গাড়ীতে "+drivingtime+"মিনিটের মধ্যে পৌছাতে পারবেন", Toast.LENGTH_LONG).show();
+        strAmount=String.format("%.2f", timeneeded);
+        strAmount1=String.format("%.2f", distanceInMeters);
+        strAmount2=String.format("%.2f", drivingtime);
+        strAmount3=String.format("%.2f", distanceInMeters*60);
+        strAmount4=String.format("%.2f", distanceInMeters*30);
+        walk.setText("  "+strAmount+" মিনিট");
+        car.setText("  "+strAmount2+" মিনিট");
+        distance.setText("  "+strAmount1+ " কিলোমিটার");
+        cng.setText("  "+strAmount3+ " টাকা");
+        rickshaw.setText("  "+strAmount4+ " টাকা");
 
-        Toast.makeText(getActivity(),"দূরত্ব "+distanceInMeters+" কিলোমিটার", Toast.LENGTH_LONG).show();
-        Toast.makeText(getActivity(),"আপনি হেটে "+timeneeded+"মিনিটের মধ্যে পৌছাতে পারবেন", Toast.LENGTH_LONG).show();
-        Toast.makeText(getActivity(),"আপনি গাড়ীতে "+drivingtime+"মিনিটের মধ্যে পৌছাতে পারবেন", Toast.LENGTH_LONG).show();
 
 
         editor.clear();
@@ -365,7 +386,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                 }
 
                 lineOptions.addAll(points);
-                lineOptions.width(5);
+                lineOptions.width(7);
                 lineOptions.color(Color.BLUE);
             }
             //setUpMapIfNeeded();

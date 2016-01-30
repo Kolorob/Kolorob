@@ -215,15 +215,18 @@
         android:background="@drawable/detailed_info_panel_bottom"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:id="@+id/linearLayout4">
+        android:id="@+id/linearLayout4"
+        android:gravity="center_vertical|center_horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/kivabejabenhealth"
-            android:text="কিভাবে যাবেন"
-            android:foregroundGravity="center"
-            android:gravity="center" />
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/kivabejabenhealth"
+                android:text="কিভাবে যাবেন"
+                android:foregroundGravity="center" />
 
 
 
