@@ -59,21 +59,21 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         itemName = (TextView) findViewById(R.id.tv_header);
         itemAddress = (TextView) findViewById(R.id.tv_item_locationEnt);
 
-        itemContact = (TextView) findViewById(R.id.tv_item_locationEnt);
+        itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
 
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
         kivabejaben=(Button)findViewById(R.id.kivabejaben);
 
-        itemName.setText(entertainmentServiceProviderItem.getNodeNameBn());
+        itemName.setText(entertainmentServiceProviderItem.getNodeName());
         itemAddress.setText("ঠিকানা ঃ  "+ AppConstants.BAUNIABADH);
 
         itemContact.setText("যোগাযোগের উপায় :"+entertainmentServiceProviderItem.getNodeContact());
 
-        email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
-        website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
+       // email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
+        //website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
+        //fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
 
 
         //common for all category

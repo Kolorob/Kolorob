@@ -1,12 +1,17 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -21,6 +26,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
+import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
@@ -58,8 +64,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 
-public class OpeningActivity extends BaseActivity {
-
+public class OpeningActivity extends Activity {
+    public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
     /**
@@ -68,7 +74,9 @@ public class OpeningActivity extends BaseActivity {
      */
     private GoogleApiClient client;
     private Context ctx;
-
+    public static final String EDU_PROVIDER_TABLE = "edu_provider";
+    public  SQLiteDatabase db3;
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
@@ -115,6 +123,10 @@ public class OpeningActivity extends BaseActivity {
         kolorob_logo.setMargins(0, 15, 0, 0);
         kolorobLogo.setLayoutParams(kolorob_logo);
 
+        LoadData();
+    }
+    public void LoadData()
+    {
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
 
@@ -259,34 +271,41 @@ public class OpeningActivity extends BaseActivity {
 
         } else {
             if (!AppUtils.isNetConnected(getApplicationContext())) {
+
                 DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                if (db.checkDataBase()) {
-                    Intent a = new Intent(getApplicationContext(),PlaceDetailsActivity.class);//Default Activity
+                db3=db.getReadableDatabase();
+                if (db.isTableExists(db3,EDU_PROVIDER_TABLE)){
+                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity.class);//Default Activity
                     a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //getApplicationContext().startActivity(a);
                     (getApplicationContext()).startActivity(a);
 
-                    (getApplicationContext()).stopService(getIntent());
-                } else {
-                    AppDialogManager.showNoInternetDialog(ctx, new RetryCallBackForNoInternet() {
+                    this.finish();
+                }
+                else {
+                    AppDialogManager.showNoInternetDialog(this, new RetryCallBackForNoInternet() {
                         @Override
                         public void retry() {
-
+                           LoadData();
                         }
                     });
                 }
 
+            } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED )
+            {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
+                            INTERNET_PERMISSION);
+                }
             }
 
-
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
-                    INTERNET_PERMISSION);
         }
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
 
        /* new Handler().postDelayed(new Runnable() {
 

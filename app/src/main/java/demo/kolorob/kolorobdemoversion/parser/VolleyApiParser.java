@@ -36,7 +36,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class VolleyApiParser {
     private static final String TAG = VolleyApiParser.class.getSimpleName();
     private static final String VOLLEY_TAG = "Background_API_Request";
-    public  Activity activity;
+    public Activity activity;
 
 
     public static void postRequest(final Context ctx, final int reqCode,
@@ -72,6 +72,7 @@ public class VolleyApiParser {
         map.put("uid", "-1");
         return map;
     }
+
     public Activity getActivity() {
         return activity;
     }
@@ -125,7 +126,9 @@ public class VolleyApiParser {
             @Override
             public Object getTag() {
                 return VOLLEY_TAG;
-            }            @Override
+            }
+
+            @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = getDefaultPostRequestMap(reqCode);
                 if (contentMap != null)
@@ -153,21 +156,17 @@ public class VolleyApiParser {
                                   final VolleyApiCallback vApiCb,
                                   final Request.Priority priority) {
         if (!AppUtils.isNetConnected(ctx)) {
-            DatabaseHelper db=new DatabaseHelper(ctx);
-            /*Intent a=new Intent(ctx,PlaceDetailsActivity.class);//Default Activity
-           ctx.startActivity(a);
 
-            ((Activity) ctx).finish();*/
-            if(!db.checkDataBase()){
-                AppDialogManager.showNoInternetDialog(ctx, new RetryCallBackForNoInternet() {
-                    @Override
-                    public void retry() {
-                        getRequest(ctx, apiUrl, vApiCb, priority);
-                    }
-                });
-            }
-            return;
-        }
+            AppDialogManager.showNoInternetDialog(ctx, new RetryCallBackForNoInternet() {
+                @Override
+                public void retry() {
+                    getRequest(ctx, apiUrl, vApiCb, priority);
+                }
+            });
+
+        return;
+    }
+
 
         StringRequest strReq = new StringRequest(
                 Request.Method.GET,
