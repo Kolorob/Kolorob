@@ -60,9 +60,8 @@ public class OpeningActivity extends BaseActivity {
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
-        Toast.makeText(getApplicationContext(), "Your Phone Screen height is " + height, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getApplicationContext(), "Your Phone Screen width is " + width, Toast.LENGTH_SHORT).show();
-        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
+
+       // LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
         LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
         LinearLayout shadowBoy = (LinearLayout) findViewById(R.id.shadow_boy);
         LinearLayout shadowGirl = (LinearLayout) findViewById(R.id.shadow_girl);
@@ -83,10 +82,10 @@ public class OpeningActivity extends BaseActivity {
         girl_shadow.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         girl_shadow.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        boy.setLayoutParams(boy_layout);
+        //boy.setLayoutParams(boy_layout);
         girl.setLayoutParams(girl_layout);
 
-        boy.bringToFront();
+       // boy.bringToFront();
         girl.bringToFront();
 
         shadowBoy.setLayoutParams(boy_shadow);

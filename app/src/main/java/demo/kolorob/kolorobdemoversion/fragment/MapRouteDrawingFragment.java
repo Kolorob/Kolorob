@@ -288,8 +288,8 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         loc2.setLongitude(Lat);
 
         float distanceInMeters = loc1.distanceTo(loc2)/1000;
-        float timeneeded= (distanceInMeters/5)*60;
-        float drivingtime= (distanceInMeters/60)*60;
+        float timeneeded= (distanceInMeters/3)*60;
+        float drivingtime= (distanceInMeters/15)*60;
         String strAmount=String.valueOf(timeneeded);
         String strAmount1=String.valueOf(distanceInMeters);
         String strAmount2=String.valueOf(drivingtime);
@@ -301,8 +301,8 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         strAmount=String.format("%.2f", timeneeded);
         strAmount1=String.format("%.2f", distanceInMeters);
         strAmount2=String.format("%.2f", drivingtime);
-        strAmount3=String.format("%.2f", distanceInMeters*60);
-        strAmount4=String.format("%.2f", distanceInMeters*30);
+        strAmount3=String.format("%.2f", (distanceInMeters-1)*12+40);
+        strAmount4=String.format("%.2f", distanceInMeters*20);
         walk.setText("  "+strAmount+" মিনিট");
         car.setText("  "+strAmount2+" মিনিট");
         distance.setText("  "+strAmount1+ " কিলোমিটার");
