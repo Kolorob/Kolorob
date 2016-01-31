@@ -11,4 +11,5 @@
     <string name="title_activity_details_info_activity_entertainment">
         DetailsInfoActivityEntertainment
     </string>
+    <string name="title_activity_feedback">FeedbackActivity</string>
 </resources>
