@@ -21,8 +21,8 @@ public class AppConstants {
     public static final String[] ALL_CAT_DETAIL_BN = {"some details on পড়াশুনা", "some details on আনন্দ ফুর্তি",
             "some details on সরকারী সুবিধা", "some details on চিকিৎসা", "some details on চাকরি বাকরি",
             "some details on আইন কানুন", "some details on টাকা পয়সা"};
-    public static final int[] ALL_CAT_ICONS = {R.drawable.ico_edu, R.drawable.ico_health,R.drawable.ico_fun,
-            R.drawable.ico_govt,R.drawable.ico_law,  R.drawable.ico_money,R.drawable.ico_job
+    public static final int[] ALL_CAT_ICONS = {R.drawable.but_porashuna_small, R.drawable.but_chikitsha_small,R.drawable.but_ananda_small,
+            R.drawable.but_shorkari_small,R.drawable.but_ain_small,  R.drawable.but_taka_small,R.drawable.but_chakri_small
             };
     public static final int[] ALL_CAT_MARKER_ICONS = {R.drawable.pin_blue,R.drawable.pin_red,R.drawable.pin_pink,
         R.drawable.pin_green,R.drawable.pin_brown,R.drawable.pin_feroza,R.drawable.pin_yellow};

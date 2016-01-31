@@ -524,7 +524,7 @@ private String placeChoice;
         LayoutInflater li = LayoutInflater.from(this);
         View v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
-        TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
+        //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
 
         // BE CAREFUL :: Category ID is being mapped as to the icon serial no.
         // in the AppConstants.ALL_CAT_ICONS array
@@ -533,8 +533,8 @@ private String placeChoice;
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
 
-        tvName.setText(ci.getCatName());
-        tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+     //   tvName.setText(ci.getCatName());
+     //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
 
 /**************************
  *
@@ -626,7 +626,7 @@ private String placeChoice;
                 categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, 1.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                 else
                     showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }

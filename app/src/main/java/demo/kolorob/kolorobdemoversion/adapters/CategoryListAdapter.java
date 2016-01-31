@@ -36,7 +36,7 @@ public class CategoryListAdapter  extends ArrayAdapter<CategoryItem> {
             convertView = inflater.inflate(R.layout.cat_side_list_item, parent, false);
             holder = new ViewHolder();
             holder.ivIcon = (ImageView) convertView.findViewById(R.id.ivIconCatList);
-            holder.tvName = (TextView) convertView.findViewById(R.id.tvNameCatList);
+         //   holder.tvName = (TextView) convertView.findViewById(R.id.tvNameCatList);
             convertView.setTag(holder);
         }else
             holder = (ViewHolder) convertView.getTag();

@@ -17,21 +17,21 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="3dp" />
 
-    <TextView
-        android:id="@+id/tvNameCatList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:text="Health"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        tools:ignore="HardcodedText"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/ivIconCatList"
-        android:layout_alignLeft="@+id/ivIconCatList"
-        android:layout_alignStart="@+id/ivIconCatList"
-        android:layout_alignRight="@+id/ivIconCatList"
-        android:layout_alignEnd="@+id/ivIconCatList" />
+    <!--<TextView-->
+        <!--android:id="@+id/tvNameCatList"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="3dp"-->
+        <!--android:text="Health"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16dp"-->
+        <!--tools:ignore="HardcodedText"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:layout_below="@+id/ivIconCatList"-->
+        <!--android:layout_alignLeft="@+id/ivIconCatList"-->
+        <!--android:layout_alignStart="@+id/ivIconCatList"-->
+        <!--android:layout_alignRight="@+id/ivIconCatList"-->
+        <!--android:layout_alignEnd="@+id/ivIconCatList" />-->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
