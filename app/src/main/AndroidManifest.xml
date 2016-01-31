@@ -47,20 +47,22 @@
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
             android:theme="@style/Theme.Transparent" />
-
-        <activity android:name=".activity.DetailsInfoActivityEntertainment"
-            android:theme="@style/Theme.Transparent"></activity>
-        <activity android:name=".activity.DetailsJobActivity"
-            android:theme="@style/Theme.Transparent"></activity>
-        <activity android:name=".activity.DetailsFinancialActivity"
-        android:theme="@style/Theme.Transparent"></activity>
-
-        <activity android:name=".activity.DetailsLegalActivity"
-            android:theme="@style/Theme.Transparent"></activity>
-
-
-
-
+        <activity
+            android:name=".activity.DetailsInfoActivityEntertainment"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.DetailsJobActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.DetailsFinancialActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.DetailsLegalActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.ReviewActivity"
+            android:label="@string/title_activity_review" >
+        </activity>
     </application>
 
 </manifest>
