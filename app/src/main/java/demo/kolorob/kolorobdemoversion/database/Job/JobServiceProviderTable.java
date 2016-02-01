@@ -167,7 +167,30 @@ public class JobServiceProviderTable {
         closeDB();
         return false;
     }
+    public ArrayList<JobServiceProviderItem> Jobnames(int cat_id,String head,String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
 
+        ArrayList<JobServiceProviderItem> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
+                + " AND "+KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_JOB_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
+    }
     private long updateItem(
             String identifierId,
             String serviceProviderId,

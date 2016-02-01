@@ -53,7 +53,7 @@ public class DetailsInfoActivityHealth extends Activity  {
         Intent intent = getIntent();
         if (null != intent)
         {
-            healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_VIEW);
+            healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH);
 
         }
         /**
@@ -79,41 +79,41 @@ public class DetailsInfoActivityHealth extends Activity  {
         website.setText("ওয়েবসাইট ঃ  "+healthServiceProviderItem.getNodeWebsite());
         fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getNodeFacebook());
 
-          kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  String lat= healthServiceProviderItem.getLatitude().toString();
-                  // double latitude = Double.parseDouble(lat);
-                  String lon = healthServiceProviderItem.getLongitude().toString();
-                  // double longitude = Double.parseDouble(lon);
-                  SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                  SharedPreferences.Editor editor = pref.edit();
-                  editor.putString("Latitude",lat);
-                  editor.putString("Longitude",lon);
-                  editor.commit();
+        kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String lat= healthServiceProviderItem.getLatitude().toString();
+                // double latitude = Double.parseDouble(lat);
+                String lon = healthServiceProviderItem.getLongitude().toString();
+                // double longitude = Double.parseDouble(lon);
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Latitude",lat);
+                editor.putString("Longitude",lon);
+                editor.commit();
 
 
-                  String Longitude=pref.getString("Latitude", null);
-                  String Latitude=pref.getString("Longitude", null);
+                String Longitude=pref.getString("Latitude", null);
+                String Latitude=pref.getString("Longitude", null);
 
-                  if (Latitude != null && Longitude != null )
-                  {
-                      Double Lon= Double.parseDouble(Longitude);
-                      Double Lat= Double.parseDouble(Latitude);
-                      Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                      Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
-                      // implementFragment();
+                if (Latitude != null && Longitude != null )
+                {
+                    Double Lon= Double.parseDouble(Longitude);
+                    Double Lat= Double.parseDouble(Latitude);
+                    Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                    // implementFragment();
 
-                      //username and password are present, do your stuff
-                  }
-
-
+                    //username and password are present, do your stuff
+                }
 
 
 
-                  finish();
-              }
-          });
+
+
+                finish();
+            }
+        });
 
         //common for all category
         close = (ImageView) findViewById(R.id.iv_close);
@@ -139,4 +139,3 @@ public class DetailsInfoActivityHealth extends Activity  {
         super.onBackPressed();
     }
 }
-

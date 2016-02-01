@@ -1,8 +1,12 @@
 package demo.kolorob.kolorobdemoversion.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.io.File;
 
 /**
  * Created by touhid on 12/26/15.
@@ -11,6 +15,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String DB_NAME = "kolorob.db";
+
+    public static  String DB_PATH ;
     public static final int DB_VERSION = 1;
 
     public static final String SERVICE_CATEGORY = "service_category";
@@ -40,16 +46,29 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String LEGAL_AID_SERVICE_PROVIDER_TABLE="legal_aid_provider";
     public static final String LEGAL_AID_LEGAL_ADVICE_TABLE="legal_aid_legal_advice";
     public static final String LEGAL_AID_SALISHI_TABLE="legal_aid_salishi";
+    public Context context;
+    public boolean mDataBaseExist;
+
 
     // TODO Write table names for all other tables
     public static final String JOB_SERVICE_PROVIDER_TABLE="job_provider";
     public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
+        this.context = context;
+        if(android.os.Build.VERSION.SDK_INT >= 17){
+            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
+        }
+        else
+        {
+            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+        }
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
     }
 
     public static int getDbVersion() {
@@ -72,4 +91,43 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         onCreate(db);
     }
+    private boolean checkDataBase2()
+    {
+        File dbFile = new File(DB_PATH + DB_NAME);
+        //Log.v("dbFile", dbFile + "   "+ dbFile.exists());
+        return dbFile.exists();
+    }
+    public static boolean checkDataBase(Context c) {
+        File f = new File("/data/data/" + c.getPackageName() + "/databases/"
+                + DB_NAME);
+        if (!f.exists())
+            return false;
+        SQLiteDatabase checkDB = null;
+        try {
+            checkDB = SQLiteDatabase
+                    .openDatabase("/data/data/" + c.getPackageName()
+                                    + "/databases/" + DB_NAME, null,
+                            SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
+        return checkDB != null ? true : false;
+    }
+    public boolean isTableExists(SQLiteDatabase db, String tableName)
+    {
+        if (tableName == null || db == null || !db.isOpen())
+        {
+            return false;
+        }
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM "+DatabaseHelper.EDU_PROVIDER_TABLE ,null);
+        if (!cursor.moveToFirst())
+        {
+            return false;
+        }
+        int count = cursor.getInt(0);
+        cursor.close();
+        return count > 0;
+    }
 }
+

@@ -10,8 +10,12 @@
 
     <application
         android:allowBackup="true"
+<<<<<<< HEAD
         android:icon="@drawable/kolorob_logo_first_page"
+=======
         android:largeHeap="true"
+        android:icon="@mipmap/ic_launcher"
+>>>>>>> origin/isratmity
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
@@ -61,17 +65,25 @@
         <activity
             android:name=".activity.DetailsLegalActivity"
             android:theme="@style/Theme.Transparent" />
+<<<<<<< HEAD
         <activity
             android:name=".activity.ReviewActivity"
             android:label="@string/title_activity_review" >
         </activity>
+=======
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".activity.FeedbackActivity"
             android:label="@string/title_activity_feedback"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> origin/isratmity
     </application>
 
 </manifest>

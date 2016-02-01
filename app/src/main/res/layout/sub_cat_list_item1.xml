@@ -18,7 +18,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/txt_cd_icon_cat"
-                android:src="@drawable/ico_health"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:paddingLeft="3dp" />

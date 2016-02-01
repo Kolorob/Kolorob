@@ -405,8 +405,13 @@ private String placeChoice;
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
 
+<<<<<<< HEAD
      //   tvName.setText(ci.getCatName());
      //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+=======
+       // tvName.setText(ci.getCatName());
+        //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+>>>>>>> origin/isratmity
 
 /**************************
  *

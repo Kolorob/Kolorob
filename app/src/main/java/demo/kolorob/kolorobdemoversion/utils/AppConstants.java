@@ -103,7 +103,9 @@ public class AppConstants {
     //endregion
 
     public static final String KEY_DETAILS_JOB = "jobprovider";
+    public static final String KEY_DETAILS_ENT = "entProvider";
     public static final String KEY_DETAILS_VIEW = "eduProvider";
+    public static final String KEY_DETAILS_HEALTH = "heaProvider";
     public static final String KEY_DETAILS_LEGAL = "legalaidprovider";
     public static final String KEY_DETAILS_FINANCIAL = "financialprovider";
     public static final int EDUCATION= 1;

@@ -40,7 +40,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
     private TextView itemClosingTIme;
     private TextView itemBreakTime;
 
-    //  private TextView nodeRegistedwith;
+  //  private TextView nodeRegistedwith;
     private TextView email;
     private TextView website;
     private TextView fb;
@@ -66,18 +66,27 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         itemName = (TextView) findViewById(R.id.tv_header_entertainment);
         itemAddress = (TextView) findViewById(R.id.tv_item_type_ent);
 
-        itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
+       itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
 
+<<<<<<< HEAD
         nodeRegistrationNumber=(TextView)findViewById(R.id.tv_item_registration_nunmber);
         itemarea=(TextView)findViewById(R.id.tv_item_location_ent);
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
         itemClosingTIme=(TextView)findViewById(R.id.closing_time);
         itemBreakTime=(TextView)findViewById(R.id.break_time);
+=======
+        itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
+>>>>>>> origin/isratmity
 
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
 
+<<<<<<< HEAD
+=======
+        itemName.setText(entertainmentServiceProviderItem.getNodeName());
+        itemAddress.setText("ঠিকানা ঃ  "+ AppConstants.BAUNIABADH);
+>>>>>>> origin/isratmity
 
         kivabejaben=(Button)findViewById(R.id.kivabejabenedu);
 
@@ -92,9 +101,9 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         itemClosingTIme.setText("বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingTime() );
         itemBreakTime.setText("বিরতির সময়: "+entertainmentServiceProviderItem.getBreakTime());
 
-        email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
-        website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
+       // email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
+        //website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
+        //fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
 
 
 
@@ -119,17 +128,15 @@ public class DetailsInfoActivityEntertainment extends Activity  {
             @Override
             public void onClick(View v) {
                 String lat= entertainmentServiceProviderItem.getLatitude().toString();
-                // double latitude = Double.parseDouble(lat);
+               // double latitude = Double.parseDouble(lat);
                 String lon = entertainmentServiceProviderItem.getLongitude().toString();
-                // double longitude = Double.parseDouble(lon);
+               // double longitude = Double.parseDouble(lon);
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("Latitude",lat);
                 editor.putString("Longitude",lon);
                 editor.commit();
 
-                Toast.makeText(getApplicationContext(), "Your Longitude is " + lon, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Your Latitude is " + lat,Toast.LENGTH_SHORT).show();
 
                 String Longitude=pref.getString("Latitude", null);
                 String Latitude=pref.getString("Longitude", null);
@@ -138,8 +145,8 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 {
                     Double Lon= Double.parseDouble(Longitude);
                     Double Lat= Double.parseDouble(Latitude);
-                  //  Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
                     // implementFragment();
 
                     //username and password are present, do your stuff

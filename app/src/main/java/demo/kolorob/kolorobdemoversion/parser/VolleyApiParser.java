@@ -1,6 +1,8 @@
 package demo.kolorob.kolorobdemoversion.parser;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -14,6 +16,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
+import demo.kolorob.kolorobdemoversion.activity.PlaceChoiceActivity;
+import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
+import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.http.VolleySingleton;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
@@ -30,6 +36,8 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class VolleyApiParser {
     private static final String TAG = VolleyApiParser.class.getSimpleName();
     private static final String VOLLEY_TAG = "Background_API_Request";
+    public Activity activity;
+
 
     public static void postRequest(final Context ctx, final int reqCode,
                                    final String jsonContent,
@@ -65,11 +73,18 @@ public class VolleyApiParser {
         return map;
     }
 
+    public Activity getActivity() {
+        return activity;
+    }
+
     public static void postRequest(final Context ctx, final int reqCode,
                                    final Map<String, String> contentMap,
                                    final VolleyApiCallback vApiCb,
                                    final Request.Priority priority) {
+
         if (!AppUtils.isNetConnected(ctx)) {
+
+
             AppDialogManager.showNoInternetDialog(ctx, new RetryCallBackForNoInternet() {
                 @Override
                 public void retry() {
@@ -111,7 +126,9 @@ public class VolleyApiParser {
             @Override
             public Object getTag() {
                 return VOLLEY_TAG;
-            }            @Override
+            }
+
+            @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = getDefaultPostRequestMap(reqCode);
                 if (contentMap != null)
@@ -139,14 +156,17 @@ public class VolleyApiParser {
                                   final VolleyApiCallback vApiCb,
                                   final Request.Priority priority) {
         if (!AppUtils.isNetConnected(ctx)) {
+
             AppDialogManager.showNoInternetDialog(ctx, new RetryCallBackForNoInternet() {
                 @Override
                 public void retry() {
                     getRequest(ctx, apiUrl, vApiCb, priority);
                 }
             });
-            return;
-        }
+
+        return;
+    }
+
 
         StringRequest strReq = new StringRequest(
                 Request.Method.GET,

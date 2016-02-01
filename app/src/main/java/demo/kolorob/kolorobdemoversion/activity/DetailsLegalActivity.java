@@ -69,14 +69,14 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 
             itemName.setText(legalAidServiceProviderItem.getLegalaidNameEng());
-            itemAddress.setText("ঠিকানাঃ "+ AppConstants.BAUNIABADH);
-            itemType.setText("যোগাযোগঃ  "+legalAidServiceProviderItem.getContactNo());
+            itemAddress.setText("ঠিকানাঃ "+ legalAidServiceProviderItem.getArea());
+            itemType.setText("যোগাযোগঃ  "+legalAidServiceProviderItem.getIdentifierId());
 
-            itemContact.setText("যোগাযোগের উপায়ঃ "+legalAidServiceProviderItem.getContactNo());
+            itemContact.setText("যোগাযোগের উপায়ঃ "+legalAidServiceProviderItem.getCategoryId());
 
-            email.setText("ইমেইলঃ "+legalAidServiceProviderItem.getEmailAddress());
-            website.setText("ওয়েবসাইটঃ "+legalAidServiceProviderItem.getWebsiteLink());
-            fb.setText("ফেসবুকঃ "+legalAidServiceProviderItem.getFbLink());
+           // email.setText("ইমেইলঃ "+legalAidServiceProviderItem.getEmailAddress());
+           // website.setText("ওয়েবসাইটঃ "+legalAidServiceProviderItem.getWebsiteLink());
+           // fb.setText("ফেসবুকঃ "+legalAidServiceProviderItem.getFbLink());
             legal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

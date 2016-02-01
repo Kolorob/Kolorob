@@ -71,8 +71,8 @@ public class DetailsJobActivity extends Activity {
         itemContact.setText("রেজিস্ট্রেশঃন "+jobServiceProviderItem.getRegisteredWith());
 
         email.setText("সংবাদ দাতাঃ "+jobServiceProviderItem.getContactPersonDesignation());
-        website.setText("ওয়েবসাইটঃ "+jobServiceProviderItem.getWebsiteLink());
-        fb.setText("ফেসবুকঃ "+jobServiceProviderItem.getFbLink());
+       // website.setText("ওয়েবসাইটঃ "+jobServiceProviderItem.getWebsiteLink());
+       /// fb.setText("ফেসবুকঃ "+jobServiceProviderItem.getFbLink());
 
 
         kivabejabejob.setOnClickListener(

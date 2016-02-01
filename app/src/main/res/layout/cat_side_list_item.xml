@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/txt_cd_icon_cat"
-        android:src="@drawable/ico_health"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:paddingTop="3dp" />
@@ -32,6 +31,7 @@
         <!--android:layout_alignStart="@+id/ivIconCatList"-->
         <!--android:layout_alignRight="@+id/ivIconCatList"-->
         <!--android:layout_alignEnd="@+id/ivIconCatList" />-->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

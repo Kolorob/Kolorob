@@ -70,8 +70,9 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         View v = inflater.inflate(R.layout.route_drawer_fragment, container,
                 false);
         mMapView = (MapView) v.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
 
+
+        mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
         try {
@@ -311,7 +312,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
 
 
-        editor.clear();
+        //editor.clear();
         editor.commit();
 
     }

@@ -314,7 +314,7 @@ public class MapFragment extends Fragment implements
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         Intent hel = new Intent(getActivity(),DetailsInfoActivityHealth.class);
-                        hel.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
+                        hel.putExtra(AppConstants.KEY_DETAILS_HEALTH,et);
                         startActivity(hel);
                         break;
                     }
@@ -331,7 +331,7 @@ public class MapFragment extends Fragment implements
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         Intent ent = new Intent(getActivity(),DetailsInfoActivityEntertainment.class);
-                        ent.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
+                        ent.putExtra(AppConstants.KEY_DETAILS_ENT,et);
                         startActivity(ent);
                         break;
                     }
