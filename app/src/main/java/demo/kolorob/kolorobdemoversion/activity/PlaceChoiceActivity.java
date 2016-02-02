@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,12 +20,14 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 300;
     private AnimationDrawable frAnimBaunia;
     private AnimationDrawable frAnimParisRoad;
+    Button Feedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice);
-
+        Feedback = (Button) findViewById(R.id.button2);
+        Feedback.setOnClickListener(this);
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);
         ImageView ivBauniaBandh = (ImageView) findViewById(R.id.iv_baunia);
@@ -145,6 +148,11 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
             case R.id.iv_parise:
                 frAnimParisRoad.start();
                 gotoPlaceDetailsView(AppConstants.PLACE_PARIS_ROAD);
+                break;
+            case R.id.button2:
+                Intent a = new Intent(PlaceChoiceActivity.this, FeedbackActivity.class);
+                startActivity(a);
+                finish();
                 break;
 
             default:

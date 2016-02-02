@@ -188,4 +188,11 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         // attaching data adapter to spinner
         subcategoryname = spinner3.getSelectedItem().toString();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
 }
