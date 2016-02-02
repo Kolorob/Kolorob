@@ -128,8 +128,8 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 editor.putString("Longitude",lon);
                 editor.commit();
 
-                Toast.makeText(getApplicationContext(), "Your Longitude is " + lon, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "Your Latitude is " + lat,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Your Longitude is " + lon, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(), "Your Latitude is " + lat,Toast.LENGTH_SHORT).show();
 
                 String Longitude=pref.getString("Latitude", null);
                 String Latitude=pref.getString("Longitude", null);

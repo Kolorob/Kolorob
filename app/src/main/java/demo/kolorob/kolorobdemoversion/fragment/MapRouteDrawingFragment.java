@@ -452,7 +452,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     public void onResume() {
 
 
-        Toast.makeText(getActivity(),"I am in OnResume of Map", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity(),"I am in OnResume of Map", Toast.LENGTH_LONG).show();
         super.onResume();
         mMapView.onResume();
         mGoogleApiClient.connect();
@@ -462,7 +462,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     public void onPause() {
         super.onPause();
         mMapView.onPause();
-        Toast.makeText(getActivity(),"I am in Onpause of Map", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity(),"I am in Onpause of Map", Toast.LENGTH_LONG).show();
 
 
         if (mGoogleApiClient.isConnected()) {
@@ -475,7 +475,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         super.onDestroy();
         mMapView.onDestroy();
 
-        Toast.makeText(getActivity(),"I am in OnDestroy of Map", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity(),"I am in OnDestroy of Map", Toast.LENGTH_LONG).show();
 
     }
 

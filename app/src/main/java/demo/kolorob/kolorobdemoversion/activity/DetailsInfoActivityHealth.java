@@ -100,8 +100,8 @@ public class DetailsInfoActivityHealth extends Activity  {
                 {
                     Double Lon= Double.parseDouble(Longitude);
                     Double Lat= Double.parseDouble(Latitude);
-                    Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
                     // implementFragment();
 
                     //username and password are present, do your stuff
