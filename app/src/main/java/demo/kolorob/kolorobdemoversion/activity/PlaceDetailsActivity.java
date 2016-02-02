@@ -334,8 +334,6 @@ private String placeChoice;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, PlaceChoiceActivity.class));
-
         finish();
     }
 

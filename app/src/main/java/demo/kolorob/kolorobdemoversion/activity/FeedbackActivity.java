@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,7 +41,8 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     public static final String KEY_CATEGORYNAME = "categoryname";
     public static final String KEY_SUBCATEGORYNAME = "subcategoryname";
     int cat_id;
-
+    ImageView close;
+    TextView close_tv;
 
     String userage,categoryname,subcategoryname,issuetype;
     private Context con;
@@ -81,6 +85,24 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         issuetype= spinner4.getSelectedItem().toString();
         SubmitFeedback = (Button) findViewById(R.id.Submitfeedback);
         SubmitFeedback.setOnClickListener(this);
+        close = (ImageView) findViewById(R.id.iv_close);
+        close_tv = (TextView) findViewById(R.id.tv_close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(con, PlaceChoiceActivity.class);//Default Activity
+                startActivity(a);
+                finish();
+            }
+        });
+        close_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(con, PlaceChoiceActivity.class);//Default Activity
+                startActivity(a);
+                finish();
+            }
+        });
     }
 
     private void submitFeedback(){
@@ -189,10 +211,6 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         subcategoryname = spinner3.getSelectedItem().toString();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
+
 
 }
