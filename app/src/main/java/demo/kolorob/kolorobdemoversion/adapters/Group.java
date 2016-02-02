@@ -1,7 +1,7 @@
 package demo.kolorob.kolorobdemoversion.adapters;
 
 /**
- * Created by mity on 1/17/16.
+ * Created by israt.jahan on 1/17/16.
  */
 import java.util.ArrayList;
 import java.util.List;

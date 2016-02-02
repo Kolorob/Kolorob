@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,15 +67,17 @@ public class OpeningActivity extends Activity {
     private Context ctx;
     public static final String EDU_PROVIDER_TABLE = "edu_provider";
     public  SQLiteDatabase db3;
+    ProgressDialog pd;
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
-        DatabaseHelper dbhelper = new DatabaseHelper(OpeningActivity.this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening);
-
-        ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);
+     pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
+        pd.setIndeterminate(true);
+        pd.show(OpeningActivity.this, "PROG_DIALOG", "Getting machine status...");
+        ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -118,6 +121,7 @@ public class OpeningActivity extends Activity {
     }
     public void LoadData()
     {
+
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
 
@@ -266,6 +270,7 @@ public class OpeningActivity extends Activity {
                 DatabaseHelper db = new DatabaseHelper(getApplicationContext());
                 db3=db.getReadableDatabase();
                 if (db.isTableExists(db3,EDU_PROVIDER_TABLE)){
+                    pd.dismiss();
                     Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity.class);//Default Activity
                     a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //getApplicationContext().startActivity(a);
@@ -443,6 +448,7 @@ public class OpeningActivity extends Activity {
         boolean firstRun = settings.getBoolean("firstRun", false);
         if (firstRun == false)//if running for first time
         {
+            pd.dismiss();
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("firstRun", true);
             editor.commit();
@@ -451,6 +457,7 @@ public class OpeningActivity extends Activity {
             startActivity(i);
             finish();
         } else {
+            pd.dismiss();
             Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);//Default Activity
 
             //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);

@@ -55,7 +55,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 /**
  * Created by touhid on 12/3/15.
  *
- * @author touhid,arafat
+ * @author touhid,arafat,israt
  */
 public class PlaceDetailsActivity extends BaseActivity implements View.OnClickListener {
 
