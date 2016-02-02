@@ -165,6 +165,10 @@ private String placeChoice;
             placeDetailsLayout.setBackgroundResource(R.drawable.place_details_bg);
         }
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
 
         subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
