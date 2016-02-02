@@ -64,6 +64,9 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     public static final String TAG = MapRouteDrawingFragment.class.getSimpleName();
     private static final int MAP_ZOOM_AMOUNT=17;
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private double Lon;
+    private double Lat;
+    private int locationNameId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,15 +98,16 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         String Latitude=pref.getString("Latitude", null);
         String Longitude =pref.getString("Longitude", null);
-        int locationNameId= pref.getInt("LocationNameId", 0);
+        locationNameId= pref.getInt("LocationNameId", 0);
         // Toast.makeText(getApplicationContext(), "Your Longitude is " + Longitude,                Toast.LENGTH_SHORT).show();
         // Toast.makeText(getApplicationContext(), "Your Latitude is " + Latitude,                Toast.LENGTH_SHORT).show();
 
 
+        Log.e("Changed", "-->" + Latitude);
+        Log.e("Got it","-->"+Longitude);
 
-
-        Double Lon= Double.parseDouble(Longitude);
-        Double Lat= Double.parseDouble(Latitude);
+        Lon= Double.parseDouble(Longitude);
+        Lat= Double.parseDouble(Latitude);
 
 
 
@@ -228,20 +232,21 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         double currentLongitude = location.getLongitude();
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
 
-        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
+        //  SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        //  SharedPreferences.Editor editor = pref.edit();
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
-        String Longitude=pref.getString("Latitude", null);
-        String Latitude=pref.getString("Longitude", null);
-        int locationNameId=pref.getInt("LocationNameId", 0);
-        // Toast.makeText(getApplicationContext(), "Your Longitude is " + Longitude,                Toast.LENGTH_SHORT).show();
+        // String Longitude=pref.getString("Latitude", null);
+        //  String Latitude=pref.getString("Longitude", null);
+        //  int locationNameId=pref.getInt("LocationNameId", 0);
+        // if(Longitude==null)
+        // Toast.makeText(getActivity()," আমি একা ", Toast.LENGTH_LONG).show();
         // Toast.makeText(getApplicationContext(), "Your Latitude is " + Latitude,                Toast.LENGTH_SHORT).show();
 
 
 
-        Double Lon= Double.parseDouble(Longitude);
-        Double Lat= Double.parseDouble(Latitude);
+        // Double Lon= Double.parseDouble(Longitude);
+        // Double Lat= Double.parseDouble(Latitude);
         //  Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon,                Toast.LENGTH_SHORT).show();
         // Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,                Toast.LENGTH_SHORT).show();
         //implementFragment();
@@ -250,7 +255,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         LatLng latLng1 =new LatLng(Lat,Lon);
 
 
-        getYourRoute(currentLatitude,currentLongitude,Lon,Lat);
+        // getYourRoute(currentLatitude,currentLongitude,Lon,Lat);
         //  MarkerOptions options1 = new MarkerOptions()
         //  .position(latLng1)
         //  .title("You are here!");
@@ -258,7 +263,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         // googleMap.addMarker(options1);
 
 
-        getYourRoute(currentLatitude, currentLongitude, Lon, Lat);
+        getYourRoute(currentLatitude, currentLongitude, Lat, Lon);
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title("I am here!");
@@ -285,8 +290,8 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         loc1.setLongitude(currentLongitude);
 
         Location loc2 = new Location("");
-        loc2.setLatitude(Lon);
-        loc2.setLongitude(Lat);
+        loc2.setLatitude(Lat);
+        loc2.setLongitude(Lon);
 
         float distanceInMeters = loc1.distanceTo(loc2)/1000;
         float timeneeded= (distanceInMeters/3)*60;
@@ -312,8 +317,8 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
 
 
-        //editor.clear();
-        editor.commit();
+        //  editor.clear();
+        // editor.commit();
 
     }
 
@@ -447,7 +452,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     public void onResume() {
 
 
-
+        Toast.makeText(getActivity(),"I am in OnResume of Map", Toast.LENGTH_LONG).show();
         super.onResume();
         mMapView.onResume();
         mGoogleApiClient.connect();
@@ -457,6 +462,9 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     public void onPause() {
         super.onPause();
         mMapView.onPause();
+        Toast.makeText(getActivity(),"I am in Onpause of Map", Toast.LENGTH_LONG).show();
+
+
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
@@ -466,6 +474,9 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     public void onDestroy() {
         super.onDestroy();
         mMapView.onDestroy();
+
+        Toast.makeText(getActivity(),"I am in OnDestroy of Map", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
