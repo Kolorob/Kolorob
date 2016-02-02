@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,11 +39,14 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     public static final String KEY_SUBCATEGORYNAME = "subcategoryname";
     int cat_id;
 
-    String username, userage,usercontact,categoryname,subcategoryname,issuetype,issuedetails;
+
+    String userage,categoryname,subcategoryname,issuetype;
     private Context con;
     Spinner spinner2,spinner3,spinner4;
     private Button SubmitFeedback;
-
+    private EditText editTextUsername;
+    private EditText editTextIssuedetails;
+    private EditText editTextContactNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +63,11 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         spinner3 = (Spinner) findViewById(R.id.spinner3);
         spinYear.setAdapter(adapter);
         con=this;
-        username = String.valueOf(findViewById(R.id.editText2));
-        userage=String.valueOf(spinYear);
-        usercontact=String.valueOf(findViewById(R.id.editText));
-        issuedetails=String.valueOf(findViewById(R.id.editText3));
+        editTextUsername = (EditText) findViewById(R.id.editText2);
+        editTextIssuedetails = (EditText) findViewById(R.id.editText3);
+        editTextContactNo= (EditText) findViewById(R.id.editText);
+        userage=spinYear.getSelectedItem().toString();
+
         loadSpinnerDataforcat();
         ArrayList<String> issue = new ArrayList<String>();
 
@@ -79,7 +84,9 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void submitFeedback(){
-
+        final String username =  editTextUsername.getText().toString().trim();
+        final String issuedetails =  editTextIssuedetails.getText().toString().trim();
+        final String usercontact = editTextContactNo.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new Response.Listener<String>() {
