@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by touhid on 12/26/15.
@@ -75,6 +74,22 @@ public class CategoryTable {
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
         return ret;
+    }
+    public ArrayList<String> getAllCatNames() {
+        ArrayList<String> ciList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(1);
+                ciList.add(name);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return ciList;
     }
 
     public boolean isFieldExist(int id) {

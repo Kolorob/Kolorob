@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -115,6 +113,24 @@ public class SubCategoryTable {
                 new String[]{cat_id + "",id+""});
         closeDB();
         return ret;
+    }
+    public ArrayList<String> getcatSubCategories(int id) {
+
+
+        ArrayList<String> siList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String catid2 =cursor.getString(2);
+                siList.add(catid2);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
     }
 
     public ArrayList<SubCategoryItem> getAllSubCategories(int id) {

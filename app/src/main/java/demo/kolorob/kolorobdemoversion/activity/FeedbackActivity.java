@@ -1,63 +1,85 @@
 package demo.kolorob.kolorobdemoversion.activity;
-import android.support.v7.app.AppCompatActivity;
+
+import android.content.Context;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.CategoryTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 
 public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String REGISTER_URL = "http://www.kolorob.net/volley.php";
 
     public static final String KEY_USERNAME = "username";
-    public static final String KEY_PASSWORD = "password";
-    public static final String KEY_EMAIL = "email";
+    public static final String KEY_USERAGE = "userage";
+    public static final String KEY_CONTACT = "usercontact";
+    public static final String KEY_ISSUETYPE = "issuetype";
+    public static final String KEY_ISSUEDETAILS = "issuedetails";
+    public static final String KEY_CATEGORYNAME = "categoryname";
+    public static final String KEY_SUBCATEGORYNAME = "subcategoryname";
+    int cat_id;
 
-
-    private EditText editTextUsername;
-    private EditText editTextEmail;
-    private EditText editTextPassword;
-
-    private Button buttonRegister;
+    String username, userage,usercontact,categoryname,subcategoryname,issuetype,issuedetails;
+    private Context con;
+    Spinner spinner2,spinner3,spinner4;
+    private Button SubmitFeedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback2);
+        setContentView(R.layout.activity_user_feedback);
+        ArrayList<String> age = new ArrayList<String>();
+        age.add("5-15");
+        age.add("16-35");
+        age.add("36-50");
+        age.add("50>");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, age);
 
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        editTextEmail= (EditText) findViewById(R.id.editTextEmail);
+        Spinner spinYear = (Spinner)findViewById(R.id.spinner);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner3 = (Spinner) findViewById(R.id.spinner3);
+        spinYear.setAdapter(adapter);
+        con=this;
+        username = String.valueOf(findViewById(R.id.editText2));
+        userage=String.valueOf(spinYear);
+        usercontact=String.valueOf(findViewById(R.id.editText));
+        issuedetails=String.valueOf(findViewById(R.id.editText3));
+        loadSpinnerDataforcat();
+        ArrayList<String> issue = new ArrayList<String>();
 
-        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        issue.add("Bug");
+        issue.add("Wrong Information");
+        issue.add("Suggestion");
 
-        buttonRegister.setOnClickListener(this);
+        ArrayAdapter<String> adapterissue = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,issue);
+        spinner4 = (Spinner) findViewById(R.id.spinner4);
+        spinner4.setAdapter(adapterissue);
+        issuetype= spinner4.getSelectedItem().toString();
+        SubmitFeedback = (Button) findViewById(R.id.Submitfeedback);
+        SubmitFeedback.setOnClickListener(this);
     }
 
-    private void registerUser(){
-        final String username = editTextUsername.getText().toString().trim();
-        final String password = editTextPassword.getText().toString().trim();
-        final String email = editTextEmail.getText().toString().trim();
+    private void submitFeedback(){
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
                 new Response.Listener<String>() {
@@ -76,12 +98,18 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put(KEY_USERNAME,username);
-                params.put(KEY_PASSWORD,password);
-                params.put(KEY_EMAIL, email);
+                params.put(KEY_USERAGE,userage);
+                params.put(KEY_CONTACT, usercontact);
+                params.put(KEY_ISSUETYPE,issuetype);
+                params.put(KEY_ISSUEDETAILS,issuedetails);
+                params.put(KEY_CATEGORYNAME, categoryname);
+                params.put(KEY_SUBCATEGORYNAME, subcategoryname);
                 return params;
             }
 
         };
+
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
@@ -89,8 +117,68 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(v == buttonRegister){
-            registerUser();
+        if(v ==  SubmitFeedback){
+            submitFeedback();
         }
+    }
+    public int getCat_id() {
+        return cat_id;
+    }
+
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
+    }
+    private void loadSpinnerDataforcat() {
+        // database handler
+        CategoryTable cattable =new CategoryTable(con);
+
+        // Spinner Drop down elements
+        ArrayList<String> cat = cattable.getAllCatNames();
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> adapterr = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cat);
+        spinner2.setAdapter(adapterr);
+        // attaching data adapter to spinner
+
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categoryname = spinner2.getSelectedItem().toString();
+                if (categoryname.equals("Education")) setCat_id(1);
+                else if (categoryname.equals("Health")) setCat_id(2);
+                else if (categoryname.equals("Entertainment")) setCat_id(3);
+                else if (categoryname.equals("Government")) setCat_id(4);
+                else if (categoryname.equals("Legal")) setCat_id(5);
+                else if (categoryname.equals("Financial")) setCat_id(6);
+                else if (categoryname.equals("Job")) setCat_id(7);
+
+                loadSpinnerDataforsubcat();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+
+        });
+
+    }
+    private void loadSpinnerDataforsubcat() {
+        // database handler
+        SubCategoryTable subCategoryTable =new SubCategoryTable(con);
+
+        // Spinner Drop down elements
+        ArrayList<String> subcat = subCategoryTable.getcatSubCategories(cat_id);
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> adapterrr = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subcat);
+        spinner3.setAdapter(adapterrr);
+        // attaching data adapter to spinner
+        subcategoryname = spinner3.getSelectedItem().toString();
     }
 }
