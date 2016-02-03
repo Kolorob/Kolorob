@@ -160,12 +160,24 @@
                 android:id="@+id/sub_cat_item_list"
                 android:visibility="gone"
                 android:layout_marginTop="5dp" />
+            <ScrollView
 
-            <ExpandableListView
-                android:id="@+id/listView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ExpandableListView>
+                android:layout_height="wrap_content">
+
+
+                <ExpandableListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" >
+                </ExpandableListView>
+
+            </LinearLayout>
+            </ScrollView>
             <TextView
                 android:id="@+id/tvInstructionSubCat"
                 android:layout_width="wrap_content"

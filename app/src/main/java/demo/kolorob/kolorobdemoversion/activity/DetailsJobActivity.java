@@ -31,8 +31,7 @@ public class DetailsJobActivity extends Activity {
     private TextView itemAddress;
     private TextView itemType;
     private TextView itemContact;
-    private TextView itemdesignation;
-    private TextView itemarea;
+
     private TextView email;
     private TextView website;
     private TextView fb;

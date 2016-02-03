@@ -3,21 +3,28 @@ package demo.kolorob.kolorobdemoversion.fragment;
 /**
  * Created by Mazharul.Islam1 on 1/24/2016.
  */
+
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -46,7 +53,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-//import demo.kolorob.kolorobdemoversion.activity.RouteActivity;
 import demo.kolorob.kolorobdemoversion.helpers.RouteDrawer;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -54,26 +60,28 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * A fragment that launches other parts of the demo application.
  */
 public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,LocationListener {
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    TextView distance,car,walk,cng,rickshaw;
+    TextView distance, car, walk, cng, rickshaw;
     MapView mMapView;
     private GoogleMap googleMap;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     public static final String TAG = MapRouteDrawingFragment.class.getSimpleName();
-    private static final int MAP_ZOOM_AMOUNT=17;
+    private static final int MAP_ZOOM_AMOUNT = 17;
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private double Lon;
     private double Lat;
     private int locationNameId;
+    private static Context context=null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.route_drawer_fragment, container,
                 false);
         mMapView = (MapView) v.findViewById(R.id.mapView);
-
+        context=getActivity().getApplicationContext();
 
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
@@ -88,28 +96,26 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         double latitude = 17.385044;
         double longitude = 78.486671;
-        car=(TextView)v.findViewById(R.id.car);
-        distance=(TextView)v.findViewById(R.id.distance);
-        walk=(TextView)v.findViewById(R.id.walk);
-        cng=(TextView)v.findViewById(R.id.cng);
-        rickshaw=(TextView)v.findViewById(R.id.rickshaw);
+        car = (TextView) v.findViewById(R.id.car);
+        distance = (TextView) v.findViewById(R.id.distance);
+        walk = (TextView) v.findViewById(R.id.walk);
+        cng = (TextView) v.findViewById(R.id.cng);
+        rickshaw = (TextView) v.findViewById(R.id.rickshaw);
         SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
-        String Latitude=pref.getString("Latitude", null);
-        String Longitude =pref.getString("Longitude", null);
-        locationNameId= pref.getInt("LocationNameId", 0);
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+        locationNameId = pref.getInt("LocationNameId", 0);
         // Toast.makeText(getApplicationContext(), "Your Longitude is " + Longitude,                Toast.LENGTH_SHORT).show();
         // Toast.makeText(getApplicationContext(), "Your Latitude is " + Latitude,                Toast.LENGTH_SHORT).show();
 
 
         Log.e("Changed", "-->" + Latitude);
-        Log.e("Got it","-->"+Longitude);
+        Log.e("Got it", "-->" + Longitude);
 
-        Lon= Double.parseDouble(Longitude);
-        Lat= Double.parseDouble(Latitude);
-
-
+        Lon = Double.parseDouble(Longitude);
+        Lat = Double.parseDouble(Latitude);
 
 
         MarkerOptions marker = new MarkerOptions().position(
@@ -123,16 +129,15 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                 .target(new LatLng(Lat, Lon)).zoom(13).build();
 
 
-        double latitude1=23.7795;
-        double longitude1= 90.4046;
+        double latitude1 = 23.7795;
+        double longitude1 = 90.4046;
 
 
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
 
 
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -148,40 +153,33 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     }
 
 
+    private String getDirectionsUrl(double lat1, double lon1, double lat2, double lon2) {
 
+        String str_origin = "origin=" + lat1 + "," + lon1;
 
-
-    private String getDirectionsUrl(double lat1,double lon1, double lat2, double lon2){
-
-        String str_origin = "origin="+lat1+","+lon1;
-
-        String str_dest = "destination="+lat2+","+lon2;
+        String str_dest = "destination=" + lat2 + "," + lon2;
 
         String sensor = "sensor=false";
 
         String waypoints = "";
 
 
-
-        String parameters = str_origin+"&"+str_dest+"&"+sensor+"&"+waypoints;
+        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + waypoints;
 
         String output = "json";
 
-        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
 
         return url;
     }
 
 
-
-
-
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try{
+        try {
             URL url = new URL(strUrl);
 
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -192,10 +190,10 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
 
-            StringBuffer sb  = new StringBuffer();
+            StringBuffer sb = new StringBuffer();
 
             String line = "";
-            while( ( line = br.readLine())  != null){
+            while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
 
@@ -203,9 +201,9 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
             br.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             Log.d("Exception ", e.toString());
-        }finally{
+        } finally {
             iStream.close();
             urlConnection.disconnect();
         }
@@ -215,14 +213,49 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     @Override
     public void onConnected(Bundle bundle) {
 
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
         if (location == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+            //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+           //need to implement listener
         }
         else {
             handleNewLocation(location);
         }
+
+    }
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            try {
+
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+
+        }else{
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+
 
     }
 
