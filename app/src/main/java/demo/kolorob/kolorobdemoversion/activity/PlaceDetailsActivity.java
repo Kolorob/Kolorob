@@ -75,6 +75,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private Button seeMap;
     private static TextView insSubCat;
     private static FrameLayout map;
+    private int height;
 
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
@@ -106,7 +107,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
 
-private String placeChoice;
+    private String placeChoice;
 
     public String getPlaceChoice() {
         return placeChoice;
@@ -121,7 +122,7 @@ private String placeChoice;
         super.onCreate(savedInstanceState);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+        height = displayMetrics.heightPixels;
         if(height>1000)
         setContentView(R.layout.place_details_activity);
         else
@@ -688,7 +689,9 @@ private String placeChoice;
             @Override
             public void run() {
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
-                if (dwPerc < .8)
+                if (height<1000d&&dwPerc < .8)
+                    return;
+                else if(dwPerc<0.6)
                     return;
                 // Decrease category-list width
                 ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
