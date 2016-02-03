@@ -71,13 +71,13 @@ public class DetailsInfoActivityHealth extends Activity  {
 
 
         itemName.setText(healthServiceProviderItem.getNodeName());
-        itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getArea());
+        itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getNameBn());
         itemType.setText("ধরন ঃ  "+healthServiceProviderItem.getNodeType());
         itemContact.setText("যোগাযোগের উপায় ঃ  "+healthServiceProviderItem.getNodeContact());
 
         email.setText("ইমেইল ঃ  "+healthServiceProviderItem.getNodeEmail());
         website.setText("ওয়েবসাইট ঃ  "+healthServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getNodeFacebook());
+        fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getClosingtime());
 
         kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
             @Override
