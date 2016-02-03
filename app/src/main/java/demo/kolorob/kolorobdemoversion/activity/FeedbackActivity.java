@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -67,9 +68,37 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         spinner3 = (Spinner) findViewById(R.id.spinner3);
         spinYear.setAdapter(adapter);
         con=this;
-        editTextUsername = (EditText) findViewById(R.id.editText2);
+        editTextUsername = (EditText) findViewById(R.id.editText4);
+        editTextUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus)editTextUsername.setBackgroundColor(Color.LTGRAY);
+
+
+            }
+        });
         editTextIssuedetails = (EditText) findViewById(R.id.editText3);
+        editTextIssuedetails.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus)editTextIssuedetails.setBackgroundColor(Color.LTGRAY);
+
+
+            }
+        });
+
         editTextContactNo= (EditText) findViewById(R.id.editText);
+        editTextContactNo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus)editTextContactNo.setBackgroundColor(Color.LTGRAY);
+
+
+            }
+        });
         userage=spinYear.getSelectedItem().toString();
 
         loadSpinnerDataforcat();

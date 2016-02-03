@@ -1,7 +1,5 @@
 package demo.kolorob.kolorobdemoversion.utils;
 
-import android.graphics.BitmapFactory;
-
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -85,6 +83,8 @@ public class AppConstants {
     public static final String KEY_CAT_OBJ = "category_object";
     public static final String KEY_PLACE = "place";
     public static final String BAUNIABADH = "বাউনিয়া বাঁধ";
+    public static final String WAITTAG = "একটু অপেক্ষা করুন";
+    public static final String WAITDET = "তথ্য সংগ্রহ হচ্ছে.....";
     public static final String PARIS_ROAD = "প্যারিস রোড";
     public static final int PLACE_BAUNIABADH = 1;
     public static final int PLACE_PARIS_ROAD = 2;

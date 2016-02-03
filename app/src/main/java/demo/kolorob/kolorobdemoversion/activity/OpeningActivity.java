@@ -76,7 +76,7 @@ public class OpeningActivity extends Activity {
         setContentView(R.layout.activity_opening);
      pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
         pd.setIndeterminate(true);
-        pd.show(OpeningActivity.this, "PROG_DIALOG", "Getting machine status...");
+        pd.show(OpeningActivity.this,AppConstants.WAITTAG, AppConstants.WAITDET);
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
