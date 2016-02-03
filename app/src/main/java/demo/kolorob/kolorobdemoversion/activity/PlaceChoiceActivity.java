@@ -80,57 +80,13 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
         ivParisRoad.setLayoutParams(parise_img);
 
 
-        //added some animation on Button
         ivBauniaBandh.setBackgroundResource(R.drawable.frame_animation_list);
         ivParisRoad.setBackgroundResource(R.drawable.frame_animation_list1);
         frAnimBaunia = (AnimationDrawable) ivBauniaBandh.getBackground();
         frAnimParisRoad = (AnimationDrawable) ivParisRoad.getBackground();
         frAnimBaunia.setOneShot(true);
         frAnimParisRoad.setOneShot(true);
-/*
-        ivBauniaBandh.setOnTouchListener(
-                new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                // PRESSED
-                                frame_Animation.start();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        gotoPlaceDetailsView(AppConstants.PLACE_BAUNIABADH);
-                                    }
-                                }, 300);
-                                return true; // if you want to handle the touch event
-                        }
-                        return false;
-                    }
-                }
-        );
 
-
-        ivParisRoad.setOnTouchListener(
-                new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                // PRESSED
-                                frame_Animation1.start();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent = new Intent(PlaceChoiceActivity.this, ButtonClickBaunia.class);
-                                        startActivity(intent);
-                                    }
-                                }, 300);
-                                return true; // if you want to handle the touch event
-                        }
-                        return false;
-                    }
-                }
-        );*/
 
 
     }
