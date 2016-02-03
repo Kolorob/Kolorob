@@ -493,7 +493,7 @@ private String placeChoice;
                 seeMap.setVisibility(View.GONE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
                 placeDetailsLayout.setBackgroundResource(R.drawable.cool_crash_ui_backdrop);
-                categoryHeader.setText(ci.getCatName());
+               // categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
                     showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
@@ -688,7 +688,7 @@ private String placeChoice;
             @Override
             public void run() {
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
-                if (dwPerc < .6)
+                if (dwPerc < .8)
                     return;
                 // Decrease category-list width
                 ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();

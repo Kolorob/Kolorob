@@ -19,7 +19,7 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="220dp"
             android:gravity="center"
             android:orientation="vertical"
             android:focusableInTouchMode="true">
@@ -78,16 +78,16 @@
 
         <LinearLayout
             android:id="@+id/llSubCatListHeadIconHolder"
-            android:layout_width="36dp"
-            android:layout_height="62dp"
+            android:layout_width="43dp"
+            android:layout_height="60dp"
             android:background="@color/black"
             android:orientation="vertical"
             android:visibility="visible">
 
             <ImageView
                 android:id="@+id/ivHeadCatIconSubCatList"
-                android:layout_width="35dp"
-                android:layout_height="40dp"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
                 android:background="@color/black"
                 android:contentDescription="@string/txt_cd_header_icon_ofcat_subcatlist"
                 android:padding="7dp" />
@@ -126,20 +126,35 @@
             </ScrollView>
         </HorizontalScrollView>
 
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp">-->
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:alpha="0.0"/>-->
+            <!-- -->
+            <!-- -->
+            <!-- -->
+        <!--</LinearLayout>-->
+
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/svSubCategoryListHolder"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
             android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
             android:background="@color/white"
             android:orientation="vertical"
             android:visibility="visible"
             android:id="@+id/llItemListHolder">
+
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -162,10 +177,10 @@
                 android:layout_marginTop="5dp" />
 
             <ExpandableListView
-               android:id="@+id/listView"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-           </ExpandableListView>
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ExpandableListView>
             <TextView
                 android:id="@+id/tvInstructionSubCat"
                 android:layout_width="wrap_content"
@@ -207,7 +222,7 @@
             android:layout_alignRight="@+id/llItemListHolder"
             android:layout_alignEnd="@+id/llItemListHolder"
             android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="1dp"
             android:layout_marginBottom="6dp"
             android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"></FrameLayout>
     </RelativeLayout>
