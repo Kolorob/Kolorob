@@ -77,7 +77,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
         email.setText("ইমেইল ঃ  "+healthServiceProviderItem.getNodeEmail());
         website.setText("ওয়েবসাইট ঃ  "+healthServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getClosingtime());
+        fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getNodeFacebook());
 
         kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
             @Override

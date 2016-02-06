@@ -432,6 +432,7 @@ public class OpeningActivity extends Activity {
 
     private void saveFinancialServiceProvider(JSONArray financialServiceProvider) {
         FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(OpeningActivity.this);
+        financialServiceProviderTable.dropTable();
         int financialServiceProviderCount = financialServiceProvider.length();
 
         for (int i = 0; i < financialServiceProviderCount; i++) {
