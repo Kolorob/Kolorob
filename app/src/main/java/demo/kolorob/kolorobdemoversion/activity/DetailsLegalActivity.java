@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -55,7 +55,13 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                 legalAidServiceProviderItem = (LegalAidServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
 
             }
+            LegalAidtypeServiceProviderLegalAdviceTable legalAidtypeServiceProviderLegalAdviceTable= new LegalAidtypeServiceProviderLegalAdviceTable(this);
+
+            fb = (TextView) findViewById(R.id.tv_fb);
+
+
             /**
+             *
              *following codes only for legal. This may vary for different category.
              * */
             itemName = (TextView) findViewById(R.id.tv_header);
@@ -64,7 +70,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             itemContact = (TextView) findViewById(R.id.tv_item_contact);
             email = (TextView) findViewById(R.id.tv_email);
             website = (TextView) findViewById(R.id.tv_website);
-            fb = (TextView) findViewById(R.id.tv_fb);
+
             legal=(Button)findViewById(R.id.kivabejabenLegal);
 
 
@@ -72,7 +78,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             itemAddress.setText("ঠিকানাঃ "+ legalAidServiceProviderItem.getArea());
             itemType.setText("যোগাযোগঃ  "+legalAidServiceProviderItem.getIdentifierId());
 
-            itemContact.setText("যোগাযোগের উপায়ঃ "+legalAidServiceProviderItem.getCategoryId());
+            itemContact.setText("যোগাযোগের উপায়ঃ "+legalAidServiceProviderItem.getContactNo());
 
            // email.setText("ইমেইলঃ "+legalAidServiceProviderItem.getEmailAddress());
            // website.setText("ওয়েবসাইটঃ "+legalAidServiceProviderItem.getWebsiteLink());

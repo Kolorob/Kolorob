@@ -37,6 +37,8 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
@@ -47,6 +49,8 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceP
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -227,6 +231,40 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "salishi", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveLegalaidSalishi(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "advice", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveLegalaidAdvice(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
             getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
                         @Override
@@ -400,6 +438,7 @@ public class OpeningActivity extends Activity {
 
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
+        legalAidServiceProviderTable.dropTable();
         int legalaidServiceProviderCount = legalaidServiceProvider.length();
 
         for (int i = 0; i < legalaidServiceProviderCount; i++) {
@@ -407,6 +446,38 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = legalaidServiceProvider.getJSONObject(i);
                 LegalAidServiceProviderItem et = LegalAidServiceProviderItem.parseLegalAidServiceProviderItem(jo);
                 legalAidServiceProviderTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveLegalaidSalishi(JSONArray legalaidtypeServiceProvider) {
+        LegalAidtypeServiceProviderSalishiTable legalAidtypeServiceProviderSalishiTable = new LegalAidtypeServiceProviderSalishiTable(OpeningActivity.this);
+      legalAidtypeServiceProviderSalishiTable.dropTable();
+        int legalaidtypeServiceProviderCount = legalaidtypeServiceProvider.length();
+
+        for (int i = 0; i < legalaidtypeServiceProviderCount; i++) {
+            try {
+                JSONObject jo = legalaidtypeServiceProvider.getJSONObject(i);
+                LegalAidSalishiItem et = LegalAidSalishiItem.parseLegalAidSalishiItem(jo);
+                legalAidtypeServiceProviderSalishiTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveLegalaidAdvice(JSONArray legalaidAdvice) {
+       LegalAidtypeServiceProviderLegalAdviceTable legalAidtypeServiceProviderLegalAdviceTable = new LegalAidtypeServiceProviderLegalAdviceTable(OpeningActivity.this);
+       legalAidtypeServiceProviderLegalAdviceTable.dropTable();
+        int legalaidAdviceCount = legalaidAdvice.length();
+
+        for (int i = 0; i < legalaidAdviceCount; i++) {
+            try {
+                JSONObject jo = legalaidAdvice.getJSONObject(i);
+                LegalAidLegalAdviceItem et = LegalAidLegalAdviceItem.parseLegalAidLegalAdviceItem(jo);
+                legalAidtypeServiceProviderLegalAdviceTable.insertItem(et);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -33,28 +33,60 @@ public class LegalAidLegalAdviceItem implements Serializable {
         return legaladviceId;
     }
 
+    public void setLegaladviceId(int legaladviceId) {
+        this.legaladviceId = legaladviceId;
+    }
+
     public String getIdentifierId() {
         return identifierId;
+    }
+
+    public void setIdentifierId(String identifierId) {
+        this.identifierId = identifierId;
     }
 
     public int getLegalaidSubCategoryId() {
         return legalaidSubCategoryId;
     }
 
+    public void setLegalaidSubCategoryId(int legalaidSubCategoryId) {
+        this.legalaidSubCategoryId = legalaidSubCategoryId;
+    }
+
     public String getLegalaidservicename() {
         return legalaidservicename;
+    }
+
+    public void setLegalaidservicename(String legalaidservicename) {
+        this.legalaidservicename = legalaidservicename;
     }
 
     public String getLegalaidfree() {
         return legalaidfree;
     }
 
-    public String getLegalaidpersonauthority() {
-        return legalaidpersonauthority;
+    public void setLegalaidfree(String legalaidfree) {
+        this.legalaidfree = legalaidfree;
     }
 
     public String getLegalaidcost() {
         return legalaidcost;
+    }
+
+    public void setLegalaidcost(String legalaidcost) {
+        this.legalaidcost = legalaidcost;
+    }
+
+    public String getLegalaidpersonauthority() {
+        return legalaidpersonauthority;
+    }
+
+    public void setLegalaidpersonauthority(String legalaidpersonauthority) {
+        this.legalaidpersonauthority = legalaidpersonauthority;
+    }
+
+    public void setLegalaidremark(String legalaidremark) {
+        this.legalaidremark = legalaidremark;
     }
 
     public String getLegalaidremark() {
