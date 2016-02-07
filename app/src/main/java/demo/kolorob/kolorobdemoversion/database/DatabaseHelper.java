@@ -52,7 +52,17 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     // TODO Write table names for all other tables
     public static final String JOB_SERVICE_PROVIDER_TABLE="job_provider";
+    //tables for financial services
     public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";
+    public static final String FINANCIAL_SERVICE_BILLS="financial_bills";
+    public static final String FINANCIAL_SERVICE_INSURANCE="financial_insurance";
+    public static final String FINANCIAL_SERVICE_LOAN="financial_loan";
+    public static final String FINANCIAL_SERVICE_PAYMENT="financial_payment";
+    public static final String FINANCIAL_SERVICE_SOCIAL="financial_social";
+    public static final String FINANCIAL_SERVICE_TAX="financial_tax";
+    public static final String FINANCIAL_SERVICE_TRANSACTION="financial_transaction";
+    public static final String FINANCIAL_SERVICE_TUITION="financial_tuition";
+
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
