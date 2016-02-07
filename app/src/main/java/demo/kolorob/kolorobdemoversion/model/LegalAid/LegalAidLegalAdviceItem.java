@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by israt.jahan on 1/7/2016.
  */
 public class LegalAidLegalAdviceItem implements Serializable {
-    private String legaladviceId;
+    private int legaladviceId;
     private String identifierId;
     private int legalaidSubCategoryId;
     private String legalaidservicename;
@@ -18,7 +18,7 @@ public class LegalAidLegalAdviceItem implements Serializable {
     private String legalaidpersonauthority;
     private String legalaidremark;
 
-    public LegalAidLegalAdviceItem(String legaladviceId, String identifierId, int legalaidSubCategoryId, String legalaidservicename, String legalaidfree, String legalaidcost, String legalaidpersonauthority, String legalaidremark) {
+    public LegalAidLegalAdviceItem(int legaladviceId, String identifierId, int legalaidSubCategoryId, String legalaidservicename, String legalaidfree, String legalaidcost, String legalaidpersonauthority, String legalaidremark) {
         this.legaladviceId = legaladviceId;
         this.identifierId = identifierId;
         this.legalaidSubCategoryId = legalaidSubCategoryId;
@@ -29,7 +29,7 @@ public class LegalAidLegalAdviceItem implements Serializable {
         this.legalaidremark = legalaidremark;
     }
 
-    public String getLegaladviceId() {
+    public int getLegaladviceId() {
         return legaladviceId;
     }
 
@@ -61,7 +61,7 @@ public class LegalAidLegalAdviceItem implements Serializable {
         return legalaidremark;
     }
     public static LegalAidLegalAdviceItem parseLegalAidLegalAdviceItem(JSONObject jo) throws JSONException {
-        String _legaladviceId = jo.getString("legal_advice_id");
+        int _legaladviceId = jo.getInt("legal_advice_id");
         String _identifierId = jo.getString("identifier_id");
         int _legalaidSubCategoryId = jo.getInt("legal_aid_subcategory_id");
         String _legalaidservicename = jo.getString("legal_aid_service_name");

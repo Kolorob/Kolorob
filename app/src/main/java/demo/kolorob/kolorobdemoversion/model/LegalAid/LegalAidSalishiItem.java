@@ -9,8 +9,8 @@ import java.io.Serializable;
  * Created by israt.jahan on 1/7/2016.
  */
 public class LegalAidSalishiItem implements Serializable {
-    private String identifierId;
     private String sId;
+    private String identifierId;
     private int legalaidSubCategoryId;
     private String sservicename;
     private String sfree;
@@ -18,9 +18,9 @@ public class LegalAidSalishiItem implements Serializable {
     private String spersonauthority;
     private String sremark;
 
-    public LegalAidSalishiItem(String identifierId, String sId, int legalaidSubCategoryId, String sservicename, String sfree, String scost, String spersonauthority, String sremark) {
-        this.identifierId = identifierId;
+    public LegalAidSalishiItem( String sId,String identifierId, int legalaidSubCategoryId, String sservicename, String sfree, String scost, String spersonauthority, String sremark) {
         this.sId = sId;
+        this.identifierId = identifierId;
         this.legalaidSubCategoryId = legalaidSubCategoryId;
         this.sservicename = sservicename;
         this.sfree = sfree;
