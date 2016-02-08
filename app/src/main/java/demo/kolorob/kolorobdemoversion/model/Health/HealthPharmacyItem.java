@@ -128,12 +128,10 @@ public class HealthPharmacyItem implements Serializable {
                 _pharmacyNoDegree,
                 _pharmacyLMAF,
                 _pharmacyMBBS,
-
                 _pharmacySpecialist,
                 _remarks,
                 _pharmacyDocRemarks,
                 _refNumber
-
         );
 
 
