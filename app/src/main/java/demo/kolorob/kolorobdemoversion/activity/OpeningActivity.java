@@ -662,15 +662,15 @@ public class OpeningActivity extends Activity {
 
 
 
-    private void savePharmacyServiceProvider(JSONArray phermacyServiceProvider) {
+    private void savePharmacyServiceProvider(JSONArray pharmacyServiceProvider) {
         HealthPharmacyTable healthPharmacyTable = new HealthPharmacyTable(OpeningActivity.this);
         healthPharmacyTable.dropTable();
-        int phermacyserviceprovidercount = phermacyServiceProvider.length();
+        int pharmacyserviceprovidercount = pharmacyServiceProvider.length();
 
-        for (int i = 0; i < phermacyserviceprovidercount; i++) {
+        for (int i = 0; i < pharmacyserviceprovidercount; i++) {
             try {
 
-                JSONObject jo = phermacyServiceProvider.getJSONObject(i);
+                JSONObject jo = pharmacyServiceProvider.getJSONObject(i);
                 HealthPharmacyItem et = HealthPharmacyItem.parseHealthPharmacyItem(jo);
                 healthPharmacyTable.insertItemHealthPharmacy(et);
 
@@ -924,7 +924,7 @@ public class OpeningActivity extends Activity {
                 e.printStackTrace();
             }
         }
-    
+
         //setContentView(R.layout.activity_main); //we don't need this line
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         boolean firstRun = settings.getBoolean("firstRun", false);

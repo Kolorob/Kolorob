@@ -49,9 +49,9 @@ public class HealthPharmacyTable {
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_NODE_ID + "  INTEGER, " // 0 - int
+                + KEY_NODE_ID + "  STRING, " // 0 - int
                 + KEY_DOC_ID + "  INTEGER, "              // 1 - text
-                + KEY_PHARMACY_FEE + " INTEGER, "
+                + KEY_PHARMACY_FEE + " TEXT, "
                 + KEY_DOCTOR_NAME + " TEXT, "// 2 - text
                 + KEY_PHARMACY_TIME + " TEXT, "
                 + KEY_PHARMACY_NO_DEGREE + " TEXT, "
@@ -62,7 +62,7 @@ public class HealthPharmacyTable {
                 + KEY_PHARMACY_REMARKS + " TEXT, "
                 + KEY_PHARMACY_DOC_REMARKS + " TEXT, "
 
-                + KEY_REF_NUM + " INTEGER, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_DOC_ID + "," + KEY_REF_NUM + "))";
+                + KEY_REF_NUM + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_DOC_ID + "," + KEY_REF_NUM + "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -100,7 +100,7 @@ public class HealthPharmacyTable {
     public long insertItemHealthPharmacy(
             String nodeId,
             int docId,
-            int pharmacyFee,
+            String pharmacyFee,
             String pharmacyDoctorName,
             String pharmacyTime,
             String pharmacyNoDegree,
@@ -111,7 +111,7 @@ public class HealthPharmacyTable {
             String remarks,
             String pharmacyDocRemarks,
 
-            int refNumber
+            String refNumber
     ) {
         if (isFieldExist(nodeId, docId, refNumber)) {
             return updateItem(
@@ -150,13 +150,13 @@ public class HealthPharmacyTable {
         return ret;
     }
 
-    public boolean isFieldExist(String id, int doc_id, int refnum) {
+    public boolean isFieldExist(String id, int doc_id, String refnum) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0)) && Integer.parseInt(cursor.getString(1)) == doc_id && Integer.parseInt(cursor.getString(11)) == refnum) {
+                if (id.equals(cursor.getString(0)) && Integer.parseInt(cursor.getString(1)) == doc_id &&refnum.equals(cursor.getString(11) )) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -170,7 +170,7 @@ public class HealthPharmacyTable {
 
     private long updateItem(String nodeId,
                             int docId,
-                            int pharmacyFee,
+                            String pharmacyFee,
                             String pharmacyDoctorName,
                             String pharmacyTime,
                             String pharmacyNoDegree,
@@ -181,7 +181,7 @@ public class HealthPharmacyTable {
                             String remarks,
                             String pharmacyDocRemarks,
 
-                            int refNumber) {
+                            String refNumber) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID, nodeId);
         rowValue.put(KEY_DOC_ID, docId);
@@ -227,7 +227,7 @@ public class HealthPharmacyTable {
     private HealthPharmacyItem healthPharmacyItem(Cursor cursor) {
         String _nodeId = cursor.getString(0);
         int _docId = cursor.getInt(1);
-        int _pharmacyFee = cursor.getInt(2);
+        String _pharmacyFee = cursor.getString(2);
         String _pharmacyDoctorName = cursor.getString(3);
         String _pharmacyTime = cursor.getString(4);
         String _pharmacyNoDegree = cursor.getString(5);
@@ -236,7 +236,7 @@ public class HealthPharmacyTable {
         String _pharmacySpecialist = cursor.getString(8);
         String _remarks = cursor.getString(9);
         String _pharmacyDocRemarks = cursor.getString(10);
-        int _refNumber = cursor.getInt(11);
+        String _refNumber = cursor.getString(11);
 
 
         return new HealthPharmacyItem(
