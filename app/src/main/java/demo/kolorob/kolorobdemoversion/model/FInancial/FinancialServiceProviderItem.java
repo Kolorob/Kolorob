@@ -182,16 +182,17 @@ public class FinancialServiceProviderItem implements Serializable {
         String _Finaddress=jo.getString("address");
         String _Finlatitude=jo.getString("latitude");
         String _Finlongitude = jo.getString("longitude");
+        int _categoryId=jo.getInt("category_id");
         String _openingtime=jo.getString("opening_time");
         String _breaktime=jo.getString("break_time");
         String _closingtime=jo.getString("closing_time");
         String _landmark=jo.getString("landmark");
         String _road=jo.getString("road");
         String _block =jo.getString("block");
-        String _breaktime2=jo.getString("breaktime2");
+        String _breaktime2=jo.getString("break_time2");
         String _additionaltime=jo.getString("additional_time");
 
-        int _categoryId=jo.getInt("category_id");
+
 
 
         return new FinancialServiceProviderItem(

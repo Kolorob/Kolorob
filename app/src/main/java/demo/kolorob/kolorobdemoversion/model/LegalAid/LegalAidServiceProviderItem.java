@@ -194,7 +194,7 @@ public class LegalAidServiceProviderItem implements Serializable {
         String _landmark=jo.getString("landmark");
         String _road=jo.getString("road");
         String _block =jo.getString("block");
-        String _breaktime2=jo.getString("breaktime2");
+        String _breaktime2=jo.getString("break_time2");
         String _additionaltime=jo.getString("additional_time");
 
         return new LegalAidServiceProviderItem(_identifierId, _serviceProviderId, _legalaidSubCategoryId,

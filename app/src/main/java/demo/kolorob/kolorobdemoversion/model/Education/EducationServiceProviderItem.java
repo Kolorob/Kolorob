@@ -37,19 +37,20 @@ public class EducationServiceProviderItem implements Serializable {
     private String shift;
     private String canteenFacility;
     private String additionalInfo;
+    private String nodeType;
     private String area;
     private String address;
     private String latitude;
     private String longitude;
 
-    private String openingtime;
-    private String closingtime;
-    private String breaktime;
-    private String breaktime2;
-    private String landmark;
+    private String opening_time;
+    private String break_time;
+    private String closing_time;
     private String road;
     private String block;
-    private String additionaltime;
+    private String landmark;
+    private String breaktime2;
+    private String additional_time;
 
     public void setEduNameEng(String eduNameEng) {
         this.eduNameEng = eduNameEng;
@@ -82,7 +83,8 @@ public class EducationServiceProviderItem implements Serializable {
                                         String area,
                                         String address,
                                         String latitude,
-                                        String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
+                                        String longitude,
+                                        String opening_time,String break_time,String closing_time,String road,String block,String landmark,String breaktime2,String additional_time) {
 
         this.identifierId = identifierId ;
         this.serviceProviderId = serviceProviderId;
@@ -112,17 +114,55 @@ public class EducationServiceProviderItem implements Serializable {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.opening_time=opening_time;
+        this.break_time=break_time;
+        this.closing_time=closing_time;
+        this.road=road;
+        this.block=block;
+        this.landmark=landmark;
+        this.breaktime2=breaktime2;
+        this.additional_time=additional_time;
 
-        this.openingtime = openingtime;
-        this.breaktime = breaktime;
-        this.closingtime = closingtime;
-        this.landmark = landmark;
-        this.road = road;
-        this.block = block;
-        this.breaktime2 = breaktime2;
-        this.additionaltime = additionaltime;
+
 
     }
+
+    public String getNodeType() {
+        return nodeType;
+    }
+
+    public String getOpening_time() {
+        return opening_time;
+    }
+
+    public String getBreak_time() {
+        return break_time;
+    }
+
+    public String getClosing_time() {
+        return closing_time;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public String getBlock() {
+        return block;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public String getBreaktime2() {
+        return breaktime2;
+    }
+
+    public String getAdditional_time() {
+        return additional_time;
+    }
+
     public String getIdentifierId(){return identifierId ;}
     public String getServiceProviderId(){return serviceProviderId;}
     public int getEduSubCategoryId(){return eduSubCategoryId;}
@@ -167,37 +207,6 @@ public class EducationServiceProviderItem implements Serializable {
     public String getLatitude(){return latitude;}
     public String getLongitude(){return longitude;}
 
-    public String getOpeningtime() {
-        return openingtime;
-    }
-
-    public String getClosingtime() {
-        return closingtime;
-    }
-
-    public String getBreaktime() {
-        return breaktime;
-    }
-
-    public String getBreaktime2() {
-        return breaktime2;
-    }
-
-    public String getLandmark() {
-        return landmark;
-    }
-
-    public String getRoad() {
-        return road;
-    }
-
-    public String getBlock() {
-        return block;
-    }
-
-    public String getAdditionaltime() {
-        return additionaltime;
-    }
 
     public static EducationServiceProviderItem parseEducationServiceProviderItem(JSONObject jo) throws JSONException {
         String _identifierId=jo.getString("identifier_id");
@@ -228,14 +237,14 @@ public class EducationServiceProviderItem implements Serializable {
         String _address=jo.getString("address");
         String _latitude = jo.getString("latitude");
         String _longitude = jo.getString("longitude");
-        String _openingtime=jo.getString("opening_time");
-        String _breaktime=jo.getString("break_time");
-        String _closingtime=jo.getString("closing_time");
-        String _landmark=jo.getString("landmark");
-        String _road=jo.getString("road");
-        String _block =jo.getString("block");
-        String _breaktime2=jo.getString("breaktime2");
-        String _additionaltime=jo.getString("additional_time");
+        String _opening_time=jo.getString("shift");
+        String _break_time=jo.getString("canteen_facility");
+        String _closing_time=jo.getString("additional_info");
+        String _road=jo.getString("area");
+        String _block=jo.getString("address");
+        String _landmark = jo.getString("latitude");
+        String _breaktime2 = jo.getString("longitude");
+        String _additional_time= jo.getString("additional_time");
 
         return new EducationServiceProviderItem(  _identifierId,
                 _serviceProviderId,
@@ -262,7 +271,8 @@ public class EducationServiceProviderItem implements Serializable {
                 _canteenFacility,
                 _additionalInfo,_area,_address,
                 _latitude,
-                _longitude, _openingtime, _breaktime, _closingtime, _landmark, _road, _block, _breaktime2, _additionaltime);
+                _longitude,_opening_time,
+                _break_time,_closing_time,_road,_block,_landmark,_breaktime2,_additional_time);
     }
 
 }

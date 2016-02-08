@@ -93,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         db.execSQL("DROP TABLE IF EXISTS " + SERVICE_CATEGORY);
         db.execSQL("DROP TABLE IF EXISTS " + SUB_CATEGORY);
-
+        db.execSQL("DROP TABLE IF EXISTS " + EDU_PROVIDER_COURSE_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + EDU_PROVIDER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_SERVICE_PROVIDER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_LEGAL_ADVICE_TABLE);
