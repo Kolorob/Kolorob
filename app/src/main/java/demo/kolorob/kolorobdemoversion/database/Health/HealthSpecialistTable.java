@@ -127,8 +127,8 @@ public class HealthSpecialistTable {
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND"+ KEY_SPECIALIST_ID+ " = ? AND "+KEY_REF_NUM + " = ?",
-                new String[]{nodeId + "",specialistId + "",refNum+""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND"+ KEY_SPECIALIST_ID+ " = ? ",
+                new String[]{nodeId + "",specialistId + ""});
         closeDB();
         return ret;
     }

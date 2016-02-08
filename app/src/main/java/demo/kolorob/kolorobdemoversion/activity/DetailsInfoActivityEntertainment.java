@@ -88,9 +88,9 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         nodeRegistrationNumber.setText("রেজিস্ট্রেশন নম্বর: "+entertainmentServiceProviderItem.getNodeFacebook());
 
 
-        itemopeningTime.setText("খোলার সময়: " +entertainmentServiceProviderItem.getOpeningTime() );
-        itemClosingTIme.setText("বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingTime() );
-        itemBreakTime.setText("বিরতির সময়: "+entertainmentServiceProviderItem.getBreakTime());
+        itemopeningTime.setText("খোলার সময়: " +entertainmentServiceProviderItem.getOpeningtime() );
+        itemClosingTIme.setText("বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingtime() );
+        itemBreakTime.setText("বিরতির সময়: "+entertainmentServiceProviderItem.getBreaktime());
 
         email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
         website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());

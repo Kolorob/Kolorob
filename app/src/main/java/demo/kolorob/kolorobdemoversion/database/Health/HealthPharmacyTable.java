@@ -62,7 +62,7 @@ public class HealthPharmacyTable {
                 + KEY_PHARMACY_REMARKS + " TEXT, "
                 + KEY_PHARMACY_DOC_REMARKS + " TEXT, "
 
-                + KEY_REF_NUM + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_DOC_ID + "," + KEY_REF_NUM + "))";
+                + KEY_REF_NUM + " TEXT, PRIMARY KEY(" + KEY_DOC_ID +  "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();

@@ -120,20 +120,20 @@ public class DetailsInfoActivityHealth extends Activity  {
 
                 int docId=et.getDocId();
                 String docString = String.valueOf(docId);
-                int docfee=et.getPharmacyFee();
-                String docfees = String.valueOf(docfee);
-                int refnum=et.getRefNumber();
-                String refnums = String.valueOf(refnum);
+                //int docfee=et.getPharmacyFee();
+             //   String docfees = String.valueOf(docfee);
+             //   int refnum=et.getRefNumber();
+               // String refnums = String.valueOf(refnum);
 
                 doc_id_list[k]=(docString);
                 Phermacy_doc_list[k]=et.getPharmacyDoctorName();
-                doc_fee_list[k]=docfees;
+               // doc_fee_list[k]=docfees;
                 pharmacy_time_list[k]= et.getPharmacyTime();
                 pharmacy_no_degree_list[k]=et.getPharmacyNoDegree();
                 Pharmacy_lmaf_list[k]=et.getPharmacyLMAF();
                 Pharmacy_mbbs_list[k]=et.getPharmacyMBBS();
                 pharmacy_speciallist_list[k]= et.getPharmacySpecialist();
-                refnum_list[k]=refnums;
+               // refnum_list[k]=refnums;
 
 
 
