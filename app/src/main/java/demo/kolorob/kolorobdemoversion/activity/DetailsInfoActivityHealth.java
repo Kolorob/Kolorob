@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 
+import demo.kolorob.kolorobdemoversion.adapters.PharmacyAdapter;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
@@ -33,6 +35,8 @@ public class DetailsInfoActivityHealth extends Activity  {
     Button kivabejabenHealth;
     ImageView close;
     TextView close_tv;
+    ListView lv1,lv2,lv3;
+
 
     /**
      * Following components are only for education
@@ -54,13 +58,13 @@ public class DetailsInfoActivityHealth extends Activity  {
     HealthServiceProviderItem healthServiceProviderItem;
     HealthPharmacyItem healthPharmacyItem;
     HealthVaccinesItem healthVaccinesItem;
-
+    ListView navlist;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.health_details_info);
+        setContentView(R.layout.health_details_info1);
         Intent intent = getIntent();
         if (null != intent)
         {
@@ -74,6 +78,11 @@ public class DetailsInfoActivityHealth extends Activity  {
         ArrayList<HealthVaccinesItem> healthPharmacyItemArrayList;
         ArrayList<HealthSpecialistItem> healthSpecialistItems;
         ArrayList<HealthPharmacyItem> healthPharmacyItems;
+        navlist = (ListView) findViewById(R.id.listView2);
+
+
+
+
 
         HealthSpecialistTable healthSpecialistTable =new HealthSpecialistTable(DetailsInfoActivityHealth.this);
         HealthPharmacyTable healthPharmacyTable1 =new HealthPharmacyTable(DetailsInfoActivityHealth.this);
@@ -94,11 +103,60 @@ public class DetailsInfoActivityHealth extends Activity  {
         //  Toast.makeText(getApplicationContext(), "Doc Id is " +  healthPharmacyItem, Toast.LENGTH_SHORT).show();
 
 
+         lv1=(ListView)findViewById(R.id.listView2);
+
         if(healthPharmacyItems!=null) {
+            String lat="";
+            int k=0;
             for (HealthPharmacyItem et : healthPharmacyItems) {
 
-                String lat = et.getPharmacyDoctorName();
+                String[] doc_id_list=new String[100];
+                String[] Phermacy_doc_list=new String[100];
+                String[] doc_fee_list=new String[100];
+                String[] pharmacy_time_list=new String[100];
+                String[] pharmacy_no_degree_list=new String[100];
+                String[] Pharmacy_lmaf_list=new String[100];
+                String[] Pharmacy_mbbs_list=new String[100];
+                String[] pharmacy_speciallist_list=new String[100];
+                String[] refnum_list=new String[100];
+
+
+                int docId=et.getDocId();
+                String docString = String.valueOf(docId);
+                int docfee=et.getPharmacyFee();
+                String docfees = String.valueOf(docfee);
+                int refnum=et.getRefNumber();
+                String refnums = String.valueOf(refnum);
+
+                doc_id_list[k]=(docString);
+                Phermacy_doc_list[k]=et.getPharmacyDoctorName();
+                doc_fee_list[k]=docfees;
+                pharmacy_time_list[k]= et.getPharmacyTime();
+                pharmacy_no_degree_list[k]=et.getPharmacyNoDegree();
+                Pharmacy_lmaf_list[k]=et.getPharmacyLMAF();
+                Pharmacy_mbbs_list[k]=et.getPharmacyMBBS();
+                pharmacy_speciallist_list[k]= et.getPharmacySpecialist();
+                refnum_list[k]=refnums;
+
+
+
+                PharmacyAdapter adapter=new PharmacyAdapter(this,doc_id_list,Phermacy_doc_list,doc_fee_list,
+                        pharmacy_time_list,pharmacy_no_degree_list,Pharmacy_lmaf_list,
+                        Pharmacy_mbbs_list,pharmacy_speciallist_list,refnum_list );
+
+                navlist.setAdapter(adapter);
+
+
+
+
+              //  lat = lat+"\n"+ " Node_id: "+et.getNodeId()+"\n Doctor_id: "+ et.getDocId() + "\nPhermacy Fee:" + et.getPharmacyFee() + "\n Doctor Name: " +et.getPharmacyDoctorName()+"\n";
+
+
+               // phermacy.setText("Doc id"+et.getDocId()+"Pharmacy Fee"+et.getPharmacyFee()+"Doctor_name"+et.getPharmacyDoctorName());
+                k++;
             }
+           // phermacy.setText(lat);
+
         }
 
 
@@ -134,6 +192,7 @@ public class DetailsInfoActivityHealth extends Activity  {
         kivabejabenHealth=(Button)findViewById(R.id.kivabejabenhealth);
 
 
+
         itemName.setText(healthServiceProviderItem.getNodeName());
         itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getArea());
         itemType.setText("ধরন ঃ  "+healthServiceProviderItem.getNodeType());
@@ -155,6 +214,7 @@ public class DetailsInfoActivityHealth extends Activity  {
                 editor.putString("Latitude",lat);
                 editor.putString("Longitude",lon);
                 editor.commit();
+
 
 
                 String Longitude=pref.getString("Latitude", null);
