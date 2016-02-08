@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
@@ -55,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
@@ -253,6 +255,22 @@ public class OpeningActivity extends Activity {
                                     String apiSt = jo.getString(AppConstants.KEY_STATUS);
                                     if (apiSt.equals(AppConstants.KEY_SUCCESS))
                                         saveEducationServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "get_edu_course", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveEducationCourse(jo.getJSONArray(AppConstants.KEY_DATA));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -635,6 +653,25 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = educationServiceProvider.getJSONObject(i);
                 EducationServiceProviderItem et = EducationServiceProviderItem.parseEducationServiceProviderItem(jo);
                 educationServiceProviderTable.insertItem(et);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveEducationCourse(JSONArray educationCourse) {
+        EducationCourseTable educationCourseTable = new EducationCourseTable(OpeningActivity.this);
+        educationCourseTable.dropTable();
+        int educationCourseCount = educationCourse.length();
+
+
+        for (int i = 0; i <educationCourseCount; i++) {
+            try {
+
+                JSONObject jo = educationCourse.getJSONObject(i);
+                EducationCourseItem et = EducationCourseItem.parseEducationCourseItem(jo);
+                educationCourseTable.insertItem(et);
 
             } catch (JSONException e) {
                 e.printStackTrace();

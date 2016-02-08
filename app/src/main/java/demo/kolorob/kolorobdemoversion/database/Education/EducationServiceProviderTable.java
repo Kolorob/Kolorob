@@ -23,7 +23,6 @@ public class EducationServiceProviderTable  {
 
     private static final String TAG = EducationServiceProviderTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.EDU_PROVIDER_TABLE;
-
     private static final String KEY_IDENTIFIER_ID = "_identifier_id"; // 0 -integer
     private static final String KEY_SERVICE_PROVIDER_ID = "_service_provider_id"; // 1 - text
     private static final String KEY_EDU_SUBCATEGORY_ID  = "_edu_subcategory_id"; // 2 - text*/
