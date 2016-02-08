@@ -426,6 +426,7 @@ public class OpeningActivity extends Activity {
      */
     private void saveCategoryList(JSONArray categoryArray) {
         CategoryTable catTable = new CategoryTable(OpeningActivity.this);
+        catTable.dropTable();
         int catCount = categoryArray.length();
         for (int i = 0; i < catCount; i++) {
             try {
@@ -441,6 +442,7 @@ public class OpeningActivity extends Activity {
 
     private void saveSubCategoryList(JSONArray subCategoryArray) {
         SubCategoryTable subCatTable = new SubCategoryTable(OpeningActivity.this);
+        subCatTable.dropTable();
         int subCatCount = subCategoryArray.length();
         for (int i = 0; i < subCatCount; i++) {
             try {
@@ -457,6 +459,7 @@ public class OpeningActivity extends Activity {
 
     private void saveHealthSpecialist(JSONArray healthSpecialist) {
         HealthSpecialistTable healthSpecialistTable  = new  HealthSpecialistTable (OpeningActivity.this);
+        healthSpecialistTable.dropTable();
         int healthSpecialistCount = healthSpecialist.length();
 
         for (int i = 0; i < healthSpecialistCount; i++) {
@@ -475,6 +478,7 @@ public class OpeningActivity extends Activity {
 
     private void saveEducationServiceProvider(JSONArray educationServiceProvider) {
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
+        educationServiceProviderTable.dropTable();
         int eduServiceProviderCount = educationServiceProvider.length();
 
 
@@ -499,6 +503,7 @@ public class OpeningActivity extends Activity {
 
     private void saveHealthVaccines(JSONArray healthVaccines) {
         HealthVaccinesTable healthVaccinesTable = new  HealthVaccinesTable(OpeningActivity.this);
+        healthVaccinesTable.dropTable();
         int healthVaccinesCount = healthVaccines.length();
 
         for (int i = 0; i < healthVaccinesCount; i++) {
@@ -517,6 +522,7 @@ public class OpeningActivity extends Activity {
 
     private void savePharmacyServiceProvider(JSONArray phermacyServiceProvider) {
         HealthPharmacyTable healthPharmacyTable = new HealthPharmacyTable(OpeningActivity.this);
+        healthPharmacyTable.dropTable();
         int phermacyserviceprovidercount = phermacyServiceProvider.length();
 
         for (int i = 0; i < phermacyserviceprovidercount; i++) {
@@ -539,6 +545,7 @@ public class OpeningActivity extends Activity {
 
     private void saveHealthServiceProvider(JSONArray healthServiceProvider) {
         HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
+        healthServiceProviderTable.dropTable();
         int healthServiceProviderCount = healthServiceProvider.length();
 
         for (int i = 0; i < healthServiceProviderCount; i++) {
