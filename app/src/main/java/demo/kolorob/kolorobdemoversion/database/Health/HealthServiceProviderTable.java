@@ -21,23 +21,23 @@ public class HealthServiceProviderTable {
     private static final String TAG = HealthServiceProviderTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_PROVIDER_TABLE;
 
-    private static final String KEY_NODE_ID = "_nodeId"; // 0 -integer
-    private static final String KEY_NODE_NAME = "_nodeName"; // 1 - text
-    private static final String KEY_DATE_NAME = "_dateName"; // 2 - text*/
-    private static final String KEY_DATE_DATE = "_dateDate";
-    private static final String KEY_NODE_DESIGNATION = "_nodeDesignation"; //
-    private static final String KEY_NODE_CONTACT = "_nodeContact"; //
-    private static final String KEY_NODE_EMAIL = "_nodeEmail"; //
-    private static final String KEY_NODE_ADDITIONAL = "_nodeAdditional"; //
-    private static final String KEY_NODE_WEBSITE = "_nodeWebsite"; //
-    private static final String KEY_NODE_FACEBOOK = "_nodeFacebook"; //
-    private static final String KEY_NODE_REGISTERED_WITH = "_nodeRegisteredwith"; //
-    private static final String KEY_NODE_REGISTRATION_NUMBER = "_nodeRegistationNumber"; //
-    private static final String KEY_EDITED_BY = "_editedBy"; //
-    private static final String KEY_REF_NUM = "_refNum"; //
-    private static final String KEY_NAME_BN = "nameBn";
-    private static final String KEY_TIME_STAMP = "_timeStamp"; //
-    private static final String KEY_NODE_TYPE = "_nodeType"; //
+    private static final String KEY_NODE_ID = "_node_id"; // 0 -integer
+    private static final String KEY_NODE_NAME = "_node_name"; // 1 - text
+    private static final String KEY_DATE_NAME = "_date_name"; // 2 - text*/
+    private static final String KEY_DATE_DATE = "_date_date";
+    private static final String KEY_NODE_DESIGNATION = "_node_designation"; //
+    private static final String KEY_NODE_CONTACT = "_node_contact"; //
+    private static final String KEY_NODE_EMAIL = "_node_email"; //
+    private static final String KEY_NODE_ADDITIONAL = "_node_additional"; //
+    private static final String KEY_NODE_WEBSITE = "_node_website"; //
+    private static final String KEY_NODE_FACEBOOK = "_node_facebook"; //
+    private static final String KEY_NODE_REGISTERED_WITH = "_node_registeredwith"; //
+    private static final String KEY_NODE_REGISTRATION_NUMBER = "_node_registationNumber"; //
+    private static final String KEY_EDITED_BY = "_edited_by"; //
+    private static final String KEY_REF_NUM = "_ref_num"; //
+    private static final String KEY_NAME_BN = "name_bn";
+    private static final String KEY_TIME_STAMP = "_time_stamp"; //
+    private static final String KEY_NODE_TYPE = "_node_type"; //
     private static final String KEY_AREA = "_area"; //
     private static final String KEY_ADDRESS = "_address"; //
     private static final String KEY_LONGITUDE = "_longitude"; //
@@ -79,7 +79,7 @@ public class HealthServiceProviderTable {
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_REF_NUM + "))";
+                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -142,7 +142,7 @@ public class HealthServiceProviderTable {
                                  String longitude,
                                  String latitude,
                                  int categoryId) {
-        if (isFieldExist(nodeId, categoryId, refNum)) {
+        if (isFieldExist(nodeId, categoryId)) {
             return updateItem(
                     nodeId,
                     nodeName,
@@ -199,13 +199,13 @@ public class HealthServiceProviderTable {
         return ret;
     }
 
-    public boolean isFieldExist(String id,int cat_id,int sub_cat_id) {
+    public boolean isFieldExist(String id,int cat_id) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(21))==cat_id&&Integer.parseInt(cursor.getString(13))==sub_cat_id) {
+                if (id.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(21))==cat_id) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -288,8 +288,8 @@ public class HealthServiceProviderTable {
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+KEY_REF_NUM + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
-                new String[]{nodeId + "",refNum+"",categoryId+""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
+                new String[]{nodeId + "",categoryId+""});
         closeDB();
         return ret;
     }

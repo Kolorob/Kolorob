@@ -13,11 +13,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 
+import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class DetailsInfoActivityHealth extends Activity  {
@@ -36,13 +45,15 @@ public class DetailsInfoActivityHealth extends Activity  {
     private TextView itemAddress;
     private TextView itemType;
     private TextView itemContact;
-
+    private int k;
     private TextView email;
     private TextView website;
     private TextView fb;
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     HealthServiceProviderItem healthServiceProviderItem;
+    HealthPharmacyItem healthPharmacyItem;
+    HealthVaccinesItem healthVaccinesItem;
 
 
 
@@ -56,6 +67,59 @@ public class DetailsInfoActivityHealth extends Activity  {
             healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH);
 
         }
+        k=1;
+        String node_id = healthServiceProviderItem.getNodeId();
+//        int node_ids = Integer.parseInt(node_id.toString());
+
+        ArrayList<HealthVaccinesItem> healthPharmacyItemArrayList;
+        ArrayList<HealthSpecialistItem> healthSpecialistItems;
+        ArrayList<HealthPharmacyItem> healthPharmacyItems;
+
+        HealthSpecialistTable healthSpecialistTable =new HealthSpecialistTable(DetailsInfoActivityHealth.this);
+        HealthPharmacyTable healthPharmacyTable1 =new HealthPharmacyTable(DetailsInfoActivityHealth.this);
+
+
+
+
+        HealthVaccinesTable healthVaccinesTable=new HealthVaccinesTable(DetailsInfoActivityHealth.this);
+        healthPharmacyItemArrayList=healthVaccinesTable.getVaccinesforNode(healthServiceProviderItem.getNodeId());
+        healthPharmacyItems=healthPharmacyTable1.getSpecialistforNode(healthServiceProviderItem.getNodeId());
+
+        healthSpecialistItems=healthSpecialistTable.getSpecialistforNode(healthServiceProviderItem.getNodeId());
+        // if(healthPharmacyItemArrayList!=null)
+        // k=2;
+        // Toast.makeText(getApplicationContext(), "Doc Id is " +  healthPharmacyItemArrayList.getVaccinefee(), Toast.LENGTH_SHORT).show();
+
+        // if(healthPharmacyItem!=null)
+        //  Toast.makeText(getApplicationContext(), "Doc Id is " +  healthPharmacyItem, Toast.LENGTH_SHORT).show();
+
+
+        if(healthPharmacyItems!=null) {
+            for (HealthPharmacyItem et : healthPharmacyItems) {
+
+                String lat = et.getPharmacyDoctorName();
+            }
+        }
+
+
+        if(healthPharmacyItemArrayList!=null) {
+            for (HealthVaccinesItem et : healthPharmacyItemArrayList) {
+
+                String lat = et.getVaccinefee();
+            }
+        }
+
+
+        if(healthSpecialistItems!=null) {
+            for (HealthSpecialistItem et : healthSpecialistItems) {
+
+                String lat = et.getSpecialistremarks();
+            }
+        }
+
+
+
+
         /**
          *following codes only for education. This may vary for different category.
          * */
@@ -71,7 +135,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
 
         itemName.setText(healthServiceProviderItem.getNodeName());
-        itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getNameBn());
+        itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getArea());
         itemType.setText("ধরন ঃ  "+healthServiceProviderItem.getNodeType());
         itemContact.setText("যোগাযোগের উপায় ঃ  "+healthServiceProviderItem.getNodeContact());
 
@@ -100,8 +164,8 @@ public class DetailsInfoActivityHealth extends Activity  {
                 {
                     Double Lon= Double.parseDouble(Longitude);
                     Double Lat= Double.parseDouble(Latitude);
-                   // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                  //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
                     // implementFragment();
 
                     //username and password are present, do your stuff

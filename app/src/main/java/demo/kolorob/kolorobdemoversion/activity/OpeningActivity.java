@@ -34,7 +34,10 @@ import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
@@ -47,7 +50,10 @@ import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
@@ -163,6 +169,64 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
+
+
+            getRequest(OpeningActivity.this, "healthSpecialist", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveHealthSpecialist(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+
+            getRequest(OpeningActivity.this, "healthPharmacy", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        savePharmacyServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+
+
+
+
+            getRequest(OpeningActivity.this, "healthVaccines", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveHealthVaccines(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
 
             getRequest(OpeningActivity.this, "get_edu_service_provider", new VolleyApiCallback() {
                         @Override
@@ -283,6 +347,12 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
+
+
+
+
+
+
             getRequest(OpeningActivity.this, "finance", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -383,6 +453,26 @@ public class OpeningActivity extends Activity {
         }
     }
 
+
+
+    private void saveHealthSpecialist(JSONArray healthSpecialist) {
+        HealthSpecialistTable healthSpecialistTable  = new  HealthSpecialistTable (OpeningActivity.this);
+        int healthSpecialistCount = healthSpecialist.length();
+
+        for (int i = 0; i < healthSpecialistCount; i++) {
+            try {
+                JSONObject jo = healthSpecialist.getJSONObject(i);
+                HealthSpecialistItem et =  HealthSpecialistItem.parseHealthSpecialistItem(jo);
+                healthSpecialistTable.insertItemHealth(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
     private void saveEducationServiceProvider(JSONArray educationServiceProvider) {
         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(OpeningActivity.this);
         int eduServiceProviderCount = educationServiceProvider.length();
@@ -403,6 +493,70 @@ public class OpeningActivity extends Activity {
 
     }
 
+
+
+
+
+    private void saveHealthVaccines(JSONArray healthVaccines) {
+        HealthVaccinesTable healthVaccinesTable = new  HealthVaccinesTable(OpeningActivity.this);
+        int healthVaccinesCount = healthVaccines.length();
+
+        for (int i = 0; i < healthVaccinesCount; i++) {
+            try {
+                JSONObject jo = healthVaccines.getJSONObject(i);
+                HealthVaccinesItem et =  HealthVaccinesItem.parseHealthVaccinesItem(jo);
+                healthVaccinesTable.insertItemHealth(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
+    private void savePharmacyServiceProvider(JSONArray phermacyServiceProvider) {
+        HealthPharmacyTable healthPharmacyTable = new HealthPharmacyTable(OpeningActivity.this);
+        int phermacyserviceprovidercount = phermacyServiceProvider.length();
+
+        for (int i = 0; i < phermacyserviceprovidercount; i++) {
+            try {
+
+                JSONObject jo = phermacyServiceProvider.getJSONObject(i);
+                HealthPharmacyItem et = HealthPharmacyItem.parseHealthPharmacyItem(jo);
+                healthPharmacyTable.insertItemHealthPharmacy(et);
+
+                //     Toast.makeText(this, "Internet permission granted", Toast.LENGTH_SHORT).show();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
+    private void saveHealthServiceProvider(JSONArray healthServiceProvider) {
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
+        int healthServiceProviderCount = healthServiceProvider.length();
+
+        for (int i = 0; i < healthServiceProviderCount; i++) {
+            try {
+                JSONObject jo = healthServiceProvider.getJSONObject(i);
+                HealthServiceProviderItem et = HealthServiceProviderItem.parseHealthServiceProviderItem(jo);
+                healthServiceProviderTable.insertItemHealth(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
+
+
     private void saveEntertainmentServiceProvider(JSONArray entertainmentServiceProvider) {
         EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(OpeningActivity.this);
         int entServiceProviderCount = entertainmentServiceProvider.length();
@@ -420,21 +574,7 @@ public class OpeningActivity extends Activity {
 
     }
 
-    private void saveHealthServiceProvider(JSONArray healthServiceProvider) {
-        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
-        int healthServiceProviderCount = healthServiceProvider.length();
 
-        for (int i = 0; i < healthServiceProviderCount; i++) {
-            try {
-                JSONObject jo = healthServiceProvider.getJSONObject(i);
-                HealthServiceProviderItem et = HealthServiceProviderItem.parseHealthServiceProviderItem(jo);
-                healthServiceProviderTable.insertItemHealth(et);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
