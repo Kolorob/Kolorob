@@ -206,8 +206,8 @@ public class HealthPharmacyTable {
     }
 
 
-    public ArrayList<HealthPharmacyItem> getSpecialistforNode(String nodeId) {
-        ArrayList<HealthPharmacyItem> specialistList = new ArrayList<>();
+    public ArrayList<HealthPharmacyItem> getPharmacyforNode(String nodeId) {
+        ArrayList<HealthPharmacyItem> PharmacyList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
@@ -215,12 +215,12 @@ public class HealthPharmacyTable {
         if (cursor.moveToFirst()) {
             do {
                 //System.out.println("abc="+cursor.getString(4));
-                specialistList.add(healthPharmacyItem(cursor));
+                PharmacyList.add(healthPharmacyItem(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return specialistList;
+        return PharmacyList;
     }
 
 
