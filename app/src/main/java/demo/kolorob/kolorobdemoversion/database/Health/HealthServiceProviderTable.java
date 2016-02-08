@@ -43,6 +43,14 @@ public class HealthServiceProviderTable {
     private static final String KEY_LONGITUDE = "_longitude"; //
     private static final String KEY_LATITUDE = "_latitude"; //
     private static final String KEY_CATEGORY_ID = "_categoryId"; //
+    private static final String KEY_OPENTIME = "_openingtime"; //
+    private static final String KEY_BREAKTIME = "_breaktime"; //
+    private static final String KEY_CLOSEATIME = "_closingtime"; //
+    private static final String KEY_LANDMARK = "_landmark"; //
+    private static final String KEY_ROAD = "_road"; //
+    private static final String KEY_BLOCK = "_block"; //
+    private static final String KEY_BREAKTIME2 = "_breaktime2"; //
+    private static final String KEY_ADTIME = "_additionaltime";
 
 
     private Context tContext;
@@ -79,7 +87,15 @@ public class HealthServiceProviderTable {
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_CATEGORY_ID + "))";
+                + KEY_CATEGORY_ID + " INTEGER,"
+                + KEY_OPENTIME + " TEXT, "
+                + KEY_BREAKTIME + " TEXT, "
+                + KEY_CLOSEATIME + " TEXT, "
+                + KEY_LANDMARK + " TEXT, "
+                + KEY_ROAD+ " TEXT, "
+                + KEY_BLOCK + " TEXT, "
+                + KEY_BREAKTIME2 + " TEXT, "
+                + KEY_ADTIME + " PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -116,7 +132,15 @@ public class HealthServiceProviderTable {
                 healthServiceProviderItem.getAddress(),
                 healthServiceProviderItem.getLatitude(),
                 healthServiceProviderItem.getLongitude(),
-                healthServiceProviderItem.getCategoryId()
+                healthServiceProviderItem.getCategoryId(),
+                healthServiceProviderItem.getOpeningtime(),
+                healthServiceProviderItem.getBreaktime(),
+                healthServiceProviderItem.getClosingtime(),
+                healthServiceProviderItem.getLandmark(),
+                healthServiceProviderItem.getRoad(),
+                healthServiceProviderItem.getBlock(),
+                healthServiceProviderItem.getBreaktime2(),
+                healthServiceProviderItem.getAdditionaltime()
         );
     }
 
@@ -141,7 +165,7 @@ public class HealthServiceProviderTable {
                                  String address,
                                  String longitude,
                                  String latitude,
-                                 int categoryId) {
+                                 int categoryId, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         if (isFieldExist(nodeId, categoryId)) {
             return updateItem(
                     nodeId,
@@ -165,7 +189,14 @@ public class HealthServiceProviderTable {
                     address,
                     longitude,
                     latitude,
-                    categoryId);
+                    categoryId,openingtime,
+                    breaktime,
+                    closingtime,
+                    landmark,
+                    road,
+                    block,
+                    breaktime2,
+                    additionaltime);
         }
 
         ContentValues rowValue = new ContentValues();
@@ -191,7 +222,14 @@ public class HealthServiceProviderTable {
         rowValue.put(KEY_LATITUDE  , longitude );
         rowValue.put(KEY_LONGITUDE  , latitude );
         rowValue.put(KEY_CATEGORY_ID , categoryId);
-
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
+        rowValue.put(KEY_LANDMARK  , landmark);
+        rowValue.put(KEY_ROAD  , road );
+        rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_ADTIME  , additionaltime );
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
@@ -261,7 +299,7 @@ public class HealthServiceProviderTable {
                             String address,
                             String longitude,
                             String latitude,
-                            int categoryId) {
+                            int categoryId, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
         rowValue.put(KEY_NODE_NAME , nodeName);
@@ -285,7 +323,14 @@ public class HealthServiceProviderTable {
         rowValue.put(KEY_LATITUDE  , longitude );
         rowValue.put(KEY_LONGITUDE  , latitude );
         rowValue.put(KEY_CATEGORY_ID , categoryId);
-
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
+        rowValue.put(KEY_LANDMARK  , landmark);
+        rowValue.put(KEY_ROAD  , road );
+        rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_ADTIME  , additionaltime );
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
@@ -376,6 +421,14 @@ public class HealthServiceProviderTable {
         String _longitude=cursor.getString(19);
         String _latitude=cursor.getString(20);
         int _categoryId=cursor.getInt(21);
+        String _openingtime=cursor.getString(22);
+        String _breaktime=cursor.getString(23);
+        String _closingtime=cursor.getString(24);
+        String _landmark=cursor.getString(25);
+        String _road=cursor.getString(26);
+        String _block=cursor.getString(27);
+        String _breaktime2=cursor.getString(28);
+        String _additionaltime=cursor.getString(29);
 
 
         return new HealthServiceProviderItem(
@@ -400,7 +453,14 @@ public class HealthServiceProviderTable {
                 _address,
                 _longitude,
                 _latitude,
-                _categoryId);
+                _categoryId,_openingtime,
+                _breaktime,
+                _closingtime,
+                _landmark,
+                _road,
+                _block,
+                _breaktime2,
+                _additionaltime);
     }
 
 }

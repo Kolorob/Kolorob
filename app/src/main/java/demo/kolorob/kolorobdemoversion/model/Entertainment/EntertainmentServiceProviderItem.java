@@ -32,9 +32,16 @@ public class EntertainmentServiceProviderItem implements Serializable {
     private String latitude;
     private String longitude;
     private int categoryId;
-    private String openingTime;
-    private String breakTime;
-    private String closingTime;
+
+    private String openingtime;
+    private String closingtime;
+    private String breaktime;
+    private String breaktime2;
+    private String landmark;
+    private String road;
+    private String block;
+    private String additionaltime;
+
 
 
 
@@ -62,10 +69,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
             String latitude,
             String longitude,
             int categoryId,
-            String openingTime,
-            String breakTime,
-            String closingTime
-            ){
+            String openingtime,String breaktime, String closingtime, String landmark, String road, String block, String breaktime2,  String additionaltime){
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;
@@ -89,13 +93,49 @@ public class EntertainmentServiceProviderItem implements Serializable {
         this.latitude=latitude;
         this.longitude=longitude;
         this.categoryId=categoryId;
-        this.openingTime=openingTime;
-        this.breakTime=breakTime;
-        this.closingTime=closingTime;
+        this.openingtime = openingtime;
+        this.breaktime = breaktime;
+        this.closingtime = closingtime;
+        this.landmark = landmark;
+        this.road = road;
+        this.block = block;
+        this.breaktime2 = breaktime2;
+        this.additionaltime = additionaltime;
 
 
     }
 
+    public String getOpeningtime() {
+        return openingtime;
+    }
+
+    public String getClosingtime() {
+        return closingtime;
+    }
+
+    public String getBreaktime() {
+        return breaktime;
+    }
+
+    public String getBreaktime2() {
+        return breaktime2;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public String getBlock() {
+        return block;
+    }
+
+    public String getAdditionaltime() {
+        return additionaltime;
+    }
 
     public static EntertainmentServiceProviderItem parseEntertainmentServiceProviderItem(JSONObject jo) throws JSONException
     {
@@ -121,9 +161,16 @@ public class EntertainmentServiceProviderItem implements Serializable {
         String _latitude = jo.getString("latitude");
         String _longitude= jo.getString("longitude");
         int _categoryId= jo.getInt("category_id");
-        String _openingTime = jo.getString("opening_time");
-        String _breakTime = jo.getString("break_time");
-        String _closingTime = jo.getString("closing_time");
+        String _openingtime=jo.getString("opening_time");
+        String _breaktime=jo.getString("break_time");
+        String _closingtime=jo.getString("closing_time");
+        String _landmark=jo.getString("landmark");
+        String _road=jo.getString("road");
+        String _block =jo.getString("block");
+        String _breaktime2=jo.getString("breaktime2");
+        String _additionaltime=jo.getString("additional_time");
+
+
 
         return new EntertainmentServiceProviderItem(
                 _nodeId,
@@ -148,14 +195,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
                 _latitude,
                 _longitude,
                 _categoryId,
-                _openingTime,
-                _breakTime,
-                _closingTime
-
-
-
-
-        );
+                _openingtime,
+                _breaktime,
+                _closingtime,
+                _landmark, _road, _block, _breaktime2, _additionaltime);
     }
 
 
@@ -250,27 +293,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
         this.nodeId = nodeId;
     }
 
-    public String getOpeningTime() {
-        return openingTime;
-    }
 
-    public void setOpeningTime(String openingTime) {
-        this.openingTime = openingTime;
-    }
 
-    public String getBreakTime() {
-        return breakTime;
-    }
 
-    public void setBreakTime(String breakTime) {
-        this.breakTime = breakTime;
-    }
-
-    public String getClosingTime() {
-        return closingTime;
-    }
-
-    public void setClosingTime(String closingTime) {
-        this.closingTime = closingTime;
-    }
 }

@@ -43,10 +43,14 @@ public class EntertainmentServiceProviderTable {
     public static final String KEY_LATITUDE = "_latitude";
     public static final String KEY_LONGITUDE = "_longitude";
     public static final String KEY_CATEGORY_ID = "_categoryId";
-    public static final String KEY_OPENING_TIME = "_openingTime";
-    public static final String KEY_BREAK_TIME = "_breakTime";
-    public static final String KEY_CLOSING_TIME = "_closingTime";
-
+    private static final String KEY_OPENTIME = "_openingtime"; //
+    private static final String KEY_BREAKTIME = "_breaktime"; //
+    private static final String KEY_CLOSEATIME = "_closingtime";
+    private static final String KEY_LANDMARK = "_landmark"; //
+    private static final String KEY_ROAD = "_road"; //
+    private static final String KEY_BLOCK = "_block"; //
+    private static final String KEY_BREAKTIME2 = "_breaktime2"; //
+    private static final String KEY_ADTIME = "_additionaltime";
 
     private Context tContext;
 
@@ -83,9 +87,14 @@ public class EntertainmentServiceProviderTable {
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, "
                 + KEY_CATEGORY_ID + " INTEGER, "
-                + KEY_OPENING_TIME + " TEXT, "
-                + KEY_BREAK_TIME + " TEXT, "
-                + KEY_CLOSING_TIME + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
+                + KEY_OPENTIME + " TEXT, "
+                + KEY_BREAKTIME + " TEXT, "
+                + KEY_CLOSEATIME + " TEXT, "
+                + KEY_LANDMARK + " TEXT, "
+                + KEY_ROAD+ " TEXT, "
+                + KEY_BLOCK + " TEXT, "
+                + KEY_BREAKTIME2 + " TEXT, "
+                + KEY_ADTIME + "TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -122,9 +131,14 @@ public class EntertainmentServiceProviderTable {
                 entertainmentServiceProviderItem.getLatitude(),
                 entertainmentServiceProviderItem.getLongitude(),
                 entertainmentServiceProviderItem.getCategoryId(),
-                entertainmentServiceProviderItem.getOpeningTime(),
-                entertainmentServiceProviderItem.getBreakTime(),
-                entertainmentServiceProviderItem.getClosingTime()
+                entertainmentServiceProviderItem.getOpeningtime(),
+                entertainmentServiceProviderItem.getBreaktime(),
+                entertainmentServiceProviderItem.getClosingtime(),
+                entertainmentServiceProviderItem.getLandmark(),
+                entertainmentServiceProviderItem.getRoad(),
+                entertainmentServiceProviderItem.getBlock(),
+                entertainmentServiceProviderItem.getBreaktime2(),
+                entertainmentServiceProviderItem.getAdditionaltime()
 
 
         );
@@ -152,9 +166,7 @@ public class EntertainmentServiceProviderTable {
                                         String latitude,
                                         String longitude,
                                         int categoryId,
-                                        String openingTime,
-                                        String breakTime,
-                                        String closingTime
+                                       String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime
 
     ) {
         if (isFieldExist(nodeId, entSubCategoryId)) {
@@ -180,9 +192,14 @@ public class EntertainmentServiceProviderTable {
                     latitude,
                     longitude,
                     categoryId,
-                    openingTime,
-                    breakTime,
-                    closingTime);
+                    openingtime,
+                    breaktime,
+                    closingtime,
+                    landmark,
+                    road,
+                    block,
+                    breaktime2,
+                    additionaltime);
         }
 
         ContentValues rowValue = new ContentValues();
@@ -208,9 +225,14 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
         rowValue.put(KEY_CATEGORY_ID,categoryId);
-        rowValue.put(KEY_OPENING_TIME,openingTime);
-        rowValue.put(KEY_BREAK_TIME,breakTime);
-        rowValue.put(KEY_CLOSING_TIME,closingTime);
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
+        rowValue.put(KEY_LANDMARK  , landmark);
+        rowValue.put(KEY_ROAD  , road );
+        rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -260,9 +282,9 @@ public class EntertainmentServiceProviderTable {
                              String latitude,
                              String longitude,
                              int categoryId,
-                             String openingTime,
-                             String breakTime,
-                             String closingTime
+                          String openingtime,
+                             String breaktime, String closingtime, String landmark,
+                             String road, String block, String breaktime2, String additionaltime
                              ) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
@@ -287,9 +309,14 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
         rowValue.put(KEY_CATEGORY_ID,categoryId);
-        rowValue.put(KEY_OPENING_TIME,openingTime);
-        rowValue.put(KEY_BREAK_TIME,breakTime);
-        rowValue.put(KEY_CLOSING_TIME,closingTime);
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
+        rowValue.put(KEY_LANDMARK  , landmark);
+        rowValue.put(KEY_ROAD  , road );
+        rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_ADTIME  , additionaltime );
 
         SQLiteDatabase db = openDB();
 
@@ -436,9 +463,15 @@ public class EntertainmentServiceProviderTable {
         String _latitude = cursor.getString(19);
         String _longitude= cursor.getString(20);
         int _categoryId= cursor.getInt(21);
-        String _openingTime=cursor.getString(22);
-        String _breakTime= cursor.getString(23);
-        String _closingTime = cursor.getString(24);
+        String _openingtime=cursor.getString(22);
+        String _breaktime=cursor.getString(23);
+        String _closingtime=cursor.getString(24);
+        String _landmark=cursor.getString(25);
+        String _road=cursor.getString(26);
+        String _block=cursor.getString(27);
+        String _breaktime2=cursor.getString(28);
+        String _additionaltime=cursor.getString(29);
+
 
         return new EntertainmentServiceProviderItem(
                 _nodeId,
@@ -463,9 +496,14 @@ public class EntertainmentServiceProviderTable {
                 _latitude,
                 _longitude,
                 _categoryId,
-                _openingTime,
-                _breakTime,
-                _closingTime);
+                _openingtime,
+                _breaktime,
+                _closingtime,
+                _landmark,
+                _road,
+                _block,
+                _breaktime2,
+                _additionaltime);
     }
 
 
