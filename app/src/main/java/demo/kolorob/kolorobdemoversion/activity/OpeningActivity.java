@@ -33,7 +33,15 @@ import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialLoanTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialPaymentTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTuitionTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
@@ -49,7 +57,15 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialPaymentItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
@@ -347,12 +363,6 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-
-
-
-
-
-
             getRequest(OpeningActivity.this, "finance", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -370,7 +380,142 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "tuition", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
 
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialTuition(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "bills", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialBills(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "insurance", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialInsurance(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "loan", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialLoan(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "payment", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialPayment(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "social", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialSocial(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "tax", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialTax(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "transaction", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialTransaction(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
         } else {
             if (!AppUtils.isNetConnected(getApplicationContext())) {
@@ -456,7 +601,9 @@ public class OpeningActivity extends Activity {
     }
 
 
-
+    /**
+     * Written by : israt.jahan
+     */
     private void saveHealthSpecialist(JSONArray healthSpecialist) {
         HealthSpecialistTable healthSpecialistTable  = new  HealthSpecialistTable (OpeningActivity.this);
         healthSpecialistTable.dropTable();
@@ -494,12 +641,7 @@ public class OpeningActivity extends Activity {
             }
         }
 
-
     }
-
-
-
-
 
     private void saveHealthVaccines(JSONArray healthVaccines) {
         HealthVaccinesTable healthVaccinesTable = new  HealthVaccinesTable(OpeningActivity.this);
@@ -662,6 +804,127 @@ public class OpeningActivity extends Activity {
                 e.printStackTrace();
             }
         }
+    }
+    private void saveFinancialBills(JSONArray financialBills) {
+        FinancialBillsTable financialBillsTable = new FinancialBillsTable(OpeningActivity.this);
+        financialBillsTable.dropTable();
+        int financialBillsCount = financialBills.length();
+
+        for (int i = 0; i < financialBillsCount; i++) {
+            try {
+                JSONObject jo = financialBills.getJSONObject(i);
+                FinancialBillsItem et = FinancialBillsItem.parseFinancialBillsItem(jo);
+                financialBillsTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialInsurance(JSONArray financialInsurance) {
+        FinancialInsuranceTable financialInsuranceTable = new FinancialInsuranceTable(OpeningActivity.this);
+        financialInsuranceTable.dropTable();
+        int financialInsuranceCount = financialInsurance.length();
+
+        for (int i = 0; i < financialInsuranceCount; i++) {
+            try {
+                JSONObject jo = financialInsurance.getJSONObject(i);
+                FinancialInsuranceItem et = FinancialInsuranceItem.parseFinancialInsuranceItem(jo);
+                financialInsuranceTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialTax(JSONArray financialTax) {
+        FinancialTaxTable financialTaxTable = new FinancialTaxTable(OpeningActivity.this);
+        financialTaxTable.dropTable();
+        int financialTaxCount = financialTax.length();
+
+        for (int i = 0; i < financialTaxCount; i++) {
+            try {
+                JSONObject jo = financialTax.getJSONObject(i);
+                FinancialTaxItem et =  FinancialTaxItem.parseFinancialTaxItem(jo);
+                financialTaxTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialTransaction(JSONArray financialTransaction) {
+        FinancialTransactionTable financialTransactionTable = new FinancialTransactionTable(OpeningActivity.this);
+        financialTransactionTable.dropTable();
+        int financialTransactionCount = financialTransaction.length();
+
+        for (int i = 0; i < financialTransactionCount; i++) {
+            try {
+                JSONObject jo = financialTransaction.getJSONObject(i);
+                FinancialTransactionItem et = FinancialTransactionItem.parseFinancialTransactionItem(jo);
+                financialTransactionTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialTuition(JSONArray financialTuition) {
+        FinancialTuitionTable financialTuitionTable = new FinancialTuitionTable(OpeningActivity.this);
+        financialTuitionTable.dropTable();
+        int financialTuitionCount = financialTuition.length();
+
+        for (int i = 0; i < financialTuitionCount; i++) {
+            try {
+                JSONObject jo = financialTuition.getJSONObject(i);
+                FinancialTuitionItem et = FinancialTuitionItem.parseFinancialTuitionItem(jo);
+                financialTuitionTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialSocial(JSONArray financialSocial) {
+        FinancialSocialTable financialSocialTable = new FinancialSocialTable(OpeningActivity.this);
+        financialSocialTable.dropTable();
+        int financialSocialCount = financialSocial.length();
+
+        for (int i = 0; i < financialSocialCount; i++) {
+            try {
+                JSONObject jo = financialSocial.getJSONObject(i);
+                FinancialSocialItem et = FinancialSocialItem.parseFinancialSocialItem(jo);
+                financialSocialTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialLoan(JSONArray financialLoan) {
+        FinancialLoanTable financialLoanTable = new FinancialLoanTable(OpeningActivity.this);
+        financialLoanTable.dropTable();
+        int financialLoanCount = financialLoan.length();
+
+        for (int i = 0; i < financialLoanCount; i++) {
+            try {
+                JSONObject jo = financialLoan.getJSONObject(i);
+                FinancialLoanItem et = FinancialLoanItem.parseFinancialLoanItem(jo);
+                financialLoanTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void saveFinancialPayment(JSONArray financialPayment) {
+        FinancialPaymentTable financialPaymentTable = new FinancialPaymentTable(OpeningActivity.this);
+        financialPaymentTable.dropTable();
+        int financialPaymentCount = financialPayment.length();
+
+        for (int i = 0; i < financialPaymentCount; i++) {
+            try {
+                JSONObject jo = financialPayment.getJSONObject(i);
+                FinancialPaymentItem et = FinancialPaymentItem.parseFinancialPaymentItem(jo);
+                financialPaymentTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    
         //setContentView(R.layout.activity_main); //we don't need this line
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         boolean firstRun = settings.getBoolean("firstRun", false);
