@@ -17,7 +17,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class HealthVaccinesTable {
 
-    private static final String TAG = HealthServiceProviderTable.class.getSimpleName();
+    private static final String TAG = HealthVaccinesTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_VACCINES_TABLE;
 
     private static final String KEY_NODE_ID = "_nodeId"; // 0 -integer

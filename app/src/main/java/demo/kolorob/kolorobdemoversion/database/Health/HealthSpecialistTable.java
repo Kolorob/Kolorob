@@ -15,7 +15,8 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 /**
  * Created by mity on 2/4/16.
  */
-public class HealthSpecialistTable {private static final String TAG = HealthServiceProviderTable.class.getSimpleName();
+public class HealthSpecialistTable {
+    private static final String TAG = HealthSpecialistTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_SPECIALIST_TABLE;
 
     private static final String KEY_NODE_ID = "_nodeId"; // 0 -integer

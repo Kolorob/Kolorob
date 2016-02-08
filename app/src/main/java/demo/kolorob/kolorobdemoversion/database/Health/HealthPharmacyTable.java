@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
+import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by Mazhaul Islam on 4/2/2016.
@@ -35,7 +36,6 @@ public class HealthPharmacyTable {
     private static final String KEY_REF_NUM = "_ref_number"; //
 
 
-
     private Context tContext;
 
 
@@ -49,9 +49,9 @@ public class HealthPharmacyTable {
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_NODE_ID + "  INTEGER, " // 0 - int
+                + KEY_NODE_ID + "  STRING, " // 0 - int
                 + KEY_DOC_ID + "  INTEGER, "              // 1 - text
-                + KEY_PHARMACY_FEE + " INTEGER, "
+                + KEY_PHARMACY_FEE + " TEXT, "
                 + KEY_DOCTOR_NAME + " TEXT, "// 2 - text
                 + KEY_PHARMACY_TIME + " TEXT, "
                 + KEY_PHARMACY_NO_DEGREE + " TEXT, "
@@ -62,7 +62,7 @@ public class HealthPharmacyTable {
                 + KEY_PHARMACY_REMARKS + " TEXT, "
                 + KEY_PHARMACY_DOC_REMARKS + " TEXT, "
 
-                + KEY_REF_NUM + " INTEGER, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_DOC_ID + "," + KEY_REF_NUM + "))";
+                + KEY_REF_NUM + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_DOC_ID + "," + KEY_REF_NUM + "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -100,7 +100,7 @@ public class HealthPharmacyTable {
     public long insertItemHealthPharmacy(
             String nodeId,
             int docId,
-            int pharmacyFee,
+            String pharmacyFee,
             String pharmacyDoctorName,
             String pharmacyTime,
             String pharmacyNoDegree,
@@ -111,9 +111,9 @@ public class HealthPharmacyTable {
             String remarks,
             String pharmacyDocRemarks,
 
-            int refNumber
+            String refNumber
     ) {
-        if (isFieldExist(nodeId,docId, refNumber)) {
+        if (isFieldExist(nodeId, docId, refNumber)) {
             return updateItem(
                     nodeId,
                     docId,
@@ -130,19 +130,18 @@ public class HealthPharmacyTable {
         }
 
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , nodeId);
-        rowValue.put(KEY_DOC_ID  , docId);
-        rowValue.put(KEY_PHARMACY_FEE   , pharmacyFee);
-        rowValue.put(KEY_DOCTOR_NAME , pharmacyDoctorName );
-        rowValue.put(KEY_PHARMACY_TIME  , pharmacyTime );
-        rowValue.put(KEY_PHARMACY_NO_DEGREE  ,pharmacyNoDegree  );
-        rowValue.put(KEY_PHARMACY_LMAF   , pharmacyLMAF );
-        rowValue.put(KEY_PHARMACY_MBBS   , pharmacyMBBS );
-        rowValue.put(KEY_PHARMACY_SPECILIST  , pharmacySpecialist );
-        rowValue.put(KEY_PHARMACY_REMARKS ,remarks );
-        rowValue.put(KEY_PHARMACY_DOC_REMARKS ,pharmacyDocRemarks );
-        rowValue.put(KEY_REF_NUM , refNumber );
-
+        rowValue.put(KEY_NODE_ID, nodeId);
+        rowValue.put(KEY_DOC_ID, docId);
+        rowValue.put(KEY_PHARMACY_FEE, pharmacyFee);
+        rowValue.put(KEY_DOCTOR_NAME, pharmacyDoctorName);
+        rowValue.put(KEY_PHARMACY_TIME, pharmacyTime);
+        rowValue.put(KEY_PHARMACY_NO_DEGREE, pharmacyNoDegree);
+        rowValue.put(KEY_PHARMACY_LMAF, pharmacyLMAF);
+        rowValue.put(KEY_PHARMACY_MBBS, pharmacyMBBS);
+        rowValue.put(KEY_PHARMACY_SPECILIST, pharmacySpecialist);
+        rowValue.put(KEY_PHARMACY_REMARKS, remarks);
+        rowValue.put(KEY_PHARMACY_DOC_REMARKS, pharmacyDocRemarks);
+        rowValue.put(KEY_REF_NUM, refNumber);
 
 
         SQLiteDatabase db = openDB();
@@ -151,13 +150,13 @@ public class HealthPharmacyTable {
         return ret;
     }
 
-    public boolean isFieldExist(String id,int doc_id,int refnum) {
+    public boolean isFieldExist(String id, int doc_id, String refnum) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(1))==doc_id&&Integer.parseInt(cursor.getString(11))==refnum) {
+                if (id.equals(cursor.getString(0)) && Integer.parseInt(cursor.getString(1)) == doc_id &&refnum.equals(cursor.getString(11) )) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -171,7 +170,7 @@ public class HealthPharmacyTable {
 
     private long updateItem(String nodeId,
                             int docId,
-                            int pharmacyFee,
+                            String pharmacyFee,
                             String pharmacyDoctorName,
                             String pharmacyTime,
                             String pharmacyNoDegree,
@@ -182,37 +181,33 @@ public class HealthPharmacyTable {
                             String remarks,
                             String pharmacyDocRemarks,
 
-                            int refNumber)
-                             {
+                            String refNumber) {
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , nodeId);
-        rowValue.put(KEY_DOC_ID  , docId);
-        rowValue.put(KEY_PHARMACY_FEE   , pharmacyFee);
-        rowValue.put(KEY_DOCTOR_NAME , pharmacyDoctorName );
-        rowValue.put(KEY_PHARMACY_TIME  , pharmacyTime );
-        rowValue.put(KEY_PHARMACY_NO_DEGREE  ,pharmacyNoDegree  );
-        rowValue.put(KEY_PHARMACY_LMAF   , pharmacyLMAF );
+        rowValue.put(KEY_NODE_ID, nodeId);
+        rowValue.put(KEY_DOC_ID, docId);
+        rowValue.put(KEY_PHARMACY_FEE, pharmacyFee);
+        rowValue.put(KEY_DOCTOR_NAME, pharmacyDoctorName);
+        rowValue.put(KEY_PHARMACY_TIME, pharmacyTime);
+        rowValue.put(KEY_PHARMACY_NO_DEGREE, pharmacyNoDegree);
+        rowValue.put(KEY_PHARMACY_LMAF, pharmacyLMAF);
 
-                                 rowValue.put(KEY_PHARMACY_MBBS  , pharmacyMBBS );
-        rowValue.put(KEY_PHARMACY_SPECILIST  , pharmacySpecialist );
-        rowValue.put(KEY_PHARMACY_REMARKS ,remarks );
-                                 rowValue.put(KEY_PHARMACY_DOC_REMARKS ,pharmacyDocRemarks );
-        rowValue.put(KEY_REF_NUM , refNumber );
+        rowValue.put(KEY_PHARMACY_MBBS, pharmacyMBBS);
+        rowValue.put(KEY_PHARMACY_SPECILIST, pharmacySpecialist);
+        rowValue.put(KEY_PHARMACY_REMARKS, remarks);
+        rowValue.put(KEY_PHARMACY_DOC_REMARKS, pharmacyDocRemarks);
+        rowValue.put(KEY_REF_NUM, refNumber);
 
 
         SQLiteDatabase db = openDB();
-                                 long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND" + KEY_DOC_ID + " = ? AND " + KEY_REF_NUM + " = ?",
-                                         new String[]{nodeId + "", docId + "", refNumber + ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND" + KEY_DOC_ID + " = ? AND " + KEY_REF_NUM + " = ?",
+                new String[]{nodeId + "", docId + "", refNumber + ""});
         closeDB();
         return ret;
     }
 
 
-
-
-
-    public ArrayList<HealthPharmacyItem> getSpecialistforNode(String nodeId) {
-        ArrayList<HealthPharmacyItem> specialistList = new ArrayList<>();
+    public ArrayList<HealthPharmacyItem> getPharmacyforNode(String nodeId) {
+        ArrayList<HealthPharmacyItem> PharmacyList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
@@ -220,31 +215,28 @@ public class HealthPharmacyTable {
         if (cursor.moveToFirst()) {
             do {
                 //System.out.println("abc="+cursor.getString(4));
-                specialistList.add(healthPharmacyItem(cursor));
+                PharmacyList.add(healthPharmacyItem(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return specialistList;
+        return PharmacyList;
     }
 
 
-
     private HealthPharmacyItem healthPharmacyItem(Cursor cursor) {
-        String _nodeId=cursor.getString(0);
-        int _docId=cursor.getInt(1);
-        int _pharmacyFee=cursor.getInt(2);
-        String _pharmacyDoctorName=cursor.getString(3);
-        String _pharmacyTime=cursor.getString(4);
-        String _pharmacyNoDegree=cursor.getString(5);
-        String _pharmacyLMAF=cursor.getString(6);
-        String _pharmacyMBBS=cursor.getString(7);
-        String _pharmacySpecialist=cursor.getString(8);
-        String _remarks=cursor.getString(9);
-        String _pharmacyDocRemarks=cursor.getString(10);
-        int _refNumber=cursor.getInt(11);
-
-
+        String _nodeId = cursor.getString(0);
+        int _docId = cursor.getInt(1);
+        String _pharmacyFee = cursor.getString(2);
+        String _pharmacyDoctorName = cursor.getString(3);
+        String _pharmacyTime = cursor.getString(4);
+        String _pharmacyNoDegree = cursor.getString(5);
+        String _pharmacyLMAF = cursor.getString(6);
+        String _pharmacyMBBS = cursor.getString(7);
+        String _pharmacySpecialist = cursor.getString(8);
+        String _remarks = cursor.getString(9);
+        String _pharmacyDocRemarks = cursor.getString(10);
+        String _refNumber = cursor.getString(11);
 
 
         return new HealthPharmacyItem(
@@ -264,4 +256,11 @@ public class HealthPharmacyTable {
                 _refNumber);
     }
 
+    public void dropTable() {
+        SQLiteDatabase db = openDB();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        createTable();
+        Lg.d(TAG, "Table dropped and recreated.");
+        closeDB();
+    }
 }

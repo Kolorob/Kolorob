@@ -14,13 +14,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
-
 import demo.kolorob.kolorobdemoversion.adapters.PharmacyAdapter;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
@@ -92,7 +89,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
         HealthVaccinesTable healthVaccinesTable=new HealthVaccinesTable(DetailsInfoActivityHealth.this);
         healthPharmacyItemArrayList=healthVaccinesTable.getVaccinesforNode(healthServiceProviderItem.getNodeId());
-        healthPharmacyItems=healthPharmacyTable1.getSpecialistforNode(healthServiceProviderItem.getNodeId());
+        healthPharmacyItems=healthPharmacyTable1.getPharmacyforNode(healthServiceProviderItem.getNodeId());
 
         healthSpecialistItems=healthSpecialistTable.getSpecialistforNode(healthServiceProviderItem.getNodeId());
         // if(healthPharmacyItemArrayList!=null)

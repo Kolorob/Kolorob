@@ -12,7 +12,7 @@ public class HealthPharmacyItem implements Serializable {
 
     private String nodeId;
     private int docId;
-    private int pharmacyFee;
+    private String pharmacyFee;
     private String pharmacyDoctorName;
     private String pharmacyTime;
     private String pharmacyNoDegree;
@@ -21,13 +21,13 @@ public class HealthPharmacyItem implements Serializable {
     private String pharmacySpecialist;
     private String remarks;
     private String pharmacyDocRemarks;
-    private int refNumber;
+    private String refNumber;
 
 
     public HealthPharmacyItem(
             String nodeId,
             int docId,
-            int pharmacyFee,
+            String pharmacyFee,
             String pharmacyDoctorName,
             String pharmacyTime,
             String pharmacyNoDegree,
@@ -36,7 +36,7 @@ public class HealthPharmacyItem implements Serializable {
             String pharmacySpecialist,
             String remarks,
             String pharmacyDocRemarks,
-            int refNumber
+            String refNumber
     ) {
 
         this.nodeId = nodeId;
@@ -71,7 +71,7 @@ public class HealthPharmacyItem implements Serializable {
         return docId;
     }
 
-    public int getPharmacyFee() {
+    public String getPharmacyFee() {
         return pharmacyFee;
     }
 
@@ -100,14 +100,14 @@ public class HealthPharmacyItem implements Serializable {
     }
 
 
-    public int getRefNumber() {
+    public String getRefNumber() {
         return refNumber;
     }
 
     public static HealthPharmacyItem parseHealthPharmacyItem(JSONObject jo) throws JSONException {
         String _nodeId = jo.getString("node_id");
         int _docId = jo.getInt("doc_id");
-        int _pharmacyFee = jo.getInt("pharmacy_fee");
+        String _pharmacyFee = jo.getString("pharmacy_fee");
         String _pharmacyDoctorName = jo.getString("pharmacy_doctor_name");
         String _pharmacyTime = jo.getString("pharmacy_time");
         String _pharmacyNoDegree = jo.getString("pharmacy_no_degree");
@@ -116,7 +116,7 @@ public class HealthPharmacyItem implements Serializable {
         String _pharmacySpecialist = jo.getString("pharmacy_specialist");
         String _remarks = jo.getString("pharmacy_remarks");
         String _pharmacyDocRemarks = jo.getString("pharmacy_doc_remarks");
-        int _refNumber = jo.getInt("ref_num");
+        String _refNumber = jo.getString("ref_num");
 
 
         return new HealthPharmacyItem(
@@ -128,12 +128,10 @@ public class HealthPharmacyItem implements Serializable {
                 _pharmacyNoDegree,
                 _pharmacyLMAF,
                 _pharmacyMBBS,
-
                 _pharmacySpecialist,
                 _remarks,
                 _pharmacyDocRemarks,
                 _refNumber
-
         );
 
 

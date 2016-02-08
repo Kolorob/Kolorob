@@ -40,6 +40,14 @@ public class FinancialServiceProviderTable {
     private static final String KEY_FIN_LONGITUDE = "_longitude"; //
 
     private static final String KEY_CATEGORY_ID = "_categoryId"; //
+    private static final String KEY_OPENTIME = "_openingtime"; //
+    private static final String KEY_BREAKTIME = "_breaktime"; //
+    private static final String KEY_CLOSEATIME = "_closingtime"; //
+    private static final String KEY_LANDMARK = "_landmark"; //
+    private static final String KEY_ROAD = "_road"; //
+    private static final String KEY_BLOCK = "_block"; //
+    private static final String KEY_BREAKTIME2 = "_breaktime2"; //
+    private static final String KEY_ADTIME = "_additionaltime";
 
 
     private Context tContext;
@@ -69,7 +77,15 @@ public class FinancialServiceProviderTable {
                 + KEY_FIN_ADDRESS + " TEXT, "
                 + KEY_FIN_LATITUDE + " TEXT, "
                 + KEY_FIN_LONGITUDE + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, PRIMARY KEY(" + KEY_FIN_NODE_ID+ ", " + KEY_FIN_REF_NUM + "))";
+                + KEY_CATEGORY_ID + " INTEGER,"
+                + KEY_OPENTIME + " TEXT, "
+                + KEY_BREAKTIME + " TEXT, "
+                + KEY_CLOSEATIME + " TEXT, "
+                + KEY_LANDMARK + " TEXT, "
+                + KEY_ROAD+ " TEXT, "
+                + KEY_BLOCK + " TEXT, "
+                + KEY_BREAKTIME2 + " TEXT, "
+                + KEY_ADTIME + "TEXT, PRIMARY KEY(" + KEY_FIN_NODE_ID+ ", " + KEY_FIN_REF_NUM + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -85,14 +101,22 @@ public class FinancialServiceProviderTable {
                 financialServiceProviderItem.getNodeEmail(),financialServiceProviderItem.getNodeAdditional(),financialServiceProviderItem.getNodeWebsite(),
                 financialServiceProviderItem.getNodeFacebook(),financialServiceProviderItem.getNodeRegisteredwith(),
                 financialServiceProviderItem.getNodeRegistrationnumber(),financialServiceProviderItem.getRefNum(), financialServiceProviderItem.getArea(), financialServiceProviderItem.getAddress(),
-                financialServiceProviderItem.getLatitude(),financialServiceProviderItem.getLongitude(),financialServiceProviderItem.getCategoryId());
+                financialServiceProviderItem.getLatitude(),financialServiceProviderItem.getLongitude(),financialServiceProviderItem.getCategoryId(),
+                financialServiceProviderItem.getOpeningtime(),
+                financialServiceProviderItem.getBreaktime(),
+                financialServiceProviderItem.getClosingtime(),
+                financialServiceProviderItem.getLandmark(),
+                financialServiceProviderItem.getRoad(),
+                financialServiceProviderItem.getBlock(),
+                financialServiceProviderItem.getBreaktime2(),
+                financialServiceProviderItem.getAdditionaltime());
     }
 
     private long insertItem(String nodeId, String nodeName, String nodeDesignation,
                             String nodeContact, String nodeEmail, String nodeAdditional,
                             String nodeWebsite, String nodeFacebook, String nodeRegisteredwith,
                             String nodeRegistrationnumber, int refNum, String area,
-                            String address, String latitude, String longitude, int categoryId) {
+                            String address, String latitude, String longitude, int categoryId, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         if (isFieldExist(nodeId, categoryId, refNum)) {
             return updateItem(
                     nodeId,
@@ -110,7 +134,14 @@ public class FinancialServiceProviderTable {
                     address,
                     latitude,
                     longitude,
-                    categoryId);
+                    categoryId,openingtime,
+                    breaktime,
+                    closingtime,
+                    landmark,
+                    road,
+                    block,
+                    breaktime2,
+                    additionaltime);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID, nodeId);
@@ -129,6 +160,14 @@ public class FinancialServiceProviderTable {
         rowValue.put(KEY_FIN_LATITUDE, latitude);
         rowValue.put(KEY_FIN_LONGITUDE, longitude);
         rowValue.put(KEY_CATEGORY_ID, categoryId);
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
+        rowValue.put(KEY_LANDMARK  , landmark);
+        rowValue.put(KEY_ROAD  , road );
+        rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -137,7 +176,11 @@ public class FinancialServiceProviderTable {
 
     }
 
-    private long  updateItem(String nodeId, String nodeName, String nodeDesignation, String nodeContact, String nodeEmail, String nodeAdditional, String nodeWebsite, String nodeFacebook, String nodeRegisteredwith, String nodeRegistrationnumber, int refNum, String area, String address, String latitude, String longitude, int categoryId) {
+    private long  updateItem(String nodeId, String nodeName, String nodeDesignation, String nodeContact,
+                             String nodeEmail, String nodeAdditional, String nodeWebsite, String nodeFacebook,
+                             String nodeRegisteredwith, String nodeRegistrationnumber, int refNum, String area, String address,
+                             String latitude, String longitude, int categoryId, String openingtime, String breaktime,
+                             String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID, nodeId);
         rowValue.put(KEY_FIN_NODE_NAME,  nodeName);
@@ -155,6 +198,14 @@ public class FinancialServiceProviderTable {
         rowValue.put(KEY_FIN_LATITUDE, latitude);
         rowValue.put(KEY_FIN_LONGITUDE, longitude);
         rowValue.put(KEY_CATEGORY_ID, categoryId);
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
+        rowValue.put(KEY_LANDMARK  , landmark);
+        rowValue.put(KEY_ROAD  , road );
+        rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -271,9 +322,25 @@ public class FinancialServiceProviderTable {
         String _Finlatitude = cursor.getString(13);
         String _Finlongitude = cursor.getString(14);
         int    _categoryId   = cursor.getInt(15);
+        String _openingtime=cursor.getString(16);
+        String _breaktime=cursor.getString(17);
+        String _closingtime=cursor.getString(18);
+        String _landmark=cursor.getString(19);
+        String _road=cursor.getString(20);
+        String _block=cursor.getString(21);
+        String _breaktime2=cursor.getString(22);
+        String _additionaltime=cursor.getString(23);
+
         return new FinancialServiceProviderItem(_FinnodeId, _FinnodeName,_FinnodeDesignation,
                 _FinnodeContact,_FinnodeEmail, _FinnodeAdditional, _FinnodeWebsite,_FinnodeFacebook,
-                _FinnodeRegisteredwith, _FinnodeRegistrationNumber, _FinrefNum, _Finarea, _Finaddress, _Finlatitude, _Finlongitude,_categoryId);
+                _FinnodeRegisteredwith, _FinnodeRegistrationNumber, _FinrefNum, _Finarea, _Finaddress, _Finlatitude, _Finlongitude,_categoryId,_openingtime,
+                _breaktime,
+                _closingtime,
+                _landmark,
+                _road,
+                _block,
+                _breaktime2,
+                _additionaltime);
 
     }
 

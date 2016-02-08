@@ -28,8 +28,16 @@ public class LegalAidServiceProviderItem implements Serializable {
     private String latitude;
     private String longitude;
 
-    public LegalAidServiceProviderItem( String identifierId, String serviceProviderId,int legalaidSubCategoryId, int categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude) {
+    private String openingtime;
+    private String closingtime;
+    private String breaktime;
+    private String breaktime2;
+    private String landmark;
+    private String road;
+    private String block;
+    private String additionaltime;
 
+    public LegalAidServiceProviderItem(String identifierId, String serviceProviderId, int legalaidSubCategoryId, int categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         this.identifierId = identifierId;
         this.serviceProviderId = serviceProviderId;
         this.legalaidSubCategoryId = legalaidSubCategoryId;
@@ -48,9 +56,47 @@ public class LegalAidServiceProviderItem implements Serializable {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.openingtime = openingtime;
+        this.breaktime = breaktime;
+        this.closingtime = closingtime;
+        this.landmark = landmark;
+        this.road = road;
+        this.block = block;
+        this.breaktime2 = breaktime2;
+        this.additionaltime = additionaltime;
     }
 
+    public String getOpeningtime() {
+        return openingtime;
+    }
 
+    public String getClosingtime() {
+        return closingtime;
+    }
+
+    public String getBreaktime() {
+        return breaktime;
+    }
+
+    public String getBreaktime2() {
+        return breaktime2;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public String getBlock() {
+        return block;
+    }
+
+    public String getAdditionaltime() {
+        return additionaltime;
+    }
 
     public String getIdentifierId() {
         return identifierId;
@@ -142,10 +188,18 @@ public class LegalAidServiceProviderItem implements Serializable {
         String _address = jo.getString("address");
         String _latitude = jo.getString("latitude");
         String _longitude = jo.getString("longitude");
+        String _openingtime=jo.getString("opening_time");
+        String _breaktime=jo.getString("break_time");
+        String _closingtime=jo.getString("closing_time");
+        String _landmark=jo.getString("landmark");
+        String _road=jo.getString("road");
+        String _block =jo.getString("block");
+        String _breaktime2=jo.getString("breaktime2");
+        String _additionaltime=jo.getString("additional_time");
 
         return new LegalAidServiceProviderItem(_identifierId, _serviceProviderId, _legalaidSubCategoryId,
                 _categoryId,_legalaidNameEng, _legalaidBan, _contactPersonDesignation, _contactNo, _emailAddress, _websiteLink,
-                _fbLink, _registeredWith, _registrationNo, _additionalInfo, _area, _address, _latitude, _longitude);
+                _fbLink, _registeredWith, _registrationNo, _additionalInfo, _area, _address, _latitude, _longitude, _openingtime, _breaktime, _closingtime, _landmark, _road, _block, _breaktime2, _additionaltime);
 
     }
 }
