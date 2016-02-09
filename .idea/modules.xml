@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Kolorob.iml" filepath="$PROJECT_DIR$/Kolorob.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/volley/volley.iml" filepath="$PROJECT_DIR$/libraries/volley/volley.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/volley/volley.iml" filepath="$PROJECT_DIR$/libraries/volley/volley.iml" />
     </modules>
   </component>
 </project>

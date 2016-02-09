@@ -84,15 +84,6 @@
 
         android:layout_alignTop="@+id/girl_shadow" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:src="@drawable/feedback"
-        android:background="@color/transparent"
-        android:id="@+id/button2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
