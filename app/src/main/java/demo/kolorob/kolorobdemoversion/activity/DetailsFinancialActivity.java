@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
         ImageView close;
         TextView close_tv;
         ImageView btnroute;
+    ImageButton Feedback;
         /**
          * Following components are only for Financial
          * For other categories this components may vary
@@ -48,6 +50,16 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_details_financial);
             Intent intent = getIntent();
+            Feedback = (ImageButton) findViewById(R.id.button2);
+            Feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent a = new Intent(DetailsFinancialActivity.this, FeedbackActivity.class);
+                    startActivity(a);
+                    finish();
+                }
+            });
+
             if (null != intent)
             {
                 financialServiceProviderItem = (FinancialServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIAL);

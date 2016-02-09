@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 public class DetailsJobActivity extends Activity {
     ImageView close,kivabejabejob;
     TextView close_tv;
-
+    ImageButton Feedback;
     /**
      * Following components are only for LegalAid
      * For other categories this components may vary
@@ -44,6 +45,16 @@ public class DetailsJobActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_job);
         Intent intent = getIntent();
+        Feedback = (ImageButton) findViewById(R.id.button2);
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsJobActivity.this, FeedbackActivity.class);
+                startActivity(a);
+                finish();
+            }
+        });
+
         if (null != intent)
         {
             jobServiceProviderItem = (JobServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_JOB);

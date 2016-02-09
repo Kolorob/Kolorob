@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,7 @@ public class DetailsInfoActivity extends Activity  {
     private TextView email;
     private TextView website;
     private TextView fb;
-
+    ImageButton Feedback;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     EducationServiceProviderItem educationServiceProviderItem;
 
@@ -50,6 +51,16 @@ public class DetailsInfoActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_info);
         Intent intent = getIntent();
+        Feedback = (ImageButton) findViewById(R.id.button2);
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsInfoActivity.this, FeedbackActivity.class);
+                startActivity(a);
+                finish();
+            }
+        });
+
         if (null != intent)
         {
             educationServiceProviderItem = (EducationServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_VIEW);

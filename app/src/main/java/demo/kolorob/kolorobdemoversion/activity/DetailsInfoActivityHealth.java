@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,13 +55,23 @@ public class DetailsInfoActivityHealth extends Activity  {
     HealthPharmacyItem healthPharmacyItem;
     HealthVaccinesItem healthVaccinesItem;
     ListView navlist;
-
+    ImageButton Feedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.health_details_info1);
         Intent intent = getIntent();
+        Feedback = (ImageButton) findViewById(R.id.button2);
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsInfoActivityHealth.this, FeedbackActivity.class);
+                startActivity(a);
+                finish();
+            }
+        });
+
         if (null != intent)
         {
             healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH);

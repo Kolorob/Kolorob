@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
         ImageView close,legal;
         TextView close_tv;
-
+    ImageButton Feedback;
         /**
          * Following components are only for LegalAid
          * For other categories this components may vary
@@ -49,6 +50,16 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_details_legal);
             Intent intent = getIntent();
+            Feedback = (ImageButton) findViewById(R.id.button2);
+            Feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent a = new Intent(DetailsLegalActivity.this, FeedbackActivity.class);
+                    startActivity(a);
+                    finish();
+                }
+            });
+
             if (null != intent)
             {
                 legalAidServiceProviderItem = (LegalAidServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
@@ -117,6 +128,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     finish();
                 }
             });
+
 
 
             //common for all category
