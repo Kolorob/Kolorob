@@ -18,7 +18,9 @@ public class EntertainmentFitnessItem {
     private String type;
     private String servicedetails;
 
-    public EntertainmentFitnessItem(String nodeId, int entSubCategoryId, int yearofestablishment, int workers, String offers, String offerdetails, String servicetype, String type, String servicedetails) {
+    public EntertainmentFitnessItem(String nodeId, int entSubCategoryId, int yearofestablishment, int workers,
+                                    String offers, String offerdetails, String servicetype, String type,
+                                    String servicedetails) {
         this.nodeId = nodeId;
         this.entSubCategoryId = entSubCategoryId;
         this.yearofestablishment = yearofestablishment;

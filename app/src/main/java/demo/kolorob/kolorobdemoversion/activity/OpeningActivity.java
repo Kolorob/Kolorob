@@ -33,6 +33,7 @@ import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
@@ -58,6 +59,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
@@ -289,6 +291,22 @@ public class OpeningActivity extends Activity {
                             String apiSt = jo.getString(AppConstants.KEY_STATUS);
                             if (apiSt.equals(AppConstants.KEY_SUCCESS))
                                 saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            getRequest(OpeningActivity.this, "entertainment/bookshop", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveEntertainmentBookshop(jo.getJSONArray(AppConstants.KEY_DATA));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -745,13 +763,31 @@ public class OpeningActivity extends Activity {
 
     private void saveEntertainmentServiceProvider(JSONArray entertainmentServiceProvider) {
         EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(OpeningActivity.this);
+        entertainmentServiceProviderTable.dropTable();
         int entServiceProviderCount = entertainmentServiceProvider.length();
 
         for (int i = 0; i < entServiceProviderCount; i++) {
             try {
                 JSONObject jo = entertainmentServiceProvider.getJSONObject(i);
                 EntertainmentServiceProviderItem et = EntertainmentServiceProviderItem.parseEntertainmentServiceProviderItem(jo);
-                entertainmentServiceProviderTable.insertItemEntertainment(et);
+                entertainmentServiceProviderTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    private void saveEntertainmentBookshop(JSONArray entertainmentBookshop) {
+        EntertainmentBookTable entertainmentBookTable = new EntertainmentBookTable(OpeningActivity.this);
+        entertainmentBookTable.dropTable();
+        int entertainmentBookshopCount = entertainmentBookshop.length();
+
+        for (int i = 0; i < entertainmentBookshopCount; i++) {
+            try {
+                JSONObject jo = entertainmentBookshop.getJSONObject(i);
+               EntertainmentBookShopItem et = EntertainmentBookShopItem.parseEntertainmentBookShopItem(jo);
+                entertainmentBookTable.insertItem(et);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
