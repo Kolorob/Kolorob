@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,7 +48,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     String userage,categoryname,subcategoryname,issuetype;
     private Context con;
     Spinner spinner2,spinner3,spinner4;
-    private Button SubmitFeedback;
+    private ImageButton SubmitFeedback;
     private EditText editTextUsername;
     private EditText editTextIssuedetails;
     private EditText editTextContactNo;
@@ -112,7 +112,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         spinner4 = (Spinner) findViewById(R.id.spinner4);
         spinner4.setAdapter(adapterissue);
         issuetype= spinner4.getSelectedItem().toString();
-        SubmitFeedback = (Button) findViewById(R.id.Submitfeedback);
+        SubmitFeedback = (ImageButton) findViewById(R.id.Submitfeedback);
         SubmitFeedback.setOnClickListener(this);
         close = (ImageView) findViewById(R.id.iv_close);
         close_tv = (TextView) findViewById(R.id.tv_close);

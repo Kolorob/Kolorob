@@ -9,18 +9,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class DetailsInfoActivityEntertainment extends Activity  {
-    Button kivabejaben;
-    ImageView close;
+
+    ImageView close,kivabejaben;
     TextView close_tv;
 
 
@@ -79,7 +77,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         fb = (TextView) findViewById(R.id.tv_fb);
 
 
-        kivabejaben=(Button)findViewById(R.id.kivabejabenedu);
+        kivabejaben=(ImageView)findViewById(R.id.ent);
 
         itemName.setText(entertainmentServiceProviderItem.getNodeNameBn());
         itemAddress.setText("ঠিকানা :"+ entertainmentServiceProviderItem.getAddress());

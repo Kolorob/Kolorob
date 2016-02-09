@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +17,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by israt.jahan on 1/11/2016.
  */
 public class DetailsJobActivity extends Activity {
-    Button kivabejabejob;
-    ImageView close;
+    ImageView close,kivabejabejob;
     TextView close_tv;
 
     /**
@@ -61,7 +59,7 @@ public class DetailsJobActivity extends Activity {
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
-        kivabejabejob=(Button)findViewById(R.id.kivabejabenJob);
+        kivabejabejob=(ImageView)findViewById(R.id.kivabejabenJob);
 
         itemName.setText(jobServiceProviderItem.getAddress());
         itemAddress.setText("ঠিকানাঃ "+jobServiceProviderItem.getArea());

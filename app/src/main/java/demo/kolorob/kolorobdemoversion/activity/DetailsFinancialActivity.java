@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +23,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
         ImageView close;
         TextView close_tv;
-        Button btn;
+        ImageView btnroute;
         /**
          * Following components are only for Financial
          * For other categories this components may vary
@@ -64,7 +63,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             email = (TextView) findViewById(R.id.tv_email);
             website = (TextView) findViewById(R.id.tv_website);
             fb = (TextView) findViewById(R.id.tv_fb);
-            btn=(Button)findViewById(R.id.kivabejabenFinancial);
+            btnroute=(ImageView)findViewById(R.id.kivabejabenFinancial);
 
             itemName.setText( financialServiceProviderItem.getNodeName());
             itemAddress.setText("ঠিকানাঃ "+ financialServiceProviderItem.getArea());
@@ -77,7 +76,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             fb.setText("ফেসবুকঃ "+ financialServiceProviderItem.getNodeFacebook());
 
 
-            btn.setOnClickListener(new View.OnClickListener() {
+            btnroute.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String lat= financialServiceProviderItem.getLatitude().toString();

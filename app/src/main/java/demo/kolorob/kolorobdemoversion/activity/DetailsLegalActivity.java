@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,9 +21,9 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
     public class DetailsLegalActivity extends Activity {
 
-        ImageView close;
+        ImageView close,legal;
         TextView close_tv;
-        Button legal;
+
         /**
          * Following components are only for LegalAid
          * For other categories this components may vary
@@ -71,7 +70,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             email = (TextView) findViewById(R.id.tv_email);
             website = (TextView) findViewById(R.id.tv_website);
 
-            legal=(Button)findViewById(R.id.kivabejabenLegal);
+            legal=(ImageView)findViewById(R.id.legal);
 
 
             itemName.setText(legalAidServiceProviderItem.getLegalaidNameEng());

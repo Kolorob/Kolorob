@@ -324,13 +324,14 @@
 
 
 
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/kivabejabenhealth"
-            android:text="কিভাবে যাবেন"
-            android:foregroundGravity="center" />
-
+            android:src="@drawable/kivabe"
+            android:paddingRight="20dp"
+            android:focusable="true"
+            android:layout_gravity="center" />
 
 
     </LinearLayout>

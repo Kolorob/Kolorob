@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +15,9 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class DetailsInfoActivity extends Activity  {
 
-    ImageView close;
+    ImageView close,edukivabejaben;
     TextView close_tv;
-    Button edukivabejaben;
+
 
     /**
     * Following components are only for education
@@ -72,7 +71,7 @@ public class DetailsInfoActivity extends Activity  {
        email = (TextView) findViewById(R.id.tv_email);
        website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
-        edukivabejaben=(Button)findViewById(R.id.kivabejabenedu);
+        edukivabejaben=(ImageView)findViewById(R.id.kivabejabenedu);
 
         itemName.setText(educationServiceProviderItem.getEduNameEng());
        itemAddress.setText("ঠিকানা ঃ  "+educationServiceProviderItem.getArea());
