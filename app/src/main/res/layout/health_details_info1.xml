@@ -44,22 +44,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout2"
-        android:layout_alignLeft="@+id/linearLayout2"
+       android:layout_alignLeft="@+id/linearLayout2"
         android:layout_above="@+id/linearLayout4"
         android:layout_alignStart="@+id/linearLayout2"
         android:background="@drawable/detailed_info_panel_body"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView">-->
 
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout2"
+            android:id="@+id/dd"
+            android:background="@drawable/detailed_info_panel_body"
+            >
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,12 +76,9 @@
 
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,12 +91,9 @@
                     android:layout_alignRight="@+id/imageView4"
                     android:layout_alignEnd="@+id/imageView4" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,12 +110,9 @@
 
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -130,20 +122,16 @@
                     android:id="@+id/tv_item_type_entertainment"
                     android:textColor="@color/small_window_text_color"
                     android:textSize="20sp"
-                    android:layout_below="@+id/tv_item_location_entertainment"
-                    android:layout_alignParentLeft="true"
+
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="4dp" />
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -153,8 +141,7 @@
                     android:id="@+id/tv_item_contact_entertainment"
                     android:textColor="@color/small_window_text_color"
                     android:textSize="20sp"
-                    android:layout_below="@+id/tv_item_type_entertainment"
-                    android:layout_alignParentLeft="true"
+
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingTop="2dp"
@@ -162,12 +149,9 @@
 
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,38 +161,28 @@
                     android:textColor="#000000"
                     android:textSize="25sp"
                     android:paddingLeft="10dp"
-                    android:layout_below="@+id/tv_item_contact_entertainment"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+
                     android:padding="5dp"
                     android:layout_marginLeft="5dp" />
 
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView4"
-                    android:layout_alignParentStart="true"
                     android:src="@drawable/green_line_horizontal"
-                    android:layout_below="@+id/textView12_health"
-                    android:layout_alignParentLeft="true"
+
                     android:padding="5dp" />
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -219,17 +193,12 @@
                     android:textSize="25sp"
                     android:paddingLeft="10dp"
                     android:padding="5dp"
-                    android:layout_alignLeft="@+id/textView12_health"
-                    android:layout_alignStart="@+id/textView12_health"
-                    android:layout_below="@+id/imageView4" />
+              />
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -241,17 +210,12 @@
                     android:paddingLeft="10dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="4dp"
-                    android:layout_alignLeft="@+id/tv_website_entertainment"
-                    android:layout_alignStart="@+id/tv_website_entertainment"
-                    android:layout_below="@+id/textView13_health" />
+                    />
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -264,17 +228,12 @@
                     android:paddingLeft="10dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="4dp"
-                    android:layout_below="@+id/tv_email_entertainment"
-                    android:layout_alignLeft="@+id/tv_fb_entertainment"
-                    android:layout_alignStart="@+id/tv_fb_entertainment" />
+                    />
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -288,42 +247,112 @@
                     android:paddingTop="2dp"
                     android:paddingBottom="4dp"
 
-                    android:layout_below="@+id/tv_website_entertainment"
-                    android:layout_alignLeft="@+id/textView13_health" />
+
+                    />
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
+
 
                 <ListView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/listView2" />
+                    android:layout_margin="10dp"
+                    android:id="@+id/listView2"
 
-                <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listView3" />
 
-                <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listView4" />
-            </LinearLayout>
+                    >
+               </ListView>
+
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/listView3"
+
+
+                >
+            </ListView>
+
+
+
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/listView4"
+
+
+                >
+            </ListView>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="স্কুল এর নাম"
+                android:id="@+id/tv_header_entertainments"
+                android:textColor="#000000"
+                android:textSize="25sp"
+
+                android:padding="5dp"
+                android:layout_marginLeft="5dp" />
+
+
+
+
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViews2"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/green_line_horizontal"
+                android:layout_below="@+id/tv_header_entertainment"
+                android:layout_alignParentLeft="true"
+                android:padding="5dp"
+                android:layout_alignRight="@+id/imageView4"
+                android:layout_alignEnd="@+id/imageView4" />
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ঠিকানা :"
+                android:id="@+id/tv_item_location_entertainments"
+                android:textColor="@color/small_window_text_color"
+                android:textSize="20sp"
+                android:layout_below="@+id/imageView2"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp" />
+
+
+
+
+
 
 
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/detailed_info_panel_bottom"
         android:layout_gravity="bottom"
+
         android:layout_alignParentBottom="true"
         android:id="@+id/linearLayout4"
         android:gravity="center_vertical|center_horizontal">

@@ -146,7 +146,7 @@ public class HealthVaccinesTable {
         ArrayList<HealthVaccinesItem> vaccineList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+nodeId+"'" , null);
 
         if (cursor.moveToFirst()) {
             do {

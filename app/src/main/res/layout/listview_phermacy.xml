@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+
     android:layout_height="match_parent">
 
 
@@ -10,6 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Doc ID"
+        android:textColor="@color/black"
         android:id="@+id/doc_id" />
 
     <TextView
@@ -17,11 +19,15 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Doc_name"
+        android:textColor="@color/black"
+
         android:id="@+id/doc_name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Doc_fee"
         android:id="@+id/doc_fee" />
@@ -29,6 +35,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pharmacy Time"
         android:id="@+id/pharmacy_time" />
@@ -38,6 +46,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pharmacy_degree"
+        android:textColor="@color/black"
+
         android:id="@+id/phar_deg" />
 
     <TextView
@@ -45,11 +55,15 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pharmacy_lmaf"
+        android:textColor="@color/black"
+
         android:id="@+id/phar_lmaf" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pharmacy_Mbbs"
         android:id="@+id/phar_mbbs" />
@@ -59,11 +73,15 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pharmacy_speciallist"
+        android:textColor="@color/black"
+
         android:id="@+id/phar_speciallist" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pharmacy_remarks"
         android:id="@+id/phar_remarks" />
