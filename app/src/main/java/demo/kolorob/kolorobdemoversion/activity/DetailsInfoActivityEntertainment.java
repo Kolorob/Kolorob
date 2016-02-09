@@ -12,7 +12,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationExamFeesDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationResultInfoTable;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationExamFeeItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -61,6 +69,9 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         /**
          *following codes only for education. This may vary for different category.
          * */
+
+
+
         itemName = (TextView) findViewById(R.id.tv_header_entertainment);
         itemAddress = (TextView) findViewById(R.id.tv_item_type_ent);
 
