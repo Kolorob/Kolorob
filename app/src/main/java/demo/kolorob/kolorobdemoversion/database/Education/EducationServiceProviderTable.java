@@ -60,7 +60,7 @@ public class EducationServiceProviderTable  {
 
     //
     private static final String KEY_BREAKTIME2 = "_breaktime2"; //
-    private static final String KEY_ADTIME = "_additionaltime";
+    private static final String KEY_ADTIME = "_additional_time";
 
 
     private Context tContext;
@@ -92,9 +92,9 @@ public class EducationServiceProviderTable  {
                 + KEY_FB_LINK + " TEXT, "
                 + KEY_REGISTERED_WITH + " TEXT, "
                 + KEY_REGISTRATION_NO  + " TEXT, "
-                + KEY_TOTAL_STUDENTS + " TEXT, "
-                + KEY_TOTAL_CLASSES + " TEXT, "
-                + KEY_TOTAL_TEACHERS + " TEXT, "
+                + KEY_TOTAL_STUDENTS + " INTEGER, "
+                + KEY_TOTAL_CLASSES + " INTEGER, "
+                + KEY_TOTAL_TEACHERS + " INTEGER, "
                 + KEY_COURSE_PROVIDED + " TEXT, "
                 + KEY_SHIFT + " TEXT, "
                 + KEY_CANTEEN_FACILITY + " TEXT, "
@@ -106,11 +106,11 @@ public class EducationServiceProviderTable  {
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_BREAKTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
-                + KEY_LANDMARK + " TEXT, "
                 + KEY_ROAD+ " TEXT, "
                 + KEY_BLOCK + " TEXT, "
+                + KEY_LANDMARK + " TEXT, "
                 + KEY_BREAKTIME2 + " TEXT, "
-                + KEY_ADTIME + "TEXT, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_EDU_SUBCATEGORY_ID + ", " + KEY_SERVICE_PROVIDER_ID + "))";
+                + KEY_ADTIME + " TEXT, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_EDU_SUBCATEGORY_ID + ", " + KEY_SERVICE_PROVIDER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -152,14 +152,14 @@ public class EducationServiceProviderTable  {
                 educationServiceProviderItem.getAddress(),
                 educationServiceProviderItem.getLatitude(),
                 educationServiceProviderItem.getLongitude(),
-                educationServiceProviderItem.getOpening_time(),
-                educationServiceProviderItem.getBreak_time(),
-                educationServiceProviderItem.getClosing_time(),
-                educationServiceProviderItem.getLandmark(),
+                educationServiceProviderItem.getOpeningtime(),
+                educationServiceProviderItem.getBreaktime(),
+                educationServiceProviderItem.getClosingtime(),
                 educationServiceProviderItem.getRoad(),
                 educationServiceProviderItem.getBlock(),
+                educationServiceProviderItem.getLandmark(),
                 educationServiceProviderItem.getBreaktime2(),
-                educationServiceProviderItem.getAdditional_time()
+                educationServiceProviderItem.getAdditionaltime()
         );
     }
 
@@ -180,9 +180,9 @@ public class EducationServiceProviderTable  {
                            String fbLink,
                            String registeredWith,
                            String registrationNo,
-                           String totalStudents,
-                           String totalClasses,
-                           String totalTeachers,
+                           int totalStudents,
+                           int totalClasses,
+                           int totalTeachers,
                            String courseProvided,
                            String shift,
                            String canteenFacility,
@@ -190,11 +190,11 @@ public class EducationServiceProviderTable  {
                            String area,
                            String address,
                            String latitude,
-                           String longitude, String opening_time,
-                           String break_time, String closing_time,
+                           String longitude, String openingtime,
+                           String breaktime, String closingtime,
                            String road, String block,
                            String landmark,
-                           String breaktime2, String additional_time) {
+                           String breaktime2, String additionaltime) {
         if (isFieldExist(identifierId,categoryId,eduSubCategoryId)) {
             return updateItem(
                     identifierId,
@@ -224,14 +224,14 @@ public class EducationServiceProviderTable  {
                     area,
                     address,
                     latitude,
-                    longitude,opening_time,
-                    break_time,
-                    closing_time,
+                    longitude,openingtime,
+                    breaktime,
+                    closingtime,
                     road,
                     block,
                     landmark,
                     breaktime2,
-                    additional_time);
+                    additionaltime);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_IDENTIFIER_ID , identifierId);
@@ -262,14 +262,14 @@ public class EducationServiceProviderTable  {
         rowValue.put(KEY_ADDRESS, address);
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
-        rowValue.put(KEY_OPENTIME , opening_time);
-        rowValue.put(KEY_BREAKTIME  , break_time);
-        rowValue.put(KEY_CLOSEATIME  , closing_time);
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
         rowValue.put(KEY_ROAD  , road );
         rowValue.put(KEY_BLOCK   , block );
         rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
-        rowValue.put(KEY_ADTIME  , additional_time );
+        rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
 
@@ -312,16 +312,16 @@ public class EducationServiceProviderTable  {
                             String fbLink,
                             String registeredWith,
                             String registrationNo,
-                            String totalStudents,
-                            String totalClasses,
-                            String totalTeachers,
+                            int totalStudents,
+                            int totalClasses,
+                            int totalTeachers,
                             String courseProvided,
                             String shift,
                             String canteenFacility,
                             String additionalInfo,
                             String area,
                             String address,
-                            String latitude,String longitude, String opening_time,String break_time,String closing_time,String road,String block,String landmark,String breaktime2,String additional_time) {
+                            String latitude,String longitude, String openingtime,String breaktime,String closingtime,String road,String block,String landmark,String breaktime2,String additionaltime) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_IDENTIFIER_ID , identifierId);
         rowValue.put(KEY_SERVICE_PROVIDER_ID , serviceProviderId);
@@ -351,14 +351,14 @@ public class EducationServiceProviderTable  {
         rowValue.put(KEY_ADDRESS,address);
         rowValue.put(KEY_LATITUDE,latitude);
         rowValue.put(KEY_LONGITUDE,longitude);
-        rowValue.put(KEY_OPENTIME , opening_time);
-        rowValue.put(KEY_BREAKTIME  , break_time);
-        rowValue.put(KEY_CLOSEATIME  , closing_time);
+        rowValue.put(KEY_OPENTIME , openingtime);
+        rowValue.put(KEY_BREAKTIME  , breaktime);
+        rowValue.put(KEY_CLOSEATIME  , closingtime);
         rowValue.put(KEY_ROAD  , road );
         rowValue.put(KEY_BLOCK   , block );
         rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
-        rowValue.put(KEY_ADTIME  , additional_time );
+        rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND "+KEY_EDU_SUBCATEGORY_ID + " = ? AND "+KEY_CATEGORY_ID + " = ? ",
                 new String[]{identifierId + "",eduSubCategoryId+"",categoryId+""});
@@ -466,9 +466,9 @@ public class EducationServiceProviderTable  {
         String _fbLink=cursor.getString(14);
         String _registeredWith=cursor.getString(15);
         String _registrationNo=cursor.getString(16);
-        String _totalStudents=cursor.getString(17);
-        String _totalClasses=cursor.getString(18);
-        String _totalTeachers=cursor.getString(19);
+        int _totalStudents=cursor.getInt(17);
+        int _totalClasses=cursor.getInt(18);
+        int _totalTeachers=cursor.getInt(19);
         String _courseProvided=cursor.getString(20);
         String _shift=cursor.getString(21);
         String _canteenFacility=cursor.getString(22);
@@ -477,14 +477,14 @@ public class EducationServiceProviderTable  {
         String _address=cursor.getString(25);
         String _latitude = cursor.getString(26);
         String _longitude = cursor.getString(27);
-        String _opening_time=cursor.getString(28);
-        String _break_time=cursor.getString(29);
-        String _closing_time=cursor.getString(30);
+        String _openingtime=cursor.getString(28);
+        String _breaktime=cursor.getString(29);
+        String _closingtime=cursor.getString(30);
         String _road=cursor.getString(31);
         String _block=cursor.getString(32);
         String _landmark=cursor.getString(33);
         String _breaktime2=cursor.getString(34);
-        String _additional_time=cursor.getString(35);
+        String _additionaltime=cursor.getString(35);
 
 
         return new EducationServiceProviderItem(
@@ -514,14 +514,14 @@ public class EducationServiceProviderTable  {
                 _additionalInfo,
                 _area,_address,
                 _latitude,
-                _longitude,_opening_time,
-                _break_time,
-                _closing_time,
+                _longitude,_openingtime,
+                _breaktime,
+                _closingtime,
                 _road,
                 _block,
                 _landmark,
                 _breaktime2,
-                _additional_time);
+                _additionaltime);
     }
 
     public void dropTable() {

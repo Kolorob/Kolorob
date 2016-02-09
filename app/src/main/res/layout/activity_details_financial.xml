@@ -190,7 +190,7 @@
         </RelativeLayout>
     </ScrollView>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/detailed_info_panel_bottom"
@@ -199,13 +199,18 @@
         android:id="@+id/linearLayout4">
 
 
-        <Button
+
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/kivabejabenFinancial"
-            android:text="কিভাবে যাবেন"
-            android:foregroundGravity="center"
-            android:gravity="center" />
+            android:src="@drawable/kivabe"
+            android:paddingRight="20dp"
+            android:focusable="true"
+            android:layout_gravity="center" />
+
+
 
 
 

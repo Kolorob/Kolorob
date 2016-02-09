@@ -6,12 +6,10 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,8 +32,8 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class DetailsInfoActivityHealth extends Activity  {
-    Button kivabejabenHealth;
-    ImageView close;
+
+    ImageView close,kivabejabenHealth;
     TextView close_tv;
     ListView lv1,lv2,lv3;
 
@@ -223,7 +221,7 @@ public class DetailsInfoActivityHealth extends Activity  {
         email = (TextView) findViewById(R.id.tv_email_entertainment);
         website = (TextView) findViewById(R.id.tv_website_entertainment);
         fb = (TextView) findViewById(R.id.tv_fb_entertainment);
-        kivabejabenHealth=(Button)findViewById(R.id.kivabejabenhealth);
+        kivabejabenHealth=(ImageView)findViewById(R.id.kivabejabenhealth);
 
 
 

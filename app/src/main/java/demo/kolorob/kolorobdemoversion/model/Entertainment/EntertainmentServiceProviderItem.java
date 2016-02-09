@@ -37,9 +37,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
     private String closingtime;
     private String breaktime;
     private String breaktime2;
-    private String landmark;
+
     private String road;
     private String block;
+    private String landmark;
     private String additionaltime;
 
 
@@ -69,7 +70,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
             String latitude,
             String longitude,
             int categoryId,
-            String openingtime,String breaktime, String closingtime, String landmark, String road, String block, String breaktime2,  String additionaltime){
+            String openingtime,String breaktime, String closingtime, String road, String block, String landmark, String breaktime2,  String additionaltime){
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;
@@ -96,9 +97,9 @@ public class EntertainmentServiceProviderItem implements Serializable {
         this.openingtime = openingtime;
         this.breaktime = breaktime;
         this.closingtime = closingtime;
-        this.landmark = landmark;
         this.road = road;
         this.block = block;
+        this.landmark = landmark;
         this.breaktime2 = breaktime2;
         this.additionaltime = additionaltime;
 
@@ -164,10 +165,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
         String _openingtime=jo.getString("opening_time");
         String _breaktime=jo.getString("break_time");
         String _closingtime=jo.getString("closing_time");
-        String _landmark=jo.getString("landmark");
         String _road=jo.getString("road");
         String _block =jo.getString("block");
-        String _breaktime2=jo.getString("breaktime2");
+        String _landmark=jo.getString("landmark");
+        String _breaktime2=jo.getString("break_time2");
         String _additionaltime=jo.getString("additional_time");
 
 
@@ -198,7 +199,7 @@ public class EntertainmentServiceProviderItem implements Serializable {
                 _openingtime,
                 _breaktime,
                 _closingtime,
-                _landmark, _road, _block, _breaktime2, _additionaltime);
+             _road, _block,_landmark, _breaktime2, _additionaltime);
     }
 
 

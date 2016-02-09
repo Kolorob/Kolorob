@@ -30,27 +30,25 @@ public class EducationServiceProviderItem implements Serializable {
     private String fbLink;
     private String registeredWith;
     private String registrationNo;
-    private String totalStudents;
-    private String totalClasses;
-    private String totalTeachers;
+    private int totalStudents;
+    private int totalClasses;
+    private int totalTeachers;
     private String courseProvided;
     private String shift;
     private String canteenFacility;
     private String additionalInfo;
-    private String nodeType;
     private String area;
     private String address;
     private String latitude;
     private String longitude;
-
-    private String opening_time;
-    private String break_time;
-    private String closing_time;
+    private String openingtime;
+    private String breaktime;
+    private String closingtime;
     private String road;
     private String block;
     private String landmark;
     private String breaktime2;
-    private String additional_time;
+    private String additionaltime;
 
     public void setEduNameEng(String eduNameEng) {
         this.eduNameEng = eduNameEng;
@@ -73,9 +71,9 @@ public class EducationServiceProviderItem implements Serializable {
                                         String fbLink,
                                         String registeredWith,
                                         String registrationNo,
-                                        String totalStudents,
-                                        String totalClasses,
-                                        String totalTeachers,
+                                        int totalStudents,
+                                        int totalClasses,
+                                        int totalTeachers,
                                         String courseProvided,
                                         String shift,
                                         String canteenFacility,
@@ -84,7 +82,7 @@ public class EducationServiceProviderItem implements Serializable {
                                         String address,
                                         String latitude,
                                         String longitude,
-                                        String opening_time,String break_time,String closing_time,String road,String block,String landmark,String breaktime2,String additional_time) {
+                                        String openingtime,String breaktime,String closingtime,String road,String block,String landmark,String breaktime2,String additionaltime) {
 
         this.identifierId = identifierId ;
         this.serviceProviderId = serviceProviderId;
@@ -114,33 +112,31 @@ public class EducationServiceProviderItem implements Serializable {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.opening_time=opening_time;
-        this.break_time=break_time;
-        this.closing_time=closing_time;
+        this.openingtime=openingtime;
+        this.breaktime=breaktime;
+        this.closingtime=closingtime;
         this.road=road;
         this.block=block;
         this.landmark=landmark;
         this.breaktime2=breaktime2;
-        this.additional_time=additional_time;
+        this.additionaltime=additionaltime;
 
 
 
     }
 
-    public String getNodeType() {
-        return nodeType;
+
+
+    public String getOpeningtime() {
+        return openingtime;
     }
 
-    public String getOpening_time() {
-        return opening_time;
+    public String getBreaktime() {
+        return breaktime;
     }
 
-    public String getBreak_time() {
-        return break_time;
-    }
-
-    public String getClosing_time() {
-        return closing_time;
+    public String getClosingtime() {
+        return closingtime;
     }
 
     public String getRoad() {
@@ -159,8 +155,8 @@ public class EducationServiceProviderItem implements Serializable {
         return breaktime2;
     }
 
-    public String getAdditional_time() {
-        return additional_time;
+    public String getAdditionaltime() {
+        return additionaltime;
     }
 
     public String getIdentifierId(){return identifierId ;}
@@ -197,9 +193,9 @@ public class EducationServiceProviderItem implements Serializable {
     public String getFbLink(){return fbLink;}
     public String getRegisteredWith(){return registeredWith;}
     public String getRegistrationNo(){return registrationNo;}
-    public String getTotalStudents(){return totalStudents;}
-    public String getTotalClasses(){return totalClasses;}
-    public String getTotalTeachers(){return totalTeachers;}
+    public int getTotalStudents(){return totalStudents;}
+    public int getTotalClasses(){return totalClasses;}
+    public int getTotalTeachers(){return totalTeachers;}
     public String getCourseProvided(){return courseProvided;}
     public String getShift(){return shift;}
     public String getCanteenFacility(){return canteenFacility;}
@@ -226,9 +222,9 @@ public class EducationServiceProviderItem implements Serializable {
         String _fbLink=jo.getString("fb_link");
         String _registeredWith=jo.getString("registered_with");
         String _registrationNo=jo.getString("registration_no");
-        String _totalStudents=jo.getString("total_students");
-        String _totalClasses=jo.getString("total_classes");
-        String _totalTeachers=jo.getString("total_teachers");
+        int _totalStudents=jo.getInt("total_students");
+        int _totalClasses=jo.getInt("total_classes");
+        int _totalTeachers=jo.getInt("total_teachers");
         String _courseProvided=jo.getString("course_provided");
         String _shift=jo.getString("shift");
         String _canteenFacility=jo.getString("canteen_facility");
@@ -237,16 +233,16 @@ public class EducationServiceProviderItem implements Serializable {
         String _address=jo.getString("address");
         String _latitude = jo.getString("latitude");
         String _longitude = jo.getString("longitude");
-        String _opening_time=jo.getString("shift");
-        String _break_time=jo.getString("canteen_facility");
-        String _closing_time=jo.getString("additional_info");
-        String _road=jo.getString("area");
-        String _block=jo.getString("address");
-        String _landmark = jo.getString("latitude");
-        String _breaktime2 = jo.getString("longitude");
-        String _additional_time= jo.getString("additional_time");
+        String _openingtime=jo.getString("opening_time");
+        String _breaktime=jo.getString("break_time");
+        String _closingtime=jo.getString("closing_time");
+        String _road=jo.getString("road");
+        String _block=jo.getString("block");
+        String _landmark = jo.getString("landmark");
+        String _breaktime2 = jo.getString("breaktime2");
+        String _additionaltime= jo.getString("additional_time");
 
-        return new EducationServiceProviderItem(  _identifierId,
+        return new EducationServiceProviderItem( _identifierId,
                 _serviceProviderId,
                 _eduSubCategoryId,
                 _categoryId,
@@ -271,8 +267,8 @@ public class EducationServiceProviderItem implements Serializable {
                 _canteenFacility,
                 _additionalInfo,_area,_address,
                 _latitude,
-                _longitude,_opening_time,
-                _break_time,_closing_time,_road,_block,_landmark,_breaktime2,_additional_time);
+                _longitude,_openingtime,
+                _breaktime,_closingtime,_road,_block,_landmark,_breaktime2,_additionaltime);
     }
 
 }

@@ -85,7 +85,7 @@ public class FinancialServiceProviderTable {
                 + KEY_ROAD+ " TEXT, "
                 + KEY_BLOCK + " TEXT, "
                 + KEY_BREAKTIME2 + " TEXT, "
-                + KEY_ADTIME + "TEXT, PRIMARY KEY(" + KEY_FIN_NODE_ID+ ", " + KEY_FIN_REF_NUM + "))";
+                + KEY_ADTIME + " TEXT, PRIMARY KEY(" + KEY_FIN_NODE_ID+ ", " + KEY_FIN_REF_NUM + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }

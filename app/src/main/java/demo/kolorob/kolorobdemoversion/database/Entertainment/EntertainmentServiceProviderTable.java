@@ -46,9 +46,9 @@ public class EntertainmentServiceProviderTable {
     private static final String KEY_OPENTIME = "_openingtime"; //
     private static final String KEY_BREAKTIME = "_breaktime"; //
     private static final String KEY_CLOSEATIME = "_closingtime";
-    private static final String KEY_LANDMARK = "_landmark"; //
     private static final String KEY_ROAD = "_road"; //
     private static final String KEY_BLOCK = "_block"; //
+    private static final String KEY_LANDMARK = "_landmark"; //
     private static final String KEY_BREAKTIME2 = "_breaktime2"; //
     private static final String KEY_ADTIME = "_additionaltime";
 
@@ -65,8 +65,8 @@ public class EntertainmentServiceProviderTable {
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_NODE_ID + "  INTEGER , " // 0 - int
-                + KEY_SUB_CATEGORY_ID + "  INTEGER, "              // 1 - text
+                + KEY_NODE_ID + " TEXT , " // 0 - int
+                + KEY_SUB_CATEGORY_ID + " INTEGER, "              // 1 - text
                 + KEY_NODE_NAME + " TEXT, "
                 + KEY_NODE_NAME_BN + " TEXT, "// 2 - text
                 + KEY_DATE_NAME + " TEXT, "
@@ -90,11 +90,11 @@ public class EntertainmentServiceProviderTable {
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_BREAKTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
-                + KEY_LANDMARK + " TEXT, "
                 + KEY_ROAD+ " TEXT, "
                 + KEY_BLOCK + " TEXT, "
+                + KEY_LANDMARK + " TEXT, "
                 + KEY_BREAKTIME2 + " TEXT, "
-                + KEY_ADTIME + "TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
+                + KEY_ADTIME + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -107,8 +107,8 @@ public class EntertainmentServiceProviderTable {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
-    public long insertItemEntertainment(EntertainmentServiceProviderItem entertainmentServiceProviderItem) {
-        return insertItemEntertainment(
+    public long insertItem(EntertainmentServiceProviderItem entertainmentServiceProviderItem) {
+        return insertItem(
                 entertainmentServiceProviderItem.getNodeId(),
                 entertainmentServiceProviderItem.getEntSubCategoryId(),
                 entertainmentServiceProviderItem.getNodeName(),
@@ -134,9 +134,9 @@ public class EntertainmentServiceProviderTable {
                 entertainmentServiceProviderItem.getOpeningtime(),
                 entertainmentServiceProviderItem.getBreaktime(),
                 entertainmentServiceProviderItem.getClosingtime(),
-                entertainmentServiceProviderItem.getLandmark(),
                 entertainmentServiceProviderItem.getRoad(),
                 entertainmentServiceProviderItem.getBlock(),
+                entertainmentServiceProviderItem.getLandmark(),
                 entertainmentServiceProviderItem.getBreaktime2(),
                 entertainmentServiceProviderItem.getAdditionaltime()
 
@@ -144,7 +144,7 @@ public class EntertainmentServiceProviderTable {
         );
     }
 
-    public long insertItemEntertainment(String nodeId,
+    public long insertItem(String nodeId,
                                         int entSubCategoryId,
                                         String nodeName,
                                         String nodeNameBn,
@@ -166,7 +166,7 @@ public class EntertainmentServiceProviderTable {
                                         String latitude,
                                         String longitude,
                                         int categoryId,
-                                       String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime
+                                       String openingtime, String breaktime, String closingtime, String road, String block, String landmark, String breaktime2, String additionaltime
 
     ) {
         if (isFieldExist(nodeId, entSubCategoryId)) {
@@ -195,9 +195,9 @@ public class EntertainmentServiceProviderTable {
                     openingtime,
                     breaktime,
                     closingtime,
-                    landmark,
                     road,
                     block,
+                    landmark,
                     breaktime2,
                     additionaltime);
         }
@@ -205,8 +205,8 @@ public class EntertainmentServiceProviderTable {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
         rowValue.put(KEY_SUB_CATEGORY_ID , entSubCategoryId);
-        rowValue.put(KEY_NODE_NAME  , nodeName);
-        rowValue.put(KEY_NODE_NAME_BN,nodeNameBn);
+        rowValue.put(KEY_NODE_NAME , nodeName);
+        rowValue.put(KEY_NODE_NAME_BN ,nodeNameBn);
         rowValue.put(KEY_DATE_NAME , dataName);
         rowValue.put(KEY_DATE_DATE , dataDate);
         rowValue.put(KEY_NODE_DESIGNATION ,nodeDesignation );
@@ -228,9 +228,10 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_OPENTIME , openingtime);
         rowValue.put(KEY_BREAKTIME  , breaktime);
         rowValue.put(KEY_CLOSEATIME  , closingtime);
-        rowValue.put(KEY_LANDMARK  , landmark);
+
         rowValue.put(KEY_ROAD  , road );
         rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
         rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
@@ -283,8 +284,8 @@ public class EntertainmentServiceProviderTable {
                              String longitude,
                              int categoryId,
                           String openingtime,
-                             String breaktime, String closingtime, String landmark,
-                             String road, String block, String breaktime2, String additionaltime
+                             String breaktime, String closingtime,
+                             String road, String block,String landmark, String breaktime2, String additionaltime
                              ) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
@@ -312,9 +313,9 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_OPENTIME , openingtime);
         rowValue.put(KEY_BREAKTIME  , breaktime);
         rowValue.put(KEY_CLOSEATIME  , closingtime);
-        rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_ROAD  , road );
         rowValue.put(KEY_BLOCK   , block );
+        rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
         rowValue.put(KEY_ADTIME  , additionaltime );
 
@@ -324,8 +325,8 @@ public class EntertainmentServiceProviderTable {
 //                new String[]{identifierId + "", eduSubCategoryId + "", categoryId + ""});
 
 
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+ KEY_SUB_CATEGORY_ID + " = ? AND "+ KEY_CATEGORY_ID + " = ? ",
-                new String[]{nodeId + "", entSubCategoryId+ "", categoryId + ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+ KEY_SUB_CATEGORY_ID + " = ? ",
+                new String[]{nodeId + "", entSubCategoryId+ ""});
         closeDB();
         return ret;
     }
@@ -400,23 +401,6 @@ public class EntertainmentServiceProviderTable {
     }
 
 
-//    public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id) {
-//        ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
-//        //System.out.println(cat_id+"  "+sub_cat_id);
-//        SQLiteDatabase db = openDB();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                //System.out.println("abc="+cursor.getString(4));
-//                subCatList.add(cursorToSubCatList(cursor));
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        closeDB();
-//        return subCatList;
-//    }
-
 
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
@@ -442,7 +426,7 @@ public class EntertainmentServiceProviderTable {
 
     private EntertainmentServiceProviderItem cursorToSubCatList(Cursor cursor) {
         String _nodeId= cursor.getString(0);
-        Integer _entSubCategoryId= cursor.getInt(1);
+        int _entSubCategoryId= cursor.getInt(1);
         String _nodeName = cursor.getString(2);
         String _nodeNameBn= cursor.getString(3);
         String _dataName = cursor.getString(4);
@@ -466,9 +450,9 @@ public class EntertainmentServiceProviderTable {
         String _openingtime=cursor.getString(22);
         String _breaktime=cursor.getString(23);
         String _closingtime=cursor.getString(24);
-        String _landmark=cursor.getString(25);
-        String _road=cursor.getString(26);
-        String _block=cursor.getString(27);
+        String _road=cursor.getString(25);
+        String _block=cursor.getString(26);
+        String _landmark=cursor.getString(27);
         String _breaktime2=cursor.getString(28);
         String _additionaltime=cursor.getString(29);
 
