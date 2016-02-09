@@ -19,8 +19,8 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class EntertainmentFitnessTable {
 
-    private static final String TAG = EntertainmentBookTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.ENT_BOOKSHOP_TABLE;
+    private static final String TAG = EntertainmentFitnessTable.class.getSimpleName();
+    private static final String TABLE_NAME = DatabaseHelper.ENT_FIT_BEAUTY;
     public static final String KEY_NODE_ID = "_node_id";
     public static final String KEY_SUB_CATEGORY_ID = "_ent_sub_category_id";
     private static final String KEY_ENT_YEAR = "_year_of_establishment"; // 1 - text

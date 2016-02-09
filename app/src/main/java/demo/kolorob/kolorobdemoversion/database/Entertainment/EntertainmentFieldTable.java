@@ -18,8 +18,8 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  * Created by israt.jahan on 2/9/2016.
  */
 public class EntertainmentFieldTable {
-    private static final String TAG = EntertainmentTheatreTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.ENT_THEATRE;
+    private static final String TAG = EntertainmentFieldTable.class.getSimpleName();
+    private static final String TABLE_NAME = DatabaseHelper.ENT_FIELD;
     public static final String KEY_NODE_ID = "_node_id";
     public static final String KEY_SUB_CATEGORY_ID = "_ent_sub_category_id";
     public static final String KEY_EVENTCOST = "_event_cost";

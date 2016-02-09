@@ -34,7 +34,10 @@ import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialLoanTable;
@@ -60,7 +63,10 @@ import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
@@ -313,6 +319,55 @@ public class OpeningActivity extends Activity {
                     }
                 }
             });
+            getRequest(OpeningActivity.this, "entertainment/theatre", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveEntertainmentTheatre(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            getRequest(OpeningActivity.this, "entertainment/fitness_beauty", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveEntertainmentFitness(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            getRequest(OpeningActivity.this, "entertainment/field", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveEntertainmentField(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
 
             getRequest(OpeningActivity.this, "health", new VolleyApiCallback() {
                 @Override
@@ -788,6 +843,57 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = entertainmentBookshop.getJSONObject(i);
                EntertainmentBookShopItem et = EntertainmentBookShopItem.parseEntertainmentBookShopItem(jo);
                 entertainmentBookTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    private void saveEntertainmentField(JSONArray entertainmentField) {
+        EntertainmentFieldTable entertainmentFieldTable = new EntertainmentFieldTable(OpeningActivity.this);
+        entertainmentFieldTable.dropTable();
+        int entertainmentFieldCount = entertainmentField.length();
+
+        for (int i = 0; i < entertainmentFieldCount; i++) {
+            try {
+                JSONObject jo = entertainmentField.getJSONObject(i);
+                EntertainmentFieldItem et = EntertainmentFieldItem.parseEntertainmentFieldItem(jo);
+                entertainmentFieldTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    private void saveEntertainmentTheatre(JSONArray entertainmentTheatre) {
+        EntertainmentTheatreTable entertainmentTheatreTable = new EntertainmentTheatreTable(OpeningActivity.this);
+        entertainmentTheatreTable.dropTable();
+        int entertainmentTheatreCount = entertainmentTheatre.length();
+
+        for (int i = 0; i < entertainmentTheatreCount; i++) {
+            try {
+                JSONObject jo = entertainmentTheatre.getJSONObject(i);
+                EntertainmentTheatreItem et = EntertainmentTheatreItem.parseEntertainmentTheatreItem(jo);
+                entertainmentTheatreTable.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    private void saveEntertainmentFitness(JSONArray entertainmentFitness) {
+        EntertainmentFitnessTable entertainmentFitnessTable = new EntertainmentFitnessTable(OpeningActivity.this);
+        entertainmentFitnessTable.dropTable();
+        int entertainmentFitnessCount = entertainmentFitness.length();
+
+        for (int i = 0; i < entertainmentFitnessCount; i++) {
+            try {
+                JSONObject jo = entertainmentFitness.getJSONObject(i);
+                EntertainmentFitnessItem et = EntertainmentFitnessItem.parseEntertainmentFitnessItem(jo);
+                entertainmentFitnessTable.insertItem(et);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
