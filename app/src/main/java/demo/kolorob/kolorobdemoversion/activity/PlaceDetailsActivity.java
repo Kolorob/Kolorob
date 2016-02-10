@@ -4,6 +4,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -76,7 +77,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private static TextView insSubCat;
     private static FrameLayout map;
     private int height;
-
+    private View nextChild;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
     private int subCatShowFlag=0;
@@ -483,6 +484,8 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         break;
                 }
 
+
+
                 /**
                  * code for all categories
                  **/
@@ -597,7 +600,16 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 * category id 5 means legal
                 * category id 6 means financial
                 * category id 7 means job*/
+
+                if(nextChild!=null)
+                    nextChild.setBackgroundColor(Color.TRANSPARENT);
+
                 switch (currentCategoryID) {
+
+
+
+
+
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> eduItem;
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
@@ -641,6 +653,13 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         break;
                 }
                 /*code for all*/
+
+
+                for(int i=0; i<((ViewGroup)v).getChildCount(); ++i) {
+                    nextChild = ((ViewGroup)v).getChildAt(i);
+                    nextChild.setBackgroundColor(Color.BLACK);
+                }
+
                 showSubCatListItem.setEnabled(true);
                 subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());

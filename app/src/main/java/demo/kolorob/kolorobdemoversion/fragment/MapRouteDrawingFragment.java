@@ -148,7 +148,8 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1 * 1000);
 
-
+       editor.clear();
+        editor.commit();
         return v;
     }
 
