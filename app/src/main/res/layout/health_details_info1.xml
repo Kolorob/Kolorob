@@ -291,17 +291,6 @@
 
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="স্কুল এর নাম"
-                android:id="@+id/tv_header_entertainments"
-                android:textColor="#000000"
-                android:textSize="25sp"
-
-                android:padding="5dp"
-                android:layout_marginLeft="5dp" />
 
 
 
@@ -309,33 +298,6 @@
 
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViews2"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/green_line_horizontal"
-                android:layout_below="@+id/tv_header_entertainment"
-                android:layout_alignParentLeft="true"
-                android:padding="5dp"
-                android:layout_alignRight="@+id/imageView4"
-                android:layout_alignEnd="@+id/imageView4" />
-
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="ঠিকানা :"
-                android:id="@+id/tv_item_location_entertainments"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/imageView2"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
 
 
 

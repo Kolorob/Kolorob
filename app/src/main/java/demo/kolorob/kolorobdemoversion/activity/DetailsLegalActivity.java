@@ -7,10 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.LegalAidAdviceAdapter;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
+import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -25,6 +33,10 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
         ImageView close,legal;
         TextView close_tv;
     ImageButton Feedback;
+         ListView lv11,lv2;
+    ArrayList<LegalAidtypeServiceProviderLegalAdviceTable> legalAidtypeServiceProviderLegalAdviceTables;
+    ArrayList<LegalAidLegalAdviceItem> legalAidLegalAdviceItems;
+    ArrayList<LegalAidSalishiItem> legalAidSalishiItems;
         /**
          * Following components are only for LegalAid
          * For other categories this components may vary
@@ -69,6 +81,9 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
             fb = (TextView) findViewById(R.id.tv_fb);
 
+            lv11 = (ListView) findViewById(R.id.listView7);
+            lv2 = (ListView) findViewById(R.id.listView8);
+
 
             /**
              *
@@ -89,8 +104,80 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             itemType.setText("যোগাযোগঃ  "+legalAidServiceProviderItem.getIdentifierId());
 
             itemContact.setText("যোগাযোগের উপায়ঃ "+legalAidServiceProviderItem.getContactNo());
+            String la= legalAidServiceProviderItem.getIdentifierId();
 
-           // email.setText("ইমেইলঃ "+legalAidServiceProviderItem.getEmailAddress());
+            LegalAidtypeServiceProviderLegalAdviceTable legalAidtypeServiceProviderLegalAdviceTable1=new LegalAidtypeServiceProviderLegalAdviceTable(this);
+            LegalAidtypeServiceProviderSalishiTable legalAidtypeServiceProviderSalishiTable = new LegalAidtypeServiceProviderSalishiTable(this);
+
+            legalAidLegalAdviceItems=legalAidtypeServiceProviderLegalAdviceTable.getLegalAdvice(la);
+            legalAidSalishiItems =  legalAidtypeServiceProviderSalishiTable.getLegalSalishi(la);
+
+            if(legalAidLegalAdviceItems!=null) {
+
+                int g= legalAidLegalAdviceItems.size();
+                String[] service_name=new String[g];
+                String[] legal_aid_free=new String[g];
+                String[] legal_aid_cost=new String[g];
+                String[] legal_aid_person_authority=new String[g];
+                String[] legal_aid_remark=new String[g];
+
+                int  k=0;
+                for (LegalAidLegalAdviceItem et : legalAidLegalAdviceItems) {
+
+                    service_name[k]=et.getLegalaidcost();
+                    legal_aid_free[k]=et.getLegalaidfree();
+                    legal_aid_cost[k]=et.getLegalaidcost();
+                    legal_aid_person_authority[k]=et.getLegalaidpersonauthority();
+                    legal_aid_remark[k]=et.getLegalaidremark();
+
+
+
+
+
+                    k++;
+                }
+
+
+                LegalAidAdviceAdapter adapter=new LegalAidAdviceAdapter(this,service_name,legal_aid_free,
+                        legal_aid_cost,legal_aid_person_authority,legal_aid_remark);
+                lv11.setAdapter(adapter);
+                Helpes.getListViewSize(lv11);
+            }
+
+            if(legalAidSalishiItems!=null) {
+
+                int g= legalAidSalishiItems.size();
+                String[] service_name=new String[g];
+                String[] legal_aid_free=new String[g];
+                String[] legal_aid_cost=new String[g];
+                String[] legal_aid_person_authority=new String[g];
+                String[] legal_aid_remark=new String[g];
+
+                int  k=0;
+                for (LegalAidSalishiItem et : legalAidSalishiItems) {
+
+                    service_name[k]=et.getSservicename();
+                    legal_aid_free[k]=et.getSfree();
+                    legal_aid_cost[k]=et.getScost();
+                    legal_aid_person_authority[k]=et.getSpersonauthority();
+                    legal_aid_remark[k]=et.getSremark();
+
+
+
+
+
+                    k++;
+                }
+
+
+                LegalAidAdviceAdapter adapter=new LegalAidAdviceAdapter(this,service_name,legal_aid_free,
+                        legal_aid_cost,legal_aid_person_authority,legal_aid_remark);
+                lv2.setAdapter(adapter);
+                Helpes.getListViewSize(lv2);
+            }
+
+
+            // email.setText("ইমেইলঃ "+legalAidServiceProviderItem.getEmailAddress());
            // website.setText("ওয়েবসাইটঃ "+legalAidServiceProviderItem.getWebsiteLink());
            // fb.setText("ফেসবুকঃ "+legalAidServiceProviderItem.getFbLink());
             legal.setOnClickListener(new View.OnClickListener() {

@@ -11,18 +11,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.EntertainmentBookshopAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.EntertainmentFieldAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.EntertainmentFitnessAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.EntertainmentTheatreAdapter;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationExamFeesDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultInfoTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
+import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationExamFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class DetailsInfoActivityEntertainment extends Activity  {
@@ -51,9 +65,16 @@ public class DetailsInfoActivityEntertainment extends Activity  {
     private TextView email;
     private TextView website;
     private TextView fb;
+    ListView navlist,navlist1,navlist2,navlist3;
+
+    ArrayList<EntertainmentBookShopItem> entertainmentBookShopItems;
+    ArrayList<EntertainmentFieldItem> entertainmentFieldItems;
+    ArrayList<EntertainmentFitnessItem> entertainmentFitnessItems;
+    ArrayList<EntertainmentTheatreItem> entertainmentTheatreItems;
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     EntertainmentServiceProviderItem entertainmentServiceProviderItem;
+
 
 
 
@@ -71,6 +92,13 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 finish();
             }
         });
+
+
+
+        navlist = (ListView) findViewById(R.id.listView7);
+        navlist1 = (ListView) findViewById(R.id.listView8);
+        navlist2 = (ListView) findViewById(R.id.listView9);
+        navlist3 = (ListView) findViewById(R.id.listView10);
 
         if (null != intent)
         {
@@ -133,6 +161,158 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 finish();
             }
         });
+
+
+        EntertainmentBookTable entertainmentBookTable =new EntertainmentBookTable(DetailsInfoActivityEntertainment.this);
+        EntertainmentFieldTable entertainmentFieldTable = new EntertainmentFieldTable(DetailsInfoActivityEntertainment.this);
+        EntertainmentFitnessTable entertainmentFitnessTable = new EntertainmentFitnessTable(DetailsInfoActivityEntertainment.this);
+        EntertainmentTheatreTable entertainmentTheatreTable =new EntertainmentTheatreTable(DetailsInfoActivityEntertainment.this);
+
+
+        entertainmentBookShopItems= entertainmentBookTable.getBookshop(entertainmentServiceProviderItem.getNodeId());
+        entertainmentFieldItems= entertainmentFieldTable.getField(entertainmentServiceProviderItem.getNodeId());
+        entertainmentFitnessItems= entertainmentFitnessTable.getFitness(entertainmentServiceProviderItem.getNodeId());
+        entertainmentTheatreItems= entertainmentTheatreTable.getTheatre(entertainmentServiceProviderItem.getNodeId());
+
+        if(entertainmentBookShopItems!=null) {
+
+            int g= entertainmentBookShopItems.size();
+            String[] borrow_cost=new String[g];
+            String[] lending_allowed=new String[g];
+            String[] membership_cost=new String[g];
+            String[] offers=new String[g];
+            String[] offer_details=new String[g];
+            String[] membership_cost_ffp=new String[g];
+            String[] membership_cost_foc=new String[g];
+           int  k=0;
+            for (EntertainmentBookShopItem et : entertainmentBookShopItems) {
+
+                borrow_cost[k]=et.getBorrowCost();
+                lending_allowed[k]=et.getLending();
+                membership_cost[k]=et.getMemcost();
+                offers[k]=et.getOffers();
+                offer_details[k]=et.getOfferdetails();
+                membership_cost_ffp[k]=et.getMemcostffp();
+                membership_cost_foc[k]=et.getMemcostfoc();
+
+
+
+                k++;
+            }
+
+
+            EntertainmentBookshopAdapter adapter=new EntertainmentBookshopAdapter(this,borrow_cost,lending_allowed,
+                    membership_cost,offers,offer_details,membership_cost_ffp,membership_cost_foc);
+            navlist.setAdapter(adapter);
+            Helpes.getListViewSize(navlist);
+        }
+
+
+
+        if(entertainmentFieldItems!=null) {
+
+            int g= entertainmentFieldItems.size();
+            String[] event_cost=new String[g];
+            String[] playground_cost=new String[g];
+            String[] remark=new String[g];
+            String[] event_cost_ffp=new String[g];
+            String[] event_cost_foc=new String[g];
+            String[] playground_cost_ffp=new String[g];
+            String[] playground_cost_foc=new String[g];
+
+           int  k=0;
+            for (EntertainmentFieldItem et : entertainmentFieldItems) {
+
+                event_cost[k]=et.getEventCost();
+                playground_cost[k]=et.getPlaygroundcost();
+                remark[k]=et.getRemark();
+                event_cost_ffp[k]=et.getEventcostffp();
+                event_cost_foc[k]=et.getEventcostfoc();
+                playground_cost_ffp[k]=et.getPlaygroundcostffp();
+                playground_cost_foc[k]=et.getPlaygroundcostfoc();
+                k++;
+            }
+            EntertainmentFieldAdapter adapter=new EntertainmentFieldAdapter(this,event_cost,playground_cost,
+                    remark,event_cost_ffp,event_cost_foc,playground_cost_ffp,playground_cost_foc);
+            navlist2.setAdapter(adapter);
+            Helpes.getListViewSize(navlist2);
+        }
+
+
+
+        if(entertainmentTheatreItems!=null) {
+
+            int g= entertainmentTheatreItems.size();
+
+            String[] event_type=new String[g];
+            String[] event_fee=new String[g];
+            String[] event_date=new String[g];
+            String[] remarks=new String[g];
+            String[] event_fee_ffp=new String[g];
+            String[] event_fee_foc=new String[g];
+
+            int  k=0;
+            for (EntertainmentTheatreItem et : entertainmentTheatreItems) {
+
+
+                event_type[k]=et.getEventtype();
+                event_fee[k]=et.getEventfee();
+                event_date[k]=et.getEventdate();
+                remarks[k]=et.getRemarks();
+                event_fee_ffp[k]=et.getEventfee();
+                event_fee_foc[k]=et.getEventfeefoc();
+                k++;
+            }
+            EntertainmentTheatreAdapter adapter=new EntertainmentTheatreAdapter(this,event_type,event_fee,
+                    event_date,remarks,event_fee_ffp,event_fee_foc);
+            navlist2.setAdapter(adapter);
+            Helpes.getListViewSize(navlist2);
+        }
+
+
+        if(entertainmentFitnessItems!=null) {
+
+            int g= entertainmentFitnessItems.size();
+
+            String[] year_of_establishment=new String[g];
+            String[] num_workers=new String[g];
+            String[] offers=new String[g];
+            String[] offer_details=new String[g];
+            String[] service_type=new String[g];
+            String[] type=new String[g];
+            String[] service_details=new String[g];
+
+            int  k=0;
+            for (EntertainmentFitnessItem et : entertainmentFitnessItems) {
+
+                int year=et.getYearofestablishment();
+                String docString = String.valueOf(year);
+
+
+                int years=et.getWorkers();
+                String docStrings = String.valueOf(years);
+
+                year_of_establishment[k]=docString;
+                num_workers[k]=docStrings;
+                offers[k]=et.getOffers();
+                offer_details[k]=et.getOfferdetails();
+                service_type[k]=et.getServicetype();
+                type[k]=et.getType();
+                service_details[k]=et.getServicedetails();
+                k++;
+            }
+            EntertainmentFitnessAdapter adapter=new EntertainmentFitnessAdapter(this,year_of_establishment,num_workers,
+                    offers,offer_details,service_type,type,service_details);
+            navlist3.setAdapter(adapter);
+            Helpes.getListViewSize(navlist3);
+        }
+
+
+
+
+
+
+
 
 
         kivabejaben.setOnClickListener(new View.OnClickListener() {

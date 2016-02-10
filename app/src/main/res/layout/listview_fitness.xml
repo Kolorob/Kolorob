@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Doc ID"
+        android:textColor="@color/black"
+        android:id="@+id/year_of_establishment" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Doc_name"
+        android:textColor="@color/black"
+
+        android:id="@+id/num_workers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Doc_fee"
+        android:id="@+id/offers" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy Time"
+        android:id="@+id/offer_details" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy_degree"
+        android:textColor="@color/black"
+
+        android:id="@+id/service_type" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy_lmaf"
+        android:textColor="@color/black"
+
+        android:id="@+id/type" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy_Mbbs"
+        android:id="@+id/service_details" />
+
+</LinearLayout>

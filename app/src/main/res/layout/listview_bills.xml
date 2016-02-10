@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Doc_name"
+        android:textColor="@color/black"
+
+        android:id="@+id/service_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Doc_fee"
+        android:id="@+id/yes_no" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy Time"
+        android:id="@+id/costs" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy_degree"
+        android:textColor="@color/black"
+
+        android:id="@+id/remark" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pharmacy_lmaf"
+        android:textColor="@color/black"
+
+        android:id="@+id/ref_num" />
+
+
+
+</LinearLayout>

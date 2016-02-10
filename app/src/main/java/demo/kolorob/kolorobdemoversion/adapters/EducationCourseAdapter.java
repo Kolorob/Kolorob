@@ -83,11 +83,11 @@ public class EducationCourseAdapter extends BaseAdapter
 
 
 
-        holder.c_name.setText("বিশেষজ্ঞের ধরন : " +course_name[position]);
-        holder.c_duration.setText(" বিশেষজ্ঞের ফি  : "+course_duration[position]);
-        holder.s_admission_time.setText("মন্তব্য : "+course_admission_time[position]);
-        holder.c_cost.setText(" বিশেষজ্ঞের ফি  : "+edu_course_cost[position]);
-        holder.s_type.setText("মন্তব্য : "+edu_course_type[position]);
+        holder.c_name.setText("কোর্সের নাম : " +course_name[position]);
+        holder.c_duration.setText(" কোর্সের সময়সীমা: "+course_duration[position]);
+        holder.s_admission_time.setText("ভর্তির মৌসুম : "+course_admission_time[position]);
+        holder.c_cost.setText(" ভর্তি হতে খরচ : "+edu_course_cost[position]);
+        holder.s_type.setText("কোর্সের ধরন: "+edu_course_type[position]);
 
 
 
