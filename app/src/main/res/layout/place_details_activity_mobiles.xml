@@ -144,15 +144,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/svSubCategoryListHolder"
-            android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
-            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
             android:background="@color/white"
             android:orientation="vertical"
             android:visibility="visible"
-            android:id="@+id/llItemListHolder">
+            android:id="@+id/llItemListHolder"
+            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder">
 
 
 
@@ -179,7 +178,7 @@
             <ExpandableListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="200dp" >
             </ExpandableListView>
             <TextView
                 android:id="@+id/tvInstructionSubCat"
