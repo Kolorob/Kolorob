@@ -166,6 +166,7 @@ public class MapFragment extends Fragment implements
         }
 
         googleMap = mMapView.getMap();
+        if(googleMap!=null)
         googleMap.setOnInfoWindowClickListener(this);
 
        // LinearLayout ll=(LinearLayout) mMapView.findViewById(R.id.ll);

@@ -216,7 +216,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-        callMapFragment();
+       // callMapFragment();
 
     }
     public void createData(int cat_id, String head,String placeChoice) {
@@ -654,10 +654,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
                 /*code for all*/
 
-
+                  int p= getResources().getColor(R.color.subcategory_color);
                 for(int i=0; i<((ViewGroup)v).getChildCount(); ++i) {
                     nextChild = ((ViewGroup)v).getChildAt(i);
-                    nextChild.setBackgroundColor(Color.BLACK);
+                    nextChild.setBackgroundColor(p);
                 }
 
                 showSubCatListItem.setEnabled(true);

@@ -15,8 +15,8 @@
     <color name="yellow">#FEFE00</color>
     <color name="small_window_text_color">#E38730</color>
     <color name="facebook">#48649F</color>
-
+    <color name="subcategory_color">#999999</color>
     <color name="line_draw">#1E91DB</color>
     <color name="semi_transparent">#7f000000</color>
-
+    #72805C
 </resources>
