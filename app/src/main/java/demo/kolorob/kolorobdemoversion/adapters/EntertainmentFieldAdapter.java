@@ -88,13 +88,13 @@ public class EntertainmentFieldAdapter extends BaseAdapter
         {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.e_cost.setText("ভ্যাকসিন নাম : " +event_cost[position]);
-        holder.p_cost.setText("ভ্যাকসিন ফি : "+playground_cost[position]);
-        holder.remarks.setText("ভ্যাকসিন নাম : " +remark[position]);
-        holder.e_cost_ffp.setText("ভ্যাকসিন ফি : "+event_cost_ffp[position]);
-        holder.e_cost_foc.setText("ভ্যাকসিন নাম : " +event_cost_foc[position]);
-        holder.p_cost_ffp.setText("ভ্যাকসিন ফি : "+playground_cost_ffp[position]);
-        holder.p_cost_foc.setText("ভ্যাকসিন নাম : " +playground_cost_foc[position]);
+        holder.e_cost.setText("ইভেন্টের খরচ : " +event_cost[position]);
+        holder.p_cost.setText("মাঠের খরচ: "+playground_cost[position]);
+        holder.remarks.setText("মন্তব্য : " +remark[position]);
+        holder.e_cost_ffp.setText("ইভেন্ট খরচ : "+event_cost_ffp[position]);
+        holder.e_cost_foc.setText("ইভেন্ট খরচ: " +event_cost_foc[position]);
+        holder.p_cost_ffp.setText("মাঠের খরচ : "+playground_cost_ffp[position]);
+        holder.p_cost_foc.setText("মাঠের খরচ : " +playground_cost_foc[position]);
 
         return convertView;
     }

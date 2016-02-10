@@ -93,11 +93,11 @@ public class LegalAidAdviceAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.service_name.setText("ভ্যাকসিন ফি : "+service_name[position]);
-        holder.legal_aid_free.setText("ভ্যাকসিন নাম : " +legal_aid_free[position]);
-        holder.legal_aid_cost.setText("ভ্যাকসিন ফি : "+legal_aid_cost[position]);
-        holder.legal_aid_person_authority.setText("ভ্যাকসিন নাম : " +legal_aid_person_authority[position]);
-        holder.legal_aid_remark.setText("ভ্যাকসিন ফি : "+legal_aid_remark[position]);
+        holder.service_name.setText("সেবা গ্রহনের নাম : "+service_name[position]);
+        holder.legal_aid_free.setText("সেবা ফ্রী কিনা : " +legal_aid_free[position]);
+        holder.legal_aid_cost.setText("সেবার বিনিময় খরচ: "+legal_aid_cost[position]);
+        holder.legal_aid_person_authority.setText("ব্যক্তিগত অধিকার্ত : " +legal_aid_person_authority[position]);
+        holder.legal_aid_remark.setText("মন্তব্য : "+legal_aid_remark[position]);
 
         return convertView;
     }
