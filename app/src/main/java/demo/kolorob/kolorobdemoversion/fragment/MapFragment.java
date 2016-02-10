@@ -180,7 +180,7 @@ public class MapFragment extends Fragment implements
         }
 
         else {
-            MAP_ZOOM_AMOUNT = 16;
+            MAP_ZOOM_AMOUNT = 25;
 
         }
         if(locationNameId==1) {

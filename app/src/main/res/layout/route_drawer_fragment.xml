@@ -19,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
 
-        android:background="@color/facebook"
+        android:background="@drawable/kolorob_route"
         android:gravity="center_vertical|center_horizontal"
         >
         <LinearLayout
@@ -39,8 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/distance"
-                    android:textColor="@color/white"
+                    android:background="@drawable/durotto"
                     android:textSize="20dp"
                     android:id="@+id/textViewi"
                     android:gravity="center_vertical|center_horizontal"
@@ -51,7 +50,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/holo_blue_light" />
+                android:background="@android:color/white" />
 
 
             <LinearLayout
@@ -73,7 +72,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="100dp"
-            android:background="@android:color/holo_blue_light" />
+            android:background="@android:color/white" />
 
 
         <LinearLayout
@@ -86,10 +85,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/time"
+                    android:background="@drawable/shomoy"
                     android:textColor="@color/white"
                     android:id="@+id/textView8"
                     android:gravity="center_vertical|center_horizontal"
@@ -99,7 +98,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/holo_blue_light" />
+                android:background="@android:color/white" />
 
 
             <LinearLayout
@@ -142,7 +141,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="100dp"
-                    android:background="@android:color/holo_blue_light" />
+                    android:background="@android:color/white" />
 
 
                 <LinearLayout
@@ -175,7 +174,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="100dp"
-            android:background="@android:color/holo_blue_light" />
+            android:background="@android:color/white" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -191,13 +190,12 @@
                 android:layout_height="50dp"
                 android:gravity="center_horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="যাতায়াত খরচ"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/khoroch"
                     android:id="@+id/textView6"
                     android:textColor="#FFFFFF"
-                    android:textSize="22sp"
-                    android:layout_marginTop="10dp" />
+                    android:textSize="22sp" />
 
 
 
@@ -206,7 +204,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/holo_blue_light" />
+                android:background="@android:color/white" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -248,7 +246,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="100dp"
-                    android:background="@android:color/holo_blue_light" />
+                    android:background="@android:color/white" />
 
 
                 <LinearLayout
