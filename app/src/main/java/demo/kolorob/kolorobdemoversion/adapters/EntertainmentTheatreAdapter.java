@@ -89,12 +89,12 @@ public class EntertainmentTheatreAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.event_type.setText("ভ্যাকসিন ফি : "+event_type[position]);
-        holder.event_fee.setText("ভ্যাকসিন নাম : " +event_fee[position]);
-        holder.event_date.setText("ভ্যাকসিন ফি : "+event_date[position]);
-        holder.remarks.setText("ভ্যাকসিন নাম : " +remarks[position]);
-        holder.event_fee_ffp.setText("ভ্যাকসিন ফি : "+event_fee_ffp[position]);
-        holder.event_fee_foc.setText("ভ্যাকসিন নাম : " +event_fee_foc[position]);
+        holder.event_type.setText("ইভেন্ট টাইপ : "+event_type[position]);
+        holder.event_fee.setText("ইভেন্টের ফী : " +event_fee[position]);
+        holder.event_date.setText("ইভেন্ট ফী : "+event_date[position]);
+        holder.remarks.setText("মন্তবন্য: " +remarks[position]);
+        holder.event_fee_ffp.setText("ইভেন্ট ফী এফ এফ পি: "+event_fee_ffp[position]);
+        holder.event_fee_foc.setText("ইভেন্ট ফী ও সি : " +event_fee_foc[position]);
 
         return convertView;
     }

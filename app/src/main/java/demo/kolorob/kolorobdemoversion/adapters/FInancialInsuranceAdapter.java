@@ -89,10 +89,10 @@ public class FInancialInsuranceAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.service_name.setText("ভ্যাকসিন ফি : "+service_name[position]);
-        holder.yes_no.setText("ভ্যাকসিন নাম : " +yes_no[position]);
-        holder.costs.setText("ভ্যাকসিন ফি : "+costs[position]);
-        holder.remark.setText("ভ্যাকসিন নাম : " +remark[position]);
+        holder.service_name.setText("সেবার নাম : "+service_name[position]);
+        holder.yes_no.setText("হ্যা বা না : " +yes_no[position]);
+        holder.costs.setText("খরচ: "+costs[position]);
+        holder.remark.setText("মন্তব্য: " +remark[position]);
 
 
         return convertView;

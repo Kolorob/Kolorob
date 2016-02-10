@@ -93,13 +93,13 @@ public class EntertainmentFitnessAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.year_of_establishment.setText("ভ্যাকসিন ফি : "+year_of_establishment[position]);
-        holder.num_workers.setText("ভ্যাকসিন নাম : " +num_workers[position]);
-        holder.offers.setText("ভ্যাকসিন ফি : "+offers[position]);
-        holder.offer_details.setText("ভ্যাকসিন নাম : " +offer_details[position]);
-        holder.service_type.setText("ভ্যাকসিন ফি : "+service_type[position]);
-        holder.type.setText("ভ্যাকসিন নাম : " +type[position]);
-        holder.service_details.setText("ভ্যাকসিন নাম : " +service_details[position]);
+        holder.year_of_establishment.setText("প্রতিষ্ঠার সময় : "+year_of_establishment[position]);
+        holder.num_workers.setText("কর্মীর সংখ্যা: " +num_workers[position]);
+        holder.offers.setText("অফার: "+offers[position]);
+        holder.offer_details.setText("অফার বিস্তারিত : " +offer_details[position]);
+        holder.service_type.setText("সেবার ধরন: "+service_type[position]);
+        holder.type.setText("ধরন : " +type[position]);
+        holder.service_details.setText("সেবার বিবরন: " +service_details[position]);
 
 
         return convertView;

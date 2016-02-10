@@ -76,8 +76,8 @@ public class HealthSpecialistAdapter extends BaseAdapter
 
 
 
-        holder.s_name.setText("বিশেষজ্ঞের ধরন : " +specialist_name[position]);
-        holder.s_fee.setText(" বিশেষজ্ঞের ফি  : "+specialist_fee[position]);
+        holder.s_name.setText("বিশেষজ্ঞের  ধরন : " +specialist_name[position]);
+        holder.s_fee.setText(" বিশেষজ্ঞের  ফি  : "+specialist_fee[position]);
         holder.s_remarks.setText("মন্তব্য : "+specialist_remarks[position]);
 
 
