@@ -133,10 +133,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="অন্যান্য তথ্য"
+                android:text=" স্কুলের তথ্য  "
                 android:id="@+id/textView12_health"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="@color/blue"
+                android:textSize="28sp"
                 android:paddingLeft="10dp"
                 android:layout_below="@+id/tv_item_contact"
                 android:layout_alignParentLeft="true"
@@ -158,10 +158,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="আরো তথ্য"
+                android:text=" যোগাযোগের উপায় "
                 android:id="@+id/textView13_health"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:textColor="@color/blue"
+                android:textSize="28sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
                 android:layout_below="@+id/tv_transport_facility"
@@ -314,13 +314,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/lll"
                 android:layout_below="@+id/tv_fb"
                 >
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text=" কোর্স সমূহের তালিকা  "
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="28dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewr"
+                    android:src="@drawable/green_line_horizontal"
+                    android:padding="5dp"
+                    />
+
+
+
                 <ListView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -347,6 +364,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/linearLayout4"
         android:gravity="center">
+
 
         <ImageView
             android:layout_width="wrap_content"

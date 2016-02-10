@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class DetailsInfoActivity extends Activity  {
     private TextView website;
     private TextView fb;
     ImageButton Feedback;
+    LinearLayout linearLayout;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     EducationServiceProviderItem educationServiceProviderItem;
     ListView listView;
@@ -67,6 +69,8 @@ public class DetailsInfoActivity extends Activity  {
                 finish();
             }
         });
+
+        linearLayout=(LinearLayout)findViewById(R.id.lll);
 
         if (null != intent)
         {
@@ -132,19 +136,12 @@ public class DetailsInfoActivity extends Activity  {
 
 
             for (EducationCourseItem et : educationCourseItems) {
-
-
-
-
-
-
-
                 course_name[k]=et.getEducoursename();
                 course_duration_list[k]=et.getEducourseduration();
                 admission_time[k]= et.getEducourseadmissiontime();
                 course_cost[k]=et.getEducoursecost();
                 course_type[k]=et.getEducoursetype();
-
+                linearLayout.setVisibility(View.VISIBLE);
 
                 //  lat = lat+"\n"+ " Node_id: "+et.getNodeId()+"\n Doctor_id: "+ et.getDocId() + "\nPhermacy Fee:" + et.getPharmacyFee() + "\n Doctor Name: " +et.getPharmacyDoctorName()+"\n";
                 // phermacy.setText("Doc id"+et.getDocId()+"Pharmacy Fee"+et.getPharmacyFee()+"Doctor_name"+et.getPharmacyDoctorName());
