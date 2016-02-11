@@ -64,7 +64,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="স্কুল এর নাম"
                 android:id="@+id/tv_header_entertainment"
-                android:textColor="#000000"
+                android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:layout_alignParentTop="true"
@@ -91,7 +91,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="ঠিকানা :"
                 android:id="@+id/tv_item_location_ent"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_below="@+id/imageView2"
                 android:layout_alignParentLeft="true"
@@ -105,7 +105,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="এলাকা :"
                 android:id="@+id/tv_item_type_ent"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_below="@+id/tv_item_location_ent"
                 android:layout_alignParentLeft="true"
@@ -120,39 +120,26 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="যোগাযোগের উপায়  :"
                 android:id="@+id/tv_item_contact_ent"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_below="@+id/tv_item_type_ent"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="4dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="রেজিস্ট্রেশন নম্বর:"
-                android:id="@+id/tv_item_registration_nunmber"
-                android:textColor="@color/small_window_text_color"
-                android:textSize="20sp"
-                android:layout_below="@+id/tv_item_contact_ent"
+                android:layout_below="@+id/imageView5"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="4dp" />
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="অন্যান্য তথ্য"
+                android:text="প্রতিষ্ঠানের সময়সূচি"
                 android:id="@+id/textView12_health"
-                android:textColor="#000000"
+                android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/tv_item_registration_nunmber"
+                android:layout_below="@+id/tv_item_type_ent"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:padding="5dp"
@@ -172,9 +159,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="আরো তথ্য"
+                android:text="যোগাযোগের উপায়"
                 android:id="@+id/textView13_health"
-                android:textColor="#000000"
+                android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
@@ -198,7 +185,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="খোলার সময় :"
                 android:id="@+id/opening_time"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_below="@+id/imageView4"
                 android:layout_alignParentLeft="true"
@@ -213,7 +200,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="মধ্যান্যবিরতির সময়"
                 android:id="@+id/break_time"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_below="@+id/opening_time"
                 android:layout_alignParentLeft="true"
@@ -227,7 +214,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="বন্ধ্রে সময় :"
                 android:id="@+id/closing_time"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_below="@+id/break_time"
                 android:layout_alignParentLeft="true"
@@ -241,12 +228,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="ই-মেইল : "
                 android:id="@+id/tv_email"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="4dp"
-                android:layout_below="@+id/imageView5"
+                android:layout_below="@+id/tv_item_contact_ent"
                 android:layout_alignLeft="@+id/tv_website"
                 android:layout_alignStart="@+id/tv_website" />
 
@@ -256,7 +243,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Website : "
                 android:id="@+id/tv_website"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
@@ -271,7 +258,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Facebook Link : "
                 android:id="@+id/tv_fb"
-                android:textColor="@color/small_window_text_color"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
@@ -280,49 +267,230 @@
                 android:layout_below="@+id/tv_website"
                 android:layout_alignLeft="@+id/textView13_health" />
 
-            <ListView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Facebook Link : "
+                android:id="@+id/road"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp"
+
                 android:layout_below="@+id/tv_fb"
-                android:id="@+id/listView7"
-
-
-                >
-            </ListView>
-
-            <ListView
+                android:layout_alignLeft="@+id/textView13_health" />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_below="@+id/listView7"
-                android:id="@+id/listView8"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Facebook Link : "
+                android:id="@+id/block"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp"
 
-
-                >
-            </ListView>
-
-            <ListView
+                android:layout_below="@+id/road"
+                android:layout_alignLeft="@+id/textView13_health" />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_below="@+id/listView8"
-                android:id="@+id/listView9"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Facebook Link : "
+                android:id="@+id/landmark"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp"
+
+                android:layout_below="@+id/block"
+                android:layout_alignLeft="@+id/textView13_health" />
 
 
-                >
-            </ListView>
-
-            <ListView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_below="@+id/listView9"
-                android:id="@+id/listView10"
-
-
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/first_list"
+                android:layout_below="@+id/landmark"
                 >
-            </ListView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="28dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewrh"
+                    android:src="@drawable/green_line_horizontal"
+                    android:padding="5dp"
+                    />
+
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/listView7"
+
+
+                    >
+                </ListView>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/second_list"
+                android:layout_below="@+id/first_list"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="28dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewrd"
+                    android:src="@drawable/green_line_horizontal"
+                    android:padding="5dp"
+                    />
+
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/listView8"
+
+
+                    >
+                </ListView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/third_list"
+                android:layout_below="@+id/second_list"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="28dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewr"
+                    android:src="@drawable/green_line_horizontal"
+                    android:padding="5dp"
+                    />
+
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_below="@+id/listView9"
+                    android:id="@+id/listView9"
+
+
+                    >
+                </ListView>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/fourth_list"
+                android:layout_below="@+id/third_list"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="28dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewrdd"
+                    android:src="@drawable/green_line_horizontal"
+                    android:padding="5dp"
+                    />
+
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/listView10"
+
+
+                    >
+                </ListView>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
 
         </RelativeLayout>
     </ScrollView>

@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -65,7 +68,11 @@ public class DetailsInfoActivityEntertainment extends Activity  {
     private TextView email;
     private TextView website;
     private TextView fb;
+    private TextView road;
+    private TextView block;
+    private TextView landmark;
     ListView navlist,navlist1,navlist2,navlist3;
+    LinearLayout first,second,third,fourth;
 
     ArrayList<EntertainmentBookShopItem> entertainmentBookShopItems;
     ArrayList<EntertainmentFieldItem> entertainmentFieldItems;
@@ -100,6 +107,13 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         navlist2 = (ListView) findViewById(R.id.listView9);
         navlist3 = (ListView) findViewById(R.id.listView10);
 
+
+
+        first= (LinearLayout)findViewById(R.id.first_list);
+        second = (LinearLayout)findViewById(R.id.second_list);
+        third = (LinearLayout)findViewById(R.id.third_list);
+        fourth =(LinearLayout)findViewById(R.id.fourth_list);
+
         if (null != intent)
         {
             entertainmentServiceProviderItem = (EntertainmentServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
@@ -116,7 +130,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
         itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
 
-        nodeRegistrationNumber=(TextView)findViewById(R.id.tv_item_registration_nunmber);
+        //nodeRegistrationNumber=(TextView)findViewById(R.id.tv_item_registration_nunmber);
         itemarea=(TextView)findViewById(R.id.tv_item_location_ent);
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
         itemClosingTIme=(TextView)findViewById(R.id.closing_time);
@@ -125,15 +139,18 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
+        road=(TextView)findViewById(R.id.road);
+        block=(TextView)findViewById(R.id.block);
+        landmark=(TextView)findViewById(R.id.landmark);
 
 
         kivabejaben=(ImageView)findViewById(R.id.ent);
 
         itemName.setText(entertainmentServiceProviderItem.getNodeNameBn());
-        itemAddress.setText("ঠিকানা :"+ entertainmentServiceProviderItem.getAddress());
-        itemarea.setText("এলাকা : "+entertainmentServiceProviderItem.getArea());
-        itemContact.setText("যোগাযোগের উপায় :"+entertainmentServiceProviderItem.getNodeContact());
-        nodeRegistrationNumber.setText("রেজিস্ট্রেশন নম্বর: "+entertainmentServiceProviderItem.getNodeFacebook());
+        itemAddress.setText("ঠিকানা: "+ entertainmentServiceProviderItem.getAddress());
+        itemarea.setText("এলাকা: "+entertainmentServiceProviderItem.getArea());
+        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+entertainmentServiceProviderItem.getNodeContact());
+       // nodeRegistrationNumber.setText("রেজিস্ট্রেশন নম্ব: "+entertainmentServiceProviderItem.getNodeFacebook());
 
 
         itemopeningTime.setText("খোলার সময়: " +entertainmentServiceProviderItem.getOpeningtime() );
@@ -142,8 +159,10 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
         email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
         website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক : "+entertainmentServiceProviderItem.getNodeFacebook());
-
+        fb.setText("ফেইসবুক: "+entertainmentServiceProviderItem.getNodeFacebook());
+        road.setText("রাস্তা : " +entertainmentServiceProviderItem.getBlock());
+        block.setText("ব্লক : "+entertainmentServiceProviderItem.getLandmark());
+        landmark.setText("কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
 
 
         //common for all category
@@ -176,6 +195,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
         if(entertainmentBookShopItems!=null) {
 
+           //
             int g= entertainmentBookShopItems.size();
             String[] borrow_cost=new String[g];
             String[] lending_allowed=new String[g];
@@ -195,7 +215,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 membership_cost_ffp[k]=et.getMemcostffp();
                 membership_cost_foc[k]=et.getMemcostfoc();
 
-
+                first.setVisibility(View.VISIBLE);
 
                 k++;
             }
@@ -210,6 +230,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
 
         if(entertainmentFieldItems!=null) {
+
 
             int g= entertainmentFieldItems.size();
             String[] event_cost=new String[g];
@@ -231,6 +252,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 playground_cost_ffp[k]=et.getPlaygroundcostffp();
                 playground_cost_foc[k]=et.getPlaygroundcostfoc();
                 k++;
+                second.setVisibility(View.VISIBLE);
             }
             EntertainmentFieldAdapter adapter=new EntertainmentFieldAdapter(this,event_cost,playground_cost,
                     remark,event_cost_ffp,event_cost_foc,playground_cost_ffp,playground_cost_foc);
@@ -262,6 +284,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 event_fee_ffp[k]=et.getEventfee();
                 event_fee_foc[k]=et.getEventfeefoc();
                 k++;
+                third.setVisibility(View.VISIBLE);
             }
             EntertainmentTheatreAdapter adapter=new EntertainmentTheatreAdapter(this,event_type,event_fee,
                     event_date,remarks,event_fee_ffp,event_fee_foc);
@@ -300,6 +323,9 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 type[k]=et.getType();
                 service_details[k]=et.getServicedetails();
                 k++;
+
+                fourth.setVisibility(View.VISIBLE);
+
             }
             EntertainmentFitnessAdapter adapter=new EntertainmentFitnessAdapter(this,year_of_establishment,num_workers,
                     offers,offer_details,service_type,type,service_details);

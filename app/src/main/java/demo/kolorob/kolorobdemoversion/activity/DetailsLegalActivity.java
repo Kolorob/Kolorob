@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,6 +52,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
         private TextView email;
         private TextView website;
         private TextView fb;
+        private TextView opentime,closetime,breaktime,road,block,landmark;
+        LinearLayout ll1,ll2;
 
         //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
         LegalAidServiceProviderItem legalAidServiceProviderItem;
@@ -83,12 +86,23 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
             lv11 = (ListView) findViewById(R.id.listView7);
             lv2 = (ListView) findViewById(R.id.listView8);
+            ll1=(LinearLayout)findViewById(R.id.first_list);
+            ll2=(LinearLayout)findViewById(R.id.second_list);
 
 
             /**
              *
              *following codes only for legal. This may vary for different category.
              * */
+
+            opentime=(TextView)findViewById(R.id.opening_time);
+            breaktime=(TextView)findViewById(R.id.breaktime);
+            closetime=(TextView)findViewById(R.id.close_time);
+            road=(TextView)findViewById(R.id.road);
+            block=(TextView)findViewById(R.id.block);
+            landmark=(TextView)findViewById(R.id.landmark);
+
+
             itemName = (TextView) findViewById(R.id.tv_header);
             itemAddress = (TextView) findViewById(R.id.tv_item_location);
             itemType = (TextView) findViewById(R.id.tv_item_type);
@@ -100,11 +114,21 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 
             itemName.setText(legalAidServiceProviderItem.getLegalaidNameEng());
-            itemAddress.setText("ঠিকানাঃ "+ legalAidServiceProviderItem.getArea());
-            itemType.setText("যোগাযোগঃ  "+legalAidServiceProviderItem.getIdentifierId());
+            itemAddress.setText("ঠিকানা: "+ legalAidServiceProviderItem.getArea());
+            itemType.setText("যোগাযোগ:  "+legalAidServiceProviderItem.getIdentifierId());
 
-            itemContact.setText("যোগাযোগের উপায়ঃ "+legalAidServiceProviderItem.getContactNo());
+            itemContact.setText("মোবাইল নম্বর:  "+legalAidServiceProviderItem.getContactNo());
+            opentime.setText("খোলার সময়: "+legalAidServiceProviderItem.getOpeningtime());
+            closetime.setText("বন্ধ ক্রার সময়: "+legalAidServiceProviderItem.getClosingtime());
+            breaktime.setText("বিরতির সময়: "+ legalAidServiceProviderItem.getBreaktime());
+            road.setText("রাস্ত:া"+ legalAidServiceProviderItem.getRoad());
+            block.setText("কাছাকাছি পরিচিত স্থান:"+legalAidServiceProviderItem.getLandmark());
+            fb.setText("ফেইসবুক: "+ legalAidServiceProviderItem.getFbLink());
+            website.setText("ওয়েবসাইট: " +legalAidServiceProviderItem.getWebsiteLink());
+            email.setText("ইমেইল: "+legalAidServiceProviderItem.getEmailAddress());
+          //  itemarea.setText("এলাকা: " +legalAidServiceProviderItem.getAddress());
             String la= legalAidServiceProviderItem.getIdentifierId();
+
 
             LegalAidtypeServiceProviderLegalAdviceTable legalAidtypeServiceProviderLegalAdviceTable1=new LegalAidtypeServiceProviderLegalAdviceTable(this);
             LegalAidtypeServiceProviderSalishiTable legalAidtypeServiceProviderSalishiTable = new LegalAidtypeServiceProviderSalishiTable(this);
@@ -130,7 +154,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     legal_aid_person_authority[k]=et.getLegalaidpersonauthority();
                     legal_aid_remark[k]=et.getLegalaidremark();
 
-
+                    ll1.setVisibility(View.VISIBLE);
 
 
 
@@ -161,6 +185,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     legal_aid_cost[k]=et.getScost();
                     legal_aid_person_authority[k]=et.getSpersonauthority();
                     legal_aid_remark[k]=et.getSremark();
+
+                    ll2.setVisibility(View.VISIBLE);
 
 
 

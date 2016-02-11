@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -53,6 +54,16 @@ public class DetailsInfoActivityHealth extends Activity  {
     private TextView email;
     private TextView website;
     private TextView fb;
+    private TextView opening_time;
+    private TextView breaktime;
+    private TextView close_time;
+    private TextView road;
+    private TextView block;
+    private TextView landmark;
+    private LinearLayout ll1;
+    private LinearLayout ll2;
+    private LinearLayout ll3;
+
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     HealthServiceProviderItem healthServiceProviderItem;
@@ -81,6 +92,16 @@ public class DetailsInfoActivityHealth extends Activity  {
         navlist = (ListView) findViewById(R.id.listView2);
         navlist1 = (ListView) findViewById(R.id.listView3);
         navlist2 = (ListView) findViewById(R.id.listView4);
+        opening_time=(TextView)findViewById(R.id.opening_time);
+        breaktime = (TextView)findViewById(R.id.break_time);
+        close_time=(TextView)findViewById(R.id.closing_time);
+        road=(TextView)findViewById(R.id.road);
+        block=(TextView)findViewById(R.id.block);
+        landmark=(TextView)findViewById(R.id.landmark);
+
+        ll1=(LinearLayout)findViewById(R.id.second_list);
+        ll2=(LinearLayout)findViewById(R.id.third_list);
+        ll3=(LinearLayout)findViewById(R.id.fourth_list);
 
 
 
@@ -123,7 +144,7 @@ public class DetailsInfoActivityHealth extends Activity  {
             String[] refnum_list=new String[f];
 
             for (HealthPharmacyItem et : healthPharmacyItems) {
-
+                ll1.setVisibility(View.VISIBLE);
 
 
                 int docId=et.getDocId();
@@ -169,7 +190,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
                 vaccine_name[k]=et.getVaccinename();
                 pharmacy_time_list[k]=et.getVaccinefee();
-
+                ll2.setVisibility(View.VISIBLE);
 
 
                 k++;
@@ -197,6 +218,8 @@ public class DetailsInfoActivityHealth extends Activity  {
                 specialist_fee[k]=et.getSpecialistfees();
                 remarks[k]=et.getSpecialistremarks();
                 k++;
+
+                ll3.setVisibility(View.VISIBLE);
             }
 
 
@@ -226,13 +249,19 @@ public class DetailsInfoActivityHealth extends Activity  {
 
 
         itemName.setText(healthServiceProviderItem.getNodeName());
-        itemAddress.setText("ঠিকানা ঃ  "+healthServiceProviderItem.getArea());
-        itemType.setText("ধরন ঃ  "+healthServiceProviderItem.getNodeType());
-        itemContact.setText("যোগাযোগের উপায় ঃ  "+healthServiceProviderItem.getNodeContact());
+        itemAddress.setText("ঠিকানা: "+healthServiceProviderItem.getArea());
+        itemType.setText("ধরন: "+healthServiceProviderItem.getNodeType());
+        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());
+        opening_time.setText("খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
+        breaktime.setText("বিরতির সময়: "+healthServiceProviderItem.getBreaktime());
+        close_time.setText("বন্ধ করার সময়: "+healthServiceProviderItem.getClosingtime());
+        road.setText("রাস্তা : "+healthServiceProviderItem.getRoad());
+        block.setText("ব্লক: "+healthServiceProviderItem.getBlock());
+        landmark.setText("কাছাকাছি পরিচিত স্থান: "+healthServiceProviderItem.getLandmark());
 
-        email.setText("ইমেইল ঃ  "+healthServiceProviderItem.getNodeEmail());
-        website.setText("ওয়েবসাইট ঃ  "+healthServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক ঃ  "+healthServiceProviderItem.getNodeFacebook());
+        email.setText("ইমেইল: "+healthServiceProviderItem.getNodeEmail());
+        website.setText("ওয়েবসাইট: "+healthServiceProviderItem.getNodeWebsite());
+        fb.setText("ফেসবুক: "+healthServiceProviderItem.getNodeFacebook());
 
         kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
             @Override

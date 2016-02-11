@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,16 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
         private TextView website;
         private TextView fb;
 
+    private TextView open;
+    private TextView closen;
+    private TextView breaking;
+    private TextView road;
+    private TextView block;
+    private TextView landmark;
+    private TextView additional;
+
+    LinearLayout first,second,third,fourth;
+
         //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
         FinancialServiceProviderItem financialServiceProviderItem;
 
@@ -77,6 +88,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
     ArrayList<FinancialTransactionItem> financialTransactionItems;
     ArrayList<FinancialTuitionItem> financialTuitionItems;
     ListView navlist,navlist1,navlist2,navlist3,navlist4,navlist5,navlist6,navlist7;
+    LinearLayout l1,l2,l3,l4,l5,l6,l7,l8;
 
 
 
@@ -113,6 +125,24 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             btnroute=(ImageView)findViewById(R.id.kivabejabenFinancial);
 
 
+            open=(TextView)findViewById(R.id.opening_time);
+            closen=(TextView)findViewById(R.id.close_time);
+            breaking =(TextView)findViewById(R.id.breaktime);
+            road= (TextView)findViewById(R.id.road);
+            block =(TextView)findViewById(R.id.block);
+            landmark=(TextView)findViewById(R.id.landmark);
+            additional=( TextView )findViewById(R.id.additionalTime);
+
+
+            l1=(LinearLayout)findViewById(R.id.first_list);
+            l2=(LinearLayout)findViewById(R.id.second_list);
+            l3=(LinearLayout)findViewById(R.id.third_list);
+            l4=(LinearLayout)findViewById(R.id.fourth_list);
+            l5=(LinearLayout)findViewById(R.id.fifth_list);
+            l6=(LinearLayout)findViewById(R.id.sixth_list);
+            l7=(LinearLayout)findViewById(R.id.seventh_list);
+            l8=(LinearLayout)findViewById(R.id.eighth_list);
+
 
             navlist = (ListView) findViewById(R.id.listView7s);
             navlist1 = (ListView) findViewById(R.id.listView8s);
@@ -123,15 +153,28 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             navlist6 = (ListView) findViewById(R.id.listView9ss);
             navlist7 = (ListView) findViewById(R.id.listView10ss);
 
+
+            open.setText("খোলার সময়: " +financialServiceProviderItem.getOpeningtime() );
+            closen.setText("বন্ধের সময়: " +financialServiceProviderItem.getClosingtime());
+            breaking.setText("বিরতির সময়: "+ financialServiceProviderItem.getBreaktime2());
+            additional.setText("অতিরিক্ত সময়: "+financialServiceProviderItem.getAdditionaltime());
             itemName.setText( financialServiceProviderItem.getNodeName());
-            itemAddress.setText("ঠিকানাঃ "+ financialServiceProviderItem.getArea());
-            itemType.setText("যোগাযোগঃ  "+ financialServiceProviderItem.getNodeContact());
+            road.setText("রাস্ত:া"+financialServiceProviderItem.getRoad());
+            block.setText("ব্লক: "+ financialServiceProviderItem.getBlock());
+            landmark.setText("কাছাকাছি পরিচিত স্থান:" +financialServiceProviderItem.getLandmark());
+            itemAddress.setText("ঠিকানা: "+ financialServiceProviderItem.getArea());
+            itemType.setText("যোগাযোগ: "+ financialServiceProviderItem.getNodeContact());
 
-            itemContact.setText("রেজিস্ট্রেশঃন "+ financialServiceProviderItem.getNodeRegisteredwith());
+            itemContact.setText("রেজিস্ট্রেশঃন: "+ financialServiceProviderItem.getNodeRegisteredwith());
 
-            email.setText("সংবাদ দাতাঃ "+ financialServiceProviderItem.getNodeDesignation());
-            website.setText("ওয়েবসাইটঃ "+ financialServiceProviderItem.getNodeWebsite());
-            fb.setText("ফেসবুকঃ " + financialServiceProviderItem.getNodeFacebook());
+            email.setText("সংবাদ দাতা:"+ financialServiceProviderItem.getNodeDesignation());
+            website.setText("ওয়েবসাইট:"+ financialServiceProviderItem.getNodeWebsite());
+            fb.setText("ফেসবুক: " + financialServiceProviderItem.getNodeFacebook());
+
+
+
+
+
 
 
             FinancialBillsTable financialBillsTable = new FinancialBillsTable(DetailsFinancialActivity.this);
@@ -165,12 +208,15 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                 int  k=0;
                 for (FinancialBillsItem et : financialBillsItems) {
 
+
+
                     service_name[k]=et.getServicename();
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
                     ref_num[k]=et.getRefNum();
                     k++;
+                    l1.setVisibility(View.VISIBLE);
                 }
                 FInancialBilsAdapter adapter=new FInancialBilsAdapter(this,service_name,yes_no,
                         costs,remark,ref_num);
@@ -196,6 +242,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
+                    l2.setVisibility(View.VISIBLE);
 
                     k++;
                 }
@@ -214,6 +261,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                 String[] yes_no=new String[g];
                 String[] costs=new String[g];
                 String[] remark=new String[g];
+                l1.setVisibility(View.VISIBLE);
+
 
 
                 int  k=0;
@@ -223,6 +272,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
+                    l3.setVisibility(View.VISIBLE);
+
 
                     k++;
                 }
@@ -247,6 +298,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
+                    l4.setVisibility(View.VISIBLE);
 
                     k++;
                 }
@@ -271,11 +323,12 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                 int  k=0;
                 for (FinancialSocialItem et : financialSocialItems) {
 
+
                     service_name[k]=et.getServicename();
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
-
+                    l5.setVisibility(View.VISIBLE);
                     k++;
                 }
                 FinancialSocialAdapter adapter=new FinancialSocialAdapter(this,service_name,yes_no,
@@ -302,6 +355,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
+                    l6.setVisibility(View.VISIBLE);
 
                     k++;
                 }
@@ -325,11 +379,12 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
                 int  k=0;
                 for (FinancialTransactionItem et : financialTransactionItems) {
 
+
                     service_name[k]=et.getServicename();
                     yes_no[k]=et.getYn();
                     costs[k]=et.getServicecost();
                     remark[k]=et.getServiceremark();
-
+                    l7.setVisibility(View.VISIBLE);
                     k++;
                 }
                 FinancialSocialAdapter adapter=new FinancialSocialAdapter(this,service_name,yes_no,
@@ -351,6 +406,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
                 int  k=0;
                 for (FinancialTuitionItem et : financialTuitionItems) {
+                    l8.setVisibility(View.VISIBLE);
 
                     service_name[k]=et.getServicename();
                     yes_no[k]=et.getYn();
