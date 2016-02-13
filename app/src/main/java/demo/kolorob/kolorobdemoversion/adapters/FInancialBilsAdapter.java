@@ -90,7 +90,7 @@ public class FInancialBilsAdapter extends BaseAdapter
         }
 
         holder.service_name.setText("সেবার নাম : "+service_name[position]);
-        holder.yes_no.setText("হ্যা বা না : " +yes_no[position]);
+        holder.yes_no.setText("সেবা পাওয়া যাবে কিনা? : " +yes_no[position]);
         holder.costs.setText("খরচ: "+costs[position]);
         holder.remark.setText("মন্তব্য: " +remark[position]);
         holder.ref_num.setText("রেফারেন্স নম্ভর : "+ref_num[position]);

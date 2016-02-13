@@ -159,17 +159,17 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             breaking.setText("বিরতির সময়: "+ financialServiceProviderItem.getBreaktime2());
             additional.setText("অতিরিক্ত সময়: "+financialServiceProviderItem.getAdditionaltime());
             itemName.setText( financialServiceProviderItem.getNodeName());
-            road.setText("রাস্ত:া"+financialServiceProviderItem.getRoad());
+            road.setText("রাস্তা: "+financialServiceProviderItem.getRoad());
             block.setText("ব্লক: "+ financialServiceProviderItem.getBlock());
             landmark.setText("কাছাকাছি পরিচিত স্থান:" +financialServiceProviderItem.getLandmark());
             itemAddress.setText("ঠিকানা: "+ financialServiceProviderItem.getArea());
-            itemType.setText("যোগাযোগ: "+ financialServiceProviderItem.getNodeContact());
+            itemType.setText("রেজিস্ট্রেশন: "+ financialServiceProviderItem.getNodeRegisteredwith());
 
-            itemContact.setText("রেজিস্ট্রেশঃন: "+ financialServiceProviderItem.getNodeRegisteredwith());
+            itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+ financialServiceProviderItem.getNodeContact());
 
-            email.setText("সংবাদ দাতা:"+ financialServiceProviderItem.getNodeDesignation());
-            website.setText("ওয়েবসাইট:"+ financialServiceProviderItem.getNodeWebsite());
-            fb.setText("ফেসবুক: " + financialServiceProviderItem.getNodeFacebook());
+            email.setText("ইমেইল: "+ financialServiceProviderItem.getNodeDesignation());
+            website.setText("ওয়েবসাইট :"+ financialServiceProviderItem.getNodeWebsite());
+            fb.setText("ফেসবুক : " + financialServiceProviderItem.getNodeFacebook());
 
 
 

@@ -341,7 +341,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:text=" বিল পরিশোধ সম্পর্কিত তথ্য   "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -384,7 +384,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:text=" ইনস্যুরেন্স সম্পর্কিত তথ্য "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -426,7 +426,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:text=" লোন সম্পর্কিত তথ্য  "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -470,7 +470,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:text=" পেমেন্ট সম্পর্কিত তথ্য "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -513,7 +513,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:text=" সামাজিক পন্য সম্পর্কিত তথ্য  "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -556,7 +556,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:text=" ট্যাক্স সম্পর্কিত তথ্য  "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -598,7 +598,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:text=" আর্থিক লেনদেন সম্পর্কিত তথ্য "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -642,7 +642,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:text=" টিউশন সম্পর্কিত তথ্য  "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>

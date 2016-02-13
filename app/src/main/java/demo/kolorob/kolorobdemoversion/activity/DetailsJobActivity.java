@@ -33,7 +33,7 @@ public class DetailsJobActivity extends Activity {
 
     private TextView email;
     private TextView website;
-    private TextView fb;
+    private TextView fb,openTime,close_Time,breakTIme,jobName,road,block,landmark;
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     JobServiceProviderItem jobServiceProviderItem;
@@ -71,14 +71,37 @@ public class DetailsJobActivity extends Activity {
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
         kivabejabejob=(ImageView)findViewById(R.id.kivabejabenJob);
+        openTime=(TextView)findViewById(R.id.opening_time);
+        close_Time=(TextView)findViewById(R.id.closingtime);
+        breakTIme=(TextView)findViewById(R.id.break_time);
+        jobName=(TextView)findViewById(R.id.job_name);
+        road=(TextView)findViewById(R.id.road);
+        block=(TextView)findViewById(R.id.block);
+        landmark=(TextView)findViewById(R.id.landmark);
+
+
+
+
 
         itemName.setText(jobServiceProviderItem.getAddress());
-        itemAddress.setText("ঠিকানাঃ "+jobServiceProviderItem.getArea());
-        itemType.setText("যোগাযোগঃ  "+jobServiceProviderItem.getContactNo());
+        itemAddress.setText("ঠিকানা: "+jobServiceProviderItem.getArea());
+        itemType.setText("রেজিস্ট্রেশন :  "+jobServiceProviderItem.getRegisteredWith());
 
-        itemContact.setText("রেজিস্ট্রেশঃন "+jobServiceProviderItem.getRegisteredWith());
+        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+jobServiceProviderItem.getContactNo());
 
-        email.setText("সংবাদ দাতাঃ "+jobServiceProviderItem.getContactPersonDesignation());
+        email.setText("সংবাদ দাতা: "+jobServiceProviderItem.getContactPersonDesignation());
+        fb.setText("ফেইসবুক: "+jobServiceProviderItem.getFbLink());
+        website.setText("ওয়েবসাইট: "+jobServiceProviderItem.getWebsiteLink());
+        jobName.setText("জবের নাম: ");
+        road.setText("রাস্তা :");
+        block.setText("ব্লক :");
+
+        openTime.setText("খোলার সময়: ");
+        close_Time.setText("বন্ধ করার সময়: ");
+        breakTIme.setText("বিরতির সময়: ");
+        landmark.setText("কাছাকাছি পরিচিত স্থান: ");
+
+
        // website.setText("ওয়েবসাইটঃ "+jobServiceProviderItem.getWebsiteLink());
        /// fb.setText("ফেসবুকঃ "+jobServiceProviderItem.getFbLink());
 

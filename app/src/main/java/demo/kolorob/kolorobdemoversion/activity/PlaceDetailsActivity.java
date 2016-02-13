@@ -1,4 +1,5 @@
 package  demo.kolorob.kolorobdemoversion.activity;
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -83,6 +84,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private int subCatShowFlag=0;
     private int locationNameId;
     private String locationName;
+    private LinearLayout catLayout;
 
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
@@ -103,7 +105,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     //common for all categories
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     private int currentCategoryID;
-
+    private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
 
 
@@ -132,8 +134,6 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
 
-
-
         Intent intent;
         intent = getIntent();
         if (null != intent)
@@ -152,7 +152,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         }
 
 
-        categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
+        //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
         categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
 
@@ -173,6 +173,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         editor.commit();
 
         subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
+
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
@@ -394,9 +395,16 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
         LayoutInflater li = LayoutInflater.from(this);
-        View v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
+        View v;
+
+        if(height<1000)
+            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+        else
+        v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
+
+
 
         // BE CAREFUL :: Category ID is being mapped as to the icon serial no.
         // in the AppConstants.ALL_CAT_ICONS array
@@ -708,7 +716,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void run() {
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
-                if (height<1000d&&dwPerc < .8)
+                if (height<1000d&&dwPerc ==1)
                     return;
                 else if(dwPerc<0.6)
                     return;

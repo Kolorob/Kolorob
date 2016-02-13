@@ -52,7 +52,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
         private TextView email;
         private TextView website;
         private TextView fb;
-        private TextView opentime,closetime,breaktime,road,block,landmark;
+        private TextView opentime,closetime,breaktime,road,block,landmark,additional_time;
         LinearLayout ll1,ll2;
 
         //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
@@ -101,7 +101,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
             road=(TextView)findViewById(R.id.road);
             block=(TextView)findViewById(R.id.block);
             landmark=(TextView)findViewById(R.id.landmark);
-
+            additional_time=(TextView)findViewById(R.id.additionalTime);
 
             itemName = (TextView) findViewById(R.id.tv_header);
             itemAddress = (TextView) findViewById(R.id.tv_item_location);
@@ -115,17 +115,18 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
             itemName.setText(legalAidServiceProviderItem.getLegalaidNameEng());
             itemAddress.setText("ঠিকানা: "+ legalAidServiceProviderItem.getArea());
-            itemType.setText("যোগাযোগ:  "+legalAidServiceProviderItem.getIdentifierId());
-
+            itemType.setText("এলাকা : "+legalAidServiceProviderItem.getAddress());
+            additional_time.setText(" অতিরিক্ত সময়: " +legalAidServiceProviderItem.getAdditionaltime());
             itemContact.setText("মোবাইল নম্বর:  "+legalAidServiceProviderItem.getContactNo());
             opentime.setText("খোলার সময়: "+legalAidServiceProviderItem.getOpeningtime());
-            closetime.setText("বন্ধ ক্রার সময়: "+legalAidServiceProviderItem.getClosingtime());
+            closetime.setText("বন্ধ করার সময়: "+legalAidServiceProviderItem.getClosingtime());
             breaktime.setText("বিরতির সময়: "+ legalAidServiceProviderItem.getBreaktime());
-            road.setText("রাস্ত:া"+ legalAidServiceProviderItem.getRoad());
-            block.setText("কাছাকাছি পরিচিত স্থান:"+legalAidServiceProviderItem.getLandmark());
+            road.setText("রাস্তা: "+ legalAidServiceProviderItem.getRoad());
+            block.setText("ব্লক:"+legalAidServiceProviderItem.getLandmark());
             fb.setText("ফেইসবুক: "+ legalAidServiceProviderItem.getFbLink());
             website.setText("ওয়েবসাইট: " +legalAidServiceProviderItem.getWebsiteLink());
             email.setText("ইমেইল: "+legalAidServiceProviderItem.getEmailAddress());
+            landmark.setText("কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
           //  itemarea.setText("এলাকা: " +legalAidServiceProviderItem.getAddress());
             String la= legalAidServiceProviderItem.getIdentifierId();
 

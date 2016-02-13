@@ -86,18 +86,12 @@
 
             <ImageView
                 android:id="@+id/ivHeadCatIconSubCatList"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/black"
                 android:contentDescription="@string/txt_cd_header_icon_ofcat_subcatlist"
                 android:padding="7dp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#FFFFFF"
-                tools:ignore="HardcodedText"
-                android:gravity="center_vertical|center_horizontal"
-                android:id="@+id/tv_cat_name" />
+
         </LinearLayout>
 
         <HorizontalScrollView
