@@ -52,6 +52,7 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTabl
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Job.JobTypeServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
@@ -81,6 +82,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Job.JobTypeServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -590,6 +592,23 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "jobtype", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveJobType(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
             getRequest(OpeningActivity.this, "transaction", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -705,6 +724,22 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = healthSpecialist.getJSONObject(i);
                 HealthSpecialistItem et =  HealthSpecialistItem.parseHealthSpecialistItem(jo);
                 healthSpecialistTable.insertItemHealth(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveJobType(JSONArray jobType) {
+        JobTypeServiceProviderTable jobTypeServiceProviderTable  = new  JobTypeServiceProviderTable (OpeningActivity.this);
+        jobTypeServiceProviderTable.dropTable();
+        int jobTypeCount = jobType.length();
+
+        for (int i = 0; i < jobTypeCount; i++) {
+            try {
+                JSONObject jo = jobType.getJSONObject(i);
+                JobTypeServiceProviderItem et =  JobTypeServiceProviderItem.parseJobTypeServiceProvider(jo);
+                jobTypeServiceProviderTable.insertItem(et);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
