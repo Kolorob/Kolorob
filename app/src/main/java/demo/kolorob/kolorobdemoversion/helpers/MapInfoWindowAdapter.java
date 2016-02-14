@@ -177,7 +177,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getEduNameEng());
-                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
+                        itemAddress.setText("ঠিকানা ঃ  "+et.getAddress());
                         itemType.setText("ধরন ঃ  "+et.getEduType());
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
                     }
@@ -193,8 +193,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getNodeName());
-                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
-                        itemType.setText("ধরন ঃ  "+et.getDateName());
+                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.PARIS_ROAD);
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
                     }
                 }
@@ -210,8 +209,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getNodeNameBn());
-                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.BAUNIABADH);
-                        itemType.setText("ধরন ঃ  "+et.getDataName());
+                        itemAddress.setText("ঠিকানা ঃ  "+et.getAddress());
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
                     }
                 }
