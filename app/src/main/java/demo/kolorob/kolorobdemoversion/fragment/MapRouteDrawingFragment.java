@@ -5,7 +5,9 @@ package demo.kolorob.kolorobdemoversion.fragment;
  */
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
@@ -148,7 +150,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1 * 1000);
 
-       editor.clear();
+        editor.clear();
         editor.commit();
         return v;
     }
@@ -408,29 +410,46 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
+            if(result==null)
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT).create();
+                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                //getActivity().finish();
+                            }
 
-            for(int i=0;i<result.size();i++){
-                points = new ArrayList<LatLng>();
-                lineOptions = new PolylineOptions();
-
-                List<HashMap<String, String>> path = result.get(i);
-
-                for(int j=0;j<path.size();j++){
-                    HashMap<String,String> point = path.get(j);
-
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
-                    LatLng position = new LatLng(lat, lng);
-
-                    points.add(position);
-                }
-
-                lineOptions.addAll(points);
-                lineOptions.width(7);
-                lineOptions.color(Color.BLUE);
+                        });
+                alertDialog.show();
             }
-            //setUpMapIfNeeded();
-            googleMap.addPolyline(lineOptions);
+            else {
+
+                for (int i = 0; i < result.size(); i++) {
+                    points = new ArrayList<LatLng>();
+                    lineOptions = new PolylineOptions();
+
+                    List<HashMap<String, String>> path = result.get(i);
+
+                    for (int j = 0; j < path.size(); j++) {
+                        HashMap<String, String> point = path.get(j);
+
+                        double lat = Double.parseDouble(point.get("lat"));
+                        double lng = Double.parseDouble(point.get("lng"));
+                        LatLng position = new LatLng(lat, lng);
+
+                        points.add(position);
+                    }
+
+                    lineOptions.addAll(points);
+                    lineOptions.width(7);
+                    lineOptions.color(Color.BLUE);
+                }
+                //setUpMapIfNeeded();
+                googleMap.addPolyline(lineOptions);
+            }
 
         }
     }
