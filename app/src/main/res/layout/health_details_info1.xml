@@ -178,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="প্রতিষ্ঠানের সময়সূচি"
+                    android:text=" প্রতিষ্ঠানের সময়সূচি"
                     android:id="@+id/textView12_health"
                     android:textColor="@color/blue"
                     android:textSize="25sp"
@@ -246,7 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="যোগাযোগের উপায়"
+                    android:text=" যোগাযোগের উপায়"
                     android:id="@+id/textView13_health"
                     android:textColor="@color/blue"
                     android:textSize="25sp"
@@ -384,7 +384,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ফার্মেসি সম্পর্কিত তথ্য  "
+                    android:text=" ফার্মেসি সম্পর্কিত তথ্য  "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>

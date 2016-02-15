@@ -149,23 +149,23 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
         kivabejaben=(ImageView)findViewById(R.id.ent);
 
-        itemName.setText(entertainmentServiceProviderItem.getNodeNameBn());
-        itemAddress.setText("ঠিকানা: "+ entertainmentServiceProviderItem.getAddress());
-        itemarea.setText("এলাকা: "+entertainmentServiceProviderItem.getArea());
-        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+entertainmentServiceProviderItem.getNodeContact());
+        itemName.setText(" "+entertainmentServiceProviderItem.getNodeNameBn());
+        itemAddress.setText("  ঠিকানা: "+ entertainmentServiceProviderItem.getAddress());
+        itemarea.setText("  এলাকা: "+entertainmentServiceProviderItem.getArea());
+        itemContact.setText("   মোবাইল/মুঠোফোন নম্বর: "+entertainmentServiceProviderItem.getNodeContact());
        // nodeRegistrationNumber.setText("রেজিস্ট্রেশন নম্ব: "+entertainmentServiceProviderItem.getNodeFacebook());
 
 
-        itemopeningTime.setText("খোলার সময়: " +entertainmentServiceProviderItem.getOpeningtime() );
-        itemClosingTIme.setText("বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingtime() );
-        itemBreakTime.setText("বিরতির সময়: "+entertainmentServiceProviderItem.getBreaktime());
+        itemopeningTime.setText("  খোলার সময়: " +entertainmentServiceProviderItem.getOpeningtime() );
+        itemClosingTIme.setText("  বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingtime() );
+        itemBreakTime.setText("  বিরতির সময়: "+entertainmentServiceProviderItem.getBreaktime());
 
-        email.setText("ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
-        website.setText("ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেইসবুক: "+entertainmentServiceProviderItem.getNodeFacebook());
-        road.setText("রাস্তা : " +entertainmentServiceProviderItem.getBlock());
-        block.setText("ব্লক : "+entertainmentServiceProviderItem.getLandmark());
-        landmark.setText("কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
+        email.setText(" ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
+        website.setText(" ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
+        fb.setText(" ফেইসবুক: "+entertainmentServiceProviderItem.getNodeFacebook());
+        road.setText(" রাস্তা : " +entertainmentServiceProviderItem.getBlock());
+        block.setText(" ব্লক : "+entertainmentServiceProviderItem.getLandmark());
+        landmark.setText(" কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
 
 
         //common for all category

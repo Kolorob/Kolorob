@@ -116,20 +116,21 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
             legal=(ImageView)findViewById(R.id.legal);
 
 
-            itemName.setText(legalAidServiceProviderItem.getLegalaidNameEng());
-            itemAddress.setText("ঠিকানা: "+ legalAidServiceProviderItem.getArea());
-            itemType.setText("এলাকা : "+legalAidServiceProviderItem.getAddress());
+            itemName.setText(" "+legalAidServiceProviderItem.getLegalaidNameEng());
+
+            itemAddress.setText("  ঠিকানা: "+ legalAidServiceProviderItem.getArea());
+            itemType.setText("  এলাকা : "+legalAidServiceProviderItem.getAddress());
             additional_time.setText(" অতিরিক্ত সময়: " +legalAidServiceProviderItem.getAdditionaltime());
-            itemContact.setText("মোবাইল নম্বর:  "+legalAidServiceProviderItem.getContactNo());
-            opentime.setText("খোলার সময়: "+legalAidServiceProviderItem.getOpeningtime());
-            closetime.setText("বন্ধ করার সময়: "+legalAidServiceProviderItem.getClosingtime());
-            breaktime.setText("বিরতির সময়: "+ legalAidServiceProviderItem.getBreaktime());
-            road.setText("রাস্তা: "+ legalAidServiceProviderItem.getRoad());
-            block.setText("ব্লক:"+legalAidServiceProviderItem.getLandmark());
-            fb.setText("ফেইসবুক: "+ legalAidServiceProviderItem.getFbLink());
-            website.setText("ওয়েবসাইট: " +legalAidServiceProviderItem.getWebsiteLink());
-            email.setText("ইমেইল: "+legalAidServiceProviderItem.getEmailAddress());
-            landmark.setText("কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
+            itemContact.setText("  মোবাইল নম্বর:  "+legalAidServiceProviderItem.getContactNo());
+            opentime.setText(" খোলার সময়: "+legalAidServiceProviderItem.getOpeningtime());
+            closetime.setText(" বন্ধ করার সময়: "+legalAidServiceProviderItem.getClosingtime());
+            breaktime.setText(" বিরতির সময়: "+ legalAidServiceProviderItem.getBreaktime());
+            road.setText(" রাস্তা: "+ legalAidServiceProviderItem.getRoad());
+            block.setText(" ব্লক:"+legalAidServiceProviderItem.getLandmark());
+            fb.setText(" ফেইসবুক: "+ legalAidServiceProviderItem.getFbLink());
+            website.setText(" ওয়েবসাইট: " +legalAidServiceProviderItem.getWebsiteLink());
+            email.setText(" ইমেইল: "+legalAidServiceProviderItem.getEmailAddress());
+            landmark.setText(" কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
           //  itemarea.setText("এলাকা: " +legalAidServiceProviderItem.getAddress());
             String la= legalAidServiceProviderItem.getIdentifierId();
 

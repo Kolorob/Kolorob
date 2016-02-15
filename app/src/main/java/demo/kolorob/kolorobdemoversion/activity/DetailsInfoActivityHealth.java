@@ -251,20 +251,20 @@ public class DetailsInfoActivityHealth extends Activity  {
 
 
 
-        itemName.setText(healthServiceProviderItem.getNodeName());
-        itemAddress.setText("ঠিকানা: "+healthServiceProviderItem.getArea());
-        itemType.setText("ধরন: "+healthServiceProviderItem.getNodeType());
-        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());
-        opening_time.setText("খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
-        breaktime.setText("বিরতির সময়: "+healthServiceProviderItem.getBreaktime());
-        close_time.setText("বন্ধ করার সময়: "+healthServiceProviderItem.getClosingtime());
-        road.setText("রাস্তা : "+healthServiceProviderItem.getRoad());
-        block.setText("ব্লক: "+healthServiceProviderItem.getBlock());
-        landmark.setText("কাছাকাছি পরিচিত স্থান: "+healthServiceProviderItem.getLandmark());
+        itemName.setText(" "+healthServiceProviderItem.getNodeName());
+        itemAddress.setText("  ঠিকানা: "+healthServiceProviderItem.getArea());
+        itemType.setText("  ধরন: "+healthServiceProviderItem.getNodeType());
+        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());
+        opening_time.setText("  খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
+        breaktime.setText("  বিরতির সময়: "+healthServiceProviderItem.getBreaktime());
+        close_time.setText("  বন্ধ করার সময়: "+healthServiceProviderItem.getClosingtime());
+        road.setText("  রাস্তা : "+healthServiceProviderItem.getRoad());
+        block.setText("  ব্লক: "+healthServiceProviderItem.getBlock());
+        landmark.setText("  কাছাকাছি পরিচিত স্থান: "+healthServiceProviderItem.getLandmark());
 
-        email.setText("ইমেইল: " + healthServiceProviderItem.getNodeEmail());
-        website.setText("ওয়েবসাইট: "+healthServiceProviderItem.getNodeWebsite());
-        fb.setText("ফেসবুক: "+healthServiceProviderItem.getNodeFacebook());
+        email.setText("  ইমেইল: " + healthServiceProviderItem.getNodeEmail());
+        website.setText("  ওয়েবসাইট: "+healthServiceProviderItem.getNodeWebsite());
+        fb.setText("  ফেসবুক: "+healthServiceProviderItem.getNodeFacebook());
 
         kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
             @Override

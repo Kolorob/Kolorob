@@ -109,19 +109,19 @@ public class DetailsInfoActivity extends Activity  {
         edukivabejaben=(ImageView)findViewById(R.id.kivabejabenedu);
         listView=(ListView)findViewById(R.id.listView5);
 
-        itemName.setText(educationServiceProviderItem.getEduNameEng());
-       itemAddress.setText("ঠিকানা: "+educationServiceProviderItem.getArea());
-        itemType.setText("শিক্ষার ধরন: "+educationServiceProviderItem.getEduType());
-        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+educationServiceProviderItem.getContactNo());
-       totalStudents.setText("মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
-        totalClasses.setText("মোট শ্রেণি সংখ্যা: "+educationServiceProviderItem.getTotalClasses()+ " টি");
-       totalTeachers.setText("মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
-      playground.setText("খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
-        hostel.setText("আবাসন/হোস্টেল সুবিধা : "+educationServiceProviderItem.getHostelFacility());
-        transport.setText("যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
-        email.setText("ইমেইল: "+educationServiceProviderItem.getEmailAddress());
-        website.setText("ওয়েবসাইট: "+educationServiceProviderItem.getWebsiteLink());
-       fb.setText("ফেইসবুক: "+educationServiceProviderItem.getFbLink());
+        itemName.setText(" "+educationServiceProviderItem.getEduNameEng());
+       itemAddress.setText(" ঠিকানা: "+educationServiceProviderItem.getArea());
+        itemType.setText(" শিক্ষার ধরন: "+educationServiceProviderItem.getEduType());
+        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+educationServiceProviderItem.getContactNo());
+       totalStudents.setText(" মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
+        totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+educationServiceProviderItem.getTotalClasses()+ " টি");
+       totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
+      playground.setText(" খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
+        hostel.setText(" আবাসন/হোস্টেল সুবিধা : "+educationServiceProviderItem.getHostelFacility());
+        transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
+        email.setText(" ইমেইল: "+educationServiceProviderItem.getEmailAddress());
+        website.setText(" ওয়েবসাইট: "+educationServiceProviderItem.getWebsiteLink());
+       fb.setText(" ফেইসবুক: "+educationServiceProviderItem.getFbLink());
 
 
 

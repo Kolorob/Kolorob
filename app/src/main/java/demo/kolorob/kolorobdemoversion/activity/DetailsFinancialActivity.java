@@ -157,22 +157,22 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
             navlist7 = (ListView) findViewById(R.id.listView10ss);
 
 
-            open.setText("খোলার সময়: " +financialServiceProviderItem.getOpeningtime() );
-            closen.setText("বন্ধের সময়: " +financialServiceProviderItem.getClosingtime());
-            breaking.setText("বিরতির সময়: "+ financialServiceProviderItem.getBreaktime2());
-            additional.setText("অতিরিক্ত সময়: "+financialServiceProviderItem.getAdditionaltime());
-            itemName.setText( financialServiceProviderItem.getNodeName());
-            road.setText("রাস্তা: "+financialServiceProviderItem.getRoad());
-            block.setText("ব্লক: "+ financialServiceProviderItem.getBlock());
-            landmark.setText("কাছাকাছি পরিচিত স্থান:" +financialServiceProviderItem.getLandmark());
-            itemAddress.setText("ঠিকানা: "+ financialServiceProviderItem.getArea());
-            itemType.setText("রেজিস্ট্রেশন: "+ financialServiceProviderItem.getNodeRegisteredwith());
+            open.setText(" খোলার সময়: " +financialServiceProviderItem.getOpeningtime() );
+            closen.setText(" বন্ধের সময়: " +financialServiceProviderItem.getClosingtime());
+            breaking.setText(" বিরতির সময়: "+ financialServiceProviderItem.getBreaktime2());
+            additional.setText(" অতিরিক্ত সময়: "+financialServiceProviderItem.getAdditionaltime());
+            itemName.setText(" "+ financialServiceProviderItem.getNodeName());
+            road.setText(" রাস্তা: "+financialServiceProviderItem.getRoad());
+            block.setText(" ব্লক: "+ financialServiceProviderItem.getBlock());
+            landmark.setText(" কাছাকাছি পরিচিত স্থান:" +financialServiceProviderItem.getLandmark());
+            itemAddress.setText(" ঠিকানা: "+ financialServiceProviderItem.getArea());
+            itemType.setText(" রেজিস্ট্রেশন: "+ financialServiceProviderItem.getNodeRegisteredwith());
 
-            itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+ financialServiceProviderItem.getNodeContact());
+            itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+ financialServiceProviderItem.getNodeContact());
 
-            email.setText("ইমেইল: "+ financialServiceProviderItem.getNodeDesignation());
-            website.setText("ওয়েবসাইট :"+ financialServiceProviderItem.getNodeWebsite());
-            fb.setText("ফেসবুক : " + financialServiceProviderItem.getNodeFacebook());
+            email.setText(" ইমেইল: "+ financialServiceProviderItem.getNodeDesignation());
+            website.setText(" ওয়েবসাইট :"+ financialServiceProviderItem.getNodeWebsite());
+            fb.setText(" ফেসবুক : " + financialServiceProviderItem.getNodeFacebook());
 
 
 

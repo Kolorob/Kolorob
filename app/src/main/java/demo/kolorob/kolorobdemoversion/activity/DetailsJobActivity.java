@@ -87,23 +87,23 @@ public class DetailsJobActivity extends Activity {
 
 
 
-        itemName.setText(jobServiceProviderItem.getAddress());
-        itemAddress.setText("ঠিকানা: "+jobServiceProviderItem.getArea());
-        itemType.setText("রেজিস্ট্রেশন :  "+jobServiceProviderItem.getRegisteredWith());
+        itemName.setText(" "+jobServiceProviderItem.getAddress());
+        itemAddress.setText(" ঠিকানা: "+jobServiceProviderItem.getArea());
+        itemType.setText(" রেজিস্ট্রেশন :  "+jobServiceProviderItem.getRegisteredWith());
 
-        itemContact.setText("মোবাইল/মুঠোফোন নম্বর: "+jobServiceProviderItem.getContactNo());
+        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+jobServiceProviderItem.getContactNo());
 
-        email.setText("সংবাদ দাতা: "+jobServiceProviderItem.getContactPersonDesignation());
-        fb.setText("ফেইসবুক: "+jobServiceProviderItem.getFbLink());
-        website.setText("ওয়েবসাইট: "+jobServiceProviderItem.getWebsiteLink());
-        jobName.setText("জবের নাম: ");
-        road.setText("রাস্তা :");
-        block.setText("ব্লক :");
+        email.setText(" সংবাদ দাতা: "+jobServiceProviderItem.getContactPersonDesignation());
+        fb.setText(" ফেইসবুক: "+jobServiceProviderItem.getFbLink());
+        website.setText(" ওয়েবসাইট: "+jobServiceProviderItem.getWebsiteLink());
+        jobName.setText(" জবের নাম: ");
+        road.setText(" রাস্তা :");
+        block.setText(" ব্লক :");
 
-        openTime.setText("খোলার সময়: ");
-        close_Time.setText("বন্ধ করার সময়: ");
-        breakTIme.setText("বিরতির সময়: ");
-        landmark.setText("কাছাকাছি পরিচিত স্থান: ");
+        openTime.setText(" খোলার সময়: ");
+        close_Time.setText(" বন্ধ করার সময়: ");
+        breakTIme.setText(" বিরতির সময়: ");
+        landmark.setText(" কাছাকাছি পরিচিত স্থান: ");
 
 
        // website.setText("ওয়েবসাইটঃ "+jobServiceProviderItem.getWebsiteLink());

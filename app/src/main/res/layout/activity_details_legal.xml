@@ -166,12 +166,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="প্রতিষ্ঠানের সময়সূচি"
+                android:text=" প্রতিষ্ঠানের সময়সূচি"
                 android:id="@+id/pr_time"
                 android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_below="@+id/tv_item_type" />
 
             <ImageView
@@ -256,12 +257,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="আরো তথ্য"
+                android:text=" যোগাযোগের উপায় "
                 android:id="@+id/textView13"
                 android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_below="@+id/additionalTime" />
 
             <ImageView
@@ -381,7 +383,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন  "
+                    android:text=" আইন বিষয়ক পরামর্শ সম্পর্কিত তথ্য   "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
@@ -424,7 +426,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" প্রতিষ্ঠানের বিস্তারিত বিবরন "
+                    android:text=" সালিশী সম্পর্কিত তথ্য "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="28dp"/>
