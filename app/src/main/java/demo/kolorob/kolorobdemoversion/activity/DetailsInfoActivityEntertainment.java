@@ -382,8 +382,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                 }
                 else
                 {
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainment.this).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainment.this, AlertDialog.THEME_HOLO_LIGHT).create();
                     alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
                     alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

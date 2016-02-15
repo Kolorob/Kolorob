@@ -10,35 +10,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/detailed_info_panel_top"
-        android:gravity="center_vertical|right"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout2">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:background="@color/transparent"
-            android:src="@drawable/feedback"
-            android:foregroundGravity="center_vertical|center_horizontal" />
+        android:id="@+id/linearLayout2"
+        android:gravity="center_vertical|center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="বন্ধ করুন"
-            android:id="@+id/tv_close"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:focusable="true" />
 
-        <ImageView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.25"
+
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.50"
             android:layout_height="wrap_content"
-            android:id="@+id/iv_close"
-            android:src="@drawable/close_button"
-            android:paddingRight="20dp"
-            android:focusable="true" />
+            android:gravity="center">
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button2"
+                android:background="@color/transparent"
+                android:src="@drawable/feedback"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.25"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="বন্ধ করুন"
+                android:id="@+id/tv_close"
+                android:textColor="#000000"
+                android:textSize="18sp"
+
+                android:focusable="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_close"
+                android:src="@drawable/close_button"
+                android:focusable="true" />
+
+
+        </LinearLayout>
+
+
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

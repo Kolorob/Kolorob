@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -145,8 +146,7 @@ public class DetailsJobActivity extends Activity {
 
                         else
                         {
-
-                            AlertDialog alertDialog = new AlertDialog.Builder(DetailsJobActivity.this).create();
+                            AlertDialog alertDialog = new AlertDialog.Builder(DetailsJobActivity.this, AlertDialog.THEME_HOLO_LIGHT).create();
                             alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
                             alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
                             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
