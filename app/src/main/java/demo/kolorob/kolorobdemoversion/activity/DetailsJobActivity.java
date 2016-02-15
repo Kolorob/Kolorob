@@ -1,6 +1,8 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by israt.jahan on 1/11/2016.
@@ -110,37 +113,53 @@ public class DetailsJobActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(AppUtils.isNetConnected(getApplicationContext())) {
 
-                        String lat= jobServiceProviderItem.getLatitude().toString();
-                        // double latitude = Double.parseDouble(lat);
-                        String lon = jobServiceProviderItem.getLongitude().toString();
-                        // double longitude = Double.parseDouble(lon);
-                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("Latitude",lat);
-                        editor.putString("Longitude",lon);
-                        editor.commit();
+                            String lat = jobServiceProviderItem.getLatitude().toString();
+                            // double latitude = Double.parseDouble(lat);
+                            String lon = jobServiceProviderItem.getLongitude().toString();
+                            // double longitude = Double.parseDouble(lon);
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("Latitude", lat);
+                            editor.putString("Longitude", lon);
+                            editor.commit();
 
 
-                        String Longitude=pref.getString("Latitude", null);
-                        String Latitude=pref.getString("Longitude", null);
+                            String Longitude = pref.getString("Latitude", null);
+                            String Latitude = pref.getString("Longitude", null);
 
-                        if (Latitude != null && Longitude != null )
-                        {
-                            Double Lon= Double.parseDouble(Longitude);
-                            Double Lat= Double.parseDouble(Latitude);
-                            Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
-                            // implementFragment();
+                            if (Latitude != null && Longitude != null) {
+                                Double Lon = Double.parseDouble(Longitude);
+                                Double Lat = Double.parseDouble(Latitude);
+                               // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
+                                // implementFragment();
 
-                            //username and password are present, do your stuff
+                                //username and password are present, do your stuff
+                            }
+
+
+                            finish();
                         }
 
+                        else
+                        {
+
+                            AlertDialog alertDialog = new AlertDialog.Builder(DetailsJobActivity.this).create();
+                            alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                            alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
 
 
 
-
-                        finish();
+                        }
                     }
                 }
         );

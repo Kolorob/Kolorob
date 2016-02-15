@@ -1033,7 +1033,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         editor.putInt("LocationNameId", locationNameId);
         editor.commit();
 
-        if (Latitude != null) {
+        if (Latitude != null&&AppUtils.isNetConnected(getApplicationContext())) {
             Double Lon = Double.parseDouble(Longitude);
             Double Lat = Double.parseDouble(Latitude);
 
@@ -1041,6 +1041,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
         }
+
     }
 
     @Override
