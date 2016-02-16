@@ -1,5 +1,4 @@
 package  demo.kolorob.kolorobdemoversion.activity;
-import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -576,10 +575,16 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
         ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[cat_id-1]);
-        else
+        else{
             ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[cat_id-1]);
+        }
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
+        if(width>800)
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
+    else{
+        lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
+    }
+
         ivIcon.setLayoutParams(lpIv);
         tvName.setText(si.getSubcatHeader());
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));

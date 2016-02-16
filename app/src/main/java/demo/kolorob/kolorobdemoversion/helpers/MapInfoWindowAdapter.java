@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -33,6 +34,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     private TextView itemType;
     private TextView itemContact;
     ImageView close;
+    private int height;
     private int categoryId;
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> educationServiceProvider;
@@ -48,11 +50,17 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     public MapInfoWindowAdapter(int cat_id,ArrayList<EducationServiceProviderItem> et,final Context context){
         inflater = (LayoutInflater)context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+OpeningActivity op=new OpeningActivity();
+        int h=op.getHeight();
         educationServiceProvider = et;//setting the entertainment object
 
         categoryId=cat_id;
-        myContentsView = inflater.inflate(R.layout.small_info, null);
+  if(h>1000) {
+      myContentsView = inflater.inflate(R.layout.small_info, null);
+  }
+        else {
+      myContentsView = inflater.inflate(R.layout.small_info_mobile, null);
+  }
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
@@ -151,6 +159,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         jobServiceProvider = et;//setting the job object
 
         categoryId=cat_id;
+
         myContentsView= inflater.inflate(R.layout.small_info, null);
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
@@ -193,7 +202,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getNodeName());
-                        itemAddress.setText("ঠিকানা ঃ  "+AppConstants.PARIS_ROAD);
+                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
                         itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
                     }
                 }

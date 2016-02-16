@@ -106,6 +106,16 @@ public class OpeningActivity extends Activity {
     public static final String EDU_PROVIDER_TABLE = "edu_provider";
     public  SQLiteDatabase db3;
     ProgressDialog pd;
+    public int height;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +129,7 @@ public class OpeningActivity extends Activity {
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+        setHeight(displayMetrics.heightPixels);
 
 
        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
