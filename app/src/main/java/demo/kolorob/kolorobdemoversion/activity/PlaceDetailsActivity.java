@@ -1,4 +1,5 @@
 package  demo.kolorob.kolorobdemoversion.activity;
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -84,7 +85,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private int locationNameId;
     private String locationName;
     private LinearLayout catLayout;
-
+    private int subcategory;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> currentEducationServiceProvider;
@@ -126,9 +127,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         if(height>1000)
-        setContentView(R.layout.place_details_activity);
+            setContentView(R.layout.place_details_activity);
         else
-        setContentView(R.layout.place_details_activity_mobiles);
+            setContentView(R.layout.place_details_activity_mobiles);
 
 
 
@@ -216,29 +217,29 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-       // callMapFragment();
+        // callMapFragment();
 
     }
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
             case AppConstants.EDUCATION:
 
-            SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
-            currentCategoryID = cat_id;
-            EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
-            ArrayList<String> print = null;
-            groups.removeAllElements();
-            print = subCategoryTable.getSubnameedu(currentCategoryID, head);
-            for (int j = 0; j < print.size(); j++) {
-                Group group = new Group(print.get(j));
-                printnames = null;
-                printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
-                for (int i = 0; i < printnames.size(); i++) {
-                    group.children.add(i, printnames.get(i));
+                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> print = null;
+                groups.removeAllElements();
+                print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < print.size(); j++) {
+                    Group group = new Group(print.get(j));
+                    printnames = null;
+                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+                    for (int i = 0; i < printnames.size(); i++) {
+                        group.children.add(i, printnames.get(i));
+                    }
+                    groups.add(j, group);
                 }
-                groups.add(j, group);
-            }
-        break;
+                break;
             case AppConstants.ENTERTAINMENT:
 
                 SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivity.this);
@@ -386,6 +387,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private void constructCategoryList(ArrayList<CategoryItem> categoryList, double dwPercentage) {
         llCatListHolder.removeAllViews();
+
         for (CategoryItem ci : categoryList) {
             llCatListHolder.addView(getCategoryListItemView(ci, dwPercentage));
 
@@ -399,7 +401,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         if(height<1000)
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
         else
-        v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
+            v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
 
@@ -412,8 +414,8 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
 
-     //   tvName.setText(ci.getCatName());
-     //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+        //   tvName.setText(ci.getCatName());
+        //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
 
 /**************************
  *
@@ -504,7 +506,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 seeMap.setVisibility(View.GONE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
                 placeDetailsLayout.setBackgroundResource(R.drawable.cool_crash_ui_backdrop);
-               // categoryHeader.setText(ci.getCatName());
+                // categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
                     showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
@@ -550,7 +552,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList,double dwPercentage,int cat_id) {
         llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
+        subcategory=0;
         for (SubCategoryItem si : subCategoryList) {
+
+
 
             if(!header.contains(si.getSubcatHeader()))
             {
@@ -568,22 +573,22 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         View v;
         LayoutInflater li = LayoutInflater.from(this);
         if(height>1000)
-        v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         else
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
-        ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[cat_id-1]);
+            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[ subcategory++]);
         else{
-            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[cat_id-1]);
+            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[ subcategory++]);
         }
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         if(width>800)
-        lpIv.width = (int) (primaryIconWidth * dwPercentage);
-    else{
-        lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
-    }
+            lpIv.width = (int) (primaryIconWidth * dwPercentage);
+        else{
+            lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
+        }
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setText(si.getSubcatHeader());
@@ -667,7 +672,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
                 /*code for all*/
 
-                  int p= getResources().getColor(R.color.subcategory_color);
+                int p= getResources().getColor(R.color.subcategory_color);
                 for(int i=0; i<((ViewGroup)v).getChildCount(); ++i) {
                     nextChild = ((ViewGroup)v).getChildAt(i);
                     nextChild.setBackgroundColor(p);
@@ -1015,7 +1020,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         super.onResume();
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-       // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
         String Longitude = pref.getString("Latitude", null);
         String Latitude = pref.getString("Longitude", null);

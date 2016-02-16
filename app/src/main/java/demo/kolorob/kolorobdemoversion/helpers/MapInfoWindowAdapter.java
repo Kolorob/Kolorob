@@ -50,17 +50,17 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     public MapInfoWindowAdapter(int cat_id,ArrayList<EducationServiceProviderItem> et,final Context context){
         inflater = (LayoutInflater)context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-OpeningActivity op=new OpeningActivity();
+        OpeningActivity op=new OpeningActivity();
         int h=op.getHeight();
         educationServiceProvider = et;//setting the entertainment object
 
         categoryId=cat_id;
-  if(h>1000) {
-      myContentsView = inflater.inflate(R.layout.small_info, null);
-  }
+        if(h>1000) {
+            myContentsView = inflater.inflate(R.layout.small_info, null);
+        }
         else {
-      myContentsView = inflater.inflate(R.layout.small_info_mobile, null);
-  }
+            myContentsView = inflater.inflate(R.layout.small_info_mobile, null);
+        }
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
@@ -185,10 +185,10 @@ OpeningActivity op=new OpeningActivity();
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        itemName.setText(et.getEduNameEng());
-                        itemAddress.setText("ঠিকানা ঃ  "+et.getAddress());
-                        itemType.setText("ধরন ঃ  "+et.getEduType());
-                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
+                        itemName.setText(et.getEduNameBan());
+                        itemAddress.setText("ঠিকানা: "+et.getAddress());
+                        itemType.setText("ধরন: "+et.getEduType());
+                        itemContact.setText("যোগাযোগের উপায়: " + et.getContactNo());
                     }
                 }
                 break;
@@ -201,9 +201,10 @@ OpeningActivity op=new OpeningActivity();
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        itemName.setText(et.getNodeName());
-                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
-                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+                        itemName.setText(et.getNameBn());
+                        itemAddress.setText("ঠিকানা: "+et.getArea());
+                        itemContact.setText("মোবাইল নম্বর: " + et.getNodeContact());
+                        itemType.setText("পরিচিত জায়গা: "+et.getLandmark());
                     }
                 }
 
@@ -218,8 +219,9 @@ OpeningActivity op=new OpeningActivity();
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getNodeNameBn());
-                        itemAddress.setText("ঠিকানা ঃ  "+et.getAddress());
-                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+                        itemType.setText("পরিচিত জায়গা: "+et.getBlock());
+                        itemAddress.setText("ঠিকানা: "+et.getAddress());
+                        itemContact.setText("মোবাইল নম্বর: " + et.getNodeContact());
                     }
                 }
 
@@ -236,9 +238,10 @@ OpeningActivity op=new OpeningActivity();
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        itemName.setText(et.getLegalaidNameEng());
-                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
-                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
+                        itemName.setText(et.getLegalaidNameBan());
+                        itemAddress.setText("ঠিকানা:  "+et.getArea());
+                        itemContact.setText("মোবাইল নম্বর: " + et.getContactNo());
+                        itemType.setText("পরিচিত জায়গা: "+et.getLandmark());
 
                     }
                 }
@@ -253,8 +256,9 @@ OpeningActivity op=new OpeningActivity();
                     {
 
                         itemName.setText(et.getNodeName());
-                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
-                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getNodeContact());
+                        itemAddress.setText("ঠিকানা: "+et.getArea());
+                        itemContact.setText("মোবাইল নম্বর: " + et.getNodeContact());
+                        itemType.setText("পরিচিত জায়গা: "+et.getLandmark());
 
 
                     }
@@ -269,8 +273,9 @@ OpeningActivity op=new OpeningActivity();
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
                         itemName.setText(et.getAddress());
-                        itemAddress.setText("ঠিকানা ঃ  "+et.getArea());
-                        itemContact.setText("যোগাযোগের উপায় ঃ  " + et.getContactNo());
+                        itemAddress.setText("ঠিকানা: "+et.getArea());
+                        itemContact.setText("মোবাইল নম্বর: " + et.getContactNo());
+
 
                     }
                 }
