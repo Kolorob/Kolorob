@@ -6,6 +6,7 @@ package demo.kolorob.kolorobdemoversion.fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +18,6 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
@@ -26,7 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -76,6 +76,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
     private double Lat;
     private int locationNameId;
     private static Context context=null;
+    boolean check=false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,7 +148,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setInterval(3 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1 * 1000);
 
         editor.clear();
@@ -229,8 +230,10 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
         if (location == null) {
+            if(check==false){
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
+            check=true;}
             //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
            //need to implement listener
         }
