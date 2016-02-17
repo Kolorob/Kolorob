@@ -81,7 +81,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
     private int subCatShowFlag=0;
-    private int locationNameId;
+    private int locationNameId,subcategory;
     private String locationName;
     private LinearLayout catLayout;
 
@@ -550,6 +550,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList,double dwPercentage,int cat_id) {
         llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
+        subcategory=0;
         for (SubCategoryItem si : subCategoryList) {
 
             if(!header.contains(si.getSubcatHeader()))
@@ -568,22 +569,22 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         View v;
         LayoutInflater li = LayoutInflater.from(this);
         if(height>1000)
-        v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         else
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
-        ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[cat_id-1]);
+            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[ subcategory++]);
         else{
-            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[cat_id-1]);
+            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[ subcategory++]);
         }
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         if(width>720)
-        lpIv.width = (int) (primaryIconWidth * dwPercentage);
-    else{
-        lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
-    }
+            lpIv.width = (int) (primaryIconWidth * dwPercentage);
+        else{
+            lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
+        }
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setText(si.getSubcatHeader());
