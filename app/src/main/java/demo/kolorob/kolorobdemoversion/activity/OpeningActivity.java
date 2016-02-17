@@ -99,6 +99,7 @@ public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -109,6 +110,7 @@ public class OpeningActivity extends Activity {
     public  SQLiteDatabase db3;
     ProgressDialog pd;
     public int height,width;
+    Boolean  firstRun;
 
 
 
@@ -159,58 +161,117 @@ public class OpeningActivity extends Activity {
         kolorob_logo.setMargins(0, 15, 0, 0);
         kolorobLogo.setLayoutParams(kolorob_logo);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-        alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
-                        startActivity(i);
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
-                        if(AppUtils.isNetConnected(getApplicationContext())) {
-
-                            pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
-                            pd.setIndeterminate(true);
-                            pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
 
 
-                            LoadData();
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+         firstRun = settings.getBoolean("firstRun", false);
+        if (firstRun == false)//if running for first time
+        {
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("firstRun", true);
+            editor.commit();
+
+            if(!AppUtils.isNetConnected(getApplicationContext())) {
+                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("firstRun", false);
+                                editor.commit();
+                                finish();
+                            }
+                        });
+                alertDialog.show();
+            }
+            else
+
+
+
+            {
+                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
+                pd.setIndeterminate(true);
+                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
+
+
+                LoadData();
+
+                pd.dismiss();
+
+                Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
+            }
+
+
+
+        } else {
+
+
+            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+            alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
+
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                            startActivity(i);
+                            dialog.dismiss();
+                            finish();
                         }
-                        else {
-                            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-                            alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
-                            alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
-                                            startActivity(i);
-                                            dialog.dismiss();
-                                            finish();
-                                        }
-                                    });
-                            alertDialog.show();
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                            if (AppUtils.isNetConnected(getApplicationContext())) {
+
+                                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
+                                pd.setIndeterminate(true);
+                                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
 
 
+                                LoadData();
+                            } else {
+                                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                                alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                                                startActivity(i);
+                                                dialog.dismiss();
+                                                finish();
+                                            }
+                                        });
+                                alertDialog.show();
 
+
+                            }
 
                         }
+                    });
 
-                    }
-                });
+            alertDialog.show();
 
-        alertDialog.show();
+
+
+
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -1195,29 +1256,31 @@ public class OpeningActivity extends Activity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
+
+
         }
 
-        //setContentView(R.layout.activity_main); //we don't need this line
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
-        boolean firstRun = settings.getBoolean("firstRun", false);
+
         if (firstRun == false)//if running for first time
         {
             pd.dismiss();
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("firstRun", true);
-            editor.commit();
+
             Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);//Activity to be     launched For the First time
-           // Intent i = new Intent(OpeningActivity.this, FeedbackActivity.class);//Activity to be     launched For the First time
+            // Intent i = new Intent(OpeningActivity.this, FeedbackActivity.class);//Activity to be     launched For the First time
             startActivity(i);
-          finish();
+
         } else {
             pd.dismiss();
             Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);//Default Activity
 
             //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
             startActivity(a);
-           finish();
+
         }
+        //setContentView(R.layout.activity_main); //we don't need this line
+
     }
 
 
