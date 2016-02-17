@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:id="@+id/llCategoryListHolder"
-            android:layout_width="75dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
