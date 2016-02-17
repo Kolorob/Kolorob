@@ -27,8 +27,10 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:id="@+id/iv_kolorob_logo"
+                android:layout_marginLeft="10dp"
+
                 android:background="@drawable/kolorob_logo_first_page"
-               />
+                />
 
 
 
