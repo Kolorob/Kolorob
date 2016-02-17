@@ -18,14 +18,16 @@ public class HealthVaccineAdapter extends BaseAdapter
     Activity context;
     String vaccine_name[];
     String vaccine_fee[];
+    String vaccine_remarks[];
 
 
 
-    public HealthVaccineAdapter(Activity context, String[] vaccine_name,String[] vaccine_fee) {
+    public HealthVaccineAdapter(Activity context, String[] vaccine_name,String[] vaccine_fee,String[] vaccine_remarks) {
         super();
         this.context = context;
         this.vaccine_name = vaccine_name;
         this.vaccine_fee = vaccine_fee;
+        this.vaccine_remarks=vaccine_remarks;
 
     }
 
@@ -47,6 +49,7 @@ public class HealthVaccineAdapter extends BaseAdapter
     private class ViewHolder {
         TextView VaccineName ;
         TextView VaccineFee;
+        TextView VaccineRemark;
 
     }
 
@@ -62,6 +65,7 @@ public class HealthVaccineAdapter extends BaseAdapter
             holder = new ViewHolder();
             holder.VaccineName = (TextView) convertView.findViewById(R.id.v_name);
             holder.VaccineFee = (TextView) convertView.findViewById(R.id.v_fee);
+            holder.VaccineRemark=(TextView) convertView.findViewById(R.id.v_remark);
 
             convertView.setTag(holder);
         }
@@ -77,7 +81,7 @@ public class HealthVaccineAdapter extends BaseAdapter
         holder.VaccineName.setText("ভ্যাকসিন নাম : " +vaccine_name[position]);
         holder.VaccineFee.setText("ভ্যাকসিন ফি : "+vaccine_fee[position]);
 
-
+        holder.VaccineRemark.setText("মন্তব্য: "+vaccine_remarks[position]);
 
         return convertView;
     }

@@ -25,9 +25,9 @@ public class HealthDetailsAdapter extends BaseAdapter
     String phar_mbbs[];
     String phar_speciallist[];
     String phar_remarks[];
+ String phar_docremarks[];
 
-
-    public HealthDetailsAdapter(Activity context, String[] doc_id,String[] doc_name, String[] doc_fee, String[] pharmacyTime, String[] phar_deg, String[] phar_lmaf, String[] phar_mbbs,String[] phar_speciallist,String[] phar_remarks) {
+    public HealthDetailsAdapter(Activity context, String[] doc_id,String[] doc_name, String[] doc_fee, String[] pharmacyTime, String[] phar_deg, String[] phar_lmaf, String[] phar_mbbs,String[] phar_speciallist,String[] phar_remarks,String[] phar_docremarks) {
         super();
         this.context = context;
         this.doc_id = doc_id;
@@ -40,6 +40,7 @@ public class HealthDetailsAdapter extends BaseAdapter
         this.phar_mbbs = phar_mbbs;
         this.phar_speciallist = phar_speciallist;
         this.phar_remarks = phar_remarks;
+        this.phar_docremarks=phar_docremarks;
     }
 
     public int getCount() {
@@ -67,6 +68,7 @@ public class HealthDetailsAdapter extends BaseAdapter
         TextView pharmacy_mbbs;
         TextView pharmacy_specialist;
         TextView pharmacy_remarks ;
+        TextView pharmacy_docremarks ;
     }
 
     public View getView(int position, View convertView, ViewGroup parent)
@@ -88,16 +90,13 @@ public class HealthDetailsAdapter extends BaseAdapter
             holder.pharmacy_mbbs = (TextView) convertView.findViewById(R.id.phar_mbbs);
             holder.pharmacy_specialist = (TextView) convertView.findViewById(R.id.phar_speciallist);
             holder.pharmacy_remarks = (TextView) convertView.findViewById(R.id.phar_remarks);
+            holder.pharmacy_docremarks = (TextView) convertView.findViewById(R.id.phar_docremarks);
             convertView.setTag(holder);
         }
         else
         {
             holder = (ViewHolder) convertView.getTag();
         }
-
-
-
-
 
         holder.docId.setText("ডাক্তারের আইডি: " +doc_id[position]);
         holder.docName.setText("ডাক্তারের নাম: "+doc_name[position]);
@@ -108,7 +107,7 @@ public class HealthDetailsAdapter extends BaseAdapter
         holder.pharmacy_mbbs.setText("ফার্মেসি এম বি বি এস : "+phar_mbbs[position]);
         holder.pharmacy_specialist.setText("ফার্মেসি বিশশজ্ঞ: "+phar_speciallist[position]);
         holder.pharmacy_remarks.setText("ফার্মেসি মন্তব্য:  "+phar_remarks[position]);
-
+        holder.pharmacy_docremarks.setText(":ডাক্তারের বিবরণঃ  "+phar_docremarks[position]);
 
         return convertView;
     }
