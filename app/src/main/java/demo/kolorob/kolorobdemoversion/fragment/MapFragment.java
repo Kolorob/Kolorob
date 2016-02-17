@@ -144,8 +144,8 @@ public class MapFragment extends Fragment implements
         View rootView;
 
         if(height>1000)
-        rootView = inflater.inflate(R.layout.fragment_map, container,
-                false);
+            rootView = inflater.inflate(R.layout.fragment_map, container,
+                    false);
         else
             rootView = inflater.inflate(R.layout.fragment_map1, container,
                     false);
@@ -165,9 +165,10 @@ public class MapFragment extends Fragment implements
 
         googleMap = mMapView.getMap();
         if(googleMap!=null)
-        googleMap.setOnInfoWindowClickListener(this);
+            googleMap.setOnInfoWindowClickListener(this);
 
-       // LinearLayout ll=(LinearLayout) mMapView.findViewById(R.id.ll);
+
+        // LinearLayout ll=(LinearLayout) mMapView.findViewById(R.id.ll);
 
 
 
@@ -178,7 +179,7 @@ public class MapFragment extends Fragment implements
         }
 
         else {
-            MAP_ZOOM_AMOUNT = 25;
+            MAP_ZOOM_AMOUNT = 16;
 
         }
         if(locationNameId==1) {
@@ -221,7 +222,7 @@ public class MapFragment extends Fragment implements
                 if(educationServiceProvider!=null) {
                     for (EducationServiceProviderItem et : educationServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        drawMarker(location, et.getEduNameEng());
+                        drawMarkerEdu(location, et.getEduNameEng(), et.getEduSubCategoryId());
                     }
                 }
                 break;
@@ -231,7 +232,7 @@ public class MapFragment extends Fragment implements
                 if(healthServiceProvider!=null) {
                     for (HealthServiceProviderItem et : healthServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        drawMarker(location, et.getNodeName());
+                        drawMarkerHel(location, et.getNodeName(), et.getRefNum());
                     }
                 }
 
@@ -244,7 +245,7 @@ public class MapFragment extends Fragment implements
                 if(entertainmentServiceProvider!=null) {
                     for (EntertainmentServiceProviderItem et : entertainmentServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        drawMarker(location, et.getNodeName());
+                        drawMarkerEnt(location, et.getNodeName(), et.getEntSubCategoryId());
                     }
                 }
 
@@ -259,7 +260,7 @@ public class MapFragment extends Fragment implements
                 if(legalaidServiceProvider!=null) {
                     for (LegalAidServiceProviderItem et :legalaidServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        drawMarker(location, et.getLegalaidNameEng());
+                        drawMarkerLeg(location, et.getLegalaidNameEng(), et.getLegalaidSubCategoryId());
                     }
                 }
                 break;
@@ -268,7 +269,7 @@ public class MapFragment extends Fragment implements
                 if(financialServiceProvider!=null) {
                     for (FinancialServiceProviderItem et :financialServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        drawMarker(location, et.getNodeName());
+                        drawMarkerFin(location, et.getNodeName(), et.getRefNum());
                     }
                 }
                 break;
@@ -277,7 +278,7 @@ public class MapFragment extends Fragment implements
                 if(jobServiceProvider!=null) {
                     for (JobServiceProviderItem et :jobServiceProvider) {
                         LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        drawMarker(location, et.getIdentifierId());
+                        drawMarkerJob(location, et.getIdentifierId(),et.getJobSubCategoryId());
                     }
                 }
                 break;
@@ -400,14 +401,151 @@ public class MapFragment extends Fragment implements
                 break;
         }
     }
+    private void drawMarkerEdu(LatLng point,String title,int subcategotyId){
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.draggable(false);
+        markerOptions.title(title);
+
+        if(subcategotyId>=1&&subcategotyId<=12)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[1]));
+        else if(subcategotyId>=13&&subcategotyId<=17)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+        else if(subcategotyId>=18&&subcategotyId<=19)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
+        else if(subcategotyId>=20&&subcategotyId<=21)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
+        else if(subcategotyId>=22&&subcategotyId<=26)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
+        googleMap.addMarker(markerOptions);
+    }
+
+    private void drawMarkerHel(LatLng point,String title,int subcategotyId){
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.draggable(false);
+        markerOptions.title(title);
+
+        if(subcategotyId>=1&&subcategotyId<=7)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[1]));
+        else if(subcategotyId>=8&&subcategotyId<=12)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+        else if(subcategotyId>=13&&subcategotyId<=15)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
+        else if(subcategotyId>=16&&subcategotyId<=20)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
+        else if(subcategotyId==21)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
+        else if(subcategotyId==22)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[6]));
+
+
+
+        googleMap.addMarker(markerOptions);
+    }
+    private void drawMarkerEnt(LatLng point,String title,int subcategotyId){
+
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.draggable(false);
+        markerOptions.title(title);
+
+        if(subcategotyId==1)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[1]));
+
+        else if(subcategotyId==2||subcategotyId==5||subcategotyId==21)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+
+        else if(subcategotyId==3)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
+        else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
+        else if(subcategotyId>=9&&subcategotyId<=11)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
+        else if(subcategotyId==12)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[6]));
+        else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[7]));
+        else if(subcategotyId==15||subcategotyId==17||subcategotyId==18)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[8]));
+
+
+
+
+        googleMap.addMarker(markerOptions);
+    }
+
+
     private void drawMarker(LatLng point,String title){
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(point);
         markerOptions.draggable(false);
         markerOptions.title(title);
+
+
+
+
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[categoryId]));
         googleMap.addMarker(markerOptions);
     }
+    private void drawMarkerLeg(LatLng point,String title, int subcategotyId){
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.draggable(false);
+        markerOptions.title(title);
+
+        if(subcategotyId==1)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[1]));
+
+        else if(subcategotyId>=2&&subcategotyId<=5)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+
+
+        googleMap.addMarker(markerOptions);
+    }
+    private void drawMarkerFin(LatLng point,String title, int subcategotyId){
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.draggable(false);
+        markerOptions.title(title);
+        if(subcategotyId>=1&&subcategotyId<=4)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[1]));
+        else if(subcategotyId>=5&&subcategotyId<=8)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+        else if(subcategotyId>=20&&subcategotyId<=21)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+        else if(subcategotyId>=9&&subcategotyId<=12)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
+        else if(subcategotyId>=13&&subcategotyId<=15)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
+        else if(subcategotyId>=16&&subcategotyId<=18)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
+        else if(subcategotyId==19)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[6]));
+
+        googleMap.addMarker(markerOptions);
+    }
+    private void drawMarkerJob(LatLng point,String title, int subcategotyId){
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.draggable(false);
+        markerOptions.title(title);
+        if(subcategotyId==1)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[1]));
+        else if(subcategotyId==2||subcategotyId==3)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+        else if(subcategotyId>=4&&subcategotyId<=9)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
+        else if(subcategotyId>=10&&subcategotyId<=12)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
+        else if(subcategotyId>=13&&subcategotyId<=16)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
+        else if(subcategotyId>=17&&subcategotyId<=19)
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[6]));
+        googleMap.addMarker(markerOptions);
+    }
+
 
     @Override
     public void onResume() {

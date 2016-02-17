@@ -23,12 +23,12 @@ public class AppConstants {
             R.drawable.but_shorkari_small,R.drawable.but_ain_small,  R.drawable.but_taka_small,R.drawable.but_chakri_small
             };
     public static final int[] ALL_CAT_MARKER_ICONS = {R.drawable.pin_blue,R.drawable.pin_red,R.drawable.pin_pink,
-        R.drawable.pin_green,R.drawable.pin_brown,R.drawable.pin_feroza,R.drawable.pin_yellow};
+        R.drawable.pin_green,R.drawable.pin_brown,R.drawable.pin_feroza,R.drawable.pin_yellow,R.drawable.pin_orange};
     public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.pin_blue1,R.drawable.pin_red1,R.drawable.pin_pink1,
-            R.drawable.pin_green1,R.drawable.pin_brown1,R.drawable.pin_feroza1,R.drawable.pin_yellow1};
+            R.drawable.pin_green1,R.drawable.pin_brown1,R.drawable.pin_feroza1,R.drawable.pin_yellow1,R.drawable.pin_orange};
     public static final float[] MARKER_HUE_COLOR = {BitmapDescriptorFactory.HUE_RED,BitmapDescriptorFactory.HUE_BLUE,
             BitmapDescriptorFactory.HUE_RED,(float)300,BitmapDescriptorFactory.HUE_GREEN,
-            (float)324.8,(float)168.8,BitmapDescriptorFactory.HUE_YELLOW};
+            (float)324.8,(float)168.8,BitmapDescriptorFactory.HUE_YELLOW,BitmapDescriptorFactory.HUE_ORANGE};
 
     public static final String[] SUB_CAT_EDU_BN = {"স্কুল-কলেজ", "মাদ্রাসা", "কারিগরি", "মেডিকেল", "অন্যান্য"};
     public static final String[] SUB_CAT_FUN_BN = {"খেলার মাঠ", "সাংস্কৃতিক", "ভ্রমণ", "ইলেক্ট্রনিক্স", "অন্যান্য"};
