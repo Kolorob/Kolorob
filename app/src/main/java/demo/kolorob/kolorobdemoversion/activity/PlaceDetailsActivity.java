@@ -579,7 +579,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[cat_id-1]);
         }
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
-        if(width>800)
+        if(width>720)
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
     else{
         lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);

@@ -9,10 +9,8 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -196,7 +194,12 @@ public class MapFragment extends Fragment implements
             googleMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
         }
-
+      /*  BitmapDescriptor image = BitmapDescriptorFactory.fromResource(R.drawable.trial);
+        GroundOverlayOptions groundOverlay = new GroundOverlayOptions()
+                .image(image)
+                .position(AppConstants.BAUNIA, 500f)
+                .transparency(0.5f);
+        googleMap.addGroundOverlay(groundOverlay);*/
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
