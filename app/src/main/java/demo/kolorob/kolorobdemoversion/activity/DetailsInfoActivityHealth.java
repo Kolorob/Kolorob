@@ -247,7 +247,7 @@ public class DetailsInfoActivityHealth extends Activity  {
         /**
          *following codes only for education. This may vary for different category.
          * */
-        itemName = (TextView) findViewById(R.id.tv_header_entertainment);
+        itemName = (TextView) findViewById(R.id.tv_header);
         itemAddress = (TextView) findViewById(R.id.tv_item_location_entertainment);
         itemType = (TextView) findViewById(R.id.tv_item_type_entertainment);
         itemContact = (TextView) findViewById(R.id.tv_item_contact_entertainment);
