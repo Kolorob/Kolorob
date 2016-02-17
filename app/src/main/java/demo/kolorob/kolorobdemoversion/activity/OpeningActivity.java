@@ -106,15 +106,9 @@ public class OpeningActivity extends Activity {
     public static final String EDU_PROVIDER_TABLE = "edu_provider";
     public  SQLiteDatabase db3;
     ProgressDialog pd;
-    public int height;
+    public int height,width;
 
-    public int getHeight() {
-        return height;
-    }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -128,8 +122,8 @@ public class OpeningActivity extends Activity {
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        int width = displayMetrics.widthPixels;
-        setHeight(displayMetrics.heightPixels);
+        width=displayMetrics.widthPixels;
+        height=displayMetrics.heightPixels;
 
 
        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);

@@ -19,13 +19,31 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 300;
     private AnimationDrawable frAnimBaunia;
     private AnimationDrawable frAnimParisRoad;
+    public int height,width;
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice);
-
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        setWidth(displayMetrics.widthPixels);
+        setHeight(displayMetrics.heightPixels);
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);
         ImageView ivBauniaBandh = (ImageView) findViewById(R.id.iv_baunia);
         ImageView ivParisRoad = (ImageView) findViewById(R.id.iv_parise);
@@ -33,7 +51,6 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
         ivBauniaBandh.setOnClickListener(this);
         ivParisRoad.setOnClickListener(this);
 
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
 
