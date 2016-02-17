@@ -112,4 +112,16 @@
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Pharmacy_remarks"
         android:id="@+id/phar_remarks" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="4dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Pharmacy_docremarks"
+        android:id="@+id/phar_docremarks" />
 </LinearLayout>

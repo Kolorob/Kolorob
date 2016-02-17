@@ -97,7 +97,7 @@ public class DetailsInfoActivityHealth extends Activity  {
         String node_id = healthServiceProviderItem.getNodeId();
 //        int node_ids = Integer.parseInt(node_id.toString());
 
-        ArrayList<HealthVaccinesItem> healthPharmacyItemArrayList;
+        ArrayList<HealthVaccinesItem> healthVaccinesItemArrayList;
         ArrayList<HealthSpecialistItem> healthSpecialistItems;
         ArrayList<HealthPharmacyItem> healthPharmacyItems;
         navlist = (ListView) findViewById(R.id.listView2);
@@ -125,7 +125,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
 
         HealthVaccinesTable healthVaccinesTable=new HealthVaccinesTable(DetailsInfoActivityHealth.this);
-        healthPharmacyItemArrayList=healthVaccinesTable.getVaccinesforNode(healthServiceProviderItem.getNodeId());
+        healthVaccinesItemArrayList=healthVaccinesTable.getVaccinesforNode(healthServiceProviderItem.getNodeId());
         healthPharmacyItems=healthPharmacyTable1.getPharmacyforNode(healthServiceProviderItem.getNodeId());
 
         healthSpecialistItems=healthSpecialistTable.getSpecialistforNode(healthServiceProviderItem.getNodeId());
@@ -153,7 +153,7 @@ public class DetailsInfoActivityHealth extends Activity  {
             String[] Pharmacy_mbbs_list=new String[f];
             String[] pharmacy_speciallist_list=new String[f];
             String[] pharmacy_remarks=new String[f];
-
+            String[] pharmacy_docremarks=new String[f];
             for (HealthPharmacyItem et : healthPharmacyItems) {
                 ll1.setVisibility(View.VISIBLE);
 
@@ -170,15 +170,15 @@ public class DetailsInfoActivityHealth extends Activity  {
                 Pharmacy_lmaf_list[k]=et.getPharmacyLMAF();
                 Pharmacy_mbbs_list[k]=et.getPharmacyMBBS();
                 pharmacy_speciallist_list[k]= et.getPharmacySpecialist();
-                pharmacy_remarks[k]=et.getpharmacyDocRemarks();
-
+                pharmacy_remarks[k]=et.getRemarks();
+                pharmacy_docremarks[k]=et.getpharmacyDocRemarks();
               //  lat = lat+"\n"+ " Node_id: "+et.getNodeId()+"\n Doctor_id: "+ et.getDocId() + "\nPhermacy Fee:" + et.getPharmacyFee() + "\n Doctor Name: " +et.getPharmacyDoctorName()+"\n";
                // phermacy.setText("Doc id"+et.getDocId()+"Pharmacy Fee"+et.getPharmacyFee()+"Doctor_name"+et.getPharmacyDoctorName());
                 k++;
             }
             HealthDetailsAdapter adapter=new HealthDetailsAdapter(this,doc_id_list,Phermacy_doc_list,doc_fee_list,
                     pharmacy_time_list,pharmacy_no_degree_list,Pharmacy_lmaf_list,
-                    Pharmacy_mbbs_list,pharmacy_speciallist_list,pharmacy_remarks );
+                    Pharmacy_mbbs_list,pharmacy_speciallist_list,pharmacy_remarks,pharmacy_docremarks );
 
             navlist.setAdapter(adapter);
 
@@ -191,16 +191,19 @@ public class DetailsInfoActivityHealth extends Activity  {
         }
 
 
-        if(healthPharmacyItemArrayList!=null) {
+        if(healthVaccinesItemArrayList!=null) {
 
-           int g= healthPharmacyItemArrayList.size();
+           int g= healthVaccinesItemArrayList.size();
             String[] vaccine_name=new String[g];
-            String[] pharmacy_time_list=new String[g];
+            String[] vaccine_fee=new String[g];
+            String[] vaccine_remark=new String[g];
             k=0;
-            for (HealthVaccinesItem et : healthPharmacyItemArrayList) {
+
+            for (HealthVaccinesItem et : healthVaccinesItemArrayList) {
 
                 vaccine_name[k]=et.getVaccinename();
-                pharmacy_time_list[k]=et.getVaccinefee();
+                vaccine_fee[k]=et.getVaccinefee();
+                vaccine_remark[k]=et.getVaccineremarks();
                 ll2.setVisibility(View.VISIBLE);
 
 
@@ -208,7 +211,7 @@ public class DetailsInfoActivityHealth extends Activity  {
             }
 
 
-            HealthVaccineAdapter adapter=new HealthVaccineAdapter(this,vaccine_name,pharmacy_time_list );
+            HealthVaccineAdapter adapter=new HealthVaccineAdapter(this,vaccine_name,vaccine_fee,vaccine_remark );
             navlist1.setAdapter(adapter);
             Helpes.getListViewSize(navlist1);
         }
@@ -261,7 +264,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
         itemName.setText(" "+healthServiceProviderItem.getNodeName());
         itemAddress.setText("  ঠিকানা: "+healthServiceProviderItem.getArea());
-        itemType.setText("  ধরন: "+healthServiceProviderItem.getNodeType());
+        itemType.setText("  ধরন: ");
         itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());
         opening_time.setText("  খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
         breaktime.setText("  বিরতির সময়: "+healthServiceProviderItem.getBreaktime());

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -27,10 +26,11 @@ public class PharmacyAdapter extends ArrayAdapter<String> {
     private final String[] phar_mbbs;
     private final String[] phar_speciallist;
     private final String[] phar_remarks;
+    private final String[] phar_docremarks;
 
 
 
-    public PharmacyAdapter(Activity context, String[] doc_id,String[] doc_name, String[] doc_fee, String[] pharmacyTime, String[] phar_deg, String[] phar_lmaf, String[] phar_mbbs,String[] phar_speciallist,String[] phar_remarks) {
+    public PharmacyAdapter(Activity context, String[] doc_id,String[] doc_name, String[] doc_fee, String[] pharmacyTime, String[] phar_deg, String[] phar_lmaf, String[] phar_mbbs,String[] phar_speciallist,String[] phar_remarks,String[] phar_docremarks) {
         super(context, R.layout.listview_phermacy, doc_id);
         // TODO Auto-generated constructor stub
 
@@ -44,6 +44,7 @@ public class PharmacyAdapter extends ArrayAdapter<String> {
         this.phar_mbbs=phar_mbbs;
         this.phar_speciallist=phar_speciallist;
         this.phar_remarks=phar_remarks;
+        this.phar_docremarks=phar_docremarks;
 
 
     }
@@ -61,7 +62,7 @@ public class PharmacyAdapter extends ArrayAdapter<String> {
         TextView pharmacy_mbbs = (TextView) rowView.findViewById(R.id.phar_mbbs);
         TextView pharmacy_specialist = (TextView) rowView.findViewById(R.id.phar_speciallist);
         TextView pharmacy_remarks = (TextView) rowView.findViewById(R.id.phar_remarks);
-
+        TextView pharmacy_docremarks = (TextView) rowView.findViewById(R.id.phar_docremarks);
         //   TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
         docId.setText(doc_id[position]);
@@ -73,7 +74,7 @@ public class PharmacyAdapter extends ArrayAdapter<String> {
         pharmacy_mbbs.setText(phar_mbbs[position]);
         pharmacy_specialist.setText(phar_speciallist[position]);
         pharmacy_remarks.setText(phar_remarks[position]);
-
+        pharmacy_docremarks.setText(phar_docremarks[position]);
 
         //    extratxt.setText("Description "+itemname[position]);
         return rowView;

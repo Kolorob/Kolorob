@@ -306,7 +306,7 @@ public class MapFragment extends Fragment implements
                         Intent ii = new Intent(getActivity(),DetailsInfoActivity.class);
                         ii.putExtra(AppConstants.KEY_DETAILS_VIEW,et);
                         startActivity(ii);
-                        getActivity().finish();
+                       // getActivity().finish();
                         break;
                     }
                 }
@@ -323,7 +323,7 @@ public class MapFragment extends Fragment implements
                         Intent hel = new Intent(getActivity(),DetailsInfoActivityHealth.class);
                         hel.putExtra(AppConstants.KEY_DETAILS_HEALTH,et);
                         startActivity(hel);
-                        getActivity().finish();
+                      //  getActivity().finish();
                         break;
                     }
                 }
@@ -341,7 +341,7 @@ public class MapFragment extends Fragment implements
                         Intent ent = new Intent(getActivity(),DetailsInfoActivityEntertainment.class);
                         ent.putExtra(AppConstants.KEY_DETAILS_ENT,et);
                         startActivity(ent);
-                        getActivity().finish();
+                      //  getActivity().finish();
                         break;
                     }
                 }
@@ -366,7 +366,7 @@ public class MapFragment extends Fragment implements
                         Intent legal = new Intent(getActivity(),DetailsLegalActivity.class);
                         legal.putExtra(AppConstants.KEY_DETAILS_LEGAL,et);
                         startActivity(legal);
-                        getActivity().finish();
+                       // getActivity().finish();
                         break;
                     }
                 }
@@ -383,7 +383,7 @@ public class MapFragment extends Fragment implements
                         Intent iij = new Intent(getActivity(),DetailsFinancialActivity.class);
                         iij.putExtra(AppConstants.KEY_DETAILS_FINANCIAL,et);
                         startActivity(iij);
-                        getActivity().finish();
+                      //  getActivity().finish();
                         break;
                     }
                 }
@@ -399,7 +399,7 @@ public class MapFragment extends Fragment implements
                         Intent iijob = new Intent(getActivity(), DetailsJobActivity.class);
                         iijob.putExtra(AppConstants.KEY_DETAILS_JOB,et);
                         startActivity(iijob);
-                        getActivity().finish();
+                      //  getActivity().finish();
                         break;
                     }
                 }
