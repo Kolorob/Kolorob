@@ -3,8 +3,10 @@ package demo.kolorob.kolorobdemoversion.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -116,9 +118,7 @@ public class OpeningActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening);
-     pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
-        pd.setIndeterminate(true);
-        pd.show(OpeningActivity.this,AppConstants.WAITTAG, AppConstants.WAITDET);
+
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -159,7 +159,61 @@ public class OpeningActivity extends Activity {
         kolorob_logo.setMargins(0, 15, 0, 0);
         kolorobLogo.setLayoutParams(kolorob_logo);
 
-        LoadData();
+        AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+        alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                        startActivity(i);
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                        if(AppUtils.isNetConnected(getApplicationContext())) {
+
+                            pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
+                            pd.setIndeterminate(true);
+                            pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
+
+
+                            LoadData();
+                        }
+                        else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                            alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                            alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                                            startActivity(i);
+                                            dialog.dismiss();
+                                            finish();
+                                        }
+                                    });
+                            alertDialog.show();
+
+
+
+
+                        }
+
+                    }
+                });
+
+        alertDialog.show();
+
+
+
     }
     public void LoadData()
     {
