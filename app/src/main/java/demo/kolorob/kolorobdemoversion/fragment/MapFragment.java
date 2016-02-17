@@ -195,10 +195,11 @@ public class MapFragment extends Fragment implements
             googleMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
         }
-      /*  BitmapDescriptor image = BitmapDescriptorFactory.fromResource(R.drawable.trial);
+      /* BitmapDescriptor image = BitmapDescriptorFactory.fromResource(R.drawable.trial);
+        LatLngBounds bounds = new LatLngBounds (new LatLng(23.815122, 90.376780), new LatLng(23.824740, 90.384038));
         GroundOverlayOptions groundOverlay = new GroundOverlayOptions()
                 .image(image)
-                .position(AppConstants.BAUNIA, 500f)
+                .positionFromBounds(bounds)
                 .transparency(0.5f);
         googleMap.addGroundOverlay(groundOverlay);*/
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

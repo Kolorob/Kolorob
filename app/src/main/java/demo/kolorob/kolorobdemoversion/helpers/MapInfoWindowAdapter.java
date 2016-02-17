@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
+import demo.kolorob.kolorobdemoversion.activity.PlaceChoiceActivity;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -50,17 +50,12 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
     public MapInfoWindowAdapter(int cat_id,ArrayList<EducationServiceProviderItem> et,final Context context){
         inflater = (LayoutInflater)context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        OpeningActivity op=new OpeningActivity();
-        int h=op.getHeight();
+        PlaceChoiceActivity pc=new PlaceChoiceActivity();
+        int h=pc.getHeight();
+        int w=pc.getWidth();
         educationServiceProvider = et;//setting the entertainment object
-
         categoryId=cat_id;
-        if(h>1000) {
-            myContentsView = inflater.inflate(R.layout.small_info, null);
-        }
-        else {
-            myContentsView = inflater.inflate(R.layout.small_info_mobile, null);
-        }
+        myContentsView = inflater.inflate(R.layout.small_info, null);
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);

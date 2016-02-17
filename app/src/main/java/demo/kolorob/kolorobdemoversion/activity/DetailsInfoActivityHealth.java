@@ -10,8 +10,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,7 +23,6 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.HealthDetailsAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.HealthSpecialistAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.HealthVaccineAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.PharmacyAdapter;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
@@ -40,7 +39,7 @@ public class DetailsInfoActivityHealth extends Activity  {
     ImageView close,kivabejabenHealth;
     TextView close_tv;
     ListView lv1,lv2,lv3;
-
+    ImageButton Feedback;
 
     /**
      * Following components are only for education
@@ -80,6 +79,15 @@ public class DetailsInfoActivityHealth extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.health_details_info1);
         Intent intent = getIntent();
+        Feedback = (ImageButton) findViewById(R.id.button2);
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsInfoActivityHealth.this, FeedbackActivity.class);
+                startActivity(a);
+                finish();
+            }
+        });
         if (null != intent)
         {
             healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH);
