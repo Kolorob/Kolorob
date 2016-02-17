@@ -109,7 +109,7 @@ public class DetailsInfoActivity extends Activity  {
         edukivabejaben=(ImageView)findViewById(R.id.kivabejabenedu);
         listView=(ListView)findViewById(R.id.listView5);
 
-        itemName.setText(" "+educationServiceProviderItem.getEduNameEng());
+        itemName.setText(" "+educationServiceProviderItem.getEduNameBan());
        itemAddress.setText(" ঠিকানা: "+educationServiceProviderItem.getArea());
         itemType.setText(" শিক্ষার ধরন: "+educationServiceProviderItem.getEduType());
         itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+educationServiceProviderItem.getContactNo());
