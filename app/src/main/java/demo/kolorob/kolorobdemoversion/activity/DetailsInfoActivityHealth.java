@@ -152,7 +152,7 @@ public class DetailsInfoActivityHealth extends Activity  {
             String[] Pharmacy_lmaf_list=new String[f];
             String[] Pharmacy_mbbs_list=new String[f];
             String[] pharmacy_speciallist_list=new String[f];
-            String[] refnum_list=new String[f];
+            String[] pharmacy_remarks=new String[f];
 
             for (HealthPharmacyItem et : healthPharmacyItems) {
                 ll1.setVisibility(View.VISIBLE);
@@ -170,7 +170,7 @@ public class DetailsInfoActivityHealth extends Activity  {
                 Pharmacy_lmaf_list[k]=et.getPharmacyLMAF();
                 Pharmacy_mbbs_list[k]=et.getPharmacyMBBS();
                 pharmacy_speciallist_list[k]= et.getPharmacySpecialist();
-                refnum_list[k]=et.getRefNumber();
+                pharmacy_remarks[k]=et.getpharmacyDocRemarks();
 
               //  lat = lat+"\n"+ " Node_id: "+et.getNodeId()+"\n Doctor_id: "+ et.getDocId() + "\nPhermacy Fee:" + et.getPharmacyFee() + "\n Doctor Name: " +et.getPharmacyDoctorName()+"\n";
                // phermacy.setText("Doc id"+et.getDocId()+"Pharmacy Fee"+et.getPharmacyFee()+"Doctor_name"+et.getPharmacyDoctorName());
@@ -178,7 +178,7 @@ public class DetailsInfoActivityHealth extends Activity  {
             }
             HealthDetailsAdapter adapter=new HealthDetailsAdapter(this,doc_id_list,Phermacy_doc_list,doc_fee_list,
                     pharmacy_time_list,pharmacy_no_degree_list,Pharmacy_lmaf_list,
-                    Pharmacy_mbbs_list,pharmacy_speciallist_list,refnum_list );
+                    Pharmacy_mbbs_list,pharmacy_speciallist_list,pharmacy_remarks );
 
             navlist.setAdapter(adapter);
 
