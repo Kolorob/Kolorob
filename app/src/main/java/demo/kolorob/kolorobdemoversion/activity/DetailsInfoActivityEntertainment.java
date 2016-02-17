@@ -128,7 +128,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
 
 
-        itemName = (TextView) findViewById(R.id.tv_header_entertainment);
+        itemName = (TextView) findViewById(R.id.tv_header);
         itemAddress = (TextView) findViewById(R.id.tv_item_type_ent);
 
         itemContact = (TextView) findViewById(R.id.tv_item_contact_ent);
