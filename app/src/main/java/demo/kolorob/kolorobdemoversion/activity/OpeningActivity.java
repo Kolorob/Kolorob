@@ -1202,20 +1202,22 @@ public class OpeningActivity extends Activity {
         boolean firstRun = settings.getBoolean("firstRun", false);
         if (firstRun == false)//if running for first time
         {
-            pd.dismiss();
+
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("firstRun", true);
             editor.commit();
             Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);//Activity to be     launched For the First time
            // Intent i = new Intent(OpeningActivity.this, FeedbackActivity.class);//Activity to be     launched For the First time
             startActivity(i);
+            pd.dismiss();
           finish();
         } else {
-            pd.dismiss();
+
             Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);//Default Activity
 
             //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
             startActivity(a);
+            pd.dismiss();
            finish();
         }
     }

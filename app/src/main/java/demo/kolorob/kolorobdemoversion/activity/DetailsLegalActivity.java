@@ -116,7 +116,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
             legal=(ImageView)findViewById(R.id.legal);
 
 
-            itemName.setText(" "+legalAidServiceProviderItem.getLegalaidNameEng());
+            itemName.setText(" "+legalAidServiceProviderItem.getLegalaidNameBan());
 
             itemAddress.setText("  ঠিকানা: "+ legalAidServiceProviderItem.getArea());
             itemType.setText("  এলাকা : "+legalAidServiceProviderItem.getAddress());

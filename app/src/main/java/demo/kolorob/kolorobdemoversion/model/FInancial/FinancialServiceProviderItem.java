@@ -19,6 +19,7 @@ public class FinancialServiceProviderItem implements Serializable {
     private String nodeAdditional;
     private String nodeWebsite;
     private String nodeFacebook;
+    private  String namebn;
     private String nodeRegisteredwith;
     private String nodeRegistationnumber;
 
@@ -36,6 +37,14 @@ public class FinancialServiceProviderItem implements Serializable {
     private String road;
     private String block;
     private String additionaltime;
+
+    public String getNamebn() {
+        return namebn;
+    }
+
+    public void setNamebn(String namebn) {
+        this.namebn = namebn;
+    }
 
     public String getNodeRegistationnumber() {
         return nodeRegistationnumber;
@@ -73,7 +82,7 @@ public class FinancialServiceProviderItem implements Serializable {
         return additionaltime;
     }
 
-    public FinancialServiceProviderItem(String nodeId, String nodeName, String nodeDesignation, String nodeContact, String nodeEmail, String nodeAdditional, String nodeWebsite, String nodeFacebook, String nodeRegisteredwith, String nodeRegistationnumber, int refNum, String area, String address, String latitude, String longitude, int categoryId, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
+    public FinancialServiceProviderItem(String nodeId, String nodeName, String nodeDesignation, String nodeContact, String nodeEmail, String nodeAdditional, String nodeWebsite, String nodeFacebook, String nodeRegisteredwith, String nodeRegistationnumber, int refNum,String namebn, String area, String address, String latitude, String longitude, int categoryId, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         this.nodeId = nodeId;
         this.nodeName = nodeName;
         this.nodeDesignation = nodeDesignation;
@@ -85,6 +94,7 @@ public class FinancialServiceProviderItem implements Serializable {
         this.nodeRegisteredwith = nodeRegisteredwith;
         this.nodeRegistationnumber = nodeRegistationnumber;
         this.refNum = refNum;
+        this.namebn=namebn;
         this.area = area;
         this.address = address;
         this.latitude = latitude;
@@ -178,6 +188,7 @@ public class FinancialServiceProviderItem implements Serializable {
         String _FinnodeRegisteredwith = jo.getString("node_registered_with");
         String _FinnodeRegistrationNumber= jo.getString("node_registration_number");
         int    _FinrefNum= jo.getInt("ref_num");
+        String _Finnamebn=jo.getString("name_bn");
         String _Finarea=jo.getString("area");
         String _Finaddress=jo.getString("address");
         String _Finlatitude=jo.getString("latitude");
@@ -207,6 +218,7 @@ public class FinancialServiceProviderItem implements Serializable {
                 _FinnodeRegisteredwith,
                 _FinnodeRegistrationNumber,
                 _FinrefNum,
+                _Finnamebn,
                 _Finarea,
                 _Finaddress,
                 _Finlatitude,

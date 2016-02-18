@@ -34,6 +34,7 @@ public class FinancialServiceProviderTable {
     private static final String KEY_FIN_NODE_REGISTERED_WITH = "_nodeRegisteredwith"; //
     private static final String KEY_FIN_NODE_REGISTRATION_NUMBER = "_nodeRegistationNumber"; //
     private static final String KEY_FIN_REF_NUM = "_refNum"; //
+    private static final String KEY_FIN_NAME_BN= "_namebn"; //
     private static final String KEY_FIN_AREA = "_area"; //
     private static final String KEY_FIN_ADDRESS = "_address"; //
     private static final String KEY_FIN_LATITUDE  = "_latitude"; //
@@ -73,6 +74,7 @@ public class FinancialServiceProviderTable {
                 + KEY_FIN_NODE_REGISTERED_WITH + " TEXT, "
                 + KEY_FIN_NODE_REGISTRATION_NUMBER + " TEXT, "
                 + KEY_FIN_REF_NUM+ " INTEGER, "
+                + KEY_FIN_NAME_BN + " TEXT, "
                 + KEY_FIN_AREA + " TEXT, "
                 + KEY_FIN_ADDRESS + " TEXT, "
                 + KEY_FIN_LATITUDE + " TEXT, "
@@ -100,7 +102,7 @@ public class FinancialServiceProviderTable {
                 financialServiceProviderItem.getNodeDesignation(), financialServiceProviderItem.getNodeContact(),
                 financialServiceProviderItem.getNodeEmail(),financialServiceProviderItem.getNodeAdditional(),financialServiceProviderItem.getNodeWebsite(),
                 financialServiceProviderItem.getNodeFacebook(),financialServiceProviderItem.getNodeRegisteredwith(),
-                financialServiceProviderItem.getNodeRegistrationnumber(),financialServiceProviderItem.getRefNum(), financialServiceProviderItem.getArea(), financialServiceProviderItem.getAddress(),
+                financialServiceProviderItem.getNodeRegistrationnumber(),financialServiceProviderItem.getRefNum(),financialServiceProviderItem.getNamebn(), financialServiceProviderItem.getArea(), financialServiceProviderItem.getAddress(),
                 financialServiceProviderItem.getLatitude(),financialServiceProviderItem.getLongitude(),financialServiceProviderItem.getCategoryId(),
                 financialServiceProviderItem.getOpeningtime(),
                 financialServiceProviderItem.getBreaktime(),
@@ -115,7 +117,7 @@ public class FinancialServiceProviderTable {
     private long insertItem(String nodeId, String nodeName, String nodeDesignation,
                             String nodeContact, String nodeEmail, String nodeAdditional,
                             String nodeWebsite, String nodeFacebook, String nodeRegisteredwith,
-                            String nodeRegistrationnumber, int refNum, String area,
+                            String nodeRegistrationnumber, int refNum,String namebn, String area,
                             String address, String latitude, String longitude, int categoryId, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         if (isFieldExist(nodeId, categoryId, refNum)) {
             return updateItem(
@@ -130,6 +132,7 @@ public class FinancialServiceProviderTable {
                     nodeRegisteredwith,
                     nodeRegistrationnumber,
                     refNum,
+                    namebn,
                     area,
                     address,
                     latitude,
@@ -155,6 +158,7 @@ public class FinancialServiceProviderTable {
         rowValue.put(KEY_FIN_NODE_REGISTERED_WITH, nodeRegisteredwith);
         rowValue.put(KEY_FIN_NODE_REGISTRATION_NUMBER,nodeRegistrationnumber);
         rowValue.put(KEY_FIN_REF_NUM , refNum);
+        rowValue.put(KEY_FIN_NAME_BN, namebn);
         rowValue.put(KEY_FIN_AREA, area);
         rowValue.put(KEY_FIN_ADDRESS, address);
         rowValue.put(KEY_FIN_LATITUDE, latitude);
@@ -178,7 +182,7 @@ public class FinancialServiceProviderTable {
 
     private long  updateItem(String nodeId, String nodeName, String nodeDesignation, String nodeContact,
                              String nodeEmail, String nodeAdditional, String nodeWebsite, String nodeFacebook,
-                             String nodeRegisteredwith, String nodeRegistrationnumber, int refNum, String area, String address,
+                             String nodeRegisteredwith, String nodeRegistrationnumber, int refNum,String namebn, String area, String address,
                              String latitude, String longitude, int categoryId, String openingtime, String breaktime,
                              String closingtime, String landmark, String road, String block, String breaktime2, String additionaltime) {
         ContentValues rowValue = new ContentValues();
@@ -193,6 +197,7 @@ public class FinancialServiceProviderTable {
         rowValue.put(KEY_FIN_NODE_REGISTERED_WITH, nodeRegisteredwith);
         rowValue.put(KEY_FIN_NODE_REGISTRATION_NUMBER,nodeRegistrationnumber);
         rowValue.put(KEY_FIN_REF_NUM , refNum);
+        rowValue.put(KEY_FIN_NAME_BN, namebn);
         rowValue.put(KEY_FIN_AREA, area);
         rowValue.put(KEY_FIN_ADDRESS, address);
         rowValue.put(KEY_FIN_LATITUDE, latitude);
@@ -219,7 +224,7 @@ public class FinancialServiceProviderTable {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0)) && Integer.parseInt(cursor.getString(15)) == cat_id && Integer.parseInt(cursor.getString(10)) == sub_cat_id) {
+                if (id.equals(cursor.getString(0)) && Integer.parseInt(cursor.getString(16)) == cat_id && Integer.parseInt(cursor.getString(10)) == sub_cat_id) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -317,23 +322,24 @@ public class FinancialServiceProviderTable {
         String _FinnodeRegisteredwith = cursor.getString(8);
         String _FinnodeRegistrationNumber = cursor.getString(9);
         int  _FinrefNum = cursor.getInt(10);
-        String _Finarea = cursor.getString(11);
-        String _Finaddress = cursor.getString(12);
-        String _Finlatitude = cursor.getString(13);
-        String _Finlongitude = cursor.getString(14);
-        int    _categoryId   = cursor.getInt(15);
-        String _openingtime=cursor.getString(16);
-        String _breaktime=cursor.getString(17);
-        String _closingtime=cursor.getString(18);
-        String _landmark=cursor.getString(19);
-        String _road=cursor.getString(20);
-        String _block=cursor.getString(21);
-        String _breaktime2=cursor.getString(22);
-        String _additionaltime=cursor.getString(23);
+        String _Finnamebn=cursor.getString(11);
+        String _Finarea = cursor.getString(12);
+        String _Finaddress = cursor.getString(13);
+        String _Finlatitude = cursor.getString(14);
+        String _Finlongitude = cursor.getString(15);
+        int    _categoryId   = cursor.getInt(16);
+        String _openingtime=cursor.getString(17);
+        String _breaktime=cursor.getString(18);
+        String _closingtime=cursor.getString(19);
+        String _landmark=cursor.getString(20);
+        String _road=cursor.getString(21);
+        String _block=cursor.getString(22);
+        String _breaktime2=cursor.getString(23);
+        String _additionaltime=cursor.getString(24);
 
         return new FinancialServiceProviderItem(_FinnodeId, _FinnodeName,_FinnodeDesignation,
                 _FinnodeContact,_FinnodeEmail, _FinnodeAdditional, _FinnodeWebsite,_FinnodeFacebook,
-                _FinnodeRegisteredwith, _FinnodeRegistrationNumber, _FinrefNum, _Finarea, _Finaddress, _Finlatitude, _Finlongitude,_categoryId,_openingtime,
+                _FinnodeRegisteredwith, _FinnodeRegistrationNumber, _FinrefNum, _Finnamebn,_Finarea, _Finaddress, _Finlatitude, _Finlongitude,_categoryId,_openingtime,
                 _breaktime,
                 _closingtime,
                 _landmark,
