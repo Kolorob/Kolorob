@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -286,6 +287,8 @@ public class DetailsInfoActivityHealth extends Activity  {
 
                     String lat = healthServiceProviderItem.getLatitude().toString();
                     // double latitude = Double.parseDouble(lat);
+
+
                     String lon = healthServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
