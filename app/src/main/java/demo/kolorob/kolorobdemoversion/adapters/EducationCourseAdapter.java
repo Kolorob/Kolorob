@@ -15,26 +15,121 @@ import demo.kolorob.kolorobdemoversion.R;
 public class EducationCourseAdapter extends BaseAdapter
 {
     Activity context;
-    String course_name[];
-    String course_duration[];
-    String course_admission_time[];
-    String edu_course_cost[];
-    String edu_course_type[];
+    String pre_school_free[];
+    String pre_school_stipend_speciality[];
 
-    public EducationCourseAdapter(Activity context, String[] course_name,String[] course_duration,String[] course_admission_time,String[] edu_course_cost,String[] edu_course_type) {
+    String pre_school_stipend_type[];
+    String pre_school_stipend_details[];
+    String pre_school_max_fee[];
+    String pre_school_min_fee[];
+
+    String pre_school_coaching_fee[];
+    String pre_school_additional_fee[];
+    String i_v_free[];
+    String i_v_stipend_speciality[];
+
+    String i_v_stipend_type[];
+    String i_v_stipend_details[];
+    String i_v_max_fee[];
+    String i_v_min_fee[];
+    String i_v_additional_fee[];
+
+
+    String i_v_coaching_fee[];
+
+
+    String vi_x_free[];
+    String vi_x_stipend_speciality[];
+    String vi_x_stipend_type[];
+    String vi_x_stipend_details[];
+    String vi_x_max_fee[];
+    String vi_x_min_fee[];
+    String vi_x_coaching_fee[];
+    String vi_x_additional_fee[];
+
+    String xi_xii_free[];
+    String xi_xii_stipend_speciality[];
+    String xi_xii_stipend_type[];
+    String xi_xii_stipend_details[];
+    String xi_xii_max_fee[];
+    String xi_xii_min_fee[];
+    String xi_xii_coaching_fee[];
+    String xi_xii_additional_fee[];
+
+
+    String uni_free[];
+    String uni_stipend_speciality[];
+    String uni_stipend_details[];
+    String uni_stipend_type[];
+    String uni_max_fee[];
+    String uni_min_fee[];
+    String uni_coaching_fee[];
+    String uni_additional_fee[];
+
+
+    public EducationCourseAdapter(Activity context, String[] pre_school_free,String[] pre_school_stipend_speciality,String[] pre_school_stipend_type,String[] pre_school_stipend_details,
+                                  String[] pre_school_max_fee, String[] pre_school_min_fee,String[] pre_school_coaching_fee,String[] pre_school_additional_fee,
+                                  String[] i_v_free,String[] i_v_stipend_speciality,String[] i_v_stipend_type,String[] i_v_stipend_details,String[] i_v_max_fee,
+                                  String[] i_v_min_fee,String[] i_v_coaching_fee,String[] i_v_additional_fee,String[] vi_x_free,String[] vi_x_stipend_speciality,
+                                  String[] vi_x_stipend_type,String[] vi_x_stipend_details ,String[] vi_x_max_fee,String[] vi_x_min_fee,String[] vi_x_coaching_fee,
+                                  String[] vi_x_additional_fee,String[]xi_xii_free,String[] xi_xii_stipend_speciality,String[] xi_xii_stipend_type,String[] xi_xii_stipend_details,
+                                  String[] xi_xii_max_fee,String[] xi_xii_min_fee,String[] xi_xii_coaching_fee,String[] xi_xii_additional_fee,String[] uni_free,String[]uni_stipend_speciality,
+                                  String[] uni_stipend_type,String[] uni_stipend_details,String[] uni_max_fee,String[] uni_min_fee,String[] uni_coaching_fee,String[] uni_additional_fee
+                                  ) {
         super();
         this.context = context;
-        this.course_name = course_name;
-        this.course_duration = course_duration;
-        this.course_admission_time = course_admission_time;
-        this.edu_course_cost = edu_course_cost;
-        this.edu_course_type = edu_course_type;
+        this.pre_school_free = pre_school_free;
+        this.pre_school_stipend_speciality = pre_school_stipend_speciality;
+        this.pre_school_stipend_type = pre_school_stipend_type;
+        this.pre_school_stipend_details = pre_school_stipend_details;
+        this.pre_school_max_fee = pre_school_max_fee;
+        this.pre_school_min_fee = pre_school_min_fee;
+        this.pre_school_coaching_fee = pre_school_coaching_fee;
+        this.pre_school_additional_fee = pre_school_additional_fee;
+
+        this.i_v_free = i_v_free;
+        this.i_v_coaching_fee = i_v_coaching_fee;
+        this.i_v_stipend_speciality = i_v_stipend_speciality;
+        this.i_v_stipend_type = i_v_stipend_type;
+        this.i_v_stipend_details = i_v_stipend_details;
+        this.i_v_max_fee = i_v_max_fee;
+        this.i_v_min_fee = i_v_min_fee;
+        this.i_v_additional_fee = i_v_additional_fee;
+
+        this.xi_xii_free = xi_xii_free;
+        this.xi_xii_stipend_speciality = xi_xii_stipend_speciality;
+        this.xi_xii_stipend_type = xi_xii_stipend_type;
+        this.xi_xii_stipend_details = xi_xii_stipend_details;
+        this.xi_xii_max_fee = xi_xii_max_fee;
+        this.xi_xii_min_fee = xi_xii_min_fee;
+        this.xi_xii_coaching_fee = xi_xii_coaching_fee;
+        this.xi_xii_additional_fee = xi_xii_additional_fee;
+
+        this.vi_x_free = vi_x_free;
+        this.vi_x_stipend_speciality = vi_x_stipend_speciality;
+        this.vi_x_stipend_type = vi_x_stipend_type;
+        this.vi_x_stipend_details = vi_x_stipend_details;
+        this.vi_x_max_fee = vi_x_max_fee;
+        this.vi_x_min_fee = vi_x_min_fee;
+        this.vi_x_coaching_fee = vi_x_coaching_fee;
+        this.vi_x_additional_fee = vi_x_additional_fee;
+
+        this.uni_free = uni_free;
+        this.uni_stipend_type = uni_stipend_type;
+        this.uni_stipend_details = uni_stipend_details;
+        this.uni_stipend_speciality = uni_stipend_speciality;
+
+        this.uni_max_fee = uni_max_fee;
+        this.uni_min_fee = uni_min_fee;
+        this.uni_coaching_fee = uni_coaching_fee;
+        this.uni_additional_fee = uni_additional_fee;
+
 
     }
 
     public int getCount() {
         // TODO Auto-generated method stub
-        return course_name.length;
+        return pre_school_stipend_speciality.length;
     }
 
     public Object getItem(int position) {
@@ -48,11 +143,49 @@ public class EducationCourseAdapter extends BaseAdapter
     }
 
     private class ViewHolder {
-        TextView c_name ;
-        TextView c_duration;
-        TextView s_admission_time;
-        TextView c_cost;
-        TextView s_type;
+        TextView a ;
+        TextView b;
+        TextView c;
+        TextView d;
+        TextView e;
+        TextView f ;
+        TextView g;
+        TextView h;
+        TextView i;
+        TextView j;
+        TextView k ;
+        TextView l;
+        TextView m;
+        TextView n;
+        TextView o;
+        TextView p ;
+        TextView q;
+        TextView r;
+        TextView s;
+        TextView t;
+        TextView u ;
+        TextView v;
+        TextView w;
+        TextView x;
+        TextView y;
+
+        TextView z ;
+        TextView aa;
+        TextView ab;
+        TextView ac;
+        TextView ad;
+        TextView ae ;
+        TextView af;
+        TextView ag;
+        TextView ah;
+        TextView ai;
+        TextView aj ;
+        TextView ak;
+        TextView al;
+        TextView am;
+        TextView an;
+
+
 
     }
 
@@ -64,13 +197,55 @@ public class EducationCourseAdapter extends BaseAdapter
 
         if (convertView == null)
         {
-            convertView = inflater.inflate(R.layout.listview_course_time, null);
+            convertView = inflater.inflate(R.layout.educationcoursefee, null);
             holder = new ViewHolder();
-            holder.c_name = (TextView) convertView.findViewById(R.id.c_name);
-            holder.c_duration = (TextView) convertView.findViewById(R.id.c_duration);
-            holder.s_admission_time = (TextView) convertView.findViewById(R.id.c_admissionTime);
-            holder.c_cost = (TextView) convertView.findViewById(R.id.c_cost);
-            holder.s_type = (TextView) convertView.findViewById(R.id.c_type);
+            holder.a = (TextView) convertView.findViewById(R.id.a);
+            holder.b = (TextView) convertView.findViewById(R.id.b);
+            holder.c = (TextView) convertView.findViewById(R.id.c);
+            holder.d = (TextView) convertView.findViewById(R.id.d);
+            holder.e = (TextView) convertView.findViewById(R.id.e);
+
+            holder.f = (TextView) convertView.findViewById(R.id.f);
+            holder.g = (TextView) convertView.findViewById(R.id.g);
+            holder.h = (TextView) convertView.findViewById(R.id.h);
+            holder.i = (TextView) convertView.findViewById(R.id.i);
+            holder.j =(TextView) convertView.findViewById(R.id.j);
+
+            holder.k = (TextView) convertView.findViewById(R.id.k);
+            holder.l = (TextView) convertView.findViewById(R.id.l);
+            holder.m = (TextView) convertView.findViewById(R.id.m);
+            holder.n = (TextView) convertView.findViewById(R.id.n);
+            holder.o = (TextView) convertView.findViewById(R.id.o);
+
+            holder.p = (TextView) convertView.findViewById(R.id.p);
+            holder.q = (TextView) convertView.findViewById(R.id.q);
+            holder.r = (TextView) convertView.findViewById(R.id.r);
+            holder.s = (TextView) convertView.findViewById(R.id.s);
+            holder.t = (TextView) convertView.findViewById(R.id.t);
+
+            holder.u = (TextView) convertView.findViewById(R.id.u);
+            holder.v = (TextView) convertView.findViewById(R.id.v);
+            holder.w = (TextView) convertView.findViewById(R.id.w);
+            holder.x = (TextView) convertView.findViewById(R.id.x);
+            holder.y = (TextView) convertView.findViewById(R.id.y);
+
+            holder.z = (TextView) convertView.findViewById(R.id.z);
+            holder.aa = (TextView) convertView.findViewById(R.id.aa);
+            holder.ab = (TextView) convertView.findViewById(R.id.ab);
+            holder.ac = (TextView) convertView.findViewById(R.id.ac);
+            holder.ad = (TextView) convertView.findViewById(R.id.ad);
+
+            holder.ae = (TextView) convertView.findViewById(R.id.ae);
+            holder.af = (TextView) convertView.findViewById(R.id.af);
+            holder.ag = (TextView) convertView.findViewById(R.id.ag);
+            holder.ah = (TextView) convertView.findViewById(R.id.ah);
+            holder.ai = (TextView) convertView.findViewById(R.id.ai);
+
+            holder.aj = (TextView) convertView.findViewById(R.id.aj);
+            holder.ak = (TextView) convertView.findViewById(R.id.ak);
+            holder.al = (TextView) convertView.findViewById(R.id.al);
+            holder.am = (TextView) convertView.findViewById(R.id.am);
+            holder.an = (TextView) convertView.findViewById(R.id.an);
 
             convertView.setTag(holder);
         }
@@ -83,11 +258,56 @@ public class EducationCourseAdapter extends BaseAdapter
 
 
 
-        holder.c_name.setText("কোর্সের নাম : " +course_name[position]);
-        holder.c_duration.setText("কোর্সের সময়সীমা: "+course_duration[position]);
-        holder.s_admission_time.setText("ভর্তির মৌসুম : "+course_admission_time[position]);
-        holder.c_cost.setText("ভর্তি হতে খরচ : "+edu_course_cost[position]+ " টাকা ");
-        holder.s_type.setText("কোর্সের ধরন: "+edu_course_type[position]);
+        holder.a.setText("প্রি স্কুল ফী : " +pre_school_free[position]);
+        holder.b.setText("প্রি স্কুল বৃত্তি বিশেষত্ব "+pre_school_stipend_speciality[position]);
+        holder.c.setText("প্রি স্কুল স্কুল বৃত্তি টাইপঃ "+pre_school_stipend_details[position]);
+        holder.d.setText("প্রি স্কুল বৃত্তি বৃত্তি বিস্তারিতঃ "+pre_school_max_fee[position]+ " টাকা ");
+        holder.e.setText("প্রি স্কুল সর্বোচ্চ ফিঃ"+pre_school_min_fee[position]);
+        holder.i.setText("প্রি স্কুল সর্বনিম্ন ফিঃ "+pre_school_stipend_type[position]+ " টাকা ");
+        holder.f.setText("প্রি স্কুল কোচিং ফিঃ " +pre_school_coaching_fee[position]);
+        holder.g.setText("প্রি স্কুল অতিরিক্ত ফিঃ "+pre_school_additional_fee[position]);
+
+        holder.h.setText("চতুর্থ পঞ্চম শ্রেনীর ফিঃ "+i_v_free[position]);
+        holder.j.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি বিশেষত্ব"+i_v_stipend_speciality[position]);
+        holder.k.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি টাইপঃ " +i_v_stipend_type[position]);
+        holder.l.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি বিস্তারিতঃ "+i_v_stipend_details[position]);
+        holder.m.setText("চতুর্থ পঞ্চম শ্রেনীর সর্বোচ্চ ফিঃ "+i_v_max_fee[position]);
+        holder.n.setText("চতুর্থ পঞ্চম শ্রেনীর সর্বনিম্ন ফিঃ "+i_v_min_fee[position]+ " টাকা ");
+        holder.o.setText("চতুর্থ পঞ্চম শ্রেনীর অতিরিক্ত ফিঃ"+i_v_additional_fee[position]);
+        holder.p.setText("চতুর্থ পঞ্চম শ্রেনীর কোচিং ফিঃ" +i_v_coaching_fee[position]);
+
+
+        holder.q.setText("ইউনিভার্সিটির ফিঃ "+vi_x_free[position]);
+        holder.r.setText("ইউনিভার্সিটির বৃত্তি বিশেষত্ব"+vi_x_stipend_speciality[position]);
+        holder.s.setText("ইউনিভার্সিটির বৃত্তি টাইপঃ "+vi_x_stipend_type[position]+ " টাকা ");
+        holder.t.setText("ইউনিভার্সিটির বৃত্তি বিস্তারিতঃ "+vi_x_stipend_details[position]);
+        holder.u.setText("ইউনিভার্সিটির সর্বোচ্চ ফিঃ " +vi_x_max_fee[position]);
+        holder.v.setText("ইউনিভার্সিটির সর্বনিম্ন ফিঃ "+vi_x_min_fee[position]);
+        holder.w.setText("ইউনিভার্সিটির কোচিং ফিঃ"+vi_x_coaching_fee[position]);
+        holder.x.setText("ইউনিভার্সিটির অতিরিক্ত ফিঃ "+vi_x_additional_fee[position]+ " টাকা ");
+
+
+        holder.y.setText("ষষ্ঠ থেকে দশম শ্রেনীর ফিঃ: "+xi_xii_free[position]);
+        holder.z.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি বিশেষত্ব" +xi_xii_stipend_speciality[position]);
+        holder.aa.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি টাইপঃ"+xi_xii_stipend_type[position]);
+        holder.ab.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি বিস্তারিতঃ "+xi_xii_stipend_details[position]);
+        holder.ac.setText("ষষ্ঠ থেকে দশম শ্রেনীর সর্বোচ্চ ফিঃ "+xi_xii_max_fee[position]+ " টাকা ");
+        holder.ad.setText("ষষ্ঠ থেকে দশম শ্রেনীর সর্বনিম্ন ফিঃ"+xi_xii_min_fee[position]);
+        holder.ae.setText("ষষ্ঠ থেকে দশম শ্রেনীর কোচিং ফিঃ" +xi_xii_coaching_fee[position]);
+        holder.af.setText("ষষ্ঠ থেকে দশম শ্রেনীর অতিরিক্ত ফিঃ "+xi_xii_additional_fee[position]);
+
+
+        holder.ag.setText("একাদশ দ্বাদশ শ্রেনীর ফিঃ "+uni_free[position]);
+        holder.ah.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি বিশেষত্ব "+uni_stipend_speciality[position]+ " টাকা ");
+        holder.ai.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি টাইপঃ "+uni_stipend_details[position]);
+
+        holder.aj.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি বিস্তারিতঃ " +uni_stipend_type[position]);
+        holder.ak.setText("একাদশ দ্বাদশ শ্রেনীর সর্বোচ্চ ফিঃ "+uni_max_fee[position]);
+        holder.al.setText("একাদশ দ্বাদশ শ্রেনীর সর্বনিম্ন ফিঃ "+uni_min_fee[position]);
+        holder.am.setText("একাদশ দ্বাদশ শ্রেনীর কোচিং ফিঃ"+uni_coaching_fee[position]+ " টাকা ");
+        holder.an.setText("একাদশ দ্বাদশ শ্রেনীর অতিরিক্ত ফিঃ"+uni_additional_fee[position]);
+
+
 
 
 
