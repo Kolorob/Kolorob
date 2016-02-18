@@ -152,7 +152,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         itemName.setText(" "+entertainmentServiceProviderItem.getNodeNameBn());
         itemAddress.setText("  ঠিকানা: "+ entertainmentServiceProviderItem.getAddress());
         itemarea.setText("  এলাকা: "+entertainmentServiceProviderItem.getArea());
-        itemContact.setText("   মোবাইল/মুঠোফোন নম্বর: "+entertainmentServiceProviderItem.getNodeContact());
+        itemContact.setText("   মোবাইল/মুঠোফোন নম্বর: "+entertainmentServiceProviderItem.getNodeAdditional());
        // nodeRegistrationNumber.setText("রেজিস্ট্রেশন নম্ব: "+entertainmentServiceProviderItem.getNodeFacebook());
 
 

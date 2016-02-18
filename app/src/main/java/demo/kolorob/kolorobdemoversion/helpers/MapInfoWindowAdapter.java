@@ -216,7 +216,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                         itemName.setText(et.getNodeNameBn());
                         itemType.setText("পরিচিত জায়গা: "+et.getBlock());
                         itemAddress.setText("ঠিকানা: "+et.getAddress());
-                        itemContact.setText("মোবাইল নম্বর: " + et.getNodeContact());
+                        itemContact.setText("মোবাইল নম্বর: " + et.getNodeAdditional());
                     }
                 }
 
