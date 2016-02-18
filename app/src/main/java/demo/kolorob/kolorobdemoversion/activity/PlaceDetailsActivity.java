@@ -84,6 +84,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private int locationNameId,subcategory;
     private String locationName;
     private LinearLayout catLayout;
+    TextView textView;
 
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
@@ -131,7 +132,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.place_details_activity_mobiles);
 
 
-
+        textView=(TextView)findViewById(R.id.tvInstructionSubCat);
 
         Intent intent;
         intent = getIntent();
@@ -449,12 +450,14 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+                        textView.setText("যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.HEALTH:
 
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+                        textView.setText("যে ধরনের চিকিৎসা সুবিধা  সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
 
 
@@ -464,6 +467,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
+                        textView.setText("যে ধরনের আনন্দ ফুর্তি সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
 
 
@@ -476,16 +480,19 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
+                        textView.setText("যে ধরনের আইন কানুন সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.FINANCIAL:
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
+                        textView.setText("যে ধরনের টাকা পয়সা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.JOB:
                         ArrayList<JobServiceProviderItem> jobServiceProvider;
                         jobServiceProvider = constructjobListItem(ci.getId());
                         callMapFragmentWithJobInfo(ci.getCatName(), ci.getId(), jobServiceProvider);
+                        textView.setText("যে ধরনের চাকরি বাকরি সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     default:
                         break;
