@@ -98,6 +98,8 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
         ivParisRoad.setBackgroundResource(R.drawable.frame_animation_list1);
         frAnimBaunia = (AnimationDrawable) ivBauniaBandh.getBackground();
         frAnimParisRoad = (AnimationDrawable) ivParisRoad.getBackground();
+        frAnimBaunia.setOneShot(false);
+        frAnimParisRoad.setOneShot(false);
         frAnimBaunia.setOneShot(true);
         frAnimParisRoad.setOneShot(true);
 

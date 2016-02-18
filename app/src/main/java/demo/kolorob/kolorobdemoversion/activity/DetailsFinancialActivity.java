@@ -161,7 +161,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
             closen.setText(" বন্ধের সময়: " +financialServiceProviderItem.getClosingtime());
             breaking.setText(" বিরতির সময়: "+ financialServiceProviderItem.getBreaktime2());
             additional.setText(" অতিরিক্ত সময়: "+financialServiceProviderItem.getAdditionaltime());
-            itemName.setText(" "+ financialServiceProviderItem.getNodeName());
+            itemName.setText(" "+ financialServiceProviderItem.getNamebn());
             road.setText(" রাস্তা: "+financialServiceProviderItem.getRoad());
             block.setText(" ব্লক: "+ financialServiceProviderItem.getBlock());
             landmark.setText(" কাছাকাছি পরিচিত স্থান:" +financialServiceProviderItem.getLandmark());
