@@ -190,7 +190,7 @@
                 android:layout_margin="10dp"
                 android:text="@string/txt_inst_sub_cat_choose"
                 android:id="@+id/btn_show_sub_cat_list_item"
-                android:background="@color/gray"
+                android:background="@color/yellow"
                 android:padding="3dp" />
 
             <Button

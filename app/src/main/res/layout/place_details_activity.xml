@@ -188,9 +188,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:text="@string/txt_inst_sub_cat_choose"
                 android:id="@+id/btn_show_sub_cat_list_item"
-                android:background="@color/gray"
+                android:background="@color/yellow"
                 android:padding="3dp" />
 
             <Button
