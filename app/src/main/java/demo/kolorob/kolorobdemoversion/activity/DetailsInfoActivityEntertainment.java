@@ -17,8 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -26,17 +24,11 @@ import demo.kolorob.kolorobdemoversion.adapters.EntertainmentBookshopAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EntertainmentFieldAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EntertainmentFitnessAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EntertainmentTheatreAdapter;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationExamFeesDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationResultInfoTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-//import demo.kolorob.kolorobdemoversion.model.Education.EducationExamFeeItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
