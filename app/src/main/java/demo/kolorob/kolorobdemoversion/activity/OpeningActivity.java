@@ -34,6 +34,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
@@ -64,6 +65,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
@@ -93,7 +95,10 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
-
+/**
+ * Created by Yeakub Hassan Rafi on 27-Dec-15.
+ * @author mity
+ */
 
 public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
@@ -400,6 +405,22 @@ public class OpeningActivity extends Activity {
                                     String apiSt = jo.getString(AppConstants.KEY_STATUS);
                                     if (apiSt.equals(AppConstants.KEY_SUCCESS))
                                         saveEducationCourse(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "get_edu_fees", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveEducationFee(jo.getJSONArray(AppConstants.KEY_DATA));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -899,6 +920,25 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = educationCourse.getJSONObject(i);
                 EducationCourseItem et = EducationCourseItem.parseEducationCourseItem(jo);
                 educationCourseTable.insertItem(et);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private void saveEducationFee(JSONArray educationFee) {
+        EducationFeeTable educationFeeTable = new EducationFeeTable(OpeningActivity.this);
+        educationFeeTable.dropTable();
+        int educationFeeCount = educationFee.length();
+
+
+        for (int i = 0; i <educationFeeCount; i++) {
+            try {
+
+                JSONObject jo = educationFee.getJSONObject(i);
+                EducationFeeItem et = EducationFeeItem.parseEducationFeeItem(jo);
+                educationFeeTable.insertItem(et);
 
             } catch (JSONException e) {
                 e.printStackTrace();
