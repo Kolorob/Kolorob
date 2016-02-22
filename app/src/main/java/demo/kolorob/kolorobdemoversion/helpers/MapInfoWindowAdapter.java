@@ -81,6 +81,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
         itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
         itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
+        img1=(ImageView)myContentsView.findViewById(R.id.img1);
         itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
 
     }
@@ -98,6 +99,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        img1=(ImageView)myContentsView.findViewById(R.id.img1);
         itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
         itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
         itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
@@ -122,6 +124,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        img1=(ImageView)myContentsView.findViewById(R.id.img1);
         itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
         itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
         itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
@@ -139,6 +142,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
+        img1=(ImageView)myContentsView.findViewById(R.id.img1);
         itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
         itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
         itemContact = (TextView) myContentsView.findViewById(R.id.tv_item_contact);
@@ -159,6 +163,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         myContentsView= inflater.inflate(R.layout.small_info, null);
         myContentsView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         close = (ImageView) myContentsView.findViewById(R.id.iv_close);
+        img1=(ImageView)myContentsView.findViewById(R.id.img1);
         itemName = (TextView) myContentsView.findViewById(R.id.tv_heading);
         itemAddress = (TextView) myContentsView.findViewById(R.id.tv_item_location);
         itemType = (TextView) myContentsView.findViewById(R.id.tv_item_type);
@@ -181,7 +186,8 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        img1.setImageResource(R.drawable.but_porashuna_small);
+                        img1.setBackgroundResource(AppConstants.ALL_CAT_ICONS[categoryId - 1]);
+
                         itemName.setText(et.getEduNameBan());
                         itemAddress.setText("ঠিকানা: "+et.getAddress());
                         itemType.setText("ধরন: "+et.getEduType());
@@ -198,7 +204,8 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        img1.setImageResource(R.drawable.but_chikitsha_small);
+
+                        img1.setBackgroundResource(AppConstants.ALL_CAT_ICONS[categoryId - 1]);
                         itemName.setText(et.getNameBn());
                         itemAddress.setText("ঠিকানা: "+et.getArea());
                         itemContact.setText("মোবাইল নম্বর: " + et.getNodeContact());
@@ -216,7 +223,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        img1.setImageResource(R.drawable.but_ananda_small);
+                        img1.setBackgroundResource(AppConstants.ALL_CAT_ICONS[categoryId - 1]);
                         itemName.setText(et.getNodeNameBn());
                         itemType.setText("পরিচিত জায়গা: "+et.getBlock());
                         itemAddress.setText("ঠিকানা: "+et.getAddress());
@@ -237,7 +244,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     System.out.println(lat +"  "+loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        img1.setImageResource(R.drawable.but_ain_small);
+                        img1.setBackgroundResource(AppConstants.ALL_CAT_ICONS[categoryId - 1]);
                         itemName.setText(et.getLegalaidNameBan());
                         itemAddress.setText("ঠিকানা:  "+et.getArea());
                         itemContact.setText("মোবাইল নম্বর: " + et.getContactNo());
@@ -255,7 +262,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
 
-                        img1.setImageResource(R.drawable.but_taka_small);
+                        img1.setBackgroundResource(AppConstants.ALL_CAT_ICONS[categoryId - 1]);
                         itemName.setText(et.getNodeName());
                         itemAddress.setText("ঠিকানা: "+et.getArea());
                         itemContact.setText("মোবাইল নম্বর: " + et.getNodeContact());
@@ -270,10 +277,10 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                 {
                     Double lat = Double.parseDouble(et.getLatitude());
                     Double lon = Double.parseDouble(et.getLongitude());
-                    System.out.println(lat +"  "+loc.latitude);
+                    System.out.println(lat + "  " + loc.latitude);
                     if(loc.latitude== lat && loc.longitude==lon)
                     {
-                        img1.setImageResource(R.drawable.but_chakri_small);
+                        img1.setBackgroundResource(AppConstants.ALL_CAT_ICONS[categoryId - 1]);
                         itemName.setText(et.getAddress());
                         itemAddress.setText("ঠিকানা: "+et.getArea());
                         itemContact.setText("মোবাইল নম্বর: " + et.getContactNo());
