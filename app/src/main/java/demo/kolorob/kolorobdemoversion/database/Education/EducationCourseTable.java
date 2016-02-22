@@ -126,7 +126,7 @@ public class EducationCourseTable {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (courseId.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(3))==eduSubCategoryId&&courseId.equals(cursor.getString(0))&&courseId.equals(cursor.getString(0))) {
+                if (identifierId.equals(cursor.getString(1))&&Integer.parseInt(cursor.getString(2))==eduSubCategoryId&&educoursetype.equals(cursor.getString(7))&&courseId.equals(cursor.getString(0))) {
                     cursor.close();
                     closeDB();
                     return true;
