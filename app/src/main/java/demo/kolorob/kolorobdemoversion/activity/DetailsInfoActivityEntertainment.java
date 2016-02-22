@@ -35,7 +35,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitne
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationExamFeeItem;
+//import demo.kolorob.kolorobdemoversion.model.Education.EducationExamFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
