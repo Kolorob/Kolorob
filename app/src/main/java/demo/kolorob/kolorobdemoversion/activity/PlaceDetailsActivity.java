@@ -514,9 +514,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                // categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                 else
-                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -588,14 +588,14 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         }
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         if(width>720)
-            lpIv.width = (int) (primaryIconWidth * dwPercentage);
+            lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
         else{
             lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
         }
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setText(si.getSubcatHeader());
-        tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+        tvName.setTextSize((float) (VIEW_WIDTH * .050 * dwPercentage));
 /**************************
  *
  *
