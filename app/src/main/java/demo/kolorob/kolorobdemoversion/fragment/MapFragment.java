@@ -142,8 +142,11 @@ public class MapFragment extends Fragment implements
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         View rootView;
-
         if(height>1000)
+            rootView = inflater.inflate(R.layout.fragment_map1, container,
+                    false);
+
+       else if(height>1000)
             rootView = inflater.inflate(R.layout.fragment_map, container,
                     false);
         else

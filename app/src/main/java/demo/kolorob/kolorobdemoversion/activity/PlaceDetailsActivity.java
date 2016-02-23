@@ -126,8 +126,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
-        if(height>1000)
-        setContentView(R.layout.place_details_activity);
+        if(height>1700)
+            setContentView(R.layout.placedetailsactivitysupermobile);
+
+        else  if(height>1000)
+            setContentView(R.layout.place_details_activity);
         else
         setContentView(R.layout.place_details_activity_mobiles);
 
@@ -396,8 +399,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
         LayoutInflater li = LayoutInflater.from(this);
         View v;
-
-        if(height<1000)
+        if(height>1700)
+            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+       else if(height<1000)
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
         else
         v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
@@ -575,7 +579,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-        if(height>1000)
+        if(height>1700)
+            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+       else  if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         else
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
