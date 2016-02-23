@@ -439,11 +439,13 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
                         String lat = financialServiceProviderItem.getLatitude().toString();
                         // double latitude = Double.parseDouble(lat);
                         String lon = financialServiceProviderItem.getLongitude().toString();
+                        String name= financialServiceProviderItem.getNamebn().toString();
                         // double longitude = Double.parseDouble(lon);
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("Latitude", lat);
                         editor.putString("Longitude", lon);
+                        editor.putString("Name", name);
                         editor.commit();
 
 

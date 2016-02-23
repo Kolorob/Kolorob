@@ -263,7 +263,7 @@ public class DetailsInfoActivityHealth extends Activity  {
 
 
 
-        itemName.setText(" "+healthServiceProviderItem.getNodeName());
+        itemName.setText(" "+healthServiceProviderItem.getNameBn());
         itemAddress.setText("  ঠিকানা: "+healthServiceProviderItem.getArea());
         itemType.setText("  ধরন: ");
         itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());
@@ -288,13 +288,14 @@ public class DetailsInfoActivityHealth extends Activity  {
                     String lat = healthServiceProviderItem.getLatitude().toString();
                     // double latitude = Double.parseDouble(lat);
 
-
+                    String name= healthServiceProviderItem.getNameBn();
                     String lon = healthServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Latitude", lat);
                     editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
                     editor.commit();
 
 

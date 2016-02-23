@@ -109,6 +109,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
+        String Name = pref.getString("Name", null);
         locationNameId = pref.getInt("LocationNameId", 0);
         // Toast.makeText(getApplicationContext(), "Your Longitude is " + Longitude,                Toast.LENGTH_SHORT).show();
         // Toast.makeText(getApplicationContext(), "Your Latitude is " + Latitude,                Toast.LENGTH_SHORT).show();
@@ -116,13 +117,13 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         Log.e("Changed", "-->" + Latitude);
         Log.e("Got it", "-->" + Longitude);
-
+        Log.e("Name", "-->" + Name);
         Lon = Double.parseDouble(Longitude);
         Lat = Double.parseDouble(Latitude);
 
 
         MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(Lat, Lon)).title("Hello Maps");
+                new LatLng(Lat, Lon)).title(Name);
 
         marker.icon(BitmapDescriptorFactory
                 .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
@@ -138,7 +139,7 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
-
+        googleMap.setMyLocationEnabled(true);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
                 .addConnectionCallbacks(this)
@@ -303,11 +304,11 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
 
         getYourRoute(currentLatitude, currentLongitude, Lat, Lon);
-        MarkerOptions options = new MarkerOptions()
-                .position(latLng)
-                .title("I am here!");
-
-        googleMap.addMarker(options);
+//        MarkerOptions options = new MarkerOptions()
+//                .position(latLng)
+//                .title("I am here!");
+//
+//        googleMap.addMarker(options);
 
         if(locationNameId==1) {
             CameraPosition cameraPosition = new CameraPosition.Builder()

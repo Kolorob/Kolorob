@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -192,10 +193,12 @@ public class DetailsInfoActivity extends Activity  {
                     // double latitude = Double.parseDouble(lat);
                     String lon = educationServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
+                    String name= educationServiceProviderItem.getEduNameBan().toString();
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Latitude", lat);
                     editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
                     editor.commit();
 
 
@@ -205,8 +208,7 @@ public class DetailsInfoActivity extends Activity  {
                     if (Latitude != null && Longitude != null) {
                         Double Lon = Double.parseDouble(Longitude);
                         Double Lat = Double.parseDouble(Latitude);
-                        Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
+
                         // implementFragment();
 
                         //username and password are present, do your stuff

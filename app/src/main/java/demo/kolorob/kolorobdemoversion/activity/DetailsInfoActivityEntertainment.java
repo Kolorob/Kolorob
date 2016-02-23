@@ -346,11 +346,14 @@ public class DetailsInfoActivityEntertainment extends Activity  {
                     String lat = entertainmentServiceProviderItem.getLatitude().toString();
                     // double latitude = Double.parseDouble(lat);
                     String lon = entertainmentServiceProviderItem.getLongitude().toString();
+                    String name= entertainmentServiceProviderItem.getNodeNameBn().toString();
                     // double longitude = Double.parseDouble(lon);
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Latitude", lat);
                     editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+
                     editor.commit();
 
                     // Toast.makeText(getApplicationContext(), "Your Longitude is " + lon, Toast.LENGTH_SHORT).show();

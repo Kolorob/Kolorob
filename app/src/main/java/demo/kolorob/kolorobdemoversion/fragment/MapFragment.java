@@ -156,6 +156,7 @@ public class MapFragment extends Fragment implements
         locName.setText(locationName);
         mapIndicator.setText(Html.fromHtml("সব " + mapIndicatorText + " এর স্থান ম্যাপ এ দেখানো হয়েছে"));
         mMapView.onCreate(savedInstanceState);
+
         mMapView.onResume();
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -164,6 +165,7 @@ public class MapFragment extends Fragment implements
         }
 
         googleMap = mMapView.getMap();
+        googleMap.setMyLocationEnabled(true);
         if(googleMap!=null)
             googleMap.setOnInfoWindowClickListener(this);
 

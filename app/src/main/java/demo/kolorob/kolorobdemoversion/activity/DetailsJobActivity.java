@@ -119,11 +119,13 @@ public class DetailsJobActivity extends Activity {
                             String lat = jobServiceProviderItem.getLatitude().toString();
                             // double latitude = Double.parseDouble(lat);
                             String lon = jobServiceProviderItem.getLongitude().toString();
+                            String name= jobServiceProviderItem.getAddress().toString();
                             // double longitude = Double.parseDouble(lon);
                             SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("Latitude", lat);
                             editor.putString("Longitude", lon);
+                            editor.putString("Name", name);
                             editor.commit();
 
 
