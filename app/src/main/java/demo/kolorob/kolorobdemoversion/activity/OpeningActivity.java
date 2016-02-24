@@ -135,33 +135,22 @@ public class OpeningActivity extends Activity {
 
        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
         LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
-        LinearLayout shadowBoy = (LinearLayout) findViewById(R.id.shadow_boy);
-        LinearLayout shadowGirl = (LinearLayout) findViewById(R.id.shadow_girl);
-
 
         RelativeLayout.LayoutParams kolorob_logo = new RelativeLayout.LayoutParams(width, height / 3);
         RelativeLayout.LayoutParams boy_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3);
         RelativeLayout.LayoutParams girl_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3 - height / 15);
-        RelativeLayout.LayoutParams boy_shadow = new RelativeLayout.LayoutParams(width / 2, height / 12);
-        RelativeLayout.LayoutParams girl_shadow = new RelativeLayout.LayoutParams(width / 2, height / 12);
 
         boy_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        boy_shadow.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
 
         girl_layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         girl_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-        girl_shadow.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        girl_shadow.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         boy.setLayoutParams(boy_layout);
         girl.setLayoutParams(girl_layout);
 
       boy.bringToFront();
         girl.bringToFront();
-
-        shadowBoy.setLayoutParams(boy_shadow);
-        shadowGirl.setLayoutParams(girl_shadow);
 
         kolorob_logo.setMargins(0, 15, 0, 0);
         kolorobLogo.setLayoutParams(kolorob_logo);

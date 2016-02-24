@@ -30,27 +30,8 @@
         android:layout_toEndOf="@+id/boy"
         android:id="@+id/girl" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shadow"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/shadow_boy"></LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shadow"
-        android:layout_alignTop="@+id/shadow_boy"
-        android:layout_toRightOf="@+id/shadow_boy"
-        android:layout_toEndOf="@+id/shadow_boy"
-        android:id="@+id/shadow_girl" />
+
 
     <ImageView
         android:layout_width="wrap_content"
