@@ -19,10 +19,12 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -57,7 +59,7 @@ public class DetailsInfoActivity extends Activity  {
     LinearLayout linearLayout;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     EducationServiceProviderItem educationServiceProviderItem;
-    ListView listView;
+    ListView listView,courseListView;
 
 
     @Override
@@ -87,15 +89,16 @@ public class DetailsInfoActivity extends Activity  {
         * */
 
         ArrayList<EducationCourseItem> educationCourseItems;
+        ArrayList<EducationFeeItem>educationFeeItems;
 
 
 
         EducationCourseTable educationCourseTable = new EducationCourseTable(DetailsInfoActivity.this);
         EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivity.this);
         educationCourseItems=educationCourseTable.getEduCourse(educationServiceProviderItem.getIdentifierId());
+        educationFeeItems = educationFeeTable.getEduFee(educationServiceProviderItem.getIdentifierId());
 
-
-
+        courseListView=(ListView)findViewById(R.id.courseListView);
         itemName = (TextView) findViewById(R.id.tv_header);
         itemAddress = (TextView) findViewById(R.id.tv_item_location);
         itemType = (TextView) findViewById(R.id.tv_item_type);
@@ -128,6 +131,180 @@ public class DetailsInfoActivity extends Activity  {
 
 
 
+        if(educationFeeItems!=null) {
+
+            int k=0;
+            int f= educationFeeItems.size();
+
+            String[] pre_school_free=new String[f];
+            String[] pre_school_stipend_speciality=new String[f];
+            String[] pre_school_stipend_type=new String[f];
+            String[] pre_school_stipend_details=new String[f];
+            String[] pre_school_max_fee=new String[f];
+
+
+            String[] pre_school_min_fee=new String[f];
+            String[] pre_school_coaching_fee=new String[f];
+            String[] pre_school_additional_fee=new String[f];
+            String[] i_v_free=new String[f];
+            String[] i_v_stipend_speciality=new String[f];
+
+            String[] i_v_stipend_type=new String[f];
+            String[] i_v_stipend_details=new String[f];
+            String[] i_v_max_fee=new String[f];
+            String[] i_v_min_fee=new String[f];
+            String[] i_v_additional_fee=new String[f];
+
+            String[] i_v_coaching_fee=new String[f];
+            String[] vi_x_free=new String[f];
+            String[] vi_x_stipend_speciality=new String[f];
+            String[] vi_x_stipend_type=new String[f];
+            String[] vi_x_stipend_details=new String[f];
+
+            String[] vi_x_max_fee=new String[f];
+            String[] vi_x_min_fee=new String[f];
+            String[] vi_x_coaching_fee=new String[f];
+            String[] vi_x_additional_fee=new String[f];
+            String[] xi_xii_free=new String[f];
+
+
+            String[] xi_xii_stipend_speciality=new String[f];
+            String[] xi_xii_stipend_type=new String[f];
+            String[] xi_xii_stipend_details=new String[f];
+            String[] xi_xii_max_fee=new String[f];
+            String[] xi_xii_min_fee=new String[f];
+
+
+            String[] xi_xii_coaching_fee=new String[f];
+            String[] xi_xii_additional_fee=new String[f];
+            String[] uni_free=new String[f];
+            String[] uni_stipend_speciality=new String[f];
+            String[] uni_stipend_details=new String[f];
+
+
+            String[] uni_stipend_type=new String[f];
+            String[] uni_max_fee=new String[f];
+            String[] uni_min_fee=new String[f];
+            String[] uni_coaching_fee=new String[f];
+            String[] uni_additional_fee=new String[f];
+
+
+            for (EducationFeeItem et : educationFeeItems) {
+
+
+                pre_school_free[k]=et.getPre_school_free();
+                pre_school_stipend_speciality[k]=et.getPre_school_stipend_speciality();
+                pre_school_stipend_type[k]= et.getPre_school_stipend_type();
+                pre_school_stipend_details[k]=et.getPre_school_stipend_details();
+                pre_school_max_fee[k]=et.getPre_school_max_fee();
+
+                pre_school_min_fee[k]=et.getPre_school_min_fee();
+                pre_school_coaching_fee[k]=et.getPre_school_coaching_fee();
+                pre_school_additional_fee[k]= et.getPre_school_additional_fee();
+                i_v_free[k]=et.getI_v_free();
+                i_v_stipend_speciality[k]=et.getI_v_stipend_speciality();
+
+                i_v_stipend_type[k]=et.getI_v_stipend_type();
+                i_v_stipend_details[k]=et.getI_v_stipend_details();
+                i_v_max_fee[k]= et.getI_v_max_fee();
+                i_v_min_fee[k]=et.getI_v_min_fee();
+                i_v_additional_fee[k]=et.getI_v_additional_fee();
+
+                i_v_coaching_fee[k]=et.getI_v_coaching_fee();
+                vi_x_free[k]=et.getVi_x_free();
+                vi_x_stipend_speciality[k]= et.getVi_x_stipend_speciality();
+                vi_x_stipend_type[k]=et.getVi_x_stipend_type();
+                vi_x_stipend_details[k]=et.getVi_x_stipend_details();
+
+                vi_x_max_fee[k]=et.getVi_x_max_fee();
+                vi_x_min_fee[k]=et.getVi_x_min_fee();
+                vi_x_coaching_fee[k]= et.getVi_x_coaching_fee();
+                vi_x_additional_fee[k]=et.getVi_x_additional_fee();
+                xi_xii_free[k]=et.getXi_xii_free();
+
+                xi_xii_stipend_speciality[k]=et.getXi_xii_stipend_speciality();
+                xi_xii_stipend_type[k]=et.getXi_xii_stipend_type();
+                xi_xii_stipend_details[k]= et.getXi_xii_stipend_details();
+                xi_xii_max_fee[k]=et.getXi_xii_max_fee();
+                xi_xii_min_fee[k]=et.getXi_xii_min_fee();
+
+                xi_xii_coaching_fee[k]=et.getXi_xii_coaching_fee();
+                xi_xii_additional_fee[k]=et.getXi_xii_additional_fee();
+                uni_free[k]= et.getUni_free();
+                uni_stipend_speciality[k]=et.getUni_stipend_speciality();
+                uni_stipend_details[k]=et.getUni_stipend_type();
+
+                uni_stipend_type[k]=et.getUni_stipend_details();
+                uni_max_fee[k]=et.getUni_stipend_details();
+                uni_min_fee[k]= et.getUni_max_fee();
+                uni_coaching_fee[k]=et.getUni_min_fee();
+                uni_additional_fee[k]=et.getUni_coaching_fee();
+
+
+
+
+
+                linearLayout.setVisibility(View.VISIBLE);
+
+                //  lat = lat+"\n"+ " Node_id: "+et.getNodeId()+"\n Doctor_id: "+ et.getDocId() + "\nPhermacy Fee:" + et.getPharmacyFee() + "\n Doctor Name: " +et.getPharmacyDoctorName()+"\n";
+                // phermacy.setText("Doc id"+et.getDocId()+"Pharmacy Fee"+et.getPharmacyFee()+"Doctor_name"+et.getPharmacyDoctorName());
+                k++;
+            }
+            EducationCourseFee adapter=new EducationCourseFee(
+                    this,
+                    pre_school_free,
+                    pre_school_stipend_speciality,
+                    pre_school_stipend_type,
+                    pre_school_stipend_details,
+                    pre_school_max_fee,
+                    pre_school_min_fee,
+                    pre_school_coaching_fee,
+                    pre_school_additional_fee,
+                    i_v_free,
+                    i_v_stipend_speciality,
+                    i_v_stipend_type,
+                    i_v_stipend_details,
+                    i_v_max_fee,
+                    i_v_min_fee,
+                    i_v_additional_fee,
+                    i_v_coaching_fee,
+                    vi_x_free,
+                    vi_x_stipend_speciality,
+                    vi_x_stipend_type,
+                    vi_x_stipend_details,
+                    vi_x_max_fee,
+                    vi_x_min_fee,
+                    vi_x_coaching_fee,
+                    vi_x_additional_fee,
+                    xi_xii_free,
+                    xi_xii_stipend_speciality,
+                    xi_xii_stipend_type,
+                    xi_xii_stipend_details,
+                    xi_xii_max_fee,
+                    xi_xii_min_fee,
+                    xi_xii_coaching_fee,
+                    xi_xii_additional_fee,
+                    uni_free,
+                    uni_stipend_speciality,
+                    uni_stipend_details,
+                    uni_stipend_type,
+                    uni_max_fee,
+                    uni_min_fee,
+                    uni_coaching_fee,
+                    uni_additional_fee);
+
+            listView.setAdapter(adapter);
+
+            Helpes.getListViewSize(listView);
+
+
+
+            // phermacy.setText(lat);
+
+        }
+
+
+
 
         if(educationCourseItems!=null) {
 
@@ -156,9 +333,9 @@ public class DetailsInfoActivity extends Activity  {
             EducationCourseAdapter adapter=new EducationCourseAdapter(this,course_name,course_duration_list,admission_time,
                     course_cost,course_type);
 
-            listView.setAdapter(adapter);
+            courseListView.setAdapter(adapter);
 
-            Helpes.getListViewSize(listView);
+            Helpes.getListViewSize(courseListView);
 
 
 

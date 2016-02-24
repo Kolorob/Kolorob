@@ -395,11 +395,21 @@
 
 
                 <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+
+                android:id="@+id/listView5" />
+
+
+
+                <ListView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
 
-                    android:id="@+id/listView5" />
+
+                    android:id="@+id/courseListView" />
 
 
             </LinearLayout>
