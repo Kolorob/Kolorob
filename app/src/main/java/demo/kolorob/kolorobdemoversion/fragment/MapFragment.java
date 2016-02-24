@@ -168,7 +168,6 @@ public class MapFragment extends Fragment implements
         }
 
         googleMap = mMapView.getMap();
-        googleMap.setMyLocationEnabled(true);
         if(googleMap!=null)
             googleMap.setOnInfoWindowClickListener(this);
 

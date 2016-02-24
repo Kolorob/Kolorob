@@ -304,11 +304,11 @@ public class MapRouteDrawingFragment extends Fragment implements GoogleApiClient
 
 
         getYourRoute(currentLatitude, currentLongitude, Lat, Lon);
-//        MarkerOptions options = new MarkerOptions()
-//                .position(latLng)
-//                .title("I am here!");
-//
-//        googleMap.addMarker(options);
+       MarkerOptions options = new MarkerOptions()
+               .position(latLng)
+                .title("আপনি এখানে");
+
+        googleMap.addMarker(options);
 
         if(locationNameId==1) {
             CameraPosition cameraPosition = new CameraPosition.Builder()

@@ -126,10 +126,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
-        if(height>1700)
-            setContentView(R.layout.placedetailsactivitysupermobile);
+      if(height>1700)
+           setContentView(R.layout.placedetailsactivitysupermobile);
 
-        else  if(height>1000)
+      else
+        if(height>1000)
             setContentView(R.layout.place_details_activity);
         else
         setContentView(R.layout.place_details_activity_mobiles);
@@ -399,11 +400,13 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
         LayoutInflater li = LayoutInflater.from(this);
         View v;
-        if(height>1700)
-            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-       else if(height<1000)
+       if(height>1700)
+          v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+      else
+        if(height<1000)
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
         else
+
         v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
@@ -518,9 +521,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                // categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                 else
-                    showAnimatedSubcategories(subCatList, 0.3, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -579,9 +582,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-        if(height>1700)
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
-       else  if(height>1000)
+       if(height>1700)
+           v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+       else
+        if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         else
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
@@ -594,14 +598,14 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         }
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         if(width>720)
-            lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
+            lpIv.width = (int) (primaryIconWidth * dwPercentage);
         else{
             lpIv.width = (int) (primaryIconWidth * dwPercentage*1.5);
         }
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setText(si.getSubcatHeader());
-        tvName.setTextSize((float) (VIEW_WIDTH * .050 * dwPercentage));
+        tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
 /**************************
  *
  *

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -90,6 +91,7 @@ public class DetailsInfoActivity extends Activity  {
 
 
         EducationCourseTable educationCourseTable = new EducationCourseTable(DetailsInfoActivity.this);
+        EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivity.this);
         educationCourseItems=educationCourseTable.getEduCourse(educationServiceProviderItem.getIdentifierId());
 
 
@@ -111,18 +113,18 @@ public class DetailsInfoActivity extends Activity  {
         listView=(ListView)findViewById(R.id.listView5);
 
         itemName.setText(" "+educationServiceProviderItem.getEduNameBan());
-       itemAddress.setText(" ঠিকানা: "+educationServiceProviderItem.getArea());
+        itemAddress.setText(" ঠিকানা: "+educationServiceProviderItem.getArea());
         itemType.setText(" শিক্ষার ধরন: "+educationServiceProviderItem.getEduType());
         itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+educationServiceProviderItem.getContactNo());
-       totalStudents.setText(" মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
+        totalStudents.setText(" মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
         totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+educationServiceProviderItem.getTotalClasses()+ " টি");
-       totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
-      playground.setText(" খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
+        totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
+        playground.setText(" খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
         hostel.setText(" আবাসন/হোস্টেল সুবিধা : "+educationServiceProviderItem.getHostelFacility());
         transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         email.setText(" ইমেইল: "+educationServiceProviderItem.getEmailAddress());
         website.setText(" ওয়েবসাইট: "+educationServiceProviderItem.getWebsiteLink());
-       fb.setText(" ফেইসবুক: "+educationServiceProviderItem.getFbLink());
+        fb.setText(" ফেইসবুক: "+educationServiceProviderItem.getFbLink());
 
 
 
