@@ -67,6 +67,9 @@ public class EducationCourseFee extends BaseAdapter
     String uni_additional_fee[];
 
 
+    String nothing;
+
+
     public EducationCourseFee(Activity context, String[] pre_school_free,String[] pre_school_stipend_speciality,String[] pre_school_stipend_type,String[] pre_school_stipend_details,
                                   String[] pre_school_max_fee, String[] pre_school_min_fee,String[] pre_school_coaching_fee,String[] pre_school_additional_fee,
                                   String[] i_v_free,String[] i_v_stipend_speciality,String[] i_v_stipend_type,String[] i_v_stipend_details,String[] i_v_max_fee,
