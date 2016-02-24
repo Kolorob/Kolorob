@@ -56,27 +56,21 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
 
         LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
         LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
-        LinearLayout shadowBoy = (LinearLayout) findViewById(R.id.boy_shadow);
-        LinearLayout shadowGirl = (LinearLayout) findViewById(R.id.girl_shadow);
 
         RelativeLayout.LayoutParams kolorob_logo = new RelativeLayout.LayoutParams(width / 3, height / 6);
         RelativeLayout.LayoutParams baunia_img = new RelativeLayout.LayoutParams((int) (2 * width / 3.2), (int) (height / 2.5));
         RelativeLayout.LayoutParams parise_img = new RelativeLayout.LayoutParams((int) (2 * width / 3.2), (int) (height / 2.5));
         RelativeLayout.LayoutParams boy_layout = new RelativeLayout.LayoutParams(width / 3, height / 2);
         RelativeLayout.LayoutParams girl_layout = new RelativeLayout.LayoutParams(width / 3, height / 2 - height / 15);
-        RelativeLayout.LayoutParams boy_shadow = new RelativeLayout.LayoutParams(width / 3, height / 15);
-        RelativeLayout.LayoutParams girl_shadow = new RelativeLayout.LayoutParams(width / 3, height / 15);
 
         kolorob_logo.addRule(RelativeLayout.CENTER_HORIZONTAL);
         kolorob_logo.addRule(RelativeLayout.CENTER_VERTICAL);
         parise_img.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         parise_img.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        girl_shadow.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        girl_shadow.addRule(RelativeLayout.CENTER_VERTICAL);
+
         girl_layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         girl_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        boy_shadow.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        boy_shadow.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
         boy_layout.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         boy_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
@@ -87,8 +81,7 @@ public class PlaceChoiceActivity extends BaseActivity implements View.OnClickLis
         girl.setLayoutParams(girl_layout);
         boy.bringToFront();
         girl.bringToFront();
-        shadowBoy.setLayoutParams(boy_shadow);
-        shadowGirl.setLayoutParams(girl_shadow);
+
         kolorobLogo.setLayoutParams(kolorob_logo);
         ivBauniaBandh.setLayoutParams(baunia_img);
         ivParisRoad.setLayoutParams(parise_img);
