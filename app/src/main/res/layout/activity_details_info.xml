@@ -124,7 +124,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="নাম"
-                    android:layout_marginTop="12dp"
 
                     android:id="@+id/tv_header"
                     android:textColor="@color/blue"
@@ -392,17 +391,6 @@
                     android:padding="5dp"
                     />
 
-
-
-                <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-
-                android:id="@+id/listView5" />
-
-
-
                 <ListView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -412,7 +400,44 @@
                     android:id="@+id/courseListView" />
 
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" কোর্স ফি "
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="28dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewrd"
+                    android:src="@drawable/green_line_horizontal"
+                    android:padding="5dp"
+                    />
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:id="@+id/listView5" />
+
+
+
+
+
+
+
+
+
+
             </LinearLayout>
+
+
+
+
 
 
 
