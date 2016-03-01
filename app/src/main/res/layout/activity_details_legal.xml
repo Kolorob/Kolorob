@@ -123,7 +123,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="নাম"
-                    android:layout_marginTop="12dp"
 
                     android:id="@+id/tv_header"
                     android:textColor="@color/blue"
