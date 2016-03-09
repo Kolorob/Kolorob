@@ -1,6 +1,8 @@
 package  demo.kolorob.kolorobdemoversion.activity;
+
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -460,13 +462,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         textView.setText("যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.HEALTH:
-
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         textView.setText("যে ধরনের চিকিৎসা সুবিধা  সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
-
 
                     //TODO write necessary codes for health
 
@@ -481,7 +481,20 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
+                       map.removeAllViews();
                         //TODO write necessary codes for government
+
+                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+
+                        alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                        alertDialog.getWindow().setLayout(200, 300);
+                        alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
@@ -496,11 +509,19 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         textView.setText("যে ধরনের টাকা পয়সা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.JOB:
-                        ArrayList<JobServiceProviderItem> jobServiceProvider;
-                        jobServiceProvider = constructjobListItem(ci.getId());
-                        callMapFragmentWithJobInfo(ci.getCatName(), ci.getId(), jobServiceProvider);
-                        textView.setText("যে ধরনের চাকরি বাকরি সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
-                        break;
+                        map.removeAllViews();
+                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+
+                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog2.dismiss();
+                                    }
+                                });
+                        alertDialog2.getWindow().setLayout(200, 300);
+                        alertDialog2.show();
+
                     default:
                         break;
                 }
@@ -665,7 +686,18 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        //TODO write necessary codes for government
+                        map.removeAllViews();
+                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+
+                        alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                        alertDialog.getWindow().setLayout(200, 300);
+                        alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalItem;
@@ -678,10 +710,20 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
                     case AppConstants.JOB:
-                        ArrayList<JobServiceProviderItem> jobItem;
-                        jobItem = constructjobListItemForHeader(cat_id, si.getSubcatHeader());
-                        callMapFragmentWithJobInfo(si.getSubcatHeader(), cat_id, jobItem);
-                        break;
+                        map.removeAllViews();
+                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+
+                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog2.dismiss();
+                                    }
+                                });
+                        alertDialog2.getWindow().setLayout(200, 300);
+                        alertDialog2.show();
+
+
                     default:
                         break;
                 }

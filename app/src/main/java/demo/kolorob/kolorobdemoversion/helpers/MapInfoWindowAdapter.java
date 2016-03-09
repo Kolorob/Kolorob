@@ -234,6 +234,7 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
                 //TODO write necessary codes for entertainment
                 break;
             case AppConstants.GOVERNMENT:
+
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:

@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Kolorob.iml" filepath="$PROJECT_DIR$/Kolorob.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Kolorobfrommity.iml" filepath="$PROJECT_DIR$/Kolorobfrommity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kolorobm.iml" filepath="$PROJECT_DIR$/Kolorobm.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/volley/volley.iml" filepath="$PROJECT_DIR$/libraries/volley/volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/volley/volley.iml" filepath="$PROJECT_DIR$/libraries/volley/volley.iml" />
     </modules>
   </component>
