@@ -176,7 +176,6 @@ public class HealthPharmacyTable {
                             String pharmacyNoDegree,
                             String pharmacyLMAF,
                             String pharmacyMBBS,
-
                             String pharmacySpecialist,
                             String remarks,
                             String pharmacyDocRemarks,
@@ -199,8 +198,8 @@ public class HealthPharmacyTable {
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND" + KEY_DOC_ID + " = ? AND " + KEY_REF_NUM + " = ?",
-                new String[]{nodeId + "", docId + "", refNumber + ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND " + KEY_REF_NUM + " = ? AND " + KEY_DOC_ID + " = ?",
+                new String[]{nodeId + "", refNumber + "", docId + ""});
         closeDB();
         return ret;
     }
