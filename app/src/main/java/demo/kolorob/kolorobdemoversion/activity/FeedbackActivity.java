@@ -29,7 +29,9 @@ import java.util.Map;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
-
+/**
+ * Created by israt.jahan on 1/7/2016.
+ */
 public class FeedbackActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String REGISTER_URL = "http://www.kolorob.net/volley.php";
