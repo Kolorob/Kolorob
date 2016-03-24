@@ -126,14 +126,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/svSubCategoryListHolder"
-            android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
-            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
             android:background="@color/white"
             android:orientation="vertical"
             android:visibility="visible"
-            android:id="@+id/llItemListHolder">
+            android:id="@+id/llItemListHolder"
+            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/detailsearch"
+                android:visibility="gone"
+                android:id="@+id/show"
+                android:layout_height="match_parent">
+</RelativeLayout>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:background="@drawable/searchbutton"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/btn_see_map"
+                android:layout_below="@+id/tvInstructionSubCat"
+                android:layout_alignRight="@+id/btn_see_map"
+                android:layout_alignEnd="@+id/btn_see_map" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -144,9 +161,9 @@
                 android:padding="7dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:textColor="#000000"
-                android:background="@color/yellow"
+                android:background="@color/red"
                 android:textSize="20sp"
-                android:visibility="gone" />
+                />
 
             <ListView
                 android:layout_width="match_parent"
@@ -158,41 +175,51 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <ExpandableListView
-                    android:id="@+id/listView"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" >
-                </ExpandableListView>
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+
+                    <ExpandableListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="259dp" >
+                    </ExpandableListView>
+
+                </LinearLayout>
             </ScrollView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="141dp">
             <TextView
                 android:id="@+id/tvInstructionSubCat"
-                android:layout_width="wrap_content"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="right"
                 android:gravity="center"
                 android:padding="7dp"
                 android:visibility="visible"
                 android:text="@string/txt_sub_cat_inst"
-                android:textColor="@color/red"/>
+                android:textColor="@color/red"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/btn_show_sub_cat_list_item"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/btn_see_map" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:text="@string/txt_inst_sub_cat_choose"
                 android:id="@+id/btn_show_sub_cat_list_item"
                 android:background="@color/yellow"
-                android:padding="3dp" />
+                android:padding="3dp"
+                android:layout_below="@+id/tvInstructionSubCat"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -201,8 +228,11 @@
                 android:id="@+id/btn_see_map"
                 android:background="@drawable/pullup_map"
                 android:layout_gravity="center_horizontal"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
 
+            </RelativeLayout>
         </LinearLayout>
 
         <FrameLayout

@@ -172,7 +172,7 @@ private String placeChoice;
         }
 
 
-        subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
+      //  subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
@@ -210,7 +210,7 @@ private String placeChoice;
             @Override
             public void onClick(View v) {
                 subCatItemList.setVisibility(View.GONE);
-                subCatItemListHeader.setVisibility(View.GONE);
+                subCatItemListHeader.setVisibility(View.VISIBLE);
                 showSubCatListItem.setVisibility(View.VISIBLE);
                 seeMap.setVisibility(View.GONE);
             }
@@ -495,7 +495,7 @@ private String placeChoice;
                 showSubCatListItem.setEnabled(false);
                 showSubCatListItem.setVisibility(View.VISIBLE);
                 subCatItemList.setVisibility(View.GONE);
-                subCatItemListHeader.setVisibility(View.GONE);
+
                 insSubCat.setVisibility(View.VISIBLE);
                 seeMap.setVisibility(View.GONE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
@@ -648,7 +648,7 @@ private String placeChoice;
                 }
                 /*code for all*/
                 showSubCatListItem.setEnabled(true);
-                subCatItemListHeader.setText(si.getSubcatHeader());
+
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
             }
         });

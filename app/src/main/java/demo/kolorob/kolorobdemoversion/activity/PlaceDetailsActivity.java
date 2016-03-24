@@ -21,6 +21,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -78,6 +79,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private Button seeMap;
     private static TextView insSubCat;
     private static FrameLayout map;
+    private static RelativeLayout showsearch;
     private int height;
     private View nextChild;
     private boolean isCatExpandedOnce = false;
@@ -87,7 +89,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private String locationName;
     private LinearLayout catLayout;
     TextView textView;
-
+ImageButton search;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
     private ArrayList<EducationServiceProviderItem> currentEducationServiceProvider;
@@ -137,7 +139,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         else
         setContentView(R.layout.place_details_activity_mobiles);
 
-
+search=(ImageButton)findViewById(R.id.imageButton2);
         textView=(TextView)findViewById(R.id.tvInstructionSubCat);
 
         Intent intent;
@@ -182,6 +184,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
+        showsearch=(RelativeLayout)findViewById(R.id.show);
         insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         seeMap = (Button) findViewById(R.id.btn_see_map);
         showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
@@ -202,7 +205,13 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         constructCategoryList(categoryTable.getAllCategories());
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         rlSubCatHolder.setVisibility(View.INVISIBLE);
+search.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+        showsearch.setVisibility(View.VISIBLE);
+    }
+});
 
         showSubCatListItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -481,7 +490,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                       map.removeAllViews();
+                        map.removeAllViews();
                         //TODO write necessary codes for government
 
                         final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
@@ -527,7 +536,6 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
 
 
-
                 /**
                  * code for all categories
                  **/
@@ -539,7 +547,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 seeMap.setVisibility(View.GONE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
                 placeDetailsLayout.setBackgroundResource(R.drawable.cool_crash_ui_backdrop);
-               // categoryHeader.setText(ci.getCatName());
+                // categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)
                     showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
@@ -768,7 +776,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             public void run() {
                 rlSubCatHolder.setVisibility(View.VISIBLE);
                 rlSubCatHolder.startAnimation(slideInFromRightAnim());
-                constructSubCategoryList(subCatList,1.0,cat_id);
+                constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
                 (int) (200 *
@@ -783,9 +791,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void run() {
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
-                if (height<1000d&&dwPerc ==1)
+                if (height < 1000d && dwPerc == 1)
                     return;
-                else if(dwPerc<0.6)
+                else if (dwPerc < 0.6)
                     return;
                 // Decrease category-list width
                 ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();

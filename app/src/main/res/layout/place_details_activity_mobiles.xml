@@ -142,8 +142,7 @@
             android:background="@color/white"
             android:orientation="vertical"
             android:visibility="visible"
-            android:id="@+id/llItemListHolder"
-            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder">
+            android:id="@+id/llItemListHolder">
 
 
 
