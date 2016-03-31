@@ -2,6 +2,7 @@ package  demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,10 +40,16 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.AlphabetListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEdu;
@@ -97,6 +105,7 @@ int caselan=0;
     private ExpandableListView subCatItemList;
     private Button showSubCatListItem;
     private Button seeMap;
+    private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static TextView insSubCat;
     private static FrameLayout map;
     private static RelativeLayout showsearch2,searchpage,filteroption;
@@ -111,12 +120,14 @@ int caselan=0;
     private RadioButton srad,brad;
     private GestureDetector mGestureDetector;
     private int sideIndexHeight;
+    private List<Object[]> alphabet = new ArrayList<Object[]>();
     private static float sideIndexX;
     private static float sideIndexY;
     TextView textView,texthead,textmid;
     FinancialServiceProviderItem financialServiceProviderItem;
 ImageButton search;
     Button Back;
+
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
@@ -127,7 +138,7 @@ private Switch switchlan;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
-
+    ArrayList<String> countries=new ArrayList<String>();
     ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
@@ -155,7 +166,9 @@ private Switch switchlan;
     ArrayList<PopulatedfromDBEnt>arraylist5=new ArrayList<>();
     ArrayList<PopulatedfromDBLeg>arraylist6=new ArrayList<>();
     private String placeChoice;
-
+    private int indexListSize;
+    private ListActivity listView;
+private ListView itemList;
     public String getPlaceChoice() {
         return placeChoice;
     }
@@ -166,6 +179,7 @@ private Switch switchlan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         dpi=displayMetrics.densityDpi;
@@ -230,7 +244,7 @@ private Switch switchlan;
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
         editor.commit();
-
+        itemList = (ListView)findViewById(R.id.listViewSearch);
         subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
 
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
@@ -287,15 +301,15 @@ search.setOnClickListener(new View.OnClickListener() {
                     status = 1;
                     texthead.setText(R.string.Head);
                     Back.setText("ফিরে যান");
-                   // srad.setText("শিওর ক্যাশ");
-                   // brad.setText("বিকাশ");
+                    // srad.setText("শিওর ক্যাশ");
+                    // brad.setText("বিকাশ");
                     SearchResult(status, currentCategoryID);
                 } else {
                     status = 0;
                     lan.setText("English");
                     texthead.setText(R.string.Headen);
-                   // srad.setText("Sure Cash");
-                   // brad.setText("BKash");
+                    // srad.setText("Sure Cash");
+                    // brad.setText("BKash");
                     Back.setText("Go Back");
                     SearchResult(status, currentCategoryID);
                 }
@@ -318,11 +332,11 @@ search.setOnClickListener(new View.OnClickListener() {
             }
         });*/
 
-       // subCatItemListHeader.setVisibility(View.GONE);
+        // subCatItemListHeader.setVisibility(View.GONE);
         //subCatItemList.setVisibility(View.GONE);
     }
 });
-
+        mGestureDetector = new GestureDetector(this, new SideIndexGestureListener());
         showSubCatListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -347,6 +361,128 @@ search.setOnClickListener(new View.OnClickListener() {
        // callMapFragment();
 
     }
+    protected void indexbar(ArrayList<String> countries) {
+
+       AlphabetListAdapter adapterind = new AlphabetListAdapter();
+        List<AlphabetListAdapter.Row> rows = new ArrayList<AlphabetListAdapter.Row>();
+        int start = 0;
+        int end = 0;
+        String previousLetter = null;
+        Object[] tmpIndexItem = null;
+        Pattern numberPattern = Pattern.compile("[0-9]");
+
+        for (String country : countries) {
+            String firstLetter = country.substring(0, 1);
+
+            // Group numbers together in the scroller
+            if (numberPattern.matcher(firstLetter).matches()) {
+                firstLetter = "#";
+            }
+
+            // If we've changed to a new letter, add the previous letter to the alphabet scroller
+            if (previousLetter != null && !firstLetter.equals(previousLetter)) {
+                end = rows.size() - 1;
+                tmpIndexItem = new Object[3];
+                tmpIndexItem[0] = previousLetter.toUpperCase(Locale.UK);
+                tmpIndexItem[1] = start;
+                tmpIndexItem[2] = end;
+                alphabet.add(tmpIndexItem);
+
+                start = end + 1;
+            }
+
+            // Check if we need to add a header row
+            if (!firstLetter.equals(previousLetter)) {
+                rows.add(new AlphabetListAdapter.Section(firstLetter));
+                sections.put(firstLetter, start);
+            }
+
+            // Add the country to the list
+            rows.add(new AlphabetListAdapter.Item(country));
+            previousLetter = firstLetter;
+        }
+
+        if (previousLetter != null) {
+            // Save the last letter
+            tmpIndexItem = new Object[3];
+            tmpIndexItem[0] = previousLetter.toUpperCase(Locale.UK);
+            tmpIndexItem[1] = start;
+            tmpIndexItem[2] = rows.size() - 1;
+            alphabet.add(tmpIndexItem);
+        }
+
+        adapterind.setRows(rows);
+        itemList.setAdapter(adapter);
+
+
+        updateList();
+    }
+    public static class MyCustomComparator implements Comparator<HashMap<String, String>> {
+
+        @Override
+        public int compare(HashMap<String, String> lhs,
+                           HashMap<String, String> rhs) {
+            if(lhs.get("onLineCheck") == String.valueOf(true))
+            return 1;
+            else
+            return 0;
+
+        }
+
+    }
+    public ListActivity getListView() {
+        return listView;
+    }
+    public void updateList() {
+        LinearLayout sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
+        sideIndex.removeAllViews();
+        indexListSize = alphabet.size();
+        if (indexListSize < 1) {
+            return;
+        }
+
+        int indexMaxSize = (int) Math.floor(sideIndex.getHeight() / 20);
+        int tmpIndexListSize = indexListSize;
+        while (tmpIndexListSize > indexMaxSize) {
+            tmpIndexListSize = tmpIndexListSize / 2;
+        }
+        double delta;
+        if (tmpIndexListSize > 0) {
+            delta = indexListSize / tmpIndexListSize;
+        } else {
+            delta = 1;
+        }
+
+        TextView tmpTV;
+        for (double i = 1; i <= indexListSize; i = i + delta) {
+            Object[] tmpIndexItem = alphabet.get((int) i - 1);
+            String tmpLetter = tmpIndexItem[0].toString();
+
+            tmpTV = new TextView(this);
+            tmpTV.setText(tmpLetter);
+            tmpTV.setGravity(Gravity.CENTER);
+            tmpTV.setTextSize(15);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+            tmpTV.setLayoutParams(params);
+            sideIndex.addView(tmpTV);
+        }
+
+        sideIndexHeight = sideIndex.getHeight();
+
+        sideIndex.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // now you know coordinates of touch
+                sideIndexX = event.getX();
+                sideIndexY = event.getY();
+
+                // and can display a proper item it country list
+                displayListItem();
+
+                return false;
+            }
+        });
+    }
 
     class SideIndexGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -355,27 +491,50 @@ search.setOnClickListener(new View.OnClickListener() {
             sideIndexY = sideIndexY - distanceY;
 
             if (sideIndexX >= 0 && sideIndexY >= 0) {
-               // displayListItem();
+               displayListItem();
             }
 
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (mGestureDetector.onTouchEvent(event)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void displayListItem() {
+        LinearLayout sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
+        sideIndexHeight = sideIndex.getHeight();
+        // compute number of pixels for every side index item
+        double pixelPerIndexItem = (double) sideIndexHeight / indexListSize;
+
+        // compute the item index for given event position belongs to
+        int itemPosition = (int) (sideIndexY / pixelPerIndexItem);
+
+        // get the item (we can do it since we know item index)
+        if (itemPosition < alphabet.size()) {
+            Object[] indexItem = alphabet.get(itemPosition);
+            int subitemPosition = sections.get(indexItem[0]);
+
+            //ListView listView = (ListView) findViewById(android.R.id.list);
+            itemList.setSelection(subitemPosition);
+        }
+    }
     private void SearchResult(int caselan, int currentCategoryID)  {
 
 
         int status=caselan;
         filterText = (EditText)findViewById(R.id.editText);
-        ListView itemList = (ListView)findViewById(R.id.listViewSearch);
-        FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivity.this);
 
-        HealthServiceProviderTable healthServiceProviderTable=new HealthServiceProviderTable(PlaceDetailsActivity.this);
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
-        LegalAidServiceProviderTable legalAidServiceProviderTable=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+
         if (currentCategoryID==1) {
             EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivity.this);
             fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
+
             arraylist2.clear();
 
             for (int i=0;i<fetchededu.size();i++)
@@ -396,6 +555,14 @@ search.setOnClickListener(new View.OnClickListener() {
 
 
             }
+            for (int ind=0;ind<arraylist2.size();ind++)
+            {
+countries.add(arraylist2.get(ind).getRank());
+                ;
+            }
+            Collections.sort(countries);
+          indexbar(countries);
+
             adapterEdu = new ListViewAdapterEdu(this, arraylist2);
 
             itemList.setAdapter(adapterEdu);

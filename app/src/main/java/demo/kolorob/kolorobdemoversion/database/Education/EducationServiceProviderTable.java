@@ -387,7 +387,7 @@ public class EducationServiceProviderTable  {
 
         SQLiteDatabase db = openDB();
         EducationServiceProviderItem educationServiceProviderItem=null;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_IDENTIFIER_ID+"="+Node, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_IDENTIFIER_ID+"="+Node , null);
 
         if (cursor.moveToFirst()) {
             do {
