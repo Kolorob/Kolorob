@@ -199,6 +199,26 @@ public class LegalAidServiceProviderTable {
         closeDB();
         return ret;
     }
+    public LegalAidServiceProviderItem getlegNode2(String Node) {
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + "=" + Node, null);
+LegalAidServiceProviderItem legalAidServiceProviderItem=null;
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                legalAidServiceProviderItem=new LegalAidServiceProviderItem(cursor.getString(0),cursor.getString(1),
+                        cursor.getInt(2),cursor.getInt(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),
+                        cursor.getString(8),cursor.getString(9),
+                        cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
+                        cursor.getString(16), cursor.getString(17),cursor.getString(18),cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),
+                        cursor.getString(23),cursor.getString(24),cursor.getString(25));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return legalAidServiceProviderItem;
+    }
     public ArrayList<LegalAidServiceProviderItem> Legnames(int cat_id,String head,String a,String place) {
         String subcatnames=null;
         subcatnames=a;

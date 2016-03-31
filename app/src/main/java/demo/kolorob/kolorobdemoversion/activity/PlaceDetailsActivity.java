@@ -45,11 +45,15 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEdu;
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEnt;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterHel;
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterLeg;
 import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDB;
 import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEdu;
+import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEnt;
 import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBHel;
+import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBLeg;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -112,6 +116,7 @@ int caselan=0;
     TextView textView,texthead,textmid;
     FinancialServiceProviderItem financialServiceProviderItem;
 ImageButton search;
+    Button Back;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
@@ -141,10 +146,14 @@ private Switch switchlan;
     ListViewAdapter adapter;
     ListViewAdapterEdu adapterEdu;
     ListViewAdapterHel adapterHel;
-    ArrayList<PopulatedfromDB> arraylist = new ArrayList<PopulatedfromDB>();
+    ListViewAdapterLeg adapterLeg;
+    ListViewAdapterEnt adapterEnt;
+    ArrayList<PopulatedfromDB> arraylist = new ArrayList<>();//fin
     ArrayList<PopulatedfromDBEdu>arraylist2=new ArrayList<>();
     ArrayList<PopulatedfromDBHel>arraylist3=new ArrayList<>();
-
+    ArrayList<PopulatedfromDBLeg>arraylist4=new ArrayList<>();
+    ArrayList<PopulatedfromDBEnt>arraylist5=new ArrayList<>();
+    ArrayList<PopulatedfromDBLeg>arraylist6=new ArrayList<>();
     private String placeChoice;
 
     public String getPlaceChoice() {
@@ -172,13 +181,13 @@ private Switch switchlan;
         setContentView(R.layout.place_details_activity_mobiles);
 
         search=(ImageButton)findViewById(R.id.imageButton2);
+        Back=(Button)findViewById(R.id.backbutton);
         textView=(TextView)findViewById(R.id.tvInstructionSubCat);
         showsearch2=(RelativeLayout)findViewById(R.id.seearch);
         filteroption=(RelativeLayout)findViewById(R.id.lowlayout);
         final  ToggleButton lan=(ToggleButton)findViewById(R.id.toggleButton);
         texthead = (TextView) findViewById(R.id.headtext);
 
-        textmid = (TextView) findViewById(R.id.midtext);
 
         lan.setText("English");
 
@@ -256,7 +265,17 @@ search.setOnClickListener(new View.OnClickListener() {
 
         showsearch2.setVisibility(View.VISIBLE);
         SearchResult(0, currentCategoryID);
+        Back.setText("Go Back");
         seeMap.setVisibility(View.GONE);
+        Back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                showsearch2.setVisibility(View.GONE);
+                rlSubCatHolder.setVisibility(View.VISIBLE);
+
+            }
+        });
         lan.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -267,6 +286,7 @@ search.setOnClickListener(new View.OnClickListener() {
                     //Button is OFF
                     status = 1;
                     texthead.setText(R.string.Head);
+                    Back.setText("ফিরে যান");
                    // srad.setText("শিওর ক্যাশ");
                    // brad.setText("বিকাশ");
                     SearchResult(status, currentCategoryID);
@@ -276,8 +296,10 @@ search.setOnClickListener(new View.OnClickListener() {
                     texthead.setText(R.string.Headen);
                    // srad.setText("Sure Cash");
                    // brad.setText("BKash");
+                    Back.setText("Go Back");
                     SearchResult(status, currentCategoryID);
                 }
+
 
                 // Do Something
             }
@@ -442,6 +464,172 @@ search.setOnClickListener(new View.OnClickListener() {
                     String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
 
                     adapterHel.filter(text);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1,
+                                              int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+            });
+
+
+
+        }
+        else if (currentCategoryID==5){
+    LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+            fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
+            arraylist4.clear();
+
+            for (int i=0;i<fetchedleg.size();i++)
+            {
+
+                fname=fetchedleg.get(i).getLegalaidNameEng();
+                fnodeid=fetchedleg.get(i).getIdentifierId();
+                refid=fetchedleg.get(i).getLegalaidSubCategoryId();
+                upname=fetchedleg.get(i).getLegalaidNameBan();
+                if (status==1) {
+
+                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(upname, fnodeid, refid,fetchedleg);
+
+                    arraylist4.add(wp);
+                }else {
+                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(fname,fnodeid,refid,fetchedleg);
+                    arraylist4.add(wp);}
+
+
+            }
+            adapterLeg = new ListViewAdapterLeg(this, arraylist4);
+
+            itemList.setAdapter(adapterLeg);
+
+
+            filterText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // TODO Auto-generated method stub
+                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+                    adapterLeg.filter(text);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1,
+                                              int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+            });
+
+
+
+        }
+        else if (currentCategoryID==3){
+            EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+
+            fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
+            arraylist5.clear();
+
+            for (int i=0;i<fetchedent.size();i++)
+            {
+
+                fname=fetchedent.get(i).getNodeName();
+                fnodeid=fetchedent.get(i).getNodeId();
+                refid=fetchedent.get(i).getEntSubCategoryId();
+                upname=fetchedent.get(i).getNodeNameBn();
+                if (status==1) {
+
+                    PopulatedfromDBEnt wp = new PopulatedfromDBEnt(upname, fnodeid, refid,fetchedent);
+
+                    arraylist5.add(wp);
+                }else {
+                    PopulatedfromDBEnt wp = new PopulatedfromDBEnt(fname,fnodeid,refid,fetchedent);
+                    arraylist5.add(wp);}
+
+
+            }
+            adapterEnt = new ListViewAdapterEnt(this, arraylist5);
+
+            itemList.setAdapter(adapterEnt);
+
+
+            filterText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // TODO Auto-generated method stub
+                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+                    adapterEnt.filter(text);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1,
+                                              int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+            });
+
+
+
+        }
+        else if (currentCategoryID==6){
+            LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+            fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
+            arraylist.clear();
+
+            for (int i=0;i<fetchedleg.size();i++)
+            {
+
+                fname=fetchedleg.get(i).getLegalaidNameEng();
+                fnodeid=fetchedleg.get(i).getIdentifierId();
+                refid=fetchedleg.get(i).getLegalaidSubCategoryId();
+                upname=fetchedleg.get(i).getLegalaidNameBan();
+                if (status==1) {
+
+                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(upname, fnodeid, refid,fetchedleg);
+
+                    arraylist.add(wp);
+                }else {
+                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(fname,fnodeid,refid,fetchedleg);
+                    arraylist.add(wp);}
+
+
+            }
+            adapter = new ListViewAdapter(this, arraylist);
+
+            itemList.setAdapter(adapter);
+
+
+            filterText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // TODO Auto-generated method stub
+                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+                    adapter.filter(text);
                 }
 
                 @Override
@@ -644,7 +832,7 @@ search.setOnClickListener(new View.OnClickListener() {
        if(dpi>300)
           v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
       else
-        if(dpi<300)
+        if(dpi<300 && height>1000)
             v = li.inflate(R.layout.cat_list_mobile1, llCatListHolder, false);
         else
 
@@ -695,12 +883,16 @@ search.setOnClickListener(new View.OnClickListener() {
                 * category id 7 means job*/
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
                         textView.setText("যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
+
                         break;
                     case AppConstants.HEALTH:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
@@ -710,6 +902,7 @@ search.setOnClickListener(new View.OnClickListener() {
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
@@ -720,6 +913,7 @@ search.setOnClickListener(new View.OnClickListener() {
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         map.removeAllViews();
                         //TODO write necessary codes for government
 
@@ -736,18 +930,21 @@ search.setOnClickListener(new View.OnClickListener() {
                         alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
                         textView.setText("যে ধরনের আইন কানুন সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.FINANCIAL:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
                         textView.setText("যে ধরনের টাকা পয়সা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.JOB:
+                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         map.removeAllViews();
                         final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
 

@@ -273,26 +273,13 @@ android:visibility="gone"
             android:layout_below="@+id/headtext"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView3"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true">
 
-            </LinearLayout>
-        </ScrollView>
+
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="420dp"
             android:id="@+id/listViewSearch"
             android:layout_below="@+id/editText"
             android:layout_alignParentLeft="true"
@@ -358,7 +345,18 @@ android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:checked="false" />
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/backbutton"
+            android:background="@color/yellow"
+            android:padding="3dp"
+            android:layout_marginTop="47dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/listViewSearch"
+            android:layout_alignRight="@+id/headtext"
+            android:layout_alignEnd="@+id/headtext" />
 
     </RelativeLayout>
 </FrameLayout>
