@@ -16,10 +16,8 @@
         android:contentDescription="@string/txt_cd_icon_cat"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-
         android:paddingTop="0dp"
-        android:layout_gravity="bottom"
-        android:layout_weight="0.12" />
+        android:layout_gravity="bottom" />
 
     <!--<TextView-->
         <!--android:id="@+id/tvNameCatList"-->

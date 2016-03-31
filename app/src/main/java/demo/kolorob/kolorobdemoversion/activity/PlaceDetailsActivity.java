@@ -9,7 +9,10 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,21 +22,34 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEdu;
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterHel;
 import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDB;
+import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEdu;
+import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBHel;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -59,13 +75,13 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 /**
  * Created by touhid on 12/3/15.
  *
- * @author touhid,arafat,israt
+ * @author touhid,israt,arafat
  */
 public class PlaceDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = PlaceDetailsActivity.class.getSimpleName();
     private static final int ANIM_INTERVAL = 100;
-
+int caselan=0;
     private static double VIEW_WIDTH;
     private ScrollView svCatList;
     private LinearLayout llCatListHolder;
@@ -79,8 +95,8 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private Button seeMap;
     private static TextView insSubCat;
     private static FrameLayout map;
-    private static RelativeLayout showsearch;
-    private int height;
+    private static RelativeLayout showsearch2,searchpage,filteroption;
+    private int height,dpi;
     private View nextChild;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
@@ -88,17 +104,19 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private int locationNameId,subcategory;
     private String locationName;
     private LinearLayout catLayout;
-    TextView textView;
+    private RadioButton srad,brad;
+    private GestureDetector mGestureDetector;
+    private int sideIndexHeight;
+    private static float sideIndexX;
+    private static float sideIndexY;
+    TextView textView,texthead,textmid;
+    FinancialServiceProviderItem financialServiceProviderItem;
 ImageButton search;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
-    private ArrayList<EducationServiceProviderItem> currentEducationServiceProvider;
-    private ArrayList<EntertainmentServiceProviderItem> currentEntertainmentServiceProvider;
-    private ArrayList<HealthServiceProviderItem> currentHealthServiceProvider;
-    private ArrayList<LegalAidServiceProviderItem> currentLegalAidServiceProvider;
-    private ArrayList<JobServiceProviderItem> currentJobServiceProvider;
-    private ArrayList<FinancialServiceProviderItem> currentFinancialServiceProvider;
 
+private Switch switchlan;
+ public int status=0;
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
@@ -111,8 +129,21 @@ ImageButton search;
     private int currentCategoryID;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
-
-
+    private EditText filterText;
+    String fname,fnodeid,upname;
+    int refid;
+    private RadioGroup fingroup;
+    private ArrayList<FinancialServiceProviderItem>fetchedfin;
+    private ArrayList<EducationServiceProviderItem>fetchededu;
+    private ArrayList<LegalAidServiceProviderItem>fetchedleg;
+    private ArrayList<EntertainmentServiceProviderItem>fetchedent;
+    private ArrayList<HealthServiceProviderItem>fetchedhel;
+    ListViewAdapter adapter;
+    ListViewAdapterEdu adapterEdu;
+    ListViewAdapterHel adapterHel;
+    ArrayList<PopulatedfromDB> arraylist = new ArrayList<PopulatedfromDB>();
+    ArrayList<PopulatedfromDBEdu>arraylist2=new ArrayList<>();
+    ArrayList<PopulatedfromDBHel>arraylist3=new ArrayList<>();
 
     private String placeChoice;
 
@@ -128,9 +159,10 @@ ImageButton search;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
-      if(height>1700)
+      if(dpi>300)
            setContentView(R.layout.placedetailsactivitysupermobile);
 
       else
@@ -139,8 +171,18 @@ ImageButton search;
         else
         setContentView(R.layout.place_details_activity_mobiles);
 
-search=(ImageButton)findViewById(R.id.imageButton2);
+        search=(ImageButton)findViewById(R.id.imageButton2);
         textView=(TextView)findViewById(R.id.tvInstructionSubCat);
+        showsearch2=(RelativeLayout)findViewById(R.id.seearch);
+        filteroption=(RelativeLayout)findViewById(R.id.lowlayout);
+        final  ToggleButton lan=(ToggleButton)findViewById(R.id.toggleButton);
+        texthead = (TextView) findViewById(R.id.headtext);
+
+        textmid = (TextView) findViewById(R.id.midtext);
+
+        lan.setText("English");
+
+
 
         Intent intent;
         intent = getIntent();
@@ -184,7 +226,7 @@ search=(ImageButton)findViewById(R.id.imageButton2);
 
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
-        showsearch=(RelativeLayout)findViewById(R.id.show);
+        //showsearch=(RelativeLayout)findViewById(R.id.show);
         insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         seeMap = (Button) findViewById(R.id.btn_see_map);
         showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
@@ -209,13 +251,60 @@ search.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
-        showsearch.setVisibility(View.VISIBLE);
+
+        rlSubCatHolder.setVisibility(View.GONE);
+
+        showsearch2.setVisibility(View.VISIBLE);
+        SearchResult(0, currentCategoryID);
+        seeMap.setVisibility(View.GONE);
+        lan.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if (lan.isChecked()) {
+                    //Button is ON
+                    lan.setText("Bangla");
+                    //Button is OFF
+                    status = 1;
+                    texthead.setText(R.string.Head);
+                   // srad.setText("শিওর ক্যাশ");
+                   // brad.setText("বিকাশ");
+                    SearchResult(status, currentCategoryID);
+                } else {
+                    status = 0;
+                    lan.setText("English");
+                    texthead.setText(R.string.Headen);
+                   // srad.setText("Sure Cash");
+                   // brad.setText("BKash");
+                    SearchResult(status, currentCategoryID);
+                }
+
+                // Do Something
+            }
+        });
+
+
+
+        /*if (isChecked) caselan = 1;
+        else caselan = 0;
+        SearchResult(caselan, currentCategoryID);
+        switchlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+
+            }
+        });*/
+
+       // subCatItemListHeader.setVisibility(View.GONE);
+        //subCatItemList.setVisibility(View.GONE);
     }
 });
 
         showSubCatListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                search.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 subCatItemListHeader.setVisibility(View.VISIBLE);
                 showSubCatListItem.setVisibility(View.GONE);
@@ -225,6 +314,7 @@ search.setOnClickListener(new View.OnClickListener() {
         seeMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                search.setVisibility(View.VISIBLE);
                 subCatItemList.setVisibility(View.GONE);
                 subCatItemListHeader.setVisibility(View.GONE);
                 showSubCatListItem.setVisibility(View.VISIBLE);
@@ -235,6 +325,144 @@ search.setOnClickListener(new View.OnClickListener() {
        // callMapFragment();
 
     }
+
+    class SideIndexGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            sideIndexX = sideIndexX - distanceX;
+            sideIndexY = sideIndexY - distanceY;
+
+            if (sideIndexX >= 0 && sideIndexY >= 0) {
+               // displayListItem();
+            }
+
+            return super.onScroll(e1, e2, distanceX, distanceY);
+        }
+    }
+
+    private void SearchResult(int caselan, int currentCategoryID)  {
+
+
+        int status=caselan;
+        filterText = (EditText)findViewById(R.id.editText);
+        ListView itemList = (ListView)findViewById(R.id.listViewSearch);
+        FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+
+        HealthServiceProviderTable healthServiceProviderTable=new HealthServiceProviderTable(PlaceDetailsActivity.this);
+        EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+        LegalAidServiceProviderTable legalAidServiceProviderTable=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+        if (currentCategoryID==1) {
+            EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivity.this);
+            fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
+            arraylist2.clear();
+
+            for (int i=0;i<fetchededu.size();i++)
+            {
+
+                fname=fetchededu.get(i).getEduNameEng();
+                fnodeid=fetchededu.get(i).getIdentifierId();
+                refid=fetchededu.get(i).getEduSubCategoryId();
+                upname=fetchededu.get(i).getEduNameBan();
+                if (status==1) {
+
+                    PopulatedfromDBEdu wp = new PopulatedfromDBEdu(upname, fnodeid, refid,fetchededu);
+
+                    arraylist2.add(wp);
+                }else {
+                    PopulatedfromDBEdu wp = new PopulatedfromDBEdu(fname,fnodeid,refid,fetchededu);
+                    arraylist2.add(wp);}
+
+
+            }
+            adapterEdu = new ListViewAdapterEdu(this, arraylist2);
+
+            itemList.setAdapter(adapterEdu);
+
+
+            filterText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // TODO Auto-generated method stub
+                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+                    adapterEdu.filter(text);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1,
+                                              int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+        });
+
+
+
+    }
+        else if (currentCategoryID==2){
+            HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivity.this);
+            fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
+            arraylist3.clear();
+
+            for (int i=0;i<fetchedhel.size();i++)
+            {
+
+                fname=fetchedhel.get(i).getNodeName();
+                fnodeid=fetchedhel.get(i).getNodeId();
+                refid=fetchedhel.get(i).getRefNum();
+                upname=fetchedhel.get(i).getNameBn();
+                if (status==1) {
+
+                    PopulatedfromDBHel wp = new PopulatedfromDBHel(upname, fnodeid, refid,fetchedhel);
+
+                    arraylist3.add(wp);
+                }else {
+                    PopulatedfromDBHel wp = new PopulatedfromDBHel(fname,fnodeid,refid,fetchedhel);
+                    arraylist3.add(wp);}
+
+
+            }
+            adapterHel = new ListViewAdapterHel(this, arraylist3);
+
+            itemList.setAdapter(adapterHel);
+
+
+            filterText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    // TODO Auto-generated method stub
+                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+                    adapterHel.filter(text);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence arg0, int arg1,
+                                              int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                    // TODO Auto-generated method stub
+                }
+
+            });
+
+
+
+        }
+    }
+
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
             case AppConstants.EDUCATION:
@@ -353,6 +581,8 @@ search.setOnClickListener(new View.OnClickListener() {
 
 
 
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -411,11 +641,11 @@ search.setOnClickListener(new View.OnClickListener() {
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
         LayoutInflater li = LayoutInflater.from(this);
         View v;
-       if(height>1700)
+       if(dpi>300)
           v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
       else
-        if(height<1000)
-            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+        if(dpi<300)
+            v = li.inflate(R.layout.cat_list_mobile1, llCatListHolder, false);
         else
 
         v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
@@ -607,11 +837,12 @@ search.setOnClickListener(new View.OnClickListener() {
     private View getSubCategoryListItemView(final SubCategoryItem si, double dwPercentage, final int cat_id)
     {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-       if(height>1700)
+       if(dpi>300)
            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
        else
         if(height>1000)
@@ -793,6 +1024,7 @@ search.setOnClickListener(new View.OnClickListener() {
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
                 if (height < 1000d && dwPerc == 1)
                     return;
+                else if (dwPerc < 0.9 && dpi>300)return;
                 else if (dwPerc < 0.6)
                     return;
                 // Decrease category-list width

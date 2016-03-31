@@ -81,7 +81,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
         //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
         FinancialServiceProviderItem financialServiceProviderItem;
-
+ArrayList<FinancialServiceProviderItem>finfromsearch;
     ArrayList<FinancialBillsItem> financialBillsItems;
     ArrayList<FinancialInsuranceItem> financialInsuranceItems;
     ArrayList<FinancialLoanItem> financialLoanItems;
@@ -112,6 +112,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
             if (null != intent)
             {
+
                 financialServiceProviderItem = (FinancialServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIAL);
 
             }

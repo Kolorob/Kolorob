@@ -10,19 +10,20 @@
 
     <ScrollView
         android:id="@+id/svCategoryListHolder"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
         android:background="@color/semi_transparent">
 
         <LinearLayout
             android:id="@+id/llCategoryListHolder"
-            android:layout_width="75dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:paddingLeft="10dp">
 
             <!--Java is used to put category items inside here-->
             <!--<ImageView
@@ -78,7 +79,7 @@
 
         <LinearLayout
             android:id="@+id/llSubCatListHeadIconHolder"
-            android:layout_width="75dp"
+            android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@color/black"
             android:orientation="vertical"
@@ -138,7 +139,7 @@
                 android:background="@drawable/detailsearch"
                 android:visibility="gone"
                 android:id="@+id/show"
-                android:layout_height="match_parent">
+                android:layout_height="20dp">
 </RelativeLayout>
 
             <ImageButton
@@ -172,7 +173,7 @@
                 android:visibility="gone"
                 android:layout_marginTop="5dp" />
             <ScrollView
-
+                android:id="@+id/expand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -199,13 +200,13 @@
                 android:layout_gravity="right"
                 android:gravity="center"
                 android:padding="7dp"
-                android:visibility="visible"
+
                 android:text="@string/txt_sub_cat_inst"
                 android:textColor="@color/red"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_toStartOf="@+id/btn_show_sub_cat_list_item"
+                android:visibility="gone"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignBottom="@+id/btn_see_map" />
@@ -247,6 +248,117 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"></FrameLayout>
+
+
+
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/seearch"
+android:visibility="gone"
+        android:background="@drawable/cool_crash_ui_backdrop"
+        android:layout_alignBottom="@+id/map_fragment"
+        android:layout_toRightOf="@+id/svCategoryListHolder"
+        android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
+        android:layout_gravity="right"
+
+        android:layout_marginLeft="120dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_below="@+id/headtext"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView3"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true">
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:id="@+id/listViewSearch"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/sideIndex"
+            android:layout_toStartOf="@+id/sideIndex" />
+        <LinearLayout
+            android:id="@+id/sideIndex"
+            android:layout_width="40dip"
+            android:layout_height="fill_parent"
+            android:background="@color/transparent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Write down the name"
+            android:id="@+id/headtext"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/midtext"
+            android:id="@+id/lowlayout"
+            android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollView4"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:checked="false" />
+
+
+    </RelativeLayout>
 </FrameLayout>

@@ -383,7 +383,29 @@ public class EducationServiceProviderTable  {
         closeDB();
         return subCatList;
     }
+    public EducationServiceProviderItem geteduNode2(String Node) {
 
+        SQLiteDatabase db = openDB();
+        EducationServiceProviderItem educationServiceProviderItem=null;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_IDENTIFIER_ID+"="+Node, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                educationServiceProviderItem=new EducationServiceProviderItem(cursor.getString(0),cursor.getString(1),
+                        cursor.getInt(2),cursor.getInt(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),
+                        cursor.getString(8),cursor.getString(9),
+                        cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
+                        cursor.getString(16), cursor.getInt(17),cursor.getInt(18),cursor.getInt(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),
+                        cursor.getString(23),cursor.getString(24),cursor.getString(25),cursor.getString(26),cursor.getString(27),
+                        cursor.getString(28),cursor.getString(29),cursor.getString(30),cursor.getString(31),cursor.getString(32),
+                        cursor.getString(33),cursor.getString(34),cursor.getString(35));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return educationServiceProviderItem;
+    }
     public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id) {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
 

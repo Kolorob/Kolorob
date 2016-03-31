@@ -50,7 +50,7 @@ public class FinancialServiceProviderTable {
     private static final String KEY_BREAKTIME2 = "_breaktime2"; //
     private static final String KEY_ADTIME = "_additionaltime";
 
-
+private  FinancialServiceProviderItem financialServiceProviderItem;
     private Context tContext;
 
 
@@ -276,6 +276,43 @@ public class FinancialServiceProviderTable {
         closeDB();
         return  nameslist;
     }
+    public FinancialServiceProviderItem getfinNode2(String Node) {
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_FIN_NODE_ID+"="+Node, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                financialServiceProviderItem=new FinancialServiceProviderItem(cursor.getString(0),cursor.getString(1),
+                        cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),
+                        cursor.getString(8),cursor.getString(9),
+                        cursor.getInt(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
+                        cursor.getInt(16), cursor.getString(17),cursor.getString(18),cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),
+                        cursor.getString(23),cursor.getString(24));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return financialServiceProviderItem;
+    }
+    public ArrayList<FinancialServiceProviderItem> getfinNode(String Node) {
+        ArrayList<FinancialServiceProviderItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_FIN_NODE_ID+"="+Node, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
     public ArrayList<FinancialServiceProviderItem> getAllFinancialSubCategoriesInfo(int cat_id) {
         ArrayList<FinancialServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
@@ -292,6 +329,7 @@ public class FinancialServiceProviderTable {
         closeDB();
         return subCatList;
     }
+
     public ArrayList<FinancialServiceProviderItem> getAllFinancialSubCategoriesInfoWithHead(int cat_id, String header) {
         ArrayList<FinancialServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
