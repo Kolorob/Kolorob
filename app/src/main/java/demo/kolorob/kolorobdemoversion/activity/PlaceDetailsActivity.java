@@ -364,6 +364,7 @@ search.setOnClickListener(new View.OnClickListener() {
     protected void indexbar(ArrayList<String> countries) {
 
        AlphabetListAdapter adapterind = new AlphabetListAdapter();
+        alphabet.clear();
         List<AlphabetListAdapter.Row> rows = new ArrayList<AlphabetListAdapter.Row>();
         int start = 0;
         int end = 0;
@@ -555,6 +556,7 @@ search.setOnClickListener(new View.OnClickListener() {
 
 
             }
+            countries.clear();
             for (int ind=0;ind<arraylist2.size();ind++)
             {
 countries.add(arraylist2.get(ind).getRank());
@@ -618,6 +620,15 @@ countries.add(arraylist2.get(ind).getRank());
 
 
             }
+            countries.clear();
+            for (int ind=0;ind<arraylist3.size();ind++)
+            {
+                countries.add(arraylist3.get(ind).getRank());
+
+            }
+            Collections.sort(countries);
+            indexbar(countries);
+
             adapterHel = new ListViewAdapterHel(this, arraylist3);
 
             itemList.setAdapter(adapterHel);
@@ -673,6 +684,15 @@ countries.add(arraylist2.get(ind).getRank());
 
 
             }
+            countries.clear();
+            for (int ind=0;ind<arraylist4.size();ind++)
+            {
+                countries.add(arraylist4.get(ind).getRank());
+
+            }
+            Collections.sort(countries);
+            indexbar(countries);
+
             adapterLeg = new ListViewAdapterLeg(this, arraylist4);
 
             itemList.setAdapter(adapterLeg);
@@ -729,6 +749,15 @@ countries.add(arraylist2.get(ind).getRank());
 
 
             }
+            countries.clear();
+            for (int ind=0;ind<arraylist5.size();ind++)
+            {
+                countries.add(arraylist5.get(ind).getRank());
+
+            }
+            Collections.sort(countries);
+            indexbar(countries);
+
             adapterEnt = new ListViewAdapterEnt(this, arraylist5);
 
             itemList.setAdapter(adapterEnt);
@@ -784,6 +813,15 @@ countries.add(arraylist2.get(ind).getRank());
 
 
             }
+            countries.clear();
+            for (int ind=0;ind<arraylist.size();ind++)
+            {
+                countries.add(arraylist.get(ind).getRank());
+
+            }
+            Collections.sort(countries);
+            indexbar(countries);
+
             adapter = new ListViewAdapter(this, arraylist);
 
             itemList.setAdapter(adapter);

@@ -393,7 +393,7 @@ public class HealthServiceProviderTable {
         ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id+ " ORDER BY " +KEY_NODE_NAME, null);
 
         if (cursor.moveToFirst()) {
             do {
