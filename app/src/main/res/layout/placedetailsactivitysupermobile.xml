@@ -290,12 +290,24 @@ android:visibility="gone"
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="420dp"
             android:id="@+id/listViewSearch"
             android:layout_below="@+id/editText"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/sideIndex"
+            android:layout_toStartOf="@+id/sideIndex" />
+        <LinearLayout
+            android:id="@+id/sideIndex"
+            android:layout_width="30dip"
+            android:layout_height="420dp"
+            android:background="@color/semi_transparent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

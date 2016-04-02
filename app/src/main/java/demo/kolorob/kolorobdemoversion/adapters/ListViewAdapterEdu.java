@@ -26,6 +26,7 @@ public class ListViewAdapterEdu extends BaseAdapter {
 	Context mContext;
 	LayoutInflater inflater;
 	Activity activity;
+	int size;
 	private List<PopulatedfromDBEdu> worldpopulationlist = null;
 	private ArrayList<PopulatedfromDBEdu> arraylist;
 EducationServiceProviderItem nullfin;
@@ -38,17 +39,29 @@ EducationServiceProviderItem nullfin;
 		this.arraylist.addAll(worldpopulationlist);
 	}
 
+
+
 	public class ViewHolder {
 		TextView rank;
 
 	}
 
-	@Override
-	public int getCount() {
-		return worldpopulationlist.size();
-	}
+
 
 	@Override
+	public int getCount() {
+
+			size = worldpopulationlist.size();
+
+		return size;
+
+	}
+
+
+
+
+
+
 	public PopulatedfromDB getItem(int position) {
 		return worldpopulationlist.get(position);
 	}
@@ -69,6 +82,7 @@ EducationServiceProviderItem nullfin;
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
+
 		}
 		// Set the results into TextViews
 		String rank=worldpopulationlist.get(position).getRank().toString();

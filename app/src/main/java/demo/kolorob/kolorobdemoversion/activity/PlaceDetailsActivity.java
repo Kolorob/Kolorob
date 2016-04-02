@@ -41,7 +41,6 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -128,6 +127,7 @@ int caselan=0;
 ImageButton search;
     Button Back;
 
+    TextView tmpTV;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
@@ -164,7 +164,7 @@ private Switch switchlan;
     ArrayList<PopulatedfromDBHel>arraylist3=new ArrayList<>();
     ArrayList<PopulatedfromDBLeg>arraylist4=new ArrayList<>();
     ArrayList<PopulatedfromDBEnt>arraylist5=new ArrayList<>();
-    ArrayList<PopulatedfromDBLeg>arraylist6=new ArrayList<>();
+    ArrayList<PopulatedfromDB>arraylistfin=new ArrayList<>();
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
@@ -364,7 +364,7 @@ search.setOnClickListener(new View.OnClickListener() {
     protected void indexbar(ArrayList<String> countries) {
 
        AlphabetListAdapter adapterind = new AlphabetListAdapter();
-        alphabet.clear();
+alphabet.clear();
         List<AlphabetListAdapter.Row> rows = new ArrayList<AlphabetListAdapter.Row>();
         int start = 0;
         int end = 0;
@@ -413,27 +413,13 @@ search.setOnClickListener(new View.OnClickListener() {
         }
 
         adapterind.setRows(rows);
-        itemList.setAdapter(adapter);
+        itemList.setAdapter(adapterind);
 
 
         updateList();
     }
-    public static class MyCustomComparator implements Comparator<HashMap<String, String>> {
 
-        @Override
-        public int compare(HashMap<String, String> lhs,
-                           HashMap<String, String> rhs) {
-            if(lhs.get("onLineCheck") == String.valueOf(true))
-            return 1;
-            else
-            return 0;
 
-        }
-
-    }
-    public ListActivity getListView() {
-        return listView;
-    }
     public void updateList() {
         LinearLayout sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
         sideIndex.removeAllViews();
@@ -454,7 +440,6 @@ search.setOnClickListener(new View.OnClickListener() {
             delta = 1;
         }
 
-        TextView tmpTV;
         for (double i = 1; i <= indexListSize; i = i + delta) {
             Object[] tmpIndexItem = alphabet.get((int) i - 1);
             String tmpLetter = tmpIndexItem[0].toString();
@@ -473,6 +458,7 @@ search.setOnClickListener(new View.OnClickListener() {
         sideIndex.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 // now you know coordinates of touch
                 sideIndexX = event.getX();
                 sideIndexY = event.getY();
@@ -563,13 +549,15 @@ countries.add(arraylist2.get(ind).getRank());
                 ;
             }
             Collections.sort(countries);
-          indexbar(countries);
+            if (status!=1){
+          indexbar(countries);}
 
             adapterEdu = new ListViewAdapterEdu(this, arraylist2);
 
             itemList.setAdapter(adapterEdu);
 
-
+            itemList.setFastScrollEnabled(false);
+            itemList.setFastScrollEnabled(true);
             filterText.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -592,7 +580,7 @@ countries.add(arraylist2.get(ind).getRank());
                     // TODO Auto-generated method stub
                 }
 
-        });
+            });
 
 
 
@@ -627,7 +615,8 @@ countries.add(arraylist2.get(ind).getRank());
 
             }
             Collections.sort(countries);
-            indexbar(countries);
+            if (status!=1){
+                indexbar(countries);}
 
             adapterHel = new ListViewAdapterHel(this, arraylist3);
 
@@ -691,7 +680,8 @@ countries.add(arraylist2.get(ind).getRank());
 
             }
             Collections.sort(countries);
-            indexbar(countries);
+            if (status!=1){
+                indexbar(countries);}
 
             adapterLeg = new ListViewAdapterLeg(this, arraylist4);
 
@@ -756,7 +746,8 @@ countries.add(arraylist2.get(ind).getRank());
 
             }
             Collections.sort(countries);
-            indexbar(countries);
+            if (status!=1){
+                indexbar(countries);}
 
             adapterEnt = new ListViewAdapterEnt(this, arraylist5);
 
@@ -791,38 +782,39 @@ countries.add(arraylist2.get(ind).getRank());
 
         }
         else if (currentCategoryID==6){
-            LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
-            fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
-            arraylist.clear();
+            FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+            fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
+            arraylistfin.clear();
 
-            for (int i=0;i<fetchedleg.size();i++)
+            for (int i=0;i<fetchedfin.size();i++)
             {
 
-                fname=fetchedleg.get(i).getLegalaidNameEng();
-                fnodeid=fetchedleg.get(i).getIdentifierId();
-                refid=fetchedleg.get(i).getLegalaidSubCategoryId();
-                upname=fetchedleg.get(i).getLegalaidNameBan();
+                fname=fetchedfin.get(i).getNodeName();
+                fnodeid=fetchedfin.get(i).getNodeId();
+                refid=fetchedfin.get(i).getRefNum();
+                upname=fetchedfin.get(i).getNamebn();
                 if (status==1) {
 
-                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(upname, fnodeid, refid,fetchedleg);
+                    PopulatedfromDB wp = new PopulatedfromDB(upname, fnodeid, refid,fetchedfin);
 
-                    arraylist.add(wp);
+                    arraylistfin.add(wp);
                 }else {
-                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(fname,fnodeid,refid,fetchedleg);
-                    arraylist.add(wp);}
+                    PopulatedfromDB wp = new PopulatedfromDB(fname,fnodeid,refid,fetchedfin);
+                    arraylistfin.add(wp);}
 
 
             }
             countries.clear();
-            for (int ind=0;ind<arraylist.size();ind++)
+            for (int ind=0;ind<arraylistfin.size();ind++)
             {
-                countries.add(arraylist.get(ind).getRank());
+                countries.add(arraylistfin.get(ind).getRank());
 
             }
             Collections.sort(countries);
-            indexbar(countries);
+            if (status!=1){
+                indexbar(countries);}
 
-            adapter = new ListViewAdapter(this, arraylist);
+            adapter = new ListViewAdapter(this, arraylistfin);
 
             itemList.setAdapter(adapter);
 

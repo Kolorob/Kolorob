@@ -279,7 +279,7 @@ android:visibility="gone"
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="750dp"
             android:id="@+id/listViewSearch"
             android:layout_below="@+id/editText"
             android:layout_alignParentLeft="true"
@@ -289,7 +289,7 @@ android:visibility="gone"
         <LinearLayout
             android:id="@+id/sideIndex"
             android:layout_width="40dip"
-            android:layout_height="420dp"
+            android:layout_height="750dp"
             android:background="@color/transparent"
             android:gravity="center_horizontal"
             android:orientation="vertical"

@@ -8,12 +8,28 @@ public class PopulatedfromDB {
 	private String rank;
 	private String nodeid;
 	private String refid;
+	private int ref;
 	private ArrayList<FinancialServiceProviderItem>fetched=null;
 
 	public PopulatedfromDB() {
 
 	}
 
+	public PopulatedfromDB(String upname, String fnodeid, int refid, ArrayList<FinancialServiceProviderItem> fetchedfin) {
+
+		this.rank = upname;
+		this.nodeid=fnodeid;
+		this.ref=refid;
+		this.fetched=fetchedfin;
+	}
+
+	public int getRef() {
+		return ref;
+	}
+
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
 
 	public String getRefid() {
 		return refid;
