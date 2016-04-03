@@ -105,6 +105,7 @@ int caselan=0;
     private Button showSubCatListItem;
     private Button seeMap;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
+    private HashMap<String, String> countriesv2 = new HashMap<>();
     private static TextView insSubCat;
     private static FrameLayout map;
     private static RelativeLayout showsearch2,searchpage,filteroption;
@@ -133,6 +134,7 @@ ImageButton search;
 
 private Switch switchlan;
  public int status=0;
+    AlphabetListAdapter adapterind = new AlphabetListAdapter();
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
@@ -363,7 +365,7 @@ search.setOnClickListener(new View.OnClickListener() {
     }
     protected void indexbar(ArrayList<String> countries) {
 
-       AlphabetListAdapter adapterind = new AlphabetListAdapter();
+
 alphabet.clear();
         List<AlphabetListAdapter.Row> rows = new ArrayList<AlphabetListAdapter.Row>();
         int start = 0;
@@ -507,7 +509,7 @@ alphabet.clear();
             Object[] indexItem = alphabet.get(itemPosition);
             int subitemPosition = sections.get(indexItem[0]);
 
-            //ListView listView = (ListView) findViewById(android.R.id.list);
+
             itemList.setSelection(subitemPosition);
         }
     }
@@ -545,6 +547,7 @@ alphabet.clear();
             countries.clear();
             for (int ind=0;ind<arraylist2.size();ind++)
             {
+
 countries.add(arraylist2.get(ind).getRank());
                 ;
             }
@@ -552,18 +555,28 @@ countries.add(arraylist2.get(ind).getRank());
             if (status!=1){
           indexbar(countries);}
 
-            adapterEdu = new ListViewAdapterEdu(this, arraylist2);
-
-            itemList.setAdapter(adapterEdu);
 
             itemList.setFastScrollEnabled(false);
             itemList.setFastScrollEnabled(true);
+            filterText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    adapterEdu = new ListViewAdapterEdu(PlaceDetailsActivity.this, arraylist2);
+
+                    return false;
+                }
+            });
+
             filterText.addTextChangedListener(new TextWatcher() {
 
                 @Override
                 public void afterTextChanged(Editable arg0) {
                     // TODO Auto-generated method stub
                     String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+
+                    itemList.setAdapter(adapterEdu);
 
                     adapterEdu.filter(text);
                 }

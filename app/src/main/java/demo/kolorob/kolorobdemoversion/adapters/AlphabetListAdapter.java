@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,19 +9,30 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 
 public class AlphabetListAdapter extends BaseAdapter {
+    Context mContext;
+    LayoutInflater inflater;
+    Activity activity;
+    int size;
+    private List<PopulatedfromDBEdu> worldpopulationlist = null;
+    private ArrayList<PopulatedfromDBEdu> arraylist;
+    EducationServiceProviderItem nullfin;
 
     public static abstract class Row {}
     
     public static final class Section extends Row {
         public final String text;
 
+
         public Section(String text) {
             this.text = text;
+
         }
     }
     
@@ -81,6 +93,7 @@ public class AlphabetListAdapter extends BaseAdapter {
             Item item = (Item) getItem(position);
             TextView textView = (TextView) view.findViewById(R.id.textView1);
             textView.setText(item.text);
+
         } else { // Section
             if (view == null) {
                 LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -91,8 +104,18 @@ public class AlphabetListAdapter extends BaseAdapter {
             TextView textView = (TextView) view.findViewById(R.id.textView1);
             textView.setText(section.text);
         }
+        view.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+
+
+            }
+        });
         
         return view;
     }
+
 
 }
