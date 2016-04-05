@@ -365,7 +365,7 @@ public class DetailsInfoActivity extends Activity  {
             public void onClick(View v) {
 
 
-                if(AppUtils.isNetConnected(getApplicationContext())) {
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
                     String lat = educationServiceProviderItem.getLatitude().toString();
@@ -397,7 +397,11 @@ public class DetailsInfoActivity extends Activity  {
                     finish();
 
                 }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
+                    AppUtils.showSettingsAlert(DetailsInfoActivity.this);
+
+                }
 
                 else
                 {

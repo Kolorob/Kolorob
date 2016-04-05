@@ -114,7 +114,7 @@ public class DetailsJobActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(AppUtils.isNetConnected(getApplicationContext())) {
+                        if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
                             String lat = jobServiceProviderItem.getLatitude().toString();
                             // double latitude = Double.parseDouble(lat);
@@ -145,7 +145,11 @@ public class DetailsJobActivity extends Activity {
 
                             finish();
                         }
+                        else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
+                            AppUtils.showSettingsAlert(DetailsJobActivity.this);
+
+                        }
                         else
                         {
                             AlertDialog alertDialog = new AlertDialog.Builder(DetailsJobActivity.this, AlertDialog.THEME_HOLO_LIGHT).create();
