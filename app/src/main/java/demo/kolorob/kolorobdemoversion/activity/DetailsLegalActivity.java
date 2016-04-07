@@ -216,7 +216,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
                 public void onClick(View v) {
 
 
-                    if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+                    if(AppUtils.isNetConnected(getApplicationContext())) {
 
                         String lat = legalAidServiceProviderItem.getLatitude().toString();
                         // double latitude = Double.parseDouble(lat);
@@ -247,11 +247,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
                         finish();
                     }
-                    else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                        AppUtils.showSettingsAlert(DetailsLegalActivity.this);
-
-                    }
 
                     else
                     {

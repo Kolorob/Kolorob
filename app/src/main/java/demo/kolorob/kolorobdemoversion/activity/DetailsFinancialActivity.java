@@ -435,9 +435,7 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
                 @Override
                 public void onClick(View v) {
 
-
-
-                    if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+                    if(AppUtils.isNetConnected(getApplicationContext())) {
 
                         String lat = financialServiceProviderItem.getLatitude().toString();
                         // double latitude = Double.parseDouble(lat);
@@ -469,11 +467,7 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
                         finish();
 
                     }
-                    else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                        AppUtils.showSettingsAlert(DetailsFinancialActivity.this);
-
-                    }
                     else
                     {
 

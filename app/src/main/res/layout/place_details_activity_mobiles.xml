@@ -80,7 +80,7 @@
             android:id="@+id/llSubCatListHeadIconHolder"
             android:layout_width="70dp"
             android:layout_height="120dp"
-            android:background="@color/common_plus_signin_btn_text_dark_disabled"
+            android:background="@color/black"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -88,7 +88,7 @@
                 android:id="@+id/ivHeadCatIconSubCatList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"
+                android:background="@color/black"
                 android:contentDescription="@string/txt_cd_header_icon_ofcat_subcatlist"
                 android:padding="7dp" />
 
