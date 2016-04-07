@@ -205,7 +205,7 @@ private ListView itemList;
         texthead = (TextView) findViewById(R.id.headtext);
 
 
-        lan.setText("Bangla");
+        lan.setText("English");
 
 
 
@@ -298,7 +298,7 @@ search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 if (lan.isChecked()) {
                     //Button is ON
-                    lan.setText("English");
+                    lan.setText("Bangla");
                     //Button is OFF
                     status = 1;
                     texthead.setText(R.string.Head);
@@ -308,7 +308,7 @@ search.setOnClickListener(new View.OnClickListener() {
                     SearchResult(status, currentCategoryID);
                 } else {
                     status = 0;
-                    lan.setText("Bangla");
+                    lan.setText("English");
                     texthead.setText(R.string.Headen);
                     // srad.setText("Sure Cash");
                     // brad.setText("BKash");
