@@ -37,7 +37,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +60,7 @@ import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEdu;
 import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEnt;
 import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBHel;
 import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBLeg;
+import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -92,7 +92,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private static final String TAG = PlaceDetailsActivity.class.getSimpleName();
     private static final int ANIM_INTERVAL = 100;
-int caselan=0;
+    int caselan=0;
     private static double VIEW_WIDTH;
     private ScrollView svCatList;
     private LinearLayout llCatListHolder;
@@ -104,11 +104,12 @@ int caselan=0;
     private ExpandableListView subCatItemList;
     private Button showSubCatListItem;
     private Button seeMap;
+    CategoryItem ci;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private HashMap<String, String> countriesv2 = new HashMap<>();
     private static TextView insSubCat;
     private static FrameLayout map;
-    private static RelativeLayout showsearch2,searchpage,filteroption;
+    public LinearLayout showsearch2,llItemListHolderbody;
     private int height,dpi;
     private View nextChild;
     private boolean isCatExpandedOnce = false;
@@ -125,30 +126,50 @@ int caselan=0;
     private static float sideIndexY;
     TextView textView,texthead,textmid;
     FinancialServiceProviderItem financialServiceProviderItem;
-ImageButton search;
+    ImageButton search;
     Button Back;
+    public int layoutstatus;
+
+    public int getLayoutstatus() {
+        return layoutstatus;
+    }
+
+    public void setLayoutstatus(int layoutstatus) {
+        this.layoutstatus = layoutstatus;
+    }
 
     TextView tmpTV;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
-private Switch switchlan;
- public int status=0;
-    AlphabetListAdapter adapterind = new AlphabetListAdapter();
+    private Switch switchlan;
+    public int status=0;
+    AlphabetListAdapter adapterind = new AlphabetListAdapter(PlaceDetailsActivity.this);
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
     ArrayList<String> countries=new ArrayList<String>();
+    ArrayList<SearchHolder> searchheads=new ArrayList<>();
+
     ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
+    public LinearLayout sideIndex;
+    public CategoryItem getCi() {
+        return ci;
+    }
+
+    public void setCi(CategoryItem ci) {
+        this.ci = ci;
+    }
+
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     private int currentCategoryID;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
     private EditText filterText;
-    String fname,fnodeid,upname;
+    String fname,fnodeid,upname,names,ids;
     int refid;
     private RadioGroup fingroup;
     private ArrayList<FinancialServiceProviderItem>fetchedfin;
@@ -170,7 +191,17 @@ private Switch switchlan;
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
-private ListView itemList;
+
+    public RelativeLayout getRlSubCatHolder() {
+        return rlSubCatHolder;
+    }
+
+    public void setRlSubCatHolder(RelativeLayout rlSubCatHolder) {
+        this.rlSubCatHolder = rlSubCatHolder;
+    }
+
+    private ListView itemList;
+    public    RelativeLayout rlSubCatHolder;
     public String getPlaceChoice() {
         return placeChoice;
     }
@@ -187,26 +218,22 @@ private ListView itemList;
         dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
-      if(dpi>300)
-           setContentView(R.layout.placedetailsactivitysupermobile);
+        if(dpi>300)
+            setContentView(R.layout.placedetailsactivitysupermobile);
 
-      else
+        else
         if(height>1000)
             setContentView(R.layout.place_details_activity);
         else
-        setContentView(R.layout.place_details_activity_mobiles);
+            setContentView(R.layout.place_details_activity_mobiles);
 
         search=(ImageButton)findViewById(R.id.imageButton2);
         Back=(Button)findViewById(R.id.backbutton);
         textView=(TextView)findViewById(R.id.tvInstructionSubCat);
-        showsearch2=(RelativeLayout)findViewById(R.id.seearch);
-        filteroption=(RelativeLayout)findViewById(R.id.lowlayout);
-        final  ToggleButton lan=(ToggleButton)findViewById(R.id.toggleButton);
+        showsearch2=(LinearLayout)findViewById(R.id.seearch);
+        llItemListHolderbody=(LinearLayout)findViewById(R.id.llItemListHolder);
+        sideIndex = (LinearLayout)findViewById(R.id.sideIndex);
         texthead = (TextView) findViewById(R.id.headtext);
-
-
-        lan.setText("English");
-
 
 
         Intent intent;
@@ -270,56 +297,32 @@ private ListView itemList;
          **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivity.this);
         constructCategoryList(categoryTable.getAllCategories());
-        final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
+        rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         rlSubCatHolder.setVisibility(View.INVISIBLE);
-search.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-
-
-        rlSubCatHolder.setVisibility(View.GONE);
-
-        showsearch2.setVisibility(View.VISIBLE);
-        SearchResult(0, currentCategoryID);
-        Back.setText("Go Back");
-        seeMap.setVisibility(View.GONE);
-        Back.setOnClickListener(new View.OnClickListener() {
-
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
-                showsearch2.setVisibility(View.GONE);
-                rlSubCatHolder.setVisibility(View.VISIBLE);
-
-            }
-        });
-        lan.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                if (lan.isChecked()) {
-                    //Button is ON
-                    lan.setText("Bangla");
-                    //Button is OFF
-                    status = 1;
-                    texthead.setText(R.string.Head);
-                    Back.setText("ফিরে যান");
-                    // srad.setText("শিওর ক্যাশ");
-                    // brad.setText("বিকাশ");
-                    SearchResult(status, currentCategoryID);
-                } else {
-                    status = 0;
-                    lan.setText("English");
-                    texthead.setText(R.string.Headen);
-                    // srad.setText("Sure Cash");
-                    // brad.setText("BKash");
-                    Back.setText("Go Back");
-                    SearchResult(status, currentCategoryID);
-                }
+            public void onClick(View v) {
 
 
-                // Do Something
-            }
-        });
+                llItemListHolderbody.setVisibility(View.GONE);
+
+                showsearch2.setVisibility(View.VISIBLE);
+                Back.setVisibility(View.VISIBLE);
+                SearchResult(currentCategoryID);
+                seeMap.setVisibility(View.GONE);
+                Back.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+                        showsearch2.setVisibility(View.GONE);
+                        map.setVisibility(View.VISIBLE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
+                        getCategoryListItemView(getCi(), 1.0);
+                        Back.setVisibility(View.GONE);
+
+                    }
+                });
+
 
 
 
@@ -334,15 +337,16 @@ search.setOnClickListener(new View.OnClickListener() {
             }
         });*/
 
-        // subCatItemListHeader.setVisibility(View.GONE);
-        //subCatItemList.setVisibility(View.GONE);
-    }
-});
+                // subCatItemListHeader.setVisibility(View.GONE);
+                //subCatItemList.setVisibility(View.GONE);
+            }
+        });
         mGestureDetector = new GestureDetector(this, new SideIndexGestureListener());
         showSubCatListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 search.setVisibility(View.GONE);
+                textView.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 subCatItemListHeader.setVisibility(View.VISIBLE);
                 showSubCatListItem.setVisibility(View.GONE);
@@ -360,13 +364,13 @@ search.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-       // callMapFragment();
+        // callMapFragment();
 
     }
-    protected void indexbar(ArrayList<String> countries) {
+    protected void indexbar(ArrayList<SearchHolder> countries) {
 
 
-alphabet.clear();
+        alphabet.clear();
         List<AlphabetListAdapter.Row> rows = new ArrayList<AlphabetListAdapter.Row>();
         int start = 0;
         int end = 0;
@@ -374,7 +378,10 @@ alphabet.clear();
         Object[] tmpIndexItem = null;
         Pattern numberPattern = Pattern.compile("[0-9]");
 
-        for (String country : countries) {
+        for(int ii=0;ii<countries.size();ii++) {
+            String country=countries.get(ii).getName();
+            String idd=countries.get(ii).getId();
+            int cattid=countries.get(ii).getCatid();
             String firstLetter = country.substring(0, 1);
 
             // Group numbers together in the scroller
@@ -401,7 +408,7 @@ alphabet.clear();
             }
 
             // Add the country to the list
-            rows.add(new AlphabetListAdapter.Item(country));
+            rows.add(new AlphabetListAdapter.Item(country,idd,cattid));
             previousLetter = firstLetter;
         }
 
@@ -414,8 +421,12 @@ alphabet.clear();
             alphabet.add(tmpIndexItem);
         }
 
+
         adapterind.setRows(rows);
+        adapterind.setSections(sections);
         itemList.setAdapter(adapterind);
+
+        //  sideIndex.setLayoutParams(new RelativeLayout.LayoutParams(30, 0));
 
 
         updateList();
@@ -423,8 +434,11 @@ alphabet.clear();
 
 
     public void updateList() {
-        LinearLayout sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
+
+
+
         sideIndex.removeAllViews();
+
         indexListSize = alphabet.size();
         if (indexListSize < 1) {
             return;
@@ -480,7 +494,7 @@ alphabet.clear();
             sideIndexY = sideIndexY - distanceY;
 
             if (sideIndexX >= 0 && sideIndexY >= 0) {
-               displayListItem();
+                displayListItem();
             }
 
             return super.onScroll(e1, e2, distanceX, distanceY);
@@ -496,7 +510,7 @@ alphabet.clear();
         }
     }
     public void displayListItem() {
-        LinearLayout sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
+        sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
         sideIndexHeight = sideIndex.getHeight();
         // compute number of pixels for every side index item
         double pixelPerIndexItem = (double) sideIndexHeight / indexListSize;
@@ -513,14 +527,17 @@ alphabet.clear();
             itemList.setSelection(subitemPosition);
         }
     }
-    private void SearchResult(int caselan, int currentCategoryID)  {
+    private void SearchResult( int currentCategoryID)  {
 
 
-        int status=caselan;
+
         filterText = (EditText)findViewById(R.id.editText);
 
 
         if (currentCategoryID==1) {
+
+            itemList.setAdapter(null);
+           sideIndex.setVisibility(View.VISIBLE);
             EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivity.this);
             fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
 
@@ -533,27 +550,24 @@ alphabet.clear();
                 fnodeid=fetchededu.get(i).getIdentifierId();
                 refid=fetchededu.get(i).getEduSubCategoryId();
                 upname=fetchededu.get(i).getEduNameBan();
-                if (status==1) {
 
-                    PopulatedfromDBEdu wp = new PopulatedfromDBEdu(upname, fnodeid, refid,fetchededu);
-
-                    arraylist2.add(wp);
-                }else {
-                    PopulatedfromDBEdu wp = new PopulatedfromDBEdu(fname,fnodeid,refid,fetchededu);
-                    arraylist2.add(wp);}
-
-
+                PopulatedfromDBEdu wp = new PopulatedfromDBEdu(fname,fnodeid,refid,fetchededu);
+                arraylist2.add(wp);
             }
-            countries.clear();
+
+
+
+           searchheads.clear();
             for (int ind=0;ind<arraylist2.size();ind++)
             {
-
-countries.add(arraylist2.get(ind).getRank());
-                ;
+              names=arraylist2.get(ind).getRank();
+                ids=arraylist2.get(ind).getNodeid();
+                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
+                searchheads.add(sh);
             }
-            Collections.sort(countries);
-            if (status!=1){
-          indexbar(countries);}
+            Collections.sort(searchheads,SearchHolder.NameCompare);
+
+                indexbar(searchheads);
 
 
             itemList.setFastScrollEnabled(false);
@@ -563,6 +577,9 @@ countries.add(arraylist2.get(ind).getRank());
                 public boolean onTouch(View v, MotionEvent event) {
 
                     adapterEdu = new ListViewAdapterEdu(PlaceDetailsActivity.this, arraylist2);
+                    map.setVisibility(View.GONE);
+                    sideIndex.setVisibility(View.GONE);
+                    itemList.setAdapter(adapterEdu);
 
                     return false;
                 }
@@ -572,11 +589,9 @@ countries.add(arraylist2.get(ind).getRank());
 
                 @Override
                 public void afterTextChanged(Editable arg0) {
+
                     // TODO Auto-generated method stub
                     String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
-
-
-                    itemList.setAdapter(adapterEdu);
 
                     adapterEdu.filter(text);
                 }
@@ -597,8 +612,9 @@ countries.add(arraylist2.get(ind).getRank());
 
 
 
-    }
+        }
         else if (currentCategoryID==2){
+            sideIndex.setVisibility(View.VISIBLE);
             HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivity.this);
             fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
             arraylist3.clear();
@@ -610,36 +626,48 @@ countries.add(arraylist2.get(ind).getRank());
                 fnodeid=fetchedhel.get(i).getNodeId();
                 refid=fetchedhel.get(i).getRefNum();
                 upname=fetchedhel.get(i).getNameBn();
-                if (status==1) {
 
-                    PopulatedfromDBHel wp = new PopulatedfromDBHel(upname, fnodeid, refid,fetchedhel);
-
-                    arraylist3.add(wp);
-                }else {
-                    PopulatedfromDBHel wp = new PopulatedfromDBHel(fname,fnodeid,refid,fetchedhel);
-                    arraylist3.add(wp);}
+                PopulatedfromDBHel wp = new PopulatedfromDBHel(fname,fnodeid,refid,fetchedhel);
+                arraylist3.add(wp);}
 
 
-            }
-            countries.clear();
+
+
+            searchheads.clear();
             for (int ind=0;ind<arraylist3.size();ind++)
             {
-                countries.add(arraylist3.get(ind).getRank());
-
+                names=arraylist3.get(ind).getRank();
+                ids=arraylist3.get(ind).getNodeid();
+                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
+                searchheads.add(sh);
             }
-            Collections.sort(countries);
-            if (status!=1){
-                indexbar(countries);}
+            Collections.sort(searchheads,SearchHolder.NameCompare);
 
-            adapterHel = new ListViewAdapterHel(this, arraylist3);
+            indexbar(searchheads);
 
-            itemList.setAdapter(adapterHel);
 
+
+
+            itemList.setFastScrollEnabled(false);
+            itemList.setFastScrollEnabled(true);
+            filterText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    sideIndex.setVisibility(View.GONE);
+                    map.setVisibility(View.GONE);
+                    adapterHel = new ListViewAdapterHel(PlaceDetailsActivity.this, arraylist3);
+
+
+                    itemList.setAdapter(adapterHel);
+                    return false;
+                }
+            });
 
             filterText.addTextChangedListener(new TextWatcher() {
 
                 @Override
                 public void afterTextChanged(Editable arg0) {
+
                     // TODO Auto-generated method stub
                     String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
 
@@ -664,7 +692,9 @@ countries.add(arraylist2.get(ind).getRank());
 
         }
         else if (currentCategoryID==5){
-    LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+            sideIndex.setVisibility(View.VISIBLE);
+            itemList.setAdapter(null);
+            LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
             fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
             arraylist4.clear();
 
@@ -675,31 +705,40 @@ countries.add(arraylist2.get(ind).getRank());
                 fnodeid=fetchedleg.get(i).getIdentifierId();
                 refid=fetchedleg.get(i).getLegalaidSubCategoryId();
                 upname=fetchedleg.get(i).getLegalaidNameBan();
-                if (status==1) {
 
-                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(upname, fnodeid, refid,fetchedleg);
-
-                    arraylist4.add(wp);
-                }else {
-                    PopulatedfromDBLeg wp = new PopulatedfromDBLeg(fname,fnodeid,refid,fetchedleg);
-                    arraylist4.add(wp);}
+                PopulatedfromDBLeg wp = new PopulatedfromDBLeg(fname,fnodeid,refid,fetchedleg);
+                arraylist4.add(wp);
 
 
             }
-            countries.clear();
+            searchheads.clear();
             for (int ind=0;ind<arraylist4.size();ind++)
             {
-                countries.add(arraylist4.get(ind).getRank());
-
+                names=arraylist4.get(ind).getRank();
+                ids=arraylist4.get(ind).getNodeid();
+                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
+                searchheads.add(sh);
             }
-            Collections.sort(countries);
-            if (status!=1){
-                indexbar(countries);}
+            Collections.sort(searchheads,SearchHolder.NameCompare);
 
-            adapterLeg = new ListViewAdapterLeg(this, arraylist4);
+            indexbar(searchheads);
 
-            itemList.setAdapter(adapterLeg);
 
+
+            itemList.setFastScrollEnabled(false);
+            itemList.setFastScrollEnabled(true);
+            filterText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    map.setVisibility(View.GONE);
+                    sideIndex.setVisibility(View.GONE);
+                    adapterLeg = new ListViewAdapterLeg(PlaceDetailsActivity.this, arraylist4);
+
+                    itemList.setAdapter(adapterLeg);
+
+                    return false;
+                }
+            });
 
             filterText.addTextChangedListener(new TextWatcher() {
 
@@ -729,6 +768,7 @@ countries.add(arraylist2.get(ind).getRank());
 
         }
         else if (currentCategoryID==3){
+            sideIndex.setVisibility(View.VISIBLE);
             EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
 
             fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
@@ -741,31 +781,40 @@ countries.add(arraylist2.get(ind).getRank());
                 fnodeid=fetchedent.get(i).getNodeId();
                 refid=fetchedent.get(i).getEntSubCategoryId();
                 upname=fetchedent.get(i).getNodeNameBn();
-                if (status==1) {
 
-                    PopulatedfromDBEnt wp = new PopulatedfromDBEnt(upname, fnodeid, refid,fetchedent);
-
-                    arraylist5.add(wp);
-                }else {
-                    PopulatedfromDBEnt wp = new PopulatedfromDBEnt(fname,fnodeid,refid,fetchedent);
-                    arraylist5.add(wp);}
+                PopulatedfromDBEnt wp = new PopulatedfromDBEnt(fname,fnodeid,refid,fetchedent);
+                arraylist5.add(wp);
 
 
             }
-            countries.clear();
+            searchheads.clear();
             for (int ind=0;ind<arraylist5.size();ind++)
             {
-                countries.add(arraylist5.get(ind).getRank());
-
+                names=arraylist5.get(ind).getRank();
+                ids=arraylist5.get(ind).getNodeid();
+                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
+                searchheads.add(sh);
             }
-            Collections.sort(countries);
-            if (status!=1){
-                indexbar(countries);}
+            Collections.sort(searchheads,SearchHolder.NameCompare);
 
-            adapterEnt = new ListViewAdapterEnt(this, arraylist5);
+            indexbar(searchheads);
 
-            itemList.setAdapter(adapterEnt);
 
+
+
+
+            itemList.setFastScrollEnabled(false);
+            itemList.setFastScrollEnabled(true);
+            filterText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    sideIndex.setVisibility(View.GONE);
+                    map.setVisibility(View.GONE);
+                    adapterEnt = new ListViewAdapterEnt(PlaceDetailsActivity.this, arraylist5);
+                    itemList.setAdapter(adapterEnt);
+                    return false;
+                }
+            });
 
             filterText.addTextChangedListener(new TextWatcher() {
 
@@ -795,6 +844,7 @@ countries.add(arraylist2.get(ind).getRank());
 
         }
         else if (currentCategoryID==6){
+            sideIndex.setVisibility(View.VISIBLE);
             FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivity.this);
             fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
             arraylistfin.clear();
@@ -806,31 +856,40 @@ countries.add(arraylist2.get(ind).getRank());
                 fnodeid=fetchedfin.get(i).getNodeId();
                 refid=fetchedfin.get(i).getRefNum();
                 upname=fetchedfin.get(i).getNamebn();
-                if (status==1) {
 
-                    PopulatedfromDB wp = new PopulatedfromDB(upname, fnodeid, refid,fetchedfin);
-
-                    arraylistfin.add(wp);
-                }else {
-                    PopulatedfromDB wp = new PopulatedfromDB(fname,fnodeid,refid,fetchedfin);
-                    arraylistfin.add(wp);}
+                PopulatedfromDB wp = new PopulatedfromDB(fname,fnodeid,refid,fetchedfin);
+                arraylistfin.add(wp);
 
 
             }
-            countries.clear();
+            searchheads.clear();
             for (int ind=0;ind<arraylistfin.size();ind++)
             {
-                countries.add(arraylistfin.get(ind).getRank());
-
+                names=arraylistfin.get(ind).getRank();
+                ids=arraylistfin.get(ind).getNodeid();
+                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
+                searchheads.add(sh);
             }
-            Collections.sort(countries);
-            if (status!=1){
-                indexbar(countries);}
+            Collections.sort(searchheads,SearchHolder.NameCompare);
 
-            adapter = new ListViewAdapter(this, arraylistfin);
+            indexbar(searchheads);
 
-            itemList.setAdapter(adapter);
 
+
+
+
+            itemList.setFastScrollEnabled(false);
+            itemList.setFastScrollEnabled(true);
+            filterText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    sideIndex.setVisibility(View.GONE);
+                    map.setVisibility(View.GONE);
+                    adapter = new ListViewAdapter(PlaceDetailsActivity.this, arraylistfin);
+                    itemList.setAdapter(adapter);
+                    return false;
+                }
+            });
 
             filterText.addTextChangedListener(new TextWatcher() {
 
@@ -865,22 +924,22 @@ countries.add(arraylist2.get(ind).getRank());
         switch (cat_id) {
             case AppConstants.EDUCATION:
 
-            SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
-            currentCategoryID = cat_id;
-            EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
-            ArrayList<String> print = null;
-            groups.removeAllElements();
-            print = subCategoryTable.getSubnameedu(currentCategoryID, head);
-            for (int j = 0; j < print.size(); j++) {
-                Group group = new Group(print.get(j));
-                printnames = null;
-                printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
-                for (int i = 0; i < printnames.size(); i++) {
-                    group.children.add(i, printnames.get(i));
+                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
+                currentCategoryID = cat_id;
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+                ArrayList<String> print = null;
+                groups.removeAllElements();
+                print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < print.size(); j++) {
+                    Group group = new Group(print.get(j));
+                    printnames = null;
+                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+                    for (int i = 0; i < printnames.size(); i++) {
+                        group.children.add(i, printnames.get(i));
+                    }
+                    groups.add(j, group);
                 }
-                groups.add(j, group);
-            }
-        break;
+                break;
             case AppConstants.ENTERTAINMENT:
 
                 SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivity.this);
@@ -1030,7 +1089,8 @@ countries.add(arraylist2.get(ind).getRank());
 
     private void constructCategoryList(ArrayList<CategoryItem> categoryList, double dwPercentage) {
         llCatListHolder.removeAllViews();
-        for (CategoryItem ci : categoryList) {
+        for ( CategoryItem ci : categoryList) {
+            setCi(ci);
             llCatListHolder.addView(getCategoryListItemView(ci, dwPercentage));
 
         }
@@ -1039,14 +1099,14 @@ countries.add(arraylist2.get(ind).getRank());
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
         LayoutInflater li = LayoutInflater.from(this);
         View v;
-       if(dpi>300)
-          v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-      else
+        if(dpi>300)
+            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+        else
         if(dpi<300 && height>1000)
             v = li.inflate(R.layout.cat_list_mobile1, llCatListHolder, false);
         else
 
-        v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
+            v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
 
@@ -1059,8 +1119,8 @@ countries.add(arraylist2.get(ind).getRank());
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
 
-     //   tvName.setText(ci.getCatName());
-     //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+        //   tvName.setText(ci.getCatName());
+        //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
 
 /**************************
  *
@@ -1093,8 +1153,10 @@ countries.add(arraylist2.get(ind).getRank());
                 * category id 7 means job*/
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
+                        map.setVisibility(View.VISIBLE);
+                        search.setVisibility(View.VISIBLE);
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
@@ -1102,7 +1164,10 @@ countries.add(arraylist2.get(ind).getRank());
 
                         break;
                     case AppConstants.HEALTH:
+                        map.setVisibility(View.VISIBLE);
+                        search.setVisibility(View.VISIBLE);
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
@@ -1112,7 +1177,10 @@ countries.add(arraylist2.get(ind).getRank());
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
+                        map.setVisibility(View.VISIBLE);
+                        search.setVisibility(View.VISIBLE);
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
@@ -1123,7 +1191,9 @@ countries.add(arraylist2.get(ind).getRank());
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
+
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         map.removeAllViews();
                         //TODO write necessary codes for government
 
@@ -1140,21 +1210,29 @@ countries.add(arraylist2.get(ind).getRank());
                         alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
+                        map.setVisibility(View.VISIBLE);
+                        search.setVisibility(View.VISIBLE);
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
                         textView.setText("যে ধরনের আইন কানুন সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.FINANCIAL:
+                        map.setVisibility(View.VISIBLE);
+                        search.setVisibility(View.VISIBLE);
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
                         textView.setText("যে ধরনের টাকা পয়সা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
                         break;
                     case AppConstants.JOB:
+
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
+                        llItemListHolderbody.setVisibility(View.VISIBLE);
                         map.removeAllViews();
                         final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
 
@@ -1249,9 +1327,9 @@ countries.add(arraylist2.get(ind).getRank());
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-       if(dpi>300)
-           v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
-       else
+        if(dpi>300)
+            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+        else
         if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         else
@@ -1375,7 +1453,7 @@ countries.add(arraylist2.get(ind).getRank());
                 }
                 /*code for all*/
 
-                  int p= getResources().getColor(R.color.subcategory_color);
+                int p= getResources().getColor(R.color.subcategory_color);
                 for(int i=0; i<((ViewGroup)v).getChildCount(); ++i) {
                     nextChild = ((ViewGroup)v).getChildAt(i);
                     nextChild.setBackgroundColor(p);
@@ -1697,7 +1775,7 @@ countries.add(arraylist2.get(ind).getRank());
     public void implementRouteDrawingFragment()
     {
         MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
-
+map.setVisibility(View.VISIBLE);
         FragmentManager fragmentManager=getFragmentManager();
         FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment, mapRouteDrawingFragment);
@@ -1724,7 +1802,7 @@ countries.add(arraylist2.get(ind).getRank());
         super.onResume();
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-       // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
         String Longitude = pref.getString("Latitude", null);
         String Latitude = pref.getString("Longitude", null);

@@ -81,7 +81,7 @@
             android:id="@+id/llSubCatListHeadIconHolder"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@color/black"
+            android:background="@color/common_plus_signin_btn_text_dark_disabled"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -89,7 +89,7 @@
                 android:id="@+id/ivHeadCatIconSubCatList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/black"
+                android:background="@color/transparent"
                 android:contentDescription="@string/txt_cd_header_icon_ofcat_subcatlist"
                 android:padding="7dp" />
 
@@ -122,128 +122,193 @@
         </HorizontalScrollView>
 
 
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/innerlayouts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/svSubCategoryListHolder"
-            android:layout_marginRight="7dp"
-            android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:visibility="visible"
-            android:id="@+id/llItemListHolder"
-            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:background="@drawable/detailsearch"
-                android:visibility="gone"
-                android:id="@+id/show"
-                android:layout_height="20dp">
-</RelativeLayout>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton2"
-                android:background="@drawable/searchbutton"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/btn_see_map"
-                android:layout_below="@+id/tvInstructionSubCat"
-                android:layout_alignRight="@+id/btn_see_map"
-                android:layout_alignEnd="@+id/btn_see_map" />
-
-            <TextView
+            android:layout_toRightOf="@+id/llSubCatListHeadIconHolder"
+            android:layout_toEndOf="@+id/llSubCatListHeadIconHolder">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="স্কুল এর নাম"
-                android:id="@+id/tv_sub_cat_item_list_head"
-                android:padding="7dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:textColor="#000000"
-                android:background="@color/red"
-                android:textSize="20sp"
-                />
+                android:layout_below="@+id/svSubCategoryListHolder"
+                android:layout_marginRight="7dp"
+                android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:id="@+id/llItemListHolder"
+                android:layout_toRightOf="@+id/llSubCatListHeadIconHolder">
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sub_cat_item_list"
-                android:visibility="gone"
-                android:layout_marginTop="5dp" />
-            <ScrollView
-                android:id="@+id/expand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton2"
+                    android:background="@drawable/searchbutton"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/btn_see_map"
+                    android:layout_below="@+id/tvInstructionSubCat"
+                    android:layout_alignRight="@+id/btn_see_map"
+                    android:layout_alignEnd="@+id/btn_see_map" />
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="স্কুল এর নাম"
+                    android:id="@+id/tv_sub_cat_item_list_head"
+                    android:padding="7dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:background="@color/red"
+                    android:textSize="20sp"
+                    />
 
 
-                    <ExpandableListView
-                        android:id="@+id/listView"
-                        android:layout_width="match_parent"
-                        android:layout_height="259dp" >
-                    </ExpandableListView>
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sub_cat_item_list"
+                    android:visibility="gone"
+                    android:layout_marginTop="5dp" />
 
-                </LinearLayout>
-            </ScrollView>
-            <RelativeLayout
+
+                        <ExpandableListView
+                            android:id="@+id/listView"
+                            android:layout_width="match_parent"
+                            android:layout_height="259dp" >
+                        </ExpandableListView>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="141dp">
+                    <TextView
+                        android:id="@+id/tvInstructionSubCat"
+                        android:layout_width="116dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:padding="7dp"
+                        android:text="@string/txt_sub_cat_inst"
+                        android:textColor="@color/red"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:visibility="gone"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignBottom="@+id/btn_see_map" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="@string/txt_inst_sub_cat_choose"
+                        android:id="@+id/btn_show_sub_cat_list_item"
+                        android:background="@color/yellow"
+                        android:padding="3dp"
+                        android:layout_below="@+id/tvInstructionSubCat"
+                        android:layout_centerHorizontal="true" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ম্যাপ এ দেখেন"
+                        android:id="@+id/btn_see_map"
+                        android:background="@drawable/pullup_map"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="gone"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="141dp">
-            <TextView
-                android:id="@+id/tvInstructionSubCat"
-                android:layout_width="116dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:gravity="center"
-                android:padding="7dp"
+                android:layout_below="@+id/svSubCategoryListHolder"
+                android:layout_marginRight="7dp"
 
-                android:text="@string/txt_sub_cat_inst"
-                android:textColor="@color/red"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
+                android:background="@color/white"
+                android:orientation="vertical"
                 android:visibility="gone"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBottom="@+id/btn_see_map" />
+                android:id="@+id/seearch"
+                android:layout_toRightOf="@+id/llSubCatListHeadIconHolder">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/txt_inst_sub_cat_choose"
-                android:id="@+id/btn_show_sub_cat_list_item"
-                android:background="@color/yellow"
-                android:padding="3dp"
-                android:layout_below="@+id/tvInstructionSubCat"
-                android:layout_centerHorizontal="true" />
+                    android:id="@+id/show2"
+                    android:layout_height="500dp">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ম্যাপ এ দেখেন"
-                android:id="@+id/btn_see_map"
-                android:background="@drawable/pullup_map"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:id="@+id/editText"
+                        android:hint="Write the name here"
+                        android:gravity="center_horizontal"
+                        android:layout_below="@+id/headtext"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        />
 
-            </RelativeLayout>
-        </LinearLayout>
+                            <ListView
+                                android:id="@+id/listViewSearch"
+                                android:layout_width="match_parent"
+                                android:layout_height="400dp"
+                                android:layout_below="@+id/editText"
+                                android:layout_toRightOf="@+id/searchscroll"
+                                android:layout_toLeftOf="@+id/sideIndex"
+                                android:layout_toStartOf="@+id/sideIndex">
+                            </ListView>
 
+                    <LinearLayout
+                        android:id="@+id/sideIndex"
+                        android:layout_width="40dip"
+                        android:layout_height="400dp"
+                        android:background="@color/transparent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/editText"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true">
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/show2">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"
+                        android:text="@string/txt_inst_sub_cat_choose"
+                        android:id="@+id/backbutton"
+                        android:background="@color/yellow"
+                        android:padding="3dp"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
         <FrameLayout
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_alignParentBottom="true"
             android:id="@+id/map_fragment"
-            android:layout_below="@+id/llItemListHolder"
-            android:layout_alignRight="@+id/llItemListHolder"
-            android:layout_alignEnd="@+id/llItemListHolder"
+            android:layout_below="@+id/innerlayouts"
+            android:layout_alignRight="@+id/innerlayouts"
+            android:layout_alignEnd="@+id/innerlayouts"
             android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
@@ -254,109 +319,4 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/seearch"
-android:visibility="gone"
-        android:background="@drawable/cool_crash_ui_backdrop"
-        android:layout_alignBottom="@+id/map_fragment"
-        android:layout_toRightOf="@+id/svCategoryListHolder"
-        android:layout_toEndOf="@+id/llSubCatListHeadIconHolder"
-        android:layout_gravity="right"
-
-        android:layout_marginLeft="120dp">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_below="@+id/headtext"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-
-
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="750dp"
-            android:id="@+id/listViewSearch"
-            android:layout_below="@+id/editText"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/sideIndex"
-            android:layout_toStartOf="@+id/sideIndex" />
-        <LinearLayout
-            android:id="@+id/sideIndex"
-            android:layout_width="40dip"
-            android:layout_height="750dp"
-            android:background="@color/transparent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_below="@+id/editText"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Write down the name"
-            android:id="@+id/headtext"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp" />
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/midtext"
-            android:id="@+id/lowlayout"
-            android:visibility="gone"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/scrollView4"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
-            </LinearLayout>
-        </RelativeLayout>
-
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/toggleButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:checked="false" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:id="@+id/backbutton"
-            android:background="@color/yellow"
-            android:padding="3dp"
-            android:layout_marginTop="47dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/listViewSearch"
-            android:layout_alignRight="@+id/headtext"
-            android:layout_alignEnd="@+id/headtext" />
-
-    </RelativeLayout>
 </FrameLayout>

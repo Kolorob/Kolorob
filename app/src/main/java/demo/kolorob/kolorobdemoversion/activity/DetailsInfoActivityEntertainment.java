@@ -335,13 +335,12 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
 
 
-
         kivabejaben.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if(AppUtils.isNetConnected(getApplicationContext())) {
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
                     String lat = entertainmentServiceProviderItem.getLatitude().toString();
                     // double latitude = Double.parseDouble(lat);
@@ -374,6 +373,11 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
 
                     finish();
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityEntertainment.this);
+
                 }
                 else
                 {

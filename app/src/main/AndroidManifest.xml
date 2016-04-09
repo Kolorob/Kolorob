@@ -48,22 +48,22 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivity"
-            android:theme="@style/Theme.Transparent" />
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
-            android:theme="@style/Theme.Transparent" />
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment"
-            android:theme="@style/Theme.Transparent" />
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsJobActivity"
-            android:theme="@style/Theme.Transparent" />
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsFinancialActivity"
-            android:theme="@style/Theme.Transparent" />
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsLegalActivity"
-            android:theme="@style/Theme.Transparent" />
+            android:theme="@style/Theme.AppCompat.Light" />
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -1,16 +1,22 @@
 package demo.kolorob.kolorobdemoversion.utils;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.util.DisplayMetrics;
@@ -23,6 +29,7 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
+import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
 import demo.kolorob.kolorobdemoversion.helpers.AndroidUnicodedFontSupport;
 
 /**
@@ -31,7 +38,57 @@ import demo.kolorob.kolorobdemoversion.helpers.AndroidUnicodedFontSupport;
  */
 public class AppUtils {
 
+    private static OpeningActivity open;
     private static Typeface bengaliFontNormalSolmn, bengaliFontBoldSolmn;
+
+
+    public static void showSettingsAlert(Context con) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(con);
+        final Context cont;
+        cont = con;
+        // Setting Dialog Title
+        alertDialog.setTitle("GPS is disabled!");
+
+        // Setting Dialog Message
+        alertDialog
+                .setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+        // On pressing Settings button
+        alertDialog.setPositiveButton("Settings",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(
+                                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        cont.startActivity(intent);
+                    }
+                });
+
+        // on pressing cancel button
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    public static boolean displayGpsStatus(Context context) {
+        // context = open.getApplicationContext();;
+        ContentResolver contentResolver = context.getApplicationContext()
+                .getContentResolver();
+        boolean gpsStatus = Settings.Secure
+                .isLocationProviderEnabled(contentResolver,
+                        LocationManager.GPS_PROVIDER);
+        if (gpsStatus) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 
     public static SpannableString getUnicodedFormat(AssetManager assetManager, String str) {
         if (bengaliFontNormalSolmn == null)
@@ -137,6 +194,7 @@ public class AppUtils {
     public static boolean isDevicePortrait(Resources res) {
         return res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
+
 
 
     public static boolean isNetConnected(Context context) {
