@@ -23,19 +23,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/main_nav_road_name_holder"
+        android:background="@color/transparent"
         android:gravity="center_vertical|center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="প্যারিস রোড"
-            android:id="@+id/tv_location_name"
-            android:textColor="#FFFFFF"
-            android:textSize="23sp"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_marginTop="10dp" />
+
     </LinearLayout>
 
     <LinearLayout

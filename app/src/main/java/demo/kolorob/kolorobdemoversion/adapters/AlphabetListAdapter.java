@@ -2,7 +2,6 @@ package demo.kolorob.kolorobdemoversion.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -153,7 +152,7 @@ public class AlphabetListAdapter extends BaseAdapter {
                 int size=sectionvalues.size();
 
                if(sectionvalues.contains(position)){
-                   final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
+                /*   final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
 
                 alertDialog.setMessage("Please tap properly");
                 alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "Ok",
@@ -165,7 +164,7 @@ public class AlphabetListAdapter extends BaseAdapter {
                         });
                 alertDialog.getWindow().setLayout(200, 300);
                 alertDialog.show();
-               } else {
+               */} else {
                 int valcheck=((Item) getItem(position)).cattid;
 
                 if (valcheck==1)

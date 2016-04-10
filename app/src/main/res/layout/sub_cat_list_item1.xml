@@ -20,7 +20,7 @@
                 android:contentDescription="@string/txt_cd_icon_cat"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:paddingLeft="3dp" />
+                 />
 
             <TextView
                 android:id="@+id/tv_sub_cat_name"
