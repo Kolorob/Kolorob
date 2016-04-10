@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -218,6 +219,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
+
+        Log.d(">>>>","test_dpi"+dpi);
+
+
         if(dpi>300)
             setContentView(R.layout.placedetailsactivitysupermobile);
 

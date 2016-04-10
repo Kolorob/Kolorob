@@ -61,11 +61,11 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         subcategoryname=nodeid;
         int cattid=getIntent().getExtras().getInt("CatId");
         ArrayList<String> age = new ArrayList<String>();
-        age.add("5-15");
-        age.add("16-35");
-        age.add("36-50");
-        age.add("50>");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, age);
+        age.add("5-15 (৫ থেকে ১৫)");
+        age.add("16-35 (১৬ থেকে ৩৫)");
+        age.add("36-50 (৩৬ থেকে ৫০)");
+        age.add("50> (৫০ এর উপরে)");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.dropdown_text_survey, age);
 
         Spinner spinYear = (Spinner)findViewById(R.id.spinner);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
@@ -73,6 +73,9 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         spinYear.setAdapter(adapter);
         con=this;
         editTextUsername = (EditText) findViewById(R.id.editText4);
+        TextView textView =(TextView)findViewById(R.id.textView14);
+
+        textView.setText("সমস্যার বিস্তারিত \n বিবরন: ");
         editTextUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -108,11 +111,11 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         loadSpinnerDataforcat(cattid);
         ArrayList<String> issue = new ArrayList<String>();
 
-        issue.add("Bug");
-        issue.add("Wrong Information");
-        issue.add("Suggestion");
+        issue.add("Bug (সফটওয়্যার গত ত্রুটি)");
+        issue.add("Wrong Information (ভুল তথ্য)");
+        issue.add("Suggestion (পরামর্শ)");
 
-        ArrayAdapter<String> adapterissue = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,issue);
+        ArrayAdapter<String> adapterissue = new ArrayAdapter<String>(this, R.layout.dropdown_text_survey,issue);
         spinner4 = (Spinner) findViewById(R.id.spinner4);
         spinner4.setAdapter(adapterissue);
         issuetype= spinner4.getSelectedItem().toString();
