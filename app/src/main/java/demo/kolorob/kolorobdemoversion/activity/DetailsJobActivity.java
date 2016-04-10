@@ -135,7 +135,7 @@ public class DetailsJobActivity extends Activity {
                             if (Latitude != null && Longitude != null) {
                                 Double Lon = Double.parseDouble(Longitude);
                                 Double Lat = Double.parseDouble(Latitude);
-                               // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
                                 //Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
                                 // implementFragment();
 

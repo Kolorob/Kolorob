@@ -360,6 +360,7 @@ public class DetailsInfoActivity extends Activity  {
             }
         });
 
+
         edukivabejaben.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

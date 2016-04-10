@@ -1,7 +1,6 @@
 package demo.kolorob.kolorobdemoversion.utils;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +16,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.util.DisplayMetrics;
@@ -44,10 +44,10 @@ public class AppUtils {
 
     public static void showSettingsAlert(Context con) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(con);
-    final Context cont;
+        final Context cont;
         cont = con;
         // Setting Dialog Title
-        alertDialog.setTitle("GPS is settings");
+        alertDialog.setTitle("GPS is disabled!");
 
         // Setting Dialog Message
         alertDialog
@@ -76,7 +76,7 @@ public class AppUtils {
     }
 
     public static boolean displayGpsStatus(Context context) {
-       // context = open.getApplicationContext();;
+        // context = open.getApplicationContext();;
         ContentResolver contentResolver = context.getApplicationContext()
                 .getContentResolver();
         boolean gpsStatus = Settings.Secure

@@ -437,10 +437,8 @@ public class OpeningActivity extends Activity {
 
 
        /* new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
-
             }
         }, SPLASH_TIME_OUT);*/
 

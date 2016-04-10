@@ -112,10 +112,7 @@ FinancialServiceProviderItem nullfin;
 				{
 					worldpopulationlist.add(wp);
 				}
-				else if (wp.getRefid().toLowerCase(Locale.getDefault()).contains(charText))
-				{
-					worldpopulationlist.add(wp);
-				}
+
 			}
 		}
 		notifyDataSetChanged();

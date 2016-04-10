@@ -293,9 +293,9 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
         }
 
-        @Override
-        public void onBackPressed() {
-            finish();
-            super.onBackPressed();
-        }
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
 }
