@@ -1,19 +1,18 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,8 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.database.CategoryTable;
-import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+
 /**
  * Created by israt.jahan on 1/7/2016.
  */
@@ -54,10 +52,14 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     private EditText editTextUsername;
     private EditText editTextIssuedetails;
     private EditText editTextContactNo;
+    int status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_feedback);
+        String nodeid=getIntent().getExtras().getString("NodeId");
+        subcategoryname=nodeid;
+        int cattid=getIntent().getExtras().getInt("CatId");
         ArrayList<String> age = new ArrayList<String>();
         age.add("5-15");
         age.add("16-35");
@@ -103,7 +105,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         });
         userage=spinYear.getSelectedItem().toString();
 
-        loadSpinnerDataforcat();
+        loadSpinnerDataforcat(cattid);
         ArrayList<String> issue = new ArrayList<String>();
 
         issue.add("Bug");
@@ -140,20 +142,65 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         final String username =  editTextUsername.getText().toString().trim();
         final String issuedetails =  editTextIssuedetails.getText().toString().trim();
         final String usercontact = editTextContactNo.getText().toString().trim();
+        try {
+            int num = Integer.parseInt(usercontact);
+          status=1;
+        } catch (NumberFormatException e) {
+            status =0;
+        }
+        if(username.matches("")|| status==0)
+        {
+            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(FeedbackActivity.this).create();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(FeedbackActivity.this,response,Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(FeedbackActivity.this,error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
+            alertDialog.setMessage("Please enter information properly");
+            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.dismiss();
+
+                        }
+                    });
+            alertDialog.getWindow().setLayout(200, 300);
+            alertDialog.show();
+        }
+        else {
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(FeedbackActivity.this).create();
+
+                            alertDialog.setMessage("Information submitted Successfully");
+                            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertDialog.dismiss();
+                                            finish();
+                                        }
+                                    });
+                            alertDialog.getWindow().setLayout(200, 300);
+                            alertDialog.show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(FeedbackActivity.this).create();
+
+                            alertDialog.setMessage("Wrong input!");
+                            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.getWindow().setLayout(200, 300);
+                            alertDialog.show();
+                        }
+                    })
+
+        {
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
@@ -174,7 +221,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
+    }
     @Override
     public void onClick(View v) {
         if(v ==  SubmitFeedback){
@@ -188,58 +235,26 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
     public void setCat_id(int cat_id) {
         this.cat_id = cat_id;
     }
-    private void loadSpinnerDataforcat() {
+    private void loadSpinnerDataforcat(int cattid) {
         // database handler
-        CategoryTable cattable =new CategoryTable(con);
 
-        // Spinner Drop down elements
-        ArrayList<String> cat = cattable.getAllCatNames();
-
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> adapterr = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cat);
-        spinner2.setAdapter(adapterr);
-        // attaching data adapter to spinner
-
-
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                categoryname = spinner2.getSelectedItem().toString();
-                if (categoryname.equals("Education")) setCat_id(1);
-                else if (categoryname.equals("Health")) setCat_id(2);
-                else if (categoryname.equals("Entertainment")) setCat_id(3);
-                else if (categoryname.equals("Government")) setCat_id(4);
-                else if (categoryname.equals("Legal")) setCat_id(5);
-                else if (categoryname.equals("Financial")) setCat_id(6);
-                else if (categoryname.equals("Job")) setCat_id(7);
-
-                loadSpinnerDataforsubcat();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+if (cattid==1)
+    categoryname="Education";
+        else if (cattid==2)
+    categoryname="Health";
+else if (cattid==3)
+    categoryname="Entertainment";
+else if (cattid==4)
+    categoryname="Government";
+else if (cattid==5)
+    categoryname="Legal";
+else if (cattid==6)
+    categoryname="Financial";
+else if (cattid==7)
+    categoryname="Job";
 
 
-        });
 
-    }
-    private void loadSpinnerDataforsubcat() {
-        // database handler
-        SubCategoryTable subCategoryTable =new SubCategoryTable(con);
-
-        // Spinner Drop down elements
-        ArrayList<String> subcat = subCategoryTable.getcatSubCategories(cat_id);
-
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> adapterrr = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subcat);
-        spinner3.setAdapter(adapterrr);
-        // attaching data adapter to spinner
-        subcategoryname = spinner3.getSelectedItem().toString();
     }
 
 

@@ -69,14 +69,6 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
             setContentView(R.layout.activity_details_legal);
             Intent intent = getIntent();
             Feedback = (ImageButton) findViewById(R.id.button2);
-            Feedback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent a = new Intent(DetailsLegalActivity.this, FeedbackActivity.class);
-                    startActivity(a);
-                    finish();
-                }
-            });
 
             if (null != intent)
             {
@@ -133,6 +125,16 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
             landmark.setText(" কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
           //  itemarea.setText("এলাকা: " +legalAidServiceProviderItem.getAddress());
             String la= legalAidServiceProviderItem.getIdentifierId();
+            Feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent a = new Intent(DetailsLegalActivity.this, FeedbackActivity.class);
+                    a.putExtra("NodeId", legalAidServiceProviderItem.getIdentifierId());
+                    a.putExtra("CatId", legalAidServiceProviderItem.getCategoryId());
+                    startActivity(a);
+                    finish();
+                }
+            });
 
 
             LegalAidtypeServiceProviderLegalAdviceTable legalAidtypeServiceProviderLegalAdviceTable1=new LegalAidtypeServiceProviderLegalAdviceTable(this);

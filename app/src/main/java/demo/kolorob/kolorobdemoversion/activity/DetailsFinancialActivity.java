@@ -101,14 +101,6 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
             setContentView(R.layout.activity_details_financial);
             Intent intent = getIntent();
             Feedback = (ImageButton) findViewById(R.id.button2);
-            Feedback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent a = new Intent(DetailsFinancialActivity.this, FeedbackActivity.class);
-                    startActivity(a);
-                    finish();
-                }
-            });
 
             if (null != intent)
             {
@@ -177,6 +169,14 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
 
 
 
+            Feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent a = new Intent(DetailsFinancialActivity.this, FeedbackActivity.class);
+                    startActivity(a);
+                    finish();
+                }
+            });
 
 
 
