@@ -82,14 +82,7 @@ Activity con;
         setContentView(R.layout.health_details_info1);
         Intent intent = getIntent();
         Feedback = (ImageButton) findViewById(R.id.button2);
-        Feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent a = new Intent(DetailsInfoActivityHealth.this, FeedbackActivity.class);
-                startActivity(a);
-                finish();
-            }
-        });
+
         if (null != intent)
         {
             healthServiceProviderItem = (HealthServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH);
@@ -279,7 +272,16 @@ Activity con;
         email.setText("  ইমেইল: " + healthServiceProviderItem.getNodeEmail());
         website.setText("  ওয়েবসাইট: "+healthServiceProviderItem.getNodeWebsite());
         fb.setText("  ফেসবুক: "+healthServiceProviderItem.getNodeFacebook());
-
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsInfoActivityHealth.this, FeedbackActivity.class);
+                a.putExtra("NodeId", healthServiceProviderItem.getNodeId());
+                a.putExtra("CatId", healthServiceProviderItem.getCategoryId());
+                startActivity(a);
+                finish();
+            }
+        });
         kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

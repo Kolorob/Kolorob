@@ -2,20 +2,18 @@ package demo.kolorob.kolorobdemoversion.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity;
@@ -23,7 +21,6 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity;
-import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
@@ -49,6 +46,7 @@ public class AlphabetListAdapter extends BaseAdapter {
     EntertainmentServiceProviderItem nullent;
     LegalAidServiceProviderItem nullleg;
     FinancialServiceProviderItem nullfin;
+    List<Integer> sectionvalues = new ArrayList<Integer>();
 
     public AlphabetListAdapter(Activity activity) {
         this.activity=activity;
@@ -134,6 +132,7 @@ public class AlphabetListAdapter extends BaseAdapter {
             }
             
             Item item = (Item) getItem(position);
+
             TextView textView = (TextView) view.findViewById(R.id.textView1);
             textView.setText(item.name);
 
@@ -144,13 +143,31 @@ public class AlphabetListAdapter extends BaseAdapter {
             }
             
             Section section = (Section) getItem(position);
+            sectionvalues.add(position);
             TextView textView = (TextView) view.findViewById(R.id.textView1);
             textView.setText(section.text);
         }
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int size=sectionvalues.size();
+
+               if(sectionvalues.contains(position)){
+                   final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
+
+                alertDialog.setMessage("Please tap properly");
+                alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.dismiss();
+
+                            }
+                        });
+                alertDialog.getWindow().setLayout(200, 300);
+                alertDialog.show();
+               } else {
                 int valcheck=((Item) getItem(position)).cattid;
+
                 if (valcheck==1)
                 {
                     EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(AlphabetListAdapter.this.mContext);
@@ -194,8 +211,9 @@ public class AlphabetListAdapter extends BaseAdapter {
                 }
 
             }
+            }
         });
-        
+
         return view;
     }
 

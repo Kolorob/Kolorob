@@ -86,14 +86,7 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         setContentView(R.layout.activity_details_info_entertainment);
         Intent intent = getIntent();
         Feedback = (ImageButton) findViewById(R.id.button2);
-        Feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent a = new Intent(DetailsInfoActivityEntertainment.this, FeedbackActivity.class);
-                startActivity(a);
-                finish();
-            }
-        });
+
 
 
 
@@ -158,7 +151,16 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         road.setText(" রাস্তা : " +entertainmentServiceProviderItem.getBlock());
         block.setText(" ব্লক : "+entertainmentServiceProviderItem.getLandmark());
         landmark.setText(" কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
-
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsInfoActivityEntertainment.this, FeedbackActivity.class);
+                a.putExtra("NodeId", entertainmentServiceProviderItem.getNodeId());
+                a.putExtra("CatId", entertainmentServiceProviderItem.getCategoryId());
+                startActivity(a);
+                finish();
+            }
+        });
 
         //common for all category
         close = (ImageView) findViewById(R.id.iv_close);

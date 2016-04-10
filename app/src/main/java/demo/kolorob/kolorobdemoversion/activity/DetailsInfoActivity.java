@@ -68,14 +68,7 @@ public class DetailsInfoActivity extends Activity  {
         setContentView(R.layout.activity_details_info);
         Intent intent = getIntent();
         Feedback = (ImageButton) findViewById(R.id.button2);
-        Feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent a = new Intent(DetailsInfoActivity.this, FeedbackActivity.class);
-                startActivity(a);
-                finish();
-            }
-        });
+
 
         linearLayout=(LinearLayout)findViewById(R.id.lll);
 
@@ -129,7 +122,16 @@ public class DetailsInfoActivity extends Activity  {
         website.setText(" ওয়েবসাইট: "+educationServiceProviderItem.getWebsiteLink());
         fb.setText(" ফেইসবুক: "+educationServiceProviderItem.getFbLink());
 
-
+        Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(DetailsInfoActivity.this, FeedbackActivity.class);
+                a.putExtra("NodeId", educationServiceProviderItem.getIdentifierId());
+                a.putExtra("CatId", educationServiceProviderItem.getCategoryId());
+                startActivity(a);
+                finish();
+            }
+        });
 
         if(educationFeeItems!=null) {
 
