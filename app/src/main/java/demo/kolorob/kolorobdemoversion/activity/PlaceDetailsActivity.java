@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -130,6 +131,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     ImageButton search;
     Button Back;
     public int layoutstatus;
+    HorizontalScrollView svSubCategoryListHolder;
 
     public int getLayoutstatus() {
         return layoutstatus;
@@ -220,17 +222,21 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
 
-        Log.d(">>>>","test_dpi"+dpi);
+        Log.d(">>>>","test_dpi "+dpi);
+       // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
-
+        HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
         if(dpi>300)
             setContentView(R.layout.placedetailsactivitysupermobile);
 
         else
         if(height>1000)
             setContentView(R.layout.place_details_activity);
-        else
+        else {
             setContentView(R.layout.place_details_activity_mobiles);
+          //  svSubCategoryListHolder.setMinimumHeight(70);
+
+        }
 
         search=(ImageButton)findViewById(R.id.imageButton2);
         Back=(Button)findViewById(R.id.backbutton);
@@ -1338,7 +1344,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         else
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
