@@ -1514,7 +1514,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
                 if (height < 1000d && dwPerc == 1)
                     return;
-                else if (dwPerc < 0.9 && dpi>300)return;
+                else if (dwPerc < 0.7 && dpi>300)return;
                 else if (dwPerc < 0.6)
                     return;
                 // Decrease category-list width

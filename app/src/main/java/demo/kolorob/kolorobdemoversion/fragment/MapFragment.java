@@ -154,9 +154,9 @@ public class MapFragment extends Fragment implements
                     false);
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
-        locName = (TextView) rootView.findViewById(R.id.tv_location_name);
+
         mapIndicator = (TextView) rootView.findViewById(R.id.tv_map_indicator);
-        locName.setText(locationName);
+
         mapIndicator.setText(Html.fromHtml("সব " + mapIndicatorText + " এর স্থান ম্যাপ এ দেখানো হয়েছে"));
         mMapView.onCreate(savedInstanceState);
 

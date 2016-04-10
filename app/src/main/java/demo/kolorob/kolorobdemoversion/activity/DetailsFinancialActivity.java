@@ -173,6 +173,8 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
                 @Override
                 public void onClick(View v) {
                     Intent a = new Intent(DetailsFinancialActivity.this, FeedbackActivity.class);
+                    a.putExtra("NodeId",financialServiceProviderItem.getNodeId());
+                    a.putExtra("CatId", financialServiceProviderItem.getCategoryId());
                     startActivity(a);
                     finish();
                 }
