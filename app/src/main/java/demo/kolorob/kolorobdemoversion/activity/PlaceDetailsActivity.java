@@ -565,7 +565,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
                 searchheads.add(sh);
             }
-            Collections.sort(searchheads,SearchHolder.NameCompare);
+          Collections.sort(searchheads, SearchHolder.NameCompare);
 
                 indexbar(searchheads);
 
@@ -719,7 +719,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
                 searchheads.add(sh);
             }
-            Collections.sort(searchheads,SearchHolder.NameCompare);
+           Collections.sort(searchheads,SearchHolder.NameCompare);
 
             indexbar(searchheads);
 
