@@ -395,6 +395,14 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             int cattid=countries.get(ii).getCatid();
             String firstLetter = country.substring(0, 1);
 
+
+            Log.d(">>>>>","country.size "+countries.size());
+            Log.d(">>>>>","country "+countries.get(ii).getName());
+            Log.d(">>>>>","idd "+countries.get(ii).getId());
+            Log.d(">>>>>","cattid "+countries.get(ii).getCatid());
+            Log.d(">>>>>","firstLetter "+country.substring(0, 1));
+
+
             // Group numbers together in the scroller
             if (numberPattern.matcher(firstLetter).matches()) {
                 firstLetter = "#";
@@ -1342,7 +1350,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         else
         if(height>1000)
-            v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         else
             v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
