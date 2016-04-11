@@ -1,14 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'kolorob_release_key'
-            keyPassword 'kolorob2016'
-            storeFile file('D:/KOLOROB_PROJECT/Release_key_kolorob/release.jks')
-            storePassword 'kolorob2016'
-        }
-    }
+
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
