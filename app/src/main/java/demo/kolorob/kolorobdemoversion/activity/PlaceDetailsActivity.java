@@ -244,7 +244,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         showsearch2=(LinearLayout)findViewById(R.id.seearch);
         llItemListHolderbody=(LinearLayout)findViewById(R.id.llItemListHolder);
         sideIndex = (LinearLayout)findViewById(R.id.sideIndex);
-        texthead = (TextView) findViewById(R.id.headtext);
+     //   texthead = (TextView) findViewById(R.id.headtext);
 
 
         Intent intent;

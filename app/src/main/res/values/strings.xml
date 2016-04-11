@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KolorobDemoVersion</string>
+    <string name="app_name">Kolorob</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_location_ask">LocationAskActivity</string>
     <string name="title_activity_button_click_baunia">ButtonClickBaunia</string>
