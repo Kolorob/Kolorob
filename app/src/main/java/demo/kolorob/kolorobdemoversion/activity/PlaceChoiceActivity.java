@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,7 +50,9 @@ public class PlaceChoiceActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_place_choice);
+
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         setWidth(displayMetrics.widthPixels);
         setHeight(displayMetrics.heightPixels);
