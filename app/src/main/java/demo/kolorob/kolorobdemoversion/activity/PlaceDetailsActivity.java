@@ -1794,7 +1794,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     public void implementRouteDrawingFragment()
     {
         MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
-map.setVisibility(View.VISIBLE);
+        map.setVisibility(View.VISIBLE);
         FragmentManager fragmentManager=getFragmentManager();
         FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment, mapRouteDrawingFragment);

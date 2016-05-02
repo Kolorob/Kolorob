@@ -67,6 +67,9 @@
             android:name=".activity.DetailsFinancialActivity"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
+            android:name=".activity.PlaceChoiceActivity2"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
             android:name=".activity.DetailsLegalActivity"
             android:theme="@style/Theme.AppCompat.Light" />
 
