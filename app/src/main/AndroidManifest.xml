@@ -47,7 +47,9 @@
         <activity
             android:name=".activity.ButtonClickBaunia"
             android:label="@string/title_activity_button_click_baunia" />
-        <activity android:name=".activity.PlaceChoiceActivity" />
+        <activity android:name=".activity.PlaceChoiceActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activity.PlaceDetailsActivityNew"
             android:screenOrientation="portrait" />
@@ -68,7 +70,8 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.PlaceChoiceActivity2"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activity.DetailsLegalActivity"
             android:theme="@style/Theme.AppCompat.Light" />

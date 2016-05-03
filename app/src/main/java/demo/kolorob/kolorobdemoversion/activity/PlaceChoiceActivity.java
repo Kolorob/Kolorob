@@ -50,7 +50,7 @@ public class PlaceChoiceActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+      //  getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_place_choice);
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
