@@ -204,7 +204,7 @@ public class OpeningActivity extends Activity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
                             startActivity(i);
                             dialog.dismiss();
                             finish();
@@ -231,7 +231,7 @@ public class OpeningActivity extends Activity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
-                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
                                                 startActivity(i);
                                                 dialog.dismiss();
                                                 finish();
@@ -404,7 +404,7 @@ public class OpeningActivity extends Activity {
                 db3=db.getReadableDatabase();
                 if (db.isTableExists(db3,EDU_PROVIDER_TABLE)){
                     pd.dismiss();
-                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity.class);//Default Activity
+                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity2.class);//Default Activity
                     a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //getApplicationContext().startActivity(a);
                     (getApplicationContext()).startActivity(a);
@@ -845,7 +845,7 @@ public class OpeningActivity extends Activity {
 
         } else {
             pd.dismiss();
-            Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);//Default Activity
+            Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);//Default Activity
             //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
             startActivity(a);
 

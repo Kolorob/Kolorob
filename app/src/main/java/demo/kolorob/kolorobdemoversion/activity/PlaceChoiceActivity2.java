@@ -1,25 +1,33 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
-public class PlaceChoiceActivity2 extends AppCompatActivity {
+public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
-
+    private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 300;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice2);
+
+
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels-32;
@@ -85,9 +93,73 @@ public class PlaceChoiceActivity2 extends AppCompatActivity {
         imgpar.setLayoutParams(paramsPar);
 
 
+        imgbau.setOnClickListener((View.OnClickListener) this);
+        imgpar.setOnClickListener((View.OnClickListener) this);
+
+
+
 
 
     }
+
+
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.imageBau:
+
+                gotoPlaceDetailsView(AppConstants.PLACE_BAUNIABADH);
+                break;
+
+            case R.id.imagePar:
+
+                gotoPlaceDetailsView(AppConstants.PLACE_PARIS_ROAD);
+                break;
+
+
+            default:
+                break;
+
+        }
+
+    }
+
+
+
+    private void gotoPlaceDetailsView(final int placeId) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(PlaceChoiceActivity2.this, PlaceDetailsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(AppConstants.KEY_PLACE, placeId);
+                startActivity(intent);
+            }
+        }, DELAY_PLACE_DETAILS_LAUNCH_ANIM);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Close")
+                .setMessage("Are you sure you want to close Kolorob")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
