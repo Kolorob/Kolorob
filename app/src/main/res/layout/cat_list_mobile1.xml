@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/ivIconCatList"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/txt_cd_icon_cat"
         android:layout_centerVertical="true"

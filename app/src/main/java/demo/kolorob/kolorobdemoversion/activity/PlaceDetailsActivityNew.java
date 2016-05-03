@@ -21,7 +21,6 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -53,7 +52,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
-import java.util.regex.Pattern;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AlphabetListAdapter;
@@ -278,12 +276,12 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
         }*/
 
-        search=(ImageButton)findViewById(R.id.imageButton2);
-        Back=(Button)findViewById(R.id.backbutton);
-        textView=(TextView)findViewById(R.id.tvInstructionSubCat);
-        showsearch2=(LinearLayout)findViewById(R.id.seearch);
-        llItemListHolderbody=(LinearLayout)findViewById(R.id.llItemListHolder);
-        sideIndex = (LinearLayout)findViewById(R.id.sideIndex);
+      //  search=(ImageButton)findViewById(R.id.imageButton2);
+       // Back=(Button)findViewById(R.id.backbutton);
+       // textView=(TextView)findViewById(R.id.tvInstructionSubCat);
+       // showsearch2=(LinearLayout)findViewById(R.id.seearch);
+       // llItemListHolderbody=(LinearLayout)findViewById(R.id.llItemListHolder);
+      //  sideIndex = (LinearLayout)findViewById(R.id.sideIndex);
      //   texthead = (TextView) findViewById(R.id.headtext);
 
 
@@ -306,40 +304,33 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
 
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
-        categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
-        placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
+        //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
+        //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
 
 
         ///this code will change the background of the layout for two places.
-        if(locationNameId== AppConstants.PLACE_BAUNIABADH)
-        {
-            placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
-        }
-        else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
-        {
-            placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
-        }
+
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
         editor.commit();
-        itemList = (ListView)findViewById(R.id.listViewSearch);
-        subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
+       // itemList = (ListView)findViewById(R.id.listViewSearch);
+        //subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
 
-        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+        //subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         //showsearch=(RelativeLayout)findViewById(R.id.show);
-        insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
-        seeMap = (Button) findViewById(R.id.btn_see_map);
-        showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
+       // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
+        //seeMap = (Button) findViewById(R.id.btn_see_map);
+       // showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80); // 80% of the view width
 
-        svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
+      //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
-        llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+       // llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         lp.width = (int) (VIEW_WIDTH);
 
@@ -348,222 +339,26 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
          **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNew.this);
         constructCategoryList(categoryTable.getAllCategories());
-        rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
-        rlSubCatHolder.setVisibility(View.INVISIBLE);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                llItemListHolderbody.setVisibility(View.GONE);
-
-                showsearch2.setVisibility(View.VISIBLE);
-                Back.setVisibility(View.VISIBLE);
-                SearchResult(currentCategoryID);
-                seeMap.setVisibility(View.GONE);
-                Back.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View arg0) {
-                        showsearch2.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
-                        getCategoryListItemView(getCi(), 1.0);
-                        Back.setVisibility(View.GONE);
-
-                    }
-                });
+        //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
+        //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
 
 
-
-        /*if (isChecked) caselan = 1;
-        else caselan = 0;
-        SearchResult(caselan, currentCategoryID);
-        switchlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
-
-            }
-        });*/
-
-                // subCatItemListHeader.setVisibility(View.GONE);
-                //subCatItemList.setVisibility(View.GONE);
-            }
-        });
-        mGestureDetector = new GestureDetector(this, new SideIndexGestureListener());
-        showSubCatListItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search.setVisibility(View.GONE);
-                textView.setVisibility(View.GONE);
-                subCatItemList.setVisibility(View.VISIBLE);
-                subCatItemListHeader.setVisibility(View.VISIBLE);
-                showSubCatListItem.setVisibility(View.GONE);
-                seeMap.setVisibility(View.VISIBLE);
-            }
-        });
-        seeMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search.setVisibility(View.VISIBLE);
-                subCatItemList.setVisibility(View.GONE);
-                subCatItemListHeader.setVisibility(View.GONE);
-                showSubCatListItem.setVisibility(View.VISIBLE);
-                seeMap.setVisibility(View.GONE);
-            }
-        });
 
         // callMapFragment();
 
     }
-    protected void indexbar(ArrayList<SearchHolder> countries) {
-
-
-        alphabet.clear();
-        List<AlphabetListAdapter.Row> rows = new ArrayList<AlphabetListAdapter.Row>();
-        int start = 0;
-        int end = 0;
-        String previousLetter = null;
-        Object[] tmpIndexItem = null;
-        Pattern numberPattern = Pattern.compile("[0-9]");
-
-        for(int ii=0;ii<countries.size();ii++) {
-            String country=countries.get(ii).getName();
-            String idd=countries.get(ii).getId();
-            int cattid=countries.get(ii).getCatid();
-            String firstLetter = country.substring(0, 1);
-
-
-            Log.d(">>>>>","country.size "+countries.size());
-            Log.d(">>>>>","country "+countries.get(ii).getName());
-            Log.d(">>>>>","idd "+countries.get(ii).getId());
-            Log.d(">>>>>","cattid "+countries.get(ii).getCatid());
-            Log.d(">>>>>","firstLetter "+country.substring(0, 1));
-
-
-            // Group numbers together in the scroller
-            if (numberPattern.matcher(firstLetter).matches()) {
-                firstLetter = "#";
-            }
-
-            // If we've changed to a new letter, add the previous letter to the alphabet scroller
-            if (previousLetter != null && !firstLetter.equals(previousLetter)) {
-                end = rows.size() - 1;
-                tmpIndexItem = new Object[3];
-                tmpIndexItem[0] = previousLetter.toUpperCase(Locale.UK);
-                tmpIndexItem[1] = start;
-                tmpIndexItem[2] = end;
-                alphabet.add(tmpIndexItem);
-
-                start = end + 1;
-            }
-
-            // Check if we need to add a header row
-            if (!firstLetter.equals(previousLetter)) {
-                rows.add(new AlphabetListAdapter.Section(firstLetter));
-                sections.put(firstLetter, start);
-            }
-
-            // Add the country to the list
-            rows.add(new AlphabetListAdapter.Item(country,idd,cattid));
-            previousLetter = firstLetter;
-        }
-
-        if (previousLetter != null) {
-            // Save the last letter
-            tmpIndexItem = new Object[3];
-            tmpIndexItem[0] = previousLetter.toUpperCase(Locale.UK);
-            tmpIndexItem[1] = start;
-            tmpIndexItem[2] = rows.size() - 1;
-            alphabet.add(tmpIndexItem);
-        }
-
-
-        adapterind.setRows(rows);
-        adapterind.setSections(sections);
-        itemList.setAdapter(adapterind);
-
-        //  sideIndex.setLayoutParams(new RelativeLayout.LayoutParams(30, 0));
-
-
-        updateList();
-    }
-
-
-    public void updateList() {
 
 
 
-        sideIndex.removeAllViews();
 
-        indexListSize = alphabet.size();
-        if (indexListSize < 1) {
-            return;
-        }
-
-        int indexMaxSize = (int) Math.floor(sideIndex.getHeight() / 20);
-        int tmpIndexListSize = indexListSize;
-        while (tmpIndexListSize > indexMaxSize) {
-            tmpIndexListSize = tmpIndexListSize / 2;
-        }
-        double delta;
-        if (tmpIndexListSize > 0) {
-            delta = indexListSize / tmpIndexListSize;
-        } else {
-            delta = 1;
-        }
-
-        for (double i = 1; i <= indexListSize; i = i + delta) {
-            Object[] tmpIndexItem = alphabet.get((int) i - 1);
-            String tmpLetter = tmpIndexItem[0].toString();
-
-            tmpTV = new TextView(this);
-            tmpTV.setText(tmpLetter);
-            tmpTV.setGravity(Gravity.CENTER);
-            tmpTV.setTextSize(15);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            tmpTV.setLayoutParams(params);
-            sideIndex.addView(tmpTV);
-        }
-
-        sideIndexHeight = sideIndex.getHeight();
-
-        sideIndex.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                // now you know coordinates of touch
-                sideIndexX = event.getX();
-                sideIndexY = event.getY();
-
-                // and can display a proper item it country list
-                displayListItem();
-
-                return false;
-            }
-        });
-    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         return false;
     }
 
-    class SideIndexGestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            sideIndexX = sideIndexX - distanceX;
-            sideIndexY = sideIndexY - distanceY;
 
-            if (sideIndexX >= 0 && sideIndexY >= 0) {
-                displayListItem();
-            }
-
-            return super.onScroll(e1, e2, distanceX, distanceY);
-        }
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -631,7 +426,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             }
           Collections.sort(searchheads, SearchHolder.NameCompare);
 
-                indexbar(searchheads);
+               // indexbar(searchheads);
 
 
             itemList.setFastScrollEnabled(false);
@@ -707,7 +502,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             }
             Collections.sort(searchheads, SearchHolder.NameCompare);
 
-            indexbar(searchheads);
+            //indexbar(searchheads);
 
 
 
@@ -785,7 +580,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             }
            Collections.sort(searchheads, SearchHolder.NameCompare);
 
-            indexbar(searchheads);
+            //indexbar(searchheads);
 
 
 
@@ -861,7 +656,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             }
             Collections.sort(searchheads, SearchHolder.NameCompare);
 
-            indexbar(searchheads);
+           // indexbar(searchheads);
 
 
 
@@ -936,7 +731,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             }
             Collections.sort(searchheads, SearchHolder.NameCompare);
 
-            indexbar(searchheads);
+           // indexbar(searchheads);
 
 
 
@@ -1178,7 +973,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
         // BE CAREFUL :: Category ID is being mapped as to the icon serial no.
         // in the AppConstants.ALL_CAT_ICONS array
-        ivIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
+        ivIcon.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1]);
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
@@ -1218,37 +1013,31 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
                         map.setVisibility(View.VISIBLE);
-                        search.setVisibility(View.VISIBLE);
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
-                        textView.setText("যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
+
 
                         break;
                     case AppConstants.HEALTH:
                         map.setVisibility(View.VISIBLE);
-                        search.setVisibility(View.VISIBLE);
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
-                        textView.setText("যে ধরনের চিকিৎসা সুবিধা  সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
+
                         break;
 
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
                         map.setVisibility(View.VISIBLE);
-                        search.setVisibility(View.VISIBLE);
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
-                        textView.setText("যে ধরনের আনন্দ ফুর্তি সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
+
                         break;
 
 
@@ -1256,8 +1045,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
                     case AppConstants.GOVERNMENT:
 
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         map.removeAllViews();
                         //TODO write necessary codes for government
 
@@ -1275,28 +1063,23 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         break;
                     case AppConstants.LEGAL:
                         map.setVisibility(View.VISIBLE);
-                        search.setVisibility(View.VISIBLE);
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
-                        textView.setText("যে ধরনের আইন কানুন সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
+
                         break;
                     case AppConstants.FINANCIAL:
                         map.setVisibility(View.VISIBLE);
-                        search.setVisibility(View.VISIBLE);
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
-                        textView.setText("যে ধরনের টাকা পয়সা সম্বন্ধে জানতে চান,\nতার উপর চাপ দেন");
+
                         break;
                     case AppConstants.JOB:
 
-                        if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
-                        llItemListHolderbody.setVisibility(View.VISIBLE);
+
                         map.removeAllViews();
                         final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
@@ -1318,20 +1101,20 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 /**
                  * code for all categories
                  **/
-                showSubCatListItem.setEnabled(false);
-                showSubCatListItem.setVisibility(View.VISIBLE);
-                subCatItemList.setVisibility(View.GONE);
-                subCatItemListHeader.setVisibility(View.GONE);
-                insSubCat.setVisibility(View.VISIBLE);
-                seeMap.setVisibility(View.GONE);
+              //  showSubCatListItem.setEnabled(false);
+             //   showSubCatListItem.setVisibility(View.VISIBLE);
+              //  subCatItemList.setVisibility(View.GONE);
+             //   subCatItemListHeader.setVisibility(View.GONE);
+             //   insSubCat.setVisibility(View.VISIBLE);
+               // seeMap.setVisibility(View.VISIBLE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
-                placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
+
                 // categoryHeader.setText(ci.getCatName());
-                categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
+
                 if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                 else
-                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
+                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -1352,10 +1135,10 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
 
 
-        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+    //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
-        subCatItemList.setAdapter(adapter);
+     //   subCatItemList.setAdapter(adapter);
 
 
     }
@@ -1554,9 +1337,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                rlSubCatHolder.setVisibility(View.VISIBLE);
-                rlSubCatHolder.startAnimation(slideInFromRightAnim());
-                constructSubCategoryList(subCatList, 1.0, cat_id);
+               // rlSubCatHolder.setVisibility(View.VISIBLE);
+             //   rlSubCatHolder.startAnimation(slideInFromRightAnim());
+               // constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
                 (int) (200 *

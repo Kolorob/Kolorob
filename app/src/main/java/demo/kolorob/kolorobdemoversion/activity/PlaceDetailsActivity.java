@@ -1133,7 +1133,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
         // BE CAREFUL :: Category ID is being mapped as to the icon serial no.
         // in the AppConstants.ALL_CAT_ICONS array
-        ivIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
+        ivIcon.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1]);
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
