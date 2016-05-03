@@ -26,6 +26,7 @@ public class SplashActivity extends ActionBarActivity {
         //  requestWindowFeature(Window.FEATURE_NO_TITLE);
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         context = this;
@@ -50,6 +51,15 @@ public class SplashActivity extends ActionBarActivity {
             }
         }, 3000);
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        System.out.println("----main activity---onStart---");
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
 }
