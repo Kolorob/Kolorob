@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/place_details_bg_baunia"
+    android:background="@drawable/backdrop"
     android:orientation="vertical"
-    tools:context=".activity.PlaceDetailsActivity"
+    tools:context=".activity.PlaceDetailsActivityNew"
     android:id="@+id/place_details_layout">
 
     <ScrollView
         android:id="@+id/svCategoryListHolder"
         android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:background="@color/semi_transparent">
+        android:background="@color/transparent">
 
         <LinearLayout
             android:id="@+id/llCategoryListHolder"

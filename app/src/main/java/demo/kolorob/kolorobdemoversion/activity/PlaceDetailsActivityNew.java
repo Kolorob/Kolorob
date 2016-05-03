@@ -1,4 +1,4 @@
-package  demo.kolorob.kolorobdemoversion.activity;
+package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -10,6 +10,12 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -18,6 +24,7 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,9 +97,9 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  *
  * @author touhid,israt,arafat
  */
-public class PlaceDetailsActivity extends BaseActivity implements View.OnClickListener {
+public class PlaceDetailsActivityNew extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = PlaceDetailsActivity.class.getSimpleName();
+    private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
     private static final int ANIM_INTERVAL = 100;
     int caselan=0;
     private static double VIEW_WIDTH;
@@ -147,7 +154,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private Switch switchlan;
     public int status=0;
-    AlphabetListAdapter adapterind = new AlphabetListAdapter(PlaceDetailsActivity.this);
+    AlphabetListAdapter adapterind = new AlphabetListAdapter(PlaceDetailsActivityNew.this);
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
@@ -221,22 +228,55 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
+        setContentView(R.layout.activity_place_detailnew);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // toolbar.setBackgroundResource(android.R.color.transparent);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+        ab.setDisplayHomeAsUpEnabled(true);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+              //  getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+               // getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toggle.setDrawerIndicatorEnabled(true);
+        drawer.setDrawerListener(toggle);
+        //toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         Log.d(">>>>","test_dpi "+dpi);
        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
-        if(dpi>300)
-            setContentView(R.layout.placedetailsactivitysupermobile);
+      /*  if(dpi>300)
+          //  setContentView(R.layout.placedetailsactivitysupermobile);
 
         else
         if(height>1000)
-            setContentView(R.layout.place_details_activity);
+           // setContentView(R.layout.place_details_activity);
         else {
             setContentView(R.layout.place_details_activity_mobiles);
           //  svSubCategoryListHolder.setMinimumHeight(70);
 
-        }
+        }*/
 
         search=(ImageButton)findViewById(R.id.imageButton2);
         Back=(Button)findViewById(R.id.backbutton);
@@ -252,12 +292,12 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         if (null != intent)
         {
             locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
-            if(locationNameId==AppConstants.PLACE_BAUNIABADH)
+            if(locationNameId== AppConstants.PLACE_BAUNIABADH)
             {
                 setPlaceChoice("Baunia Badh");
                 locationName = AppConstants.BAUNIABADH;
             }
-            else if(locationNameId==AppConstants.PLACE_PARIS_ROAD)
+            else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
                 setPlaceChoice("Paris Road");
                 locationName = AppConstants.PARIS_ROAD;
@@ -271,11 +311,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
         ///this code will change the background of the layout for two places.
-        if(locationNameId==AppConstants.PLACE_BAUNIABADH)
+        if(locationNameId== AppConstants.PLACE_BAUNIABADH)
         {
             placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
         }
-        else if(locationNameId==AppConstants.PLACE_PARIS_ROAD)
+        else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
         {
             placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
         }
@@ -306,7 +346,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         /**
          * constructing category list
          **/
-        CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivity.this);
+        CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNew.this);
         constructCategoryList(categoryTable.getAllCategories());
         rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         rlSubCatHolder.setVisibility(View.INVISIBLE);
@@ -506,6 +546,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        return false;
+    }
+
     class SideIndexGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
@@ -557,7 +602,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
             itemList.setAdapter(null);
            sideIndex.setVisibility(View.VISIBLE);
-            EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivity.this);
+            EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
             fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
 
             arraylist2.clear();
@@ -595,7 +640,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
-                    adapterEdu = new ListViewAdapterEdu(PlaceDetailsActivity.this, arraylist2);
+                    adapterEdu = new ListViewAdapterEdu(PlaceDetailsActivityNew.this, arraylist2);
                     map.setVisibility(View.GONE);
                     sideIndex.setVisibility(View.GONE);
                     itemList.setAdapter(adapterEdu);
@@ -634,7 +679,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         }
         else if (currentCategoryID==2){
             sideIndex.setVisibility(View.VISIBLE);
-            HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivity.this);
+            HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
             fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
             arraylist3.clear();
 
@@ -660,7 +705,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
                 searchheads.add(sh);
             }
-            Collections.sort(searchheads,SearchHolder.NameCompare);
+            Collections.sort(searchheads, SearchHolder.NameCompare);
 
             indexbar(searchheads);
 
@@ -674,7 +719,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 public boolean onTouch(View v, MotionEvent event) {
                     sideIndex.setVisibility(View.GONE);
                     map.setVisibility(View.GONE);
-                    adapterHel = new ListViewAdapterHel(PlaceDetailsActivity.this, arraylist3);
+                    adapterHel = new ListViewAdapterHel(PlaceDetailsActivityNew.this, arraylist3);
 
 
                     itemList.setAdapter(adapterHel);
@@ -713,7 +758,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         else if (currentCategoryID==5){
             sideIndex.setVisibility(View.VISIBLE);
             itemList.setAdapter(null);
-            LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+            LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
             fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
             arraylist4.clear();
 
@@ -738,7 +783,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
                 searchheads.add(sh);
             }
-           Collections.sort(searchheads,SearchHolder.NameCompare);
+           Collections.sort(searchheads, SearchHolder.NameCompare);
 
             indexbar(searchheads);
 
@@ -751,7 +796,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 public boolean onTouch(View v, MotionEvent event) {
                     map.setVisibility(View.GONE);
                     sideIndex.setVisibility(View.GONE);
-                    adapterLeg = new ListViewAdapterLeg(PlaceDetailsActivity.this, arraylist4);
+                    adapterLeg = new ListViewAdapterLeg(PlaceDetailsActivityNew.this, arraylist4);
 
                     itemList.setAdapter(adapterLeg);
 
@@ -788,7 +833,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         }
         else if (currentCategoryID==3){
             sideIndex.setVisibility(View.VISIBLE);
-            EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+            EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
 
             fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
             arraylist5.clear();
@@ -814,7 +859,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
                 searchheads.add(sh);
             }
-            Collections.sort(searchheads,SearchHolder.NameCompare);
+            Collections.sort(searchheads, SearchHolder.NameCompare);
 
             indexbar(searchheads);
 
@@ -829,7 +874,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 public boolean onTouch(View v, MotionEvent event) {
                     sideIndex.setVisibility(View.GONE);
                     map.setVisibility(View.GONE);
-                    adapterEnt = new ListViewAdapterEnt(PlaceDetailsActivity.this, arraylist5);
+                    adapterEnt = new ListViewAdapterEnt(PlaceDetailsActivityNew.this, arraylist5);
                     itemList.setAdapter(adapterEnt);
                     return false;
                 }
@@ -864,7 +909,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         }
         else if (currentCategoryID==6){
             sideIndex.setVisibility(View.VISIBLE);
-            FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+            FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
             fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
             arraylistfin.clear();
 
@@ -889,7 +934,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
                 searchheads.add(sh);
             }
-            Collections.sort(searchheads,SearchHolder.NameCompare);
+            Collections.sort(searchheads, SearchHolder.NameCompare);
 
             indexbar(searchheads);
 
@@ -904,7 +949,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 public boolean onTouch(View v, MotionEvent event) {
                     sideIndex.setVisibility(View.GONE);
                     map.setVisibility(View.GONE);
-                    adapter = new ListViewAdapter(PlaceDetailsActivity.this, arraylistfin);
+                    adapter = new ListViewAdapter(PlaceDetailsActivityNew.this, arraylistfin);
                     itemList.setAdapter(adapter);
                     return false;
                 }
@@ -943,9 +988,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (cat_id) {
             case AppConstants.EDUCATION:
 
-                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
+                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNew.this);
                 currentCategoryID = cat_id;
-                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
                 ArrayList<String> print = null;
                 groups.removeAllElements();
                 print = subCategoryTable.getSubnameedu(currentCategoryID, head);
@@ -961,9 +1006,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case AppConstants.ENTERTAINMENT:
 
-                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivity.this);
+                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNew.this);
                 currentCategoryID = cat_id;
-                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
                 ArrayList<String> printent = null;
                 groups.removeAllElements();
                 printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
@@ -979,9 +1024,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case AppConstants.HEALTH:
 
-                SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivity.this);
+                SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNew.this);
                 currentCategoryID = cat_id;
-                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
                 ArrayList<String> printhea = null;
                 groups.removeAllElements();
                 printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
@@ -997,9 +1042,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case AppConstants.FINANCIAL:
 
-                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivity.this);
+                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivityNew.this);
                 currentCategoryID = cat_id;
-                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
                 ArrayList<String> printfin = null;
                 groups.removeAllElements();
                 printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
@@ -1015,9 +1060,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case AppConstants.LEGAL:
 
-                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivity.this);
+                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNew.this);
                 currentCategoryID = cat_id;
-                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
                 ArrayList<String> printleg = null;
                 groups.removeAllElements();
                 printleg = subCategoryTable5.getSubnameedu(currentCategoryID, head);
@@ -1033,9 +1078,9 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case AppConstants.JOB:
 
-                SubCategoryTable subCategoryTable6= new SubCategoryTable(PlaceDetailsActivity.this);
+                SubCategoryTable subCategoryTable6= new SubCategoryTable(PlaceDetailsActivityNew.this);
                 currentCategoryID = cat_id;
-                JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivity.this);
+                JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivityNew.this);
                 ArrayList<String> printjob = null;
                 groups.removeAllElements();
                 printjob  = subCategoryTable6.getSubnameedu(currentCategoryID, head);
@@ -1216,7 +1261,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         map.removeAllViews();
                         //TODO write necessary codes for government
 
-                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
                         alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
@@ -1253,7 +1298,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         if (showsearch2.getVisibility() == View.VISIBLE) showsearch2.setVisibility(View.GONE);
                         llItemListHolderbody.setVisibility(View.VISIBLE);
                         map.removeAllViews();
-                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
                         alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
@@ -1314,17 +1359,17 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
     }
-    private ArrayList<SubCategoryItem> constructSubCategoryListItem(int cat_id,String header)
+    private ArrayList<SubCategoryItem> constructSubCategoryListItem(int cat_id, String header)
     {
         ArrayList<SubCategoryItem> subCategoryItems;
-        SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
+        SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNew.this);
         subCategoryItems=subCategoryTable.getAllSubCategoriesHeader(cat_id,header);
 
         return subCategoryItems;
     }
 
 
-    private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList,double dwPercentage,int cat_id) {
+    private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
         llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         subcategory=0;
@@ -1430,7 +1475,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
                     case AppConstants.GOVERNMENT:
                         map.removeAllViews();
-                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
                         alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
@@ -1454,7 +1499,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                         break;
                     case AppConstants.JOB:
                         map.removeAllViews();
-                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivity.this).create();
+                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
                         alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
@@ -1489,7 +1534,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private ArrayList<SubCategoryItem> getSubCategoryList(int id) {
         // TODO Get sub-categories from the SUB_CATEGORY local table : NEXT PHASE
-        SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivity.this);
+        SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNew.this);
         return subCategoryTable.getAllSubCategories(id);
     }
 
@@ -1591,15 +1636,15 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<EducationServiceProviderItem> constructEducationListItem(int cat_id)
     {
         ArrayList<EducationServiceProviderItem> educationServiceProvider;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
         educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfo(cat_id);
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationServiceProviderItem> constructEducationListItemForHeader(int cat_id,String header)
+    private ArrayList<EducationServiceProviderItem> constructEducationListItemForHeader(int cat_id, String header)
     {
         ArrayList<EducationServiceProviderItem> educationServiceProvider;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivity.this);
+        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
         educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfoWithHead(cat_id, header);
         return educationServiceProvider;
     }
@@ -1623,7 +1668,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<HealthServiceProviderItem> constructHealthListItem(int cat_id)
     {
         ArrayList<HealthServiceProviderItem> healthServiceProvider;
-        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
         healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo(cat_id);
         return healthServiceProvider;
     }
@@ -1641,10 +1686,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         fragmentTransaction.replace(R.id.map_fragment, mapFragment);
         fragmentTransaction.commit();
     }
-    private ArrayList<HealthServiceProviderItem> constructHealthListItemForHeader(int cat_id,String header)
+    private ArrayList<HealthServiceProviderItem> constructHealthListItemForHeader(int cat_id, String header)
     {
         ArrayList<HealthServiceProviderItem> healthServiceProvider;
-        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivity.this);
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
         healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, header);
         return healthServiceProvider;
     }
@@ -1654,7 +1699,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItem(int cat_id)
     {
         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+        EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo(cat_id);
         return entertainmentServiceProvider;
     }
@@ -1673,10 +1718,10 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         fragmentTransaction.commit();
     }
 
-    private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItemForHeader(int cat_id,String header)
+    private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItemForHeader(int cat_id, String header)
     {
         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivity.this);
+        EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, header);
         return entertainmentServiceProvider;
     }
@@ -1693,15 +1738,15 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItem(int cat_id)
     {
         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
         return legalaidServiceProvider;
     }
 
-    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItemForHeader(int cat_id,String header)
+    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItemForHeader(int cat_id, String header)
     {
         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
+        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, header);
         return legalaidServiceProvider;
     }
@@ -1727,15 +1772,15 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<FinancialServiceProviderItem> constructfinancialListItem(int cat_id)
     {
         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-        FinancialServiceProviderTable financialServiceProviderTable = new  FinancialServiceProviderTable (PlaceDetailsActivity.this);
+        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
         financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfo(cat_id);
         return financialServiceProvider;
     }
 
-    private ArrayList<FinancialServiceProviderItem> constructfinancialListItemForHeader(int cat_id,String header)
+    private ArrayList<FinancialServiceProviderItem> constructfinancialListItemForHeader(int cat_id, String header)
     {
         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivity.this);
+        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
         financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
         return financialServiceProvider;
     }
@@ -1763,15 +1808,15 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<JobServiceProviderItem> constructjobListItem(int cat_id)
     {
         ArrayList<JobServiceProviderItem> jobServiceProvider;
-        JobServiceProviderTable jobServiceProviderTable = new  JobServiceProviderTable (PlaceDetailsActivity.this);
+        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivityNew.this);
         jobServiceProvider = jobServiceProviderTable.getAllJobSubCategoriesInfo(cat_id);
         return jobServiceProvider;
     }
 
-    private ArrayList<JobServiceProviderItem> constructjobListItemForHeader(int cat_id,String header)
+    private ArrayList<JobServiceProviderItem> constructjobListItemForHeader(int cat_id, String header)
     {
         ArrayList<JobServiceProviderItem> jobServiceProvider;
-        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivity.this);
+        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivityNew.this);
         jobServiceProvider = jobServiceProviderTable.getAllJobSubCategoriesInfoWithHead(cat_id, header);
         return jobServiceProvider;
     }
@@ -1832,11 +1877,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         if (null != intent)
         {
             locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
-            if(locationNameId==AppConstants.PLACE_BAUNIABADH)
+            if(locationNameId== AppConstants.PLACE_BAUNIABADH)
             {
                 locationName = AppConstants.BAUNIABADH;
             }
-            else if(locationNameId==AppConstants.PLACE_PARIS_ROAD)
+            else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
                 locationName = AppConstants.PARIS_ROAD;
             }
@@ -1844,7 +1889,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         editor.putInt("LocationNameId", locationNameId);
         editor.commit();
 
-        if (Latitude != null&&AppUtils.isNetConnected(getApplicationContext())) {
+        if (Latitude != null&& AppUtils.isNetConnected(getApplicationContext())) {
             Double Lon = Double.parseDouble(Longitude);
             Double Lat = Double.parseDouble(Latitude);
 

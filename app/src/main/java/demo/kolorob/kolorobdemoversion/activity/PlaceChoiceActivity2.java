@@ -1,12 +1,11 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -133,7 +132,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(PlaceChoiceActivity2.this, PlaceDetailsActivity.class);
+                Intent intent = new Intent(PlaceChoiceActivity2.this, PlaceDetailsActivityNew.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
                 startActivity(intent);

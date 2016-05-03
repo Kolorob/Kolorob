@@ -49,7 +49,7 @@
             android:label="@string/title_activity_button_click_baunia" />
         <activity android:name=".activity.PlaceChoiceActivity" />
         <activity
-            android:name=".activity.PlaceDetailsActivity"
+            android:name=".activity.PlaceDetailsActivityNew"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivity"
