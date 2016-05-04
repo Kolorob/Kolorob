@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvSpinnerData"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:padding="5dp"
+    android:singleLine="true"
+    android:textColor="@android:color/black"
+    android:paddingLeft="30dp"
+    android:textSize="20dp"
+  android:gravity="center">
+
+</TextView>

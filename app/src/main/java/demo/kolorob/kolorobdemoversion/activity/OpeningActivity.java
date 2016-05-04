@@ -125,6 +125,7 @@ public class OpeningActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_opening);
 
@@ -204,7 +205,7 @@ public class OpeningActivity extends Activity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
                             startActivity(i);
                             dialog.dismiss();
                             finish();
@@ -231,7 +232,7 @@ public class OpeningActivity extends Activity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
-                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);
+                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
                                                 startActivity(i);
                                                 dialog.dismiss();
                                                 finish();
@@ -404,7 +405,7 @@ public class OpeningActivity extends Activity {
                 db3=db.getReadableDatabase();
                 if (db.isTableExists(db3,EDU_PROVIDER_TABLE)){
                     pd.dismiss();
-                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity.class);//Default Activity
+                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity2.class);//Default Activity
                     a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //getApplicationContext().startActivity(a);
                     (getApplicationContext()).startActivity(a);
@@ -845,7 +846,7 @@ public class OpeningActivity extends Activity {
 
         } else {
             pd.dismiss();
-            Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity.class);//Default Activity
+            Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);//Default Activity
             //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
             startActivity(a);
 
@@ -894,6 +895,14 @@ public class OpeningActivity extends Activity {
 
     }
 
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        System.out.println("----main activity---onStart---");
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
     @Override
     protected void onRestart() {
         super.onRestart();
