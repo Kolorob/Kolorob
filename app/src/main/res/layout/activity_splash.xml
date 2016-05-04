@@ -7,19 +7,8 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="KOLOROB ANIMATION"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/rotate_image"
-        android:layout_alignStart="@+id/rotate_image"
-        android:layout_alignRight="@+id/rotate_image"
-        android:layout_alignEnd="@+id/rotate_image" />
+
+
 
     <ImageView
         android:id="@+id/rotate_image"
@@ -27,7 +16,22 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
-        android:src="@drawable/circle" />
+        android:src="@drawable/glow"
+        />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kolorob is loading data.Please wait for a moment..."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
+       android:gravity="center_horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/rotate_image"
+
+        />
     <ImageView
         android:id="@+id/rotate_cicle"
         android:layout_width="wrap_content"
@@ -44,7 +48,7 @@
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:gravity="center|bottom"
-        android:text="KOLOROB"
+        android:text="No more lattu"
         android:layout_below="@+id/rotate_cicle"
         android:layout_marginTop="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -52,29 +56,29 @@
         android:textStyle="bold" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="90dp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:layout_alignParentBottom="true"-->
 
-        android:orientation="horizontal">
+        <!--android:orientation="horizontal">-->
 
 
-    <ImageView
-        android:id="@+id/rotate_left"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="1dp"
-        android:background="@drawable/boy_figure" />
+    <!--<ImageView-->
+        <!--android:id="@+id/rotate_left"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="120dp"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:background="@drawable/boy_figure" />-->
 
-    <ImageView
-        android:id="@+id/rotate_right"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="1dp"
-        android:background="@drawable/girl_figure" />
+    <!--<ImageView-->
+        <!--android:id="@+id/rotate_right"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="120dp"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:background="@drawable/girl_figure" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 </RelativeLayout>
