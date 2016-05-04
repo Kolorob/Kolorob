@@ -27,14 +27,13 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,17 +45,7 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
-import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEdu;
-import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEnt;
-import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterHel;
-import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterLeg;
 import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDB;
-import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEdu;
-import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBEnt;
-import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBHel;
-import demo.kolorob.kolorobdemoversion.adapters.PopulatedfromDBLeg;
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
@@ -139,26 +128,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private int currentCategoryID;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
-    private EditText filterText;
-    String fname,fnodeid,upname,names,ids;
-    int refid;
-    private RadioGroup fingroup;
-    private ArrayList<FinancialServiceProviderItem>fetchedfin;
-    private ArrayList<EducationServiceProviderItem>fetchededu;
-    private ArrayList<LegalAidServiceProviderItem>fetchedleg;
-    private ArrayList<EntertainmentServiceProviderItem>fetchedent;
-    private ArrayList<HealthServiceProviderItem>fetchedhel;
-    ListViewAdapter adapter;
-    ListViewAdapterEdu adapterEdu;
-    ListViewAdapterHel adapterHel;
-    ListViewAdapterLeg adapterLeg;
-    ListViewAdapterEnt adapterEnt;
-    ArrayList<PopulatedfromDB> arraylist = new ArrayList<>();//fin
-    ArrayList<PopulatedfromDBEdu>arraylist2=new ArrayList<>();
-    ArrayList<PopulatedfromDBHel>arraylist3=new ArrayList<>();
-    ArrayList<PopulatedfromDBLeg>arraylist4=new ArrayList<>();
-    ArrayList<PopulatedfromDBEnt>arraylist5=new ArrayList<>();
-    ArrayList<PopulatedfromDB>arraylistfin=new ArrayList<>();
+
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
@@ -228,25 +198,6 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
-      /*  if(dpi>300)
-          //  setContentView(R.layout.placedetailsactivitysupermobile);
-
-        else
-        if(height>1000)
-           // setContentView(R.layout.place_details_activity);
-        else {
-            setContentView(R.layout.place_details_activity_mobiles);
-          //  svSubCategoryListHolder.setMinimumHeight(70);
-
-        }*/
-
-      //  search=(ImageButton)findViewById(R.id.imageButton2);
-       // Back=(Button)findViewById(R.id.backbutton);
-       // textView=(TextView)findViewById(R.id.tvInstructionSubCat);
-       // showsearch2=(LinearLayout)findViewById(R.id.seearch);
-       // llItemListHolderbody=(LinearLayout)findViewById(R.id.llItemListHolder);
-      //  sideIndex = (LinearLayout)findViewById(R.id.sideIndex);
-     //   texthead = (TextView) findViewById(R.id.headtext);
 
 
         Intent intent;
@@ -258,15 +209,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             {
                 setPlaceChoice("Baunia Badh");
                 locationName = AppConstants.BAUNIABADH;
-                listData.add("বাউনিয়া বাধ");
-                listData.add("প্যারিস রোড");
+                listData.add(AppConstants.BAUNIABADH);
+                listData.add(AppConstants.PARIS_ROAD);
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
                 setPlaceChoice("Paris Road");
                 locationName = AppConstants.PARIS_ROAD;
-                listData.add("প্যারিস রোড");
-                listData.add("বাউনিয়া বাধ");
+                listData.add(AppConstants.PARIS_ROAD);
+                listData.add(AppConstants.BAUNIABADH);
             }
         }
 
@@ -319,7 +270,25 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNew.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
         spItems.setAdapter(arrayAdapter);
+        spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                String imc_met=spItems.getSelectedItem().toString();
+                setPlaceChoice(imc_met);
+                if(imc_met==AppConstants.BAUNIABADH) {
+                    locationNameId = AppConstants.PLACE_BAUNIABADH;
+                }
+                else locationNameId=AppConstants.PLACE_PARIS_ROAD;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
 
     }
 
@@ -888,7 +857,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         if(subCatShowFlag==1)
         {
-            rlSubCatHolder.startAnimation(slideOutFromLeftAnim());
+           // rlSubCatHolder.startAnimation(slideOutFromLeftAnim());
         }
         subCatShowFlag=1;
 
@@ -993,7 +962,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
     {
         MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
+        mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
@@ -1017,7 +986,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
     {
         MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
+        mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
         mapFragment.setHealthServiceProvider(healthServiceProviderItems);
@@ -1048,7 +1017,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems)
     {
         MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
+        mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
         mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
@@ -1095,7 +1064,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
     {
         MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
+        mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
         mapFragment.setLegalaidServiceProvider(legalaidServiceProviderItems);
@@ -1129,7 +1098,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
     {
         MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
+        mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
         mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
@@ -1165,7 +1134,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private void callMapFragmentWithJobInfo(String item_name,int cat_id,ArrayList<JobServiceProviderItem> jobServiceProviderItems)
     {
         MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
+        mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
         mapFragment.setJobServiceProvider(jobServiceProviderItems);
@@ -1221,10 +1190,12 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             if(locationNameId== AppConstants.PLACE_BAUNIABADH)
             {
                 locationName = AppConstants.BAUNIABADH;
+                setPlaceChoice(locationName);
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
                 locationName = AppConstants.PARIS_ROAD;
+                setPlaceChoice(locationName);
             }
         }
         editor.putInt("LocationNameId", locationNameId);
