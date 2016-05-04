@@ -13,6 +13,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/mapholder"
             android:layout_height="match_parent">
             <FrameLayout
                 android:layout_width="268dp"
@@ -26,6 +31,7 @@
                 android:layout_alignParentEnd="true">
 
             </FrameLayout>
+            </RelativeLayout>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
                 android:layout_width="120dp"

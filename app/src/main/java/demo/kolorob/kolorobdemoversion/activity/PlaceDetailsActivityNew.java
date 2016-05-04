@@ -77,9 +77,10 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class PlaceDetailsActivityNew extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
-    private static final int ANIM_INTERVAL = 100;
+    private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
-    private LinearLayout llCatListHolder;
+
+    private LinearLayout llCatListHolder,mapnother;
     CategoryItem ci;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
@@ -99,7 +100,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
     public int layoutstatus;
 
-
+private Toolbar toolbar;
 
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
@@ -132,7 +133,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
-
+private RelativeLayout mapholderr;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
     }
@@ -160,13 +161,14 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       toolbar = (Toolbar) findViewById(R.id.toolbar);
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
         ab.setDisplayHomeAsUpEnabled(true);
-
+mapnother=(LinearLayout)findViewById(R.id.mapnothers);
+        mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
@@ -540,7 +542,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
                         map.setVisibility(View.VISIBLE);
-
+toolbar.startAnimation(slideInFromRightAnim());
+                        mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
@@ -549,7 +552,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         break;
                     case AppConstants.HEALTH:
                         map.setVisibility(View.VISIBLE);
-
+                        toolbar.startAnimation(slideInFromRightAnim());
+                        mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
@@ -560,7 +564,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
                     case AppConstants.ENTERTAINMENT:
                         map.setVisibility(View.VISIBLE);
-
+                        toolbar.startAnimation(slideInFromRightAnim());
+                        mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
@@ -590,7 +595,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         break;
                     case AppConstants.LEGAL:
                         map.setVisibility(View.VISIBLE);
-
+                        toolbar.startAnimation(slideInFromRightAnim());
+                        mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
@@ -598,7 +604,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         break;
                     case AppConstants.FINANCIAL:
                         map.setVisibility(View.VISIBLE);
-
+                        toolbar.startAnimation(slideInFromRightAnim());
+                        mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
