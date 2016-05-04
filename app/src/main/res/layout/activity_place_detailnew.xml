@@ -20,7 +20,7 @@
 
         <include layout="@layout/toolbar_categorized" />
         <include layout="@layout/toolbar" />
-        <include layout="@layout/place_details_activityy" />
+        <include layout="@layout/place_details_modified" />
         <!-- Let's add fragment -->
 
 

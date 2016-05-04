@@ -82,7 +82,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
 
-    private LinearLayout llCatListHolder,mapnother;
+    private LinearLayout llCatListHolder,mapnother,listholder;
     CategoryItem ci;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
@@ -172,6 +172,7 @@ private RelativeLayout mapholderr;
         ab.setDisplayHomeAsUpEnabled(true);
         mapnother=(LinearLayout)findViewById(R.id.mapnothers);
         mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
+        listholder=(LinearLayout)findViewById(R.id.listholder);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){

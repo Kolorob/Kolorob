@@ -5,32 +5,32 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/backplacedetails"
         android:id="@+id/mapnothers"
-        android:layout_above="@+id/bottom">
-
+        android:layout_above="@+id/listholder">
         <RelativeLayout
             android:layout_width="match_parent"
 
             android:layout_height="match_parent">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:id="@+id/mapholder"
-            android:layout_height="match_parent">
-            <FrameLayout
-                android:layout_width="268dp"
-                android:layout_height="match_parent"
-                android:id="@+id/map_fragment"
-                android:layout_gravity="left|top"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/mapholder"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="268dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/map_fragment"
+                    android:layout_gravity="left|top"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true">
 
-            </FrameLayout>
+                </FrameLayout>
             </RelativeLayout>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
@@ -57,15 +57,49 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/red"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/listholder"
+
+        android:layout_above="@+id/linearLayout5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Click here to open list"
+            android:id="@+id/textView16"
+            android:paddingRight="80dp"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp" />
+
+        <ImageButton
+            android:layout_width="109dp"
+            android:layout_height="89dp"
+            android:background="@drawable/list_showing_upbutton"
+            android:id="@+id/imageButton"
+            android:paddingLeft="800dp"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:paddingTop="60dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="200dp"
         android:layout_height="70dp"
         android:background="#163e11"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/bottom" >
-
+        android:id="@+id/linearLayout5">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -125,5 +159,4 @@
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </LinearLayout>
-
 </RelativeLayout>
