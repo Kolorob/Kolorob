@@ -1,8 +1,10 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -97,10 +99,10 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
-
+Activity act;
     public int layoutstatus;
 
-private Toolbar toolbar;
+private Toolbar toolbar,toolbar2;
 
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
@@ -111,9 +113,9 @@ private Toolbar toolbar;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
-
+private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
-
+Context context;
     ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
     public LinearLayout sideIndex;
@@ -162,14 +164,15 @@ private RelativeLayout mapholderr;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
         ab.setDisplayHomeAsUpEnabled(true);
-mapnother=(LinearLayout)findViewById(R.id.mapnothers);
+        mapnother=(LinearLayout)findViewById(R.id.mapnothers);
         mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
@@ -542,8 +545,38 @@ mapnother=(LinearLayout)findViewById(R.id.mapnothers);
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
                         map.setVisibility(View.VISIBLE);
-toolbar.startAnimation(slideInFromRightAnim());
+                        toolbar.setVisibility(View.GONE);
+                        toolbar2.setVisibility(View.VISIBLE);
+                        toolbar2.setBackgroundColor(Color.parseColor("#58BED6"));
+                        toolbar2.startAnimation(slideInFromRightAnim());
+                        setSupportActionBar(toolbar2);
+                        ActionBar ab2 = getSupportActionBar();
+                        ab2.setHomeAsUpIndicator(R.drawable.menu_icon);
+                        ab2.setDisplayHomeAsUpEnabled(true);
+                        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                                act, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+                            /** Called when a drawer has settled in a completely open state. */
+                            public void onDrawerOpened(View drawerView) {
+                                super.onDrawerOpened(drawerView);
+                                //  getSupportActionBar().setTitle("Navigation!");
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+
+                            /** Called when a drawer has settled in a completely closed state. */
+                            public void onDrawerClosed(View view) {
+                                super.onDrawerClosed(view);
+                                // getSupportActionBar().setTitle(mActivityTitle);
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+                        };
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
+                        toggle.setDrawerIndicatorEnabled(true);
+                        drawer.setDrawerListener(toggle);
                         mapholderr.startAnimation(slideInFromRightAnim());
+
+                        ab2.openOptionsMenu();
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
@@ -552,7 +585,35 @@ toolbar.startAnimation(slideInFromRightAnim());
                         break;
                     case AppConstants.HEALTH:
                         map.setVisibility(View.VISIBLE);
-                        toolbar.startAnimation(slideInFromRightAnim());
+                        toolbar.setVisibility(View.GONE);
+                        toolbar2.setVisibility(View.VISIBLE);
+                        toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
+                        toolbar2.startAnimation(slideInFromRightAnim());
+                        setSupportActionBar(toolbar2);
+                        ActionBar ab3 = getSupportActionBar();
+                        ab3.setHomeAsUpIndicator(R.drawable.menu_icon);
+                        ab3.setDisplayHomeAsUpEnabled(true);
+                        ActionBarDrawerToggle toggle3 = new ActionBarDrawerToggle(
+                                act, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+                            /** Called when a drawer has settled in a completely open state. */
+                            public void onDrawerOpened(View drawerView) {
+                                super.onDrawerOpened(drawerView);
+                                //  getSupportActionBar().setTitle("Navigation!");
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+
+                            /** Called when a drawer has settled in a completely closed state. */
+                            public void onDrawerClosed(View view) {
+                                super.onDrawerClosed(view);
+                                // getSupportActionBar().setTitle(mActivityTitle);
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+                        };
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
+                        toggle3.setDrawerIndicatorEnabled(true);
+                        drawer.setDrawerListener(toggle3);
                         mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
@@ -564,7 +625,35 @@ toolbar.startAnimation(slideInFromRightAnim());
 
                     case AppConstants.ENTERTAINMENT:
                         map.setVisibility(View.VISIBLE);
-                        toolbar.startAnimation(slideInFromRightAnim());
+                        toolbar.setVisibility(View.GONE);
+                        toolbar2.setVisibility(View.VISIBLE);
+                        toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
+                        toolbar2.startAnimation(slideInFromRightAnim());
+                        setSupportActionBar(toolbar2);
+                        ActionBar ab4 = getSupportActionBar();
+                        ab4.setHomeAsUpIndicator(R.drawable.menu_icon);
+                        ab4.setDisplayHomeAsUpEnabled(true);
+                        ActionBarDrawerToggle toggle4 = new ActionBarDrawerToggle(
+                                act, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+                            /** Called when a drawer has settled in a completely open state. */
+                            public void onDrawerOpened(View drawerView) {
+                                super.onDrawerOpened(drawerView);
+                                //  getSupportActionBar().setTitle("Navigation!");
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+
+                            /** Called when a drawer has settled in a completely closed state. */
+                            public void onDrawerClosed(View view) {
+                                super.onDrawerClosed(view);
+                                // getSupportActionBar().setTitle(mActivityTitle);
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+                        };
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
+                        toggle4.setDrawerIndicatorEnabled(true);
+                        drawer.setDrawerListener(toggle4);
                         mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
@@ -580,6 +669,8 @@ toolbar.startAnimation(slideInFromRightAnim());
 
                         map.removeAllViews();
                         //TODO write necessary codes for government
+                        toolbar2.setVisibility(View.GONE);
+                        toolbar.setVisibility(View.VISIBLE);
 
                         final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
@@ -595,7 +686,35 @@ toolbar.startAnimation(slideInFromRightAnim());
                         break;
                     case AppConstants.LEGAL:
                         map.setVisibility(View.VISIBLE);
-                        toolbar.startAnimation(slideInFromRightAnim());
+                        toolbar.setVisibility(View.GONE);
+                        toolbar2.setVisibility(View.VISIBLE);
+                        toolbar2.setBackgroundColor(Color.parseColor("#67C3A2"));
+                        toolbar2.startAnimation(slideInFromRightAnim());
+                        setSupportActionBar(toolbar2);
+                        ActionBar ab5 = getSupportActionBar();
+                        ab5.setHomeAsUpIndicator(R.drawable.menu_icon);
+                        ab5.setDisplayHomeAsUpEnabled(true);
+                        ActionBarDrawerToggle toggle5 = new ActionBarDrawerToggle(
+                                act, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+                            /** Called when a drawer has settled in a completely open state. */
+                            public void onDrawerOpened(View drawerView) {
+                                super.onDrawerOpened(drawerView);
+                                //  getSupportActionBar().setTitle("Navigation!");
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+
+                            /** Called when a drawer has settled in a completely closed state. */
+                            public void onDrawerClosed(View view) {
+                                super.onDrawerClosed(view);
+                                // getSupportActionBar().setTitle(mActivityTitle);
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+                        };
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
+                        toggle5.setDrawerIndicatorEnabled(true);
+                        drawer.setDrawerListener(toggle5);
                         mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
@@ -604,7 +723,35 @@ toolbar.startAnimation(slideInFromRightAnim());
                         break;
                     case AppConstants.FINANCIAL:
                         map.setVisibility(View.VISIBLE);
-                        toolbar.startAnimation(slideInFromRightAnim());
+                        toolbar.setVisibility(View.GONE);
+                        toolbar2.setVisibility(View.VISIBLE);
+                        toolbar2.setBackgroundColor(Color.parseColor("#7a378b"));
+                        toolbar2.startAnimation(slideInFromRightAnim());
+                        setSupportActionBar(toolbar2);
+                        ActionBar ab6 = getSupportActionBar();
+                        ab6.setHomeAsUpIndicator(R.drawable.menu_icon);
+                        ab6.setDisplayHomeAsUpEnabled(true);
+                        ActionBarDrawerToggle toggle6 = new ActionBarDrawerToggle(
+                                act, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+                            /** Called when a drawer has settled in a completely open state. */
+                            public void onDrawerOpened(View drawerView) {
+                                super.onDrawerOpened(drawerView);
+                                //  getSupportActionBar().setTitle("Navigation!");
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+
+                            /** Called when a drawer has settled in a completely closed state. */
+                            public void onDrawerClosed(View view) {
+                                super.onDrawerClosed(view);
+                                // getSupportActionBar().setTitle(mActivityTitle);
+                                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                            }
+                        };
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
+                        toggle6.setDrawerIndicatorEnabled(true);
+                        drawer.setDrawerListener(toggle6);
                         mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
@@ -615,6 +762,8 @@ toolbar.startAnimation(slideInFromRightAnim());
 
 
                         map.removeAllViews();
+                        toolbar2.setVisibility(View.GONE);
+                        toolbar.setVisibility(View.VISIBLE);
                         final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
@@ -891,7 +1040,7 @@ toolbar.startAnimation(slideInFromRightAnim());
                 if (height < 1000d && dwPerc == 1)
                     return;
                 else if (dwPerc < 0.7 && dpi>300)return;
-                else if (dwPerc < 0.6)
+                else if (dwPerc < 0.75)
                     return;
                 // Decrease category-list width
                 ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();

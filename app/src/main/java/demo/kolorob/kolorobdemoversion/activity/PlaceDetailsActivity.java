@@ -1067,7 +1067,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
 
     public static void subCatInsGone()
     {
-        insSubCat.setVisibility(View.GONE);
+
     }
     @Override
     public void onClick(View v) {

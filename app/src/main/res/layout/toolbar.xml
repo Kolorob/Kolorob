@@ -28,8 +28,8 @@
         <ImageView
             android:id="@+id/toolbar_logoa"
             android:src="@drawable/sear_bar"
-            android:layout_width="630dp"
-            android:layout_height="match_parent"
+            android:layout_width="663dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="?attr/actionBarSize"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"

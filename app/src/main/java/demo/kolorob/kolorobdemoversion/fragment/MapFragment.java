@@ -4,7 +4,6 @@ package demo.kolorob.kolorobdemoversion.fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,7 +156,7 @@ public class MapFragment extends Fragment implements
 
         mapIndicator = (TextView) rootView.findViewById(R.id.tv_map_indicator);
 
-        mapIndicator.setText(Html.fromHtml("সব " + mapIndicatorText + " এর স্থান ম্যাপ এ দেখানো হয়েছে"));
+
         mMapView.onCreate(savedInstanceState);
 
         mMapView.onResume();

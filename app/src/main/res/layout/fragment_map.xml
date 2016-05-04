@@ -12,7 +12,7 @@
     android:id="@+id/mapView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
+    
     android:padding="3dp" />
 
     <LinearLayout
@@ -29,30 +29,8 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/map_marker"
-        android:gravity="center_horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="সব এর স্থান ম্যাপ এ দেখানো হয়েছে"
-            android:id="@+id/tv_map_indicator"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFF"
-            android:gravity="center_vertical|center_horizontal"
-            android:paddingRight="10dp"
-            android:paddingLeft="6dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="3dp" />
-    </LinearLayout>
+
+
 
 </RelativeLayout>
