@@ -14,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/backdrop"
+        android:background="@drawable/backplacedetails"
         >
 
         <include layout="@layout/toolbar" />
-        <include layout="@layout/place_details_activity2" />
+        <include layout="@layout/place_details_activityy" />
         <!-- Let's add fragment -->
 
 

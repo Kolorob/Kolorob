@@ -273,11 +273,11 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         ///this code will change the background of the layout for two places.
         if(locationNameId==AppConstants.PLACE_BAUNIABADH)
         {
-            placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
+            placeDetailsLayout.setBackgroundResource(R.drawable.backplacedetails);
         }
         else if(locationNameId==AppConstants.PLACE_PARIS_ROAD)
         {
-            placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
+            placeDetailsLayout.setBackgroundResource(R.drawable.backplacedetails);
         }
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -1280,7 +1280,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 insSubCat.setVisibility(View.VISIBLE);
                 seeMap.setVisibility(View.GONE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
-                placeDetailsLayout.setBackgroundResource(R.drawable.backdrop);
+                placeDetailsLayout.setBackgroundResource(R.drawable.backplacedetails);
                 // categoryHeader.setText(ci.getCatName());
                 categoryHeaderIcon.setImageResource(AppConstants.ALL_CAT_ICONS[ci.getId() - 1]);
                 if (isCatExpandedOnce)

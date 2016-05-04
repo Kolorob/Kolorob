@@ -16,11 +16,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,31 +27,24 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.Switch;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.AlphabetListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterEdu;
@@ -99,24 +89,14 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
     private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
     private static final int ANIM_INTERVAL = 100;
-    int caselan=0;
     private static double VIEW_WIDTH;
-    private ScrollView svCatList;
     private LinearLayout llCatListHolder;
-    private LinearLayout llSubCatListHolder;
-    private FrameLayout placeDetailsLayout;
-    private TextView categoryHeader;
-    private ImageView categoryHeaderIcon;
-    private TextView subCatItemListHeader;
-    private ExpandableListView subCatItemList;
-    private Button showSubCatListItem;
-    private Button seeMap;
     CategoryItem ci;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
-    private HashMap<String, String> countriesv2 = new HashMap<>();
-    private static TextView insSubCat;
     private static FrameLayout map;
-    public LinearLayout showsearch2,llItemListHolderbody;
+    private Spinner spItems;
+    ArrayAdapter arrayAdapter;
+    List<String>listData=new ArrayList<String>();
     private int height,dpi;
     private View nextChild;
     private boolean isCatExpandedOnce = false;
@@ -124,41 +104,24 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private int subCatShowFlag=0;
     private int locationNameId,subcategory;
     private String locationName;
-    private LinearLayout catLayout;
-    private RadioButton srad,brad;
-    private GestureDetector mGestureDetector;
+
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
-    private static float sideIndexX;
-    private static float sideIndexY;
-    TextView textView,texthead,textmid;
-    FinancialServiceProviderItem financialServiceProviderItem;
-    ImageButton search;
-    Button Back;
+
     public int layoutstatus;
-    HorizontalScrollView svSubCategoryListHolder;
 
-    public int getLayoutstatus() {
-        return layoutstatus;
-    }
 
-    public void setLayoutstatus(int layoutstatus) {
-        this.layoutstatus = layoutstatus;
-    }
 
-    TextView tmpTV;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
-    private Switch switchlan;
-    public int status=0;
-    AlphabetListAdapter adapterind = new AlphabetListAdapter(PlaceDetailsActivityNew.this);
+
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
-    ArrayList<String> countries=new ArrayList<String>();
+
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
 
     ArrayList<EducationServiceProviderItem> printnames;
@@ -233,6 +196,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
         ab.setDisplayHomeAsUpEnabled(true);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
@@ -294,11 +258,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             {
                 setPlaceChoice("Baunia Badh");
                 locationName = AppConstants.BAUNIABADH;
+                listData.add("বাউনিয়া বাধ");
+                listData.add("প্যারিস রোড");
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
                 setPlaceChoice("Paris Road");
                 locationName = AppConstants.PARIS_ROAD;
+                listData.add("প্যারিস রোড");
+                listData.add("বাউনিয়া বাধ");
             }
         }
 
@@ -346,8 +314,16 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
 
         // callMapFragment();
+        spItems = (Spinner) findViewById(R.id.areaitems);
+
+        arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNew.this,R.layout.area_row_spinner, listData);
+        arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
+        spItems.setAdapter(arrayAdapter);
+
 
     }
+
+
 
 
 
@@ -360,424 +336,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
 
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (mGestureDetector.onTouchEvent(event)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public void displayListItem() {
-        sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
-        sideIndexHeight = sideIndex.getHeight();
-        // compute number of pixels for every side index item
-        double pixelPerIndexItem = (double) sideIndexHeight / indexListSize;
 
-        // compute the item index for given event position belongs to
-        int itemPosition = (int) (sideIndexY / pixelPerIndexItem);
 
-        // get the item (we can do it since we know item index)
-        if (itemPosition < alphabet.size()) {
-            Object[] indexItem = alphabet.get(itemPosition);
-            int subitemPosition = sections.get(indexItem[0]);
 
-
-            itemList.setSelection(subitemPosition);
-        }
-    }
-    private void SearchResult( int currentCategoryID)  {
-
-
-
-        filterText = (EditText)findViewById(R.id.editText);
-
-
-        if (currentCategoryID==1) {
-
-            itemList.setAdapter(null);
-           sideIndex.setVisibility(View.VISIBLE);
-            EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
-            fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
-
-            arraylist2.clear();
-
-            for (int i=0;i<fetchededu.size();i++)
-            {
-
-                fname=fetchededu.get(i).getEduNameEng();
-                fnodeid=fetchededu.get(i).getIdentifierId();
-                refid=fetchededu.get(i).getEduSubCategoryId();
-                upname=fetchededu.get(i).getEduNameBan();
-
-                PopulatedfromDBEdu wp = new PopulatedfromDBEdu(fname,fnodeid,refid,fetchededu);
-                arraylist2.add(wp);
-            }
-
-
-
-           searchheads.clear();
-            for (int ind=0;ind<arraylist2.size();ind++)
-            {
-              names=arraylist2.get(ind).getRank();
-                ids=arraylist2.get(ind).getNodeid();
-                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
-                searchheads.add(sh);
-            }
-          Collections.sort(searchheads, SearchHolder.NameCompare);
-
-               // indexbar(searchheads);
-
-
-            itemList.setFastScrollEnabled(false);
-            itemList.setFastScrollEnabled(true);
-            filterText.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-
-                    adapterEdu = new ListViewAdapterEdu(PlaceDetailsActivityNew.this, arraylist2);
-                    map.setVisibility(View.GONE);
-                    sideIndex.setVisibility(View.GONE);
-                    itemList.setAdapter(adapterEdu);
-
-                    return false;
-                }
-            });
-
-            filterText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-
-                    // TODO Auto-generated method stub
-                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
-
-                    adapterEdu.filter(text);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1,
-                                              int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-            });
-
-
-
-        }
-        else if (currentCategoryID==2){
-            sideIndex.setVisibility(View.VISIBLE);
-            HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
-            fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
-            arraylist3.clear();
-
-            for (int i=0;i<fetchedhel.size();i++)
-            {
-
-                fname=fetchedhel.get(i).getNodeName();
-                fnodeid=fetchedhel.get(i).getNodeId();
-                refid=fetchedhel.get(i).getRefNum();
-                upname=fetchedhel.get(i).getNameBn();
-
-                PopulatedfromDBHel wp = new PopulatedfromDBHel(fname,fnodeid,refid,fetchedhel);
-                arraylist3.add(wp);}
-
-
-
-
-            searchheads.clear();
-            for (int ind=0;ind<arraylist3.size();ind++)
-            {
-                names=arraylist3.get(ind).getRank();
-                ids=arraylist3.get(ind).getNodeid();
-                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
-                searchheads.add(sh);
-            }
-            Collections.sort(searchheads, SearchHolder.NameCompare);
-
-            //indexbar(searchheads);
-
-
-
-
-            itemList.setFastScrollEnabled(false);
-            itemList.setFastScrollEnabled(true);
-            filterText.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    sideIndex.setVisibility(View.GONE);
-                    map.setVisibility(View.GONE);
-                    adapterHel = new ListViewAdapterHel(PlaceDetailsActivityNew.this, arraylist3);
-
-
-                    itemList.setAdapter(adapterHel);
-                    return false;
-                }
-            });
-
-            filterText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-
-                    // TODO Auto-generated method stub
-                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
-
-                    adapterHel.filter(text);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1,
-                                              int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-            });
-
-
-
-        }
-        else if (currentCategoryID==5){
-            sideIndex.setVisibility(View.VISIBLE);
-            itemList.setAdapter(null);
-            LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
-            fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
-            arraylist4.clear();
-
-            for (int i=0;i<fetchedleg.size();i++)
-            {
-
-                fname=fetchedleg.get(i).getLegalaidNameEng();
-                fnodeid=fetchedleg.get(i).getIdentifierId();
-                refid=fetchedleg.get(i).getLegalaidSubCategoryId();
-                upname=fetchedleg.get(i).getLegalaidNameBan();
-
-                PopulatedfromDBLeg wp = new PopulatedfromDBLeg(fname,fnodeid,refid,fetchedleg);
-                arraylist4.add(wp);
-
-
-            }
-            searchheads.clear();
-            for (int ind=0;ind<arraylist4.size();ind++)
-            {
-                names=arraylist4.get(ind).getRank();
-                ids=arraylist4.get(ind).getNodeid();
-                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
-                searchheads.add(sh);
-            }
-           Collections.sort(searchheads, SearchHolder.NameCompare);
-
-            //indexbar(searchheads);
-
-
-
-            itemList.setFastScrollEnabled(false);
-            itemList.setFastScrollEnabled(true);
-            filterText.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    map.setVisibility(View.GONE);
-                    sideIndex.setVisibility(View.GONE);
-                    adapterLeg = new ListViewAdapterLeg(PlaceDetailsActivityNew.this, arraylist4);
-
-                    itemList.setAdapter(adapterLeg);
-
-                    return false;
-                }
-            });
-
-            filterText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                    // TODO Auto-generated method stub
-                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
-
-                    adapterLeg.filter(text);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1,
-                                              int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-            });
-
-
-
-        }
-        else if (currentCategoryID==3){
-            sideIndex.setVisibility(View.VISIBLE);
-            EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
-
-            fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
-            arraylist5.clear();
-
-            for (int i=0;i<fetchedent.size();i++)
-            {
-
-                fname=fetchedent.get(i).getNodeName();
-                fnodeid=fetchedent.get(i).getNodeId();
-                refid=fetchedent.get(i).getEntSubCategoryId();
-                upname=fetchedent.get(i).getNodeNameBn();
-
-                PopulatedfromDBEnt wp = new PopulatedfromDBEnt(fname,fnodeid,refid,fetchedent);
-                arraylist5.add(wp);
-
-
-            }
-            searchheads.clear();
-            for (int ind=0;ind<arraylist5.size();ind++)
-            {
-                names=arraylist5.get(ind).getRank();
-                ids=arraylist5.get(ind).getNodeid();
-                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
-                searchheads.add(sh);
-            }
-            Collections.sort(searchheads, SearchHolder.NameCompare);
-
-           // indexbar(searchheads);
-
-
-
-
-
-            itemList.setFastScrollEnabled(false);
-            itemList.setFastScrollEnabled(true);
-            filterText.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    sideIndex.setVisibility(View.GONE);
-                    map.setVisibility(View.GONE);
-                    adapterEnt = new ListViewAdapterEnt(PlaceDetailsActivityNew.this, arraylist5);
-                    itemList.setAdapter(adapterEnt);
-                    return false;
-                }
-            });
-
-            filterText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                    // TODO Auto-generated method stub
-                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
-
-                    adapterEnt.filter(text);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1,
-                                              int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-            });
-
-
-
-        }
-        else if (currentCategoryID==6){
-            sideIndex.setVisibility(View.VISIBLE);
-            FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
-            fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
-            arraylistfin.clear();
-
-            for (int i=0;i<fetchedfin.size();i++)
-            {
-
-                fname=fetchedfin.get(i).getNodeName();
-                fnodeid=fetchedfin.get(i).getNodeId();
-                refid=fetchedfin.get(i).getRefNum();
-                upname=fetchedfin.get(i).getNamebn();
-
-                PopulatedfromDB wp = new PopulatedfromDB(fname,fnodeid,refid,fetchedfin);
-                arraylistfin.add(wp);
-
-
-            }
-            searchheads.clear();
-            for (int ind=0;ind<arraylistfin.size();ind++)
-            {
-                names=arraylistfin.get(ind).getRank();
-                ids=arraylistfin.get(ind).getNodeid();
-                SearchHolder sh = new SearchHolder(names,ids,currentCategoryID);
-                searchheads.add(sh);
-            }
-            Collections.sort(searchheads, SearchHolder.NameCompare);
-
-           // indexbar(searchheads);
-
-
-
-
-
-            itemList.setFastScrollEnabled(false);
-            itemList.setFastScrollEnabled(true);
-            filterText.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    sideIndex.setVisibility(View.GONE);
-                    map.setVisibility(View.GONE);
-                    adapter = new ListViewAdapter(PlaceDetailsActivityNew.this, arraylistfin);
-                    itemList.setAdapter(adapter);
-                    return false;
-                }
-            });
-
-            filterText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                    // TODO Auto-generated method stub
-                    String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
-
-                    adapter.filter(text);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1,
-                                              int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                    // TODO Auto-generated method stub
-                }
-
-            });
-
-
-
-        }
-    }
 
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
@@ -905,10 +466,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         finish();
     }
 
-    public static void subCatInsGone()
-    {
-        insSubCat.setVisibility(View.GONE);
-    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -1153,7 +711,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
 
     private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
-        llSubCatListHolder.removeAllViews();
+       // llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         subcategory=0;
         for (SubCategoryItem si : subCategoryList) {
@@ -1162,7 +720,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             {
                 header.add(si.getSubcatHeader());
 
-                llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
+               // llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
             }
         }
     }
@@ -1306,8 +864,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     nextChild.setBackgroundColor(p);
                 }
 
-                showSubCatListItem.setEnabled(true);
-                subCatItemListHeader.setText(si.getSubcatHeader());
+               // showSubCatListItem.setEnabled(true);
+               // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
             }
         });
