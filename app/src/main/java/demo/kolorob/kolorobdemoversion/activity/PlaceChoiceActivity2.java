@@ -25,7 +25,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
-    private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 300;
+    private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,6 +176,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         }, DELAY_PLACE_DETAILS_LAUNCH_ANIM);
     }

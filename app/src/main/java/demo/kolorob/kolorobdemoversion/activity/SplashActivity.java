@@ -27,73 +27,6 @@ public class SplashActivity extends ActionBarActivity {
     View view=null;
 
 
-    public RefreshHandler mRedrawHandler = new RefreshHandler();
-
-    class RefreshHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            //SplashActivity.this.setsongName();
-        }
-
-        public void sleep(long delayMillis) {
-            this.removeMessages(0);
-            sendMessageDelayed(obtainMessage(0), delayMillis);
-        }
-    };
-
-    private void setsongName() {
-        try {
-            in++;
-
-//            if(in == 5) {
-//                rotateImage.setBackgroundResource(R.drawable.glow);
-//                Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.glow_animation);
-//                rotateImage.startAnimation(startRotateAnimation);
-//            }
-            // Main.songtitle.setText(Main.songname);
-        } catch (final Exception e) {
-
-
-        }
-
-        if(in ==1){
-            rotateImage.setBackgroundResource(R.drawable.glow);
-            System.out.println("-----okkkkk1--------");
-           // startActivity(new Intent(SplashActivity.this, OpeningActivity.class));
-        }
-        else if(in ==2){
-            rotateImage.setBackgroundResource(R.drawable.kolorob_logo_first_page);
-            System.out.println("-----okkkkk2--------");
-
-        }
-        else if(in ==3){
-            rotateImage.setBackgroundResource(R.drawable.glow);
-            System.out.println("-----okkkkk2--------");
-
-        }
-        else if(in ==4){
-            rotateImage.setBackgroundResource(R.drawable.kolorob_logo_first_page);
-            System.out.println("-----okkkkk2--------");
-
-        }
-        else if(in ==5){
-            rotateImage.setBackgroundResource(R.drawable.glow);
-            System.out.println("-----okkkkk2--------");
-
-        }
-
-        else if(in == 7){
-            rotateImage.setBackgroundResource(R.drawable.glow);
-            startActivity(new Intent(SplashActivity.this, PlaceChoiceActivity.class));
-            mRedrawHandler.removeMessages(0);
-            finish();
-            System.out.println("-----okkkkk74--------" );
-           // in=0;
-        }
-
-        mRedrawHandler.sleep(1000);
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,26 +35,26 @@ public class SplashActivity extends ActionBarActivity {
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
 
-       // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_splash);
         context = this;
-        //getActionBar().setBackgroundDrawable((getResources().getDrawable(R.drawable.actionbar)));
 
     //    TextView text = (TextView)findViewById(R.id.falsetice_id);
 
-
         rotateImage = (ImageView) findViewById(R.id.rotate_image);
         rotateImage.setBackgroundResource(R.drawable.glow);
-                Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
-               rotateImage.startAnimation(startRotateAnimation);
+        Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
+        rotateImage.startAnimation(startRotateAnimation);
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                                 /* start the activity */
-                startActivity(new Intent(SplashActivity.this, PlaceChoiceActivity.class));
+                startActivity(new Intent(SplashActivity.this, PlaceChoiceActivity2.class));
                 //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                overridePendingTransition(0, 0);
+                //overridePendingTransition(0, 0);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 finish();
             }
         }, 3000);
