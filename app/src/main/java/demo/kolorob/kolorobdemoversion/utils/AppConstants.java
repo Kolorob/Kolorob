@@ -48,6 +48,7 @@ public class AppConstants {
             SUB_CAT_HEALTH_BN, SUB_CAT_JOB_BN, SUB_CAT_LAW_BN, SUB_CAT_MONEY_BN};
 
     public static final double CAT_LIST_LG_WIDTH_PERC = 0.15;
+    public static final double CAT_LIST_LG_WIDTH_PERC_NEW = 0.20;
     public static final double CAT_LIST_SM_WIDTH_PERC = 0.11;
 
 

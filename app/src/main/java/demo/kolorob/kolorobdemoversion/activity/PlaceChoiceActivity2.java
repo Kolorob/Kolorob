@@ -25,7 +25,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
-
+    Toolbar toolbar;
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
@@ -106,10 +106,14 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         imgbau.setOnClickListener((View.OnClickListener) this);
         imgpar.setOnClickListener((View.OnClickListener) this);
 
+       if(height>1000)
+       toolbar = (Toolbar) findViewById(R.id.toolbar);
+        else
+           toolbar = (Toolbar) findViewById(R.id.toolbar_s);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
+
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
         ab.setDisplayHomeAsUpEnabled(true);
