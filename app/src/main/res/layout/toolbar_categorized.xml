@@ -5,7 +5,7 @@
     android:id="@+id/categorytoolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-android:visibility="gone"
+    android:visibility="gone"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -24,6 +24,9 @@ android:visibility="gone"
                 <!--android:layout_marginTop="4dp"-->
                 <!--android:layout_marginBottom="4dp"-->
                 <!--android:layout_gravity="left" />-->
+
+
+
 
 
 

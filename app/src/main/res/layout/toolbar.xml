@@ -11,19 +11,10 @@
 
 
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <!--<ImageView-->
-            <!--android:id="@+id/toolbar_logos"-->
-            <!--android:src="@drawable/menu_icon"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginRight="?attr/actionBarSize"-->
-            <!--android:layout_marginTop="4dp"-->
-            <!--android:layout_marginBottom="4dp"-->
-            <!--android:layout_gravity="left" />-->
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/toolbar_logoa"
@@ -33,7 +24,7 @@
             android:layout_marginRight="?attr/actionBarSize"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:layout_gravity="left" />
+          />
 
         <ImageView
             android:id="@+id/toolbar_logo"
@@ -43,12 +34,32 @@
             android:layout_marginRight="?attr/actionBarSize"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:layout_gravity="right" />
+             />
+
+
+
+    </LinearLayout>
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/toolbar_logos"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:src="@drawable/menu_icon"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginRight="?attr/actionBarSize"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="4dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginBottom="4dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="left" />&ndash;&gt;-->
+
+    <!-- -->
 
 
 
 
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
 
 

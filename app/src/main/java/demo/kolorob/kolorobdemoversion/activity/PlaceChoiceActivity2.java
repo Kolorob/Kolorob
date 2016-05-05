@@ -104,6 +104,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
+
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
         ab.setDisplayHomeAsUpEnabled(true);
