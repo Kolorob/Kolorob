@@ -58,6 +58,7 @@ import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapRouteDrawingFragment;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -548,8 +549,11 @@ private RelativeLayout mapholderr;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
+                        listholder.setVisibility(View.VISIBLE);
+                        listholder.setBackgroundColor(Color.parseColor("#58BED6"));
                         toolbar2.setBackgroundColor(Color.parseColor("#58BED6"));
                         toolbar2.startAnimation(slideInFromRightAnim());
+                        listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab2 = getSupportActionBar();
                         ab2.setHomeAsUpIndicator(R.drawable.menu_icon);
@@ -590,6 +594,9 @@ private RelativeLayout mapholderr;
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
                         toolbar2.startAnimation(slideInFromRightAnim());
+                        listholder.setVisibility(View.VISIBLE);
+                        listholder.setBackgroundColor(Color.parseColor("#DF554E"));
+                        listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab3 = getSupportActionBar();
                         ab3.setHomeAsUpIndicator(R.drawable.menu_icon);
@@ -630,6 +637,9 @@ private RelativeLayout mapholderr;
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
                         toolbar2.startAnimation(slideInFromRightAnim());
+                        listholder.setVisibility(View.VISIBLE);
+                        listholder.setBackgroundColor(Color.parseColor("#7377B7"));
+                        listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab4 = getSupportActionBar();
                         ab4.setHomeAsUpIndicator(R.drawable.menu_icon);
@@ -671,8 +681,8 @@ private RelativeLayout mapholderr;
                         map.removeAllViews();
                         //TODO write necessary codes for government
                         toolbar2.setVisibility(View.GONE);
+                        listholder.setVisibility(View.GONE);
                         toolbar.setVisibility(View.VISIBLE);
-
                         final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
@@ -688,6 +698,9 @@ private RelativeLayout mapholderr;
                     case AppConstants.LEGAL:
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
+                        listholder.setVisibility(View.VISIBLE);
+                        listholder.setBackgroundColor(Color.parseColor("#67C3A2"));
+                        listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#67C3A2"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -725,6 +738,9 @@ private RelativeLayout mapholderr;
                     case AppConstants.FINANCIAL:
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
+                        listholder.setVisibility(View.VISIBLE);
+                        listholder.setBackgroundColor(Color.parseColor("#7a378b"));
+                        listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7a378b"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -764,6 +780,7 @@ private RelativeLayout mapholderr;
 
                         map.removeAllViews();
                         toolbar2.setVisibility(View.GONE);
+                        listholder.setVisibility(View.GONE);
                         toolbar.setVisibility(View.VISIBLE);
                         final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
@@ -1118,15 +1135,16 @@ private RelativeLayout mapholderr;
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(getPlaceChoice());
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+       /* mapFragment.setLocationName(getPlaceChoice());
         mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
+
+        mapFragment.setLocationNameId(locationNameId);*/
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
-        mapFragment.setLocationNameId(locationNameId);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
 
