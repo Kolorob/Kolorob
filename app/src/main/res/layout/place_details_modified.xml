@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/backplacedetails"
+
         android:id="@+id/mapnothers"
         android:layout_above="@+id/listholder">
         <RelativeLayout
@@ -61,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/red"
+        android:visibility="gone"
         android:layout_gravity="center_horizontal"
         android:id="@+id/listholder"
 
