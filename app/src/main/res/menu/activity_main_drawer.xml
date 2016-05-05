@@ -11,9 +11,9 @@
             android:icon="@drawable/profile_icon"
             android:title="Registration" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_emergency"
             android:icon="@drawable/protinidhi_icon"
-            android:title="Calling Doctor" />
+            android:title="Emergency Services" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/advertising_icon"

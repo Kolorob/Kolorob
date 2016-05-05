@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/kolorob_logo_first_page"
@@ -36,6 +38,9 @@
 
         <activity
             android:name=".activity.OpeningActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.EmergencyActivity"
             android:theme="@style/Theme.AppCompat.Light" />
 
         <activity

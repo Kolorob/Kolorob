@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.fragment;
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,9 +64,13 @@ MapView mapView;
         mapViewController.setZoom(18);
         mapViewController.setCenter(BauniaBadh);
         anotherOverlayItemArray = new ArrayList<OverlayItem>();
+
         if(educationServiceProvider!=null) {
+            Log.d("---edu name ","....subcategory..");
             for (EducationServiceProviderItem et : educationServiceProvider) {
                 LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                Log.d("---edu name "+location,"....subcategory..");
+                Log.d("---edu name "+et.getEduNameEng(),"....subcategory.."+et.getEduSubCategoryId());
                 drawMarkerEdu(location, et.getEduNameEng(), et.getEduSubCategoryId());
             }
         }
@@ -116,14 +121,14 @@ MapView mapView;
             Drawable drawable = this.getResources().getDrawable(
                     R.drawable.advertising_icon);
         }
-        else if(subcategotyId>=13&&subcategotyId<=17)
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
-        else if(subcategotyId>=18&&subcategotyId<=19)
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
-        else if(subcategotyId>=20&&subcategotyId<=21)
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
-        else if(subcategotyId>=22&&subcategotyId<=26)
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
+//        else if(subcategotyId>=13&&subcategotyId<=17)
+//            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[2]));
+//        else if(subcategotyId>=18&&subcategotyId<=19)
+//            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[3]));
+//        else if(subcategotyId>=20&&subcategotyId<=21)
+//            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[4]));
+//        else if(subcategotyId>=22&&subcategotyId<=26)
+//            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(AppConstants.MARKER_HUE_COLOR[5]));
         //mapView.getOverlays().add(markerOptions);
     }
 

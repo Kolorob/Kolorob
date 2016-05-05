@@ -1,11 +1,13 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -26,12 +29,15 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
+
+    private Context con;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice2);
 
 
+        con = this;
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels-32;
@@ -135,10 +141,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-
-
     }
 
 
@@ -225,6 +227,28 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        return false;
+        int id = menuItem.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_emergency) {
+
+            Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, EmergencyActivity.class);
+            startActivity(em);
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
     }
 }
