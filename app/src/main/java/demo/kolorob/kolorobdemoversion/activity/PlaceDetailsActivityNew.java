@@ -250,16 +250,18 @@ private RelativeLayout mapholderr;
        // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         //seeMap = (Button) findViewById(R.id.btn_see_map);
        // showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
-        VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
+        VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC_NEW;
         isCatExpandedOnce = false;
-        primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80); // 80% of the view width
+        primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.92); // 80% of the view width
 
       //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
        // llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
-        lp.width = (int) (VIEW_WIDTH);
+        int s=lp.width = (int) (VIEW_WIDTH);
 
+
+         Log.d(">>>>>>>>","View_width       "+s);
         /**
          * constructing category list
          **/
@@ -1057,8 +1059,8 @@ private RelativeLayout mapholderr;
                 Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
                 if (height < 1000d && dwPerc == 1)
                     return;
-                else if (dwPerc < 0.7 && dpi>300)return;
-                else if (dwPerc < 0.75)
+                else if (dwPerc < 0.99 && dpi>300)return;
+                else if (dwPerc < 0.99)
                     return;
                 // Decrease category-list width
                 ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
