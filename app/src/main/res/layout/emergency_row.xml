@@ -57,6 +57,48 @@
 		android:layout_below="@+id/layout"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 
+
+
+
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:text=" @+id/TextView01" android:id="@+id/bangla_name"
+		android:textSize="18sp"
+
+		android:textStyle="bold"
+		android:textColor="#3A4296"
+		android:paddingTop="2dip"
+		android:paddingBottom="2dip"
+		android:gravity="center_vertical"
+		android:layout_below="@+id/phone_id"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+
+
+
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:text=" @+id/TextView01" android:id="@+id/bangla_address"
+		android:textSize="18sp"
+
+		android:textStyle="bold"
+		android:textColor="#3A4296"
+		android:paddingTop="2dip"
+		android:paddingBottom="2dip"
+		android:gravity="center_vertical"
+		android:layout_below="@+id/bangla_name"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+
+
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:text=" @+id/TextView01" android:id="@+id/bangla_phone"
+		android:textSize="18sp"
+
+		android:textStyle="bold"
+		android:textColor="#3A4296"
+		android:paddingTop="2dip"
+		android:paddingBottom="2dip"
+		android:gravity="center_vertical"
+		android:layout_below="@+id/bangla_address"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+
 </RelativeLayout>
 
 
