@@ -160,6 +160,7 @@ private RelativeLayout mapholderr;
 
         super.onCreate(savedInstanceState);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+
         dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
@@ -259,9 +260,17 @@ private RelativeLayout mapholderr;
        // llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         int s=lp.width = (int) (VIEW_WIDTH);
+        FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
+
+        lp.height=400;
+
+        if(height<1000)
+        caTsList.setMargins(0, 250, 0, 0);
+        else
+            caTsList.setMargins(0, 10, 0, 0);
 
 
-         Log.d(">>>>>>>>","View_width       "+s);
+        Log.d(">>>>>>>>","View_width       "+s);
         /**
          * constructing category list
          **/
@@ -497,8 +506,8 @@ private RelativeLayout mapholderr;
         if(dpi>300)
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
         else
-        if(dpi<300 && height>1000)
-            v = li.inflate(R.layout.cat_list_mobile1, llCatListHolder, false);
+        if( height>1000)
+            v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         else
 
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);

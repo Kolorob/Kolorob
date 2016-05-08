@@ -34,6 +34,13 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTabl
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
+
+/**
+ * Created by arafat on 02/05/15.
+ *
+ * @author arafat
+ */
+
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     AutoCompleteTextView autocompletetextview2;
@@ -120,7 +127,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         paramsPar.width = (width*2)/3;
         imgpar.setLayoutParams(paramsPar);
 
-
+        search();
         imgbau.setOnClickListener((View.OnClickListener) this);
         imgpar.setOnClickListener((View.OnClickListener) this);
 
@@ -187,43 +194,13 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         vectorEdu.addAll(vectorHel);
         vectorEdu.addAll(vectorFin);
         vectorEdu.addAll(vectorLeg);
-
-
-
-
-
-
-
-
-
-
         autocompletetextview2 = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteTextView1x);
-
-
-
         ArrayAdapter<String> adapter2;
-
-
-
-
-
         adapter2 = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, vectorEdu);
-
-
+                (this, R.layout.dropdown_text_survey, vectorEdu);
         autocompletetextview2.setThreshold(2);
-
-
         autocompletetextview2.setAdapter(adapter2);
-
-
-
-
-
-
-
-//
 //                Intent ii = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
 //                ii.putExtra(AppConstants.KEY_DETAILS_VIEW, SearchedEducation);
 //                startActivity(ii);
@@ -273,7 +250,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+              //  overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         }, DELAY_PLACE_DETAILS_LAUNCH_ANIM);
     }

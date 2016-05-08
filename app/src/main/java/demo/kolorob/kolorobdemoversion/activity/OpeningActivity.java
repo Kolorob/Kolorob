@@ -125,7 +125,6 @@ public class OpeningActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_opening);
 
@@ -901,7 +900,7 @@ public class OpeningActivity extends Activity {
         // TODO Auto-generated method stub
         super.onStart();
         System.out.println("----main activity---onStart---");
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+       // overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
     @Override
     protected void onRestart() {
