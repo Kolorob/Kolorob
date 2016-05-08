@@ -136,7 +136,7 @@ Context context;
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
-private RelativeLayout mapholderr;
+    private RelativeLayout mapholderr;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
     }
@@ -262,10 +262,10 @@ private RelativeLayout mapholderr;
         int s=lp.width = (int) (VIEW_WIDTH);
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
-        lp.height=400;
+        lp.height=100;
 
         if(height<1000)
-        caTsList.setMargins(0, 250, 0, 0);
+        caTsList.setMargins(0, 60, 0, 0);
         else
             caTsList.setMargins(0, 10, 0, 0);
 
@@ -503,14 +503,14 @@ private RelativeLayout mapholderr;
     private View getCategoryListItemView(final CategoryItem ci, double dwPercentage) {
         LayoutInflater li = LayoutInflater.from(this);
         View v;
-        if(dpi>300)
-            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-        else
+//        if(dpi>300)
+//            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+//        else
         if( height>1000)
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         else
 
-            v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
+            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
 
@@ -1399,14 +1399,23 @@ private RelativeLayout mapholderr;
     }
 
     @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        slideInFromRightAnim();
+        super.onStart();
+
+        System.out.println("----main activity---onStart---");
+
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
+
 
     @Override
     public void onLowMemory() {

@@ -46,7 +46,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     AutoCompleteTextView autocompletetextview2;
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
-    private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
+    private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 100;
     Vector vector= new Vector();
     Vector compare= new Vector();
     Vector vectorHel= new Vector();
@@ -249,8 +249,9 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
                 Intent intent = new Intent(PlaceChoiceActivity2.this, PlaceDetailsActivityNew.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 startActivity(intent);
-              //  overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
             }
         }, DELAY_PLACE_DETAILS_LAUNCH_ANIM);
     }
@@ -282,6 +283,18 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         return true;
     }
 
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+
+        super.onStart();
+
+        System.out.println("----main activity---onStart---");
+
+
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
