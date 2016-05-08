@@ -222,14 +222,16 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
 
-        Log.d(">>>>","test_dpi "+dpi);
+
        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
-        if(dpi>300)
-            setContentView(R.layout.placedetailsactivitysupermobile);
+//        if(dpi>300)
+//            setContentView(R.layout.placedetailsactivitysupermobile);
+//
+//        else
 
-        else
+        Log.d(">>>>","Height "+height);
         if(height>1000)
             setContentView(R.layout.place_details_activity);
         else {

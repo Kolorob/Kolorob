@@ -35,16 +35,16 @@
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/transparent">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
 
                     android:layout_width="120dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="230dp"
+                    android:layout_marginTop="40dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:focusableInTouchMode="true"

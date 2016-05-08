@@ -21,7 +21,7 @@ public class LocationInstructionActivity extends Activity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LocationInstructionActivity.this,PlaceChoiceActivity.class);
+                Intent i = new Intent(LocationInstructionActivity.this,PlaceChoiceActivity2.class);
                 startActivity(i);
                 finish();
             }

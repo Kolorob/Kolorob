@@ -50,10 +50,10 @@ public class SplashActivity extends ActionBarActivity {
             @Override
             public void run() {
                                 /* start the activity */
-                startActivity(new Intent(SplashActivity.this, PlaceChoiceActivity2.class));
+                startActivity(new Intent(SplashActivity.this, OpeningActivity.class));
                 //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 //overridePendingTransition(0, 0);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 finish();
             }
         }, 3000);
