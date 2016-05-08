@@ -18,17 +18,35 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Vector;
+
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
+    AutoCompleteTextView autocompletetextview2;
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
+    Vector vector= new Vector();
+    Vector compare= new Vector();
+    Vector vectorHel= new Vector();
+    Vector vectorEnt= new Vector();
+    Vector vectorEdu= new Vector();
+    Vector vectorFin= new Vector();
+    Vector vectorLeg= new Vector();
 
     private Context con;
     @Override
@@ -106,10 +124,10 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         imgbau.setOnClickListener((View.OnClickListener) this);
         imgpar.setOnClickListener((View.OnClickListener) this);
 
-       if(height>1000)
+//       if(height>1000)
        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        else
-           toolbar = (Toolbar) findViewById(R.id.toolbar_s);
+//        else
+//           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
         // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
@@ -146,6 +164,79 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
 
     }
+
+
+
+    public void search()
+    {
+        final EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceChoiceActivity2.this);
+        final EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceChoiceActivity2.this);
+        final HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceChoiceActivity2.this);
+        final FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceChoiceActivity2.this);
+        final LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceChoiceActivity2.this);
+        vector=educationServiceProviderTable.getAllEducationSubCategoriesInfo();
+        vectorEnt=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        vectorHel=healthServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        vectorFin=financialServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        vectorLeg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo();
+
+        compare.removeAllElements();
+
+        vectorEdu.addAll(vectorEnt);
+        vectorEdu.addAll(vector);
+        vectorEdu.addAll(vectorHel);
+        vectorEdu.addAll(vectorFin);
+        vectorEdu.addAll(vectorLeg);
+
+
+
+
+
+
+
+
+
+
+        autocompletetextview2 = (AutoCompleteTextView)
+                findViewById(R.id.autoCompleteTextView1x);
+
+
+
+        ArrayAdapter<String> adapter2;
+
+
+
+
+
+        adapter2 = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, vectorEdu);
+
+
+        autocompletetextview2.setThreshold(2);
+
+
+        autocompletetextview2.setAdapter(adapter2);
+
+
+
+
+
+
+
+//
+//                Intent ii = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
+//                ii.putExtra(AppConstants.KEY_DETAILS_VIEW, SearchedEducation);
+//                startActivity(ii);
+
+                //TODO Do something with the selected text
+            }
+
+
+
+
+
+
+
 
 
 

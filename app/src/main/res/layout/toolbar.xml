@@ -13,24 +13,49 @@
 
 
     <LinearLayout
-        android:layout_width="696dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.3"
             android:id="@+id/toolbar_logoa"
-            android:src="@drawable/sear_bar"
-            android:layout_width="596dp"
-            android:layout_height="wrap_content"
+            android:background="@color/white"
+
+            android:orientation="horizontal"
 
 
+            android:layout_height="wrap_content">
 
-            />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView1x"
+                android:layout_width="0dp"
+                android:layout_weight="0.87"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/black"
+
+
+                android:hint="Search in All category ..."
+                android:background="@android:color/transparent"
+                android:layout_height="40dp"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_below="@+id/textView2"
+
+                android:ems="10" />
+
+
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/toolbar_logo"
             android:src="@drawable/search_icons"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
+            android:layout_weight="0.2"
             android:layout_height="match_parent"
 
 
@@ -45,26 +70,26 @@
 
 
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <!--<FrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <!--<ImageView-->
-            <!--android:id="@+id/toolbar_logos"-->
-            <!--android:src="@drawable/menu_icon"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginRight="?attr/actionBarSize"-->
-            <!--android:layout_marginTop="4dp"-->
-            <!--android:layout_marginBottom="4dp"-->
-            <!--android:layout_gravity="left" />-->
-
-
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/toolbar_logos"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:src="@drawable/menu_icon"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginRight="?attr/actionBarSize"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="4dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginBottom="4dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="left" />&ndash;&gt;-->
 
 
 
 
-    </FrameLayout>
+
+
+    <!--</FrameLayout>-->
 
 
 

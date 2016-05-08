@@ -2,7 +2,7 @@
 
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar_s"
+    android:id="@+id/toolbars"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/transparent"
@@ -13,20 +13,42 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="396dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+
+
+        <LinearLayout
+            android:layout_width="296dp"
             android:id="@+id/toolbar_logoa"
-            android:src="@drawable/sear_bar"
-            android:layout_width="196dp"
-            android:layout_height="wrap_content"
+            android:background="@color/white"
+
+            android:orientation="horizontal"
 
 
+            android:layout_height="wrap_content">
 
-            android:layout_gravity="left"
-            />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView1x"
+                android:layout_width="0dp"
+                android:layout_weight="0.87"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/black"
+
+
+                android:hint="Search in All category ..."
+                android:background="@android:color/transparent"
+                android:layout_height="40dp"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_below="@+id/textView2"
+
+                android:ems="10" />
+
+
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/toolbar_logo"
@@ -46,26 +68,7 @@
 
 
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-        <!--<ImageView-->
-        <!--android:id="@+id/toolbar_logos"-->
-        <!--android:src="@drawable/menu_icon"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginRight="?attr/actionBarSize"-->
-        <!--android:layout_marginTop="4dp"-->
-        <!--android:layout_marginBottom="4dp"-->
-        <!--android:layout_gravity="left" />-->
-
-
-
-
-
-
-    </FrameLayout>
 
 
 

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
@@ -349,6 +350,30 @@ LegalAidServiceProviderItem legalAidServiceProviderItem=null;
         closeDB();
         return subCatList;
     }
+
+
+    public Vector<String> getAllLegalAidSubCategoriesInfo() {
+        Vector<String> subCatList = new Vector<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        int cat_id=5;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                String  subCatLists = cursor.getString(cursor.getColumnIndex(KEY_LEGAL_AID_NAME_ENG));
+
+                subCatList.add(subCatLists);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+
     public ArrayList<LegalAidServiceProviderItem> getAllLegalAidSubCategoriesInfoWithHead(int cat_id, String header) {
         ArrayList<LegalAidServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
@@ -323,6 +324,29 @@ private  FinancialServiceProviderItem financialServiceProviderItem;
             do {
                 //System.out.println("abc="+cursor.getString(4));
                 subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+
+
+    public Vector<String> getAllEntertainmentSubCategoriesInfo() {
+        Vector<String> subCatList = new Vector<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        int cat_id=6;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                String  subCatLists = cursor.getString(cursor.getColumnIndex(KEY_FIN_NODE_NAME));
+
+                subCatList.add(subCatLists);
             } while (cursor.moveToNext());
         }
         cursor.close();
