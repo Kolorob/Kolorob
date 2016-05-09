@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -21,6 +23,7 @@ import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -34,9 +37,10 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 /**
  * Created by israt.jahan on 5/5/2016.
  */
-public class MapFragmentOSM extends Fragment {
+public class MapFragmentOSM extends Fragment implements View.OnClickListener {
     Drawable newMarker;
-
+    private Spinner spItems;
+    List<String> listData=new ArrayList<String>();
     public String getLocationName() {
         return locationName;
     }
@@ -54,6 +58,15 @@ public class MapFragmentOSM extends Fragment {
 
     public void setLocationNameId(int locationNameId) {
         this.locationNameId = locationNameId;
+        if(locationNameId== AppConstants.PLACE_BAUNIABADH)
+        {
+            listData.add(AppConstants.BAUNIABADH);
+            listData.add(AppConstants.PARIS_ROAD);
+        }
+        else {
+            listData.add(AppConstants.PARIS_ROAD);
+            listData.add(AppConstants.BAUNIABADH);
+        }
     }
     private ArrayList<HealthServiceProviderItem> healthServiceProvider=null;
 
@@ -64,7 +77,7 @@ public class MapFragmentOSM extends Fragment {
     private ArrayList<EducationServiceProviderItem> educationServiceProvider=null;
 MapView mapView;
     private int categoryId;
-
+    ArrayAdapter arrayAdapter;
     public int getCategoryId() {
         return categoryId;
     }
@@ -93,7 +106,7 @@ MapView mapView;
         educationServiceProvider=et;
     }
 int subcategotyId;
-    public static final GeoPoint BauniaBadh = new GeoPoint(23.8196826, 90.3806812);
+    View rootView;
     ArrayList<OverlayItem> anotherOverlayItemArray,anotherOverlayItemArray2,anotherOverlayItemArray3,anotherOverlayItemArray4,anotherOverlayItemArray7,anotherOverlayItemArray8,anotherOverlayItemArray5,anotherOverlayItemArray6;
     public MapFragmentOSM()
     {
@@ -112,17 +125,19 @@ int subcategotyId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView;
+
         double latDouble,longDouble;
         int i=0;
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
+
         MapView mapView = (MapView) rootView.findViewById(R.id.mapview);
         mapView.setClickable(true);
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
         mapView.setUseDataConnection(true);
+
 
         resProxyImp = new
                 ResourceProxyImpl(getActivity());
@@ -130,8 +145,7 @@ int subcategotyId;
         mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
         mapView.getOverlays().add(mMyLocationOverlay);
         IMapController mapViewController = mapView.getController();
-        mapViewController.setZoom(18);
-        mapViewController.setCenter(BauniaBadh);
+
         anotherOverlayItemArray = new ArrayList<OverlayItem>();
         anotherOverlayItemArray2 = new ArrayList<OverlayItem>();
         anotherOverlayItemArray3 = new ArrayList<OverlayItem>();
@@ -140,6 +154,18 @@ int subcategotyId;
         anotherOverlayItemArray6 = new ArrayList<OverlayItem>();
         anotherOverlayItemArray7 = new ArrayList<OverlayItem>();
         anotherOverlayItemArray8 = new ArrayList<OverlayItem>();
+
+
+        if(locationNameId==1) {
+
+            mapViewController.setZoom(18);
+            mapViewController.setCenter(AppConstants.BAUNIA1);
+        }
+        else if(locationNameId==2)
+        {
+            mapViewController.setZoom(17);
+            mapViewController.setCenter(AppConstants.PARIS1);
+        }
         switch (categoryId)
         {
             case AppConstants.EDUCATION:
@@ -522,4 +548,8 @@ int subcategotyId;
     };
 
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }
