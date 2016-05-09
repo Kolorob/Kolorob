@@ -56,7 +56,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".activity.PlaceDetailsActivity"
+            android:name=".activity.PlaceDetailsActivityNew"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivity"
