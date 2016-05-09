@@ -19,6 +19,7 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
@@ -165,7 +166,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent iifin = new Intent(getActivity(), DetailsFinancialActivity.class);
+                        Intent iifin = new Intent(getActivity(), DetailsFinancialActivity_new.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, detfin);
                         activity.startActivity(iifin);
 

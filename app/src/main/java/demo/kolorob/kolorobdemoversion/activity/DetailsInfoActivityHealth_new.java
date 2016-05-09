@@ -265,7 +265,7 @@ Activity con;
 
         if(!healthServiceProviderItem.getArea().equals(""))
         {
-            concateBasic("  ঠিকানা: ", healthServiceProviderItem.getArea());
+            concateBasic("   ঠিকানা: ", healthServiceProviderItem.getArea());
         }
 
         if(!healthServiceProviderItem.getNodeType().equals(""))
@@ -306,7 +306,7 @@ Activity con;
         if(!healthServiceProviderItem.getNodeContact().equals(""))
             concateBasic("  মোবাইল/মুঠোফোন নম্বর: ",healthServiceProviderItem.getNodeContact());
 
-        if(! healthServiceProviderItem.getNodeEmail().equals(""))
+        if(!healthServiceProviderItem.getNodeEmail().equals(""))
             concateBasic("  ইমেইল: ", healthServiceProviderItem.getNodeEmail());
 
         if(!healthServiceProviderItem.getNodeWebsite().equals(""))
