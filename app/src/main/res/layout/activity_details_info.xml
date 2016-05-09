@@ -154,6 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
 
                 android:text="ঠিকানা :"
                 android:id="@+id/tv_item_location"
@@ -177,6 +178,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
+                android:visibility="gone"
                 android:paddingTop="2dp"
                 android:paddingBottom="4dp" />
 
@@ -190,6 +192,7 @@
                 android:layout_below="@+id/imageView5"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="4dp" />
@@ -248,6 +251,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Total Students :"
                 android:id="@+id/tv_total_students"
                 android:textSize="20sp"
+                android:visibility="gone"
                 android:layout_below="@+id/imageView4"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -258,6 +262,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Total Classes"
                 android:id="@+id/tv_total_class"
@@ -272,6 +277,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Total Teachers :"
                 android:id="@+id/tv_total_teachers"
                 android:textSize="20sp"
@@ -285,6 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Hostel Facility :"
                 android:id="@+id/tv_hostel_fac"
@@ -300,6 +307,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Playground :"
                 android:id="@+id/tv_playground"
                 android:textSize="20sp"
@@ -313,6 +321,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Transport Facility :"
                 android:id="@+id/tv_transport_facility"
                 android:textSize="20sp"
@@ -328,6 +337,7 @@
                 android:textColor="@color/black"
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Email : "
                 android:id="@+id/tv_email"
+                android:visibility="gone"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
@@ -342,6 +352,7 @@
                 android:textColor="@color/black"
                 android:textAppearance="?android:attr/textAppearanceLarge"                android:text="Website : "
                 android:id="@+id/tv_website"
+                android:visibility="gone"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
                 android:paddingTop="2dp"
@@ -358,6 +369,7 @@
                 android:id="@+id/tv_fb"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
+                android:visibility="gone"
                 android:paddingTop="2dp"
                 android:paddingBottom="4dp"
 

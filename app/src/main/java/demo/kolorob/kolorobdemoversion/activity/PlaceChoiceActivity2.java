@@ -274,7 +274,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                startActivity(intent);
+               // startActivity(intent);
 
             }
         }, DELAY_PLACE_DETAILS_LAUNCH_ANIM);

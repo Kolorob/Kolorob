@@ -5,6 +5,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
  */
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class HealthVaccineAdapter extends BaseAdapter
     String vaccine_name[];
     String vaccine_fee[];
     String vaccine_remarks[];
+    String basic_part;
 
 
 
@@ -77,13 +79,38 @@ public class HealthVaccineAdapter extends BaseAdapter
 
 
 
+        if(!vaccine_name[position].equals(""))
+            concateBasic("ভ্যাকসিন নাম : ",vaccine_name[position]);
 
-        holder.VaccineName.setText("ভ্যাকসিন নাম : " +vaccine_name[position]);
-        holder.VaccineFee.setText("ভ্যাকসিন ফি : "+vaccine_fee[position]);
+        if(!vaccine_fee[position].equals(""))
+            concateBasic("ভ্যাকসিন ফি : ",vaccine_fee[position]);
 
-        holder.VaccineRemark.setText("মন্তব্য: "+vaccine_remarks[position]);
 
+    //    holder.VaccineName.setText("ভ্যাকসিন নাম : " +);
+      //  holder.VaccineFee.setText(""+vaccine_fee[position]);
+
+        if(!vaccine_remarks[position].equals(""))
+            concateBasic("মন্তব্য: ",vaccine_remarks[position]);
+     //
+     //
+     // holder.VaccineRemark.setText("মন্তব্য: "+vaccine_remarks[position]);
+             concateBasic("","");
+             holder.VaccineName.setText(basic_part);
+
+            basic_part="";
         return convertView;
+    }
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        basic_part= basic_part+value + "\n";
+
+        Log.d("....>>>", "Values   " + basic_part);
+
+
+        return basic_part;
     }
 
 }
