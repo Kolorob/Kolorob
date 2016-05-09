@@ -17,6 +17,8 @@
     <string name="Headen">Write Name Here!</string>
     <string name="MiddleSearchen">Search for efficiently!</string>
     <string name="time">সময়</string>
+    <string name="loading">একটু অপেক্ষা করেন \n কলরব তৈরি হচ্ছে </string>
+    <string name="roam"> আর লাট্টুর মত ঘুরতে হবে না </string>
     <string name="title_activity_details_info_activity_entertainment">
         DetailsInfoActivityEntertainment
     </string>
