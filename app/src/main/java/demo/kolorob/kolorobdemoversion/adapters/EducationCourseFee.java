@@ -261,54 +261,216 @@ public class EducationCourseFee extends BaseAdapter
 
 
 
-        holder.a.setText("প্রি স্কুল ফী : " +pre_school_free[position]);
-        holder.b.setText("প্রি স্কুল বৃত্তি বিশেষত্বঃ "+pre_school_stipend_speciality[position]);
-        holder.c.setText("প্রি স্কুল স্কুল বৃত্তি টাইপঃ "+pre_school_stipend_details[position]);
-        holder.d.setText("প্রি স্কুল বৃত্তি বৃত্তি বিস্তারিতঃ "+pre_school_max_fee[position]+ " টাকা ");
-        holder.e.setText("প্রি স্কুল সর্বোচ্চ ফিঃ "+pre_school_min_fee[position]);
-        holder.f.setText("প্রি স্কুল সর্বনিম্ন ফিঃ "+pre_school_stipend_type[position]+ " টাকা ");
-        holder.g.setText("প্রি স্কুল কোচিং ফিঃ " +pre_school_coaching_fee[position]);
-        holder.h.setText("প্রি স্কুল অতিরিক্ত ফিঃ "+pre_school_additional_fee[position]);
+        if(!pre_school_free[position].equals(""))
+        {
+            holder.a.setVisibility(View.VISIBLE);
+            holder.a.setText("প্রি স্কুল ফী : " +pre_school_free[position]);
+        }
 
-        holder.i.setText("চতুর্থ পঞ্চম শ্রেনীর ফিঃ "+i_v_free[position]);
-        holder.j.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি বিশেষত্ব "+i_v_stipend_speciality[position]);
-        holder.k.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি টাইপঃ  " +i_v_stipend_type[position]);
-        holder.l.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি বিস্তারিতঃ  "+i_v_stipend_details[position]);
-        holder.m.setText("চতুর্থ পঞ্চম শ্রেনীর সর্বোচ্চ ফিঃ  "+i_v_max_fee[position]);
-        holder.n.setText("চতুর্থ পঞ্চম শ্রেনীর সর্বনিম্ন ফিঃ  "+i_v_min_fee[position]+ " টাকা ");
-        holder.o.setText("চতুর্থ পঞ্চম শ্রেনীর অতিরিক্ত ফিঃ "+i_v_additional_fee[position]);
-        holder.p.setText("চতুর্থ পঞ্চম শ্রেনীর কোচিং ফিঃ" +i_v_coaching_fee[position]);
+        if(!pre_school_stipend_speciality[position].equals(""))
+        {
+
+            holder.b.setText("প্রি স্কুল বৃত্তি বিশেষত্বঃ "+pre_school_stipend_speciality[position]);
+        }
+        if(!pre_school_stipend_details[position].equals(""))
+        {
+            holder.c.setText("প্রি স্কুল স্কুল বৃত্তি টাইপঃ "+pre_school_stipend_details[position]);
+        }
+
+        if(!pre_school_max_fee[position].equals(""))
+        {
+            holder.d.setText("প্রি স্কুল বৃত্তি বৃত্তি বিস্তারিতঃ "+pre_school_max_fee[position]+ " টাকা ");
+        }
+
+        if(!pre_school_min_fee[position].equals(""))
+        {
+            holder.e.setText("প্রি স্কুল সর্বোচ্চ ফিঃ "+pre_school_min_fee[position]);
+        }
+
+        if(!pre_school_stipend_type[position].equals(""))
+        {
+            holder.f.setText("প্রি স্কুল সর্বনিম্ন ফিঃ "+pre_school_stipend_type[position]+ " টাকা ");
+        }
+
+        if(!pre_school_coaching_fee[position].equals(""))
+        {
+            holder.g.setText("প্রি স্কুল কোচিং ফিঃ " +pre_school_coaching_fee[position]);
+        }
+
+        if(!pre_school_additional_fee[position].equals(""))
+        {
+            holder.h.setText("প্রি স্কুল অতিরিক্ত ফিঃ "+pre_school_additional_fee[position]);
+        }
 
 
-        holder.ag.setText("ইউনিভার্সিটির ফিঃ "+vi_x_free[position]);
-        holder.ah.setText("ইউনিভার্সিটির বৃত্তি বিশেষত্ব "+vi_x_stipend_speciality[position]);
-        holder.ai.setText("ইউনিভার্সিটির বৃত্তি টাইপঃ "+vi_x_stipend_type[position]+ " টাকা ");
-        holder.aj.setText("ইউনিভার্সিটির বৃত্তি বিস্তারিতঃ "+vi_x_stipend_details[position]);
-        holder.ak.setText("ইউনিভার্সিটির সর্বোচ্চ ফিঃ " +vi_x_max_fee[position]);
-        holder.al.setText("ইউনিভার্সিটির সর্বনিম্ন ফিঃ "+vi_x_min_fee[position]);
-        holder.am.setText("ইউনিভার্সিটির কোচিং ফিঃ "+vi_x_coaching_fee[position]);
-        holder.an.setText("ইউনিভার্সিটির অতিরিক্ত ফিঃ "+vi_x_additional_fee[position]+ " টাকা ");
+
+        if(!i_v_free[position].equals(""))
+        {
+            holder.i.setText("চতুর্থ পঞ্চম শ্রেনীর ফিঃ "+i_v_free[position]);
+        }
+
+        if(!i_v_stipend_speciality[position].equals(""))
+        {
+            holder.j.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি বিশেষত্ব "+i_v_stipend_speciality[position]);
+        }
+
+        if(!i_v_stipend_type[position].equals(""))
+        {
+            holder.k.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি টাইপঃ  " +i_v_stipend_type[position]);
+        }
+
+        if(!i_v_stipend_details[position].equals(""))
+        {
+            holder.l.setText("চতুর্থ পঞ্চম শ্রেনীর বৃত্তি বিস্তারিতঃ  "+i_v_stipend_details[position]);
+        }
+
+        if(!i_v_max_fee[position].equals(""))
+        {
+            holder.m.setText("চতুর্থ পঞ্চম শ্রেনীর সর্বোচ্চ ফিঃ  "+i_v_max_fee[position]);
+        }
 
 
-        holder.q.setText("ষষ্ঠ থেকে দশম শ্রেনীর ফিঃ: "+xi_xii_free[position]);
-        holder.r.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি বিশেষত্ব " +xi_xii_stipend_speciality[position]);
-        holder.s.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি টাইপঃ "+xi_xii_stipend_type[position]);
-        holder.t.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি বিস্তারিতঃ "+xi_xii_stipend_details[position]);
-        holder.u.setText("ষষ্ঠ থেকে দশম শ্রেনীর সর্বোচ্চ ফিঃ "+xi_xii_max_fee[position]+ " টাকা ");
-        holder.v.setText("ষষ্ঠ থেকে দশম শ্রেনীর সর্বনিম্ন ফিঃ "+xi_xii_min_fee[position]);
-        holder.w.setText("ষষ্ঠ থেকে দশম শ্রেনীর কোচিং ফিঃ" +xi_xii_coaching_fee[position]);
-        holder.x.setText("ষষ্ঠ থেকে দশম শ্রেনীর অতিরিক্ত ফিঃ "+xi_xii_additional_fee[position]);
+        if(!i_v_min_fee[position].equals(""))
+        {
+            holder.n.setText("চতুর্থ পঞ্চম শ্রেনীর সর্বনিম্ন ফিঃ  "+i_v_min_fee[position]+ " টাকা ");
+        }
+
+        if(!i_v_additional_fee[position].equals(""))
+        {
+            holder.o.setText("চতুর্থ পঞ্চম শ্রেনীর অতিরিক্ত ফিঃ "+i_v_additional_fee[position]);
+        }
+
+        if(!i_v_coaching_fee[position].equals(""))
+        {
+            holder.p.setText("চতুর্থ পঞ্চম শ্রেনীর কোচিং ফিঃ" +i_v_coaching_fee[position]);
+        }
 
 
-        holder.y.setText("একাদশ দ্বাদশ শ্রেনীর ফিঃ "+uni_free[position]);
-        holder.z.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি বিশেষত্ব "+uni_stipend_speciality[position]+ " টাকা ");
-        holder.aa.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি টাইপঃ "+uni_stipend_details[position]);
+        if(vi_x_free[position].equals(""))
+        {
+            holder.ag.setText("ইউনিভার্সিটির ফিঃ "+vi_x_free[position]);
+        }
 
-        holder.ab.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি বিস্তারিতঃ " +uni_stipend_type[position]);
-        holder.ac.setText("একাদশ দ্বাদশ শ্রেনীর সর্বোচ্চ ফিঃ "+uni_max_fee[position]);
-        holder.ad.setText("একাদশ দ্বাদশ শ্রেনীর সর্বনিম্ন ফিঃ "+uni_min_fee[position]);
-        holder.ae.setText("একাদশ দ্বাদশ শ্রেনীর কোচিং ফিঃ "+uni_coaching_fee[position]+ " টাকা ");
-        holder.af.setText("একাদশ দ্বাদশ শ্রেনীর অতিরিক্ত ফিঃ "+uni_additional_fee[position]);
+        if(vi_x_stipend_speciality[position].equals(""))
+        {
+            holder.ah.setText("ইউনিভার্সিটির বৃত্তি বিশেষত্ব "+vi_x_stipend_speciality[position]);
+        }
+
+        if(vi_x_stipend_type[position].equals(""))
+        {
+            holder.ai.setText("ইউনিভার্সিটির বৃত্তি টাইপঃ "+vi_x_stipend_type[position]+ " টাকা ");
+        }
+
+
+        if(!vi_x_stipend_details[position].equals(""))
+        {
+            holder.aj.setText("ইউনিভার্সিটির বৃত্তি বিস্তারিতঃ "+vi_x_stipend_details[position]);
+        }
+
+        if(!vi_x_max_fee[position].equals(""))
+        {
+            holder.ak.setText("ইউনিভার্সিটির সর্বোচ্চ ফিঃ " +vi_x_max_fee[position]);
+        }
+
+        if(!vi_x_min_fee[position].equals(""))
+        {
+            holder.al.setText("ইউনিভার্সিটির সর্বনিম্ন ফিঃ "+vi_x_min_fee[position]);
+        }
+
+        if(!vi_x_coaching_fee[position].equals(""))
+        {
+            holder.am.setText("ইউনিভার্সিটির কোচিং ফিঃ "+vi_x_coaching_fee[position]);
+        }
+
+        if(!vi_x_additional_fee[position].equals(""))
+        {
+            holder.an.setText("ইউনিভার্সিটির অতিরিক্ত ফিঃ "+vi_x_additional_fee[position]+ " টাকা ");
+        }
+
+
+        if(!xi_xii_free[position].equals(""))
+        {
+            holder.q.setText("ষষ্ঠ থেকে দশম শ্রেনীর ফিঃ: "+xi_xii_free[position]);
+        }
+
+        if(!xi_xii_stipend_speciality[position].equals(""))
+        {
+            holder.r.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি বিশেষত্ব " +xi_xii_stipend_speciality[position]);
+        }
+
+        if(!xi_xii_stipend_type[position].equals(""))
+        {
+            holder.s.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি টাইপঃ "+xi_xii_stipend_type[position]);
+        }
+
+        if(!xi_xii_stipend_details[position].equals(""))
+        {
+            holder.t.setText("ষষ্ঠ থেকে দশম শ্রেনীর বৃত্তি বিস্তারিতঃ "+xi_xii_stipend_details[position]);
+        }
+
+        if(!xi_xii_max_fee[position].equals(""))
+        {
+            holder.u.setText("ষষ্ঠ থেকে দশম শ্রেনীর সর্বোচ্চ ফিঃ "+xi_xii_max_fee[position]+ " টাকা ");
+        }
+
+        if(!xi_xii_min_fee[position].equals(""))
+        {
+            holder.v.setText("ষষ্ঠ থেকে দশম শ্রেনীর সর্বনিম্ন ফিঃ "+xi_xii_min_fee[position]);
+        }
+
+        if(xi_xii_coaching_fee[position].equals(""))
+        {
+            holder.w.setText("ষষ্ঠ থেকে দশম শ্রেনীর কোচিং ফিঃ" +xi_xii_coaching_fee[position]);
+        }
+
+
+        if(!xi_xii_additional_fee[position].equals("")){
+            holder.x.setText("ষষ্ঠ থেকে দশম শ্রেনীর অতিরিক্ত ফিঃ "+xi_xii_additional_fee[position]);
+        }
+
+
+        if(!uni_free[position].equals(""))
+        {
+            holder.y.setText("একাদশ দ্বাদশ শ্রেনীর ফিঃ "+uni_free[position]);
+        }
+
+        if(!uni_stipend_speciality[position].equals(""))
+        {
+            holder.z.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি বিশেষত্ব "+uni_stipend_speciality[position]+ " টাকা ");
+        }
+
+
+        if(!uni_stipend_details[position].equals(""))
+        {
+            holder.aa.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি টাইপঃ "+uni_stipend_details[position]);
+        }
+
+        if(!uni_stipend_type[position].equals(""))
+        {
+            holder.ab.setText("একাদশ দ্বাদশ শ্রেনীর বৃত্তি বিস্তারিতঃ " +uni_stipend_type[position]);
+        }
+
+
+        if(!uni_max_fee[position].equals(""))
+        {
+            holder.ac.setText("একাদশ দ্বাদশ শ্রেনীর সর্বোচ্চ ফিঃ "+uni_max_fee[position]);
+        }
+
+        if(!uni_min_fee[position].equals(""))
+        {
+            holder.ad.setText("একাদশ দ্বাদশ শ্রেনীর সর্বনিম্ন ফিঃ "+uni_min_fee[position]);
+        }
+
+        if(!uni_coaching_fee[position].equals(""))
+        {
+            holder.ae.setText("একাদশ দ্বাদশ শ্রেনীর কোচিং ফিঃ "+uni_coaching_fee[position]+ " টাকা ");
+        }
+
+        if(!uni_additional_fee[position].equals(""))
+        {
+            holder.af.setText("একাদশ দ্বাদশ শ্রেনীর অতিরিক্ত ফিঃ "+uni_additional_fee[position]);
+        }
+
 
 
 
