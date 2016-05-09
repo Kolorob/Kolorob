@@ -11,12 +11,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -186,17 +184,16 @@ public class MapFragment extends Fragment implements
 
         }
         if(locationNameId==1) {
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(AppConstants.BAUNIA).zoom(MAP_ZOOM_AMOUNT).build();
-            googleMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
+            //CameraPosition cameraPosition = new CameraPosition.Builder()
+                  //  .target(AppConstants.BAUNIA).zoom(MAP_ZOOM_AMOUNT).build();
+           // googleMap.animateCamera(CameraUpdateFactory
+             //       .newCameraPosition(cameraPosition));
         }
         else if(locationNameId==2)
         {
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(AppConstants.PARIS).zoom(MAP_ZOOM_AMOUNT).build();
-            googleMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
+          //  CameraPosition cameraPosition = new CameraPosition.Builder()
+                //    .target(AppConstants.PARIS).zoom(MAP_ZOOM_AMOUNT).build();
+//                    .newCameraPosition(cameraPosition));
         }
       /* BitmapDescriptor image = BitmapDescriptorFactory.fromResource(R.drawable.trial);
         LatLngBounds bounds = new LatLngBounds (new LatLng(23.815122, 90.376780), new LatLng(23.824740, 90.384038));
