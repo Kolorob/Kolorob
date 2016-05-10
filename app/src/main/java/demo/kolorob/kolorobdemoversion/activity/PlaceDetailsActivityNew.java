@@ -1203,16 +1203,18 @@ Context context;
 
     private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+
     }
 
     private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItemForHeader(int cat_id, String header)
@@ -1250,16 +1252,18 @@ Context context;
 
     private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setLegalaidServiceProvider(legalaidServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setLegalaidServiceProvider(legalaidServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+
     }
 
 
@@ -1283,17 +1287,20 @@ Context context;
     }
 
     private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
-    {
-        MapFragment mapFragment = new MapFragment();
+    {    MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+
+
+     
     }
 
 

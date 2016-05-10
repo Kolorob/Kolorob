@@ -75,18 +75,31 @@ MapView mapView;
 
     ResourceProxyImpl resProxyImp;
     MyLocationOverlay mMyLocationOverlay;
+
+    public void setEntertainmentServiceProvider(ArrayList<EntertainmentServiceProviderItem> et) {
+        this.entertainmentServiceProvider = et;
+    }
+
+    public void setLegalaidServiceProvider(ArrayList<LegalAidServiceProviderItem> et) {
+        this.legalaidServiceProvider = et;
+    }
+
+    public void setFinancialServiceProvider(ArrayList<FinancialServiceProviderItem> et) {
+        this.financialServiceProvider = et;
+    }
+
     public void setEducationServiceProvider(ArrayList<EducationServiceProviderItem> et)
     {
         educationServiceProvider=et;
     }
 int subcategotyId;
     public static final GeoPoint BauniaBadh = new GeoPoint(23.8196826, 90.3806812);
-    ArrayList<OverlayItem> anotherOverlayItemArray,anotherOverlayItemArray2,anotherOverlayItemArray3,anotherOverlayItemArray4,anotherOverlayItemArray5,anotherOverlayItemArray6;
+    ArrayList<OverlayItem> anotherOverlayItemArray,anotherOverlayItemArray2,anotherOverlayItemArray3,anotherOverlayItemArray4,anotherOverlayItemArray7,anotherOverlayItemArray8,anotherOverlayItemArray5,anotherOverlayItemArray6;
     public MapFragmentOSM()
     {
 
     }
-    ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay,anotherItemizedIconOverlay2,anotherItemizedIconOverlay3,anotherItemizedIconOverlay4,anotherItemizedIconOverlay5,anotherItemizedIconOverlay6;
+    ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay,anotherItemizedIconOverlay2,anotherItemizedIconOverlay7,anotherItemizedIconOverlay8,anotherItemizedIconOverlay3,anotherItemizedIconOverlay4,anotherItemizedIconOverlay5,anotherItemizedIconOverlay6;
 
     public ArrayList<HealthServiceProviderItem> getHealthServiceProvider() {
         return healthServiceProvider;
@@ -125,6 +138,8 @@ int subcategotyId;
         anotherOverlayItemArray4 = new ArrayList<OverlayItem>();
         anotherOverlayItemArray5 = new ArrayList<OverlayItem>();
         anotherOverlayItemArray6 = new ArrayList<OverlayItem>();
+        anotherOverlayItemArray7 = new ArrayList<OverlayItem>();
+        anotherOverlayItemArray8 = new ArrayList<OverlayItem>();
         switch (categoryId)
         {
             case AppConstants.EDUCATION:
@@ -256,7 +271,89 @@ int subcategotyId;
 
                 break;
             case AppConstants.ENTERTAINMENT:
+                if(entertainmentServiceProvider!=null) {
+                    for (  EntertainmentServiceProviderItem et : entertainmentServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        subcategotyId=et.getEntSubCategoryId();
+                        latDouble=Double.parseDouble(et.getLatitude());
+                        longDouble=Double.parseDouble(et.getLongitude());
 
+
+                        if(subcategotyId==1){
+
+                            anotherOverlayItemArray.clear();
+                            anotherOverlayItemArray.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
+                            anotherItemizedIconOverlay
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay);
+                        }
+                        else if(subcategotyId==2||subcategotyId==5||subcategotyId==21) {
+                            anotherOverlayItemArray2.clear();
+                            anotherOverlayItemArray2.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
+                            anotherItemizedIconOverlay2
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay2);
+                        }
+                        else if(subcategotyId==3){
+                            anotherOverlayItemArray3.clear();
+                            anotherOverlayItemArray3.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
+                            anotherItemizedIconOverlay3
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay3);
+                        }
+                        else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8){
+                            anotherOverlayItemArray4.clear();
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_orange);
+                            anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            anotherItemizedIconOverlay4
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay4);
+                        }
+                        else if(subcategotyId>=9&&subcategotyId<=11){
+                            anotherOverlayItemArray5.clear();
+                            anotherOverlayItemArray5.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
+                            anotherItemizedIconOverlay5
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay5);
+                        }
+                        else if(subcategotyId==12){
+                            anotherOverlayItemArray6.clear();
+                            anotherOverlayItemArray6.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
+                            anotherItemizedIconOverlay6
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay6);
+                        }
+                        else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20){
+                            anotherOverlayItemArray7.clear();
+                            anotherOverlayItemArray7.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_red);
+                            anotherItemizedIconOverlay7
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay7);
+                        }
+                        else if(subcategotyId==15||subcategotyId==17||subcategotyId==18){
+                            anotherOverlayItemArray8.clear();
+                            anotherOverlayItemArray8.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_blue);
+                            anotherItemizedIconOverlay8
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray8,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay8);
+                        }
+                    }
+                }
 
 
 
@@ -266,9 +363,113 @@ int subcategotyId;
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
+                if(legalaidServiceProvider!=null) {
+                    for (  LegalAidServiceProviderItem et : legalaidServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        subcategotyId=et.getLegalaidSubCategoryId();
+                        latDouble=Double.parseDouble(et.getLatitude());
+                        longDouble=Double.parseDouble(et.getLongitude());
+
+
+                        if(subcategotyId==1){
+
+                            anotherOverlayItemArray.clear();
+                            anotherOverlayItemArray.add(new OverlayItem(et.getLegalaidNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
+                            anotherItemizedIconOverlay
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay);
+                        }
+                      else if(subcategotyId>=2&&subcategotyId<=5){
+                            anotherOverlayItemArray2.clear();
+                            anotherOverlayItemArray2.add(new OverlayItem(et.getLegalaidNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
+                            anotherItemizedIconOverlay2
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay2);
+                        }
+
+                    }
+                }
 
                 break;
             case AppConstants.FINANCIAL:
+                if(financialServiceProvider!=null) {
+                    for (  FinancialServiceProviderItem et : financialServiceProvider) {
+                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        subcategotyId=et.getRefNum();
+                        latDouble=Double.parseDouble(et.getLatitude());
+                        longDouble=Double.parseDouble(et.getLongitude());
+
+
+                        if(subcategotyId>=1&&subcategotyId<=4){
+
+                            anotherOverlayItemArray.clear();
+                            anotherOverlayItemArray.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
+                            anotherItemizedIconOverlay
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay);
+                        }
+                        else if(subcategotyId>=5&&subcategotyId<=8) {
+                            anotherOverlayItemArray2.clear();
+                            anotherOverlayItemArray2.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
+                            anotherItemizedIconOverlay2
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay2);
+                        }
+                        else if(subcategotyId>=20&&subcategotyId<=21){
+                            anotherOverlayItemArray3.clear();
+                            anotherOverlayItemArray3.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
+                            anotherItemizedIconOverlay3
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay3);
+                        }
+                        else if(subcategotyId>=9&&subcategotyId<=12){
+                            anotherOverlayItemArray4.clear();
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_orange);
+                            anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            anotherItemizedIconOverlay4
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay4);
+                        }
+                        else if(subcategotyId>=13&&subcategotyId<=15){
+                            anotherOverlayItemArray5.clear();
+                            anotherOverlayItemArray5.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
+                            anotherItemizedIconOverlay5
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay5);
+                        }
+                        else if(subcategotyId>=16&&subcategotyId<=18){
+                            anotherOverlayItemArray6.clear();
+                            anotherOverlayItemArray6.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
+                            anotherItemizedIconOverlay6
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay6);
+                        }
+                        else if(subcategotyId==19){
+                            anotherOverlayItemArray7.clear();
+                            anotherOverlayItemArray7.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                            newMarker = this.getResources().getDrawable(R.drawable.pin_red);
+                            anotherItemizedIconOverlay7
+                                    = new ItemizedIconOverlay<OverlayItem>(
+                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,resProxyImp);
+                            mapView.getOverlays().add(anotherItemizedIconOverlay7);
+                        }
+                    }
+                }
 
                 break;
             case AppConstants.JOB:
