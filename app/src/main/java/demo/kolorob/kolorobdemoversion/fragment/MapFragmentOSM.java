@@ -14,10 +14,8 @@ import com.google.android.gms.maps.model.LatLng;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.ResourceProxyImpl;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.MyLocationOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
@@ -85,8 +83,7 @@ MapView mapView;
         this.categoryId = categoryId;
     }
 
-    ResourceProxyImpl resProxyImp;
-    MyLocationOverlay mMyLocationOverlay;
+
 
     public void setEntertainmentServiceProvider(ArrayList<EntertainmentServiceProviderItem> et) {
         this.entertainmentServiceProvider = et;
@@ -137,12 +134,10 @@ int subcategotyId;
         mapView.setMultiTouchControls(true);
         mapView.setUseDataConnection(true);
 
-
-        resProxyImp = new
-                ResourceProxyImpl(getActivity());
+;
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
-        mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
-        mapView.getOverlays().add(mMyLocationOverlay);
+       // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
+    //    mapView.getOverlays().add(mMyLocationOverlay);
         IMapController mapViewController = mapView.getController();
 
         anotherOverlayItemArray = new ArrayList<OverlayItem>();
@@ -180,10 +175,11 @@ int subcategotyId;
 
 
                             anotherOverlayItemArray.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
+                        //   newMarker.setIcon(this.getResources().getDrawable(R.drawable.pin_green));
                             newMarker = this.getResources().getDrawable(R.drawable.pin_green);
                             anotherItemizedIconOverlay
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
 
 
                         }
@@ -193,7 +189,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
                             anotherItemizedIconOverlay2
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=18&&subcategotyId<=19){
@@ -202,7 +198,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
                             anotherItemizedIconOverlay3
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=20&&subcategotyId<=21){
@@ -211,7 +207,7 @@ int subcategotyId;
                             anotherOverlayItemArray4.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
                             anotherItemizedIconOverlay4
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=22&&subcategotyId<=26){
@@ -220,7 +216,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
                             anotherItemizedIconOverlay5
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
 
                         }
 
@@ -255,7 +251,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_green);
                             anotherItemizedIconOverlay
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
 
 
                         }
@@ -265,7 +261,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
                             anotherItemizedIconOverlay2
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=13&&subcategotyId<=15){
@@ -274,7 +270,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
                             anotherItemizedIconOverlay3
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=16&&subcategotyId<=20){
@@ -283,7 +279,7 @@ int subcategotyId;
                             anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
                             anotherItemizedIconOverlay4
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==21){
@@ -292,7 +288,7 @@ int subcategotyId;
 
                             anotherItemizedIconOverlay5
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==22){
@@ -301,7 +297,7 @@ int subcategotyId;
 
                             anotherItemizedIconOverlay6
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                     }
@@ -341,7 +337,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_green);
                             anotherItemizedIconOverlay
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==2||subcategotyId==5||subcategotyId==21) {
@@ -350,7 +346,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
                             anotherItemizedIconOverlay2
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==3){
@@ -359,7 +355,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
                             anotherItemizedIconOverlay3
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8){
@@ -368,7 +364,7 @@ int subcategotyId;
                             anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
                             anotherItemizedIconOverlay4
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=9&&subcategotyId<=11){
@@ -377,7 +373,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
                             anotherItemizedIconOverlay5
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==12){
@@ -386,7 +382,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
                             anotherItemizedIconOverlay6
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20){
@@ -395,7 +391,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_red);
                             anotherItemizedIconOverlay7
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==15||subcategotyId==17||subcategotyId==18){
@@ -404,7 +400,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_blue);
                             anotherItemizedIconOverlay8
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray8,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray8,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                     }
@@ -450,7 +446,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_green);
                             anotherItemizedIconOverlay
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                       else if(subcategotyId>=2&&subcategotyId<=5){
@@ -459,7 +455,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
                             anotherItemizedIconOverlay2
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
 
                         }
 
@@ -487,7 +483,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_green);
                             anotherItemizedIconOverlay
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=5&&subcategotyId<=8) {
@@ -496,7 +492,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
                             anotherItemizedIconOverlay2
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=20&&subcategotyId<=21){
@@ -505,16 +501,16 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
                             anotherItemizedIconOverlay3
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=9&&subcategotyId<=12){
 
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_orange);
+                           // newMarker.setIcon = this.getResources().getDrawable(R.drawable.pin_orange);
                             anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
                             anotherItemizedIconOverlay4
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=13&&subcategotyId<=15){
@@ -523,7 +519,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
                             anotherItemizedIconOverlay5
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId>=16&&subcategotyId<=18){
@@ -532,7 +528,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
                             anotherItemizedIconOverlay6
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                         else if(subcategotyId==19){
@@ -541,7 +537,7 @@ int subcategotyId;
                             newMarker = this.getResources().getDrawable(R.drawable.pin_red);
                             anotherItemizedIconOverlay7
                                     = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,resProxyImp);
+                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,getActivity());
 
                         }
                     }
@@ -583,7 +579,7 @@ int subcategotyId;
         //---
 
         //Add Scale Bar
-        ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(getActivity());
+        ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);
 
 
@@ -605,6 +601,7 @@ int subcategotyId;
 
         @Override
         public boolean onItemSingleTapUp(int index, OverlayItem item) {
+
             Toast.makeText(getActivity(),
                     item.getTitle() + "\n"
                             + item.getSnippet()+ "\n"
