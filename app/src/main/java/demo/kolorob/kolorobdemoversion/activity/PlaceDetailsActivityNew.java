@@ -1147,11 +1147,11 @@ Context context;
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
-       /* mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setLocationName(getPlaceChoice());
+     //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
-        mapFragment.setLocationNameId(locationNameId);*/
+        mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -1171,15 +1171,16 @@ Context context;
 
     private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+       mapFragment.setLocationName(getPlaceChoice());
+       // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setHealthServiceProvider(healthServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
     private ArrayList<HealthServiceProviderItem> constructHealthListItemForHeader(int cat_id, String header)
