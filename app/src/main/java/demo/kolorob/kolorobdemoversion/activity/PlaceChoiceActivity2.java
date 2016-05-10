@@ -347,6 +347,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
             Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
             Intent em = new Intent(this, EmergencyActivity.class);
             startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
