@@ -71,7 +71,7 @@
 
         <activity
             android:name=".activity.PlaceDetailsActivityNew"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment_new"
             android:theme="@style/Theme.AppCompat.Light" />
