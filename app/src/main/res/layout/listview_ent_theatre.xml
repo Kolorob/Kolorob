@@ -19,64 +19,6 @@
 
         android:id="@+id/event_type" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
 
-        android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Doc_fee"
-        android:id="@+id/event_fee" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-
-        android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Pharmacy Time"
-        android:id="@+id/event_date" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Pharmacy_degree"
-        android:textColor="@color/black"
-
-        android:id="@+id/remarks" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Pharmacy_lmaf"
-        android:textColor="@color/black"
-
-        android:id="@+id/event_fee_ffp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-
-        android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Pharmacy_Mbbs"
-        android:id="@+id/event_fee_foc" />
 
 </LinearLayout>
