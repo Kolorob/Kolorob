@@ -86,7 +86,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
-
+    private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,mapnother,listholder;
     CategoryItem ci;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
@@ -302,7 +302,10 @@ Context context;
                 if(imc_met==AppConstants.BAUNIABADH) {
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
                 }
-                else locationNameId=AppConstants.PLACE_PARIS_ROAD;
+                else {locationNameId=AppConstants.PLACE_PARIS_ROAD;}
+            if(mapcalledstatus){
+
+            }
             }
 
             @Override
@@ -595,6 +598,7 @@ Context context;
                 * category id 7 means job*/
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
+                        mapcalledstatus=true;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -638,6 +642,7 @@ Context context;
 
                         break;
                     case AppConstants.HEALTH:
+                        mapcalledstatus=true;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -681,6 +686,7 @@ Context context;
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
+                        mapcalledstatus=true;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -726,7 +732,7 @@ Context context;
 
                     case AppConstants.GOVERNMENT:
 
-
+                        mapcalledstatus=false;
                         map.removeAllViews();
                         //TODO write necessary codes for government
                         toolbar2.setVisibility(View.GONE);
@@ -745,6 +751,7 @@ Context context;
                         alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
+                        mapcalledstatus=true;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
@@ -785,6 +792,7 @@ Context context;
 
                         break;
                     case AppConstants.FINANCIAL:
+                        mapcalledstatus=true;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
@@ -825,7 +833,7 @@ Context context;
 
                         break;
                     case AppConstants.JOB:
-
+                        mapcalledstatus=false;
 
                         map.removeAllViews();
                         toolbar2.setVisibility(View.GONE);

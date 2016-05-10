@@ -4,6 +4,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
  * Created by Mazharul.Islam1 on 2/9/2016.
  */
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class HealthSpecialistAdapter extends BaseAdapter
     String specialist_name[];
     String specialist_fee[];
     String specialist_remarks[];
+    String basic_part;
 
 
     public HealthSpecialistAdapter(Activity context, String[] specialist_name,String[] specialist_fee,String[] specialist_remarks) {
@@ -76,15 +78,35 @@ public class HealthSpecialistAdapter extends BaseAdapter
 
 
 
-        holder.s_name.setText("বিশেষজ্ঞের  ধরন : " +specialist_name[position]);
-        holder.s_fee.setText(" বিশেষজ্ঞের  ফি  : "+specialist_fee[position]);
-        holder.s_remarks.setText("মন্তব্য : "+specialist_remarks[position]);
+
+        if(specialist_name[position].equals(""))
+            concateBasic("বিশেষজ্ঞের  ধরন : ",specialist_name[position]);
+
+        if(specialist_fee[position].equals(""))
+            concateBasic(" বিশেষজ্ঞের  ফি  : ",specialist_fee[position]);
+
+        if(specialist_remarks[position].equals(""))
+            concateBasic("মন্তব্য : ",specialist_remarks[position]);
 
 
+        holder.s_name.setText(basic_part);
+        basic_part="";
 
         return convertView;
     }
 
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        basic_part= basic_part+value + "\n";
+
+        Log.d("....>>>", "Values   " + basic_part);
+
+
+        return basic_part;
+    }
 }
 
 

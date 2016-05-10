@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Vaccine Fee"
@@ -34,6 +35,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"

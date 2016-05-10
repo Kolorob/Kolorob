@@ -11,13 +11,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,12 +36,13 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
-public class DetailsInfoActivityHealth extends Activity  {
+public class DetailsInfoActivityHealth_new extends Activity  {
 
     ImageView close,kivabejabenHealth;
     TextView close_tv;
     ListView lv1,lv2,lv3;
     ImageButton Feedback;
+    String basic_part="",timeStamp,communicationway;
 
     /**
      * Following components are only for education
@@ -79,7 +80,7 @@ Activity con;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.health_details_info1);
+        setContentView(R.layout.health_details_info12);
         Intent intent = getIntent();
         Feedback = (ImageButton) findViewById(R.id.button2);
 
@@ -114,13 +115,13 @@ Activity con;
 
 
 
-        HealthSpecialistTable healthSpecialistTable =new HealthSpecialistTable(DetailsInfoActivityHealth.this);
-        HealthPharmacyTable healthPharmacyTable1 =new HealthPharmacyTable(DetailsInfoActivityHealth.this);
+        HealthSpecialistTable healthSpecialistTable =new HealthSpecialistTable(DetailsInfoActivityHealth_new.this);
+        HealthPharmacyTable healthPharmacyTable1 =new HealthPharmacyTable(DetailsInfoActivityHealth_new.this);
 
 
 
 
-        HealthVaccinesTable healthVaccinesTable=new HealthVaccinesTable(DetailsInfoActivityHealth.this);
+        HealthVaccinesTable healthVaccinesTable=new HealthVaccinesTable(DetailsInfoActivityHealth_new.this);
         healthVaccinesItemArrayList=healthVaccinesTable.getVaccinesforNode(healthServiceProviderItem.getNodeId());
         healthPharmacyItems=healthPharmacyTable1.getPharmacyforNode(healthServiceProviderItem.getNodeId());
 
@@ -158,6 +159,8 @@ Activity con;
                 String docString = String.valueOf(docId);
 
 
+
+
                 doc_id_list[k]=(docString);
                 Phermacy_doc_list[k]=et.getPharmacyDoctorName();
                 doc_fee_list[k]=et.getPharmacyFee();
@@ -178,7 +181,7 @@ Activity con;
 
             navlist.setAdapter(adapter);
 
-            Helpes.getListViewSize(navlist);
+           Helpes.getListViewSize(navlist);
 
 
 
@@ -260,24 +263,79 @@ Activity con;
 
         itemName.setText(" "+healthServiceProviderItem.getNameBn());
 
+        if(!healthServiceProviderItem.getArea().equals(""))
+        {
+            concateBasic("   ঠিকানা: ", healthServiceProviderItem.getArea());
+        }
 
-        itemAddress.setText("  ঠিকানা: "+healthServiceProviderItem.getArea());
-        itemType.setText("  ধরন: ");
-        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());
-        opening_time.setText("  খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
-        breaktime.setText("  বিরতির সময়: "+healthServiceProviderItem.getBreaktime());
-        close_time.setText("  বন্ধ করার সময়: "+healthServiceProviderItem.getClosingtime());
-        road.setText("  রাস্তা : "+healthServiceProviderItem.getRoad());
-        block.setText("  ব্লক: "+healthServiceProviderItem.getBlock());
-        landmark.setText("  কাছাকাছি পরিচিত স্থান: "+healthServiceProviderItem.getLandmark());
+        if(!healthServiceProviderItem.getNodeType().equals(""))
+        {
+             concateBasic("  ধরন: ",healthServiceProviderItem.getNodeType());
+        }
 
-        email.setText("  ইমেইল: " + healthServiceProviderItem.getNodeEmail());
-        website.setText("  ওয়েবসাইট: "+healthServiceProviderItem.getNodeWebsite());
-        fb.setText("  ফেসবুক: "+healthServiceProviderItem.getNodeFacebook());
+        itemAddress.setText(basic_part);
+        basic_part="";
+
+       // itemType.setText("  ধরন: ");
+
+        if(!healthServiceProviderItem.getOpeningtime().equals(""))
+        {
+
+            concateBasic("  খোলার সময়: ", healthServiceProviderItem.getOpeningtime());
+
+        }
+
+        if(!healthServiceProviderItem.getBreaktime().equals(""))
+        {
+
+            concateBasic("  বিরতির সময়: ", healthServiceProviderItem.getBreaktime());
+            //opening_time.setText("  খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
+        }
+
+        if(!healthServiceProviderItem.getOpeningtime().equals(""))
+        {
+
+            concateBasic("  বন্ধ করার সময়: ",healthServiceProviderItem.getClosingtime());
+            //opening_time.setText("  খোলার সময়: "+healthServiceProviderItem.getOpeningtime());
+        }
+
+        opening_time.setText(basic_part);
+
+        basic_part="";
+
+        if(!healthServiceProviderItem.getNodeContact().equals(""))
+            concateBasic("  মোবাইল/মুঠোফোন নম্বর: ",healthServiceProviderItem.getNodeContact());
+
+        if(!healthServiceProviderItem.getNodeEmail().equals(""))
+            concateBasic("  ইমেইল: ", healthServiceProviderItem.getNodeEmail());
+
+        if(!healthServiceProviderItem.getNodeWebsite().equals(""))
+            concateBasic("  ওয়েবসাইট: ",healthServiceProviderItem.getNodeWebsite());
+
+        if(!healthServiceProviderItem.getNodeFacebook().equals(""))
+            concateBasic("  ফেসবুক: ",healthServiceProviderItem.getNodeFacebook());
+
+        if(!healthServiceProviderItem.getRoad().equals(""))
+            concateBasic("  রাস্তা : ",healthServiceProviderItem.getRoad());
+
+        if(!healthServiceProviderItem.getBlock().equals(""))
+            concateBasic("  ব্লক: ",healthServiceProviderItem.getBlock());
+
+        if(!healthServiceProviderItem.getLandmark().equals(""))
+            concateBasic("  কাছাকাছি পরিচিত স্থান: ",healthServiceProviderItem.getLandmark());
+
+        itemContact.setText(basic_part);
+//        road.setText("");
+//        block.setText(""+healthServiceProviderItem.getBlock());
+//        landmark.setText("  কাছাকাছি পরিচিত স্থান: "+healthServiceProviderItem.getLandmark());
+//        itemContact.setText("" +);
+//        email.setText("" +);
+//        website.setText(""+);
+//        fb.setText("  ফেসবুক: ");
         Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(DetailsInfoActivityHealth.this, FeedbackActivity.class);
+                Intent a = new Intent(DetailsInfoActivityHealth_new.this, FeedbackActivity.class);
                 a.putExtra("NodeId", healthServiceProviderItem.getNodeId());
                 a.putExtra("CatId", healthServiceProviderItem.getCategoryId());
                 startActivity(a);
@@ -325,7 +383,7 @@ Activity con;
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showSettingsAlert(DetailsInfoActivityHealth.this);
+                    AppUtils.showSettingsAlert(DetailsInfoActivityHealth_new.this);
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealth.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("GPS Disabled ");
 //                    alertDialog.setMessage(" GPS সচল করুন।  ");
@@ -341,7 +399,7 @@ Activity con;
                 else
                 {
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealth.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealth_new.this, AlertDialog.THEME_HOLO_LIGHT).create();
                     alertDialog.setTitle("ইন্টারনেট সংযোগ্ন বিচ্ছিন্ন ");
                     alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -411,6 +469,22 @@ Activity con;
         // Showing Alert Message
         alertDialog.show();
     }
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        basic_part= basic_part+value + "\n";
+
+        Log.d("....>>>", "Values   " + basic_part);
+
+
+        return basic_part;
+    }
+
+
+
+
 
     @Override
     public void onBackPressed() {

@@ -64,6 +64,10 @@
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
             android:theme="@style/Theme.AppCompat.Light" />
+
+        <activity
+            android:name=".activity.DetailsInfoActivityHealth_new"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment"
             android:theme="@style/Theme.AppCompat.Light" />
