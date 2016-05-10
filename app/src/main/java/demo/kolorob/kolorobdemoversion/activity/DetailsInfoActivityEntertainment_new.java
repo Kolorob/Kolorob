@@ -69,7 +69,7 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
     private TextView landmark;
     ListView navlist,navlist1,navlist2,navlist3;
     LinearLayout first,second,third,fourth;
-    private String result_concate;
+    private String result_concate="";
 
     ArrayList<EntertainmentBookShopItem> entertainmentBookShopItems;
     ArrayList<EntertainmentFieldItem> entertainmentFieldItems;
@@ -85,7 +85,7 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_info_entertainment);
+        setContentView(R.layout.activity_details_info_entertainment_new);
         Intent intent = getIntent();
         Feedback = (ImageButton) findViewById(R.id.button2);
 
@@ -141,9 +141,9 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
         if(!entertainmentServiceProviderItem.getAddress().equals(""))
             concateBasic("  ঠিকানা: ",entertainmentServiceProviderItem.getAddress());
 
-        if(!entertainmentServiceProviderItem.getAddress().equals(""))
-            concateBasic("  এলাকা: ", entertainmentServiceProviderItem.getAddress());
-            itemAddress.setText(result_concate);
+        if(!entertainmentServiceProviderItem.getArea().equals(""))
+            concateBasic("  এলাকা: ", entertainmentServiceProviderItem.getArea());
+        itemarea.setText(result_concate);
         result_concate="";
 
         //itemarea.setText("  এলাকা: "+entertainmentServiceProviderItem.getArea());
@@ -164,7 +164,7 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
 //        itemClosingTIme.setText("  বন্ধের সময়: " +entertainmentServiceProviderItem.getClosingtime() );
 //        itemBreakTime.setText("  বিরতির সময়: "+entertainmentServiceProviderItem.getBreaktime());
 
-        if( entertainmentServiceProviderItem.getNodeAdditional().equals(""))
+        if(!entertainmentServiceProviderItem.getNodeAdditional().equals(""))
             concateBasic("   মোবাইল/মুঠোফোন নম্বর: ", entertainmentServiceProviderItem.getNodeAdditional());
 
         if(!entertainmentServiceProviderItem.getNodeEmail().equals(""))
@@ -181,19 +181,19 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
             concateBasic(" রাস্তা : ",entertainmentServiceProviderItem.getBlock());
 
         if(!entertainmentServiceProviderItem.getLandmark().equals(""))
-            concateBasic(" ব্লক : ",entertainmentServiceProviderItem.getLandmark());
+            concateBasic("  ব্লক : ",entertainmentServiceProviderItem.getLandmark());
 
         if(!entertainmentServiceProviderItem.getRoad().equals(""))
             concateBasic(" কাছাকাছি পরিচিত স্থান: ",entertainmentServiceProviderItem.getRoad() );
 
 
         itemContact.setText(result_concate);
-        email.setText(" ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
-        website.setText(" ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
-        fb.setText(" ফেইসবুক: "+entertainmentServiceProviderItem.getNodeFacebook());
-        road.setText(" রাস্তা : " +entertainmentServiceProviderItem.getBlock());
-        block.setText(" ব্লক : "+entertainmentServiceProviderItem.getLandmark());
-        landmark.setText(" কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
+//        email.setText(" ইমেইল : "+entertainmentServiceProviderItem.getNodeEmail());
+//        website.setText(" ওয়েবসাইট : "+entertainmentServiceProviderItem.getNodeWebsite());
+//        fb.setText(" ফেইসবুক: "+entertainmentServiceProviderItem.getNodeFacebook());
+//        road.setText(" রাস্তা : " +entertainmentServiceProviderItem.getBlock());
+//        block.setText(" ব্লক : "+entertainmentServiceProviderItem.getLandmark());
+//        landmark.setText(" কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
         Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

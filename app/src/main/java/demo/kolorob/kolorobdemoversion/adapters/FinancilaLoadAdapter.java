@@ -107,10 +107,12 @@ public class FinancilaLoadAdapter extends BaseAdapter
 
         if(!remark[position].equals(""))
             concateBasic("মন্তব্য: ",remark[position]);
-
+        concateBasic("","");
         holder.service_name.setText(result_concate);
 
 
+
+        result_concate="";
 
         return convertView;
     }

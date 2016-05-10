@@ -38,7 +38,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
         TextView close_tv;
     ImageButton Feedback;
          ListView lv11,lv2;
-    String result_concate;
+    String result_concate="";
     ArrayList<LegalAidtypeServiceProviderLegalAdviceTable> legalAidtypeServiceProviderLegalAdviceTables;
     ArrayList<LegalAidLegalAdviceItem> legalAidLegalAdviceItems;
     ArrayList<LegalAidSalishiItem> legalAidSalishiItems;
@@ -67,7 +67,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_details_legal);
+            setContentView(R.layout.activity_details_legal_new);
             Intent intent = getIntent();
             Feedback = (ImageButton) findViewById(R.id.button2);
 
@@ -113,16 +113,16 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 
 
-            if(legalAidServiceProviderItem.getArea().equals(""))
+            if(!legalAidServiceProviderItem.getArea().equals(""))
                 concateBasic("  ঠিকানা: ",legalAidServiceProviderItem.getArea());
-            if(legalAidServiceProviderItem.getAddress().equals(""))
+            if(!legalAidServiceProviderItem.getAddress().equals(""))
                 concateBasic("  এলাকা : ",legalAidServiceProviderItem.getAddress());
             itemAddress.setText(result_concate);
             result_concate="";
 
-            if(legalAidServiceProviderItem.getOpeningtime().equals(""))
+            if(!legalAidServiceProviderItem.getOpeningtime().equals(""))
                 concateBasic(" খোলার সময়: ",legalAidServiceProviderItem.getOpeningtime());
-            if(legalAidServiceProviderItem.getAdditionaltime().equals(""))
+            if(!legalAidServiceProviderItem.getAdditionaltime().equals(""))
                 concateBasic(" অতিরিক্ত সময়: ",legalAidServiceProviderItem.getAdditionaltime());
 
             if(!legalAidServiceProviderItem.getClosingtime().equals(""))
@@ -134,7 +134,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 //            closetime.setText(" বন্ধ করার সময়: "+legalAidServiceProviderItem.getClosingtime());
 
 
-            if(legalAidServiceProviderItem.getContactNo().equals(""))
+            if(!legalAidServiceProviderItem.getContactNo().equals(""))
                 concateBasic("  মোবাইল নম্বর:  ",legalAidServiceProviderItem.getContactNo());
 //            itemType.setText("  এলাকা : "+legalAidServiceProviderItem.getAddress());
 //
@@ -157,15 +157,15 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
             if(!legalAidServiceProviderItem.getLandmark().equals(""))
                 concateBasic(" কাছাকাছি পরিচিত স্থান: ",legalAidServiceProviderItem.getLandmark());
-
+            itemContact.setText(result_concate);
 
 //            breaktime.setText(" বিরতির সময়: "+ legalAidServiceProviderItem.getBreaktime());
-            road.setText(" রাস্তা: "+ legalAidServiceProviderItem.getRoad());
-            block.setText(" ব্লক:"+legalAidServiceProviderItem.getLandmark());
-            fb.setText(" ফেইসবুক: "+ legalAidServiceProviderItem.getFbLink());
-            website.setText(" ওয়েবসাইট: " +legalAidServiceProviderItem.getWebsiteLink());
-            email.setText(" ইমেইল: "+legalAidServiceProviderItem.getEmailAddress());
-            landmark.setText(" কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
+//            road.setText(" রাস্তা: "+ legalAidServiceProviderItem.getRoad());
+//            block.setText(" ব্লক:"+legalAidServiceProviderItem.getLandmark());
+//            fb.setText(" ফেইসবুক: "+ legalAidServiceProviderItem.getFbLink());
+//            website.setText(" ওয়েবসাইট: " +legalAidServiceProviderItem.getWebsiteLink());
+//            email.setText(" ইমেইল: "+legalAidServiceProviderItem.getEmailAddress());
+//            landmark.setText(" কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
           //  itemarea.setText("এলাকা: " +legalAidServiceProviderItem.getAddress());
             String la= legalAidServiceProviderItem.getIdentifierId();
             Feedback.setOnClickListener(new View.OnClickListener() {

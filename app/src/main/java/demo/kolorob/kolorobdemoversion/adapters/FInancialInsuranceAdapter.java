@@ -104,8 +104,11 @@ public class FInancialInsuranceAdapter extends BaseAdapter
 //        holder.yes_no.setText("সেবা পাওয়া যাবে কিনা? : " +yes_no[position]);
 //        holder.costs.setText("খরচ: "+costs[position]);
 //        holder.remark.setText("মন্তব্য: " +remark[position]);
-        holder.service_name.setText(result_concate);
+        concateBasic("","");
 
+
+        holder.service_name.setText(result_concate);
+        result_concate="";
         return convertView;
     }
 

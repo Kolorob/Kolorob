@@ -114,8 +114,10 @@ public class EntertainmentBookshopAdapter extends BaseAdapter
             concateBasic("সদস্য ফী : ",membership_cost_foc[position]);
 
 
-
+        concateBasic("","");
         holder.bor_cost.setText(result_concate);
+
+        result_concate="";
 //        holder.lending_allowed.setText("ধার নেয়া যাবে কিনা: "+lending_allowed[position]);
 //        holder.mem_cost.setText("সদস্য খরচ : " +membership_cost[position]);
 //        holder.offers.setText("অফার: "+offers[position]);

@@ -108,8 +108,10 @@ public class EntertainmentTheatreAdapter extends BaseAdapter
 
 
 
-
+         concateBasic("","");
         holder.event_type.setText(result_concate);
+        result_concate="";
+
 //        holder.event_fee.setText("ইভেন্টের ফী : " +event_fee[position]);
 //        holder.event_date.setText("ইভেন্ট ফী : "+event_date[position]);
 //        holder.remarks.setText("মন্তবন্য: " +remarks[position]);

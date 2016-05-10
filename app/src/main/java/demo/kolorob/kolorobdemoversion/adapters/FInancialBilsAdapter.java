@@ -111,8 +111,13 @@ public class FInancialBilsAdapter extends BaseAdapter
 
         if(!ref_num[position].equals(""))
             concateBasic("রেফারেন্স নম্ভর : ",ref_num[position]);
+        concateBasic("","");
+
 
         holder.service_name.setText(result_concate);
+
+
+        result_concate="";
 
 //        holder.service_name.setText("সেবার নাম : "+service_name[position]);
 //        holder.yes_no.setText("সেবা পাওয়া যাবে কিনা? : " +yes_no[position]);

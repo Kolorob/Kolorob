@@ -107,11 +107,13 @@ public class FinancialSocialAdapter extends BaseAdapter
             concateBasic("মন্তব্য: ",remark[position]);
 
 
-
+        concateBasic("","");
         holder.service_name.setText(result_concate);
 
 
 
+
+        result_concate="";
         return convertView;
     }
 

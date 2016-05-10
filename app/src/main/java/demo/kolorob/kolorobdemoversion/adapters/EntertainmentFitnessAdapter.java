@@ -107,10 +107,14 @@ public class EntertainmentFitnessAdapter extends BaseAdapter
 
 
 
+           concateBasic("","");
+
+
 
         holder.year_of_establishment.setText(result_concate);
 
 
+        result_concate="";
 
         return convertView;
     }

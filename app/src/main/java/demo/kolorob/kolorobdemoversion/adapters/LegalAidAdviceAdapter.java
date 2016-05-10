@@ -107,13 +107,16 @@ public class LegalAidAdviceAdapter extends BaseAdapter
         if(!legal_aid_remark[position].equals(""))
             concateBasic("",legal_aid_remark[position]);
 
+        concateBasic("","");
         holder.service_name.setText(result_concate);
-        holder.legal_aid_free.setText("সেবা বিনামূল্যে কিনা : " +legal_aid_free[position]);
-        holder.legal_aid_cost.setText("সেবার বিনিময় খরচ: "+legal_aid_cost[position]);
-        holder.legal_aid_person_authority.setText("যিনি সেবা দিবেন: " +legal_aid_person_authority[position]);
-        holder.legal_aid_remark.setText("মন্তব্য : "+legal_aid_remark[position]);
+//        holder.legal_aid_free.setText("সেবা বিনামূল্যে কিনা : " +legal_aid_free[position]);
+//        holder.legal_aid_cost.setText("সেবার বিনিময় খরচ: "+legal_aid_cost[position]);
+//        holder.legal_aid_person_authority.setText("যিনি সেবা দিবেন: " +legal_aid_person_authority[position]);
+//        holder.legal_aid_remark.setText("মন্তব্য : " + legal_aid_remark[position]);
 
 
+
+        result_concate="";
 
         return convertView;
     }

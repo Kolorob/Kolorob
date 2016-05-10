@@ -22,10 +22,12 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity_new;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -132,7 +134,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                     public void onClick(View v) {
 
 
-                        Intent iient = new Intent(getActivity(), DetailsInfoActivityEntertainment.class);
+                        Intent iient = new Intent(getActivity(), DetailsInfoActivityEntertainment_new.class);
                         iient.putExtra(AppConstants.KEY_DETAILS_ENT, detent);
                         activity.startActivity(iient);
 
@@ -182,7 +184,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                     public void onClick(View v) {
 
 
-                        Intent iileg = new Intent(getActivity(), DetailsLegalActivity.class);
+                        Intent iileg = new Intent(getActivity(), DetailsLegalActivity_new.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, detleg);
                         activity.startActivity(iileg);
 

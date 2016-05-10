@@ -20,6 +20,7 @@ public class EducationCourseAdapter extends BaseAdapter
     String course_admission_time[];
     String edu_course_cost[];
     String edu_course_type[];
+    String result_concate;
 
     public EducationCourseAdapter(Activity context, String[] course_name,String[] course_duration,String[] course_admission_time,String[] edu_course_cost,String[] edu_course_type) {
         super();
@@ -67,10 +68,7 @@ public class EducationCourseAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.listview_course_time, null);
             holder = new ViewHolder();
             holder.c_name = (TextView) convertView.findViewById(R.id.c_name);
-            holder.c_duration = (TextView) convertView.findViewById(R.id.c_duration);
-            holder.s_admission_time = (TextView) convertView.findViewById(R.id.c_admissionTime);
-            holder.c_cost = (TextView) convertView.findViewById(R.id.c_cost);
-            holder.s_type = (TextView) convertView.findViewById(R.id.c_type);
+
 
             convertView.setTag(holder);
         }
@@ -82,16 +80,33 @@ public class EducationCourseAdapter extends BaseAdapter
 
 
 
+       if(!course_name[position].equals(""))
+           concateBasic("কোর্সের নাম: ",course_name[position]);
+        if(!course_duration[position].equals(""))
+            concateBasic("কোর্সের সময়সীমা: ",course_duration[position]);
+        if(!course_admission_time[position].equals(""))
+            concateBasic("ভর্তির মৌসুম : ",course_admission_time[position]);
+        if(!edu_course_cost[position].equals(""))
+            concateBasic("ভর্তি হতে খরচ : ",edu_course_cost[position]);
+        if(!edu_course_type[position].equals(""))
+            concateBasic("কোর্সের ধরন: ",edu_course_type[position]);
 
-        holder.c_name.setText("কোর্সের নাম : " +course_name[position]);
-        holder.c_duration.setText("কোর্সের সময়সীমা: "+course_duration[position]);
-        holder.s_admission_time.setText("ভর্তির মৌসুম : "+course_admission_time[position]);
-        holder.c_cost.setText("ভর্তি হতে খরচ : "+edu_course_cost[position]+ " টাকা ");
-        holder.s_type.setText("কোর্সের ধরন: "+edu_course_type[position]);
+        concateBasic("","");
 
 
+
+
+        holder.c_name.setText(result_concate);
+        result_concate="";
 
         return convertView;
+    }
+
+
+    private String concateBasic(String value1,String value2){
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+        return result_concate;
     }
 
 }
