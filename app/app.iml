@@ -143,8 +143,8 @@
     <orderEntry type="library" exported="" name="play-services-wallet-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="slf4j-android-1.7.12" level="project" />
     <orderEntry type="library" exported="" name="play-services-appstate-8.4.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-gcm-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="slf4j-api-1.7.12" level="project" />
+    <orderEntry type="library" exported="" name="play-services-gcm-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-panorama-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-8.4.0" level="project" />

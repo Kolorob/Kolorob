@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
@@ -31,6 +32,8 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -39,6 +42,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -327,6 +331,40 @@ Context context;
 
 
 
+    public void helpDialog(View v){
+
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivityNew.this);
+        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceDetailsActivityNew.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
+        final Button button= (Button)promptView.findViewById(R.id.phone_call);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PlaceDetailsActivityNew.this, "...ok....",Toast.LENGTH_LONG).show();
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //resultText.setText("Hello, " + userfeedback.getText());
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
 
 
 
