@@ -29,4 +29,5 @@
     <string name="title_activity_review">ReviewActivity</string>
     <string name="title_activity_feedback">FeedbackActivity</string>
     <string name="title_activity_place_choice2">PlaceChoiceActivity2</string>
+    <string name="title_activity_display_all_jobs">DisplayAllJobsActivity</string>
 </resources>

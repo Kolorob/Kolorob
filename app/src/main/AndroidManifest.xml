@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="demo.kolorob.kolorobdemoversion">
+    package="demo.kolorob.kolorobdemoversion" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/kolorob_logo_first_page"
-        android:largeHeap="true"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme.NoActionBar"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning" >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBN-XOOR5ERV-mk9Q5F5Mo9gJTXFQiXZro" />
@@ -28,21 +27,19 @@
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.OpeningActivity"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.EmergencyActivity"
             android:theme="@style/Theme.AppCompat.Light" />
-
         <activity
             android:name=".activity.LocationAskActivity"
             android:theme="@style/Theme.Transparent" />
@@ -52,9 +49,9 @@
         <activity
             android:name=".activity.ButtonClickBaunia"
             android:label="@string/title_activity_button_click_baunia" />
-        <activity android:name=".activity.PlaceChoiceActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".activity.PlaceChoiceActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PlaceDetailsActivity"
             android:screenOrientation="portrait" />
@@ -64,11 +61,9 @@
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
             android:theme="@style/Theme.AppCompat.Light" />
-
         <activity
             android:name=".activity.DetailsInfoActivityHealth_new"
             android:theme="@style/Theme.AppCompat.Light" />
-
         <activity
             android:name=".activity.PlaceDetailsActivityNew"
             android:screenOrientation="portrait" />
@@ -89,12 +84,10 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.PlaceChoiceActivity2"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsLegalActivity"
             android:theme="@style/Theme.AppCompat.Light" />
-
         <activity
             android:name=".activity.DetailsLegalActivity_new"
             android:theme="@style/Theme.AppCompat.Light" />
@@ -102,10 +95,15 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".activity.FeedbackActivity"
             android:label="@string/title_activity_feedback"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DisplayAllJobsActivity"
+            android:label="@string/title_activity_display_all_jobs" >
+        </activity>
     </application>
 
 </manifest>
