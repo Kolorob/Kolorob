@@ -66,7 +66,7 @@ public class DetailsJobActivity extends Activity {
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
-        kivabejabejob=(ImageView)findViewById(R.id.kivabejabenJob);
+
         openTime=(TextView)findViewById(R.id.opening_time);
         close_Time=(TextView)findViewById(R.id.closingtime);
         breakTIme=(TextView)findViewById(R.id.break_time);

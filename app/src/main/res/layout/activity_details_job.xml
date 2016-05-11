@@ -42,12 +42,12 @@
             android:gravity="center">
 
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:background="@color/transparent"
-                android:src="@drawable/feedback"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="30dp"
+              android:text="বিস্তারিত বিবরন "
+              />
 
 
         </LinearLayout>
@@ -406,14 +406,7 @@
         android:id="@+id/linearLayout4"
         android:foregroundGravity="center"
         android:gravity="center">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/kivabejabenJob"
-            android:src="@drawable/kivabe"
-            android:paddingRight="20dp"
-            android:focusable="true"
-            android:layout_gravity="center" />
+
 
 
     </LinearLayout>
