@@ -327,6 +327,10 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
             // Handle the camera action
         } else if (id == R.id.info_change) {
 
+            Intent em = new Intent(this, Information_UpdateActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
         } else if (id == R.id.emergency_info) {
 
           //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();

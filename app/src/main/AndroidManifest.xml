@@ -40,6 +40,10 @@
         <activity
             android:name=".activity.EmergencyActivity"
             android:theme="@style/Theme.AppCompat.Light" />
+
+        <activity
+            android:name=".activity.Information_UpdateActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.LocationAskActivity"
             android:theme="@style/Theme.Transparent" />
