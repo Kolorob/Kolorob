@@ -14,6 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -34,6 +38,7 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -48,8 +53,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 public class MapFragmentOSM extends Fragment implements View.OnClickListener,MapEventsReceiver {
     Drawable newMarker;
     Marker marker;
-    EducationServiceProviderItem nulledu;
-    HealthServiceProviderItem nullhel;
+
     GeoPoint pp;
     int ind=0;
     List<String> listData=new ArrayList<String>();
@@ -156,15 +160,6 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
         //    mapView.getOverlays().add(mMyLocationOverlay);
         IMapController mapViewController = mapView.getController();
 
-        anotherOverlayItemArray = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray2 = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray3 = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray4 = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray5 = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray6 = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray7 = new ArrayList<OverlayItem>();
-        anotherOverlayItemArray8 = new ArrayList<OverlayItem>();
-
 
         if(locationNameId==1) {
 
@@ -201,16 +196,37 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
                 }
                     break;
             case AppConstants.ENTERTAINMENT:
-                //TODO write necessary codes for entertainment
+                for (EntertainmentServiceProviderItem et : entertainmentServiceProvider) {
+                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                    subcategotyId = et.getEntSubCategoryId();
+                    latDouble = Double.parseDouble(et.getLatitude());
+                    longDouble = Double.parseDouble(et.getLongitude());
+                    GeoPoint point = new GeoPoint(latDouble, longDouble);
+                    drawMarkerEnt(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getEntSubCategoryId());
+                }
                 break;
             case AppConstants.GOVERNMENT:
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
-
+                for (LegalAidServiceProviderItem et : legalaidServiceProvider) {
+                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                    subcategotyId = et.getLegalaidSubCategoryId();
+                    latDouble = Double.parseDouble(et.getLatitude());
+                    longDouble = Double.parseDouble(et.getLongitude());
+                    GeoPoint point = new GeoPoint(latDouble, longDouble);
+                    drawMarkerLeg(point, et.getLegalaidNameEng(), et.getAddress(), et.getContactNo(), et.getIdentifierId(), et.getLegalaidSubCategoryId());
+                }
                 break;
             case AppConstants.FINANCIAL:
-
+                for (FinancialServiceProviderItem et : financialServiceProvider) {
+                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                    subcategotyId = et.getRefNum();
+                    latDouble = Double.parseDouble(et.getLatitude());
+                    longDouble = Double.parseDouble(et.getLongitude());
+                    GeoPoint point = new GeoPoint(latDouble, longDouble);
+                    drawMarkerFin(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getRefNum());
+                }
                 break;
             case AppConstants.JOB:
 
@@ -267,7 +283,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
         else if(subcategotyId>=22&&subcategotyId<=26)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,point,title,contact,node);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -292,69 +308,87 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
         else if(subcategotyId==22)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,point,title,contact,node);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
+        marker.setInfoWindow(infoWindow);
+
+        mapView.getOverlays().add(marker);
+    }
+
+    private void drawMarkerEnt(GeoPoint point,String title,String address,String contact, String node,int subcategotyId){
+
+
+        Marker marker= new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        if(subcategotyId==1)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+
+        else if(subcategotyId==2||subcategotyId==5||subcategotyId==21)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
+        else if(subcategotyId==3)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
+        else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+        else if(subcategotyId>=9&&subcategotyId<=11)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_red));
+        else if(subcategotyId==12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
+        else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
+        else if(subcategotyId==15||subcategotyId==17||subcategotyId==18)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
+
+
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
     }
 
 
+
+    private void drawMarkerLeg(GeoPoint point,String title,String address,String contact, String node,int subcategotyId){
+        Marker marker= new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        if(subcategotyId==1)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
+
+        else if(subcategotyId>=2&&subcategotyId<=5)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
+        marker.setInfoWindow(infoWindow);
+
+        mapView.getOverlays().add(marker);
+    }
+    private void drawMarkerFin(GeoPoint point,String title,String address,String contact, String node,int subcategotyId){
+        Marker marker= new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        if(subcategotyId>=1&&subcategotyId<=4)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
+        else if(subcategotyId>=5&&subcategotyId<=8)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+        else if(subcategotyId>=20&&subcategotyId<=21)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
+        else if(subcategotyId>=9&&subcategotyId<=12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
+        else if(subcategotyId>=13&&subcategotyId<=15)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+        else if(subcategotyId>=16&&subcategotyId<=18)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
+        else if(subcategotyId==19)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
+        marker.setInfoWindow(infoWindow);
+
+        mapView.getOverlays().add(marker);
+    }
+
     @Override
     public void onClick(View v) {
 
-    }
-    private class MyInfoWindow extends InfoWindow{
-        String titlemarker,contact2,node;
-        GeoPoint pp;
-        public MyInfoWindow(int layoutResId, MapView mapView,GeoPoint point,String title,String contact,String Node) {
-            super(layoutResId, mapView);
-            this.pp=point;
-            this.titlemarker=title;
-            this.contact2=contact;
-            this.node=Node;
-        }
-        public void onClose() {
-        }
-
-        public void onOpen(Object arg0) {
-            final LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
-            Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
-            TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
-           // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
-            TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
-            TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
-txtTitle.setText(titlemarker);
-           // contact.setText(contact2);
-            adddescription.setText(node);
-            layout.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    switch (categoryId) {
-                        case AppConstants.EDUCATION:
-                        // Override Marker's onClick behaviour here
-                        Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-                        layout.setVisibility(View.VISIBLE);
-                        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(getActivity());
-                        nulledu = educationServiceProviderTable.geteduNode2(node);
-                        Intent iient = new Intent(getActivity(), DetailsInfoActivity.class);
-                        iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
-                        getActivity().startActivity(iient);
-                        layout.setVisibility(View.GONE);
-                            break;
-                        case AppConstants.HEALTH:
-                            Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-                            layout.setVisibility(View.VISIBLE);
-                            HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(getActivity());
-                            nullhel = healthServiceProviderTable.gethelNode2(node);
-                            Intent iihel = new Intent(getActivity(), DetailsInfoActivityHealth_new.class);
-                            iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
-                            getActivity().startActivity(iihel);
-                            layout.setVisibility(View.GONE);
-                            break;
-                    }
-
-                }
-            });
-        }
     }
 
 }
