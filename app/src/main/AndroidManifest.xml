@@ -75,7 +75,7 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsJobActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity_new"
             android:theme="@style/Theme.AppCompat.Light" />
@@ -102,7 +102,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DisplayAllJobsActivity"
-            android:label="@string/title_activity_display_all_jobs" >
+
+            android:theme="@style/Theme.Transparent">
         </activity>
     </application>
 

@@ -2,11 +2,13 @@ package demo.kolorob.kolorobdemoversion.adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -22,7 +24,8 @@ public class DisplayAllJobList extends BaseAdapter
     String remaing_date[];
     String address[];
     String contract_number[];
-
+    LinearLayout titlePart,salaryPart,addressPart,numberpart;
+    int height,width;
 
 
     public DisplayAllJobList(Activity context, String[] title,String[] salary_range,String[] remaining_date, String[] address,String[] contract_number) {
@@ -33,6 +36,8 @@ public class DisplayAllJobList extends BaseAdapter
         this.remaing_date = remaining_date;
         this.address =address;
         this.contract_number=contract_number;
+
+
 
 
     }
@@ -72,7 +77,7 @@ public class DisplayAllJobList extends BaseAdapter
         {
             convertView = inflater.inflate(R.layout.display_all_job_list, null);
             holder = new ViewHolder();
-            holder.title = (TextView) convertView.findViewById(R.id.title_id);
+            holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.salary_range = (TextView) convertView.findViewById(R.id.salary_range);
             holder.remaining_date = (TextView) convertView.findViewById(R.id.remaining_date);
             holder.address = (TextView) convertView.findViewById(R.id.address);
@@ -87,15 +92,38 @@ public class DisplayAllJobList extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
+        titlePart=(LinearLayout)convertView.findViewById(R.id.titlePart);
+        salaryPart=(LinearLayout)convertView.findViewById(R.id.salaryPart);
+        addressPart=(LinearLayout)convertView.findViewById(R.id.addressPart);
+        numberpart=(LinearLayout)convertView.findViewById(R.id.numberPart);
+        DisplayMetrics displayMetrics =  context.getResources().getDisplayMetrics();
+        height= displayMetrics.heightPixels;
+        width=displayMetrics.widthPixels;
 
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) titlePart.getLayoutParams();
+
+        params.width = width/3;
+        titlePart.setLayoutParams(params);
+
+
+        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) salaryPart.getLayoutParams();
+
+        params1.width = width/3;
+        salaryPart.setLayoutParams(params1);
+
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) addressPart.getLayoutParams();
+
+        params2.width = width/3;
+        addressPart.setLayoutParams(params2);
 
 
 
         holder.title.setText("" +title[position]);
-        holder.salary_range.setText("" + salary_range[position]);
-        holder.remaining_date.setText("" + remaing_date[position]);
-        holder.address.setText("" + address[position]);
-        holder.contact_number.setText("" + contract_number[position]);
+        holder.title.setTextSize(26);
+        holder.salary_range.setText("স্যালারি : " + salary_range[position]);
+        holder.remaining_date.setText("সময় বাকি আছেঃ " + remaing_date[position]);
+        holder.address.setText("ঠিকানাঃ " + address[position]);
+        holder.contact_number.setText("যোগাযোগের নম্বরঃ " + contract_number[position]);
 
 
 

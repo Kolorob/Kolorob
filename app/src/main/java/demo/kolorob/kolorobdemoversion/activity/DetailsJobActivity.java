@@ -19,7 +19,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
- * Created by israt.jahan on 1/11/2016.
+ * Created by arafat on 1/11/2016.
  */
 public class DetailsJobActivity extends Activity {
     ImageView close,kivabejabejob;
@@ -66,7 +66,7 @@ public class DetailsJobActivity extends Activity {
         email = (TextView) findViewById(R.id.tv_email);
         website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
-        kivabejabejob=(ImageView)findViewById(R.id.kivabejabenJob);
+
         openTime=(TextView)findViewById(R.id.opening_time);
         close_Time=(TextView)findViewById(R.id.closingtime);
         breakTIme=(TextView)findViewById(R.id.break_time);
@@ -79,98 +79,24 @@ public class DetailsJobActivity extends Activity {
 
 
 
-        itemName.setText(" "+jobServiceProviderItem.getAddress());
-        itemAddress.setText(" ঠিকানা: "+jobServiceProviderItem.getArea());
-        itemType.setText(" রেজিস্ট্রেশন :  "+jobServiceProviderItem.getRegisteredWith());
+        itemName.setText("Plumber Needed");
+        itemAddress.setText(" ঠিকানা:  বাড়ি নং: ১০ বাস্তা নম্বর: 4 বাউনিয়াবাদ ");
+        itemType.setText(" রেজিস্ট্রেশন :  বাউনিয়াবাদ");
 
-        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+jobServiceProviderItem.getContactNo());
+        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর:  01988009755");
 
-        email.setText(" সংবাদ দাতা: "+jobServiceProviderItem.getContactPersonDesignation());
-        fb.setText(" ফেইসবুক: "+jobServiceProviderItem.getFbLink());
-        website.setText(" ওয়েবসাইট: "+jobServiceProviderItem.getWebsiteLink());
-        jobName.setText(" জবের নাম: ");
-        road.setText(" রাস্তা :");
-        block.setText(" ব্লক :");
+        email.setText(" সংবাদ দাতা: অন্তরা ");
+        fb.setText(" ফেইসবুক: https://www.facebook.com/mazharul.islamarafat");
+        website.setText(" ওয়েবসাইট: http://www.kolorob.info/");
+        jobName.setText(" স্যালারি : ১০০০০ টাকা ");
+        road.setText("আবেদনের শেষ সময় : ১১ মে ২০১৬");
+        block.setText(" চাকুরির ধরন:  পার্ট টাইম");
 
-        openTime.setText(" খোলার সময়: ");
-        close_Time.setText(" বন্ধ করার সময়: ");
-        breakTIme.setText(" বিরতির সময়: ");
-        landmark.setText(" কাছাকাছি পরিচিত স্থান: ");
+        openTime.setText(" দায়িত্ব ঃ  পানির লাইন ফেটে গেছে। এটা মেরামত করা দরকার। ");
+        close_Time.setText(" তথ্য সংগ্রহের সময়ঃ ২ মে ২০১৬ ");
+        breakTIme.setText(" ইমেইলঃ  mazharul.islam1@savethechildren.org" );
+        landmark.setText(" কাছাকাছি পরিচিত স্থান: বাউনিয়াবাদ ঈদ গাহ মাঠ");
 
-        Feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent a = new Intent(DetailsJobActivity.this, FeedbackActivity.class);
-                a.putExtra("NodeId", jobServiceProviderItem.getIdentifierId());
-                a.putExtra("CatId", jobServiceProviderItem.getCategoryId());
-                startActivity(a);
-                finish();
-            }
-        });
-
-       // website.setText("ওয়েবসাইটঃ "+jobServiceProviderItem.getWebsiteLink());
-       /// fb.setText("ফেসবুকঃ "+jobServiceProviderItem.getFbLink());
-
-
-        kivabejabejob.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
-
-                            String lat = jobServiceProviderItem.getLatitude().toString();
-                            // double latitude = Double.parseDouble(lat);
-                            String lon = jobServiceProviderItem.getLongitude().toString();
-                            String name= jobServiceProviderItem.getAddress().toString();
-                            // double longitude = Double.parseDouble(lon);
-                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.putString("Latitude", lat);
-                            editor.putString("Longitude", lon);
-                            editor.putString("Name", name);
-                            editor.commit();
-
-
-                            String Longitude = pref.getString("Latitude", null);
-                            String Latitude = pref.getString("Longitude", null);
-
-                            if (Latitude != null && Longitude != null) {
-                                Double Lon = Double.parseDouble(Longitude);
-                                Double Lat = Double.parseDouble(Latitude);
-                                // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                                //Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
-                                // implementFragment();
-
-                                //username and password are present, do your stuff
-                            }
-
-
-                            finish();
-                        }
-                        else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-
-                            AppUtils.showSettingsAlert(DetailsJobActivity.this);
-
-                        }
-                        else
-                        {
-                            AlertDialog alertDialog = new AlertDialog.Builder(DetailsJobActivity.this, AlertDialog.THEME_HOLO_LIGHT).create();
-                            alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-                            alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            alertDialog.show();
-
-
-
-                        }
-                    }
-                }
-        );
 
         //common for all category
         close = (ImageView) findViewById(R.id.iv_close);

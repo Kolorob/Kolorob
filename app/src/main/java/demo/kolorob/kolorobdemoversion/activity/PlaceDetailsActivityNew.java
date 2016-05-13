@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DisplayAllJobList;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
@@ -833,23 +834,28 @@ Context context;
 
                         break;
                     case AppConstants.JOB:
-                        mapcalledstatus=false;
+                       // mapcalledstatus=false;
 
-                        map.removeAllViews();
-                        toolbar2.setVisibility(View.GONE);
-                        listholder.setVisibility(View.GONE);
-                        toolbar.setVisibility(View.VISIBLE);
-                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
+                     //   map.removeAllViews();
+//                        toolbar2.setVisibility(View.GONE);
+//                        listholder.setVisibility(View.GONE);
+//                        toolbar.setVisibility(View.VISIBLE);
+//                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
+//
+//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+//                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        alertDialog2.dismiss();
+//                                    }
+//                                });
+//                        alertDialog2.getWindow().setLayout(200, 300);
+//                        alertDialog2.show();
 
-                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog2.dismiss();
-                                    }
-                                });
-                        alertDialog2.getWindow().setLayout(200, 300);
-                        alertDialog2.show();
+
+                        Intent intentJ = new Intent(PlaceDetailsActivityNew.this,DisplayAllJobsActivity.class);
+                        startActivity(intentJ);
+
 
                     default:
                         break;
