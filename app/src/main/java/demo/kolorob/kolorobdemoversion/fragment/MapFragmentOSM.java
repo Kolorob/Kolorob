@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -43,6 +46,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 public class MapFragmentOSM extends Fragment implements View.OnClickListener,MapEventsReceiver {
     Drawable newMarker;
     Marker marker;
+    EducationServiceProviderItem nulledu;
     GeoPoint pp;
     int ind=0;
     List<String> listData=new ArrayList<String>();
@@ -292,7 +296,13 @@ txtTitle.setText(titlemarker);
                 public void onClick(View v) {
                     // Override Marker's onClick behaviour here
                     Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-                //layout.setVisibility(View.GONE);
+               layout.setVisibility(View.VISIBLE);
+                    EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(getActivity());
+                    nulledu = educationServiceProviderTable.geteduNode2(node);
+                    Intent iient = new Intent(getActivity(), DetailsInfoActivity.class);
+                    iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+                    getActivity().startActivity(iient);
+                    layout.setVisibility(View.GONE);
                 }
             });
         }
