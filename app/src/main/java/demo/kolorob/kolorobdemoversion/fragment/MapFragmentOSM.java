@@ -7,17 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.osmdroid.api.IMapController;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +40,10 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 /**
  * Created by israt.jahan on 5/5/2016.
  */
-public class MapFragmentOSM extends Fragment implements View.OnClickListener {
+public class MapFragmentOSM extends Fragment implements View.OnClickListener,MapEventsReceiver {
     Drawable newMarker;
+    Marker marker;
+    GeoPoint pp;
     int ind=0;
     List<String> listData=new ArrayList<String>();
     public String getLocationName() {
@@ -72,7 +80,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener {
     private ArrayList<JobServiceProviderItem> jobServiceProvider=null;
     private ArrayList<FinancialServiceProviderItem> financialServiceProvider=null;
     private ArrayList<EducationServiceProviderItem> educationServiceProvider=null;
-MapView mapView;
+    MapView mapView;
     private int categoryId;
     ArrayAdapter arrayAdapter;
     public int getCategoryId() {
@@ -101,7 +109,7 @@ MapView mapView;
     {
         educationServiceProvider=et;
     }
-int subcategotyId;
+    int subcategotyId;
     View rootView;
     ArrayList<OverlayItem> anotherOverlayItemArray,anotherOverlayItemArrayfinal,anotherOverlayItemArray2,anotherOverlayItemArray3,anotherOverlayItemArray4,anotherOverlayItemArray7,anotherOverlayItemArray8,anotherOverlayItemArray5,anotherOverlayItemArray6;
     public MapFragmentOSM()
@@ -128,16 +136,17 @@ int subcategotyId;
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
 
-        MapView mapView = (MapView) rootView.findViewById(R.id.mapview);
+        mapView = (MapView) rootView.findViewById(R.id.mapview);
         mapView.setClickable(true);
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
         mapView.setUseDataConnection(true);
 
-;
+
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
-       // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
-    //    mapView.getOverlays().add(mMyLocationOverlay);
+        //mapView.setTilesScaledToDpi(true);
+        // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
+        //    mapView.getOverlays().add(mMyLocationOverlay);
         IMapController mapViewController = mapView.getController();
 
         anotherOverlayItemArray = new ArrayList<OverlayItem>();
@@ -164,399 +173,28 @@ int subcategotyId;
         {
             case AppConstants.EDUCATION:
                 if(educationServiceProvider!=null) {
-                    for (  EducationServiceProviderItem et : educationServiceProvider) {
-                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId=et.getEduSubCategoryId();
+                    for (EducationServiceProviderItem et : educationServiceProvider) {
+                        //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        subcategotyId = et.getEduSubCategoryId();
                         latDouble=Double.parseDouble(et.getLatitude());
                         longDouble=Double.parseDouble(et.getLongitude());
-
-                      //  anotherOverlayItemArrayfinal.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                        if(subcategotyId>=1&&subcategotyId<=12){
-
-
-                            anotherOverlayItemArray.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                        //   newMarker.setIcon(this.getResources().getDrawable(R.drawable.pin_green));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
-                            anotherItemizedIconOverlay
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
-
-
-                        }
-                        else if(subcategotyId>=13&&subcategotyId<=17) {
-
-                            anotherOverlayItemArray2.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
-                            anotherItemizedIconOverlay2
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=18&&subcategotyId<=19){
-
-                            anotherOverlayItemArray3.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
-                            anotherItemizedIconOverlay3
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=20&&subcategotyId<=21){
-
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_orange);
-                            anotherOverlayItemArray4.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            anotherItemizedIconOverlay4
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=22&&subcategotyId<=26){
-
-                            anotherOverlayItemArray5.add(new OverlayItem(et.getEduNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
-                            anotherItemizedIconOverlay5
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-
+                        GeoPoint point=  new GeoPoint(latDouble,longDouble);
+                        drawMarkerEdu(point, et.getEduNameEng(),et.getAddress(),et.getContactNo(),et.getIdentifierId(), et.getEduSubCategoryId());
                     }
-
-                    if(anotherItemizedIconOverlay!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay);
-                    if(anotherItemizedIconOverlay2!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay2);
-                    if(anotherItemizedIconOverlay3!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay3);
-                    if(anotherItemizedIconOverlay4!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay4);
-                    if(anotherItemizedIconOverlay5!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay5);
-
                 }
                 break;
             case AppConstants.HEALTH:
-                if(healthServiceProvider!=null) {
-                    for (  HealthServiceProviderItem et : healthServiceProvider) {
-                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId=et.getRefNum();
-                        latDouble=Double.parseDouble(et.getLatitude());
-                        longDouble=Double.parseDouble(et.getLongitude());
-
-
-                        if(subcategotyId>=1&&subcategotyId<=7){
-
-
-                            anotherOverlayItemArray.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
-                            anotherItemizedIconOverlay
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
-
-
-                        }
-                        else if(subcategotyId>=8&&subcategotyId<=12) {
-
-                            anotherOverlayItemArray2.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
-                            anotherItemizedIconOverlay2
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=13&&subcategotyId<=15){
-
-                            anotherOverlayItemArray3.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
-                            anotherItemizedIconOverlay3
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=16&&subcategotyId<=20){
-
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_orange);
-                            anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            anotherItemizedIconOverlay4
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==21){
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
-                            anotherOverlayItemArray5.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-
-                            anotherItemizedIconOverlay5
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==22){
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
-                            anotherOverlayItemArray6.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-
-                            anotherItemizedIconOverlay6
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                    }
-                    if(anotherItemizedIconOverlay!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay);
-                    if(anotherItemizedIconOverlay2!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay2);
-                    if(anotherItemizedIconOverlay3!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay3);
-                    if(anotherItemizedIconOverlay4!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay4);
-                    if(anotherItemizedIconOverlay5!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay5);
-                    if(anotherItemizedIconOverlay6!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay6);
-
-
-
-                }
-
-
-
                 break;
             case AppConstants.ENTERTAINMENT:
-                if(entertainmentServiceProvider!=null) {
-                    for (  EntertainmentServiceProviderItem et : entertainmentServiceProvider) {
-                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId=et.getEntSubCategoryId();
-                        latDouble=Double.parseDouble(et.getLatitude());
-                        longDouble=Double.parseDouble(et.getLongitude());
-
-
-                        if(subcategotyId==1){
-
-
-                            anotherOverlayItemArray.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
-                            anotherItemizedIconOverlay
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==2||subcategotyId==5||subcategotyId==21) {
-
-                            anotherOverlayItemArray2.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
-                            anotherItemizedIconOverlay2
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==3){
-
-                            anotherOverlayItemArray3.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
-                            anotherItemizedIconOverlay3
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8){
-
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_orange);
-                            anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            anotherItemizedIconOverlay4
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=9&&subcategotyId<=11){
-
-                            anotherOverlayItemArray5.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
-                            anotherItemizedIconOverlay5
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==12){
-
-                            anotherOverlayItemArray6.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
-                            anotherItemizedIconOverlay6
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20){
-
-                            anotherOverlayItemArray7.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_red);
-                            anotherItemizedIconOverlay7
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==15||subcategotyId==17||subcategotyId==18){
-
-                            anotherOverlayItemArray8.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_blue);
-                            anotherItemizedIconOverlay8
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray8,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                    }
-                    if(anotherItemizedIconOverlay!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay);
-                    if(anotherItemizedIconOverlay2!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay2);
-                    if(anotherItemizedIconOverlay3!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay3);
-                    if(anotherItemizedIconOverlay4!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay4);
-                    if(anotherItemizedIconOverlay5!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay5);
-                    if(anotherItemizedIconOverlay6!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay6);
-                    if(anotherItemizedIconOverlay7!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay7);
-                    if(anotherItemizedIconOverlay8!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay8);
-
-                }
-
-
-
                 //TODO write necessary codes for entertainment
                 break;
             case AppConstants.GOVERNMENT:
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
-                if(legalaidServiceProvider!=null) {
-                    for (  LegalAidServiceProviderItem et : legalaidServiceProvider) {
-                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId=et.getLegalaidSubCategoryId();
-                        latDouble=Double.parseDouble(et.getLatitude());
-                        longDouble=Double.parseDouble(et.getLongitude());
-
-
-                        if(subcategotyId==1){
-
-
-                            anotherOverlayItemArray.add(new OverlayItem(et.getLegalaidNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
-                            anotherItemizedIconOverlay
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                      else if(subcategotyId>=2&&subcategotyId<=5){
-
-                            anotherOverlayItemArray2.add(new OverlayItem(et.getLegalaidNameEng(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
-                            anotherItemizedIconOverlay2
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-
-                    }
-                    if(anotherItemizedIconOverlay!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay);
-                    if(anotherItemizedIconOverlay2!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay2);
-                }
 
                 break;
             case AppConstants.FINANCIAL:
-                if(financialServiceProvider!=null) {
-                    for (  FinancialServiceProviderItem et : financialServiceProvider) {
-                        LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId=et.getRefNum();
-                        latDouble=Double.parseDouble(et.getLatitude());
-                        longDouble=Double.parseDouble(et.getLongitude());
-
-
-                        if(subcategotyId>=1&&subcategotyId<=4){
-
-
-                            anotherOverlayItemArray.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_green);
-                            anotherItemizedIconOverlay
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=5&&subcategotyId<=8) {
-
-                            anotherOverlayItemArray2.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_brown);
-                            anotherItemizedIconOverlay2
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray2,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=20&&subcategotyId<=21){
-
-                            anotherOverlayItemArray3.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_feroza);
-                            anotherItemizedIconOverlay3
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray3,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=9&&subcategotyId<=12){
-
-                           // newMarker.setIcon = this.getResources().getDrawable(R.drawable.pin_orange);
-                            anotherOverlayItemArray4.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            anotherItemizedIconOverlay4
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray4,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=13&&subcategotyId<=15){
-
-                            anotherOverlayItemArray5.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_pink);
-                            anotherItemizedIconOverlay5
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray5,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId>=16&&subcategotyId<=18){
-
-                            anotherOverlayItemArray6.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_yellow);
-                            anotherItemizedIconOverlay6
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray6,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                        else if(subcategotyId==19){
-
-                            anotherOverlayItemArray7.add(new OverlayItem(et.getNodeName(),et.getArea(),new GeoPoint(latDouble,longDouble)));
-                            newMarker = this.getResources().getDrawable(R.drawable.pin_red);
-                            anotherItemizedIconOverlay7
-                                    = new ItemizedIconOverlay<OverlayItem>(
-                                    anotherOverlayItemArray7,newMarker, myOnItemGestureListener,getActivity());
-
-                        }
-                    }
-                    if(anotherItemizedIconOverlay!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay);
-                    if(anotherItemizedIconOverlay2!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay2);
-                    if(anotherItemizedIconOverlay3!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay3);
-                    if(anotherItemizedIconOverlay4!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay4);
-                    if(anotherItemizedIconOverlay5!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay5);
-                    if(anotherItemizedIconOverlay6!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay6);
-                    if(anotherItemizedIconOverlay7!=null)
-                        mapView.getOverlays().add(anotherItemizedIconOverlay7);
-                   
-                }
 
                 break;
             case AppConstants.JOB:
@@ -577,7 +215,8 @@ int subcategotyId;
 
 
         //---
-
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
         //Add Scale Bar
         ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);
@@ -585,36 +224,79 @@ int subcategotyId;
 
         return rootView;
     }
-    private void drawMarkerEdu(LatLng point,String title,int subcategotyId){
-
-
+    @Override
+    public boolean singleTapConfirmedHelper(GeoPoint p) {
+        Toast.makeText(getActivity(), "Tap on (" + p.getLatitude() + "," + p.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+        InfoWindow.closeAllInfoWindowsOn(mapView);
+        return true;
     }
 
-    ItemizedIconOverlay.OnItemGestureListener<OverlayItem> myOnItemGestureListener
-            = new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>(){
+    @Override
+    public boolean longPressHelper(GeoPoint p) {
+        return false;
+    }
 
-        @Override
-        public boolean onItemLongPress(int arg0, OverlayItem arg1) {
-            // TODO Auto-generated method stub
-            return false;
-        }
+    private void drawMarkerEdu(GeoPoint point,String title,String address,String contact, String node,int subcategotyId){
+        Marker marker= new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-        @Override
-        public boolean onItemSingleTapUp(int index, OverlayItem item) {
 
-            Toast.makeText(getActivity(),
-                    item.getTitle() + "\n"
-                            + item.getSnippet()+ "\n"
-                            + item.getPoint().getLatitudeE6() + " : " + item.getPoint().getLongitudeE6(),
-                    Toast.LENGTH_LONG).show();
-            return true;
-        }
+        if(subcategotyId>=1&&subcategotyId<=12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+        else if(subcategotyId>=13&&subcategotyId<=17)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
+        else if(subcategotyId>=18&&subcategotyId<=19)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
+        else if(subcategotyId>=20&&subcategotyId<=21)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
+        else if(subcategotyId>=22&&subcategotyId<=26)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,point,title,contact,node);
+        marker.setInfoWindow(infoWindow);
 
-    };
+        mapView.getOverlays().add(marker);
+        //marker.setTitle("Title of the marker");
+
+    }
 
 
     @Override
     public void onClick(View v) {
 
     }
+    private class MyInfoWindow extends InfoWindow{
+        String titlemarker,contact2,node;
+        GeoPoint pp;
+        public MyInfoWindow(int layoutResId, MapView mapView,GeoPoint point,String title,String contact,String Node) {
+            super(layoutResId, mapView);
+            this.pp=point;
+            this.titlemarker=title;
+            this.contact2=contact;
+            this.node=Node;
+        }
+        public void onClose() {
+        }
+
+        public void onOpen(Object arg0) {
+            final LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
+            Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
+            TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
+           // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
+            TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
+            TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
+txtTitle.setText(titlemarker);
+           // contact.setText(contact2);
+            adddescription.setText(node);
+            layout.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Override Marker's onClick behaviour here
+                    Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                //layout.setVisibility(View.GONE);
+                }
+            });
+        }
+    }
+
 }
+
