@@ -31,7 +31,9 @@ import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -47,6 +49,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
     Drawable newMarker;
     Marker marker;
     EducationServiceProviderItem nulledu;
+    HealthServiceProviderItem nullhel;
     GeoPoint pp;
     int ind=0;
     List<String> listData=new ArrayList<String>();
@@ -188,7 +191,15 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
                 }
                 break;
             case AppConstants.HEALTH:
-                break;
+                for (HealthServiceProviderItem et : healthServiceProvider) {
+                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                    subcategotyId = et.getRefNum();
+                    latDouble = Double.parseDouble(et.getLatitude());
+                    longDouble = Double.parseDouble(et.getLongitude());
+                    GeoPoint point = new GeoPoint(latDouble, longDouble);
+                    drawMarkerHealth(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getRefNum());
+                }
+                    break;
             case AppConstants.ENTERTAINMENT:
                 //TODO write necessary codes for entertainment
                 break;
@@ -263,6 +274,29 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
         //marker.setTitle("Title of the marker");
 
     }
+    private void drawMarkerHealth(GeoPoint point,String title,String address,String contact, String node,int subcategotyId){
+        Marker marker= new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        if(subcategotyId>=1&&subcategotyId<=7)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+        else if(subcategotyId>=8&&subcategotyId<=12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
+        else if(subcategotyId>=13&&subcategotyId<=15)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
+        else if(subcategotyId>=16&&subcategotyId<=20)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
+        else if(subcategotyId==21)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+        else if(subcategotyId==22)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
+
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,point,title,contact,node);
+        marker.setInfoWindow(infoWindow);
+
+        mapView.getOverlays().add(marker);
+    }
 
 
     @Override
@@ -294,15 +328,30 @@ txtTitle.setText(titlemarker);
             adddescription.setText(node);
             layout.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Override Marker's onClick behaviour here
-                    Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-               layout.setVisibility(View.VISIBLE);
-                    EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(getActivity());
-                    nulledu = educationServiceProviderTable.geteduNode2(node);
-                    Intent iient = new Intent(getActivity(), DetailsInfoActivity.class);
-                    iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
-                    getActivity().startActivity(iient);
-                    layout.setVisibility(View.GONE);
+                    switch (categoryId) {
+                        case AppConstants.EDUCATION:
+                        // Override Marker's onClick behaviour here
+                        Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                        layout.setVisibility(View.VISIBLE);
+                        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(getActivity());
+                        nulledu = educationServiceProviderTable.geteduNode2(node);
+                        Intent iient = new Intent(getActivity(), DetailsInfoActivity.class);
+                        iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+                        getActivity().startActivity(iient);
+                        layout.setVisibility(View.GONE);
+                            break;
+                        case AppConstants.HEALTH:
+                            Toast.makeText(getActivity(), "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                            layout.setVisibility(View.VISIBLE);
+                            HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(getActivity());
+                            nullhel = healthServiceProviderTable.gethelNode2(node);
+                            Intent iihel = new Intent(getActivity(), DetailsInfoActivityHealth_new.class);
+                            iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
+                            getActivity().startActivity(iihel);
+                            layout.setVisibility(View.GONE);
+                            break;
+                    }
+
                 }
             });
         }
