@@ -34,8 +34,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -98,11 +100,13 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
     private View nextChild;
+    private ExpandableListView subCatItemList;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
     private int subCatShowFlag=0;
     private int locationNameId,subcategory;
     private String locationName;
+    private ListView expandableListview;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -142,6 +146,7 @@ Context context;
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
+    private ImageButton expandableListShowing;
     private RelativeLayout mapholderr;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -199,7 +204,7 @@ Context context;
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         toggle.setDrawerIndicatorEnabled(true);
         drawer.setDrawerListener(toggle);
@@ -234,6 +239,21 @@ Context context;
                 listData.add(AppConstants.BAUNIABADH);
             }
         }
+
+        expandableListShowing = (ImageButton)findViewById(R.id.expandble_list_showing);
+        subCatItemList= (ExpandableListView)findViewById(R.id.listView);
+
+
+        expandableListShowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subCatItemList.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+
+
 
 
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
@@ -896,6 +916,9 @@ Context context;
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
+        Log.d("cat_id",">>>" +cat_id);
+        Log.d("header",">>>" +header);
+        Log.d("placeChoice",">>>" +cat_id);
         createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;

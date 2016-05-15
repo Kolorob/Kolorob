@@ -1299,6 +1299,13 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
         createData(cat_id,header,placeChoice);
+
+
+        Log.d("cat_id",">>>>>"+cat_id);
+        Log.d("header",">>>>>"+header);
+
+        Log.d("placeChoice",">>>>>"+placeChoice);
+
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
         for(SubCategoryItem si : subCategoryItems)
