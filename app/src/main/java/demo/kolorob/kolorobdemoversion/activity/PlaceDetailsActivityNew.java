@@ -52,7 +52,6 @@ import java.util.List;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.DisplayAllJobList;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
@@ -991,6 +990,7 @@ Context context;
         }
 
         ivIcon.setLayoutParams(lpIv);
+        tvName.setTextColor(Color.BLUE);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -1137,7 +1137,7 @@ Context context;
                constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
-                (int) (200 *
+                (int) (150 *
                         (AppConstants.CAT_LIST_LG_WIDTH_PERC
                                 - AppConstants.CAT_LIST_SM_WIDTH_PERC)
                 ));
