@@ -323,22 +323,22 @@ private LinearLayout subcatlistholder;
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         if(subcategotyId==1)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
 
         else if(subcategotyId==2||subcategotyId==5||subcategotyId==21)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
-        else if(subcategotyId==3)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
-        else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
-        else if(subcategotyId>=9&&subcategotyId<=11)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_red));
-        else if(subcategotyId==12)
+        else if(subcategotyId==3)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
-        else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
-        else if(subcategotyId==15||subcategotyId==17||subcategotyId==18)
+        else if(subcategotyId==4||subcategotyId==6||subcategotyId==7||subcategotyId==8)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
+        else if(subcategotyId>=9&&subcategotyId<=11)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
+        else if(subcategotyId==12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+        else if(subcategotyId==13||subcategotyId==14||subcategotyId==16||subcategotyId==19||subcategotyId==20)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+        else if(subcategotyId==15||subcategotyId==17||subcategotyId==18)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
 
 
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
@@ -355,10 +355,10 @@ private LinearLayout subcatlistholder;
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
         if(subcategotyId==1)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
 
         else if(subcategotyId>=2&&subcategotyId<=5)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_red));
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
         marker.setInfoWindow(infoWindow);
 
@@ -371,17 +371,16 @@ private LinearLayout subcatlistholder;
         if(subcategotyId>=1&&subcategotyId<=4)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
         else if(subcategotyId>=5&&subcategotyId<=8)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_red));
         else if(subcategotyId>=20&&subcategotyId<=21)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
-        else if(subcategotyId>=9&&subcategotyId<=12)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
-        else if(subcategotyId>=13&&subcategotyId<=15)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
-        else if(subcategotyId>=16&&subcategotyId<=18)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
-        else if(subcategotyId==19)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
+        else if(subcategotyId>=9&&subcategotyId<=12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
+        else if(subcategotyId>=13&&subcategotyId<=15)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
+        else if(subcategotyId>=16&&subcategotyId<=18)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
+   
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
         marker.setInfoWindow(infoWindow);
 
