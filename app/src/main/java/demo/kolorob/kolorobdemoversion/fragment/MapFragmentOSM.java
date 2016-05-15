@@ -1,30 +1,19 @@
 package demo.kolorob.kolorobdemoversion.fragment;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.events.MapEventsReceiver;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.TileSystem;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
@@ -37,10 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -166,13 +151,13 @@ private LinearLayout subcatlistholder;
 
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setTilesScaledToDpi(true);
-        mapView.setTilesScaledToDpi(true);
+      /*  mapView.setTilesScaledToDpi(true);
         // Test code
         float density = mapView.isTilesScaledToDpi() ? mapView.getResources().getDisplayMetrics().density : 1;
         density *= 1.5;
         ITileSource aTileSource = mapView.getTileProvider().getTileSource();
         TileSystem.setTileSize((int) (aTileSource.getTileSizePixels() * density));
-        System.out.println("density: " + density);
+        System.out.println("density: " + density);*/
         // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
         //    mapView.getOverlays().add(mMyLocationOverlay);
         IMapController mapViewController = mapView.getController();
@@ -313,17 +298,17 @@ private LinearLayout subcatlistholder;
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
         if(subcategotyId>=1&&subcategotyId<=7)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
-        else if(subcategotyId>=8&&subcategotyId<=12)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
+        else if(subcategotyId>=8&&subcategotyId<=12)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_red));
         else if(subcategotyId>=13&&subcategotyId<=15)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
-        else if(subcategotyId>=16&&subcategotyId<=20)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
+        else if(subcategotyId>=16&&subcategotyId<=20)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
         else if(subcategotyId==21)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
         else if(subcategotyId==22)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_orange));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
 
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
         marker.setInfoWindow(infoWindow);
