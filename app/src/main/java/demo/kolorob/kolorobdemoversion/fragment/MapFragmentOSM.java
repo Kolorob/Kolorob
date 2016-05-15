@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,8 +21,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.TileSystem;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
@@ -46,6 +49,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by israt.jahan on 5/5/2016.
@@ -53,7 +57,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 public class MapFragmentOSM extends Fragment implements View.OnClickListener,MapEventsReceiver {
     Drawable newMarker;
     Marker marker;
-
+private LinearLayout subcatlistholder;
     GeoPoint pp;
     int ind=0;
     List<String> listData=new ArrayList<String>();
@@ -67,7 +71,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
 
     private String locationName;
     private int locationNameId;
-
+    private static double VIEW_WIDTH;
+    private int primaryIconWidth;
     public int getLocationNameId() {
         return locationNameId;
     }
@@ -140,14 +145,19 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        LayoutInflater li = LayoutInflater.from(getActivity());
         double latDouble,longDouble;
         int i=0;
+        View v;
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
-
+        VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
+        primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
+
+
+
         mapView.setClickable(true);
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
@@ -155,7 +165,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
 
 
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
-        //mapView.setTilesScaledToDpi(true);
+        mapView.setTilesScaledToDpi(true);
+        mapView.setTilesScaledToDpi(true);
+        // Test code
+        float density = mapView.isTilesScaledToDpi() ? mapView.getResources().getDisplayMetrics().density : 1;
+        density *= 1.5;
+        ITileSource aTileSource = mapView.getTileProvider().getTileSource();
+        TileSystem.setTileSize((int) (aTileSource.getTileSizePixels() * density));
+        System.out.println("density: " + density);
         // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
         //    mapView.getOverlays().add(mMyLocationOverlay);
         IMapController mapViewController = mapView.getController();
@@ -274,15 +291,15 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener,Map
 
 
         if(subcategotyId>=1&&subcategotyId<=12)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_feroza));
-        else if(subcategotyId>=13&&subcategotyId<=17)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_blue));
+        else if(subcategotyId>=13&&subcategotyId<=17)
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_red));
         else if(subcategotyId>=18&&subcategotyId<=19)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_pink));
         else if(subcategotyId>=20&&subcategotyId<=21)
             marker.setIcon( this.getResources().getDrawable(R.drawable.pin_green));
         else if(subcategotyId>=22&&subcategotyId<=26)
-            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_yellow));
+            marker.setIcon( this.getResources().getDrawable(R.drawable.pin_brown));
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView,MapFragmentOSM.this.getActivity() ,point,title,contact,node,categoryId);
         marker.setInfoWindow(infoWindow);
 

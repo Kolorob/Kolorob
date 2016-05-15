@@ -30,14 +30,46 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true">
 
+
+
                 </FrameLayout>
             </RelativeLayout>
+            <ScrollView
+                android:id="@+id/svSubCategoryListHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:paddingTop="40dp"
+
+
+                android:layout_gravity="right|top"
+                android:fillViewport="false"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/llSubCatListHolder"
+
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:focusableInTouchMode="true"
+                    android:paddingLeft="10dp">
+
+
+                </LinearLayout>
+
+            </ScrollView>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:paddingTop="40dp">
+                android:paddingTop="40dp"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentLeft="true">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
@@ -55,6 +87,7 @@
                 </LinearLayout>
 
             </ScrollView>
+
         </RelativeLayout>
     </LinearLayout>
 

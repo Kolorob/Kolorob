@@ -90,6 +90,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,mapnother,listholder;
     CategoryItem ci;
+    private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
     private Spinner spItems;
@@ -262,7 +263,8 @@ Context context;
 
       //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
-       // llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+        llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+        llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         int s=lp.width = (int) (VIEW_WIDTH);
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
@@ -600,6 +602,7 @@ Context context;
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
                         mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -644,6 +647,7 @@ Context context;
                         break;
                     case AppConstants.HEALTH:
                         mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -688,6 +692,7 @@ Context context;
 
                     case AppConstants.ENTERTAINMENT:
                         mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -734,6 +739,7 @@ Context context;
                     case AppConstants.GOVERNMENT:
 
                         mapcalledstatus=false;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.removeAllViews();
                         //TODO write necessary codes for government
                         toolbar2.setVisibility(View.GONE);
@@ -753,6 +759,7 @@ Context context;
                         break;
                     case AppConstants.LEGAL:
                         mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
@@ -794,6 +801,7 @@ Context context;
                         break;
                     case AppConstants.FINANCIAL:
                         mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
@@ -835,7 +843,7 @@ Context context;
                         break;
                     case AppConstants.JOB:
                        // mapcalledstatus=false;
-
+                        llSubCatListHolder.setVisibility(View.GONE);
                      //   map.removeAllViews();
 //                        toolbar2.setVisibility(View.GONE);
 //                        listholder.setVisibility(View.GONE);
@@ -917,7 +925,7 @@ Context context;
 
 
     private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
-       // llSubCatListHolder.removeAllViews();
+       llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         subcategory=0;
         for (SubCategoryItem si : subCategoryList) {
@@ -926,7 +934,7 @@ Context context;
             {
                 header.add(si.getSubcatHeader());
 
-               // llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
+                llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
             }
         }
     }
@@ -1094,16 +1102,16 @@ Context context;
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         if(subCatShowFlag==1)
         {
-           // rlSubCatHolder.startAnimation(slideOutFromLeftAnim());
+            llSubCatListHolder.setVisibility(View.VISIBLE);
         }
         subCatShowFlag=1;
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               // rlSubCatHolder.setVisibility(View.VISIBLE);
-             //   rlSubCatHolder.startAnimation(slideInFromRightAnim());
-               // constructSubCategoryList(subCatList, 1.0, cat_id);
+                llSubCatListHolder.setVisibility(View.VISIBLE);
+                llSubCatListHolder.startAnimation(slideInFromRightAnim());
+               constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
                 (int) (200 *
