@@ -107,6 +107,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private String locationName;
     private ListView expandableListview;
     private RelativeLayout wholeLayout;
+    private int showList;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -250,6 +251,7 @@ Context context;
                 subCatItemList.setVisibility(View.VISIBLE);
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
                     map.setVisibility(View.GONE);
+                    showList=1;
 
 
 
@@ -648,7 +650,9 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
-                       // explist.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
+                        showList=0;
+
 
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -696,7 +700,7 @@ Context context;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
-                       // explist.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -705,6 +709,7 @@ Context context;
                         listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab3 = getSupportActionBar();
+                        showList=0;
                         ab3.setHomeAsUpIndicator(R.drawable.menu_icon);
                         ab3.setDisplayHomeAsUpEnabled(true);
                         ActionBarDrawerToggle toggle3 = new ActionBarDrawerToggle(
@@ -741,7 +746,8 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
-                       // explist.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
+                        showList=0;
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
@@ -809,9 +815,10 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
-                       // explist.setVisibility(View.GONE);
+                       explist.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
+                        showList=0;
                         listholder.setBackgroundColor(Color.parseColor("#67C3A2"));
                         listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
@@ -852,8 +859,9 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
-                       // explist.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
+                        showList=0;
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7a378b"));
                         listholder.startAnimation(slideInFromRightAnim());
@@ -1068,12 +1076,16 @@ Context context;
 
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> eduItem;
+                        if(showList==1)
+                        explist.setVisibility(View.VISIBLE);
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
                         ArrayList<HealthServiceProviderItem> healthItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         healthItem = constructHealthListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
@@ -1082,6 +1094,8 @@ Context context;
 
 
                         ArrayList<EntertainmentServiceProviderItem> entItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         entItem = constructEntertainmentListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, entItem);
                         break;
@@ -1103,11 +1117,15 @@ Context context;
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         legalItem = constructlegalaidListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
                         ArrayList<FinancialServiceProviderItem> financialItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
