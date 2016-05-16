@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/wholeLayout">
 
     <LinearLayout
         android:orientation="vertical"
@@ -10,7 +11,7 @@
         android:layout_centerHorizontal="true"
 
         android:id="@+id/mapnothers"
-        android:layout_above="@+id/exlist">
+        android:layout_above="@+id/listholder">
         <RelativeLayout
             android:layout_width="match_parent"
 
@@ -33,6 +34,28 @@
 
 
                 </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+
+                    android:id="@+id/explist"
+                    android:layout_height="wrap_content">
+                    <ExpandableListView
+                        android:id="@+id/listView"
+                        android:visibility="gone"
+
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+                    </ExpandableListView>
+
+
+
+                </LinearLayout>
+
+
+
+
             </RelativeLayout>
             <ScrollView
                 android:id="@+id/svSubCategoryListHolder"
@@ -92,22 +115,7 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_above="@+id/listholder"
-        android:id="@+id/exlist"
-        android:layout_height="wrap_content">
 
-        <ExpandableListView
-            android:id="@+id/listView"
-            android:visibility="gone"
-            android:background="@color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="259dp" >
-        </ExpandableListView>
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
