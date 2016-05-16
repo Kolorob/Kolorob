@@ -1,7 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,12 +10,11 @@ import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
  * Created by arafat on 1/11/2016.
  */
-public class Information_UpdateActivity extends Activity {
+public class PhoneRegActivity extends Activity {
     ImageView close,kivabejabejob;
     TextView close_tv;
     ImageButton Feedback;
@@ -30,7 +28,7 @@ public class Information_UpdateActivity extends Activity {
     private TextView itemType;
     private TextView itemContact;
 
-    private EditText email;
+    private EditText phone;
     private EditText name;
     private TextView fb,openTime,close_Time,breakTIme,jobName,road,block,landmark;
 
@@ -42,19 +40,18 @@ public class Information_UpdateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.information_update);
+        setContentView(R.layout.phone_reg);
 
 
-        name  = (EditText)findViewById(R.id.name_id);
-        email = (EditText)findViewById(R.id.email_id);
+        phone  = (EditText)findViewById(R.id.phone_id);
 
 
     }
 
     public void submit(View v){
 
-        String nametext = name.getText().toString();
-        String emailtext = name.getText().toString();
+        String phoneno = phone.getText().toString();
+
 
 
     }

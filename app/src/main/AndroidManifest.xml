@@ -37,6 +37,12 @@
         <activity
             android:name=".activity.OpeningActivity"
             android:theme="@style/Theme.AppCompat.Light" />
+
+        <activity
+            android:name=".activity.PhoneRegActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+
+
         <activity
             android:name=".activity.EmergencyActivity"
             android:theme="@style/Theme.AppCompat.Light" />

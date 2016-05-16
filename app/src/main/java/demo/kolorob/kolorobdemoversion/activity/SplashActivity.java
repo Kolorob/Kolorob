@@ -45,6 +45,8 @@ public class SplashActivity extends ActionBarActivity {
         Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
         rotateImage.startAnimation(startRotateAnimation);
 
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
