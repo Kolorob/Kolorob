@@ -1,115 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backdrop"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     tools:context="demo.kolorob.kolorobdemoversion.activity.Information_UpdateActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout2"
-        android:gravity="center_vertical|center_horizontal">
-
 
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
+            android:layout_width="match_parent"
+
+            android:background="@drawable/menu_image"
             android:layout_height="wrap_content">
 
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:id="@+id/iv_kolorob_logo"
-                android:layout_marginLeft="18dp"
-                android:background="@drawable/kolorob_logo_first_page"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.50"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="30dp"
-              android:text="বিস্তারিত বিবরন "
-              />
-
-
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:text="Change your information"
+        />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:text="Name"
+        />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="বন্ধ করুন"
-                android:id="@+id/tv_close"
-                android:textColor="#000000"
-                android:textSize="18sp"
-
-                android:focusable="true" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/iv_close"
-                android:src="@drawable/close_button"
-                android:focusable="true" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-    <ScrollView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignLeft="@+id/linearLayout2"
-        android:layout_above="@+id/linearLayout4"
-        android:layout_alignStart="@+id/linearLayout2"
-        android:background="@drawable/detailed_info_panel_body"
-        android:id="@+id/scrollView">
+        android:textSize="30dp"
+        android:id="@+id/name_id"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_horizontal"
+
+        />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:text="Email"
+        />
 
-
-
-    </ScrollView>
-    <LinearLayout
-        android:orientation="horizontal"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/detailed_info_panel_bottom"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/linearLayout4"
-        android:foregroundGravity="center"
-        android:gravity="center">
+        android:layout_marginTop="5dp"
+        android:textSize="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/email_id"
+        />
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/submit_btn"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:layout_marginTop="15dp"
+        android:text="motamot"
+        android:onClick="submit"
+        />
 
-    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
+
+

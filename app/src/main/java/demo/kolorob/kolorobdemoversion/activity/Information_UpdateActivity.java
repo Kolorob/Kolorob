@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,8 +30,8 @@ public class Information_UpdateActivity extends Activity {
     private TextView itemType;
     private TextView itemContact;
 
-    private TextView email;
-    private TextView website;
+    private EditText email;
+    private EditText name;
     private TextView fb,openTime,close_Time,breakTIme,jobName,road,block,landmark;
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
@@ -42,11 +43,20 @@ public class Information_UpdateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_update);
-        Intent intent = getIntent();
-        Feedback = (ImageButton) findViewById(R.id.button2);
 
 
+        name  = (EditText)findViewById(R.id.name_id);
+        email = (EditText)findViewById(R.id.email_id);
 
+
+    }
+
+    public void submit(View v){
+
+        String nametext = name.getText().toString();
+        String emailtext = name.getText().toString();
+
+        
     }
 
     @Override
