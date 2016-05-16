@@ -98,7 +98,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     private static double VIEW_WIDTH;
     private ScrollView svCatList;
     private LinearLayout llCatListHolder;
-    private LinearLayout llSubCatListHolder;
+    private LinearLayout llSubCatListHolder,exlist;
     private FrameLayout placeDetailsLayout;
     private TextView categoryHeader;
     private ImageView categoryHeaderIcon;
@@ -246,6 +246,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
         showsearch2=(LinearLayout)findViewById(R.id.seearch);
         llItemListHolderbody=(LinearLayout)findViewById(R.id.llItemListHolder);
         sideIndex = (LinearLayout)findViewById(R.id.sideIndex);
+        exlist=(LinearLayout)findViewById(R.id.explist);
      //   texthead = (TextView) findViewById(R.id.headtext);
 
 
@@ -955,6 +956,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                     Group group = new Group(print.get(j));
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+                    Log.d(">>>>", "printnames"+printnames);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }

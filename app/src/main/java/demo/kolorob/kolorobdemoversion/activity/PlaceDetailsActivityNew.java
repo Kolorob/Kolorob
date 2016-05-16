@@ -89,7 +89,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
-    private LinearLayout llCatListHolder,mapnother,listholder;
+    private LinearLayout llCatListHolder,mapnother,listholder,explist;
     CategoryItem ci;
     private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
@@ -106,6 +106,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private int locationNameId,subcategory;
     private String locationName;
     private ListView expandableListview;
+    private RelativeLayout wholeLayout;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -247,6 +248,10 @@ Context context;
             @Override
             public void onClick(View v) {
                 subCatItemList.setVisibility(View.VISIBLE);
+                    wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
+                    map.setVisibility(View.GONE);
+
+
 
             }
         });
@@ -279,14 +284,26 @@ Context context;
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC_NEW;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.92); // 80% of the view width
+        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
+
+
 
       //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+      explist=(LinearLayout)findViewById(R.id.explist);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         int s=lp.width = (int) (VIEW_WIDTH);
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
+
+
+        ViewGroup.LayoutParams exlist= explist.getLayoutParams();
+        RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
+
+        expnlist.setMargins(s,90,140,0);
+
+
 
         lp.height=100;
 
@@ -294,6 +311,8 @@ Context context;
         caTsList.setMargins(0, 60, 0, 0);
         else
             caTsList.setMargins(0, 10, 0, 0);
+
+
 
 
         Log.d(">>>>>>>>","View_width       "+s);
@@ -327,7 +346,7 @@ Context context;
                 else {locationNameId=AppConstants.PLACE_PARIS_ROAD;}
             if(mapcalledstatus){
 
-            }
+              }
             }
 
             @Override
@@ -404,6 +423,12 @@ Context context;
                     Group group = new Group(print.get(j));
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+
+                    Log.d(">>>>", "printnames"+printnames);
+                    Log.d(">>>>", "currentCategoryID "+currentCategoryID);
+                    Log.d(">>>>", "head "+head);
+                    Log.d(">>>>", "print.get(j) "+print.get(j));
+                    Log.d(">>>>", "placeChoice "+placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -623,6 +648,8 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                       // explist.setVisibility(View.GONE);
+
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         listholder.setVisibility(View.VISIBLE);
@@ -669,6 +696,7 @@ Context context;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
+                       // explist.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -713,6 +741,7 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                       // explist.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
@@ -780,6 +809,7 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                       // explist.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#67C3A2"));
@@ -822,6 +852,7 @@ Context context;
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                       // explist.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7a378b"));
@@ -931,7 +962,12 @@ Context context;
 
     //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
+        subCatItemList.setAdapter(adapter);
+
+      //  MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
      //   subCatItemList.setAdapter(adapter);
 
 
@@ -1370,7 +1406,8 @@ Context context;
     }
 
     private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
-    {    MapFragmentOSM mapFragment = new MapFragmentOSM();
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
