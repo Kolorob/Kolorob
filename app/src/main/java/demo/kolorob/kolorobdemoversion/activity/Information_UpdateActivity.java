@@ -56,7 +56,7 @@ public class Information_UpdateActivity extends Activity {
         String nametext = name.getText().toString();
         String emailtext = name.getText().toString();
 
-        
+
     }
 
     @Override
