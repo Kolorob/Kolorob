@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+=======
+>>>>>>> aa13662861468e690d87970c6346f4e0dbfee265
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
@@ -27,8 +30,14 @@
       </value>
     </option>
   </component>
+<<<<<<< HEAD
+=======
+      </value>
+    </option>
+  <component name="ProjectDictionaryState">
     <dictionary name="israt.jahan" />
   </component>
+>>>>>>> aa13662861468e690d87970c6346f4e0dbfee265
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
