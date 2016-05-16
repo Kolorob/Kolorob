@@ -61,19 +61,19 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsInfoActivityHealth_new"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.PlaceDetailsActivityNew"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment_new"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment"
             android:theme="@style/Theme.AppCompat.Light" />
@@ -82,10 +82,10 @@
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity_new"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.PlaceChoiceActivity2"
             android:screenOrientation="portrait" />
@@ -94,7 +94,7 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsLegalActivity_new"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/Theme.Transparent" />
 
         <meta-data
             android:name="com.google.android.gms.version"
