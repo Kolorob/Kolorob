@@ -65,7 +65,6 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
-import demo.kolorob.kolorobdemoversion.fragment.MapRouteDrawingFragment;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -147,6 +146,7 @@ Context context;
     private ListActivity listView;
     private ImageButton expandableListShowing;
     private RelativeLayout mapholderr;
+    MapFragmentOSM mapFragment = new MapFragmentOSM();
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
     }
@@ -1229,7 +1229,7 @@ Context context;
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
     {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
+
         mapFragment.setLocationName(getPlaceChoice());
      //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
@@ -1254,7 +1254,7 @@ Context context;
 
     private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
     {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
+
        mapFragment.setLocationName(getPlaceChoice());
        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
@@ -1286,7 +1286,7 @@ Context context;
 
     private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems)
     {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
+
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
@@ -1335,7 +1335,6 @@ Context context;
 
     private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
     {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
@@ -1370,7 +1369,7 @@ Context context;
     }
 
     private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
-    {    MapFragmentOSM mapFragment = new MapFragmentOSM();
+    {
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
@@ -1410,11 +1409,11 @@ Context context;
 
     private void callMapFragmentWithJobInfo(String item_name,int cat_id,ArrayList<JobServiceProviderItem> jobServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
+
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setJobServiceProvider(jobServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -1423,15 +1422,7 @@ Context context;
     }
 
 
-    public void implementRouteDrawingFragment()
-    {
-        MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
-        map.setVisibility(View.VISIBLE);
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapRouteDrawingFragment);
-        fragmentTransaction.commit();
-    }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -1455,37 +1446,39 @@ Context context;
         SharedPreferences.Editor editor = pref.edit();
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
-        String Longitude = pref.getString("Latitude", null);
-        String Latitude = pref.getString("Longitude", null);
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+boolean value=pref.getBoolean("Value",false);
+
+       if(value!=false)
+       {
+           mapFragment.DrawRoute(Latitude,Longitude);
+       }
+        else {
+           Intent intent;
+           intent = getIntent();
+           if (null != intent) {
+               locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE, 0);
+               if (locationNameId == AppConstants.PLACE_BAUNIABADH) {
+                   locationName = AppConstants.BAUNIABADH;
+                   setPlaceChoice(locationName);
+               } else if (locationNameId == AppConstants.PLACE_PARIS_ROAD) {
+                   locationName = AppConstants.PARIS_ROAD;
+                   setPlaceChoice(locationName);
+               }
+           }
+           editor.putInt("LocationNameId", locationNameId);
+           editor.commit();
+
+           if (Latitude != null && AppUtils.isNetConnected(getApplicationContext())) {
+               Double Lon = Double.parseDouble(Longitude);
+               Double Lat = Double.parseDouble(Latitude);
 
 
-        Intent intent;
-        intent = getIntent();
-        if (null != intent)
-        {
-            locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
-            if(locationNameId== AppConstants.PLACE_BAUNIABADH)
-            {
-                locationName = AppConstants.BAUNIABADH;
-                setPlaceChoice(locationName);
-            }
-            else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
-            {
-                locationName = AppConstants.PARIS_ROAD;
-                setPlaceChoice(locationName);
-            }
-        }
-        editor.putInt("LocationNameId", locationNameId);
-        editor.commit();
-
-        if (Latitude != null&& AppUtils.isNetConnected(getApplicationContext())) {
-            Double Lon = Double.parseDouble(Longitude);
-            Double Lat = Double.parseDouble(Latitude);
-
-            implementRouteDrawingFragment();
 
 
-        }
+           }
+       }
 
     }
 
