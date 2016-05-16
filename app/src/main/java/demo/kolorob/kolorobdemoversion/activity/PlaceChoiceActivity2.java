@@ -325,6 +325,10 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
         if (id == R.id.phone_reg) {
             // Handle the camera action
+            Intent em = new Intent(this, PhoneRegActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
         } else if (id == R.id.info_change) {
 
             Intent em = new Intent(this, Information_UpdateActivity.class);
