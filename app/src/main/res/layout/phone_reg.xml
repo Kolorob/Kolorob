@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
         android:textSize="28dp"
-        android:text="Change your information"
+        android:text="Phone registraiton korun"
         />
 
     <TextView
@@ -36,39 +36,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
+        android:phoneNumber="true"
         android:textSize="25dp"
-        android:text="Name"
+        android:text="Phone Number "
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:id="@+id/name_id"
+        android:id="@+id/phone_id"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
 
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:text="Email"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/email_id"
         />
 
 
@@ -79,7 +60,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="25dp"
         android:layout_marginTop="15dp"
-        android:text="motamot"
+        android:text="Diyechi"
         android:onClick="submit"
         />
 
