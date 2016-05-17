@@ -138,13 +138,13 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Click here to open list"
             android:id="@+id/textView16"
-            android:paddingRight="80dp"
-            android:paddingTop="20dp"
+            android:paddingRight="0dp"
+            android:paddingTop="03dp"
             android:paddingLeft="20dp" />
 
         <ImageButton
-            android:layout_width="109dp"
-            android:layout_height="89dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/list_showing_upbutton"
             android:id="@+id/expandble_list_showing"
             android:paddingLeft="800dp"
