@@ -6,14 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -446,11 +444,13 @@ public class DetailsInfoActivity extends Activity  {
                     String lon = educationServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
                     String name= educationServiceProviderItem.getEduNameBan().toString();
+                    boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Latitude", lat);
                     editor.putString("Longitude", lon);
                     editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
                     editor.commit();
 
 
