@@ -244,7 +244,7 @@ Context context;
 
 
         RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) listholder.getLayoutParams();
-        params3.height = height/13;
+        params3.height = 40;
         params3.width = width;
         listholder.setLayoutParams(params3);
 
@@ -253,7 +253,7 @@ Context context;
         subCatItemList= (ExpandableListView)findViewById(R.id.listView);
 
 
-        expandableListShowing.setOnClickListener(new View.OnClickListener() {
+        listholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 subCatItemList.setVisibility(View.VISIBLE);
@@ -304,14 +304,17 @@ Context context;
       explist=(LinearLayout)findViewById(R.id.explist);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
+        ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
         int s=lp.width = (int) (VIEW_WIDTH);
+        lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
 
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
-        expnlist.setMargins(s,90,140,0);
+        expnlist.setMargins(s,90,s,0);
+
 
 
 
@@ -1025,9 +1028,7 @@ Context context;
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-        if(dpi>300)
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
-        else
+
         if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         else

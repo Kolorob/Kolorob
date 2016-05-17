@@ -72,7 +72,7 @@
                 <LinearLayout
                     android:id="@+id/llSubCatListHolder"
 
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
@@ -126,9 +126,11 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/listholder"
 
+
         android:layout_above="@+id/linearLayout5"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="false"
+        android:gravity="center">
 
 
 
@@ -136,21 +138,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Click here to open list"
+            android:text="@string/list_show"
             android:id="@+id/textView16"
             android:paddingRight="0dp"
             android:paddingTop="03dp"
             android:paddingLeft="20dp" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
             android:background="@drawable/list_showing_upbutton"
             android:id="@+id/expandble_list_showing"
-            android:paddingLeft="800dp"
-            android:gravity="right"
-            android:layout_alignParentRight="true"
-            android:paddingTop="60dp" />
+            android:paddingLeft="005dp"
+            />
 
 
 
