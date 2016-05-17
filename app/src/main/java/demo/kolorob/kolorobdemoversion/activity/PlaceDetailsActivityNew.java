@@ -114,6 +114,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private List<Object[]> alphabet = new ArrayList<Object[]>();
 Activity act;
     public int layoutstatus;
+    private Boolean list_expand=false;
 
 private Toolbar toolbar,toolbar2;
 
@@ -189,7 +190,7 @@ Context context;
         mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
         listholder=(LinearLayout)findViewById(R.id.listholder);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
             /** Called when a drawer has settled in a completely open state. */
@@ -256,10 +257,25 @@ Context context;
         listholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                subCatItemList.setVisibility(View.VISIBLE);
+
+                if(list_expand.equals(false))
+                {
+                    subCatItemList.setVisibility(View.VISIBLE);
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
                     map.setVisibility(View.GONE);
                     showList=1;
+                    list_expand=true;
+
+                }
+
+                else
+                {
+                    showList=0;
+                    map.setVisibility(View.VISIBLE);
+                    list_expand=false;
+                    subCatItemList.setVisibility(View.GONE);
+
+                }
 
 
 
@@ -276,6 +292,9 @@ Context context;
 
 
         ///this code will change the background of the layout for two places.
+
+
+
 
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -1048,7 +1067,7 @@ Context context;
         }
 
         ivIcon.setLayoutParams(lpIv);
-        tvName.setTextColor(Color.BLUE);
+        tvName.setTextColor(Color.MAGENTA);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
