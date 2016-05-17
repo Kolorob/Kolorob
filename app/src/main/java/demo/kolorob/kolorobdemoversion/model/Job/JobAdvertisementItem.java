@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class JobAdvertisementItem implements Serializable {
     private int id;
     private String form_date;
-    private int position;
-    private int institute_name;
+    private String position;
+    private String institute_name;
     private String institute_name_bangla;
     private String post_date;
     private String application_last_date;
@@ -64,7 +64,7 @@ public class JobAdvertisementItem implements Serializable {
     private String TypeSubcategory;
 
 
-    public JobAdvertisementItem(int id, String form_date, int position, int institute_name, String institute_name_bangla,
+    public JobAdvertisementItem(int id, String form_date, String position, String institute_name, String institute_name_bangla,
                                 String post_date, String application_last_date, String location,
                                 String post_type, String job_responsibility, String required_experience,
                                 String start_salary, String end_salary, String other_benefits, String reference_person, String application_medium,
@@ -132,174 +132,6 @@ public class JobAdvertisementItem implements Serializable {
 
     }
 
-    public String getSubcategory() {
-        return Subcategory;
-    }
-
-    public void setSubcategory(String subcategory) {
-        Subcategory = subcategory;
-    }
-
-    public String getTypeSubcategory() {
-        return TypeSubcategory;
-    }
-
-    public void setTypeSubcategory(String typeSubcategory) {
-        TypeSubcategory = typeSubcategory;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getCollector_name() {
-        return collector_name;
-    }
-
-    public void setCollector_name(String collector_name) {
-        this.collector_name = collector_name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getJob_type() {
-        return job_type;
-    }
-
-    public void setJob_type(String job_type) {
-        this.job_type = job_type;
-    }
-
-    public String getReg_num() {
-        return reg_num;
-    }
-
-    public void setReg_num(String reg_num) {
-        this.reg_num = reg_num;
-    }
-
-    public String getReg_with() {
-        return reg_with;
-    }
-
-    public void setReg_with(String reg_with) {
-        this.reg_with = reg_with;
-    }
-
-    public String getRef3() {
-        return ref3;
-    }
-
-    public void setRef3(String ref3) {
-        this.ref3 = ref3;
-    }
-
-    public String getRef2() {
-        return ref2;
-    }
-
-    public void setRef2(String ref2) {
-        this.ref2 = ref2;
-    }
-
-    public String getRef1() {
-        return ref1;
-    }
-
-    public void setRef1(String ref1) {
-        this.ref1 = ref1;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    public String getBreaks() {
-        return breaks;
-    }
-
-    public void setBreaks(String breaks) {
-        this.breaks = breaks;
-    }
-
-    public String getClosing() {
-        return closing;
-    }
-
-    public void setClosing(String closing) {
-        this.closing = closing;
-    }
-
-    public String getOff_day() {
-        return off_day;
-    }
-
-    public void setOff_day(String off_day) {
-        this.off_day = off_day;
-    }
-
-    public String getOpening() {
-        return opening;
-    }
-
-    public void setOpening(String opening) {
-        this.opening = opening;
-    }
-
-    public String getAddress_block() {
-        return address_block;
-    }
-
-    public void setAddress_block(String address_block) {
-        this.address_block = address_block;
-    }
-
-    public String getAddress_police() {
-        return address_police;
-    }
-
-    public void setAddress_police(String address_police) {
-        this.address_police = address_police;
-    }
-
-    public String getMobile1() {
-        return mobile1;
-    }
-
-    public void setMobile1(String mobile1) {
-        this.mobile1 = mobile1;
-    }
-
-    public String getContact_designation() {
-        return contact_designation;
-    }
-
-    public void setContact_designation(String contact_designation) {
-        this.contact_designation = contact_designation;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
     public int getId() {
         return id;
     }
@@ -316,19 +148,19 @@ public class JobAdvertisementItem implements Serializable {
         this.form_date = form_date;
     }
 
-    public int getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 
-    public int getInstitute_name() {
+    public String getInstitute_name() {
         return institute_name;
     }
 
-    public void setInstitute_name(int institute_name) {
+    public void setInstitute_name(String institute_name) {
         this.institute_name = institute_name;
     }
 
@@ -500,6 +332,14 @@ public class JobAdvertisementItem implements Serializable {
         this.address_avenue = address_avenue;
     }
 
+    public String getAddress_block() {
+        return address_block;
+    }
+
+    public void setAddress_block(String address_block) {
+        this.address_block = address_block;
+    }
+
     public String getAddress_area() {
         return address_area;
     }
@@ -514,6 +354,14 @@ public class JobAdvertisementItem implements Serializable {
 
     public void setAddress_post(String address_post) {
         this.address_post = address_post;
+    }
+
+    public String getAddress_police() {
+        return address_police;
+    }
+
+    public void setAddress_police(String address_police) {
+        this.address_police = address_police;
     }
 
     public String getAddress_city() {
@@ -532,6 +380,14 @@ public class JobAdvertisementItem implements Serializable {
         this.address_country = address_country;
     }
 
+    public String getMobile1() {
+        return mobile1;
+    }
+
+    public void setMobile1(String mobile1) {
+        this.mobile1 = mobile1;
+    }
+
     public String getMobile2() {
         return mobile2;
     }
@@ -548,6 +404,14 @@ public class JobAdvertisementItem implements Serializable {
         this.email = email;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
     public String getFacebook() {
         return facebook;
     }
@@ -556,30 +420,215 @@ public class JobAdvertisementItem implements Serializable {
         this.facebook = facebook;
     }
 
-    public static JobServiceProviderItem parseJobServiceProviderItem(JSONObject jo) throws JSONException {
-        String _identifierId = jo.getString("identifier_id");
-        String _serviceProviderId = jo.getString("serviceprovider_id");
-        int _jobSubCategoryId = jo.getInt("job_subcategory_id");
-        int _categoryId = jo.getInt("category_id");
+    public String getContact_designation() {
+        return contact_designation;
+    }
 
-        String _contactPersonDesignation = jo.getString("contact_person_designation");
-        String _contactNo = jo.getString("contact_no");
-        String _emailAddress = jo.getString("email_address");
-        String _websiteLink = jo.getString("website_link");
-        String _fbLink = jo.getString("fb_link");
-        String _registeredWith = jo.getString("registered_with");
-        String _registrationNo = jo.getString("registration_no");
-        String _additionalInfo = jo.getString("additional_info");
-        String _area = jo.getString("area");
-        String _address = jo.getString("address");
-        String _latitude = jo.getString("latitude");
-        String _longitude = jo.getString("longitude");
+    public void setContact_designation(String contact_designation) {
+        this.contact_designation = contact_designation;
+    }
+
+    public String getOpening() {
+        return opening;
+    }
+
+    public void setOpening(String opening) {
+        this.opening = opening;
+    }
+
+    public String getBreaks() {
+        return breaks;
+    }
+
+    public void setBreaks(String breaks) {
+        this.breaks = breaks;
+    }
+
+    public String getClosing() {
+        return closing;
+    }
+
+    public void setClosing(String closing) {
+        this.closing = closing;
+    }
+
+    public String getOff_day() {
+        return off_day;
+    }
+
+    public void setOff_day(String off_day) {
+        this.off_day = off_day;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getRef1() {
+        return ref1;
+    }
+
+    public void setRef1(String ref1) {
+        this.ref1 = ref1;
+    }
+
+    public String getRef2() {
+        return ref2;
+    }
+
+    public void setRef2(String ref2) {
+        this.ref2 = ref2;
+    }
+
+    public String getRef3() {
+        return ref3;
+    }
+
+    public void setRef3(String ref3) {
+        this.ref3 = ref3;
+    }
+
+    public String getReg_with() {
+        return reg_with;
+    }
+
+    public void setReg_with(String reg_with) {
+        this.reg_with = reg_with;
+    }
+
+    public String getReg_num() {
+        return reg_num;
+    }
+
+    public void setReg_num(String reg_num) {
+        this.reg_num = reg_num;
+    }
+
+    public String getJob_type() {
+        return job_type;
+    }
+
+    public void setJob_type(String job_type) {
+        this.job_type = job_type;
+    }
+
+    public String getCollector_name() {
+        return collector_name;
+    }
+
+    public void setCollector_name(String collector_name) {
+        this.collector_name = collector_name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getSubcategory() {
+        return Subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        Subcategory = subcategory;
+    }
+
+    public String getTypeSubcategory() {
+        return TypeSubcategory;
+    }
+
+    public void setTypeSubcategory(String typeSubcategory) {
+        TypeSubcategory = typeSubcategory;
+    }
+
+    public static JobAdvertisementItem parseJobServiceProviderItem(JSONObject jo) throws JSONException {
+        int id = jo.getInt("id");
+        String form_date = jo.getString("form_date");
+        String position = jo.getString("position");
+        String institute_name = jo.getString("institute_name");
+
+        String institute_name_bangla = jo.getString("institute_name_bangla");
+        String post_date = jo.getString("post_date");
+        String application_last_date = jo.getString("application_last_date");
+        String location = jo.getString("location");
+        String post_type = jo.getString("post_type");
+        String job_responsibility = jo.getString("job_responsibility");
+        String required_experience = jo.getString("required_experience");
+        String start_salary = jo.getString("start_salary");
+        String end_salary = jo.getString("end_salary");
+        String other_benefits = jo.getString("other_benefits");
+        String reference_person = jo.getString("reference_person");
+        String application_medium = jo.getString("application_medium");
 
 
+        String map_type = jo.getString("map_type");
+        String latitude = jo.getString("latitude");
+        String  longitude = jo.getString("longitude");
+        String address_floor = jo.getString("address_floor");
 
-        return new JobServiceProviderItem(_identifierId, _serviceProviderId, _jobSubCategoryId,
-                _categoryId, _contactPersonDesignation, _contactNo, _emailAddress, _websiteLink,
-                _fbLink, _registeredWith, _registrationNo, _additionalInfo, _area, _address, _latitude, _longitude);
+        String address_house_name = jo.getString("address_house_name");
+        String address_house_num = jo.getString("address_house_num");
+        String address_road = jo.getString("address_road");
+        String address_line = jo.getString("address_line");
+        String address_avenue = jo.getString("address_avenue");
+        String address_block = jo.getString("address_block");
+        String address_area = jo.getString("address_area");
+        String address_post = jo.getString("address_post");
+        String address_police = jo.getString("address_police");
+        String address_city = jo.getString("address_city");
+        String address_country = jo.getString("address_country");
+        String mobile1 = jo.getString("mobile1");
+        String mobile2 = jo.getString("mobile2");
+        String email = jo.getString("email");
+        String  website = jo.getString("website");
+        String  facebook = jo.getString("facebook");
+        String contact_designation = jo.getString("contact_designation");
+        String opening = jo.getString("opening");
+        String breaks = jo.getString("break");
+        String closing = jo.getString("closing");
+        String off_day = jo.getString("off_day");
+        String remarks = jo.getString("remarks");
+        String ref1 = jo.getString("ref1");
+        String ref2 = jo.getString("ref2");
+        String ref3 = jo.getString("ref3");
+        String reg_with = jo.getString("reg_with");
+        String reg_num = jo.getString("reg_num");
+        String job_type = jo.getString("job_type");
+
+
+        String collector_name = jo.getString("collector_name");
+        String status = jo.getString("status");
+        String user = jo.getString("user");
+        String  Subcategory = jo.getString("Subcategory");
+
+        String TypeSubcategory = jo.getString("TypeSubcategory");
+        return new JobAdvertisementItem(id,form_date, position, institute_name, institute_name_bangla,
+                post_date, application_last_date, location,
+                post_type, job_responsibility, required_experience,
+                start_salary, end_salary,other_benefits, reference_person, application_medium,
+                map_type, latitude,longitude, address_floor,
+                address_house_name, address_house_num, address_road, address_line,
+                address_avenue, address_block, address_area,
+                address_post,address_police, address_city, mobile1,mobile2,email,website,
+                facebook, contact_designation, opening,
+                breaks,closing, off_day, remarks,
+                ref1, ref2,ref3, reg_with, reg_num, job_type,
+                collector_name, status, user, Subcategory,  TypeSubcategory);
 
     }
 }
