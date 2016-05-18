@@ -126,5 +126,6 @@
     <orderEntry type="library" exported="" name="play-services-appindexing-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="gson-2.4" level="project" />
     <orderEntry type="module" module-name="volley" exported="" />
+    <orderEntry type="library" exported="" name="android-android-23" level="project" />
   </component>
 </module>
