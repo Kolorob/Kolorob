@@ -3,15 +3,23 @@ package demo.kolorob.kolorobdemoversion.fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
@@ -38,7 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -52,7 +59,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
  * Created by israt.jahan on 5/5/2016.
 
  */
-public class MapFragmentRouteOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
+public class MapFragmentRouteOSM extends Fragment implements View.OnClickListener, MapEventsReceiver, LocationListener {
     Drawable newMarker;
     Marker marker;
     MyLocationNewOverlay mylocation;
@@ -96,7 +103,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialServiceProviderItem> financialServiceProvider = null;
     private ArrayList<EducationServiceProviderItem> educationServiceProvider = null;
-    MapView mapView,mapp;
+    MapView mapView, mapp;
     private int categoryId;
 
     ArrayAdapter arrayAdapter;
@@ -134,7 +141,9 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
 
     }
 
-    LocationManager locationManager;
+    LocationManager locationManager ;
+    String provider;
+    GeoPoint userlocation;
     ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay, anotherItemizedIconOverlay2, anotherItemizedIconOverlay7, anotherItemizedIconOverlay8, anotherItemizedIconOverlay3, anotherItemizedIconOverlay4, anotherItemizedIconOverlay5, anotherItemizedIconOverlay6;
     ArrayList<ItemizedIconOverlay> overlayholder = null;
 
@@ -145,16 +154,19 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
     public void setHealthServiceProvider(ArrayList<HealthServiceProviderItem> et) {
         this.healthServiceProvider = et;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         LayoutInflater li = LayoutInflater.from(getActivity());
         double latDouble, longDouble;
         int i = 0;
 
         super.onCreate(savedInstanceState);
 
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
         VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
@@ -172,16 +184,34 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
 
         mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mapView.setTilesScaledToDpi(true);
-      /*  mapView.setTilesScaledToDpi(true);
-        // Test code
-        float density = mapView.isTilesScaledToDpi() ? mapView.getResources().getDisplayMetrics().density : 1;
-        density *= 1.5;
-        ITileSource aTileSource = mapView.getTileProvider().getTileSource();
-        TileSystem.setTileSize((int) (aTileSource.getTileSizePixels() * density));
-        System.out.println("density: " + density);*/
-        // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
-        //    mapView.getOverlays().add(mMyLocationOverlay);
+
         IMapController mapViewController = mapView.getController();
+
+        locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        // Creating an empty criteria object
+        Criteria criteria = new Criteria();
+
+        // Getting the name of the provider that meets the criteria
+        provider = locationManager.getBestProvider(criteria, false);
+
+
+        if(provider!=null && !provider.equals("")){
+
+            // Get the location from the given provider
+            Location location = locationManager.getLastKnownLocation(provider);
+
+            locationManager.requestLocationUpdates(provider, 20000, 1, this);
+
+
+            if(location!=null)
+                onLocationChanged(location);
+            else
+                Toast.makeText(getActivity(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(getActivity(), "No Provider Found", Toast.LENGTH_SHORT).show();
+        }
 
 
         if (locationNameId == 1) {
@@ -200,14 +230,9 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         //Add Scale Bar
         ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);
-        mylocation = new MyLocationNewOverlay(mapView);
-        mylocation.enableMyLocation();
-
-        IMyLocationProvider s= mylocation.getMyLocationProvider();
 
 
-        mylocation.getMyLocation();
-        mapView.getOverlays().add(mylocation);
+
 
         ImageButton curButton=(ImageButton) rootView.findViewById(R.id.currlocation);
         curButton.setOnClickListener(new View.OnClickListener() {
@@ -242,12 +267,41 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         centermarker.setTitle("Destination");
 
         mapView.getOverlays().add(centermarker);
+        RoadManager roadManager = new OSRMRoadManager(getActivity());
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
+
+        waypoints.add(userlocation);
         waypoints.add(markerlocation);
-        waypoints.add(mylocation.getMyLocation());
+        Road road = roadManager.getRoad(waypoints);
+        if (road.mStatus != Road.STATUS_OK)
+            Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
+
+        Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
+        roadOverlay.setColor(Color.YELLOW);
+        mapView.getOverlays().add(roadOverlay);
+
+        //3. Showing the Route steps on the map
+        FolderOverlay roadMarkers = new FolderOverlay(getActivity());
+        mapView.getOverlays().add(roadMarkers);
+        Drawable nodeIcon = getResources().getDrawable(R.drawable.marker_node);
+        for (int ii = 0; ii < road.mNodes.size(); ii++) {
+            RoadNode node = road.mNodes.get(ii);
+            Marker nodeMarker = new Marker(mapView);
+            nodeMarker.setPosition(node.mLocation);
+            nodeMarker.setIcon(nodeIcon);
+
+            //4. Filling the bubbles
+            nodeMarker.setTitle("Step " + ii);
+            nodeMarker.setSnippet(node.mInstructions);
+            nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
+            Drawable iconContinue = getResources().getDrawable(R.drawable.ic_continue);
+            nodeMarker.setImage(iconContinue);
+            //4. end
+
+            roadMarkers.add(nodeMarker);
+        }
         return rootView;
     }
-
 
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
@@ -274,6 +328,32 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
 
     public void setMapView(MapView mapView) {
         this.mapView = mapView;
+    }
+
+    public void onLocationChanged(Location location) {
+        // Getting reference to TextView tv_longitude
+        Toast.makeText(getActivity(), "Tap on (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+        Marker usermarker=new Marker(mapView);
+        double laat=location.getLatitude();
+        double longg=location.getLongitude();
+       userlocation=new GeoPoint(laat,longg);
+        usermarker.setPosition(userlocation);
+        mapView.getOverlays().add(usermarker);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
 
