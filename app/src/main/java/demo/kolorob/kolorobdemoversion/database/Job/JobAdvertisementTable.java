@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -138,7 +139,7 @@ public class JobAdvertisementTable {
                 + KEY_USER_NAME + " TEXT, "
                 + KEY_STATUS + " TEXT, "
                 + KEY_SUBCATEGORY + " TEXT, "
-                + KEY_TYPESUBCATEGORY + " TEXT, "
+
                 + KEY_TYPESUBCATEGORY + " TEXT, PRIMARY KEY( " + KEY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -380,7 +381,9 @@ public class JobAdvertisementTable {
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
+        Log.d(">>>","Success  "+ret);
         return ret;
+
 
 
 
@@ -523,6 +526,24 @@ public class JobAdvertisementTable {
         cursor.close();
         closeDB();
         return false;
+    }
+
+
+    public ArrayList<JobAdvertisementItem> jobAdvertisementItems() {
+        ArrayList<JobAdvertisementItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
     }
 
 
