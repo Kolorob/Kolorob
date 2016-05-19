@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#efefef"
+	>
+
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="left"
+		android:background="#efefef"
+		android:layout_alignParentLeft="true"
+		>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/distance_btn"
+			android:layout_gravity="left"
+			android:id="@+id/distance_id"
+			/>
+
+		<TextView
+			android:text="way" android:id="@+id/title_id"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="#3A4296"
+
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></TextView>
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="#efefef"
+		android:layout_centerHorizontal="true"
+		android:gravity="center_horizontal"
+		>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/call_btn"
+			android:layout_gravity="left"
+
+			/>
+
+		<TextView
+			android:text=" way" android:id="@+id/call_id"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="#3A4296"
+			android:layout_below="@+id/distance_id"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></TextView>
+	</LinearLayout>
+
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="#efefef"
+		android:layout_alignParentRight="true"
+		android:gravity="center_horizontal"
+		>
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/call_btn"
+			android:layout_gravity="left"
+
+			/>
+
+		<TextView
+			android:text=" way" android:id="@+id/call_id"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="#3A4296"
+			android:layout_below="@+id/distance_id"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></TextView>
+	</LinearLayout>
+
+
+
+</RelativeLayout>
+
+
+
+
+

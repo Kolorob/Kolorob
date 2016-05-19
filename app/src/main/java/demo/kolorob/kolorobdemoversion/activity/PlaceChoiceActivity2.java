@@ -191,21 +191,12 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
 
 
-
-
-
-
-
-
         autocompletetextview2 = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteTextView1x);
 
 
 
         ArrayAdapter<String> adapter2;
-
-
-
 
 
         adapter2 = new ArrayAdapter<String>
@@ -338,7 +329,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         } else if (id == R.id.emergency_info) {
 
           //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
-            Intent em = new Intent(this, EmergencyActivity.class);
+            Intent em = new Intent(this, NewEmergency.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         } else if (id == R.id.local_representative) {
