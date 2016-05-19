@@ -268,11 +268,13 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
                         String lon = legalAidServiceProviderItem.getLongitude().toString();
                         String name= legalAidServiceProviderItem.getLegalaidNameBan().toString();
                         // double longitude = Double.parseDouble(lon);
+                        boolean fromornot=true;
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("Latitude", lat);
                         editor.putString("Longitude", lon);
                         editor.putString("Name", name);
+                        editor.putBoolean("Value", fromornot);
                         editor.commit();
 
 

@@ -64,19 +64,60 @@ public class JobAdvertisementItem implements Serializable {
     private String TypeSubcategory;
 
 
-    public JobAdvertisementItem(int id, String form_date, String position, String institute_name, String institute_name_bangla,
-                                String post_date, String application_last_date, String location,
-                                String post_type, String job_responsibility, String required_experience,
-                                String start_salary, String end_salary, String other_benefits, String reference_person, String application_medium,
-                                String map_type, String latitude, String longitude, String address_floor,
-                                String address_house_name, String address_house_num, String address_road, String address_line,
-                                String address_avenue, String address_block, String address_area,
-                                String address_post, String address_police, String address_city,
-                                String mobile1, String mobile2, String email, String website,
-                                String facebook, String contact_designation, String opening,
-                                String breaks, String closing, String off_day, String remarks,
-                                String ref1, String ref2, String ref3, String reg_with, String reg_num, String job_type,
-                                String collector_name, String status, String user, String Subcategory, String TypeSubcategory
+    public JobAdvertisementItem(
+                                int id,
+                                String form_date,
+                                String position,
+                                String institute_name,
+                                String institute_name_bangla,
+                                String post_date,
+                                String application_last_date,
+                                String location,
+                                String post_type,
+                                String job_responsibility,
+                                String required_experience,
+                                String start_salary,
+                                String end_salary,
+                                String other_benefits,
+                                String reference_person,
+                                String application_medium,
+                                String map_type,
+                                String latitude,
+                                String longitude,
+                                String address_floor,
+                                String address_house_name,
+                                String address_house_num,
+                                String address_road,
+                                String address_line,
+                                String address_avenue,
+                                String address_block,
+                                String address_area,
+                                String address_post,
+                                String address_police,
+                                String address_city,
+                                String address_country,
+                                String mobile1,
+                                String mobile2,
+                                String email,
+                                String website,
+                                String facebook,
+                                String contact_designation,
+                                String opening,
+                                String breaks,
+                                String closing,
+                                String off_day,
+                                String remarks,
+                                String ref1,
+                                String ref2,
+                                String ref3,
+                                String reg_with,
+                                String reg_num,
+                                String job_type,
+                                String collector_name,
+                                String status,
+                                String user,
+                                String Subcategory,
+                                String TypeSubcategory
     ) {
         this.id=id;
         this.form_date = form_date;
@@ -107,6 +148,8 @@ public class JobAdvertisementItem implements Serializable {
         this.address_area = address_area;
         this.address_post = address_post;
         this.address_police = address_police;
+        this.address_city=address_city;
+        this.address_country=address_country;
         this.mobile1 = mobile1;
         this.mobile2 = mobile2;
         this.email = email;
@@ -611,7 +654,7 @@ public class JobAdvertisementItem implements Serializable {
         String job_type = jo.getString("job_type");
         String collector_name = jo.getString("collector_name");
         String status = jo.getString("status");
-        String user = jo.getString("user");
+        String user = jo.getString("username");
         String  Subcategory = jo.getString("Subcategory");
 
         String TypeSubcategory = jo.getString("TypeSubcategory");
@@ -622,7 +665,7 @@ public class JobAdvertisementItem implements Serializable {
                 map_type, latitude,longitude, address_floor,
                 address_house_name, address_house_num, address_road, address_line,
                 address_avenue, address_block, address_area,
-                address_post,address_police, address_city, mobile1,mobile2,email,website,
+                address_post,address_police, address_city,address_country, mobile1,mobile2,email,website,
                 facebook, contact_designation, opening,
                 breaks,closing, off_day, remarks,
                 ref1, ref2,ref3, reg_with, reg_num, job_type,

@@ -1,13 +1,11 @@
 package demo.kolorob.kolorobdemoversion.helpers;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -71,7 +69,7 @@ public class MyInfoWindow extends InfoWindow {
                 switch (catid) {
                     case AppConstants.EDUCATION:
                         // Override Marker's onClick behaviour here
-                        Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(MyInfoWindow.this.con);
                         nulledu = educationServiceProviderTable.geteduNode2(node);
@@ -81,7 +79,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.GONE);
                         break;
                     case AppConstants.HEALTH:
-                        Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(MyInfoWindow.this.con);
                         nullhel = healthServiceProviderTable.gethelNode2(node);
@@ -91,7 +89,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.GONE);
                         break;
                     case AppConstants.ENTERTAINMENT:
-                        Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(MyInfoWindow.this.con);
                         nullent = entertainmentServiceProviderTable.getentNode2(node);
@@ -101,7 +99,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.GONE);
                         break;
                     case AppConstants.LEGAL:
-                        Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(MyInfoWindow.this.con);
                         nullleg = legalAidServiceProviderTable.getlegNode2(node);
@@ -111,7 +109,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.GONE);
                         break;
                     case AppConstants.FINANCIAL:
-                        Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                         FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(MyInfoWindow.this.con);
                         nullfin = financialServiceProviderTable.getfinNode2(node);

@@ -392,10 +392,12 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
                     String lon = entertainmentServiceProviderItem.getLongitude().toString();
                     String name= entertainmentServiceProviderItem.getNodeNameBn().toString();
                     // double longitude = Double.parseDouble(lon);
+                    boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Latitude", lat);
                     editor.putString("Longitude", lon);
+                    editor.putBoolean("Value", fromornot);
                     editor.putString("Name", name);
 
                     editor.commit();
