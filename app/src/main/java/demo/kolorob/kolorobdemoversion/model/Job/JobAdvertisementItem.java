@@ -654,7 +654,7 @@ public class JobAdvertisementItem implements Serializable {
         String job_type = jo.getString("job_type");
         String collector_name = jo.getString("collector_name");
         String status = jo.getString("status");
-        String user = jo.getString("user");
+        String user = jo.getString("username");
         String  Subcategory = jo.getString("Subcategory");
 
         String TypeSubcategory = jo.getString("TypeSubcategory");
