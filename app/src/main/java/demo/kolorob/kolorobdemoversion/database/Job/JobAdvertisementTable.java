@@ -61,7 +61,7 @@ public class JobAdvertisementTable {
     private static final String KEY_FACEBOOK = "facebook"; //
     private static final String KEY_CONTACT_DESIGNATION = "contact_designation"; //
     private static final String KEY_OPENING = "opening"; //
-    private static final String KEY_BREAK = "break"; //
+    private static final String KEY_BREAK = "breaks"; //
     private static final String KEY_CLOSING = "closing"; //
     private static final String KEY_OFF_DAY = "off_day"; //
     private static final String KEY_REMARKS = "remarks"; //
@@ -93,6 +93,7 @@ public class JobAdvertisementTable {
                 + KEY_FORM_DATE + "  TEXT, "              // 1 - text
                 + KEY_POSITION + " TEXT, "
                 + KEY_INSTITUTION_NAME + " TEXT, "// 2 - text
+                + KEY_INSTITUTION_NAME_BANGLA + " TEXT, "// 2 - text
                 + KEY_POST_DATE + " TEXT, "
                 + KEY_APPLICATION_LAST_DATE + " TEXT, "
                 + KEY_LOCATION + " TEXT, "
@@ -126,6 +127,7 @@ public class JobAdvertisementTable {
                 + KEY_FACEBOOK + " TEXT, "
                 + KEY_CONTACT_DESIGNATION + " TEXT, "
                 + KEY_OPENING+ " TEXT, "
+                + KEY_BREAK+ " TEXT, "
                 + KEY_CLOSING + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
                 + KEY_REMARKS + " TEXT, "
