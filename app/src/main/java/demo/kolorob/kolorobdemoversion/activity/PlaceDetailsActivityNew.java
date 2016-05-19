@@ -65,6 +65,7 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapRouteDrawingFragment;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -1477,7 +1478,15 @@ Context context;
         fragmentTransaction.commit();
     }
 
+    public void implementRouteDrawingFragmentOSM()
+    {
+        MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
+        fragmentTransaction.commit();
+    }
     public void implementRouteDrawingFragment()
     {
         MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
@@ -1510,38 +1519,39 @@ Context context;
         SharedPreferences.Editor editor = pref.edit();
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
-        String Longitude = pref.getString("Latitude", null);
-        String Latitude = pref.getString("Longitude", null);
-
-
-        Intent intent;
-        intent = getIntent();
-        if (null != intent)
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+        Boolean valuecheck=pref.getBoolean("Value",false);
+        if (valuecheck!=false)
         {
-            locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
-            if(locationNameId== AppConstants.PLACE_BAUNIABADH)
-            {
-                locationName = AppConstants.BAUNIABADH;
-                setPlaceChoice(locationName);
-            }
-            else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
-            {
-                locationName = AppConstants.PARIS_ROAD;
-                setPlaceChoice(locationName);
-            }
-        }
-        editor.putInt("LocationNameId", locationNameId);
-        editor.commit();
-
-        if (Latitude != null&& AppUtils.isNetConnected(getApplicationContext())) {
-            Double Lon = Double.parseDouble(Longitude);
-            Double Lat = Double.parseDouble(Latitude);
-
-            implementRouteDrawingFragment();
-
-
+        implementRouteDrawingFragmentOSM();
         }
 
+else {
+            Intent intent;
+            intent = getIntent();
+            if (null != intent) {
+                locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE, 0);
+                if (locationNameId == AppConstants.PLACE_BAUNIABADH) {
+                    locationName = AppConstants.BAUNIABADH;
+                    setPlaceChoice(locationName);
+                } else if (locationNameId == AppConstants.PLACE_PARIS_ROAD) {
+                    locationName = AppConstants.PARIS_ROAD;
+                    setPlaceChoice(locationName);
+                }
+            }
+            editor.putInt("LocationNameId", locationNameId);
+            editor.commit();
+
+            if (Latitude != null && AppUtils.isNetConnected(getApplicationContext())) {
+                Double Lon = Double.parseDouble(Longitude);
+                Double Lat = Double.parseDouble(Latitude);
+
+                implementRouteDrawingFragment();
+
+
+            }
+        }
     }
 
     @Override

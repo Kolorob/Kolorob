@@ -14,14 +14,21 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.MapQuestRoadManager;
+import org.osmdroid.bonuspack.routing.OSRMRoadManager;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
+import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider;
@@ -43,6 +50,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by israt.jahan on 5/5/2016.
+
  */
 public class MapFragmentOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
     Drawable newMarker;
@@ -88,7 +96,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialServiceProviderItem> financialServiceProvider = null;
     private ArrayList<EducationServiceProviderItem> educationServiceProvider = null;
-    MapView mapView;
+    MapView mapView,mapp;
     private int categoryId;
 
     ArrayAdapter arrayAdapter;
@@ -153,7 +161,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
-
+setMapView(mapView);
 
         mapView.setClickable(true);
 
@@ -418,51 +426,48 @@ public void DrawRoute(String lat, String lon)
     Double servicelat=Double.parseDouble(lat);
     Double servicelon=Double.parseDouble(lon);
     GeoPoint servicepoint=new GeoPoint(servicelat,servicelon);
-    mylocation = new MyLocationNewOverlay(mapView);
-    mylocation.enableMyLocation();
-    IMyLocationProvider s= mylocation.getMyLocationProvider();
 
-
-    mylocation.getMyLocation();
-    mapView.getOverlays().add(mylocation);
+    Double endlat=Double.parseDouble("23.791902");
+    Double endlon=Double.parseDouble("90.411343");
+mapp=getMapView();
    // double latt=mylocation.getMyLocation().getLatitude();
    // Log.d("latt",String.valueOf(latt));
-    Marker destinationmarker=new Marker(mapView);
+    Marker destinationmarker=new Marker(mapp);
     destinationmarker.setPosition(servicepoint);
-    mapView.getOverlays().add(destinationmarker);
+    mapp.getOverlays().add(destinationmarker);
 
-  //  GeoPoint my=mylocation.getMyLocation();
+    GeoPoint my=new GeoPoint(endlat,endlon);
 
  //   double latitude = my.getLatitudeE6() / 1E6;
 //
  //   double longitude = my.getLongitudeE6() / 1E6;
 
     //2. Playing with the RoadManager
-    //roadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
+    //RoadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
     //roadManager.addRequestOption("routeType=bicycle");
     ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
-  //  waypoints.add(my);
+    waypoints.add(my);
     waypoints.add(servicepoint);
 
 
     //GeoPoint endPoint = new GeoPoint(48.4, -1.9);
 
 
-   /* RoadManager roadManager = new OSRMRoadManager(getActivity());
+    RoadManager roadManager = new OSRMRoadManager(getActivity());
     Road road = roadManager.getRoad(waypoints);
     if (road.mStatus != Road.STATUS_OK)
         Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
 
     Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
-    mapView.getOverlays().add(roadOverlay);
+    mapp.getOverlays().add(roadOverlay);
 
     //3. Showing the Route steps on the map
     FolderOverlay roadMarkers = new FolderOverlay(getActivity());
-    mapView.getOverlays().add(roadMarkers);
+    mapp.getOverlays().add(roadMarkers);
     Drawable nodeIcon = getResources().getDrawable(R.drawable.map_marker);
     for (int i = 0; i < road.mNodes.size(); i++) {
         RoadNode node = road.mNodes.get(i);
-        Marker nodeMarker = new Marker(mapView);
+        Marker nodeMarker = new Marker(mapp);
         nodeMarker.setPosition(node.mLocation);
         nodeMarker.setIcon(nodeIcon);
 
@@ -476,7 +481,7 @@ public void DrawRoute(String lat, String lon)
 
         roadMarkers.add(nodeMarker);
     }
-*/
+
 
 }
     @Override
@@ -485,14 +490,12 @@ public void DrawRoute(String lat, String lon)
     }
 
 
+    public MapView getMapView() {
+        return mapView;
+    }
 
-
-
-
-
-
-
-
-
+    public void setMapView(MapView mapView) {
+        this.mapView = mapView;
+    }
 }
 
