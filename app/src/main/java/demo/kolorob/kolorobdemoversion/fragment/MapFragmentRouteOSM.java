@@ -178,6 +178,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
+        havePolyLine = false;
         if (havePolyLine) {
             mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
@@ -211,7 +212,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
             location = locationManager.getLastKnownLocation(provider);
 
 
-            locationManager.requestLocationUpdates(provider, 60000, 90, this);
+            locationManager.requestLocationUpdates(provider, 60000, 0.0f, this);
 
 
             if(location!=null)
@@ -240,7 +241,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         //Add Scale Bar
         ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);
-        havePolyLine = false;
+
 
 
 
@@ -290,6 +291,9 @@ public void Drawroute(GeoPoint Ulocation,GeoPoint Mlocation)
     roadOverlay.setColor(Color.YELLOW);
     mapView.getOverlays().add(roadOverlay);
      havePolyLine=true;
+    if (havePolyLine) {
+        mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    }
     //3. Showing the Route steps on the map
     FolderOverlay roadMarkers = new FolderOverlay(getActivity());
     mapView.getOverlays().add(roadMarkers);
@@ -309,6 +313,7 @@ public void Drawroute(GeoPoint Ulocation,GeoPoint Mlocation)
         //4. end
 
         roadMarkers.add(nodeMarker);
+        mapView.invalidate();
     }
 
 }
