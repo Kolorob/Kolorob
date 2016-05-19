@@ -1,29 +1,27 @@
 package demo.kolorob.kolorobdemoversion.fragment;
 
-import android.Manifest;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
-
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
@@ -42,7 +40,6 @@ import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
-import org.osmdroid.views.overlay.mylocation.IMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
@@ -196,7 +193,18 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         mapView.setTilesScaledToDpi(true);
 
         mapViewController = mapView.getController();
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
+        final int gpsVersion = getResources().getInteger(com.google.android.gms.R.integer.google_play_services_version);
 
+        // Showing status
+        if(status== ConnectionResult.SUCCESS)
+            Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
+        else{
+            Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
+            int requestCode = 10;
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), requestCode);
+            dialog.show();
+        }
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         // Creating an empty criteria object
