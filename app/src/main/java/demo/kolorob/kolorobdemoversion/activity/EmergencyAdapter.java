@@ -1,0 +1,135 @@
+package demo.kolorob.kolorobdemoversion.activity;
+
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+public class EmergencyAdapter extends ArrayAdapter<Emergency> {
+
+	protected static final String LOG_TAG = EmergencyAdapter.class.getSimpleName();
+	
+	private List<Emergency> items;
+	private int layoutResourceId;
+	private Context context;
+
+	public EmergencyAdapter(Context context, int layoutResourceId, List<Emergency> items) {
+		super(context, layoutResourceId, items);
+		this.layoutResourceId = layoutResourceId;
+		this.context = context;
+		this.items = items;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View row = convertView;
+		AtomPaymentHolder holder = null;
+
+		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+		row = inflater.inflate(layoutResourceId, parent, false);
+
+		holder = new AtomPaymentHolder();
+		holder.emergency = items.get(position);
+		final int i = position;
+		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.call_id);
+	//	holder.removePaymentButton.setTag(holder.atomPayment);
+
+		holder.name = (ImageButton)row.findViewById(R.id.distance_id);
+		//setNameTextChangeListener(holder);
+		holder.name.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                 // Perform action on click   
+
+               //  Intent activityChangeIntent = new Intent(PresentActivity.this, NextActivity.class);
+
+                 // currentContext.startActivity(activityChangeIntent);
+Log.d("========", "-----------------"+i);
+
+               //  PresentActivity.this.startActivity(activityChangeIntent);
+             }
+         });
+		
+		holder.value = (ImageButton)row.findViewById(R.id.call_id);
+		//setNameTextChangeListener(holder);
+		holder.value.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                 // Perform action on click   
+
+               //  Intent activityChangeIntent = new Intent(PresentActivity.this, NextActivity.class);
+
+                 // currentContext.startActivity(activityChangeIntent);
+Log.d("========", "-----------------"+i);
+
+               //  PresentActivity.this.startActivity(activityChangeIntent);
+             }
+         });
+		
+		
+	//	holder.value = (TextView)row.findViewById(R.id.atomPay_value);
+//		setValueTextListeners(holder);
+
+		row.setTag(holder);
+
+		setupItem(holder);
+		return row;
+	}
+
+	private void setupItem(AtomPaymentHolder holder) {
+	//	holder.name.setText(holder.atomPayment.getName());
+	//	holder.value.setText(String.valueOf(holder.atomPayment.getValue()));
+		
+		//holder.value.setBackgroundResource(R.drawable.ic_launcher);
+	}
+
+	public static class AtomPaymentHolder {
+		Emergency emergency;
+		ImageButton name;
+		ImageButton value;
+		ImageButton removePaymentButton;
+	}
+	
+//	private void setNameTextChangeListener(final AtomPaymentHolder holder) {
+//		holder.name.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//				holder.atomPayment.setName(s.toString());
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+//
+//			@Override
+//			public void afterTextChanged(Editable s) { }
+//		});
+//	}
+
+//	private void setValueTextListeners(final AtomPaymentHolder holder) {
+//		holder.value.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//				try{
+//					holder.atomPayment.setValue(Double.parseDouble(s.toString()));
+//				}catch (NumberFormatException e) {
+//					Log.e(LOG_TAG, "error reading double value: " + s.toString());
+//				}
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+//
+//			@Override
+//			public void afterTextChanged(Editable s) { }
+//		});
+//	}
+}
