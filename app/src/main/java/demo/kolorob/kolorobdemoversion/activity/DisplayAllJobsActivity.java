@@ -19,7 +19,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DisplayAllJobList;
@@ -34,6 +37,9 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DisplayAllJobsActivity extends Activity {
 
+
+        ArrayList<JobAdvertisementItem> jobAdvertisementItems;
+        JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
         Context context;
         ListView joblist;
 
@@ -50,17 +56,6 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-
-                        JobAdvertisementItem jobAdvertisementItem;
-                        ArrayList<JobAdvertisementItem> jobAdvertisementItems;
-                        ArrayList<JobAdvertisementItem> jobAdvertisementItems1;
-
-                        JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
-
-                        jobAdvertisementItems= jobAdvertisementTable.jobAdvertisementItems();
-                        jobAdvertisementItems1= jobAdvertisementTable.jobAdvertisementItems();
-
 
 
 
@@ -100,50 +95,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         context=this;
 
-        String[] tittle = new String[] { "Plumber Needed",
-                "Electrician Needed",
-                "Babysitter Needed",
 
-        };
-
-        String[] salary_range = new String[] { "10,000 Taka",
-                "30,000 Taka",
-                "20,000 Taka",
-
-        };
-
-        String[] remaining_date = new String[] { "3 days",
-                "4 days",
-                "1 day",
-
-        };
-
-        String[] address = new String[] { "Bauniabad",
-                "Paris Road",
-                "Bauniabad",
-
-        };
-
-        String[] contact_number = new String[] { "01988009755",
-                "01790615263",
-                "01558409186",
-
-        };
-
-
-        joblist=(ListView)findViewById(R.id.jobList);
-
-        DisplayAllJobList displayAllJobList= new DisplayAllJobList(this,tittle, salary_range, remaining_date, address, contact_number);
-        joblist.setAdapter(displayAllJobList);
-
-
-        joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-             Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
 
@@ -160,9 +112,13 @@ public class DisplayAllJobsActivity extends Activity {
             try {
                 JSONObject jo = joblistArray.getJSONObject(i);
                 JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(jo);
-                Log.d(">>>","Insert Item  "+si);
+
                 JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
                 jobAdvertisementTable.insertItem(si);
+                Log.d(">>>","Insert Item  ");
+                displayData();
+
+
 
 
 
@@ -171,6 +127,89 @@ public class DisplayAllJobsActivity extends Activity {
             }
         }
     }
+
+
+    public void displayData()
+    {
+
+        jobAdvertisementItems= jobAdvertisementTable.jobAdvertisementItems();
+
+        int size= jobAdvertisementItems.size();
+
+        String[] tittle = new String[size];
+
+        String[] salary_range = new String[size];
+
+        long[] remaining_date = new long[size];
+
+        String[] address = new String[size];
+
+        String[] contact_number = new String[size];
+
+        int increment= 0;
+
+
+        for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
+        {
+
+            tittle[increment]=jobAdvertisementItem.getInstitute_name();
+            salary_range[increment]=jobAdvertisementItem.getStart_salary()+" "+jobAdvertisementItem.getEnd_salary();
+            remaining_date[increment]= remaining_date(jobAdvertisementItem.getApplication_last_date());
+            address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
+            contact_number[increment] = jobAdvertisementItem.getMobile1();
+
+        }
+
+
+
+
+        joblist=(ListView)findViewById(R.id.jobList);
+
+        DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number);
+        joblist.setAdapter(displayAllJobList);
+
+
+        joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    private long remaining_date(String lastDate)
+    {
+        String Datetime;
+        Calendar c = Calendar.getInstance();
+
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        Datetime = dateformat.format(c.getTime());
+        Log.d(">>>>>","today "+Datetime);
+        Date enddate=new Date();
+        Date today=new Date();
+
+        try{
+            enddate=dateformat.parse(lastDate);
+            today= dateformat.parse(Datetime);
+
+            Log.d(">>>>>","today "+today);
+            Log.d(">>>>>","endDay "+enddate);
+
+
+        }
+        catch (Exception e)
+        {
+
+        }
+        long diff = enddate.getTime() - today.getTime();
+
+        return diff/ (24 * 60 * 60 * 1000);
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
