@@ -21,14 +21,14 @@ public class DisplayAllJobList extends BaseAdapter
     Activity context;
     String title[];
     String salary_range[];
-    String remaing_date[];
+    long remaing_date[];
     String address[];
     String contract_number[];
     LinearLayout titlePart,salaryPart,addressPart,numberpart;
     int height,width;
 
 
-    public DisplayAllJobList(Activity context, String[] title,String[] salary_range,String[] remaining_date, String[] address,String[] contract_number) {
+    public DisplayAllJobList(Activity context, String[] title,String[] salary_range,long[] remaining_date, String[] address,String[] contract_number) {
         super();
         this.context = context;
         this.title = title;
