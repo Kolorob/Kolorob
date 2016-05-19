@@ -4,21 +4,14 @@
     android:layout_height="match_parent"
     tools:context=".ListViewActivity" >
 
-    <Button
-        android:id="@+id/EnterPays_addAtomPayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/EnterPays_addPayment"
-        android:drawableLeft="@android:drawable/ic_input_add" />
+
 
     <ListView
         android:id="@+id/EnterPays_atomPaysList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/emergencylistitem"
-        android:layout_below="@+id/EnterPays_addAtomPayment" >
+         >
 
     </ListView>
 
