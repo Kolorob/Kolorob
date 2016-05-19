@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -491,11 +490,13 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
                         String lon = financialServiceProviderItem.getLongitude().toString();
                         String name= financialServiceProviderItem.getNamebn().toString();
                         // double longitude = Double.parseDouble(lon);
+                        boolean fromornot=true;
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("Latitude", lat);
                         editor.putString("Longitude", lon);
                         editor.putString("Name", name);
+                        editor.putBoolean("Value", fromornot);
                         editor.commit();
 
 
@@ -505,8 +506,8 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
                         if (Latitude != null && Longitude != null) {
                             Double Lon = Double.parseDouble(Longitude);
                             Double Lat = Double.parseDouble(Latitude);
-                            Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
                             // implementFragment();
 
                             //username and password are present, do your stuff
