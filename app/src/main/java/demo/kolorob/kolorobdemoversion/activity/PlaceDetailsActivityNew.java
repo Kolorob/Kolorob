@@ -109,11 +109,13 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private ListView expandableListview;
     private RelativeLayout wholeLayout;
     private int showList;
+    private ImageButton helpicon;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
 Activity act;
     public int layoutstatus;
+    private Boolean list_expand=false;
 
 private Toolbar toolbar,toolbar2;
 
@@ -189,7 +191,7 @@ Context context;
         mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
         listholder=(LinearLayout)findViewById(R.id.listholder);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
             /** Called when a drawer has settled in a completely open state. */
@@ -242,17 +244,39 @@ Context context;
             }
         }
 
+
+        RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) listholder.getLayoutParams();
+        params3.height = 40;
+        params3.width = width;
+        listholder.setLayoutParams(params3);
+
         expandableListShowing = (ImageButton)findViewById(R.id.expandble_list_showing);
+        helpicon=(ImageButton)findViewById(R.id.helpicon);
         subCatItemList= (ExpandableListView)findViewById(R.id.listView);
 
 
-        expandableListShowing.setOnClickListener(new View.OnClickListener() {
+        listholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                subCatItemList.setVisibility(View.VISIBLE);
+
+                if(list_expand.equals(false))
+                {
+                    subCatItemList.setVisibility(View.VISIBLE);
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
                     map.setVisibility(View.GONE);
                     showList=1;
+                    list_expand=true;
+
+                }
+
+                else
+                {
+                    showList=0;
+                    map.setVisibility(View.VISIBLE);
+                    list_expand=false;
+                    subCatItemList.setVisibility(View.GONE);
+
+                }
 
 
 
@@ -269,6 +293,9 @@ Context context;
 
 
         ///this code will change the background of the layout for two places.
+
+
+
 
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -297,14 +324,17 @@ Context context;
       explist=(LinearLayout)findViewById(R.id.explist);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
+        ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
         int s=lp.width = (int) (VIEW_WIDTH);
+        lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
 
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
-        expnlist.setMargins(s,90,140,0);
+        expnlist.setMargins(s,90,s,0);
+
 
 
 
@@ -653,9 +683,8 @@ Context context;
                         map.setVisibility(View.VISIBLE);
                         explist.setVisibility(View.GONE);
                         showList=0;
-
-
                         toolbar.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#58BED6"));
@@ -702,6 +731,7 @@ Context context;
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
                         explist.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -750,6 +780,7 @@ Context context;
                         explist.setVisibility(View.GONE);
                         showList=0;
                         toolbar.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -799,6 +830,7 @@ Context context;
                         //TODO write necessary codes for government
                         toolbar2.setVisibility(View.GONE);
                         listholder.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar.setVisibility(View.VISIBLE);
                         final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
@@ -820,6 +852,7 @@ Context context;
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
                         showList=0;
+                        helpicon.setVisibility(View.GONE);
                         listholder.setBackgroundColor(Color.parseColor("#67C3A2"));
                         listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
@@ -861,6 +894,7 @@ Context context;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         explist.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
                         showList=0;
                         listholder.setVisibility(View.VISIBLE);
@@ -893,6 +927,7 @@ Context context;
                         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                         getSupportActionBar().setHomeButtonEnabled(true);
                         toggle6.setDrawerIndicatorEnabled(true);
+                        helpicon.setVisibility(View.GONE);
                         drawer.setDrawerListener(toggle6);
                         mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
@@ -1013,9 +1048,7 @@ Context context;
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-        if(dpi>300)
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
-        else
+
         if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         else
@@ -1035,7 +1068,7 @@ Context context;
         }
 
         ivIcon.setLayoutParams(lpIv);
-        tvName.setTextColor(Color.BLUE);
+        tvName.setTextColor(Color.MAGENTA);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
