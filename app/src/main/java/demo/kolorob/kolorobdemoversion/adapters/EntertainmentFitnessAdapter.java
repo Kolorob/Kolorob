@@ -23,6 +23,7 @@ public class EntertainmentFitnessAdapter extends BaseAdapter
     String service_type[];
     String type[];
     String service_details[];
+    String result_concate;
 
 
 
@@ -80,12 +81,7 @@ public class EntertainmentFitnessAdapter extends BaseAdapter
             holder = new ViewHolder();
 
             holder.year_of_establishment = (TextView) convertView.findViewById(R.id.year_of_establishment);
-            holder.num_workers = (TextView) convertView.findViewById(R.id.num_workers);
-            holder.offers = (TextView) convertView.findViewById(R.id.offers);
-            holder.offer_details = (TextView) convertView.findViewById(R.id.offer_details);
-            holder.service_type = (TextView) convertView.findViewById(R.id.service_type);
-            holder.type = (TextView) convertView.findViewById(R.id.type);
-            holder.service_details = (TextView) convertView.findViewById(R.id.service_details);
+
             convertView.setTag(holder);
         }
         else
@@ -93,17 +89,45 @@ public class EntertainmentFitnessAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.year_of_establishment.setText("প্রতিষ্ঠার সময় : "+year_of_establishment[position]);
-        holder.num_workers.setText("কর্মীর সংখ্যা: " +num_workers[position]);
-        holder.offers.setText("অফার: "+offers[position]);
-        holder.offer_details.setText("অফার বিস্তারিত : " +offer_details[position]);
-        holder.service_type.setText("সেবার ধরন: "+service_type[position]);
-        holder.type.setText("ধরন : " +type[position]);
-        holder.service_details.setText("সেবার বিবরন: " +service_details[position]);
 
+        if(!year_of_establishment[position].equals(""))
+            concateBasic("প্রতিষ্ঠার সময় : ",year_of_establishment[position]);
+        if(!num_workers[position].equals(""))
+            concateBasic("কর্মীর সংখ্যা: ",num_workers[position]);
+        if(!offers[position].equals(""))
+            concateBasic("অফার: ",offers[position]);
+        if(!offer_details[position].equals(""))
+            concateBasic("অফার বিস্তারিত : ",offer_details[position]);
+        if(!service_type[position].equals(""))
+            concateBasic("সেবার ধরন: ",service_type[position]);
+        if(!type[position].equals(""))
+            concateBasic("ধরন : ",type[position]);
+        if(!service_details[position].equals(""))
+            concateBasic("সেবার বিবরন: ",service_details[position]);
+
+
+
+           concateBasic("","");
+
+
+
+        holder.year_of_establishment.setText(result_concate);
+
+
+        result_concate="";
 
         return convertView;
     }
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+
+        return result_concate;
+    }
+
 
 }
 

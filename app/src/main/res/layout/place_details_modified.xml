@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/wholeLayout">
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,13 +32,68 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true">
 
+
+
                 </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+
+                    android:id="@+id/explist"
+                    android:layout_height="wrap_content">
+                    <ExpandableListView
+                        android:id="@+id/listView"
+                        android:visibility="gone"
+
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+                    </ExpandableListView>
+
+
+
+                </LinearLayout>
+
+
+
+
             </RelativeLayout>
+            <ScrollView
+                android:id="@+id/svSubCategoryListHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:paddingTop="40dp"
+
+
+                android:layout_gravity="right|top"
+                android:fillViewport="false"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/llSubCatListHolder"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:focusableInTouchMode="true"
+                    android:paddingLeft="10dp">
+
+
+                </LinearLayout>
+
+            </ScrollView>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent">
+                android:background="@color/transparent"
+                android:paddingTop="40dp"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentLeft="true">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
@@ -54,42 +111,65 @@
                 </LinearLayout>
 
             </ScrollView>
+
         </RelativeLayout>
     </LinearLayout>
+
+
+
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:background="@color/red"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_gravity="center_horizontal"
         android:id="@+id/listholder"
 
+
         android:layout_above="@+id/linearLayout5"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="false"
+        android:gravity="center">
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Click here to open list"
+            android:text="@string/list_show"
             android:id="@+id/textView16"
-            android:paddingRight="80dp"
-            android:paddingTop="20dp"
+            android:paddingRight="0dp"
+            android:paddingTop="03dp"
             android:paddingLeft="20dp" />
 
         <ImageButton
-            android:layout_width="109dp"
-            android:layout_height="89dp"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
             android:background="@drawable/list_showing_upbutton"
-            android:id="@+id/imageButton"
-            android:paddingLeft="800dp"
-            android:gravity="right"
-            android:layout_alignParentRight="true"
-            android:paddingTop="60dp" />
+            android:id="@+id/expandble_list_showing"
+            android:paddingLeft="005dp"
+            />
+
+
+
+
+
     </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/help_icon"
+        android:id="@+id/helpicon"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="120dp"
+        android:gravity="right"
+        android:onClick="helpDialog"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
 
     <LinearLayout
         android:orientation="vertical"
@@ -125,6 +205,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
+
+
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
@@ -143,7 +225,7 @@
                 android:text="আগের পাতা"
                 android:id="@+id/agerpatatext"
                 android:textColor="#ffc917"
-                android:paddingTop="10dp"
+                android:paddingTop="2dp"
                 android:layout_below="@+id/prebutton"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

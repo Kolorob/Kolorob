@@ -259,6 +259,8 @@ Activity con;
 
 
         itemName.setText(" "+healthServiceProviderItem.getNameBn());
+
+
         itemAddress.setText("  ঠিকানা: "+healthServiceProviderItem.getArea());
         itemType.setText("  ধরন: ");
         itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+healthServiceProviderItem.getNodeContact());

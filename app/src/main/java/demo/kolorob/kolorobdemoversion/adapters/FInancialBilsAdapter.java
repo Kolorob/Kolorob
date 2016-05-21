@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.adapters;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class FInancialBilsAdapter extends BaseAdapter
     String costs[];
     String remark[];
     String ref_num[];
+    String result_concate;
 
 
 
@@ -38,6 +40,11 @@ public class FInancialBilsAdapter extends BaseAdapter
 
 
     }
+
+
+
+
+
 
     public int getCount() {
         // TODO Auto-generated method stub
@@ -89,14 +96,53 @@ public class FInancialBilsAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.service_name.setText("সেবার নাম : "+service_name[position]);
-        holder.yes_no.setText("সেবা পাওয়া যাবে কিনা? : " +yes_no[position]);
-        holder.costs.setText("খরচ: "+costs[position]);
-        holder.remark.setText("মন্তব্য: " +remark[position]);
-        holder.ref_num.setText("রেফারেন্স নম্ভর : "+ref_num[position]);
+
+        if(!service_name[position].equals(""))
+            concateBasic("সেবার নাম : ",service_name[position]);
+
+        if(!yes_no[position].equals(""))
+            concateBasic("সেবা পাওয়া যাবে কিনা? : ",yes_no[position]);
+
+        if(!costs[position].equals(""))
+            concateBasic("খরচ: ",costs[position]);
+
+        if(!remark[position].equals(""))
+            concateBasic("মন্তব্য: ",remark[position]);
+
+        if(!ref_num[position].equals(""))
+            concateBasic("রেফারেন্স নম্ভর : ",ref_num[position]);
+        concateBasic("","");
+
+
+        holder.service_name.setText(result_concate);
+
+
+        result_concate="";
+
+//        holder.service_name.setText("সেবার নাম : "+service_name[position]);
+//        holder.yes_no.setText("সেবা পাওয়া যাবে কিনা? : " +yes_no[position]);
+//        holder.costs.setText("খরচ: "+costs[position]);
+//        holder.remark.setText("মন্তব্য: " +remark[position]);
+//        holder.ref_num.setText("রেফারেন্স নম্ভর : "+ref_num[position]);
 
         return convertView;
     }
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+
+        Log.d("....>>>", "Values   " + result_concate);
+
+
+        return result_concate;
+    }
+
+
+
+
 
 }
 

@@ -1,7 +1,8 @@
 package demo.kolorob.kolorobdemoversion.utils;
-
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+
+import org.osmdroid.util.GeoPoint;
 
 import demo.kolorob.kolorobdemoversion.R;
 
@@ -41,9 +42,10 @@ public class AppConstants {
     public static final String[] SUB_CAT_LAW_BN = {"আইনজীবী", "আইন-কেন্দ্র", "সালিশ কেন্দ্র"};
     public static final String[] SUB_CAT_MONEY_BN = {"sub-category-1", "sub-category-2", "sub-category-3"};
 
+    public static final GeoPoint BAUNIA1 = new GeoPoint(23.8197971,90.3803564);
+    public static final GeoPoint PARIS1 = new GeoPoint(23.8135117,90.3707107);
     public static final LatLng BAUNIA = new LatLng(23.8197971,90.3803564);
     public static final LatLng PARIS = new LatLng(23.8135117,90.3707107);
-
     public static final String[][] SUB_CATEGORIES = {SUB_CAT_EDU_BN, SUB_CAT_FUN_BN, SUB_CAT_GOVT_BN,
             SUB_CAT_HEALTH_BN, SUB_CAT_JOB_BN, SUB_CAT_LAW_BN, SUB_CAT_MONEY_BN};
 
@@ -86,10 +88,10 @@ public class AppConstants {
     //region Keys of the activity data-passing extras
     public static final String KEY_CAT_OBJ = "category_object";
     public static final String KEY_PLACE = "place";
-    public static final String BAUNIABADH = "বাউনিয়া বাঁধ";
+    public static final String BAUNIABADH = "Baunia Badh";
     public static final String WAITTAG = "একটু অপেক্ষা করুন";
     public static final String WAITDET = "তথ্য সংগ্রহ হচ্ছে.....";
-    public static final String PARIS_ROAD = "প্যারিস রোড";
+    public static final String PARIS_ROAD = "Paris Road";
     public static final int PLACE_BAUNIABADH = 1;
     public static final int PLACE_PARIS_ROAD = 2;
     //endregion

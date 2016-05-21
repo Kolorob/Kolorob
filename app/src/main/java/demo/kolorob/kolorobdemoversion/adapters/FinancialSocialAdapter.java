@@ -4,6 +4,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
  * Created by Mazhaul Islam on 10/2/2016.
  */
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class FinancialSocialAdapter extends BaseAdapter
     String yes_no[];
     String costs[];
     String remark[];
+    String result_concate;
 
 
 
@@ -92,14 +94,41 @@ public class FinancialSocialAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.service_name.setText("সেবার নাম : "+service_name[position]);
-        holder.yes_no.setText("সেবা পাওয়া যাবে কিনা? : " +yes_no[position]);
-        holder.costs.setText("খরচ: "+costs[position]);
-        holder.remark.setText("মন্তব্য: " +remark[position]);
+        if(!service_name[position].equals(""))
+            concateBasic("সেবার নাম : ",service_name[position]);
+
+        if(!yes_no[position].equals(""))
+            concateBasic("সেবা পাওয়া যাবে কিনা? : ",yes_no[position]);
+
+        if(!costs[position].equals(""))
+            concateBasic("খরচ: ",costs[position]);
+
+        if(!remark[position].equals(""))
+            concateBasic("মন্তব্য: ",remark[position]);
 
 
+        concateBasic("","");
+        holder.service_name.setText(result_concate);
+
+
+
+
+        result_concate="";
         return convertView;
     }
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+
+        Log.d("....>>>", "Values   " + result_concate);
+
+
+        return result_concate;
+    }
+
 
 }
 

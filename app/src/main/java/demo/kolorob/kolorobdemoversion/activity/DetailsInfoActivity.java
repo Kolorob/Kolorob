@@ -6,14 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -96,31 +94,101 @@ public class DetailsInfoActivity extends Activity  {
         itemAddress = (TextView) findViewById(R.id.tv_item_location);
         itemType = (TextView) findViewById(R.id.tv_item_type);
         itemContact = (TextView) findViewById(R.id.tv_item_contact);
-       totalStudents = (TextView) findViewById(R.id.tv_total_students);
-       totalClasses = (TextView) findViewById(R.id.tv_total_class);
-       totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-       playground = (TextView) findViewById(R.id.tv_playground);
-       hostel = (TextView) findViewById(R.id.tv_hostel_fac);
+        totalStudents = (TextView) findViewById(R.id.tv_total_students);
+        totalClasses = (TextView) findViewById(R.id.tv_total_class);
+        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
+        playground = (TextView) findViewById(R.id.tv_playground);
+        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-       email = (TextView) findViewById(R.id.tv_email);
-       website = (TextView) findViewById(R.id.tv_website);
+        email = (TextView) findViewById(R.id.tv_email);
+        website = (TextView) findViewById(R.id.tv_website);
         fb = (TextView) findViewById(R.id.tv_fb);
         edukivabejaben=(ImageView)findViewById(R.id.kivabejabenedu);
         listView=(ListView)findViewById(R.id.listView5);
+        if(!educationServiceProviderItem.getEduNameBan().equals(""))
+        {
+            itemName.setVisibility(View.VISIBLE);
+            itemName.setText(" "+educationServiceProviderItem.getEduNameBan());
 
-        itemName.setText(" "+educationServiceProviderItem.getEduNameBan());
-        itemAddress.setText(" ঠিকানা: "+educationServiceProviderItem.getArea());
-        itemType.setText(" শিক্ষার ধরন: "+educationServiceProviderItem.getEduType());
-        itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+educationServiceProviderItem.getContactNo());
-        totalStudents.setText(" মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
-        totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+educationServiceProviderItem.getTotalClasses()+ " টি");
-        totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
-        playground.setText(" খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
-        hostel.setText(" আবাসন/হোস্টেল সুবিধা : "+educationServiceProviderItem.getHostelFacility());
-        transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
-        email.setText(" ইমেইল: "+educationServiceProviderItem.getEmailAddress());
-        website.setText(" ওয়েবসাইট: "+educationServiceProviderItem.getWebsiteLink());
-        fb.setText(" ফেইসবুক: "+educationServiceProviderItem.getFbLink());
+        }
+
+        if(!educationServiceProviderItem.getEduNameBan().equals(""))
+        {
+            itemName.setVisibility(View.VISIBLE);
+            itemName.setText(" "+educationServiceProviderItem.getEduNameBan());
+        }
+
+        if(!educationServiceProviderItem.getArea().equals(""))
+        {
+            itemAddress.setVisibility(View.VISIBLE);
+            itemAddress.setText(" ঠিকানা: "+educationServiceProviderItem.getArea());
+        }
+        if(!educationServiceProviderItem.getEduType().equals(""))
+        {
+            itemType.setVisibility(View.VISIBLE);
+            itemType.setText(" শিক্ষার ধরন: "+educationServiceProviderItem.getEduType());
+        }
+
+        if(!educationServiceProviderItem.getContactNo().equals(""))
+        {
+            itemContact.setVisibility(View.VISIBLE);
+            itemContact.setText("  মোবাইল/মুঠোফোন নম্বর: "+educationServiceProviderItem.getContactNo());
+        }
+
+        if(educationServiceProviderItem.getTotalStudents()!=0)
+        {
+            totalStudents.setVisibility(View.VISIBLE);
+            totalStudents.setText(" মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
+        }
+         if(educationServiceProviderItem.getTotalClasses()!=0)
+         {
+             totalClasses.setVisibility(View.VISIBLE);
+             totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+educationServiceProviderItem.getTotalClasses()+ " টি");
+         }
+
+        if(educationServiceProviderItem.getTotalTeachers()!=0)
+        {
+            totalTeachers.setVisibility(View.VISIBLE);
+            totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
+        }
+
+        if(!educationServiceProviderItem.getPlayground().equals(""))
+        {
+            playground.setVisibility(View.VISIBLE);
+            playground.setText(" খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
+        }
+
+        if(!educationServiceProviderItem.getHostelFacility().equals(""))
+        {
+            hostel.setVisibility(View.VISIBLE);
+            hostel.setText(" আবাসন/হোস্টেল সুবিধা : "+educationServiceProviderItem.getHostelFacility());
+        }
+
+        if(!educationServiceProviderItem.getHostelFacility().equals(""))
+        {
+            transport.setVisibility(View.VISIBLE);
+            transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
+        }
+
+       if(!educationServiceProviderItem.getEmailAddress().equals(""))
+       {
+           email.setVisibility(View.VISIBLE);
+           email.setText(" ইমেইল: "+educationServiceProviderItem.getEmailAddress());
+       }
+
+        if(!educationServiceProviderItem.getWebsiteLink().equals(""))
+        {
+            website.setVisibility(View.VISIBLE);
+            website.setText(" ওয়েবসাইট: "+educationServiceProviderItem.getWebsiteLink());
+        }
+
+
+        if(!educationServiceProviderItem.getFbLink().equals(""))
+        {
+            fb.setVisibility(View.VISIBLE);
+            fb.setText(" ফেইসবুক: "+educationServiceProviderItem.getFbLink());
+        }
+
 
         Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -376,11 +444,13 @@ public class DetailsInfoActivity extends Activity  {
                     String lon = educationServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
                     String name= educationServiceProviderItem.getEduNameBan().toString();
+                    boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Latitude", lat);
                     editor.putString("Longitude", lon);
                     editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
                     editor.commit();
 
 

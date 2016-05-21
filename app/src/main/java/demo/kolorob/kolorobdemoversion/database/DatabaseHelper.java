@@ -55,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     // TODO Write table names for all other tables
     public static final String JOB_SERVICE_PROVIDER_TABLE="job_provider";
+    public static final String JOB_SERVICE_ADVERTISEMENT_TABLE="job_advertisement_table";
     public static final String JOB_SERVICE_PROVIDER_TYPE="job_provider_type";
     //tables for financial services
     public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";

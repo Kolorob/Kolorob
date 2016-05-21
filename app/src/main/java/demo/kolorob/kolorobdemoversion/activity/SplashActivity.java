@@ -45,12 +45,14 @@ public class SplashActivity extends ActionBarActivity {
         Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.android_rotate_animation);
         rotateImage.startAnimation(startRotateAnimation);
 
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                                 /* start the activity */
-                startActivity(new Intent(SplashActivity.this, OpeningActivity.class));
+                startActivity(new Intent(SplashActivity.this, DetailsInfoActivityEducation.class));
                 //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 //overridePendingTransition(0, 0);
 //                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

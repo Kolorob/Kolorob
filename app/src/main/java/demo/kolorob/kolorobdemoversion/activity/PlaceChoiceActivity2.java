@@ -191,21 +191,12 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
 
 
-
-
-
-
-
-
         autocompletetextview2 = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteTextView1x);
 
 
 
         ArrayAdapter<String> adapter2;
-
-
-
 
 
         adapter2 = new ArrayAdapter<String>
@@ -218,11 +209,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         autocompletetextview2.setAdapter(adapter2);
 
 
-
-
-
-
-
 //
 //                Intent ii = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
 //                ii.putExtra(AppConstants.KEY_DETAILS_VIEW, SearchedEducation);
@@ -230,12 +216,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
                 //TODO Do something with the selected text
             }
-
-
-
-
-
-
 
 
 
@@ -274,7 +254,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                startActivity(intent);
+               // startActivity(intent);
 
             }
         }, DELAY_PLACE_DETAILS_LAUNCH_ANIM);
@@ -298,8 +278,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -315,8 +293,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         super.onStart();
 
         System.out.println("----main activity---onStart---");
-
-
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
     @Override
@@ -338,20 +314,33 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.phone_reg) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_emergency) {
-
-            Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
-            Intent em = new Intent(this, EmergencyActivity.class);
+            Intent em = new Intent(this, PhoneRegActivity.class);
             startActivity(em);
-        } else if (id == R.id.nav_manage) {
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.info_change) {
 
-        } else if (id == R.id.nav_send) {
+            Intent em = new Intent(this, Information_UpdateActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else if (id == R.id.emergency_info) {
+
+          //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, NewEmergency.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        } else if (id == R.id.local_representative) {
+
+        } else if (id == R.id.adv_info) {
+
+        } else if (id == R.id.adv) {
+
+        }
+
+        else if (id == R.id.nav_share) {
 
         }
 

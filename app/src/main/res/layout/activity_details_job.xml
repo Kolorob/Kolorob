@@ -20,7 +20,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.25"
-
             android:layout_height="wrap_content">
 
 
@@ -29,7 +28,6 @@
                 android:layout_height="55dp"
                 android:id="@+id/iv_kolorob_logo"
                 android:layout_marginLeft="18dp"
-
                 android:background="@drawable/kolorob_logo_first_page"
                 />
 
@@ -42,12 +40,12 @@
             android:gravity="center">
 
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:background="@color/transparent"
-                android:src="@drawable/feedback"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="30dp"
+              android:text="বিস্তারিত বিবরন "
+              />
 
 
         </LinearLayout>
@@ -214,6 +212,7 @@
                 android:text=" প্রতিষ্ঠানের সময়সীমা"
                 android:id="@+id/somoysima"
                 android:textColor="@color/blue"
+                android:visibility="visible"
                 android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:padding="5dp"
@@ -224,6 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imagesomoysima"
+                android:visibility="visible"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/green_line_horizontal"
                 android:layout_below="@+id/somoysima"
@@ -275,13 +275,13 @@
                 android:layout_alignStart="@+id/tv_website" />
 
 
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text=" যোগাযোগের উপায়"
+                android:visibility="visible"
+
                 android:id="@+id/textView13"
                 android:textColor="@color/blue"
                 android:textSize="25sp"
@@ -296,6 +296,8 @@
                 android:id="@+id/imageView5"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/green_line_horizontal"
+                android:visibility="visible"
+
                 android:layout_below="@+id/textView13"
                 android:layout_alignParentLeft="true"
                 android:padding="5dp" />
@@ -399,14 +401,7 @@
         android:id="@+id/linearLayout4"
         android:foregroundGravity="center"
         android:gravity="center">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/kivabejabenJob"
-            android:src="@drawable/kivabe"
-            android:paddingRight="20dp"
-            android:focusable="true"
-            android:layout_gravity="center" />
+
 
 
     </LinearLayout>

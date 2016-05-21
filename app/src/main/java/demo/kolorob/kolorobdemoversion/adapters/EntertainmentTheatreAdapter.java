@@ -22,6 +22,7 @@ public class EntertainmentTheatreAdapter extends BaseAdapter
     String remarks[];
     String event_fee_ffp[];
     String event_fee_foc[];
+    String result_concate;
 
 
 
@@ -76,12 +77,13 @@ public class EntertainmentTheatreAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.listview_ent_theatre, null);
             holder = new ViewHolder();
 
+
             holder.event_type = (TextView) convertView.findViewById(R.id.event_type);
-            holder.event_fee = (TextView) convertView.findViewById(R.id.event_fee);
-            holder.event_date = (TextView) convertView.findViewById(R.id.event_date);
-            holder.remarks = (TextView) convertView.findViewById(R.id.remarks);
-            holder.event_fee_ffp = (TextView) convertView.findViewById(R.id.event_fee_ffp);
-            holder.event_fee_foc = (TextView) convertView.findViewById(R.id.event_fee_foc);
+//            holder.event_fee = (TextView) convertView.findViewById(R.id.event_fee);
+//            holder.event_date = (TextView) convertView.findViewById(R.id.event_date);
+//            holder.remarks = (TextView) convertView.findViewById(R.id.remarks);
+//            holder.event_fee_ffp = (TextView) convertView.findViewById(R.id.event_fee_ffp);
+//            holder.event_fee_foc = (TextView) convertView.findViewById(R.id.event_fee_foc);
             convertView.setTag(holder);
         }
         else
@@ -89,16 +91,45 @@ public class EntertainmentTheatreAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.event_type.setText("ইভেন্ট টাইপ : "+event_type[position]);
-        holder.event_fee.setText("ইভেন্টের ফী : " +event_fee[position]);
-        holder.event_date.setText("ইভেন্ট ফী : "+event_date[position]);
-        holder.remarks.setText("মন্তবন্য: " +remarks[position]);
-        holder.event_fee_ffp.setText("ইভেন্ট ফী এফ এফ পি: "+event_fee_ffp[position]);
-        holder.event_fee_foc.setText("ইভেন্ট ফী ও সি : " +event_fee_foc[position]);
+
+        if(!event_type[position].equals(""))
+            concateBasic("ইভেন্টের ধরন: ",event_type[position]);
+        if(!String.valueOf(event_fee[position]).equals(""))
+            concateBasic("ইভেন্ট ফী: ",event_fee[position]);
+        if(!event_date[position].equals(""))
+            concateBasic("ইভেন্ট ফী : ",event_date[position]);
+        if(!remarks[position].equals(""))
+            concateBasic("মন্তবন্য: ",remarks[position]);
+        if(!event_fee_ffp[position].equals(""))
+            concateBasic("ইভেন্ট ফী এফ এফ পি: ",event_fee_ffp[position]);
+
+        if(!event_fee_foc[position].equals(""))
+            concateBasic("ইভেন্ট ফী ও সি : ",event_fee_foc[position]);
+
+
+
+         concateBasic("","");
+        holder.event_type.setText(result_concate);
+        result_concate="";
+
+//        holder.event_fee.setText("ইভেন্টের ফী : " +event_fee[position]);
+//        holder.event_date.setText("ইভেন্ট ফী : "+event_date[position]);
+//        holder.remarks.setText("মন্তবন্য: " +remarks[position]);
+//        holder.event_fee_ffp.setText("ইভেন্ট ফী এফ এফ পি: "+event_fee_ffp[position]);
+//        holder.event_fee_foc.setText("ইভেন্ট ফী ও সি : " +event_fee_foc[position]);
 
         return convertView;
     }
+    private String concateBasic(String value1,String value2){
 
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+
+
+
+
+        return result_concate;
+    }
 }
 
 

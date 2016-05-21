@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
@@ -31,14 +32,19 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +65,7 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapRouteDrawingFragment;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -82,9 +89,10 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
-
-    private LinearLayout llCatListHolder,mapnother,listholder;
+    private static boolean mapcalledstatus;
+    private LinearLayout llCatListHolder,mapnother,listholder,explist;
     CategoryItem ci;
+    private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
     private Spinner spItems;
@@ -92,16 +100,22 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
     private View nextChild;
+    private ExpandableListView subCatItemList;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
     private int subCatShowFlag=0;
     private int locationNameId,subcategory;
     private String locationName;
+    private ListView expandableListview;
+    private RelativeLayout wholeLayout;
+    private int showList;
+    private ImageButton helpicon;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
 Activity act;
     public int layoutstatus;
+    private Boolean list_expand=false;
 
 private Toolbar toolbar,toolbar2;
 
@@ -136,6 +150,7 @@ Context context;
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
+    private ImageButton expandableListShowing;
     private RelativeLayout mapholderr;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -176,7 +191,7 @@ Context context;
         mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
         listholder=(LinearLayout)findViewById(R.id.listholder);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
             /** Called when a drawer has settled in a completely open state. */
@@ -193,7 +208,7 @@ Context context;
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         toggle.setDrawerIndicatorEnabled(true);
         drawer.setDrawerListener(toggle);
@@ -230,12 +245,57 @@ Context context;
         }
 
 
+        RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) listholder.getLayoutParams();
+        params3.height = 40;
+        params3.width = width;
+        listholder.setLayoutParams(params3);
+
+        expandableListShowing = (ImageButton)findViewById(R.id.expandble_list_showing);
+        helpicon=(ImageButton)findViewById(R.id.helpicon);
+        subCatItemList= (ExpandableListView)findViewById(R.id.listView);
+
+
+        listholder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(list_expand.equals(false))
+                {
+                    subCatItemList.setVisibility(View.VISIBLE);
+                    wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
+                    map.setVisibility(View.GONE);
+                    showList=1;
+                    list_expand=true;
+
+                }
+
+                else
+                {
+                    showList=0;
+                    map.setVisibility(View.VISIBLE);
+                    list_expand=false;
+                    subCatItemList.setVisibility(View.GONE);
+
+                }
+
+
+
+            }
+        });
+
+
+
+
+
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
         //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
 
 
         ///this code will change the background of the layout for two places.
+
+
+
 
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -254,13 +314,29 @@ Context context;
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC_NEW;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.92); // 80% of the view width
+        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
+
+
 
       //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
-       // llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+        llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+      explist=(LinearLayout)findViewById(R.id.explist);
+        llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
+        ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
         int s=lp.width = (int) (VIEW_WIDTH);
+        lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
+
+
+        ViewGroup.LayoutParams exlist= explist.getLayoutParams();
+        RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
+
+        expnlist.setMargins(s,90,s,0);
+
+
+
 
         lp.height=100;
 
@@ -268,6 +344,8 @@ Context context;
         caTsList.setMargins(0, 60, 0, 0);
         else
             caTsList.setMargins(0, 10, 0, 0);
+
+
 
 
         Log.d(">>>>>>>>","View_width       "+s);
@@ -298,7 +376,10 @@ Context context;
                 if(imc_met==AppConstants.BAUNIABADH) {
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
                 }
-                else locationNameId=AppConstants.PLACE_PARIS_ROAD;
+                else {locationNameId=AppConstants.PLACE_PARIS_ROAD;}
+            if(mapcalledstatus){
+
+              }
             }
 
             @Override
@@ -324,6 +405,40 @@ Context context;
 
 
 
+    public void helpDialog(View v){
+
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivityNew.this);
+        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceDetailsActivityNew.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
+        final Button button= (Button)promptView.findViewById(R.id.phone_call);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PlaceDetailsActivityNew.this, "...ok....",Toast.LENGTH_LONG).show();
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //resultText.setText("Hello, " + userfeedback.getText());
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
 
 
 
@@ -341,6 +456,12 @@ Context context;
                     Group group = new Group(print.get(j));
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+
+                    Log.d(">>>>", "printnames"+printnames);
+                    Log.d(">>>>", "currentCategoryID "+currentCategoryID);
+                    Log.d(">>>>", "head "+head);
+                    Log.d(">>>>", "print.get(j) "+print.get(j));
+                    Log.d(">>>>", "placeChoice "+placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -557,8 +678,13 @@ Context context;
                 * category id 7 means job*/
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
+                        mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                        explist.setVisibility(View.GONE);
+                        showList=0;
                         toolbar.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#58BED6"));
@@ -600,8 +726,12 @@ Context context;
 
                         break;
                     case AppConstants.HEALTH:
+                        mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -610,6 +740,7 @@ Context context;
                         listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab3 = getSupportActionBar();
+                        showList=0;
                         ab3.setHomeAsUpIndicator(R.drawable.menu_icon);
                         ab3.setDisplayHomeAsUpEnabled(true);
                         ActionBarDrawerToggle toggle3 = new ActionBarDrawerToggle(
@@ -643,8 +774,13 @@ Context context;
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
+                        mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                        explist.setVisibility(View.GONE);
+                        showList=0;
                         toolbar.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -688,11 +824,13 @@ Context context;
 
                     case AppConstants.GOVERNMENT:
 
-
+                        mapcalledstatus=false;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.removeAllViews();
                         //TODO write necessary codes for government
                         toolbar2.setVisibility(View.GONE);
                         listholder.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar.setVisibility(View.VISIBLE);
                         final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
@@ -707,9 +845,14 @@ Context context;
                         alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
+                        mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                       explist.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
+                        showList=0;
+                        helpicon.setVisibility(View.GONE);
                         listholder.setBackgroundColor(Color.parseColor("#67C3A2"));
                         listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
@@ -747,8 +890,13 @@ Context context;
 
                         break;
                     case AppConstants.FINANCIAL:
+                        mapcalledstatus=true;
+                        llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
+                        explist.setVisibility(View.GONE);
+                        helpicon.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
+                        showList=0;
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7a378b"));
                         listholder.startAnimation(slideInFromRightAnim());
@@ -779,6 +927,7 @@ Context context;
                         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                         getSupportActionBar().setHomeButtonEnabled(true);
                         toggle6.setDrawerIndicatorEnabled(true);
+                        helpicon.setVisibility(View.GONE);
                         drawer.setDrawerListener(toggle6);
                         mapholderr.startAnimation(slideInFromRightAnim());
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
@@ -787,23 +936,28 @@ Context context;
 
                         break;
                     case AppConstants.JOB:
+                       // mapcalledstatus=false;
+                        llSubCatListHolder.setVisibility(View.GONE);
+                     //   map.removeAllViews();
+//                        toolbar2.setVisibility(View.GONE);
+//                        listholder.setVisibility(View.GONE);
+//                        toolbar.setVisibility(View.VISIBLE);
+//                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
+//
+//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+//                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        alertDialog2.dismiss();
+//                                    }
+//                                });
+//                        alertDialog2.getWindow().setLayout(200, 300);
+//                        alertDialog2.show();
 
 
-                        map.removeAllViews();
-                        toolbar2.setVisibility(View.GONE);
-                        listholder.setVisibility(View.GONE);
-                        toolbar.setVisibility(View.VISIBLE);
-                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
+                        Intent intentJ = new Intent(PlaceDetailsActivityNew.this,DisplayAllJobsActivity.class);
+                        startActivity(intentJ);
 
-                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog2.dismiss();
-                                    }
-                                });
-                        alertDialog2.getWindow().setLayout(200, 300);
-                        alertDialog2.show();
 
                     default:
                         break;
@@ -836,6 +990,9 @@ Context context;
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
+        Log.d("cat_id",">>>" +cat_id);
+        Log.d("header",">>>" +header);
+        Log.d("placeChoice",">>>" +cat_id);
         createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
@@ -849,7 +1006,12 @@ Context context;
 
     //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
+        subCatItemList.setAdapter(adapter);
+
+      //  MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
      //   subCatItemList.setAdapter(adapter);
 
 
@@ -865,7 +1027,7 @@ Context context;
 
 
     private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
-       // llSubCatListHolder.removeAllViews();
+       llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         subcategory=0;
         for (SubCategoryItem si : subCategoryList) {
@@ -874,7 +1036,7 @@ Context context;
             {
                 header.add(si.getSubcatHeader());
 
-               // llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
+                llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
             }
         }
     }
@@ -886,9 +1048,7 @@ Context context;
         int height = displayMetrics.heightPixels;
         View v;
         LayoutInflater li = LayoutInflater.from(this);
-        if(dpi>300)
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
-        else
+
         if(height>1000)
             v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
         else
@@ -908,6 +1068,7 @@ Context context;
         }
 
         ivIcon.setLayoutParams(lpIv);
+        tvName.setTextColor(Color.MAGENTA);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -949,12 +1110,16 @@ Context context;
 
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> eduItem;
+                        if(showList==1)
+                        explist.setVisibility(View.VISIBLE);
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
                         ArrayList<HealthServiceProviderItem> healthItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         healthItem = constructHealthListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
@@ -963,6 +1128,8 @@ Context context;
 
 
                         ArrayList<EntertainmentServiceProviderItem> entItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         entItem = constructEntertainmentListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, entItem);
                         break;
@@ -984,11 +1151,15 @@ Context context;
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         legalItem = constructlegalaidListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
                         ArrayList<FinancialServiceProviderItem> financialItem;
+                        if(showList==1)
+                            explist.setVisibility(View.VISIBLE);
                         financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
@@ -1042,19 +1213,19 @@ Context context;
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         if(subCatShowFlag==1)
         {
-           // rlSubCatHolder.startAnimation(slideOutFromLeftAnim());
+            llSubCatListHolder.setVisibility(View.VISIBLE);
         }
         subCatShowFlag=1;
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               // rlSubCatHolder.setVisibility(View.VISIBLE);
-             //   rlSubCatHolder.startAnimation(slideInFromRightAnim());
-               // constructSubCategoryList(subCatList, 1.0, cat_id);
+                llSubCatListHolder.setVisibility(View.VISIBLE);
+                llSubCatListHolder.startAnimation(slideInFromRightAnim());
+               constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
-                (int) (200 *
+                (int) (150 *
                         (AppConstants.CAT_LIST_LG_WIDTH_PERC
                                 - AppConstants.CAT_LIST_SM_WIDTH_PERC)
                 ));
@@ -1147,11 +1318,11 @@ Context context;
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
-       /* mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setLocationName(getPlaceChoice());
+     //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
-        mapFragment.setLocationNameId(locationNameId);*/
+        mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -1171,15 +1342,16 @@ Context context;
 
     private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+       mapFragment.setLocationName(getPlaceChoice());
+       // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setHealthServiceProvider(healthServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
     private ArrayList<HealthServiceProviderItem> constructHealthListItemForHeader(int cat_id, String header)
@@ -1202,16 +1374,18 @@ Context context;
 
     private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+
     }
 
     private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItemForHeader(int cat_id, String header)
@@ -1249,16 +1423,18 @@ Context context;
 
     private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setLegalaidServiceProvider(legalaidServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setLegalaidServiceProvider(legalaidServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+
     }
 
 
@@ -1283,16 +1459,20 @@ Context context;
 
     private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
     {
-        MapFragment mapFragment = new MapFragment();
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+
         mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+
+
+     
     }
 
 
@@ -1331,7 +1511,15 @@ Context context;
         fragmentTransaction.commit();
     }
 
+    public void implementRouteDrawingFragmentOSM()
+    {
+        MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
+        fragmentTransaction.commit();
+    }
     public void implementRouteDrawingFragment()
     {
         MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
@@ -1364,38 +1552,39 @@ Context context;
         SharedPreferences.Editor editor = pref.edit();
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
-        String Longitude = pref.getString("Latitude", null);
-        String Latitude = pref.getString("Longitude", null);
-
-
-        Intent intent;
-        intent = getIntent();
-        if (null != intent)
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+        Boolean valuecheck=pref.getBoolean("Value",false);
+        if (valuecheck!=false)
         {
-            locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
-            if(locationNameId== AppConstants.PLACE_BAUNIABADH)
-            {
-                locationName = AppConstants.BAUNIABADH;
-                setPlaceChoice(locationName);
-            }
-            else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
-            {
-                locationName = AppConstants.PARIS_ROAD;
-                setPlaceChoice(locationName);
-            }
-        }
-        editor.putInt("LocationNameId", locationNameId);
-        editor.commit();
-
-        if (Latitude != null&& AppUtils.isNetConnected(getApplicationContext())) {
-            Double Lon = Double.parseDouble(Longitude);
-            Double Lat = Double.parseDouble(Latitude);
-
-            implementRouteDrawingFragment();
-
-
+        implementRouteDrawingFragmentOSM();
         }
 
+else {
+            Intent intent;
+            intent = getIntent();
+            if (null != intent) {
+                locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE, 0);
+                if (locationNameId == AppConstants.PLACE_BAUNIABADH) {
+                    locationName = AppConstants.BAUNIABADH;
+                    setPlaceChoice(locationName);
+                } else if (locationNameId == AppConstants.PLACE_PARIS_ROAD) {
+                    locationName = AppConstants.PARIS_ROAD;
+                    setPlaceChoice(locationName);
+                }
+            }
+            editor.putInt("LocationNameId", locationNameId);
+            editor.commit();
+
+            if (Latitude != null && AppUtils.isNetConnected(getApplicationContext())) {
+                Double Lon = Double.parseDouble(Longitude);
+                Double Lat = Double.parseDouble(Latitude);
+
+                implementRouteDrawingFragment();
+
+
+            }
+        }
     }
 
     @Override

@@ -12,6 +12,7 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Course Name"
@@ -24,6 +25,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
         android:textColor="@color/black"
@@ -35,6 +38,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Admission Time"
         android:textColor="@color/black"
@@ -46,6 +51,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Cost"
@@ -57,6 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -70,6 +79,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -83,6 +94,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
@@ -93,6 +106,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -107,6 +122,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Cost"
         android:textColor="@color/black"
@@ -119,6 +136,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Type"
         android:textColor="@color/black"
@@ -131,6 +150,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -143,6 +164,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
@@ -154,6 +177,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Admission Time"
@@ -163,6 +188,8 @@
 
     <TextView
         android:layout_width="wrap_content"
+        android:visibility="gone"
+
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
@@ -177,6 +204,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -193,6 +222,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Course Name"
         android:textColor="@color/black"
@@ -202,6 +233,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -214,6 +247,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Admission Time"
@@ -225,6 +260,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -237,6 +274,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -252,6 +291,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -263,7 +304,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
@@ -274,6 +318,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -288,6 +334,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Cost"
         android:textColor="@color/black"
@@ -301,6 +349,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Type"
         android:textColor="@color/black"
 
@@ -311,6 +361,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -325,6 +377,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
         android:textColor="@color/black"
@@ -337,6 +391,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Admission Time"
         android:textColor="@color/black"
 
@@ -349,6 +405,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Cost"
         android:textColor="@color/black"
 
@@ -360,6 +418,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Type"
         android:textColor="@color/black"
@@ -374,6 +434,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Course Name"
         android:textColor="@color/black"
@@ -386,6 +448,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
         android:textColor="@color/black"
 
@@ -395,6 +459,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Admission Time"
@@ -409,6 +475,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Cost"
         android:textColor="@color/black"
 
@@ -418,6 +486,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -431,6 +501,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:visibility="gone"
+
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
@@ -445,6 +517,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Duration"
         android:textColor="@color/black"
@@ -455,6 +529,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:paddingLeft="10dp"
+        android:visibility="gone"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Admission Time"
@@ -469,6 +545,8 @@
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
+
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Cost"
         android:textColor="@color/black"
 
@@ -480,6 +558,8 @@
         android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:visibility="gone"
+
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="Course Type"
         android:textColor="@color/black"

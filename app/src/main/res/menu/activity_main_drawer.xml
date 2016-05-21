@@ -3,33 +3,41 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/phone_reg"
             android:icon="@drawable/advertising_icon"
-            android:title="Information" />
+            android:title="@string/phone_registration" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/info_change"
             android:icon="@drawable/profile_icon"
-            android:title="Registration" />
+            android:title="@string/information_change" />
         <item
-            android:id="@+id/nav_emergency"
+            android:id="@+id/local_representative"
             android:icon="@drawable/protinidhi_icon"
-            android:title="Emergency Services" />
+            android:title="@string/area_member" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/adv_info"
             android:icon="@drawable/advertising_icon"
-            android:title="Tools" />
+            android:title="@string/advertisements" />
+        <item
+            android:id="@+id/adv"
+            android:icon="@drawable/advertisement"
+            android:title="@string/know_adv" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/emergency_info"
+                android:icon="@drawable/close_button"
+                android:title="Emergency Services" />
+            <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/advertising_icon"
                 android:title="Facebook" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/profile_icon"
-                android:title="Send" />
+                android:id="@+id/nav_help"
+                android:icon="@drawable/help_icon"
+                android:title="Help" />
         </menu>
     </item>
 

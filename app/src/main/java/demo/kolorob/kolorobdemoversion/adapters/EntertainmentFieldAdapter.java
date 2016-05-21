@@ -22,6 +22,7 @@ public class EntertainmentFieldAdapter extends BaseAdapter
     String event_cost_foc[];
     String playground_cost_ffp[];
     String playground_cost_foc[];
+    String result_concate;
 
 
 
@@ -76,28 +77,57 @@ public class EntertainmentFieldAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.listview_entertainment_field, null);
             holder = new ViewHolder();
             holder.e_cost = (TextView) convertView.findViewById(R.id.event_cost);
-            holder.p_cost = (TextView) convertView.findViewById(R.id.playground_cost);
-            holder.remarks = (TextView) convertView.findViewById(R.id.remarks);
-            holder.e_cost_ffp = (TextView) convertView.findViewById(R.id.e_cost_ffp);
-            holder.e_cost_foc = (TextView) convertView.findViewById(R.id.e_cost_foc);
-            holder.p_cost_ffp = (TextView) convertView.findViewById(R.id.p_c_ffp);
-            holder.p_cost_foc = (TextView) convertView.findViewById(R.id.p_cost_foc);
+
             convertView.setTag(holder);
         }
         else
         {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.e_cost.setText("ইভেন্টের খরচ : " +event_cost[position]);
-        holder.p_cost.setText("মাঠের খরচ: "+playground_cost[position]);
-        holder.remarks.setText("মন্তব্য : " +remark[position]);
-        holder.e_cost_ffp.setText("ইভেন্ট খরচ : "+event_cost_ffp[position]);
-        holder.e_cost_foc.setText("ইভেন্ট খরচ: " +event_cost_foc[position]);
-        holder.p_cost_ffp.setText("মাঠের খরচ : "+playground_cost_ffp[position]);
-        holder.p_cost_foc.setText("মাঠের খরচ : " +playground_cost_foc[position]);
+
+
+        if(!event_cost[position].equals(""))
+            concateBasic("",event_cost[position]);
+        if(!playground_cost[position].equals(""))
+            concateBasic("",playground_cost[position]);
+        if(!remark[position].equals(""))
+            concateBasic("",remark[position]);
+        if(!event_cost_ffp[position].equals(""))
+            concateBasic("",event_cost_ffp[position]);
+        if(!event_cost_foc[position].equals(""))
+            concateBasic("",event_cost_foc[position]);
+        if(!playground_cost_ffp[position].equals(""))
+            concateBasic("",playground_cost_ffp[position]);
+        if(!playground_cost_foc[position].equals(""))
+            concateBasic("",playground_cost_foc[position]);
+
+
+        concateBasic("","");
+        holder.e_cost.setText(result_concate);
+
+        result_concate="";
+//        holder.p_cost.setText("মাঠের খরচ: "+playground_cost[position]);
+//        holder.remarks.setText("মন্তব্য : " +remark[position]);
+//        holder.e_cost_ffp.setText("ইভেন্ট খরচ : "+event_cost_ffp[position]);
+//        holder.e_cost_foc.setText("ইভেন্ট খরচ: " +event_cost_foc[position]);
+//        holder.p_cost_ffp.setText("মাঠের খরচ : "+playground_cost_ffp[position]);
+//        holder.p_cost_foc.setText("মাঠের খরচ : " +playground_cost_foc[position]);
 
         return convertView;
     }
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+
+
+
+
+        return result_concate;
+    }
+
+
 
 }
 

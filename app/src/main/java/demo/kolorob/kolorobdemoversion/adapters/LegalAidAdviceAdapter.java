@@ -25,7 +25,7 @@ public class LegalAidAdviceAdapter extends BaseAdapter
     String legal_aid_cost[];
     String legal_aid_person_authority[];
     String legal_aid_remark[];
-
+    String result_concate;
 
 
 
@@ -93,13 +93,40 @@ public class LegalAidAdviceAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.service_name.setText("সেবার নাম : "+service_name[position]);
-        holder.legal_aid_free.setText("সেবা বিনামূল্যে কিনা : " +legal_aid_free[position]);
-        holder.legal_aid_cost.setText("সেবার বিনিময় খরচ: "+legal_aid_cost[position]);
-        holder.legal_aid_person_authority.setText("যিনি সেবা দিবেন: " +legal_aid_person_authority[position]);
-        holder.legal_aid_remark.setText("মন্তব্য : "+legal_aid_remark[position]);
+
+        if(service_name[position].equals(""))
+            concateBasic("সেবার নাম : ",service_name[position]);
+        if(legal_aid_free[position].equals(""))
+            concateBasic("সেবা বিনামূল্যে কিনা : ",legal_aid_free[position]);
+        if(!legal_aid_cost[position].equals(""))
+            concateBasic("সেবার বিনিময় খরচ: ",legal_aid_cost[position]);
+
+        if(!legal_aid_person_authority[position].equals(""))
+            concateBasic("যিনি সেবা দিবেন: ",legal_aid_person_authority[position]);
+
+        if(!legal_aid_remark[position].equals(""))
+            concateBasic("",legal_aid_remark[position]);
+
+        concateBasic("","");
+        holder.service_name.setText(result_concate);
+//        holder.legal_aid_free.setText("সেবা বিনামূল্যে কিনা : " +legal_aid_free[position]);
+//        holder.legal_aid_cost.setText("সেবার বিনিময় খরচ: "+legal_aid_cost[position]);
+//        holder.legal_aid_person_authority.setText("যিনি সেবা দিবেন: " +legal_aid_person_authority[position]);
+//        holder.legal_aid_remark.setText("মন্তব্য : " + legal_aid_remark[position]);
+
+
+
+        result_concate="";
 
         return convertView;
+    }
+
+
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+        return result_concate;
     }
 
 }
