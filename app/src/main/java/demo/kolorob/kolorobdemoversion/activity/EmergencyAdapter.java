@@ -33,11 +33,11 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 	};
 
 	String[] address = new String[] { "Mirpur 10, Dhaka",
-			"",
+			"Dhaka",
 			"পল্লবী থানা",
-			"",
+			"Dhaka",
 			"DESCO, Pallabi, Dhaka",
-			"দুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয","Pllabi, Dhaka","","Red Crescent","","","",
+			"দুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
 	};
 	String[] name_bangla = new String[] { "029555555",
 			"পুলিশ কন্ট্রোল রুম",
@@ -60,7 +60,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 	String[] address_bangla = new String[] { "",
 			"মিরপুর ১০, ঢাকা",
 			"Not Found",
-			"",
+			"Dhaka",
 			"পল্লবী, ঢাকা",
 			"পল্লবী, ঢাকা","","","","","","",
 	};
@@ -99,12 +99,16 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 		holder = new AtomPaymentHolder();
 		holder.emergency = items.get(position);
 		final int i = position;
+
+		holder.title = (TextView)row.findViewById(R.id.emergency_name);
+
+		holder.title.setText(values[i]+","+" "+address[i]);
 		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.call_id);
 	//	holder.removePaymentButton.setTag(holder.atomPayment);
 
-		holder.name = (ImageButton)row.findViewById(R.id.distance_id);
+		holder.loc = (ImageButton)row.findViewById(R.id.distance_id);
 		//setNameTextChangeListener(holder);
-		holder.name.setOnClickListener(new View.OnClickListener() {
+		holder.loc.setOnClickListener(new View.OnClickListener() {
              public void onClick(View v) {
                  // Perform action on click   
 
@@ -112,14 +116,17 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
                  // currentContext.startActivity(activityChangeIntent);
 Log.d("========", "-----------------"+i);
+				 Toast.makeText(context,
+						 "Sorry, Location is not found! ", Toast.LENGTH_LONG)
+						 .show();
 
                //  PresentActivity.this.startActivity(activityChangeIntent);
              }
          });
 		
-		holder.value = (ImageButton)row.findViewById(R.id.call_id);
+		holder.call = (ImageButton)row.findViewById(R.id.call_id);
 		//setNameTextChangeListener(holder);
-		holder.value.setOnClickListener(new View.OnClickListener() {
+		holder.call.setOnClickListener(new View.OnClickListener() {
              public void onClick(View v) {
 
 				Log.d("========", "-----------------"+i);
@@ -136,6 +143,20 @@ Log.d("========", "-----------------"+i);
 
              }
          });
+
+		holder.email = (ImageButton)row.findViewById(R.id.email_id);
+		//setNameTextChangeListener(holder);
+		holder.email.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+
+
+					Toast.makeText(context,
+							"Sorry, Email is not found! ", Toast.LENGTH_LONG)
+							.show();
+
+
+			}
+		});
 		
 		
 	//	holder.value = (TextView)row.findViewById(R.id.atomPay_value);
@@ -156,8 +177,10 @@ Log.d("========", "-----------------"+i);
 
 	public static class AtomPaymentHolder {
 		Emergency emergency;
-		ImageButton name;
-		ImageButton value;
+		ImageButton loc;
+		ImageButton call;
+		ImageButton email;
+		TextView title;
 		ImageButton removePaymentButton;
 	}
 	

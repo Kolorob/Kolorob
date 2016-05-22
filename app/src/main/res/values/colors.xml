@@ -20,6 +20,7 @@
     <color name="semi_transparent">#7f000000</color>
     <color name="orange">#FF8040</color>
     <color name="details_upperhand_color">#93A037</color>
+    <color name="details_info_scrollview_background">#DFF6D9</color>
 
 
 
