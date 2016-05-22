@@ -596,6 +596,6 @@
             android:focusable="true"
             android:layout_gravity="center" />
 
-    </LinearLayout>
+</LinearLayout>
 
 </RelativeLayout>
