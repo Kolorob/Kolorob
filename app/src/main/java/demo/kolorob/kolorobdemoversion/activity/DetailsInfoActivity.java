@@ -364,7 +364,6 @@ public class DetailsInfoActivity extends Activity  {
                     uni_additional_fee);
 
             listView.setAdapter(adapter);
-
             Helpes.getListViewSize(listView);
 
 
@@ -460,9 +459,7 @@ public class DetailsInfoActivity extends Activity  {
                     if (Latitude != null && Longitude != null) {
                         Double Lon = Double.parseDouble(Longitude);
                         Double Lat = Double.parseDouble(Latitude);
-
                         // implementFragment();
-
                         //username and password are present, do your stuff
                     }
 
@@ -489,8 +486,6 @@ public class DetailsInfoActivity extends Activity  {
                                 }
                             });
                     alertDialog.show();
-
-
 
                 }
 
