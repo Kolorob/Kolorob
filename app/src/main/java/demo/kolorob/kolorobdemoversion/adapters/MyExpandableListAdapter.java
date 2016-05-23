@@ -29,6 +29,7 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity_new;
@@ -188,7 +189,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                     public void onClick(View v) {
 
 
-                        Intent iileg = new Intent(getActivity(), DetailsLegalActivity_new.class);
+                        Intent iileg = new Intent(getActivity(), DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, detleg);
                         activity.startActivity(iileg);
 

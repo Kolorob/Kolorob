@@ -34,7 +34,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
     ImageView left_image,middle_image,right_image;
-    TextView address_text,phone_text,email_text;
+    TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
     TextView ups_text;
     private ImageView close_button;
@@ -92,6 +92,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ll2=(LinearLayout)findViewById(R.id.third_list);
         ll3=(LinearLayout)findViewById(R.id.fourth_list);
         scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
+        itemopeningTime=(TextView)findViewById(R.id.opening_time);
 
 
 
