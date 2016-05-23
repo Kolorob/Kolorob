@@ -112,8 +112,9 @@
         <activity
             android:name=".activity.DisplayAllJobsActivity"
             android:theme="@style/Theme.Transparent" />
-        <activity android:name=".activity.DetailsInfoActivityEducation"></activity>
-        <activity android:name=".activity.DetailsInfoActivityEntertainmentNew"></activity>
+        <activity android:name=".activity.DetailsInfoActivityEducation" />
+        <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
+        <activity android:name=".activity.DetailsInfoActivityHealthNew"></activity>
     </application>
 
 </manifest>
