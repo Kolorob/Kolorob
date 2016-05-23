@@ -116,7 +116,8 @@
         <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
         <activity android:name=".activity.DetailsInfoActivityHealthNew" />
         <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
-        <activity android:name=".activity.DetailsInfoActivityLegalNew"></activity>
+        <activity android:name=".activity.DetailsInfoActivityLegalNew" />
+        <activity android:name=".activity.DetailsJobActivityNew"></activity>
     </application>
 
 </manifest>
