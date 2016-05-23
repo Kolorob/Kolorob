@@ -114,7 +114,9 @@
             android:theme="@style/Theme.Transparent" />
         <activity android:name=".activity.DetailsInfoActivityEducation" />
         <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
-        <activity android:name=".activity.DetailsInfoActivityHealthNew"></activity>
+        <activity android:name=".activity.DetailsInfoActivityHealthNew" />
+        <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
+        <activity android:name=".activity.DetailsInfoActivityLegalNew"></activity>
     </application>
 
 </manifest>

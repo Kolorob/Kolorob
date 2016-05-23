@@ -100,9 +100,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
         int upperhad_height=params2.height = height/6;
-
         upperHand.setLayoutParams(params2);
-
 
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
         int  vd=params_upperText.height = height/24;
