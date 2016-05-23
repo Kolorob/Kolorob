@@ -40,7 +40,6 @@
         <activity
             android:name=".activity.NewEmergency"
             android:theme="@style/Theme.AppCompat.Light" />
-
         <activity
             android:name=".activity.PhoneRegActivity"
             android:theme="@style/Theme.AppCompat.Light" />
@@ -112,11 +111,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DisplayAllJobsActivity"
-            android:theme="@style/Theme.Transparent"></activity>
-        <activity android:name=".activity.DetailsInfoActivityEducation"
-           >
-
-        </activity>
+            android:theme="@style/Theme.Transparent" />
+        <activity android:name=".activity.DetailsInfoActivityEducation"></activity>
+        <activity android:name=".activity.DetailsInfoActivityEntertainmentNew"></activity>
     </application>
 
 </manifest>
