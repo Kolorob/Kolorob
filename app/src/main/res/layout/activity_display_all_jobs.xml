@@ -93,7 +93,7 @@
         android:layout_above="@+id/linearLayout4"
         android:layout_alignStart="@+id/linearLayout2"
         android:orientation="horizontal"
-        android:background="@drawable/detailed_info_panel_body"
+        android:background="@drawable/backdrop"
         android:id="@+id/scrollView">
 
 
