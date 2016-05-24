@@ -1,11 +1,15 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -19,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -51,7 +56,8 @@ public class DetailsInfoActivityEducation extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button;
+    private ImageView close_button,phone_mid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +104,7 @@ public class DetailsInfoActivityEducation extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         close_button=(ImageView)findViewById(R.id.close_button);
+        phone_mid=(ImageView)findViewById(R.id.phone_middl);
 
 
 
@@ -402,6 +409,34 @@ public class DetailsInfoActivityEducation extends Activity {
 
             Helpes.getListViewSize(courseListView);
 
+            phone_mid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                    if(!educationServiceProviderItem.equals(""))
+                    {
+                        callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
+                        if(checkPermission())
+                            startActivity(callIntent1);
+                        else{
+                            Toast.makeText(getApplicationContext(),
+                                    "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+            });
+
+
+
+
+
+
 
 
             // phermacy.setText(lat);
@@ -423,5 +458,19 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
 
+    }
+
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
     }
 }

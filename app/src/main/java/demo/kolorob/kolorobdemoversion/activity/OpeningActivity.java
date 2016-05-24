@@ -281,6 +281,7 @@ public class OpeningActivity extends Activity {
                     }
             );
 
+
             getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {

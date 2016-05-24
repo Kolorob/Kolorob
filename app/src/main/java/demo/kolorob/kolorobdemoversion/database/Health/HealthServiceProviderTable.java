@@ -411,6 +411,27 @@ public class HealthServiceProviderTable {
         return subCatList;
     }
 
+    public ArrayList<String> getAllEntertainmentSubCategoriesInfos() {
+        ArrayList<String> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        int cat_id=2;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                String  subCatLists = cursor.getString(cursor.getColumnIndex(KEY_NODE_NAME));
+
+                subCatList.add(subCatLists);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
 
     public ArrayList<HealthServiceProviderItem> getAllHealthSubCategoriesInfo(int cat_id) {
         ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();

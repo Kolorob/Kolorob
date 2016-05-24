@@ -172,7 +172,9 @@ public class DisplayAllJobsActivity extends Activity {
         joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivity.class);
+
+                Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
+                intent.putExtra("position",position);
                 startActivity(intent);
             }
         });

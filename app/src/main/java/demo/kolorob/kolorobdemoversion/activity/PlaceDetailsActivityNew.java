@@ -110,10 +110,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private RelativeLayout wholeLayout;
     private int showList;
     private ImageButton helpicon;
+    private ArrayList<FinancialServiceProviderItem>fetchedfin;
+    private ArrayList<EducationServiceProviderItem>fetchededu;
+    private ArrayList<LegalAidServiceProviderItem>fetchedleg;
+    private ArrayList<EntertainmentServiceProviderItem>fetchedent;
+    private ArrayList<HealthServiceProviderItem>fetchedhel;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
-Activity act;
+    Activity act;
     public int layoutstatus;
     private Boolean list_expand=false;
 
@@ -128,6 +133,7 @@ private Toolbar toolbar,toolbar2;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
+    ArrayList<String> allData= new ArrayList<>();
 private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
 Context context;
@@ -180,8 +186,30 @@ Context context;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
+        HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
+        LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
+        EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
+        FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
+        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
+        fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
+        fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
+        fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
+        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
+
+        // allData contains All data of the Tables
+        allData.addAll(educationServiceProviderTable.getAllEducationSubCategoriesInfos());
+        allData.addAll(entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
+        allData.addAll(healthServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
+        allData.addAll(financialServiceProviderTable.getAllEntertainmentSubCategoriesInfos());
+        allData.addAll(legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfos());
+
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
+
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -1474,7 +1502,7 @@ Context context;
         fragmentTransaction.commit();
 
 
-     
+
     }
 
 
