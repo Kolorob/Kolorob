@@ -197,7 +197,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         final int gpsVersion = getResources().getInteger(com.google.android.gms.R.integer.google_play_services_version);
 
         // Showing status
-        if(status== ConnectionResult.SUCCESS)
+        if(gpsVersion>=8400000)
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
         else{
             Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
