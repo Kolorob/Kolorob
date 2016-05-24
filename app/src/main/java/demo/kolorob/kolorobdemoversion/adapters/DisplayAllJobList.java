@@ -108,6 +108,7 @@ public class DisplayAllJobList extends BaseAdapter
 
         LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) salaryPart.getLayoutParams();
 
+
         params1.width = width/3;
         salaryPart.setLayoutParams(params1);
 

@@ -106,6 +106,7 @@ public class EntertainmentFieldAdapter extends BaseAdapter
         holder.e_cost.setText(result_concate);
 
         result_concate="";
+
 //        holder.p_cost.setText("মাঠের খরচ: "+playground_cost[position]);
 //        holder.remarks.setText("মন্তব্য : " +remark[position]);
 //        holder.e_cost_ffp.setText("ইভেন্ট খরচ : "+event_cost_ffp[position]);
