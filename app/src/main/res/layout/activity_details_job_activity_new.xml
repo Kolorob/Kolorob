@@ -333,42 +333,7 @@
 
                             />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="2dp"
-                            android:paddingBottom="4dp"
-                            android:text="Closing Time: "
-                            android:visibility="visible"
-                            android:id="@+id/closing_time"
 
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="2dp"
-                            android:paddingBottom="4dp"
-                            android:text="Break Time: "
-                            android:visibility="visible"
-                            android:id="@+id/break_time"
-
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="2dp"
-                            android:paddingBottom="4dp"
-                            android:text="Off Day: "
-                            android:visibility="visible"
-                            android:id="@+id/off_day"
-
-                            />
 
 
                         <TextView
@@ -394,17 +359,7 @@
                             android:id="@+id/post_date"
 
                             />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="2dp"
-                            android:paddingBottom="4dp"
-                            android:text="Application Last date "
-                            android:visibility="visible"
-                            android:id="@+id/last_date"
 
-                            />
 
                         <TextView
                             android:layout_width="wrap_content"

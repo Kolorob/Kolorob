@@ -63,7 +63,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         email_text=(TextView)findViewById(R.id.email_text);
         close_button=(ImageView)findViewById(R.id.close_button);
         break_time=(TextView)findViewById(R.id.break_time);
-        off_day=(TextView)findViewById(R.id.off_day);
+       // off_day=(TextView)findViewById(R.id.off_day);
         opening_time=(TextView)findViewById(R.id.opening_time);
 
         job_type=(TextView)findViewById(R.id.job_type);
@@ -72,7 +72,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
        // other_benefits=(TextView)findViewById(R.id.other_benefits);
        // application_medium=(TextView)findViewById(R.id.application_medium);
         application_post_date=(TextView)findViewById(R.id.post_date);
-        application_last_date=(TextView)findViewById(R.id.last_date);
+      //  application_last_date=(TextView)findViewById(R.id.last_date);
         reference_person=(TextView)findViewById(R.id.reference_person);
         //collector_name=(TextView)findViewById(R.id.collector_name);
         salary_range=(TextView)findViewById(R.id.salary_range);
@@ -121,7 +121,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
                 concateBasic("বন্ধের দিন ", jobAdvertisementItem.getOff_day());
 
 
-            job_type.setText(result_concate);
+            opening_time.setText(result_concate);
             result_concate="";
 
             if(!jobAdvertisementItem.getPost_date().equals(""))
@@ -144,7 +144,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
            }
            if(!jobAdvertisementItem.getCollector_name().equals(""))
                concateBasic("সংগ্রহকারীর নাম ",jobAdvertisementItem.getCollector_name());
-            application_post_date.setText(result_concate);
+            reference_person.setText(result_concate);
             result_concate="";
            }
 
