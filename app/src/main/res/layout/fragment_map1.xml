@@ -14,7 +14,12 @@
         android:layout_height="match_parent"
         android:background="@color/red"
         android:padding="3dp" />
-
+    <org.osmdroid.views.MapView
+    android:id="@+id/mapview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:layout_alignParentTop="true" />
     <LinearLayout
         android:id="@+id/ll"
         android:orientation="horizontal"

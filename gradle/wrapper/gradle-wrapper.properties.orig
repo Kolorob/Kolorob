@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+#Sun May 15 15:49:41 BDT 2016
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip
+=======
+#Thu May 12 09:19:48 BDT 2016
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip
+>>>>>>> 4842b2aa9c7495986d8bf9cda713b1ad527d2117
