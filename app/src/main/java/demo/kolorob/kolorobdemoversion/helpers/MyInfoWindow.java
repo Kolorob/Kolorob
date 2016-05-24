@@ -14,7 +14,11 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment_new;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity_new;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
@@ -73,7 +77,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(MyInfoWindow.this.con);
                         nulledu = educationServiceProviderTable.geteduNode2(node);
-                        Intent iient = new Intent(MyInfoWindow.this.con, DetailsInfoActivity.class);
+                        Intent iient = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEducation.class);
                         iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
                         MyInfoWindow.this.con.startActivity(iient);
                         layout.setVisibility(View.GONE);
@@ -83,7 +87,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(MyInfoWindow.this.con);
                         nullhel = healthServiceProviderTable.gethelNode2(node);
-                        Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealth_new.class);
+                        Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
                         iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
                         layout.setVisibility(View.GONE);
@@ -93,7 +97,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(MyInfoWindow.this.con);
                         nullent = entertainmentServiceProviderTable.getentNode2(node);
-                        Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainment_new.class);
+                        Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainmentNew.class);
                         iientt.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
                         MyInfoWindow.this.con.startActivity(iientt);
                         layout.setVisibility(View.GONE);
@@ -113,7 +117,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(MyInfoWindow.this.con);
                         nullfin = financialServiceProviderTable.getfinNode2(node);
-                        Intent iifin = new Intent(MyInfoWindow.this.con, DetailsFinancialActivity_new.class);
+                        Intent iifin = new Intent(MyInfoWindow.this.con, DetailsInfoActivityFinancialNew.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
                         layout.setVisibility(View.GONE);
