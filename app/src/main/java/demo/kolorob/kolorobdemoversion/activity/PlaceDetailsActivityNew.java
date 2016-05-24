@@ -289,11 +289,15 @@ Context context;
 
                 if(list_expand.equals(false))
                 {
+
                     subCatItemList.setVisibility(View.VISIBLE);
+                   // explist.setVisibility(View.VISIBLE);
+
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
                     map.setVisibility(View.GONE);
                     showList=1;
                     list_expand=true;
+
 
                 }
 
@@ -351,7 +355,7 @@ Context context;
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
         llCatListHolder.setVisibility(View.VISIBLE);
         //rlSubCatHolder.setVisibility(View.VISIBLE);
-      explist=(LinearLayout)findViewById(R.id.explist);
+        explist=(LinearLayout)findViewById(R.id.explist);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
@@ -1140,16 +1144,20 @@ Context context;
 
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> eduItem;
-                        if(showList==1)
-                        explist.setVisibility(View.VISIBLE);
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                             }
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
                         ArrayList<HealthServiceProviderItem> healthItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         healthItem = constructHealthListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
@@ -1158,8 +1166,10 @@ Context context;
 
 
                         ArrayList<EntertainmentServiceProviderItem> entItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         entItem = constructEntertainmentListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, entItem);
                         break;
@@ -1181,15 +1191,19 @@ Context context;
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         legalItem = constructlegalaidListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
                         ArrayList<FinancialServiceProviderItem> financialItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
@@ -1313,8 +1327,8 @@ Context context;
     private Animation slideOutFromLeftAnim() {
         Animation outToLeft = new TranslateAnimation(
                 Animation.RELATIVE_TO_PARENT, 0.0f,
-                Animation.RELATIVE_TO_PARENT, +0.95f,
                 Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.95f,
                 Animation.RELATIVE_TO_PARENT, 0.0f);
         outToLeft.setDuration(ANIM_INTERVAL *
                         (int) (200 *
