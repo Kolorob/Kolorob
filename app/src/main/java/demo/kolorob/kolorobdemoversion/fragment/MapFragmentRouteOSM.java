@@ -1,9 +1,11 @@
 package demo.kolorob.kolorobdemoversion.fragment;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
@@ -12,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
@@ -59,15 +65,19 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
  * Created by israt.jahan on 5/5/2016.
 
  */
-public class MapFragmentRouteOSM extends Fragment implements View.OnClickListener, MapEventsReceiver, LocationListener {
+public class MapFragmentRouteOSM extends Fragment implements View.OnClickListener, MapEventsReceiver, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
     Drawable newMarker;
     Marker marker;
     MyLocationNewOverlay mylocation;
     private LinearLayout subcatlistholder;
-    GeoPoint pp;
+    String stlat, stlong;
     int ind = 0;
+    Location mLastLocation;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
     List<String> listData = new ArrayList<String>();
-
+double laat,longg;
     public String getLocationName() {
         return locationName;
     }
@@ -98,6 +108,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
 
     private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
     GeoPoint markerlocation, userlocation;
+    Marker usermarker;
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
@@ -155,6 +166,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         this.healthServiceProvider = et;
     }
 
+    boolean statusofservice = false;
     Location location;
     IMapController mapViewController;
 
@@ -197,9 +209,11 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         final int gpsVersion = getResources().getInteger(com.google.android.gms.R.integer.google_play_services_version);
 
         // Showing status
-        if(gpsVersion>=8400000)
+        if (gpsVersion >= 8400000) {
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
-        else{
+            statusofservice = false;
+            buildGoogleApiClient();
+        } else {
             Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), requestCode);
@@ -223,12 +237,12 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
             locationManager.requestLocationUpdates(provider, 60000, 0.0f, this);
 
 
-            if(location!=null)
+            if (location != null)
                 onLocationChanged(location);
             else
                 Toast.makeText(getActivity(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
             Toast.makeText(getActivity(), "No Provider Found", Toast.LENGTH_SHORT).show();
         }
 
@@ -251,14 +265,12 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         mapView.getOverlays().add(myScaleBarOverlay);
 
 
-
-
-        ImageButton curButton=(ImageButton) rootView.findViewById(R.id.currlocation);
+        ImageButton curButton = (ImageButton) rootView.findViewById(R.id.currlocation);
         curButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                if(location!=null)
+                if (location != null)
                     onLocationChanged(location);
                 mapViewController.animateTo(new GeoPoint(location));
 
@@ -272,62 +284,63 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
 
-        double lat=Double.parseDouble(Latitude);
-        double lon=Double.parseDouble(Longitude);
-         markerlocation=new GeoPoint(lat,lon);
-        Marker centermarker=new Marker(mapView);
+        double lat = Double.parseDouble(Latitude);
+        double lon = Double.parseDouble(Longitude);
+        markerlocation = new GeoPoint(lat, lon);
+        Marker centermarker = new Marker(mapView);
         centermarker.setPosition(markerlocation);
         centermarker.setTitle("Destination");
 
         mapView.getOverlays().add(centermarker);
 
-Drawroute(userlocation,markerlocation);
+        Drawroute(userlocation, markerlocation);
 
         return rootView;
     }
-public void Drawroute(GeoPoint Ulocation,GeoPoint Mlocation)
-{
-    RoadManager roadManager = new OSRMRoadManager(getActivity());
-    ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
-    waypoints.add(userlocation);
-    waypoints.add(markerlocation);
-    Road road = roadManager.getRoad(waypoints);
-    if (road.mStatus != Road.STATUS_OK)
-        Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
 
-    Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
-    roadOverlay.setColor(Color.YELLOW);
-    mapView.getOverlays().add(roadOverlay);
-     havePolyLine=true;
-    if (havePolyLine) {
-        mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
+        RoadManager roadManager = new OSRMRoadManager(getActivity());
+        ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
+        waypoints.add(userlocation);
+        waypoints.add(markerlocation);
+        Road road = roadManager.getRoad(waypoints);
+        if (road.mStatus != Road.STATUS_OK)
+            Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
+
+        Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
+        roadOverlay.setColor(Color.YELLOW);
+        mapView.getOverlays().add(roadOverlay);
+        havePolyLine = true;
+        if (havePolyLine) {
+            mapView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+        //3. Showing the Route steps on the map
+        FolderOverlay roadMarkers = new FolderOverlay(getActivity());
+        mapView.getOverlays().add(roadMarkers);
+        Drawable nodeIcon = getResources().getDrawable(R.drawable.marker_node);
+        for (int ii = 0; ii < road.mNodes.size(); ii++) {
+            RoadNode node = road.mNodes.get(ii);
+            Marker nodeMarker = new Marker(mapView);
+            nodeMarker.setPosition(node.mLocation);
+            nodeMarker.setIcon(nodeIcon);
+
+            //4. Filling the bubbles
+            nodeMarker.setTitle("Step " + ii);
+            nodeMarker.setSnippet(node.mInstructions);
+            nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
+            Drawable iconContinue = getResources().getDrawable(R.drawable.ic_continue);
+            nodeMarker.setImage(iconContinue);
+            //4. end
+
+            roadMarkers.add(nodeMarker);
+            mapView.invalidate();
+        }
+
     }
-    //3. Showing the Route steps on the map
-    FolderOverlay roadMarkers = new FolderOverlay(getActivity());
-    mapView.getOverlays().add(roadMarkers);
-    Drawable nodeIcon = getResources().getDrawable(R.drawable.marker_node);
-    for (int ii = 0; ii < road.mNodes.size(); ii++) {
-        RoadNode node = road.mNodes.get(ii);
-        Marker nodeMarker = new Marker(mapView);
-        nodeMarker.setPosition(node.mLocation);
-        nodeMarker.setIcon(nodeIcon);
 
-        //4. Filling the bubbles
-        nodeMarker.setTitle("Step " + ii);
-        nodeMarker.setSnippet(node.mInstructions);
-        nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
-        Drawable iconContinue = getResources().getDrawable(R.drawable.ic_continue);
-        nodeMarker.setImage(iconContinue);
-        //4. end
-
-        roadMarkers.add(nodeMarker);
-        mapView.invalidate();
-    }
-
-}
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
-       // Toast.makeText(getActivity(), "Tap on (" + p.getLatitude() + "," + p.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getActivity(), "Tap on (" + p.getLatitude() + "," + p.getLongitude() + ")", Toast.LENGTH_SHORT).show();
         InfoWindow.closeAllInfoWindowsOn(mapView);
         return true;
     }
@@ -354,13 +367,27 @@ public void Drawroute(GeoPoint Ulocation,GeoPoint Mlocation)
 
     public void onLocationChanged(Location location) {
         // Getting reference to TextView tv_longitude
-        Toast.makeText(getActivity(), "Tap on (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-        Marker usermarker=new Marker(mapView);
-        double laat=location.getLatitude();
-        double longg=location.getLongitude();
-       userlocation=new GeoPoint(laat,longg);
-        usermarker.setPosition(userlocation);
-        mapView.getOverlays().add(usermarker);
+        if (statusofservice == false) {
+            mapView.getOverlays().remove(usermarker);
+            //Toast.makeText(getActivity(), "Tap on (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+            usermarker = new Marker(mapView);
+          laat = location.getLatitude();
+          longg = location.getLongitude();
+            userlocation = new GeoPoint(laat, longg);
+            usermarker.setPosition(userlocation);
+            mapView.getOverlays().add(usermarker);
+        } else {
+            mapView.getOverlays().remove(usermarker);
+            stlat = String.valueOf(location.getLatitude());
+            stlong = String.valueOf(location.getLongitude());
+            laat = location.getLatitude();
+            longg = location.getLongitude();
+            usermarker = new Marker(mapView);
+            userlocation = new GeoPoint(laat, longg);
+            usermarker.setPosition(userlocation);
+            mapView.getOverlays().add(usermarker);
+            Toast.makeText(getActivity(), "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -375,6 +402,58 @@ public void Drawroute(GeoPoint Ulocation,GeoPoint Mlocation)
 
     @Override
     public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(100); // Update location every second
+
+//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, getActivity());
+
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            stlat = String.valueOf(mLastLocation.getLatitude());
+            stlong = String.valueOf(mLastLocation.getLongitude());
+            double laat = mLastLocation.getLatitude();
+            double longg = mLastLocation.getLongitude();
+
+        }
+         Toast.makeText(getActivity(), "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+    synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
 
     }
 }
