@@ -206,7 +206,6 @@ Context context;
         allData.addAll(legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfos());
 
 
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
 
