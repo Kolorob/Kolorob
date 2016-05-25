@@ -10,6 +10,8 @@
     android:paddingTop="8dp"
     android:text="Test"
     android:textSize="20sp"
-    android:textColor="#f76111"
+    android:textColor="#ffffff"
+    android:background="@drawable/color_box_1"
+
     android:textAlignment="textStart"
     android:textStyle="bold" /> 

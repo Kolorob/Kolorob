@@ -298,7 +298,7 @@ Context context;
                     subCatItemList.setVisibility(View.VISIBLE);
                    // explist.setVisibility(View.VISIBLE);
 
-                    wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
+                    wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
                     map.setVisibility(View.GONE);
                     showList=1;
                     list_expand=true;

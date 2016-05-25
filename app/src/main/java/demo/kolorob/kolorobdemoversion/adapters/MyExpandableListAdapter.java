@@ -6,6 +6,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -278,6 +279,21 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.listrow_groups, null);
         }
         Group group = (Group) getGroup(groupPosition);
+        Log.d(">>>>>>","Group Value "+catid);
+
+        if(catid==1)
+               ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_5);
+        else if(catid==2)
+            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_4);
+        else if(catid==3)
+            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_2);
+        else if(catid==5)
+            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_1);
+        else if(catid==6)
+            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_7);
+
+
+      //
             if(group.string.equals("Govt. Primary School "))
                 ((CheckedTextView) convertView).setText("সরকারী প্রাইমারী স্কুল (Govt. Primary School)");
 
