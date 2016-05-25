@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
@@ -54,6 +56,7 @@ public class Information_UpdateActivity extends Activity {
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     JobServiceProviderItem jobServiceProviderItem;
+private Context con;
 
 
 
@@ -66,6 +69,7 @@ public class Information_UpdateActivity extends Activity {
         name  = (EditText)findViewById(R.id.name_id);
         email = (EditText)findViewById(R.id.email_id);
 
+        con = this;
 
     }
 
@@ -74,58 +78,63 @@ public class Information_UpdateActivity extends Activity {
         final String nametext = name.getText().toString();
         final String emailtext = name.getText().toString();
 
+        if(nametext.length()<3) {
+            AlertMessage.showMessage(con, "Sorry", "Name can not be too small.");
+        }else if(emailtext.length()<12) {
+            AlertMessage.showMessage(con, "Sorry", "Email is not correct.");
+        }
+        else {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
+                            alertDialog.setMessage("Information submitted Successfully");
+                            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertDialog.dismiss();
+                                            finish();
+                                        }
+                                    });
+                            alertDialog.getWindow().setLayout(200, 300);
+                            alertDialog.show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
 
-                        alertDialog.setMessage("Information submitted Successfully");
-                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog.dismiss();
-                                        finish();
-                                    }
-                                });
-                        alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
+                            alertDialog.setMessage("Wrong input!");
+                            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.getWindow().setLayout(200, 300);
+                            alertDialog.show();
+                        }
+                    })
 
-                        alertDialog.setMessage("Wrong input!");
-                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog.dismiss();
-                                    }
-                                });
-                        alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();
-                    }
-                })
+            {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(KEY_USERNAME, nametext);
+                    params.put(KEY_USEREMAIL, emailtext);
 
-        {
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERNAME,nametext);
-                params.put(KEY_USEREMAIL,emailtext);
+                    return params;
+                }
 
-                return params;
-            }
-
-        };
+            };
 
 
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
     }
 
     @Override

@@ -115,6 +115,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             final EducationServiceProviderItem det = groups.get(groupPosition).getchildren().get(childPosition);
             text = (TextView) v.findViewById(R.id.textView1);
             text.setText(det.getEduNameBan());
+
             v.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -279,6 +280,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         Group group = (Group) getGroup(groupPosition);
             if(group.string.equals("Govt. Primary School "))
                 ((CheckedTextView) convertView).setText("সরকারী প্রাইমারী স্কুল (Govt. Primary School)");
+
             else if(group.string.equals("Day Care Centres"))
                  ((CheckedTextView) convertView).setText("ডে কেয়ার সেন্টার(Day Care Centres)");
             else if(group.string.equals("Kindergarten"))
