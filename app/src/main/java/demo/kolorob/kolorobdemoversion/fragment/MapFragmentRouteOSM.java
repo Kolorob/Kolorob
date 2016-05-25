@@ -267,15 +267,9 @@ double roadlength;
                 Toast.makeText(getActivity(), "No Provider Found", Toast.LENGTH_SHORT).show();
             }
         }
+        mapViewController.setZoom(18);
+        mapViewController.setCenter(markerlocation);
 
-        if (locationNameId == 1) {
-
-            mapViewController.setZoom(18);
-            mapViewController.setCenter(AppConstants.BAUNIA1);
-        } else if (locationNameId == 2) {
-            mapViewController.setZoom(17);
-            mapViewController.setCenter(AppConstants.PARIS1);
-        }
 
 
         //---
@@ -308,8 +302,7 @@ double roadlength;
                 }
             }
         });
-        mapViewController.setZoom(18);
-        mapViewController.setCenter(AppConstants.BAUNIA1);
+
 
 
         return rootView;
