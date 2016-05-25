@@ -32,6 +32,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServi
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
@@ -334,15 +335,20 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         } else if (id == R.id.local_representative) {
 
+           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+
         } else if (id == R.id.adv_info) {
+          //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
 
+            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
         } else if (id == R.id.adv) {
-
+            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
         }
 
-        else if (id == R.id.nav_share) {
-
-        }
+//        else if (id == R.id.nav_share) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
