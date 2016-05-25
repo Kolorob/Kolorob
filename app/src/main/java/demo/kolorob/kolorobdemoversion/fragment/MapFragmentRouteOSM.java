@@ -226,7 +226,7 @@ double laat,longg;
         final int gpsVersion = getResources().getInteger(com.google.android.gms.R.integer.google_play_services_version);
 
         // Showing status
-        if (gpsVersion >= 9400000) {
+        if (gpsVersion >= 8400000) {
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
             statusofservice = true;
             buildGoogleApiClient();
