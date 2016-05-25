@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -75,6 +76,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
@@ -158,6 +160,8 @@ Context context;
     private ListActivity listView;
     private ImageButton expandableListShowing;
     private RelativeLayout mapholderr;
+
+    private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
     }
@@ -186,6 +190,8 @@ Context context;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
+
+        con =this;
 
         EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
         HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
@@ -391,8 +397,6 @@ Context context;
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
 
-
-
         // callMapFragment();
         spItems = (Spinner) findViewById(R.id.areaitems);
 
@@ -424,18 +428,74 @@ Context context;
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
-
-
-
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        return false;
+        int id = menuItem.getItemId();
+
+        if (id == R.id.phone_reg) {
+            // Handle the camera action
+            Intent em = new Intent(this, PhoneRegActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else if (id == R.id.info_change) {
+
+            Intent em = new Intent(this, Information_UpdateActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else if (id == R.id.emergency_info) {
+
+            //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, NewEmergency.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        } else if (id == R.id.local_representative) {
+
+            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+
+        } else if (id == R.id.adv_info) {
+            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+
+            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
+        } else if (id == R.id.adv) {
+            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
+        }
+
+//        else if (id == R.id.nav_share) {
+//
+//        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
     }
 
 
+
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//        return false;
+//    }
+//
+//
 
 
     public void helpDialog(View v){

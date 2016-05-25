@@ -311,9 +311,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
                 //TODO Do something with the selected text
             }
 
-
-
-
     @Override
     public void onClick(View view) {
 

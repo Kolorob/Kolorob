@@ -28,7 +28,7 @@
         <menu>
             <item
                 android:id="@+id/emergency_info"
-                android:icon="@drawable/close_button"
+                android:icon="@drawable/emergency_icon"
                 android:title="Emergency Services" />
             <!--<item-->
                 <!--android:id="@+id/nav_share"-->
