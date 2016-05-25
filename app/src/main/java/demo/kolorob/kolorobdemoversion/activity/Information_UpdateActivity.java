@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
@@ -25,6 +36,13 @@ public class Information_UpdateActivity extends Activity {
      * For other categories this components may vary
      * In that case design the layout for specific category and call them in  setContentView(R.layout.activity_details_info);
      * */
+
+    private static final String REGISTER_URL = "http://www.kolorob.net/volley.php";
+
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_USEREMAIL = "email";
+
+
     private TextView itemName;
     private TextView itemAddress;
     private TextView itemType;
@@ -53,10 +71,61 @@ public class Information_UpdateActivity extends Activity {
 
     public void submit(View v){
 
-        String nametext = name.getText().toString();
-        String emailtext = name.getText().toString();
+        final String nametext = name.getText().toString();
+        final String emailtext = name.getText().toString();
 
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
+
+                        alertDialog.setMessage("Information submitted Successfully");
+                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog.dismiss();
+                                        finish();
+                                    }
+                                });
+                        alertDialog.getWindow().setLayout(200, 300);
+                        alertDialog.show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
+
+                        alertDialog.setMessage("Wrong input!");
+                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                        alertDialog.getWindow().setLayout(200, 300);
+                        alertDialog.show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put(KEY_USERNAME,nametext);
+                params.put(KEY_USEREMAIL,emailtext);
+
+                return params;
+            }
+
+        };
+
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     @Override
