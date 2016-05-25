@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
     private LinearLayout subcatlistholder;
     String stlat, stlong;
     int ind = 0;
+    Polyline roadOverlay;
     Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -205,47 +207,62 @@ double laat,longg;
         mapView.setTilesScaledToDpi(true);
 
         mapViewController = mapView.getController();
+        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+
+        double lat = Double.parseDouble(Latitude);
+        double lon = Double.parseDouble(Longitude);
+        markerlocation = new GeoPoint(lat, lon);
+        Marker centermarker = new Marker(mapView);
+        centermarker.setPosition(markerlocation);
+        centermarker.setTitle("Destination");
+
+        mapView.getOverlays().add(centermarker);
+
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
         final int gpsVersion = getResources().getInteger(com.google.android.gms.R.integer.google_play_services_version);
 
         // Showing status
-        if (gpsVersion >= 8400000) {
+        if (gpsVersion >= 9400000) {
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
-            statusofservice = false;
+            statusofservice = true;
             buildGoogleApiClient();
         } else {
             Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), requestCode);
-            dialog.show();
+            dialog.show();//dialog needs to be modified more of an alert dialog
+            locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+            // Creating an empty criteria object
+            Criteria criteria = new Criteria();
+
+            // Getting the name of the provider that meets the criteria
+            provider = locationManager.getBestProvider(criteria, false);
+
+
+            if (provider != null && !provider.equals("")) {
+
+                // Get the location from the given provider
+                location = locationManager.getLastKnownLocation(provider);
+
+
+                locationManager.requestLocationUpdates(provider, 60000, 0.0f, this);
+
+
+                if (location != null) {
+                    onLocationChanged(location);
+                    Drawroute(userlocation, markerlocation);
+                } else
+                    Toast.makeText(getActivity(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(getActivity(), "No Provider Found", Toast.LENGTH_SHORT).show();
+            }
         }
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        // Creating an empty criteria object
-        Criteria criteria = new Criteria();
-
-        // Getting the name of the provider that meets the criteria
-        provider = locationManager.getBestProvider(criteria, false);
-
-
-        if (provider != null && !provider.equals("")) {
-
-            // Get the location from the given provider
-            location = locationManager.getLastKnownLocation(provider);
-
-
-            locationManager.requestLocationUpdates(provider, 60000, 0.0f, this);
-
-
-            if (location != null)
-                onLocationChanged(location);
-            else
-                Toast.makeText(getActivity(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(getActivity(), "No Provider Found", Toast.LENGTH_SHORT).show();
-        }
-
 
         if (locationNameId == 1) {
 
@@ -270,35 +287,32 @@ double laat,longg;
 
             @Override
             public void onClick(View view) {
-                if (location != null)
-                    onLocationChanged(location);
-                mapViewController.animateTo(new GeoPoint(location));
+                if (mLastLocation != null|| location!=null) {
+                    Location setloc;
+                    if (mLastLocation!=null) {
+                        setloc=mLastLocation;
+                        onLocationChanged(mLastLocation);
 
+
+
+                    }
+                    else {
+                        setloc=location;
+                        onLocationChanged(location);}
+                    Drawroute(userlocation, markerlocation);
+                    mapViewController.animateTo(new GeoPoint(setloc));
+                }
             }
         });
         mapViewController.setZoom(18);
         mapViewController.setCenter(AppConstants.BAUNIA1);
-        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
 
-        String Latitude = pref.getString("Latitude", null);
-        String Longitude = pref.getString("Longitude", null);
-
-        double lat = Double.parseDouble(Latitude);
-        double lon = Double.parseDouble(Longitude);
-        markerlocation = new GeoPoint(lat, lon);
-        Marker centermarker = new Marker(mapView);
-        centermarker.setPosition(markerlocation);
-        centermarker.setTitle("Destination");
-
-        mapView.getOverlays().add(centermarker);
-
-        Drawroute(userlocation, markerlocation);
 
         return rootView;
     }
 
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
+        mapView.getOverlays().remove(roadOverlay);
         RoadManager roadManager = new OSRMRoadManager(getActivity());
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
         waypoints.add(userlocation);
@@ -307,7 +321,7 @@ double laat,longg;
         if (road.mStatus != Road.STATUS_OK)
             Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
 
-        Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
+        roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
         roadOverlay.setColor(Color.YELLOW);
         mapView.getOverlays().add(roadOverlay);
         havePolyLine = true;
@@ -369,7 +383,7 @@ double laat,longg;
         // Getting reference to TextView tv_longitude
         if (statusofservice == false) {
             mapView.getOverlays().remove(usermarker);
-            //Toast.makeText(getActivity(), "Tap on (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
             usermarker = new Marker(mapView);
           laat = location.getLatitude();
           longg = location.getLongitude();
@@ -388,6 +402,7 @@ double laat,longg;
             mapView.getOverlays().add(usermarker);
             Toast.makeText(getActivity(), "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
@@ -431,6 +446,11 @@ double laat,longg;
             stlong = String.valueOf(mLastLocation.getLongitude());
             double laat = mLastLocation.getLatitude();
             double longg = mLastLocation.getLongitude();
+            userlocation=new GeoPoint(laat,longg);
+            usermarker=new Marker(mapView);
+            usermarker.setPosition(userlocation);
+            mapView.getOverlays().add(usermarker);
+            Drawroute(userlocation, markerlocation);
 
         }
          Toast.makeText(getActivity(), "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
@@ -453,6 +473,25 @@ double laat,longg;
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("s", "onStart fired ..............");
+        if(statusofservice==true)
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        if(statusofservice==true) {
+            mGoogleApiClient.disconnect();
+            Log.d("s", "isConnected ...............: " + mGoogleApiClient.isConnected());
+        }
+        super.onStop();
+        Log.d("s", "onStop fired ..............");
 
 
     }
