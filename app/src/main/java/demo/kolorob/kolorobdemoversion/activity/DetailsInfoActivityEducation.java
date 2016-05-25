@@ -2,8 +2,11 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.Uri;
@@ -38,6 +41,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class DetailsInfoActivityEducation extends Activity {
     Dialog dialog;
@@ -56,7 +60,7 @@ public class DetailsInfoActivityEducation extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button,phone_mid;
+    private ImageView close_button,phone_mid,distance_left;
 
 
     @Override
@@ -105,11 +109,9 @@ public class DetailsInfoActivityEducation extends Activity {
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         close_button=(ImageView)findViewById(R.id.close_button);
         phone_mid=(ImageView)findViewById(R.id.phone_middl);
-
-
-
         phone_text.setText(educationServiceProviderItem.getContactNo());
         email_text.setText(educationServiceProviderItem.getEmailAddress());
+        distance_left=(ImageView)findViewById(R.id.distance_left);
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -447,6 +449,65 @@ public class DetailsInfoActivityEducation extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+
+
+                    String lat = educationServiceProviderItem.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = educationServiceProviderItem.getLongitude().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    String name= educationServiceProviderItem.getEduNameBan().toString();
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Latitude", null);
+                    String Latitude = pref.getString("Longitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        // implementFragment();
+                        //username and password are present, do your stuff
+                    }
+
+
+                    finish();
+
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityEducation.this);
+
+                }
+
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
             }
         });
 

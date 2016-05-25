@@ -65,7 +65,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button;
+    private ImageView close_button,distance_btn;
 
 
     @Override
@@ -104,6 +104,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         phone_text=(TextView)findViewById(R.id.phone_text);
         email_text=(TextView)findViewById(R.id.email_text);
         close_button=(ImageView)findViewById(R.id.close_button);
+        distance_btn=(ImageView)findViewById(R.id.distance_left);
 
 
 
