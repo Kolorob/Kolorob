@@ -22,6 +22,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -72,7 +74,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
     Marker marker;
     MyLocationNewOverlay mylocation;
     private LinearLayout subcatlistholder;
-    String stlat, stlong;
+    String stlat, stlong,centername;
     int ind = 0;
     Polyline roadOverlay;
     Location mLastLocation;
@@ -92,7 +94,7 @@ double laat,longg;
     private int locationNameId;
     private static double VIEW_WIDTH;
     private int primaryIconWidth;
-
+double roadlength;
     public int getLocationNameId() {
         return locationNameId;
     }
@@ -178,6 +180,7 @@ double laat,longg;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         LayoutInflater li = LayoutInflater.from(getActivity());
+
         double latDouble, longDouble;
         int i = 0;
 
@@ -212,7 +215,8 @@ double laat,longg;
 
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
-
+         centername = pref.getString("Name", null);
+        locationNameId = pref.getInt("LocationNameId", 0);
         double lat = Double.parseDouble(Latitude);
         double lon = Double.parseDouble(Longitude);
         markerlocation = new GeoPoint(lat, lon);
@@ -310,7 +314,30 @@ double laat,longg;
 
         return rootView;
     }
-
+public void calltransportlayout()
+{
+    RelativeLayout trlayout,headlayout;
+    TextView disttext,Bustext,Ricksawtext,Cngtext,Walkingtext,headtext;
+    trlayout=(RelativeLayout)rootView.findViewById(R.id.transportdetailslayout);
+    trlayout.setVisibility(View.VISIBLE);
+    headlayout=(RelativeLayout)rootView.findViewById(R.id.headerlayout);
+    headlayout.setVisibility(View.VISIBLE);
+    headtext=(TextView)rootView.findViewById(R.id.headtext);
+    headtext.setText(centername);
+    String distance= String.format("%.2f", roadlength);
+    disttext=(TextView)rootView.findViewById(R.id.distancetext);
+    Cngtext=(TextView)rootView.findViewById(R.id.cngtext);
+    Bustext=(TextView)rootView.findViewById(R.id.bustext);
+    Ricksawtext=(TextView)rootView.findViewById(R.id.ricksawtext);
+    Walkingtext=(TextView)rootView.findViewById(R.id.walkingtext);
+    disttext.setText(getString(R.string.distance) +": " +distance );
+    double Busfare=roadlength*1.55;
+            if (Busfare <=7.00)Bustext.setText( "7 " + "Taka ");
+    else {
+                String Bfare=String.format("%.2f", Busfare);
+                Bustext.setText(Bfare + " Taka ");
+            }
+}
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
         mapView.getOverlays().remove(roadOverlay);
         RoadManager roadManager = new OSRMRoadManager(getActivity());
@@ -323,6 +350,7 @@ double laat,longg;
 
         roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
         roadOverlay.setColor(Color.YELLOW);
+        roadlength=road.mLength;
         mapView.getOverlays().add(roadOverlay);
         havePolyLine = true;
         if (havePolyLine) {
@@ -349,7 +377,7 @@ double laat,longg;
             roadMarkers.add(nodeMarker);
             mapView.invalidate();
         }
-
+        calltransportlayout();
     }
 
     @Override
@@ -486,14 +514,15 @@ double laat,longg;
 
     @Override
     public void onStop() {
+
         if(statusofservice==true) {
             mGoogleApiClient.disconnect();
             Log.d("s", "isConnected ...............: " + mGoogleApiClient.isConnected());
         }
+
+
         super.onStop();
         Log.d("s", "onStop fired ..............");
-
-
     }
 }
 
