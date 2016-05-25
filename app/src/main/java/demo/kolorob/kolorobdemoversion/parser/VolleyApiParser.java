@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.parser;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -37,6 +38,7 @@ public class VolleyApiParser {
     private static final String TAG = VolleyApiParser.class.getSimpleName();
     private static final String VOLLEY_TAG = "Background_API_Request";
     public Activity activity;
+    public static String FinalUrl;
 
 
     public static void postRequest(final Context ctx, final int reqCode,
@@ -168,9 +170,24 @@ public class VolleyApiParser {
     }
 
 
+        Character c=apiUrl.charAt(0);
+
+         if(c.equals('h'))
+         {
+             FinalUrl=apiUrl;
+         }
+        else
+             FinalUrl=apiUrl+AppConstants.API_URL;
+
+        Log.d(">>>","FinalUrl"+FinalUrl);
+        Log.d(">>>","apiUrl "+apiUrl);
+
+
+
+
         StringRequest strReq = new StringRequest(
                 Request.Method.GET,
-                AppConstants.API_URL + apiUrl,
+                FinalUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

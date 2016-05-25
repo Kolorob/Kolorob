@@ -41,8 +41,11 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServi
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+<<<<<<< HEAD
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+=======
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+>>>>>>> 09641fdfa825a3616ce8070cf953cce5398bd97a
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
