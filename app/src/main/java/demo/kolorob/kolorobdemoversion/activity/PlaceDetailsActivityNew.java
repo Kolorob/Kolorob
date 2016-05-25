@@ -321,6 +321,8 @@ Context context;
       //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+        llCatListHolder.setVisibility(View.VISIBLE);
+        //rlSubCatHolder.setVisibility(View.VISIBLE);
       explist=(LinearLayout)findViewById(R.id.explist);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
@@ -1513,6 +1515,8 @@ Context context;
 
     public void implementRouteDrawingFragmentOSM()
     {
+        llCatListHolder.setVisibility(View.GONE);
+        llSubCatListHolder.setVisibility(View.GONE);
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
