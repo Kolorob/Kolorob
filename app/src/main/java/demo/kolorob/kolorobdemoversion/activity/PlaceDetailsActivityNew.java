@@ -110,10 +110,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private RelativeLayout wholeLayout;
     private int showList;
     private ImageButton helpicon;
+    private ArrayList<FinancialServiceProviderItem>fetchedfin;
+    private ArrayList<EducationServiceProviderItem>fetchededu;
+    private ArrayList<LegalAidServiceProviderItem>fetchedleg;
+    private ArrayList<EntertainmentServiceProviderItem>fetchedent;
+    private ArrayList<HealthServiceProviderItem>fetchedhel;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
-Activity act;
+    Activity act;
     public int layoutstatus;
     private Boolean list_expand=false;
 
@@ -128,6 +133,7 @@ private Toolbar toolbar,toolbar2;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
+    ArrayList<String> allData= new ArrayList<>();
 private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
 Context context;
@@ -180,8 +186,29 @@ Context context;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
+        HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
+        LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
+        EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
+        FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
+        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
+        fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
+        fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
+        fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
+        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
+
+        // allData contains All data of the Tables
+        allData.addAll(educationServiceProviderTable.getAllEducationSubCategoriesInfos());
+        allData.addAll(entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
+        allData.addAll(healthServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
+        allData.addAll(financialServiceProviderTable.getAllEntertainmentSubCategoriesInfos());
+        allData.addAll(legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfos());
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
+
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -261,11 +288,15 @@ Context context;
 
                 if(list_expand.equals(false))
                 {
+
                     subCatItemList.setVisibility(View.VISIBLE);
+                   // explist.setVisibility(View.VISIBLE);
+
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
                     map.setVisibility(View.GONE);
                     showList=1;
                     list_expand=true;
+
 
                 }
 
@@ -323,7 +354,7 @@ Context context;
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
         llCatListHolder.setVisibility(View.VISIBLE);
         //rlSubCatHolder.setVisibility(View.VISIBLE);
-      explist=(LinearLayout)findViewById(R.id.explist);
+        explist=(LinearLayout)findViewById(R.id.explist);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
@@ -1112,16 +1143,20 @@ Context context;
 
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> eduItem;
-                        if(showList==1)
-                        explist.setVisibility(View.VISIBLE);
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                             }
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
                         ArrayList<HealthServiceProviderItem> healthItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         healthItem = constructHealthListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
@@ -1130,8 +1165,10 @@ Context context;
 
 
                         ArrayList<EntertainmentServiceProviderItem> entItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         entItem = constructEntertainmentListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, entItem);
                         break;
@@ -1153,15 +1190,19 @@ Context context;
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         legalItem = constructlegalaidListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
                         ArrayList<FinancialServiceProviderItem> financialItem;
-                        if(showList==1)
+                        if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                        }
                         financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
@@ -1285,8 +1326,8 @@ Context context;
     private Animation slideOutFromLeftAnim() {
         Animation outToLeft = new TranslateAnimation(
                 Animation.RELATIVE_TO_PARENT, 0.0f,
-                Animation.RELATIVE_TO_PARENT, +0.95f,
                 Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.95f,
                 Animation.RELATIVE_TO_PARENT, 0.0f);
         outToLeft.setDuration(ANIM_INTERVAL *
                         (int) (200 *
@@ -1474,7 +1515,7 @@ Context context;
         fragmentTransaction.commit();
 
 
-     
+
     }
 
 

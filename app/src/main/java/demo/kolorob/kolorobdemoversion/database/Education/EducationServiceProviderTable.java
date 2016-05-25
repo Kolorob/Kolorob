@@ -389,6 +389,27 @@ public class EducationServiceProviderTable  {
         return subCatList;
     }
 
+    public ArrayList<String> getAllEducationSubCategoriesInfos() {
+        ArrayList<String> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        int cat_id=1;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                String  subCatLists = cursor.getString(cursor.getColumnIndex(KEY_EDU_NAME_ENG));
+
+                subCatList.add(subCatLists);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
 
     public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id,int sub_cat_id) {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();

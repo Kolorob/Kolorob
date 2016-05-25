@@ -153,6 +153,7 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
+    ArrayList<String> allData= new ArrayList<>();
     ArrayList<String> countries=new ArrayList<String>();
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
 
