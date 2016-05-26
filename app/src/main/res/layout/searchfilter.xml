@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backdrop"
+    android:orientation="vertical">
 
-    <GridView
-        android:id="@+id/grid"
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:verticalSpacing="35dp"
-        android:horizontalSpacing="5dp"
-        android:numColumns="auto_fit"
-        android:columnWidth="100dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"/>
-</RelativeLayout>
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"></LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:id="@+id/allitem"
+        android:layout_gravity="center_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+       ></RelativeLayout>
+
+
+</LinearLayout>

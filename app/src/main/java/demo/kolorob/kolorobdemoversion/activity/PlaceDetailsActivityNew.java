@@ -327,14 +327,7 @@ Context context;
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
         //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
-
-
         ///this code will change the background of the layout for two places.
-
-
-
-
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
@@ -1143,9 +1136,9 @@ Context context;
         LayoutInflater li = LayoutInflater.from(this);
 
         if(height>1000)
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item, llSubCatListHolder, false);
         else
-            v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item1, llSubCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
