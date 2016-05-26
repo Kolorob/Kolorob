@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
@@ -325,7 +323,10 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
                 gotoPlaceDetailsView(AppConstants.PLACE_PARIS_ROAD);
                 break;
-
+            case R.id.searchall:
+                Intent i=new Intent(this,SearchActivity.class);
+                startActivity(i);
+                finish();
 
             default:
                 break;

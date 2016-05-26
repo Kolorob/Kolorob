@@ -15,7 +15,7 @@ import demo.kolorob.kolorobdemoversion.adapters.TextViewAdapter;
 /**
  * Created by HP on 5/25/2016.
  */
-public class SearchGrid extends Activity {
+public class SearchActivity extends Activity {
 
     GridView gridView;
 
