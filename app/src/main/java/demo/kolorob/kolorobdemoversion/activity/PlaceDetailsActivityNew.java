@@ -193,23 +193,6 @@ EditText Searchall;
 
         con =this;
 
-        EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
-        HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
-        LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
-        FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
-        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
-        fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
-        fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
-        fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
-        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
-
-        // allData contains All data of the Tables
-        allData.addAll(educationServiceProviderTable.getAllEducationSubCategoriesInfos());
-        allData.addAll(entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
-        allData.addAll(healthServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
-        allData.addAll(financialServiceProviderTable.getAllEntertainmentSubCategoriesInfos());
-        allData.addAll(legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfos());
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
