@@ -179,7 +179,7 @@ Context context;
     public void setPlaceChoice(String placeChoice) {
         this.placeChoice = placeChoice;
     }
-
+EditText Searchall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -214,7 +214,18 @@ Context context;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
+        Searchall=(EditText)findViewById(R.id.searchall);
+        Searchall.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
+
+                Intent i=new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(i);
+
+                return false;
+            }
+        });
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
