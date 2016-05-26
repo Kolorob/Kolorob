@@ -257,15 +257,65 @@ Searchall=(EditText)findViewById(R.id.searchall);
         builder.setSmallIcon(R.drawable.kolorob_logo_first_page);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(true);
-        builder.setSubText("Click here to update");   //API level 16
+      //  builder.setSubText("Click here to update");   //API level 16
         builder.setNumber(100);
-        builder.build();
+     //   builder.build();
+
+         builder.setContentTitle("Update kolorob").setContentText("New Version of Kolorob is Available")
+                .setSmallIcon(R.drawable.kolorob_logo_first_page).getNotification();
 
         myNotication = builder.getNotification();
         manager.notify(11, myNotication);
     }
 
 
+    public void search()
+    {
+        final EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceChoiceActivity2.this);
+        final EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceChoiceActivity2.this);
+        final HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceChoiceActivity2.this);
+        final FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceChoiceActivity2.this);
+        final LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceChoiceActivity2.this);
+        vector=educationServiceProviderTable.getAllEducationSubCategoriesInfo();
+        vectorEnt=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        vectorHel=healthServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        vectorFin=financialServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        vectorLeg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo();
+
+        compare.removeAllElements();
+
+        vectorEdu.addAll(vectorEnt);
+        vectorEdu.addAll(vector);
+        vectorEdu.addAll(vectorHel);
+        vectorEdu.addAll(vectorFin);
+        vectorEdu.addAll(vectorLeg);
+
+
+        autocompletetextview2 = (AutoCompleteTextView)
+                findViewById(R.id.autoCompleteTextView1x);
+
+
+
+        ArrayAdapter<String> adapter2;
+
+
+        adapter2 = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, vectorEdu);
+
+
+        autocompletetextview2.setThreshold(2);
+
+
+        autocompletetextview2.setAdapter(adapter2);
+
+
+//
+//                Intent ii = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
+//                ii.putExtra(AppConstants.KEY_DETAILS_VIEW, SearchedEducation);
+//                startActivity(ii);
+
+                //TODO Do something with the selected text
+            }
 
     @Override
     public void onClick(View view) {
