@@ -17,6 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:id="@+id/allitem"
+        android:maxHeight="80dp"
+        android:minHeight="80dp"
+        android:background="@color/white"
         android:layout_gravity="center_horizontal" />
 
     <RelativeLayout

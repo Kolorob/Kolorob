@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBar;
@@ -170,7 +171,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         adapter = new ListViewAdapterAllCategories(this, allHolders);
 
         allitemList.setAdapter(adapter);
-
+        int[] colors = {0, 0xFFFF0000, 0}; // red for the example
+        allitemList.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
+        allitemList.setDividerHeight(1);
 
         filterText.addTextChangedListener(new TextWatcher() {
 
