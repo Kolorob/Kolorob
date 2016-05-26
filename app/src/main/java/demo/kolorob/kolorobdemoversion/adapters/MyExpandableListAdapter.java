@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 
 /**
  * Created by israt.jahan on 1/17/16.
+ * Modified by Arafat
  */
 import android.app.Activity;
 import android.content.Context;

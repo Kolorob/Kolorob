@@ -171,8 +171,9 @@ public class VolleyApiParser {
 
 
         Character c=apiUrl.charAt(0);
+        Character c1= apiUrl.charAt(1);
 
-         if(c.equals('h'))
+         if(c.equals('h')&&(c1.equals('t')))
          {
              FinalUrl=apiUrl;
          }

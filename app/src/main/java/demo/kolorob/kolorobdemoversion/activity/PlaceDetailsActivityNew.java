@@ -250,7 +250,7 @@ Context context;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Log.d(">>>>","test_dpi "+dpi);
+      //  Log.d(">>>>","test_dpi "+dpi);
        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
@@ -387,7 +387,7 @@ Context context;
 
 
 
-        Log.d(">>>>>>>>","View_width       "+s);
+        //Log.d(">>>>>>>>","View_width       "+s);
         /**
          * constructing category list
          **/
@@ -550,8 +550,8 @@ Context context;
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
 
-                    Log.d(">>>>", "printnames"+printnames);
-                    Log.d(">>>>", "currentCategoryID "+currentCategoryID);
+                    Log.d(">>>>", "printnames "+printnames);
+                    Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
                     Log.d(">>>>", "head "+head);
                     Log.d(">>>>", "print.get(j) "+print.get(j));
                     Log.d(">>>>", "placeChoice "+placeChoice);
@@ -1083,9 +1083,9 @@ Context context;
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
-        Log.d("cat_id",">>>" +cat_id);
-        Log.d("header",">>>" +header);
-        Log.d("placeChoice",">>>" +cat_id);
+   //     Log.d("cat_id",">>>" +cat_id);
+     //   Log.d("header",">>>" +header);
+      //  Log.d("placeChoice",">>>" +cat_id);
         createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
