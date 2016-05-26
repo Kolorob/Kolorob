@@ -250,9 +250,12 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         builder.setSmallIcon(R.drawable.kolorob_logo_first_page);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(true);
-        builder.setSubText("Click here to update");   //API level 16
+      //  builder.setSubText("Click here to update");   //API level 16
         builder.setNumber(100);
-        builder.build();
+     //   builder.build();
+
+         builder.setContentTitle("Update kolorob").setContentText("New Version of Kolorob is Available")
+                .setSmallIcon(R.drawable.kolorob_logo_first_page).getNotification();
 
         myNotication = builder.getNotification();
         manager.notify(11, myNotication);
@@ -279,8 +282,6 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         vectorEdu.addAll(vectorHel);
         vectorEdu.addAll(vectorFin);
         vectorEdu.addAll(vectorLeg);
-
-
 
 
         autocompletetextview2 = (AutoCompleteTextView)
