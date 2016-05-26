@@ -2,7 +2,6 @@ package demo.kolorob.kolorobdemoversion.parser;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -17,10 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
-import demo.kolorob.kolorobdemoversion.activity.PlaceChoiceActivity;
-import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
-import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.http.VolleySingleton;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
@@ -177,7 +172,7 @@ public class VolleyApiParser {
              FinalUrl=apiUrl;
          }
         else
-             FinalUrl=apiUrl+AppConstants.API_URL;
+             FinalUrl= AppConstants.API_URL + apiUrl ;
 
         Log.d(">>>","FinalUrl"+FinalUrl);
         Log.d(">>>","apiUrl "+apiUrl);

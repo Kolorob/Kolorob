@@ -31,8 +31,8 @@
             android:focusableInTouchMode="true"
             android:layout_height="wrap_content">
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView1x"
+            <EditText
+                android:id="@+id/searchall"
                 android:layout_width="0dp"
                 android:layout_weight="0.87"
                 android:layout_marginLeft="5dp"
