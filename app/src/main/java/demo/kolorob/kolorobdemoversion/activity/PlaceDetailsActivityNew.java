@@ -288,7 +288,7 @@ EditText Searchall;
 
                 if(list_expand.equals(false))
                 {
-
+                    llSubCatListHolder.setVisibility(View.GONE);
                     subCatItemList.setVisibility(View.VISIBLE);
                    // explist.setVisibility(View.VISIBLE);
 
@@ -302,6 +302,7 @@ EditText Searchall;
 
                 else
                 {
+                    llSubCatListHolder.setVisibility(View.VISIBLE);
                     showList=0;
                     map.setVisibility(View.VISIBLE);
                     list_expand=false;
@@ -359,7 +360,7 @@ EditText Searchall;
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
-        expnlist.setMargins(s,90,s,0);
+        expnlist.setMargins(s,90,0,0);
 
 
 
@@ -762,7 +763,7 @@ EditText Searchall;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
                         explist.setVisibility(View.GONE);
-                        showList=0;
+                        showList=1;
                         toolbar.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -773,6 +774,7 @@ EditText Searchall;
                         listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab2 = getSupportActionBar();
+
                         ab2.setHomeAsUpIndicator(R.drawable.menu_icon);
                         ab2.setDisplayHomeAsUpEnabled(true);
                         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -799,6 +801,7 @@ EditText Searchall;
                         mapholderr.startAnimation(slideInFromRightAnim());
 
                         ab2.openOptionsMenu();
+                        createData(currentCategoryID,"",placeChoice);
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
