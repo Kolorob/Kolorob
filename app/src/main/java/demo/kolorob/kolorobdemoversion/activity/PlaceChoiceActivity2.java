@@ -1,9 +1,14 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -17,28 +22,30 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
-    AutoCompleteTextView autocompletetextview2;
+
     LinearLayout first,second,third,menubar,SearchBar,SearchIcon,imgbau,imgpar;
     int width,height;
+    EditText Searchall;
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
     Vector vector= new Vector();
     Vector compare= new Vector();
@@ -47,6 +54,9 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     Vector vectorEdu= new Vector();
     Vector vectorFin= new Vector();
     Vector vectorLeg= new Vector();
+    String app_ver;
+    NotificationManager manager;
+    Notification myNotication;
 
     private Context con;
     @Override
@@ -56,14 +66,30 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
 
         con = this;
-
+        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels-32;
         width=displayMetrics.widthPixels-32;
 
         Log.d("...>>>","Layout width"+width);
 
-        first=(LinearLayout)findViewById(R.id.top_section);
+        try
+        {
+            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+        }
+
+
+        catch (PackageManager.NameNotFoundException e) {
+           // Log.e(tag, e.getMessage());
+
+        }
+
+        Log.d(">>>","Application Version: "+app_ver);
+
+
+        checkVersion(Double.parseDouble(app_ver));
+
+            first=(LinearLayout)findViewById(R.id.top_section);
         second= (LinearLayout)findViewById(R.id.bauniabad_section);
         third = (LinearLayout)findViewById(R.id.parisRoad_section);
        // menubar=(LinearLayout)findViewById(R.id.menuBar);
@@ -88,6 +114,10 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         params3.height = height/5;
         params3.width = width;
         third.setLayoutParams(params3);
+
+
+
+
 
 //        LinearLayout.LayoutParams paramsMenue = (LinearLayout.LayoutParams) menubar.getLayoutParams();
 //        paramsMenue.height = height/16;
@@ -114,13 +144,24 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         paramsBau.width = (width*2)/3;
         imgbau.setLayoutParams(paramsBau);
 
+Searchall=(EditText)findViewById(R.id.searchall);
+        Searchall.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
+
+                Intent i=new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(i);
+
+                return false;
+            }
+        });
         LinearLayout.LayoutParams paramsPar = (LinearLayout.LayoutParams) imgpar.getLayoutParams();
 
         paramsPar.width = (width*2)/3;
         imgpar.setLayoutParams(paramsPar);
 
-
+        Searchall.setOnClickListener((View.OnClickListener) this);
         imgbau.setOnClickListener((View.OnClickListener) this);
         imgpar.setOnClickListener((View.OnClickListener) this);
 
@@ -166,58 +207,66 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     }
 
 
-
-    public void search()
+   public void checkVersion(final double current_version)
     {
-        final EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceChoiceActivity2.this);
-        final EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceChoiceActivity2.this);
-        final HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceChoiceActivity2.this);
-        final FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceChoiceActivity2.this);
-        final LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceChoiceActivity2.this);
-        vector=educationServiceProviderTable.getAllEducationSubCategoriesInfo();
-        vectorEnt=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
-        vectorHel=healthServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
-        vectorFin=financialServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
-        vectorLeg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo();
+        getRequest(PlaceChoiceActivity2.this, "http://kolorob.net/app_version.json", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+                        Log.d(">>>","Start Json Parsing "+apiContent);
+                            try {
+                                JSONObject jo = new JSONObject(apiContent);
+                                Log.d(">>>","JsonObject: "+jo);
+                                Double remote_version = jo.getDouble("version");
 
-        compare.removeAllElements();
+                                if(remote_version>current_version)
+                                {
+                                    Toast.makeText(PlaceChoiceActivity2.this, "You must update the App =)",
+                                            Toast.LENGTH_LONG).show();
+                                    generateNotification();
+                                }
 
-        vectorEdu.addAll(vectorEnt);
-        vectorEdu.addAll(vector);
-        vectorEdu.addAll(vectorHel);
-        vectorEdu.addAll(vectorFin);
-        vectorEdu.addAll(vectorLeg);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-
-
-
-        autocompletetextview2 = (AutoCompleteTextView)
-                findViewById(R.id.autoCompleteTextView1x);
-
-
-
-        ArrayAdapter<String> adapter2;
+                    }
+                }
+        );
+    }
 
 
-        adapter2 = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, vectorEdu);
 
+    public void generateNotification()
+    {
+        String url = "https://play.google.com/store/apps/details?id=demo.kolorob.kolorobdemoversion&hl=en";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        // i.setData(Uri.parse("package:demo.kolorob.kolorobdemoversion"));
 
-        autocompletetextview2.setThreshold(2);
+        //Intent intent = new Intent(this,NotificationView.class);
 
+        manager.cancel(11);
+        PendingIntent pendingIntent = PendingIntent.getActivity(PlaceChoiceActivity2.this, 0, i, 0);
 
-        autocompletetextview2.setAdapter(adapter2);
+        Notification.Builder builder = new Notification.Builder(PlaceChoiceActivity2.this);
 
+        builder.setAutoCancel(false);
+        builder.setTicker("New Version of Kolorob is Available");
+        builder.setContentTitle("Update kolorob");
+      //  builder.setContentText("To update click here.");
+        builder.setSmallIcon(R.drawable.kolorob_logo_first_page);
+        builder.setContentIntent(pendingIntent);
+        builder.setOngoing(true);
+      //  builder.setSubText("Click here to update");   //API level 16
+        builder.setNumber(100);
+     //   builder.build();
 
-//
-//                Intent ii = new Intent(PlaceDetailsActivity.this, DetailsInfoActivity.class);
-//                ii.putExtra(AppConstants.KEY_DETAILS_VIEW, SearchedEducation);
-//                startActivity(ii);
+         builder.setContentTitle("Update kolorob").setContentText("New Version of Kolorob is Available")
+                .setSmallIcon(R.drawable.kolorob_logo_first_page).getNotification();
 
-                //TODO Do something with the selected text
-            }
-
-
+        myNotication = builder.getNotification();
+        manager.notify(11, myNotication);
+    }
 
 
     @Override
@@ -234,6 +283,9 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
 
                 gotoPlaceDetailsView(AppConstants.PLACE_PARIS_ROAD);
                 break;
+            case R.id.searchall:
+                Intent i=new Intent(this,SearchActivity.class);
+                startActivity(i);
 
 
             default:
@@ -334,15 +386,20 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         } else if (id == R.id.local_representative) {
 
+           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+
         } else if (id == R.id.adv_info) {
+          //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
 
+            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
         } else if (id == R.id.adv) {
-
+            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
         }
 
-        else if (id == R.id.nav_share) {
-
-        }
+//        else if (id == R.id.nav_share) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

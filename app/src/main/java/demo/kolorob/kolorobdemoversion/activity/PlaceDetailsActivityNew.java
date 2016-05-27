@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -75,6 +76,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
@@ -158,6 +160,8 @@ Context context;
     private ListActivity listView;
     private ImageButton expandableListShowing;
     private RelativeLayout mapholderr;
+
+    private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
     }
@@ -175,7 +179,7 @@ Context context;
     public void setPlaceChoice(String placeChoice) {
         this.placeChoice = placeChoice;
     }
-
+EditText Searchall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -187,29 +191,24 @@ Context context;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
 
-        EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNew.this);
-        HealthServiceProviderTable healthServiceProviderTable1=new HealthServiceProviderTable(PlaceDetailsActivityNew.this);
-        LegalAidServiceProviderTable legalAidServiceProviderTable1=new LegalAidServiceProviderTable(PlaceDetailsActivityNew.this);
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable1=new EntertainmentServiceProviderTable(PlaceDetailsActivityNew.this);
-        FinancialServiceProviderTable financialServiceProviderTable=new FinancialServiceProviderTable(PlaceDetailsActivityNew.this);
-        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(currentCategoryID);
-        fetchedhel=healthServiceProviderTable1.getAllHealthSubCategoriesInfo(currentCategoryID);
-        fetchedleg=legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfo(currentCategoryID);
-        fetchedent=entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfo(currentCategoryID);
-        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(currentCategoryID);
-
-        // allData contains All data of the Tables
-        allData.addAll(educationServiceProviderTable.getAllEducationSubCategoriesInfos());
-        allData.addAll(entertainmentServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
-        allData.addAll(healthServiceProviderTable1.getAllEntertainmentSubCategoriesInfos());
-        allData.addAll(financialServiceProviderTable.getAllEntertainmentSubCategoriesInfos());
-        allData.addAll(legalAidServiceProviderTable1.getAllLegalAidSubCategoriesInfos());
+        con =this;
 
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
+        Searchall=(EditText)findViewById(R.id.searchall);
+        Searchall.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
+
+                Intent i=new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(i);
+
+                return false;
+            }
+        });
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -245,7 +244,7 @@ Context context;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Log.d(">>>>","test_dpi "+dpi);
+      //  Log.d(">>>>","test_dpi "+dpi);
        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
@@ -293,7 +292,7 @@ Context context;
                     subCatItemList.setVisibility(View.VISIBLE);
                    // explist.setVisibility(View.VISIBLE);
 
-                    wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.backplacedetails) );
+                    wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
                     map.setVisibility(View.GONE);
                     showList=1;
                     list_expand=true;
@@ -322,14 +321,7 @@ Context context;
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
         //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
-
-
         ///this code will change the background of the layout for two places.
-
-
-
-
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.clear();
@@ -382,7 +374,7 @@ Context context;
 
 
 
-        Log.d(">>>>>>>>","View_width       "+s);
+        //Log.d(">>>>>>>>","View_width       "+s);
         /**
          * constructing category list
          **/
@@ -390,8 +382,6 @@ Context context;
         constructCategoryList(categoryTable.getAllCategories());
         //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
-
-
 
 
         // callMapFragment();
@@ -425,18 +415,74 @@ Context context;
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
-
-
-
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        return false;
+        int id = menuItem.getItemId();
+
+        if (id == R.id.phone_reg) {
+            // Handle the camera action
+            Intent em = new Intent(this, PhoneRegActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else if (id == R.id.info_change) {
+
+            Intent em = new Intent(this, Information_UpdateActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else if (id == R.id.emergency_info) {
+
+            //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, NewEmergency.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        } else if (id == R.id.local_representative) {
+
+            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+
+        } else if (id == R.id.adv_info) {
+            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+
+            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
+        } else if (id == R.id.adv) {
+            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
+        }
+
+//        else if (id == R.id.nav_share) {
+//
+//        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
     }
 
 
+
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//        return false;
+//    }
+//
+//
 
 
     public void helpDialog(View v){
@@ -491,8 +537,8 @@ Context context;
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
 
-                    Log.d(">>>>", "printnames"+printnames);
-                    Log.d(">>>>", "currentCategoryID "+currentCategoryID);
+                    Log.d(">>>>", "printnames "+printnames);
+                    Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
                     Log.d(">>>>", "head "+head);
                     Log.d(">>>>", "print.get(j) "+print.get(j));
                     Log.d(">>>>", "placeChoice "+placeChoice);
@@ -1024,9 +1070,9 @@ Context context;
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
-        Log.d("cat_id",">>>" +cat_id);
-        Log.d("header",">>>" +header);
-        Log.d("placeChoice",">>>" +cat_id);
+   //     Log.d("cat_id",">>>" +cat_id);
+     //   Log.d("header",">>>" +header);
+      //  Log.d("placeChoice",">>>" +cat_id);
         createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
@@ -1084,9 +1130,9 @@ Context context;
         LayoutInflater li = LayoutInflater.from(this);
 
         if(height>1000)
-            v = li.inflate(R.layout.sub_cat_list_item, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item, llSubCatListHolder, false);
         else
-            v = li.inflate(R.layout.sub_cat_list_item1, llCatListHolder, false);
+            v = li.inflate(R.layout.sub_cat_list_item1, llSubCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)

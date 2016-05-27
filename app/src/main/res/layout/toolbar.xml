@@ -31,14 +31,15 @@
             android:focusableInTouchMode="true"
             android:layout_height="wrap_content">
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView1x"
+            <EditText
+                android:id="@+id/searchall"
                 android:layout_width="0dp"
                 android:layout_weight="0.87"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
                 android:textColor="@color/black"
                 android:hint="Search in All category ..."
+                android:textColorHint="@color/red"
                 android:background="@color/white"
                 android:layout_height="40dp"
                 android:popupBackground="#ffffff"

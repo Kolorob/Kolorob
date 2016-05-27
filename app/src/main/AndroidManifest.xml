@@ -30,33 +30,43 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.OpeningActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.NewEmergency"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.PhoneRegActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.EmergencyActivity"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
             android:name=".activity.Information_UpdateActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.LocationAskActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.LocationInstructionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.ButtonClickBaunia"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_button_click_baunia" />
         <activity
             android:name=".activity.PlaceChoiceActivity"
@@ -66,39 +76,49 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsInfoActivityHealth_new"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.PlaceDetailsActivityNew"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment_new"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsJobActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity_new"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.PlaceChoiceActivity2"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsLegalActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsLegalActivity_new"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
 
         <meta-data

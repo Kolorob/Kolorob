@@ -28,16 +28,16 @@
         <menu>
             <item
                 android:id="@+id/emergency_info"
-                android:icon="@drawable/close_button"
+                android:icon="@drawable/emergency_icon"
                 android:title="Emergency Services" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/advertising_icon"
-                android:title="Facebook" />
-            <item
-                android:id="@+id/nav_help"
-                android:icon="@drawable/help_icon"
-                android:title="Help" />
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/advertising_icon"-->
+                <!--android:title="Facebook" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_help"-->
+                <!--android:icon="@drawable/help_icon"-->
+                <!--android:title="Help" />-->
         </menu>
     </item>
 

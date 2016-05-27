@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backdrop"
     tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/detailed_info_panel_top"
+
+
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout2"
@@ -87,13 +89,13 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignLeft="@+id/linearLayout2"
         android:layout_above="@+id/linearLayout4"
         android:layout_alignStart="@+id/linearLayout2"
         android:orientation="horizontal"
-        android:background="@drawable/backdrop"
+
         android:id="@+id/scrollView">
 
 
@@ -108,19 +110,19 @@
 
 
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/detailed_info_panel_bottom"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/linearLayout4"
-        android:foregroundGravity="center"
-        android:gravity="center">
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/detailed_info_panel_bottom"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:id="@+id/linearLayout4"-->
+        <!--android:foregroundGravity="center"-->
+        <!--android:gravity="center">-->
 
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 </RelativeLayout>

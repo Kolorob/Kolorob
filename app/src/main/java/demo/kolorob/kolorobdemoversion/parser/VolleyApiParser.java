@@ -2,7 +2,7 @@ package demo.kolorob.kolorobdemoversion.parser;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,10 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
-import demo.kolorob.kolorobdemoversion.activity.PlaceChoiceActivity;
-import demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivity;
-import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.http.VolleySingleton;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
@@ -37,6 +33,7 @@ public class VolleyApiParser {
     private static final String TAG = VolleyApiParser.class.getSimpleName();
     private static final String VOLLEY_TAG = "Background_API_Request";
     public Activity activity;
+    public static String FinalUrl;
 
 
     public static void postRequest(final Context ctx, final int reqCode,
@@ -168,9 +165,25 @@ public class VolleyApiParser {
     }
 
 
+        Character c=apiUrl.charAt(0);
+        Character c1= apiUrl.charAt(1);
+
+         if(c.equals('h')&&(c1.equals('t')))
+         {
+             FinalUrl=apiUrl;
+         }
+        else
+             FinalUrl= AppConstants.API_URL + apiUrl ;
+
+        Log.d(">>>","FinalUrl"+FinalUrl);
+        Log.d(">>>","apiUrl "+apiUrl);
+
+
+
+
         StringRequest strReq = new StringRequest(
                 Request.Method.GET,
-                AppConstants.API_URL + apiUrl,
+                FinalUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
