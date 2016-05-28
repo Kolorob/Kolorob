@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,7 +71,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private ArrayList<EntertainmentServiceProviderItem>fetchedent;
     private ArrayList<HealthServiceProviderItem>fetchedhel;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
-    RadioGroup catgroup;
+    RadioGroup catgroup,fgrp1,fgrp2;
 ArrayList<String>filter=new ArrayList<>();
     ArrayList<String>filter2=new ArrayList<>();
     public int getFilcatid() {
@@ -171,6 +173,8 @@ check.setVisibility(View.VISIBLE);
 
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
           allitemList=(ListView)findViewById(R.id.allitem);
+        fleft=(LinearLayout)findViewById(R.id.linearLayout1);
+        fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
        Populateholder();
     }
 public void populatefilterwords(int filcatid)
@@ -187,7 +191,25 @@ public void populatefilterwords(int filcatid)
             {
                 filter.add(subholders.get(f).getSubcatname());}
         }
-
+    final RadioButton[] rb = new RadioButton[30];
+    fgrp1 = new RadioGroup(this); //create the RadioGroup
+    fgrp1.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+    for(int i=0; i<filter.size(); i++){
+        rb[i]  = new RadioButton(this);
+        fgrp1.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+        rb[i].setText(filter.get(i).toString());
+        rb[i].setTextColor(Color.WHITE);
+    }
+    fgrp2 = new RadioGroup(this); //create the RadioGroup
+    fgrp2.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+    for(int i=0; i<filter2.size(); i++){
+        rb[i]  = new RadioButton(this);
+        fgrp2.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+        rb[i].setText(filter2.get(i).toString());
+        rb[i].setTextColor(Color.WHITE);
+    }
+    fleft.addView(fgrp1);
+    fright.addView(fgrp2);//you add the w
     searchtext.setText("Filter more");
 }
     @Override
