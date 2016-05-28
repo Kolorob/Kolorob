@@ -23,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -56,8 +57,19 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ListViewAdapterAllCategories adapter;
     EditText filterText;
     ListView allitemList;
+    String filterword;
     TextView searchtext;
     ImageButton more;
+    int snumber;
+
+    public String getFilterword() {
+        return filterword;
+    }
+
+    public void setFilterword(String filterword) {
+        this.filterword = filterword;
+    }
+
     boolean catstatus=false;
     int filcatid;
     RelativeLayout catholder;
@@ -211,6 +223,29 @@ public void populatefilterwords(int filcatid)
     fleft.addView(fgrp1);
     fright.addView(fgrp2);//you add the w
     searchtext.setText("Filter more");
+    fgrp1.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
+    fgrp2.clearCheck();
+    fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            // TODO Auto-generated method stub
+            if (checkedId != -1) {
+                fun2();
+            }
+        }
+    });
+
+    fgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            // TODO Auto-generated method stub
+            if (checkedId != -1) {
+                fun1();
+            }
+        }
+    });
 }
     @Override
     public void onClick(View v) {
@@ -316,7 +351,7 @@ public void populatefilterwords(int filcatid)
         boolean instatus=status;
         if(instatus==true)
         {
-int gotcatid=getFilcatid();
+            int gotcatid=getFilcatid();
             catHolders.clear();
             for(int ii=0;ii<allHolders.size();ii++)
             {
@@ -370,5 +405,54 @@ int gotcatid=getFilcatid();
         super.onBackPressed();
         finish();
     }
+    public void fun1() {
+        fgrp2.setOnCheckedChangeListener(null);
+        fgrp2.clearCheck();
+        fgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                fun2();
+                int buttonId=fgrp2.getCheckedRadioButtonId();
+                RadioButton radioButton=(RadioButton)findViewById(buttonId);
+                setFilterword((String) radioButton.getText());
+                int num=Findsubcatid(filterword);
+                Toast.makeText(SearchActivity.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+                Log.v("Inside fun1",String.valueOf(num));
+            }
+        });
+    }
+
+    public void fun2() {
+        fgrp1.setOnCheckedChangeListener(null);
+        fgrp1.clearCheck();
+        fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                fun1();
+                int buttonId=fgrp1.getCheckedRadioButtonId();
+                RadioButton radioButton=(RadioButton)findViewById(buttonId);
+                setFilterword((String) radioButton.getText());
+                int num=Findsubcatid(filterword);
+                Toast.makeText(SearchActivity.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+                Log.v("Inside fun2","fun1");
+
+            }
+        });
+    }
+    private int Findsubcatid(String filterword){
+
+        for (int s=0;s<=subholders.size();s++)
+        {
+            if (subholders.get(s).getSubcatname().equals(filterword))
+            {
+                snumber=subholders.get(s).getSubcatid();
+            break;
+            }
+        }
+
+        return snumber;
+    }
 }
