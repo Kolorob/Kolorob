@@ -155,7 +155,7 @@ public class SubCategoryTable {
 
         SQLiteDatabase db = openDB();
         int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
 
 
         if (cursor.moveToFirst()) {

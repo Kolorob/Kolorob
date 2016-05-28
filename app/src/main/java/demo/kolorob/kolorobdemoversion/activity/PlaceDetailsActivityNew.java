@@ -123,6 +123,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     Activity act;
     public int layoutstatus;
     private Boolean list_expand=false;
+    private TextView listOrMapDisplayText;
 
 private Toolbar toolbar,toolbar2;
 
@@ -151,7 +152,7 @@ Context context;
     }
 
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
-    private int currentCategoryID;
+    public static int currentCategoryID;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
 
@@ -191,7 +192,7 @@ EditText Searchall;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
 
-        con =this;
+        con =PlaceDetailsActivityNew.this;
 
 
 
@@ -270,7 +271,8 @@ EditText Searchall;
                 listData.add(AppConstants.BAUNIABADH);
             }
         }
-
+        listOrMapDisplayText=(TextView)findViewById(R.id.listViewerText);
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
         RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) listholder.getLayoutParams();
         params3.height = 40;
@@ -288,24 +290,27 @@ EditText Searchall;
 
                 if(list_expand.equals(false))
                 {
-
+                    llSubCatListHolder.setVisibility(View.GONE);
                     subCatItemList.setVisibility(View.VISIBLE);
-                   // explist.setVisibility(View.VISIBLE);
+                    explist.setVisibility(View.VISIBLE);
 
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
                     map.setVisibility(View.GONE);
                     showList=1;
                     list_expand=true;
+                    listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
 
                 }
 
                 else
                 {
+                    llSubCatListHolder.setVisibility(View.VISIBLE);
                     showList=0;
                     map.setVisibility(View.VISIBLE);
                     list_expand=false;
                     subCatItemList.setVisibility(View.GONE);
+                    listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
 
                 }
 
@@ -359,7 +364,7 @@ EditText Searchall;
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
-        expnlist.setMargins(s,90,s,0);
+        expnlist.setMargins((s*9)/10,40,5,40);
 
 
 
@@ -535,7 +540,7 @@ EditText Searchall;
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
-                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, head, print.get(j), placeChoice);
+                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
 
                     Log.d(">>>>", "printnames "+printnames);
                     Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
@@ -707,12 +712,18 @@ EditText Searchall;
 //        if(dpi>300)
 //            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
 //        else
+
+
+
+
         if( height>1000)
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         else
 
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
+
+
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
 
 
@@ -758,19 +769,29 @@ EditText Searchall;
                 * category id 7 means job*/
                 switch (currentCategoryID) {
                     case AppConstants.EDUCATION:
-                        mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
-                        explist.setVisibility(View.GONE);
-                        showList=0;
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            subCatItemList.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            mapcalledstatus=true;
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            map.setVisibility(View.VISIBLE);
+                            listholder.startAnimation(slideInFromRightAnim());
+                            mapholderr.startAnimation(slideInFromRightAnim());
+                            ArrayList<EducationServiceProviderItem> educationServiceProvider;
+                            educationServiceProvider = constructEducationListItem(ci.getId());
+                            callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+                        }
                         toolbar.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
-                        listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#58BED6"));
                         toolbar2.setBackgroundColor(Color.parseColor("#58BED6"));
                         toolbar2.startAnimation(slideInFromRightAnim());
-                        listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab2 = getSupportActionBar();
                         ab2.setHomeAsUpIndicator(R.drawable.menu_icon);
@@ -796,21 +817,32 @@ EditText Searchall;
                         getSupportActionBar().setHomeButtonEnabled(true);
                         toggle.setDrawerIndicatorEnabled(true);
                         drawer.setDrawerListener(toggle);
-                        mapholderr.startAnimation(slideInFromRightAnim());
-
                         ab2.openOptionsMenu();
-                        ArrayList<EducationServiceProviderItem> educationServiceProvider;
-                        educationServiceProvider = constructEducationListItem(ci.getId());
-                        callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+
 
 
                         break;
                     case AppConstants.HEALTH:
-                        mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            subCatItemList.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            mapcalledstatus=true;
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            map.setVisibility(View.VISIBLE);
+                            mapholderr.startAnimation(slideInFromRightAnim());
+                            ArrayList<HealthServiceProviderItem> healthServiceProvider;
+                            healthServiceProvider = constructHealthListItem(ci.getId());
+                            callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+
+
+                        }
+
+
                         toolbar.setVisibility(View.GONE);
-                        explist.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
@@ -820,7 +852,7 @@ EditText Searchall;
                         listholder.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab3 = getSupportActionBar();
-                        showList=0;
+
                         ab3.setHomeAsUpIndicator(R.drawable.menu_icon);
                         ab3.setDisplayHomeAsUpEnabled(true);
                         ActionBarDrawerToggle toggle3 = new ActionBarDrawerToggle(
@@ -844,21 +876,35 @@ EditText Searchall;
                         getSupportActionBar().setHomeButtonEnabled(true);
                         toggle3.setDrawerIndicatorEnabled(true);
                         drawer.setDrawerListener(toggle3);
-                        mapholderr.startAnimation(slideInFromRightAnim());
-                        ArrayList<HealthServiceProviderItem> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem(ci.getId());
-                        callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
 
                         break;
 
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
-                        mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
-                        explist.setVisibility(View.GONE);
-                        showList=0;
+
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            subCatItemList.setVisibility(View.VISIBLE);
+                        }
+
+                        else
+                        {
+                            mapcalledstatus=true;
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            map.setVisibility(View.VISIBLE);
+                            mapholderr.startAnimation(slideInFromRightAnim());
+                            ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
+                            entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
+                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
+
+                        }
+
+
+
+
                         toolbar.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
@@ -892,10 +938,6 @@ EditText Searchall;
                         getSupportActionBar().setHomeButtonEnabled(true);
                         toggle4.setDrawerIndicatorEnabled(true);
                         drawer.setDrawerListener(toggle4);
-                        mapholderr.startAnimation(slideInFromRightAnim());
-                        ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
-                        entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
-                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
 
                         break;
 
@@ -925,13 +967,28 @@ EditText Searchall;
                         alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
-                        mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
-                       explist.setVisibility(View.GONE);
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            subCatItemList.setVisibility(View.VISIBLE);
+                        }
+
+                        else {
+                            mapcalledstatus=true;
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            map.setVisibility(View.VISIBLE);
+                            mapholderr.startAnimation(slideInFromRightAnim());
+                            ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+                            legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                            callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
+
+                        }
+
+
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
-                        showList=0;
+
                         helpicon.setVisibility(View.GONE);
                         listholder.setBackgroundColor(Color.parseColor("#67C3A2"));
                         listholder.startAnimation(slideInFromRightAnim());
@@ -963,20 +1020,30 @@ EditText Searchall;
                         getSupportActionBar().setHomeButtonEnabled(true);
                         toggle5.setDrawerIndicatorEnabled(true);
                         drawer.setDrawerListener(toggle5);
-                        mapholderr.startAnimation(slideInFromRightAnim());
-                        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                        callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
 
                         break;
                     case AppConstants.FINANCIAL:
-                        mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
-                        explist.setVisibility(View.GONE);
+                        if(showList==1) {
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            subCatItemList.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            mapcalledstatus=true;
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            map.setVisibility(View.VISIBLE);
+                            mapholderr.startAnimation(slideInFromRightAnim());
+                            ArrayList<FinancialServiceProviderItem> financialServiceProvider;
+                            financialServiceProvider = constructfinancialListItem(ci.getId());
+                            callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
+
+                        }
+
+
                         helpicon.setVisibility(View.GONE);
                         toolbar.setVisibility(View.GONE);
-                        showList=0;
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7a378b"));
                         listholder.startAnimation(slideInFromRightAnim());
@@ -1009,10 +1076,6 @@ EditText Searchall;
                         toggle6.setDrawerIndicatorEnabled(true);
                         helpicon.setVisibility(View.GONE);
                         drawer.setDrawerListener(toggle6);
-                        mapholderr.startAnimation(slideInFromRightAnim());
-                        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-                        financialServiceProvider = constructfinancialListItem(ci.getId());
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
 
                         break;
                     case AppConstants.JOB:
@@ -1044,6 +1107,7 @@ EditText Searchall;
                 }
 
 
+
                 /**
                  * code for all categories
                  **/
@@ -1057,10 +1121,18 @@ EditText Searchall;
 
                 // categoryHeader.setText(ci.getCatName());
 
-                if (isCatExpandedOnce)
-                    showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+
+                if(showList!=1)
+                {
+                    if (isCatExpandedOnce)
+                        showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    else
+                        showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
+                }
+
                 else
-                    showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); //AppConstants.CAT_LIST_LG_WIDTH_PERC);
+                    categoryListBuildUp(currentCategoryID);
+               //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -1086,10 +1158,10 @@ EditText Searchall;
 
     //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
-        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
-        subCatItemList.setAdapter(adapter);
+//        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+//
+//        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
+//        subCatItemList.setAdapter(adapter);
 
       //  MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
      //   subCatItemList.setAdapter(adapter);
@@ -1119,6 +1191,16 @@ EditText Searchall;
                 llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
             }
         }
+    }
+
+    private void categoryListBuildUp(int currentCategoryID)
+    {
+        createData(currentCategoryID,"",placeChoice);
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+
+        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
+        subCatItemList.setAdapter(adapter);
+
     }
     private View getSubCategoryListItemView(final SubCategoryItem si, double dwPercentage, final int cat_id)
     {
@@ -1190,20 +1272,14 @@ EditText Searchall;
 
                     case AppConstants.EDUCATION:
                         ArrayList<EducationServiceProviderItem> eduItem;
-                        if(showList==1) {
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                             }
+
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
                         ArrayList<HealthServiceProviderItem> healthItem;
-                        if(showList==1) {
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                        }
+
                         healthItem = constructHealthListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
@@ -1212,10 +1288,7 @@ EditText Searchall;
 
 
                         ArrayList<EntertainmentServiceProviderItem> entItem;
-                        if(showList==1) {
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                        }
+
                         entItem = constructEntertainmentListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, entItem);
                         break;
@@ -1237,19 +1310,13 @@ EditText Searchall;
                         break;
                     case AppConstants.LEGAL:
                         ArrayList<LegalAidServiceProviderItem> legalItem;
-                        if(showList==1) {
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                        }
+
                         legalItem = constructlegalaidListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
                         ArrayList<FinancialServiceProviderItem> financialItem;
-                        if(showList==1) {
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                        }
+
                         financialItem = constructfinancialListItemForHeader(cat_id, si.getSubcatHeader());
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, financialItem);
                         break;
@@ -1310,6 +1377,7 @@ EditText Searchall;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 llSubCatListHolder.setVisibility(View.VISIBLE);
                 llSubCatListHolder.startAnimation(slideInFromRightAnim());
                constructSubCategoryList(subCatList, 1.0, cat_id);
@@ -1640,9 +1708,20 @@ EditText Searchall;
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+        if(showList==1)
+        {
+            createData(currentCategoryID,"",placeChoice);
+            MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
+            subCatItemList.setAdapter(adapter);
+        }
+
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+
+        Log.d(">>>>>>","You are in onResume");
 
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
@@ -1694,6 +1773,7 @@ else {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(">>>>>>","You are in onPause");
     }
 
 

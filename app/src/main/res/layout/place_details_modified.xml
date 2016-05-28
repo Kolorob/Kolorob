@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/list_show"
-            android:id="@+id/textView16"
+            android:id="@+id/listViewerText"
             android:paddingRight="0dp"
             android:paddingTop="03dp"
             android:paddingLeft="20dp" />

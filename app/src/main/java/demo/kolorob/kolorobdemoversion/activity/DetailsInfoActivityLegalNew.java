@@ -1,26 +1,38 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class DetailsInfoActivityLegalNew extends Activity {
 
@@ -31,10 +43,10 @@ public class DetailsInfoActivityLegalNew extends Activity {
     int width,height;
     String basic_part;
     TextView ups_text,itemopeningTime;
-    private ImageView close_button;
+    private ImageView close_button,distance_left;
     private LinearLayout ll3,scrollingPart;
     LinearLayout ll1,ll2;
-    ImageView close,legal;
+    ImageView close,legal,phone_mid;
     TextView close_tv;
     ImageButton Feedback;
     ListView lv11,lv2;
@@ -43,6 +55,11 @@ public class DetailsInfoActivityLegalNew extends Activity {
     ArrayList<LegalAidLegalAdviceItem> legalAidLegalAdviceItems;
     ArrayList<LegalAidSalishiItem> legalAidSalishiItems;
     LegalAidServiceProviderItem legalAidServiceProviderItem;
+    private Context con;
+
+    /**
+     * Created by arafat on 28/05/2016.
+     */
 
 
     @Override
@@ -54,6 +71,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         width=displayMetrics.widthPixels;
 
         Intent intent = getIntent();
+        con=this;
 
         if (null != intent)
         {
@@ -86,6 +104,9 @@ public class DetailsInfoActivityLegalNew extends Activity {
         ll1=(LinearLayout)findViewById(R.id.first_list);
         ll2=(LinearLayout)findViewById(R.id.second_list);
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
+        distance_left=(ImageView)findViewById(R.id.distance_left);
+
+        phone_mid=(ImageView)findViewById(R.id.phone_middl);
 
         if(!legalAidServiceProviderItem.getOpeningtime().equals(""))
             concateBasic(" খোলার সময়: ",legalAidServiceProviderItem.getOpeningtime());
@@ -142,10 +163,118 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         LinearLayout.LayoutParams expnlist = (LinearLayout.LayoutParams) scrollingPart.getLayoutParams();
         expnlist.setMargins(0,0,0,vcc);
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        phone_mid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if(!legalAidServiceProviderItem.getContactNo().equals(""))
+                {
+                    callIntent1.setData(Uri.parse("tel:" + legalAidServiceProviderItem.getContactNo()));
+                    if(checkPermission())
+                        startActivity(callIntent1);
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+                else {
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
+                }
+            }
+        });
+
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+
+                    String lat = legalAidServiceProviderItem.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = legalAidServiceProviderItem.getLongitude().toString();
+                    String name= legalAidServiceProviderItem.getLegalaidNameBan().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Latitude", null);
+                    String Latitude = pref.getString("Longitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                        // implementFragment();
+
+                        //username and password are present, do your stuff
+                    }
+
+
+                    finish();
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityLegalNew.this);
+
+                }
+
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+
+                }
+            }
+        });
+
 
 
     }
 
+
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
 
     private String concateBasic(String value1,String value2){
 

@@ -1,12 +1,20 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,6 +40,7 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTuitionTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
@@ -42,17 +52,22 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+
+/**
+ * Created by arafat on 28/05/2016.
+ */
 
 public class DetailsInfoActivityFinancialNew extends Activity {
 
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,phone_mid;
     TextView address_text,phone_text,email_text;
     int width,height;
     String basic_part;
     TextView ups_text;
-    private ImageView close_button;
+    private ImageView close_button,distance_left;
     private LinearLayout ll3,scrollingPart;
     FinancialServiceProviderItem financialServiceProviderItem;
     ArrayList<FinancialServiceProviderItem> finfromsearch;
@@ -67,6 +82,7 @@ public class DetailsInfoActivityFinancialNew extends Activity {
     ListView navlist,navlist1,navlist2,navlist3,navlist4,navlist5,navlist6,navlist7;
     LinearLayout l1,l2,l3,l4,l5,l6,l7,l8;
     private TextView open;
+    private Context con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +136,9 @@ public class DetailsInfoActivityFinancialNew extends Activity {
         navlist6 = (ListView) findViewById(R.id.listView9ss);
         navlist7 = (ListView) findViewById(R.id.listView10ss);
         open=(TextView)findViewById(R.id.opening_time);
+        distance_left=(ImageView)findViewById(R.id.distance_left);
+        phone_mid=(ImageView)findViewById(R.id.phone_middl);
+        con=this;
 
 
         if(!financialServiceProviderItem.getOpeningtime().equals(""))
@@ -432,8 +451,105 @@ public class DetailsInfoActivityFinancialNew extends Activity {
 
 
 
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
+
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+
+                    String lat = financialServiceProviderItem.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = financialServiceProviderItem.getLongitude().toString();
+                    String name= financialServiceProviderItem.getNamebn().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Latitude", null);
+                    String Latitude = pref.getString("Longitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        //  Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat, Toast.LENGTH_SHORT).show();
+                        // implementFragment();
+
+                        //username and password are present, do your stuff
+                    }
+
+
+                    finish();
+
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityFinancialNew.this);
+
+                }
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityFinancialNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+
+                }
+
+
+
+            }
+        });
+
+
+
+
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        phone_mid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if(!financialServiceProviderItem.getNodeContact().equals(""))
+                {
+                    callIntent1.setData(Uri.parse("tel:" + financialServiceProviderItem.getNodeContact()));
+                    if(checkPermission())
+                        startActivity(callIntent1);
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+                else {
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
+                }
+            }
+        });
 
 
 
@@ -450,5 +566,18 @@ public class DetailsInfoActivityFinancialNew extends Activity {
 
 
         return basic_part;
+    }
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
     }
 }
