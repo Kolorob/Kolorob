@@ -364,7 +364,7 @@ EditText Searchall;
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
-        expnlist.setMargins((s*4)/5,50,0,40);
+        expnlist.setMargins((s*9)/10,40,5,40);
 
 
 
