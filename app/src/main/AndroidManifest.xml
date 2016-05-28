@@ -50,6 +50,7 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"></activity>
 
         <activity

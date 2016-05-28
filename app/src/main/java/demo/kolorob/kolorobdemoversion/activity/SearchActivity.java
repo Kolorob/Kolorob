@@ -228,6 +228,7 @@ public void populatefilterwords(int filcatid)
         fgrp2.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
         rb[i].setText(filter2.get(i).toString());
         rb[i].setTextColor(Color.WHITE);
+
     }
     fleft.addView(fgrp1);
     fright.addView(fgrp2);//you add the w
