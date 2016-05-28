@@ -57,6 +57,10 @@ public class DetailsInfoActivityLegalNew extends Activity {
     LegalAidServiceProviderItem legalAidServiceProviderItem;
     private Context con;
 
+    /**
+     * Created by arafat on 28/05/2016.
+     */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

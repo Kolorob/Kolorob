@@ -46,6 +46,10 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
+/**
+ * Created by arafat on 28/05/2016.
+ */
+
 public class DetailsInfoActivityEducation extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;

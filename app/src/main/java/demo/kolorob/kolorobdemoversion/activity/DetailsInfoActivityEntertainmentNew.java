@@ -78,6 +78,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     private TextView transport;
     private ImageView close_button,distance_btn;
 
+    /**
+     * Created by arafat on 28/05/2016.
+     */
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

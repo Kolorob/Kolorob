@@ -54,6 +54,10 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
+/**
+ * Created by arafat on 28/05/2016.
+ */
+
 public class DetailsInfoActivityFinancialNew extends Activity {
 
     Dialog dialog;
