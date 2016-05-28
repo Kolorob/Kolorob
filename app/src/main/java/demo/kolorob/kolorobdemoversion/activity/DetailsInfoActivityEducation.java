@@ -21,6 +21,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,7 +49,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 public class DetailsInfoActivityEducation extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
     TextView ups_text;
@@ -116,6 +117,9 @@ public class DetailsInfoActivityEducation extends Activity {
         phone_text.setText(educationServiceProviderItem.getContactNo());
         email_text.setText(educationServiceProviderItem.getEmailAddress());
         distance_left=(ImageView)findViewById(R.id.distance_left);
+        email_btn=(ImageView) findViewById(R.id.right_side_email);
+
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -197,6 +201,11 @@ public class DetailsInfoActivityEducation extends Activity {
             transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         }
 
+        if(!educationServiceProviderItem.getEmailAddress().equals(""))
+        {
+            AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                    "ই মেইল আই ডি পাওয়া যায়নি");
+        }
 
 
 
