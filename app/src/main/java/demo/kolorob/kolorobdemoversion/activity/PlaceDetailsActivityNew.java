@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -124,7 +125,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     public int layoutstatus;
     private Boolean list_expand=false;
     private TextView listOrMapDisplayText;
-
+boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
 private Toolbar toolbar,toolbar2;
 
 
@@ -155,13 +156,13 @@ Context context;
     public static int currentCategoryID;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
-
+TextView header;
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
     private ImageButton expandableListShowing;
     private RelativeLayout mapholderr;
-
+    ArrayList<CategoryItem> categoryList;
     private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -210,6 +211,7 @@ EditText Searchall;
                 return false;
             }
         });
+        header=(TextView)findViewById(R.id.textView15);
        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -384,7 +386,8 @@ EditText Searchall;
          * constructing category list
          **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNew.this);
-        constructCategoryList(categoryTable.getAllCategories());
+       categoryList=categoryTable.getAllCategories();
+        constructCategoryList(categoryList);
         //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
@@ -721,7 +724,7 @@ EditText Searchall;
         else
 
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-        ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
+       final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
 
 
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
@@ -755,7 +758,26 @@ EditText Searchall;
             @Override
             public void onClick(View v) {
 
+
                 currentCategoryID = ci.getId();
+
+                for(int i= 0; i < llCatListHolder.getChildCount(); i++){
+                    ImageView iv = (ImageView) ((ViewGroup)llCatListHolder.getChildAt(i)).getChildAt(0);
+                    // new background because something has changed
+                    // check if it's not the imageView you just clicked because you don't want to change its background
+                    iv.setImageResource(0);
+                    iv.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[i]);
+                }
+               /* llCatListHolder.getChildAt(0).setBackgroundResource(R.drawable.turned_off_porashona);
+                llCatListHolder.getChildAt(1).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chikitsha));
+                llCatListHolder.getChildAt(2).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_anondo_furti));
+                llCatListHolder.getChildAt(3).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_shorkari_shubidha));
+                llCatListHolder.getChildAt(4).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_ain_kanun));
+                llCatListHolder.getChildAt(5).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_taka_poisha));
+                llCatListHolder.getChildAt(6).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chakri_bakri));
+*/
+
+
                 //
 
                 /*code for category*/
@@ -768,7 +790,11 @@ EditText Searchall;
                 * category id 6 means financial
                 * category id 7 means job*/
                 switch (currentCategoryID) {
+
                     case AppConstants.EDUCATION:
+                        educlicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_porashona);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
@@ -791,6 +817,8 @@ EditText Searchall;
                         toolbar2.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#58BED6"));
                         toolbar2.setBackgroundColor(Color.parseColor("#58BED6"));
+                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_porashona));
+                        header.setText("Education");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab2 = getSupportActionBar();
@@ -823,6 +851,9 @@ EditText Searchall;
 
                         break;
                     case AppConstants.HEALTH:
+                        helclicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
@@ -846,6 +877,8 @@ EditText Searchall;
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
+                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_chikitsha));
+                        header.setText("Health");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#DF554E"));
@@ -882,7 +915,9 @@ EditText Searchall;
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
-
+                        entclicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_anondo_furti);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
@@ -909,6 +944,8 @@ EditText Searchall;
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
+                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_chikitsha));
+                        header.setText("Health");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7377B7"));
@@ -945,7 +982,9 @@ EditText Searchall;
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-
+                        govclicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
                         mapcalledstatus=false;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.removeAllViews();
@@ -967,6 +1006,9 @@ EditText Searchall;
                         alertDialog.show();
                         break;
                     case AppConstants.LEGAL:
+                        legclicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
@@ -994,6 +1036,8 @@ EditText Searchall;
                         listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#67C3A2"));
+                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_ain_kanun));
+                        header.setText("Health");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
                         ActionBar ab5 = getSupportActionBar();
@@ -1023,6 +1067,9 @@ EditText Searchall;
 
                         break;
                     case AppConstants.FINANCIAL:
+                        finclicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
@@ -1046,7 +1093,10 @@ EditText Searchall;
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7a378b"));
+                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_taka_poisha));
+                        header.setText("Financial");
                         listholder.startAnimation(slideInFromRightAnim());
+
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7a378b"));
                         toolbar2.startAnimation(slideInFromRightAnim());
@@ -1079,6 +1129,9 @@ EditText Searchall;
 
                         break;
                     case AppConstants.JOB:
+                        jobclicked=true;
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.turned_on_chakri_bakri);
                        // mapcalledstatus=false;
                         llSubCatListHolder.setVisibility(View.GONE);
                      //   map.removeAllViews();
