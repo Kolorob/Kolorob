@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,8 +12,11 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -31,6 +35,7 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceP
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
  * Created by HP on 5/25/2016.
@@ -44,20 +49,77 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ListViewAdapterAllCategories adapter;
     EditText filterText;
     ListView allitemList;
+    ImageButton more;
+    boolean catstatus=false;
+    int filcatid;
+    RelativeLayout catholder;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
+    ArrayList<AllHolder>catHolders=new ArrayList<>();
     private ArrayList<FinancialServiceProviderItem>fetchedfin;
     private ArrayList<EducationServiceProviderItem>fetchededu;
     private ArrayList<LegalAidServiceProviderItem>fetchedleg;
     private ArrayList<EntertainmentServiceProviderItem>fetchedent;
     private ArrayList<HealthServiceProviderItem>fetchedhel;
-      @Override
+    RadioGroup catgroup;
+
+    public int getFilcatid() {
+        return filcatid;
+    }
+
+    public void setFilcatid(int filcatid) {
+        this.filcatid = filcatid;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchfilter);
 
-
+more=(ImageButton)findViewById(R.id.morebutton);
+          more.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+          catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
+          catholder.setVisibility(View.GONE);
+          catgroup=(RadioGroup)findViewById(R.id.catradioGroup);
+          catgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+              @Override
+              public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                  if (checkedId == R.id.edradioButton) {
+
+                      setFilcatid(1);
+                      catstatus=true;
+                      calladapter(catstatus);
+
+                  } else  if (checkedId == R.id.helradioButton2) {
+                      //do work when radioButton2 is active
+                      setFilcatid(2);
+                      catstatus=true;
+                      calladapter(catstatus);
+                  }
+                  else  if (checkedId == R.id.entradioButton5) {
+                      //do work when radioButton2 is active
+                      setFilcatid(3);
+                      catstatus=true;
+                      calladapter(catstatus);
+                  }
+                  else  if (checkedId == R.id.finradioButton4) {
+                      //do work when radioButton2 is active
+                      setFilcatid(6);
+                      catstatus=true;
+                      calladapter(catstatus);
+                  }
+                  else  if (checkedId == R.id.legradioButton3) {
+                      //do work when radioButton2 is active
+                      setFilcatid(5);
+                      catstatus=true;
+                      calladapter(catstatus);
+                  }
+
+
+              }
+          });
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
@@ -85,6 +147,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.morebutton:
+
+                catholder.setVisibility(View.VISIBLE);
+
+
+
+        }
 
     }
 
@@ -168,9 +240,33 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
         }
-        adapter = new ListViewAdapterAllCategories(this, allHolders);
+        calladapter(false);
 
-        allitemList.setAdapter(adapter);
+    }
+    private void calladapter(boolean status)
+    {
+        boolean instatus=status;
+        if(instatus==true)
+        {
+int gotcatid=getFilcatid();
+            catHolders.clear();
+            for(int ii=0;ii<allHolders.size();ii++)
+            {
+                if(allHolders.get(ii).getCatid()==gotcatid)
+                {
+                    catHolders.add(allHolders.get(ii));
+                }
+            }
+            adapter = new ListViewAdapterAllCategories(this, catHolders);
+
+            allitemList.setAdapter(adapter);
+        }
+        else {
+            adapter = new ListViewAdapterAllCategories(this, allHolders);
+
+            allitemList.setAdapter(adapter);
+        }
+
         int[] colors = {0, 0xFFFF0000, 0}; // red for the example
         allitemList.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
         allitemList.setDividerHeight(1);
