@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -27,6 +28,7 @@ import java.util.Locale;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
+import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
@@ -66,8 +68,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private ArrayList<LegalAidServiceProviderItem>fetchedleg;
     private ArrayList<EntertainmentServiceProviderItem>fetchedent;
     private ArrayList<HealthServiceProviderItem>fetchedhel;
+    private ArrayList<Subcatholder>subholders=new ArrayList<>();
     RadioGroup catgroup;
-
+ArrayList<String>filter=new ArrayList<>();
+    ArrayList<String>filter2=new ArrayList<>();
     public int getFilcatid() {
         return filcatid;
     }
@@ -137,7 +141,9 @@ check.setVisibility(View.VISIBLE);
                 if ( isChecked )
                 {
                     // perform logic
+
                     fholder.setVisibility(View.VISIBLE);
+                    populatefilterwords(getFilcatid());
                 }
 
             }
@@ -160,13 +166,29 @@ check.setVisibility(View.VISIBLE);
 
     //    gridView = (GridView) findViewById(R.id.grid);
 
-        SubCategoryTable subCategoryTable = new SubCategoryTable(SearchActivity.this);
-        subcategorynames=subCategoryTable.getcatSubCategories(1);
+
+
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
           allitemList=(ListView)findViewById(R.id.allitem);
        Populateholder();
     }
+public void populatefilterwords(int filcatid)
+{
+    SubCategoryTable subCategoryTable = new SubCategoryTable(SearchActivity.this);
+    subholders=subCategoryTable.getcatSubCategories(filcatid);
 
+        int upto=subholders.size()/2;
+        for (int f=0;f<subholders.size();f++)
+        {
+            if (f>=upto)
+                filter2.add(subholders.get(f).getSubcatname());
+            else
+            {
+                filter.add(subholders.get(f).getSubcatname());}
+        }
+
+    searchtext.setText("Filter more");
+}
     @Override
     public void onClick(View v) {
 
