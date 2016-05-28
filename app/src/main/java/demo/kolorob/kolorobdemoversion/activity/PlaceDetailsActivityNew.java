@@ -123,6 +123,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     Activity act;
     public int layoutstatus;
     private Boolean list_expand=false;
+    private TextView listOrMapDisplayText;
 
 private Toolbar toolbar,toolbar2;
 
@@ -270,6 +271,7 @@ EditText Searchall;
                 listData.add(AppConstants.BAUNIABADH);
             }
         }
+        listOrMapDisplayText=(TextView)findViewById(R.id.listViewerText);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
         RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) listholder.getLayoutParams();
@@ -296,6 +298,7 @@ EditText Searchall;
                     map.setVisibility(View.GONE);
                     showList=1;
                     list_expand=true;
+                    listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
 
                 }
@@ -307,6 +310,7 @@ EditText Searchall;
                     map.setVisibility(View.VISIBLE);
                     list_expand=false;
                     subCatItemList.setVisibility(View.GONE);
+                    listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
 
                 }
 
@@ -360,7 +364,7 @@ EditText Searchall;
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
-        expnlist.setMargins(s,90,0,0);
+        expnlist.setMargins((s*4)/5,50,0,40);
 
 
 
