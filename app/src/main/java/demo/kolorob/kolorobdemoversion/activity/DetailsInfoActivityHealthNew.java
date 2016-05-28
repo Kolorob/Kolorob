@@ -1,8 +1,11 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -29,6 +32,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class DetailsInfoActivityHealthNew extends Activity {
     Dialog dialog;
@@ -37,7 +41,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
     TextView ups_text;
-    private ImageView close_button;
+    private ImageView close_button,distance_left;
     ListView navlist,navlist1,navlist2;
     String TAG= "nothing";
     HealthServiceProviderItem healthServiceProviderItem;
@@ -93,6 +97,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ll3=(LinearLayout)findViewById(R.id.fourth_list);
         scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
+        distance_left=(ImageView)findViewById(R.id.distance_left);
 
 
 
@@ -276,6 +281,84 @@ public class DetailsInfoActivityHealthNew extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                if (AppUtils.isNetConnected(getApplicationContext()) && AppUtils.displayGpsStatus(getApplicationContext())) {
+
+                    String lat = healthServiceProviderItem.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+
+                    String name= healthServiceProviderItem.getNameBn();
+                    String lon = healthServiceProviderItem.getLongitude().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Latitude", null);
+                    String Latitude = pref.getString("Longitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                        // implementFragment();
+
+                        //username and password are present, do your stuff
+                    }
+
+
+                    finish();
+
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityHealthNew.this);
+//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealth.this, AlertDialog.THEME_HOLO_LIGHT).create();
+//                    alertDialog.setTitle("GPS Disabled ");
+//                    alertDialog.setMessage(" GPS সচল করুন।  ");
+//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                    alertDialog.show();
+                }
+
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ্ন বিচ্ছিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+
+                }
+
+
             }
         });
 
