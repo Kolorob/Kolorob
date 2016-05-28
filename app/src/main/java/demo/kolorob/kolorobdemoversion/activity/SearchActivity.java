@@ -58,6 +58,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     int filcatid;
     RelativeLayout catholder;
     CheckBox check;
+    LinearLayout fholder,fleft,fright;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
     private ArrayList<FinancialServiceProviderItem>fetchedfin;
@@ -86,6 +87,7 @@ more=(ImageButton)findViewById(R.id.morebutton);
         check=(CheckBox)findViewById(R.id.searchmbox);
           more.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
           catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
           catholder.setVisibility(View.GONE);
           catgroup=(RadioGroup)findViewById(R.id.catradioGroup);
@@ -135,6 +137,7 @@ check.setVisibility(View.VISIBLE);
                 if ( isChecked )
                 {
                     // perform logic
+                    fholder.setVisibility(View.VISIBLE);
                 }
 
             }

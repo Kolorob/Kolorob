@@ -133,7 +133,41 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="#ffffff"
                 android:checked="false" />
+            <LinearLayout
+                android:id="@+id/LinearLayoutfilter"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:background="@color/black">
 
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:weightSum="10"
+                    android:orientation="vertical" >
+
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:weightSum="10"
+                    android:orientation="vertical" >
+
+
+                </LinearLayout>
+            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 
