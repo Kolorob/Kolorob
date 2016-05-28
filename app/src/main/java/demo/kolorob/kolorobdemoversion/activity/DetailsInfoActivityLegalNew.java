@@ -1,14 +1,18 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,7 +44,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     private ImageView close_button,distance_left;
     private LinearLayout ll3,scrollingPart;
     LinearLayout ll1,ll2;
-    ImageView close,legal;
+    ImageView close,legal,phone_mid;
     TextView close_tv;
     ImageButton Feedback;
     ListView lv11,lv2;
@@ -92,6 +97,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
         ll2=(LinearLayout)findViewById(R.id.second_list);
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
         distance_left=(ImageView)findViewById(R.id.distance_left);
+
+        phone_mid=(ImageView)findViewById(R.id.phone_middl);
 
         if(!legalAidServiceProviderItem.getOpeningtime().equals(""))
             concateBasic(" খোলার সময়: ",legalAidServiceProviderItem.getOpeningtime());
@@ -152,6 +159,30 @@ public class DetailsInfoActivityLegalNew extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+
+        phone_mid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if(!legalAidServiceProviderItem.getContactNo().equals(""))
+                {
+                    callIntent1.setData(Uri.parse("tel:" + legalAidServiceProviderItem.getContactNo()));
+                    if(checkPermission())
+                        startActivity(callIntent1);
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),
+                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         });
 
@@ -223,6 +254,20 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
     }
 
+
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
 
     private String concateBasic(String value1,String value2){
 

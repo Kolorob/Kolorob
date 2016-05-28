@@ -1,11 +1,15 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,7 +46,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
     TextView ups_text;
-    private ImageView close_button,distance_left;
+    private ImageView close_button,distance_left,phone_mid;
     ListView navlist,navlist1,navlist2;
     String TAG= "nothing";
     HealthServiceProviderItem healthServiceProviderItem;
@@ -98,7 +103,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
         distance_left=(ImageView)findViewById(R.id.distance_left);
-
+        phone_mid=(ImageView)findViewById(R.id.phone_middl);
 
 
 
@@ -284,6 +289,31 @@ public class DetailsInfoActivityHealthNew extends Activity {
             }
         });
 
+        phone_mid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if(!healthServiceProviderItem.getNodeContact().equals(""))
+                {
+                    callIntent1.setData(Uri.parse("tel:" + healthServiceProviderItem.getNodeContact()));
+                    if(checkPermission())
+                        startActivity(callIntent1);
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),
+                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        });
+
+
+
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -362,5 +392,19 @@ public class DetailsInfoActivityHealthNew extends Activity {
             }
         });
 
+    }
+
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
     }
 }
