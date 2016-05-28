@@ -141,9 +141,10 @@ check.setVisibility(View.VISIBLE);
                 if ( isChecked )
                 {
                     // perform logic
-
+                    catgroup.setVisibility(View.GONE);
                     fholder.setVisibility(View.VISIBLE);
                     populatefilterwords(getFilcatid());
+                    check.setVisibility(View.GONE);
                 }
 
             }
@@ -197,6 +198,7 @@ public void populatefilterwords(int filcatid)
             case R.id.morebutton:
                 searchtext.setText("where you want to search");
                 catholder.setVisibility(View.VISIBLE);
+                catgroup.setVisibility(View.VISIBLE);
 
 
 
