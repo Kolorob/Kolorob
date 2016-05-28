@@ -60,7 +60,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     String filterword;
     TextView searchtext;
     ImageButton more;
-    int snumber;
+    int snumber=0;
+
+    public int getSnumber() {
+        return snumber;
+    }
+
+    public void setSnumber(int snumber) {
+        this.snumber = snumber;
+    }
 
     public String getFilterword() {
         return filterword;
@@ -77,6 +85,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     LinearLayout fholder,fleft,fright;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
+    ArrayList<AllHolder>subcatHolders=new ArrayList<>();
     private ArrayList<FinancialServiceProviderItem>fetchedfin;
     private ArrayList<EducationServiceProviderItem>fetchededu;
     private ArrayList<LegalAidServiceProviderItem>fetchedleg;
@@ -360,9 +369,26 @@ public void populatefilterwords(int filcatid)
                     catHolders.add(allHolders.get(ii));
                 }
             }
+            int checknum=getSnumber();
+            if(checknum!=0)
+            {
+                subcatHolders.clear();
+                for(int iii=0;iii<catHolders.size();iii++)
+                {
+                    if(catHolders.get(iii).getRefnum()==checknum)
+                    {
+                        subcatHolders.add(catHolders.get(iii));
+                    }
+                }
+                adapter = new ListViewAdapterAllCategories(this, subcatHolders);
+
+                allitemList.setAdapter(adapter);
+            }
+            else if (checknum==0){
             adapter = new ListViewAdapterAllCategories(this, catHolders);
 
             allitemList.setAdapter(adapter);
+            }
         }
         else {
             adapter = new ListViewAdapterAllCategories(this, allHolders);
@@ -417,6 +443,7 @@ public void populatefilterwords(int filcatid)
                 RadioButton radioButton=(RadioButton)findViewById(buttonId);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
+                calladapter(true);
                 Toast.makeText(SearchActivity.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
                 Log.v("Inside fun1",String.valueOf(num));
             }
@@ -436,6 +463,7 @@ public void populatefilterwords(int filcatid)
                 RadioButton radioButton=(RadioButton)findViewById(buttonId);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
+                calladapter(true);
                 Toast.makeText(SearchActivity.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
                 Log.v("Inside fun2","fun1");
 
@@ -448,7 +476,7 @@ public void populatefilterwords(int filcatid)
         {
             if (subholders.get(s).getSubcatname().equals(filterword))
             {
-                snumber=subholders.get(s).getSubcatid();
+                setSnumber(subholders.get(s).getSubcatid());
             break;
             }
         }
