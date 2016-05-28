@@ -34,6 +34,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookT
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
@@ -64,6 +65,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     LinearLayout first,second,third,fourth;
     private String result_concate="";
     private TextView itemopeningTime;
+    private Context con;
 
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
@@ -81,6 +83,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_info_activity_entertainment_new);
+        con=this;
 
         Intent intent = getIntent();
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -426,9 +429,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
                 }
             }
         });

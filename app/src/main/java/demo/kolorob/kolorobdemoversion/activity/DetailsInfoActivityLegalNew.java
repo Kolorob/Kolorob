@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -53,6 +55,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     ArrayList<LegalAidLegalAdviceItem> legalAidLegalAdviceItems;
     ArrayList<LegalAidSalishiItem> legalAidSalishiItems;
     LegalAidServiceProviderItem legalAidServiceProviderItem;
+    private Context con;
 
 
     @Override
@@ -64,6 +67,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         width=displayMetrics.widthPixels;
 
         Intent intent = getIntent();
+        con=this;
 
         if (null != intent)
         {
@@ -179,9 +183,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
                 }
             }
         });

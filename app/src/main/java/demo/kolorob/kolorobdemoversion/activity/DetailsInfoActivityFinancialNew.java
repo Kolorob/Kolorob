@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,7 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTuitionTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
@@ -76,6 +78,7 @@ public class DetailsInfoActivityFinancialNew extends Activity {
     ListView navlist,navlist1,navlist2,navlist3,navlist4,navlist5,navlist6,navlist7;
     LinearLayout l1,l2,l3,l4,l5,l6,l7,l8;
     private TextView open;
+    private Context con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +134,7 @@ public class DetailsInfoActivityFinancialNew extends Activity {
         open=(TextView)findViewById(R.id.opening_time);
         distance_left=(ImageView)findViewById(R.id.distance_left);
         phone_mid=(ImageView)findViewById(R.id.phone_middl);
+        con=this;
 
 
         if(!financialServiceProviderItem.getOpeningtime().equals(""))
@@ -537,9 +541,8 @@ public class DetailsInfoActivityFinancialNew extends Activity {
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
                 }
             }
         });

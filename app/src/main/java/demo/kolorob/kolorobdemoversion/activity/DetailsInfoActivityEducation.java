@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,6 +37,7 @@ import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
 import demo.kolorob.kolorobdemoversion.adapters.LegalAidAdviceAdapter;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
@@ -51,6 +53,7 @@ public class DetailsInfoActivityEducation extends Activity {
     int width,height;
     TextView ups_text;
     ListView courseListView,listView;
+    Context con;
     EducationServiceProviderItem educationServiceProviderItem;
     ArrayList<EducationCourseItem> educationCourseItems;
     ArrayList<EducationFeeItem>educationFeeItems;
@@ -70,6 +73,7 @@ public class DetailsInfoActivityEducation extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;
+        con=this;
 
 
         Intent intent = getIntent();
@@ -415,18 +419,23 @@ public class DetailsInfoActivityEducation extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                    if(!educationServiceProviderItem.equals(""))
+                    if(!educationServiceProviderItem.getContactNo().equals(""))
                     {
                         callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
                         if(checkPermission())
                             startActivity(callIntent1);
                         else{
+                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                    "ফোন নম্বর পাওয়া যায়নি");
                             Toast.makeText(getApplicationContext(),
                                     "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                     .show();
                         }
                     }
                     else {
+
+                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                "ফোন নম্বর পাওয়া যায়নি");
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();

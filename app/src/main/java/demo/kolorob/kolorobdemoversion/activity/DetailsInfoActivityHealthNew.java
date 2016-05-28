@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ import demo.kolorob.kolorobdemoversion.adapters.HealthVaccineAdapter;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
@@ -59,6 +61,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private LinearLayout ll2;
     private LinearLayout ll3,scrollingPart;
     private int k;
+    private Context con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         width=displayMetrics.widthPixels;
 
         Intent intent = getIntent();
+        con=this;
 
 
         if (null != intent)
@@ -305,9 +309,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                     }
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
                 }
             }
         });
