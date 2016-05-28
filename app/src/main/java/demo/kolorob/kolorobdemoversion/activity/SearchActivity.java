@@ -11,12 +11,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -49,10 +52,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ListViewAdapterAllCategories adapter;
     EditText filterText;
     ListView allitemList;
+    TextView searchtext;
     ImageButton more;
     boolean catstatus=false;
     int filcatid;
     RelativeLayout catholder;
+    CheckBox check;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
     private ArrayList<FinancialServiceProviderItem>fetchedfin;
@@ -77,6 +82,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.searchfilter);
 
 more=(ImageButton)findViewById(R.id.morebutton);
+        searchtext=(TextView)findViewById(R.id.textView17) ;
+        check=(CheckBox)findViewById(R.id.searchmbox);
           more.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
           catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
@@ -117,9 +124,21 @@ more=(ImageButton)findViewById(R.id.morebutton);
                       calladapter(catstatus);
                   }
 
-
+check.setVisibility(View.VISIBLE);
               }
           });
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if ( isChecked )
+                {
+                    // perform logic
+                }
+
+            }
+        });
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
@@ -151,7 +170,7 @@ more=(ImageButton)findViewById(R.id.morebutton);
         switch (v.getId()) {
 
             case R.id.morebutton:
-
+                searchtext.setText("where you want to search");
                 catholder.setVisibility(View.VISIBLE);
 
 

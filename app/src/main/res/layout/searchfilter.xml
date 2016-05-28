@@ -121,6 +121,19 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
             </RadioGroup>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search more"
+                android:id="@+id/searchmbox"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="#ffffff"
+                android:checked="false" />
+
         </RelativeLayout>
     </RelativeLayout>
 
