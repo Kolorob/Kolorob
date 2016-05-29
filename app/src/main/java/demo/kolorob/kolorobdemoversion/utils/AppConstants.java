@@ -32,9 +32,9 @@ public class AppConstants {
     public static final int[] ALL_CAT_MARKER_ICONS = {R.drawable.blue_pin,R.drawable.red_pin,R.drawable.magenta_pin,
         R.drawable.orange_pin,R.drawable.deep_blue_pin,R.drawable.light_orange_pin,R.drawable.green_pin,R.drawable.purple_pin,
     R.drawable.brown_pin,R.drawable.sky_blue_pin};
-    public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.blue_pin,R.drawable.red_pin,R.drawable.magenta_pin,
-            R.drawable.orange_pin,R.drawable.deep_blue_pin,R.drawable.light_orange_pin,R.drawable.green_pin,R.drawable.purple_pin,
-            R.drawable.brown_pin,R.drawable.sky_blue_pin};
+    public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.blue_button,R.drawable.red_button,R.drawable.light_purple_button,
+            R.drawable.orange_button,R.drawable.brown_button,R.drawable.sky_blue_button,R.drawable.light_orange_button,R.drawable.deep_blue_button,
+            R.drawable.magenta_button,R.drawable.off_button};
     public static final float[] MARKER_HUE_COLOR = {BitmapDescriptorFactory.HUE_RED,BitmapDescriptorFactory.HUE_BLUE,
             BitmapDescriptorFactory.HUE_RED,(float)300,BitmapDescriptorFactory.HUE_GREEN,
             (float)324.8,(float)168.8,BitmapDescriptorFactory.HUE_YELLOW,BitmapDescriptorFactory.HUE_ORANGE};
