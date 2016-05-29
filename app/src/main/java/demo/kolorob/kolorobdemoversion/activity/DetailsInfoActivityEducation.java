@@ -205,11 +205,7 @@ public class DetailsInfoActivityEducation extends Activity {
             transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         }
 
-        if(!educationServiceProviderItem.getEmailAddress().equals(""))
-        {
-            AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                    "ই মেইল আই ডি পাওয়া যায়নি");
-        }
+
 
 
 
@@ -428,6 +424,17 @@ public class DetailsInfoActivityEducation extends Activity {
 
             Helpes.getListViewSize(courseListView);
 
+            right_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(educationServiceProviderItem.getEmailAddress().equals(""))
+                    {
+                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                                "ই মেইল আই ডি পাওয়া যায়নি");
+                    }
+                }
+            });
+
             phone_mid.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -473,6 +480,8 @@ public class DetailsInfoActivityEducation extends Activity {
                 finish();
             }
         });
+
+
 
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override

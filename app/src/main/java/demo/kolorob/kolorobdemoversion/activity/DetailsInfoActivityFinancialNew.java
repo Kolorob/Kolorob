@@ -520,12 +520,32 @@ public class DetailsInfoActivityFinancialNew extends Activity {
         });
 
 
-
+//        right_image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(!financialServiceProviderItem.getEmailAddress().equals(""))
+//                {
+//                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+//                            "ই মেইল আই ডি পাওয়া যায়নি");
+//                }
+//            }
+//        });
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        right_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(financialServiceProviderItem.getNodeEmail().equals(""))
+                {
+                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                            "ই মেইল আই ডি পাওয়া যায়নি");
+                }
             }
         });
 
