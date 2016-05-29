@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +38,7 @@ import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
 import demo.kolorob.kolorobdemoversion.adapters.LegalAidAdviceAdapter;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
@@ -43,14 +46,19 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
+/**
+ * Created by arafat on 28/05/2016.
+ */
+
 public class DetailsInfoActivityEducation extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
     TextView ups_text;
     ListView courseListView,listView;
+    Context con;
     EducationServiceProviderItem educationServiceProviderItem;
     ArrayList<EducationCourseItem> educationCourseItems;
     ArrayList<EducationFeeItem>educationFeeItems;
@@ -70,6 +78,7 @@ public class DetailsInfoActivityEducation extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;
+        con=this;
 
 
         Intent intent = getIntent();
@@ -112,6 +121,9 @@ public class DetailsInfoActivityEducation extends Activity {
         phone_text.setText(educationServiceProviderItem.getContactNo());
         email_text.setText(educationServiceProviderItem.getEmailAddress());
         distance_left=(ImageView)findViewById(R.id.distance_left);
+        email_btn=(ImageView) findViewById(R.id.right_side_email);
+
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -193,6 +205,11 @@ public class DetailsInfoActivityEducation extends Activity {
             transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         }
 
+        if(!educationServiceProviderItem.getEmailAddress().equals(""))
+        {
+            AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                    "ই মেইল আই ডি পাওয়া যায়নি");
+        }
 
 
 
@@ -415,18 +432,23 @@ public class DetailsInfoActivityEducation extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                    if(!educationServiceProviderItem.equals(""))
+                    if(!educationServiceProviderItem.getContactNo().equals(""))
                     {
                         callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
                         if(checkPermission())
                             startActivity(callIntent1);
                         else{
+                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                    "ফোন নম্বর পাওয়া যায়নি");
                             Toast.makeText(getApplicationContext(),
                                     "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                     .show();
                         }
                     }
                     else {
+
+                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                "ফোন নম্বর পাওয়া যায়নি");
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();

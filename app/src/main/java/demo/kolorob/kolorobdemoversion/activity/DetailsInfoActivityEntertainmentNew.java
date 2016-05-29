@@ -1,11 +1,18 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,6 +34,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookT
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
@@ -36,13 +45,14 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,call_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
     TextView ups_text;
@@ -55,6 +65,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     LinearLayout first,second,third,fourth;
     private String result_concate="";
     private TextView itemopeningTime;
+    private Context con;
 
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
@@ -67,11 +78,17 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     private TextView transport;
     private ImageView close_button,distance_btn;
 
+    /**
+     * Created by arafat on 28/05/2016.
+     */
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_info_activity_entertainment_new);
+        con=this;
 
         Intent intent = getIntent();
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -105,6 +122,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         email_text=(TextView)findViewById(R.id.email_text);
         close_button=(ImageView)findViewById(R.id.close_button);
         distance_btn=(ImageView)findViewById(R.id.distance_left);
+        call_btn=(ImageView)findViewById(R.id.phone_middl);
+
 
 
 
@@ -334,8 +353,108 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
             }
         });
 
+        distance_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+
+                    String lat = entertainmentServiceProviderItem.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = entertainmentServiceProviderItem.getLongitude().toString();
+                    String name= entertainmentServiceProviderItem.getNodeNameBn().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putBoolean("Value", fromornot);
+                    editor.putString("Name", name);
+
+                    editor.commit();
+
+                    // Toast.makeText(getApplicationContext(), "Your Longitude is " + lon, Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(getApplicationContext(), "Your Latitude is " + lat,Toast.LENGTH_SHORT).show();
+
+                    String Longitude = pref.getString("Latitude", null);
+                    String Latitude = pref.getString("Longitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        //  Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
+                        // implementFragment();
+
+                        //username and password are present, do your stuff
+                    }
+
+
+                    finish();
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityEntertainmentNew.this);
+
+                }
+                else
+                {
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+
+                }
+            }
+        });
+
+        call_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if(!entertainmentServiceProviderItem.getNodeContact().equals(""))
+                {
+                    callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItem.getNodeContact()));
+                    if(checkPermission())
+                        startActivity(callIntent1);
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                }
+                else {
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
+                }
+            }
+        });
+
+
+    }
+
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
     }
 
     private String concateBasic(String value1,String value2){

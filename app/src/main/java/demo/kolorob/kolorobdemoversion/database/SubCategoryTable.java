@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -114,10 +115,10 @@ public class SubCategoryTable {
         closeDB();
         return ret;
     }
-    public ArrayList<String> getcatSubCategories(int id) {
+    public ArrayList<Subcatholder> getcatSubCategories(int id) {
 
 
-        ArrayList<String> siList = new ArrayList<>();
+        ArrayList<Subcatholder> siList = new ArrayList<Subcatholder>();
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
@@ -125,7 +126,8 @@ public class SubCategoryTable {
         if (cursor.moveToFirst()) {
             do {
                 String catid2 =cursor.getString(2);
-                siList.add(catid2);
+                int subcatid=cursor.getInt(1);
+                siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -153,7 +155,7 @@ public class SubCategoryTable {
 
         SQLiteDatabase db = openDB();
         int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
 
 
         if (cursor.moveToFirst()) {

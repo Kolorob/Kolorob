@@ -93,7 +93,10 @@ FinancialServiceProviderItem nullfin;
 
 			}
 		});
-
+	int h=	view.getHeight();
+		ViewGroup.LayoutParams params = view.getLayoutParams();
+		params.height = 80;
+		view.setLayoutParams(params);
 		return view;
 	}
 
