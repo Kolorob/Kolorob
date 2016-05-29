@@ -52,7 +52,7 @@ public class EmergencyActivity extends Activity {
             "DESCO, Pallabi, Dhaka",
             "দুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয","Pllabi, Dhaka","","Red Crescent","","","",
     };
-    String[] name_bangla = new String[] { "029555555",
+    String[] name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
             "পুলিশ কন্ট্রোল রুম",
             "পল্লবী থানা",
             "র্যাব - ৪",
@@ -61,7 +61,7 @@ public class EmergencyActivity extends Activity {
     };
 
 
-    String[] phone_no = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
+    String[] phone_no = new String[] { "029555555",
             "029555555",
             "027124000",
             "02-9015922",

@@ -30,6 +30,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -50,25 +51,20 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.Information_UpdateActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity
-            android:name=".activity.LocationAskActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.LocationInstructionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.ButtonClickBaunia"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_button_click_baunia" />
+            android:label="@string/title_activity_button_click_baunia"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PlaceChoiceActivity"
             android:screenOrientation="portrait" />
@@ -139,7 +135,8 @@
         <activity android:name=".activity.DetailsInfoActivityHealthNew" />
         <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
-        <activity android:name=".activity.DetailsJobActivityNew"></activity>
+        <activity android:name=".activity.DetailsJobActivityNew" />
+        <activity android:name=".activity.FeedBackActivityNew"></activity>
     </application>
 
 </manifest>
