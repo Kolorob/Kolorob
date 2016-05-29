@@ -35,24 +35,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/salaryPart">
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Salary Renge"
-                android:textColor="@color/black"
-                android:id="@+id/salary_range"
-                />
-
-
-
-        </LinearLayout>
 
 
 
@@ -62,15 +45,56 @@
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/black"
 
-        android:text="Remaining Date"
-        android:id="@+id/remaining_date"
-        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/salaryPart">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/remaining_date_lin">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+
+                android:text="Remaining Date"
+                android:id="@+id/remaining_date"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/salaryPart_lin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salary Renge"
+                android:textColor="@color/black"
+                android:id="@+id/salary_range"
+                />
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
 
          <LinearLayout
              android:layout_width="wrap_content"

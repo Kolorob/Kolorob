@@ -24,7 +24,7 @@ public class DisplayAllJobList extends BaseAdapter
     long remaing_date[];
     String address[];
     String contract_number[];
-    LinearLayout titlePart,salaryPart,addressPart,numberpart;
+    LinearLayout titlePart,salaryPart,addressPart,numberpart,remainingdate_lin,salary_range_lin;
     int height,width;
 
 
@@ -96,9 +96,14 @@ public class DisplayAllJobList extends BaseAdapter
         salaryPart=(LinearLayout)convertView.findViewById(R.id.salaryPart);
         addressPart=(LinearLayout)convertView.findViewById(R.id.addressPart);
         numberpart=(LinearLayout)convertView.findViewById(R.id.numberPart);
+        remainingdate_lin=(LinearLayout)convertView.findViewById(R.id.remaining_date_lin);
+        salary_range_lin=(LinearLayout)convertView.findViewById(R.id.salaryPart_lin);
         DisplayMetrics displayMetrics =  context.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;
+
+
+
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) titlePart.getLayoutParams();
 
@@ -106,11 +111,22 @@ public class DisplayAllJobList extends BaseAdapter
         titlePart.setLayoutParams(params);
 
 
-        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) salaryPart.getLayoutParams();
+        LinearLayout.LayoutParams params_salary = (LinearLayout.LayoutParams) salary_range_lin.getLayoutParams();
+
+        params_salary.width = width/3;
+        salary_range_lin.setLayoutParams(params_salary);
+
+        LinearLayout.LayoutParams params_remainingDate = (LinearLayout.LayoutParams) remainingdate_lin.getLayoutParams();
+
+        params_remainingDate.width = width/3;
+        remainingdate_lin.setLayoutParams(params_remainingDate);
 
 
-        params1.width = width/3;
-        salaryPart.setLayoutParams(params1);
+//        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) salaryPart.getLayoutParams();
+//
+//
+//        params1.width = width/3;
+//        salaryPart.setLayoutParams(params1);
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) addressPart.getLayoutParams();
 
