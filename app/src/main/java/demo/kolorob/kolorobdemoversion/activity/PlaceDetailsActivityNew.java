@@ -684,17 +684,7 @@ EditText Searchall;
     }
 
 
-    private void callMapFragment()
-    {
-        MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(locationName);
-        mapFragment.setMapIndicatorText("");
-        mapFragment.setCategoryId(0);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
-        fragmentTransaction.commit();
-    }
+
 
     private void constructCategoryList(ArrayList<CategoryItem> categoryList) {
         constructCategoryList(categoryList, 1.0);
