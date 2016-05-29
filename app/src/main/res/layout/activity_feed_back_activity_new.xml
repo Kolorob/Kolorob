@@ -26,13 +26,13 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="আপনার নাম:  "
-                android:id="@+id/textView16"
+                android:id="@+id/name_user"
                 android:gravity="center" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText5" />
+                android:id="@+id/name_userx" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,12 +45,12 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ইমেইল: "
-                android:id="@+id/textView19" />
+                android:id="@+id/email_user" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText6" />
+                android:id="@+id/email_userx" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,12 +63,12 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ফোন নম্বর: "
-                android:id="@+id/textView20" />
+                android:id="@+id/phone_user" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText7" />
+                android:id="@+id/phone_userx" />
         </LinearLayout>
 
         <TextView
@@ -87,6 +87,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/send"
             android:text="পাঠিয়ে দিন" />
     </LinearLayout>
 </RelativeLayout>
