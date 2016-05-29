@@ -730,12 +730,12 @@ catholder.setVisibility(View.GONE);
         });
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //resultText.setText("Hello, " + userfeedback.getText());
                     }
                 })
-                .setNegativeButton("Cancel",
+                .setNegativeButton("বাতিল করুন",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
