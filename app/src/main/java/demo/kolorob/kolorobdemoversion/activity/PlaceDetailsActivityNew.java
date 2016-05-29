@@ -281,13 +281,16 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
 
                 catsearchclicked=true;
                 setFilcatid(currentCategoryID);
+                setSnumber(0);
                 wholeLayout.setVisibility(View.GONE);
                 searchLayout.setVisibility(View.VISIBLE);
                 calladapter(true);
 
+catholder.setVisibility(View.GONE);
 
                 catgroup.setVisibility(View.GONE);
                 if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
+
                 check.setChecked(false);
                 check.setVisibility(View.GONE);
                 return false;
@@ -561,6 +564,7 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
                     // perform logic
                     catgroup.setVisibility(View.GONE);
                     fholder.setVisibility(View.VISIBLE);
+
                     populatefilterwords(getFilcatid());
                     check.setVisibility(View.GONE);
                 }
@@ -577,9 +581,14 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
     public void populatefilterwords(int filcatid)
     {
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNew.this);
+        subholders.clear();
         subholders=subCategoryTable.getcatSubCategories(filcatid);
 
         int upto=subholders.size()/2;
+        filter.clear();
+        filter2.clear();
+        fleft.removeAllViews();
+        fright.removeAllViews();
         for (int f=0;f<subholders.size();f++)
         {
             if (f>=upto)
@@ -895,7 +904,12 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
                 if (catsearchclicked){
                     catholder.setVisibility(View.VISIBLE);
                     fholder.setVisibility(View.VISIBLE);
+
                     calladapter(true);
+                    catgroup.setVisibility(View.GONE);
+                    fholder.setVisibility(View.VISIBLE);
+                    populatefilterwords(getFilcatid());
+                    check.setVisibility(View.GONE);
 
                 }
                 else {
