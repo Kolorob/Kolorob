@@ -68,7 +68,7 @@ public class DetailsInfoActivityEducation extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button,phone_mid,distance_left;
+    private ImageView close_button,phone_mid,distance_left,feedback;
 
 
     @Override
@@ -122,6 +122,7 @@ public class DetailsInfoActivityEducation extends Activity {
         email_text.setText(educationServiceProviderItem.getEmailAddress());
         distance_left=(ImageView)findViewById(R.id.distance_left);
         email_btn=(ImageView) findViewById(R.id.right_side_email);
+        feedback=(ImageView)findViewById(R.id.feedback);
 
 
 
@@ -205,6 +206,16 @@ public class DetailsInfoActivityEducation extends Activity {
             transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         }
 
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
+                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
+                feedIntent.putExtra("categoryId",1);
+
+            }
+        });
 
 
 
