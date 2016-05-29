@@ -58,10 +58,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
-            android:name=".activity.LocationAskActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
             android:name=".activity.LocationInstructionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
