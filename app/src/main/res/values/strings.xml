@@ -64,6 +64,9 @@
     <string name="application_time"> আবেদনের সময় </string>
     <string name="info_collector">তথ্য সংগ্রহ কারী  </string>
     <string name="salary_range">বেতন সীমা </string>
+    <string name="know_kolorob">কলরব সম্পর্কে আপনি কি জানতে চান?</string>
+    <string name="enter_text_here"> এখানে লিখুন </string>
+
 
     বেতন সীমা
 

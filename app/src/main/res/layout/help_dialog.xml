@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="What you wanna know about kolorob?"
+        android:text="@string/know_kolorob"
         android:id="@+id/textView" />
 
     <EditText
         android:id="@+id/edittext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter text here.."
+        android:hint="@string/enter_text_here"
         android:lines="4"
         android:padding="10dp" />
 
@@ -25,7 +25,7 @@
         android:id="@+id/submit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="জমা দিন"
         android:layout_gravity="center_horizontal"
         android:onClick="submit"
         android:padding="10dp" />
