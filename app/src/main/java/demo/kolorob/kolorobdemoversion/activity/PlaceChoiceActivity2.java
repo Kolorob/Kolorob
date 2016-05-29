@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,23 +20,48 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Locale;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
+import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
+import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -47,18 +74,62 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     int width,height;
     EditText Searchall;
     private static final int DELAY_PLACE_DETAILS_LAUNCH_ANIM = 500;
-    Vector vector= new Vector();
-    Vector compare= new Vector();
-    Vector vectorHel= new Vector();
-    Vector vectorEnt= new Vector();
-    Vector vectorEdu= new Vector();
-    Vector vectorFin= new Vector();
-    Vector vectorLeg= new Vector();
+    private LinearLayout llSubCatListHolder,exlist;
+    ArrayList<String> subcategorynames;
+    ListViewAdapterAllCategories adapter;
+    EditText filterText;
+    ListView allitemList;
+    String filterword;
+    TextView searchtext;
+    ImageButton more;
+    int snumber=0;
+
     String app_ver;
     NotificationManager manager;
     Notification myNotication;
+    public int getSnumber() {
+        return snumber;
+    }
+
+    public void setSnumber(int snumber) {
+        this.snumber = snumber;
+    }
+
+    public String getFilterword() {
+        return filterword;
+    }
+
+    public void setFilterword(String filterword) {
+        this.filterword = filterword;
+    }
+    boolean doubleBackToExitPressedOnce = false;
+    boolean catstatus=false;
+    int filcatid;
+    RelativeLayout catholder;
+    CheckBox check;
+    LinearLayout fholder,fleft,fright;
+    ArrayList<AllHolder>allHolders=new ArrayList<>();
+    ArrayList<AllHolder>catHolders=new ArrayList<>();
+    ArrayList<AllHolder>subcatHolders=new ArrayList<>();
+    private ArrayList<FinancialServiceProviderItem>fetchedfin;
+    private ArrayList<EducationServiceProviderItem>fetchededu;
+    private ArrayList<LegalAidServiceProviderItem>fetchedleg;
+    private ArrayList<EntertainmentServiceProviderItem>fetchedent;
+    private ArrayList<HealthServiceProviderItem>fetchedhel;
+    private ArrayList<Subcatholder>subholders=new ArrayList<>();
+    RadioGroup catgroup,fgrp1,fgrp2;
+    ArrayList<String>filter=new ArrayList<>();
+    ArrayList<String>filter2=new ArrayList<>();
+    public int getFilcatid() {
+        return filcatid;
+    }
+
+    public void setFilcatid(int filcatid) {
+        this.filcatid = filcatid;
+    }
 
     private Context con;
+    LinearLayout placemain,searchmain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +141,10 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels-32;
         width=displayMetrics.widthPixels-32;
+placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
+        searchmain=(LinearLayout)findViewById(R.id.searchviewholder);
+        searchmain.setVisibility(View.GONE);
+        placemain.setVisibility(View.VISIBLE);
 
         Log.d("...>>>","Layout width"+width);
 
@@ -149,9 +224,15 @@ Searchall=(EditText)findViewById(R.id.searchall);
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-
-                Intent i=new Intent(getApplicationContext(),SearchActivity.class);
-                startActivity(i);
+                calladapter(false);
+                placemain.setVisibility(View.GONE);
+                searchmain.setVisibility(View.VISIBLE);
+                catholder.setVisibility(View.GONE);
+                fholder.setVisibility(View.GONE);
+                catgroup.setVisibility(View.GONE);
+               if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
+                check.setChecked(false);
+                check.setVisibility(View.GONE);
 
                 return false;
             }
@@ -202,7 +283,87 @@ Searchall=(EditText)findViewById(R.id.searchall);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        more=(ImageButton)findViewById(R.id.morebutton);
+        searchtext=(TextView)findViewById(R.id.textView17) ;
+        check=(CheckBox)findViewById(R.id.searchmbox);
+        more.setOnClickListener((View.OnClickListener) this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
+        catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
+        catholder.setVisibility(View.GONE);
+        catgroup=(RadioGroup)findViewById(R.id.catradioGroup);
+        catgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                if (checkedId == R.id.edradioButton) {
+
+                    setFilcatid(1);
+                    catstatus=true;
+                    calladapter(catstatus);
+
+                } else  if (checkedId == R.id.helradioButton2) {
+                    //do work when radioButton2 is active
+                    setFilcatid(2);
+                    catstatus=true;
+                    calladapter(catstatus);
+                }
+                else  if (checkedId == R.id.entradioButton5) {
+                    //do work when radioButton2 is active
+                    setFilcatid(3);
+                    catstatus=true;
+                    calladapter(catstatus);
+                }
+                else  if (checkedId == R.id.finradioButton4) {
+                    //do work when radioButton2 is active
+                    setFilcatid(6);
+                    catstatus=true;
+                    calladapter(catstatus);
+                }
+                else  if (checkedId == R.id.legradioButton3) {
+                    //do work when radioButton2 is active
+                    setFilcatid(5);
+                    catstatus=true;
+                    calladapter(catstatus);
+                }
+
+                check.setVisibility(View.VISIBLE);
+            }
+        });
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if ( isChecked )
+                {
+                    // perform logic
+                    catgroup.setVisibility(View.GONE);
+                    fholder.setVisibility(View.VISIBLE);
+                    populatefilterwords(getFilcatid());
+                    check.setVisibility(View.GONE);
+                }
+
+            }
+        });
+//        else
+//           toolbar = (Toolbar) findViewById(R.id.toolbars);
+
+        // toolbar.setBackgroundResource(android.R.color.transparent);
+
+
+        //toggle.syncState();
+
+
+        //    gridView = (GridView) findViewById(R.id.grid);
+
+
+
+        llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+        allitemList=(ListView)findViewById(R.id.allitem);
+        fleft=(LinearLayout)findViewById(R.id.linearLayout1);
+        fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
+        Populateholder();
 
     }
 
@@ -283,10 +444,11 @@ Searchall=(EditText)findViewById(R.id.searchall);
 
                 gotoPlaceDetailsView(AppConstants.PLACE_PARIS_ROAD);
                 break;
-            case R.id.searchall:
-                Intent i=new Intent(this,SearchActivity.class);
-                startActivity(i);
 
+            case R.id.morebutton:
+                searchtext.setText(R.string.searchtext);
+                catholder.setVisibility(View.VISIBLE);
+                catgroup.setVisibility(View.VISIBLE);
 
             default:
                 break;
@@ -314,22 +476,34 @@ Searchall=(EditText)findViewById(R.id.searchall);
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Close")
-                .setMessage("Are you sure you want to close Kolorob")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
+        if (doubleBackToExitPressedOnce) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Close")
+                    .setMessage("Are you sure you want to close Kolorob")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
 
-                })
-                .setNegativeButton("No", null)
-                .show();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+searchmain.setVisibility(View.GONE);
+        placemain.setVisibility(View.VISIBLE);
+        this.doubleBackToExitPressedOnce = true;
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -405,5 +579,275 @@ Searchall=(EditText)findViewById(R.id.searchall);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
+    }
+    public void populatefilterwords(int filcatid)
+    {
+        SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceChoiceActivity2.this);
+        subcatHolders.clear();
+        filter.clear();
+        filter2.clear();
+        fleft.removeAllViews();
+        fright.removeAllViews();
+        subholders=subCategoryTable.getcatSubCategories(filcatid);
+
+        int upto=subholders.size()/2;
+        for (int f=0;f<subholders.size();f++)
+        {
+            if (f>=upto)
+                filter2.add(subholders.get(f).getSubcatname());
+            else
+            {
+                filter.add(subholders.get(f).getSubcatname());}
+        }
+
+        final RadioButton[] rb = new RadioButton[30];
+        fgrp1 = new RadioGroup(this); //create the RadioGroup
+        fgrp1.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+        for(int i=0; i<filter.size(); i++){
+            rb[i]  = new RadioButton(this);
+            fgrp1.addView(rb[i]);
+          //the RadioButtons are added to the radioGroup instead of the layout
+            rb[i].setText(filter.get(i).toString());
+            rb[i].setTextColor(Color.WHITE);
+        }
+        fgrp2 = new RadioGroup(this); //create the RadioGroup
+        fgrp2.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+        for(int i=0; i<filter2.size(); i++){
+            rb[i]  = new RadioButton(this);
+            fgrp2.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+            rb[i].setText(filter2.get(i).toString());
+            rb[i].setTextColor(Color.WHITE);
+
+
+        }
+        fleft.addView(fgrp1);
+        fright.addView(fgrp2);//you add the w
+        searchtext.setText(R.string.searchtext);
+        fgrp1.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
+        fgrp2.clearCheck();
+        fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId != -1) {
+                    fun2();
+                }
+            }
+        });
+
+        fgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId != -1) {
+                    fun1();
+                }
+            }
+        });
+    }
+
+    public void Populateholder()
+    {
+        filterText = (EditText)findViewById(R.id.searchall);
+        EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceChoiceActivity2.this);
+        EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceChoiceActivity2.this);
+        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceChoiceActivity2.this);
+        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceChoiceActivity2.this);
+        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceChoiceActivity2.this);
+        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo(3);
+        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(6);
+        fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(5);
+        fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfo(2);
+        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(1);
+        String nameen,namebn,catid,node;
+        int refname;
+        for (int i=0;i<fetchededu.size();i++)
+        {
+
+            nameen=fetchededu.get(i).getEduNameEng();
+            node=fetchededu.get(i).getIdentifierId();
+            refname=fetchededu.get(i).getEduSubCategoryId();
+            namebn=fetchededu.get(i).getEduNameBan();
+
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,1);
+            allHolders.add(all);
+        }
+
+
+        for (int i=0;i<fetchedhel.size();i++)
+        {
+
+            nameen=fetchedhel.get(i).getNodeName();
+            node=fetchedhel.get(i).getNodeId();
+            refname=fetchedhel.get(i).getRefNum();
+            namebn=fetchedhel.get(i).getNameBn();
+
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,2);
+            allHolders.add(all);
+        }
+
+
+        for (int i=0;i<fetchedleg.size();i++)
+        {
+
+            nameen=fetchedleg.get(i).getLegalaidNameEng();
+            node=fetchedleg.get(i).getIdentifierId();
+            refname=fetchedleg.get(i).getLegalaidSubCategoryId();
+            namebn=fetchedleg.get(i).getLegalaidNameBan();
+
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,5);
+            allHolders.add(all);
+        }
+        for (int i=0;i<fetchedent.size();i++)
+        {
+
+            nameen=fetchedent.get(i).getNodeName();
+            node=fetchedent.get(i).getNodeId();
+            refname=fetchedent.get(i).getEntSubCategoryId();
+            namebn=fetchedent.get(i).getNodeNameBn();
+
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,3);
+            allHolders.add(all);
+        }
+        for (int i=0;i<fetchedfin.size();i++)
+        {
+
+            nameen=fetchedfin.get(i).getNodeName();
+            node=fetchedfin.get(i).getNodeId();
+            refname=fetchedfin.get(i).getRefNum();
+            namebn=fetchedfin.get(i).getNamebn();
+
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,6);
+            allHolders.add(all);
+
+
+        }
+        calladapter(false);
+
+    }
+    private void calladapter(boolean status)
+    {
+        boolean instatus=status;
+        if(instatus==true)
+        {
+            int gotcatid=getFilcatid();
+            catHolders.clear();
+            for(int ii=0;ii<allHolders.size();ii++)
+            {
+                if(allHolders.get(ii).getCatid()==gotcatid)
+                {
+                    catHolders.add(allHolders.get(ii));
+                }
+            }
+            int checknum=getSnumber();
+            if(checknum!=0)
+            {
+                subcatHolders.clear();
+                for(int iii=0;iii<catHolders.size();iii++)
+                {
+                    if(catHolders.get(iii).getRefnum()==checknum)
+                    {
+                        subcatHolders.add(catHolders.get(iii));
+                    }
+                }
+                adapter = new ListViewAdapterAllCategories(this, subcatHolders);
+
+                allitemList.setAdapter(adapter);
+            }
+            else if (checknum==0){
+                adapter = new ListViewAdapterAllCategories(this, catHolders);
+
+                allitemList.setAdapter(adapter);
+            }
+        }
+        else {
+            adapter = new ListViewAdapterAllCategories(this, allHolders);
+
+            allitemList.setAdapter(adapter);
+        }
+
+        int[] colors = {0, 0xFFFF0000, 0}; // red for the example
+        allitemList.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
+        allitemList.setDividerHeight(1);
+
+        filterText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+                String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
+
+                adapter.filter(text);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                      int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+        });
+        allitemList.setFastScrollEnabled(false);
+        allitemList.setFastScrollEnabled(true);
+    }
+    public void fun1() {
+        fgrp2.setOnCheckedChangeListener(null);
+        fgrp2.clearCheck();
+        fgrp2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                fun2();
+                int buttonId=fgrp2.getCheckedRadioButtonId();
+                RadioButton radioButton=(RadioButton)findViewById(buttonId);
+                setFilterword((String) radioButton.getText());
+                int num=Findsubcatid(filterword);
+                calladapter(true);
+                Toast.makeText(PlaceChoiceActivity2.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+                Log.v("Inside fun1",String.valueOf(num));
+            }
+        });
+    }
+
+    public void fun2() {
+        fgrp1.setOnCheckedChangeListener(null);
+        fgrp1.clearCheck();
+        fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                fun1();
+                int buttonId=fgrp1.getCheckedRadioButtonId();
+                RadioButton radioButton=(RadioButton)findViewById(buttonId);
+                setFilterword((String) radioButton.getText());
+                int num=Findsubcatid(filterword);
+                calladapter(true);
+                Toast.makeText(PlaceChoiceActivity2.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+                Log.v("Inside fun2","fun1");
+
+            }
+        });
+    }
+    private int Findsubcatid(String filterword){
+
+        for (int s=0;s<=subholders.size();s++)
+        {
+            if (subholders.get(s).getSubcatname().equals(filterword))
+            {
+                setSnumber(subholders.get(s).getSubcatid());
+                break;
+            }
+        }
+
+        return snumber;
     }
 }

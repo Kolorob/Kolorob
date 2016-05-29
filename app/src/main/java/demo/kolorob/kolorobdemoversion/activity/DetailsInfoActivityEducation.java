@@ -68,7 +68,7 @@ public class DetailsInfoActivityEducation extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button,phone_mid,distance_left;
+    private ImageView close_button,phone_mid,distance_left,feedback;
 
 
     @Override
@@ -122,6 +122,7 @@ public class DetailsInfoActivityEducation extends Activity {
         email_text.setText(educationServiceProviderItem.getEmailAddress());
         distance_left=(ImageView)findViewById(R.id.distance_left);
         email_btn=(ImageView) findViewById(R.id.right_side_email);
+        feedback=(ImageView)findViewById(R.id.feedback);
 
 
 
@@ -205,11 +206,17 @@ public class DetailsInfoActivityEducation extends Activity {
             transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         }
 
-        if(!educationServiceProviderItem.getEmailAddress().equals(""))
-        {
-            AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                    "ই মেইল আই ডি পাওয়া যায়নি");
-        }
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
+                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
+                feedIntent.putExtra("categoryId",1);
+
+            }
+        });
+
 
 
 
@@ -428,6 +435,17 @@ public class DetailsInfoActivityEducation extends Activity {
 
             Helpes.getListViewSize(courseListView);
 
+            right_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(educationServiceProviderItem.getEmailAddress().equals(""))
+                    {
+                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                                "ই মেইল আই ডি পাওয়া যায়নি");
+                    }
+                }
+            });
+
             phone_mid.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -473,6 +491,8 @@ public class DetailsInfoActivityEducation extends Activity {
                 finish();
             }
         });
+
+
 
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override

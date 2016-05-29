@@ -193,6 +193,17 @@ public class DetailsInfoActivityLegalNew extends Activity {
             }
         });
 
+        right_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(legalAidServiceProviderItem.getEmailAddress().equals(""))
+                {
+                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                            "ই মেইল আই ডি পাওয়া যায়নি");
+                }
+            }
+        });
+
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

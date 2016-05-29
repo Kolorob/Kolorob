@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.interfaces.OnBackPressedListener;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -519,5 +520,21 @@ public void calltransportlayout()
     }
 
 
+
+
+   /* @Override
+    public void onBackPressed() {
+       ;
+        List<Fragment> fragmentList =  getActivity().getSupportFragmentManager().getFragments();
+        if (fragmentList != null) {
+            //TODO: Perform your logic to pass back press here
+            for(Fragment fragment : fragmentList){
+                if(fragment instanceof OnBackPressedListener){
+                    ((OnBackPressedListener)fragment).onBackPressed();
+                }
+            }
+        }
+    }
+*/
 }
 
