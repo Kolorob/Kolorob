@@ -212,7 +212,10 @@ public class DetailsInfoActivityEducation extends Activity {
             public void onClick(View v) {
                 Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
                 feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
-                feedIntent.putExtra("categoryId",1);
+                feedIntent.putExtra("categoryId","1");
+                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
+
+                startActivity(feedIntent);
 
             }
         });
