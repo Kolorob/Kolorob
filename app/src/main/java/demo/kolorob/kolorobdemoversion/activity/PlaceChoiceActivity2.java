@@ -488,7 +488,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
 searchmain.setVisibility(View.GONE);
         placemain.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+       
 
         new Handler().postDelayed(new Runnable() {
 

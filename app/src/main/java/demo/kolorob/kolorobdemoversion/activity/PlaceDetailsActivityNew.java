@@ -236,6 +236,7 @@ EditText Searchall,catsearch;
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -847,12 +848,25 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
 
 
 
-
-
-    @Override
+@Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+    wholeLayout.setVisibility(View.VISIBLE);
+    searchLayout.setVisibility(View.GONE);
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 
