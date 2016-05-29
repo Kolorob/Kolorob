@@ -228,12 +228,13 @@ EditText Searchall,catsearch;
     private ArrayList<HealthServiceProviderItem>fetchedhel;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
     RadioGroup catgroup,fgrp1,fgrp2;
+    int va;
     ArrayList<String>filter=new ArrayList<>();
     ArrayList<String>filter2=new ArrayList<>();
     public int getFilcatid() {
         return filcatid;
     }
-
+    ArrayList<SubCategoryItem> subCategoryList;
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
@@ -1508,10 +1509,10 @@ catholder.setVisibility(View.GONE);
             v = li.inflate(R.layout.sub_cat_list_item, llSubCatListHolder, false);
         else
             v = li.inflate(R.layout.sub_cat_list_item1, llSubCatListHolder, false);
-        ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
+        final ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
-            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[ subcategory++]);
+            ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[ subcategory++]);
         else{
             ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS1[ subcategory++]);
         }
@@ -1527,7 +1528,7 @@ catholder.setVisibility(View.GONE);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
-
+       va=0;
 /**************************
  *
  *
@@ -1543,15 +1544,88 @@ catholder.setVisibility(View.GONE);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int index=llSubCatListHolder.indexOfChild(v);
                 for(int i= 0; i < llSubCatListHolder.getChildCount(); i++){
-              ImageView  ivIcon = (ImageView)llSubCatListHolder.getChildAt(0).findViewById(R.id.iv_sub_cat_icon);
-                    TextView tv=(TextView) ((ViewGroup)llSubCatListHolder.getChildAt(i)).getChildAt(1);
-                    // new background because something has changed
-                    // check if it's not the imageView you just clicked because you don't want to change its background
-                   // tv.setText("as");
-                   // ivIcon.setImageResource(0);
-                   // ivIcon.setImageResource(AppConstants.OFF_BUTTON[0]);
+                    if(i==index)
+                    {
+                        if (i==0) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.blue_button);
+                            continue;
+                        }
+                        else if(i==1) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.red_button);
+                            continue;
+
+                        }
+                        else if(i==2) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.light_purple_button);
+                            continue;
+
+                        }
+                        else if(i==3) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.orange_button);
+                            continue;
+
+                        }
+                        else if(i==4) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.brown_button);
+                            continue;
+
+                        }   else if(i==5) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.sky_blue_button);
+                            continue;
+
+                        }   else if(i==6) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.light_orange_button);
+                            continue;
+
+                        }
+                        else if(i==7) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.deep_blue_button);
+                            continue;
+
+                        }
+                        else if(i==8) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.magenta_button);
+                            continue;
+
+                        }
+
+
+
+
+
+                    }
+                    else {
+                        ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
+                        // TextView tv=(TextView) ((ViewGroup)llSubCatListHolder.getChildAt(i)).getChildAt(1);
+                        // new background because something has changed
+                        // check if it's not the imageView you just clicked because you don't want to change its background
+                        // tv.setText("as");
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(AppConstants.OFF_BUTTON[0]);
+                    }
                 }
+
 
 //llSubCatListHolder.findViewById(R.id.f).findViewById(R.id.f2).findViewById(R.id.iv_sub_cat_icon).setBackground(R.drawable.off_button);
                 /*code for category*/
@@ -1574,6 +1648,7 @@ catholder.setVisibility(View.GONE);
 
 
                     case AppConstants.EDUCATION:
+
                         ArrayList<EducationServiceProviderItem> eduItem;
 
                         eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
@@ -1644,10 +1719,7 @@ catholder.setVisibility(View.GONE);
                 /*code for all*/
 
                 int p= getResources().getColor(R.color.subcategory_color);
-                for(int i=0; i<((ViewGroup)v).getChildCount(); ++i) {
-                    nextChild = ((ViewGroup)v).getChildAt(i);
-                    nextChild.setBackgroundColor(p);
-                }
+
 
                // showSubCatListItem.setEnabled(true);
                // subCatItemListHeader.setText(si.getSubcatHeader());
