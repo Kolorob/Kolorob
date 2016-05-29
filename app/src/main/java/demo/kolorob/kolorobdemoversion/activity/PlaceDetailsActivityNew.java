@@ -208,7 +208,7 @@ EditText Searchall,catsearch;
     public String getFilterword() {
         return filterword;
     }
-
+    TextView tvName;
     public void setFilterword(String filterword) {
         this.filterword = filterword;
     }
@@ -999,12 +999,13 @@ catholder.setVisibility(View.GONE);
 
 
                 currentCategoryID = ci.getId();
-
                 for(int i= 0; i < llCatListHolder.getChildCount(); i++){
                     ImageView iv = (ImageView) ((ViewGroup)llCatListHolder.getChildAt(i)).getChildAt(0);
+
                     // new background because something has changed
                     // check if it's not the imageView you just clicked because you don't want to change its background
                     iv.setImageResource(0);
+
                     iv.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[i]);
                 }
                /* llCatListHolder.getChildAt(0).setBackgroundResource(R.drawable.turned_off_porashona);
@@ -1508,7 +1509,7 @@ catholder.setVisibility(View.GONE);
         else
             v = li.inflate(R.layout.sub_cat_list_item1, llSubCatListHolder, false);
         ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
-        TextView tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
+        tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
             ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONS[ subcategory++]);
         else{
@@ -1542,7 +1543,17 @@ catholder.setVisibility(View.GONE);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int i= 0; i < llSubCatListHolder.getChildCount(); i++){
+              ImageView  ivIcon = (ImageView)llSubCatListHolder.getChildAt(0).findViewById(R.id.iv_sub_cat_icon);
+                    TextView tv=(TextView) ((ViewGroup)llSubCatListHolder.getChildAt(i)).getChildAt(1);
+                    // new background because something has changed
+                    // check if it's not the imageView you just clicked because you don't want to change its background
+                   // tv.setText("as");
+                   // ivIcon.setImageResource(0);
+                   // ivIcon.setImageResource(AppConstants.OFF_BUTTON[0]);
+                }
 
+//llSubCatListHolder.findViewById(R.id.f).findViewById(R.id.f2).findViewById(R.id.iv_sub_cat_icon).setBackground(R.drawable.off_button);
                 /*code for category*/
                 /*following code will be different for each category*/
                 /*category id 1 means education.

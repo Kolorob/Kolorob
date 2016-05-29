@@ -23,6 +23,7 @@ public class AppConstants {
     public static final int[] ALL_CAT_ICONS = {R.drawable.but_porashuna_small, R.drawable.but_chikitsha_small,R.drawable.but_ananda_small,
             R.drawable.but_shorkari_small,R.drawable.but_ain_small,  R.drawable.but_taka_small,R.drawable.but_chakri_small
             };
+    public static final int[] OFF_BUTTON = {R.drawable.off_button};
     public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.turned_off_porashona, R.drawable.turned_off_chikitsha,R.drawable.turned_off_anondo_furti,
             R.drawable.turned_off_shorkari_shubidha,R.drawable.turned_off_ain_kanun,  R.drawable.turned_off_taka_poisha,R.drawable.turned_off_chakri_bakri
     };
