@@ -50,8 +50,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
     Toolbar toolbar;
-    private LinearLayout llSubCatListHolder,exlist;
-    ArrayList<String>subcategorynames;
+
     ListViewAdapterAllCategories adapter;
     EditText filterText;
     ListView allitemList;
@@ -190,7 +189,7 @@ check.setVisibility(View.VISIBLE);
 
 
 
-        llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+
           allitemList=(ListView)findViewById(R.id.allitem);
         fleft=(LinearLayout)findViewById(R.id.linearLayout1);
         fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
