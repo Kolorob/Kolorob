@@ -1,6 +1,5 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -43,7 +42,6 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceP
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
  * Created by HP on 5/25/2016.
@@ -109,7 +107,7 @@ ArrayList<String>filter=new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchfilter);
 
-more=(ImageButton)findViewById(R.id.morebutton);
+        more=(ImageButton)findViewById(R.id.morebutton);
         searchtext=(TextView)findViewById(R.id.textView17) ;
         check=(CheckBox)findViewById(R.id.searchmbox);
           more.setOnClickListener(this);
