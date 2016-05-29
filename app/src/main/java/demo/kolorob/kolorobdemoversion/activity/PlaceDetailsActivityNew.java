@@ -188,6 +188,7 @@ TextView header;
         this.placeChoice = placeChoice;
     }
 EditText Searchall,catsearch;
+    boolean catsearchclicked=false;
     ListViewAdapterAllCategories adapter;
     EditText filterText;
     ListView allitemList;
@@ -264,7 +265,13 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
 
                 wholeLayout.setVisibility(View.GONE);
                 searchLayout.setVisibility(View.VISIBLE);
-
+                calladapter(false);
+                catholder.setVisibility(View.GONE);
+                fholder.setVisibility(View.GONE);
+                catgroup.setVisibility(View.GONE);
+                if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
+                check.setChecked(false);
+                check.setVisibility(View.GONE);
                 return false;
             }
         });
@@ -272,10 +279,20 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
+                catsearchclicked=true;
+                setFilcatid(currentCategoryID);
                 wholeLayout.setVisibility(View.GONE);
                 searchLayout.setVisibility(View.VISIBLE);
+                calladapter(true);
 
+
+                catgroup.setVisibility(View.GONE);
+                if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
+                check.setChecked(false);
+                check.setVisibility(View.GONE);
                 return false;
+
+
             }
         });
         header=(TextView)findViewById(R.id.textView15);
@@ -591,7 +608,7 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
         }
         fleft.addView(fgrp1);
         fright.addView(fgrp2);//you add the w
-        searchtext.setText("Filter more");
+        searchtext.setText(R.string.searchtext);
         fgrp1.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
         fgrp2.clearCheck();
         fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -875,9 +892,18 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
         switch(v.getId()){
 
             case R.id.morebutton:
-                searchtext.setText("where you want to search");
-                catholder.setVisibility(View.VISIBLE);
-                catgroup.setVisibility(View.VISIBLE);
+                if (catsearchclicked){
+                    catholder.setVisibility(View.VISIBLE);
+                    fholder.setVisibility(View.VISIBLE);
+                    calladapter(true);
+
+                }
+                else {
+                    searchtext.setText(R.string.searchtext);
+                    catholder.setVisibility(View.VISIBLE);
+                    catgroup.setVisibility(View.VISIBLE);
+
+                }
                 break;
 
             default:

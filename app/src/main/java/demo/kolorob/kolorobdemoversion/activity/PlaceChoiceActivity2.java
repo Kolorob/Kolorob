@@ -224,9 +224,15 @@ Searchall=(EditText)findViewById(R.id.searchall);
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-
+                calladapter(false);
                 placemain.setVisibility(View.GONE);
                 searchmain.setVisibility(View.VISIBLE);
+                catholder.setVisibility(View.GONE);
+                fholder.setVisibility(View.GONE);
+                catgroup.setVisibility(View.GONE);
+               if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
+                check.setChecked(false);
+                check.setVisibility(View.GONE);
 
                 return false;
             }
@@ -440,7 +446,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
                 break;
 
             case R.id.morebutton:
-                searchtext.setText("where you want to search");
+                searchtext.setText(R.string.searchtext);
                 catholder.setVisibility(View.VISIBLE);
                 catgroup.setVisibility(View.VISIBLE);
 
@@ -488,7 +494,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
 searchmain.setVisibility(View.GONE);
         placemain.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
-       
+
 
         new Handler().postDelayed(new Runnable() {
 
@@ -577,6 +583,11 @@ searchmain.setVisibility(View.GONE);
     public void populatefilterwords(int filcatid)
     {
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceChoiceActivity2.this);
+        subcatHolders.clear();
+        filter.clear();
+        filter2.clear();
+        fleft.removeAllViews();
+        fright.removeAllViews();
         subholders=subCategoryTable.getcatSubCategories(filcatid);
 
         int upto=subholders.size()/2;
@@ -588,12 +599,14 @@ searchmain.setVisibility(View.GONE);
             {
                 filter.add(subholders.get(f).getSubcatname());}
         }
+
         final RadioButton[] rb = new RadioButton[30];
         fgrp1 = new RadioGroup(this); //create the RadioGroup
         fgrp1.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
         for(int i=0; i<filter.size(); i++){
             rb[i]  = new RadioButton(this);
-            fgrp1.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+            fgrp1.addView(rb[i]);
+          //the RadioButtons are added to the radioGroup instead of the layout
             rb[i].setText(filter.get(i).toString());
             rb[i].setTextColor(Color.WHITE);
         }
@@ -605,10 +618,11 @@ searchmain.setVisibility(View.GONE);
             rb[i].setText(filter2.get(i).toString());
             rb[i].setTextColor(Color.WHITE);
 
+
         }
         fleft.addView(fgrp1);
         fright.addView(fgrp2);//you add the w
-        searchtext.setText("Filter more");
+        searchtext.setText(R.string.searchtext);
         fgrp1.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
         fgrp2.clearCheck();
         fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

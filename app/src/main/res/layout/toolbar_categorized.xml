@@ -64,7 +64,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.87"
                     android:textColor="@color/black"
-                    android:hint="Search in category ..."
+                    android:hint="Search..."
                     android:textColorHint="@color/red"
                     android:background="@color/white"
                     android:layout_height="40dp"
@@ -75,8 +75,13 @@
                     android:layout_alignEnd="@+id/toolbar_logo"
                     android:layout_alignParentTop="true"
                     android:layout_toEndOf="@+id/textView15"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignBottom="@+id/imageView7"
+                    android:paddingBottom="5dp"
+                    android:layout_below="@+id/textView15"
+                    android:layout_marginBottom="10dp" />
 
 
         </RelativeLayout>
