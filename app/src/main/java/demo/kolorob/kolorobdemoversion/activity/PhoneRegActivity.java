@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -97,15 +98,18 @@ public class PhoneRegActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
-
+                       // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);
-                            JSONArray forms = jo.getJSONArray("status");
+                            String forms;
+                            forms = jo.getString("status");
+                            Log.d(">>>>>","status "+forms);
+                            //Log.d(">>>>>","status ");
 
-                            if(forms.toString().equals("true"))
+                            if(forms.equals("true"))
                             {
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "রেজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
                                 demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
