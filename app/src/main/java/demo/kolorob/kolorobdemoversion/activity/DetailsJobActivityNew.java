@@ -199,6 +199,12 @@ public class DetailsJobActivityNew extends AppCompatActivity {
 
 
 
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 
@@ -220,6 +226,11 @@ public class DetailsJobActivityNew extends AppCompatActivity {
     public void sendemail(View v){
         AlertMessage.showMessage(con,"Sorry","Email ID is not found!");
     }
+
+//    public void closepage(View v){
+//        this.finish();
+//    }
+
 
     private String concateBasic(String value1,String value2){
 
