@@ -8,6 +8,11 @@
     <string name="switch_image">Switch Image</string>
     <string name="transparency">Transparency</string>
     <string name="clickable">Clickable</string>
+    <string name="Education">পড়াশুনা</string>
+    <string name="Health"></string>
+    <string name="Legal">Switch Image</string>
+    <string name="Financial">Transparency</string>
+    <string name="Entertainment">Clickable</string>
     <string name="txt_cd_icon_cat">Icon of the category</string>
     <string name="txt_cd_header_icon_ofcat_subcatlist">header icon of the category</string>
     <string name="txt_inst_sub_cat_choose">লিস্ট দেখতে চাইলে এখানে চাপ দেন</string>
