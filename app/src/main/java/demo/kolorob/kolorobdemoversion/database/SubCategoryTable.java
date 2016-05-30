@@ -23,6 +23,8 @@ public class SubCategoryTable {
     private static final String KEY_SUB_CAT_ID = "_sub_cat_id"; // 1 -integer
     private static final String KEY_NAME = "_sub_cat_name"; // 2 - text
     private static final String KEY_SUB_CAT_HEADER= "_sub_cat_header";
+    private static final String KEY_NAME_BN = "_sub_cat_name_bn"; // 2 - text
+    private static final String KEY_SUB_CAT_HEADER_BN= "_sub_cat_header_bn";
     // : But boolean value,
     // for simplicity of the local table
     // structure it's kept as string.
@@ -46,6 +48,8 @@ public class SubCategoryTable {
                 + KEY_SUB_CAT_ID + " INTEGER, "
                 + KEY_NAME + " TEXT, "
                 + KEY_SUB_CAT_HEADER + " TEXT, "
+                + KEY_NAME_BN + " TEXT, "
+                + KEY_SUB_CAT_HEADER_BN + " TEXT, "
                 + " PRIMARY KEY("+KEY_CAT_ID+","+KEY_SUB_CAT_ID+"))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -64,20 +68,23 @@ public class SubCategoryTable {
                 subCategoryItem.getCatId(),
                 subCategoryItem.getId(),
                 subCategoryItem.getSubCatName(),
-                subCategoryItem.getSubcatHeader()
+                subCategoryItem.getSubcatHeader(),
+                subCategoryItem.getSubCatNameBn(),
+                subCategoryItem.getSubCatHeaderBn()
         );
     }
 
-    public long insertItem(int cat_id, int id, String name,String header) {
+    public long insertItem(int cat_id, int id, String name,String header,String namebn,String headerbn) {
         if (isFieldExist(id,cat_id)) {
-            return updateItem(cat_id,id,name,header);
+            return updateItem(cat_id,id,name,header,namebn,headerbn);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_CAT_ID, cat_id);
         rowValue.put(KEY_SUB_CAT_ID, id);
         rowValue.put(KEY_NAME, name);
         rowValue.put(KEY_SUB_CAT_HEADER,header);
-
+        rowValue.put(KEY_NAME_BN, namebn);
+        rowValue.put(KEY_SUB_CAT_HEADER_BN,headerbn);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -102,13 +109,14 @@ public class SubCategoryTable {
         return false;
     }
 
-    private long updateItem(int cat_id,int id, String name,String header) {
+    private long updateItem(int cat_id,int id, String name,String header,String namebn, String headerbn) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_CAT_ID, cat_id);
         rowValue.put(KEY_SUB_CAT_ID, id);
         rowValue.put(KEY_NAME, name);
         rowValue.put(KEY_SUB_CAT_HEADER,header);
-
+        rowValue.put(KEY_NAME_BN, namebn);
+        rowValue.put(KEY_SUB_CAT_HEADER_BN,headerbn);
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_CAT_ID + " = ? AND "+KEY_SUB_CAT_ID+" = ?",
                 new String[]{cat_id + "",id+""});
@@ -125,7 +133,7 @@ public class SubCategoryTable {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 =cursor.getString(2);
+                String catid2 =cursor.getString(4);
                 int subcatid=cursor.getInt(1);
                 siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());
@@ -211,7 +219,9 @@ public class SubCategoryTable {
         int id = cursor.getInt(1);
         String name = cursor.getString(2);
         String head = cursor.getString(3);
-        return new SubCategoryItem(cat_id,id, name,head);
+        String namebn = cursor.getString(4);
+        String headbn = cursor.getString(5);
+        return new SubCategoryItem(cat_id,id, name,head,namebn,headbn);
     }
 
     public void dropTable() {

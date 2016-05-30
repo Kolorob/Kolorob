@@ -2072,6 +2072,8 @@ catholder.setVisibility(View.GONE);
         llCatListHolder.setVisibility(View.GONE);
         llSubCatListHolder.setVisibility(View.GONE);
         listholder.setVisibility(View.GONE);
+        searchLayout.setVisibility(View.GONE);
+        wholeLayout.setVisibility(View.VISIBLE);
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
