@@ -89,7 +89,7 @@ FinancialServiceProviderItem nullfin;
 			holder = (ViewHolder) view.getTag();
 		}
 		// Set the results into TextViews
-		String rank=worldpopulationlist.get(position).getNameen().toString();
+		String rank=worldpopulationlist.get(position).getNamebn().toString();
 		if (holder.rank.getText()!=rank)
 		holder.rank.setText(rank);
 		//holder.country.setText(worldpopulationlist.get(position).getCountry());
@@ -159,6 +159,10 @@ int catt=worldpopulationlist.get(position).getCatid();
 			for (AllHolder wp : arraylist)
 			{
 				if (wp.getNameen().toLowerCase(Locale.getDefault()).contains(charText))
+				{
+					worldpopulationlist.add(wp);
+				}
+				else if (wp.getNamebn().toLowerCase(Locale.getDefault()).contains(charText))
 				{
 					worldpopulationlist.add(wp);
 				}

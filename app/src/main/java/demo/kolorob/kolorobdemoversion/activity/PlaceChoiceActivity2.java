@@ -104,7 +104,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     }
     boolean doubleBackToExitPressedOnce = false;
     boolean catstatus=false;
-    int filcatid;
+    int filcatid=0;
     RelativeLayout catholder;
     CheckBox check;
     LinearLayout fholder,fleft,fright;
@@ -300,6 +300,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
 
                     setFilcatid(1);
                     catstatus=true;
+                    getFilcatid();
                     calladapter(catstatus);
 
                 } else  if (checkedId == R.id.helradioButton2) {
