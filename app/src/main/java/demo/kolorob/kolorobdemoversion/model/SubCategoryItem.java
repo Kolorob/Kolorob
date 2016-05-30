@@ -5,8 +5,6 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
-
 /**
  * Created by Yeakub Hassan Rafi on 26-Dec-15.
  */
@@ -16,12 +14,15 @@ public class SubCategoryItem implements Serializable {
     private int catId;
     private String subCatName;
     private String subCatHeader;
-
-    public SubCategoryItem(int cat_id, int id,String subsubCatName,String subCatHeader) {
+    private String subCatNameBn;
+    private String subCatHeaderBn;
+    public SubCategoryItem(int cat_id, int id,String subsubCatName,String subCatHeader,String subsubCatNameBn,String subCatHeaderBn) {
         this.id = id;
         this.catId = cat_id;
         this.subCatName = subsubCatName;
         this.subCatHeader = subCatHeader;
+        this.subCatNameBn=subsubCatNameBn;
+        this.subCatHeaderBn=subCatHeaderBn;
     }
 
     public SubCategoryItem(int id, String subsubCatName) {
@@ -39,6 +40,22 @@ public class SubCategoryItem implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSubCatNameBn() {
+        return subCatNameBn;
+    }
+
+    public void setSubCatNameBn(String subCatNameBn) {
+        this.subCatNameBn = subCatNameBn;
+    }
+
+    public String getSubCatHeaderBn() {
+        return subCatHeaderBn;
+    }
+
+    public void setSubCatHeaderBn(String subCatHeaderBn) {
+        this.subCatHeaderBn = subCatHeaderBn;
     }
 
     public String getSubcatHeader()
@@ -69,6 +86,8 @@ public class SubCategoryItem implements Serializable {
         int id = jo.getInt("subcategory_id");
         String name = jo.getString("subcategory_name");
         String head = jo.getString("subcategory_header");
-        return new SubCategoryItem(cat_id,id, name,head);
+        String namebn=jo.getString("subcategory_name_bangla");
+        String headbn=jo.getString("subcategory_header_bangla");
+        return new SubCategoryItem(cat_id,id, name,head,namebn,headbn);
     }
 }

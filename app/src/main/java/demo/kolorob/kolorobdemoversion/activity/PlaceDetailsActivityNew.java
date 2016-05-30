@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -2088,6 +2087,9 @@ catholder.setVisibility(View.GONE);
     {
         llCatListHolder.setVisibility(View.GONE);
         llSubCatListHolder.setVisibility(View.GONE);
+        listholder.setVisibility(View.GONE);
+        searchLayout.setVisibility(View.GONE);
+        wholeLayout.setVisibility(View.VISIBLE);
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();

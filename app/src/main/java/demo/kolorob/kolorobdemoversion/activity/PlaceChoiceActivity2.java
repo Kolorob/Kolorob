@@ -811,7 +811,7 @@ searchmain.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-                Toast.makeText(PlaceChoiceActivity2.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+
                 Log.v("Inside fun1",String.valueOf(num));
             }
         });
@@ -831,7 +831,7 @@ searchmain.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-                Toast.makeText(PlaceChoiceActivity2.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+
                 Log.v("Inside fun2","fun1");
 
             }
