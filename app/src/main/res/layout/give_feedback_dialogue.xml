@@ -4,33 +4,59 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
-    android:gravity="fill_vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/verify_registration"
-        android:id="@+id/textView" />
+    android:gravity="center">
 
-    <LinearLayout
+
+    <RadioGroup
         android:layout_width="match_parent"
+        android:id="@+id/feedbackRadio"
         android:layout_height="wrap_content"
         android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_de"/>
 
-        <ImageButton
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/yes"
-            android:background="@drawable/yes_button"/>
+            android:text="ভাল"
+            android:textColor="@color/orange"
+            android:id="@+id/bad" />
 
-        <ImageButton
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_de"/>
+
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/no"
+            android:text="মোটামোটি"
+            android:textColor="@color/orange"
 
-            android:background="@drawable/no_button"/>
+            android:id="@+id/moderate" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_de"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ভাল না"
+            android:textColor="@color/orange"
+
+            android:id="@+id/good" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_de"/>
 
 
-    </LinearLayout>
+    </RadioGroup>
+
 
 </LinearLayout>
