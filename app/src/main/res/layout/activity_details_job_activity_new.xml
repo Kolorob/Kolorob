@@ -61,6 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/distance_left"
+                        android:onClick="showdirection"
                         android:background="@drawable/distance_btn"/>
 
                     <TextView
@@ -136,6 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/right_side_email"
+                        android:onClick="sendemail"
                         android:background="@drawable/email_btn"/>
 
                     <TextView

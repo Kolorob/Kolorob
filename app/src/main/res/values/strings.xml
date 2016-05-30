@@ -53,8 +53,8 @@
     <string name="know_adv">বিজ্ঞাপন বা তথ্য জানুন  </string>
     <string name="list_show"> লিস্ট দেখতে এখানে চাপ দিন  </string>
     <string name="way_to_go">যাবার উপায়</string>
-    <string name="phone">ফোন করুন</string>
-    <string name="email">ইমেইল করুন</string>
+    <string name="phone">ফোন করুন:</string>
+    <string name="email">ইমেইল করুন:</string>
     <string name="close">বন্ধ করুন</string>
     <string name="address">ঠিকানা </string>
     <string name="phone_text">ফোন </string>
