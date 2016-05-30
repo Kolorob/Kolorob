@@ -578,12 +578,44 @@ public class DetailsInfoActivityEducation extends Activity {
         }
 
         else
+            feedBackAlert();
 
 
 
 
 
 
+
+    }
+
+    public void feedBackAlert()
+    {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
+        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final Button submit= (Button) promptView.findViewById(R.id.submit);
+
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+
+        alert.show();
     }
 
 
