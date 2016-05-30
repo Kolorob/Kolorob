@@ -589,7 +589,7 @@ public class DetailsInfoActivityEducation extends Activity {
 
         Boolean register=RegisteredOrNot();
 
-        if(register.equals(true))
+        if(register.equals(false))
         {
             requestToRegister();
         }
@@ -651,7 +651,7 @@ public class DetailsInfoActivityEducation extends Activity {
             rating=2;
         else
             rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"node="+educationServiceProviderItem.getIdentifierId()+"service="+"1"+"rating="+rating;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationServiceProviderItem.getIdentifierId()+"&service="+"1"+"&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -779,11 +779,11 @@ public class DetailsInfoActivityEducation extends Activity {
       //  editor.putString("registered", lat);
         registered = pref.getString("registered", null);
         phone_num = pref.getString("phone",null);
-        editor.commit();
-        if(registered.equals("yes"))
+       // editor.commit();
+      //  if(registered.equals("yes"))
             return true;
-        else
-            return false;
+      //  else
+         //   return true;
 
 
 
