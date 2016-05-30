@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:layout_alignParentTop="true" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -85,7 +84,7 @@ android:visibility="gone"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Bus Text"
                 android:id="@+id/bustext"
                 android:textColor="#000000"
@@ -96,7 +95,7 @@ android:visibility="gone"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="ricksawtext"
                 android:id="@+id/ricksawtext"
                 android:textColor="#000000"
@@ -116,7 +115,7 @@ android:visibility="gone"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="cngtext"
                 android:id="@+id/cngtext"
                 android:textColor="#000000"
@@ -145,7 +144,7 @@ android:visibility="gone"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="walking"
                 android:id="@+id/walkingtext"
                 android:textColor="#000000"

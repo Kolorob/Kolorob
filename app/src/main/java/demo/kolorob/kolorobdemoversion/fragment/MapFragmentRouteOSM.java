@@ -340,7 +340,8 @@ public void calltransportlayout()
             if (Busfare <=7.00)Bustext.setText( "7 " + "Taka ");
     else {
                 String Bfare=String.format("%.2f", Busfare);
-                Bustext.setText(Bfare + " Taka and might take " +bustime+ "minutes"  );
+                String Btime=String.format("%.2f", bustime);
+                Bustext.setText(Bfare + " Taka and might take " + Btime+ " minutes"  );
             }
 }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
