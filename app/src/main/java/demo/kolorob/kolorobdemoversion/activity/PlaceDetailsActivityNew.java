@@ -2357,9 +2357,9 @@ else {
         }
     }
 
-    public void sendDataToserver(String text)
+    public void sendDataToserver(final String text)
     {
-        String url = "http://www.kolorob.net/mamoni/survey/api/sync";
+        String url = "http://www.kolorob.net/KolorobApi/api/help/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -2396,13 +2396,7 @@ else {
                 Map<String, String> params = new HashMap<>();
 
                 try {
-                    //data
-                    JSONObject data = new JSONObject();
-                    data.put("username", "collector");
-                    data.put("password", "collector");
-                    data.put("get_all", true);
-
-                    params.put("data", data.toString());
+                    params.put("query",text);
                 }
                 catch (Exception e){
 
