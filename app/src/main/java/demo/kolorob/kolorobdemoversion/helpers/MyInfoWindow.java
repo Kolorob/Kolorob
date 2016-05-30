@@ -12,14 +12,10 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity_new;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity_new;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -37,7 +33,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by HP on 5/14/2016.
  */
 public class MyInfoWindow extends InfoWindow {
-    String titlemarker,contact2,node;
+    String titlemarker,contact2,node,address;
     EducationServiceProviderItem nulledu;
     HealthServiceProviderItem nullhel;
     EntertainmentServiceProviderItem nullent;
@@ -46,7 +42,7 @@ public class MyInfoWindow extends InfoWindow {
     Activity con;
     GeoPoint pp;
     int catid;
-    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, String Node, int categoryid) {
+    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, String Node, int categoryid,String add) {
         super(layoutResId, mapView);
         this.con=con;
         this.pp=point;
@@ -54,6 +50,7 @@ public class MyInfoWindow extends InfoWindow {
         this.contact2=contact;
         this.node=Node;
         this.catid=categoryid;
+        this.address=add;
     }
     public void onClose() {
     }
@@ -68,7 +65,8 @@ public class MyInfoWindow extends InfoWindow {
         TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
         txtTitle.setText(titlemarker);
         // contact.setText(contact2);
-        adddescription.setText(node);
+        txtSubdescription.setText("যোগাযোগঃ "+contact2);
+        adddescription.setText("ঠিকানাঃ " + address);
         layout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switch (catid) {
@@ -81,7 +79,7 @@ public class MyInfoWindow extends InfoWindow {
                         Intent iient = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEducation.class);
                         iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
                         MyInfoWindow.this.con.startActivity(iient);
-                        layout.setVisibility(View.GONE);
+
                         break;
                     case AppConstants.HEALTH:
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
@@ -91,7 +89,7 @@ public class MyInfoWindow extends InfoWindow {
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
                         iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
-                        layout.setVisibility(View.GONE);
+
                         break;
                     case AppConstants.ENTERTAINMENT:
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
@@ -101,7 +99,7 @@ public class MyInfoWindow extends InfoWindow {
                         Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainmentNew.class);
                         iientt.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
                         MyInfoWindow.this.con.startActivity(iientt);
-                        layout.setVisibility(View.GONE);
+
                         break;
                     case AppConstants.LEGAL:
                       //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
@@ -111,7 +109,7 @@ public class MyInfoWindow extends InfoWindow {
                         Intent iileg = new Intent(MyInfoWindow.this.con, DetailsLegalActivity_new.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
-                        layout.setVisibility(View.GONE);
+
                         break;
                     case AppConstants.FINANCIAL:
                        // Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
@@ -121,7 +119,7 @@ public class MyInfoWindow extends InfoWindow {
                         Intent iifin = new Intent(MyInfoWindow.this.con, DetailsInfoActivityFinancialNew.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
-                        layout.setVisibility(View.GONE);
+
                         break;
                 }
 

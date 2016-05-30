@@ -317,7 +317,7 @@ setMapView(mapView);
             marker.setIcon(this.getResources().getDrawable(R.drawable.orange_pin));
         else if (subcategotyId >= 22 && subcategotyId <= 26)
             marker.setIcon(this.getResources().getDrawable(R.drawable.brown_pin));
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -343,7 +343,7 @@ setMapView(mapView);
         else if (subcategotyId == 22)
             marker.setIcon(this.getResources().getDrawable(R.drawable.sky_blue_pin));
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -374,7 +374,7 @@ setMapView(mapView);
             marker.setIcon(this.getResources().getDrawable(R.drawable.deep_blue_pin));
 
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -391,7 +391,7 @@ setMapView(mapView);
 
         else if (subcategotyId >= 2 && subcategotyId <= 5)
             marker.setIcon(this.getResources().getDrawable(R.drawable.red_pin));
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -414,7 +414,7 @@ setMapView(mapView);
         else if (subcategotyId >= 16 && subcategotyId <= 18)
             marker.setIcon(this.getResources().getDrawable(R.drawable.sky_blue_pin));
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
