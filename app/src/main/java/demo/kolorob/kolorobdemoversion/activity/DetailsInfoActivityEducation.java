@@ -570,6 +570,23 @@ public class DetailsInfoActivityEducation extends Activity {
 
     public void verifyRegistration(View v){
 
+        Boolean register=RegisteredOrNot();
+
+        if(register.equals(true))
+        {
+            requestToRegister();
+        }
+
+        else
+
+
+
+
+    }
+
+
+    public void requestToRegister()
+    {
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
@@ -593,6 +610,7 @@ public class DetailsInfoActivityEducation extends Activity {
         });
 
 
+
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -606,7 +624,6 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
         alert.show();
-
     }
 
 
@@ -621,5 +638,21 @@ public class DetailsInfoActivityEducation extends Activity {
             return false;
 
         }
+    }
+
+    public Boolean RegisteredOrNot()
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("registered", lat);
+        String registered = pref.getString("registered", null);
+        editor.commit();
+        if(registered.equals("yes"))
+            return true;
+        else
+            return false;
+
+
+
     }
 }
