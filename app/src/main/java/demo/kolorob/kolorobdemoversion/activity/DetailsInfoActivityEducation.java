@@ -209,18 +209,18 @@ public class DetailsInfoActivityEducation extends Activity {
         }
 
 
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
-                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
-                feedIntent.putExtra("categoryId","1");
-                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
-
-                startActivity(feedIntent);
-
-            }
-        });
+//        feedback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
+//                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
+//                feedIntent.putExtra("categoryId","1");
+//                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
+//
+//                startActivity(feedIntent);
+//
+//            }
+//        });
 
 
 
@@ -575,43 +575,36 @@ public class DetailsInfoActivityEducation extends Activity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
         alertDialogBuilder.setView(promptView);
 
-        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
-        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
-        final Button button= (Button)promptView.findViewById(R.id.phone_call);
+
+        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
+        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
+
+        final AlertDialog alert = alertDialogBuilder.create();
 
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                sendDataToserver(userfeedback.getText().toString());
+                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityEducation.this,PhoneRegActivity.class);
+                startActivity(intentPhoneRegistration);
 
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+        no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneCall();
-                Toast.makeText(DetailsInfoActivityEducation.this, "...ok....",Toast.LENGTH_LONG).show();
+                alert.cancel();
+
             }
         });
         // setup a dialog window
-        alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //resultText.setText("Hello, " + userfeedback.getText());
-                    }
-                })
-                .setNegativeButton("বাতিল করুন",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+        alertDialogBuilder.setCancelable(false);
 
-        // create an alert dialog
-        AlertDialog alert = alertDialogBuilder.create();
+
+
         alert.show();
 
     }
