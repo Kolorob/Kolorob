@@ -35,11 +35,12 @@
 			android:layout_height="wrap_content"
 			android:background="@drawable/distance_btn"
 			android:layout_gravity="left"
+			android:layout_marginLeft="15dp"
 			android:id="@+id/distance_id"
 			/>
 
 		<TextView
-			android:text="way" android:id="@+id/title_id"
+			android:text="@string/way_to_go" android:id="@+id/title_id"
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:textColor="#3A4296"
@@ -61,7 +62,7 @@
 			/>
 
 		<TextView
-			android:text=" call" android:id="@+id/call_text"
+			android:text="@string/phone_text" android:id="@+id/call_text"
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:textColor="#3A4296"
@@ -83,7 +84,7 @@
 			/>
 
 		<TextView
-			android:text=" email" android:id="@+id/add_text"
+			android:text="@string/email_text" android:id="@+id/add_text"
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:textColor="#3A4296"
