@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,10 +55,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -722,7 +735,18 @@ catholder.setVisibility(View.GONE);
         alertDialogBuilder.setView(promptView);
 
         final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
+        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
         final Button button= (Button)promptView.findViewById(R.id.phone_call);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sendDataToserver(userfeedback.getText().toString());
+
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -766,11 +790,11 @@ catholder.setVisibility(View.GONE);
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
 
-                    Log.d(">>>>", "printnames "+printnames);
-                    Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
-                    Log.d(">>>>", "head "+head);
-                    Log.d(">>>>", "print.get(j) "+print.get(j));
-                    Log.d(">>>>", "placeChoice "+placeChoice);
+                   // Log.d(">>>>", "printnames "+printnames);
+                  /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
+                   // Log.d(">>>>", "head "+head);
+                   // Log.d(">>>>", "print.get(j) "+print.get(j));
+                   // Log.d(">>>>", "placeChoice "+placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -2285,7 +2309,7 @@ catholder.setVisibility(View.GONE);
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+        //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
         if(showList==1)
         {
             createData(currentCategoryID,"",placeChoice);
@@ -2298,7 +2322,7 @@ catholder.setVisibility(View.GONE);
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
 
-        Log.d(">>>>>>","You are in onResume");
+       /// Log.d(">>>>>>","You are in onResume");
 
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
@@ -2335,6 +2359,67 @@ else {
         }
     }
 
+    public void sendDataToserver(final String text)
+    {
+        String url = "http://www.kolorob.net/KolorobApi/api/help/save_query?query="+text;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PlaceDetailsActivityNew.this,response,Toast.LENGTH_SHORT).show();
+
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            JSONArray forms = jo.getJSONArray("true");
+
+                            if(forms.toString().equals("true"))
+                            {
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceDetailsActivityNew.this, "মন্তব্যটি পাঠানো হয়ছে",
+                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+                            }
+                            else
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceDetailsActivityNew.this, "মন্তব্য পাঠানো সফল হয়নি",
+                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PlaceDetailsActivityNew.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(PlaceDetailsActivityNew.this);
+        requestQueue.add(stringRequest);
+
+
+
+    }
+
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -2350,7 +2435,7 @@ else {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(">>>>>>","You are in onPause");
+       // Log.d(">>>>>>","You are in onPause");
     }
 
 
