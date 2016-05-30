@@ -735,12 +735,14 @@ catholder.setVisibility(View.GONE);
         alertDialogBuilder.setView(promptView);
 
         final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
-        final Button submit= (Button)findViewById(R.id.submit_btn);
+        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
         final Button button= (Button)promptView.findViewById(R.id.phone_call);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                sendDataToserver(userfeedback.getText().toString());
 
             }
         });
@@ -788,11 +790,11 @@ catholder.setVisibility(View.GONE);
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
 
-                    Log.d(">>>>", "printnames "+printnames);
-                    Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
-                    Log.d(">>>>", "head "+head);
-                    Log.d(">>>>", "print.get(j) "+print.get(j));
-                    Log.d(">>>>", "placeChoice "+placeChoice);
+                   // Log.d(">>>>", "printnames "+printnames);
+                  /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
+                   // Log.d(">>>>", "head "+head);
+                   // Log.d(">>>>", "print.get(j) "+print.get(j));
+                   // Log.d(">>>>", "placeChoice "+placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -2307,7 +2309,7 @@ catholder.setVisibility(View.GONE);
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+        //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
         if(showList==1)
         {
             createData(currentCategoryID,"",placeChoice);
@@ -2320,7 +2322,7 @@ catholder.setVisibility(View.GONE);
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
 
-        Log.d(">>>>>>","You are in onResume");
+       /// Log.d(">>>>>>","You are in onResume");
 
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
@@ -2359,9 +2361,9 @@ else {
 
     public void sendDataToserver(final String text)
     {
-        String url = "http://www.kolorob.net/KolorobApi/api/help/";
+        String url = "http://www.kolorob.net/KolorobApi/api/help/save_query?query="+text;
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -2404,13 +2406,6 @@ else {
 
                 Map<String, String> params = new HashMap<>();
 
-                try {
-                    params.put("query",text);
-                }
-                catch (Exception e){
-
-                }
-
                 return params;
             }
 
@@ -2440,7 +2435,7 @@ else {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(">>>>>>","You are in onPause");
+       // Log.d(">>>>>>","You are in onPause");
     }
 
 
