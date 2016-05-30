@@ -87,7 +87,7 @@ public class DetailsInfoActivityEducation extends Activity {
     private ImageView close_button,phone_mid,distance_left,feedback;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
-    String status;
+    String status,phone_num,registered;
 
 
     @Override
@@ -594,8 +594,11 @@ public class DetailsInfoActivityEducation extends Activity {
             requestToRegister();
         }
 
-        else
+        else {
+
             feedBackAlert();
+            sendReviewToServer();
+        }
 
 
 
@@ -641,13 +644,20 @@ public class DetailsInfoActivityEducation extends Activity {
 
     public void sendReviewToServer()
     {
-        String url = "http://www.kolorob.net/KolorobApi/api/customers/register?phone="+phone;
+        int rating;
+        if(status.equals("ভাল"))
+            rating=1;
+        else if(status.equals("মোটামোট"))
+            rating=2;
+        else
+            rating=3;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"node="+educationServiceProviderItem.getIdentifierId()+"service="+"1"+"rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailsInfoActivityEducation.this,response,Toast.LENGTH_SHORT).show();
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);
@@ -658,11 +668,11 @@ public class DetailsInfoActivityEducation extends Activity {
 
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
 
 
@@ -680,7 +690,7 @@ public class DetailsInfoActivityEducation extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PhoneRegActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailsInfoActivityEducation.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }) {
 
@@ -696,7 +706,7 @@ public class DetailsInfoActivityEducation extends Activity {
 
 // Adding request to request queue
 
-        RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityEducation.this);
         requestQueue.add(stringRequest);
     }
 
@@ -767,7 +777,8 @@ public class DetailsInfoActivityEducation extends Activity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
       //  editor.putString("registered", lat);
-        String registered = pref.getString("registered", null);
+        registered = pref.getString("registered", null);
+        phone_num = pref.getString("phone",null);
         editor.commit();
         if(registered.equals("yes"))
             return true;
