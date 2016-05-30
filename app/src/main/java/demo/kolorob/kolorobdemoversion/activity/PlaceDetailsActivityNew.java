@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -10,12 +11,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -738,6 +742,7 @@ catholder.setVisibility(View.GONE);
         final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
         final Button button= (Button)promptView.findViewById(R.id.phone_call);
 
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -750,6 +755,7 @@ catholder.setVisibility(View.GONE);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                phoneCall();
                 Toast.makeText(PlaceDetailsActivityNew.this, "...ok....",Toast.LENGTH_LONG).show();
             }
         });
@@ -1789,6 +1795,16 @@ catholder.setVisibility(View.GONE);
 
     }
 
+    public void phoneCall()
+    {
+
+        Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+            callIntent1.setData(Uri.parse("tel:" + "01796559112"));
+            if(checkPermission())
+                startActivity(callIntent1);
+
+    }
+
     private void decCatListWidth(final double dwPerc) {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -2437,7 +2453,18 @@ else {
         super.onPause();
        // Log.d(">>>>>>","You are in onPause");
     }
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
 
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
 
 
     @Override

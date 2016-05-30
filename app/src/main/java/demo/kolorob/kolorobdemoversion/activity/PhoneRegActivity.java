@@ -1,7 +1,10 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -152,7 +155,18 @@ public class PhoneRegActivity extends Activity {
 
 
     }
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
 
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
 
 
 
