@@ -168,7 +168,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Education"
+                        android:text="@string/Education"
                         android:id="@+id/edradioButton"
                         android:textColor="#ffffff"
                         android:layout_alignParentTop="true"
@@ -178,7 +178,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Health"
+                        android:text="@string/Health"
                         android:id="@+id/helradioButton2"
                         android:textColor="#ffffff"
                         android:layout_below="@+id/edradioButton"
@@ -188,7 +188,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Legal Aid"
+                        android:text="@string/Legal"
                         android:id="@+id/legradioButton3"
                         android:textColor="#ffffff"
                         android:layout_alignParentBottom="true"
@@ -198,7 +198,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Financial service"
+                        android:text="@string/Financial"
                         android:id="@+id/finradioButton4"
                         android:textColor="#ffffff"
                         android:layout_below="@+id/entradioButton5"
@@ -208,7 +208,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Entertainment"
+                        android:text="@string/Entertainment"
                         android:id="@+id/entradioButton5"
                         android:textColor="#ffffff"
                         android:layout_below="@+id/helradioButton2"
