@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 
 /**
@@ -27,6 +28,7 @@ public class PhoneRegActivity extends Activity {
     private TextView itemAddress;
     private TextView itemType;
     private TextView itemContact;
+    private String phoneNumber;
 
     private EditText phone;
     private EditText name;
@@ -44,13 +46,23 @@ public class PhoneRegActivity extends Activity {
 
 
         phone  = (EditText)findViewById(R.id.phone_id);
+        phoneNumber=phone.getText().toString();
+
+
 
 
     }
 
     public void submit(View v){
 
-        String phoneno = phone.getText().toString();
+        phoneNumber = phone.getText().toString();
+        int size=phoneNumber.length();
+
+        if(size!=11)
+        {
+            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
+                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+        }
 
 
 
