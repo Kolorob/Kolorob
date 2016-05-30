@@ -199,7 +199,7 @@ public class OpeningActivity extends Activity {
                 pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
                 LoadData();
                 pd.dismiss();
-                Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
+               // Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
             }
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
@@ -849,23 +849,23 @@ public class OpeningActivity extends Activity {
 
 
 
-        if (firstRun == false)//if running for first time
-        {
-            pd.dismiss();
-            Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-            //Activity to be     launched For the First time
-            // Intent i = new Intent(OpeningActivity.this, FeedbackActivity.class);//Activity to be     launched For the First time
-            startActivity(i);
-
-        } else {
+//        if (firstRun == false)//if running for first time
+//        {
+//            pd.dismiss();
+//          //  Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
+//         //   overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//            //Activity to be     launched For the First time
+//            // Intent i = new Intent(OpeningActivity.this, FeedbackActivity.class);//Activity to be     launched For the First time
+//            startActivity(i);
+//
+//        } else {
             pd.dismiss();
             Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);//Default Activity
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
             startActivity(a);
 
-        }
+    //    }
 
     }
 
