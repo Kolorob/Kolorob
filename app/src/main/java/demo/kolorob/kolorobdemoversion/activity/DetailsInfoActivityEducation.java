@@ -582,6 +582,8 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
 
+
+
     }
 
 
@@ -644,7 +646,7 @@ public class DetailsInfoActivityEducation extends Activity {
     {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("registered", lat);
+      //  editor.putString("registered", lat);
         String registered = pref.getString("registered", null);
         editor.commit();
         if(registered.equals("yes"))
