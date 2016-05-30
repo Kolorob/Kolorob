@@ -11,9 +11,10 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:layout_alignParentTop="true" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:id="@+id/headerlayout"
         android:visibility="gone"
@@ -27,43 +28,48 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageView12"
             android:background="@drawable/distance_icon"
-            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/headtext"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Large Text"
             android:id="@+id/headtext"
+            android:textStyle="bold"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold" />
+            android:layout_toRightOf="@+id/imageView12"
+            android:layout_toEndOf="@+id/imageView12" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="150dp"
         android:id="@+id/transportdetailslayout"
-        android:visibility="gone"
-        android:layout_marginTop="354dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:id="@+id/currlocation"
             android:background="@drawable/location"
             android:layout_above="@+id/linearLayout6"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_marginTop="60dp"
+    android:layout_height="80dp">
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+
+            android:layout_height="120dp"
             android:layout_alignParentBottom="true"
             android:background="#55dfcd"
             android:layout_alignRight="@+id/currlocation"
@@ -80,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="Bus Text"
                 android:id="@+id/bustext"
                 android:textColor="#000000"
                 android:layout_alignBottom="@+id/imageView8"
@@ -94,9 +100,9 @@
                 android:text="ricksawtext"
                 android:id="@+id/ricksawtext"
                 android:textColor="#000000"
-                android:layout_alignBottom="@+id/imageView9"
-                android:layout_toRightOf="@+id/imageView10"
-                android:layout_toEndOf="@+id/imageView10" />
+                android:layout_below="@+id/imageView8"
+                android:layout_alignLeft="@+id/bustext"
+                android:layout_alignStart="@+id/bustext" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -114,7 +120,7 @@
                 android:text="cngtext"
                 android:id="@+id/cngtext"
                 android:textColor="#000000"
-                android:layout_alignBottom="@+id/imageView10"
+                android:layout_alignTop="@+id/imageView10"
                 android:layout_alignLeft="@+id/ricksawtext"
                 android:layout_alignStart="@+id/ricksawtext" />
 
@@ -123,7 +129,7 @@
                 android:layout_height="wrap_content"
               android:background="@drawable/cng"
                 android:id="@+id/imageView10"
-                android:layout_centerVertical="true"
+                android:layout_below="@+id/ricksawtext"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -143,11 +149,11 @@
                 android:text="walking"
                 android:id="@+id/walkingtext"
                 android:textColor="#000000"
-                android:layout_alignBottom="@+id/imageView11"
+                android:layout_below="@+id/imageView10"
                 android:layout_alignLeft="@+id/cngtext"
                 android:layout_alignStart="@+id/cngtext" />
         </RelativeLayout>
-
+</ScrollView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -157,7 +163,8 @@
             android:background="#fe0f3b"
             android:layout_above="@+id/linearLayout6"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp" />
     </RelativeLayout>
 
 
