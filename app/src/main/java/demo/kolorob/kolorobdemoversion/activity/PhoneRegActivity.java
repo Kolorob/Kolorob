@@ -7,6 +7,21 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
@@ -53,20 +68,89 @@ public class PhoneRegActivity extends Activity {
 
     }
 
-    public void submit(View v){
+    public void submit(View v) {
 
         phoneNumber = phone.getText().toString();
-        int size=phoneNumber.length();
+        int size = phoneNumber.length();
 
-        if(size!=11)
-        {
+        if (size != 11) {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+        } else if (phoneNumber.charAt(0) != '0' && phoneNumber.charAt(0) != '1') {
+            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
+                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+        } else if (phoneNumber.charAt(2) == '2' || phoneNumber.charAt(2) == '3' || phoneNumber.charAt(2) == '4') {
+            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
+                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+        } else {
+            sendPhoneNumberToServer(phoneNumber);
         }
+    }
+
+
+    public void sendPhoneNumberToServer(final String phone)
+    {
+        String url = "http://www.kolorob.net/KolorobApi/api/customers/register?phone="+phone;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
+
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            JSONArray forms = jo.getJSONArray("status");
+
+                            if(forms.toString().equals("true"))
+                            {
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                        "রেজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                            }
+                            else
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PhoneRegActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
+        requestQueue.add(stringRequest);
 
 
 
     }
+
+
+
 
     @Override
     public void onBackPressed() {
