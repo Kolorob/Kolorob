@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Locale;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivity;
+import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity_new;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity;
@@ -105,7 +105,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 					// Send single item click data to SingleItemView Class
 					FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
 					nullfin = financialServiceProviderTable.getfinNode2(worldpopulationlist.get(position).getNodeid());
-					Intent iient = new Intent(getActivity(), DetailsFinancialActivity.class);
+					Intent iient = new Intent(getActivity(), DetailsFinancialActivity_new.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, nullfin);
 					activity.startActivity(iient);
 //				Toast.makeText(mContext, "rank " + worldpopulationlist.get(position).getNodeid(), Toast.LENGTH_LONG).show();
@@ -113,7 +113,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 				if (catt==1) {
 					EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
 					nulledu=educationServiceProviderTable.geteduNode2(worldpopulationlist.get(position).getNodeid());
-					Intent iient = new Intent(getActivity(), DetailsInfoActivity.class);
+					Intent iient = new Intent(getActivity(), DetailsInfoActivityEducation.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
 					activity.startActivity(iient);
 				}
