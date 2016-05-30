@@ -28,11 +28,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
@@ -71,6 +85,9 @@ public class DetailsInfoActivityEducation extends Activity {
     private TextView hostel;
     private TextView transport;
     private ImageView close_button,phone_mid,distance_left,feedback;
+    RadioGroup feedRadio;
+    RadioButton rb1,rb2,rb3;
+    String status;
 
 
     @Override
@@ -606,6 +623,9 @@ public class DetailsInfoActivityEducation extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                declareRadiobutton();
+
+
                 alert.cancel();
 
             }
@@ -618,6 +638,74 @@ public class DetailsInfoActivityEducation extends Activity {
         alert.show();
     }
 
+
+    public void sendReviewToServer()
+    {
+        String url = "http://www.kolorob.net/KolorobApi/api/customers/register?phone="+phone;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
+                        // Log.d(">>>>>","status "+response);
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            String forms;
+                            forms = jo.getString("status");
+                            Log.d(">>>>>","status "+forms);
+                            //Log.d(">>>>>","status ");
+
+                            if(forms.equals("true"))
+                            {
+                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                            }
+                            else
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PhoneRegActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
+        requestQueue.add(stringRequest);
+    }
+
+    public void declareRadiobutton()
+    {
+        int selected = feedRadio.getCheckedRadioButtonId();
+        RadioButton rb1 = (RadioButton) findViewById(selected);
+        status = rb1.getText().toString();
+    }
 
     public void requestToRegister()
     {
