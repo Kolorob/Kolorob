@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,10 +55,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -722,7 +735,16 @@ catholder.setVisibility(View.GONE);
         alertDialogBuilder.setView(promptView);
 
         final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
+        final Button submit= (Button)findViewById(R.id.submit_btn);
         final Button button= (Button)promptView.findViewById(R.id.phone_call);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -2333,6 +2355,71 @@ else {
 
             }
         }
+    }
+
+    public void sendDataToserver(String text)
+    {
+        String url = "http://www.kolorob.net/mamoni/survey/api/sync";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PlaceDetailsActivityNew.this,response,Toast.LENGTH_SHORT).show();
+
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            JSONArray forms = jo.getJSONArray("forms");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PlaceDetailsActivityNew.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                try {
+                    //data
+                    JSONObject data = new JSONObject();
+                    data.put("username", "collector");
+                    data.put("password", "collector");
+                    data.put("get_all", true);
+
+                    params.put("data", data.toString());
+                }
+                catch (Exception e){
+
+                }
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(PlaceDetailsActivityNew.this);
+        requestQueue.add(stringRequest);
+
+
+
     }
 
     @Override
