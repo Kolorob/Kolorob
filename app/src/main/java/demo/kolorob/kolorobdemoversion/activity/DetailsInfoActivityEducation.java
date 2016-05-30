@@ -19,18 +19,34 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
@@ -69,6 +85,9 @@ public class DetailsInfoActivityEducation extends Activity {
     private TextView hostel;
     private TextView transport;
     private ImageView close_button,phone_mid,distance_left,feedback;
+    RadioGroup feedRadio;
+    RadioButton rb1,rb2,rb3;
+    String status,phone_num,registered;
 
 
     @Override
@@ -207,18 +226,18 @@ public class DetailsInfoActivityEducation extends Activity {
         }
 
 
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
-                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
-                feedIntent.putExtra("categoryId","1");
-                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
-
-                startActivity(feedIntent);
-
-            }
-        });
+//        feedback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
+//                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
+//                feedIntent.putExtra("categoryId","1");
+//                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
+//
+//                startActivity(feedIntent);
+//
+//            }
+//        });
 
 
 
@@ -566,6 +585,179 @@ public class DetailsInfoActivityEducation extends Activity {
 
     }
 
+    public void verifyRegistration(View v){
+
+        Boolean register=RegisteredOrNot();
+
+        if(register.equals(false))
+        {
+            requestToRegister();
+        }
+
+        else {
+
+            feedBackAlert();
+            sendReviewToServer();
+        }
+
+
+
+
+
+
+
+    }
+
+    public void feedBackAlert()
+    {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
+        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final Button submit= (Button) promptView.findViewById(R.id.submit);
+
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                declareRadiobutton();
+
+
+                alert.cancel();
+
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+
+        alert.show();
+    }
+
+
+    public void sendReviewToServer()
+    {
+        int rating;
+        if(status.equals("ভাল"))
+            rating=1;
+        else if(status.equals("মোটামোট"))
+            rating=2;
+        else
+            rating=3;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationServiceProviderItem.getIdentifierId()+"&service="+"1"+"&rating="+rating;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(DetailsInfoActivityEducation.this,response,Toast.LENGTH_SHORT).show();
+                        // Log.d(">>>>>","status "+response);
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            String forms;
+                            forms = jo.getString("status");
+                            Log.d(">>>>>","status "+forms);
+                            //Log.d(">>>>>","status ");
+
+                            if(forms.equals("true"))
+                            {
+                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                            }
+                            else
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(DetailsInfoActivityEducation.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityEducation.this);
+        requestQueue.add(stringRequest);
+    }
+
+    public void declareRadiobutton()
+    {
+        int selected = feedRadio.getCheckedRadioButtonId();
+        RadioButton rb1 = (RadioButton) findViewById(selected);
+        status = rb1.getText().toString();
+    }
+
+    public void requestToRegister()
+    {
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
+        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
+        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityEducation.this,PhoneRegActivity.class);
+                startActivity(intentPhoneRegistration);
+
+            }
+        });
+
+
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+
+        alert.show();
+    }
+
 
     private boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
@@ -578,5 +770,22 @@ public class DetailsInfoActivityEducation extends Activity {
             return false;
 
         }
+    }
+
+    public Boolean RegisteredOrNot()
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+      //  editor.putString("registered", lat);
+        registered = pref.getString("registered", null);
+        phone_num = pref.getString("phone",null);
+       // editor.commit();
+      //  if(registered.equals("yes"))
+            return true;
+      //  else
+         //   return true;
+
+
+
     }
 }
