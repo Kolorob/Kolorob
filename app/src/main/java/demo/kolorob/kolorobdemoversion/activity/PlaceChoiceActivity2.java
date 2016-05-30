@@ -831,7 +831,7 @@ searchmain.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-               
+
                 Log.v("Inside fun2","fun1");
 
             }
