@@ -255,10 +255,19 @@ EditText Searchall,catsearch;
         this.filcatid = filcatid;
     }
     boolean doubleBackToExitPressedOnce = false;
+    int val;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+        val = settings.getInt("KValue", 0);
+        Log.e("ASinplaceDetails",String.valueOf(val));
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
         dpi=displayMetrics.densityDpi;
@@ -270,7 +279,7 @@ EditText Searchall,catsearch;
 
         wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
         wholeLayout.setVisibility(View.VISIBLE);
-searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
+        searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
         searchLayout.setVisibility(View.GONE);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
@@ -433,10 +442,8 @@ catholder.setVisibility(View.GONE);
         //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
         ///this code will change the background of the layout for two places.
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
+
+
        // itemList = (ListView)findViewById(R.id.listViewSearch);
         //subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
 
@@ -1269,7 +1276,11 @@ catholder.setVisibility(View.GONE);
                         alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+
+
                                         alertDialog.dismiss();
+
+                                        finish();
                                     }
                                 });
                         alertDialog.getWindow().setLayout(200, 300);

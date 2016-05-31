@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -123,7 +124,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     public int getFilcatid() {
         return filcatid;
     }
-
+int val;
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
@@ -145,7 +146,33 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
         searchmain=(LinearLayout)findViewById(R.id.searchviewholder);
         searchmain.setVisibility(View.GONE);
         placemain.setVisibility(View.VISIBLE);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+        val = settings.getInt("KValue", 0);
+        Log.e("ASinplaceDetails",String.valueOf(val));
+        if (val!=7)
+        {
+            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceChoiceActivity2.this).create();
+
+            alertDialog.setMessage("Data have not uploaded probably");
+            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent i = new Intent(PlaceChoiceActivity2.this, OpeningActivity.class);
+
+                            alertDialog.dismiss();
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+            alertDialog.getWindow().setLayout(200, 300);
+            alertDialog.show();
+        }
         Log.d("...>>>","Layout width"+width);
 
         try

@@ -89,7 +89,7 @@ FinancialServiceProviderItem nullfin;
 			holder = (ViewHolder) view.getTag();
 		}
 		// Set the results into TextViews
-		String rank=worldpopulationlist.get(position).getNamebn().toString();
+		String rank=worldpopulationlist.get(position).getNameen().toString();
 		if (holder.rank.getText()!=rank)
 		holder.rank.setText(rank);
 		//holder.country.setText(worldpopulationlist.get(position).getCountry());
