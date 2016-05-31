@@ -1,6 +1,8 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -32,6 +34,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -50,6 +53,7 @@ import java.util.Locale;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
+import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -57,6 +61,7 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -65,6 +70,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -121,6 +127,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     RadioGroup catgroup,fgrp1,fgrp2;
     ArrayList<String>filter=new ArrayList<>();
     ArrayList<String>filter2=new ArrayList<>();
+    FrameLayout mapp;
     public int getFilcatid() {
         return filcatid;
     }
@@ -135,7 +142,7 @@ int val;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice2);
-
+mapp=(FrameLayout)findViewById(R.id.map_fragment);
 
         con = this;
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -877,5 +884,64 @@ searchmain.setVisibility(View.GONE);
         }
 
         return snumber;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+
+        SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+        Boolean valuecheck=pref.getBoolean("Value",false);
+
+        searchmain.setVisibility(View.GONE);
+        placemain.setVisibility(View.VISIBLE);
+
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+
+        if (valuecheck!=false)
+        {
+            placemain.setVisibility(View.GONE);
+            allitemList.setVisibility(View.GONE);
+           mapp.setVisibility(View.VISIBLE);
+            searchmain.setVisibility(View.VISIBLE);
+
+           // map.setVisibility(View.VISIBLE);
+            implementRouteDrawingFragmentOSM();
+        }
+
+        else {
+            Intent intent;
+            intent = getIntent();
+            if (null != intent) {
+
+            }
+
+
+            if (Latitude != null && AppUtils.isNetConnected(getApplicationContext())) {
+                Double Lon = Double.parseDouble(Longitude);
+                Double Lat = Double.parseDouble(Latitude);
+
+
+
+            }
+        }
+    }
+    public void implementRouteDrawingFragmentOSM()
+    {
+
+
+        MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
+
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
+        fragmentTransaction.commit();
     }
 }

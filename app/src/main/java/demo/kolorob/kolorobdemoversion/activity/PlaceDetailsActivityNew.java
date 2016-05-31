@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -146,7 +147,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private RelativeLayout wholeLayout;
     private int showList;
     private ImageButton helpicon;
-
+    private Button prebutton;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -298,6 +299,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
         Searchall=(EditText)findViewById(R.id.searchall);
+        prebutton=(Button) findViewById(R.id.prebutton);
         catsearch=(EditText)findViewById(R.id.searchallc);
         Searchall.setOnTouchListener(new View.OnTouchListener() {
             @Override
