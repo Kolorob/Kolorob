@@ -2115,7 +2115,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
         fragmentTransaction.commit();
     }
- 
+
     public void Populateholder()
     {
         filterText = (EditText)findViewById(R.id.searchall);
@@ -2364,6 +2364,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
         if (valuecheck!=false)
         {
+            searchLayout.setVisibility(View.GONE);
+            explist.setVisibility(View.GONE);
+            map.setVisibility(View.VISIBLE);
             implementRouteDrawingFragmentOSM();
         }
 
