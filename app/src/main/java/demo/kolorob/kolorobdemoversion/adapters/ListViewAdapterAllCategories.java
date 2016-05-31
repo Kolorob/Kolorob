@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -141,6 +142,10 @@ int catt=worldpopulationlist.get(position).getCatid();
 					iient.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
 					activity.startActivity(iient);
 							}
+				SharedPreferences pref = getActivity().getSharedPreferences("MyPref", mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = pref.edit();
+				editor.putBoolean("Search", true);
+				editor.commit();
 			}
 		});
 

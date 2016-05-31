@@ -114,6 +114,13 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  * @author touhid,israt,arafat
  */
 public class PlaceDetailsActivityNew extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
+    public int getShowList() {
+        return showList;
+    }
+
+    public void setShowList(int showList) {
+        this.showList = showList;
+    }
 
     private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
     private static final int ANIM_INTERVAL = 200;
@@ -418,7 +425,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
                     map.setVisibility(View.GONE);
-                    showList=1;
+                    setShowList(1);
+
                     list_expand=true;
                     listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
@@ -428,7 +436,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 else
                 {
                     llSubCatListHolder.setVisibility(View.VISIBLE);
-                    showList=0;
+                    setShowList(0);
                     map.setVisibility(View.VISIBLE);
                     list_expand=false;
                     subCatItemList.setVisibility(View.GONE);
@@ -926,8 +934,31 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         }
 
         this.doubleBackToExitPressedOnce = true;
-        wholeLayout.setVisibility(View.VISIBLE);
-        searchLayout.setVisibility(View.GONE);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        int k=getShowList();
+        boolean ss=pref.getBoolean("Search",false);
+       if(map.getVisibility()==View.VISIBLE && k==1)
+       {
+           map.setVisibility(View.GONE);
+           llCatListHolder.setVisibility(View.VISIBLE);
+           llSubCatListHolder.setVisibility(View.VISIBLE);
+           listholder.setVisibility(View.VISIBLE);
+
+           if(k==1){
+               llSubCatListHolder.setVisibility(View.GONE);
+               explist.setVisibility(View.VISIBLE);
+           }
+       }
+        else if (map.getVisibility()==View.VISIBLE&& ss==true)
+        {
+            map.setVisibility(View.GONE);
+            llCatListHolder.setVisibility(View.VISIBLE);
+            llSubCatListHolder.setVisibility(View.VISIBLE);
+            listholder.setVisibility(View.VISIBLE);
+            searchLayout.setVisibility(View.VISIBLE);
+
+
+        }
 
 
         new Handler().postDelayed(new Runnable() {
@@ -1915,6 +1946,19 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+    }
+    private void callMapFragment()
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        //   mapFragment.setMapIndicatorText(item_name);
+
+
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
