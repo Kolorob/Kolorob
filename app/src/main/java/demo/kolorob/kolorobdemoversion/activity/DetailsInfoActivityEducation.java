@@ -87,7 +87,7 @@ public class DetailsInfoActivityEducation extends Activity {
     private ImageView close_button,phone_mid,distance_left,feedback;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
-    String status,phone_num,registered;
+    String status="",phone_num="",registered="";
 
 
     @Override
@@ -712,9 +712,13 @@ public class DetailsInfoActivityEducation extends Activity {
 
     public void declareRadiobutton()
     {
-        int selected = feedRadio.getCheckedRadioButtonId();
-        RadioButton rb1 = (RadioButton) findViewById(selected);
-        status = rb1.getText().toString();
+       // int selected = feedRadio.getCheckedRadioButtonId();
+       // RadioButton rb1 = (RadioButton) findViewById(selected);
+      //  status = rb1.getText().toString();
+
+        // Arafat, change this codes;
+
+        status = "1";
     }
 
     public void requestToRegister()

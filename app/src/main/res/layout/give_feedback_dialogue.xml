@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ভাল"
+            android:layout_marginLeft="-10dp"
             android:textColor="@color/orange"
             android:id="@+id/bad" />
 
@@ -33,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="মোটামোটি"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/orange"
 
             android:id="@+id/moderate" />
