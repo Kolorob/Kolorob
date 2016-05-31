@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 public class DisplayAllJobsActivity extends Activity {
 
     private ImageView close_button;
+    private TextView tv_button;
         ArrayList<JobAdvertisementItem> jobAdvertisementItems;
         JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
         Context context;
@@ -91,11 +93,18 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.show();
 
         close_button=(ImageView)findViewById(R.id.iv_close);
+        tv_button=(TextView)findViewById(R.id.tv_close);
 
 
         context=this;
 
         close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        tv_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
