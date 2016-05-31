@@ -104,7 +104,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:layout_gravity="center_horizontal">
 
         <ListView
@@ -116,7 +116,7 @@
             android:background="@color/white"
             android:layout_gravity="center_horizontal" />
             <FrameLayout
-                android:layout_width="268dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/map_fragment"
                 android:visibility="gone"

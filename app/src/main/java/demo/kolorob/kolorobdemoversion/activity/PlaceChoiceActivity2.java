@@ -143,7 +143,13 @@ int val;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice2);
 mapp=(FrameLayout)findViewById(R.id.map_fragment);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
 
+        editor.putBoolean("Value", false);
+
+
+        editor.commit();
         con = this;
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -261,6 +267,8 @@ Searchall=(EditText)findViewById(R.id.searchall);
                 calladapter(false);
                 placemain.setVisibility(View.GONE);
                 searchmain.setVisibility(View.VISIBLE);
+                mapp.setVisibility(View.GONE);
+                allitemList.setVisibility(View.VISIBLE);
                 catholder.setVisibility(View.GONE);
                 fholder.setVisibility(View.GONE);
                 catgroup.setVisibility(View.GONE);
@@ -904,7 +912,12 @@ searchmain.setVisibility(View.GONE);
 
         /// Log.d(">>>>>>","You are in onResume");
 
+if(valuecheck==false)
+{
 
+       allitemList.setVisibility(View.VISIBLE);
+
+}
         if (valuecheck!=false)
         {
             placemain.setVisibility(View.GONE);
