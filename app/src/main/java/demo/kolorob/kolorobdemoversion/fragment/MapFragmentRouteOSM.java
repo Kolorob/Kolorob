@@ -337,13 +337,37 @@ public void calltransportlayout()
     Walkingtext=(TextView)rootView.findViewById(R.id.walkingtext);
     disttext.setText(getString(R.string.distance) +": " +distance+ " km" );
     double Busfare=roadlength*1.55;
-    double bustime=(roadlength*15)/60;
+    double bustime=(roadlength/15)*60;
             if (Busfare <=7.00)Bustext.setText( "7 " + "Taka ");
     else {
                 String Bfare=String.format("%.2f", Busfare);
                 String Btime=String.format("%.2f", bustime);
                 Bustext.setText(Bfare + " Taka and might take " + Btime+ " minutes"  );
             }
+    double CNGfare=(roadlength-2)*12+40;
+    double CNGtime=(roadlength/13)*60;
+    if (CNGfare <=40.00)Cngtext.setText( "40 " + "Taka and very minimum time required");
+    else {
+        String Cfare=String.format("%.2f", CNGfare);
+        String Ctime=String.format("%.2f", CNGtime);
+        Cngtext.setText(Cfare + " Taka and might take " + Ctime+ " minutes"  );
+    }
+    double rickfare=(roadlength)*15;
+    double ricktime=(roadlength/10)*60;
+    if (rickfare <=10.00)Ricksawtext.setText( "10 " + "Taka and very minimum time required");
+    else {
+        String Rfare=String.format("%.2f", rickfare);
+        String Rtime=String.format("%.2f", ricktime);
+        Ricksawtext.setText(Rfare + " Taka and might take " + Rtime+ " minutes"  );
+    }
+    double wfare=0.0;
+    double wtime=(roadlength/8)*60;
+
+
+        String wwfare=String.format("%.2f", wfare);
+        String wwtime=String.format("%.2f", wtime);
+        Walkingtext.setText(wwfare + " Taka and might take " + wwtime+ " minutes"  );
+
 }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
         mapView.getOverlays().remove(roadOverlay);

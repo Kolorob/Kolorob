@@ -274,7 +274,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putBoolean("Value", false);
-
+        editor.putInt("ValueD", 23);
 
         editor.commit();
 
@@ -771,6 +771,14 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
             public void onClick(View v) {
 
                 sendDataToserver(userfeedback.getText().toString());
+
+            }
+        });
+        prebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PlaceDetailsActivityNew.this.onBackPressed();
 
             }
         });

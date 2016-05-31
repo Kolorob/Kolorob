@@ -147,7 +147,12 @@ mapp=(FrameLayout)findViewById(R.id.map_fragment);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putBoolean("Value", false);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
+        editor.putInt("ValueD", 10);
+
+        editor.commit();
 
         editor.commit();
         con = this;
@@ -159,7 +164,7 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
         searchmain=(LinearLayout)findViewById(R.id.searchviewholder);
         searchmain.setVisibility(View.GONE);
         placemain.setVisibility(View.VISIBLE);
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
+
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
 
@@ -903,7 +908,7 @@ searchmain.setVisibility(View.GONE);
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
         Boolean valuecheck=pref.getBoolean("Value",false);
-
+        int getv=pref.getInt("ValueD",0);
         searchmain.setVisibility(View.GONE);
         placemain.setVisibility(View.VISIBLE);
 
@@ -918,7 +923,7 @@ if(valuecheck==false)
        allitemList.setVisibility(View.VISIBLE);
 
 }
-        if (valuecheck!=false)
+        if (valuecheck!=false && getv==10)
         {
             placemain.setVisibility(View.GONE);
             allitemList.setVisibility(View.GONE);
