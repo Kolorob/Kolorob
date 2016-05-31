@@ -184,6 +184,7 @@ double roadlength;
         StrictMode.setThreadPolicy(policy);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
+
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         width = metrics.widthPixels;
