@@ -2088,8 +2088,7 @@ catholder.setVisibility(View.GONE);
         llCatListHolder.setVisibility(View.GONE);
         llSubCatListHolder.setVisibility(View.GONE);
         listholder.setVisibility(View.GONE);
-        searchLayout.setVisibility(View.GONE);
-        wholeLayout.setVisibility(View.VISIBLE);
+
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
@@ -2269,7 +2268,7 @@ catholder.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-                Toast.makeText(PlaceDetailsActivityNew.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+
                 Log.v("Inside fun1",String.valueOf(num));
             }
         });
@@ -2289,7 +2288,7 @@ catholder.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-                Toast.makeText(PlaceDetailsActivityNew.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+
                 Log.v("Inside fun2","fun1");
 
             }
@@ -2334,7 +2333,8 @@ catholder.setVisibility(View.GONE);
             MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
             subCatItemList.setAdapter(adapter);
         }
-
+        searchLayout.setVisibility(View.GONE);
+        wholeLayout.setVisibility(View.VISIBLE);
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();

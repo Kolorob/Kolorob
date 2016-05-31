@@ -64,7 +64,7 @@
                     android:layout_width="20dp"
                     android:layout_weight="0.87"
                     android:textColor="@color/black"
-                    android:hint="Search..."
+                    android:hint="@string/csearch"
                     android:textColorHint="@color/red"
                     android:background="@color/white"
                     android:layout_height="40dp"
