@@ -576,13 +576,6 @@ public class DetailsInfoActivityEducation extends Activity {
         });
 
 
-
-
-
-
-
-
-
     }
 
     public void verifyRegistration(View v){
@@ -599,11 +592,6 @@ public class DetailsInfoActivityEducation extends Activity {
             feedBackAlert();
             sendReviewToServer();
         }
-
-
-
-
-
 
 
     }
@@ -716,7 +704,7 @@ public class DetailsInfoActivityEducation extends Activity {
        // RadioButton rb1 = (RadioButton) findViewById(selected);
       //  status = rb1.getText().toString();
 
-        // Arafat, change this codes;
+        // Arafat, i set it as static 1, pls change this codes;
 
         status = "1";
     }
