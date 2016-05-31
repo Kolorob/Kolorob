@@ -172,8 +172,12 @@
                 android:layout_alignEnd="@+id/morebutton"
                 android:layout_alignLeft="@+id/textView17"
                 android:layout_alignStart="@+id/textView17">
-
-
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -242,6 +246,8 @@
                     android:layout_alignParentEnd="true"
                     android:textColor="#ffffff"
                     android:checked="false" />
+                </LinearLayout>
+                </ScrollView>
                 <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="150dp">
