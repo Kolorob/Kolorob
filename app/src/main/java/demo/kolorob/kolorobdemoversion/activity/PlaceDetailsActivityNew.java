@@ -14,7 +14,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -95,7 +94,6 @@ import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
-import demo.kolorob.kolorobdemoversion.fragment.MapRouteDrawingFragment;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -1310,15 +1308,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         govclicked=true;
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
-                        mapcalledstatus=false;
+                        mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
-                        map.removeAllViews();
+                        map.setVisibility(View.VISIBLE);
                         //TODO write necessary codes for government
                         toolbar2.setVisibility(View.GONE);
                         listholder.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
                         toolbar.setVisibility(View.VISIBLE);
-                        final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
+                       /* final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
                         alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
                         alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
@@ -1332,7 +1330,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                                     }
                                 });
                         alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();
+                        alertDialog.show();*/
                         break;
                     case AppConstants.LEGAL:
                         legclicked=true;
