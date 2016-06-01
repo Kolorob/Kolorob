@@ -16,7 +16,7 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity_new;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
@@ -106,7 +106,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(MyInfoWindow.this.con);
                         nullleg = legalAidServiceProviderTable.getlegNode2(node);
-                        Intent iileg = new Intent(MyInfoWindow.this.con, DetailsLegalActivity_new.class);
+                        Intent iileg = new Intent(MyInfoWindow.this.con, DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
 

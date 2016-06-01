@@ -6,6 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="searchtext">কি খুঁজতে চান?</string>
     <string name="search"> এখানে লিখে খুঁজুন</string>
+    <string name="csearch">খুঁজুন</string>
+    <string name="fsearch">সেবা খুজুন</string>
     <string name="switch_image">Switch Image</string>
     <string name="transparency">Transparency</string>
     <string name="clickable">Clickable</string>

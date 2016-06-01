@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -114,6 +115,13 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  * @author touhid,israt,arafat
  */
 public class PlaceDetailsActivityNew extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
+    public int getShowList() {
+        return showList;
+    }
+
+    public void setShowList(int showList) {
+        this.showList = showList;
+    }
 
     private static final String TAG = PlaceDetailsActivityNew.class.getSimpleName();
     private static final int ANIM_INTERVAL = 200;
@@ -139,7 +147,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private RelativeLayout wholeLayout;
     private int showList;
     private ImageButton helpicon;
-
+    private Button prebutton;
 
     private int sideIndexHeight;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -147,8 +155,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     public int layoutstatus;
     private Boolean list_expand=false;
     private TextView listOrMapDisplayText;
-boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
-private Toolbar toolbar,toolbar2;
+    boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
+    private Toolbar toolbar,toolbar2;
 
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
@@ -160,9 +168,9 @@ private Toolbar toolbar,toolbar2;
     ArrayList<HealthServiceProviderItem> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
     ArrayList<String> allData= new ArrayList<>();
-private DrawerLayout drawer;
+    private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
-Context context;
+    Context context;
     ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
     public LinearLayout sideIndex,searchLayout;
@@ -178,7 +186,7 @@ Context context;
     public static int currentCategoryID;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
-TextView header;
+    TextView header;
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
@@ -203,7 +211,7 @@ TextView header;
     public void setPlaceChoice(String placeChoice) {
         this.placeChoice = placeChoice;
     }
-EditText Searchall,catsearch;
+    EditText Searchall,catsearch;
     boolean catsearchclicked=false;
     ListViewAdapterAllCategories adapter;
     EditText filterText;
@@ -255,10 +263,26 @@ EditText Searchall,catsearch;
         this.filcatid = filcatid;
     }
     boolean doubleBackToExitPressedOnce = false;
+    int val;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putBoolean("Value", false);
+        editor.putInt("ValueD", 23);
+
+        editor.commit();
+
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+        val = settings.getInt("KValue", 0);
+        Log.e("ASinplaceDetails",String.valueOf(val));
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
         dpi=displayMetrics.densityDpi;
@@ -270,11 +294,12 @@ EditText Searchall,catsearch;
 
         wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
         wholeLayout.setVisibility(View.VISIBLE);
-searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
+        searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
         searchLayout.setVisibility(View.GONE);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
         Searchall=(EditText)findViewById(R.id.searchall);
+        prebutton=(Button) findViewById(R.id.prebutton);
         catsearch=(EditText)findViewById(R.id.searchallc);
         Searchall.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -303,7 +328,7 @@ searchLayout=(LinearLayout)findViewById(R.id.searchlayout);
                 searchLayout.setVisibility(View.VISIBLE);
                 calladapter(true);
 
-catholder.setVisibility(View.GONE);
+                catholder.setVisibility(View.GONE);
 
                 catgroup.setVisibility(View.GONE);
                 if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
@@ -316,7 +341,7 @@ catholder.setVisibility(View.GONE);
             }
         });
         header=(TextView)findViewById(R.id.textView15);
-       // toolbar.setBackgroundResource(android.R.color.transparent);
+        // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
@@ -331,14 +356,14 @@ catholder.setVisibility(View.GONE);
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-              //  getSupportActionBar().setTitle("Navigation!");
+                //  getSupportActionBar().setTitle("Navigation!");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-               // getSupportActionBar().setTitle(mActivityTitle);
+                // getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
@@ -351,8 +376,8 @@ catholder.setVisibility(View.GONE);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-      //  Log.d(">>>>","test_dpi "+dpi);
-       // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
+        //  Log.d(">>>>","test_dpi "+dpi);
+        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
 
@@ -402,7 +427,8 @@ catholder.setVisibility(View.GONE);
 
                     wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
                     map.setVisibility(View.GONE);
-                    showList=1;
+                    setShowList(1);
+
                     list_expand=true;
                     listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
@@ -412,7 +438,7 @@ catholder.setVisibility(View.GONE);
                 else
                 {
                     llSubCatListHolder.setVisibility(View.VISIBLE);
-                    showList=0;
+                    setShowList(0);
                     map.setVisibility(View.VISIBLE);
                     list_expand=false;
                     subCatItemList.setVisibility(View.GONE);
@@ -433,19 +459,17 @@ catholder.setVisibility(View.GONE);
         //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
         ///this code will change the background of the layout for two places.
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
-       // itemList = (ListView)findViewById(R.id.listViewSearch);
+
+
+        // itemList = (ListView)findViewById(R.id.listViewSearch);
         //subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
 
         //subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         //showsearch=(RelativeLayout)findViewById(R.id.show);
-       // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
+        // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         //seeMap = (Button) findViewById(R.id.btn_see_map);
-       // showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
+        // showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC_NEW;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.92); // 80% of the view width
@@ -453,7 +477,7 @@ catholder.setVisibility(View.GONE);
 
 
 
-      //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
+        //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
         llCatListHolder.setVisibility(View.VISIBLE);
@@ -478,7 +502,7 @@ catholder.setVisibility(View.GONE);
         lp.height=100;
 
         if(height<1000)
-        caTsList.setMargins(0, 60, 0, 0);
+            caTsList.setMargins(0, 60, 0, 0);
         else
             caTsList.setMargins(0, 10, 0, 0);
 
@@ -490,7 +514,7 @@ catholder.setVisibility(View.GONE);
          * constructing category list
          **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNew.this);
-       categoryList=categoryTable.getAllCategories();
+        categoryList=categoryTable.getAllCategories();
         constructCategoryList(categoryList);
         //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
@@ -513,9 +537,9 @@ catholder.setVisibility(View.GONE);
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
                 }
                 else {locationNameId=AppConstants.PLACE_PARIS_ROAD;}
-            if(mapcalledstatus){
+                if(mapcalledstatus){
 
-              }
+                }
             }
 
             @Override
@@ -750,6 +774,14 @@ catholder.setVisibility(View.GONE);
 
             }
         });
+        prebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PlaceDetailsActivityNew.this.onBackPressed();
+
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -795,11 +827,11 @@ catholder.setVisibility(View.GONE);
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
 
-                   // Log.d(">>>>", "printnames "+printnames);
-                  /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
-                   // Log.d(">>>>", "head "+head);
-                   // Log.d(">>>>", "print.get(j) "+print.get(j));
-                   // Log.d(">>>>", "placeChoice "+placeChoice);
+                    // Log.d(">>>>", "printnames "+printnames);
+                    /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
+                    // Log.d(">>>>", "head "+head);
+                    // Log.d(">>>>", "print.get(j) "+print.get(j));
+                    // Log.d(">>>>", "placeChoice "+placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -904,7 +936,7 @@ catholder.setVisibility(View.GONE);
 
 
 
-@Override
+    @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
@@ -912,8 +944,31 @@ catholder.setVisibility(View.GONE);
         }
 
         this.doubleBackToExitPressedOnce = true;
-    wholeLayout.setVisibility(View.VISIBLE);
-    searchLayout.setVisibility(View.GONE);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        int k=getShowList();
+        boolean ss=pref.getBoolean("Search",false);
+       if(map.getVisibility()==View.VISIBLE && k==1)
+       {
+           map.setVisibility(View.GONE);
+           llCatListHolder.setVisibility(View.VISIBLE);
+           llSubCatListHolder.setVisibility(View.VISIBLE);
+           listholder.setVisibility(View.VISIBLE);
+
+           if(k==1){
+               llSubCatListHolder.setVisibility(View.GONE);
+               explist.setVisibility(View.VISIBLE);
+           }
+       }
+        else if (map.getVisibility()==View.VISIBLE&& ss==true)
+        {
+            map.setVisibility(View.GONE);
+            llCatListHolder.setVisibility(View.VISIBLE);
+            llSubCatListHolder.setVisibility(View.VISIBLE);
+            listholder.setVisibility(View.VISIBLE);
+            searchLayout.setVisibility(View.VISIBLE);
+
+
+        }
 
 
         new Handler().postDelayed(new Runnable() {
@@ -993,7 +1048,7 @@ catholder.setVisibility(View.GONE);
         else
 
             v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-       final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
+        final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
 
 
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
@@ -1269,7 +1324,11 @@ catholder.setVisibility(View.GONE);
                         alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+
+
                                         alertDialog.dismiss();
+
+                                        finish();
                                     }
                                 });
                         alertDialog.getWindow().setLayout(200, 300);
@@ -1356,6 +1415,7 @@ catholder.setVisibility(View.GONE);
                             financialServiceProvider = constructfinancialListItem(ci.getId());
                             callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
 
+
                         }
 
 
@@ -1402,9 +1462,9 @@ catholder.setVisibility(View.GONE);
                         jobclicked=true;
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_chakri_bakri);
-                       // mapcalledstatus=false;
+                        // mapcalledstatus=false;
                         llSubCatListHolder.setVisibility(View.GONE);
-                     //   map.removeAllViews();
+                        //   map.removeAllViews();
 //                        toolbar2.setVisibility(View.GONE);
 //                        listholder.setVisibility(View.GONE);
 //                        toolbar.setVisibility(View.VISIBLE);
@@ -1434,12 +1494,12 @@ catholder.setVisibility(View.GONE);
                 /**
                  * code for all categories
                  **/
-              //  showSubCatListItem.setEnabled(false);
-             //   showSubCatListItem.setVisibility(View.VISIBLE);
-              //  subCatItemList.setVisibility(View.GONE);
-             //   subCatItemListHeader.setVisibility(View.GONE);
-             //   insSubCat.setVisibility(View.VISIBLE);
-               // seeMap.setVisibility(View.VISIBLE);
+                //  showSubCatListItem.setEnabled(false);
+                //   showSubCatListItem.setVisibility(View.VISIBLE);
+                //  subCatItemList.setVisibility(View.GONE);
+                //   subCatItemListHeader.setVisibility(View.GONE);
+                //   insSubCat.setVisibility(View.VISIBLE);
+                // seeMap.setVisibility(View.VISIBLE);
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
 
                 // categoryHeader.setText(ci.getCatName());
@@ -1455,7 +1515,7 @@ catholder.setVisibility(View.GONE);
 
                 else
                     categoryListBuildUp(currentCategoryID);
-               //AppConstants.CAT_LIST_LG_WIDTH_PERC);
+                //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -1465,9 +1525,9 @@ catholder.setVisibility(View.GONE);
     {
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
-   //     Log.d("cat_id",">>>" +cat_id);
-     //   Log.d("header",">>>" +header);
-      //  Log.d("placeChoice",">>>" +cat_id);
+        //     Log.d("cat_id",">>>" +cat_id);
+        //   Log.d("header",">>>" +header);
+        //  Log.d("placeChoice",">>>" +cat_id);
         createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
@@ -1479,15 +1539,15 @@ catholder.setVisibility(View.GONE);
 
 
 
-    //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+        //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 //
 //        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
 //        subCatItemList.setAdapter(adapter);
 
-      //  MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
-     //   subCatItemList.setAdapter(adapter);
+        //  MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
+        //   subCatItemList.setAdapter(adapter);
 
 
     }
@@ -1502,7 +1562,7 @@ catholder.setVisibility(View.GONE);
 
 
     private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
-       llSubCatListHolder.removeAllViews();
+        llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         subcategory=0;
         for (SubCategoryItem si : subCategoryList) {
@@ -1557,7 +1617,7 @@ catholder.setVisibility(View.GONE);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
-       va=0;
+        va=0;
 /**************************
  *
  *
@@ -1750,8 +1810,8 @@ catholder.setVisibility(View.GONE);
                 int p= getResources().getColor(R.color.subcategory_color);
 
 
-               // showSubCatListItem.setEnabled(true);
-               // subCatItemListHeader.setText(si.getSubcatHeader());
+                // showSubCatListItem.setEnabled(true);
+                // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
             }
         });
@@ -1784,7 +1844,7 @@ catholder.setVisibility(View.GONE);
 
                 llSubCatListHolder.setVisibility(View.VISIBLE);
                 llSubCatListHolder.startAnimation(slideInFromRightAnim());
-               constructSubCategoryList(subCatList, 1.0, cat_id);
+                constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
                 (int) (150 *
@@ -1798,9 +1858,9 @@ catholder.setVisibility(View.GONE);
     {
 
         Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-            callIntent1.setData(Uri.parse("tel:" + "01796559112"));
-            if(checkPermission())
-                startActivity(callIntent1);
+        callIntent1.setData(Uri.parse("tel:" + "01796559112"));
+        if(checkPermission())
+            startActivity(callIntent1);
 
     }
 
@@ -1843,10 +1903,10 @@ catholder.setVisibility(View.GONE);
                 Animation.RELATIVE_TO_PARENT, 0.0f
         );
         inFromRight.setDuration(ANIM_INTERVAL *
-                        (int) (200 *
-                                (AppConstants.CAT_LIST_LG_WIDTH_PERC
-                                        - AppConstants.CAT_LIST_SM_WIDTH_PERC)
-                        )
+                (int) (200 *
+                        (AppConstants.CAT_LIST_LG_WIDTH_PERC
+                                - AppConstants.CAT_LIST_SM_WIDTH_PERC)
+                )
         );
         inFromRight.setInterpolator(new AccelerateInterpolator());
         return inFromRight;
@@ -1859,10 +1919,10 @@ catholder.setVisibility(View.GONE);
                 Animation.RELATIVE_TO_PARENT, 0.95f,
                 Animation.RELATIVE_TO_PARENT, 0.0f);
         outToLeft.setDuration(ANIM_INTERVAL *
-                        (int) (200 *
-                                (AppConstants.CAT_LIST_LG_WIDTH_PERC
-                                        - AppConstants.CAT_LIST_SM_WIDTH_PERC)
-                        )
+                (int) (200 *
+                        (AppConstants.CAT_LIST_LG_WIDTH_PERC
+                                - AppConstants.CAT_LIST_SM_WIDTH_PERC)
+                )
         );
         outToLeft.setInterpolator(new AccelerateInterpolator());
         return outToLeft;
@@ -1891,11 +1951,24 @@ catholder.setVisibility(View.GONE);
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-     //   mapFragment.setMapIndicatorText(item_name);
+        //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+    }
+    private void callMapFragment()
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        //   mapFragment.setMapIndicatorText(item_name);
+
+
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
@@ -1915,8 +1988,8 @@ catholder.setVisibility(View.GONE);
     private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
-       mapFragment.setLocationName(getPlaceChoice());
-       // mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setLocationName(getPlaceChoice());
+        // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
         mapFragment.setLocationNameId(locationNameId);
@@ -2088,8 +2161,7 @@ catholder.setVisibility(View.GONE);
         llCatListHolder.setVisibility(View.GONE);
         llSubCatListHolder.setVisibility(View.GONE);
         listholder.setVisibility(View.GONE);
-        searchLayout.setVisibility(View.GONE);
-        wholeLayout.setVisibility(View.VISIBLE);
+
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
@@ -2097,15 +2169,7 @@ catholder.setVisibility(View.GONE);
         fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
         fragmentTransaction.commit();
     }
-    public void implementRouteDrawingFragment()
-    {
-        MapRouteDrawingFragment mapRouteDrawingFragment = new MapRouteDrawingFragment();
-        map.setVisibility(View.VISIBLE);
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapRouteDrawingFragment);
-        fragmentTransaction.commit();
-    }
+
     public void Populateholder()
     {
         filterText = (EditText)findViewById(R.id.searchall);
@@ -2269,7 +2333,7 @@ catholder.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-                Toast.makeText(PlaceDetailsActivityNew.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+
                 Log.v("Inside fun1",String.valueOf(num));
             }
         });
@@ -2289,7 +2353,7 @@ catholder.setVisibility(View.GONE);
                 setFilterword((String) radioButton.getText());
                 int num=Findsubcatid(filterword);
                 calladapter(true);
-                Toast.makeText(PlaceDetailsActivityNew.this,String.valueOf(num),Toast.LENGTH_SHORT).show();
+
                 Log.v("Inside fun2","fun1");
 
             }
@@ -2334,23 +2398,33 @@ catholder.setVisibility(View.GONE);
             MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
             subCatItemList.setAdapter(adapter);
         }
-
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
-
-
-       /// Log.d(">>>>>>","You are in onResume");
-
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
         Boolean valuecheck=pref.getBoolean("Value",false);
+        if (valuecheck==false)
+        {
+            map.setVisibility(View.GONE);
+        }
+        searchLayout.setVisibility(View.GONE);
+        wholeLayout.setVisibility(View.VISIBLE);
+
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+
         if (valuecheck!=false)
         {
-        implementRouteDrawingFragmentOSM();
+            searchLayout.setVisibility(View.GONE);
+            explist.setVisibility(View.GONE);
+            map.setVisibility(View.VISIBLE);
+            implementRouteDrawingFragmentOSM();
         }
 
-else {
+        else {
             Intent intent;
             intent = getIntent();
             if (null != intent) {
@@ -2370,7 +2444,6 @@ else {
                 Double Lon = Double.parseDouble(Longitude);
                 Double Lat = Double.parseDouble(Latitude);
 
-                implementRouteDrawingFragment();
 
 
             }
@@ -2453,7 +2526,7 @@ else {
     @Override
     protected void onPause() {
         super.onPause();
-       // Log.d(">>>>>>","You are in onPause");
+        // Log.d(">>>>>>","You are in onPause");
     }
     private boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);

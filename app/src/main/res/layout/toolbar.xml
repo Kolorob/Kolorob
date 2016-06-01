@@ -38,7 +38,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
                 android:textColor="@color/black"
-                android:hint="Search in All category ..."
+                android:hint="@string/search"
                 android:textColorHint="@color/red"
                 android:background="@color/white"
                 android:layout_height="40dp"

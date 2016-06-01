@@ -1,5 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.Job;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -600,7 +602,9 @@ public class JobAdvertisementItem implements Serializable {
     }
 
     public static JobAdvertisementItem parseJobServiceProviderItem(JSONObject jo) throws JSONException {
+
         int id = jo.getInt("id");
+       // Log.d(">>>>>>","id  "+id);
         String form_date = jo.getString("form_date");
         String position = jo.getString("position");
         String institute_name = jo.getString("institute_name");

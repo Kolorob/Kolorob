@@ -1,12 +1,15 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -31,6 +34,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -49,6 +53,7 @@ import java.util.Locale;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
+import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -56,6 +61,7 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -64,6 +70,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -104,7 +111,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     }
     boolean doubleBackToExitPressedOnce = false;
     boolean catstatus=false;
-    int filcatid;
+    int filcatid=0;
     RelativeLayout catholder;
     CheckBox check;
     LinearLayout fholder,fleft,fright;
@@ -120,10 +127,11 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     RadioGroup catgroup,fgrp1,fgrp2;
     ArrayList<String>filter=new ArrayList<>();
     ArrayList<String>filter2=new ArrayList<>();
+    FrameLayout mapp;
     public int getFilcatid() {
         return filcatid;
     }
-
+int val;
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
@@ -134,8 +142,19 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_choice2);
+mapp=(FrameLayout)findViewById(R.id.map_fragment);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
 
+        editor.putBoolean("Value", false);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
+        editor.putInt("ValueD", 10);
+
+        editor.commit();
+
+        editor.commit();
         con = this;
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -146,6 +165,32 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
         searchmain.setVisibility(View.GONE);
         placemain.setVisibility(View.VISIBLE);
 
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+        val = settings.getInt("KValue", 0);
+        Log.e("ASinplaceDetails",String.valueOf(val));
+        if (val!=7)
+        {
+            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceChoiceActivity2.this).create();
+
+            alertDialog.setMessage("Data have not uploaded probably");
+            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent i = new Intent(PlaceChoiceActivity2.this, OpeningActivity.class);
+
+                            alertDialog.dismiss();
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+            alertDialog.getWindow().setLayout(200, 300);
+            alertDialog.show();
+        }
         Log.d("...>>>","Layout width"+width);
 
         try
@@ -227,6 +272,8 @@ Searchall=(EditText)findViewById(R.id.searchall);
                 calladapter(false);
                 placemain.setVisibility(View.GONE);
                 searchmain.setVisibility(View.VISIBLE);
+                mapp.setVisibility(View.GONE);
+                allitemList.setVisibility(View.VISIBLE);
                 catholder.setVisibility(View.GONE);
                 fholder.setVisibility(View.GONE);
                 catgroup.setVisibility(View.GONE);
@@ -300,6 +347,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
 
                     setFilcatid(1);
                     catstatus=true;
+                    getFilcatid();
                     calladapter(catstatus);
 
                 } else  if (checkedId == R.id.helradioButton2) {
@@ -849,5 +897,69 @@ searchmain.setVisibility(View.GONE);
         }
 
         return snumber;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+
+        SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String Latitude = pref.getString("Latitude", null);
+        String Longitude = pref.getString("Longitude", null);
+        Boolean valuecheck=pref.getBoolean("Value",false);
+        int getv=pref.getInt("ValueD",0);
+        searchmain.setVisibility(View.GONE);
+        placemain.setVisibility(View.VISIBLE);
+
+        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
+
+        /// Log.d(">>>>>>","You are in onResume");
+
+if(valuecheck==false)
+{
+
+       allitemList.setVisibility(View.VISIBLE);
+
+}
+        if (valuecheck!=false && getv==10)
+        {
+            placemain.setVisibility(View.GONE);
+            allitemList.setVisibility(View.GONE);
+           mapp.setVisibility(View.VISIBLE);
+            searchmain.setVisibility(View.VISIBLE);
+
+           // map.setVisibility(View.VISIBLE);
+            implementRouteDrawingFragmentOSM();
+        }
+
+        else {
+            Intent intent;
+            intent = getIntent();
+            if (null != intent) {
+
+            }
+
+
+            if (Latitude != null && AppUtils.isNetConnected(getApplicationContext())) {
+                Double Lon = Double.parseDouble(Longitude);
+                Double Lat = Double.parseDouble(Latitude);
+
+
+
+            }
+        }
+    }
+    public void implementRouteDrawingFragmentOSM()
+    {
+
+
+        MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
+
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
+        fragmentTransaction.commit();
     }
 }
