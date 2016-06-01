@@ -4,9 +4,10 @@
     <modules>
 <<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Kolorob.iml" filepath="$PROJECT_DIR$/Kolorob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kolorob.iml" filepath="$PROJECT_DIR$/Kolorob.iml" />
 =======
-      <module fileurl="file://$PROJECT_DIR$/KolorobM.iml" filepath="$PROJECT_DIR$/KolorobM.iml" />
->>>>>>> 8dfb9c1577782953901fb6318584b111b9073249
+      <module fileurl="file://$PROJECT_DIR$/KolorobMayUI.iml" filepath="$PROJECT_DIR$/KolorobMayUI.iml" />
+>>>>>>> 2b45e02d48806020ed889482e6530469ffddf867
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/volley/volley.iml" filepath="$PROJECT_DIR$/libraries/volley/volley.iml" />
     </modules>

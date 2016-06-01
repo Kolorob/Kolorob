@@ -163,7 +163,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/help_icon"
         android:id="@+id/helpicon"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="95dp"
         android:layout_marginRight="100dp"
         android:gravity="right"
         android:onClick="helpDialog"

@@ -16,14 +16,11 @@ import java.util.List;
 import java.util.Locale;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DetailsFinancialActivity_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth_new;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsLegalActivity_new;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
@@ -93,7 +90,7 @@ FinancialServiceProviderItem nullfin;
 			holder = (ViewHolder) view.getTag();
 		}
 		// Set the results into TextViews
-		String rank=worldpopulationlist.get(position).getNameen().toString();
+		String rank=worldpopulationlist.get(position).getNamebn().toString();
 		if (holder.rank.getText()!=rank)
 		holder.rank.setText(rank);
 		//holder.country.setText(worldpopulationlist.get(position).getCountry());
