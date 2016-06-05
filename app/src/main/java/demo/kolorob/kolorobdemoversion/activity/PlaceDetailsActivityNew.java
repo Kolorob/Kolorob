@@ -429,6 +429,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
                     list_expand=true;
                     listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
+                    Log.d("====","CategoryId"+currentCategoryID);
+                    categoryListBuildUp(currentCategoryID);
 
 
                 }
