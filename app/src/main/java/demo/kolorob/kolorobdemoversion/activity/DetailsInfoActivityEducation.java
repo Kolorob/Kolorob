@@ -764,6 +764,36 @@ public class DetailsInfoActivityEducation extends Activity {
         }
     }
 
+    private String English_to_bengali_number_conversion(String english_number)
+    {
+        int v= english_number.length();
+        String concatResult="";
+        for(int i=0;i<v;i++)
+        {
+            if(english_number.charAt(i)=='1')
+                concatResult=concatResult+"১";
+           else if(english_number.charAt(i)=='2')
+                concatResult=concatResult+"২";
+            else if(english_number.charAt(i)=='3')
+                concatResult=concatResult+"৩";
+            else if(english_number.charAt(i)=='4')
+                concatResult=concatResult+"৪";
+            else if(english_number.charAt(i)=='5')
+                concatResult=concatResult+"৫";
+            else if(english_number.charAt(i)=='6')
+                concatResult=concatResult+"৬";
+            else if(english_number.charAt(i)=='7')
+                concatResult=concatResult+"৭";
+            else if(english_number.charAt(i)=='8')
+                concatResult=concatResult+"৮";
+            else if(english_number.charAt(i)=='9')
+                concatResult=concatResult+"৯";
+            else if(english_number.charAt(i)=='0')
+                concatResult=concatResult+"০";
+        }
+        return concatResult;
+    }
+
     public Boolean RegisteredOrNot()
     {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
