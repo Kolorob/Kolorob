@@ -1123,17 +1123,21 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.turned_on_porashona);
+                        callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+                        mapcalledstatus=true;
                         if(showList==1) {
+
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
-                            callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+
+
 
                         }
                         else
                         {
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             listholder.startAnimation(slideInFromRightAnim());
@@ -1184,21 +1188,23 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
+                        callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+                        mapcalledstatus=true;
                         if(showList==1) {
+
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
-                            callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+
 
                         }
                         else {
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
 
-                            callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
 
 
                         }
@@ -1251,12 +1257,14 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.turned_on_anondo_furti);
+                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
+                        mapcalledstatus=true;
                         if(showList==1) {
+
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
-                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
 
                         }
 
@@ -1266,8 +1274,6 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
-
                         }
 
 
@@ -1347,14 +1353,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+                        mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                        callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
                         if(showList==1) {
+
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
-                            callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
-
                         }
 
                         else {
@@ -1363,7 +1370,6 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
 
-                            callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
 
                         }
 
@@ -1412,21 +1418,23 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
+                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
+                        mapcalledstatus=true;
+
                         if(showList==1) {
+
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
-                            callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
 
                         }
                         else
                         {
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
 
 
                         }
@@ -1527,7 +1535,16 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 }
 
                 else
-                    categoryListBuildUp(currentCategoryID);
+                {
+                    if (isCatExpandedOnce)
+                        showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
+                    else
+                        showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
+                        categoryListBuildUp(currentCategoryID);
+                }
+
+
+
                 //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
@@ -1540,7 +1557,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
         //     Log.d("cat_id",">>>" +cat_id);
         //   Log.d("header",">>>" +header);
-        //  Log.d("placeChoice",">>>" +cat_id);
+          Log.d("======","catsss Id" +cat_id);
+
+
         createData(cat_id,header,placeChoice);
         ArrayList<String> itemName = new ArrayList<String>();
         currentSubCategoryItem = subCategoryItems;
@@ -1845,7 +1864,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
         // TODO Inflate the sub-category list from right
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
-        if(subCatShowFlag==1)
+        if(subCatShowFlag==1&&showList!=1)
         {
             llSubCatListHolder.setVisibility(View.VISIBLE);
         }
@@ -1854,8 +1873,10 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
+                if(showList!=1)
                 llSubCatListHolder.setVisibility(View.VISIBLE);
+
+
                 llSubCatListHolder.startAnimation(slideInFromRightAnim());
                 constructSubCategoryList(subCatList, 1.0, cat_id);
             }

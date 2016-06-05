@@ -72,6 +72,12 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
+/**
+ * Created by arafat on 10/5/15.
+ *
+ * @author arafat
+ */
+
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
@@ -172,7 +178,7 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
 
         val = settings.getInt("KValue", 0);
         Log.e("ASinplaceDetails",String.valueOf(val));
-        if (val!=7)
+        if (val!=5)
         {
             final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceChoiceActivity2.this).create();
 
