@@ -443,6 +443,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     list_expand=false;
                     subCatItemList.setVisibility(View.GONE);
                     listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
+                    //constructCategoryList(categoryList);
 
                 }
 
