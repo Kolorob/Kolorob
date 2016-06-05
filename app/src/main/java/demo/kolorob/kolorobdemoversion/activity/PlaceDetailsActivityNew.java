@@ -1140,10 +1140,11 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
-                            listholder.startAnimation(slideInFromRightAnim());
+
                             mapholderr.startAnimation(slideInFromRightAnim());
                             callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
                         }
+                        listholder.startAnimation(slideInFromRightAnim());
                         toolbar.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
