@@ -1120,12 +1120,16 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.EDUCATION:
                         educlicked=true;
                         ivIcon.setImageResource(0);
+                        ArrayList<EducationServiceProviderItem> educationServiceProvider;
+                        educationServiceProvider = constructEducationListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.turned_on_porashona);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
+                            callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+
                         }
                         else
                         {
@@ -1134,8 +1138,6 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                             map.setVisibility(View.VISIBLE);
                             listholder.startAnimation(slideInFromRightAnim());
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            ArrayList<EducationServiceProviderItem> educationServiceProvider;
-                            educationServiceProvider = constructEducationListItem(ci.getId());
                             callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
                         }
                         toolbar.setVisibility(View.GONE);
@@ -1180,19 +1182,22 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         helclicked=true;
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
+                        ArrayList<HealthServiceProviderItem> healthServiceProvider;
+                        healthServiceProvider = constructHealthListItem(ci.getId());
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
+                            callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+
                         }
                         else {
                             mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            ArrayList<HealthServiceProviderItem> healthServiceProvider;
-                            healthServiceProvider = constructHealthListItem(ci.getId());
+
                             callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
 
 
@@ -1243,12 +1248,16 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.ENTERTAINMENT:
                         entclicked=true;
                         ivIcon.setImageResource(0);
+                        ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
+                        entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.turned_on_anondo_furti);
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
+                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
+
                         }
 
                         else
@@ -1257,8 +1266,6 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
-                            entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                             callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
 
                         }
@@ -1339,11 +1346,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         legclicked=true;
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
+                        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
+                            callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
+
                         }
 
                         else {
@@ -1351,8 +1362,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-                            legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+
                             callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
 
                         }
@@ -1400,11 +1410,15 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         finclicked=true;
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
+                        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
+                        financialServiceProvider = constructfinancialListItem(ci.getId());
                         if(showList==1) {
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
+                            callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
+
                         }
                         else
                         {
@@ -1412,8 +1426,6 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                             llSubCatListHolder.setVisibility(View.GONE);
                             map.setVisibility(View.VISIBLE);
                             mapholderr.startAnimation(slideInFromRightAnim());
-                            ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-                            financialServiceProvider = constructfinancialListItem(ci.getId());
                             callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
 
 
