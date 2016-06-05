@@ -2160,35 +2160,8 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
     /**********************************************************Methods for job*****************************************************/
 
-    private ArrayList<JobServiceProviderItem> constructjobListItem(int cat_id)
-    {
-        ArrayList<JobServiceProviderItem> jobServiceProvider;
-        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivityNew.this);
-        jobServiceProvider = jobServiceProviderTable.getAllJobSubCategoriesInfo(cat_id);
-        return jobServiceProvider;
-    }
 
-    private ArrayList<JobServiceProviderItem> constructjobListItemForHeader(int cat_id, String header)
-    {
-        ArrayList<JobServiceProviderItem> jobServiceProvider;
-        JobServiceProviderTable jobServiceProviderTable = new JobServiceProviderTable(PlaceDetailsActivityNew.this);
-        jobServiceProvider = jobServiceProviderTable.getAllJobSubCategoriesInfoWithHead(cat_id, header);
-        return jobServiceProvider;
-    }
 
-    private void callMapFragmentWithJobInfo(String item_name,int cat_id,ArrayList<JobServiceProviderItem> jobServiceProviderItems)
-    {
-        MapFragment mapFragment = new MapFragment();
-        mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
-        mapFragment.setJobServiceProvider(jobServiceProviderItems);
-        mapFragment.setLocationNameId(locationNameId);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragment);
-        fragmentTransaction.commit();
-    }
 
     public void implementRouteDrawingFragmentOSM()
     {
