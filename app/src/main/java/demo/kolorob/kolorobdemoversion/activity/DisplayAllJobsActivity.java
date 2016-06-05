@@ -60,7 +60,7 @@ public class DisplayAllJobsActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-
+                        displayData();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
