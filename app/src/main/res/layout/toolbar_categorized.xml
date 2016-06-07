@@ -61,28 +61,26 @@
 
                 <EditText
                     android:id="@+id/searchallc"
-                    android:layout_width="20dp"
+                    android:layout_width="80dp"
                     android:layout_weight="0.87"
                     android:textColor="@color/black"
                     android:hint="@string/csearch"
+
+                    android:drawableLeft="@drawable/see"
                     android:textColorHint="@color/red"
                     android:background="@color/white"
                     android:layout_height="40dp"
                     android:popupBackground="#ffffff"
 
                     android:ems="10"
-                    android:layout_alignRight="@+id/toolbar_logo"
-                    android:layout_alignEnd="@+id/toolbar_logo"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/textView15"
-                    android:layout_toRightOf="@+id/textView15"
 
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignBottom="@+id/imageView7"
                     android:paddingBottom="5dp"
-                    android:layout_below="@+id/textView15"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp" />
+
+
 
 
         </RelativeLayout>
