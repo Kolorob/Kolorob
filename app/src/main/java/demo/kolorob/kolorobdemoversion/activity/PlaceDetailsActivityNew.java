@@ -91,7 +91,6 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTabl
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
-import demo.kolorob.kolorobdemoversion.fragment.MapFragment;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
@@ -144,7 +143,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private ListView expandableListview;
     private RelativeLayout wholeLayout;
     private int showList;
-    private ImageButton helpicon;
+
     private Button prebutton;
 
     private int sideIndexHeight;
@@ -188,7 +187,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
-    private ImageButton expandableListShowing;
+    private ImageButton expandableListShowing,more,helpicon;
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
     private Context con;
@@ -216,7 +215,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     ListView allitemList;
     String filterword;
     TextView searchtext;
-    ImageButton more;
+
     int snumber=0;
 
     public int getSnumber() {
@@ -240,6 +239,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
     RelativeLayout catholder;
     CheckBox check;
     LinearLayout fholder,fleft,fright;
+
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
     ArrayList<AllHolder>subcatHolders=new ArrayList<>();
@@ -315,6 +315,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 return false;
             }
         });
+
         catsearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -338,6 +339,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
             }
         });
+
         header=(TextView)findViewById(R.id.textView15);
         // toolbar.setBackgroundResource(android.R.color.transparent);
         setSupportActionBar(toolbar);
@@ -2413,8 +2415,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         Boolean valuecheck=pref.getBoolean("Value",false);
         if (valuecheck==false)
         {
-            map.setVisibility(View.GONE);
+          //  map.setVisibility(View.GONE);
         }
+
         searchLayout.setVisibility(View.GONE);
         wholeLayout.setVisibility(View.VISIBLE);
 

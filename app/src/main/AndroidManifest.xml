@@ -58,7 +58,7 @@
             android:name=".activity.Information_UpdateActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity
+        <activity3z
             android:name=".activity.LocationInstructionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
