@@ -318,7 +318,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         //ListButton.setLayoutParams(layoutParams);
        // SearchButton.setLayoutParams(layoutParams);
        // CompareButton.setLayoutParams(layoutParams);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
         Searchall=(EditText)findViewById(R.id.searchall);
         prebutton=(Button) findViewById(R.id.prebutton);

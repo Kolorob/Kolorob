@@ -194,7 +194,7 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
 //        road.setText(" রাস্তা : " +entertainmentServiceProviderItem.getBlock());
 //        block.setText(" ব্লক : "+entertainmentServiceProviderItem.getLandmark());
 //        landmark.setText(" কাছাকাছি পরিচিত স্থান: "+entertainmentServiceProviderItem.getRoad());
-        Feedback.setOnClickListener(new View.OnClickListener() {
+       /* Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent a = new Intent(DetailsInfoActivityEntertainment_new.this, FeedbackActivity.class);
@@ -203,7 +203,7 @@ public class DetailsInfoActivityEntertainment_new extends Activity  {
                 startActivity(a);
                 finish();
             }
-        });
+        });*/
 
         //common for all category
         close = (ImageView) findViewById(R.id.iv_close);

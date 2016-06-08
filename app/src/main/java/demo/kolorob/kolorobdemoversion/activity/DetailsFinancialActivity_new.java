@@ -212,17 +212,17 @@ ArrayList<FinancialServiceProviderItem>finfromsearch;
 
 
 
-            Feedback.setOnClickListener(new View.OnClickListener() {
+           /* Feedback.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent a = new Intent(DetailsFinancialActivity_new.this, FeedbackActivity.class);
+                   // Intent a = new Intent(DetailsFinancialActivity_new.this, FeedbackActivity.class);
                     a.putExtra("NodeId",financialServiceProviderItem.getNodeId());
                     a.putExtra("CatId", financialServiceProviderItem.getCategoryId());
                     startActivity(a);
                     finish();
                 }
             });
-
+*/
 
 
 

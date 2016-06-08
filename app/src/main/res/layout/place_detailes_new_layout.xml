@@ -95,6 +95,9 @@
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:id="@+id/mapbutton"
+                android:scaleType="center"
+
+                android:background="@drawable/but_porashuna_small"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true" />
 
@@ -102,6 +105,7 @@
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:id="@+id/listbutton"
+                android:adjustViewBounds="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"
                 android:layout_toRightOf="@+id/mapbutton"
@@ -111,6 +115,7 @@
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:id="@+id/searchbutton"
+                android:adjustViewBounds="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"
                 android:layout_toRightOf="@+id/listbutton"
@@ -119,7 +124,9 @@
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="70dp"
+                android:scaleType="fitCenter"
                 android:id="@+id/compare"
+                android:adjustViewBounds="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"

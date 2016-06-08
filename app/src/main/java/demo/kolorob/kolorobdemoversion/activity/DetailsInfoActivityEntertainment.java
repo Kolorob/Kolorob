@@ -154,10 +154,10 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(DetailsInfoActivityEntertainment.this, FeedbackActivity.class);
-                a.putExtra("NodeId", entertainmentServiceProviderItem.getNodeId());
-                a.putExtra("CatId", entertainmentServiceProviderItem.getCategoryId());
-                startActivity(a);
+              //  Intent a = new Intent(DetailsInfoActivityEntertainment.this, FeedbackActivity.class);
+            //    a.putExtra("NodeId", entertainmentServiceProviderItem.getNodeId());
+              //  a.putExtra("CatId", entertainmentServiceProviderItem.getCategoryId());
+             //   startActivity(a);
                 finish();
             }
         });

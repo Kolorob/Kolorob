@@ -298,7 +298,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         toolbar2 = (Toolbar) findViewById(R.id.categorytoolbar);
         Searchall=(EditText)findViewById(R.id.searchall);
         prebutton=(Button) findViewById(R.id.prebutton);
-        catsearch=(EditText)findViewById(R.id.searchallc);
+        //catsearch=(EditText)findViewById(R.id.searchallc);
         Searchall.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -1149,10 +1149,10 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         listholder.startAnimation(slideInFromRightAnim());
                         toolbar.setVisibility(View.GONE);
                         helpicon.setVisibility(View.GONE);
-                        toolbar2.setVisibility(View.VISIBLE);
+                        //toolbar2.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#58BED6"));
-                        toolbar2.setBackgroundColor(Color.parseColor("#58BED6"));
-                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_porashona));
+                        //toolbar2.setBackgroundColor(Color.parseColor("#58BED6"));
+                        //toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_porashona));
                         header.setText("Education");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
@@ -1217,7 +1217,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#DF554E"));
-                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_chikitsha));
+                      //  toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_chikitsha));
                         header.setText("Health");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         listholder.setVisibility(View.VISIBLE);
@@ -1286,7 +1286,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         helpicon.setVisibility(View.GONE);
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#7377B7"));
-                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_anondo_furti));
+                      //  toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_anondo_furti));
                         header.setText("Entertainment");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         listholder.setVisibility(View.VISIBLE);
@@ -1385,7 +1385,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         listholder.startAnimation(slideInFromRightAnim());
                         toolbar2.setVisibility(View.VISIBLE);
                         toolbar2.setBackgroundColor(Color.parseColor("#67C3A2"));
-                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_ain_kanun));
+                       // toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_ain_kanun));
                         header.setText("Legal Aid");
                         toolbar2.startAnimation(slideInFromRightAnim());
                         setSupportActionBar(toolbar2);
@@ -1447,7 +1447,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         toolbar.setVisibility(View.GONE);
                         listholder.setVisibility(View.VISIBLE);
                         listholder.setBackgroundColor(Color.parseColor("#7a378b"));
-                        toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_taka_poisha));
+                       // toolbar2.findViewById(R.id.imageView7).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_on_taka_poisha));
                         header.setText("Financial");
                         listholder.startAnimation(slideInFromRightAnim());
 
