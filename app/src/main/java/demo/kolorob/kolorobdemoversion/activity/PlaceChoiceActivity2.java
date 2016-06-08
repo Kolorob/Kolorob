@@ -53,7 +53,6 @@ import java.util.Locale;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
@@ -72,13 +71,13 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
+
 /**
  * Created by arafat on 10/5/15.
  *
  * @author arafat
  */
-
-import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -177,8 +176,9 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
         /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
+        if (val==6)val=val+1;
         Log.e("ASinplaceDetails",String.valueOf(val));
-        if (val!=5)
+        if (val!=7)
         {
             final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceChoiceActivity2.this).create();
 
@@ -517,7 +517,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(PlaceChoiceActivity2.this, PlaceDetailsActivityNew.class);
+                Intent intent = new Intent(PlaceChoiceActivity2.this, PlaceDetailsActivityNewLayout.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(AppConstants.KEY_PLACE, placeId);
                 startActivity(intent);
