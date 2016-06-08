@@ -82,18 +82,20 @@
             </ScrollView>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:orientation="vertical"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+
             android:id="@+id/linearLayout8">
 
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:id="@+id/mapbutton"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true" />
 
             <ImageButton
@@ -101,14 +103,16 @@
                 android:layout_height="70dp"
                 android:id="@+id/listbutton"
                 android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
                 android:layout_toRightOf="@+id/mapbutton"
                 android:layout_toEndOf="@+id/mapbutton" />
 
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="70dp"
-                android:id="@+id/imageButton4"
+                android:id="@+id/searchbutton"
                 android:layout_alignParentTop="true"
+                android:scaleType="fitCenter"
                 android:layout_toRightOf="@+id/listbutton"
                 android:layout_toEndOf="@+id/listbutton" />
 
@@ -116,10 +120,12 @@
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:id="@+id/compare"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/imageButton4"
-                android:layout_toEndOf="@+id/imageButton4" />
-        </RelativeLayout>
+                android:layout_toRightOf="@+id/searchbutton"
+                android:layout_toEndOf="@+id/searchbutton" />
+        </LinearLayout>
 
     </RelativeLayout>
 </LinearLayout>

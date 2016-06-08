@@ -184,7 +184,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private String placeChoice;
     private int indexListSize;
     private ListActivity listView;
-    private ImageButton expandableListShowing,more,helpicon;
+    private ImageButton expandableListShowing,more,MapButton,ListButton,SearchButton,CompareButton;
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
     private Context con;
@@ -235,7 +235,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     int filcatid;
     RelativeLayout catholder;
     CheckBox check;
-    LinearLayout fholder,fleft,fright;
+    LinearLayout fholder,fleft,fright,mbholder,lbholder,sbholder,cbholder;
 
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
@@ -259,6 +259,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -286,7 +287,37 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         setContentView(R.layout.activity_place_detailnew);
 
         con =PlaceDetailsActivityNewLayout.this;
+        MapButton=(ImageButton)findViewById(R.id.mapbutton);
+        ListButton=(ImageButton)findViewById(R.id.listbutton);
+        SearchButton=(ImageButton)findViewById(R.id.searchbutton);
+        CompareButton=(ImageButton)findViewById(R.id.compare);
 
+        int buttonWidth = width/4;
+        int buttonHeight = height/20;
+
+
+       // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
+      //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
+        params.weight = 1;
+        params.width=buttonWidth;
+        MapButton.setLayoutParams(params);
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
+        params2.weight = 1;
+        params2.width=buttonWidth;
+        SearchButton.setLayoutParams(params2);
+        LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
+        params3.weight = 1;
+        params3.width=buttonWidth;
+        ListButton.setLayoutParams(params2);
+        LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
+        params4.weight = 1;
+        params4.width=buttonWidth;
+        CompareButton.setLayoutParams(params4);
+       // SearchButton.setMinimumWidth(buttonWidth);
+        //ListButton.setLayoutParams(layoutParams);
+       // SearchButton.setLayoutParams(layoutParams);
+       // CompareButton.setLayoutParams(layoutParams);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Searchall=(EditText)findViewById(R.id.searchall);
