@@ -38,6 +38,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -455,12 +456,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
         // callMapFragment();
-       // spItems = (Spinner) findViewById(R.id.areaitems);
+        spItems = (Spinner) findViewById(R.id.areaitems);
 
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
-       // spItems.setAdapter(arrayAdapter);
-       /* spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       spItems.setAdapter(arrayAdapter);
+       spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -469,8 +470,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 setPlaceChoice(imc_met);
                 if(imc_met==AppConstants.BAUNIABADH) {
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
+                    callMapFragment(locationNameId);
                 }
-                else {locationNameId=AppConstants.PLACE_PARIS_ROAD;}
+                else {locationNameId=AppConstants.PLACE_PARIS_ROAD;
+                    callMapFragment(locationNameId);}
                 if(mapcalledstatus){
 
                 }
@@ -482,8 +485,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
             }
         });
-*/
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
         callMapFragment(1);
 
     }

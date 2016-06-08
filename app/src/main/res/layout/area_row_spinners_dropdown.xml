@@ -7,7 +7,7 @@
     android:singleLine="true"
     android:padding="5dp"
     android:textColor="@android:color/white"
-    android:paddingLeft="100dp"
+    android:paddingLeft="50dp"
     android:textSize="20dp"
     android:gravity="center"
     />
