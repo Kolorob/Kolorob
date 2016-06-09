@@ -64,6 +64,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
+    String address_textx="";
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
     ImageView left_image,middle_image,right_image,call_btn;
@@ -189,6 +190,24 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ups_text.setText(entertainmentServiceProviderItem.getNodeNameBn());
         phone_text.setText(entertainmentServiceProviderItem.getNodeContact());
         email_text.setText(entertainmentServiceProviderItem.getNodeEmail());
+        if(!entertainmentServiceProviderItem.getRoad().equals(""))
+            address_textx=concateBasic("রাস্তা",entertainmentServiceProviderItem.getAddress());
+            Log.d("Kolorob1","==="+address_textx);
+         if(!entertainmentServiceProviderItem.getBlock().equals(""))
+            address_textx=address_textx+concateBasic("ব্লক",entertainmentServiceProviderItem.getBlock());
+        Log.d("Kolorob2","==="+address_textx);
+        if(!entertainmentServiceProviderItem.getAddress().equals(""))
+            address_textx=address_textx+concateBasic("",entertainmentServiceProviderItem.getAddress());
+        Log.d("Kolorob3","===="+address_textx);
+        if(!entertainmentServiceProviderItem.getLandmark().equals(""))
+            address_textx=address_textx+concateBasic(entertainmentServiceProviderItem.getLandmark(), " এর নিকটে");
+        Log.d("Kolorob4","==="+address_textx);
+
+        address_text.setText(address_textx);
+
+
+
+
 
 
         RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
