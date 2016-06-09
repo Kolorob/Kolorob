@@ -193,18 +193,18 @@ public class DetailsInfoActivityEducation extends Activity {
         if(educationServiceProviderItem.getTotalStudents()!=0)
         {
             totalStudents.setVisibility(View.VISIBLE);
-            totalStudents.setText(" মোট ছাত্র সংখ্যা: "+educationServiceProviderItem.getTotalStudents()+ " জন");
+            totalStudents.setText(" মোট ছাত্র সংখ্যা: "+English_to_bengali_number_conversion(String.valueOf(educationServiceProviderItem.getTotalStudents()))+ " জন");
         }
         if(educationServiceProviderItem.getTotalClasses()!=0)
         {
             totalClasses.setVisibility(View.VISIBLE);
-            totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+educationServiceProviderItem.getTotalClasses()+ " টি");
+            totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+English_to_bengali_number_conversion(String.valueOf(educationServiceProviderItem.getTotalClasses()))+ " টি");
         }
 
         if(educationServiceProviderItem.getTotalTeachers()!=0)
         {
             totalTeachers.setVisibility(View.VISIBLE);
-            totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+educationServiceProviderItem.getTotalTeachers()+ " জন");
+            totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+English_to_bengali_number_conversion(String.valueOf(educationServiceProviderItem.getTotalTeachers()))+ " জন");
         }
 
         if(!educationServiceProviderItem.getPlayground().equals(""))
