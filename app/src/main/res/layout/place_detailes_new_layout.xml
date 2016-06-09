@@ -110,6 +110,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
+                        android:layout_marginLeft="210dp"
                         android:id="@+id/categoryfilterholder"
                         android:background="#163e11"
                         android:visibility="gone"
@@ -127,7 +128,7 @@
                             android:background="#76ecb5">
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
-                                android:layout_marginLeft="250dp"
+
                                 android:layout_width="350dp"
                                 android:layout_height="match_parent"
 
@@ -141,7 +142,9 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:weightSum="10"
-                                    android:orientation="vertical" >
+                                    android:orientation="vertical"
+                                    android:gravity="start|left"
+                                    android:layout_gravity="left">
 
 
 
@@ -156,7 +159,9 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:weightSum="10"
-                                    android:orientation="vertical" >
+                                    android:orientation="vertical"
+                                    android:gravity="right|end"
+                                    android:layout_gravity="right">
 
 
                                 </LinearLayout>
