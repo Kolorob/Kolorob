@@ -31,7 +31,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/searchholder"
-android:visibility="gone"
+                android:visibility="gone"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -127,6 +127,7 @@ android:visibility="gone"
                             android:background="#76ecb5">
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
+                                android:layout_marginLeft="50dp"
                                 android:layout_width="350dp"
                                 android:layout_height="match_parent"
 

@@ -871,7 +871,7 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
                         ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
+
                         //TODO write necessary codes for government
 
                         toolbar.setVisibility(View.VISIBLE);
