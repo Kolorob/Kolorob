@@ -299,46 +299,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
         Searchall=(EditText)findViewById(R.id.searchall);
         prebutton=(Button) findViewById(R.id.prebutton);
         //catsearch=(EditText)findViewById(R.id.searchallc);
-        Searchall.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                wholeLayout.setVisibility(View.GONE);
-                searchLayout.setVisibility(View.VISIBLE);
-                calladapter(false);
-                catholder.setVisibility(View.GONE);
-                fholder.setVisibility(View.GONE);
-                catgroup.setVisibility(View.GONE);
-                if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
-                check.setChecked(false);
-                check.setVisibility(View.GONE);
-                return false;
-            }
-        });
-
-        catsearch.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                catsearchclicked=true;
-                setFilcatid(currentCategoryID);
-                setSnumber(0);
-                wholeLayout.setVisibility(View.GONE);
-                searchLayout.setVisibility(View.VISIBLE);
-                calladapter(true);
-
-                catholder.setVisibility(View.GONE);
-
-                catgroup.setVisibility(View.GONE);
-                if(catgroup.getCheckedRadioButtonId()!=-1)catgroup.clearCheck();
-
-                check.setChecked(false);
-                check.setVisibility(View.GONE);
-                return false;
 
 
-            }
-        });
+
 
         header=(TextView)findViewById(R.id.textView15);
         // toolbar.setBackgroundResource(android.R.color.transparent);

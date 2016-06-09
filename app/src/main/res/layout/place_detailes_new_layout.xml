@@ -16,6 +16,7 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/linearLayout7"
             android:layout_above="@+id/linearLayout8">
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -27,6 +28,142 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
             </FrameLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/searchholder"
+android:visibility="gone"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="What you want to search?"
+                    android:id="@+id/searchtext"
+                    android:layout_above="@+id/searchall"
+                    android:layout_centerHorizontal="true" />
+                <EditText
+                    android:id="@+id/searchall"
+                    android:layout_width="200dp"
+                    android:layout_weight="0.87"
+                    android:textColor="@color/black"
+                    android:hint="@string/search"
+                    android:textColorHint="@color/red"
+                    android:background="@color/red"
+                    android:layout_height="40dp"
+                    android:popupBackground="#ffffff"
+
+                    android:ems="10"
+                    android:layout_above="@+id/allitem"
+                    android:layout_alignLeft="@+id/allitem"
+                    android:layout_alignStart="@+id/allitem"
+                    android:layout_alignRight="@+id/searchtext"
+                    android:layout_alignEnd="@+id/searchtext"
+                    android:layout_marginTop="20dp" />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/allitem"
+                    android:maxHeight="80dp"
+                    android:minHeight="80dp"
+                    android:background="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/searchtext"
+                    android:layout_alignStart="@+id/searchtext"
+                    android:layout_alignRight="@+id/searchtext"
+                    android:layout_alignEnd="@+id/searchtext"
+                    android:layout_marginTop="20dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/filterholder"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/allitem">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/searchtext"
+                        android:id="@+id/textView17"
+                        android:background="@color/white"
+                        android:layout_alignBottom="@+id/morebutton"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toLeftOf="@+id/morebutton"
+                        android:layout_toStartOf="@+id/morebutton" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/morebutton"
+                        android:background="@drawable/up_button"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="20dp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:id="@+id/categoryfilterholder"
+                        android:background="#163e11"
+                        android:visibility="gone"
+                        android:layout_above="@+id/textView17"
+                        android:layout_alignRight="@+id/morebutton"
+                        android:layout_alignEnd="@+id/morebutton"
+                        android:layout_alignLeft="@+id/textView17"
+                        android:layout_alignStart="@+id/textView17">
+
+
+
+                        <ScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:background="#76ecb5">
+                            <LinearLayout
+                                android:id="@+id/LinearLayoutfilter"
+                                android:layout_width="350dp"
+                                android:layout_height="match_parent"
+
+                                android:orientation="horizontal"
+                                android:weightSum="2"
+                                android:background="#163e11">
+
+                                <LinearLayout
+                                    android:id="@+id/linearLayout1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:weightSum="10"
+                                    android:orientation="vertical" >
+
+
+
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/linearLayout2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:weightSum="10"
+                                    android:orientation="vertical" >
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </ScrollView>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
                 android:layout_width="wrap_content"
@@ -97,7 +234,7 @@
                 android:id="@+id/mapbutton"
                 android:scaleType="center"
 
-                android:background="@drawable/but_porashuna_small"
+                android:background="@color/blue"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true" />
 
@@ -118,12 +255,13 @@
                 android:adjustViewBounds="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"
+                android:background="@color/white"
                 android:layout_toRightOf="@+id/listbutton"
                 android:layout_toEndOf="@+id/listbutton" />
 
             <ImageButton
                 android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_height="match_parent"
                 android:scaleType="fitCenter"
                 android:id="@+id/compare"
                 android:adjustViewBounds="true"
