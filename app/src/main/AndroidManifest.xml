@@ -73,6 +73,9 @@
             android:name=".activity.PlaceDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.PlaceDetailsActivityNewLayout"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.DetailsInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />

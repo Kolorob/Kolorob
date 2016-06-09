@@ -4,7 +4,7 @@
     <string name="title_activity_location_ask">LocationAskActivity</string>
     <string name="title_activity_button_click_baunia">ButtonClickBaunia</string>
     <string name="hello_world">Hello world!</string>
-    <string name="searchtext">কি খুঁজতে চান?</string>
+    <string name="searchtext">কোথায় খুঁজতে চান?</string>
     <string name="search"> এখানে লিখে খুঁজুন</string>
     <string name="csearch">খুঁজুন</string>
     <string name="fsearch">সেবা খুজুন</string>

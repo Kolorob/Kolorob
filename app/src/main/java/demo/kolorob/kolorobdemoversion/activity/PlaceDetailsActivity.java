@@ -1001,7 +1001,6 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
             case AppConstants.FINANCIAL:
-
                 SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivity.this);
                 currentCategoryID = cat_id;
                 FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivity.this);
@@ -1019,7 +1018,6 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
             case AppConstants.LEGAL:
-
                 SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivity.this);
                 currentCategoryID = cat_id;
                 LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivity.this);
@@ -1057,13 +1055,6 @@ public class PlaceDetailsActivity extends BaseActivity implements View.OnClickLi
             default:break;
         }
     }
-
-
-
-
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -332,7 +332,7 @@ Activity con;
 //        email.setText("" +);
 //        website.setText(""+);
 //        fb.setText("  ফেসবুক: ");
-        Feedback.setOnClickListener(new View.OnClickListener() {
+        /*Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent a = new Intent(DetailsInfoActivityHealth_new.this, FeedbackActivity.class);
@@ -341,7 +341,7 @@ Activity con;
                 startActivity(a);
                 finish();
             }
-        });
+        });*/
         kivabejabenHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

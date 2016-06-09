@@ -18,10 +18,10 @@
         >
 
 
+
         <include layout="@layout/toolbar_categorized" />
-        <include layout="@layout/toolbar" />
-        <include layout="@layout/place_details_modified" />
-        <include layout="@layout/searchfilter" />
+        <include layout="@layout/place_detailes_new_layout" />
+
         <!-- Let's add fragment -->
 
 
