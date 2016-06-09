@@ -800,6 +800,7 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
                         setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
+                        
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
