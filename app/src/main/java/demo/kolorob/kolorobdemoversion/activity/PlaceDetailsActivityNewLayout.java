@@ -1389,18 +1389,73 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
-    private void callMapFragment(int locationNameId)
-    {
+    private void callMapFragment(int locationNameId) {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         //   mapFragment.setMapIndicatorText(item_name);
-mapFragment.setLocationNameId(locationNameId);
-
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
+        mapFragment.setLocationNameId(locationNameId);
+        if (mapcalledstatus == true) {
+          if(educlicked){
+              educlicked=false;
+              mapFragment.setCategoryId(1);
+              ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
+              educationServiceProviderItems = constructEducationListItem(1);
+             mapFragment.setEducationServiceProvider(educationServiceProviderItems);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+              fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+            fragmentTransaction.commit();
+          }
+            if(helclicked){
+                helclicked=false;
+                mapFragment.setCategoryId(2);
+                ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
+                healthServiceProviderItems = constructHealthListItem(2);
+                mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+            if(entclicked){
+                entclicked=false;
+                mapFragment.setCategoryId(3);
+                ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
+                entertainmentServiceProviderItems = constructEntertainmentListItem(3);
+                mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+            if(legclicked){
+                legclicked=false;
+                mapFragment.setCategoryId(5);
+                ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
+                legalAidServiceProviderItems = constructlegalaidListItem(5);
+                mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+            if(finclicked){
+                finclicked=false;
+                mapFragment.setCategoryId(6);
+                ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
+                financialServiceProviderItems = constructfinancialListItem(6);
+                mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+        } else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     /***********************************************************Methods for Health*************************************************/
