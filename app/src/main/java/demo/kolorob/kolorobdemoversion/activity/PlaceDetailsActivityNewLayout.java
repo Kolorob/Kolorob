@@ -522,7 +522,7 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
             @Override
             public void onClick(View v) {
 
-                catholder.setVisibility(View.VISIBLE);
+                
                 fholder.setVisibility(View.VISIBLE);
                 populatefilterwords(getFilcatid());
 

@@ -127,7 +127,7 @@
                             android:background="#76ecb5">
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
-                                android:layout_marginLeft="50dp"
+                                android:layout_marginLeft="250dp"
                                 android:layout_width="350dp"
                                 android:layout_height="match_parent"
 
