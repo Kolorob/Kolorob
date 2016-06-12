@@ -240,6 +240,27 @@ public class DetailsInfoActivityFinancialNew extends Activity {
         financialTransactionItems= financialTransactionTable.getFinancialTransaction(fs);
         financialTuitionItems =financialTuitionTable.getFinancialTuition(fs);
 
+        basic_part="";
+
+
+        if(!financialServiceProviderItem.getRoad().equals(""))
+            concateBasic("রাস্তা: ", financialServiceProviderItem.getRoad());
+
+        if(!financialServiceProviderItem.getBlock().equals(""))
+            concateBasic("ব্লক: ",financialServiceProviderItem.getBlock());
+
+
+
+        if(!financialServiceProviderItem.getAddress().equals(""))
+            concateBasic("",financialServiceProviderItem.getAddress());
+
+
+        if(!financialServiceProviderItem.getLandmark().equals(""))
+            concateBasic(financialServiceProviderItem.getLandmark(), "  এর নিকটে");
+        address_text.setText(basic_part);
+
+        Log.d("===","final Address"+basic_part);
+
         if(financialBillsItems!=null) {
 
             int g= financialBillsItems.size();
