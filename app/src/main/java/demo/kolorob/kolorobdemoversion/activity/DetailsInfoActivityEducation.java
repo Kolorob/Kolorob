@@ -88,6 +88,7 @@ public class DetailsInfoActivityEducation extends Activity {
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
+    String result_concate;
 
 
     @Override
@@ -225,6 +226,29 @@ public class DetailsInfoActivityEducation extends Activity {
             transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
         }
 
+        result_concate="";
+
+
+        if(!educationServiceProviderItem.getRoad().equals(""))
+            concateBasic("রাস্তা: ", educationServiceProviderItem.getRoad());
+
+        if(!educationServiceProviderItem.getBlock().equals(""))
+            concateBasic("ব্লক: ",educationServiceProviderItem.getBlock());
+
+
+
+        if(!educationServiceProviderItem.getAddress().equals(""))
+            concateBasic("",educationServiceProviderItem.getAddress());
+
+
+        if(!educationServiceProviderItem.getLandmark().equals(""))
+            concateBasic(educationServiceProviderItem.getLandmark(), "  এর নিকটে");
+
+        Log.d("===","final Address"+result_concate);
+
+
+
+        address_text.setText(result_concate);
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -809,5 +833,16 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
 
+
+    }
+    private String concateBasic(String value1,String value2){
+
+        String value= value1+value2;
+        result_concate= result_concate+value + "\n";
+
+        Log.d("....>>>", "Values   " + result_concate);
+
+
+        return result_concate;
     }
 }
