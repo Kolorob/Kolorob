@@ -89,7 +89,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     }
 
     private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
-
+    IMapController mapViewController;
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
@@ -108,6 +108,13 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.categoryId = categoryId;
     }
 
+    public IMapController getMapViewController() {
+        return mapViewController;
+    }
+
+    public void setMapViewController(IMapController mapViewController) {
+        this.mapViewController = mapViewController;
+    }
 
     public void setEntertainmentServiceProvider(ArrayList<EntertainmentServiceProviderItem> et) {
         this.entertainmentServiceProvider = et;
@@ -181,7 +188,7 @@ setMapView(mapView);
         System.out.println("density: " + density);*/
         // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
         //    mapView.getOverlays().add(mMyLocationOverlay);
-        IMapController mapViewController = mapView.getController();
+        mapViewController= mapView.getController();
 
 
         if (locationNameId == 1) {

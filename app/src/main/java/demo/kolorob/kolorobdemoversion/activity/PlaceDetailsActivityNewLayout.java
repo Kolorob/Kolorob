@@ -237,7 +237,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     RelativeLayout catholder;
     CheckBox check;
     LinearLayout fholder,fleft,fright,mbholder,lbholder,sbholder,cbholder;
-
+RelativeLayout searchviewholder,filterholder;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
     ArrayList<AllHolder>subcatHolders=new ArrayList<>();
@@ -286,17 +286,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
-
+fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         con =PlaceDetailsActivityNewLayout.this;
         MapButton=(ImageButton)findViewById(R.id.mapbutton);
         ListButton=(ImageButton)findViewById(R.id.listbutton);
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
         CompareButton=(ImageButton)findViewById(R.id.compare);
-
+searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
-
-
+        allitemList=(ListView)findViewById(R.id.allitem);
+catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
       //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
@@ -322,8 +322,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
         Searchall=(EditText)findViewById(R.id.searchall);
-        prebutton=(Button) findViewById(R.id.prebutton);
 
+        prebutton=(Button) findViewById(R.id.prebutton);
+filterholder=(RelativeLayout)findViewById(R.id.filterholder);
 
         header=(TextView)findViewById(R.id.textView15);
         // toolbar.setBackgroundResource(android.R.color.transparent);
@@ -414,7 +415,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.92); // 80% of the view width
 
-
+        fleft=(LinearLayout)findViewById(R.id.linearLayout1);
+        fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
 
         //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
@@ -486,10 +488,49 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             }
         });
 
-
+        Populateholder();
         callMapFragment(1);
+        SearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                map.setVisibility(View.GONE);
+                searchviewholder.setVisibility(View.VISIBLE);
+                populateSearch();
+                if(educlicked==false||helclicked||false||entclicked==false||legclicked==false||finclicked==false)
+                {
+                    filterholder.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        MapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchviewholder.setVisibility(View.GONE);
+                map.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+    }
+    public void populateSearch()
+    {
+
+        ImageButton more=(ImageButton)findViewById(R.id.morebutton);
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                catholder.setVisibility(View.VISIBLE);
+                fholder.setVisibility(View.VISIBLE);
+                populatefilterwords(getFilcatid());
+
+            }
+        });
 
     }
+
     public void populatefilterwords(int filcatid)
     {
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
@@ -529,7 +570,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         }
         fleft.addView(fgrp1);
         fright.addView(fgrp2);//you add the w
-        searchtext.setText(R.string.searchtext);
+
         fgrp1.clearCheck(); // this is so we can start fresh, with no selection on both RadioGroups
         fgrp2.clearCheck();
         fgrp1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -756,6 +797,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     case AppConstants.EDUCATION:
                         educlicked=true;
+                        setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
+                        
+                        filterholder.setVisibility(View.VISIBLE);
+                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
@@ -763,10 +810,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+
                         break;
                     case AppConstants.HEALTH:
                         helclicked=true;
+                        setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
+                        filterholder.setVisibility(View.VISIBLE);
+                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
@@ -774,7 +826,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+
 
                         break;
 
@@ -782,6 +834,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     case AppConstants.ENTERTAINMENT:
                         entclicked=true;
+                        setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
+                        filterholder.setVisibility(View.VISIBLE);
+                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
@@ -793,7 +850,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                             mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+
 
 
 
@@ -808,11 +865,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                     case AppConstants.GOVERNMENT:
                         govclicked=true;
+                        setFilcatid(currentCategoryID);
+                        filterholder.setVisibility(View.VISIBLE);
+                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
-                        map.setVisibility(View.VISIBLE);
+
                         //TODO write necessary codes for government
 
                         toolbar.setVisibility(View.VISIBLE);
@@ -834,6 +894,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         break;
                     case AppConstants.LEGAL:
                         legclicked=true;
+                        setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
+                        populatefilterwords(getFilcatid());
+                        filterholder.setVisibility(View.VISIBLE);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
@@ -845,7 +910,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                             mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+
 
 
 
@@ -856,6 +921,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         break;
                     case AppConstants.FINANCIAL:
                         finclicked=true;
+                        setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
+                        filterholder.setVisibility(View.VISIBLE);
+                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
@@ -866,7 +936,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+
 
 
 
@@ -875,6 +945,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         break;
                     case AppConstants.JOB:
                         jobclicked=true;
+                        setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
+                        filterholder.setVisibility(View.VISIBLE);
+                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.turned_on_chakri_bakri);
                         // mapcalledstatus=false;
@@ -1389,18 +1464,73 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
-    private void callMapFragment(int locationNameId)
-    {
+    private void callMapFragment(int locationNameId) {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         //   mapFragment.setMapIndicatorText(item_name);
-mapFragment.setLocationNameId(locationNameId);
-
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
+        mapFragment.setLocationNameId(locationNameId);
+        if (mapcalledstatus == true) {
+          if(educlicked){
+              educlicked=false;
+              mapFragment.setCategoryId(1);
+              ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
+              educationServiceProviderItems = constructEducationListItem(1);
+             mapFragment.setEducationServiceProvider(educationServiceProviderItems);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+              fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+            fragmentTransaction.commit();
+          }
+            if(helclicked){
+                helclicked=false;
+                mapFragment.setCategoryId(2);
+                ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
+                healthServiceProviderItems = constructHealthListItem(2);
+                mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+            if(entclicked){
+                entclicked=false;
+                mapFragment.setCategoryId(3);
+                ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
+                entertainmentServiceProviderItems = constructEntertainmentListItem(3);
+                mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+            if(legclicked){
+                legclicked=false;
+                mapFragment.setCategoryId(5);
+                ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
+                legalAidServiceProviderItems = constructlegalaidListItem(5);
+                mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+            if(finclicked){
+                finclicked=false;
+                mapFragment.setCategoryId(6);
+                ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
+                financialServiceProviderItems = constructfinancialListItem(6);
+                mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
+            }
+        } else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     /***********************************************************Methods for Health*************************************************/
