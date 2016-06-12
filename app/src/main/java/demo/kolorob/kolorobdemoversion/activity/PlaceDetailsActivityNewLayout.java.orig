@@ -476,8 +476,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
-        spItems.setAdapter(arrayAdapter);
-        spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       spItems.setAdapter(arrayAdapter);
+       spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -530,6 +530,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             }
         });
 
+<<<<<<< HEAD
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -537,6 +538,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
             }
         });
+=======
+>>>>>>> 06d6d9df2749076dd37ce2e8785dfad73eb565d1
     }
     public void populateSearch()
     {

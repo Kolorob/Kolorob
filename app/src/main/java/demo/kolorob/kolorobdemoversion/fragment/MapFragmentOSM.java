@@ -129,7 +129,12 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     }
 
     public void setEducationServiceProvider(ArrayList<EducationServiceProviderItem> et) {
+
+
         educationServiceProvider = et;
+    }
+    public void setEducationServiceProvider2(ArrayList<EducationServiceProviderItem> et2) {
+        educationServiceProvider = et2;
     }
 
     int subcategotyId;
