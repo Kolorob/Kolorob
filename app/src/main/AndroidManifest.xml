@@ -137,7 +137,11 @@
             android:theme="@style/Theme.Transparent" />
         <activity android:name=".activity.DetailsInfoActivityEducation" />
         <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
-        <activity android:name=".activity.DetailsInfoActivityHealthNew" />
+        <activity android:name=".activity.DetailsInfoActivityHealthNew"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+
+            />
         <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />

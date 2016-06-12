@@ -78,6 +78,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private int k;
     private Context con;
     private String basic_part;
+    RelativeLayout background;
 
     /**
      * Created by arafat on 28/05/2016.
@@ -130,6 +131,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         itemopeningTime=(TextView)findViewById(R.id.opening_time);
         distance_left=(ImageView)findViewById(R.id.distance_left);
         phone_mid=(ImageView)findViewById(R.id.phone_middl);
+        background=(RelativeLayout)findViewById(R.id.background);
+        background.setBackgroundResource(R.drawable.back_drop);
 
 
 

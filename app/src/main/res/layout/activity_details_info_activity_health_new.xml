@@ -3,16 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth">
+    android:id="@+id/background"
+    android:background="@drawable/back_drop"
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew">
+
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:layout_height="match_parent"
         android:id="@+id/upper"
         >
@@ -474,6 +477,9 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
 
         android:layout_height="100dp"
         android:orientation="horizontal"
@@ -515,6 +521,7 @@
             android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+
 
             android:gravity="center|end">
 
