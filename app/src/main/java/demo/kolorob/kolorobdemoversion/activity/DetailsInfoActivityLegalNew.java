@@ -123,7 +123,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         phone_mid=(ImageView)findViewById(R.id.phone_middl);
 
-        basic_part="";
+        result_concate="";
 
 
         if(!legalAidServiceProviderItem.getRoad().equals(""))
@@ -140,8 +140,9 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         if(!legalAidServiceProviderItem.getLandmark().equals(""))
             concateBasic(legalAidServiceProviderItem.getLandmark(), "  এর নিকটে");
-        address_text.setText(basic_part);
-        basic_part="";
+        address_text.setText(result_concate);
+        result_concate="";
+
 
         if(!legalAidServiceProviderItem.getOpeningtime().equals(""))
             concateBasic(" খোলার সময়: ",legalAidServiceProviderItem.getOpeningtime());
