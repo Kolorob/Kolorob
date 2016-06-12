@@ -296,7 +296,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
-catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
+        catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
       //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
@@ -324,7 +324,7 @@ catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         Searchall=(EditText)findViewById(R.id.searchall);
 
         prebutton=(Button) findViewById(R.id.prebutton);
-filterholder=(RelativeLayout)findViewById(R.id.filterholder);
+        filterholder=(RelativeLayout)findViewById(R.id.filterholder);
 
         header=(TextView)findViewById(R.id.textView15);
         // toolbar.setBackgroundResource(android.R.color.transparent);
@@ -490,6 +490,8 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
 
         Populateholder();
         callMapFragment(1);
+
+
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -510,6 +512,14 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
                 searchviewholder.setVisibility(View.GONE);
                 map.setVisibility(View.VISIBLE);
 
+
+            }
+        });
+
+        ListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.setVisibility(View.GONE);
 
             }
         });
@@ -548,7 +558,8 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
                 filter2.add(subholders.get(f).getSubcatname());
             else
             {
-                filter.add(subholders.get(f).getSubcatname());}
+                filter.add(subholders.get(f).getSubcatname());
+            }
         }
         final RadioButton[] rb = new RadioButton[30];
         fgrp1 = new RadioGroup(this); //create the RadioGroup

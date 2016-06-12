@@ -28,6 +28,23 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
             </FrameLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:id="@+id/explist"
+                android:layout_height="wrap_content">
+                <ExpandableListView
+                    android:id="@+id/listView"
+                    android:visibility="gone"
+
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ExpandableListView>
+
+
+
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/searchholder"
@@ -240,7 +257,7 @@
                 android:id="@+id/mapbutton"
                 android:scaleType="center"
 
-                android:background="@color/blue"
+                android:background="@color/orange"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true" />
 
@@ -251,6 +268,9 @@
                 android:adjustViewBounds="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"
+                android:background="@color/red"
+
+
                 android:layout_toRightOf="@+id/mapbutton"
                 android:layout_toEndOf="@+id/mapbutton" />
 
@@ -258,10 +278,11 @@
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:id="@+id/searchbutton"
+
                 android:adjustViewBounds="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"
-                android:background="@color/white"
+                android:background="@color/green"
                 android:layout_toRightOf="@+id/listbutton"
                 android:layout_toEndOf="@+id/listbutton" />
 
@@ -273,6 +294,8 @@
                 android:adjustViewBounds="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:background="@color/yellow"
+
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/searchbutton"
                 android:layout_toEndOf="@+id/searchbutton" />
