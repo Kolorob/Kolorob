@@ -166,6 +166,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
     Context context;
+    ArrayList <String>Headerholder=new ArrayList<>();
     ArrayList<EducationServiceProviderItem> printnames;
     //common for all categories
     public LinearLayout sideIndex,searchLayout;
@@ -260,7 +261,9 @@ RelativeLayout searchviewholder,filterholder;
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
-
+    ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
+    ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
+    ArrayList <String>clicked=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -761,7 +764,7 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
             @Override
             public void onClick(View v) {
 
-
+                clicked.clear();
                 currentCategoryID = ci.getId();
                 for(int i= 0; i < llCatListHolder.getChildCount(); i++){
                     ImageView iv = (ImageView) ((ViewGroup)llCatListHolder.getChildAt(i)).getChildAt(0);
@@ -796,6 +799,7 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
                 switch (currentCategoryID) {
 
                     case AppConstants.EDUCATION:
+                        EDD.clear();
                         educlicked=true;
                         setFilcatid(currentCategoryID);
                         catstatus=true;
@@ -1135,7 +1139,9 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
             @Override
             public void onClick(View v) {
 
+
                 int index=llSubCatListHolder.indexOfChild(v);
+                clicked.add(String.valueOf(index));
                 for(int i= 0; i < llSubCatListHolder.getChildCount(); i++){
                     if(i==index)
                     {
@@ -1215,6 +1221,77 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
                         ivIcon.setImageResource(AppConstants.OFF_BUTTON[0]);
                     }
                 }
+                for (int ii=0;ii<clicked.size();ii++)
+                {
+                    if(clicked.get(ii)==String.valueOf(ii))
+                    {
+                        if (ii==0) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.blue_button);
+                            continue;
+                        }
+                        else if(ii==1) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.red_button);
+                            continue;
+
+                        }
+                        else if(ii==2) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.light_purple_button);
+                            continue;
+
+                        }
+                        else if(ii==3) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.orange_button);
+                            continue;
+
+                        }
+                        else if(ii==4) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.brown_button);
+                            continue;
+
+                        }   else if(ii==5) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.sky_blue_button);
+                            continue;
+
+                        }   else if(ii==6) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.light_orange_button);
+                            continue;
+
+                        }
+                        else if(ii==7) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.deep_blue_button);
+                            continue;
+
+                        }
+                        else if(ii==8) {
+                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(ii).findViewById(R.id.iv_sub_cat_icon));
+                            ivIcon.setImageResource(0);
+                            ivIcon.setImageResource(R.drawable.magenta_button);
+                            continue;
+
+                        }
+
+
+
+
+
+                    }
+                }
 
 
 //llSubCatListHolder.findViewById(R.id.f).findViewById(R.id.f2).findViewById(R.id.iv_sub_cat_icon).setBackground(R.drawable.off_button);
@@ -1239,10 +1316,20 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
 
                     case AppConstants.EDUCATION:
 
-                        ArrayList<EducationServiceProviderItem> eduItem;
 
-                        eduItem = constructEducationListItemForHeader(cat_id, si.getSubcatHeader());
-                        callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, eduItem);
+                        Headerholder.add(si.getSubcatHeader());
+                        for(int s=0;s<Headerholder.size();s++)
+                        {
+                            eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s));
+
+                        }
+                        for (int ss=0;ss<eduItem.size();ss++)
+                        {
+                            EDD.add(eduItem.get(ss));
+                        }
+
+
+                        callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
@@ -1462,6 +1549,22 @@ filterholder=(RelativeLayout)findViewById(R.id.filterholder);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+    }
+   private void callMapFragmentWithEducationInfoFromHeader(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        //   mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+
+        mapFragment.setLocationNameId(locationNameId);
+            mapFragment.setEducationServiceProvider(educationServiceProviderItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+
+
         fragmentTransaction.commit();
     }
     private void callMapFragment(int locationNameId) {
