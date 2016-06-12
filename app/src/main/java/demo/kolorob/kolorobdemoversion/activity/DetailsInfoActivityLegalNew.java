@@ -123,6 +123,27 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         phone_mid=(ImageView)findViewById(R.id.phone_middl);
 
+        result_concate="";
+
+
+        if(!legalAidServiceProviderItem.getRoad().equals(""))
+            concateBasic("রাস্তা: ", legalAidServiceProviderItem.getRoad());
+
+        if(!legalAidServiceProviderItem.getBlock().equals(""))
+            concateBasic("ব্লক: ",legalAidServiceProviderItem.getBlock());
+
+
+
+        if(!legalAidServiceProviderItem.getAddress().equals(""))
+            concateBasic("",legalAidServiceProviderItem.getAddress());
+
+
+        if(!legalAidServiceProviderItem.getLandmark().equals(""))
+            concateBasic(legalAidServiceProviderItem.getLandmark(), "  এর নিকটে");
+        address_text.setText(result_concate);
+        result_concate="";
+
+
         if(!legalAidServiceProviderItem.getOpeningtime().equals(""))
             concateBasic(" খোলার সময়: ",legalAidServiceProviderItem.getOpeningtime());
         if(!legalAidServiceProviderItem.getAdditionaltime().equals(""))
@@ -495,10 +516,6 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         String value= value1+value2;
         result_concate= result_concate+value + "\n";
-
-
-
-
         return result_concate;
     }
 }

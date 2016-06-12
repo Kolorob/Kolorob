@@ -190,20 +190,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ups_text.setText(entertainmentServiceProviderItem.getNodeNameBn());
         phone_text.setText(entertainmentServiceProviderItem.getNodeContact());
         email_text.setText(entertainmentServiceProviderItem.getNodeEmail());
-        if(!entertainmentServiceProviderItem.getRoad().equals(""))
-            address_textx=concateBasic("রাস্তা",entertainmentServiceProviderItem.getAddress());
-            Log.d("Kolorob1","==="+address_textx);
-         if(!entertainmentServiceProviderItem.getBlock().equals(""))
-            address_textx=address_textx+concateBasic("ব্লক",entertainmentServiceProviderItem.getBlock());
-        Log.d("Kolorob2","==="+address_textx);
-        if(!entertainmentServiceProviderItem.getAddress().equals(""))
-            address_textx=address_textx+concateBasic("",entertainmentServiceProviderItem.getAddress());
-        Log.d("Kolorob3","===="+address_textx);
-        if(!entertainmentServiceProviderItem.getLandmark().equals(""))
-            address_textx=address_textx+concateBasic(entertainmentServiceProviderItem.getLandmark(), " এর নিকটে");
-        Log.d("Kolorob4","==="+address_textx);
 
-        address_text.setText(address_textx);
+
 
 
 
@@ -214,7 +202,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         int  vcc=params_bottom_bar.height = height/13;
         params_bottom_bar.width = width;
         bottom_bar.setLayoutParams(params_bottom_bar);
-
+        result_concate="";
 
         if(!entertainmentServiceProviderItem.getOpeningtime().equals("") )
             concateBasic("  খোলার সময়: ",entertainmentServiceProviderItem.getOpeningtime() );
@@ -225,6 +213,31 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         if(!entertainmentServiceProviderItem.getBreaktime().equals(""))
             concateBasic("  বিরতির সময়: ",entertainmentServiceProviderItem.getBreaktime());
         itemopeningTime.setText(result_concate);
+
+        result_concate="";
+
+
+        if(!entertainmentServiceProviderItem.getRoad().equals(""))
+            concateBasic("রাস্তা: ", entertainmentServiceProviderItem.getRoad());
+
+        if(!entertainmentServiceProviderItem.getBlock().equals(""))
+            concateBasic("ব্লক: ",entertainmentServiceProviderItem.getBlock());
+
+
+
+        if(!entertainmentServiceProviderItem.getAddress().equals(""))
+            concateBasic("",entertainmentServiceProviderItem.getAddress());
+
+
+        if(!entertainmentServiceProviderItem.getLandmark().equals(""))
+            concateBasic(entertainmentServiceProviderItem.getLandmark(), "  এর নিকটে");
+
+        Log.d("===","final Address"+result_concate);
+
+
+
+        address_text.setText(result_concate);
+
 
         EntertainmentBookTable entertainmentBookTable =new EntertainmentBookTable(DetailsInfoActivityEntertainmentNew.this);
         EntertainmentFieldTable entertainmentFieldTable = new EntertainmentFieldTable(DetailsInfoActivityEntertainmentNew.this);
