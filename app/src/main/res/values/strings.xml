@@ -64,7 +64,7 @@
     <string name="phone">ফোন করুন:</string>
     <string name="email">ইমেইল করুন:</string>
     <string name="close">বন্ধ করুন</string>
-    <string name="address">ঠিকানা </string>
+    <string name="address">ঠিকানা : </string>
     <string name="phone_text">ফোন </string>
     <string name="email_text">ইমেইল </string>
     <string name="organization_time">প্রতিষ্ঠানের সময়সূচী </string>
