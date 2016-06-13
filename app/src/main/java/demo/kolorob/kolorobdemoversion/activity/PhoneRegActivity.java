@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +31,7 @@ import java.util.Map;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by arafat on 1/11/2016.
@@ -56,6 +58,7 @@ public class PhoneRegActivity extends Activity {
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     JobServiceProviderItem jobServiceProviderItem;
 
+    private Context con;
 
 
     @Override
@@ -68,6 +71,7 @@ public class PhoneRegActivity extends Activity {
         phoneNumber=phone.getText().toString();
 
 
+        con = this;
 
 
     }
@@ -87,6 +91,7 @@ public class PhoneRegActivity extends Activity {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
         } else {
+            SharedPreferencesHelper.setNumber(con,phoneNumber);
             sendPhoneNumberToServer(phoneNumber);
         }
     }

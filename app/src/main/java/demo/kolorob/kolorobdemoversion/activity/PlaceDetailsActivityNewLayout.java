@@ -310,6 +310,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
+        explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
       //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -333,6 +334,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         //ListButton.setLayoutParams(layoutParams);
        // SearchButton.setLayoutParams(layoutParams);
        // CompareButton.setLayoutParams(layoutParams);
+
+
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
         Searchall=(EditText)findViewById(R.id.searchall);
@@ -380,6 +383,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
+        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+//        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
 
         Intent intent;
@@ -445,7 +450,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
 
+        ViewGroup.LayoutParams exlist= explist.getLayoutParams();
+        RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
+        expnlist.setMargins((s*9)/10,40,5,40);
 
 
 
@@ -511,6 +519,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             public void onClick(View v) {
 
                 map.setVisibility(View.GONE);
+                explist.setVisibility(View.GONE);
                 searchviewholder.setVisibility(View.VISIBLE);
                 populateSearch();
                 if(educlicked==false||helclicked||false||entclicked==false||legclicked==false||finclicked==false)
@@ -527,13 +536,38 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 map.setVisibility(View.VISIBLE);
 
 
+
             }
         });
 
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(list_expand.equals(false))
+                {
+                llSubCatListHolder.setVisibility(View.GONE);
+                subCatItemList.setVisibility(View.VISIBLE);
+                explist.setVisibility(View.VISIBLE);
+              //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
                 map.setVisibility(View.GONE);
+                setShowList(1);
+
+                list_expand=true;
+                //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
+                Log.d("====","CategoryId"+currentCategoryID);
+                categoryListBuildUp(currentCategoryID);
+                }
+                else
+                {
+                    llSubCatListHolder.setVisibility(View.VISIBLE);
+                    setShowList(0);
+                    map.setVisibility(View.VISIBLE);
+                    list_expand=false;
+                    subCatItemList.setVisibility(View.GONE);
+                   // listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
+                    //constructCategoryList(categoryList);
+
+                }
 
             }
         });
@@ -554,6 +588,111 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         });
 
     }
+
+    public void createData(int cat_id, String head,String placeChoice) {
+        switch (cat_id) {
+            case AppConstants.EDUCATION:
+
+                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> print = null;
+                groups.removeAllElements();
+                print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < print.size(); j++) {
+                    Group group = new Group(print.get(j));
+                    printnames = null;
+                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
+
+                    // Log.d(">>>>", "printnames "+printnames);
+                    /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
+                    // Log.d(">>>>", "head "+head);
+                    // Log.d(">>>>", "print.get(j) "+print.get(j));
+                    // Log.d(">>>>", "placeChoice "+placeChoice);
+                    for (int i = 0; i < printnames.size(); i++) {
+                        group.children.add(i, printnames.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.ENTERTAINMENT:
+
+                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printent = null;
+                groups.removeAllElements();
+                printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printent.size(); j++) {
+                    Group group = new Group(printent.get(j));
+                    printnamesent = null;
+                    printnamesent = entertainmentServiceProviderTable.Entnames(currentCategoryID, head, printent.get(j), placeChoice);
+                    for (int i = 0; i < printnamesent.size(); i++) {
+                        group.childrenent.add(i, printnamesent.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.HEALTH:
+
+                SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printhea = null;
+                groups.removeAllElements();
+                printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printhea.size(); j++) {
+                    Group group = new Group(printhea.get(j));
+                    printnameshea = null;
+                    printnameshea = healthServiceProviderTable.Heanames(currentCategoryID, head, printhea.get(j), placeChoice);
+                    for (int i = 0; i <  printnameshea .size(); i++) {
+                        group.childrenhea.add(i,printnameshea .get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.FINANCIAL:
+
+                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printfin = null;
+                groups.removeAllElements();
+                printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j <  printfin.size(); j++) {
+                    Group group = new Group(printfin.get(j));
+                    printnamesfin = null;
+                    printnamesfin= financialServiceProviderTable.Finnames(currentCategoryID, head, printfin.get(j), placeChoice);
+                    for (int i = 0; i < printnamesfin.size(); i++) {
+                        group.childrenfin.add(i, printnamesfin.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.LEGAL:
+
+                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printleg = null;
+                groups.removeAllElements();
+                printleg = subCategoryTable5.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printleg.size(); j++) {
+                    Group group = new Group(printleg.get(j));
+                    printnamesleg = null;
+                    printnamesleg = legalAidServiceProviderTable.Legnames(currentCategoryID, head, printleg.get(j), placeChoice);
+                    for (int i = 0; i < printnamesleg.size(); i++) {
+                        group.childrenleg.add(i, printnamesleg.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.JOB:
+
+
+        }
+    }
+
 
     public void populatefilterwords(int filcatid)
     {
@@ -827,16 +966,36 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
+
+                        if(showList==1) {
+
+                            explist.setVisibility(View.VISIBLE);
+                            explist.setAnimation(slideOutFromLeftAnim());
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            subCatItemList.setVisibility(View.VISIBLE);
+
+
+                        }
+                        else {
+
+                            llSubCatListHolder.setVisibility(View.GONE);
+                            map.setVisibility(View.VISIBLE);
+                            ArrayList<EducationServiceProviderItem> educationServiceProvider;
+                            educationServiceProvider = constructEducationListItem(ci.getId());
+                            ivIcon.setImageResource(R.drawable.turned_on_porashona);
+                            callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+
+
+                        }
+
+
                         
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ArrayList<EducationServiceProviderItem> educationServiceProvider;
-                        educationServiceProvider = constructEducationListItem(ci.getId());
-                        ivIcon.setImageResource(R.drawable.turned_on_porashona);
-                        callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+
                         mapcalledstatus=true;
-                            llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.GONE);
 
                         break;
                     case AppConstants.HEALTH:
@@ -1111,9 +1270,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     private void categoryListBuildUp(int currentCategoryID)
     {
-
+        createData(currentCategoryID,"",placeChoice);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
         subCatItemList.setAdapter(adapter);
 

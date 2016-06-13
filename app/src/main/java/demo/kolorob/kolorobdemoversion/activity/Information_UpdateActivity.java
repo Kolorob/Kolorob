@@ -25,6 +25,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by arafat on 1/11/2016.
@@ -90,6 +91,8 @@ private Context con;
                         public void onResponse(String response) {
                             final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Information_UpdateActivity.this).create();
 
+                            SharedPreferencesHelper.setUser(con, nametext);
+                            SharedPreferencesHelper.setEmail(con,emailtext);
                             alertDialog.setMessage("Information submitted Successfully");
                             alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "OK",
                                     new DialogInterface.OnClickListener() {
