@@ -301,7 +301,7 @@ RelativeLayout searchviewholder,filterholder;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
 fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
-        con =PlaceDetailsActivityNewLayout.this;
+        con = this;
         MapButton=(ImageButton)findViewById(R.id.mapbutton);
         ListButton=(ImageButton)findViewById(R.id.listbutton);
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
