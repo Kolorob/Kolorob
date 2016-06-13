@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:id="@+id/feedbackRadio"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="30dp"
+        android:gravity="left">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,8 +22,8 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ভাল"
-            android:layout_marginLeft="-10dp"
+            android:text="@string/feedback1"
+            android:layout_marginLeft="1dp"
             android:textColor="@color/orange"
             android:id="@+id/bad" />
 
@@ -33,8 +35,8 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="মোটামোটি"
-            android:layout_marginLeft="10dp"
+            android:text="@string/feedback2"
+            android:layout_marginLeft="1dp"
             android:textColor="@color/orange"
 
             android:id="@+id/moderate" />
@@ -47,10 +49,42 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ভাল না"
+            android:text="@string/feedback3"
             android:textColor="@color/orange"
 
             android:id="@+id/good" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_de"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/feedback4"
+            android:textColor="@color/orange"
+
+            android:id="@+id/feedback4" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_de"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/feedback5"
+            android:textColor="@color/orange"
+
+            android:id="@+id/feedback5" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Feedback"
+
+
+            />
 
         <ImageView
             android:layout_width="match_parent"
