@@ -143,6 +143,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ListView expandableListview;
     private RelativeLayout wholeLayout;
     private int showList;
+    private String locationNameEng;
 
     private Button prebutton;
 
@@ -218,6 +219,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     TextView searchtext;
 
     int snumber=0;
+
+    public String getLocationNameEng() {
+        return locationNameEng;
+    }
+
+    public void setLocationNameEng(String locationNameEng) {
+        this.locationNameEng = locationNameEng;
+    }
 
     public int getSnumber() {
         return snumber;
@@ -399,6 +408,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 locationName = AppConstants.BAUNIABADH;
                 listData.add(AppConstants.BAUNIABADH);
                 listData.add(AppConstants.PARIS_ROAD);
+                setLocationNameEng("Baunia Badh");
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
@@ -406,6 +416,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 locationName = AppConstants.PARIS_ROAD;
                 listData.add(AppConstants.PARIS_ROAD);
                 listData.add(AppConstants.BAUNIABADH);
+                setLocationNameEng("Paris Road");
             }
         }
 
@@ -1336,7 +1347,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     private void categoryListBuildUp(int currentCategoryID)
     {
-        createData(currentCategoryID,"",placeChoice);
+        createData(currentCategoryID,"",getLocationNameEng());
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
         subCatItemList.setAdapter(adapter);
