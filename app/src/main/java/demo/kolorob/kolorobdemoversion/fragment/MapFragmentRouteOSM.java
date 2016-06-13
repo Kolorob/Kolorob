@@ -15,10 +15,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -55,7 +58,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.interfaces.OnBackPressedListener;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -149,7 +151,7 @@ double roadlength;
         educationServiceProvider = et;
     }
 
-    int subcategotyId;
+    int subcategotyId,height,width;
     View rootView;
     ArrayList<OverlayItem> anotherOverlayItemArray, anotherOverlayItemArrayfinal, anotherOverlayItemArray2, anotherOverlayItemArray3, anotherOverlayItemArray4, anotherOverlayItemArray7, anotherOverlayItemArray8, anotherOverlayItemArray5, anotherOverlayItemArray6;
 
@@ -180,6 +182,13 @@ double roadlength;
                              Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        width = metrics.widthPixels;
+        height = metrics.heightPixels;
         LayoutInflater li = LayoutInflater.from(getActivity());
 
         double latDouble, longDouble;
@@ -191,6 +200,7 @@ double roadlength;
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
         VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
+
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
         havePolyLine = false;
@@ -313,6 +323,7 @@ public void calltransportlayout()
     RelativeLayout trlayout,headlayout;
     TextView disttext,Bustext,Ricksawtext,Cngtext,Walkingtext,headtext;
     trlayout=(RelativeLayout)rootView.findViewById(R.id.transportdetailslayout);
+
     trlayout.setVisibility(View.VISIBLE);
     headlayout=(RelativeLayout)rootView.findViewById(R.id.headerlayout);
     headlayout.setVisibility(View.VISIBLE);
@@ -324,13 +335,39 @@ public void calltransportlayout()
     Bustext=(TextView)rootView.findViewById(R.id.bustext);
     Ricksawtext=(TextView)rootView.findViewById(R.id.ricksawtext);
     Walkingtext=(TextView)rootView.findViewById(R.id.walkingtext);
-    disttext.setText(getString(R.string.distance) +": " +distance );
+    disttext.setText(getString(R.string.distance) +": " +distance+ " km" );
     double Busfare=roadlength*1.55;
+    double bustime=(roadlength/15)*60;
             if (Busfare <=7.00)Bustext.setText( "7 " + "Taka ");
     else {
                 String Bfare=String.format("%.2f", Busfare);
-                Bustext.setText(Bfare + " Taka ");
+                String Btime=String.format("%.2f", bustime);
+                Bustext.setText(Bfare + " Taka and might take " + Btime+ " minutes"  );
             }
+    double CNGfare=(roadlength-2)*12+40;
+    double CNGtime=(roadlength/13)*60;
+    if (CNGfare <=40.00)Cngtext.setText( "40 " + "Taka and very minimum time required");
+    else {
+        String Cfare=String.format("%.2f", CNGfare);
+        String Ctime=String.format("%.2f", CNGtime);
+        Cngtext.setText(Cfare + " Taka and might take " + Ctime+ " minutes"  );
+    }
+    double rickfare=(roadlength)*15;
+    double ricktime=(roadlength/10)*60;
+    if (rickfare <=10.00)Ricksawtext.setText( "10 " + "Taka and very minimum time required");
+    else {
+        String Rfare=String.format("%.2f", rickfare);
+        String Rtime=String.format("%.2f", ricktime);
+        Ricksawtext.setText(Rfare + " Taka and might take " + Rtime+ " minutes"  );
+    }
+    double wfare=0.0;
+    double wtime=(roadlength/8)*60;
+
+
+        String wwfare=String.format("%.2f", wfare);
+        String wwtime=String.format("%.2f", wtime);
+        Walkingtext.setText(wwfare + " Taka and might take " + wwtime+ " minutes"  );
+
 }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
         mapView.getOverlays().remove(roadOverlay);

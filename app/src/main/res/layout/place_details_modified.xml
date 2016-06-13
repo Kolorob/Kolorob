@@ -163,8 +163,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/help_icon"
         android:id="@+id/helpicon"
-        android:layout_marginBottom="70dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginBottom="95dp"
+        android:layout_marginRight="100dp"
         android:gravity="right"
         android:onClick="helpDialog"
         android:layout_alignParentBottom="true"
@@ -193,7 +193,8 @@
                 android:id="@+id/areaitems"
                 style="@style/style_Spinner"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -207,7 +208,7 @@
 
 
 
-            <Button
+            Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -230,17 +231,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="পরের পাতা"
-                android:id="@+id/porerpatatext"
-                android:textColor="#ffc917"
-                android:paddingTop="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

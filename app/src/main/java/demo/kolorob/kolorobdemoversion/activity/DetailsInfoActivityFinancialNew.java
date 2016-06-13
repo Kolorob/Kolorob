@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +26,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.FInancialBilsAdapter;
@@ -83,6 +97,8 @@ public class DetailsInfoActivityFinancialNew extends Activity {
     LinearLayout l1,l2,l3,l4,l5,l6,l7,l8;
     private TextView open;
     private Context con;
+    String status="",phone_num="",registered="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,6 +239,27 @@ public class DetailsInfoActivityFinancialNew extends Activity {
         financialTaxItems = financialTaxTable.getFinancialTax(fs);
         financialTransactionItems= financialTransactionTable.getFinancialTransaction(fs);
         financialTuitionItems =financialTuitionTable.getFinancialTuition(fs);
+
+        basic_part="";
+
+
+        if(!financialServiceProviderItem.getRoad().equals(""))
+            concateBasic("রাস্তা: ", financialServiceProviderItem.getRoad());
+
+        if(!financialServiceProviderItem.getBlock().equals(""))
+            concateBasic("ব্লক: ",financialServiceProviderItem.getBlock());
+
+
+
+        if(!financialServiceProviderItem.getAddress().equals(""))
+            concateBasic("",financialServiceProviderItem.getAddress());
+
+
+        if(!financialServiceProviderItem.getLandmark().equals(""))
+            concateBasic(financialServiceProviderItem.getLandmark(), "  এর নিকটে");
+        address_text.setText(basic_part);
+
+        Log.d("===","final Address"+basic_part);
 
         if(financialBillsItems!=null) {
 
@@ -573,9 +610,200 @@ public class DetailsInfoActivityFinancialNew extends Activity {
 
 
 
+    }
+
+
+
+    public Boolean RegisteredOrNot()
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        //  editor.putString("registered", lat);
+        registered = pref.getString("registered", null);
+        phone_num = pref.getString("phone",null);
+        // editor.commit();
+        //  if(registered.equals("yes"))
+        return true;
+        //  else
+        //   return true;
+
 
 
     }
+
+    public void verifyRegistration(View v){
+
+        Boolean register=RegisteredOrNot();
+
+        if(register.equals(false))
+        {
+            requestToRegister();
+        }
+
+        else {
+
+            feedBackAlert();
+            sendReviewToServer();
+        }
+
+
+    }
+
+    public void feedBackAlert()
+    {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityFinancialNew.this);
+        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityFinancialNew.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final Button submit= (Button) promptView.findViewById(R.id.submit);
+
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                declareRadiobutton();
+
+
+                alert.cancel();
+
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+
+        alert.show();
+    }
+
+
+    public void sendReviewToServer()
+    {
+        int rating;
+        if(status.equals("ভাল"))
+            rating=1;
+        else if(status.equals("মোটামোট"))
+            rating=2;
+        else
+            rating=3;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialServiceProviderItem.getNodeId() +"&service="+"1"+"&rating="+rating;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(DetailsInfoActivityFinancialNew.this,response,Toast.LENGTH_SHORT).show();
+                        // Log.d(">>>>>","status "+response);
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            String forms;
+                            forms = jo.getString("status");
+                            Log.d(">>>>>", "status " + forms);
+                            //Log.d(">>>>>","status ");
+
+                            if(forms.equals("true"))
+                            {
+                                AlertMessage.showMessage(DetailsInfoActivityFinancialNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                            }
+                            else
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(DetailsInfoActivityFinancialNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(DetailsInfoActivityFinancialNew.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityFinancialNew.this);
+        requestQueue.add(stringRequest);
+    }
+
+    public void declareRadiobutton()
+    {
+        // int selected = feedRadio.getCheckedRadioButtonId();
+        // RadioButton rb1 = (RadioButton) findViewById(selected);
+        //  status = rb1.getText().toString();
+
+        // Arafat, i set it as static 1, pls change this codes;
+
+        status = "1";
+    }
+
+
+    public void requestToRegister()
+    {
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityFinancialNew.this);
+        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityFinancialNew.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
+        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityFinancialNew.this,PhoneRegActivity.class);
+                startActivity(intentPhoneRegistration);
+
+            }
+        });
+
+
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+
+        alert.show();
+    }
+
 
     private String concateBasic(String value1,String value2){
 

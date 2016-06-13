@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="জমা দিন"
         android:layout_gravity="center_horizontal"
-        android:onClick="submit"
+
         android:padding="10dp" />
 
     <Button

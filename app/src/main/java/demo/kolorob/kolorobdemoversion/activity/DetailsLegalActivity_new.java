@@ -168,7 +168,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 //            landmark.setText(" কাছাকাছি পরিচিত স্থান: " +legalAidServiceProviderItem.getLandmark());
           //  itemarea.setText("এলাকা: " +legalAidServiceProviderItem.getAddress());
             String la= legalAidServiceProviderItem.getIdentifierId();
-            Feedback.setOnClickListener(new View.OnClickListener() {
+         /*   Feedback.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent a = new Intent(DetailsLegalActivity_new.this, FeedbackActivity.class);
@@ -178,7 +178,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
                     finish();
                 }
             });
-
+*/
 
             LegalAidtypeServiceProviderLegalAdviceTable legalAidtypeServiceProviderLegalAdviceTable1=new LegalAidtypeServiceProviderLegalAdviceTable(this);
             LegalAidtypeServiceProviderSalishiTable legalAidtypeServiceProviderSalishiTable = new LegalAidtypeServiceProviderSalishiTable(this);

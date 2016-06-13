@@ -157,7 +157,11 @@ public class JobAdvertisementTable {
     }
 
     public long insertItem(JobAdvertisementItem jobAdvertisementItem) {
+
+        Log.d(">>>","Insert Itemxxx  "+jobAdvertisementItem.getId());
         return insertItem(
+
+
                 jobAdvertisementItem.getId(),
                 jobAdvertisementItem.getForm_date(),
                 jobAdvertisementItem.getPosition(),
@@ -384,7 +388,7 @@ public class JobAdvertisementTable {
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
-        Log.d(">>>","Success  "+ret);
+        Log.d(">>>","Success  "+ ret);
         return ret;
 
 

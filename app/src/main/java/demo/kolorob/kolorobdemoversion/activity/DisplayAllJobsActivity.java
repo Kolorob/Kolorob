@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +39,8 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DisplayAllJobsActivity extends Activity {
 
-
+    private ImageView close_button;
+    private TextView tv_button;
         ArrayList<JobAdvertisementItem> jobAdvertisementItems;
         JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
         Context context;
@@ -57,8 +60,7 @@ public class DisplayAllJobsActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-
-
+                        displayData();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
@@ -90,13 +92,24 @@ public class DisplayAllJobsActivity extends Activity {
 
         alertDialog.show();
 
-
+        close_button=(ImageView)findViewById(R.id.iv_close);
+        tv_button=(TextView)findViewById(R.id.tv_close);
 
 
         context=this;
 
-
-
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        tv_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
@@ -107,15 +120,17 @@ public class DisplayAllJobsActivity extends Activity {
         jobAdvertisementTable.dropTable();
         int joblistCount = joblistArray.length();
 
-        Log.d(">>>","Total Joblist  "+joblistCount);
+
         for (int i = 0; i < joblistCount; i++) {
             try {
                 JSONObject jo = joblistArray.getJSONObject(i);
                 JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(jo);
 
-                JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
+             //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
                 jobAdvertisementTable.insertItem(si);
-                Log.d(">>>","Insert Item  ");
+              // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
+              //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
+
                 displayData();
 
 
@@ -157,6 +172,7 @@ public class DisplayAllJobsActivity extends Activity {
             remaining_date[increment]= remaining_date(jobAdvertisementItem.getApplication_last_date());
             address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
             contact_number[increment] = jobAdvertisementItem.getMobile1();
+            increment++;
 
         }
 
@@ -188,7 +204,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         Datetime = dateformat.format(c.getTime());
-        Log.d(">>>>>","today "+Datetime);
+      //  Log.d(">>>>>","today "+Datetime);
         Date enddate=new Date();
         Date today=new Date();
 
@@ -196,8 +212,8 @@ public class DisplayAllJobsActivity extends Activity {
             enddate=dateformat.parse(lastDate);
             today= dateformat.parse(Datetime);
 
-            Log.d(">>>>>","today "+today);
-            Log.d(">>>>>","endDay "+enddate);
+          //  Log.d(">>>>>","today "+today);
+          //  Log.d(">>>>>","endDay "+enddate);
 
 
         }

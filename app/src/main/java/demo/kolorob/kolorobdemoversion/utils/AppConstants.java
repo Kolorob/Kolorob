@@ -94,10 +94,10 @@ public class AppConstants {
     //region Keys of the activity data-passing extras
     public static final String KEY_CAT_OBJ = "category_object";
     public static final String KEY_PLACE = "place";
-    public static final String BAUNIABADH = "Baunia Badh";
+    public static final String BAUNIABADH = "বাউনিয়া বাঁধ";
     public static final String WAITTAG = "একটু অপেক্ষা করুন";
     public static final String WAITDET = "তথ্য সংগ্রহ হচ্ছে.....";
-    public static final String PARIS_ROAD = "Paris Road";
+    public static final String PARIS_ROAD = "প্যারিস রোড";
     public static final int PLACE_BAUNIABADH = 1;
     public static final int PLACE_PARIS_ROAD = 2;
     //endregion

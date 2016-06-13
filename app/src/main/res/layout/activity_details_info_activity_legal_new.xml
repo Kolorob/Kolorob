@@ -7,6 +7,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
+    android:background="@drawable/back_drop"
 
     tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealth">
 
@@ -204,13 +205,25 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:text="@string/address"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/blue"
+                                    android:textSize="25sp"
+                                    android:paddingLeft="10dp"
+                                    android:padding="5dp"
+                                    android:layout_marginLeft="10dp"
 
                                     android:layout_height="wrap_content" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/address_text"/>
+                                    android:id="@+id/address_text"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingBottom="4dp"/>
 
 
                             </LinearLayout>
@@ -227,22 +240,48 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/phone"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/blue"
+                                    android:textSize="25sp"
+                                    android:paddingLeft="10dp"
+                                    android:padding="5dp"
+                                    android:layout_marginLeft="10dp"
                                     />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/phone_text"/>
+                                    android:id="@+id/phone_text"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingBottom="4dp"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/email"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/blue"
+                                    android:textSize="25sp"
+                                    android:paddingLeft="10dp"
+
+                                    android:padding="5dp"
+                                    android:layout_marginLeft="10dp"
                                     />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/email_text"/>
+                                    android:id="@+id/email_text"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingBottom="4dp"
+                                    />
 
 
 
@@ -271,8 +310,8 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/black" />
+                            android:layout_height="3dp"
+                            android:background="@color/transparent" />
                     </LinearLayout>
 
 
@@ -497,6 +536,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/feedback"
+                android:onClick="verifyRegistration"
                 android:id="@+id/feedback"/>
 
 

@@ -18,18 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
 
 
-	String[] values = new String[] { "Bangladesh Fire Service",
-			"Police Control Room",
-			"Pllabi Police Station",
-			"RAB – 4",
-			"DESCO - Electricity",
-			"Ministry of Disaster Management","Titas Gas","Dhaka WASA","Blood Bank","Dhaka North City Corporation","Violence against Women & Children",""
+	String[] values = new String[] { "Bangladesh Fire Service, \n বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
+			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",
+			"Pllabi Police Station, \n পল্লবী থানা",
+			"RAB – 4, \n র্যাব - ৪",
+			"DESCO - Electricity, \n ডেসকো – ইলেক্ট্রিসিটি ",
+			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, \n তিতাস গ্যাস ","Dhaka WASA, \n ঢাকা ওয়াসা",
+			"Blood Bank,  \n ব্লাড ব্যাংক ","Dhaka North City Corporation, \n ঢাকা উত্তর সিটি কর্পোরেশন","Violence against Women & Children, \n নারী ও শিশু নির্যাতন প্রতিরোধ",""
 	};
 
 	String[] address = new String[] { "Mirpur 10, Dhaka",
@@ -37,7 +39,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 			"পল্লবী থানা",
 			"Dhaka",
 			"DESCO, Pallabi, Dhaka",
-			"দুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
+			"","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
 	};
 	String[] name_bangla = new String[] { "029555555",
 			"পুলিশ কন্ট্রোল রুম",
@@ -116,9 +118,10 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
                  // currentContext.startActivity(activityChangeIntent);
 Log.d("========", "-----------------"+i);
-				 Toast.makeText(context,
-						 "Sorry, Location is not found! ", Toast.LENGTH_LONG)
-						 .show();
+//				 Toast.makeText(context,
+//						 "Sorry, Location is not found! ", Toast.LENGTH_LONG)
+//						 .show();
+				 AlertMessage.showMessage(context,"Location ","Sorry, Location is not found!");
 
                //  PresentActivity.this.startActivity(activityChangeIntent);
              }
@@ -136,9 +139,10 @@ Log.d("========", "-----------------"+i);
 				 if(AppUtils.checkPermission(context))
 					 context.startActivity(callIntent1);
 				 else{
-					 Toast.makeText(context,
-							 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-							 .show();
+//					 Toast.makeText(context,
+//							 "Sorry, Phone call is not possible now.", Toast.LENGTH_LONG)
+//							 .show();
+					 AlertMessage.showMessage(context, "Phone ", "Sorry, Phone call is not possible now.");
 				 }
 
              }
@@ -150,9 +154,10 @@ Log.d("========", "-----------------"+i);
 			public void onClick(View v) {
 
 
-					Toast.makeText(context,
-							"Sorry, Email is not found! ", Toast.LENGTH_LONG)
-							.show();
+//					Toast.makeText(context,
+//							"Sorry, Email is not found! ", Toast.LENGTH_LONG)
+//							.show();
+				AlertMessage.showMessage(context, "Email ", "Sorry, Email ID is not found!");
 
 
 			}

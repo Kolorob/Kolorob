@@ -408,8 +408,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 ((CheckedTextView) convertView).setText("পশু  চিকিৎসা কেন্দ্র (Vetenary)");
 
 
-
-
             else if(group.string.equals("ATM Booth"))
                 ((CheckedTextView) convertView).setText("এ টি এম (ATM Booth)");
             else if(group.string.equals("Bank"))

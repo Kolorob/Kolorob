@@ -5,7 +5,7 @@
     android:id="@+id/categorytoolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:visibility="gone"
+
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -30,58 +30,30 @@
 
 
 
-                <ImageView
-                    android:id="@+id/toolbar_logo"
-                    android:src="@drawable/search_icons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:layout_above="@+id/imageView7"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/imageView7"
-                    android:background="@drawable/turned_off_ain_kanun"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
+                    android:text="Pick your\n place"
                     android:id="@+id/textView15"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imageView7"
-                    android:layout_toEndOf="@+id/imageView7" />
 
-                <EditText
-                    android:id="@+id/searchallc"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.87"
-                    android:textColor="@color/black"
-                    android:hint="Search..."
-                    android:textColorHint="@color/red"
-                    android:background="@color/white"
-                    android:layout_height="40dp"
-                    android:popupBackground="#ffffff"
+                    />
 
-                    android:ems="10"
-                    android:layout_alignRight="@+id/toolbar_logo"
-                    android:layout_alignEnd="@+id/toolbar_logo"
+                <Spinner
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/areaitems"
+                    style="@style/style_Spinner"
                     android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/textView15"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_alignBottom="@+id/imageView7"
-                    android:paddingBottom="5dp"
-                    android:layout_below="@+id/textView15"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+
 
 
         </RelativeLayout>

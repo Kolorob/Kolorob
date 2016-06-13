@@ -1,10 +1,12 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 
 public class DetailsJobActivityNew extends AppCompatActivity {
     Dialog dialog;
@@ -34,6 +37,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
              salary_range;
     int position;
     ArrayList<JobAdvertisementItem> jobAdvertisementItems;
+    private Context con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         Intent intent = getIntent();
         position =intent.getIntExtra("position",0)+1;
 
+        con = this;
 
         linearLayout=(LinearLayout)findViewById(R.id.lll);
         upperHand=(LinearLayout)findViewById(R.id.upper_part);
@@ -194,6 +199,12 @@ public class DetailsJobActivityNew extends AppCompatActivity {
 
 
 
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 
@@ -206,6 +217,19 @@ public class DetailsJobActivityNew extends AppCompatActivity {
 
 
     }
+
+
+    public void showdirection(View v){
+        AlertMessage.showMessage(con,"Sorry","Direction is not found!");
+    }
+
+    public void sendemail(View v){
+        AlertMessage.showMessage(con,"Sorry","Email ID is not found!");
+    }
+
+//    public void closepage(View v){
+//        this.finish();
+//    }
 
 
     private String concateBasic(String value1,String value2){

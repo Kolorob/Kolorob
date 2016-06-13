@@ -154,10 +154,10 @@ public class DetailsInfoActivityEntertainment extends Activity  {
         Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(DetailsInfoActivityEntertainment.this, FeedbackActivity.class);
-                a.putExtra("NodeId", entertainmentServiceProviderItem.getNodeId());
-                a.putExtra("CatId", entertainmentServiceProviderItem.getCategoryId());
-                startActivity(a);
+              //  Intent a = new Intent(DetailsInfoActivityEntertainment.this, FeedbackActivity.class);
+            //    a.putExtra("NodeId", entertainmentServiceProviderItem.getNodeId());
+              //  a.putExtra("CatId", entertainmentServiceProviderItem.getCategoryId());
+             //   startActivity(a);
                 finish();
             }
         });
@@ -227,8 +227,6 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
 
         if(entertainmentFieldItems!=null) {
-
-
             int g= entertainmentFieldItems.size();
             String[] event_cost=new String[g];
             String[] playground_cost=new String[g];
@@ -307,11 +305,8 @@ public class DetailsInfoActivityEntertainment extends Activity  {
 
                 int year=et.getYearofestablishment();
                 String docString = String.valueOf(year);
-
-
                 int years=et.getWorkers();
                 String docStrings = String.valueOf(years);
-
                 year_of_establishment[k]=docString;
                 num_workers[k]=docStrings;
                 offers[k]=et.getOffers();

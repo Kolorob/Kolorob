@@ -104,8 +104,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"></LinearLayout>
+            android:layout_height="350dp"
+            android:layout_gravity="center_horizontal">
 
         <ListView
             android:layout_width="match_parent"
@@ -115,7 +115,22 @@
             android:minHeight="80dp"
             android:background="@color/white"
             android:layout_gravity="center_horizontal" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/map_fragment"
+                android:visibility="gone"
+                android:layout_gravity="left|top"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
 
+
+
+            </FrameLayout>
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,8 +172,12 @@
                 android:layout_alignEnd="@+id/morebutton"
                 android:layout_alignLeft="@+id/textView17"
                 android:layout_alignStart="@+id/textView17">
-
-
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -168,7 +187,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Education"
+                        android:text="@string/Education"
                         android:id="@+id/edradioButton"
                         android:textColor="#ffffff"
                         android:layout_alignParentTop="true"
@@ -178,7 +197,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Health"
+                        android:text="@string/Health"
                         android:id="@+id/helradioButton2"
                         android:textColor="#ffffff"
                         android:layout_below="@+id/edradioButton"
@@ -188,7 +207,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Legal Aid"
+                        android:text="@string/Legal"
                         android:id="@+id/legradioButton3"
                         android:textColor="#ffffff"
                         android:layout_alignParentBottom="true"
@@ -198,7 +217,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Financial service"
+                        android:text="@string/Financial"
                         android:id="@+id/finradioButton4"
                         android:textColor="#ffffff"
                         android:layout_below="@+id/entradioButton5"
@@ -208,7 +227,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Entertainment"
+                        android:text="@string/Entertainment"
                         android:id="@+id/entradioButton5"
                         android:textColor="#ffffff"
                         android:layout_below="@+id/helradioButton2"
@@ -219,7 +238,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Search more"
+                    android:text="@string/fsearch"
                     android:id="@+id/searchmbox"
                     android:visibility="gone"
                     android:layout_centerVertical="true"
@@ -227,6 +246,8 @@
                     android:layout_alignParentEnd="true"
                     android:textColor="#ffffff"
                     android:checked="false" />
+                </LinearLayout>
+                </ScrollView>
                 <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="150dp">
