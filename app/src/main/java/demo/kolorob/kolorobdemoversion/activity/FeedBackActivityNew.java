@@ -54,9 +54,19 @@ public class FeedBackActivityNew extends AppCompatActivity {
         send =(Button)findViewById(R.id.send);
         con=this;
         ArrayList<String> age = new ArrayList<String>();
-        age.add("ভাল");
-        age.add("মোটামোটি");
-        age.add("ভাল না");
+//        age.add("ভাল");
+//        age.add("মোটামোটি");
+//        age.add("ভাল না");
+
+        age.add("খুবই অসন্তুষ্ট ");
+        age.add("অসন্তুষ্ট ");
+        age.add("বিশেষ অনুভূতি নেই");
+        age.add("সন্তুষ্ট ");
+        age.add("খুবই সন্তুষ্ট");
+
+
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.dropdown_text_survey, age);
         ratingSpinner = (Spinner)findViewById(R.id.RatingSpinner);
         ratingSpinner.setAdapter(adapter);
