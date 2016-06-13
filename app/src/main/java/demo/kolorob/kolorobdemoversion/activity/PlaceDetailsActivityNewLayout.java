@@ -555,6 +555,111 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     }
 
+    public void createData(int cat_id, String head,String placeChoice) {
+        switch (cat_id) {
+            case AppConstants.EDUCATION:
+
+                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> print = null;
+                groups.removeAllElements();
+                print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < print.size(); j++) {
+                    Group group = new Group(print.get(j));
+                    printnames = null;
+                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
+
+                    // Log.d(">>>>", "printnames "+printnames);
+                    /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
+                    // Log.d(">>>>", "head "+head);
+                    // Log.d(">>>>", "print.get(j) "+print.get(j));
+                    // Log.d(">>>>", "placeChoice "+placeChoice);
+                    for (int i = 0; i < printnames.size(); i++) {
+                        group.children.add(i, printnames.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.ENTERTAINMENT:
+
+                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printent = null;
+                groups.removeAllElements();
+                printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printent.size(); j++) {
+                    Group group = new Group(printent.get(j));
+                    printnamesent = null;
+                    printnamesent = entertainmentServiceProviderTable.Entnames(currentCategoryID, head, printent.get(j), placeChoice);
+                    for (int i = 0; i < printnamesent.size(); i++) {
+                        group.childrenent.add(i, printnamesent.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.HEALTH:
+
+                SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printhea = null;
+                groups.removeAllElements();
+                printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printhea.size(); j++) {
+                    Group group = new Group(printhea.get(j));
+                    printnameshea = null;
+                    printnameshea = healthServiceProviderTable.Heanames(currentCategoryID, head, printhea.get(j), placeChoice);
+                    for (int i = 0; i <  printnameshea .size(); i++) {
+                        group.childrenhea.add(i,printnameshea .get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.FINANCIAL:
+
+                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printfin = null;
+                groups.removeAllElements();
+                printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j <  printfin.size(); j++) {
+                    Group group = new Group(printfin.get(j));
+                    printnamesfin = null;
+                    printnamesfin= financialServiceProviderTable.Finnames(currentCategoryID, head, printfin.get(j), placeChoice);
+                    for (int i = 0; i < printnamesfin.size(); i++) {
+                        group.childrenfin.add(i, printnamesfin.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.LEGAL:
+
+                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = cat_id;
+                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printleg = null;
+                groups.removeAllElements();
+                printleg = subCategoryTable5.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < printleg.size(); j++) {
+                    Group group = new Group(printleg.get(j));
+                    printnamesleg = null;
+                    printnamesleg = legalAidServiceProviderTable.Legnames(currentCategoryID, head, printleg.get(j), placeChoice);
+                    for (int i = 0; i < printnamesleg.size(); i++) {
+                        group.childrenleg.add(i, printnamesleg.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.JOB:
+
+
+        }
+    }
+
+
     public void populatefilterwords(int filcatid)
     {
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
