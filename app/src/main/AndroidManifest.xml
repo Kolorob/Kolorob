@@ -113,7 +113,7 @@
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.PlaceChoiceActivity2"
-            android:theme="@style/AppTheme.NoActionBar"
+
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailsLegalActivity"

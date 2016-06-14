@@ -24,7 +24,8 @@
             android:layout_weight="0.3"
             android:id="@+id/toolbar_logoa"
             android:background="@color/white"
-
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal"
 
             android:descendantFocusability="beforeDescendants"
@@ -37,6 +38,8 @@
                 android:layout_weight="0.87"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/search_icons"
                 android:textColor="@color/black"
                 android:hint="@string/search"
@@ -53,16 +56,7 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/toolbar_logo"
-            android:src="@drawable/help_icon"
-            android:layout_width="50dp"
-            android:layout_weight="0.05"
-            android:layout_height="match_parent"
 
-
-
-            />
 
 
 

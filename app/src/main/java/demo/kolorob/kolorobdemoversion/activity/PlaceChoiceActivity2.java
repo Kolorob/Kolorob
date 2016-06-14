@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -17,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -27,10 +29,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -44,11 +48,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
@@ -70,6 +84,7 @@ import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderIte
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -93,7 +108,7 @@ public class PlaceChoiceActivity2 extends AppCompatActivity implements View.OnCl
     ListView allitemList;
     String filterword;
     TextView searchtext;
-    ImageButton more;
+    ImageButton more,help;
     int snumber=0;
 
     String app_ver;
@@ -340,7 +355,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
         searchtext=(TextView)findViewById(R.id.textView17) ;
         check=(CheckBox)findViewById(R.id.searchmbox);
         more.setOnClickListener((View.OnClickListener) this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         catholder.setVisibility(View.GONE);
@@ -418,6 +433,7 @@ Searchall=(EditText)findViewById(R.id.searchall);
         fleft=(LinearLayout)findViewById(R.id.linearLayout1);
         fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
         Populateholder();
+help=(ImageButton)findViewById(R.id.helpicon);
 
     }
 
@@ -503,6 +519,10 @@ Searchall=(EditText)findViewById(R.id.searchall);
                 searchtext.setText(R.string.searchtext);
                 catholder.setVisibility(View.VISIBLE);
                 catgroup.setVisibility(View.VISIBLE);
+                break;
+            case R.id.helpicon:
+                helpDialog(view);
+                break;
 
             default:
                 break;
@@ -967,5 +987,151 @@ if(valuecheck==false)
         FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
         fragmentTransaction.commit();
+    }
+    public void helpDialog(View v){
+
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceChoiceActivity2.this);
+        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceChoiceActivity2.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
+        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
+        final Button button= (Button)promptView.findViewById(R.id.phone_call);
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user= SharedPreferencesHelper.getUser(PlaceChoiceActivity2.this);
+                String testUser=SharedPreferencesHelper.getFeedback(PlaceChoiceActivity2.this);
+                if(user.equals(testUser))
+                {
+                    AlertMessage.showMessage(con, "দুঃখিত মতামত গ্রহন করা সম্ভব হচ্ছে না", "আপনি ইতিপূর্বে মতামত দিয়ে ফেলেছেন");
+                }
+
+                else
+                    sendDataToserver(userfeedback.getText().toString());
+
+            }
+        });
+//        prebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                PlaceDetailsActivityNewLayout.this.onBackPressed();
+//
+//            }
+//        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phoneCall();
+                Toast.makeText(PlaceChoiceActivity2.this, "...ok....",Toast.LENGTH_LONG).show();
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //resultText.setText("Hello, " + userfeedback.getText());
+                    }
+                })
+                .setNegativeButton("বাতিল করুন",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
+    public void phoneCall()
+    {
+
+        Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+        callIntent1.setData(Uri.parse("tel:" + "01796559112"));
+        if(checkPermission())
+            startActivity(callIntent1);
+
+    }
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+    public void sendDataToserver(final String text)
+    {
+        String username=SharedPreferencesHelper.getUser(PlaceChoiceActivity2.this);
+        SharedPreferencesHelper.setFeedback(PlaceChoiceActivity2.this,username);
+
+        String url = "http://www.kolorob.net/KolorobApi/api/help/save_query?query="+text;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(PlaceChoiceActivity2.this,response,Toast.LENGTH_SHORT).show();
+
+                        try {
+                            JSONObject jo = new JSONObject(response);
+                            JSONArray forms = jo.getJSONArray("true");
+
+                            if(forms.toString().equals("true"))
+                            {
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceChoiceActivity2.this, "মন্তব্যটি পাঠানো হয়ছে",
+                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+                            }
+                            else
+                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceChoiceActivity2.this, "মন্তব্য পাঠানো সফল হয়নি",
+                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(PlaceChoiceActivity2.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+// Adding request to request queue
+
+        RequestQueue requestQueue = Volley.newRequestQueue(PlaceChoiceActivity2.this);
+        requestQueue.add(stringRequest);
+
+
+
     }
 }
