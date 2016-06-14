@@ -51,6 +51,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -101,7 +102,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public void setShowList(int showList) {
         this.showList = showList;
     }
-
+    ToggleButton toggleButton;
     private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
@@ -434,7 +435,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
-        llCatListHolder.setVisibility(View.VISIBLE);
+        llCatListHolder.setVisibility(View.GONE);
         //rlSubCatHolder.setVisibility(View.VISIBLE);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
@@ -563,6 +564,28 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
                 }
 
+            }
+        });
+
+        toggleButton=(ToggleButton)findViewById(R.id.toggle);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if(toggleButton.isChecked()){
+                    llCatListHolder.setVisibility(View.VISIBLE);
+                    if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
+                    {
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    llCatListHolder.setVisibility(View.GONE);
+                    llSubCatListHolder.setVisibility(View.GONE);
+                }
+
+                //Button is OFF
+                // Do Something
             }
         });
     }
