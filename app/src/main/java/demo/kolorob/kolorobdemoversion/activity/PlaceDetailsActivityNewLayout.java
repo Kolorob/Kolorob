@@ -104,6 +104,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by touhid on 12/3/15.
@@ -142,6 +143,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ListView expandableListview;
     private RelativeLayout wholeLayout;
     private int showList;
+    private String locationNameEng;
 
     private Button prebutton;
 
@@ -217,6 +219,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     TextView searchtext;
 
     int snumber=0;
+
+    public String getLocationNameEng() {
+        return locationNameEng;
+    }
+
+    public void setLocationNameEng(String locationNameEng) {
+        this.locationNameEng = locationNameEng;
+    }
 
     public int getSnumber() {
         return snumber;
@@ -398,6 +408,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 locationName = AppConstants.BAUNIABADH;
                 listData.add(AppConstants.BAUNIABADH);
                 listData.add(AppConstants.PARIS_ROAD);
+                setLocationNameEng("Baunia Badh");
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
@@ -405,6 +416,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 locationName = AppConstants.PARIS_ROAD;
                 listData.add(AppConstants.PARIS_ROAD);
                 listData.add(AppConstants.BAUNIABADH);
+                setLocationNameEng("Paris Road");
             }
         }
 
@@ -588,6 +600,71 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         });
 
     }
+
+
+    public void helpDialog(View v){
+
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivityNewLayout.this);
+        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
+        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
+        final Button button= (Button)promptView.findViewById(R.id.phone_call);
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user= SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
+                String testUser=SharedPreferencesHelper.getFeedback(PlaceDetailsActivityNewLayout.this);
+                if(user.equals(testUser))
+                {
+                    AlertMessage.showMessage(con, "দুঃখিত মতামত গ্রহন করা সম্ভব হচ্ছে না", "আপনি ইতিপূর্বে মতামত দিয়ে ফেলেছেন");
+                }
+
+                else
+                sendDataToserver(userfeedback.getText().toString());
+
+            }
+        });
+//        prebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                PlaceDetailsActivityNewLayout.this.onBackPressed();
+//
+//            }
+//        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phoneCall();
+                Toast.makeText(PlaceDetailsActivityNewLayout.this, "...ok....",Toast.LENGTH_LONG).show();
+            }
+        });
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //resultText.setText("Hello, " + userfeedback.getText());
+                    }
+                })
+                .setNegativeButton("বাতিল করুন",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
+
 
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
@@ -1270,7 +1347,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     private void categoryListBuildUp(int currentCategoryID)
     {
-        createData(currentCategoryID,"",placeChoice);
+        createData(currentCategoryID,"",getLocationNameEng());
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
         subCatItemList.setAdapter(adapter);
@@ -2293,6 +2370,9 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     public void sendDataToserver(final String text)
     {
+        String username=SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
+        SharedPreferencesHelper.setFeedback(PlaceDetailsActivityNewLayout.this,username);
+
         String url = "http://www.kolorob.net/KolorobApi/api/help/save_query?query="+text;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

@@ -78,11 +78,11 @@ private Context con;
 
         final String nametext = name.getText().toString();
         final String emailtext = name.getText().toString();
-
+        SharedPreferencesHelper.setUser(con, nametext);
         if(nametext.length()<3) {
             AlertMessage.showMessage(con, "Sorry", "Name can not be too small.");
-        }else if(emailtext.length()<12) {
-            AlertMessage.showMessage(con, "Sorry", "Email is not correct.");
+//        }else if(emailtext.length()==12) {
+//            AlertMessage.showMessage(con, "Sorry", "Email is not correct.");
         }
         else {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,

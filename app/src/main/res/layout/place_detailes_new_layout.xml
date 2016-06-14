@@ -241,6 +241,20 @@
                 </LinearLayout>
 
             </ScrollView>
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/help_icon"
+                android:id="@+id/helpicon"
+                android:layout_marginBottom="95dp"
+                android:layout_marginRight="100dp"
+                android:gravity="right"
+                android:onClick="helpDialog"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                />
         </RelativeLayout>
 
         <LinearLayout

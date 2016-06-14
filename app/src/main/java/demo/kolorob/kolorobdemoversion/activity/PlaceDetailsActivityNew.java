@@ -740,14 +740,14 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
             }
         });
-        prebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                PlaceDetailsActivityNew.this.onBackPressed();
-
-            }
-        });
+//        prebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                PlaceDetailsActivityNew.this.onBackPressed();
+//
+//            }
+//        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
