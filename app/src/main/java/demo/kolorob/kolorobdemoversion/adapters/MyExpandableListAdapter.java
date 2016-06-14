@@ -283,7 +283,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         Log.d(">>>>>>","Group Value "+catid);
 
         if(catid==1)
-               ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_5);
+               ((CheckedTextView) convertView).setBackgroundResource(R.color.green);
         else if(catid==2)
             ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_4);
         else if(catid==3)
@@ -295,284 +295,284 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
 
       //
-//            if(group.string.equals("Govt. Primary School "))
-//                ((CheckedTextView) convertView).setText("সরকারী প্রাইমারী স্কুল (Govt. Primary School)");
-//
-//            else if(group.string.equals("Day Care Centres"))
-//                 ((CheckedTextView) convertView).setText("ডে কেয়ার সেন্টার(Day Care Centres)");
-//            else if(group.string.equals("Kindergarten"))
-//                ((CheckedTextView) convertView).setText("কিন্ডারগার্ডেন (Kindergarten)");
-//            else if(group.string.equals("NGO Schools"))
-//                ((CheckedTextView) convertView).setText("এনজিও স্কুল (NGO Schools)");
-//            else if(group.string.equals("Govt. High School"))
-//                ((CheckedTextView) convertView).setText("সরকারী উচ্চ বিদ্যালয় (Govt. High School)");
-//            else if(group.string.equals("Teachers Training College"))
-//                ((CheckedTextView) convertView).setText("শিক্ষকদের প্রশিক্ষন কলেজ (Teachers Training College)");
-//            else if(group.string.equals("Private School"))
-//                ((CheckedTextView) convertView).setText("প্রাইভেট স্কুল (Private School)");
-//            else if(group.string.equals("English Medium School"))
-//                ((CheckedTextView) convertView).setText("ইংলিশ মিডিয়াম  স্কুল (English Medium School)");
-//            else if(group.string.equals("Govt. College"))
-//                ((CheckedTextView) convertView).setText("সরকারি কলেজ (Govt. College)");
-//            else if(group.string.equals("Private College"))
-//                ((CheckedTextView) convertView).setText("প্রাইভেট কলেজ (Private College)");
-//
-//            else if(group.string.equals("Women College"))
-//                ((CheckedTextView) convertView).setText("মহিলা কলেজ (Women College)");
-//            else if(group.string.equals("Welfare/Trust School"))
-//                ((CheckedTextView) convertView).setText("বৃত্তি/ কল্যাণমূলক স্কুল (Welfare/Trust School)");
-//            else if(group.string.equals("MPO Registered School"))
-//                ((CheckedTextView) convertView).setText("এমপিও ভুক্ত স্কুল (MPO Registered School)");
-//            else if(group.string.equals("Alia Madrasah"))
-//                ((CheckedTextView) convertView).setText("আলিয়া মাদ্রাসা (Alia Madrasah)");
-//            else if(group.string.equals("Kowmi Madrasah"))
-//                ((CheckedTextView) convertView).setText("কওমী মাদ্রাসা  (Kowmi Madrasah)");
-//            else if(group.string.equals("Hafezia Madrasah"))
-//                ((CheckedTextView) convertView).setText("হাফিজিয়া মাদ্রাসা  (Hafezia Madrasah)");
-//            else if(group.string.equals("Orphanage"))
-//                ((CheckedTextView) convertView).setText("এতিম খানা (Orphanage)");
-//            else if(group.string.equals("Moktob"))
-//                ((CheckedTextView) convertView).setText("মক্তব (Moktob)" );
-//            else if(group.string.equals("Polytechnique Institutes"))
-//                ((CheckedTextView) convertView).setText("পলিটেকনিক ইন্সটিটিউট (Polytechnique Institutes)");
-//            else if(group.string.equals("Vocational Training Centres"))
-//                ((CheckedTextView) convertView).setText("কারিগরি প্রশিক্ষন কেন্দ্র  (Vocational Training Centres)");
-//            else if(group.string.equals("Medical College"))
-//                ((CheckedTextView) convertView).setText("মেডিকেল কলেজ (Medical College)");
-//            else if(group.string.equals("Nursing Institutes"))
-//                ((CheckedTextView) convertView).setText("নার্সিং ইন্সটিটিউট (Nursing Institutes)");
-//            else if(group.string.equals("Language Institutes"))
-//                ((CheckedTextView) convertView).setText("ভাষা শিক্ষা প্রতিষ্ঠান (Language Institutes)");
-//            else if(group.string.equals("Coaching Centres"))
-//                ((CheckedTextView) convertView).setText("কোচিং সেন্টার  (Coaching Centres)");
-//            else if(group.string.equals("Mosques"))
-//                ((CheckedTextView) convertView).setText("মসজিদ (Mosques)");
-//            else if(group.string.equals("NGO Office"))
-//                ((CheckedTextView) convertView).setText("এনজিও অফিস (NGO Office)");
-//
-//            else if(group.string.equals("NGO Clinic"))
-//                ((CheckedTextView) convertView).setText("এনজিও ক্লিনিক  (NGO Clinic)");
-//            else if(group.string.equals("Vaccine Centre"))
-//                ((CheckedTextView) convertView).setText("প্রতিষেধক/ টিক দেয়ার কেন্দ্র (Vaccine Centre)");
-//            else if(group.string.equals("Delivery Centre"))
-//                ((CheckedTextView) convertView).setText("সন্তান জন্মদান কেন্দ্র (Delivery Centre)");
-//            else if(group.string.equals("Dentist Chamber"))
-//                ((CheckedTextView) convertView).setText("দন্ত চিকিৎসকের চেম্বার (Dentist Chamber)");
-//            else if(group.string.equals("Satelite Clinic"))
-//                ((CheckedTextView) convertView).setText("স্যাটেলাইট ক্লিনিক  (Satelite Clinic)");
-//            else if(group.string.equals("Drug Rehabilitation Centre"))
-//                ((CheckedTextView) convertView).setText("মাদকাশক্তি পুনর্বাসন কেন্দ্র (Drug Rehabilitation Centre)");
-//            else if(group.string.equals("Diagonostic Centre"))
-//                ((CheckedTextView) convertView).setText("রোগনির্ণয় কেন্দ্র (Diagonostic Centre)");
-//
-//
-//            else if(group.string.equals("Private Hospital"))
-//                ((CheckedTextView) convertView).setText("প্রাইভেট হাসপাতাল (Private Hospital)");
-//            else if(group.string.equals("Maternity Hospital"))
-//                ((CheckedTextView) convertView).setText("মাতৃ হাসপাতাল (Maternity Hospital)");
-//            else if(group.string.equals("Govt. Hospital"))
-//                ((CheckedTextView) convertView).setText("সরকারি হাসপাতাল  (Govt. Hospital)");
-//            else if(group.string.equals("Eye Hospital"))
-//                ((CheckedTextView) convertView).setText("চক্ষু হাসপাতাল (Eye Hospital)");
-//            else if(group.string.equals("Mental Hospital"))
-//                ((CheckedTextView) convertView).setText("মানসিক হাসপাতাল (Mental Hospital)");
-//
-//
-//
-//            else if(group.string.equals("Pharmacy(MBBS)"))
-//                ((CheckedTextView) convertView).setText("ফার্মেসি (ডাক্তার এম বি বি এস)  (Pharmacy(MBBS))");
-//            else if(group.string.equals("Pharmacy (LMAF)"))
-//                ((CheckedTextView) convertView).setText("ফার্মেসি(ডাক্তার এল এম এ এফ) (Pharmacy (LMAF))");
-//            else if(group.string.equals("Pharmacy(Medicine Only)"))
-//                ((CheckedTextView) convertView).setText("ফার্মেসী ( শুধুমাত্র ঔষধ)  (Pharmacy(Medicine Only))");
-//
-//
-//
-//            else if(group.string.equals("Harbal"))
-//                ((CheckedTextView) convertView).setText("ভেষজ (Harbal)");
-//            else if(group.string.equals("Dental Chamber"))
-//                ((CheckedTextView) convertView).setText("দাতের চিকিৎসক চেম্বার (Dental Chamber)");
-//            else if(group.string.equals("Diabetic Society"))
-//                ((CheckedTextView) convertView).setText("ডায়বেটিকস সোসাইটি  (Diabetic Society)");
-//            else if(group.string.equals("Homeopathy"))
-//                ((CheckedTextView) convertView).setText("হোমিওপ্যাথি (Homeopathy)");
-//            else if(group.string.equals("Ayurbedhik"))
-//                ((CheckedTextView) convertView).setText("আয়ুর্বেদিক  (Ayurbedhik)");
-//
-//
-//            else if(group.string.equals("Para Medical"))
-//                ((CheckedTextView) convertView).setText("প্যারামেডিকেল (Para Medical)");
-//
-//
-//            else if(group.string.equals("Vetenary"))
-//                ((CheckedTextView) convertView).setText("পশু  চিকিৎসা কেন্দ্র (Vetenary)");
-//
-//
-//            else if(group.string.equals("ATM Booth"))
-//                ((CheckedTextView) convertView).setText("এ টি এম (ATM Booth)");
-//            else if(group.string.equals("Bank"))
-//                ((CheckedTextView) convertView).setText("ব্যাংক (Bank)");
-//            else if(group.string.equals("Courier Service"))
-//                ((CheckedTextView) convertView).setText("কুরিয়ার সার্ভিস (Courier Service)");
-//            else if(group.string.equals("Post Office"))
-//                ((CheckedTextView) convertView).setText("পোস্ট অফিস  (Post Office)");
-//
-//
-//
-//            else if(group.string.equals("bKash"))
-//                ((CheckedTextView) convertView).setText("বিকাশ (bKash)");
-//            else if(group.string.equals("DBBL Banking"))
-//                ((CheckedTextView) convertView).setText("ডাচ বাংলা ব্যাঙ্কিং (DBBL Banking)");
-//            else if(group.string.equals("Sure Cash"))
-//                ((CheckedTextView) convertView).setText("সিউর ক্যাশ (Sure Cash)");
-//            else if(group.string.equals("Mobi Cash"))
-//                ((CheckedTextView) convertView).setText("মোবি ক্যাশ (Mobi Cash)");
-//            else if(group.string.equals("Ucash"))
-//                ((CheckedTextView) convertView).setText("ইউক্যাশ  (Ucash)");
-//            else if(group.string.equals("MyCash"))
-//                ((CheckedTextView) convertView).setText("মাইক্যাশ (MyCash)");
-//
-//            else if(group.string.equals("DESCO Bill Pay Cenre"))
-//                ((CheckedTextView) convertView).setText("ডেসকো বিদ্যুৎ বিল পরিশোধ সেন্টার  (DESCO Bill Pay Cenre)");
-//            else if(group.string.equals("Grameenphone Bill Pay"))
-//                ((CheckedTextView) convertView).setText("গ্রামীণফোন বিল পরিশোধ সেন্টার (Grameenphone Bill Pay)");
-//            else if(group.string.equals("Robi Bill Pay"))
-//                ((CheckedTextView) convertView).setText("রবি বিল পরিশোধ সেন্টার  (Robi Bill Pay)");
-//            else if(group.string.equals("Banglalink Point"))
-//                ((CheckedTextView) convertView).setText("বাংলালিংক পয়েন্ট (Banglalink Point)");
-//
-//            else if(group.string.equals("Life Insurance"))
-//                ((CheckedTextView) convertView).setText("জীবন বীমা  (Life Insurance)");
-//            else if(group.string.equals("Vehicle Insurance"))
-//                ((CheckedTextView) convertView).setText("যানবাহন বীমা (Vehicle Insurance)");
-//            else if(group.string.equals("Property Insurance"))
-//                ((CheckedTextView) convertView).setText("সম্পত্তি বীমা  (Property Insurance)");
-//
-//
-//
-//            else if(group.string.equals("Cooperative Society (Shomity)"))
-//                ((CheckedTextView) convertView).setText("সমবায় সমিতি  (Cooperative Society (Shomity))");
-////            else if(group.string.equals("NGO"))
-////                ((CheckedTextView) convertView).setText("এন জি ও (NGO)");
-//            else if(group.string.equals("Personal Loan Giver"))
-//                ((CheckedTextView) convertView).setText("ব্যক্তিগতভাবে লোন দাতা  (Personal Loan Giver)");
-//
-//            else if(group.string.equals("Hundi"))
-//                ((CheckedTextView) convertView).setText("হুন্ডি (Hundi)");
-//
-//
-//
-//            else if(group.string.equals("Playground"))
-//                ((CheckedTextView) convertView).setText("খেলার মাঠ  (Playground)");
-//            else if(group.string.equals("Dance Tuition"))
-//                ((CheckedTextView) convertView).setText("নাচের পাঠশালা  (Dance Tuition)");
-//
-//
-//            else if(group.string.equals("Singing Tuition"))
-//                ((CheckedTextView) convertView).setText("গানের পাঠশালা   (Singing Tuition)");
-//            else if(group.string.equals("Art Cenre"))
-//                ((CheckedTextView) convertView).setText("আর্ট সেন্টার (Art Cenre)");
-//
-//
-//            else if(group.string.equals("Events"))
-//                ((CheckedTextView) convertView).setText("অনুষ্ঠান  (Events)");
-//            else if(group.string.equals("Clubs"))
-//                ((CheckedTextView) convertView).setText("ক্লাব (Clubs)");
-//            else if(group.string.equals("Musical Bands"))
-//                ((CheckedTextView) convertView).setText("গানের ব্যান্ড  (Musical Bands)");
+            if(group.string.equals("Govt. Primary School "))
+                ((CheckedTextView) convertView).setText("সরকারী প্রাইমারী স্কুল (Govt. Primary School)");
+
+            else if(group.string.equals("Day Care Centres"))
+                 ((CheckedTextView) convertView).setText("ডে কেয়ার সেন্টার(Day Care Centres)");
+            else if(group.string.equals("Kindergarten"))
+                ((CheckedTextView) convertView).setText("কিন্ডারগার্ডেন (Kindergarten)");
+            else if(group.string.equals("NGO Schools"))
+                ((CheckedTextView) convertView).setText("এনজিও স্কুল (NGO Schools)");
+            else if(group.string.equals("Govt. High School"))
+                ((CheckedTextView) convertView).setText("সরকারী উচ্চ বিদ্যালয় (Govt. High School)");
+            else if(group.string.equals("Teachers Training College"))
+                ((CheckedTextView) convertView).setText("শিক্ষকদের প্রশিক্ষন কলেজ (Teachers Training College)");
+            else if(group.string.equals("Private School"))
+                ((CheckedTextView) convertView).setText("প্রাইভেট স্কুল (Private School)");
+            else if(group.string.equals("English Medium School"))
+                ((CheckedTextView) convertView).setText("ইংলিশ মিডিয়াম  স্কুল (English Medium School)");
+            else if(group.string.equals("Govt. College"))
+                ((CheckedTextView) convertView).setText("সরকারি কলেজ (Govt. College)");
+            else if(group.string.equals("Private College"))
+                ((CheckedTextView) convertView).setText("প্রাইভেট কলেজ (Private College)");
+
+            else if(group.string.equals("Women College"))
+                ((CheckedTextView) convertView).setText("মহিলা কলেজ (Women College)");
+            else if(group.string.equals("Welfare/Trust School"))
+                ((CheckedTextView) convertView).setText("বৃত্তি/ কল্যাণমূলক স্কুল (Welfare/Trust School)");
+            else if(group.string.equals("MPO Registered School"))
+                ((CheckedTextView) convertView).setText("এমপিও ভুক্ত স্কুল (MPO Registered School)");
+            else if(group.string.equals("Alia Madrasah"))
+                ((CheckedTextView) convertView).setText("আলিয়া মাদ্রাসা (Alia Madrasah)");
+            else if(group.string.equals("Kowmi Madrasah"))
+                ((CheckedTextView) convertView).setText("কওমী মাদ্রাসা  (Kowmi Madrasah)");
+            else if(group.string.equals("Hafezia Madrasah"))
+                ((CheckedTextView) convertView).setText("হাফিজিয়া মাদ্রাসা  (Hafezia Madrasah)");
+            else if(group.string.equals("Orphanage"))
+                ((CheckedTextView) convertView).setText("এতিম খানা (Orphanage)");
+            else if(group.string.equals("Moktob"))
+                ((CheckedTextView) convertView).setText("মক্তব (Moktob)" );
+            else if(group.string.equals("Polytechnique Institutes"))
+                ((CheckedTextView) convertView).setText("পলিটেকনিক ইন্সটিটিউট (Polytechnique Institutes)");
+            else if(group.string.equals("Vocational Training Centres"))
+                ((CheckedTextView) convertView).setText("কারিগরি প্রশিক্ষন কেন্দ্র  (Vocational Training Centres)");
+            else if(group.string.equals("Medical College"))
+                ((CheckedTextView) convertView).setText("মেডিকেল কলেজ (Medical College)");
+            else if(group.string.equals("Nursing Institutes"))
+                ((CheckedTextView) convertView).setText("নার্সিং ইন্সটিটিউট (Nursing Institutes)");
+            else if(group.string.equals("Language Institutes"))
+                ((CheckedTextView) convertView).setText("ভাষা শিক্ষা প্রতিষ্ঠান (Language Institutes)");
+            else if(group.string.equals("Coaching Centres"))
+                ((CheckedTextView) convertView).setText("কোচিং সেন্টার  (Coaching Centres)");
+            else if(group.string.equals("Mosques"))
+                ((CheckedTextView) convertView).setText("মসজিদ (Mosques)");
+            else if(group.string.equals("NGO Office"))
+                ((CheckedTextView) convertView).setText("এনজিও অফিস (NGO Office)");
+
+            else if(group.string.equals("NGO Clinic"))
+                ((CheckedTextView) convertView).setText("এনজিও ক্লিনিক  (NGO Clinic)");
+            else if(group.string.equals("Vaccine Centre"))
+                ((CheckedTextView) convertView).setText("প্রতিষেধক/ টিক দেয়ার কেন্দ্র (Vaccine Centre)");
+            else if(group.string.equals("Delivery Centre"))
+                ((CheckedTextView) convertView).setText("সন্তান জন্মদান কেন্দ্র (Delivery Centre)");
+            else if(group.string.equals("Dentist Chamber"))
+                ((CheckedTextView) convertView).setText("দন্ত চিকিৎসকের চেম্বার (Dentist Chamber)");
+            else if(group.string.equals("Satelite Clinic"))
+                ((CheckedTextView) convertView).setText("স্যাটেলাইট ক্লিনিক  (Satelite Clinic)");
+            else if(group.string.equals("Drug Rehabilitation Centre"))
+                ((CheckedTextView) convertView).setText("মাদকাশক্তি পুনর্বাসন কেন্দ্র (Drug Rehabilitation Centre)");
+            else if(group.string.equals("Diagonostic Centre"))
+                ((CheckedTextView) convertView).setText("রোগনির্ণয় কেন্দ্র (Diagonostic Centre)");
+
+
+            else if(group.string.equals("Private Hospital"))
+                ((CheckedTextView) convertView).setText("প্রাইভেট হাসপাতাল (Private Hospital)");
+            else if(group.string.equals("Maternity Hospital"))
+                ((CheckedTextView) convertView).setText("মাতৃ হাসপাতাল (Maternity Hospital)");
+            else if(group.string.equals("Govt. Hospital"))
+                ((CheckedTextView) convertView).setText("সরকারি হাসপাতাল  (Govt. Hospital)");
+            else if(group.string.equals("Eye Hospital"))
+                ((CheckedTextView) convertView).setText("চক্ষু হাসপাতাল (Eye Hospital)");
+            else if(group.string.equals("Mental Hospital"))
+                ((CheckedTextView) convertView).setText("মানসিক হাসপাতাল (Mental Hospital)");
+
+
+
+            else if(group.string.equals("Pharmacy(MBBS)"))
+                ((CheckedTextView) convertView).setText("ফার্মেসি (ডাক্তার এম বি বি এস)  (Pharmacy(MBBS))");
+            else if(group.string.equals("Pharmacy (LMAF)"))
+                ((CheckedTextView) convertView).setText("ফার্মেসি(ডাক্তার এল এম এ এফ) (Pharmacy (LMAF))");
+            else if(group.string.equals("Pharmacy(Medicine Only)"))
+                ((CheckedTextView) convertView).setText("ফার্মেসী ( শুধুমাত্র ঔষধ)  (Pharmacy(Medicine Only))");
+
+
+
+            else if(group.string.equals("Harbal"))
+                ((CheckedTextView) convertView).setText("ভেষজ (Harbal)");
+            else if(group.string.equals("Dental Chamber"))
+                ((CheckedTextView) convertView).setText("দাতের চিকিৎসক চেম্বার (Dental Chamber)");
+            else if(group.string.equals("Diabetic Society"))
+                ((CheckedTextView) convertView).setText("ডায়বেটিকস সোসাইটি  (Diabetic Society)");
+            else if(group.string.equals("Homeopathy"))
+                ((CheckedTextView) convertView).setText("হোমিওপ্যাথি (Homeopathy)");
+            else if(group.string.equals("Ayurbedhik"))
+                ((CheckedTextView) convertView).setText("আয়ুর্বেদিক  (Ayurbedhik)");
+
+
+            else if(group.string.equals("Para Medical"))
+                ((CheckedTextView) convertView).setText("প্যারামেডিকেল (Para Medical)");
+
+
+            else if(group.string.equals("Vetenary"))
+                ((CheckedTextView) convertView).setText("পশু  চিকিৎসা কেন্দ্র (Vetenary)");
+
+
+            else if(group.string.equals("ATM Booth"))
+                ((CheckedTextView) convertView).setText("এ টি এম (ATM Booth)");
+            else if(group.string.equals("Bank"))
+                ((CheckedTextView) convertView).setText("ব্যাংক (Bank)");
+            else if(group.string.equals("Courier Service"))
+                ((CheckedTextView) convertView).setText("কুরিয়ার সার্ভিস (Courier Service)");
+            else if(group.string.equals("Post Office"))
+                ((CheckedTextView) convertView).setText("পোস্ট অফিস  (Post Office)");
+
+
+
+            else if(group.string.equals("bKash"))
+                ((CheckedTextView) convertView).setText("বিকাশ (bKash)");
+            else if(group.string.equals("DBBL Banking"))
+                ((CheckedTextView) convertView).setText("ডাচ বাংলা ব্যাঙ্কিং (DBBL Banking)");
+            else if(group.string.equals("Sure Cash"))
+                ((CheckedTextView) convertView).setText("সিউর ক্যাশ (Sure Cash)");
+            else if(group.string.equals("Mobi Cash"))
+                ((CheckedTextView) convertView).setText("মোবি ক্যাশ (Mobi Cash)");
+            else if(group.string.equals("Ucash"))
+                ((CheckedTextView) convertView).setText("ইউক্যাশ  (Ucash)");
+            else if(group.string.equals("MyCash"))
+                ((CheckedTextView) convertView).setText("মাইক্যাশ (MyCash)");
+
+            else if(group.string.equals("DESCO Bill Pay Cenre"))
+                ((CheckedTextView) convertView).setText("ডেসকো বিদ্যুৎ বিল পরিশোধ সেন্টার  (DESCO Bill Pay Cenre)");
+            else if(group.string.equals("Grameenphone Bill Pay"))
+                ((CheckedTextView) convertView).setText("গ্রামীণফোন বিল পরিশোধ সেন্টার (Grameenphone Bill Pay)");
+            else if(group.string.equals("Robi Bill Pay"))
+                ((CheckedTextView) convertView).setText("রবি বিল পরিশোধ সেন্টার  (Robi Bill Pay)");
+            else if(group.string.equals("Banglalink Point"))
+                ((CheckedTextView) convertView).setText("বাংলালিংক পয়েন্ট (Banglalink Point)");
+
+            else if(group.string.equals("Life Insurance"))
+                ((CheckedTextView) convertView).setText("জীবন বীমা  (Life Insurance)");
+            else if(group.string.equals("Vehicle Insurance"))
+                ((CheckedTextView) convertView).setText("যানবাহন বীমা (Vehicle Insurance)");
+            else if(group.string.equals("Property Insurance"))
+                ((CheckedTextView) convertView).setText("সম্পত্তি বীমা  (Property Insurance)");
+
+
+
+            else if(group.string.equals("Cooperative Society (Shomity)"))
+                ((CheckedTextView) convertView).setText("সমবায় সমিতি  (Cooperative Society (Shomity))");
 //            else if(group.string.equals("NGO"))
 //                ((CheckedTextView) convertView).setText("এন জি ও (NGO)");
-//            else if(group.string.equals("Cultural Groups"))
-//                ((CheckedTextView) convertView).setText("সংস্কৃতিক গ্রুপ (Cultural Groups)");
-//            else if(group.string.equals("Theatre Groups"))
-//                ((CheckedTextView) convertView).setText("নাট্যদল  (Theatre Groups)");
-//
-//            else if(group.string.equals("Park"))
-//                ((CheckedTextView) convertView).setText("পার্ক (Park)");
-//            else if(group.string.equals("Zoo"))
-//                ((CheckedTextView) convertView).setText("চিড়িয়াখানা (Zoo)");
-//            else if(group.string.equals("Lake"))
-//                ((CheckedTextView) convertView).setText("হ্রদ(Lake)");
-//            else if(group.string.equals("Shishu Park"))
-//                ((CheckedTextView) convertView).setText("শিশু পার্ক (Shishu Park)");
-//            else if(group.string.equals("Cable Service Provider"))
-//                ((CheckedTextView) convertView).setText("ক্যাবল সুবিধা প্রদানকারী  (Cable Service Provider)");
-//            else if(group.string.equals("Internet Service Provider"))
-//                ((CheckedTextView) convertView).setText("ইন্টারনেট সুবিধা প্রদানকারি (Internet Service Provider)");
-//
-//            else if(group.string.equals("Book Shop"))
-//                ((CheckedTextView) convertView).setText("বইয়ের দোকান (Book Shop)");
-//            else if(group.string.equals("Video Games"))
-//                ((CheckedTextView) convertView).setText("ভিডিও গেম  (Video Games)");
-//            else if(group.string.equals("Cyber Cafe"))
-//                ((CheckedTextView) convertView).setText("সাইবার ক্যাফে (Cyber Cafe)");
-//            else if(group.string.equals("Beauty Parlour(Gents)"))
-//                ((CheckedTextView) convertView).setText("বিউটি পারলার(পুরুষদের) (Beauty Parlour(Gents))");
-//            else if(group.string.equals("Beauty Parlour(Ladies)"))
-//                ((CheckedTextView) convertView).setText("বিউটি পারলার(মহিলাদের))   (Beauty Parlour(Ladies))");
-//            else if(group.string.equals("Gym"))
-//                ((CheckedTextView) convertView).setText("ব্যায়ামাগার   (Gym)");
-//
-//
-//
-//            else if(group.string.equals("Day Labour Place"))
-//                ((CheckedTextView) convertView).setText("দিন মজুরদের স্থান  (Day Labour Place)");
-//            else if(group.string.equals("Word of Mouth"))
-//                ((CheckedTextView) convertView).setText("কারো মুখে শোনা (Word of Mouth)");
-//            else if(group.string.equals("Handicraft-Agent/Broker"))
-//                ((CheckedTextView) convertView).setText("হস্তশিল্পের এজেন্ট  (Handicraft-Agent\\/Broker)");
-//            else if(group.string.equals("Word of Mouth"))
-//                ((CheckedTextView) convertView).setText("কারো মুখে শোনা (Word of Mouth)");
-//            else if(group.string.equals("Banner"))
-//                ((CheckedTextView) convertView).setText("ব্যানারের মাধ্যমে   (Banner)");
-//            else if(group.string.equals("Leaflet"))
-//                ((CheckedTextView) convertView).setText("লিফলেটের মাধ্যমে (Leaflet)");
-//            else if(group.string.equals("Mosque Announcement"))
-//                ((CheckedTextView) convertView).setText("মসজিদের ঘোষনা  (Mosque Announcement)");
-//            else if(group.string.equals("Factory Gate"))
-//                ((CheckedTextView) convertView).setText("শিল্পকারখানার গেটে  (Factory Gate)");
-//            else if(group.string.equals("Newspaper"))
-//                ((CheckedTextView) convertView).setText("সংবাদপত্রের মাধ্যমে  (Newspaper)");
-//            else if(group.string.equals("Newspaper"))
-//                ((CheckedTextView) convertView).setText("সংবাদপত্রের মাধ্যমে  (Newspaper)");
-//            else if(group.string.equals("Weekly Chakrir Khobor"))
-//                ((CheckedTextView) convertView).setText("সাপ্তাহিক চাকুরীর খবর  (Weekly Chakrir Khobor)");
-//            else if(group.string.equals("BDjobs/Online/Prothom Alo jobs"))
-//                ((CheckedTextView) convertView).setText("বিডি জবস/ অনলাইন বা প্রথম জবস (BDjobs/Online/Prothom Alo jobs)");
-//            else if(group.string.equals("Word of Mouth"))
-//                ((CheckedTextView) convertView).setText("কারো মুখে শোনা(Word of Mouth)");
-//            else if(group.string.equals("Relative"))
-//                ((CheckedTextView) convertView).setText("আত্মীয় সজন  (Relative)");
-//            else if(group.string.equals("Website"))
-//                ((CheckedTextView) convertView).setText("ওয়েবসাইট  (Website)");
-//            else if(group.string.equals("Agent/Adam Byabshayee"))
-//                ((CheckedTextView) convertView).setText("আদম ব্যবসায়ী  (Agent/Adam Byabshayee)");
-//            else if(group.string.equals("Recruiting Agency"))
-//                ((CheckedTextView) convertView).setText("চাকুরিদাতা সংস্থা  (Recruiting Agency)");
-//            else if(group.string.equals("Man Power Bureau"))
-//                ((CheckedTextView) convertView).setText("জনশক্তি ব্যুরো  (Man Power Bureau)");
-//            else if(group.string.equals("Probashi Kolyan Bank"))
-//                ((CheckedTextView) convertView).setText("প্রবাসী কল্যাণ ব্যাংক   (Probashi Kolyan Bank)");
-//            else if(group.string.equals("Lawers"))
-//                ((CheckedTextView) convertView).setText("আইনজীবী (Lawers)");
-//            else if(group.string.equals("Salishi Personnel"))
-//                ((CheckedTextView) convertView).setText("ব্যক্তিগত সালিশী  (Salishi Personnel)");
-//            else if(group.string.equals("Document Writer"))
-//                ((CheckedTextView) convertView).setText("পত্র লেখক (Document Writer)");
-//            else if(group.string.equals("Legal Aid Centre"))
-//                ((CheckedTextView) convertView).setText("আইন সহায়তাকারী সেন্টার  (Legal Aid Centre)");
-//            else if(group.string.equals("Other Legal Help"))
-//                ((CheckedTextView) convertView).setText("অন্যন্য আইনগত সাহায্য  (Other Legal Help)");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//         else
+            else if(group.string.equals("Personal Loan Giver"))
+                ((CheckedTextView) convertView).setText("ব্যক্তিগতভাবে লোন দাতা  (Personal Loan Giver)");
+
+            else if(group.string.equals("Hundi"))
+                ((CheckedTextView) convertView).setText("হুন্ডি (Hundi)");
+
+
+
+            else if(group.string.equals("Playground"))
+                ((CheckedTextView) convertView).setText("খেলার মাঠ  (Playground)");
+            else if(group.string.equals("Dance Tuition"))
+                ((CheckedTextView) convertView).setText("নাচের পাঠশালা  (Dance Tuition)");
+
+
+            else if(group.string.equals("Singing Tuition"))
+                ((CheckedTextView) convertView).setText("গানের পাঠশালা   (Singing Tuition)");
+            else if(group.string.equals("Art Cenre"))
+                ((CheckedTextView) convertView).setText("আর্ট সেন্টার (Art Cenre)");
+
+
+            else if(group.string.equals("Events"))
+                ((CheckedTextView) convertView).setText("অনুষ্ঠান  (Events)");
+            else if(group.string.equals("Clubs"))
+                ((CheckedTextView) convertView).setText("ক্লাব (Clubs)");
+            else if(group.string.equals("Musical Bands"))
+                ((CheckedTextView) convertView).setText("গানের ব্যান্ড  (Musical Bands)");
+            else if(group.string.equals("NGO"))
+                ((CheckedTextView) convertView).setText("এন জি ও (NGO)");
+            else if(group.string.equals("Cultural Groups"))
+                ((CheckedTextView) convertView).setText("সংস্কৃতিক গ্রুপ (Cultural Groups)");
+            else if(group.string.equals("Theatre Groups"))
+                ((CheckedTextView) convertView).setText("নাট্যদল  (Theatre Groups)");
+
+            else if(group.string.equals("Park"))
+                ((CheckedTextView) convertView).setText("পার্ক (Park)");
+            else if(group.string.equals("Zoo"))
+                ((CheckedTextView) convertView).setText("চিড়িয়াখানা (Zoo)");
+            else if(group.string.equals("Lake"))
+                ((CheckedTextView) convertView).setText("হ্রদ(Lake)");
+            else if(group.string.equals("Shishu Park"))
+                ((CheckedTextView) convertView).setText("শিশু পার্ক (Shishu Park)");
+            else if(group.string.equals("Cable Service Provider"))
+                ((CheckedTextView) convertView).setText("ক্যাবল সুবিধা প্রদানকারী  (Cable Service Provider)");
+            else if(group.string.equals("Internet Service Provider"))
+                ((CheckedTextView) convertView).setText("ইন্টারনেট সুবিধা প্রদানকারি (Internet Service Provider)");
+
+            else if(group.string.equals("Book Shop"))
+                ((CheckedTextView) convertView).setText("বইয়ের দোকান (Book Shop)");
+            else if(group.string.equals("Video Games"))
+                ((CheckedTextView) convertView).setText("ভিডিও গেম  (Video Games)");
+            else if(group.string.equals("Cyber Cafe"))
+                ((CheckedTextView) convertView).setText("সাইবার ক্যাফে (Cyber Cafe)");
+            else if(group.string.equals("Beauty Parlour(Gents)"))
+                ((CheckedTextView) convertView).setText("বিউটি পারলার(পুরুষদের) (Beauty Parlour(Gents))");
+            else if(group.string.equals("Beauty Parlour(Ladies)"))
+                ((CheckedTextView) convertView).setText("বিউটি পারলার(মহিলাদের))   (Beauty Parlour(Ladies))");
+            else if(group.string.equals("Gym"))
+                ((CheckedTextView) convertView).setText("ব্যায়ামাগার   (Gym)");
+
+
+
+            else if(group.string.equals("Day Labour Place"))
+                ((CheckedTextView) convertView).setText("দিন মজুরদের স্থান  (Day Labour Place)");
+            else if(group.string.equals("Word of Mouth"))
+                ((CheckedTextView) convertView).setText("কারো মুখে শোনা (Word of Mouth)");
+            else if(group.string.equals("Handicraft-Agent/Broker"))
+                ((CheckedTextView) convertView).setText("হস্তশিল্পের এজেন্ট  (Handicraft-Agent\\/Broker)");
+            else if(group.string.equals("Word of Mouth"))
+                ((CheckedTextView) convertView).setText("কারো মুখে শোনা (Word of Mouth)");
+            else if(group.string.equals("Banner"))
+                ((CheckedTextView) convertView).setText("ব্যানারের মাধ্যমে   (Banner)");
+            else if(group.string.equals("Leaflet"))
+                ((CheckedTextView) convertView).setText("লিফলেটের মাধ্যমে (Leaflet)");
+            else if(group.string.equals("Mosque Announcement"))
+                ((CheckedTextView) convertView).setText("মসজিদের ঘোষনা  (Mosque Announcement)");
+            else if(group.string.equals("Factory Gate"))
+                ((CheckedTextView) convertView).setText("শিল্পকারখানার গেটে  (Factory Gate)");
+            else if(group.string.equals("Newspaper"))
+                ((CheckedTextView) convertView).setText("সংবাদপত্রের মাধ্যমে  (Newspaper)");
+            else if(group.string.equals("Newspaper"))
+                ((CheckedTextView) convertView).setText("সংবাদপত্রের মাধ্যমে  (Newspaper)");
+            else if(group.string.equals("Weekly Chakrir Khobor"))
+                ((CheckedTextView) convertView).setText("সাপ্তাহিক চাকুরীর খবর  (Weekly Chakrir Khobor)");
+            else if(group.string.equals("BDjobs/Online/Prothom Alo jobs"))
+                ((CheckedTextView) convertView).setText("বিডি জবস/ অনলাইন বা প্রথম জবস (BDjobs/Online/Prothom Alo jobs)");
+            else if(group.string.equals("Word of Mouth"))
+                ((CheckedTextView) convertView).setText("কারো মুখে শোনা(Word of Mouth)");
+            else if(group.string.equals("Relative"))
+                ((CheckedTextView) convertView).setText("আত্মীয় সজন  (Relative)");
+            else if(group.string.equals("Website"))
+                ((CheckedTextView) convertView).setText("ওয়েবসাইট  (Website)");
+            else if(group.string.equals("Agent/Adam Byabshayee"))
+                ((CheckedTextView) convertView).setText("আদম ব্যবসায়ী  (Agent/Adam Byabshayee)");
+            else if(group.string.equals("Recruiting Agency"))
+                ((CheckedTextView) convertView).setText("চাকুরিদাতা সংস্থা  (Recruiting Agency)");
+            else if(group.string.equals("Man Power Bureau"))
+                ((CheckedTextView) convertView).setText("জনশক্তি ব্যুরো  (Man Power Bureau)");
+            else if(group.string.equals("Probashi Kolyan Bank"))
+                ((CheckedTextView) convertView).setText("প্রবাসী কল্যাণ ব্যাংক   (Probashi Kolyan Bank)");
+            else if(group.string.equals("Lawers"))
+                ((CheckedTextView) convertView).setText("আইনজীবী (Lawers)");
+            else if(group.string.equals("Salishi Personnel"))
+                ((CheckedTextView) convertView).setText("ব্যক্তিগত সালিশী  (Salishi Personnel)");
+            else if(group.string.equals("Document Writer"))
+                ((CheckedTextView) convertView).setText("পত্র লেখক (Document Writer)");
+            else if(group.string.equals("Legal Aid Centre"))
+                ((CheckedTextView) convertView).setText("আইন সহায়তাকারী সেন্টার  (Legal Aid Centre)");
+            else if(group.string.equals("Other Legal Help"))
+                ((CheckedTextView) convertView).setText("অন্যন্য আইনগত সাহায্য  (Other Legal Help)");
+
+
+
+
+
+
+
+
+
+         else
             ((CheckedTextView) convertView).setText(group.string);
             ((CheckedTextView) convertView).setChecked(isExpanded);
 
