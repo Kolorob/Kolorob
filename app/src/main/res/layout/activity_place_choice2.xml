@@ -86,7 +86,19 @@
 
 
             </LinearLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/help_icon"
+                android:id="@+id/helpicon"
 
+
+                android:gravity="right"
+                android:onClick="helpDialog"
+
+                android:layout_gravity="bottom|right"
+                android:layout_marginTop="220dp"
+                android:layout_marginRight="50dp" />
 
         </LinearLayout>
 
