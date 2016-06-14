@@ -523,7 +523,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         });
 
         Populateholder();
-        callMapFragment(1);
+        callMapFragment(locationNameId);
 
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
@@ -1056,7 +1056,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         else {
 
                             llSubCatListHolder.setVisibility(View.GONE);
-                           
+
                             ArrayList<EducationServiceProviderItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem(ci.getId());
                             ivIcon.setImageResource(R.drawable.turned_on_porashona);
@@ -2309,6 +2309,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
     @Override
     protected void onResume() {
         super.onResume();
+        callMapFragment(locationNameId);
         //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
         if(showList==1)
         {
