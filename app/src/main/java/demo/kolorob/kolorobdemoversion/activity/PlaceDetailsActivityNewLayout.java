@@ -1056,7 +1056,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         else {
 
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+                           
                             ArrayList<EducationServiceProviderItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem(ci.getId());
                             ivIcon.setImageResource(R.drawable.turned_on_porashona);
@@ -1070,7 +1070,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-
+                        ivIcon.setImageResource(R.drawable.turned_on_porashona);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
