@@ -20,7 +20,7 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_weight="0.3"
             android:id="@+id/toolbar_logoa"
             android:background="@color/white"
@@ -33,10 +33,11 @@
 
             <EditText
                 android:id="@+id/searchall"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_weight="0.87"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
+                android:drawableLeft="@drawable/search_icons"
                 android:textColor="@color/black"
                 android:hint="@string/search"
                 android:textColorHint="@color/red"
@@ -54,9 +55,9 @@
 
         <ImageView
             android:id="@+id/toolbar_logo"
-            android:src="@drawable/search_icons"
+            android:src="@drawable/help_icon"
             android:layout_width="50dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.05"
             android:layout_height="match_parent"
 
 
