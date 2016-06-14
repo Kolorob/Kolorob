@@ -328,7 +328,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
        // SearchButton.setLayoutParams(layoutParams);
        // CompareButton.setLayoutParams(layoutParams);
 
-
+mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
         Searchall=(EditText)findViewById(R.id.searchall);
@@ -421,6 +421,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
         //subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
+        map.setVisibility(View.VISIBLE);
+        callMapFragment(locationNameId);
         //showsearch=(RelativeLayout)findViewById(R.id.show);
         // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         //seeMap = (Button) findViewById(R.id.btn_see_map);
@@ -588,6 +590,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 // Do Something
             }
         });
+
     }
     public void populateSearch()
     {
@@ -1057,7 +1060,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
 
 
@@ -1118,7 +1121,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
 
 
@@ -1771,22 +1774,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
-   private void callMapFragmentWithEducationInfoFromHeader(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        //   mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
 
-        mapFragment.setLocationNameId(locationNameId);
-            mapFragment.setEducationServiceProvider(educationServiceProviderItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-
-
-        fragmentTransaction.commit();
-    }
     private void callMapFragment(int locationNameId) {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2012,9 +2000,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     public void implementRouteDrawingFragmentOSM()
     {
-        llCatListHolder.setVisibility(View.GONE);
-        llSubCatListHolder.setVisibility(View.GONE);
-        listholder.setVisibility(View.GONE);
+
+        //listholder.setVisibility(View.GONE);
 
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
@@ -2245,7 +2232,9 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
     @Override
     protected void onResume() {
         super.onResume();
-        callMapFragment(locationNameId);
+
+
+
         //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
         if(showList==1)
         {
@@ -2291,6 +2280,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     locationName = AppConstants.PARIS_ROAD;
                     setPlaceChoice(locationName);
                 }
+                map.setVisibility(View.VISIBLE);
             }
             editor.putInt("LocationNameId", locationNameId);
             editor.commit();
