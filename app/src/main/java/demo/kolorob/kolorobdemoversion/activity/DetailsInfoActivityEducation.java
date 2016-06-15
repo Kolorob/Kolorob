@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -89,6 +91,7 @@ public class DetailsInfoActivityEducation extends Activity {
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
     String result_concate;
+    private CheckBox checkBox;
 
 
     @Override
@@ -143,6 +146,14 @@ public class DetailsInfoActivityEducation extends Activity {
         distance_left=(ImageView)findViewById(R.id.distance_left);
         email_btn=(ImageView) findViewById(R.id.right_side_email);
         feedback=(ImageView)findViewById(R.id.feedback);
+        checkBox=(CheckBox)findViewById(R.id.compare);
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
 
 
 

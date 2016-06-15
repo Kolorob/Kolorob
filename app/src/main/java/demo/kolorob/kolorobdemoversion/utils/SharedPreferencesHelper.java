@@ -103,12 +103,12 @@ public final class SharedPreferencesHelper {
 		editor.commit();
 	}
 
-	public static void setCompareData(final Context ctx, final String id1,final String id2)
+	public static void setCompareData(final Context ctx, final String id)
 	{
 		final SharedPreferences prefs = ctx.getSharedPreferences(SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
 		final Editor editor= prefs.edit();
-		editor.putString(COMAPRE_1,id1);
-		editor.putString(COMPARE_2,id2);
+		editor.putString(COMAPRE_1,id);
+
 		editor.commit();
 	}
 
