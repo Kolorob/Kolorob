@@ -7,16 +7,17 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".google_analytics.MyApplication"
         android:allowBackup="true"
-<<<<<<< HEAD
         android:icon="@drawable/kolorob_logo_first_page"
-=======
-        android:largeHeap="true"
-        android:icon="@mipmap/ic_launcher"
->>>>>>> origin/isratmity
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
@@ -25,9 +26,9 @@
             android:value="AIzaSyBN-XOOR5ERV-mk9Q5F5Mo9gJTXFQiXZro" />
 
         <activity
-            android:name=".activity.OpeningActivity"
+            android:name=".activity.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,46 +36,101 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LocationAskActivity"
-            android:theme="@style/Theme.Transparent" />
+            android:name=".activity.OpeningActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
+            android:name=".activity.NewEmergency"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.PhoneRegActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.EmergencyActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.Information_UpdateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+
+        <activity3z
             android:name=".activity.LocationInstructionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
+
         <activity
             android:name=".activity.ButtonClickBaunia"
-            android:label="@string/title_activity_button_click_baunia" />
-        <activity android:name=".activity.PlaceChoiceActivity" />
+            android:label="@string/title_activity_button_click_baunia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PlaceChoiceActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PlaceDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.PlaceDetailsActivityNewLayout"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".activity.DetailsInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsInfoActivityHealth"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activity.DetailsInfoActivityHealth_new"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.PlaceDetailsActivityNew"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailsInfoActivityEntertainment_new"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsInfoActivityEntertainment"
-            android:theme="@style/Theme.Transparent" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".activity.DetailsJobActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.DetailsFinancialActivity_new"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".activity.PlaceChoiceActivity2"
+<<<<<<< HEAD
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+=======
+
+            android:screenOrientation="portrait" />
+>>>>>>> cd156323a626c647c9a30d7c1db4ced4d0a894c7
         <activity
             android:name=".activity.DetailsLegalActivity"
-            android:theme="@style/Theme.Transparent" />
-<<<<<<< HEAD
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
-            android:name=".activity.ReviewActivity"
-            android:label="@string/title_activity_review" >
-        </activity>
-=======
-        <!--
-             ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
+            android:name=".activity.DetailsLegalActivity_new"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -82,8 +138,49 @@
         <activity
             android:name=".activity.FeedbackActivity"
             android:label="@string/title_activity_feedback"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> origin/isratmity
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DisplayAllJobsActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity android:name=".activity.DetailsInfoActivityEducation" />
+        <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
+        <activity
+            android:name=".activity.DetailsInfoActivityHealthNew"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
+        <activity android:name=".activity.DetailsInfoActivityLegalNew" />
+        <activity android:name=".activity.DetailsJobActivityNew" />
+        <activity android:name=".activity.FeedBackActivityNew" />
+
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!--
+             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+             installation campaign reporting
+        -->
+        <receiver
+            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+
+        <activity android:name=".activity.CompareActivity"></activity>
     </application>
 
 </manifest>
