@@ -548,8 +548,9 @@
 
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
                 android:background="@drawable/feedback"
                 android:onClick="verifyRegistration"
                 android:id="@+id/feedback"/>
@@ -559,7 +560,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
-                android:text=""/>
+                android:buttonTint="@color/white"
+                android:layout_marginLeft="20dp"
+
+                android:textColor="@color/white"
+                android:text="@string/compare"/>
 
 
 
