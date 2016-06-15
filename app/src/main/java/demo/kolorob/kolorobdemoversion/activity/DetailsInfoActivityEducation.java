@@ -542,6 +542,7 @@ public class DetailsInfoActivityEducation extends Activity {
                     String lon = educationServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
                     String name= educationServiceProviderItem.getEduNameBan().toString();
+                    String node=educationServiceProviderItem.getIdentifierId();
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -549,6 +550,7 @@ public class DetailsInfoActivityEducation extends Activity {
                     editor.putString("Longitude", lon);
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
+                    editor.putString("nValue", node);
                     editor.commit();
 
 
