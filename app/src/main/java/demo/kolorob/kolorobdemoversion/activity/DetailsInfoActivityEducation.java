@@ -63,6 +63,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by arafat on 28/05/2016.
@@ -147,10 +148,29 @@ public class DetailsInfoActivityEducation extends Activity {
         email_btn=(ImageView) findViewById(R.id.right_side_email);
         feedback=(ImageView)findViewById(R.id.feedback);
         checkBox=(CheckBox)findViewById(R.id.compare);
+        SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,"",2);
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+             int compareValue;
+                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityEducation.this);
+                if(compareValue>=2)
+                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+                else if (compareValue==0)
+                {
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
+                }
+
+                else if(compareValue==1)
+                {
+                    String previous_node;
+                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
+                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
+                }
+
 
             }
         });
