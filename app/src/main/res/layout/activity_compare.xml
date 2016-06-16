@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/edu_name_ban"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/edu_name_ban"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/edu_name_ban"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
         </TableRow>
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/edtype"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/hostel_facility"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/transport_facility"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/playground"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -193,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/total_students"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -202,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/playground"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -227,7 +227,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/total_classes"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -261,7 +261,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/total_teachers"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -295,7 +295,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/course_provided"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -329,7 +329,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/shift"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
@@ -363,7 +363,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="TextView"
+                android:text="@string/canteen_facility"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
