@@ -7,13 +7,7 @@
     android:background="@color/white"
     android:gravity="center">
 
-    <!--<TableRow-->
-        <!--android:id="@+id/tabla_cabecera"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
 
-
-    <!--</TableRow>-->
 
     <TableLayout
         android:id="@+id/tabla_cuerpo"
@@ -21,12 +15,12 @@
         android:layout_height="wrap_content">
 
         <TableRow
-            android:id="@+id/tableRow1"
+            android:id="@+id/edu_name_ban"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/edu_name_ban1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -35,7 +29,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/edu_name_ban2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -44,7 +38,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/edu_name_ban3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -55,12 +49,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow23"
+            android:id="@+id/eduType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView144"
+                android:id="@+id/eduType1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -69,7 +63,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView155"
+                android:id="@+id/eduType2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -78,7 +72,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView616"
+                android:id="@+id/eduType3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -88,12 +82,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow36"
+            android:id="@+id/hostel_facility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView175"
+                android:id="@+id/hostel_facility1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -102,7 +96,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView184"
+                android:id="@+id/hostel_facility2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -111,41 +105,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView194"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow44"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView204"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-            <TextView
-                android:id="@+id/textView241"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-            <TextView
-                android:id="@+id/textView1224"
+                android:id="@+id/hostel_facility3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -156,12 +116,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow2"
+            android:id="@+id/transport_facility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/transport_facility1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -170,7 +130,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/transport_facility2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -179,40 +139,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                android:text="TextView"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-            <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/transport_facility3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -223,12 +150,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow4"
+            android:id="@+id/playground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/playground1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -237,7 +164,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/playground2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -246,7 +173,210 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             <TextView
-                android:id="@+id/textView122"
+                android:id="@+id/playground3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/total_students"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_students1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_students2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_students3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/total_classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_classes1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_classes2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_classes3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/total_teachers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_teachers1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_teachers2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_teachers3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/course_provided"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/course_provided1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/course_provided2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/course_provided3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/shift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/shift1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/shift2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/shift3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/canteen_facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/canteen_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/canteen_facility2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/canteen_facility3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"

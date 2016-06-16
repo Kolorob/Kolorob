@@ -84,7 +84,21 @@
     <string name="know_kolorob">কলরব সম্পর্কে আপনি কি জানতে চান?</string>
     <string name="enter_text_here"> এখানে লিখুন </string>
     <string name="verify_registration">মতামত দেয়ার আগে আপনাকে রেজিস্ট্রেশন করতে হবে আপনি কি রেজিস্ট্রেশন করবেন? </string>
-    <string name="compare">তুলনা করুন </string>
+    <string name="edu_name_ban">তুলনা করুন </string>
+    <string name="edtype">শিক্ষার ধরন </string>
+    <string name="hostel_facility">আবাসিক সুবিধা </string>
+    <string name="transport_facility">যাতায়াত সুবিধা </string>
+    <string name="playground">খেলার মাঠ  </string>
+    <string name="total_students">ছাত্র সংখ্যা </string>
+    <string name="total_classes">ক্লাসের সংখ্যা </string>
+    <string name="total_teachers">শিক্ষকের সংখ্যা </string>
+    <string name="course_provided">কোর্স সমূহের নাম</string>
+    <string name="shift">শিফট </string>
+    <string name="canteen_facility">ক্যান্টিন সুবিধা  </string>
+
+
+
+
 
 
 
