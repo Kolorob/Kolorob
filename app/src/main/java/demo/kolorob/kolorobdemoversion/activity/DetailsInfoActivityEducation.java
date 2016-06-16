@@ -139,7 +139,7 @@ public class DetailsInfoActivityEducation extends Activity {
         email_btn=(ImageView) findViewById(R.id.right_side_email);
         feedback=(ImageView)findViewById(R.id.feedback);
         checkBox=(CheckBox)findViewById(R.id.compare);
-        SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,"",2);
+
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

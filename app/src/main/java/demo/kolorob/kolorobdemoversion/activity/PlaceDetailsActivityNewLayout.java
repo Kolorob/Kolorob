@@ -88,6 +88,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by touhid on 12/3/15.
@@ -585,8 +586,17 @@ mapcalledstatus=false;
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
-                startActivity(compare);
+
+                if(SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this).equals(""))
+                {
+                    demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                }
+                else {
+                    Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
+                    startActivity(compare);
+
+                }
 
             }
         });

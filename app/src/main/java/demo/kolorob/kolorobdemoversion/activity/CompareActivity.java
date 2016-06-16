@@ -5,16 +5,18 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 public class CompareActivity extends AppCompatActivity {
     private String comapreData;
-    String firstData,SecondData;
+    String firstData="",SecondData="";
     int checker=0;
     EducationServiceProviderTable educationServiceProviderTable;
     ArrayList<EducationServiceProviderItem> firstDataSet;
@@ -31,7 +33,7 @@ public class CompareActivity extends AppCompatActivity {
         hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
         transport_facility=(TextView)findViewById(R.id.transport_facility2);
         playground=(TextView)findViewById(R.id.playground2);
-        total_students=(TextView)findViewById(R.id.total_students2);
+        total_students=(TextView)findViewById(R.id.ttl_students);
         total_classes=(TextView)findViewById(R.id.total_classes2);
         total_teachers=(TextView)findViewById(R.id.total_teachers2);
         course_provided=(TextView)findViewById(R.id.course_provided2);
@@ -52,6 +54,7 @@ public class CompareActivity extends AppCompatActivity {
 
 
         comapreData = SharedPreferencesHelper.getComapreData(CompareActivity.this);
+
         int size=comapreData.length();
         for(int i=0;i<size;i++)
         {
@@ -59,6 +62,7 @@ public class CompareActivity extends AppCompatActivity {
                if(checker==1)
                {
                    SecondData=SecondData+comapreData.charAt(i);
+                   Log.d("===","second_data" +SecondData);
                }
                else  if(comapreData.charAt(i)==' ')
                 {
@@ -66,42 +70,45 @@ public class CompareActivity extends AppCompatActivity {
                 }
                else
                 firstData=firstData+comapreData.charAt(i);
+                Log.d("===","firstData" +firstData);
         }
 
 
         educationServiceProviderTable=new EducationServiceProviderTable(CompareActivity.this);
-        firstDataSet=educationServiceProviderTable.getEducationData(Integer.parseInt(firstData));
-        secondDataSet=educationServiceProviderTable.getEducationData(Integer.parseInt(SecondData));
+        firstDataSet=educationServiceProviderTable.getEducationData(firstData);
+        secondDataSet=educationServiceProviderTable.getEducationData(SecondData);
 
 
         for (EducationServiceProviderItem educationServiceProviderItem: firstDataSet)
         {
-            edu_name_ban.setText(educationServiceProviderItem.getEduNameBan());
+            edu_name_ban.setText(educationServiceProviderItem.getEduNameEng());
             edtype.setText(educationServiceProviderItem.getEduType());
             hostel_facility.setText(educationServiceProviderItem.getHostelFacility());
             transport_facility.setText(educationServiceProviderItem.getTransportFacility());
             playground.setText(educationServiceProviderItem.getPlayground());
-            total_students.setText(educationServiceProviderItem.getTotalStudents());
-            total_classes.setText(educationServiceProviderItem.getTotalClasses());
-            total_teachers.setText(educationServiceProviderItem.getTotalTeachers());
+            total_students.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
+            total_classes.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
+            total_teachers.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
             course_provided.setText(educationServiceProviderItem.getCourseProvided());
             shift.setText(educationServiceProviderItem.getShift());
             canteen_facility.setText(educationServiceProviderItem.getCanteenFacility());
         }
         for (EducationServiceProviderItem educationServiceProviderItem: secondDataSet)
         {
-            edu_name_ban1.setText(educationServiceProviderItem.getEduNameBan());
+            edu_name_ban1.setText(educationServiceProviderItem.getEduNameEng());
             edtype1.setText(educationServiceProviderItem.getEduType());
             hostel_facility1.setText(educationServiceProviderItem.getHostelFacility());
             transport_facility1.setText(educationServiceProviderItem.getTransportFacility());
             playground1.setText(educationServiceProviderItem.getPlayground());
-            total_students1.setText(educationServiceProviderItem.getTotalStudents());
-            total_classes1.setText(educationServiceProviderItem.getTotalClasses());
-            total_teachers1.setText(educationServiceProviderItem.getTotalTeachers());
+            total_students1.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
+            total_classes1.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
+            total_teachers1.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
             course_provided1.setText(educationServiceProviderItem.getCourseProvided());
             shift1.setText(educationServiceProviderItem.getShift());
             canteen_facility1.setText(educationServiceProviderItem.getCanteenFacility());
         }
+
+        SharedPreferencesHelper.setCompareData(CompareActivity.this,"",0);
 
 
 

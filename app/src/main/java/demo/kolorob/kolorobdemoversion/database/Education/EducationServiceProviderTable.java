@@ -411,7 +411,7 @@ public class EducationServiceProviderTable  {
     }
 
 
-    public ArrayList<EducationServiceProviderItem> getEducationData(int node_id) {
+    public ArrayList<EducationServiceProviderItem> getEducationData(String node_id) {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
