@@ -26,6 +26,7 @@ public class DisplayAllJobList extends BaseAdapter
     String contract_number[];
     LinearLayout titlePart,salaryPart,addressPart,numberpart,remainingdate_lin,salary_range_lin;
     int height,width;
+    View top,bottom;
 
 
     public DisplayAllJobList(Activity context, String[] title,String[] salary_range,long[] remaining_date, String[] address,String[] contract_number) {
@@ -96,6 +97,7 @@ public class DisplayAllJobList extends BaseAdapter
         DisplayMetrics displayMetrics =  context.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;
+
 
 
 
