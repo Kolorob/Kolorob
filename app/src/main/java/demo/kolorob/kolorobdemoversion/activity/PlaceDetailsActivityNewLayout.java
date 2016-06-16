@@ -587,10 +587,15 @@ mapcalledstatus=false;
             @Override
             public void onClick(View v) {
 
-                if(SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this).equals(""))
+                if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
                 {
                     demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                             "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                }
+                else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                {
+                    demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                 }
                 else {
                     Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
