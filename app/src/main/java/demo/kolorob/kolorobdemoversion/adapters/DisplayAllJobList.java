@@ -92,12 +92,7 @@ public class DisplayAllJobList extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        titlePart=(LinearLayout)convertView.findViewById(R.id.titlePart);
-        salaryPart=(LinearLayout)convertView.findViewById(R.id.salaryPart);
-        addressPart=(LinearLayout)convertView.findViewById(R.id.addressPart);
-        numberpart=(LinearLayout)convertView.findViewById(R.id.numberPart);
-        remainingdate_lin=(LinearLayout)convertView.findViewById(R.id.remaining_date_lin);
-        salary_range_lin=(LinearLayout)convertView.findViewById(R.id.salaryPart_lin);
+
         DisplayMetrics displayMetrics =  context.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;

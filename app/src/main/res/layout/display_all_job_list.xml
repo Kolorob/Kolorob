@@ -29,35 +29,19 @@
         </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/salaryPart">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/remaining_date_lin">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:textColor="@color/black"
 
                 android:text="Remaining Date"
                 android:id="@+id/remaining_date"
                 />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/salaryPart_lin">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +50,6 @@
                 android:textColor="@color/black"
                 android:id="@+id/salary_range"
                 />
-        </LinearLayout>
 
 
 
@@ -75,24 +58,9 @@
 
 
 
-    </LinearLayout>
-
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/last_row"
-             android:layout_marginBottom="50dp"
-             android:layout_marginLeft="20dp"
-
-             android:orientation="horizontal">
 
 
 
-             <LinearLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                 android:id="@+id/addressPart">
 
 
                  <TextView
@@ -106,14 +74,10 @@
 
 
 
-             </LinearLayout>
 
 
-             <LinearLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                 android:id="@+id/numberPart">
+
+
 
 
                  <TextView
@@ -128,9 +92,9 @@
 
 
 
-             </LinearLayout>
+
 
 
          </LinearLayout>
 
-</LinearLayout>
+
