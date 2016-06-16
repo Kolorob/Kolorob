@@ -100,33 +100,6 @@ public class DisplayAllJobList extends BaseAdapter
 
 
 
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) titlePart.getLayoutParams();
-
-        params.width = width/2;
-        titlePart.setLayoutParams(params);
-
-
-        LinearLayout.LayoutParams params_salary = (LinearLayout.LayoutParams) salary_range_lin.getLayoutParams();
-
-        params_salary.width = width/2;
-        salary_range_lin.setLayoutParams(params_salary);
-
-        LinearLayout.LayoutParams params_remainingDate = (LinearLayout.LayoutParams) remainingdate_lin.getLayoutParams();
-
-        params_remainingDate.width = width/2;
-        remainingdate_lin.setLayoutParams(params_remainingDate);
-
-
-       LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) numberpart.getLayoutParams();
-
-
-        params1.width = width/2;
-        numberpart.setLayoutParams(params1);
-
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) addressPart.getLayoutParams();
-
-        params2.width = width/2;
-        addressPart.setLayoutParams(params2);
 
 
 
