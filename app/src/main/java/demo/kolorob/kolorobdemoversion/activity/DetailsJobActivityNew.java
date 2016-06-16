@@ -42,7 +42,9 @@ public class DetailsJobActivityNew extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_job_activity_new);
+       // setContentView(R.layout.activity_details_job_activity_new);
+
+        setContentView(R.layout.activity_job_details);
 
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
@@ -152,10 +154,6 @@ public class DetailsJobActivityNew extends AppCompatActivity {
             reference_person.setText(result_concate);
             result_concate="";
            }
-
-
-
-
 
 
 
