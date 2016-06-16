@@ -20,16 +20,16 @@
         android:layout_alignRight="@+id/transportdetailslayout"
         android:layout_alignEnd="@+id/transportdetailslayout"
         android:layout_marginTop="20dp"
-        android:background="#55dfcd">
+        android:background="#29ABE2">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="55dp"
             android:id="@+id/imageView12"
             android:background="@drawable/distance_icon"
-            android:layout_alignBottom="@+id/headtext"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,13 +40,14 @@
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imageView12"
-            android:layout_toEndOf="@+id/imageView12" />
+            android:layout_toEndOf="@+id/imageView12"
+            android:textColor="#ffffff" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/transportdetailslayout"
-android:visibility="gone"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
@@ -70,7 +71,7 @@ android:visibility="gone"
 
             android:layout_height="120dp"
             android:layout_alignParentBottom="true"
-            android:background="#55dfcd"
+            android:background="#29ABE2"
             android:layout_alignRight="@+id/currlocation"
             android:layout_alignEnd="@+id/currlocation"
             android:id="@+id/linearLayout6">
@@ -151,6 +152,15 @@ android:visibility="gone"
                 android:layout_below="@+id/imageView10"
                 android:layout_alignLeft="@+id/cngtext"
                 android:layout_alignStart="@+id/cngtext" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:background="@drawable/cross"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 </ScrollView>
         <TextView

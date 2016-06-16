@@ -231,6 +231,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     int filcatid;
     RelativeLayout catholder;
     CheckBox check;
+    Boolean NavigationCalled,NavigationCalledOnce;
     LinearLayout fholder,fleft,fright,mbholder,lbholder,sbholder,cbholder;
 RelativeLayout searchviewholder,filterholder;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
@@ -268,6 +269,17 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<FinancialServiceProviderItem>FIN=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
+    EducationServiceProviderItem nulledu;
+    String nodefromback;
+
+    public String getNodefromback() {
+        return nodefromback;
+    }
+
+    public void setNodefromback(String nodefromback) {
+        this.nodefromback = nodefromback;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -282,7 +294,8 @@ RelativeLayout searchviewholder,filterholder;
 
         editor.commit();
 
-
+NavigationCalled=false;
+        NavigationCalledOnce=false;
         /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
@@ -330,6 +343,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
+
 
         Searchall=(EditText)findViewById(R.id.searchall);
 
@@ -478,7 +492,7 @@ mapcalledstatus=false;
 
         // callMapFragment();
         spItems = (Spinner) findViewById(R.id.areaitems);
-
+        spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
         spItems.setAdapter(arrayAdapter);
@@ -570,6 +584,7 @@ mapcalledstatus=false;
         });
 
         toggleButton=(ToggleButton)findViewById(R.id.toggle);
+        toggleButton.setVisibility(View.VISIBLE);
         toggleButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -861,8 +876,45 @@ mapcalledstatus=false;
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+
+        if(NavigationCalled)
+        {
+            NavigationCalled=false;
+            toggleButton.setVisibility(View.VISIBLE);
+            toggleButton.setChecked(false);
+
+            if (currentCategoryID==1)
+            {
+                NavigationCalledOnce=true;
+                String node=getNodefromback();
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this.con);
+                nulledu = educationServiceProviderTable.geteduNode2(node);
+                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsInfoActivityEducation.class);
+                iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+                this.startActivity(iient);
+
+            }
+            else if (NavigationCalled==false)
+            {
+                callMapFragment(locationNameId);
+            }
+        }
+
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 
@@ -2002,7 +2054,7 @@ mapcalledstatus=false;
     {
 
         //listholder.setVisibility(View.GONE);
-
+NavigationCalled=true;
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
@@ -2226,14 +2278,15 @@ mapcalledstatus=false;
 
     @Override
     protected void onRestart() {
+
         super.onRestart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-
+        toggleButton.setVisibility(View.VISIBLE);
+        spItems.setVisibility(View.VISIBLE);
 
         //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
         if(showList==1)
@@ -2246,6 +2299,9 @@ mapcalledstatus=false;
         SharedPreferences.Editor editor = pref.edit();
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
+
+
+        setNodefromback(pref.getString("nValue",null));
         Boolean valuecheck=pref.getBoolean("Value",false);
         if (valuecheck==false)
         {
@@ -2258,15 +2314,22 @@ mapcalledstatus=false;
 
 
         /// Log.d(">>>>>>","You are in onResume");
-
-
-        if (valuecheck!=false)
+        if (NavigationCalledOnce==true)
         {
+            callMapFragment(locationNameId);
+        }
 
+        if (valuecheck!=false & NavigationCalledOnce==false)
+        {
+            spItems.setVisibility(View.GONE);
             explist.setVisibility(View.GONE);
             map.setVisibility(View.VISIBLE);
+            llCatListHolder.setVisibility(View.GONE);
+            llSubCatListHolder.setVisibility(View.GONE);
+            toggleButton.setVisibility(View.GONE);
             implementRouteDrawingFragmentOSM();
         }
+
 
         else {
             Intent intent;
