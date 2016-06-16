@@ -1,19 +1,18 @@
+/**
+ * Created by arafat on 16/06/2016.
+ */
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 public class CompareActivity extends AppCompatActivity {
-
     private String comapreData;
     String firstData,SecondData;
     int checker=0;
@@ -103,26 +102,6 @@ public class CompareActivity extends AppCompatActivity {
             shift1.setText(educationServiceProviderItem.getShift());
             canteen_facility1.setText(educationServiceProviderItem.getCanteenFacility());
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

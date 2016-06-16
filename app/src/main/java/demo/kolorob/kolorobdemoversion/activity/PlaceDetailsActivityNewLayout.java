@@ -394,7 +394,7 @@ mapcalledstatus=false;
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
 
-        Intent intent;
+        final Intent intent;
         intent = getIntent();
         if (null != intent)
         {
@@ -456,7 +456,7 @@ mapcalledstatus=false;
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
-        int s=lp.width = (int) (VIEW_WIDTH);
+        final int s=lp.width = (int) (VIEW_WIDTH);
         lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
@@ -579,6 +579,14 @@ mapcalledstatus=false;
                     //constructCategoryList(categoryList);
 
                 }
+
+            }
+        });
+        CompareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
+                startActivity(compare);
 
             }
         });
