@@ -85,6 +85,21 @@
     <string name="enter_text_here"> এখানে লিখুন </string>
     <string name="verify_registration">মতামত দেয়ার আগে আপনাকে রেজিস্ট্রেশন করতে হবে আপনি কি রেজিস্ট্রেশন করবেন? </string>
     <string name="compare">তুলনা করুন </string>
+    <string name="edu_name_ban">তুলনা করুন </string>
+    <string name="edtype">Education Type</string>
+    <string name="hostel_facility">Hostel Facility</string>
+    <string name="transport_facility">Transport Facility</string>
+    <string name="playground">Playground</string>
+    <string name="total_students">Total Students</string>
+    <string name="total_classes">Total Classes</string>
+    <string name="total_teachers">Total Teachers</string>
+    <string name="course_provided">Course Provided</string>
+    <string name="shift">Shift</string>
+    <string name="canteen_facility">Canteen Facility</string>
+
+
+
+
 
 
 
