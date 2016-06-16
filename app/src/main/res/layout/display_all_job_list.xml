@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
+                android:textColor="@color/white"
 
                 android:text="Title"
                 android:id="@+id/title"/>
@@ -43,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
 
                 android:text="Remaining Date"
                 android:id="@+id/remaining_date"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Salary Renge"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:id="@+id/salary_range"
                 />
 
@@ -76,7 +76,7 @@
                      android:layout_height="wrap_content"
                      android:text="Address"
                      android:id="@+id/address"
-                     android:textColor="@color/black"
+                     android:textColor="@color/white"
 
                      />
 
@@ -92,7 +92,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text="Contract Number"
-                     android:textColor="@color/black"
+                     android:textColor="@color/white"
 
 
                      android:id="@+id/contact_number"
