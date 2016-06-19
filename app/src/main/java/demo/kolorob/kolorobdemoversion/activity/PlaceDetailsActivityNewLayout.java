@@ -128,6 +128,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private RelativeLayout wholeLayout;
     private int showList;
     private String locationNameEng;
+    private String comapreData;
+    String firstData="",SecondData="";
+    int checker=0;
 
     private Button prebutton;
 
@@ -657,6 +660,27 @@ mapcalledstatus=false;
 
     public void compareTool()
     {
+
+        comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+
+        int size=comapreData.length();
+        for(int i=0;i<size;i++)
+        {
+
+            if(checker==1)
+            {
+                SecondData=SecondData+comapreData.charAt(i);
+                Log.d("===","second_data" +SecondData);
+            }
+            else  if(comapreData.charAt(i)==' ')
+            {
+                checker=1;
+            }
+            else
+                firstData=firstData+comapreData.charAt(i);
+            Log.d("===","firstData" +firstData);
+        }
+
 
     }
     public void populateSearch()
