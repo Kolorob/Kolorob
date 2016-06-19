@@ -139,6 +139,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private TextView listOrMapDisplayText;
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
     private Toolbar toolbar,toolbar2;
+    TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
+    TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
 
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
@@ -420,7 +422,29 @@ mapcalledstatus=false;
 
 
 
+        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban2);
+        edtype=(TextView)findViewById(R.id.eduType2);
+        hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
+        transport_facility=(TextView)findViewById(R.id.transport_facility2);
+        playground=(TextView)findViewById(R.id.playground2);
+        total_students=(TextView)findViewById(R.id.ttl_students);
+        total_classes=(TextView)findViewById(R.id.total_classes2);
+        total_teachers=(TextView)findViewById(R.id.total_teachers2);
+        course_provided=(TextView)findViewById(R.id.course_provided2);
+        shift=(TextView)findViewById(R.id.shift2);
+        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
 
+        edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
+        edtype1=(TextView)findViewById(R.id.eduType3);
+        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
+        transport_facility1=(TextView)findViewById(R.id.transport_facility3);
+        playground1=(TextView)findViewById(R.id.playground3);
+        total_students1=(TextView)findViewById(R.id.total_students3);
+        total_classes1=(TextView)findViewById(R.id.total_classes3);
+        total_teachers1=(TextView)findViewById(R.id.total_teachers3);
+        course_provided1=(TextView)findViewById(R.id.course_provided3);
+        shift1=(TextView)findViewById(R.id.shift3);
+        canteen_facility1=(TextView)findViewById(R.id.canteen_facility3);
 
 
 
@@ -599,8 +623,7 @@ mapcalledstatus=false;
                 }
                 else {
 
-                    Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
-                    startActivity(compare);
+                   compareTool();
 
                 }
 
@@ -629,6 +652,11 @@ mapcalledstatus=false;
                 // Do Something
             }
         });
+
+    }
+
+    public void compareTool()
+    {
 
     }
     public void populateSearch()
