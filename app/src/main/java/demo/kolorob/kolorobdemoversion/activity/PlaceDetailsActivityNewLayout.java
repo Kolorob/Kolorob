@@ -494,7 +494,7 @@ mapcalledstatus=false;
 
 
         ViewGroup.LayoutParams exlist= explist.getLayoutParams();
-        RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
+        final RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
         expnlist.setMargins((s*9)/10,40,5,40);
 
@@ -630,8 +630,11 @@ mapcalledstatus=false;
                 }
                 else {
                     compare_layout.setVisibility(View.VISIBLE);
-                    compareTool();
+                    map.setVisibility(View.GONE);
+                    llCatListHolder.setVisibility(View.GONE);
 
+                    compareTool();
+                    llSubCatListHolder.setVisibility(View.GONE);
                 }
 
             }

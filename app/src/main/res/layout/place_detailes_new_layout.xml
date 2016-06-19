@@ -116,6 +116,7 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
+                        android:gravity="center"
                         android:id="@+id/left_school_name"
                         android:background="@drawable/border"
                         android:layout_height="wrap_content">
@@ -133,6 +134,8 @@
 
                     <LinearLayout
                         android:orientation="vertical"
+                        android:gravity="center"
+
                         android:id="@+id/right_school_name"
                         android:background="@drawable/border"
                         android:layout_width="0dp"
@@ -165,9 +168,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Number of Students"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/total_students"
                         android:id="@+id/textView16" />
+
                 </LinearLayout>
 
                 <LinearLayout
