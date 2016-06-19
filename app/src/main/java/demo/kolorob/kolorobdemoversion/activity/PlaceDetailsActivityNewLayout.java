@@ -598,6 +598,7 @@ mapcalledstatus=false;
                             "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                 }
                 else {
+
                     Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
                     startActivity(compare);
 
