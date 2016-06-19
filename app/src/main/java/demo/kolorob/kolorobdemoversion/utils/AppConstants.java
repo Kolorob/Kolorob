@@ -24,8 +24,8 @@ public class AppConstants {
             R.drawable.but_shorkari_small,R.drawable.but_ain_small,  R.drawable.but_taka_small,R.drawable.but_chakri_small
             };
     public static final int[] OFF_BUTTON = {R.drawable.off_button};
-    public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.turned_off_porashona, R.drawable.turned_off_chikitsha,R.drawable.turned_off_anondo_furti,
-            R.drawable.turned_off_shorkari_shubidha,R.drawable.turned_off_ain_kanun,  R.drawable.turned_off_taka_poisha,R.drawable.turned_off_chakri_bakri
+    public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.education, R.drawable.health,R.drawable.entertainment,
+            R.drawable.government,R.drawable.legal,  R.drawable.finance,R.drawable.job
     };
     public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.turned_on_porashona, R.drawable.turned_on_chikitsha,R.drawable.turned_on_anondo_furti,
             R.drawable.turned_on_shorkari_shubidha,R.drawable.turned_on_ain_kanun,  R.drawable.turned_on_taka_poisha,R.drawable.turned_on_chakri_bakri

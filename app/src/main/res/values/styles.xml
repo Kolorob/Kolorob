@@ -10,7 +10,7 @@
         <item name="colorAccent">@color/white</item>
     </style>
     <style name="style_Spinner">
-        <item name="android:background">@drawable/area_selection_button</item>
+        <item name="android:background">@drawable/searchbar</item>
         <item name="android:dropDownSelector">@android:color/transparent</item>
         <item name="android:popupBackground">#000000</item>
         <item name="android:spinnerMode">dropdown</item>
