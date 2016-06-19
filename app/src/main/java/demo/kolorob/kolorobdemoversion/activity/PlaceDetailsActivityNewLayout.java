@@ -99,7 +99,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public int getShowList() {
         return showList;
     }
-
+    EducationServiceProviderTable educationServiceProviderTable;
+    ArrayList<EducationServiceProviderItem> firstDataSet;
+    ArrayList<EducationServiceProviderItem> secondDataSet;
     public void setShowList(int showList) {
         this.showList = showList;
     }
@@ -680,6 +682,46 @@ mapcalledstatus=false;
                 firstData=firstData+comapreData.charAt(i);
             Log.d("===","firstData" +firstData);
         }
+
+
+        educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+        firstDataSet=educationServiceProviderTable.getEducationData(firstData);
+        secondDataSet=educationServiceProviderTable.getEducationData(SecondData);
+
+
+        for (EducationServiceProviderItem educationServiceProviderItem: firstDataSet)
+        {
+            edu_name_ban.setText(educationServiceProviderItem.getEduNameEng());
+            edtype.setText(educationServiceProviderItem.getEduType());
+            hostel_facility.setText(educationServiceProviderItem.getHostelFacility());
+            transport_facility.setText(educationServiceProviderItem.getTransportFacility());
+            playground.setText(educationServiceProviderItem.getPlayground());
+            total_students.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
+            total_classes.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
+            total_teachers.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
+            course_provided.setText(educationServiceProviderItem.getCourseProvided());
+            shift.setText(educationServiceProviderItem.getShift());
+            canteen_facility.setText(educationServiceProviderItem.getCanteenFacility());
+        }
+        for (EducationServiceProviderItem educationServiceProviderItem: secondDataSet)
+        {
+            edu_name_ban1.setText(educationServiceProviderItem.getEduNameEng());
+            edtype1.setText(educationServiceProviderItem.getEduType());
+            hostel_facility1.setText(educationServiceProviderItem.getHostelFacility());
+            transport_facility1.setText(educationServiceProviderItem.getTransportFacility());
+            playground1.setText(educationServiceProviderItem.getPlayground());
+            total_students1.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
+            total_classes1.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
+            total_teachers1.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
+            course_provided1.setText(educationServiceProviderItem.getCourseProvided());
+            shift1.setText(educationServiceProviderItem.getShift());
+            canteen_facility1.setText(educationServiceProviderItem.getCanteenFacility());
+        }
+
+        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
+
+
+
 
 
     }
