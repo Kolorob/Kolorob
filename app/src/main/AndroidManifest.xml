@@ -48,9 +48,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
-            android:name=".activity.EmergencyActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
-        <activity
             android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

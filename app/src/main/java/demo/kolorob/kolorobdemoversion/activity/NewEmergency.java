@@ -86,7 +86,7 @@ public class NewEmergency extends Activity {
 	}
 
 	private void setupListViewAdapter() {
-		adapter = new EmergencyAdapter(NewEmergency.this, R.layout.emergencylistitem, new ArrayList<Emergency>());
+		adapter = new EmergencyAdapter(NewEmergency.this, R.layout.emergencylistitem_new, new ArrayList<Emergency>());
 		ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
 		atomPaysListView.setAdapter(adapter);
 	}
