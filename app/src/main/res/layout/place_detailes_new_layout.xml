@@ -394,23 +394,26 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                     </LinearLayout>
+                </LinearLayout>
 
 
 
-                    <LinearLayout
+
+                <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:gravity="center"
-                        android:id="@+id/edtype1"
+                        android:id="@+id/playground1_l"
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/eduType1"
+                            android:id="@+id/playground1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
                             android:textColor="@color/white"
-                            android:text="@string/edtype"
+
+                            android:padding="5dp"
+                            android:text="@string/playground"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                     </LinearLayout>
 
@@ -428,12 +431,12 @@
                             android:layout_weight="0.5"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:id="@+id/playground1"
+                                android:id="@+id/playground2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/border"
+
                                 android:padding="5dp"
-                                android:text="@string/playground"
+                                android:text="TextView"
                                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                         </LinearLayout>
@@ -446,7 +449,7 @@
 
                             android:layout_height="wrap_content">
                             <TextView
-                                android:id="@+id/eduType3"
+                                android:id="@+id/playground3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
@@ -465,7 +468,353 @@
 
 
 
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/total_classes_l"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/total_classes1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+
+                        android:padding="5dp"
+                        android:text="@string/total_classes"
+                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/total_classes2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/total_classes3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:id="@+id/total_teachers1_1"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/total_teachers1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:text="@string/total_teachers"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:background="@drawable/custom_border"
+
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/total_teachers2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:padding="5dp"
+                                android:text="TextView"
+                                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/custom_border"
+
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/total_teachers3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:padding="5dp"
+                                android:text="TextView"
+                                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/course_provided1_1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/course_provided1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:padding="5dp"
+                        android:text="@string/course_provided"
+                        android:textAppearance="?android:attr/textAppearanceMedium">
+
+
+                    </TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/course_provided2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/course_provided3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/shift1_1"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/shift1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:padding="5dp"
+                        android:text="@string/shift"
+                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/shift2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/shift3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/canteen_facility_1"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/canteen_facility1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:padding="5dp"
+                        android:text="@string/canteen_facility"
+                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/canteen_facility2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/canteen_facility3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
 
 
             </LinearLayout>
