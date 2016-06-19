@@ -13,30 +13,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="15dp"></LinearLayout>
+        android:layout_height="15dp">
+
+
+    </LinearLayout>
 
 
 
+    <TextView
+        android:layout_width="wrap_content"
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
 
-            android:id="@+id/titlePart"
-            android:textStyle="bold"
-            android:gravity="center_horizontal">
+        android:text="Title"
+        android:id="@+id/title"
+        />
 
-            <TextView
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-
-                android:text="Title"
-                android:id="@+id/title"
-                 />
-
-        </LinearLayout>
 
 
 
@@ -60,15 +53,6 @@
                 android:textColor="@color/white"
                 android:id="@+id/salary_range"
                 />
-
-
-
-
-
-
-
-
-
 
 
 
@@ -102,7 +86,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="15dp"></LinearLayout>
+                android:layout_height="15dp">
+
+
+            </LinearLayout>
 
 
 
