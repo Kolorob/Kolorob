@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-
+                android:visibility="gone"
                 android:id="@+id/compare_layout"
                 android:background="@drawable/compare_screen"
                >
@@ -107,23 +107,24 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="6dp"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/school_name">
 
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
                         android:id="@+id/left_school_name"
                         android:background="@drawable/border"
-                        android:layout_height="40dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/edu_name_ban2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
+                            android:textColor="@color/white"
                             android:padding="5dp"
                             android:text="@string/edu_name_ban"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -134,14 +135,16 @@
                         android:orientation="vertical"
                         android:id="@+id/right_school_name"
                         android:background="@drawable/border"
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
 
-                        android:layout_height="40dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/edu_name_ban3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="@string/edu_name_ban"
@@ -180,10 +183,12 @@
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/total_students2"
+                            android:id="@+id/ttl_students"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
+                            android:textColor="@color/white"
+
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
@@ -193,13 +198,15 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/total_students3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -225,6 +232,8 @@
                         android:padding="5dp"
                         android:textColor="@color/white"
                         android:text="@string/edtype"
+
+
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                 </LinearLayout>
 
@@ -245,6 +254,8 @@
                             android:id="@+id/eduType2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -255,13 +266,14 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/eduType3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -286,6 +298,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+
+
                         android:textColor="@color/white"
                         android:text="@string/hostel_facility"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -308,6 +322,7 @@
                             android:id="@+id/hostel_facility2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -318,13 +333,14 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/hostel_facility3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -349,6 +365,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:padding="5dp"
+
                         android:text="@string/transport_facility"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                 </LinearLayout>
@@ -370,6 +387,7 @@
                             android:id="@+id/transport_facility2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -381,13 +399,14 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/transport_facility3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -412,6 +431,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
 
+
                             android:padding="5dp"
                             android:text="@string/playground"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -434,6 +454,7 @@
                                 android:id="@+id/playground2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
 
                                 android:padding="5dp"
                                 android:text="TextView"
@@ -445,13 +466,14 @@
                             android:orientation="vertical"
                             android:layout_width="0dp"
                             android:layout_weight="0.5"
-                            android:background="@drawable/custom_border"
+                            android:background="@drawable/custom_border2"
 
                             android:layout_height="wrap_content">
                             <TextView
                                 android:id="@+id/playground3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
 
                                 android:padding="5dp"
                                 android:text="TextView"
@@ -480,7 +502,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-
                         android:padding="5dp"
                         android:text="@string/total_classes"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -503,6 +524,7 @@
                             android:id="@+id/total_classes2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -514,26 +536,28 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/total_classes3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                     </LinearLayout>
-
+                </LinearLayout>
 
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:gravity="center"
+
                         android:id="@+id/total_teachers1_1"
                         android:layout_height="wrap_content">
 
@@ -541,7 +565,8 @@
                             android:id="@+id/total_teachers1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/border"
+
+                            android:textColor="@color/white"
                             android:padding="5dp"
                             android:text="@string/total_teachers"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -563,6 +588,8 @@
                             <TextView
                                 android:id="@+id/total_teachers2"
                                 android:layout_width="wrap_content"
+                                android:textColor="@color/white"
+
                                 android:layout_height="wrap_content"
 
                                 android:padding="5dp"
@@ -575,13 +602,14 @@
                             android:orientation="vertical"
                             android:layout_width="0dp"
                             android:layout_weight="0.5"
-                            android:background="@drawable/custom_border"
+                            android:background="@drawable/custom_border2"
 
                             android:layout_height="wrap_content">
                             <TextView
                                 android:id="@+id/total_teachers3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/white"
 
                                 android:padding="5dp"
                                 android:text="TextView"
@@ -600,7 +628,7 @@
 
 
 
-                </LinearLayout>
+
 
 
 
@@ -618,7 +646,7 @@
                         android:id="@+id/course_provided1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:textColor="@color/white"
                         android:padding="5dp"
                         android:text="@string/course_provided"
                         android:textAppearance="?android:attr/textAppearanceMedium">
@@ -644,7 +672,7 @@
                             android:id="@+id/course_provided2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/border"
+                            android:textColor="@color/white"
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -655,14 +683,14 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/course_provided3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/border"
+                            android:textColor="@color/white"
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -693,7 +721,7 @@
                         android:id="@+id/shift1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:textColor="@color/white"
                         android:padding="5dp"
                         android:text="@string/shift"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -716,6 +744,7 @@
                             android:id="@+id/shift2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -727,13 +756,14 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/shift3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
                             android:padding="5dp"
                             android:text="TextView"
@@ -760,7 +790,7 @@
                         android:id="@+id/canteen_facility1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border"
+                        android:textColor="@color/white"
                         android:padding="5dp"
                         android:text="@string/canteen_facility"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -775,15 +805,16 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
+                        android:textColor="@color/white"
                         android:background="@drawable/custom_border"
-
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/canteen_facility2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/border"
+                            android:textColor="@color/white"
+
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -794,14 +825,14 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border2"
 
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/canteen_facility3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/border"
+                            android:textColor="@color/white"
                             android:padding="5dp"
                             android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>

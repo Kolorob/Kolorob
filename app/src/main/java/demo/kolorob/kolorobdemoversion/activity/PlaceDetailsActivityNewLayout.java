@@ -137,6 +137,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Button prebutton;
 
     private int sideIndexHeight;
+    private LinearLayout compare_layout;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
     public int layoutstatus;
@@ -438,6 +439,7 @@ mapcalledstatus=false;
         course_provided=(TextView)findViewById(R.id.course_provided2);
         shift=(TextView)findViewById(R.id.shift2);
         canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
+        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
 
         edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
         edtype1=(TextView)findViewById(R.id.eduType3);
@@ -627,8 +629,8 @@ mapcalledstatus=false;
                             "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                 }
                 else {
-
-                   compareTool();
+                    compare_layout.setVisibility(View.VISIBLE);
+                    compareTool();
 
                 }
 
