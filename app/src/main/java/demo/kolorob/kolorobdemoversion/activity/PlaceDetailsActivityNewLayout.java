@@ -49,6 +49,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -128,7 +129,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private RelativeLayout wholeLayout;
     private int showList;
     private String locationNameEng;
-
+    ScrollView sv;
     private Button prebutton;
 
     private int sideIndexHeight;
@@ -342,7 +343,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
        // SearchButton.setLayoutParams(layoutParams);
        // CompareButton.setLayoutParams(layoutParams);
 
-mapcalledstatus=false;
+        mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
 
@@ -391,6 +392,7 @@ mapcalledstatus=false;
         // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
+    sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
@@ -613,6 +615,7 @@ mapcalledstatus=false;
             @Override
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
+                    sv.setVisibility(View.VISIBLE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
@@ -620,6 +623,7 @@ mapcalledstatus=false;
                     }
                 }
                 else {
+                    sv.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
                     llSubCatListHolder.setVisibility(View.GONE);
                 }
@@ -972,6 +976,8 @@ mapcalledstatus=false;
             setCi(ci);
             llCatListHolder.addView(getCategoryListItemView(ci, dwPercentage));
 
+
+
         }
     }
 
@@ -985,7 +991,7 @@ mapcalledstatus=false;
 
 
 
-        if( height>1000)
+       if( height>1000)
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         else
 
@@ -1081,7 +1087,7 @@ mapcalledstatus=false;
 
                             ArrayList<EducationServiceProviderItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem(ci.getId());
-                            ivIcon.setImageResource(R.drawable.turned_on_porashona);
+                            ivIcon.setImageResource(R.drawable.education_selected);
                             callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
 
 
@@ -1092,7 +1098,7 @@ mapcalledstatus=false;
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_porashona);
+                        ivIcon.setImageResource(R.drawable.education_selected);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
@@ -1106,7 +1112,7 @@ mapcalledstatus=false;
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
+                        ivIcon.setImageResource(R.drawable.health_selected);
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
@@ -1129,7 +1135,7 @@ mapcalledstatus=false;
                         ivIcon.setImageResource(0);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
-                        ivIcon.setImageResource(R.drawable.turned_on_anondo_furti);
+                        ivIcon.setImageResource(R.drawable.entertainment_selected);
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
                         mapcalledstatus=true;
 
@@ -1156,7 +1162,7 @@ mapcalledstatus=false;
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
+                        ivIcon.setImageResource(R.drawable.government_selected);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
@@ -1188,7 +1194,7 @@ mapcalledstatus=false;
                         populatefilterwords(getFilcatid());
                         filterholder.setVisibility(View.VISIBLE);
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
+                        ivIcon.setImageResource(R.drawable.legal_selected);
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
@@ -1216,7 +1222,7 @@ mapcalledstatus=false;
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
+                        ivIcon.setImageResource(R.drawable.finance_selected);
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
@@ -1241,7 +1247,7 @@ mapcalledstatus=false;
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_chakri_bakri);
+                        ivIcon.setImageResource(R.drawable.job_selected);
                         // mapcalledstatus=false;
                         llSubCatListHolder.setVisibility(View.GONE);
                         //   map.removeAllViews();
