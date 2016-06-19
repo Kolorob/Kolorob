@@ -131,10 +131,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private RelativeLayout wholeLayout;
     private int showList;
     private String locationNameEng;
+<<<<<<< HEAD
     private String comapreData;
-    ScrollView sv;
     String firstData="",SecondData="";
     int checker=0;
+
+=======
+    ScrollView sv;
+>>>>>>> 82e1168fdf5aceb29915c469fbf3467abaf9a98b
     private Button prebutton;
 
     private int sideIndexHeight;
