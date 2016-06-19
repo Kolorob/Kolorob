@@ -6,6 +6,9 @@
     android:background="@drawable/bg_jp4"
     tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity">
 
+
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -16,6 +19,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout2"
         android:gravity="center_vertical|center_horizontal">
+
 
 
 
@@ -48,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="সকল জবের তালিকা "
+                android:text="সকল চাকুরির তালিকা "
                 android:textSize="27dp"
                 android:textColor="@color/blue"/>
 
@@ -87,6 +91,8 @@
 
 
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -94,19 +100,38 @@
         android:layout_alignLeft="@+id/linearLayout2"
         android:layout_above="@+id/linearLayout4"
         android:layout_alignStart="@+id/linearLayout2"
-        android:orientation="horizontal"
+        android:orientation="vertical"
 
         android:id="@+id/scrollView">
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:id="@+id/bottom"
+            android:layout_height="5dp">
+
+        </View>
 
 
         <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/jobList"
+            android:divider="@color/white"
+            android:dividerHeight="4px"
             android:layout_marginLeft="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="13dp" />
+            android:layout_marginRight="15dp"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:id="@+id/bottoms"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="5dp">
+
+        </View>
 
 
     </LinearLayout>

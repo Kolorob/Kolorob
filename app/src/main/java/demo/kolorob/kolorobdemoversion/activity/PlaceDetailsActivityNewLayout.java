@@ -89,6 +89,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by touhid on 12/3/15.
@@ -396,7 +397,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
 
-        Intent intent;
+        final Intent intent;
         intent = getIntent();
         if (null != intent)
         {
@@ -458,7 +459,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
-        int s=lp.width = (int) (VIEW_WIDTH);
+        final int s=lp.width = (int) (VIEW_WIDTH);
         lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
@@ -579,6 +580,28 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     subCatItemList.setVisibility(View.GONE);
                    // listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
                     //constructCategoryList(categoryList);
+
+                }
+
+            }
+        });
+        CompareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                {
+                    demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                }
+                else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                {
+                    demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                }
+                else {
+                    Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
+                    startActivity(compare);
 
                 }
 

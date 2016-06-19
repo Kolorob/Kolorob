@@ -411,11 +411,11 @@ public class EducationServiceProviderTable  {
     }
 
 
-    public ArrayList<EducationServiceProviderItem> getAllEducationSubCategoriesInfo(int cat_id,int sub_cat_id) {
+    public ArrayList<EducationServiceProviderItem> getEducationData(String node_id) {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id+" AND "+KEY_EDU_SUBCATEGORY_ID+"="+sub_cat_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_IDENTIFIER_ID+"="+node_id, null);
 
         if (cursor.moveToFirst()) {
             do {
