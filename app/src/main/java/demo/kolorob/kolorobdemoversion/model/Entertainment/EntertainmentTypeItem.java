@@ -75,21 +75,21 @@ public class EntertainmentTypeItem {
 
     public static EntertainmentTypeItem parseEntertainmentTypeItem(JSONObject jo) throws JSONException {
         String _nodeId = jo.getString("node_id");
-        String _entSubCategoryId = jo.getString("name");
-        String _borrowCost = jo.getString("bn_label");
-        String _lending = jo.getString("en_label");
-        String _memcost = jo.getString("_facilities");
-        String _offers = jo.getString("column_name");
+        String name = jo.getString("name");
+        String bn_label = jo.getString("bn_label");
+        String en_label = jo.getString("en_label");
+        String _facilities = jo.getString("_facilities");
+        String column_name = jo.getString("column_name");
 
 
 
         return new EntertainmentTypeItem(
                 _nodeId,
-                _entSubCategoryId,
-                _borrowCost,
-                _lending,
-                _memcost,
-                _offers
+                name,
+                bn_label,
+                en_label,
+                _facilities,
+                column_name
 
         );
     }
