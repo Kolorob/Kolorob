@@ -58,7 +58,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         linearLayout=(LinearLayout)findViewById(R.id.lll);
         upperHand=(LinearLayout)findViewById(R.id.upper_part);
         upperText=(LinearLayout)findViewById(R.id.upperText);
-        left_way=(LinearLayout)findViewById(R.id.left_go_process);
+//        left_way=(LinearLayout)findViewById(R.id.left_go_process);
         middle_phone=(LinearLayout)findViewById(R.id.middle_phone);
         right_email=(LinearLayout)findViewById(R.id.right_email);
         left_image=(ImageView)findViewById(R.id.distance_left);
@@ -167,33 +167,33 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
 
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img=params_left_way.height = (height*3)/24;
-        int right_img=params_left_way.width = width/3;
-        left_way.setLayoutParams(params_left_way);
+//        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
+//        int lett_img=params_left_way.height = (height*3)/24;
+//        int right_img=params_left_way.width = width/3;
+//        left_way.setLayoutParams(params_left_way);
 
 
-        left_image.getLayoutParams().height= (lett_img*2)/3;
-        left_image.getLayoutParams().width=right_img/2;
+//        left_image.getLayoutParams().height= (lett_img*2)/3;
+//        left_image.getLayoutParams().width=right_img/2;
 
 
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int  vx=params_middle_phone.height = (height*3)/24;
-        params_middle_phone.width = width/3;
-        middle_phone.setLayoutParams(params_middle_phone);
+//        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
+//        int  vx=params_middle_phone.height = (height*3)/24;
+//        params_middle_phone.width = width/3;
+//        middle_phone.setLayoutParams(params_middle_phone);
 
-        middle_image.getLayoutParams().height= (lett_img*2)/3;
-        middle_image.getLayoutParams().width=right_img/2;
-
-        right_image.getLayoutParams().height= (lett_img*2)/3;
-        right_image.getLayoutParams().width=right_img/2;
+//        middle_image.getLayoutParams().height= (lett_img*2)/3;
+//        middle_image.getLayoutParams().width=right_img/2;
+//
+//        right_image.getLayoutParams().height= (lett_img*2)/3;
+//        right_image.getLayoutParams().width=right_img/2;
 
 
         scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int  vc=params_right_email.height = (height*3)/24;
-        params_right_email.width = width/3;
-        right_email.setLayoutParams(params_right_email);
+//        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
+//        int  vc=params_right_email.height = (height*3)/24;
+//        params_right_email.width = width/3;
+//        right_email.setLayoutParams(params_right_email);
 
 
 
@@ -206,12 +206,12 @@ public class DetailsJobActivityNew extends AppCompatActivity {
 
 
 
-        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
-        int  vcc=params_bottom_bar.height = height/13;
-        params_bottom_bar.width = width;
-        bottom_bar.setLayoutParams(params_bottom_bar);
-        LinearLayout.LayoutParams expnlist = (LinearLayout.LayoutParams) scrollingPart.getLayoutParams();
-        expnlist.setMargins(0,0,0,vcc);
+//        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
+//        int  vcc=params_bottom_bar.height = height/13;
+//        params_bottom_bar.width = width;
+//        bottom_bar.setLayoutParams(params_bottom_bar);
+//        LinearLayout.LayoutParams expnlist = (LinearLayout.LayoutParams) scrollingPart.getLayoutParams();
+//        expnlist.setMargins(0,0,0,vcc);
 
 
     }
