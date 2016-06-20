@@ -25,13 +25,13 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
 
 
-	String[] values = new String[] { "Bangladesh Fire Service, \n বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
+	String[] values = new String[] { "Bangladesh Fire Service, \nবাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
 			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",
-			"Pllabi Police Station, \n পল্লবী থানা",
-			"RAB – 4, \n র্যাব - ৪",
-			"DESCO - Electricity, \n ডেসকো – ইলেক্ট্রিসিটি ",
-			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, \n তিতাস গ্যাস ","Dhaka WASA, \n ঢাকা ওয়াসা",
-			"Blood Bank,  \n ব্লাড ব্যাংক ","Dhaka North City Corporation, \n ঢাকা উত্তর সিটি কর্পোরেশন","Violence against Women & Children, \n নারী ও শিশু নির্যাতন প্রতিরোধ",""
+			"Pllabi Police Station, \nপল্লবী থানা",
+			"RAB – 4, \nর্যাব - ৪",
+			"DESCO - Electricity, \nডেসকো – ইলেক্ট্রিসিটি ",
+			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, \nতিতাস গ্যাস ","Dhaka WASA, \nঢাকা ওয়াসা",
+			"Blood Bank,  \nব্লাড ব্যাংক ","Dhaka North City Corporation, \nঢাকা উত্তর সিটি কর্পোরেশন","Violence against Women & Children, \nনারী ও শিশু নির্যাতন প্রতিরোধ",""
 	};
 
 	String[] address = new String[] { "Mirpur 10, Dhaka",
@@ -41,7 +41,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 			"DESCO, Pallabi, Dhaka",
 			"","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
 	};
-	String[] name_bangla = new String[] { "029555555",
+	String[] name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্",
 			"পুলিশ কন্ট্রোল রুম",
 			"পল্লবী থানা",
 			"র্যাব - ৪",
@@ -50,8 +50,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 	};
 
 
-	String[] phone_no = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
-			"029555555",
+	String[] phone_no = new String[] { "029555555",
 			"027124000",
 			"02-9015922",
 			"029015922",
@@ -102,9 +101,20 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 		holder.emergency = items.get(position);
 		final int i = position;
 
-		holder.title = (TextView)row.findViewById(R.id.emergency_name);
+		holder.header = (TextView)row.findViewById(R.id.header_name);
 
-		holder.title.setText(values[i]+","+" "+address[i]);
+		holder.header.setText(values[i]);
+
+
+		holder.title = (TextView)row.findViewById(R.id.title_name);
+
+		//holder.title.setText(address[i]);
+		holder.title.setText("Contact: "+phone_no[i]);
+		holder.add_text = (TextView)row.findViewById(R.id.add_text);
+
+		//holder.title.setText(address[i]);
+		holder.add_text.setText("Location: "+address[i]);
+
 		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.call_id);
 	//	holder.removePaymentButton.setTag(holder.atomPayment);
 
@@ -186,6 +196,8 @@ Log.d("========", "-----------------"+i);
 		ImageButton call;
 		ImageButton email;
 		TextView title;
+		TextView header;
+		TextView add_text;
 		ImageButton removePaymentButton;
 	}
 	

@@ -90,6 +90,10 @@ public class NewEmergency extends Activity {
 		ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
 		atomPaysListView.setAdapter(adapter);
 	}
+
+	public void close(View v) {
+		this.finish();
+	}
 	
 //	private void setupAddPaymentButton() {
 //		findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(new OnClickListener() {
