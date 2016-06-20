@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by Mazharul.Islam1 on 6/20/2016.
  */
-public class EntertainmentTypeItem {
+public class EntertainmentSubTypeItem {
     private String nodeId;
     private String name;
     private String bn_label;
@@ -15,7 +15,7 @@ public class EntertainmentTypeItem {
     private String column_name;
 
 
-    public EntertainmentTypeItem(String nodeId, String name, String bn_label, String en_label, String _facilities, String column_name) {
+    public EntertainmentSubTypeItem(String nodeId, String name, String bn_label, String en_label, String _facilities, String column_name) {
         this.nodeId = nodeId;
         this.name = name;
         this.bn_label = bn_label;
@@ -73,7 +73,7 @@ public class EntertainmentTypeItem {
         this.column_name = column_name;
     }
 
-    public static EntertainmentTypeItem parseEntertainmentTypeItem(JSONObject jo) throws JSONException {
+    public static EntertainmentSubTypeItem parseEntertainmentSubTypeItem(JSONObject jo) throws JSONException {
         String _nodeId = jo.getString("node_id");
         String name = jo.getString("name");
         String bn_label = jo.getString("bn_label");
@@ -83,7 +83,7 @@ public class EntertainmentTypeItem {
 
 
 
-        return new EntertainmentTypeItem(
+        return new EntertainmentSubTypeItem(
                 _nodeId,
                 name,
                 bn_label,
