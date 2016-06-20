@@ -44,6 +44,12 @@
 
                     />
 
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cross_j"
+    android:id="@+id/close_button"
+    />
 
 
             </LinearLayout>
@@ -163,7 +169,7 @@
 
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:id="@+id/Job_info">
@@ -179,7 +185,7 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:text="@string/job_description"
                             android:textSize="28sp"
                             android:paddingLeft="10dp"
@@ -397,15 +403,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/left_go_process"
-
 
             >
 
@@ -415,6 +419,8 @@
                 android:id="@+id/distance_left"
                 android:onClick="showdirection"
 
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/phone_middl"
                 android:background="@drawable/direction_j"/>
 
 
@@ -424,6 +430,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/phone_middl"
                 android:layout_centerInParent="true"
+
+                android:layout_marginRight="10dp"
                 android:background="@drawable/phone_j"/>
 
 
@@ -431,7 +439,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/right_side_email"
-                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/phone_middl"
                 android:onClick="sendemail"
                 android:background="@drawable/email_j"/>
 
