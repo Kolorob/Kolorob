@@ -581,7 +581,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         MapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               
+
                 searchviewholder.setVisibility(View.GONE);
                 map.setVisibility(View.VISIBLE);
 
