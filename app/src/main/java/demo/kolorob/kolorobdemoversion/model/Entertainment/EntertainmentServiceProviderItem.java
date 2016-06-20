@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 /**
- * Created by Mazharul.Islam1 on 1/5/2016.
+ * Created by arafat on 1/5/2016.
  */
 public class EntertainmentServiceProviderItem implements Serializable {
     private String nodeId;
