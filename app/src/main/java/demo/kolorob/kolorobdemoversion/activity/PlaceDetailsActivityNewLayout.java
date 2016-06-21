@@ -132,7 +132,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int showList;
     private String locationNameEng;
     private String comapreData;
-    ScrollView sv;
+    ScrollView sv,svs;
     String firstData="",SecondData="";
     int checker=0;
     private Button prebutton;
@@ -185,6 +185,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ImageButton expandableListShowing,more,MapButton,ListButton,SearchButton,CompareButton;
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
+    Boolean SearchClicked=false,MapClicked=false,ListClicked=false,CompareClicked=false;
     private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -326,6 +327,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
+
         explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -333,6 +335,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
         params.weight = 1;
         params.width=buttonWidth;
+
         MapButton.setLayoutParams(params);
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
         params2.weight = 1;
@@ -401,6 +404,9 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
     sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
+        svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
+        sv.setVisibility(View.GONE);
+        svs.setVisibility(View.GONE);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
@@ -562,21 +568,31 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SearchClicked=true;
+                MapClicked=false;
+                ListClicked=false;
+                CompareClicked=false;
                 map.setVisibility(View.GONE);
+                svs.setVisibility(View.GONE);
                 explist.setVisibility(View.GONE);
+
                 searchviewholder.setVisibility(View.VISIBLE);
                 populateSearch();
-                if(educlicked==false||helclicked||false||entclicked==false||legclicked==false||finclicked==false)
+                if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
                 {
                     filterholder.setVisibility(View.GONE);
                 }
+                else filterholder.setVisibility(View.VISIBLE);
 
             }
         });
         MapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchClicked=false;
+                MapClicked=true;
+                ListClicked=false;
+                CompareClicked=false;
                 searchviewholder.setVisibility(View.GONE);
                 map.setVisibility(View.VISIBLE);
 
@@ -588,8 +604,13 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchClicked=false;
+                MapClicked=false;
+                ListClicked=true;
+                CompareClicked=false;
                 if(list_expand.equals(false))
                 {
+                    svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
@@ -619,6 +640,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchClicked=false;
+                MapClicked=false;
+                ListClicked=false;
+                CompareClicked=true;
 
                 if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
                 {
@@ -653,11 +678,13 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
+                        svs.setVisibility(View.VISIBLE);
                         llSubCatListHolder.setVisibility(View.VISIBLE);
                     }
                 }
                 else {
                     sv.setVisibility(View.GONE);
+                    svs.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
                     llSubCatListHolder.setVisibility(View.GONE);
                 }
@@ -1091,12 +1118,20 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-       if( height>1000)
+       if( height>1200)
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         else
 
-            v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-        final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
+       {
+           v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
+           final int sdk = android.os.Build.VERSION.SDK_INT;
+           if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+               sv.setBackgroundDrawable( getResources().getDrawable(R.drawable.sidebar_left3) );
+           } else {
+               sv.setBackground( getResources().getDrawable(R.drawable.sidebar_left3));
+           }
+
+       }final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
 
 
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
@@ -1390,14 +1425,19 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
                 // categoryHeader.setText(ci.getCatName());
 
-
-                if(showList!=1)
+                if(SearchClicked==true)
                 {
+                    svs.setVisibility(View.GONE);
+                }
+                else if(showList!=1 && SearchClicked==false)
+                {
+
                     if (isCatExpandedOnce)
                         showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                     else
                         showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
                 }
+
 
                 else
                 {
@@ -1509,7 +1549,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         }
 
         ivIcon.setLayoutParams(lpIv);
-        tvName.setTextColor(Color.MAGENTA);
+        tvName.setTextColor(Color.WHITE);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -1538,54 +1578,54 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                                              if (i == 0) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.blue_button);
+                                                 ivIcon.setImageResource(R.drawable.pin1_selected);
                                                  continue;
                                              } else if (i == 1) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.red_button);
+                                                 ivIcon.setImageResource(R.drawable.pin2_selected);
                                                  continue;
 
                                              } else if (i == 2) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.light_purple_button);
+                                                 ivIcon.setImageResource(R.drawable.pin3_selected);
                                                  continue;
 
                                              } else if (i == 3) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.orange_button);
+                                                 ivIcon.setImageResource(R.drawable.pin4_selected);
                                                  continue;
 
                                              } else if (i == 4) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.brown_button);
+                                                 ivIcon.setImageResource(R.drawable.pin5_selected);
                                                  continue;
 
                                              } else if (i == 5) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.sky_blue_button);
+                                                 ivIcon.setImageResource(R.drawable.pin6_selected);
                                                  continue;
 
                                              } else if (i == 6) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.light_orange_button);
+                                                 ivIcon.setImageResource(R.drawable.pin7_selected);
                                                  continue;
 
                                              } else if (i == 7) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.deep_blue_button);
+                                                 ivIcon.setImageResource(R.drawable.pin8_selected);
                                                  continue;
 
                                              } else if (i == 8) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.magenta_button);
+                                                 ivIcon.setImageResource(R.drawable.pin9_selected);
                                                  continue;
 
                                              }
@@ -1597,8 +1637,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                                              // check if it's not the imageView you just clicked because you don't want to change its background
                                              // tv.setText("as");
 
-                                             ivIcon.setImageResource(0);
-                                             ivIcon.setImageResource(AppConstants.OFF_BUTTON[0]);
+
                                          }
                                      }
                                     Collections.sort(clicked);
@@ -1613,54 +1652,54 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                                             if (iit == 0) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.blue_button);
+                                                ivIcon.setImageResource(R.drawable.pin1_selected);
                                                 continue;
                                             } else if (iit == 1) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.red_button);
+                                                ivIcon.setImageResource(R.drawable.pin2_selected);
                                                 continue;
 
                                             } else if (iit == 2) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.light_purple_button);
+                                                ivIcon.setImageResource(R.drawable.pin3_selected);
                                                 continue;
 
                                             } else if (iit == 3) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.orange_button);
+                                                ivIcon.setImageResource(R.drawable.pin4_selected);
                                                 continue;
 
                                             } else if (iit == 4) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.brown_button);
+                                                ivIcon.setImageResource(R.drawable.pin5_selected);
                                                 continue;
 
                                             } else if (iit == 5) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.sky_blue_button);
+                                                ivIcon.setImageResource(R.drawable.pin6_selected);
                                                 continue;
 
                                             } else if (iit == 6) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.light_orange_button);
+                                                ivIcon.setImageResource(R.drawable.pin7_selected);
                                                 continue;
 
                                             } else if (iit== 7) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.deep_blue_button);
+                                                ivIcon.setImageResource(R.drawable.pin8_selected);
                                                 continue;
 
                                             } else if (iit == 8) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.magenta_button);
+                                                ivIcon.setImageResource(R.drawable.pin9_selected);
                                                 continue;
 
                                             }
@@ -1834,6 +1873,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         if(subCatShowFlag==1&&showList!=1)
         {
+            svs.setVisibility(View.VISIBLE);
             llSubCatListHolder.setVisibility(View.VISIBLE);
         }
         subCatShowFlag=1;
@@ -1842,6 +1882,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             @Override
             public void run() {
                 if(showList!=1)
+                    svs.setVisibility(View.VISIBLE);
                 llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
@@ -1963,7 +2004,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         mapFragment.setLocationNameId(locationNameId);
         if (mapcalledstatus == true) {
           if(educlicked){
-              educlicked=false;
+              //educlicked=false;
               mapFragment.setCategoryId(1);
               ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
               educationServiceProviderItems = constructEducationListItem(1);
@@ -1974,7 +2015,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             fragmentTransaction.commit();
           }
             if(helclicked){
-                helclicked=false;
+                //helclicked=false;
                 mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
                 healthServiceProviderItems = constructHealthListItem(2);
@@ -1985,7 +2026,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 fragmentTransaction.commit();
             }
             if(entclicked){
-                entclicked=false;
+              //  entclicked=false;
                 mapFragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
@@ -1996,7 +2037,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 fragmentTransaction.commit();
             }
             if(legclicked){
-                legclicked=false;
+               // legclicked=false;
                 mapFragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
@@ -2007,7 +2048,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 fragmentTransaction.commit();
             }
             if(finclicked){
-                finclicked=false;
+               // finclicked=false;
                 mapFragment.setCategoryId(6);
                 ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
                 financialServiceProviderItems = constructfinancialListItem(6);

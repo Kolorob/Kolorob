@@ -236,8 +236,6 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         result_concate= result_concate+value + "\n";
 
 
-
-
         return result_concate;
     }
 }
