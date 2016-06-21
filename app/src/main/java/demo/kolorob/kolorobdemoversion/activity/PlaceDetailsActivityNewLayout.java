@@ -1097,7 +1097,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-       if( height>1300)
+       if( height>1200)
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
         else
 
@@ -1523,7 +1523,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         }
 
         ivIcon.setLayoutParams(lpIv);
-        tvName.setTextColor(Color.MAGENTA);
+        tvName.setTextColor(Color.WHITE);
         tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -1552,54 +1552,54 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                                              if (i == 0) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.blue_button);
+                                                 ivIcon.setImageResource(R.drawable.pin1_selected);
                                                  continue;
                                              } else if (i == 1) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.red_button);
+                                                 ivIcon.setImageResource(R.drawable.pin2_selected);
                                                  continue;
 
                                              } else if (i == 2) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.light_purple_button);
+                                                 ivIcon.setImageResource(R.drawable.pin3_selected);
                                                  continue;
 
                                              } else if (i == 3) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.orange_button);
+                                                 ivIcon.setImageResource(R.drawable.pin4_selected);
                                                  continue;
 
                                              } else if (i == 4) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.brown_button);
+                                                 ivIcon.setImageResource(R.drawable.pin5_selected);
                                                  continue;
 
                                              } else if (i == 5) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.sky_blue_button);
+                                                 ivIcon.setImageResource(R.drawable.pin6_selected);
                                                  continue;
 
                                              } else if (i == 6) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.light_orange_button);
+                                                 ivIcon.setImageResource(R.drawable.pin7_selected);
                                                  continue;
 
                                              } else if (i == 7) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.deep_blue_button);
+                                                 ivIcon.setImageResource(R.drawable.pin8_selected);
                                                  continue;
 
                                              } else if (i == 8) {
                                                  ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.iv_sub_cat_icon));
                                                  ivIcon.setImageResource(0);
-                                                 ivIcon.setImageResource(R.drawable.magenta_button);
+                                                 ivIcon.setImageResource(R.drawable.pin9_selected);
                                                  continue;
 
                                              }
@@ -1611,8 +1611,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                                              // check if it's not the imageView you just clicked because you don't want to change its background
                                              // tv.setText("as");
 
-                                             ivIcon.setImageResource(0);
-                                             ivIcon.setImageResource(AppConstants.OFF_BUTTON[0]);
+
                                          }
                                      }
                                     Collections.sort(clicked);
@@ -1627,54 +1626,54 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                                             if (iit == 0) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.blue_button);
+                                                ivIcon.setImageResource(R.drawable.pin1_selected);
                                                 continue;
                                             } else if (iit == 1) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.red_button);
+                                                ivIcon.setImageResource(R.drawable.pin2_selected);
                                                 continue;
 
                                             } else if (iit == 2) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.light_purple_button);
+                                                ivIcon.setImageResource(R.drawable.pin3_selected);
                                                 continue;
 
                                             } else if (iit == 3) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.orange_button);
+                                                ivIcon.setImageResource(R.drawable.pin4_selected);
                                                 continue;
 
                                             } else if (iit == 4) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.brown_button);
+                                                ivIcon.setImageResource(R.drawable.pin5_selected);
                                                 continue;
 
                                             } else if (iit == 5) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.sky_blue_button);
+                                                ivIcon.setImageResource(R.drawable.pin6_selected);
                                                 continue;
 
                                             } else if (iit == 6) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.light_orange_button);
+                                                ivIcon.setImageResource(R.drawable.pin7_selected);
                                                 continue;
 
                                             } else if (iit== 7) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.deep_blue_button);
+                                                ivIcon.setImageResource(R.drawable.pin8_selected);
                                                 continue;
 
                                             } else if (iit == 8) {
                                                 ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.iv_sub_cat_icon));
                                                 ivIcon.setImageResource(0);
-                                                ivIcon.setImageResource(R.drawable.magenta_button);
+                                                ivIcon.setImageResource(R.drawable.pin9_selected);
                                                 continue;
 
                                             }
