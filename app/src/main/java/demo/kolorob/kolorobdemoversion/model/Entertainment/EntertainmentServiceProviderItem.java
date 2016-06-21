@@ -32,12 +32,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
     private String latitude;
     private String longitude;
     private int categoryId;
-
     private String openingtime;
     private String closingtime;
     private String breaktime;
     private String breaktime2;
-
     private String road;
     private String block;
     private String landmark;

@@ -24,11 +24,11 @@ public class EntertainmetTypeTable {
     private static final String TAG = EntertainmentTheatreTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.ENT_THEATRE;
     public static final String KEY_NODE_ID = "_node_id";
-    public static final String KEY_NAME = "name";
-    public static final String KEY_BN_LEVEL = "bn_label";
-    private static final String KEY_EN_LEVEL = "_facilities"; // 1 - text
-    private static final String KEY_FACILITIES = "facilities"; // 2 - text*/
-    private static final String KEY_COLUMN_NAME = "column_name"; // 2 - text*/
+    public static final String KEY_RECREATION_PRICE = "name";
+    public static final String KEY_RECREATION_REMARKS = "bn_label";
+    private static final String KEY_TYPE = "_facilities"; // 1 - text
+    private static final String KEY_SUB_TYPE = "facilities"; // 2 - text*/
+
 
 
 
@@ -47,11 +47,10 @@ public class EntertainmetTypeTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_NODE_ID + " TEXT , "
-                + KEY_NAME + "  TEXT , " // 0 - int
-                + KEY_BN_LEVEL + "  TEXT, "              // 1 - text
-                + KEY_EN_LEVEL + " TEXT, "
-                + KEY_FACILITIES + " TEXT, "
-                + KEY_COLUMN_NAME + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + "))";
+                + KEY_RECREATION_PRICE + "  TEXT , " // 0 - int
+                + KEY_RECREATION_REMARKS + "  TEXT, "              // 1 - text
+                + KEY_TYPE + " TEXT, "
+                + KEY_SUB_TYPE + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -67,36 +66,35 @@ public class EntertainmetTypeTable {
     public long insertItem(EntertainmentTypeItem entertainmetTypeTable) {
         return insertItem(
                 entertainmetTypeTable.getNodeId(),
-                entertainmetTypeTable.getName(),
-                entertainmetTypeTable.getBn_label(),
-                entertainmetTypeTable.getEn_label(),
-                entertainmetTypeTable.get_facilities(),
-                entertainmetTypeTable.getColumn_name()
+                entertainmetTypeTable.getRecreation_price(),
+                entertainmetTypeTable.getRecreation_remarks(),
+                entertainmetTypeTable.getType(),
+
+                entertainmetTypeTable.getSub_type()
         );
     }
 
-    private long insertItem(String nodeId, String name, String bn_label, String en_label, String _facilities,
-                            String column_name) {
+    private long insertItem(String nodeId, String price, String remarks, String type, String subtype
+                            ) {
 
 
 
         if (isFieldExist(nodeId)) {
             return updateItem(
                     nodeId,
-                    name,
-                    bn_label,
-                    en_label,
-                    _facilities,
-                    column_name);
+                    price,
+                    remarks,
+                    type,
+                    subtype);
 
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID, nodeId);
-        rowValue.put(KEY_NAME, name);
-        rowValue.put(KEY_BN_LEVEL, bn_label);
-        rowValue.put(KEY_EN_LEVEL, en_label);
-        rowValue.put(KEY_FACILITIES, _facilities);
-        rowValue.put(KEY_COLUMN_NAME, column_name);
+        rowValue.put(KEY_RECREATION_PRICE,price );
+        rowValue.put(KEY_RECREATION_REMARKS, remarks);
+        rowValue.put(KEY_TYPE, type);
+        rowValue.put(KEY_SUB_TYPE, subtype);
+
 
 
         SQLiteDatabase db = openDB();
@@ -105,15 +103,13 @@ public class EntertainmetTypeTable {
         return ret;
     }
 
-    private long updateItem(String nodeId, String name, String bn_label, String en_label, String _facilities,
-                            String column_name) {
+    private long updateItem(String nodeId, String price, String remarks, String type, String subtype) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID, nodeId);
-        rowValue.put(KEY_NAME, name);
-        rowValue.put(KEY_BN_LEVEL, bn_label);
-        rowValue.put(KEY_EN_LEVEL, en_label);
-        rowValue.put(KEY_FACILITIES, _facilities);
-        rowValue.put(KEY_COLUMN_NAME, column_name);
+        rowValue.put(KEY_RECREATION_PRICE,price );
+        rowValue.put(KEY_RECREATION_REMARKS, remarks);
+        rowValue.put(KEY_TYPE, type);
+        rowValue.put(KEY_SUB_TYPE, subtype);
 
 
         SQLiteDatabase db = openDB();
@@ -153,19 +149,19 @@ public class EntertainmetTypeTable {
 
     public static EntertainmentTypeItem cursorToSubCatList(Cursor cursor) {
         String id = cursor.getString(0);
-        String  name = cursor.getString(1);
-        String bn_label = cursor.getString(2);
-        String en_label = cursor.getString(3);
-        String _facilities = cursor.getString(4);
-        String column_name = cursor.getString(5);
+        String  price = cursor.getString(1);
+        String remarks = cursor.getString(2);
+        String type = cursor.getString(3);
+        String subtype = cursor.getString(4);
+
 
         return new EntertainmentTypeItem(
                 id,
-                name,
-                bn_label,
-                en_label,
-                _facilities,
-                column_name
+                price,
+                remarks,
+                type,
+                subtype
+
 
 
         );
