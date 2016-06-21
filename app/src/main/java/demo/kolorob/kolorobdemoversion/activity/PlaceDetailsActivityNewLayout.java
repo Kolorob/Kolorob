@@ -658,6 +658,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
+                        svs.setVisibility(View.VISIBLE);
                         llSubCatListHolder.setVisibility(View.VISIBLE);
                     }
                 }
@@ -1978,7 +1979,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         mapFragment.setLocationNameId(locationNameId);
         if (mapcalledstatus == true) {
           if(educlicked){
-              educlicked=false;
+              //educlicked=false;
               mapFragment.setCategoryId(1);
               ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
               educationServiceProviderItems = constructEducationListItem(1);
@@ -1989,7 +1990,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             fragmentTransaction.commit();
           }
             if(helclicked){
-                helclicked=false;
+                //helclicked=false;
                 mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
                 healthServiceProviderItems = constructHealthListItem(2);
@@ -2000,7 +2001,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 fragmentTransaction.commit();
             }
             if(entclicked){
-                entclicked=false;
+              //  entclicked=false;
                 mapFragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
@@ -2011,7 +2012,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 fragmentTransaction.commit();
             }
             if(legclicked){
-                legclicked=false;
+               // legclicked=false;
                 mapFragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
@@ -2022,7 +2023,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 fragmentTransaction.commit();
             }
             if(finclicked){
-                finclicked=false;
+               // finclicked=false;
                 mapFragment.setCategoryId(6);
                 ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
                 financialServiceProviderItems = constructfinancialListItem(6);
