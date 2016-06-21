@@ -34,9 +34,10 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:id="@+id/iv_kolorob_logo"
-                android:layout_marginLeft="18dp"
-
-                android:background="@drawable/job"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/job_topimge"
                 />
 
         </LinearLayout>
@@ -83,7 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/iv_close"
-                android:src="@drawable/cross_j"
+                android:src="@drawable/cross_jb"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
                 android:focusable="true" />
 
 
