@@ -133,7 +133,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DisplayAllJobsActivity"
-            android:theme="@style/Theme.Transparent" />
+             />
         <activity android:name=".activity.DetailsInfoActivityEducation" />
         <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
         <activity
