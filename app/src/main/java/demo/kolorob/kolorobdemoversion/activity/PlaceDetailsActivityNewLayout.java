@@ -568,10 +568,12 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             public void onClick(View v) {
 
                 map.setVisibility(View.GONE);
+                svs.setVisibility(View.GONE);
                 explist.setVisibility(View.GONE);
+
                 searchviewholder.setVisibility(View.VISIBLE);
                 populateSearch();
-                if(educlicked==false||helclicked||false||entclicked==false||legclicked==false||finclicked==false)
+                if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
                 {
                     filterholder.setVisibility(View.GONE);
                 }
@@ -595,6 +597,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             public void onClick(View v) {
                 if(list_expand.equals(false))
                 {
+                    svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
