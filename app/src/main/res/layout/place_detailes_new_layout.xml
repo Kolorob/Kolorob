@@ -896,111 +896,107 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/searchholder"
-                android:visibility="gone"
+android:visibility="gone"
 
                 android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="What you want to search?"
                     android:id="@+id/searchtext"
-                    android:layout_above="@+id/searchall"
+                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView13"
+                    android:layout_marginTop="@dimen/fab_marginforsearch"
+                    android:background="@drawable/search_orange"
+                    android:layout_marginBottom="@dimen/fab_margin"
+                    android:layout_below="@+id/searchtext"
+                    android:layout_centerHorizontal="true" />
+
                 <EditText
                     android:id="@+id/searchall"
-                    android:layout_width="200dp"
+                    android:layout_width="600dp"
                     android:layout_weight="0.87"
                     android:textColor="@color/black"
                     android:hint="@string/search"
-                    android:textColorHint="@color/red"
-                    android:background="@color/red"
+                    android:textColorHint="@color/white"
+                    android:background="#F7941E"
                     android:layout_height="40dp"
                     android:popupBackground="#ffffff"
-
                     android:ems="10"
-                    android:layout_above="@+id/allitem"
-                    android:layout_alignLeft="@+id/allitem"
-                    android:layout_alignStart="@+id/allitem"
-                    android:layout_alignRight="@+id/searchtext"
-                    android:layout_alignEnd="@+id/searchtext"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginLeft="@dimen/nav_header_height2"
+                    android:layout_marginRight="@dimen/fab_margin"
+                    android:layout_below="@+id/imageView13"
+                    android:layout_alignParentRight="true"
+                     />
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:id="@+id/allitem"
+                    android:layout_marginRight="@dimen/fab_margin"
                     android:maxHeight="80dp"
+                    android:layout_marginLeft="@dimen/nav_header_height2"
                     android:minHeight="80dp"
-                    android:background="@color/white"
+                    android:background="#F7941E"
+                    android:layout_marginTop="20dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_centerVertical="true"
-                    android:layout_alignLeft="@+id/searchtext"
-                    android:layout_alignStart="@+id/searchtext"
-                    android:layout_alignRight="@+id/searchtext"
-                    android:layout_alignEnd="@+id/searchtext"
-                    android:layout_marginTop="20dp" />
+                    android:layout_below="@+id/searchall"
+                    android:layout_alignRight="@+id/searchall"
+                    android:layout_alignEnd="@+id/searchall"
+                    android:layout_alignParentRight="true"
+                    />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:id="@+id/filterholder"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/fab_marginforsearch2"
+                    android:layout_marginLeft="@dimen/nav_header_height2"
+
+                    android:layout_height="450dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_below="@+id/allitem">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/searchtext"
-                        android:id="@+id/textView17"
-                        android:background="@color/white"
-                        android:layout_alignBottom="@+id/morebutton"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_toLeftOf="@+id/morebutton"
-                        android:layout_toStartOf="@+id/morebutton" />
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/morebutton"
-                        android:background="@drawable/searchbar_dropdown"
-                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/filter"
+                        android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="20dp" />
+                        android:layout_alignParentEnd="true" />
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginLeft="210dp"
+                        android:layout_height="450dp"
+
                         android:id="@+id/categoryfilterholder"
-                        android:background="#163e11"
-                        android:visibility="gone"
-                        android:layout_above="@+id/textView17"
-                        android:layout_alignRight="@+id/morebutton"
-                        android:layout_alignEnd="@+id/morebutton"
-                        android:layout_alignLeft="@+id/textView17"
-                        android:layout_alignStart="@+id/textView17">
+
+                        >
 
 
 
                         <ScrollView
                             android:layout_width="wrap_content"
-                            android:layout_height="150dp"
-                            android:background="#76ecb5">
+                            android:layout_height="300dp"
+
+                            android:background="@color/semi_transparent">
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
-
-                                android:layout_width="350dp"
+                                android:visibility="gone"
+                                android:layout_width="450dp"
                                 android:layout_height="match_parent"
 
                                 android:orientation="horizontal"
                                 android:weightSum="2"
-                                android:background="#163e11">
+                                android:background="@color/semi_transparent">
 
                                 <LinearLayout
                                     android:id="@+id/linearLayout1"
@@ -1035,13 +1031,14 @@
                         </ScrollView>
                     </RelativeLayout>
                 </RelativeLayout>
+
             </RelativeLayout>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
                 android:layout_width="wrap_content"
 
                 android:background="@drawable/sidebar_left2"
-                android:layout_height="650dp"
+                android:layout_height="750dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="false"
@@ -1070,7 +1067,7 @@
             <ScrollView
                 android:id="@+id/svSubCategoryListHolder"
                 android:layout_width="wrap_content"
-                android:layout_height="650dp"
+                android:layout_height="750dp"
                 android:background="@drawable/sidebar_right"
                 android:layout_marginTop="@dimen/fab_margin"
                 android:layout_marginBottom="@dimen/nav_header_height"

@@ -327,6 +327,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
+
         explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -581,6 +582,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 {
                     filterholder.setVisibility(View.GONE);
                 }
+                else filterholder.setVisibility(View.VISIBLE);
 
             }
         });
