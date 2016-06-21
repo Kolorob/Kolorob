@@ -185,6 +185,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ImageButton expandableListShowing,more,MapButton,ListButton,SearchButton,CompareButton;
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
+    Boolean SearchClicked=false,MapClicked=false,ListClicked=false,CompareClicked=false;
     private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -566,7 +567,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SearchClicked=true;
+                MapClicked=false;
+                ListClicked=false;
+                CompareClicked=false;
                 map.setVisibility(View.GONE);
                 svs.setVisibility(View.GONE);
                 explist.setVisibility(View.GONE);
@@ -583,7 +587,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         MapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SearchClicked=false;
+                MapClicked=true;
+                ListClicked=false;
+                CompareClicked=false;
                 searchviewholder.setVisibility(View.GONE);
                 map.setVisibility(View.VISIBLE);
 
@@ -595,6 +602,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchClicked=false;
+                MapClicked=false;
+                ListClicked=true;
+                CompareClicked=false;
                 if(list_expand.equals(false))
                 {
                     svs.setVisibility(View.GONE);
@@ -627,6 +638,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchClicked=false;
+                MapClicked=false;
+                ListClicked=false;
+                CompareClicked=true;
 
                 if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
                 {
@@ -1408,14 +1423,19 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
                 // categoryHeader.setText(ci.getCatName());
 
-
-                if(showList!=1)
+                if(SearchClicked==true)
                 {
+                    svs.setVisibility(View.GONE);
+                }
+                else if(showList!=1 && SearchClicked==false)
+                {
+
                     if (isCatExpandedOnce)
                         showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                     else
                         showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
                 }
+
 
                 else
                 {
