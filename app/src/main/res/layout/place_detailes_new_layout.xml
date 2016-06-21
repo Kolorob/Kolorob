@@ -922,7 +922,7 @@ android:visibility="gone"
 
                 <EditText
                     android:id="@+id/searchall"
-                    android:layout_width="600dp"
+                    android:layout_width="@dimen/searchbar"
                     android:layout_weight="0.87"
                     android:textColor="@color/black"
                     android:hint="@string/search"
@@ -938,7 +938,7 @@ android:visibility="gone"
                      />
                 <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/listheight"
                     android:id="@+id/allitem"
                     android:layout_marginRight="@dimen/fab_margin"
                     android:maxHeight="80dp"
@@ -953,7 +953,7 @@ android:visibility="gone"
                     android:layout_alignParentRight="true"
                     />
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/searchbar"
                     android:id="@+id/filterholder"
 
                     android:layout_marginTop="@dimen/fab_marginforsearch2"
@@ -991,7 +991,7 @@ android:visibility="gone"
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
                                 android:visibility="gone"
-                                android:layout_width="450dp"
+                                android:layout_width="@dimen/searchbar"
                                 android:layout_height="match_parent"
 
                                 android:orientation="horizontal"
