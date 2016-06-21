@@ -14,8 +14,8 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
     private int entSubCategoryId;
     private String nodeName;
     private String nodeNameBn;
-    private String dataName;
-    private String dataDate;
+
+
     private String nodeDesignation;
     private String nodeContact;
     private String nodeEmail;
@@ -24,8 +24,8 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
     private String nodeFacebook;
     private String nodeRegisteredWith;
     private String nodeRegistrationNumber;
-    private String editedBy;
-    private String uploadingTime;
+
+
     private String nodeType;
     private String area;
     private String address;
@@ -39,7 +39,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
     private String road;
     private String block;
     private String landmark;
-    private String additionaltime;
+
 
 
 
@@ -50,8 +50,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
             int entSubCategoryId,
             String nodeName,
             String nodeNameBn,
-            String dataName,
-            String dataDate,
+
             String nodeDesignation,
             String nodeContact,
             String nodeEmail,
@@ -60,22 +59,26 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
             String nodeFacebook,
             String nodeRegisteredWith,
             String nodeRegistrationNumber,
-            String editedBy,
-            String uploadingTime,
+
             String nodeType,
             String area,
             String address,
             String latitude,
             String longitude,
             int categoryId,
-            String openingtime,String breaktime, String closingtime, String road, String block, String landmark, String breaktime2,  String additionaltime){
+            String openingtime,
+            String breaktime,
+            String closingtime,
+            String road,
+            String block,
+            String landmark,
+            String breaktime2){
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;
         this.nodeName=nodeName;
         this.nodeNameBn=nodeNameBn;
-        this.dataName=dataName;
-        this.dataDate=dataDate;
+
         this.nodeDesignation=nodeDesignation;
         this.nodeContact=nodeContact;
         this.nodeEmail=nodeEmail;
@@ -84,8 +87,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         this.nodeFacebook=nodeFacebook;
         this.nodeRegisteredWith=nodeRegisteredWith;
         this.nodeRegistrationNumber=nodeRegistrationNumber;
-        this.editedBy=editedBy;
-        this.uploadingTime=uploadingTime;
+
         this.nodeType=nodeType;
         this.area=area;
         this.address=address;
@@ -99,7 +101,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         this.block = block;
         this.landmark = landmark;
         this.breaktime2 = breaktime2;
-        this.additionaltime = additionaltime;
+
 
 
     }
@@ -132,9 +134,6 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         return block;
     }
 
-    public String getAdditionaltime() {
-        return additionaltime;
-    }
 
     public static EntertainmentServiceProviderItemNew parseEntertainmentServiceProviderItem(JSONObject jo) throws JSONException
     {
@@ -142,8 +141,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         Integer _entSubCategoryId= jo.getInt("ent_sub_category_id");
         String _nodeName = jo.getString("node_name");
         String _nodeNameBn= jo.getString("node_name_bn");
-        String _dataName = jo.getString("data_name");
-        String _dataDate = jo.getString("data_date");
+
         String _nodeDesignation = jo.getString("node_designation");
         String _nodeContact = jo.getString("node_contact");
         String _nodeEmail = jo.getString("node_email");
@@ -152,8 +150,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         String _nodeFacebook = jo.getString("node_facebook");
         String _nodeRegisteredWith = jo.getString("node_registered_with");
         String _nodeRegistrationNumber = jo.getString("node_registration_number");
-        String _editedBy= jo.getString("edited_by");
-        String _uploadingTime = jo.getString("uploading_time");
+
         String _nodeType = jo.getString("node_type");
         String _area = jo.getString("area");
         String _address = jo.getString("address");
@@ -167,7 +164,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         String _block =jo.getString("block");
         String _landmark=jo.getString("landmark");
         String _breaktime2=jo.getString("break_time2");
-        String _additionaltime=jo.getString("additional_time");
+
 
 
 
@@ -176,8 +173,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _entSubCategoryId,
                 _nodeName,
                 _nodeNameBn,
-                _dataName,
-                _dataDate,
+
                 _nodeDesignation,
                 _nodeContact,
                 _nodeEmail,
@@ -186,8 +182,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _nodeFacebook,
                 _nodeRegisteredWith,
                 _nodeRegistrationNumber,
-                _editedBy,
-                _uploadingTime,
+
                 _nodeType,
                 _area,
                 _address,
@@ -197,7 +192,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _openingtime,
                 _breaktime,
                 _closingtime,
-                _road, _block,_landmark, _breaktime2, _additionaltime);
+                _road, _block,_landmark, _breaktime2);
     }
 
 
@@ -217,13 +212,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         return nodeNameBn;
     }
 
-    public String getDataName() {
-        return dataName;
-    }
 
-    public String getDataDate() {
-        return dataDate;
-    }
 
     public String getNodeDesignation() {
         return nodeDesignation;
@@ -257,13 +246,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         return nodeRegistrationNumber;
     }
 
-    public String getEditedBy() {
-        return editedBy;
-    }
 
-    public String getUploadingTime() {
-        return uploadingTime;
-    }
 
     public String getNodeType() {
         return nodeType;
