@@ -357,7 +357,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
-
+        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
         Searchall=(EditText)findViewById(R.id.searchall);
 
         prebutton=(Button) findViewById(R.id.prebutton);
@@ -611,12 +611,15 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 searchviewholder.setVisibility(View.GONE);
                 map.setVisibility(View.GONE);
 
+                    searchviewholder.setVisibility(View.GONE);
+                    compare_layout.setVisibility(View.GONE);
+                }
                     svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
               //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
-                map.setVisibility(View.GONE);
+
                 setShowList(1);
 
                 list_expand=true;
