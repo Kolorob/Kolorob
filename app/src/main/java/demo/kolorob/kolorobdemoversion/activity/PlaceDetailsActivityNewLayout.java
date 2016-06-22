@@ -642,8 +642,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 MapClicked=false;
                 ListClicked=true;
                 CompareClicked=false;
-                if (CompareClicked==false||SearchClicked==false||MapClicked==false)
-                {
+                searchviewholder.setVisibility(View.GONE);
                     SearchButton.setImageResource(0);
                     MapButton.setImageResource(0);
                     CompareButton.setImageResource(0);
@@ -652,14 +651,13 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     ListButton.setBackgroundResource(R.drawable.list_selected);
                     MapButton.setBackgroundResource(R.drawable.map);
                     CompareButton.setBackgroundResource(R.drawable.compare);
-                    map.setVisibility(View.GONE);
+                map.setVisibility(View.GONE);
+
                     subCatItemList.setVisibility(View.VISIBLE);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                 }
-                if(list_expand.equals(false))
-                {
                     svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
@@ -671,19 +669,19 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 list_expand=true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
                 Log.d("====","CategoryId"+currentCategoryID);
-                categoryListBuildUp(currentCategoryID);
-                }
-                else
-                {
-                    llSubCatListHolder.setVisibility(View.VISIBLE);
-                    setShowList(0);
+                categoryListBuildUp(1);
 
-                    list_expand=false;
-                    subCatItemList.setVisibility(View.GONE);
-                   // listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
-                    //constructCategoryList(categoryList);
-
-                }
+//                else
+//                {
+//                    llSubCatListHolder.setVisibility(View.VISIBLE);
+//                    setShowList(0);
+//                    map.setVisibility(View.VISIBLE);
+//                    list_expand=false;
+//                    subCatItemList.setVisibility(View.GONE);
+//                   // listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
+//                    //constructCategoryList(categoryList);
+//
+//                }
 
             }
         });
@@ -852,6 +850,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> print = null;
                 groups.removeAllElements();
+
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
+               // subCatItemList.setChildDivider(R.color.black);
+
                 print = subCategoryTable.getSubnameedu(currentCategoryID, head);
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
@@ -872,6 +874,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
             case AppConstants.ENTERTAINMENT:
 
                 SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
                 currentCategoryID = cat_id;
                 EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printent = null;
@@ -891,6 +894,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
                 SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = cat_id;
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
                 HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printhea = null;
                 groups.removeAllElements();
@@ -911,6 +915,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 currentCategoryID = cat_id;
                 FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printfin = null;
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
                 groups.removeAllElements();
                 printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
                 for (int j = 0; j <  printfin.size(); j++) {
@@ -927,6 +932,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
                 SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = cat_id;
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.legal_aid_color));
                 LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printleg = null;
                 groups.removeAllElements();
