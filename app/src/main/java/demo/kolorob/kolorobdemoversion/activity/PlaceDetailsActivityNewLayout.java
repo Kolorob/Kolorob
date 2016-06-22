@@ -606,10 +606,11 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 MapClicked=true;
                 ListClicked=false;
                 CompareClicked=false;
-                if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
+                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                 {
 
                     svs.setVisibility(View.VISIBLE);
+                    llSubCatListHolder.setVisibility(View.VISIBLE);
                 }
                 if (CompareClicked==false||SearchClicked==false||ListClicked==false)
                 {
