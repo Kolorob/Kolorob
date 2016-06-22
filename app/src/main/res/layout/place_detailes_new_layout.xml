@@ -882,6 +882,8 @@
                 <ExpandableListView
                     android:id="@+id/listView"
                     android:visibility="gone"
+                    android:childDivider="#00000000"
+
 
                     android:background="@color/white"
                     android:layout_width="match_parent"
