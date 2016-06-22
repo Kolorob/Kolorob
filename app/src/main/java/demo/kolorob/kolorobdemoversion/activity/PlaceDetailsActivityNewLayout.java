@@ -357,7 +357,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
 
-
+        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
         Searchall=(EditText)findViewById(R.id.searchall);
 
         prebutton=(Button) findViewById(R.id.prebutton);
@@ -608,6 +608,12 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 MapClicked=false;
                 ListClicked=true;
                 CompareClicked=false;
+                if (CompareClicked==false||SearchClicked==false||MapClicked==false)
+                {
+                    map.setVisibility(View.GONE);
+                    searchviewholder.setVisibility(View.GONE);
+                    compare_layout.setVisibility(View.GONE);
+                }
                 if(list_expand.equals(false))
                 {
                     svs.setVisibility(View.GONE);
@@ -615,7 +621,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
               //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
-                map.setVisibility(View.GONE);
+
                 setShowList(1);
 
                 list_expand=true;
@@ -627,7 +633,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 {
                     llSubCatListHolder.setVisibility(View.VISIBLE);
                     setShowList(0);
-                    map.setVisibility(View.VISIBLE);
+
                     list_expand=false;
                     subCatItemList.setVisibility(View.GONE);
                    // listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
