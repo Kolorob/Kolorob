@@ -259,8 +259,12 @@ public class EntertainmentServiceProviderTableNew {
                              String longitude,
                              int categoryId,
                              String openingtime,
-                             String breaktime, String closingtime,
-                             String road, String block,String landmark, String breaktime2
+                             String breaktime,
+                             String closingtime,
+                             String road,
+                             String block,
+                             String landmark,
+                             String breaktime2
     ) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
