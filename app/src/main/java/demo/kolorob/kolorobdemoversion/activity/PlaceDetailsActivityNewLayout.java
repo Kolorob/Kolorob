@@ -563,7 +563,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
         Populateholder();
         callMapFragment(locationNameId);
-
+        MapButton.setBackgroundResource(R.drawable.map_selected);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -572,14 +572,27 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 MapClicked=false;
                 ListClicked=false;
                 CompareClicked=false;
-                map.setVisibility(View.GONE);
-                svs.setVisibility(View.GONE);
-                explist.setVisibility(View.GONE);
 
-                searchviewholder.setVisibility(View.VISIBLE);
                 populateSearch();
+                if (CompareClicked==false||SearchClicked==false||ListClicked==false)
+                {
+                    SearchButton.setImageResource(0);
+                    MapButton.setImageResource(0);
+                    CompareButton.setImageResource(0);
+                    ListButton.setImageResource(0);
+                    SearchButton.setBackgroundResource(R.drawable.search_selected);
+                    ListButton.setBackgroundResource(R.drawable.list);
+                    MapButton.setBackgroundResource(R.drawable.map);
+                    CompareButton.setBackgroundResource(R.drawable.compare);
+                    map.setVisibility(View.GONE);
+                    svs.setVisibility(View.GONE);
+                    explist.setVisibility(View.GONE);
+                    compare_layout.setVisibility(View.GONE);
+                    searchviewholder.setVisibility(View.VISIBLE);
+                }
                 if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
                 {
+
                     filterholder.setVisibility(View.GONE);
                 }
                 else filterholder.setVisibility(View.VISIBLE);
@@ -593,7 +606,27 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 MapClicked=true;
                 ListClicked=false;
                 CompareClicked=false;
-                searchviewholder.setVisibility(View.GONE);
+                if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
+                {
+
+                    svs.setVisibility(View.VISIBLE);
+                }
+                if (CompareClicked==false||SearchClicked==false||ListClicked==false)
+                {
+                    SearchButton.setImageResource(0);
+                    MapButton.setImageResource(0);
+                    CompareButton.setImageResource(0);
+                    ListButton.setImageResource(0);
+                    SearchButton.setBackgroundResource(R.drawable.search);
+                    ListButton.setBackgroundResource(R.drawable.list);
+                    MapButton.setBackgroundResource(R.drawable.map_selected);
+                    CompareButton.setBackgroundResource(R.drawable.compare);
+                    subCatItemList.setVisibility(View.GONE);
+                   explist.setVisibility(View.GONE);
+                    searchviewholder.setVisibility(View.GONE);
+                    compare_layout.setVisibility(View.GONE);
+                }
+
                 map.setVisibility(View.VISIBLE);
 
 
@@ -610,7 +643,17 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 CompareClicked=false;
                 if (CompareClicked==false||SearchClicked==false||MapClicked==false)
                 {
+                    SearchButton.setImageResource(0);
+                    MapButton.setImageResource(0);
+                    CompareButton.setImageResource(0);
+                    ListButton.setImageResource(0);
+                    SearchButton.setBackgroundResource(R.drawable.search);
+                    ListButton.setBackgroundResource(R.drawable.list_selected);
+                    MapButton.setBackgroundResource(R.drawable.map);
+                    CompareButton.setBackgroundResource(R.drawable.compare);
                     map.setVisibility(View.GONE);
+                    subCatItemList.setVisibility(View.VISIBLE);
+                    explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                 }
@@ -650,7 +693,18 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 MapClicked=false;
                 ListClicked=false;
                 CompareClicked=true;
+                if(MapClicked==false||SearchClicked==false||ListClicked==false)
+                {
+                    SearchButton.setImageResource(0);
+                    MapButton.setImageResource(0);
+                    CompareButton.setImageResource(0);
+                    ListButton.setImageResource(0);
+                    SearchButton.setBackgroundResource(R.drawable.search);
+                    ListButton.setBackgroundResource(R.drawable.list);
+                    MapButton.setBackgroundResource(R.drawable.map);
+                    CompareButton.setBackgroundResource(R.drawable.compare_selected);
 
+                }
                 if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
                 {
                     demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",

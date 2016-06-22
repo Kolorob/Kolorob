@@ -1123,7 +1123,7 @@ android:visibility="gone"
                     android:id="@+id/mapbutton"
                     android:scaleType="center"
 
-                    android:background="@drawable/map_selected"
+                    android:background="@drawable/map"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom" />
