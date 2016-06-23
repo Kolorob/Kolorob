@@ -7,44 +7,27 @@ import org.json.JSONObject;
  * Created by israt.jahan on 2/7/2016.
  */
 public class FinancialServiceDetailsItem {
-    private String nodeId;
-    private String servicename;
-    private String yn;
+    private String finId;
+
     private String servicecost;
     private String serviceremark;
-    private String refNum;
+    private String servicetype;
+    private String servicesubtype;
 
-    public FinancialServiceDetailsItem(String nodeId, String servicename, String yn, String servicecost, String serviceremark, String refNum) {
-        this.nodeId = nodeId;
-        this.servicename = servicename;
-        this.yn = yn;
+    public FinancialServiceDetailsItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+        this.finId = finId;
         this.servicecost = servicecost;
         this.serviceremark = serviceremark;
-        this.refNum = refNum;
+        this.servicetype = servicetype;
+        this.servicesubtype = servicesubtype;
     }
 
-    public String getNodeId() {
-        return nodeId;
+    public String getFinId() {
+        return finId;
     }
 
-    public void setNodeId(String nodeId) {
-        this.nodeId = nodeId;
-    }
-
-    public String getServicename() {
-        return servicename;
-    }
-
-    public void setServicename(String servicename) {
-        this.servicename = servicename;
-    }
-
-    public String getYn() {
-        return yn;
-    }
-
-    public void setYn(String yn) {
-        this.yn = yn;
+    public void setFinId(String finId) {
+        this.finId = finId;
     }
 
     public String getServicecost() {
@@ -63,23 +46,30 @@ public class FinancialServiceDetailsItem {
         this.serviceremark = serviceremark;
     }
 
-    public String getRefNum() {
-        return refNum;
+    public String getServicetype() {
+        return servicetype;
     }
 
-    public void setRefNum(String refNum) {
-        this.refNum = refNum;
+    public void setServicetype(String servicetype) {
+        this.servicetype = servicetype;
     }
 
-    public static FinancialServiceDetailsItem parseFinancialSocialItem(JSONObject jo) throws JSONException {
-        String _nodeId = jo.getString("f_node_id");
-        String _servicename = jo.getString("service_name");
-        String _yn = jo.getString("yes_no");
-        String _servicecost = jo.getString("costs");
-        String _serviceremark = jo.getString("remark");
-        String _refNum = jo.getString("ref_num");
+    public String getServicesubtype() {
+        return servicesubtype;
+    }
 
-        return new FinancialServiceDetailsItem(_nodeId,
-                _servicename, _yn, _servicecost,_serviceremark,_refNum);
+    public void setServicesubtype(String servicesubtype) {
+        this.servicesubtype = servicesubtype;
+    }
+
+    public static FinancialServiceDetailsItem parseFinancialServiceDetailsItem(JSONObject jo) throws JSONException {
+        String _finId = jo.getString("id");
+
+        String _servicecost = jo.getString("financial_cost");
+        String _serviceremark = jo.getString("financial_remarks");
+        String _servicetype = jo.getJSONObject("financial_services").getString("type");
+        String _servicesubtype = jo.getJSONObject("financial_services").getString("sub_type");
+        return new FinancialServiceDetailsItem(_finId,
+                 _servicecost,_serviceremark,_servicetype,_servicesubtype);
     }
 }

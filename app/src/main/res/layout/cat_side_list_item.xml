@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/fab_margin"
 
-    android:gravity="left"
+    android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
     android:id="@+id/linearCatlist"
-android:layout_marginBottom="20dp"
+
     android:weightSum="1">
 
 
@@ -18,8 +19,7 @@ android:layout_marginBottom="20dp"
 
 
         android:contentDescription="@string/txt_cd_icon_cat"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+
         android:paddingTop="0dp"
         android:layout_gravity="left|top" />
 
