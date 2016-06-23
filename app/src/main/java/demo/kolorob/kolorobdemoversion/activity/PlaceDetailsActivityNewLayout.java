@@ -535,6 +535,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
+
         spItems.setAdapter(arrayAdapter);
         spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -657,7 +658,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
-                }
+             //   }
 
 
                 svs.setVisibility(View.GONE);
