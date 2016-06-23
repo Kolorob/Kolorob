@@ -638,11 +638,12 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchClicked=false;
-                MapClicked=false;
-                ListClicked=true;
-                CompareClicked=false;
+                SearchClicked = false;
+                MapClicked = false;
+                ListClicked = true;
+                CompareClicked = false;
                 searchviewholder.setVisibility(View.GONE);
+                if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                     SearchButton.setImageResource(0);
                     MapButton.setImageResource(0);
                     CompareButton.setImageResource(0);
@@ -651,24 +652,24 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     ListButton.setBackgroundResource(R.drawable.list_selected);
                     MapButton.setBackgroundResource(R.drawable.map);
                     CompareButton.setBackgroundResource(R.drawable.compare);
-                map.setVisibility(View.GONE);
+                    map.setVisibility(View.GONE);
 
                     subCatItemList.setVisibility(View.VISIBLE);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                 }
-                    svs.setVisibility(View.GONE);
+                svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
-              //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
+                //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                 setShowList(1);
 
-                list_expand=true;
+                list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
-                Log.d("====","CategoryId"+currentCategoryID);
+                Log.d("====", "CategoryId" + currentCategoryID);
                 categoryListBuildUp(1);
 
 //                else
@@ -682,8 +683,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 //                    //constructCategoryList(categoryList);
 //
 //                }
-
             }
+
         });
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
