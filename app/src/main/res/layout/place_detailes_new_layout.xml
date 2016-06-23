@@ -1040,19 +1040,19 @@ android:visibility="gone"
                 android:layout_width="wrap_content"
 
                 android:background="@drawable/sidebar_left2"
-                android:layout_height="750dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="false"
                 android:layout_above="@+id/toggle"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/nav_header_height"
+                android:layout_marginBottom="@dimen/nav_header_heightcat"
 
                 android:layout_gravity="left|top">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
-                    android:layout_width="match_parent"
+                    android:layout_width="20dp"
 
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -1069,10 +1069,11 @@ android:visibility="gone"
             <ScrollView
                 android:id="@+id/svSubCategoryListHolder"
                 android:layout_width="wrap_content"
-                android:layout_height="750dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/sidebar_right"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/nav_header_height"
+                android:layout_marginBottom="@dimen/nav_header_heightcat"
+
 
                 android:layout_above="@+id/toggle"
                 android:layout_gravity="right|top"
@@ -1088,7 +1089,8 @@ android:visibility="gone"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:focusableInTouchMode="true"
-                    android:paddingLeft="10dp">
+                    android:paddingLeft="15dp"
+                    >
 
 
                 </LinearLayout>

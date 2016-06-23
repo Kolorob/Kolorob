@@ -1230,20 +1230,13 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-       if( height>1200)
+
             v = li.inflate(R.layout.cat_side_list_item, llCatListHolder, false);
-        else
+       /* else
 
        {
-           v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);
-           final int sdk = android.os.Build.VERSION.SDK_INT;
-           if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-               sv.setBackgroundDrawable( getResources().getDrawable(R.drawable.sidebar_left3) );
-           } else {
-               sv.setBackground( getResources().getDrawable(R.drawable.sidebar_left3));
-           }
-
-       }final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
+           v = li.inflate(R.layout.cat_list_mobile, llCatListHolder, false);*/
+         final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
 
 
         //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
@@ -1642,10 +1635,10 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         View v;
         LayoutInflater li = LayoutInflater.from(this);
 
-        if(height>1000)
+
             v = li.inflate(R.layout.sub_cat_list_item, llSubCatListHolder, false);
-        else
-            v = li.inflate(R.layout.sub_cat_list_item1, llSubCatListHolder, false);
+     /*   else
+            v = li.inflate(R.layout.sub_cat_list_item1, llSubCatListHolder, false);*/
         final ImageView ivIcon = (ImageView) v.findViewById(R.id.iv_sub_cat_icon);
         tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
         if(height>1000)
