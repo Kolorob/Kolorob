@@ -344,7 +344,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
         params3.weight = 1;
         params3.width=buttonWidth;
-        ListButton.setLayoutParams(params2);
+        ListButton.setLayoutParams(params3);
         LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
         params4.weight = 1;
         params4.width=buttonWidth;
