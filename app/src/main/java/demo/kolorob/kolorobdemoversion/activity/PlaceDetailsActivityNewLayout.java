@@ -657,7 +657,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
-                }
+
                     svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
