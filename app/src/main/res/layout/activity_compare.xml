@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center">
+
+
+
+    <TableLayout
+        android:id="@+id/tabla_cuerpo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:id="@+id/edu_name_ban"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/edu_name_ban1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/edu_name_ban"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edu_name_ban2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/edu_name_ban"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/edu_name_ban3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/edu_name_ban"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/eduType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/eduType1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/edtype"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/eduType2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/eduType3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/hostel_facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/hostel_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/hostel_facility"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/hostel_facility2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/hostel_facility3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/transport_facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/transport_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/transport_facility"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/transport_facility2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/transport_facility3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/playground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/playground1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/playground"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/playground2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/playground3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/total_students"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_students1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/total_students"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/ttl_students"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_students3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/total_classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_classes1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/total_classes"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_classes2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_classes3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/total_teachers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_teachers1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/total_teachers"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_teachers2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/total_teachers3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/course_provided"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/course_provided1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/course_provided"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/course_provided2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/course_provided3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/shift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/shift1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/shift"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/shift2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/shift3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/canteen_facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/canteen_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/canteen_facility"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/canteen_facility2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            <TextView
+                android:id="@+id/canteen_facility3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

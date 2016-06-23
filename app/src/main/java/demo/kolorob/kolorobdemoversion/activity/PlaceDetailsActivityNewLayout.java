@@ -1,6 +1,5 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -10,15 +9,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -55,25 +51,13 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -119,7 +103,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public void setShowList(int showList) {
         this.showList = showList;
     }
-
+    ToggleButton toggleButton;
     private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
@@ -248,6 +232,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     int filcatid;
     RelativeLayout catholder;
     CheckBox check;
+    Boolean NavigationCalled,NavigationCalledOnce;
     LinearLayout fholder,fleft,fright,mbholder,lbholder,sbholder,cbholder;
 RelativeLayout searchviewholder,filterholder;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
@@ -285,6 +270,17 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<FinancialServiceProviderItem>FIN=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
+    EducationServiceProviderItem nulledu;
+    String nodefromback;
+
+    public String getNodefromback() {
+        return nodefromback;
+    }
+
+    public void setNodefromback(String nodefromback) {
+        this.nodefromback = nodefromback;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -299,7 +295,8 @@ RelativeLayout searchviewholder,filterholder;
 
         editor.commit();
 
-
+NavigationCalled=false;
+        NavigationCalledOnce=false;
         /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
@@ -345,8 +342,9 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
        // SearchButton.setLayoutParams(layoutParams);
        // CompareButton.setLayoutParams(layoutParams);
 
-
+mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
+
 
         Searchall=(EditText)findViewById(R.id.searchall);
 
@@ -397,7 +395,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
 
-        Intent intent;
+        final Intent intent;
         intent = getIntent();
         if (null != intent)
         {
@@ -438,6 +436,8 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
         //subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
+        map.setVisibility(View.VISIBLE);
+        callMapFragment(locationNameId);
         //showsearch=(RelativeLayout)findViewById(R.id.show);
         // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         //seeMap = (Button) findViewById(R.id.btn_see_map);
@@ -452,12 +452,12 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
-        llCatListHolder.setVisibility(View.VISIBLE);
+        llCatListHolder.setVisibility(View.GONE);
         //rlSubCatHolder.setVisibility(View.VISIBLE);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
         ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
-        int s=lp.width = (int) (VIEW_WIDTH);
+        final int s=lp.width = (int) (VIEW_WIDTH);
         lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
@@ -493,7 +493,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
         // callMapFragment();
         spItems = (Spinner) findViewById(R.id.areaitems);
-
+        spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
         spItems.setAdapter(arrayAdapter);
@@ -523,7 +523,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         });
 
         Populateholder();
-        callMapFragment(1);
+        callMapFragment(locationNameId);
 
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
@@ -583,6 +583,52 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
             }
         });
+        CompareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                {
+                    demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                }
+                else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                {
+                    demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                }
+                else {
+                    Intent compare= new Intent(PlaceDetailsActivityNewLayout.this,CompareActivity.class);
+                    startActivity(compare);
+
+                }
+
+            }
+        });
+
+        toggleButton=(ToggleButton)findViewById(R.id.toggle);
+        toggleButton.setVisibility(View.VISIBLE);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if(toggleButton.isChecked()){
+                    llCatListHolder.setVisibility(View.VISIBLE);
+                    if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
+                    {
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    llCatListHolder.setVisibility(View.GONE);
+                    llSubCatListHolder.setVisibility(View.GONE);
+                }
+
+                //Button is OFF
+                // Do Something
+            }
+        });
+
     }
     public void populateSearch()
     {
@@ -602,68 +648,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
     }
 
 
-    public void helpDialog(View v){
 
-        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivityNewLayout.this);
-        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this);
-        alertDialogBuilder.setView(promptView);
-
-        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
-        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
-        final Button button= (Button)promptView.findViewById(R.id.phone_call);
-
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String user= SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
-                String testUser=SharedPreferencesHelper.getFeedback(PlaceDetailsActivityNewLayout.this);
-                if(user.equals(testUser))
-                {
-                    AlertMessage.showMessage(con, "দুঃখিত মতামত গ্রহন করা সম্ভব হচ্ছে না", "আপনি ইতিপূর্বে মতামত দিয়ে ফেলেছেন");
-                }
-
-                else
-                sendDataToserver(userfeedback.getText().toString());
-
-            }
-        });
-//        prebutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                PlaceDetailsActivityNewLayout.this.onBackPressed();
-//
-//            }
-//        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                phoneCall();
-                Toast.makeText(PlaceDetailsActivityNewLayout.this, "...ok....",Toast.LENGTH_LONG).show();
-            }
-        });
-        // setup a dialog window
-        alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //resultText.setText("Hello, " + userfeedback.getText());
-                    }
-                })
-                .setNegativeButton("বাতিল করুন",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-        // create an alert dialog
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
-
-    }
 
 
     public void createData(int cat_id, String head,String placeChoice) {
@@ -914,8 +899,45 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+
+        if(NavigationCalled)
+        {
+            NavigationCalled=false;
+            toggleButton.setVisibility(View.VISIBLE);
+            toggleButton.setChecked(false);
+
+            if (currentCategoryID==1)
+            {
+                NavigationCalledOnce=true;
+                String node=getNodefromback();
+                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this.con);
+                nulledu = educationServiceProviderTable.geteduNode2(node);
+                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsInfoActivityEducation.class);
+                iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+                this.startActivity(iient);
+
+            }
+            else if (NavigationCalled==false)
+            {
+                callMapFragment(locationNameId);
+            }
+        }
+
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 
@@ -1056,7 +1078,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         else {
 
                             llSubCatListHolder.setVisibility(View.GONE);
-                            map.setVisibility(View.VISIBLE);
+
                             ArrayList<EducationServiceProviderItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem(ci.getId());
                             ivIcon.setImageResource(R.drawable.turned_on_porashona);
@@ -1070,7 +1092,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-
+                        ivIcon.setImageResource(R.drawable.turned_on_porashona);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
@@ -1113,7 +1135,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
 
 
@@ -1174,7 +1196,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
 
-                            mapcalledstatus=true;
+
                             llSubCatListHolder.setVisibility(View.GONE);
 
 
@@ -1728,15 +1750,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     }
 
-    public void phoneCall()
-    {
 
-        Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-        callIntent1.setData(Uri.parse("tel:" + "01796559112"));
-        if(checkPermission())
-            startActivity(callIntent1);
-
-    }
 
     private void decCatListWidth(final double dwPerc) {
         new Handler().postDelayed(new Runnable() {
@@ -1835,22 +1849,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
-   private void callMapFragmentWithEducationInfoFromHeader(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        //   mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
 
-        mapFragment.setLocationNameId(locationNameId);
-            mapFragment.setEducationServiceProvider(educationServiceProviderItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-
-
-        fragmentTransaction.commit();
-    }
     private void callMapFragment(int locationNameId) {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2076,10 +2075,9 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     public void implementRouteDrawingFragmentOSM()
     {
-        llCatListHolder.setVisibility(View.GONE);
-        llSubCatListHolder.setVisibility(View.GONE);
-        listholder.setVisibility(View.GONE);
 
+        //listholder.setVisibility(View.GONE);
+NavigationCalled=true;
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
@@ -2303,12 +2301,16 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     @Override
     protected void onRestart() {
+
         super.onRestart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        toggleButton.setVisibility(View.VISIBLE);
+        spItems.setVisibility(View.VISIBLE);
+
         //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
         if(showList==1)
         {
@@ -2320,6 +2322,9 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         SharedPreferences.Editor editor = pref.edit();
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
+
+
+        setNodefromback(pref.getString("nValue",null));
         Boolean valuecheck=pref.getBoolean("Value",false);
         if (valuecheck==false)
         {
@@ -2332,15 +2337,22 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
 
         /// Log.d(">>>>>>","You are in onResume");
-
-
-        if (valuecheck!=false)
+        if (NavigationCalledOnce==true)
         {
+            callMapFragment(locationNameId);
+        }
 
+        if (valuecheck!=false & NavigationCalledOnce==false)
+        {
+            spItems.setVisibility(View.GONE);
             explist.setVisibility(View.GONE);
             map.setVisibility(View.VISIBLE);
+            llCatListHolder.setVisibility(View.GONE);
+            llSubCatListHolder.setVisibility(View.GONE);
+            toggleButton.setVisibility(View.GONE);
             implementRouteDrawingFragmentOSM();
         }
+
 
         else {
             Intent intent;
@@ -2354,6 +2366,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     locationName = AppConstants.PARIS_ROAD;
                     setPlaceChoice(locationName);
                 }
+                map.setVisibility(View.VISIBLE);
             }
             editor.putInt("LocationNameId", locationNameId);
             editor.commit();
@@ -2368,69 +2381,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         }
     }
 
-    public void sendDataToserver(final String text)
-    {
-        String username=SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
-        SharedPreferencesHelper.setFeedback(PlaceDetailsActivityNewLayout.this,username);
 
-        String url = "http://www.kolorob.net/KolorobApi/api/help/save_query?query="+text;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(PlaceDetailsActivityNewLayout.this,response,Toast.LENGTH_SHORT).show();
-
-                        try {
-                            JSONObject jo = new JSONObject(response);
-                            JSONArray forms = jo.getJSONArray("true");
-
-                            if(forms.toString().equals("true"))
-                            {
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "মন্তব্যটি পাঠানো হয়ছে",
-                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-                            }
-                            else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "মন্তব্য পাঠানো সফল হয়নি",
-                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-
-
-
-
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PlaceDetailsActivityNewLayout.this,error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-
-        };
-
-// Adding request to request queue
-
-        RequestQueue requestQueue = Volley.newRequestQueue(PlaceDetailsActivityNewLayout.this);
-        requestQueue.add(stringRequest);
-
-
-
-    }
 
     @Override
     protected void onStart() {
@@ -2448,18 +2399,6 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
     protected void onPause() {
         super.onPause();
         // Log.d(">>>>>>","You are in onPause");
-    }
-    private boolean checkPermission(){
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
-        if (result == PackageManager.PERMISSION_GRANTED){
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
     }
 
 

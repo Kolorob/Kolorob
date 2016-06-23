@@ -5,6 +5,7 @@
     android:id="@+id/categorytoolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    android:background="#F7941E"
 
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -42,7 +43,7 @@
                     android:id="@+id/textView15"
                     android:layout_centerVertical="true"
 
-                    />
+                    android:textColor="#ffffff" />
 
                 <Spinner
                     android:layout_width="150dp"

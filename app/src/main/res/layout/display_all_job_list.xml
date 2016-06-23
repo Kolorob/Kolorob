@@ -1,72 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
-    android:layout_marginTop="15dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
     android:orientation="vertical">
 
 
 
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp"></LinearLayout>
+
+
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+
             android:id="@+id/titlePart"
-            android:gravity="center">
+            android:textStyle="bold"
+            android:gravity="center_horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
+                android:textColor="@color/white"
 
                 android:text="Title"
-                android:id="@+id/title"/>
+                android:id="@+id/title"
+                 />
 
         </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/salaryPart">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/remaining_date_lin">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
 
                 android:text="Remaining Date"
                 android:id="@+id/remaining_date"
                 />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/salaryPart_lin">
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Salary Renge"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:id="@+id/salary_range"
                 />
-        </LinearLayout>
 
 
 
@@ -75,24 +68,9 @@
 
 
 
-    </LinearLayout>
-
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/last_row"
-             android:layout_marginBottom="50dp"
-             android:layout_marginLeft="20dp"
-
-             android:orientation="horizontal">
 
 
 
-             <LinearLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                 android:id="@+id/addressPart">
 
 
                  <TextView
@@ -100,37 +78,37 @@
                      android:layout_height="wrap_content"
                      android:text="Address"
                      android:id="@+id/address"
-                     android:textColor="@color/black"
+                     android:textColor="@color/white"
 
                      />
 
 
 
-             </LinearLayout>
 
 
-             <LinearLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                 android:id="@+id/numberPart">
+
+
 
 
                  <TextView
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text="Contract Number"
-                     android:textColor="@color/black"
+                     android:textColor="@color/white"
 
 
                      android:id="@+id/contact_number"
                      />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></LinearLayout>
 
 
-             </LinearLayout>
+
+
 
 
          </LinearLayout>
 
-</LinearLayout>
+

@@ -9,22 +9,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.ContactsContract;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -51,7 +45,6 @@ import java.util.Map;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
-import demo.kolorob.kolorobdemoversion.adapters.LegalAidAdviceAdapter;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
@@ -61,6 +54,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by arafat on 28/05/2016.
@@ -89,6 +83,7 @@ public class DetailsInfoActivityEducation extends Activity {
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
     String result_concate;
+    private CheckBox checkBox;
 
 
     @Override
@@ -143,6 +138,33 @@ public class DetailsInfoActivityEducation extends Activity {
         distance_left=(ImageView)findViewById(R.id.distance_left);
         email_btn=(ImageView) findViewById(R.id.right_side_email);
         feedback=(ImageView)findViewById(R.id.feedback);
+        checkBox=(CheckBox)findViewById(R.id.compare);
+
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+             int compareValue;
+                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityEducation.this);
+                if(compareValue>=2)
+                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+                else if (compareValue==0)
+                {
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
+                }
+
+                else if(compareValue==1)
+                {
+                    String previous_node;
+                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
+                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
+                }
+
+
+            }
+        });
 
 
 
@@ -551,6 +573,7 @@ public class DetailsInfoActivityEducation extends Activity {
                     String lon = educationServiceProviderItem.getLongitude().toString();
                     // double longitude = Double.parseDouble(lon);
                     String name= educationServiceProviderItem.getEduNameBan().toString();
+                    String node=educationServiceProviderItem.getIdentifierId();
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -558,11 +581,12 @@ public class DetailsInfoActivityEducation extends Activity {
                     editor.putString("Longitude", lon);
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
+                    editor.putString("nValue", node);
                     editor.commit();
 
 
-                    String Longitude = pref.getString("Latitude", null);
-                    String Latitude = pref.getString("Longitude", null);
+                    String Longitude = pref.getString("Longitude", null);
+                    String Latitude = pref.getString("Latitude", null);
 
                     if (Latitude != null && Longitude != null) {
                         Double Lon = Double.parseDouble(Longitude);

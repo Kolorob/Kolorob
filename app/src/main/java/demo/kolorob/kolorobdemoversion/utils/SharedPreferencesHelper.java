@@ -38,6 +38,9 @@ public final class SharedPreferencesHelper {
 	private static final String NUMBER = "number";
 	private static final String EMAIL = "email";
 	private static final String FEEDBACK = "feedback";
+	private static final String COMAPARE_1 = "compare1";
+	private static final String COMPARE_2 = "compare";
+
 
 	// Getters for Application configuration attributes and preferences defined
 	// in Android Manifest
@@ -98,6 +101,26 @@ public final class SharedPreferencesHelper {
 		final Editor editor = prefs.edit();
 		editor.putString(SharedPreferencesHelper.EMAIL, user);
 		editor.commit();
+	}
+
+	public static void setCompareData(final Context ctx, final String node_id,int compare)
+	{
+		final SharedPreferences prefs = ctx.getSharedPreferences(SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor= prefs.edit();
+		editor.putString(COMAPARE_1,node_id);
+		editor.putInt(COMPARE_2,compare);
+
+		editor.commit();
+	}
+	public static int getComapreValue(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getInt(SharedPreferencesHelper.COMPARE_2, 0);
+	}
+	public static String getComapreData(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.COMAPARE_1, "");
 	}
 
 

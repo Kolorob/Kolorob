@@ -5,7 +5,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/transparent"
+    android:background="#F7941E"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -20,11 +20,12 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_weight="0.3"
             android:id="@+id/toolbar_logoa"
             android:background="@color/white"
-
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal"
 
             android:descendantFocusability="beforeDescendants"
@@ -33,10 +34,13 @@
 
             <EditText
                 android:id="@+id/searchall"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_weight="0.87"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:drawableLeft="@drawable/search_icons"
                 android:textColor="@color/black"
                 android:hint="@string/search"
                 android:textColorHint="@color/red"
@@ -52,16 +56,7 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/toolbar_logo"
-            android:src="@drawable/search_icons"
-            android:layout_width="50dp"
-            android:layout_weight="0.2"
-            android:layout_height="match_parent"
 
-
-
-            />
 
 
 

@@ -283,7 +283,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         Log.d(">>>>>>","Group Value "+catid);
 
         if(catid==1)
-               ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_5);
+               ((CheckedTextView) convertView).setBackgroundResource(R.color.green);
         else if(catid==2)
             ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_4);
         else if(catid==3)

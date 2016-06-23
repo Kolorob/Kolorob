@@ -54,7 +54,7 @@ public class DisplayAllJobsActivity extends Activity {
 
 
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Do you want to Update Job Portal?");
+        alertDialog.setTitle("আপনি কি নতুন চাকুরি খুজতে চান? ");
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
                 new DialogInterface.OnClickListener() {
