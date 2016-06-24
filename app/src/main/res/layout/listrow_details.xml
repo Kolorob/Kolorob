@@ -4,17 +4,19 @@
     android:layout_height="60dp"
     android:clickable="true"
     android:orientation="vertical"
-    android:paddingLeft="15dp"
-    tools:context=".MainActivity" >
+    android:id="@+id/row_view"
+    android:paddingLeft="25dp"
+  >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-android:text="hello"
+        android:text="hello"
+        android:layout_marginLeft="27dp"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
-
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" >
     </TextView>

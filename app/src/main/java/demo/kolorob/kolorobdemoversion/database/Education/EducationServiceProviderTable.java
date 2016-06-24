@@ -415,7 +415,7 @@ public class EducationServiceProviderTable  {
         ArrayList<EducationServiceProviderItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_IDENTIFIER_ID+"="+node_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_IDENTIFIER_ID +" = "+node_id, null);
 
         if (cursor.moveToFirst()) {
             do {

@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     public Activity activity;
     private int catid;
     private Context ctx;
+    private LinearLayout linearLayout;
 
     public MyExpandableListAdapter(Activity act, Vector<Group> groups,int categoryid) {
         activity = act;
@@ -112,11 +114,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         if (v == null) {
             v = inflater.inflate(R.layout.listrow_details, null);
         }
+        linearLayout=(LinearLayout)v.findViewById(R.id.row_view);
         switch (catid) {
             case AppConstants.EDUCATION:
             final EducationServiceProviderItem det = groups.get(groupPosition).getchildren().get(childPosition);
             text = (TextView) v.findViewById(R.id.textView1);
             text.setText(det.getEduNameBan());
+                linearLayout.setBackgroundResource(R.color.education_color);
+
 
             v.setOnClickListener(new OnClickListener() {
                 @Override
@@ -137,6 +142,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 final EntertainmentServiceProviderItem detent = groups.get(groupPosition).getChildrenent().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detent.getNodeNameBn());
+                linearLayout.setBackgroundResource(R.color.entertainment_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -154,6 +160,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 final HealthServiceProviderItem dethea = groups.get(groupPosition).getChildrenhea().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(dethea.getNameBn());
+                linearLayout.setBackgroundResource(R.color.health_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -173,6 +180,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 final FinancialServiceProviderItem detfin = groups.get(groupPosition).getChildrenfin().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detfin.getNamebn());
+                linearLayout.setBackgroundResource(R.color.financial_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -187,6 +195,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 final LegalAidServiceProviderItem detleg = groups.get(groupPosition).getChildrenleg().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detleg.getLegalaidNameBan());
+                linearLayout.setBackgroundResource(R.color.legal_aid_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -283,15 +292,15 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         Log.d(">>>>>>","Group Value "+catid);
 
         if(catid==1)
-               ((CheckedTextView) convertView).setBackgroundResource(R.color.green);
+               ((CheckedTextView) convertView).setBackgroundResource(R.color.education_color);
         else if(catid==2)
-            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_4);
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.health_color);
         else if(catid==3)
-            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_2);
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.entertainment_color);
         else if(catid==5)
-            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_1);
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.legal_aid_color);
         else if(catid==6)
-            ((CheckedTextView) convertView).setBackgroundResource(R.drawable.color_box_7);
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
 
 
       //

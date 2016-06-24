@@ -28,12 +28,13 @@ dependencies {
     compile project(':volley')
 
     compile 'com.github.MKergall:osmbonuspack:v5.8.1'
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
-    compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.google.android.gms:play-services-analytics:8.4.0'
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.7.12'
+    compile 'com.android.support:support-v4:23.3.0'
 }

@@ -3,21 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
+    android:layout_marginTop="@dimen/fab_margin"
+
+    android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
     android:id="@+id/linearCatlist"
+
     android:weightSum="1">
 
 
     <ImageView
         android:id="@+id/ivIconCatList"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+
         android:contentDescription="@string/txt_cd_icon_cat"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+
         android:paddingTop="0dp"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="left|top" />
 
     <!--<TextView-->
         <!--android:id="@+id/tvNameCatList"-->

@@ -60,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //tables for financial services
     public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";
     public static final String FINANCIAL_SERVICE_BILLS="financial_bills";
+    public static final String FINANCIAL_SERVICE_DETAILS="financial_details";
     public static final String FINANCIAL_SERVICE_INSURANCE="financial_insurance";
     public static final String FINANCIAL_SERVICE_LOAN="financial_loan";
     public static final String FINANCIAL_SERVICE_PAYMENT="financial_payment";

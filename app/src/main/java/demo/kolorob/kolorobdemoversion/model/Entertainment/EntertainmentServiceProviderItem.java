@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 /**
- * Created by Mazharul.Islam1 on 1/5/2016.
+ * Created by arafat on 1/5/2016.
  */
 public class EntertainmentServiceProviderItem implements Serializable {
     private String nodeId;
@@ -32,12 +32,10 @@ public class EntertainmentServiceProviderItem implements Serializable {
     private String latitude;
     private String longitude;
     private int categoryId;
-
     private String openingtime;
     private String closingtime;
     private String breaktime;
     private String breaktime2;
-
     private String road;
     private String block;
     private String landmark;

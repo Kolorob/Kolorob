@@ -24,18 +24,18 @@ public class AppConstants {
             R.drawable.but_shorkari_small,R.drawable.but_ain_small,  R.drawable.but_taka_small,R.drawable.but_chakri_small
             };
     public static final int[] OFF_BUTTON = {R.drawable.off_button};
-    public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.turned_off_porashona, R.drawable.turned_off_chikitsha,R.drawable.turned_off_anondo_furti,
-            R.drawable.turned_off_shorkari_shubidha,R.drawable.turned_off_ain_kanun,  R.drawable.turned_off_taka_poisha,R.drawable.turned_off_chakri_bakri
+    public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.education, R.drawable.health,R.drawable.entertainment,
+            R.drawable.government,R.drawable.legal,  R.drawable.finance,R.drawable.job
     };
     public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.turned_on_porashona, R.drawable.turned_on_chikitsha,R.drawable.turned_on_anondo_furti,
             R.drawable.turned_on_shorkari_shubidha,R.drawable.turned_on_ain_kanun,  R.drawable.turned_on_taka_poisha,R.drawable.turned_on_chakri_bakri
     };
-    public static final int[] ALL_CAT_MARKER_ICONS = {R.drawable.blue_pin,R.drawable.red_pin,R.drawable.magenta_pin,
-        R.drawable.orange_pin,R.drawable.deep_blue_pin,R.drawable.light_orange_pin,R.drawable.green_pin,R.drawable.purple_pin,
-    R.drawable.brown_pin,R.drawable.sky_blue_pin};
-    public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.blue_button,R.drawable.red_button,R.drawable.light_purple_button,
-            R.drawable.orange_button,R.drawable.brown_button,R.drawable.sky_blue_button,R.drawable.light_orange_button,R.drawable.deep_blue_button,
-            R.drawable.magenta_button,R.drawable.off_button};
+    public static final int[] ALL_CAT_MARKER_ICONS = {R.drawable.pin_1,R.drawable.pin_2,R.drawable.pin_3,
+            R.drawable.pin_4,R.drawable.pin_5,R.drawable.pin_6,R.drawable.pin_7,R.drawable.pin_8,
+            R.drawable.pin_9,R.drawable.pin_10};
+    public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.pin1,R.drawable.pin2,R.drawable.pin3,
+            R.drawable.pin4,R.drawable.pin5,R.drawable.pin6,R.drawable.pin7,R.drawable.pin8,
+            R.drawable.pin9,R.drawable.pin10};
     public static final float[] MARKER_HUE_COLOR = {BitmapDescriptorFactory.HUE_RED,BitmapDescriptorFactory.HUE_BLUE,
             BitmapDescriptorFactory.HUE_RED,(float)300,BitmapDescriptorFactory.HUE_GREEN,
             (float)324.8,(float)168.8,BitmapDescriptorFactory.HUE_YELLOW,BitmapDescriptorFactory.HUE_ORANGE};

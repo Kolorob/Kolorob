@@ -21,6 +21,13 @@
     <color name="orange">#FF8040</color>
     <color name="details_upperhand_color">#93A037</color>
     <color name="details_info_scrollview_background">#DFF6D9</color>
+    <color name="education_color">#2F7281 </color>
+    <color name="entertainment_color">#43446E </color>
+    <color name="health_color">#832D27 </color>
+    <color name="financial_color">#5F621C </color>
+    <color name="legal_aid_color">#895E3D </color>
+    <color name="listView_color">#FBF3D3 </color>
+    FBF3D3
 
 
 
