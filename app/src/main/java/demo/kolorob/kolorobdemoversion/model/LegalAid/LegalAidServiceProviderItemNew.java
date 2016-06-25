@@ -35,8 +35,19 @@ public class LegalAidServiceProviderItemNew implements Serializable {
     private String road;
     private String block;
     private String off_day;
+    private String floor;
+    private String house_name;
+    private String house_no;
+    private String line;
+    private String avenue;
+    private String police_station;
 
-    public LegalAidServiceProviderItemNew(String identifierId, String post_office, int legalaidSubCategoryId, int categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day) {
+    public LegalAidServiceProviderItemNew(String identifierId, String post_office, int legalaidSubCategoryId, int categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day, String floor
+            , String house_name,
+             String house_no,
+             String line,
+             String avenue,
+             String police_station) {
         this.identifierId = identifierId;
         this.post_office = post_office;
         this.legalaidSubCategoryId = legalaidSubCategoryId;
@@ -63,6 +74,18 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         this.block = block;
         this.breaktime2 = breaktime2;
         this.off_day = off_day;
+        this.floor = floor;
+        this.house_name=house_name;
+        this.house_no=house_no;
+        this.landmark = landmark;
+        this.road = road;
+        this.block = block;
+        this.breaktime2 = breaktime2;
+        this.off_day = off_day;
+        this.line=line;
+        this.avenue=avenue;
+        this.police_station=police_station;
+
     }
 
     public String getOpeningtime() {
@@ -176,6 +199,31 @@ public class LegalAidServiceProviderItemNew implements Serializable {
     public String getLongitude() {
         return longitude;
     }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public String getHouse_name() {
+        return house_name;
+    }
+
+    public String getHouse_no() {
+        return house_no;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public String getAvenue() {
+        return avenue;
+    }
+
+    public String getPolice_station() {
+        return police_station;
+    }
+
     public static LegalAidServiceProviderItemNew parseLegalAidServiceProviderItemNew(JSONObject jo) throws JSONException {
         String _identifierId = jo.getString("identifier_id");
         String post_office = jo.getString("post_office");
@@ -203,10 +251,19 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         String _block =jo.getString("block");
         String _breaktime2=jo.getString("break_time2");
         String off_day=jo.getString("off_day");
+        String floor=jo.getString("floor");
+        String house_name=jo.getString("house_name");
+        String house_no=jo.getString("house_no");
+        String line=jo.getString("line");
+        String avenue=jo.getString("off_day");
+        String police_station=jo.getString("off_day");
+
 
         return new LegalAidServiceProviderItemNew(_identifierId, post_office, _legalaidSubCategoryId,
                 _categoryId,_legalaidNameEng, _legalaidBan, _contactPersonDesignation, _contactNo, _emailAddress, _websiteLink,
-                _fbLink, _registeredWith, _registrationNo, _additionalInfo, _area, _address, _latitude, _longitude, _openingtime, _breaktime, _closingtime, _landmark, _road, _block, _breaktime2, off_day);
+                _fbLink, _registeredWith, _registrationNo,
+                _additionalInfo, _area, _address, _latitude, _longitude, _openingtime, _breaktime, _closingtime, _landmark, _road, _block, _breaktime2,
+                off_day,floor,house_name,house_no,line,avenue,police_station);
 
     }
 }
