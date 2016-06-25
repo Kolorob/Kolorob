@@ -48,6 +48,13 @@ public class LegalAidServiceProviderTableNew {
     private static final String KEY_BLOCK = "_block"; //
     private static final String KEY_BREAKTIME2 = "_breaktime2"; //
     private static final String KEY_0FF_DAY = "off_day";
+    private static final String KEY_FLOOR = "_floor"; //
+    private static final String KEY_HOUSE_NAME = "_house_name"; //
+    private static final String KEY_HOUSE_NO = "_house_no"; //
+    private static final String KEY_LINE = "_line"; //
+    private static final String KEY_AVENUE = "_avenue"; //
+    private static final String KEY_POLICE_STATION = "_police_station"; //
+
 
     private Context tContext;
 
@@ -86,7 +93,13 @@ public class LegalAidServiceProviderTableNew {
                 + KEY_ROAD+ " TEXT, "
                 + KEY_BLOCK + " TEXT, "
                 + KEY_BREAKTIME2 + " TEXT, "
-                + KEY_0FF_DAY + " TEXT, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_LEGAL_AID_SUBCATEGORY_ID + ", " + KEY_POST_OFFICE + "))";
+                + KEY_0FF_DAY+ " TEXT, "
+                + KEY_FLOOR + " TEXT, "
+                + KEY_HOUSE_NAME + " TEXT, "
+                + KEY_HOUSE_NO+ " TEXT, "
+                + KEY_LINE + " TEXT, "
+                + KEY_AVENUE + " TEXT, "
+                + KEY_POLICE_STATION + " TEXT, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_LEGAL_AID_SUBCATEGORY_ID + ", " + KEY_POST_OFFICE + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -115,7 +128,13 @@ public class LegalAidServiceProviderTableNew {
                 legalAidServiceProviderItem.getRoad(),
                 legalAidServiceProviderItem.getBlock(),
                 legalAidServiceProviderItem.getBreaktime2(),
-                legalAidServiceProviderItem.getOff_day()
+                legalAidServiceProviderItem.getOff_day(),
+                legalAidServiceProviderItem.getFloor(),
+                legalAidServiceProviderItem.getHouse_name(),
+                legalAidServiceProviderItem.getHouse_no(),
+                legalAidServiceProviderItem.getLine(),
+                legalAidServiceProviderItem.getAvenue(),
+                legalAidServiceProviderItem.getPolice_station()
         );
     }
 
@@ -138,7 +157,21 @@ public class LegalAidServiceProviderTableNew {
                            String address,
                            String latitude,
                            String longitude
-            , String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day) {
+                         , String openingtime,
+                           String breaktime,
+                           String closingtime,
+                           String landmark,
+                           String road,
+                           String block,
+                           String breaktime2,
+                           String off_day,
+                           String floor,
+                           String house_name,
+                           String house_no,
+                           String line,
+                           String avenue,
+                           String police_station
+    ) {
         if (isFieldExist(identifierId, categoryId, legalaidSubCategoryId)) {
             return updateItem(
                     identifierId,
@@ -165,7 +198,14 @@ public class LegalAidServiceProviderTableNew {
                     road,
                     block,
                     breaktime2,
-                    off_day);
+                    off_day,
+                    floor,
+                    house_name,
+                    house_no,
+                    line,
+                    avenue,
+                    police_station
+                    );
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_IDENTIFIER_ID, identifierId);
@@ -195,6 +235,12 @@ public class LegalAidServiceProviderTableNew {
         rowValue.put(KEY_BLOCK   , block );
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
         rowValue.put(KEY_0FF_DAY  , off_day );
+        rowValue.put(KEY_FLOOR,floor);
+        rowValue.put(KEY_HOUSE_NAME,house_name);
+        rowValue.put(KEY_HOUSE_NO,house_no);
+        rowValue.put(KEY_LINE,line);
+        rowValue.put(KEY_AVENUE,avenue);
+        rowValue.put(KEY_POLICE_STATION,police_station);
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
@@ -214,7 +260,8 @@ public class LegalAidServiceProviderTableNew {
                         cursor.getString(8),cursor.getString(9),
                         cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
                         cursor.getString(16), cursor.getString(17),cursor.getString(18),cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),
-                        cursor.getString(23),cursor.getString(24),cursor.getString(25));
+                        cursor.getString(23),cursor.getString(24),cursor.getString(25),cursor.getString(26),cursor.getString(27),
+                        cursor.getString(28),cursor.getString(29),cursor.getString(30),cursor.getString(31));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -282,7 +329,21 @@ public class LegalAidServiceProviderTableNew {
             String area,
             String address,
             String latitude,
-            String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day) {
+            String longitude,
+            String openingtime,
+            String breaktime,
+            String closingtime,
+            String landmark,
+            String road,
+            String block,
+            String breaktime2,
+            String off_day,
+            String floor,
+            String house_name,
+            String house_no,
+            String line,
+            String avenue,
+            String police_station) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_IDENTIFIER_ID, identifierId);
@@ -311,6 +372,12 @@ public class LegalAidServiceProviderTableNew {
         rowValue.put(KEY_BLOCK   , block );
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
         rowValue.put(KEY_0FF_DAY  , off_day );
+        rowValue.put(KEY_FLOOR,floor);
+        rowValue.put(KEY_HOUSE_NAME,house_name);
+        rowValue.put(KEY_HOUSE_NO,house_no);
+        rowValue.put(KEY_LINE,line);
+        rowValue.put(KEY_AVENUE,avenue);
+        rowValue.put(KEY_POLICE_STATION,police_station);
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND " + KEY_LEGAL_AID_SUBCATEGORY_ID + " = ? AND " + KEY_CATEGORY_ID + " = ? ",
                 new String[]{identifierId + "", legalaidSubCategoryId + "", categoryId + ""});
@@ -442,6 +509,13 @@ public class LegalAidServiceProviderTableNew {
         String _block=cursor.getString(23);
         String _breaktime2=cursor.getString(24);
         String off_day=cursor.getString(25);
+        String floor=cursor.getString(26);
+        String house_name=cursor.getString(27);
+        String house_no=cursor.getString(28);
+        String line=cursor.getString(29);
+        String avenue=cursor.getString(30);
+        String police_station=cursor.getString(31);
+
 
         return new LegalAidServiceProviderItemNew(_identifierId, post_office, _legalaidSubCategoryId,
                 _categoryId, _legalaidNameEng, _legalaidBan, _contactPersonDesignation, _contactNo, _emailAddress, _websiteLink,
@@ -452,7 +526,14 @@ public class LegalAidServiceProviderTableNew {
                 _road,
                 _block,
                 _breaktime2,
-                off_day);
+                off_day,
+                floor,
+                house_name,
+                house_no,
+                line,
+                avenue,
+                police_station
+                );
 
     }
 
