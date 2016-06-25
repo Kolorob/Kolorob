@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.model.LegalAid;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -225,6 +226,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
     }
 
     public static LegalAidServiceProviderItemNew parseLegalAidServiceProviderItemNew(JSONObject jo) throws JSONException {
+
         String _identifierId = jo.getString("identifier_id");
         String post_office = jo.getString("post_office");
         int _legalaidSubCategoryId = jo.getInt("legal_aid_subcategory_id");
@@ -257,6 +259,12 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         String line=jo.getString("line");
         String avenue=jo.getString("off_day");
         String police_station=jo.getString("off_day");
+
+
+
+
+
+
 
 
         return new LegalAidServiceProviderItemNew(_identifierId, post_office, _legalaidSubCategoryId,
