@@ -12,90 +12,85 @@
     tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upper"
-        android:layout_above="@+id/bottomlayoutid"
 
-        >
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/upper"
+
+        android:gravity="center_vertical|center_horizontal">
+
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:id="@+id/upper_part"
+            android:layout_width="0dp"
+            android:layout_weight="0.10"
 
             android:layout_height="wrap_content">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:id="@+id/iv_kolorob_logo"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/job_topimge"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.50"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/upperText"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="2dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:id="@+id/iv_kolorob_logo"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/job_topimge"
-                    />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="82dp"
-                    android:text="বাউনিয়াবাদ আইডিয়াল হাই স্কুল "
-                    android:textSize="20dp"
-                    android:layout_marginTop="5dp"
-
-                    android:paddingLeft="10dp"
-
-                    android:layout_marginRight="40dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/ups_text"
-
-                    />
-
-
-
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/cross_jb"
-    android:layout_marginTop="5dp"
-
-    android:id="@+id/close_button"
-    />
-
-
-
-
-            </LinearLayout>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:background="@color/white"
-                android:id="@+id/bottom"
-                android:layout_marginTop="20dp"
-                android:layout_height="5dp">
-
-            </View>
-
+                android:text="বাউনিয়াবাদ আইডিয়াল হাই স্কুল "
+                android:id="@+id/ups_text"
+                android:textSize="23dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"/>
 
 
         </LinearLayout>
 
 
         <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.25"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:gravity="center">
+
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/close_button"
+                android:src="@drawable/cross_jb"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:focusable="true" />
+
+
+        </LinearLayout>
+
+
+
+
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/scrollingPart"

@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String ENT_SHISHU_PARK = "ent_shishu_park";
     public static final String ENT_SUB_CATEGORY = "ent_sub_category";
     public static final String ENT_THEATRE = "ent_theatre";
+    public static final String Legal_Aid_Details_Table= "legal_details";
     public static final String ENT_TRAINING_CENTER = "ent_training_center";
 
     public static final String LEGAL_AID_SERVICE_PROVIDER_TABLE="legal_aid_provider";

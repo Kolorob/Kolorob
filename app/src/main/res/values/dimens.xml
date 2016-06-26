@@ -8,6 +8,7 @@
     <dimen name="fab_marginforsearch">20dp</dimen>
     <dimen name="fab_marginforsearch2">20dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_heightcat">10dp</dimen>
     <dimen name="nav_header_height">50dp</dimen>
     <dimen name="nav_header_height2">50dp</dimen>
     <dimen name="nav_header_height3">80dp</dimen>

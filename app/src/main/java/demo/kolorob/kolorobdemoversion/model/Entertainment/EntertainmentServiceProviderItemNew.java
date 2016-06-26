@@ -39,7 +39,15 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
     private String road;
     private String block;
     private String landmark;
-
+    private String floor;
+    private String house_name;
+    private String house_no;
+    private String line;
+    private String avenue;
+    private String post_office;
+    private String police_station;
+    private String city;
+    private String off_day;
 
 
 
@@ -72,7 +80,15 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
             String road,
             String block,
             String landmark,
-            String breaktime2){
+            String breaktime2, String floor,
+                    String house_name,
+                    String house_no,
+                    String line,
+                    String avenue,
+                    String post_office,
+                    String police_station,
+                    String city,
+                    String off_day){
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;
@@ -99,8 +115,17 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         this.closingtime = closingtime;
         this.road = road;
         this.block = block;
-        this.landmark = landmark;
-        this.breaktime2 = breaktime2;
+        this.landmark=landmark;
+        this.breaktime2=breaktime2;
+        this.floor = floor;
+        this.house_no = house_no;
+        this.house_name = house_name;
+        this.line = line;
+        this.avenue = avenue;
+        this.post_office = post_office;
+        this.police_station = police_station;
+        this.city = city;
+        this.off_day = off_day;
 
 
 
@@ -134,6 +159,41 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         return block;
     }
 
+    public String getFloor() {
+        return floor;
+    }
+
+    public String getHouse_no() {
+        return house_no;
+    }
+
+    public String getHouse_name() {
+        return house_name;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public String getAvenue() {
+        return avenue;
+    }
+
+    public String getPost_office() {
+        return post_office;
+    }
+
+    public String getPolice_station() {
+        return police_station;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getOff_day() {
+        return off_day;
+    }
 
     public static EntertainmentServiceProviderItemNew parseEntertainmentServiceProviderItem(JSONObject jo) throws JSONException
     {
@@ -164,6 +224,15 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         String _block =jo.getString("block");
         String _landmark=jo.getString("landmark");
         String _breaktime2=jo.getString("break_time2");
+        String floor=jo.getString("break_time2");
+        String house_name=jo.getString("break_time2");
+        String house_no=jo.getString("break_time2");
+        String line=jo.getString("break_time2");
+        String avenue=jo.getString("break_time2");
+        String post_office=jo.getString("break_time2");
+        String police_station=jo.getString("break_time2");
+        String city=jo.getString("break_time2");
+        String off_day=jo.getString("break_time2");
 
 
 
@@ -173,7 +242,6 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _entSubCategoryId,
                 _nodeName,
                 _nodeNameBn,
-
                 _nodeDesignation,
                 _nodeContact,
                 _nodeEmail,
@@ -182,7 +250,6 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _nodeFacebook,
                 _nodeRegisteredWith,
                 _nodeRegistrationNumber,
-
                 _nodeType,
                 _area,
                 _address,
@@ -192,7 +259,15 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _openingtime,
                 _breaktime,
                 _closingtime,
-                _road, _block,_landmark, _breaktime2);
+                _road, _block,_landmark, _breaktime2,floor,
+                 house_name,
+                 house_no,
+                line,
+                avenue,
+                post_office,
+                 police_station,
+                 city,
+                off_day);
     }
 
 

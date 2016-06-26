@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="সকল চাকুরির তালিকা "
                 android:textSize="27dp"
+                android:paddingLeft="10dp"
                 android:textColor="@color/white"/>
 
 

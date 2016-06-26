@@ -45,58 +45,108 @@
                 android:background="@drawable/compare_screen"
                >
 
+                <!--android:visibility="gone"-->
+                <!--<LinearLayout-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:id="@+id/header_compare"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content">-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:id="@+id/first_screen_logo"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:background="@drawable/school_logo_default"-->
+                            <!--android:id="@+id/first_screen_logo_image"-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--/>-->
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:id="@+id/compare_logo"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:background="@drawable/compare_logo_default"-->
+
+                            <!--android:id="@+id/compare_logo_image"-->
+                            <!--/>-->
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:id="@+id/second_school_logo"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:background="@drawable/school_logo_default"-->
+
+
+                            <!--android:id="@+id/second_school_logo_image"-->
+                            <!--/>-->
+                    <!--</LinearLayout>-->
+
+
+
+                <!--</LinearLayout>-->
+
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:id="@+id/header_compare"
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_height="wrap_content">
 
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:id="@+id/first_screen_logo"
+
+
+                    <ImageView
                         android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/school_logo_default"
+                        android:id="@+id/first_screen_logo_image"
+                        android:layout_gravity="center_horizontal"
+                        />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/school_logo_default"
-                            android:id="@+id/first_screen_logo_image"
-                            />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:id="@+id/compare_logo"
+
+
+                    <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/compare_logo_default"
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/compare_logo_default"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/compare_logo_image"
+                        />
 
-                            android:id="@+id/compare_logo_image"
-                            />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:id="@+id/second_school_logo"
+
+
+                    <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/school_logo_default"
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/school_logo_default"
 
-                            android:id="@+id/second_school_logo_image"
-                            />
-                    </LinearLayout>
+                        android:id="@+id/second_school_logo_image"
+                        />
+
 
 
 
@@ -1040,19 +1090,19 @@ android:visibility="gone"
                 android:layout_width="wrap_content"
 
                 android:background="@drawable/sidebar_left2"
-                android:layout_height="750dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="false"
                 android:layout_above="@+id/toggle"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/nav_header_height"
+                android:layout_marginBottom="@dimen/nav_header_heightcat"
 
                 android:layout_gravity="left|top">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
-                    android:layout_width="match_parent"
+                    android:layout_width="20dp"
 
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -1069,10 +1119,11 @@ android:visibility="gone"
             <ScrollView
                 android:id="@+id/svSubCategoryListHolder"
                 android:layout_width="wrap_content"
-                android:layout_height="750dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/sidebar_right"
                 android:layout_marginTop="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/nav_header_height"
+                android:layout_marginBottom="@dimen/nav_header_heightcat"
+
 
                 android:layout_above="@+id/toggle"
                 android:layout_gravity="right|top"
@@ -1088,7 +1139,8 @@ android:visibility="gone"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:focusableInTouchMode="true"
-                    android:paddingLeft="10dp">
+                    android:paddingLeft="15dp"
+                    >
 
 
                 </LinearLayout>

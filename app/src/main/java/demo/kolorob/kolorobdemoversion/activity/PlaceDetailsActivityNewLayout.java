@@ -332,22 +332,31 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
       //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
+        final  LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
         params.weight = 1;
         params.width=buttonWidth;
+        double d=buttonWidth*0.56;
+        double large=buttonWidth*0.69;
+        final int larg=(int)Math.round(large);
+        final int smal=(int)Math.round(d);
+        params.height=larg;
 
         MapButton.setLayoutParams(params);
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
+        final LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
         params2.weight = 1;
         params2.width=buttonWidth;
+        params2.height=(int)Math.round(d);
         SearchButton.setLayoutParams(params2);
-        LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
+        final   LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
         params3.weight = 1;
         params3.width=buttonWidth;
-        ListButton.setLayoutParams(params2);
-        LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
+        params3.height=(int)Math.round(d);
+        ListButton.setLayoutParams(params3);
+        ListButton.getHeight();
+       final LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
         params4.weight = 1;
         params4.width=buttonWidth;
+        params4.height=(int)Math.round(d);
         CompareButton.setLayoutParams(params4);
        // SearchButton.setMinimumWidth(buttonWidth);
         //ListButton.setLayoutParams(layoutParams);
@@ -574,12 +583,20 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                 CompareClicked=false;
 
                 populateSearch();
-                if (CompareClicked==false||SearchClicked==false||ListClicked==false)
+                if (CompareClicked==false||MapClicked==false||ListClicked==false)
                 {
                     SearchButton.setImageResource(0);
                     MapButton.setImageResource(0);
                     CompareButton.setImageResource(0);
                     ListButton.setImageResource(0);
+                    params2.height=larg;
+                    SearchButton.setLayoutParams(params2);
+                    params.height=smal;
+                    MapButton.setLayoutParams(params);
+                    params3.height=smal;
+                    ListButton.setLayoutParams(params3);
+                    params4.height=smal;
+                    CompareButton.setLayoutParams(params4);
                     SearchButton.setBackgroundResource(R.drawable.search_selected);
                     ListButton.setBackgroundResource(R.drawable.list);
                     MapButton.setBackgroundResource(R.drawable.map);
@@ -618,6 +635,15 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     MapButton.setImageResource(0);
                     CompareButton.setImageResource(0);
                     ListButton.setImageResource(0);
+                    params.height=larg;
+                    MapButton.setLayoutParams(params);
+
+                    params2.height=smal;
+                    SearchButton.setLayoutParams(params2);
+                    params3.height=smal;
+                    ListButton.setLayoutParams(params3);
+                    params4.height=smal;
+                    CompareButton.setLayoutParams(params4);
                     SearchButton.setBackgroundResource(R.drawable.search);
                     ListButton.setBackgroundResource(R.drawable.list);
                     MapButton.setBackgroundResource(R.drawable.map_selected);
@@ -638,16 +664,25 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchClicked = false;
-                MapClicked = false;
-                ListClicked = true;
-                CompareClicked = false;
+                SearchClicked=false;
+                MapClicked=false;
+                ListClicked=true;
+                CompareClicked=false;
                 searchviewholder.setVisibility(View.GONE);
                 if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                     SearchButton.setImageResource(0);
                     MapButton.setImageResource(0);
                     CompareButton.setImageResource(0);
                     ListButton.setImageResource(0);
+                    params3.height=larg;
+                    ListButton.setLayoutParams(params3);
+
+                    params2.height=smal;
+                    SearchButton.setLayoutParams(params2);
+                    params.height=smal;
+                    MapButton.setLayoutParams(params);
+                    params4.height=smal;
+                    CompareButton.setLayoutParams(params4);
                     SearchButton.setBackgroundResource(R.drawable.search);
                     ListButton.setBackgroundResource(R.drawable.list_selected);
                     MapButton.setBackgroundResource(R.drawable.map);
@@ -683,6 +718,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 //                    //constructCategoryList(categoryList);
 //
 //                }
+
             }
 
         });
@@ -699,6 +735,15 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     MapButton.setImageResource(0);
                     CompareButton.setImageResource(0);
                     ListButton.setImageResource(0);
+                    params4.height=larg;
+                    CompareButton.setLayoutParams(params4);
+
+                    params2.height=smal;
+                    SearchButton.setLayoutParams(params2);
+                    params.height=smal;
+                    MapButton.setLayoutParams(params);
+                    params.height=smal;
+                    ListButton.setLayoutParams(params);
                     SearchButton.setBackgroundResource(R.drawable.search);
                     ListButton.setBackgroundResource(R.drawable.list);
                     MapButton.setBackgroundResource(R.drawable.map);

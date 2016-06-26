@@ -295,6 +295,37 @@ int countofDb;
             );
 
 
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            // Log.d("====","Response"+apiContent);
+
+
+                            try {
+                                Log.d("====","I am here");
+                                JSONArray legal_array= new JSONArray(apiContent);
+                                //  JSONObject jo = new JSONObject(apiContent);
+                                int p= legal_array.length();
+                                Log.d("====","LengthArray "+p);
+
+                                for(int i=0;i<p;i++)
+                                {
+
+                                }
+
+//                                   String apiSt = jo.getString(AppConstants.KEY_STATUS);
+//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+//                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+            );
+
+
+
             getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -349,6 +380,8 @@ int countofDb;
                     }
                 }
             });
+
+
             getRequest(OpeningActivity.this, "health/all", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
@@ -384,6 +417,7 @@ int countofDb;
                         }
                     }
             );
+
 //
 
 //            getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
