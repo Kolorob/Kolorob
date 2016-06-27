@@ -834,7 +834,7 @@ int countofDb;
                 }
                 if(jo.has("timing_info"))
                 {
-                    JSONArray timing = jo.getJSONArray("timing_info");
+                    JSONObject timing = jo.getJSONObject("timing_info");
 
 
                         FinancialTimingInfoItem financialContactInfoItem = FinancialTimingInfoItem.parseFinancialTimingInfoItem(timing);
@@ -845,7 +845,7 @@ int countofDb;
                 }
                 if(jo.has("registration_info"))
                 {
-                    JSONArray reg = jo.getJSONArray("registration_info");
+                    JSONObject reg = jo.getJSONObject("registration_info");
 
                         FinancialRegistrationInfoItem financialRegistrationInfoItem = FinancialRegistrationInfoItem.parseFinancialRegistrationInfoItem(reg);
                     financialServiceRegistrationInfoTable.insertItem(financialRegistrationInfoItem);
