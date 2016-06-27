@@ -35,7 +35,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
@@ -128,7 +131,7 @@ int countofDb;
     public int getCountofDb() {
         return countofDb;
     }
-
+    ArrayList<Trialholder>holdertrial=new ArrayList<>();
     public void setCountofDb(int countofDb) {
         this.countofDb = countofDb;
     }
@@ -595,11 +598,14 @@ int countofDb;
         EducationCourseTable educationCourseTable = new EducationCourseTable(OpeningActivity.this);
         educationCourseTable.dropTable();
         educationFeeTable.dropTable();
+        EducationCourseItem Eci =null;
+        EducationFeeItem Etf=null;
+        EducationServiceProviderItem et=null;
         int eduServiceProviderCount = educationServiceProvider.length();
         for (int i = 0; i < eduServiceProviderCount; i++) {
             try {
                 JSONObject jo = educationServiceProvider.getJSONObject(i);
-                EducationServiceProviderItem et = EducationServiceProviderItem.parseEducationServiceProviderItem(jo);
+                 et = EducationServiceProviderItem.parseEducationServiceProviderItem(jo);
                 educationServiceProviderTable.insertItem(et);
 
                 if(jo.has("EducationServiceProviderCourse"))
@@ -609,7 +615,7 @@ int countofDb;
                     {
                         JSONObject joesCourse= eduCourse.getJSONObject(k);
 
-                        EducationCourseItem Eci = EducationCourseItem.parseEducationCourseItem(joesCourse);
+                        Eci = EducationCourseItem.parseEducationCourseItem(joesCourse);
                         educationCourseTable.insertItem(Eci);
 
                     }
@@ -623,7 +629,7 @@ int countofDb;
                     {
                         JSONObject joes= eduExamFees.getJSONObject(j);
 
-                        EducationFeeItem Etf = EducationFeeItem.parseEducationFeeItem(joes);
+                        Etf = EducationFeeItem.parseEducationFeeItem(joes);
                         educationFeeTable.insertItem(Etf);
 
                     }
@@ -633,7 +639,9 @@ int countofDb;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
+
         countofDb++;
     }
     /**
