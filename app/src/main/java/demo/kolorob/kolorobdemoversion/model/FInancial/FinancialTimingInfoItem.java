@@ -7,12 +7,14 @@ import org.json.JSONObject;
  * Created by israt.jahan on 6/26/2016.
  */
 public class FinancialTimingInfoItem {
+    String finId;
     String openingtime;
     String closetime;
     String breaktime;
     String offday;
 
-    public FinancialTimingInfoItem(String openingtime, String closetime, String breaktime, String offday) {
+    public FinancialTimingInfoItem(   String finId,String openingtime, String closetime, String breaktime, String offday) {
+       this.finId=finId;
         this.openingtime = openingtime;
         this.closetime = closetime;
         this.breaktime = breaktime;
@@ -51,12 +53,12 @@ public class FinancialTimingInfoItem {
         this.offday = offday;
     }
     public static FinancialTimingInfoItem parseFinancialTimingInfoItem(JSONObject jo) throws JSONException {
+        String _finId = jo.getString("id");
         String _opentime = jo.getString("opening_time");
-
         String _breaktime = jo.getString("break_time");
         String _closetime = jo.getString("closing_time");
         String _offday = jo.getString("off_day");
-        return new FinancialTimingInfoItem(_opentime,
+        return new FinancialTimingInfoItem(_finId,_opentime,
                 _breaktime,_closetime,_offday);
     }
 }

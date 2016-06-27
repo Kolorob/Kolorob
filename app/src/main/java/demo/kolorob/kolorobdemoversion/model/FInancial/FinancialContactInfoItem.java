@@ -7,6 +7,7 @@ import org.json.JSONObject;
  * Created by israt.jahan on 6/26/2016.
  */
 public class FinancialContactInfoItem {
+    String finId;
            String floor;
            String housename;
            String houseno;
@@ -28,7 +29,8 @@ public class FinancialContactInfoItem {
            String node_facebook;
            String node_designation;
 
-    public FinancialContactInfoItem(String floor, String housename, String houseno, String road, String line, String avenue, String block, String area, String landmark, String postoffice, String policestation, String city, String country, String node_contact, String node_contact2, String node_email, String node_website, String node_facebook, String node_designation) {
+    public FinancialContactInfoItem(String finId,String floor, String housename, String houseno, String road, String line, String avenue, String block, String area, String landmark, String postoffice, String policestation, String city, String country, String node_contact, String node_contact2, String node_email, String node_website, String node_facebook, String node_designation) {
+        this.finId=finId;
         this.floor = floor;
         this.housename = housename;
         this.houseno = houseno;
@@ -202,6 +204,7 @@ public class FinancialContactInfoItem {
         this.node_designation = node_designation;
     }
     public static FinancialContactInfoItem parseFinancialContactInfoItem(JSONObject jo) throws JSONException {
+        String _finId = jo.getString("id");
         String _floor = jo.getString("floor");
         String _housename = jo.getString("house_name");
         String _houseno = jo.getString("house_no");
@@ -225,7 +228,7 @@ public class FinancialContactInfoItem {
 
 
 
-        return new FinancialContactInfoItem(_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
+        return new FinancialContactInfoItem(_finId,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation
         );
     }
