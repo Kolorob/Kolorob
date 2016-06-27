@@ -53,7 +53,13 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialLoanTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialPaymentTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceContactInfoTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceMapInfoTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceRegistrationInfoTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceTimingInfoTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
@@ -79,12 +85,18 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialContactInfoItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialMapInfoItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialPaymentItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialRegistrationInfoItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTimingInfoItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
@@ -326,7 +338,23 @@ int countofDb;
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/finance", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
 
+
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                        savenewFinance(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
 
             getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
@@ -760,6 +788,96 @@ int countofDb;
         }
         countofDb++;
     }
+    private void savenewFinance(JSONArray financial ) {
+        FinancialServiceNewTable financialServiceNewTable=new FinancialServiceNewTable(OpeningActivity.this);
+        FinancialServiceMapInfoTable financialServiceMapInfoTable=new FinancialServiceMapInfoTable(OpeningActivity.this);
+        FinancialServiceRegistrationInfoTable financialServiceRegistrationInfoTable=new FinancialServiceRegistrationInfoTable(OpeningActivity.this);
+        FinancialServiceContactInfoTable financialServiceContactInfoTable=new FinancialServiceContactInfoTable(OpeningActivity.this);
+        FinancialServiceTimingInfoTable financialServiceTimingInfoTable=new FinancialServiceTimingInfoTable(OpeningActivity.this);
+        FinancialServiceDetailsTable financialServiceDetailsTable=new FinancialServiceDetailsTable(OpeningActivity.this);
+    financialServiceContactInfoTable.dropTable();
+        financialServiceDetailsTable.dropTable();
+        financialServiceMapInfoTable.dropTable();
+        financialServiceNewTable.dropTable();
+        financialServiceRegistrationInfoTable.dropTable();
+        financialServiceTimingInfoTable.dropTable();
+
+        int legalaidServiceProviderCount = financial.length();
+
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+            try {
+                JSONObject jo = financial.getJSONObject(i);
+                FinancialNewItem et = FinancialNewItem.parseFinancialMapInfoItem(jo);
+                financialServiceNewTable.insertItem(et);
+
+                if(jo.has("map_info"))
+                {
+                    JSONObject MapInfo = jo.getJSONObject("map_info");
+
+
+                        FinancialMapInfoItem lasi = FinancialMapInfoItem.parseFinancialMapInfoItem(MapInfo);
+                        financialServiceMapInfoTable.insertItem(lasi);
+
+
+
+                }
+                if(jo.has("contact_info"))
+                {
+                    JSONObject contact = jo.getJSONObject("contact_info");
+
+
+                        FinancialContactInfoItem financialContactInfoItem = FinancialContactInfoItem.parseFinancialContactInfoItem(contact);
+                        financialServiceContactInfoTable.insertItem(financialContactInfoItem);
+
+
+
+                }
+                if(jo.has("timing_info"))
+                {
+                    JSONArray timing = jo.getJSONArray("timing_info");
+
+
+                        FinancialTimingInfoItem financialContactInfoItem = FinancialTimingInfoItem.parseFinancialTimingInfoItem(timing);
+                        financialServiceTimingInfoTable.insertItem(financialContactInfoItem);
+
+
+
+                }
+                if(jo.has("registration_info"))
+                {
+                    JSONArray reg = jo.getJSONArray("registration_info");
+
+                        FinancialRegistrationInfoItem financialRegistrationInfoItem = FinancialRegistrationInfoItem.parseFinancialRegistrationInfoItem(reg);
+                    financialServiceRegistrationInfoTable.insertItem(financialRegistrationInfoItem);
+
+
+
+                }
+                if(jo.has("fin_service_details"))
+                {
+                    JSONArray service_details = jo.getJSONArray("fin_service_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        FinancialServiceDetailsItem financialServiceDetailsItem = FinancialServiceDetailsItem.parseFinancialServiceDetailsItem(joes);
+                        financialServiceDetailsTable.insertItem(financialServiceDetailsItem);
+
+                    }
+
+                }
+                if(jo.has("category"))
+                {
+
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        countofDb++;
+    }
+
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
         legalAidServiceProviderTable.dropTable();
