@@ -152,6 +152,14 @@ public class FinancialContactInfoItem {
         return country;
     }
 
+    public String getFinId() {
+        return finId;
+    }
+
+    public void setFinId(String finId) {
+        this.finId = finId;
+    }
+
     public void setCountry(String country) {
         this.country = country;
     }

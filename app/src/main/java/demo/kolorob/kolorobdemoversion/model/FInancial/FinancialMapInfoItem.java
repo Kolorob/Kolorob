@@ -17,6 +17,14 @@ public class FinancialMapInfoItem {
         this.lon = lon;
     }
 
+    public String getFinId() {
+        return finId;
+    }
+
+    public void setFinId(String finId) {
+        this.finId = finId;
+    }
+
     public String getLat() {
         return lat;
     }

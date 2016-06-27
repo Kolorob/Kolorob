@@ -17,6 +17,14 @@ public class FinancialRegistrationInfoItem {
         this.registerednumber = registerednumber;
     }
 
+    public String getFinId() {
+        return finId;
+    }
+
+    public void setFinId(String finId) {
+        this.finId = finId;
+    }
+
     public String getRegisteredwith() {
         return registeredwith;
     }

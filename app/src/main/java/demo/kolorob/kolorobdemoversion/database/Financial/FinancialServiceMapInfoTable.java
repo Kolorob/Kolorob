@@ -7,21 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialMapInfoItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
 public class FinancialServiceMapInfoTable {
-    private static final String TAG = FinancialServiceMapInfoTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_MAP;
+    private static final String TAG = FinancialServiceDetailsTable.class.getSimpleName();
+    private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_DETAILS;
     private static final String KEY_FIN_NODE_ID = "_finId";
-    private static final String KEY_FIN_SERVICE_COST = "_servicecost"; // 1 - text
-    private static final String KEY_FIN_SERVICE_REMARK = "_serviceremark"; //
-    private static final String KEY_FIN_SERVICE_TYPE = "_servicetype"; // 0 -integer
+    private static final String KEY_FIN_SERVICE_LAT = "_lat"; // 1 - text
+    private static final String KEY_FIN_SERVICE_LON = "_lon"; //
 
-    private static final String KEY_FIN_SERVICE_SUBTYPE = "_servicesubtype"; // 2 - text*/
     private Context tContext;
 
     public FinancialServiceMapInfoTable(Context context) {
@@ -34,10 +32,8 @@ public class FinancialServiceMapInfoTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_FIN_NODE_ID + " TEXT , "
-                + KEY_FIN_SERVICE_COST + "  TEXT  , " // 0 - int "
-                + KEY_FIN_SERVICE_REMARK + " TEXT, "
-                + KEY_FIN_SERVICE_TYPE + " TEXT, "
-                + KEY_FIN_SERVICE_SUBTYPE + " TEXT,   PRIMARY KEY(" + KEY_FIN_NODE_ID + "))";
+                + KEY_FIN_SERVICE_LAT + "  TEXT  , " // 0 - int "
+                + KEY_FIN_SERVICE_LON + " TEXT,   PRIMARY KEY(" + KEY_FIN_NODE_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -49,31 +45,27 @@ public class FinancialServiceMapInfoTable {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
-    public long insertItem(FinancialServiceDetailsItem financialServiceDetailsItem) {
+    public long insertItem(FinancialMapInfoItem financialMapInfoItem) {
         return insertItem(
-                financialServiceDetailsItem.getFinId(),
-                financialServiceDetailsItem.getServicecost(),
-                financialServiceDetailsItem.getServiceremark(),
-                financialServiceDetailsItem.getServicetype(),
-                financialServiceDetailsItem.getServicesubtype()
+                financialMapInfoItem.getFinId(),
+                financialMapInfoItem.getLat(),
+                financialMapInfoItem.getLon()
+
         );
     }
-    private long insertItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    private long insertItem(String finId, String lat, String lon) {
         if (isFieldExist(finId)) {
             return updateItem(
                     finId,
-                    servicecost,
-                    serviceremark,
-                    servicetype,
-                    servicesubtype);
+                    lat,
+                    lon);
 
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID , finId);
-        rowValue.put(KEY_FIN_SERVICE_COST, servicecost);
-        rowValue.put(KEY_FIN_SERVICE_REMARK, serviceremark);
-        rowValue.put(KEY_FIN_SERVICE_TYPE, servicetype);
-        rowValue.put(KEY_FIN_SERVICE_SUBTYPE, servicesubtype);
+        rowValue.put(KEY_FIN_SERVICE_LAT, lat);
+        rowValue.put(KEY_FIN_SERVICE_LON, lon);
+
 
 
 
@@ -83,14 +75,13 @@ public class FinancialServiceMapInfoTable {
         return ret;}
 
 
-    private long updateItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    private long updateItem(String finId, String lat, String lon) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID , finId);
-        rowValue.put(KEY_FIN_SERVICE_COST, servicecost);
-        rowValue.put(KEY_FIN_SERVICE_REMARK, serviceremark);
-        rowValue.put(KEY_FIN_SERVICE_TYPE, servicetype);
-        rowValue.put(KEY_FIN_SERVICE_SUBTYPE, servicesubtype);
+        rowValue.put(KEY_FIN_SERVICE_LAT, lat);
+        rowValue.put(KEY_FIN_SERVICE_LON, lon);
+
 
 
         SQLiteDatabase db = openDB();
@@ -120,17 +111,16 @@ public class FinancialServiceMapInfoTable {
         closeDB();
         return false;
     }
-    private FinancialServiceDetailsItem cursorToSubCatList(Cursor cursor) {
+    private FinancialMapInfoItem cursorToSubCatList(Cursor cursor) {
         String _finId = cursor.getString(0);
-        String _servicecost= cursor.getString(1);
-        String _serviceremark = cursor.getString(2);
-        String _servicetype = cursor.getString(3);
-        String _servicesubtype = cursor.getString(4);
+        String _lat= cursor.getString(1);
+        String _lon = cursor.getString(2);
 
 
 
-        return new FinancialServiceDetailsItem(_finId,
-                _servicecost,_serviceremark,_servicetype,_servicesubtype);
+
+        return new FinancialMapInfoItem(_finId,
+                _lat,_lon);
 
 
     }

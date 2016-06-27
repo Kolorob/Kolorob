@@ -41,6 +41,14 @@ public class FinancialTimingInfoItem {
         return breaktime;
     }
 
+    public String getFinId() {
+        return finId;
+    }
+
+    public void setFinId(String finId) {
+        this.finId = finId;
+    }
+
     public void setBreaktime(String breaktime) {
         this.breaktime = breaktime;
     }
