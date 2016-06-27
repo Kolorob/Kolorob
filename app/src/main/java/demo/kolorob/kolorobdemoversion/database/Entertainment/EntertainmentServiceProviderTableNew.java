@@ -50,15 +50,15 @@ public class EntertainmentServiceProviderTableNew {
     private static final String KEY_BLOCK = "_block"; //
     private static final String KEY_LANDMARK = "_landmark"; //
     private static final String KEY_BREAKTIME2 = "_breaktime2"; //
-    public static final String KEY_FLOOR = "_longitude";
-    public static final String KEY_HOUSE_NAME = "_categoryId";
-    private static final String KEY_HOUSE_NUMBER = "_openingtime"; //
-    private static final String KEY_LINE = "_breaktime"; //
-    private static final String KEY_AVENUE = "_closingtime";
-    private static final String KEY_POST_OFFICE = "_road"; //
-    private static final String KEY_POLICE_STATION = "_block"; //
-    private static final String KEY_CITY = "_landmark"; //
-    private static final String KEY_OFF_DAY = "_breaktime2"; //
+    public static final String KEY_FLOOR = "floor";
+    public static final String KEY_HOUSE_NAME = "_house_name";
+    private static final String KEY_HOUSE_NUMBER = "_house_number"; //
+    private static final String KEY_LINE = "_line"; //
+    private static final String KEY_AVENUE = "_avenue";
+    private static final String KEY_POST_OFFICE = "_post_office"; //
+    private static final String KEY_POLICE_STATION = "_police_station"; //
+    private static final String KEY_CITY = "_city"; //
+    private static final String KEY_OFF_DAY = "_off_day"; //
 
 
     private Context tContext;
@@ -573,7 +573,7 @@ public class EntertainmentServiceProviderTableNew {
         String post_office=cursor.getString(34);
         String police_station=cursor.getString(35);
         String city=cursor.getString(36);
-        String off_day=cursor.getString(27);
+        String off_day=cursor.getString(37);
 
 
 

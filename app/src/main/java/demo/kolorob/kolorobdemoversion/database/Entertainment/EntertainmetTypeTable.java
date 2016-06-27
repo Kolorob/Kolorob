@@ -22,7 +22,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class EntertainmetTypeTable {
 
     private static final String TAG = EntertainmentTheatreTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.ENT_THEATRE;
+    private static final String TABLE_NAME = DatabaseHelper.ENT_DETAILS_INFO;
     public static final String KEY_NODE_ID = "_node_id";
     public static final String KEY_RECREATION_PRICE = "name";
     public static final String KEY_RECREATION_REMARKS = "bn_label";
