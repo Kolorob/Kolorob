@@ -215,9 +215,11 @@ public class FinancialContactInfoItem {
         String _finId = jo.getString("id");
         String _floor = jo.getString("floor");
         String _housename = jo.getString("house_name");
+
         String _houseno = jo.getString("house_no");
         String _road = jo.getString("road");
         String _line = jo.getString("line");
+
         String _avenue = jo.getString("avenue");
         String _block = jo.getString("block");
         String _area = jo.getString("area");
@@ -225,12 +227,15 @@ public class FinancialContactInfoItem {
         String _landmark = jo.getString("landmark");
         String _postoffice = jo.getString("post_office");
         String _policestation = jo.getString("police_station");
+
         String _city = jo.getString("city");
         String _country = jo.getString("country");
         String _node_contact = jo.getString("node_contact");
+
         String _node_contact2 = jo.getString("node_contact2");
         String _node_email = jo.getString("node_email");
         String _node_website = jo.getString("node_website");
+
         String _node_facebook=jo.getString("node_facebook");
         String _node_designation=jo.getString("node_designation");
 

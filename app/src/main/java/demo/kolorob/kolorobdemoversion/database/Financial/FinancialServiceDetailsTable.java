@@ -33,7 +33,7 @@ public class FinancialServiceDetailsTable {
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_FIN_NODE_ID + " TEXT , "
+                + KEY_FIN_NODE_ID + " INTEGER , "
                 + KEY_FIN_SERVICE_COST + "  TEXT  , " // 0 - int "
                 + KEY_FIN_SERVICE_REMARK + " TEXT, "
                 + KEY_FIN_SERVICE_TYPE + " TEXT, "
