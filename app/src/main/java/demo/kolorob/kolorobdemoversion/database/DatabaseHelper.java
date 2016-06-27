@@ -69,6 +69,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String FINANCIAL_SERVICE_TAX="financial_tax";
     public static final String FINANCIAL_SERVICE_TRANSACTION="financial_transaction";
     public static final String FINANCIAL_SERVICE_TUITION="financial_tuition";
+    public static final String FINANCIAL_SERVICE_MAP="financial_mapinfo";
+    public static final String FINANCIAL_SERVICE_CONTACT="financial_contactinfo";
+    public static final String FINANCIAL_SERVICE_REGISTRATION="financial_registrationinfo";
+    public static final String FINANCIAL_SERVICE_TIMING="financial_timinginfo";
 
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
