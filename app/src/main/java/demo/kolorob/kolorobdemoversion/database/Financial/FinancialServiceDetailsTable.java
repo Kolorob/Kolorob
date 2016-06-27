@@ -35,9 +35,9 @@ public class FinancialServiceDetailsTable {
                 + "( "
                 + KEY_FIN_NODE_ID + " INTEGER , "
                 + KEY_FIN_SERVICE_COST + "  TEXT  , " // 0 - int "
-                + KEY_FIN_SERVICE_REMARK + " TEXT, "
-                + KEY_FIN_SERVICE_TYPE + " TEXT, "
-                + KEY_FIN_SERVICE_SUBTYPE + " TEXT,   PRIMARY KEY(" + KEY_FIN_NODE_ID + "))";
+                + KEY_FIN_SERVICE_REMARK + " TEXT , "
+                + KEY_FIN_SERVICE_TYPE   + " TEXT , "
+                + KEY_FIN_SERVICE_SUBTYPE + " TEXT )";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -58,7 +58,7 @@ public class FinancialServiceDetailsTable {
                 financialServiceDetailsItem.getServicesubtype()
         );
     }
-    private long insertItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    public long insertItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
         if (isFieldExist(finId)) {
             return updateItem(
                     finId,
