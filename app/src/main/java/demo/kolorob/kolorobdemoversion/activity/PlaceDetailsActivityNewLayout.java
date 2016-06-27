@@ -688,12 +688,12 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     MapButton.setBackgroundResource(R.drawable.map);
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     map.setVisibility(View.GONE);
-
+                }
                     subCatItemList.setVisibility(View.VISIBLE);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
-                }
+
                 svs.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
