@@ -339,7 +339,7 @@ int countofDb;
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/finance", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/finance", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {

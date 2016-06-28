@@ -31,7 +31,7 @@ public class FinancialServiceNewTable {
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_FIN_NODE_ID + " TEXT , "
+                + KEY_FIN_NODE_ID + " INTEGER , "
                 + KEY_FIN_NAME_EN + "  TEXT  , " // 0 - int "
                 + KEY_FIN_NAME_BN + " TEXT,   PRIMARY KEY(" + KEY_FIN_NODE_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
@@ -53,7 +53,7 @@ public class FinancialServiceNewTable {
 
         );
     }
-    private long insertItem(String finId, String nameen, String namebn) {
+    private long insertItem(int finId, String nameen, String namebn) {
         if (isFieldExist(finId)) {
             return updateItem(
                     finId,
@@ -75,7 +75,7 @@ public class FinancialServiceNewTable {
         return ret;}
 
 
-    private long updateItem(String finId, String nameen, String namebn) {
+    private long updateItem(int finId, String nameen, String namebn) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID , finId);
@@ -94,13 +94,13 @@ public class FinancialServiceNewTable {
 
 
 
-    public boolean isFieldExist(String nodeid) {
+    public boolean isFieldExist(int nodeid) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (nodeid.equals(cursor.getString(0) )) {
+                if (cursor.getInt(0)==nodeid) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -112,7 +112,7 @@ public class FinancialServiceNewTable {
         return false;
     }
     private FinancialNewItem cursorToSubCatList(Cursor cursor) {
-        String _finId = cursor.getString(0);
+        int _finId = cursor.getInt(0);
         String _nameen= cursor.getString(2);
         String _namebn = cursor.getString(1);
 
