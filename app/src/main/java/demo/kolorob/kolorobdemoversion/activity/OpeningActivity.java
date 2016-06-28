@@ -53,13 +53,9 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialLoanTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialPaymentTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceContactInfoTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceMapInfoTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceRegistrationInfoTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceTimingInfoTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
@@ -89,6 +85,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialPaymentItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
@@ -810,17 +807,13 @@ int countofDb;
     }
     private void savenewFinance(JSONArray financial ) {
         FinancialServiceNewTable financialServiceNewTable=new FinancialServiceNewTable(OpeningActivity.this);
-        FinancialServiceMapInfoTable financialServiceMapInfoTable=new FinancialServiceMapInfoTable(OpeningActivity.this);
-        FinancialServiceRegistrationInfoTable financialServiceRegistrationInfoTable=new FinancialServiceRegistrationInfoTable(OpeningActivity.this);
-        FinancialServiceContactInfoTable financialServiceContactInfoTable=new FinancialServiceContactInfoTable(OpeningActivity.this);
-        FinancialServiceTimingInfoTable financialServiceTimingInfoTable=new FinancialServiceTimingInfoTable(OpeningActivity.this);
+
         FinancialServiceDetailsTable financialServiceDetailsTable=new FinancialServiceDetailsTable(OpeningActivity.this);
-    financialServiceContactInfoTable.dropTable();
+
         financialServiceDetailsTable.dropTable();
-        financialServiceMapInfoTable.dropTable();
+
         financialServiceNewTable.dropTable();
-        financialServiceRegistrationInfoTable.dropTable();
-        financialServiceTimingInfoTable.dropTable();
+
 
         int legalaidServiceProviderCount = financial.length();
 
@@ -830,50 +823,8 @@ int countofDb;
                 FinancialNewItem et = FinancialNewItem.parseFinancialMapInfoItem(jo);
                 financialServiceNewTable.insertItem(et);
 
-              /*  if(jo.has("map_info"))
-                {
-                    JSONObject MapInfo = jo.getJSONObject("map_info");
 
-
-                        FinancialMapInfoItem lasi = FinancialMapInfoItem.parseFinancialMapInfoItem(MapInfo);
-                        financialServiceMapInfoTable.insertItem(lasi);
-
-
-
-                }
-                if(jo.has("contact_info"))
-                {
-                    JSONObject contact = jo.getJSONObject("contact_info");
-
-
-                        FinancialContactInfoItem financialContactInfoItem = FinancialContactInfoItem.parseFinancialContactInfoItem(contact);
-                        financialServiceContactInfoTable.insertItem(financialContactInfoItem);
-
-
-
-                }
-                if(jo.has("timing_info"))
-                {
-                    JSONObject timing = jo.getJSONObject("timing_info");
-
-
-                        FinancialTimingInfoItem financialContactInfoItem = FinancialTimingInfoItem.parseFinancialTimingInfoItem(timing);
-                        financialServiceTimingInfoTable.insertItem(financialContactInfoItem);
-
-
-
-                }
-                if(jo.has("registration_info"))
-                {
-                    JSONObject reg = jo.getJSONObject("registration_info");
-
-                        FinancialRegistrationInfoItem financialRegistrationInfoItem = FinancialRegistrationInfoItem.parseFinancialRegistrationInfoItem(reg);
-                    financialServiceRegistrationInfoTable.insertItem(financialRegistrationInfoItem);
-
-
-
-                }
-                if(jo.has("fin_service_details"))// need an identifier id in api
+                if(jo.has("fin_service_details"))// need id in fin_service_details
                 {
                     JSONArray service_details = jo.getJSONArray("fin_service_details");
                     for( int j=0;j<service_details.length();j++)
@@ -885,11 +836,7 @@ int countofDb;
                     }
 
                 }
-                if(jo.has("category"))
-                {
 
-
-                }*/
 
             } catch (JSONException e) {
                 e.printStackTrace();
