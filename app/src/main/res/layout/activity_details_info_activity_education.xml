@@ -531,47 +531,75 @@
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-
-        android:layout_height="100dp"
         android:orientation="horizontal"
-        android:background="@color/education_color"
-        android:id="@+id/bottom_bar">
 
+        android:layout_height="60dp"
+        android:background="@color/education_color"
+        android:id="@+id/bottom_bar"
+
+        android:gravity="center_vertical">
 
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.5"
+
             android:layout_height="match_parent"
-
-            android:orientation="vertical">
-
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/feedback"
-                android:onClick="verifyRegistration"
-                android:id="@+id/feedback"/>
-
-
+            android:gravity="center_vertical|left">
             <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
+
+
                 android:buttonTint="@color/white"
                 android:layout_marginLeft="20dp"
 
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:background="@drawable/feedback_icon"
+                android:onClick="verifyRegistration"
 
 
 
+
+                android:id="@+id/feedback"/>
 
         </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
