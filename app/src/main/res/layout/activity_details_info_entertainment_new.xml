@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
                 android:background="@color/transparent"
-                android:src="@drawable/feedback"/>
+                android:src="@drawable/feedback_icon"/>
 
 
         </LinearLayout>

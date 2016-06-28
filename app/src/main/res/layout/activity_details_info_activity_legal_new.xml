@@ -535,7 +535,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/feedback"
+                android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"
                 android:id="@+id/feedback"/>
 
