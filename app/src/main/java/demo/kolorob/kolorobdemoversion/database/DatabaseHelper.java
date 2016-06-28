@@ -75,6 +75,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String FINANCIAL_SERVICE_REGISTRATION="financial_registrationinfo";
     public static final String FINANCIAL_SERVICE_TIMING="financial_timinginfo";
     public static final String FINANCIAL_SERVICE_NEW="financial_new";
+    public static final String GOVERNMENT_SERVICE_DETAILS="gov_details";
+    public static final String GOV_MAIN="gov_main";
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;

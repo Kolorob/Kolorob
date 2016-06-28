@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
@@ -15,13 +15,14 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class GovernmentServiceDetailsTable {
     private static final String TAG = GovernmentServiceDetailsTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_DETAILS;
-    private static final String KEY_FIN_NODE_ID = "_finId";
-    private static final String KEY_FIN_SERVICE_COST = "_servicecost"; // 1 - text
-    private static final String KEY_FIN_SERVICE_REMARK = "_serviceremark"; //
-    private static final String KEY_FIN_SERVICE_TYPE = "_servicetype"; // 0 -integer
+    private static final String TABLE_NAME = DatabaseHelper.GOVERNMENT_SERVICE_DETAILS;
+    private static final String KEY_NODE_ID = "_finId";
+    private static final String KEY_SERVICE_COST = "_servicecost"; // 1 - text
+    private static final String KEY_SERVICE_PERSON = "_person"; //
+    private static final String KEY_SERVICE_DETAIL = "_detail"; //
+    private static final String KEY_SERVICE_TYPE = "_servicetype"; // 0 -integer
 
-    private static final String KEY_FIN_SERVICE_SUBTYPE = "_servicesubtype"; // 2 - text*/
+    private static final String KEY_SERVICE_SUBTYPE = "_servicesubtype"; // 2 - text*/
     private Context tContext;
 
     public GovernmentServiceDetailsTable(Context context) {
@@ -33,11 +34,12 @@ public class GovernmentServiceDetailsTable {
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
-                + KEY_FIN_NODE_ID + " INTEGER , "
-                + KEY_FIN_SERVICE_COST + "  TEXT  , " // 0 - int "
-                + KEY_FIN_SERVICE_REMARK + " TEXT , "
-                + KEY_FIN_SERVICE_TYPE   + " TEXT , "
-                + KEY_FIN_SERVICE_SUBTYPE + " TEXT, PRIMARY KEY(" + KEY_FIN_NODE_ID + "))";
+                + KEY_NODE_ID + " INTEGER , "
+                + KEY_SERVICE_COST + "  TEXT  , " // 0 - int "
+                + KEY_SERVICE_PERSON + " TEXT , "
+                + KEY_SERVICE_DETAIL + " TEXT , "
+                + KEY_SERVICE_TYPE   + " TEXT , "
+                + KEY_SERVICE_SUBTYPE + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + "))";
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -50,31 +52,33 @@ public class GovernmentServiceDetailsTable {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
-    public long insertItem(FinancialServiceDetailsItem financialServiceDetailsItem) {
+    public long insertItem(GovernmentServiceDetailsItem governmentServiceDetailsItem) {
         return insertItem(
-                financialServiceDetailsItem.getFinId(),
-                financialServiceDetailsItem.getServicecost(),
-                financialServiceDetailsItem.getServiceremark(),
-                financialServiceDetailsItem.getServicetype(),
-                financialServiceDetailsItem.getServicesubtype()
+                governmentServiceDetailsItem.getFinId(),
+                governmentServiceDetailsItem.getServicecost(),
+                governmentServiceDetailsItem.getResponsibleperson(),
+                governmentServiceDetailsItem.getDetailstep(),
+                governmentServiceDetailsItem.getServicetype(),
+                governmentServiceDetailsItem.getServicesubtype()
         );
     }
-    public long insertItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    public long insertItem(int finId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
         if (isFieldExist(finId)) {
             return updateItem(
                     finId,
                     servicecost,
-                    serviceremark,
+                    responsibleperson,detailstep,
                     servicetype,
                     servicesubtype);
 
         }
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_FIN_NODE_ID , finId);
-        rowValue.put(KEY_FIN_SERVICE_COST, servicecost);
-        rowValue.put(KEY_FIN_SERVICE_REMARK, serviceremark);
-        rowValue.put(KEY_FIN_SERVICE_TYPE, servicetype);
-        rowValue.put(KEY_FIN_SERVICE_SUBTYPE, servicesubtype);
+        rowValue.put(KEY_NODE_ID , finId);
+        rowValue.put(KEY_SERVICE_COST, servicecost);
+        rowValue.put(KEY_SERVICE_PERSON, responsibleperson);
+        rowValue.put(KEY_SERVICE_DETAIL, detailstep);
+        rowValue.put(KEY_SERVICE_TYPE, servicetype);
+        rowValue.put(KEY_SERVICE_SUBTYPE, servicesubtype);
 
 
 
@@ -84,18 +88,19 @@ public class GovernmentServiceDetailsTable {
         return ret;}
 
 
-    private long updateItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    private long updateItem(int finId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
 
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_FIN_NODE_ID , finId);
-        rowValue.put(KEY_FIN_SERVICE_COST, servicecost);
-        rowValue.put(KEY_FIN_SERVICE_REMARK, serviceremark);
-        rowValue.put(KEY_FIN_SERVICE_TYPE, servicetype);
-        rowValue.put(KEY_FIN_SERVICE_SUBTYPE, servicesubtype);
+        rowValue.put(KEY_NODE_ID , finId);
+        rowValue.put(KEY_SERVICE_COST, servicecost);
+        rowValue.put(KEY_SERVICE_PERSON, responsibleperson);
+        rowValue.put(KEY_SERVICE_DETAIL, detailstep);
+        rowValue.put(KEY_SERVICE_TYPE, servicetype);
+        rowValue.put(KEY_SERVICE_SUBTYPE, servicesubtype);
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_FIN_NODE_ID + " = ?  ",
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ?  ",
                 new String[]{finId + ""});
         closeDB();
         return ret;
@@ -122,18 +127,18 @@ public class GovernmentServiceDetailsTable {
         closeDB();
         return false;
     }
-    private FinancialServiceDetailsItem cursorToSubCatList(Cursor cursor) {
+    private GovernmentServiceDetailsItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
         String _servicecost= cursor.getString(1);
-        String _serviceremark = cursor.getString(2);
-        String _servicetype = cursor.getString(3);
-        String _servicesubtype = cursor.getString(4);
+        String _person = cursor.getString(2);
+        String _detail = cursor.getString(3);
+        String _servicetype = cursor.getString(4);
+        String _servicesubtype = cursor.getString(5);
 
 
 
-        return new FinancialServiceDetailsItem(_finId,
-                _servicecost,_serviceremark,_servicetype,_servicesubtype);
-
+        return new GovernmentServiceDetailsItem(_finId,
+                _servicecost,_person,_detail,_servicetype,_servicesubtype);
 
     }
 
