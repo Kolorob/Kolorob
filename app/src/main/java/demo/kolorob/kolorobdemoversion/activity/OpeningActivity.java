@@ -60,6 +60,8 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTuitionTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
@@ -91,6 +93,8 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
@@ -346,7 +350,21 @@ int countofDb;
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/government", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
 
+                                    savenewGov(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
             getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
                         @Override
@@ -844,7 +862,45 @@ int countofDb;
         }
         countofDb++;
     }
+    private void savenewGov(JSONArray Gov ) {
+        GovernmentNewTable governmentNewTable=new GovernmentNewTable(OpeningActivity.this);
 
+        GovernmentServiceDetailsTable governmentServiceDetailsTable=new GovernmentServiceDetailsTable(OpeningActivity.this);
+
+        governmentServiceDetailsTable.dropTable();
+
+        governmentNewTable.dropTable();
+
+
+        int Govcount = Gov.length();
+
+        for (int i = 0; i < Govcount; i++) {
+            try {
+                JSONObject jo = Gov.getJSONObject(i);
+                GovernmentNewItem et =GovernmentNewItem.parseGovernmentNewItem(jo);
+                governmentNewTable.insertItem(et);
+
+
+                if(jo.has("govservice_details"))// need id in fin_service_details
+                {
+                    JSONArray service_details = jo.getJSONArray("govservice_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        GovernmentServiceDetailsItem governmentServiceDetailsItem = GovernmentServiceDetailsItem.parseGovernmentServiceDetailsItem(joes);
+                        governmentServiceDetailsTable.insertItem(governmentServiceDetailsItem);
+
+                    }
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        countofDb++;
+    }
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
         legalAidServiceProviderTable.dropTable();

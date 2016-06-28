@@ -9,6 +9,7 @@ import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
@@ -106,25 +107,25 @@ public class GovernmentNewTable {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
-    public long insertItem(FinancialNewItem financialNewItem) {
+    public long insertItem(GovernmentNewItem governmentNewItem) {
         return insertItem(
-                financialNewItem.getFinId(),
-                financialNewItem.getNameen(),
-                financialNewItem.getNamebn(),
-                financialNewItem.getLat(),
-                financialNewItem.getLon(),financialNewItem.getFloor(),
-                financialNewItem.getHousename(),financialNewItem.getHouseno(),
-                financialNewItem.getRoad(),financialNewItem.getLine(),financialNewItem.getAvenue(),
-                financialNewItem.getBlock(),financialNewItem.getArea(),financialNewItem.getLandmark(),
-                financialNewItem.getPostoffice(),financialNewItem.getPolicestation(),
-                financialNewItem.getCity(),financialNewItem.getCountry(),financialNewItem.getNode_contact(),
-                financialNewItem.getNode_contact2(),financialNewItem.getNode_email(),financialNewItem.getNode_website(),
-                financialNewItem.getNode_facebook(),financialNewItem.getNode_designation(),
-                financialNewItem.getOpeningtime(),
-                financialNewItem.getBreaktime(),
-                financialNewItem.getClosetime(),
-                financialNewItem.getOffday(), financialNewItem.getRegisteredwith(),
-                financialNewItem.getRegisterednumber(),financialNewItem.getCategoryId(),financialNewItem.getRefnumm()
+                governmentNewItem.getFinId(),
+                governmentNewItem.getNameen(),
+                governmentNewItem.getNamebn(),
+                governmentNewItem.getLat(),
+                governmentNewItem.getLon(),governmentNewItem.getFloor(),
+                governmentNewItem.getHousename(),governmentNewItem.getHouseno(),
+                governmentNewItem.getRoad(),governmentNewItem.getLine(),governmentNewItem.getAvenue(),
+                governmentNewItem.getBlock(),governmentNewItem.getArea(),governmentNewItem.getLandmark(),
+                governmentNewItem.getPostoffice(),governmentNewItem.getPolicestation(),
+                governmentNewItem.getCity(),governmentNewItem.getCountry(),governmentNewItem.getNode_contact(),
+                governmentNewItem.getNode_contact2(),governmentNewItem.getNode_email(),governmentNewItem.getNode_website(),
+                governmentNewItem.getNode_facebook(),governmentNewItem.getNode_designation(),
+                governmentNewItem.getOpeningtime(),
+                governmentNewItem.getBreaktime(),
+                governmentNewItem.getClosetime(),
+                governmentNewItem.getOffday(), governmentNewItem.getRegisteredwith(),
+                governmentNewItem.getRegisterednumber(),governmentNewItem.getCategoryId(),governmentNewItem.getRefnumm()
         );
     }
     private long insertItem(int finId, String nameen, String namebn, String lat, String lon,

@@ -71,7 +71,7 @@ public class GovernmentServiceDetailsItem {
         this.servicesubtype = servicesubtype;
     }
 
-    public static GovernmentServiceDetailsItem parseFinancialServiceDetailsItem(JSONObject jo) throws JSONException {
+    public static GovernmentServiceDetailsItem parseGovernmentServiceDetailsItem(JSONObject jo) throws JSONException {
         int _finId = jo.getInt("id");
 
         String _servicecost = jo.getString("cost");

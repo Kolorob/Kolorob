@@ -341,7 +341,7 @@ public class GovernmentNewItem {
         this.refnumm = refnumm;
     }
 
-    public static GovernmentNewItem parseFinancialMapInfoItem(JSONObject jo) throws JSONException {
+    public static GovernmentNewItem parseGovernmentNewItem(JSONObject jo) throws JSONException {
         int _finId = jo.getInt("id");
         String _nameen = jo.getString("node_name");
         String _namebn = jo.getString("node_bn");
