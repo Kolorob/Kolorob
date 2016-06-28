@@ -17,138 +17,176 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:id="@+id/upper"
     >
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:id="@+id/upper_part"
-            android:background="@color/details_upperhand_color"
-            android:layout_height="200dp">
+            android:orientation="horizontal"
+            android:background="@color/education_color"
+            android:layout_height="wrap_content">
 
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_weight="0.25"
+               android:layout_height="40dp">
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="40dp"></LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="40dp"></LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/education_color"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/upperText"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="বাউনিয়াবাদ আইডিয়াল হাই স্কুল "
-                    android:textSize="25dp"
-                    android:id="@+id/ups_text"
-
-                    />
-
-
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/school_logo_default"/>
 
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_height="match_parent"
-                    android:layout_width="0dp"
-                    android:id="@+id/left_go_process"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/distance_left"
-                        android:background="@drawable/distance_btn"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/way_to_go"/>
-
-
-
-
-                </LinearLayout>
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:id="@+id/upper_part"
+                android:background="@color/education_color"
+                android:layout_height="wrap_content">
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    >
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/holo_blue_light" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_height="match_parent"
-                    android:id="@+id/middle_phone"
+                    android:id="@+id/upperText"
                     android:orientation="vertical"
                     android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/phone_middl"
-                        android:background="@drawable/call_btn"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/phone"/>
+                        android:text="বাউনিয়াবাদ আইডিয়াল হাই স্কুল "
+                        android:textSize="18dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/white"
+
+                        android:id="@+id/ups_text"
+
+                        />
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/ratingBarStyleIndicator"
+
+                        android:numStars="5"
+                        android:stepSize="0"
+                        android:rating="2.3" />
 
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="1dp"
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:id="@+id/left_go_process"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/distance_left"
+                            android:background="@drawable/direction_icon"/>
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
                         android:layout_height="match_parent"
-                        android:background="@android:color/holo_blue_light" />
+                        android:id="@+id/middle_phone"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/phone_middl"
+                            android:background="@drawable/phone_icon"/>
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:id="@+id/right_email"
+
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/right_side_email"
+                            android:background="@drawable/email_icon"/>
+
+
+
+
+                    </LinearLayout>
+
+
+
+
 
 
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"
-                    android:id="@+id/right_email"
-
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/right_side_email"
-                        android:background="@drawable/email_btn"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/email"/>
-
-
-
-                </LinearLayout>
 
 
 
@@ -156,14 +194,13 @@
 
 
             </LinearLayout>
-
-
-
 
 
 
 
         </LinearLayout>
+
+
 
 
         <LinearLayout

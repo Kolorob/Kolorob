@@ -170,7 +170,7 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        int upperhad_height=params2.height = height/6;
+        //int upperhad_height=params2.height = height/6;
 
         upperHand.setLayoutParams(params2);
 
@@ -178,8 +178,8 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        int  vd=params_upperText.height = height/24;
-        params_upperText.width = width;
+       // int  vd=params_upperText.height = height/24;
+       // params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
@@ -213,7 +213,7 @@ public class DetailsInfoActivityEducation extends Activity {
 
         ups_text=(TextView)findViewById(R.id.ups_text);
         ups_text.setTextSize(width/25);
-        ups_text.setText(educationServiceProviderItem.getEduNameEng());
+        ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = height/20;
