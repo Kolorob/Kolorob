@@ -3,16 +3,12 @@ package demo.kolorob.kolorobdemoversion.database.Entertainment;
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
-import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -149,7 +145,7 @@ public class EntertainmetTypeTable {
 
     public static EntertainmentTypeItem cursorToSubCatList(Cursor cursor) {
         String id = cursor.getString(0);
-        String  price = cursor.getString(1);
+        String price = cursor.getString(1);
         String remarks = cursor.getString(2);
         String type = cursor.getString(3);
         String subtype = cursor.getString(4);

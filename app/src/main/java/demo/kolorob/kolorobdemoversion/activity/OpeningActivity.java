@@ -48,13 +48,13 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookT
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialLoanTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialPaymentTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
@@ -79,13 +79,13 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShop
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialPaymentItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
@@ -303,35 +303,49 @@ int countofDb;
             );
 
 
-//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//                            // Log.d("====","Response"+apiContent);
-//
-//
-//                            try {
-//                               // Log.d("====","I am here");
-//                                JSONArray legal_array= new JSONArray(apiContent);
-//                                //  JSONObject jo = new JSONObject(apiContent);
-//                                int p= legal_array.length();
-//                               // Log.d("====","LengthArray "+p);
-//
-//                                for(int i=0;i<p;i++)
-//                                {
-//
-//                                }
-//
-////                                   String apiSt = jo.getString(AppConstants.KEY_STATUS);
-////                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-////                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                    }
-//            );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            // Log.d("====","Response"+apiContent);
 
+
+                            try {
+                                Log.d("====","I am here");
+                                JSONArray legal_array= new JSONArray(apiContent);
+                                //  JSONObject jo = new JSONObject(apiContent);
+                                int p= legal_array.length();
+                                Log.d("====","LengthArray "+p);
+
+                                for(int i=0;i<p;i++)
+                                {
+
+                                }
+
+//                                   String apiSt = jo.getString(AppConstants.KEY_STATUS);
+//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+//                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/finance", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                        savenewFinance(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
 
             getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
@@ -791,6 +805,46 @@ int countofDb;
         }
         countofDb++;
     }
+    private void savenewFinance(JSONArray financial ) {
+        FinancialServiceNewTable financialServiceNewTable=new FinancialServiceNewTable(OpeningActivity.this);
+
+        FinancialServiceDetailsTable financialServiceDetailsTable=new FinancialServiceDetailsTable(OpeningActivity.this);
+
+        financialServiceDetailsTable.dropTable();
+
+        financialServiceNewTable.dropTable();
+
+
+        int legalaidServiceProviderCount = financial.length();
+
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+            try {
+                JSONObject jo = financial.getJSONObject(i);
+                FinancialNewItem et = FinancialNewItem.parseFinancialMapInfoItem(jo);
+                financialServiceNewTable.insertItem(et);
+
+
+                if(jo.has("fin_service_details"))// need id in fin_service_details
+                {
+                    JSONArray service_details = jo.getJSONArray("fin_service_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        FinancialServiceDetailsItem financialServiceDetailsItem = FinancialServiceDetailsItem.parseFinancialServiceDetailsItem(joes);
+                        financialServiceDetailsTable.insertItem(financialServiceDetailsItem);
+
+                    }
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        countofDb++;
+    }
+
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
         legalAidServiceProviderTable.dropTable();
