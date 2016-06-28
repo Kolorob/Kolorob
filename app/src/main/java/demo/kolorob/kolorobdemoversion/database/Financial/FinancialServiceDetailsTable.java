@@ -37,7 +37,8 @@ public class FinancialServiceDetailsTable {
                 + KEY_FIN_SERVICE_COST + "  TEXT  , " // 0 - int "
                 + KEY_FIN_SERVICE_REMARK + " TEXT , "
                 + KEY_FIN_SERVICE_TYPE   + " TEXT , "
-                + KEY_FIN_SERVICE_SUBTYPE + " TEXT )";
+                + KEY_FIN_SERVICE_SUBTYPE + " TEXT, PRIMARY KEY(" + KEY_FIN_NODE_ID + "))";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -58,7 +59,7 @@ public class FinancialServiceDetailsTable {
                 financialServiceDetailsItem.getServicesubtype()
         );
     }
-    public long insertItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    public long insertItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
         if (isFieldExist(finId)) {
             return updateItem(
                     finId,
@@ -83,7 +84,7 @@ public class FinancialServiceDetailsTable {
         return ret;}
 
 
-    private long updateItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    private long updateItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID , finId);
@@ -103,13 +104,14 @@ public class FinancialServiceDetailsTable {
 
 
 
-    public boolean isFieldExist(String nodeid) {
+    public boolean isFieldExist(int nodeid) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        int s=cursor.getCount();
         if (cursor.moveToFirst()) {
             do {
-                if (nodeid.equals(cursor.getString(0) )) {
+                if (cursor.getInt(0) == nodeid ) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -121,7 +123,7 @@ public class FinancialServiceDetailsTable {
         return false;
     }
     private FinancialServiceDetailsItem cursorToSubCatList(Cursor cursor) {
-        String _finId = cursor.getString(0);
+        int _finId = cursor.getInt(0);
         String _servicecost= cursor.getString(1);
         String _serviceremark = cursor.getString(2);
         String _servicetype = cursor.getString(3);

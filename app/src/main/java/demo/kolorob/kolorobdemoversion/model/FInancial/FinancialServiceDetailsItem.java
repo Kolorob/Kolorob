@@ -7,14 +7,14 @@ import org.json.JSONObject;
  * Created by israt.jahan on 2/7/2016.
  */
 public class FinancialServiceDetailsItem {
-    private String finId;
+    private int finId;
 
     private String servicecost;
     private String serviceremark;
     private String servicetype;
     private String servicesubtype;
 
-    public FinancialServiceDetailsItem(String finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    public FinancialServiceDetailsItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
         this.finId = finId;
         this.servicecost = servicecost;
         this.serviceremark = serviceremark;
@@ -22,11 +22,11 @@ public class FinancialServiceDetailsItem {
         this.servicesubtype = servicesubtype;
     }
 
-    public String getFinId() {
+    public int getFinId() {
         return finId;
     }
 
-    public void setFinId(String finId) {
+    public void setFinId(int finId) {
         this.finId = finId;
     }
 
@@ -63,7 +63,7 @@ public class FinancialServiceDetailsItem {
     }
 
     public static FinancialServiceDetailsItem parseFinancialServiceDetailsItem(JSONObject jo) throws JSONException {
-        String _finId = jo.getString("id");
+        int _finId = jo.getInt("id");
 
         String _servicecost = jo.getString("financial_cost");
         String _serviceremark = jo.getString("financial_remarks");

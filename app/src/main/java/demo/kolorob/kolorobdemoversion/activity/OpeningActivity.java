@@ -92,6 +92,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialMapInfoItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialPaymentItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialRegistrationInfoItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
@@ -880,13 +881,13 @@ int countofDb;
                 if(jo.has("fin_service_details"))// need an identifier id in api
                 {
                     JSONArray service_details = jo.getJSONArray("fin_service_details");
-                   /* for( int j=0;j<service_details.length();j++)
+                    for( int j=0;j<service_details.length();j++)
                     {
                         JSONObject joes= service_details.getJSONObject(j);
                         FinancialServiceDetailsItem financialServiceDetailsItem = FinancialServiceDetailsItem.parseFinancialServiceDetailsItem(joes);
                         financialServiceDetailsTable.insertItem(financialServiceDetailsItem);
 
-                    }*/
+                    }
 
                 }
                 if(jo.has("category"))
