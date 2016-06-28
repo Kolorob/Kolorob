@@ -85,18 +85,13 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialContactInfoItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialMapInfoItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialPaymentItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialRegistrationInfoItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTimingInfoItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
@@ -835,7 +830,7 @@ int countofDb;
                 FinancialNewItem et = FinancialNewItem.parseFinancialMapInfoItem(jo);
                 financialServiceNewTable.insertItem(et);
 
-                if(jo.has("map_info"))
+              /*  if(jo.has("map_info"))
                 {
                     JSONObject MapInfo = jo.getJSONObject("map_info");
 
@@ -894,7 +889,7 @@ int countofDb;
                 {
 
 
-                }
+                }*/
 
             } catch (JSONException e) {
                 e.printStackTrace();
