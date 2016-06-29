@@ -860,7 +860,7 @@ int countofDb;
                 e.printStackTrace();
             }
         }
-        countofDb++;
+
     }
     private void savenewGov(JSONArray Gov ) {
         GovernmentNewTable governmentNewTable=new GovernmentNewTable(OpeningActivity.this);
@@ -899,7 +899,7 @@ int countofDb;
                 e.printStackTrace();
             }
         }
-        countofDb++;
+
     }
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);

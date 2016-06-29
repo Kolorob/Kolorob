@@ -1087,9 +1087,9 @@ android:visibility="gone"
             </RelativeLayout>
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/sidebarwidth"
 
-                android:background="@drawable/sidebar_left2"
+                android:background="@drawable/sidebar_category"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
@@ -1098,16 +1098,17 @@ android:visibility="gone"
                 android:layout_marginTop="@dimen/fab_margin"
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
 
-                android:layout_gravity="left|top">
+                android:layout_gravity="center|top">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
-                    android:layout_width="20dp"
+                    android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_gravity="left|center"
+                    android:gravity="left|center"
                     android:orientation="vertical"
+                    android:layout_marginTop="100dp"
                     android:focusableInTouchMode="true"
                     >
 
@@ -1118,28 +1119,28 @@ android:visibility="gone"
 
             <ScrollView
                 android:id="@+id/svSubCategoryListHolder"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/sidebarwidth"
                 android:layout_height="wrap_content"
-                android:background="@drawable/sidebar_right"
-                android:layout_marginTop="@dimen/fab_margin"
+                android:background="@drawable/sidebar_subcategory"
+
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
-
-
                 android:layout_above="@+id/toggle"
-                android:layout_gravity="right|top"
+                android:layout_gravity="center"
 
-                android:layout_alignParentRight="true">
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/svCategoryListHolder">
 
                 <LinearLayout
-                    android:id="@+id/llSubCatListHolder"
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:id="@+id/llSubCatListHolder"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="350dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="vertical"
+
                     android:focusableInTouchMode="true"
-                    android:paddingLeft="15dp"
                     >
 
 
