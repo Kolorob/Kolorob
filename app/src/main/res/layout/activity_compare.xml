@@ -7,7 +7,9 @@
     android:background="@color/white"
     android:gravity="center">
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TableLayout
         android:id="@+id/tabla_cuerpo"
@@ -387,5 +389,6 @@
         </TableRow>
     </TableLayout>
 
+</ScrollView>
 
 </LinearLayout>

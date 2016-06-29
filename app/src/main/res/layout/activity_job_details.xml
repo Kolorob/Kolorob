@@ -479,7 +479,7 @@
 
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/phone_middl"
-                android:background="@drawable/direction_j"/>
+                android:background="@drawable/direction_icon"/>
 
 
 
@@ -490,7 +490,7 @@
                 android:layout_centerInParent="true"
 
                 android:layout_marginRight="10dp"
-                android:background="@drawable/phone_j"/>
+                android:background="@drawable/phone_icon"/>
 
 
             <ImageView
@@ -499,7 +499,7 @@
                 android:id="@+id/right_side_email"
                 android:layout_toRightOf="@+id/phone_middl"
                 android:onClick="sendemail"
-                android:background="@drawable/email_j"/>
+                android:background="@drawable/email_icon"/>
 
 
         </RelativeLayout>
