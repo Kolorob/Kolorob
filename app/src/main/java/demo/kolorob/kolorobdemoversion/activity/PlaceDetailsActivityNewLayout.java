@@ -510,7 +510,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
 
-        ViewGroup.LayoutParams exlist= explist.getLayoutParams();
+        final ViewGroup.LayoutParams exlist= explist.getLayoutParams();
         final RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
 
         expnlist.setMargins((s*9)/10,40,5,40);
@@ -604,6 +604,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     map.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
+
                     compare_layout.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.VISIBLE);
                 }
@@ -649,6 +650,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                     MapButton.setBackgroundResource(R.drawable.map_selected);
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     subCatItemList.setVisibility(View.GONE);
+
                    explist.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
@@ -1310,12 +1312,12 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
                         calladapter(catstatus);
 
                         if(showList==1) {
-
+/*
                             explist.setVisibility(View.VISIBLE);
                             explist.setAnimation(slideOutFromLeftAnim());
                             llSubCatListHolder.setVisibility(View.GONE);
                             subCatItemList.setVisibility(View.VISIBLE);
-
+*/
 
                         }
                         else {
