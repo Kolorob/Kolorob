@@ -1090,11 +1090,11 @@ if(valuecheck==false)
 
                             if(forms.toString().equals("true"))
                             {
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceChoiceActivity2.this, "মন্তব্যটি পাঠানো হয়ছে",
+                                AlertMessage.showMessage(PlaceChoiceActivity2.this, "মন্তব্যটি পাঠানো হয়ছে",
                                         "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceChoiceActivity2.this, "মন্তব্য পাঠানো সফল হয়নি",
+                                AlertMessage.showMessage(PlaceChoiceActivity2.this, "মন্তব্য পাঠানো সফল হয়নি",
                                         "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
 
 

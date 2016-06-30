@@ -10,6 +10,6 @@
     android:text="Test"
     android:textSize="20sp"
     android:textColor="#ffffff"
-    android:background="@drawable/color_box_1"
+    android:background="#ffffff"
     android:textStyle="bold"
     android:gravity="center_vertical" />
