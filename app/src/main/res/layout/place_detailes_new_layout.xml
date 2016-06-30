@@ -1105,10 +1105,11 @@ android:visibility="gone"
                     android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center"
-                    android:gravity="left|center"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_vertical|center_horizontal"
                     android:orientation="vertical"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="@dimen/catlayouttop"
+                    android:layout_marginBottom="@dimen/subcatlayouttop"
                     android:focusableInTouchMode="true"
                     >
 
@@ -1135,11 +1136,11 @@ android:visibility="gone"
                     android:id="@+id/llSubCatListHolder"
                     android:layout_width="wrap_content"
 
-                    android:layout_height="350dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
-
+                    android:layout_marginTop="@dimen/subcatlayouttop"
                     android:focusableInTouchMode="true"
                     >
 

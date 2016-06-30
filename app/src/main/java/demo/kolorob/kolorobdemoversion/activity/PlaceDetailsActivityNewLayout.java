@@ -1966,7 +1966,7 @@ searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
     private void showAnimatedSubcategories(final ArrayList<SubCategoryItem> subCatList, double dwPerc, int iconId, final int cat_id) {
         isCatExpandedOnce = true;
-        decCatListWidth(dwPerc);
+
 
         // TODO Inflate the sub-category list from right
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);

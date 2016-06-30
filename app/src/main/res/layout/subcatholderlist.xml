@@ -14,7 +14,7 @@
     <ImageView
         android:id="@+id/ivIconSCatList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/catbuttonheight"
 
         android:contentDescription="@string/txt_cd_icon_cat"
         android:layout_gravity="center|top" />
