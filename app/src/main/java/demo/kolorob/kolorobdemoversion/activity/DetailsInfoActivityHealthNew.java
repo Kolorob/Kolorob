@@ -11,14 +11,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -47,12 +45,12 @@ import demo.kolorob.kolorobdemoversion.adapters.HealthVaccineAdapter;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
-import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -554,12 +552,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-
-
-
-
 
 
 

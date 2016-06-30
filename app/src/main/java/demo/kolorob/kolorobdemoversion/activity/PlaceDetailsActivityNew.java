@@ -2440,11 +2440,11 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
 
                             if(forms.toString().equals("true"))
                             {
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceDetailsActivityNew.this, "মন্তব্যটি পাঠানো হয়ছে",
+                                AlertMessage.showMessage(PlaceDetailsActivityNew.this, "মন্তব্যটি পাঠানো হয়ছে",
                                         "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(PlaceDetailsActivityNew.this, "মন্তব্য পাঠানো সফল হয়নি",
+                                AlertMessage.showMessage(PlaceDetailsActivityNew.this, "মন্তব্য পাঠানো সফল হয়নি",
                                         "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
 
 
