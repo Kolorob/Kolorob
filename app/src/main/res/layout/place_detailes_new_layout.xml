@@ -1085,31 +1085,38 @@ android:visibility="gone"
                 </RelativeLayout>
 
             </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/llCategoryListHolderback"
+                android:layout_width="@dimen/sidebarwidth"
+                android:background="@drawable/sidebar_category"
+                android:layout_height="300dp"
+
+                android:layout_marginBottom="@dimen/nav_header_heightcat"
+                android:layout_above="@+id/toggle"
+                android:orientation="vertical"
+
+                android:focusableInTouchMode="true"
+                android:weightSum="1">
             <ScrollView
                 android:id="@+id/svCategoryListHolder"
-                android:layout_width="@dimen/sidebarwidth"
+                android:layout_width="wrap_content"
 
-                android:background="@drawable/sidebar_category"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="false"
+
+                android:layout_height="260dp"
+
                 android:layout_above="@+id/toggle"
-                android:layout_marginTop="@dimen/fab_margin"
-                android:layout_marginBottom="@dimen/nav_header_heightcat"
 
-                android:layout_gravity="center|top">
+
+                >
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"
                     android:layout_width="wrap_content"
-
+            
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_vertical|center_horizontal"
+
                     android:orientation="vertical"
-                    android:layout_marginTop="@dimen/catlayouttop"
-                    android:layout_marginBottom="@dimen/subcatlayouttop"
+
                     android:focusableInTouchMode="true"
                     >
 
@@ -1117,7 +1124,7 @@ android:visibility="gone"
                 </LinearLayout>
 
             </ScrollView>
-
+</LinearLayout>
             <ScrollView
                 android:id="@+id/svSubCategoryListHolder"
                 android:layout_width="@dimen/sidebarwidth"
