@@ -11,6 +11,7 @@
     <dimen name="nav_header_heightcat">100dp</dimen>
     <dimen name="catbuttonheight">90dp</dimen>
     <dimen name="catlayouttop">100dp</dimen>
+    <dimen name="subcatlayouttop">100dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="nav_header_height2">230dp</dimen>
     <dimen name="nav_header_height3">300dp</dimen>
