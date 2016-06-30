@@ -41,7 +41,7 @@
 		<ImageButton
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/emg_dir"
+			android:background="@drawable/direction_icon"
 			android:layout_toLeftOf="@+id/call_id"
 			android:layout_centerVertical="true"
 			android:layout_marginLeft="10dp"
@@ -51,7 +51,7 @@
 		<ImageButton
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/emg_ph"
+			android:background="@drawable/phone_icon"
 			android:layout_toLeftOf="@+id/email_id"
 			android:layout_marginLeft="10dp"
 			android:layout_centerVertical="true"
@@ -63,7 +63,7 @@
 		<ImageButton
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/emg_em"
+			android:background="@drawable/email_icon"
 			android:layout_marginLeft="10dp"
 			android:layout_marginRight="15dp"
 			android:id="@+id/email_id"
