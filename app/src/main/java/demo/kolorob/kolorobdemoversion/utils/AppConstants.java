@@ -27,9 +27,12 @@ public class AppConstants {
     public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.education, R.drawable.health,R.drawable.entertainment,
             R.drawable.government,R.drawable.legal,  R.drawable.finance,R.drawable.job
     };
-    public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.turned_on_porashona, R.drawable.turned_on_chikitsha,R.drawable.turned_on_anondo_furti,
-            R.drawable.turned_on_shorkari_shubidha,R.drawable.turned_on_ain_kanun,  R.drawable.turned_on_taka_poisha,R.drawable.turned_on_chakri_bakri
-    };
+//    public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.turned_on_porashona, R.drawable.turned_on_chikitsha,R.drawable.turned_on_anondo_furti,
+//            R.drawable.turned_on_shorkari_shubidha,R.drawable.turned_on_ain_kanun,  R.drawable.turned_on_taka_poisha,R.drawable.turned_on_chakri_bakri
+//    };
+public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.drawable.ic_continue,R.drawable.ic_continue,
+        R.drawable.ic_continue,R.drawable.ic_continue,  R.drawable.ic_continue,R.drawable.ic_continue
+};
     public static final int[] ALL_CAT_MARKER_ICONSBUTTON = {R.drawable.pin_1,R.drawable.pin_2,R.drawable.pin_3,
             R.drawable.pin_4,R.drawable.pin_5,R.drawable.pin_6,R.drawable.pin_7,R.drawable.pin_8,
             R.drawable.pin_9,R.drawable.pin_10};

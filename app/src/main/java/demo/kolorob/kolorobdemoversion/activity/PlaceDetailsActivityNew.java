@@ -1087,7 +1087,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ivIcon.setImageResource(0);
                         ArrayList<EducationServiceProviderItem> educationServiceProvider;
                         educationServiceProvider = constructEducationListItem(ci.getId());
-                        ivIcon.setImageResource(R.drawable.turned_on_porashona);
+                      //  ivIcon.setImageResource(R.drawable.turned_on_porashona);
                         callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
                         mapcalledstatus=true;
                         if(showList==1) {
@@ -1151,7 +1151,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.HEALTH:
                         helclicked=true;
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
+                      //  ivIcon.setImageResource(R.drawable.turned_on_chikitsha);
                         ArrayList<HealthServiceProviderItem> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(ci.getId());
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
@@ -1222,7 +1222,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                         ivIcon.setImageResource(0);
                         ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
-                        ivIcon.setImageResource(R.drawable.turned_on_anondo_furti);
+                     //   ivIcon.setImageResource(R.drawable.turned_on_anondo_furti);
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
                         mapcalledstatus=true;
                         if(showList==1) {
@@ -1289,7 +1289,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.GOVERNMENT:
                         govclicked=true;
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
+                    //    ivIcon.setImageResource(R.drawable.turned_on_shorkari_shubidha);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
                         map.setVisibility(View.VISIBLE);
@@ -1317,7 +1317,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.LEGAL:
                         legclicked=true;
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
+                  //      ivIcon.setImageResource(R.drawable.turned_on_ain_kanun);
                         ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
@@ -1381,7 +1381,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.FINANCIAL:
                         finclicked=true;
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
+                  //      ivIcon.setImageResource(R.drawable.turned_on_taka_poisha);
                         ArrayList<FinancialServiceProviderItem> financialServiceProvider;
                         financialServiceProvider = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
@@ -1448,7 +1448,7 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                     case AppConstants.JOB:
                         jobclicked=true;
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.turned_on_chakri_bakri);
+                //        ivIcon.setImageResource(R.drawable.turned_on_chakri_bakri);
                         // mapcalledstatus=false;
                         llSubCatListHolder.setVisibility(View.GONE);
                         //   map.removeAllViews();
