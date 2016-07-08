@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
                 android:background="@color/transparent"
-                android:src="@drawable/feedback"/>
+                android:src="@drawable/feedback_icon"/>
 
 
         </LinearLayout>
@@ -514,7 +514,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/legal"
-            android:src="@drawable/kivabe"
+            android:src="@drawable/finance"
             android:paddingRight="20dp"
             android:focusable="true"
             android:layout_gravity="center" />

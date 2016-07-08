@@ -61,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/distance_left"
-                        android:background="@drawable/distance_btn"/>
+                        android:background="@drawable/distance_icon"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -795,7 +795,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/feedback"
+                android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"
                 android:id="@+id/feedback"/>
 

@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String ENT_SHISHU_PARK = "ent_shishu_park";
     public static final String ENT_SUB_CATEGORY = "ent_sub_category";
     public static final String ENT_THEATRE = "ent_theatre";
+    public static final String ENT_DETAILS_INFO = "details_info";
     public static final String Legal_Aid_Details_Table= "legal_details";
     public static final String ENT_TRAINING_CENTER = "ent_training_center";
 
@@ -69,7 +70,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String FINANCIAL_SERVICE_TAX="financial_tax";
     public static final String FINANCIAL_SERVICE_TRANSACTION="financial_transaction";
     public static final String FINANCIAL_SERVICE_TUITION="financial_tuition";
-
+    public static final String FINANCIAL_SERVICE_MAP="financial_mapinfo";
+    public static final String FINANCIAL_SERVICE_CONTACT="financial_contactinfo";
+    public static final String FINANCIAL_SERVICE_REGISTRATION="financial_registrationinfo";
+    public static final String FINANCIAL_SERVICE_TIMING="financial_timinginfo";
+    public static final String FINANCIAL_SERVICE_NEW="financial_new";
+    public static final String GOVERNMENT_SERVICE_DETAILS="gov_details";
+    public static final String GOV_MAIN="gov_main";
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;

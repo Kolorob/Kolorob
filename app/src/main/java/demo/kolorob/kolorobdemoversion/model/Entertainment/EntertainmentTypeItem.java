@@ -64,10 +64,11 @@ public class EntertainmentTypeItem {
         this.sub_type = sub_type;
     }
 
-    public static EntertainmentTypeItem parseEntertainmentTypeItem(JSONObject jo) throws JSONException {
-        String id = jo.getString("id");
+    public static EntertainmentTypeItem parseEntertainmentTypeItem(String nodeId,JSONObject jo) throws JSONException {
+        String id = nodeId;
         String recreation_price = jo.getString("recreation_price");
         String recreation_remark = jo.getString("recreation_remark");
+
         String type = jo.getString("type");
         String sub_type = jo.getString("sub_type");
 

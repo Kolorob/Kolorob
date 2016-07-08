@@ -3,16 +3,12 @@ package demo.kolorob.kolorobdemoversion.database.Entertainment;
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
-import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -22,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class EntertainmetTypeTable {
 
     private static final String TAG = EntertainmentTheatreTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.ENT_THEATRE;
+    private static final String TABLE_NAME = DatabaseHelper.ENT_DETAILS_INFO;
     public static final String KEY_NODE_ID = "_node_id";
     public static final String KEY_RECREATION_PRICE = "name";
     public static final String KEY_RECREATION_REMARKS = "bn_label";
@@ -149,7 +145,7 @@ public class EntertainmetTypeTable {
 
     public static EntertainmentTypeItem cursorToSubCatList(Cursor cursor) {
         String id = cursor.getString(0);
-        String  price = cursor.getString(1);
+        String price = cursor.getString(1);
         String remarks = cursor.getString(2);
         String type = cursor.getString(3);
         String subtype = cursor.getString(4);

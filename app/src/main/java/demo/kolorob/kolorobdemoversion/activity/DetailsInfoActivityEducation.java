@@ -47,11 +47,11 @@ import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
-import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
@@ -131,7 +131,7 @@ public class DetailsInfoActivityEducation extends Activity {
         playground = (TextView) findViewById(R.id.tv_playground);
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-        close_button=(ImageView)findViewById(R.id.close_button);
+       // close_button=(ImageView)findViewById(R.id.close_button);
         phone_mid=(ImageView)findViewById(R.id.phone_middl);
         phone_text.setText(educationServiceProviderItem.getContactNo());
         email_text.setText(educationServiceProviderItem.getEmailAddress());
@@ -170,7 +170,7 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        int upperhad_height=params2.height = height/6;
+        //int upperhad_height=params2.height = height/6;
 
         upperHand.setLayoutParams(params2);
 
@@ -178,8 +178,8 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        int  vd=params_upperText.height = height/24;
-        params_upperText.width = width;
+       // int  vd=params_upperText.height = height/24;
+       // params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
@@ -190,7 +190,10 @@ public class DetailsInfoActivityEducation extends Activity {
 
         left_image.getLayoutParams().height= (lett_img*2)/3;
         left_image.getLayoutParams().width=right_img/2;
-
+        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
+        int  vcc=params_bottom_bar.height = height/15;
+        params_bottom_bar.width = width;
+        bottom_bar.setLayoutParams(params_bottom_bar);
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int  vx=params_middle_phone.height = (height*3)/24;
@@ -210,7 +213,14 @@ public class DetailsInfoActivityEducation extends Activity {
 
         ups_text=(TextView)findViewById(R.id.ups_text);
         ups_text.setTextSize(width/25);
-        ups_text.setText(educationServiceProviderItem.getEduNameEng());
+        ups_text.setText(educationServiceProviderItem.getEduNameBan());
+
+        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
+        feedbacks.height = height/20;
+        feedbacks.width = height/20;
+        feedback.setLayoutParams(feedbacks);
+        feedbacks.setMargins(0,0,width/30,0);
+        Log.d("width","===="+width);
 
 
         if(educationServiceProviderItem.getTotalStudents()!=0)
@@ -288,10 +298,7 @@ public class DetailsInfoActivityEducation extends Activity {
 
 
 
-        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
-        int  vcc=params_bottom_bar.height = height/13;
-        params_bottom_bar.width = width;
-        bottom_bar.setLayoutParams(params_bottom_bar);
+
 
 
 
@@ -551,14 +558,15 @@ public class DetailsInfoActivityEducation extends Activity {
 
             // phermacy.setText(lat);
 
+
         }
 
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        close_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
 
 
@@ -708,12 +716,8 @@ public class DetailsInfoActivityEducation extends Activity {
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-
-
-
-
 
 
 

@@ -50,6 +50,15 @@ public class EntertainmentServiceProviderTableNew {
     private static final String KEY_BLOCK = "_block"; //
     private static final String KEY_LANDMARK = "_landmark"; //
     private static final String KEY_BREAKTIME2 = "_breaktime2"; //
+    public static final String KEY_FLOOR = "floor";
+    public static final String KEY_HOUSE_NAME = "_house_name";
+    private static final String KEY_HOUSE_NUMBER = "_house_number"; //
+    private static final String KEY_LINE = "_line"; //
+    private static final String KEY_AVENUE = "_avenue";
+    private static final String KEY_POST_OFFICE = "_post_office"; //
+    private static final String KEY_POLICE_STATION = "_police_station"; //
+    private static final String KEY_CITY = "_city"; //
+    private static final String KEY_OFF_DAY = "_off_day"; //
 
 
     private Context tContext;
@@ -89,7 +98,16 @@ public class EntertainmentServiceProviderTableNew {
                 + KEY_ROAD+ " TEXT, "
                 + KEY_BLOCK + " TEXT, "
                 + KEY_LANDMARK + " TEXT, "
-                + KEY_BREAKTIME2 + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
+                + KEY_BREAKTIME2 + " TEXT, "
+                + KEY_FLOOR + " TEXT, "
+                + KEY_HOUSE_NAME + " TEXT, "
+                + KEY_HOUSE_NUMBER + " INTEGER, "
+                + KEY_LINE + " TEXT, "
+                + KEY_AVENUE + " TEXT, "
+                + KEY_POST_OFFICE + " TEXT, "
+                + KEY_POLICE_STATION+ " TEXT, "
+                + KEY_CITY + " TEXT, "
+                + KEY_OFF_DAY + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -128,7 +146,16 @@ public class EntertainmentServiceProviderTableNew {
                 entertainmentServiceProviderItem.getRoad(),
                 entertainmentServiceProviderItem.getBlock(),
                 entertainmentServiceProviderItem.getLandmark(),
-                entertainmentServiceProviderItem.getBreaktime2()
+                entertainmentServiceProviderItem.getBreaktime2(),
+                entertainmentServiceProviderItem.getFloor(),
+                entertainmentServiceProviderItem.getHouse_name(),
+                entertainmentServiceProviderItem.getHouse_no(),
+                entertainmentServiceProviderItem.getLine(),
+                entertainmentServiceProviderItem.getAvenue(),
+                entertainmentServiceProviderItem.getPost_office(),
+                entertainmentServiceProviderItem.getPolice_station(),
+                entertainmentServiceProviderItem.getCity(),
+                entertainmentServiceProviderItem.getOff_day()
         );
     }
 
@@ -156,7 +183,15 @@ public class EntertainmentServiceProviderTableNew {
                            String road,
                            String block,
                            String landmark,
-                           String breaktime2) {
+                           String breaktime2, String floor,
+                           String house_name,
+                           String house_no,
+                           String line,
+                           String avenue,
+                           String post_office,
+                           String police_station,
+                           String city,
+                           String off_day) {
         if (isFieldExist(nodeId, entSubCategoryId)) {
             return updateItem(nodeId,
                     entSubCategoryId,
@@ -182,7 +217,16 @@ public class EntertainmentServiceProviderTableNew {
                     road,
                     block,
                     landmark,
-                    breaktime2
+                    breaktime2,
+                    floor,
+                    house_name,
+                    house_no,
+                    line,
+                    avenue,
+                    post_office,
+                    police_station,
+                    city,
+                    off_day
                    );
         }
 
@@ -264,7 +308,15 @@ public class EntertainmentServiceProviderTableNew {
                              String road,
                              String block,
                              String landmark,
-                             String breaktime2
+                             String breaktime2,String floor,
+                             String house_name,
+                             String house_no,
+                             String line,
+                             String avenue,
+                             String post_office,
+                             String police_station,
+                             String city,
+                             String off_day
     ) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
@@ -492,7 +544,6 @@ public class EntertainmentServiceProviderTableNew {
         int _entSubCategoryId= cursor.getInt(1);
         String _nodeName = cursor.getString(2);
         String _nodeNameBn= cursor.getString(3);
-
         String _nodeDesignation = cursor.getString(6);
         String _nodeContact = cursor.getString(7);
         String _nodeEmail = cursor.getString(8);
@@ -514,6 +565,15 @@ public class EntertainmentServiceProviderTableNew {
         String _block=cursor.getString(26);
         String _landmark=cursor.getString(27);
         String _breaktime2=cursor.getString(28);
+        String floor= cursor.getString(29);
+        String house_name= cursor.getString(30);
+        String house_no=cursor.getString(31);
+        String line=cursor.getString(32);
+        String avenue=cursor.getString(33);
+        String post_office=cursor.getString(34);
+        String police_station=cursor.getString(35);
+        String city=cursor.getString(36);
+        String off_day=cursor.getString(37);
 
 
 
@@ -542,7 +602,15 @@ public class EntertainmentServiceProviderTableNew {
                 _landmark,
                 _road,
                 _block,
-                _breaktime2);
+                _breaktime2,floor,
+                house_name,
+                house_no,
+                line,
+                avenue,
+                post_office,
+                police_station,
+                city,
+                off_day);
     }
 
 

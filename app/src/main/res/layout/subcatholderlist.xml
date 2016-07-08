@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:id="@+id/linearCatlist"
+
+    android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/ivIconSCatList"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/catbuttonheight"
+
+        android:contentDescription="@string/txt_cd_icon_cat"
+        android:layout_gravity="center|top" />
+
+
+    <TextView
+        android:id="@+id/tv_sub_cat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Health"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+
+        android:layout_below="@+id/ivIconCatList"
+        android:layout_centerHorizontal="true" />/>
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvNameCatList"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="3dp"-->
+    <!--android:text="Health"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="16dp"-->
+    <!--tools:ignore="HardcodedText"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--android:layout_below="@+id/ivIconCatList"-->
+    <!--android:layout_alignLeft="@+id/ivIconCatList"-->
+    <!--android:layout_alignStart="@+id/ivIconCatList"-->
+    <!--android:layout_alignRight="@+id/ivIconCatList"-->
+    <!--android:layout_alignEnd="@+id/ivIconCatList" />-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@android:color/darker_gray" />-->
+
+</LinearLayout>
