@@ -202,47 +202,44 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
     {
 
         String _nodeId= jo.getString("id");
-
-
         String _nodeName = jo.getString("node_name");
         String _nodeNameBn= jo.getString("node_bn");
 
-        String _latitude = jo.getString("lat");
+        JSONObject map_info=jo.getJSONObject("map_info");
+        String _latitude = map_info.getString("lat");
+        String _longitude= map_info.getString("lon");
+        String _nodeType = map_info.getString("node_type");
 
-        String _longitude= jo.getString("lon");
-        String _nodeType = jo.getString("node_type");
+        JSONObject contact_info=jo.getJSONObject("contact_info");
+        String floor=contact_info.getString("floor");
+        String house_name=contact_info.getString("house_name");
+        String house_no=contact_info.getString("house_no");
+        String _road=contact_info.getString("road");
+        String line=contact_info.getString("line");
+        String avenue=contact_info.getString("avenue");
+        String _block =contact_info.getString("block");
+        String _area = contact_info.getString("area");
+        String _landmark=contact_info.getString("landmark");
+        String post_office=contact_info.getString("post_office");
+        String police_station=contact_info.getString("police_station");
+        String city=contact_info.getString("city");
+        String _nodeContact = contact_info.getString("node_contact");
+        String _nodeEmail = contact_info.getString("node_email");
+        String _nodeWebsite = contact_info.getString("node_website");
+        String _nodeFacebook = contact_info.getString("node_facebook");
+        String _nodeDesignation = contact_info.getString("address");
 
-        String floor=jo.getString("floor");
-
-        String house_name=jo.getString("house_name");
-
-        String house_no=jo.getString("house_no");
-
-        String _road=jo.getString("road");
-        String line=jo.getString("line");
-        String avenue=jo.getString("avenue");
-        String _block =jo.getString("block");
-        String _area = jo.getString("area");
-        String _landmark=jo.getString("landmark");
-        String post_office=jo.getString("post_office");
-        String police_station=jo.getString("police_station");
-        String city=jo.getString("city");
-        String _nodeContact = jo.getString("node_contact");
-        String _nodeEmail = jo.getString("node_email");
-        String _nodeWebsite = jo.getString("node_website");
-        String _nodeFacebook = jo.getString("node_facebook");
-        String _nodeDesignation = jo.getString("node_designation");
-        String _openingtime=jo.getString("opening_time");
-
-        String _breaktime=jo.getString("break_time");
-        String _closingtime=jo.getString("closing_time");
-        String _breaktime2=jo.getString("break_time");
-        String off_day=jo.getString("off_day");
-
+        JSONObject timing_info=jo.getJSONObject("timing_info");
+        String _openingtime=timing_info.getString("opening_time");
+        String _breaktime=timing_info.getString("break_time");
+        String _closingtime=timing_info.getString("closing_time");
+        String _breaktime2=timing_info.getString("break_time");
+        String off_day=timing_info.getString("off_day");
 
 
-        String _nodeRegisteredWith = jo.getString("node_registered_with");
-        String _nodeRegistrationNumber = jo.getString("node_registered_number");
+        JSONObject registration_info=jo.getJSONObject("registration_info");
+        String _nodeRegisteredWith = registration_info.getString("node_registered_with");
+        String _nodeRegistrationNumber = registration_info.getString("node_registered_number");
 
 
         Integer _entSubCategoryId= 2;
