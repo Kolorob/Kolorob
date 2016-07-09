@@ -59,7 +59,7 @@
                         android:layout_marginLeft="5dp"
 
                         android:textColor="@color/white"
-                        android:id="@+id/ups_text"
+                        android:id="@+id/ups_texts"
 
                         />
 
@@ -110,18 +110,20 @@
         </View>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/scrollingPart"
+            android:layout_marginBottom="80dp"
+
 
             >
 
             <ScrollView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -139,7 +141,41 @@
                         android:orientation="vertical"
                         android:id="@+id/Job_info">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/school_logo_default"
+                                android:id="@+id/JobIcon"/>
 
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="চাকুরীর বিস্তারিত বিবরন "
+                                android:textSize="20dp"
+                                android:layout_marginLeft="5dp"
+
+                                android:textColor="@color/white"
+                                android:id="@+id/ups_text"
+
+                                />
+
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -148,6 +184,8 @@
                             android:textSize="20sp"
                             android:paddingLeft="20dp"
                             android:padding="5dp"
+                            android:layout_marginTop="10dp"
+
                             android:textColor="@color/white"
 
                             android:layout_marginLeft="20dp"/>

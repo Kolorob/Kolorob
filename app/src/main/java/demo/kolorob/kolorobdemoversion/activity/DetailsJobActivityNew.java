@@ -87,7 +87,7 @@ public class DetailsJobActivityNew extends Activity {
         Log.d("position","===="+position);
 
         JobAdvertisementTable jobAdvertisementTable= new JobAdvertisementTable(DetailsJobActivityNew.this);
-        jobAdvertisementItems=jobAdvertisementTable.jobAdvertisementItems();
+        jobAdvertisementItems=jobAdvertisementTable.getSpecificJobElement(position);
 
         for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
         {
