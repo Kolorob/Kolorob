@@ -67,9 +67,7 @@ public class DetailsJobActivityNew extends Activity {
         bottom_bar=(LinearLayout)findViewById(R.id.bottom_bar);
         middle_image=(ImageView)findViewById(R.id.phone_middl);
         right_image=(ImageView)findViewById(R.id.right_side_email);
-        address_text=(TextView)findViewById(R.id.address_text);
-        phone_text=(TextView)findViewById(R.id.phone_text);
-        email_text=(TextView)findViewById(R.id.email_text);
+
         close_button=(ImageView)findViewById(R.id.close_button);
         break_time=(TextView)findViewById(R.id.break_time);
        // off_day=(TextView)findViewById(R.id.off_day);
@@ -89,15 +87,14 @@ public class DetailsJobActivityNew extends Activity {
         Log.d("position","===="+position);
 
         JobAdvertisementTable jobAdvertisementTable= new JobAdvertisementTable(DetailsJobActivityNew.this);
-        jobAdvertisementItems=jobAdvertisementTable.getSpecificJobElement(position);
+        jobAdvertisementItems=jobAdvertisementTable.jobAdvertisementItems();
 
         for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
         {
             ups_text=(TextView)findViewById(R.id.ups_text);
             ups_text.setTextSize(width/25);
             ups_text.setText(jobAdvertisementItem.getInstitute_name_bangla());
-            phone_text.setText(jobAdvertisementItem.getMobile1());
-            email_text.setText(jobAdvertisementItem.getEmail());
+
 
             if(!jobAdvertisementItem.getJob_type().equals(""))
             {
