@@ -1,11 +1,13 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,7 +22,7 @@ import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 
-public class DetailsJobActivityNew extends AppCompatActivity {
+public class DetailsJobActivityNew extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
     ImageView left_image,middle_image,right_image;
@@ -56,7 +58,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         con = this;
 
         linearLayout=(LinearLayout)findViewById(R.id.lll);
-        upperHand=(LinearLayout)findViewById(R.id.upper_part);
+        //upperHand=(LinearLayout)findViewById(R.id.upper_part);
         upperText=(LinearLayout)findViewById(R.id.upperText);
 //        left_way=(LinearLayout)findViewById(R.id.left_go_process);
         middle_phone=(LinearLayout)findViewById(R.id.middle_phone);
@@ -83,6 +85,8 @@ public class DetailsJobActivityNew extends AppCompatActivity {
         reference_person=(TextView)findViewById(R.id.reference_person);
         //collector_name=(TextView)findViewById(R.id.collector_name);
         salary_range=(TextView)findViewById(R.id.salary_range);
+
+        Log.d("position","===="+position);
 
         JobAdvertisementTable jobAdvertisementTable= new JobAdvertisementTable(DetailsJobActivityNew.this);
         jobAdvertisementItems=jobAdvertisementTable.getSpecificJobElement(position);
@@ -158,12 +162,12 @@ public class DetailsJobActivityNew extends AppCompatActivity {
 
 
 
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        int upperhad_height=params2.height = height/6;
-        upperHand.setLayoutParams(params2);
+//        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
+//        int upperhad_height=params2.height = height/6;
+//        upperHand.setLayoutParams(params2);
 
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        int  vd=params_upperText.height = height/24;
+        int  vd=params_upperText.height = height/12;
         params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
 
@@ -189,7 +193,7 @@ public class DetailsJobActivityNew extends AppCompatActivity {
 //        right_image.getLayoutParams().width=right_img/2;
 
 
-        scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
+          scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
 //        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
 //        int  vc=params_right_email.height = (height*3)/24;
 //        params_right_email.width = width/3;
