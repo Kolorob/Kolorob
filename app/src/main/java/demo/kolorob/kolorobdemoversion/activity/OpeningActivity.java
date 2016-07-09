@@ -48,6 +48,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookT
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
@@ -81,6 +82,7 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShop
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
@@ -314,11 +316,11 @@ int countofDb;
 
 
                             try {
-                                Log.d("====","I am here");
+                              //  Log.d("====","I am here");
                                 JSONArray legal_array= new JSONArray(apiContent);
                                 //  JSONObject jo = new JSONObject(apiContent);
                                 int p= legal_array.length();
-                                Log.d("====","LengthArray "+p);
+                           //     Log.d("====","LengthArray "+p);
 
                                 for(int i=0;i<p;i++)
                                 {
@@ -420,30 +422,32 @@ int countofDb;
                     }
                 }
             });
-//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
-//                @Override
-//                public void onResponse(int status, String apiContent) {
-//
-//
-//
-//                        try {
-//
-//                            JSONArray allData=new JSONArray(apiContent);
-//                            EntDataSize=allData.length();
-//                            for(int i=0;i<=EntDataSize;i++)
-//                            {
-//                                JSONObject jsonObject=allData.getJSONObject(i);
-//
-//                                SaveEntertainmentData(jsonObject);
-//                            }
-//
-//                                //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                }
-//            });
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+
+
+
+                    try {
+
+                        JSONArray allData=new JSONArray(apiContent);
+                        EntDataSize=allData.length();
+
+                        for(int i=0;i<=EntDataSize;i++)
+                        {
+                            JSONObject jsonObject=allData.getJSONObject(i);
+
+                            SaveEntertainmentData(jsonObject,i);
+                        }
+
+                        //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 
             getRequest(OpeningActivity.this, "health/all", new VolleyApiCallback() {
                 @Override
@@ -600,6 +604,24 @@ int countofDb;
         }
         countofDb++;
     }
+
+    private void SaveEntertainmentData(JSONObject jsonObject, int i) {
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew= new EntertainmentServiceProviderTableNew(OpeningActivity.this);
+        //entertainmentServiceProviderTableNew.dropTable();
+            try {
+                EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew=EntertainmentServiceProviderItemNew.parseEntertainmentServiceProviderItem(jsonObject,i);
+                entertainmentServiceProviderTableNew.insertItem(entertainmentServiceProviderItemNew);
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+    }
+
+
 
     private void saveSubCategoryList(JSONArray subCategoryArray) {
         SubCategoryTable subCatTable = new SubCategoryTable(OpeningActivity.this);

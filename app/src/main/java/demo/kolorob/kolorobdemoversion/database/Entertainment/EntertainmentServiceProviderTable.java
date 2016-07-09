@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -243,6 +244,7 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+      //  Log.d("Insert","===="+ret);
         closeDB();
         return ret;
 

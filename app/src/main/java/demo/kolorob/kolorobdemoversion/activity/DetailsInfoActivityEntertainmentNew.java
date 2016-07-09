@@ -46,12 +46,14 @@ import demo.kolorob.kolorobdemoversion.adapters.EntertainmentTheatreAdapter;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -191,6 +193,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
 
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNewsf;
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew= new EntertainmentServiceProviderTableNew(DetailsInfoActivityEntertainmentNew.this);
+        entertainmentServiceProviderItemNews=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+        entertainmentServiceProviderItemNewsf=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
 
 

@@ -198,9 +198,10 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         return off_day;
     }
 
-    public static EntertainmentServiceProviderItemNew parseEntertainmentServiceProviderItem(JSONObject jo) throws JSONException
+    public static EntertainmentServiceProviderItemNew parseEntertainmentServiceProviderItem(JSONObject jo, int i) throws JSONException
     {
 
+        String _nodeIds= String.valueOf(i);
         String _nodeId= jo.getString("id");
         String _nodeName = jo.getString("node_name");
         String _nodeNameBn= jo.getString("node_bn");
@@ -237,10 +238,12 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         String off_day=timing_info.getString("off_day");
 
 
-        JSONObject registration_info=jo.getJSONObject("registration_info");
-        String _nodeRegisteredWith = registration_info.getString("node_registered_with");
-        String _nodeRegistrationNumber = registration_info.getString("node_registered_number");
-
+        //JSONObject registration_info=jo.getJSONObject("registration_info");
+       // String _nodeRegisteredWiths = registration_info.getString("node_registered_with");
+        String _nodeRegisteredWith = "node_registered_with";
+       // String _nodeRegistrationNumbers = registration_info.getString("node_registered_number");
+        String _nodeRegistrationNumber =  "node_registered_number";
+        Log.d("saved","==="+_nodeId);
 
         Integer _entSubCategoryId= 2;
 
@@ -283,7 +286,8 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 _openingtime,
                 _breaktime,
                 _closingtime,
-                _road, _block,_landmark, _breaktime2,floor,
+                _road, _block,_landmark,
+                _breaktime2,floor,
                  house_name,
                  house_no,
                 line,
