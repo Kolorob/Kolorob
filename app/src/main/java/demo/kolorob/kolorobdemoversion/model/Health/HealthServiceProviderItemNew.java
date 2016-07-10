@@ -283,8 +283,645 @@ public class HealthServiceProviderItemNew implements Serializable {
 
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public String getNode_name() {
+        return node_name;
+    }
+
+    public void setNode_name(String node_name) {
+        this.node_name = node_name;
+    }
+
+    public String getNode_bn() {
+        return node_bn;
+    }
+
+    public void setNode_bn(String node_bn) {
+        this.node_bn = node_bn;
+    }
+
+    public String getInstitute_type() {
+        return institute_type;
+    }
+
+    public void setInstitute_type(String institute_type) {
+        this.institute_type = institute_type;
+    }
+
+    public String getSpoken_lang() {
+        return spoken_lang;
+    }
+
+    public void setSpoken_lang(String spoken_lang) {
+        this.spoken_lang = spoken_lang;
+    }
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getMale_doctors() {
+        return male_doctors;
+    }
+
+    public void setMale_doctors(String male_doctors) {
+        this.male_doctors = male_doctors;
+    }
+
+    public String getFemale_doctors() {
+        return female_doctors;
+    }
+
+    public void setFemale_doctors(String female_doctors) {
+        this.female_doctors = female_doctors;
+    }
+
+    public String getPatient_doctor_ratio() {
+        return patient_doctor_ratio;
+    }
+
+    public void setPatient_doctor_ratio(String patient_doctor_ratio) {
+        this.patient_doctor_ratio = patient_doctor_ratio;
+    }
+
+    public String getMale_nurse() {
+        return male_nurse;
+    }
+
+    public void setMale_nurse(String male_nurse) {
+        this.male_nurse = male_nurse;
+    }
+
+    public String getFemale_nurse() {
+        return female_nurse;
+    }
+
+    public void setFemale_nurse(String female_nurse) {
+        this.female_nurse = female_nurse;
+    }
+
+    public String getPatient_nurse_ratio() {
+        return patient_nurse_ratio;
+    }
+
+    public void setPatient_nurse_ratio(String patient_nurse_ratio) {
+        this.patient_nurse_ratio = patient_nurse_ratio;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getNode_id() {
+        return node_id;
+    }
+
+    public void setNode_id(String node_id) {
+        this.node_id = node_id;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public String getHouse_name() {
+        return house_name;
+    }
+
+    public void setHouse_name(String house_name) {
+        this.house_name = house_name;
+    }
+
+    public String getHouse_no() {
+        return house_no;
+    }
+
+    public void setHouse_no(String house_no) {
+        this.house_no = house_no;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public void setRoad(String road) {
+        this.road = road;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
+
+    public String getAvenue() {
+        return avenue;
+    }
+
+    public void setAvenue(String avenue) {
+        this.avenue = avenue;
+    }
+
+    public String getBlock() {
+        return block;
+    }
+
+    public void setBlock(String block) {
+        this.block = block;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
+    }
+
+    public String getPost_office() {
+        return post_office;
+    }
+
+    public void setPost_office(String post_office) {
+        this.post_office = post_office;
+    }
+
+    public String getPolice_station() {
+        return police_station;
+    }
+
+    public void setPolice_station(String police_station) {
+        this.police_station = police_station;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getNode_contact() {
+        return node_contact;
+    }
+
+    public void setNode_contact(String node_contact) {
+        this.node_contact = node_contact;
+    }
+
+    public String getNode_contact2() {
+        return node_contact2;
+    }
+
+    public void setNode_contact2(String node_contact2) {
+        this.node_contact2 = node_contact2;
+    }
+
+    public String getNode_website() {
+        return node_website;
+    }
+
+    public void setNode_website(String node_website) {
+        this.node_website = node_website;
+    }
+
+    public String getNode_facebook() {
+        return node_facebook;
+    }
+
+    public void setNode_facebook(String node_facebook) {
+        this.node_facebook = node_facebook;
+    }
+
+    public String getNode_designation() {
+        return node_designation;
+    }
+
+    public void setNode_designation(String node_designation) {
+        this.node_designation = node_designation;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOpening_time() {
+        return opening_time;
+    }
+
+    public void setOpening_time(String opening_time) {
+        this.opening_time = opening_time;
+    }
+
+    public String getBreak_time() {
+        return break_time;
+    }
+
+    public void setBreak_time(String break_time) {
+        this.break_time = break_time;
+    }
+
+    public String getClosing_time() {
+        return closing_time;
+    }
+
+    public void setClosing_time(String closing_time) {
+        this.closing_time = closing_time;
+    }
+
+    public String getOff_day() {
+        return off_day;
+    }
+
+    public void setOff_day(String off_day) {
+        this.off_day = off_day;
+    }
+
+    public String getNode_registered_with() {
+        return node_registered_with;
+    }
+
+    public void setNode_registered_with(String node_registered_with) {
+        this.node_registered_with = node_registered_with;
+    }
+
+    public String getNode_registered_number() {
+        return node_registered_number;
+    }
+
+    public void setNode_registered_number(String node_registered_number) {
+        this.node_registered_number = node_registered_number;
+    }
+
+    public String getUpdated_drugs() {
+        return updated_drugs;
+    }
+
+    public void setUpdated_drugs(String updated_drugs) {
+        this.updated_drugs = updated_drugs;
+    }
+
+    public String getNum_trained_pharmacist() {
+        return num_trained_pharmacist;
+    }
+
+    public void setNum_trained_pharmacist(String num_trained_pharmacist) {
+        this.num_trained_pharmacist = num_trained_pharmacist;
+    }
+
+    public String getDoctor_available() {
+        return doctor_available;
+    }
+
+    public void setDoctor_available(String doctor_available) {
+        this.doctor_available = doctor_available;
+    }
+
+    public String getPharmacy_speciality() {
+        return pharmacy_speciality;
+    }
+
+    public void setPharmacy_speciality(String pharmacy_speciality) {
+        this.pharmacy_speciality = pharmacy_speciality;
+    }
+
+    public String getPharmacy_free() {
+        return pharmacy_free;
+    }
+
+    public void setPharmacy_free(String pharmacy_free) {
+        this.pharmacy_free = pharmacy_free;
+    }
+
+    public String getFree_service_for() {
+        return free_service_for;
+    }
+
+    public void setFree_service_for(String free_service_for) {
+        this.free_service_for = free_service_for;
+    }
+
+    public String getPharmacy_free_service() {
+        return pharmacy_free_service;
+    }
+
+    public void setPharmacy_free_service(String pharmacy_free_service) {
+        this.pharmacy_free_service = pharmacy_free_service;
+    }
+
+    public String getPharmacy_fee() {
+        return pharmacy_fee;
+    }
+
+    public void setPharmacy_fee(String pharmacy_fee) {
+        this.pharmacy_fee = pharmacy_fee;
+    }
+
+    public String getPharmacy_remarks() {
+        return pharmacy_remarks;
+    }
+
+    public void setPharmacy_remarks(String pharmacy_remarks) {
+        this.pharmacy_remarks = pharmacy_remarks;
+    }
+
+    public String getPharmacy_privacy() {
+        return pharmacy_privacy;
+    }
+
+    public void setPharmacy_privacy(String pharmacy_privacy) {
+        this.pharmacy_privacy = pharmacy_privacy;
+    }
+
+    public String getQuality_equipments() {
+        return quality_equipments;
+    }
+
+    public void setQuality_equipments(String quality_equipments) {
+        this.quality_equipments = quality_equipments;
+    }
+
+    public String getGeneral_free() {
+        return general_free;
+    }
+
+    public void setGeneral_free(String general_free) {
+        this.general_free = general_free;
+    }
+
+    public String getGeneral_free_for() {
+        return general_free_for;
+    }
+
+    public void setGeneral_free_for(String general_free_for) {
+        this.general_free_for = general_free_for;
+    }
+
+    public String getGeneral_free_services() {
+        return general_free_services;
+    }
+
+    public void setGeneral_free_services(String general_free_services) {
+        this.general_free_services = general_free_services;
+    }
+
+    public String getGeneral_cost() {
+        return general_cost;
+    }
+
+    public void setGeneral_cost(String general_cost) {
+        this.general_cost = general_cost;
+    }
+
+    public String getGeneral_remark() {
+        return general_remark;
+    }
+
+    public void setGeneral_remark(String general_remark) {
+        this.general_remark = general_remark;
+    }
+
+    public String getEmergency_free() {
+        return emergency_free;
+    }
+
+    public void setEmergency_free(String emergency_free) {
+        this.emergency_free = emergency_free;
+    }
+
+    public String getEmergency_free_for() {
+        return emergency_free_for;
+    }
+
+    public void setEmergency_free_for(String emergency_free_for) {
+        this.emergency_free_for = emergency_free_for;
+    }
+
+    public String getEmergency_free_services() {
+        return emergency_free_services;
+    }
+
+    public void setEmergency_free_services(String emergency_free_services) {
+        this.emergency_free_services = emergency_free_services;
+    }
+
+    public String getEmergency_cost() {
+        return emergency_cost;
+    }
+
+    public void setEmergency_cost(String emergency_cost) {
+        this.emergency_cost = emergency_cost;
+    }
+
+    public String getEmergency_remark() {
+        return emergency_remark;
+    }
+
+    public void setEmergency_remark(String emergency_remark) {
+        this.emergency_remark = emergency_remark;
+    }
+
+    public String getAmbulance_free() {
+        return ambulance_free;
+    }
+
+    public void setAmbulance_free(String ambulance_free) {
+        this.ambulance_free = ambulance_free;
+    }
+
+    public String getAmbulance_free_for() {
+        return ambulance_free_for;
+    }
+
+    public void setAmbulance_free_for(String ambulance_free_for) {
+        this.ambulance_free_for = ambulance_free_for;
+    }
+
+    public String getAmbulance_free_services() {
+        return ambulance_free_services;
+    }
+
+    public void setAmbulance_free_services(String ambulance_free_services) {
+        this.ambulance_free_services = ambulance_free_services;
+    }
+
+    public String getAmbulance_cost() {
+        return ambulance_cost;
+    }
+
+    public void setAmbulance_cost(String ambulance_cost) {
+        this.ambulance_cost = ambulance_cost;
+    }
+
+    public String getAmbulance_remark() {
+        return ambulance_remark;
+    }
+
+    public void setAmbulance_remark(String ambulance_remark) {
+        this.ambulance_remark = ambulance_remark;
+    }
+
+    public String getMaternity_free() {
+        return maternity_free;
+    }
+
+    public void setMaternity_free(String maternity_free) {
+        this.maternity_free = maternity_free;
+    }
+
+    public String getMaternity_free_for() {
+        return maternity_free_for;
+    }
+
+    public void setMaternity_free_for(String maternity_free_for) {
+        this.maternity_free_for = maternity_free_for;
+    }
+
+    public String getMaternity_free_services() {
+        return maternity_free_services;
+    }
+
+    public void setMaternity_free_services(String maternity_free_services) {
+        this.maternity_free_services = maternity_free_services;
+    }
+
+    public String getMaternity_cost() {
+        return maternity_cost;
+    }
+
+    public void setMaternity_cost(String maternity_cost) {
+        this.maternity_cost = maternity_cost;
+    }
+
+    public String getMaternity_remark() {
+        return maternity_remark;
+    }
+
+    public void setMaternity_remark(String maternity_remark) {
+        this.maternity_remark = maternity_remark;
+    }
+
+    public String getMaternity_complication() {
+        return maternity_complication;
+    }
+
+    public void setMaternity_complication(String maternity_complication) {
+        this.maternity_complication = maternity_complication;
+    }
+
+    public String getMaternity_privacy() {
+        return maternity_privacy;
+    }
+
+    public void setMaternity_privacy(String maternity_privacy) {
+        this.maternity_privacy = maternity_privacy;
+    }
+
+    public String getMaternity_newborn_care() {
+        return maternity_newborn_care;
+    }
+
+    public void setMaternity_newborn_care(String maternity_newborn_care) {
+        this.maternity_newborn_care = maternity_newborn_care;
+    }
+
+    public String getFamily_services() {
+        return family_services;
+    }
+
+    public void setFamily_services(String family_services) {
+        this.family_services = family_services;
+    }
+
+    public String getFamily_contraceptive_available() {
+        return family_contraceptive_available;
+    }
+
+    public void setFamily_contraceptive_available(String family_contraceptive_available) {
+        this.family_contraceptive_available = family_contraceptive_available;
+    }
+
+    public String getFamily_contraceptive() {
+        return family_contraceptive;
+    }
+
+    public void setFamily_contraceptive(String family_contraceptive) {
+        this.family_contraceptive = family_contraceptive;
+    }
+
+    public String getFamily_privacy() {
+        return family_privacy;
+    }
+
+    public void setFamily_privacy(String family_privacy) {
+        this.family_privacy = family_privacy;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getReferences() {
+        return references;
+    }
+
+    public void setReferences(String references) {
+        this.references = references;
+    }
 
     public static HealthServiceProviderItemNew parseHealthServiceProviderItem(JSONObject jo) throws JSONException{
 
