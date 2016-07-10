@@ -180,6 +180,15 @@ public class HealthServiceProviderItemNew implements Serializable {
         this.id=id;
         this.node_name=node_name;
         this.node_bn=node_bn;
+        this.institute_type = institute_type;
+        this.spoken_lang=spoken_lang;
+        this.capacity=capacity;
+        this.male_doctors=male_doctors;
+        this.female_doctors=female_doctors;
+        this.patient_doctor_ratio=patient_doctor_ratio;
+        this.male_nurse=male_nurse;
+        this.female_nurse=female_nurse;
+        this.patient_nurse_ratio=patient_nurse_ratio;
         this.lon = lon;
         this.lat=lat;
         this.node_id=node_id;
@@ -206,7 +215,7 @@ public class HealthServiceProviderItemNew implements Serializable {
         this.break_time = break_time;
         this.closing_time = closing_time;
         this.off_day = off_day;
-
+        this.doctor_available=doctor_available;
         this.node_registered_with=node_registered_with;
         this.node_registered_number=node_registered_number;
         this.updated_drugs=updated_drugs;
@@ -279,10 +288,25 @@ public class HealthServiceProviderItemNew implements Serializable {
 
     public static HealthServiceProviderItemNew parseHealthServiceProviderItem(JSONObject jo) throws JSONException{
 
-        String _nodeId=jo.getString("node_id");
-        String _nodeName= jo.getString("node_name");
-        String _dateName=jo.getString("data_name");
+        String id=jo.getString("id");
+        String node_name= jo.getString("node_name");
+        String node_bn=jo.getString("node_bn");
+
+        String institute_type=jo.getString("institute_type");
+        String spoken_lang= jo.getString("spoken_lang");
+        String capacity=jo.getString("capacity");
+
+
+        String male_doctors=jo.getString("male_doctors");
+        String female_doctors= jo.getString("female_doctors");
+        String patient_doctor_ratio=jo.getString("patient_doctor_ratio");
+
+
+        String male_nurse=jo.getString("male_nurse");
+        String female_nurse= jo.getString("female_nurse");
+        String patient_nurse_ratio=jo.getString("patient_nurse_ratio");
         String lat=jo.getString("lat");
+        String lon=jo.getString("lon");
         String node_id= jo.getString("node_id");
         String floor = jo.getString("floor");
         String house_name=jo.getString("house_name");
@@ -292,7 +316,7 @@ public class HealthServiceProviderItemNew implements Serializable {
         String avenue = jo.getString("avenue");
         String block= jo.getString("block");
         String area= jo.getString("area");
-        int landmark= jo.getInt("landmark");
+        String landmark= jo.getString("landmark");
         String post_office=jo.getString("post_office");
         String police_station=jo.getString("police_station");
         String city=jo.getString("city");
@@ -300,7 +324,7 @@ public class HealthServiceProviderItemNew implements Serializable {
         String node_contact=jo.getString("node_contact");
         String node_contact2=jo.getString("node_email");
         String node_website = jo.getString("node_website");
-        int node_facebook=jo.getInt("node_facebook");
+        String node_facebook=jo.getString("node_facebook");
         String node_designation=jo.getString("node_designation");
         String address=jo.getString("address");
         String opening_time=jo.getString("opening_time");
@@ -311,6 +335,7 @@ public class HealthServiceProviderItemNew implements Serializable {
         String node_registered_number=jo.getString("node_registered_number");
         String updated_drugs=jo.getString("updated_drugs");
         String num_trained_pharmacist= jo.getString("num_trained_pharmacist");
+        String doctor_available= jo.getString("doctor_available");
         String pharmacy_speciality=jo.getString("pharmacy_speciality");
         String pharmacy_free=jo.getString("pharmacy_free");
         String free_service_for= jo.getString("free_service_for");
@@ -328,12 +353,12 @@ public class HealthServiceProviderItemNew implements Serializable {
         String emergency_free=jo.getString("emergency_free");
         String emergency_free_for=jo.getString("emergency_free_for");
         String emergency_free_services=jo.getString("emergency_free_services");
-        int emergency_cost= jo.getInt("emergency_cost");
+        String emergency_cost= jo.getString("emergency_cost");
         String emergency_remark=jo.getString("emergency_remark");
 
         String ambulance_free=jo.getString("ambulance_free");
         String ambulance_free_for = jo.getString("ambulance_free_for");
-        int ambulance_free_services=jo.getInt("ambulance_free_services");
+        String ambulance_free_services=jo.getString("ambulance_free_services");
         String ambulance_cost=jo.getString("ambulance_cost");
         String ambulance_remark=jo.getString("ambulance_remark");
 
@@ -355,30 +380,86 @@ public class HealthServiceProviderItemNew implements Serializable {
 
 
         return new HealthServiceProviderItemNew(
-                _nodeId,
-                _nodeName,
-                _dateName,
-                _dateDate,
-                _nodeDesignation,
-                _nodeContact,
-                _nodeEmail,
-                _nodeAdditional,
-                _nodeWebsite,
-                _nodeFacebook,
-                _nodeRegisteredwith,
-                _nodeRegistationNumber,
-                _editedBy,
-                _refNum,
-                _nameBn,
-                _timeStamp,
-                _nodeType,
-                _area,
-                _address,
-                _longitude,
-                _latitude,
-                _categoryId,
-
-                _openingtime, _breaktime, _closingtime, _landmark, _road, _block, _breaktime2, _additionaltime);
+                id,
+                node_name,
+                node_bn,
+                institute_type,
+                spoken_lang,
+                capacity,
+                male_doctors,
+                female_doctors,
+                patient_doctor_ratio,
+                male_nurse,
+                female_nurse,
+                patient_nurse_ratio,
+                lon,
+                lat,
+                node_id,
+                floor,
+                house_name,
+                house_no,
+                road,
+                line,
+                avenue,
+                block,
+                area,
+                landmark,
+                post_office,
+                police_station,
+                city,
+                country,
+                node_contact,
+                node_contact2,
+                node_website,
+                node_facebook,
+                node_designation,
+                address,
+                opening_time,
+                break_time,
+                closing_time,
+                off_day,
+                node_registered_with,
+                node_registered_number,
+                updated_drugs,
+                num_trained_pharmacist,
+                doctor_available,
+                pharmacy_speciality,
+                pharmacy_free,
+                free_service_for,
+                pharmacy_free_service,
+                pharmacy_fee,
+                pharmacy_remarks,
+                pharmacy_privacy,
+                quality_equipments,
+                general_free,
+                general_free_for,
+                general_free_services,
+                general_cost,
+                general_remark,
+                emergency_free,
+                emergency_free_for,
+                emergency_free_services,
+                emergency_cost,
+                emergency_remark,
+                ambulance_free,
+                ambulance_free_for,
+                ambulance_free_services,
+                ambulance_cost,
+                ambulance_remark,
+                maternity_free,
+                maternity_free_for,
+                maternity_free_services,
+                maternity_cost,
+                maternity_remark,
+                maternity_complication,
+                maternity_privacy,
+                maternity_newborn_care,
+                family_services,
+                family_contraceptive_available,
+                family_contraceptive,
+                family_privacy,
+                category,
+                references);
 
 
 
