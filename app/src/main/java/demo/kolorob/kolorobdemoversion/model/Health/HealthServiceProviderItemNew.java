@@ -1,5 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.Health;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -1002,11 +1004,14 @@ public class HealthServiceProviderItemNew implements Serializable {
         String emergency_remark=health_emergency_info.getString("emergency_remark");
 
         JSONObject health_ambulance_info= jo.getJSONObject("health_ambulance_info");
+
+
         String ambulance_free=health_ambulance_info.getString("ambulance_free");
+
         String ambulance_free_for = health_ambulance_info.getString("ambulance_free_for");
         String ambulance_free_services=health_ambulance_info.getString("ambulance_free_services");
         String ambulance_cost=health_ambulance_info.getString("ambulance_cost");
-        String ambulance_remark=jo.getString("ambulance_remark");
+        String ambulance_remark=health_ambulance_info.getString("ambulance_remark");
 
         JSONObject health_maternity_info= jo.getJSONObject("health_maternity_info");
         String maternity_free=health_maternity_info.getString("maternity_free");
@@ -1023,8 +1028,15 @@ public class HealthServiceProviderItemNew implements Serializable {
         String family_contraceptive_available=health_fp_info.getString("family_contraceptive_available");
         String family_contraceptive=health_fp_info.getString("family_contraceptive");
         String family_privacy=health_fp_info.getString("family_privacy");
+
         String category=jo.getString("category");
-        String references=jo.getString("references");
+
+
+       // String references=jo.getString("references");
+        String references="references";
+        //Log.d("Attempt4","======"+references);
+
+
 
 
         return new HealthServiceProviderItemNew(

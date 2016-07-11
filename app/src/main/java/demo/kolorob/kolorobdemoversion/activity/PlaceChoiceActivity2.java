@@ -943,12 +943,12 @@ searchmain.setVisibility(View.GONE);
 
         /// Log.d(">>>>>>","You are in onResume");
 
-if(valuecheck==false)
-{
+         if(valuecheck==false)
+       {
 
        allitemList.setVisibility(View.VISIBLE);
 
-}
+        }
         if (valuecheck!=false && getv==10)
         {
             placemain.setVisibility(View.GONE);

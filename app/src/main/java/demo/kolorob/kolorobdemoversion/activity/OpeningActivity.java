@@ -65,6 +65,7 @@ import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
@@ -450,10 +451,10 @@ int countofDb;
 //                }
 //            });
 
-            getRequest(OpeningActivity.this, "http: kolorob.net/demo/api/sp2/health", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
-                if (status == AppConstants.SUCCESS_CODE) {
+
 
 
                     try {
@@ -461,10 +462,9 @@ int countofDb;
                         JSONArray allData=new JSONArray(apiContent);
                         HealthDatSize=allData.length();
 
-                        for(int i=0;i<=HealthDatSize;i++)
+                        for(int i=0;i<HealthDatSize;i++)
                         {
                             JSONObject jsonObject=allData.getJSONObject(i);
-
                             SaveHealthtData(jsonObject);
                         }
 
@@ -472,28 +472,28 @@ int countofDb;
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
+
             }
         });
 
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/health", new VolleyApiCallback() {
-                @Override
-                public void onResponse(int status, String apiContent) {
-                    if (status == AppConstants.SUCCESS_CODE) {
-
-
-                        try {
-                            JSONObject jo = new JSONObject(apiContent);
-                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                saveHealthServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
+//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/health", new VolleyApiCallback() {
+//                @Override
+//                public void onResponse(int status, String apiContent) {
+//                    if (status == AppConstants.SUCCESS_CODE) {
+//
+//
+//                        try {
+//                            JSONObject jo = new JSONObject(apiContent);
+//                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+//                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+//                                saveHealthServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            });
 //            getRequest(OpeningActivity.this, "legal/all", new VolleyApiCallback() {
 //                        @Override
 //                        public void onResponse(int status, String apiContent) {
@@ -535,25 +535,25 @@ int countofDb;
 
 
 //
-//            getRequest(OpeningActivity.this, "finance/all", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//
-//
-//                                try {
-//                                    JSONObject jo = new JSONObject(apiContent);
-//                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-//                                        saveFinancialServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
+            getRequest(OpeningActivity.this, "finance/all", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveFinancialServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
 
 
@@ -635,11 +635,11 @@ int countofDb;
 
     private void SaveHealthtData(JSONObject jsonObject)
     {
-        HealthServiceProviderTable healthServiceProviderTable= new HealthServiceProviderTable(OpeningActivity.this);
+        HealthServiceProviderTableNew healthServiceProviderTableNew= new HealthServiceProviderTableNew(OpeningActivity.this);
         try {
             HealthServiceProviderItemNew healthServiceProviderItemNew=HealthServiceProviderItemNew.parseHealthServiceProviderItem(jsonObject);
-            healthServiceProviderTable.insertItemHealth(healthServiceProviderItemNew);
-            Log.d("Take attempt on Saving","=====")
+            healthServiceProviderTableNew.insertItemHealth(healthServiceProviderItemNew);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
