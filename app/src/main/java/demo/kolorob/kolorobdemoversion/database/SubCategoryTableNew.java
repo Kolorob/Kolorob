@@ -45,12 +45,12 @@ public class SubCategoryTableNew {
                 + KEY_CAT_ID + " INTEGER, "
                 + KEY_CAT_NAME + " TEXT, "
                 + KEY_SUB_CAT_ID + " INTEGER, "
-                + KEY_SUB_CAT_HEADER_EN + "TEXT, "
-                + KEY_SUB_CAT_HEADER_BN + "TEXT, "
+                + KEY_SUB_CAT_HEADER_EN + " TEXT, "
+                + KEY_SUB_CAT_HEADER_BN + " TEXT, "
                 + KEY_REF_ID + " INTEGER, "
-                + KEY_REF_NAME_EN + "TEXT, "
-                + KEY_REF_NAME_BN + "TEXT, "
-                + " PRIMARY KEY("+KEY_CAT_ID+","+KEY_SUB_CAT_ID+"))";
+                + KEY_REF_NAME_EN + " TEXT, "
+                + KEY_REF_NAME_BN + " TEXT, "
+                + " PRIMARY KEY("+KEY_CAT_ID+","+KEY_SUB_CAT_ID+","+KEY_REF_ID+"))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -74,7 +74,7 @@ public class SubCategoryTableNew {
     }
 
     public long insertItem(int catId, String catName, int subCatHeaderId, String subCatHeaderNameEn, String subCatHeaderNameBn, int subCatId, String subCatNameEn, String subCatNameBn) {
-        if (isFieldExist(catId,subCatHeaderId)) {
+        if (isFieldExist(catId,subCatHeaderId,subCatId)) {
             return updateItem(catId,catName,subCatHeaderId,subCatHeaderNameEn,subCatHeaderNameBn,subCatId,subCatNameEn,subCatNameBn);
         }
         ContentValues rowValue = new ContentValues();
@@ -92,13 +92,13 @@ public class SubCategoryTableNew {
         return ret;
     }
 
-    public boolean isFieldExist(int id,int cat_id) {
+    public boolean isFieldExist(int id,int cat_id,int refid) {
        // Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (Integer.parseInt(cursor.getString(1)) == id && Integer.parseInt(cursor.getString(0)) == cat_id ) {
+                if (cursor.getInt(0) == id &&cursor.getInt(2) == cat_id &&cursor.getInt(5) == refid ) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -145,12 +145,27 @@ public class SubCategoryTableNew {
         closeDB();
         return siList;
     }
-
-    public ArrayList<SubCategoryItemNew> getAllSubCategories(int id) {
+    public ArrayList<SubCategoryItemNew> getAllSubCat(int id) {
         ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCategory(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
+
+    public ArrayList<SubCategoryItemNew> getAllSubCategories() {
+        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
 
         if (cursor.moveToFirst()) {
             do {
