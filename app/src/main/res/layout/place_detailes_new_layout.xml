@@ -42,7 +42,7 @@
                 android:orientation="vertical"
                 android:visibility="gone"
                 android:id="@+id/compare_layout"
-                android:background="@drawable/compare_screen"
+
                >
 
                 <!--android:visibility="gone"-->

@@ -764,6 +764,16 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 else {
                     compare_layout.setVisibility(View.VISIBLE);
+
+                    // @@@@arafat
+                    // need to add condition for health and add color code for health,
+                    // else educaton color code is okay
+                    if(SearchClicked){
+                        compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
+                    }else{
+                        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+                    }
+
                     map.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
 
