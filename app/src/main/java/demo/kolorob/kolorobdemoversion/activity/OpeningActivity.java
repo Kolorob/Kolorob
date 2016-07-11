@@ -72,6 +72,7 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
@@ -107,6 +108,7 @@ import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -135,7 +137,8 @@ public class OpeningActivity extends Activity {
     private int EntDataSize,HealthDatSize;
     private static final int ANIM_INTERVAL = 200;
 int countofDb;
-
+    ArrayList<SubCategoryItem>si2=new ArrayList<>();
+    ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
     public int getCountofDb() {
         return countofDb;
     }
@@ -339,26 +342,26 @@ int countofDb;
 //                        }
 //                    }
 //            );
-//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/finance", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//                                try {
-//                                    JSONArray jo = new JSONArray(apiContent);
-//
-//                                        savenewFinance(jo);
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_new", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
 //                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
-//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/government", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//                                try {
+                                    savesubcat(jo);
+                                    SubCategoryTableNew subCategoryTableNew= new SubCategoryTableNew(OpeningActivity.this);
+                                    si3=subCategoryTableNew.getAllSubCat(1);
+                                    si3.size();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 //                                    JSONArray jo = new JSONArray(apiContent);
 //
 //                                    savenewGov(jo);
@@ -680,6 +683,8 @@ int countofDb;
             }
         }
         countofDb++;
+        si2=subCatTable.getAllSubCategories(1);
+        si2.size();
     }
 
 
@@ -1011,7 +1016,25 @@ int countofDb;
         countofDb++;
     }
 
+    private void savesubcat(JSONArray subcat ) {
+        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(OpeningActivity.this);
 
+
+
+        subCategoryTableNew.dropTable();
+
+        int legalaidServiceProviderCount = subcat.length();
+
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+            try {
+                JSONObject jo = subcat.getJSONObject(i);
+                SubCategoryItemNew et = SubCategoryItemNew.parseSubCategoryItem(jo);
+                subCategoryTableNew.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     private void saveFinancialServiceProvider(JSONArray financialServiceProvider) {

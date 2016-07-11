@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String SERVICE_CATEGORY = "service_category";
     public static final String SUB_CATEGORY = "sub_category";
-
+    public static final String SUB_CATEGORY_NEW = "sub_category_new";
     public static final String EDU_PROVIDER_TABLE = "edu_provider";
     public static final String EDU_PROVIDER_COURSE_TABLE = "edu_provider_course";
     public static final String EDU_PROVIDER_FEE_TABLE = "edu_provider_fee";

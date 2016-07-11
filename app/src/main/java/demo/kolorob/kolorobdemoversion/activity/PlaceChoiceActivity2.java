@@ -1099,10 +1099,6 @@ searchmain.setVisibility(View.GONE);
 
 
 
-
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

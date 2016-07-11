@@ -111,7 +111,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
-    private LinearLayout llCatListHolder,mapnother,listholder,explist;
+    private LinearLayout llCatListHolder,mapnother,listholder,explist,svholder;
     CategoryItem ci;
     private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
@@ -412,6 +412,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
+        svholder=(LinearLayout)findViewById(R.id.llCategoryListHolderback);
+        svholder.setVisibility(View.GONE);
     sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
         svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
         sv.setVisibility(View.GONE);
@@ -603,6 +605,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     map.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
+                    svholder.setVisibility(View.GONE);
+                    sv.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
 
                     compare_layout.setVisibility(View.GONE);
@@ -697,6 +701,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     compare_layout.setVisibility(View.GONE);
 
                 svs.setVisibility(View.GONE);
+                svholder.setVisibility(View.GONE);
+                sv.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
@@ -733,10 +739,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 CompareClicked=true;
                 if(MapClicked==false||SearchClicked==false||ListClicked==false)
                 {
-                    SearchButton.setImageResource(0);
-                    MapButton.setImageResource(0);
-                    CompareButton.setImageResource(0);
-                    ListButton.setImageResource(0);
+
                     params4.height=larg;
                     CompareButton.setLayoutParams(params4);
 
@@ -746,10 +749,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     MapButton.setLayoutParams(params);
                     params.height=smal;
                     ListButton.setLayoutParams(params);
-                    SearchButton.setBackgroundResource(R.drawable.search);
-                    ListButton.setBackgroundResource(R.drawable.list);
-                    MapButton.setBackgroundResource(R.drawable.map);
-                    CompareButton.setBackgroundResource(R.drawable.compare_selected);
+
 
                 }
                 if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
@@ -763,10 +763,33 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                 }
                 else {
+                    SearchButton.setImageResource(0);
+                    MapButton.setImageResource(0);
+                    CompareButton.setImageResource(0);
+                    ListButton.setImageResource(0);
+                    SearchButton.setBackgroundResource(R.drawable.search);
+                    ListButton.setBackgroundResource(R.drawable.list);
+                    MapButton.setBackgroundResource(R.drawable.map);
+                    CompareButton.setBackgroundResource(R.drawable.compare_selected);
                     compare_layout.setVisibility(View.VISIBLE);
+
+                    // @@@@arafat
+                    // need to add condition for health and add color code for health,
+                    // else educaton color code is okay
+                    if(SearchClicked){
+                        compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
+                    }else{
+                        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+                    }
+
                     map.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
-
+                    subCatItemList.setVisibility(View.GONE);
+                    explist.setVisibility(View.GONE);
+                    searchviewholder.setVisibility(View.GONE);
+                    svs.setVisibility(View.GONE);
+                    sv.setVisibility(View.GONE);
+                    svholder.setVisibility(View.GONE);
                     compareTool();
                     llSubCatListHolder.setVisibility(View.GONE);
                 }
@@ -782,6 +805,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
                     sv.setVisibility(View.VISIBLE);
+                    svholder.setVisibility(View.VISIBLE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
@@ -792,6 +816,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 else {
                     sv.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
+                    svholder.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
                     llSubCatListHolder.setVisibility(View.GONE);
                 }
