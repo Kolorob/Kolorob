@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
-import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -147,8 +146,8 @@ public class SubCategoryTableNew {
         return siList;
     }
 
-    public ArrayList<SubCategoryItem> getAllSubCategories(int id) {
-        ArrayList<SubCategoryItem> siList = new ArrayList<>();
+    public ArrayList<SubCategoryItemNew> getAllSubCategories(int id) {
+        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
@@ -202,8 +201,8 @@ public class SubCategoryTableNew {
         closeDB();
         return siList2;
     }*/
-    public ArrayList<SubCategoryItem> getAllSubCategoriesHeader(int id,String head) {
-        ArrayList<SubCategoryItem> siList = new ArrayList<>();
+    public ArrayList<SubCategoryItemNew> getAllSubCategoriesHeader(int id,String head) {
+        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER_EN+" = '"+head+"'", null);
@@ -218,14 +217,16 @@ public class SubCategoryTableNew {
         return siList;
     }
 
-    private SubCategoryItem cursorToSubCategory(Cursor cursor) {
+    private SubCategoryItemNew cursorToSubCategory(Cursor cursor) {
         int cat_id = cursor.getInt(0);
-        int id = cursor.getInt(1);
-        String name = cursor.getString(2);
-        String head = cursor.getString(3);
-        String namebn = cursor.getString(4);
-        String headbn = cursor.getString(5);
-        return new SubCategoryItem(cat_id,id, name,head,namebn,headbn);
+        String catname = cursor.getString(1);
+        int subcatheaderid = cursor.getInt(2);
+        String headen = cursor.getString(3);
+        String headbn = cursor.getString(4);
+        int subcatid = cursor.getInt(5);
+        String subcatname = cursor.getString(6);
+        String subcatnamebn = cursor.getString(7);
+        return new SubCategoryItemNew(cat_id,catname, subcatheaderid,headen,headbn,subcatid,subcatname,subcatnamebn);
     }
 
     public void dropTable() {
