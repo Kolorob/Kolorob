@@ -124,7 +124,7 @@ public class DisplayAllJobsActivity extends Activity {
         for (int i = 0; i < joblistCount; i++) {
             try {
                 JSONObject jo = joblistArray.getJSONObject(i);
-                JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(jo);
+                JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(i+1,jo);
 
              //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
                 jobAdvertisementTable.insertItem(si);

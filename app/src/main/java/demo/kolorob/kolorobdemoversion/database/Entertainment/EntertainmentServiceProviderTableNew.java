@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -21,9 +22,8 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class EntertainmentServiceProviderTableNew {
 
     private static final String TAG = EntertainmentServiceProviderTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.ENT_PROVIDER_TABLE;
-
-    public static final String KEY_NODE_ID = "_node_id";
+    private static final String TABLE_NAME = DatabaseHelper.ENT_PROVIDER_TABLE_NEW;
+    public static final String KEY_NODE_ID = "node_id";
     public static final String KEY_SUB_CATEGORY_ID = "_ent_sub_category_id";
     public static final String KEY_NODE_NAME = "_node_name";
     public static final String KEY_NODE_NAME_BN = "_node_name_bn";
@@ -107,7 +107,7 @@ public class EntertainmentServiceProviderTableNew {
                 + KEY_POST_OFFICE + " TEXT, "
                 + KEY_POLICE_STATION+ " TEXT, "
                 + KEY_CITY + " TEXT, "
-                + KEY_OFF_DAY + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + ", " + KEY_SUB_CATEGORY_ID + "))";
+                + KEY_OFF_DAY + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -183,7 +183,8 @@ public class EntertainmentServiceProviderTableNew {
                            String road,
                            String block,
                            String landmark,
-                           String breaktime2, String floor,
+                           String breaktime2,
+                           String floor,
                            String house_name,
                            String house_no,
                            String line,
@@ -192,7 +193,7 @@ public class EntertainmentServiceProviderTableNew {
                            String police_station,
                            String city,
                            String off_day) {
-        if (isFieldExist(nodeId, entSubCategoryId)) {
+        if (isFieldExist(nodeId)) {
             return updateItem(nodeId,
                     entSubCategoryId,
                     nodeName,
@@ -232,6 +233,7 @@ public class EntertainmentServiceProviderTableNew {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
+
         rowValue.put(KEY_SUB_CATEGORY_ID , entSubCategoryId);
         rowValue.put(KEY_NODE_NAME , nodeName);
         rowValue.put(KEY_NODE_NAME_BN ,nodeNameBn);
@@ -256,9 +258,19 @@ public class EntertainmentServiceProviderTableNew {
         rowValue.put(KEY_BLOCK   , block );
         rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_FLOOR,floor);
+        rowValue.put(KEY_HOUSE_NAME,house_name);
+        rowValue.put(KEY_HOUSE_NUMBER , house_no);
+        rowValue.put(KEY_LINE  , line);
+        rowValue.put(KEY_AVENUE  , avenue);
+        rowValue.put(KEY_POST_OFFICE  , post_office );
+        rowValue.put(KEY_POLICE_STATION   , police_station );
+        rowValue.put(KEY_CITY  , city);
+        rowValue.put(KEY_OFF_DAY  , off_day );
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+        Log.d("NODE_ID","====="+ret);
         closeDB();
         return ret;
 
@@ -266,13 +278,13 @@ public class EntertainmentServiceProviderTableNew {
     }
 
 
-    public boolean isFieldExist(String nodeId,int entSubCategoryId) {
+    public boolean isFieldExist(String nodeId) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (nodeId.equals(cursor.getString(0))&&Integer.parseInt(cursor.getString(1))==entSubCategoryId) {
+                if (nodeId.equals(cursor.getString(0))) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -296,7 +308,7 @@ public class EntertainmentServiceProviderTableNew {
                              String nodeFacebook,
                              String nodeRegisteredWith,
                              String nodeRegistrationNumber,
-                             String editedBy,
+                             String nodeType,
                              String area,
                              String address,
                              String latitude,
@@ -321,8 +333,8 @@ public class EntertainmentServiceProviderTableNew {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , nodeId);
         rowValue.put(KEY_SUB_CATEGORY_ID , entSubCategoryId);
-        rowValue.put(KEY_NODE_NAME  , nodeName);
-        rowValue.put(KEY_NODE_NAME_BN,nodeNameBn);
+        rowValue.put(KEY_NODE_NAME , nodeName);
+        rowValue.put(KEY_NODE_NAME_BN ,nodeNameBn);
         rowValue.put(KEY_NODE_DESIGNATION ,nodeDesignation );
         rowValue.put(KEY_NODE_CONTACT  , nodeContact);
         rowValue.put(KEY_NODE_EMAIL , nodeEmail);
@@ -331,7 +343,7 @@ public class EntertainmentServiceProviderTableNew {
         rowValue.put(KEY_NODE_FACEBOOK ,nodeFacebook);
         rowValue.put(KEY_NODE_REGISTERED_WITH, nodeRegisteredWith);
         rowValue.put(KEY_NODE_REGISTRATION_NUMBER  , nodeRegistrationNumber);
-
+        rowValue.put(KEY_NODE_TYPE, nodeType);
         rowValue.put(KEY_AREA  , area);
         rowValue.put(KEY_ADDRESS , address);
         rowValue.put(KEY_LATITUDE,latitude);
@@ -344,14 +356,23 @@ public class EntertainmentServiceProviderTableNew {
         rowValue.put(KEY_BLOCK   , block );
         rowValue.put(KEY_LANDMARK  , landmark);
         rowValue.put(KEY_BREAKTIME2  , breaktime2 );
+        rowValue.put(KEY_FLOOR,floor);
+        rowValue.put(KEY_HOUSE_NAME,house_name);
+        rowValue.put(KEY_HOUSE_NUMBER , house_no);
+        rowValue.put(KEY_LINE  , line);
+        rowValue.put(KEY_AVENUE  , avenue);
+        rowValue.put(KEY_POST_OFFICE  , post_office );
+        rowValue.put(KEY_POLICE_STATION   , police_station );
+        rowValue.put(KEY_CITY  , city);
+        rowValue.put(KEY_OFF_DAY  , off_day );
         SQLiteDatabase db = openDB();
 
 //        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND " + KEY_EDU_SUBCATEGORY_ID + " = ? AND " + KEY_CATEGORY_ID + " = ? ",
 //                new String[]{identifierId + "", eduSubCategoryId + "", categoryId + ""});
 
 
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ? AND "+ KEY_SUB_CATEGORY_ID + " = ? ",
-                new String[]{nodeId + "", entSubCategoryId+ ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ?",
+                new String[]{nodeId + ""});
         closeDB();
         return ret;
     }
@@ -379,6 +400,22 @@ public class EntertainmentServiceProviderTableNew {
         return subCatList;
     }
 
+    public ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews() {
+        ArrayList<EntertainmentServiceProviderItemNew> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public ArrayList<String> getAllEntertainmentSubCategoriesInfos() {
         ArrayList<String> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
@@ -544,36 +581,36 @@ public class EntertainmentServiceProviderTableNew {
         int _entSubCategoryId= cursor.getInt(1);
         String _nodeName = cursor.getString(2);
         String _nodeNameBn= cursor.getString(3);
-        String _nodeDesignation = cursor.getString(6);
-        String _nodeContact = cursor.getString(7);
-        String _nodeEmail = cursor.getString(8);
-        String _nodeAdditional = cursor.getString(9);
-        String _nodeWebsite = cursor.getString(10);
-        String _nodeFacebook = cursor.getString(11);
-        String _nodeRegisteredWith = cursor.getString(12);
-        String _nodeRegistrationNumber = cursor.getString(13);
-        String _nodeType = cursor.getString(16);
-        String _area = cursor.getString(17);
-        String _address = cursor.getString(18);
-        String _latitude = cursor.getString(19);
-        String _longitude= cursor.getString(20);
-        int _categoryId= cursor.getInt(21);
-        String _openingtime=cursor.getString(22);
-        String _breaktime=cursor.getString(23);
-        String _closingtime=cursor.getString(24);
-        String _road=cursor.getString(25);
-        String _block=cursor.getString(26);
-        String _landmark=cursor.getString(27);
-        String _breaktime2=cursor.getString(28);
-        String floor= cursor.getString(29);
-        String house_name= cursor.getString(30);
-        String house_no=cursor.getString(31);
-        String line=cursor.getString(32);
-        String avenue=cursor.getString(33);
-        String post_office=cursor.getString(34);
-        String police_station=cursor.getString(35);
-        String city=cursor.getString(36);
-        String off_day=cursor.getString(37);
+        String _nodeDesignation = cursor.getString(4);
+        String _nodeContact = cursor.getString(5);
+        String _nodeEmail = cursor.getString(6);
+        String _nodeAdditional = cursor.getString(7);
+        String _nodeWebsite = cursor.getString(8);
+        String _nodeFacebook = cursor.getString(9);
+        String _nodeRegisteredWith = cursor.getString(10);
+        String _nodeRegistrationNumber = cursor.getString(11);
+        String _nodeType = cursor.getString(12);
+        String _area = cursor.getString(13);
+        String _address = cursor.getString(14);
+        String _latitude = cursor.getString(15);
+        String _longitude= cursor.getString(16);
+        int _categoryId= cursor.getInt(17);
+        String _openingtime=cursor.getString(18);
+        String _breaktime=cursor.getString(19);
+        String _closingtime=cursor.getString(20);
+        String _road=cursor.getString(21);
+        String _block=cursor.getString(22);
+        String _landmark=cursor.getString(23);
+        String _breaktime2=cursor.getString(24);
+        String floor= cursor.getString(25);
+        String house_name= cursor.getString(26);
+        String house_no=cursor.getString(27);
+        String line=cursor.getString(28);
+        String avenue=cursor.getString(29);
+        String post_office=cursor.getString(30);
+        String police_station=cursor.getString(31);
+        String city=cursor.getString(32);
+        String off_day=cursor.getString(33);
 
 
 

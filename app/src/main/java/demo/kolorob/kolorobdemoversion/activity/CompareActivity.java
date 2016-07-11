@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 

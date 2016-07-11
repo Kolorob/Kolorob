@@ -601,9 +601,9 @@ public class JobAdvertisementItem implements Serializable {
         TypeSubcategory = typeSubcategory;
     }
 
-    public static JobAdvertisementItem parseJobServiceProviderItem(JSONObject jo) throws JSONException {
+    public static JobAdvertisementItem parseJobServiceProviderItem(int ids,JSONObject jo) throws JSONException {
 
-        int id = jo.getInt("id");
+        int id = ids;
        // Log.d(">>>>>>","id  "+id);
         String form_date = jo.getString("form_date");
         String position = jo.getString("position");

@@ -48,6 +48,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookT
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
@@ -60,6 +61,8 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialSocialTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTaxTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTuitionTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
@@ -79,6 +82,7 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShop
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
@@ -91,6 +95,8 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialSocialItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTaxItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
@@ -310,11 +316,11 @@ int countofDb;
 
 
                             try {
-                                Log.d("====","I am here");
+                              //  Log.d("====","I am here");
                                 JSONArray legal_array= new JSONArray(apiContent);
                                 //  JSONObject jo = new JSONObject(apiContent);
                                 int p= legal_array.length();
-                                Log.d("====","LengthArray "+p);
+                           //     Log.d("====","LengthArray "+p);
 
                                 for(int i=0;i<p;i++)
                                 {
@@ -346,7 +352,21 @@ int countofDb;
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/government", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
 
+                                    savenewGov(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
             getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
                         @Override
@@ -402,30 +422,32 @@ int countofDb;
                     }
                 }
             });
-//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
-//                @Override
-//                public void onResponse(int status, String apiContent) {
-//
-//
-//
-//                        try {
-//
-//                            JSONArray allData=new JSONArray(apiContent);
-//                            EntDataSize=allData.length();
-//                            for(int i=0;i<=EntDataSize;i++)
-//                            {
-//                                JSONObject jsonObject=allData.getJSONObject(i);
-//
-//                                SaveEntertainmentData(jsonObject);
-//                            }
-//
-//                                //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                }
-//            });
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+
+
+
+                    try {
+
+                        JSONArray allData=new JSONArray(apiContent);
+                        EntDataSize=allData.length();
+
+                        for(int i=0;i<=EntDataSize;i++)
+                        {
+                            JSONObject jsonObject=allData.getJSONObject(i);
+
+                            SaveEntertainmentData(jsonObject,i);
+                        }
+
+                        //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 
             getRequest(OpeningActivity.this, "health/all", new VolleyApiCallback() {
                 @Override
@@ -582,6 +604,24 @@ int countofDb;
         }
         countofDb++;
     }
+
+    private void SaveEntertainmentData(JSONObject jsonObject, int i) {
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew= new EntertainmentServiceProviderTableNew(OpeningActivity.this);
+        //entertainmentServiceProviderTableNew.dropTable();
+            try {
+                EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew=EntertainmentServiceProviderItemNew.parseEntertainmentServiceProviderItem(jsonObject,i);
+                entertainmentServiceProviderTableNew.insertItem(entertainmentServiceProviderItemNew);
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+    }
+
+
 
     private void saveSubCategoryList(JSONArray subCategoryArray) {
         SubCategoryTable subCatTable = new SubCategoryTable(OpeningActivity.this);
@@ -842,9 +882,47 @@ int countofDb;
                 e.printStackTrace();
             }
         }
-        countofDb++;
-    }
 
+    }
+    private void savenewGov(JSONArray Gov ) {
+        GovernmentNewTable governmentNewTable=new GovernmentNewTable(OpeningActivity.this);
+
+        GovernmentServiceDetailsTable governmentServiceDetailsTable=new GovernmentServiceDetailsTable(OpeningActivity.this);
+
+        governmentServiceDetailsTable.dropTable();
+
+        governmentNewTable.dropTable();
+
+
+        int Govcount = Gov.length();
+
+        for (int i = 0; i < Govcount; i++) {
+            try {
+                JSONObject jo = Gov.getJSONObject(i);
+                GovernmentNewItem et =GovernmentNewItem.parseGovernmentNewItem(jo);
+                governmentNewTable.insertItem(et);
+
+
+                if(jo.has("govservice_details"))// need id in fin_service_details
+                {
+                    JSONArray service_details = jo.getJSONArray("govservice_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        GovernmentServiceDetailsItem governmentServiceDetailsItem = GovernmentServiceDetailsItem.parseGovernmentServiceDetailsItem(joes);
+                        governmentServiceDetailsTable.insertItem(governmentServiceDetailsItem);
+
+                    }
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
     private void saveLegalaidServiceProvider(JSONArray legalaidServiceProvider) {
         LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(OpeningActivity.this);
         legalAidServiceProviderTable.dropTable();

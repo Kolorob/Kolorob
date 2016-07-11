@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -47,17 +46,16 @@ import demo.kolorob.kolorobdemoversion.adapters.EntertainmentTheatreAdapter;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
-import demo.kolorob.kolorobdemoversion.helpers.AlertMessage;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -195,6 +193,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
 
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNewsf;
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew= new EntertainmentServiceProviderTableNew(DetailsInfoActivityEntertainmentNew.this);
+        entertainmentServiceProviderItemNews=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+        entertainmentServiceProviderItemNewsf=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
 
 
@@ -612,7 +615,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                demo.kolorob.kolorobdemoversion.helpers.AlertMessage.showMessage(DetailsInfoActivityEntertainmentNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                             AlertMessage.showMessage(DetailsInfoActivityEntertainmentNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
 
 

@@ -12,6 +12,9 @@ import java.io.Serializable;
  */
 public class HealthServiceProviderItem implements Serializable {
 
+
+
+
     private String nodeId;
     private String nodeName;
     private String dateName;

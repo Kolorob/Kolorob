@@ -1,9 +1,14 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="sidebarwidth">55dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">25dp</dimen>
+    <dimen name="fab_margin">0dp</dimen>
+    <dimen name="catimagetop">10dp</dimen>
+    <dimen name="catlayouttop">10dp</dimen>
+    <dimen name="subcatlayouttop">00dp</dimen>
     <dimen name="searchbar">300dp</dimen>
+    <dimen name="catbuttonheight">55dp</dimen>
     <dimen name="listheight">120dp</dimen>
     <dimen name="fab_marginforsearch">20dp</dimen>
     <dimen name="fab_marginforsearch2">20dp</dimen>
