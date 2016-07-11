@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String ENT_PROVIDER_TABLE = "ent_provider";
     public static final String ENT_PROVIDER_TABLE_NEW = "ent_provider_new";
     public static final String HEALTH_PROVIDER_TABLE = "hel_provider";
+    public static final String HEALTH_PROVIDER_TABLE_NEW = "hel_provider_new";
     public static final String HEALTH_PHARMACY_TABLE = "hel_phermacy";
     public static final String HEALTH_SPECIALIST_TABLE = "hel_specialist";
     public static final String HEALTH_VACCINES_TABLE = "hel_vaccine";

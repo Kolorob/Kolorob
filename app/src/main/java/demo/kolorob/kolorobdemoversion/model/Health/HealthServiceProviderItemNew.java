@@ -928,17 +928,12 @@ public class HealthServiceProviderItemNew implements Serializable {
         String id=jo.getString("id");
         String node_name= jo.getString("node_name");
         String node_bn=jo.getString("node_bn");
-
         String institute_type=jo.getString("institute_type");
         String spoken_lang= jo.getString("spoken_lang");
         String capacity=jo.getString("capacity");
-
-
         String male_doctors=jo.getString("male_doctors");
         String female_doctors= jo.getString("female_doctors");
         String patient_doctor_ratio=jo.getString("patient_doctor_ratio");
-
-
         String male_nurse=jo.getString("male_nurse");
         String female_nurse= jo.getString("female_nurse");
         String patient_nurse_ratio=jo.getString("patient_nurse_ratio");
@@ -986,26 +981,22 @@ public class HealthServiceProviderItemNew implements Serializable {
         String general_free_services= jo.getString("general_free_services");
         String general_cost=jo.getString("general_cost");
         String general_remark=jo.getString("general_remark");
-
         String emergency_free=jo.getString("emergency_free");
         String emergency_free_for=jo.getString("emergency_free_for");
         String emergency_free_services=jo.getString("emergency_free_services");
         String emergency_cost= jo.getString("emergency_cost");
         String emergency_remark=jo.getString("emergency_remark");
-
         String ambulance_free=jo.getString("ambulance_free");
         String ambulance_free_for = jo.getString("ambulance_free_for");
         String ambulance_free_services=jo.getString("ambulance_free_services");
         String ambulance_cost=jo.getString("ambulance_cost");
         String ambulance_remark=jo.getString("ambulance_remark");
-
         String maternity_free=jo.getString("maternity_free");
         String maternity_free_for=jo.getString("maternity_free_for");
         String maternity_free_services=jo.getString("maternity_free_services");
         String maternity_cost =jo.getString("maternity_cost");
         String maternity_remark=jo.getString("maternity_remark");
         String maternity_complication=jo.getString("maternity_complication");
-
         String maternity_privacy=jo.getString("maternity_privacy");
         String maternity_newborn_care=jo.getString("maternity_newborn_care");
         String family_services =jo.getString("family_services");
