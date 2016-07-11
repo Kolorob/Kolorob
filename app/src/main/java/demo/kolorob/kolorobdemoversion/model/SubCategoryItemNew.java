@@ -6,21 +6,21 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 /**
- * Created by Yeakub Hassan Rafi on 26-Dec-15.
+ * Created by Israt Jahan on 26-Dec-15.
  */
 
 public class SubCategoryItemNew implements Serializable {
 
     private int catId;
     private String CatName;
-    private String subCatHeaderId;
+    private int subCatHeaderId;
     private String subCatHeaderNameEn;
     private String subCatHeaderNameBn;
     private int subCatId;
     private String subCatNameEn;
     private String subCatNameBn;
 
-    public SubCategoryItemNew(int catId, String catName, String subCatHeaderId, String subCatHeaderNameEn, String subCatHeaderNameBn, int subCatId, String subCatNameEn, String subCatNameBn) {
+    public SubCategoryItemNew(int catId, String catName, int subCatHeaderId, String subCatHeaderNameEn, String subCatHeaderNameBn, int subCatId, String subCatNameEn, String subCatNameBn) {
         this.catId = catId;
         CatName = catName;
         this.subCatHeaderId = subCatHeaderId;
@@ -52,11 +52,11 @@ public class SubCategoryItemNew implements Serializable {
         CatName = catName;
     }
 
-    public String getSubCatHeaderId() {
+    public int getSubCatHeaderId() {
         return subCatHeaderId;
     }
 
-    public void setSubCatHeaderId(String subCatHeaderId) {
+    public void setSubCatHeaderId(int subCatHeaderId) {
         this.subCatHeaderId = subCatHeaderId;
     }
 
@@ -113,12 +113,12 @@ public class SubCategoryItemNew implements Serializable {
         int cat_id = jo.getInt("cat_id");
         String catname=jo.getString("cat_label");
 
-        String subcatheaderid = jo.getString("sub_cat_id");
+        int subcatheaderid = jo.getInt("sub_cat_id");
         String headen = jo.getString("sub_cat_label");
-        String headbn = jo.getString("sub_cat_labelbn");
+        String headbn = jo.getString("sub_cat_label_bn");
         int subcatid = jo.getInt("ref_id");
         String subcatname= jo.getString("ref_label");
-        String subcatnamebn = jo.getString("ref_labelbn");
+        String subcatnamebn = jo.getString("ref_label_bn");
         return new SubCategoryItemNew(cat_id,catname, subcatheaderid,headen,headbn,subcatid,subcatname,subcatnamebn);
     }
 }
