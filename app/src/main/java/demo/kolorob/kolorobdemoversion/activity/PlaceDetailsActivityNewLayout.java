@@ -772,6 +772,16 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     MapButton.setBackgroundResource(R.drawable.map);
                     CompareButton.setBackgroundResource(R.drawable.compare_selected);
                     compare_layout.setVisibility(View.VISIBLE);
+
+                    // @@@@arafat
+                    // need to add condition for health and add color code for health,
+                    // else educaton color code is okay
+                    if(SearchClicked){
+                        compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
+                    }else{
+                        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+                    }
+
                     map.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
                     subCatItemList.setVisibility(View.GONE);

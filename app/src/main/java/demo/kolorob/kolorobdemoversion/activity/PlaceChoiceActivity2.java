@@ -1099,10 +1099,6 @@ if(valuecheck==false)
 
 
 
-
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
