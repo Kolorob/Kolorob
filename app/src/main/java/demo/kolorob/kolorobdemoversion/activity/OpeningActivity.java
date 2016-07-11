@@ -999,7 +999,6 @@ int countofDb;
 
 
         subCategoryTableNew.dropTable();
-        si3.clear();
 
         int legalaidServiceProviderCount = subcat.length();
 
@@ -1012,9 +1011,6 @@ int countofDb;
                 e.printStackTrace();
             }
         }
-        si3=subCategoryTableNew.getAllSubCategories();
-        si3.size();
-
     }
 
 
