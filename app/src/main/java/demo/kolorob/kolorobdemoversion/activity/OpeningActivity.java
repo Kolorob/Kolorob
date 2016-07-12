@@ -459,7 +459,6 @@ int countofDb;
             public void onResponse(int status, String apiContent) {
 
 
-
                     try {
 
                         JSONArray allData=new JSONArray(apiContent);
@@ -469,6 +468,7 @@ int countofDb;
                         {
                             JSONObject jsonObject=allData.getJSONObject(i);
                             SaveHealthtData(jsonObject);
+
                         }
 
                      //   saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));

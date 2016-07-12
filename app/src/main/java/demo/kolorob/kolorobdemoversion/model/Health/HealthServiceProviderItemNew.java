@@ -927,113 +927,239 @@ public class HealthServiceProviderItemNew implements Serializable {
 
     public static HealthServiceProviderItemNew parseHealthServiceProviderItem(JSONObject jo) throws JSONException{
 
-        String id=jo.getString("id");
-        String node_name= jo.getString("node_name");
-        String node_bn=jo.getString("node_bn");
-        String institute_type=jo.getString("institute_type");
-        String spoken_lang= jo.getString("spoken_lang");
-        String capacity=jo.getString("capacity");
-        String male_doctors=jo.getString("male_doctors");
-        String female_doctors= jo.getString("female_doctors");
-        String patient_doctor_ratio=jo.getString("patient_doctor_ratio");
-        String male_nurse=jo.getString("male_nurse");
-        String female_nurse= jo.getString("female_nurse");
-        String patient_nurse_ratio=jo.getString("patient_nurse_ratio");
+        String  id,
+                node_name,
+                node_bn,
+                institute_type,
+                spoken_lang,
+                capacity,
+                male_doctors,
+                female_doctors,
+                patient_doctor_ratio,
+                male_nurse,
+                female_nurse,
+                patient_nurse_ratio,
+                lon="",
+                lat="",
+                node_id="",
+                floor="",
+                house_name="",
+                house_no="",
+                road="",
+                line="",
+                avenue="",
+                block="",
+                area="",
+                landmark="",
+                post_office="",
+                police_station="",
+                city="",
+                country="",
+                node_contact="",
+                node_contact2="",
+                node_website="",
+                node_facebook="",
+                node_designation="",
+                address="",
+                opening_time="",
+                break_time="",
+                closing_time="",
+                off_day="",
+                node_registered_with="",
+                node_registered_number="",
+                updated_drugs="",
+                num_trained_pharmacist="",
+                doctor_available="",
+                pharmacy_speciality="",
+                pharmacy_free="",
+                free_service_for="",
+                pharmacy_free_service="",
+                pharmacy_fee="",
+                pharmacy_remarks="",
+                pharmacy_privacy="",
+                quality_equipments="",
+                general_free="",
+                general_free_for="",
+                general_free_services="",
+                general_cost="",
+                general_remark="",
+                emergency_free="",
+                emergency_free_for="",
+                emergency_free_services="",
+                emergency_cost="",
+                emergency_remark="",
+                ambulance_free="",
+                ambulance_free_for="",
+                ambulance_free_services="",
+                ambulance_cost="",
+                ambulance_remark="",
+                maternity_free="",
+                maternity_free_for="",
+                maternity_free_services="",
+                maternity_cost="",
+                maternity_remark="",
+                maternity_complication="",
+                maternity_privacy="",
+                maternity_newborn_care="",
+                family_services="",
+                family_contraceptive_available="",
+                family_contraceptive="",
+                family_privacy="",
+                category,
+                references;
 
-        JSONObject map_info= jo.getJSONObject("map_info");
-        String lat=map_info.getString("lat");
-        String lon=map_info.getString("lon");
-        String node_id= map_info.getString("node_id");
-
-        JSONObject contact_info= jo.getJSONObject("contact_info");
-        String floor = contact_info.getString("floor");
-        String house_name=contact_info.getString("house_name");
-        String house_no= contact_info.getString("house_no");
-        String road = contact_info.getString("road");
-        String line = contact_info.getString("line");
-        String avenue = contact_info.getString("avenue");
-        String block= contact_info.getString("block");
-        String area= contact_info.getString("area");
-        String landmark= contact_info.getString("landmark");
-        String post_office=contact_info.getString("post_office");
-        String police_station=contact_info.getString("police_station");
-        String city=contact_info.getString("city");
-        String country=contact_info.getString("country");
-        String node_contact=contact_info.getString("node_contact");
-        String node_contact2=contact_info.getString("node_email");
-        String node_website = contact_info.getString("node_website");
-        String node_facebook=contact_info.getString("node_facebook");
-        String node_designation=contact_info.getString("node_designation");
-        String address=contact_info.getString("address");
-
-        JSONObject timing_info= jo.getJSONObject("timing_info");
-        String opening_time=timing_info.getString("opening_time");
-        String break_time=timing_info.getString("break_time");
-        String closing_time=timing_info.getString("closing_time");
-        String off_day =timing_info.getString("off_day");
-
-        JSONObject registration_info= jo.getJSONObject("registration_info");
-        String node_registered_with=registration_info.getString("node_registered_with");
-        String node_registered_number=registration_info.getString("node_registered_number");
-
-        JSONObject health_pharmacy_info= jo.getJSONObject("health_pharmacy_info");
-        String updated_drugs=health_pharmacy_info.getString("updated_drugs");
-        String num_trained_pharmacist= health_pharmacy_info.getString("num_trained_pharmacist");
-        String doctor_available= health_pharmacy_info.getString("doctor_available");
-        String pharmacy_speciality=health_pharmacy_info.getString("pharmacy_speciality");
-        String pharmacy_free=health_pharmacy_info.getString("pharmacy_free");
-        String free_service_for= health_pharmacy_info.getString("free_service_for");
-        String pharmacy_free_service = health_pharmacy_info.getString("pharmacy_free_service");
-        String pharmacy_fee=health_pharmacy_info.getString("pharmacy_fee");
-        String pharmacy_remarks= health_pharmacy_info.getString("pharmacy_remarks");
-        String pharmacy_privacy = health_pharmacy_info.getString("pharmacy_privacy");
-        String quality_equipments = health_pharmacy_info.getString("quality_equipments");
-
-        JSONObject health_general_info= jo.getJSONObject("health_general_info");
-        String general_free = health_general_info.getString("general_free");
-        String general_free_for= health_general_info.getString("general_free_for");
-        String general_free_services= health_general_info.getString("general_free_services");
-        String general_cost=health_general_info.getString("general_cost");
-        String general_remark=health_general_info.getString("general_remark");
-
-        JSONObject health_emergency_info= jo.getJSONObject("health_emergency_info");
-        String emergency_free=health_emergency_info.getString("emergency_free");
-        String emergency_free_for=health_emergency_info.getString("emergency_free_for");
-        String emergency_free_services=health_emergency_info.getString("emergency_free_services");
-        String emergency_cost= health_emergency_info.getString("emergency_cost");
-        String emergency_remark=health_emergency_info.getString("emergency_remark");
-
-        JSONObject health_ambulance_info= jo.getJSONObject("health_ambulance_info");
-
-
-        String ambulance_free=health_ambulance_info.getString("ambulance_free");
-
-        String ambulance_free_for = health_ambulance_info.getString("ambulance_free_for");
-        String ambulance_free_services=health_ambulance_info.getString("ambulance_free_services");
-        String ambulance_cost=health_ambulance_info.getString("ambulance_cost");
-        String ambulance_remark=health_ambulance_info.getString("ambulance_remark");
-
-        JSONObject health_maternity_info= jo.getJSONObject("health_maternity_info");
-        String maternity_free=health_maternity_info.getString("maternity_free");
-        String maternity_free_for=health_maternity_info.getString("maternity_free_for");
-        String maternity_free_services=health_maternity_info.getString("maternity_free_services");
-        String maternity_cost =health_maternity_info.getString("maternity_cost");
-        String maternity_remark=health_maternity_info.getString("maternity_remark");
-        String maternity_complication=health_maternity_info.getString("maternity_complication");
-        String maternity_privacy=health_maternity_info.getString("maternity_privacy");
-        String maternity_newborn_care=health_maternity_info.getString("maternity_newborn_care");
-
-        JSONObject health_fp_info= jo.getJSONObject("health_fp_info");
-        String family_services =health_fp_info.getString("family_services");
-        String family_contraceptive_available=health_fp_info.getString("family_contraceptive_available");
-        String family_contraceptive=health_fp_info.getString("family_contraceptive");
-        String family_privacy=health_fp_info.getString("family_privacy");
-
-        String category=jo.getString("category");
+        id=jo.getString("id");
+        node_name= jo.getString("node_name");
+        node_bn=jo.getString("node_bn");
+        institute_type=jo.getString("institute_type");
+        spoken_lang= jo.getString("spoken_lang");
+        capacity=jo.getString("capacity");
+        male_doctors=jo.getString("male_doctors");
+        female_doctors= jo.getString("female_doctors");
+        patient_doctor_ratio=jo.getString("patient_doctor_ratio");
+        male_nurse=jo.getString("male_nurse");
+        female_nurse= jo.getString("female_nurse");
+        patient_nurse_ratio=jo.getString("patient_nurse_ratio");
 
 
-       // String references=jo.getString("references");
-        String references="references";
+
+        if(jo.has("map_info")) {
+            JSONObject map_info = jo.getJSONObject("map_info");
+            lat = map_info.getString("lat");
+            lon = map_info.getString("lon");
+            node_id = map_info.getString("node_id");
+
+        }
+
+        if(jo.has("contact_info")) {
+            JSONObject contact_info= jo.getJSONObject("contact_info");
+            floor = contact_info.getString("floor");
+            house_name=contact_info.getString("house_name");
+            house_no= contact_info.getString("house_no");
+            road = contact_info.getString("road");
+            line = contact_info.getString("line");
+            avenue = contact_info.getString("avenue");
+            block= contact_info.getString("block");
+            area= contact_info.getString("area");
+            landmark= contact_info.getString("landmark");
+            post_office=contact_info.getString("post_office");
+            police_station=contact_info.getString("police_station");
+            city=contact_info.getString("city");
+            country=contact_info.getString("country");
+            node_contact=contact_info.getString("node_contact");
+            node_contact2=contact_info.getString("node_email");
+            node_website = contact_info.getString("node_website");
+            node_facebook=contact_info.getString("node_facebook");
+            node_designation=contact_info.getString("node_designation");
+            address=contact_info.getString("address");
+        }
+
+
+
+
+
+        if(jo.has("timing_info")) {
+            JSONObject timing_info= jo.getJSONObject("timing_info");
+            opening_time = timing_info.getString("opening_time");
+            break_time = timing_info.getString("break_time");
+            closing_time = timing_info.getString("closing_time");
+            off_day = timing_info.getString("off_day");
+        }
+
+        if (jo.has("registration_info"))
+        {
+            JSONObject registration_info= jo.getJSONObject("registration_info");
+            node_registered_with=registration_info.getString("node_registered_with");
+            node_registered_number=registration_info.getString("node_registered_number");
+        }
+
+        //Log.d("registration_info","======");
+
+
+        if (jo.has("health_pharmacy_info"))
+        {
+            JSONObject health_pharmacy_info= jo.getJSONObject("health_pharmacy_info");
+            updated_drugs=health_pharmacy_info.getString("updated_drugs");
+            num_trained_pharmacist= health_pharmacy_info.getString("num_trained_pharmacist");
+            doctor_available= health_pharmacy_info.getString("doctor_available");
+            pharmacy_speciality=health_pharmacy_info.getString("pharmacy_speciality");
+            pharmacy_free=health_pharmacy_info.getString("pharmacy_free");
+            free_service_for= health_pharmacy_info.getString("free_service_for");
+            pharmacy_free_service = health_pharmacy_info.getString("pharmacy_free_service");
+            pharmacy_fee=health_pharmacy_info.getString("pharmacy_fee");
+            pharmacy_remarks= health_pharmacy_info.getString("pharmacy_remarks");
+            pharmacy_privacy = health_pharmacy_info.getString("pharmacy_privacy");
+            quality_equipments = health_pharmacy_info.getString("quality_equipments");
+
+        }
+        Log.d("health_pharmacy_info","======");
+
+        if (jo.has("health_general_info"))
+        {
+            JSONObject health_general_info= jo.getJSONObject("health_general_info");
+            general_free = health_general_info.getString("general_free");
+            general_free_for= health_general_info.getString("general_free_for");
+            general_free_services= health_general_info.getString("general_free_services");
+            general_cost=health_general_info.getString("general_cost");
+            general_remark=health_general_info.getString("general_remark");
+        }
+
+
+        if (jo.has("health_emergency_info"))
+        {
+            JSONObject health_emergency_info= jo.getJSONObject("health_emergency_info");
+            emergency_free=health_emergency_info.getString("emergency_free");
+            emergency_free_for=health_emergency_info.getString("emergency_free_for");
+            emergency_free_services=health_emergency_info.getString("emergency_free_services");
+            emergency_cost= health_emergency_info.getString("emergency_cost");
+            emergency_remark=health_emergency_info.getString("emergency_remark");
+        }
+
+
+
+        if (jo.has("health_ambulance_info"))
+        {
+            JSONObject health_ambulance_info= jo.getJSONObject("health_ambulance_info");
+            ambulance_free=health_ambulance_info.getString("ambulance_free");
+
+            ambulance_free_for = health_ambulance_info.getString("ambulance_free_for");
+            ambulance_free_services=health_ambulance_info.getString("ambulance_free_services");
+            ambulance_cost=health_ambulance_info.getString("ambulance_cost");
+            ambulance_remark=health_ambulance_info.getString("ambulance_remark");
+        }
+
+
+        if (jo.has("health_maternity_info"))
+        {
+            JSONObject health_maternity_info= jo.getJSONObject("health_maternity_info");
+            maternity_free=health_maternity_info.getString("maternity_free");
+            maternity_free_for=health_maternity_info.getString("maternity_free_for");
+            maternity_free_services=health_maternity_info.getString("maternity_free_services");
+            maternity_cost =health_maternity_info.getString("maternity_cost");
+            maternity_remark=health_maternity_info.getString("maternity_remark");
+            maternity_complication=health_maternity_info.getString("maternity_complication");
+            maternity_privacy=health_maternity_info.getString("maternity_privacy");
+            maternity_newborn_care=health_maternity_info.getString("maternity_newborn_care");
+        }
+
+
+
+        if (jo.has("health_fp_info"))
+        {
+            JSONObject health_fp_info= jo.getJSONObject("health_fp_info");
+            family_services =health_fp_info.getString("family_services");
+            family_contraceptive_available=health_fp_info.getString("family_contraceptive_available");
+            family_contraceptive=health_fp_info.getString("family_contraceptive");
+            family_privacy=health_fp_info.getString("family_privacy");
+        }
+
+
+
+        category=jo.getString("category");
+        references="";
+
+        //   references=jo.getString("references");
+
         //Log.d("Attempt4","======"+references);
 
 
