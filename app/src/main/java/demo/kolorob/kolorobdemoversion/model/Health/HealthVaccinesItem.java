@@ -1,11 +1,13 @@
 package demo.kolorob.kolorobdemoversion.model.Health;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 /**
  * Created by israt.jahan on 2/3/2016.
  */
+
+import org.json.JSONException;
+import org.json.JSONObject;
 public class HealthVaccinesItem {
     private String nodeId;
     private String vaccinename;

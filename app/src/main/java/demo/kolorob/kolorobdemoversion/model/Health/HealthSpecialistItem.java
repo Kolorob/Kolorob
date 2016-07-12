@@ -1,11 +1,13 @@
 package demo.kolorob.kolorobdemoversion.model.Health;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 /**
  * Created by mity on 2/4/16.
  */
+
+import org.json.JSONException;
+import org.json.JSONObject;
 public class HealthSpecialistItem {
     private String nodeId;
     private String specialistId;
