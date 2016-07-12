@@ -111,7 +111,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private static final int ANIM_INTERVAL = 200;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
-    private LinearLayout llCatListHolder,mapnother,listholder,explist,svholder;
+    private LinearLayout llCatListHolder,mapnother,listholder,explist,svholder,svsholder;
     CategoryItem ci;
     private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
@@ -413,7 +413,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
         svholder=(LinearLayout)findViewById(R.id.llCategoryListHolderback);
+        svsholder=(LinearLayout)findViewById(R.id.llSubCategoryListHolderback);
         svholder.setVisibility(View.GONE);
+        svsholder.setVisibility(View.GONE);
     sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
         svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
         sv.setVisibility(View.GONE);
@@ -606,6 +608,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     map.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
+                    svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
 
@@ -632,6 +635,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 {
 
                     svs.setVisibility(View.VISIBLE);
+                    svsholder.setVisibility(View.VISIBLE);
                     llSubCatListHolder.setVisibility(View.VISIBLE);
                 }
                 if (CompareClicked==false||SearchClicked==false||ListClicked==false)
@@ -702,6 +706,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 svs.setVisibility(View.GONE);
                 svholder.setVisibility(View.GONE);
+                svsholder.setVisibility(View.GONE);
                 sv.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
@@ -790,6 +795,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     svs.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
+                    svsholder.setVisibility(View.GONE);
                     compareTool();
                     llSubCatListHolder.setVisibility(View.GONE);
                 }
@@ -806,9 +812,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 if(toggleButton.isChecked()){
                     sv.setVisibility(View.VISIBLE);
                     svholder.setVisibility(View.VISIBLE);
+                    svsholder.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
+                        svsholder.setVisibility(View.VISIBLE);
                         svs.setVisibility(View.VISIBLE);
                         llSubCatListHolder.setVisibility(View.VISIBLE);
                     }
@@ -817,6 +825,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     sv.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
+                    svsholder.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.GONE);
                     llSubCatListHolder.setVisibility(View.GONE);
                 }
@@ -1997,6 +2006,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         if(subCatShowFlag==1&&showList!=1)
         {
+            svsholder.setVisibility(View.VISIBLE);
             svs.setVisibility(View.VISIBLE);
             llSubCatListHolder.setVisibility(View.VISIBLE);
         }
@@ -2006,6 +2016,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             @Override
             public void run() {
                 if(showList!=1)
+                    svsholder.setVisibility(View.VISIBLE);
                     svs.setVisibility(View.VISIBLE);
                 llSubCatListHolder.setVisibility(View.VISIBLE);
 
