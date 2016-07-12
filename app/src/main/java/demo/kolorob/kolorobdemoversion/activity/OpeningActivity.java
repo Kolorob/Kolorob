@@ -38,7 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
+//import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
@@ -146,7 +146,7 @@ int countofDb;
     public int getCountofDb() {
         return countofDb;
     }
-    ArrayList<Trialholder>holdertrial=new ArrayList<>();
+   // ArrayList<Trialholder>holdertrial=new ArrayList<>();
     public void setCountofDb(int countofDb) {
         this.countofDb = countofDb;
     }
