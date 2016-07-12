@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -60,13 +61,13 @@ public class HealthVaccineTableDetails {
     }
 
 
-    public long insertItemHealth(HealthVaccinesItem healthVaccinesItem ) {
+    public long insertItemHealth(HealthVaccineItemDetails healthVaccineItemDetails ) {
         return insertItemHealth(
-                healthVaccinesItem.getNodeId(),
-                healthVaccinesItem.getVaccinename(),
-                healthVaccinesItem.getVaccinefee(),
-                healthVaccinesItem.getVaccineremarks(),
-                healthVaccinesItem.getRefNum()
+                healthVaccineItemDetails.getNodeId(),
+                healthVaccineItemDetails.getVaccinename(),
+                healthVaccineItemDetails.getVaccinefee(),
+                healthVaccineItemDetails.getVaccineremarks(),
+                healthVaccineItemDetails.getForeign_key()
         );
     }
 
