@@ -1089,7 +1089,7 @@ android:visibility="gone"
                 android:id="@+id/llCategoryListHolderback"
                 android:layout_width="@dimen/sidebarwidth"
                 android:background="@drawable/sidebar_category"
-                android:layout_height="800dp"
+                android:layout_height="@dimen/sidebarheight"
 
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
                 android:layout_above="@+id/toggle"
@@ -1132,7 +1132,7 @@ android:visibility="gone"
                 android:id="@+id/llSubCategoryListHolderback"
                 android:layout_width="@dimen/sidebarwidth"
                 android:background="@drawable/sidebar_subcategory"
-                android:layout_height="800dp"
+                android:layout_height="@dimen/sidebarheight"
 
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
                 android:layout_above="@+id/toggle"
@@ -1164,7 +1164,7 @@ android:visibility="gone"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
-                        
+
                         android:focusableInTouchMode="true"
                         >
 
