@@ -95,7 +95,7 @@ public class HealthVaccineTableDetails {
         rowValue.put(KEY_FOREIGN_KEY   , refNum);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-        Log.d("saveInVaccine","==="+ret);
+        //Log.d("saveInVaccine","==="+ret);
         closeDB();
         return ret;
     }

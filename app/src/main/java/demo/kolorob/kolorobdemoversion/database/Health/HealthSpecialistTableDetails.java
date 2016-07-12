@@ -3,6 +3,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,8 +122,10 @@ public class HealthSpecialistTableDetails {
         rowValue.put(KEY_OTHER_FEE   , other_fee);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+        Log.d("health_specialist_d","==="+ret);
         closeDB();
         return ret;
+
     }
 
     public boolean isFieldExist(String id,String specialistId,int sub_cat_id) {
