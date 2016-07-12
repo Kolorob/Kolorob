@@ -295,23 +295,23 @@ int countofDb;
 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
-//            getRequest(OpeningActivity.this, "get_categories", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//
-//                                try {
-//                                    JSONObject jo = new JSONObject(apiContent);
-//                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-//                                        saveCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
+          getRequest(OpeningActivity.this, "get_categories", new VolleyApiCallback() {
+                       @Override
+                      public void onResponse(int status, String apiContent) {
+                           if (status == AppConstants.SUCCESS_CODE) {
+
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                               }
+                            }
+                        }
+                   }
+            );
 //
 //
 //            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
@@ -350,7 +350,7 @@ int countofDb;
 
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
-//                                } catch (JSONException e) {
+//                                } catch (JSONException e)
                                     savesubcat(jo);
                                     SubCategoryTableNew subCategoryTableNew= new SubCategoryTableNew(OpeningActivity.this);
                                     si3=subCategoryTableNew.getAllSubCat(1);
@@ -373,86 +373,86 @@ int countofDb;
 //                    }
 //            );
 //
-//            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//
-//
-//                                try {
-//                                    JSONObject jo = new JSONObject(apiContent);
-//                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-//                                        saveSubCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
-//            getRequest(OpeningActivity.this, "education/all", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//
-//                                try {
-//                                    JSONObject jo = new JSONObject(apiContent);
-//                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-//                                        saveEducationServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
-//
-//
-//            getRequest(OpeningActivity.this, "entertainment/all", new VolleyApiCallback() {
-//                @Override
-//                public void onResponse(int status, String apiContent) {
-//                    if (status == AppConstants.SUCCESS_CODE) {
-//
-//
-//                        try {
-//                            JSONObject jo = new JSONObject(apiContent);
-//                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
-//                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
-//                                saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            });
-//
-//            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
-//                @Override
-//                public void onResponse(int status, String apiContent) {
-//
-//
-//
-//                    try {
-//
-//                        JSONArray allData=new JSONArray(apiContent);
-//                        EntDataSize=allData.length();
-//
-//                        for(int i=0;i<=EntDataSize;i++)
-//                        {
-//                            JSONObject jsonObject=allData.getJSONObject(i);
-//
-//                            SaveEntertainmentData(jsonObject,i);
-//                        }
-//
-//                        //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
+           getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
+                       @Override
+                        public void onResponse(int status, String apiContent) {
+                           if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveSubCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "education/all", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveEducationServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+
+
+            getRequest(OpeningActivity.this, "entertainment/all", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+
+
+                        try {
+                            JSONObject jo = new JSONObject(apiContent);
+                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+
+
+
+                    try {
+
+                        JSONArray allData=new JSONArray(apiContent);
+                        EntDataSize=allData.length();
+
+                        for(int i=0;i<=EntDataSize;i++)
+                        {
+                            JSONObject jsonObject=allData.getJSONObject(i);
+
+                            SaveEntertainmentData(jsonObject,i);
+                        }
+
+                       //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                   } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
             @Override
@@ -497,24 +497,24 @@ int countofDb;
 //                    }
 //                }
 //            });
-//            getRequest(OpeningActivity.this, "legal/all", new VolleyApiCallback() {
-//                        @Override
-//                        public void onResponse(int status, String apiContent) {
-//
-//                            if (status == AppConstants.SUCCESS_CODE) {
-//
-//                                try {
-//                                    JSONObject jo = new JSONObject(apiContent);
-//                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-//                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
+            getRequest(OpeningActivity.this, "legal/all", new VolleyApiCallback() {
+                       @Override
+                        public void onResponse(int status, String apiContent) {
+
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
 //
 
