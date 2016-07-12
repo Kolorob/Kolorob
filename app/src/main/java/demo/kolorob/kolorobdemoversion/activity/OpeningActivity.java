@@ -644,10 +644,12 @@ int countofDb;
         try {
             HealthServiceProviderItemNew healthServiceProviderItemNew=HealthServiceProviderItemNew.parseHealthServiceProviderItem(jsonObject);
             healthServiceProviderTableNew.insertItemHealth(healthServiceProviderItemNew);
-            if (jsonObject.has("healthVaccineItemDetails"))
+            if (jsonObject.has("health_vaccine_details"))
             {
-                int HealthVaccineDataSize=jsonObject.getJSONObject("healthVaccineItemDetails").length();
-                JSONArray healthVaccine=jsonObject.getJSONArray("healthVaccineItemDetails");
+                JSONArray healthVaccine=jsonObject.getJSONArray("health_vaccine_details");
+                int HealthVaccineDataSize=healthVaccine.length();
+
+                Log.d("healthVaccineItemDetai","==="+HealthVaccineDataSize);
                 for (int v=0;v<HealthVaccineDataSize;v++)
                 {
                     JSONObject healthVaccineItem= healthVaccine.getJSONObject(v);

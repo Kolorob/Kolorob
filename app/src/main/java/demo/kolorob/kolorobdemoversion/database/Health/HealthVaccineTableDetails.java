@@ -145,24 +145,24 @@ public class HealthVaccineTableDetails {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
-    public ArrayList<HealthVaccinesItem> getVaccinesforNode(String nodeId) {
-        ArrayList<HealthVaccinesItem> vaccineList = new ArrayList<>();
-        //System.out.println(cat_id+"  "+sub_cat_id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+nodeId+"'" , null);
+//    public ArrayList<HealthVaccinesItem> getVaccinesforNode(String nodeId) {
+//        ArrayList<HealthVaccinesItem> vaccineList = new ArrayList<>();
+//        //System.out.println(cat_id+"  "+sub_cat_id);
+//        SQLiteDatabase db = openDB();
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+nodeId+"'" , null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                //System.out.println("abc="+cursor.getString(4));
+//                vaccineList.add(cursorToSubCatList(cursor));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        closeDB();
+//        return vaccineList;
+//    }
 
-        if (cursor.moveToFirst()) {
-            do {
-                //System.out.println("abc="+cursor.getString(4));
-                vaccineList.add(cursorToSubCatList(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return vaccineList;
-    }
-
-    private HealthVaccinesItem cursorToSubCatList(Cursor cursor) {
+    private HealthVaccineItemDetails cursorToSubCatList(Cursor cursor) {
         String _nodeId=cursor.getString(0);
         String _vaccinename=cursor.getString(1);
         String _vaccinefee=cursor.getString(2);
@@ -171,7 +171,7 @@ public class HealthVaccineTableDetails {
 
 
 
-        return new HealthVaccinesItem(
+        return new HealthVaccineItemDetails(
                 _nodeId,
                 _vaccinename,
                 _vaccinefee,

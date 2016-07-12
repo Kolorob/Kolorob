@@ -1092,7 +1092,6 @@ public class HealthServiceProviderItemNew implements Serializable {
             quality_equipments = health_pharmacy_info.getString("quality_equipments");
 
         }
-        Log.d("health_pharmacy_info","======");
 
         if (jo.has("health_general_info"))
         {
