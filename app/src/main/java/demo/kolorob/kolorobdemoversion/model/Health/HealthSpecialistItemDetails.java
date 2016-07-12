@@ -42,23 +42,32 @@ public class HealthSpecialistItemDetails {
     }
 
 
-    public static HealthSpecialistItem parseHealthSpecialistItem(JSONObject jo) throws JSONException {
-        String _nodeId=jo.getString("node_id");
-        String _specialistId= jo.getString("specialist_id");
+    public static HealthSpecialistItemDetails parseHealthSpecialistItem(JSONObject jo,int foreign_key) throws JSONException {
+        String _nodeId=jo.getString("id");
+        String _specialistId= jo.getString("num_doctors");
         String _specialisttype=jo.getString("specialist_type");
 
-        String _specialistfees=jo.getString("specialist_fees");
+        String _specialistfees=jo.getString("first_visit_fee");
         String _specialistremarks=jo.getString("specialist_remarks");
-        int _refNum= jo.getInt("ref_num");
+        int _refNum= foreign_key;
+        String week_fee=jo.getString("week_fee");
+        String month_fee=jo.getString("month_fee");
+        String report_fee=jo.getString("report_fee");
+        String other_fee=jo.getString("other_fee");
 
 
-        return new HealthSpecialistItem(
+
+        return new HealthSpecialistItemDetails(
                 _nodeId,
                 _specialistId,
                 _specialisttype,
                 _specialistfees,
                 _specialistremarks,
-                _refNum
+                _refNum,
+                week_fee,
+                month_fee,
+                report_fee,
+                other_fee
 
         );
 
