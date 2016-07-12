@@ -182,7 +182,7 @@ setMapView(mapView);
         mapView.setUseDataConnection(true);
 
 
-        mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setTilesScaledToDpi(true);
       /*  mapView.setTilesScaledToDpi(true);
         // Test code
