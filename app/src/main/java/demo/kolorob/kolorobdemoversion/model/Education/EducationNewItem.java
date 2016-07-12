@@ -8,9 +8,25 @@ import org.json.JSONObject;
  * Created by israt.jahan on 6/26/2016.
  */
 public class EducationNewItem {
-    int finId;
+    int eduId;
     String nameen;
     String namebn;
+    String edtype;
+    String shift;
+    String studentno;
+    String teachersno;
+    String classno;
+    String additional;
+    String malestudent;
+    String femalestudent;
+    String specialneeds;
+    String washroom_no;
+    String washroom_male;
+    String washroomcleanliness;
+    String watercondition;
+    String watersource;
+    String averagestudent;
+    String washroomfemale;
     String lat;
     String lon;
     String floor;
@@ -42,15 +58,26 @@ public class EducationNewItem {
 
     String refnumm;
 
-    public EducationNewItem(int finId, String nameen, String namebn, String lat, String lon,
-                            String floor, String housename, String houseno, String road, String line, String avenue,
-                            String block, String area, String landmark, String postoffice, String policestation, String city,
-                            String country, String node_contact, String node_contact2, String node_email, String node_website,
-                            String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
-                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
-        this.finId = finId;
+    public EducationNewItem(int eduId, String nameen, String namebn, String edtype, String shift, String studentno, String teachersno, String classno, String additional, String malestudent, String femalestudent, String specialneeds, String washroom_no, String washroom_male, String washroomcleanliness, String watercondition, String watersource, String averagestudent, String washroomfemale, String lat, String lon, String floor, String housename, String houseno, String road, String line, String avenue, String block, String area, String landmark, String postoffice, String policestation, String city, String country, String node_contact, String node_contact2, String node_email, String node_website, String node_facebook, String node_designation, String openingtime, String closetime, String breaktime, String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+        this.eduId = eduId;
         this.nameen = nameen;
         this.namebn = namebn;
+        this.edtype = edtype;
+        this.shift = shift;
+        this.studentno = studentno;
+        this.teachersno = teachersno;
+        this.classno = classno;
+        this.additional = additional;
+        this.malestudent = malestudent;
+        this.femalestudent = femalestudent;
+        this.specialneeds = specialneeds;
+        this.washroom_no = washroom_no;
+        this.washroom_male = washroom_male;
+        this.washroomcleanliness = washroomcleanliness;
+        this.watercondition = watercondition;
+        this.watersource = watersource;
+        this.averagestudent = averagestudent;
+        this.washroomfemale = washroomfemale;
         this.lat = lat;
         this.lon = lon;
         this.floor = floor;
@@ -82,15 +109,12 @@ public class EducationNewItem {
         this.refnumm = refnumm;
     }
 
-    public EducationNewItem(int finId, String nameen, String namebn) {
+    public int getEduId() {
+        return eduId;
     }
 
-    public int getFinId() {
-        return finId;
-    }
-
-    public void setFinId(int finId) {
-        this.finId = finId;
+    public void setEduId(int eduId) {
+        this.eduId = eduId;
     }
 
     public String getNameen() {
@@ -105,8 +129,136 @@ public class EducationNewItem {
         return namebn;
     }
 
+    public String getWatersource() {
+        return watersource;
+    }
+
+    public void setWatersource(String watersource) {
+        this.watersource = watersource;
+    }
+
     public void setNamebn(String namebn) {
         this.namebn = namebn;
+    }
+
+    public String getEdtype() {
+        return edtype;
+    }
+
+    public void setEdtype(String edtype) {
+        this.edtype = edtype;
+    }
+
+    public String getShift() {
+        return shift;
+    }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
+
+    public String getStudentno() {
+        return studentno;
+    }
+
+    public void setStudentno(String studentno) {
+        this.studentno = studentno;
+    }
+
+    public String getTeachersno() {
+        return teachersno;
+    }
+
+    public void setTeachersno(String teachersno) {
+        this.teachersno = teachersno;
+    }
+
+    public String getClassno() {
+        return classno;
+    }
+
+    public void setClassno(String classno) {
+        this.classno = classno;
+    }
+
+    public String getAdditional() {
+        return additional;
+    }
+
+    public void setAdditional(String additional) {
+        this.additional = additional;
+    }
+
+    public String getMalestudent() {
+        return malestudent;
+    }
+
+    public void setMalestudent(String malestudent) {
+        this.malestudent = malestudent;
+    }
+
+    public String getFemalestudent() {
+        return femalestudent;
+    }
+
+    public void setFemalestudent(String femalestudent) {
+        this.femalestudent = femalestudent;
+    }
+
+    public String getSpecialneeds() {
+        return specialneeds;
+    }
+
+    public void setSpecialneeds(String specialneeds) {
+        this.specialneeds = specialneeds;
+    }
+
+    public String getWashroom_no() {
+        return washroom_no;
+    }
+
+    public void setWashroom_no(String washroom_no) {
+        this.washroom_no = washroom_no;
+    }
+
+    public String getWashroom_male() {
+        return washroom_male;
+    }
+
+    public void setWashroom_male(String washroom_male) {
+        this.washroom_male = washroom_male;
+    }
+
+    public String getWashroomcleanliness() {
+        return washroomcleanliness;
+    }
+
+    public void setWashroomcleanliness(String washroomcleanliness) {
+        this.washroomcleanliness = washroomcleanliness;
+    }
+
+    public String getWatercondition() {
+        return watercondition;
+    }
+
+    public void setWatercondition(String watercondition) {
+        this.watercondition = watercondition;
+    }
+
+    public String getAveragestudent() {
+        return averagestudent;
+    }
+
+    public void setAveragestudent(String averagestudent) {
+        this.averagestudent = averagestudent;
+    }
+
+    public String getWashroomfemale() {
+        return washroomfemale;
+    }
+
+    public void setWashroomfemale(String washroomfemale) {
+        this.washroomfemale = washroomfemale;
     }
 
     public String getLat() {
@@ -343,8 +495,28 @@ public class EducationNewItem {
 
     public static EducationNewItem parseFinancialMapInfoItem(JSONObject jo) throws JSONException {
         int _finId = jo.getInt("id");
-        String _nameen = jo.getString("node_name");
         String _namebn = jo.getString("node_bn");
+        String _nameen = jo.getString("node_name");
+
+        String _edtype = jo.getString("education_type");
+        String _shift = jo.getString("shift");
+        String _studentno = jo.getString("no_of_students");
+        String _teachersno = jo.getString("no_of_teachers");
+        String _classno = jo.getString("no_of_classes");
+        String _additional = jo.getString("additional_data");
+        String _malestudent = jo.getString("no_of_male_students");
+        String _femalestudent = jo.getString("no_of_female_students");
+        String _specialneeds = jo.getString("special_needs");
+        String _washroom_no = jo.getString("washroom_no");
+        String _washroom_male = jo.getString("washroom_male");
+        String _washroomcleanliness = jo.getString("clean_washrooms");
+        String _watercondition = jo.getString("clean_water");
+        String _watersource = jo.getString("water_source");
+        String _averagestudent = jo.getString("class_size");
+        String _washroomfemale = jo.getString("washroom_female");
+
+
+
         String _lat = jo.getJSONObject("map_info").getString("lat");
         String _lon = jo.getJSONObject("map_info").getString("lon");
         String _floor = jo.getJSONObject("contact_info").getString("floor");
@@ -384,7 +556,8 @@ public class EducationNewItem {
 
         String k=jr.toString();
         String _refnumm=k.substring(1,k.length()-1);
-        return new EducationNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
+        return new EducationNewItem(_finId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_classno,_additional,_malestudent,
+                _femalestudent,_specialneeds,_washroom_no,_washroom_male,_washroomcleanliness,_watercondition,_watersource,_averagestudent,_washroomfemale,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
