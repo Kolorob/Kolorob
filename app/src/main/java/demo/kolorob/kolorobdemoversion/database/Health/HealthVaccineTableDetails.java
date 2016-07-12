@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -94,6 +95,7 @@ public class HealthVaccineTableDetails {
         rowValue.put(KEY_FOREIGN_KEY   , refNum);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+        Log.d("saveInVaccine","==="+ret);
         closeDB();
         return ret;
     }

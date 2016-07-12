@@ -61,7 +61,7 @@ public class HealthVaccineItemDetails {
         this.foreign_key = foreign_key;
     }
 
-    public static HealthVaccinesItem parseHealthVaccinesItem(JSONObject jo, int foreign_keys) throws JSONException {
+    public static HealthVaccineItemDetails parseHealthVaccinesItem(JSONObject jo, int foreign_keys) throws JSONException {
         String _nodeId=jo.getString("id");
         String _vaccinename= jo.getString("vaccine_name");
         String _vaccinefee=jo.getString("vaccine_fee");
@@ -69,7 +69,7 @@ public class HealthVaccineItemDetails {
         int foreign_key= foreign_keys;
 
 
-        return new HealthVaccinesItem(
+        return new HealthVaccineItemDetails(
                 _nodeId,
                 _vaccinename,
                 _vaccinefee,
