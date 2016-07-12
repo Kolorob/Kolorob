@@ -21,12 +21,12 @@ public class HealthVaccineItemDetails {
         this.foreign_key = foreign_key;
     }
 
-    public static HealthVaccinesItem parseHealthVaccinesItem(JSONObject jo) throws JSONException {
-        String _nodeId=jo.getString("node_id");
+    public static HealthVaccinesItem parseHealthVaccinesItem(JSONObject jo,int foreign_key) throws JSONException {
+        String _nodeId=jo.getString("id");
         String _vaccinename= jo.getString("vaccine_name");
         String _vaccinefee=jo.getString("vaccine_fee");
-        String _vaccineremarks=jo.getString("vaccine_remarks");
-        int _refNum= jo.getInt("ref_num");
+        String _vaccineremarks=jo.getString("vaccine_remark");
+        int _refNum= foreign_key;
 
 
         return new HealthVaccinesItem(
