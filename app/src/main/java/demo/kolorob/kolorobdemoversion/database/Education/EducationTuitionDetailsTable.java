@@ -159,12 +159,12 @@ public class EducationTuitionDetailsTable {
         String _tuitionlevel = cursor.getString(2);
         String _tuitionstipendfacility = cursor.getString(3);
         String _tuitionstipendtype = cursor.getString(4);
-        String _tuitiondetails= cursor.getString(1);
-        String _tuitionminfee = cursor.getString(2);
-        String _tuitionmaxfee = cursor.getString(3);
-        String _tuitionmincoaching = cursor.getString(4);
-        String _tuitionmaxcoaching= cursor.getString(1);
-        String _tuitionadditional = cursor.getString(2);
+        String _tuitiondetails= cursor.getString(5);
+        String _tuitionminfee = cursor.getString(6);
+        String _tuitionmaxfee = cursor.getString(7);
+        String _tuitionmincoaching = cursor.getString(8);
+        String _tuitionmaxcoaching= cursor.getString(9);
+        String _tuitionadditional = cursor.getString(10);
 
 
 
@@ -173,7 +173,7 @@ public class EducationTuitionDetailsTable {
                 _tuitionmaxfee,_tuitionmincoaching,_tuitionmaxcoaching,_tuitionadditional);
     }
 
-    
+
 
     public void dropTable() {
         SQLiteDatabase db = openDB();
