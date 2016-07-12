@@ -60,8 +60,7 @@ public class HealthSpecialistAdapter extends BaseAdapter
 
     private class ViewHolder {
         TextView s_name ;
-        TextView s_fee;
-        TextView s_remarks;
+
 
     }
 
@@ -76,8 +75,7 @@ public class HealthSpecialistAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.listview_specialist, null);
             holder = new ViewHolder();
             holder.s_name = (TextView) convertView.findViewById(R.id.s_name);
-            holder.s_fee = (TextView) convertView.findViewById(R.id.s_fee);
-            holder.s_remarks = (TextView) convertView.findViewById(R.id.s_remarks);
+
 
             convertView.setTag(holder);
         }
