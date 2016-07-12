@@ -25,9 +25,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String EDU_PROVIDER_TABLE = "edu_provider";
     public static final String EDU_PROVIDER_COURSE_TABLE = "edu_provider_course";
     public static final String EDU_PROVIDER_FEE_TABLE = "edu_provider_fee";
+    public static final String EDU_PROVIDER_TABLE_NEW = "edu_provider_new";
     public static final String EDU_PROVIDER_RESULT_TABLE = "edu_provider_result";
-    public static final String EDU_SUB_CAT_TABLE = "edu_sub_category";
-
+    public static final String EDU_TRAINING_TABLE = "edu_training_table";
+    public static final String EDU_TUITION_TABLE = "edu_tuition_table";
     public static final String ENT_PROVIDER_TABLE = "ent_provider";
     public static final String ENT_PROVIDER_TABLE_NEW = "ent_provider_new";
     public static final String HEALTH_PROVIDER_TABLE = "hel_provider";
