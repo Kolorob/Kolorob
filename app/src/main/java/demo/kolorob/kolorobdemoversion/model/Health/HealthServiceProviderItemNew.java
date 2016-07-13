@@ -1155,11 +1155,14 @@ public class HealthServiceProviderItemNew implements Serializable {
 
 
         category=jo.getString("category");
-        references="";
+        references=jo.getString("references");
+        references=references.replace('[',',');
+        references=references.replace(']',',');
+
 
         //   references=jo.getString("references");
 
-        //Log.d("Attempt4","======"+references);
+      //  Log.d("references","======"+references.length());
 
 
 
