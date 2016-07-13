@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
@@ -58,6 +60,21 @@ public class EducationResultDetailsTable {
                 educationResultItemNew.getEduId(),educationResultItemNew.getExamname(),educationResultItemNew.getStudentno(),
                 educationResultItemNew.getPassed(),educationResultItemNew.getGoldena(),educationResultItemNew.getAplus()
         );
+    }
+    public ArrayList<EducationResultItemNew> getAllSubCat() {
+        ArrayList<EducationResultItemNew> siList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
     }
     public long insertItem(int eduId, String examname, String studentno, String passed, String goldena, String aplus) {
         if (isFieldExist(eduId)) {

@@ -152,6 +152,10 @@ public class OpeningActivity extends Activity {
 int countofDb;
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
+    ArrayList<EducationNewItem>si4=new ArrayList<>();
+    ArrayList<EducationResultItemNew>si5=new ArrayList<>();
+    ArrayList<EducationTrainingDetailsItem>si6=new ArrayList<>();
+    ArrayList<EducationTuitionDetailsItem>si7=new ArrayList<>();
     public int getCountofDb() {
         return countofDb;
     }
@@ -383,6 +387,20 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     savenewEdu(jo);
+                                    EducationNewTable educationNewTable= new EducationNewTable(OpeningActivity.this);
+                                    EducationResultDetailsTable educationResultDetailsTable= new EducationResultDetailsTable(OpeningActivity.this);
+                                    EducationTrainingDetailsTable educationTrainingDetailsTable=new EducationTrainingDetailsTable(OpeningActivity.this);
+                                    EducationTuitionDetailsTable educationTuitionDetailsTable=new EducationTuitionDetailsTable(OpeningActivity.this);
+                                si4=educationNewTable.getAllSubCat();
+                                    si5=educationResultDetailsTable.getAllSubCat();
+                                    si6=educationTrainingDetailsTable.getAllSubCat();
+                                    si7=educationTuitionDetailsTable.getAllSubCat();
+                                    si4.size();
+                                    Log.e("main",String.valueOf(si4.size()));
+                                    Log.e("mainr",String.valueOf(si5.size()));
+                                    Log.e("maintr",String.valueOf(si6.size()));
+                                    Log.e("maintu",String.valueOf(si7.size()));
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

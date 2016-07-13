@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
@@ -84,7 +86,21 @@ public class EducationTrainingDetailsTable {
         closeDB();
         return ret;}
 
+    public ArrayList<EducationTrainingDetailsItem> getAllSubCat() {
+        ArrayList<EducationTrainingDetailsItem> siList = new ArrayList<>();
 
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
     private long updateItem(int eduId, String courseduration, String admissionmonth, String cost, String trainingnametype, String trainingnamesubtype) {
 
         ContentValues rowValue = new ContentValues();
