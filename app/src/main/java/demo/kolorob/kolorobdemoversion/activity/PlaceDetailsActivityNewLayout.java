@@ -988,7 +988,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ArrayList<String> RefHealth=null;
                 ArrayList<SubCategoryItemNew> RefHealthx=null;
                 groups.removeAllElements();
-                RefHealth=subCategoryTableNew.getSubnameedu(currentCategoryID);
+                RefHealth=subCategoryTableNew.getSubnameedu(1);
                 printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
                 for (int j = 0; j < printhea.size(); j++) {
                     Group group = new Group(printhea.get(j));

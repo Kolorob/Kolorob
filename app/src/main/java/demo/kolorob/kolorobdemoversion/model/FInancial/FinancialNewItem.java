@@ -1,5 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.FInancial;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -384,6 +386,7 @@ public class FinancialNewItem {
 
         String k=jr.toString();
         String _refnumm=k.substring(1,k.length()-1);
+        Log.d("Reference financial","====="+_refnumm);
         return new FinancialNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
                 _opentime,
