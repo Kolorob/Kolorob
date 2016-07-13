@@ -346,7 +346,7 @@ int countofDb;
 //                        }
 //                    }
 //            );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_new", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -354,10 +354,10 @@ int countofDb;
 
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
-//                                } catch (JSONException e)
+
                                     savesubcat(jo);
                                     SubCategoryTableNew subCategoryTableNew= new SubCategoryTableNew(OpeningActivity.this);
-                                    si3=subCategoryTableNew.getAllSubCat(1);
+                                    si3=subCategoryTableNew.getAllSubCat();
                                     si3.size();
                                 } catch (JSONException e) {
                                     e.printStackTrace();

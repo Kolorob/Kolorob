@@ -58,7 +58,15 @@ public class EducationNewItem {
 
     String refnumm;
 
-    public EducationNewItem(int eduId, String nameen, String namebn, String edtype, String shift, String studentno, String teachersno, String classno, String additional, String malestudent, String femalestudent, String specialneeds, String washroom_no, String washroom_male, String washroomcleanliness, String watercondition, String watersource, String averagestudent, String washroomfemale, String lat, String lon, String floor, String housename, String houseno, String road, String line, String avenue, String block, String area, String landmark, String postoffice, String policestation, String city, String country, String node_contact, String node_contact2, String node_email, String node_website, String node_facebook, String node_designation, String openingtime, String closetime, String breaktime, String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+    public EducationNewItem(int eduId, String nameen, String namebn, String edtype, String shift, String studentno,
+                            String teachersno, String classno, String additional, String malestudent, String femalestudent,
+                            String specialneeds, String washroom_no, String washroom_male, String washroomcleanliness,
+                            String watercondition, String watersource, String averagestudent, String washroomfemale, String lat,
+                            String lon, String floor, String housename, String houseno, String road, String line, String avenue,
+                            String block, String area, String landmark, String postoffice, String policestation, String city,
+                            String country, String node_contact, String node_contact2, String node_email, String node_website,
+                            String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
+                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
         this.eduId = eduId;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -494,7 +502,7 @@ public class EducationNewItem {
     }
 
     public static EducationNewItem parseFinancialMapInfoItem(JSONObject jo) throws JSONException {
-        int _finId = jo.getInt("id");
+        int _eduId = jo.getInt("id");
         String _namebn = jo.getString("node_bn");
         String _nameen = jo.getString("node_name");
 
@@ -556,7 +564,7 @@ public class EducationNewItem {
 
         String k=jr.toString();
         String _refnumm=k.substring(1,k.length()-1);
-        return new EducationNewItem(_finId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_classno,_additional,_malestudent,
+        return new EducationNewItem(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_classno,_additional,_malestudent,
                 _femalestudent,_specialneeds,_washroom_no,_washroom_male,_washroomcleanliness,_watercondition,_watersource,_averagestudent,_washroomfemale,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
                 _opentime,
