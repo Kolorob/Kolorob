@@ -39,9 +39,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="left">
                     <ImageView
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="65dp"
                         android:id="@+id/iv_kolorob_logo"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/job_topimge"
                         />
                 </LinearLayout>
@@ -56,6 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="চাকুরীর বিস্তারিত বিবরন "
                         android:textSize="20dp"
+                        android:gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
 
                         android:textColor="@color/white"
@@ -74,8 +77,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cross_jb"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="25dp"
 
+                        android:layout_marginTop="13dp"
                         android:id="@+id/close_button"
                         />
 

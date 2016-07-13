@@ -27,11 +27,11 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
 	String[] values = new String[] { "Bangladesh Fire Service, \nবাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
 			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",
-			"Pllabi Police Station, \nপল্লবী থানা",
-			"RAB – 4, \nর্যাব - ৪",
+			"Pllabi Police Station, পল্লবী থানা",
+			"RAB – 4, র্যাব - ৪",
 			"DESCO - Electricity, \nডেসকো – ইলেক্ট্রিসিটি ",
-			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, \nতিতাস গ্যাস ","Dhaka WASA, \nঢাকা ওয়াসা",
-			"Blood Bank,  \nব্লাড ব্যাংক ","Dhaka North City Corporation, \nঢাকা উত্তর সিটি কর্পোরেশন","Violence against Women & Children, \nনারী ও শিশু নির্যাতন প্রতিরোধ",""
+			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, তিতাস গ্যাস ","Dhaka WASA, ঢাকা ওয়াসা",
+			"Blood Bank,  ব্লাড ব্যাংক ","Dhaka North City Corporation, \nঢাকা উত্তর সিটি কর্পোরেশন","Violence against Women & Children, \nনারী ও শিশু নির্যাতন প্রতিরোধ",""
 	};
 
 	String[] address = new String[] { "Mirpur 10, Dhaka",
@@ -39,7 +39,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 			"পল্লবী থানা",
 			"Dhaka",
 			"DESCO, Pallabi, Dhaka",
-			"","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
+			"Dhaka","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
 	};
 	String[] name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্",
 			"পুলিশ কন্ট্রোল রুম",
