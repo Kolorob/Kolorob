@@ -38,7 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
+//import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
@@ -67,6 +67,8 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
@@ -103,6 +105,8 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
@@ -142,7 +146,7 @@ int countofDb;
     public int getCountofDb() {
         return countofDb;
     }
-    ArrayList<Trialholder>holdertrial=new ArrayList<>();
+   // ArrayList<Trialholder>holdertrial=new ArrayList<>();
     public void setCountofDb(int countofDb) {
         this.countofDb = countofDb;
     }
@@ -459,7 +463,6 @@ int countofDb;
             public void onResponse(int status, String apiContent) {
 
 
-
                     try {
 
                         JSONArray allData=new JSONArray(apiContent);
@@ -469,6 +472,7 @@ int countofDb;
                         {
                             JSONObject jsonObject=allData.getJSONObject(i);
                             SaveHealthtData(jsonObject);
+
                         }
 
                      //   saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
@@ -642,6 +646,30 @@ int countofDb;
         try {
             HealthServiceProviderItemNew healthServiceProviderItemNew=HealthServiceProviderItemNew.parseHealthServiceProviderItem(jsonObject);
             healthServiceProviderTableNew.insertItemHealth(healthServiceProviderItemNew);
+            if (jsonObject.has("health_vaccine_details"))
+            {
+                JSONArray healthVaccine=jsonObject.getJSONArray("health_vaccine_details");
+                int HealthVaccineDataSize=healthVaccine.length();
+
+               // Log.d("healthVaccineItemDetai","==="+HealthVaccineDataSize);
+                for (int v=0;v<HealthVaccineDataSize;v++)
+                {
+                    JSONObject healthVaccineItem= healthVaccine.getJSONObject(v);
+                    SaveHealthVaccineData(healthVaccineItem,jsonObject.getInt("id"));
+                }
+            }
+            if (jsonObject.has("health_specialist_details"))
+            {
+                JSONArray health_specialist_details=jsonObject.getJSONArray("health_specialist_details");
+                int HealthVaccineDataSize=health_specialist_details.length();
+
+
+                for (int v=0;v<HealthVaccineDataSize;v++)
+                {
+                    JSONObject healthSpecialistItem= health_specialist_details.getJSONObject(v);
+                    SaveSpecialistData(healthSpecialistItem,jsonObject.getInt("id"));
+                }
+            }
 
 
         } catch (JSONException e) {
@@ -649,6 +677,37 @@ int countofDb;
         }
 
     }
+
+    private void SaveHealthVaccineData(JSONObject jsonObject,int foreign_key)
+    {
+        HealthVaccineTableDetails healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
+        try {
+            HealthVaccineItemDetails healthVaccineItemDetails=HealthVaccineItemDetails.parseHealthVaccinesItem(jsonObject,foreign_key);
+            healthVaccineTableDetails.insertItemHealth(healthVaccineItemDetails);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void SaveSpecialistData(JSONObject jsonObject,int foreign_key)
+    {
+        HealthSpecialistTableDetails healthVaccineTableDetails= new HealthSpecialistTableDetails(OpeningActivity.this);
+        try {
+            HealthSpecialistItemDetails healthSpecialistItemDetails=HealthSpecialistItemDetails.parseHealthSpecialistItem(jsonObject,foreign_key);
+            healthVaccineTableDetails.insertItemHealth(healthSpecialistItemDetails);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     private void SaveEntertainmentData(JSONObject jsonObject, int i) {
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew= new EntertainmentServiceProviderTableNew(OpeningActivity.this);

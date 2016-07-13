@@ -1,7 +1,7 @@
 package demo.kolorob.kolorobdemoversion.adapters;
 
 /**
- * Created by Mazharul.Islam1 on 2/9/2016.
+ * Created by Arafat 12 July 2016
  */
 
 import android.app.Activity;
@@ -80,17 +80,17 @@ public class HealthVaccineAdapter extends BaseAdapter
 
 
         if(!vaccine_name[position].equals(""))
-            concateBasic("ভ্যাকসিন নাম : ",vaccine_name[position]);
+            concateBasic("ভ্যাকসিনের নাম : ",vaccine_name[position]);
 
         if(!vaccine_fee[position].equals(""))
-            concateBasic("ভ্যাকসিন ফি : ",vaccine_fee[position]);
+            concateBasic("ভ্যাকসিনের খরচ : ",vaccine_fee[position]);
 
 
     //    holder.VaccineName.setText("ভ্যাকসিন নাম : " +);
       //  holder.VaccineFee.setText(""+vaccine_fee[position]);
 
         if(!vaccine_remarks[position].equals(""))
-            concateBasic("মন্তব্য: ",vaccine_remarks[position]);
+            concateBasic("বিস্তারিত: ",vaccine_remarks[position]);
      //
      //
      // holder.VaccineRemark.setText("মন্তব্য: "+vaccine_remarks[position]);

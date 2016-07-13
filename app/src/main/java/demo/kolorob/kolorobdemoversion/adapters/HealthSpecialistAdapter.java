@@ -19,15 +19,27 @@ public class HealthSpecialistAdapter extends BaseAdapter
     String specialist_name[];
     String specialist_fee[];
     String specialist_remarks[];
+    String specialist_week_fee[];
+    String specialist_month_fee[];
+    String specialist_report_fee[];
+    String specialist_other_fee[];
+
     String basic_part;
 
 
-    public HealthSpecialistAdapter(Activity context, String[] specialist_name,String[] specialist_fee,String[] specialist_remarks) {
+    public HealthSpecialistAdapter(Activity context, String[] specialist_name,String[] specialist_fee,String[] specialist_remarks,String specialist_week_fee[],
+            String specialist_month_fee[],
+            String specialist_report_fee[],
+            String specialist_other_fee[]) {
         super();
         this.context = context;
         this.specialist_name = specialist_name;
         this.specialist_fee = specialist_fee;
         this.specialist_remarks = specialist_remarks;
+        this.specialist_week_fee=specialist_week_fee;
+        this.specialist_month_fee=specialist_month_fee;
+        this.specialist_report_fee=specialist_report_fee;
+        this.specialist_other_fee=specialist_other_fee;
 
     }
 
@@ -48,8 +60,7 @@ public class HealthSpecialistAdapter extends BaseAdapter
 
     private class ViewHolder {
         TextView s_name ;
-        TextView s_fee;
-        TextView s_remarks;
+
 
     }
 
@@ -64,8 +75,7 @@ public class HealthSpecialistAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.listview_specialist, null);
             holder = new ViewHolder();
             holder.s_name = (TextView) convertView.findViewById(R.id.s_name);
-            holder.s_fee = (TextView) convertView.findViewById(R.id.s_fee);
-            holder.s_remarks = (TextView) convertView.findViewById(R.id.s_remarks);
+
 
             convertView.setTag(holder);
         }

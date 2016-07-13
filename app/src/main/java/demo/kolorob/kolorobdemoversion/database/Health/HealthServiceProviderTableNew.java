@@ -552,7 +552,7 @@ public class HealthServiceProviderTableNew {
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-        Log.d("Attempt1","======"+id);
+
         closeDB();
         return ret;
     }

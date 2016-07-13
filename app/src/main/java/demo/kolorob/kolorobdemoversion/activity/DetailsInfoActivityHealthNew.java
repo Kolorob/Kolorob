@@ -323,8 +323,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
             }
 
 
-            HealthSpecialistAdapter adapter=new HealthSpecialistAdapter(this,specialist_name,specialist_fee,remarks );
-            navlist2.setAdapter(adapter);
+            //HealthSpecialistAdapter adapter=new HealthSpecialistAdapter(this,specialist_name,specialist_fee,remarks );
+           // navlist2.setAdapter(adapter);
             Helpes.getListViewSize(navlist2);
 
 
