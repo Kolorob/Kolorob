@@ -190,6 +190,8 @@ public class GovernmentNewTable {
         rowValue.put(KEY_SERVICE_BREAKTIME, closetime);
         rowValue.put(KEY_SERVICE_CLOSETIME , breaktime);
         rowValue.put(KEY_SERVICE_OFFDAY, offday);
+        rowValue.put(KEY_SERVICE_REGWITH , registeredwith);
+        rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
         SQLiteDatabase db = openDB();
@@ -234,6 +236,8 @@ public class GovernmentNewTable {
         rowValue.put(KEY_SERVICE_BREAKTIME, closetime);
         rowValue.put(KEY_SERVICE_CLOSETIME , breaktime);
         rowValue.put(KEY_SERVICE_OFFDAY, offday);
+        rowValue.put(KEY_SERVICE_REGWITH , registeredwith);
+        rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
 

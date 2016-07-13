@@ -1,4 +1,4 @@
-package demo.kolorob.kolorobdemoversion.database.Financial;
+package demo.kolorob.kolorobdemoversion.database.Education;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,18 +7,37 @@ import android.database.sqlite.SQLiteDatabase;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
-public class FinancialServiceNewTable {
+public class EducationNewTable {
     private static final String TAG = FinancialServiceDetailsTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_NEW;
+    private static final String TABLE_NAME = DatabaseHelper.EDU_PROVIDER_TABLE_NEW;
     private static final String KEY_NODE_ID = "_finId";
     private static final String KEY_NAME_EN = "_nameen"; // 1 - text
     private static final String KEY_NAME_BN = "_namebn"; //
+
+    private static final String KEY_EDU_TYPE = "_edtype"; // 1 - text
+    private static final String KEY_SHIFT = "_shift"; //
+    private static final String KEY_STUDENT_NO = "_studentno"; // 1 - text
+    private static final String KEY_TEACHER_NO = "_teachersno"; //
+    private static final String KEY_CLASS_NO = "_classno"; //
+    private static final String KEY_ADDITIONAL = "_additional"; //
+    private static final String KEY_STUDENT_MALE  = "_malestudent"; //
+    private static final String KEY_STUDENT_FEMALE = "_femalestudent"; //
+    private static final String KEY_SPNEEDS = "_specialneeds"; //
+    private static final String KEY_WASHROOM_NO = "_washroom_no"; //
+    private static final String KEY_WASHMALE_NO = "_washroom_male"; //
+    private static final String KEY_WASH_CONDITION = "_washroomcleanliness"; //
+    private static final String KEY_WATER_CONDITION = "_watercondition"; //
+    private static final String KEY_WATER_SOURCE = "_watersource"; //
+    private static final String KEY_STUDENT_AVG = "_averagestudent"; //
+    private static final String KEY_WASHFEMALE_NO = "_washroomfemale"; //
+
     private static final String KEY_SERVICE_LAT = "_lat"; // 1 - text
     private static final String KEY_SERVICE_LON = "_lon"; //
     private static final String KEY_NODE_FLOOR = "_floor"; //
@@ -53,7 +72,7 @@ public class FinancialServiceNewTable {
 
     private Context tContext;
 
-    public FinancialServiceNewTable(Context context) {
+    public EducationNewTable(Context context) {
         tContext = context;
         createTable();
     }
@@ -65,6 +84,25 @@ public class FinancialServiceNewTable {
                 + KEY_NODE_ID + " INTEGER , "
                 + KEY_NAME_EN + "  TEXT  , " // 0 - int "
                 + KEY_NAME_BN + " TEXT,   "
+
+                + KEY_EDU_TYPE + "  TEXT  , "
+                + KEY_SHIFT + "  TEXT  , "
+                + KEY_STUDENT_NO + "  TEXT, "              // 1 - text
+                + KEY_TEACHER_NO + " TEXT, "
+                + KEY_CLASS_NO + " TEXT, "
+                + KEY_ADDITIONAL + " TEXT, "
+                + KEY_STUDENT_MALE + " TEXT, "
+                + KEY_STUDENT_FEMALE + " TEXT, "
+                + KEY_SPNEEDS + "  TEXT  , "
+                + KEY_WASHROOM_NO + "  TEXT  , "
+                + KEY_WASHMALE_NO + "  TEXT, "              // 1 - text
+                + KEY_WASH_CONDITION + " TEXT, "
+                + KEY_WATER_CONDITION + " TEXT, "
+                + KEY_WATER_SOURCE + " TEXT, "
+                + KEY_STUDENT_AVG + " TEXT, "
+                + KEY_WASHFEMALE_NO + " TEXT, "
+
+
                 + KEY_SERVICE_LAT + "  TEXT  , "
                 + KEY_SERVICE_LON + "  TEXT  , "
                 + KEY_NODE_FLOOR + "  TEXT, "              // 1 - text
@@ -105,38 +143,49 @@ public class FinancialServiceNewTable {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
-    public long insertItem(FinancialNewItem financialNewItem) {
-        return insertItem(
-                financialNewItem.getFinId(),
-                financialNewItem.getNameen(),
-                financialNewItem.getNamebn(),
-                financialNewItem.getLat(),
-                financialNewItem.getLon(),financialNewItem.getFloor(),
-                financialNewItem.getHousename(),financialNewItem.getHouseno(),
-                financialNewItem.getRoad(),financialNewItem.getLine(),financialNewItem.getAvenue(),
-                financialNewItem.getBlock(),financialNewItem.getArea(),financialNewItem.getLandmark(),
-                financialNewItem.getPostoffice(),financialNewItem.getPolicestation(),
-                financialNewItem.getCity(),financialNewItem.getCountry(),financialNewItem.getNode_contact(),
-                financialNewItem.getNode_contact2(),financialNewItem.getNode_email(),financialNewItem.getNode_website(),
-                financialNewItem.getNode_facebook(),financialNewItem.getNode_designation(),
-                financialNewItem.getOpeningtime(),
-                financialNewItem.getBreaktime(),
-                financialNewItem.getClosetime(),
-                financialNewItem.getOffday(), financialNewItem.getRegisteredwith(),
-                financialNewItem.getRegisterednumber(),financialNewItem.getCategoryId(),financialNewItem.getRefnumm()
+    public long insertItem(EducationNewItem educationNewItem) {
+        return insertItem(educationNewItem.getEduId(),educationNewItem.getNameen(),educationNewItem.getNamebn(),educationNewItem.getEdtype(),
+                educationNewItem.getShift(),educationNewItem.getStudentno(),educationNewItem.getTeachersno(),educationNewItem.getClassno(),
+                educationNewItem.getAdditional(),educationNewItem.getMalestudent(),educationNewItem.getFemalestudent(),
+                educationNewItem.getSpecialneeds(),educationNewItem.getWashroom_no(),educationNewItem.getWashroom_male(),
+                educationNewItem.getWashroomcleanliness(),educationNewItem.getWatercondition(),educationNewItem.getWatersource(),
+                educationNewItem.getAveragestudent(),educationNewItem.getWashroomfemale(), educationNewItem.getLat(),
+                educationNewItem.getLon(),educationNewItem.getFloor(),
+                educationNewItem.getHousename(),educationNewItem.getHouseno(),
+                educationNewItem.getRoad(),educationNewItem.getLine(),educationNewItem.getAvenue(),
+                educationNewItem.getBlock(),educationNewItem.getArea(),educationNewItem.getLandmark(),
+                educationNewItem.getPostoffice(),educationNewItem.getPolicestation(),
+                educationNewItem.getCity(),educationNewItem.getCountry(),educationNewItem.getNode_contact(),
+                educationNewItem.getNode_contact2(),educationNewItem.getNode_email(),educationNewItem.getNode_website(),
+                educationNewItem.getNode_facebook(),educationNewItem.getNode_designation(),
+                educationNewItem.getOpeningtime(),
+                educationNewItem.getBreaktime(),
+                educationNewItem.getClosetime(),
+                educationNewItem.getOffday(), educationNewItem.getRegisteredwith(),
+                educationNewItem.getRegisterednumber(),educationNewItem.getCategoryId(),educationNewItem.getRefnumm()
+
         );
     }
-    private long insertItem(int finId, String nameen, String namebn, String lat, String lon,
-                            String floor, String housename, String houseno, String road, String line, String avenue,
+    private long insertItem(int eduId, String nameen, String namebn, String edtype, String shift, String studentno,
+                            String teachersno, String classno, String additional, String malestudent, String femalestudent,
+                            String specialneeds, String washroom_no, String washroom_male, String washroomcleanliness,
+                            String watercondition, String watersource, String averagestudent, String washroomfemale, String lat,
+                            String lon, String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
-        if (isFieldExist(finId)) {
+        if (isFieldExist(eduId)) {
             return updateItem(
-                    finId,
+                    eduId,
                     nameen,
-                    namebn, lat,
+                    namebn,
+                    edtype,shift,studentno,teachersno,classno,additional,malestudent,femalestudent,specialneeds,washroom_no,
+                    washroom_male,washroomcleanliness,watercondition,watersource,averagestudent,washroomfemale,
+
+
+
+                    lat,
                     lon, floor,
                     housename,
                     houseno,
@@ -160,9 +209,27 @@ public class FinancialServiceNewTable {
 
         }
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , finId);
+        rowValue.put(KEY_NODE_ID , eduId);
         rowValue.put(KEY_NAME_EN, nameen);
         rowValue.put(KEY_NAME_BN, namebn);
+
+        rowValue.put(KEY_EDU_TYPE, edtype);
+        rowValue.put(KEY_SHIFT, shift);
+        rowValue.put(KEY_STUDENT_NO,  studentno);
+        rowValue.put(KEY_TEACHER_NO, teachersno);
+        rowValue.put(KEY_CLASS_NO, classno);
+        rowValue.put(KEY_ADDITIONAL,  additional);
+        rowValue.put(KEY_STUDENT_MALE ,  malestudent);
+        rowValue.put(KEY_STUDENT_FEMALE ,femalestudent);
+        rowValue.put(KEY_SPNEEDS, specialneeds);
+        rowValue.put(KEY_WASHROOM_NO, washroom_no);
+        rowValue.put(KEY_WASHMALE_NO,  washroom_male);
+        rowValue.put(KEY_WASH_CONDITION, washroomcleanliness);
+        rowValue.put(KEY_WATER_CONDITION, watercondition);
+        rowValue.put(KEY_WATER_SOURCE,  watersource);
+        rowValue.put(KEY_STUDENT_AVG ,  averagestudent);
+        rowValue.put(KEY_WASHFEMALE_NO ,washroomfemale);
+
         rowValue.put(KEY_SERVICE_LAT, lat);
         rowValue.put(KEY_SERVICE_LON, lon);
         rowValue.put(KEY_NODE_FLOOR,  floor);
@@ -198,17 +265,38 @@ public class FinancialServiceNewTable {
         return ret;}
 
 
-    private long updateItem(int finId, String nameen, String namebn, String lat, String lon,
-                            String floor, String housename, String houseno, String road, String line, String avenue,
+    private long updateItem(int eduId, String nameen, String namebn, String edtype, String shift, String studentno,
+                            String teachersno, String classno, String additional, String malestudent, String femalestudent,
+                            String specialneeds, String washroom_no, String washroom_male, String washroomcleanliness,
+                            String watercondition, String watersource, String averagestudent, String washroomfemale, String lat,
+                            String lon, String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
 
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_NODE_ID , finId);
+        rowValue.put(KEY_NODE_ID , eduId);
         rowValue.put(KEY_NAME_EN, nameen);
         rowValue.put(KEY_NAME_BN, namebn);
+
+        rowValue.put(KEY_EDU_TYPE, edtype);
+        rowValue.put(KEY_SHIFT, shift);
+        rowValue.put(KEY_STUDENT_NO,  studentno);
+        rowValue.put(KEY_TEACHER_NO, teachersno);
+        rowValue.put(KEY_CLASS_NO, classno);
+        rowValue.put(KEY_ADDITIONAL,  additional);
+        rowValue.put(KEY_STUDENT_MALE ,  malestudent);
+        rowValue.put(KEY_STUDENT_FEMALE ,femalestudent);
+        rowValue.put(KEY_SPNEEDS, specialneeds);
+        rowValue.put(KEY_WASHROOM_NO, washroom_no);
+        rowValue.put(KEY_WASHMALE_NO,  washroom_male);
+        rowValue.put(KEY_WASH_CONDITION, washroomcleanliness);
+        rowValue.put(KEY_WATER_CONDITION, watercondition);
+        rowValue.put(KEY_WATER_SOURCE,  watersource);
+        rowValue.put(KEY_STUDENT_AVG ,  averagestudent);
+        rowValue.put(KEY_WASHFEMALE_NO ,washroomfemale);
+
         rowValue.put(KEY_SERVICE_LAT, lat);
         rowValue.put(KEY_SERVICE_LON, lon);
         rowValue.put(KEY_NODE_FLOOR,  floor);
@@ -243,7 +331,7 @@ public class FinancialServiceNewTable {
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ?  ",
-                new String[]{finId + ""});
+                new String[]{eduId + ""});
         closeDB();
         return ret;
 
@@ -268,46 +356,64 @@ public class FinancialServiceNewTable {
         closeDB();
         return false;
     }
-    private FinancialNewItem cursorToSubCatList(Cursor cursor) {
-        int _finId = cursor.getInt(0);
+    private EducationNewItem cursorToSubCatList(Cursor cursor) {
+        int _eduId = cursor.getInt(0);
         String _nameen= cursor.getString(1);
         String _namebn = cursor.getString(2);
-        String _lat= cursor.getString(3);
-        String _lon = cursor.getString(4);
-        String _floor = cursor.getString(5);
-        String _housename = cursor.getString(6);
+        String _edtype = cursor.getString(3);
+        String _shift = cursor.getString(4);
+        String _studentno = cursor.getString(5);
+        String _teachersno = cursor.getString(6);
+        String _classno =cursor.getString(7);
+        String _additional = cursor.getString(8);
+        String _malestudent = cursor.getString(9);
+        String _femalestudent = cursor.getString(10);
+        String _specialneeds = cursor.getString(11);
+        String _washroom_no = cursor.getString(12);
+        String _washroom_male = cursor.getString(13);
+        String _washroomcleanliness = cursor.getString(14);
+        String _watercondition = cursor.getString(15);
+        String _watersource = cursor.getString(16);
+        String _averagestudent = cursor.getString(17);
+        String _washroomfemale = cursor.getString(18);
 
-        String _houseno = cursor.getString(7);
-        String _road = cursor.getString(8);
-        String _line = cursor.getString(9);
+        String _lat= cursor.getString(19);
+        String _lon = cursor.getString(20);
+        String _floor = cursor.getString(21);
+        String _housename = cursor.getString(22);
 
-        String _avenue = cursor.getString(10);
-        String _block = cursor.getString(11);
-        String _area = cursor.getString(12);
+        String _houseno = cursor.getString(23);
+        String _road = cursor.getString(24);
+        String _line = cursor.getString(25);
 
-        String _landmark = cursor.getString(13);
-        String _postoffice = cursor.getString(14);
-        String _policestation = cursor.getString(15);
+        String _avenue = cursor.getString(26);
+        String _block = cursor.getString(27);
+        String _area = cursor.getString(28);
 
-        String _city = cursor.getString(16);
-        String _country = cursor.getString(17);
-        String _node_contact = cursor.getString(18);
-        String _node_contact2 = cursor.getString(19);
+        String _landmark = cursor.getString(29);
+        String _postoffice = cursor.getString(30);
+        String _policestation = cursor.getString(31);
 
-        String _node_email = cursor.getString(20);
-        String _node_website = cursor.getString(21);
-        String _node_facebook=cursor.getString(22);
+        String _city = cursor.getString(32);
+        String _country = cursor.getString(33);
+        String _node_contact = cursor.getString(34);
+        String _node_contact2 = cursor.getString(35);
 
-        String _node_designation=cursor.getString(23);
-        String _opentime= cursor.getString(24);
-        String _breaktime = cursor.getString(25);
-        String _closetime= cursor.getString(26);
-        String _offday = cursor.getString(27);
-        String _regwith= cursor.getString(28);
-        String _regnum = cursor.getString(29);
-        int _catid=cursor.getInt(30);
-        String _refnumm=cursor.getString(31);
-        return new FinancialNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
+        String _node_email = cursor.getString(36);
+        String _node_website = cursor.getString(37);
+        String _node_facebook=cursor.getString(38);
+
+        String _node_designation=cursor.getString(39);
+        String _opentime= cursor.getString(40);
+        String _breaktime = cursor.getString(41);
+        String _closetime= cursor.getString(42);
+        String _offday = cursor.getString(43);
+        String _regwith= cursor.getString(44);
+        String _regnum = cursor.getString(45);
+        int _catid=cursor.getInt(46);
+        String _refnumm=cursor.getString(47);
+        return new EducationNewItem(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_classno,_additional,_malestudent,
+                _femalestudent,_specialneeds,_washroom_no,_washroom_male,_washroomcleanliness,_watercondition,_watersource,_averagestudent,_washroomfemale,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
