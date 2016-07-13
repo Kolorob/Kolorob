@@ -19,6 +19,7 @@ public class EducationTuitionDetailsTable {
     private static final String TAG = EducationTuitionDetailsTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.EDU_TUITION_TABLE;
     private static final String KEY_NODE_ID = "_eduId";
+    private static final String KEY_SERVICE_ID = "_sproviderid";
     private static final String KEY_TUITION_FREE = "_tuitionfree"; // 1 - text
     private static final String KEY_TUITION_LEVEL = "_tuitionlevel"; //
     private static final String KEY_TUITION_STIPEND = "_tuitionstipendfacility"; // 0 -integer
@@ -42,6 +43,7 @@ public class EducationTuitionDetailsTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_NODE_ID + " INTEGER , "
+                + KEY_SERVICE_ID + " INTEGER , "
                 + KEY_TUITION_FREE + "  TEXT  , " // 0 - int "
                 + KEY_TUITION_LEVEL + "  TEXT , "
                 + KEY_TUITION_STIPEND   + "  TEXT , "
@@ -66,18 +68,19 @@ public class EducationTuitionDetailsTable {
 
     public long insertItem(EducationTuitionDetailsItem educationTuitionDetailsItem) {
         return insertItem(
-               educationTuitionDetailsItem.getEduId(),educationTuitionDetailsItem.getTuitionfree(),educationTuitionDetailsItem.getTuitionlevel(),
+               educationTuitionDetailsItem.getEduId(),educationTuitionDetailsItem.getServiceproviderId(), educationTuitionDetailsItem.getTuitionfree(),educationTuitionDetailsItem.getTuitionlevel(),
                 educationTuitionDetailsItem.getTuitionstipendfacility(),educationTuitionDetailsItem.getTuitionstipendtype(),
                 educationTuitionDetailsItem.getTuitiondetails(),educationTuitionDetailsItem.getTuitionminfee(),educationTuitionDetailsItem.getTuitionmaxfee(),
                 educationTuitionDetailsItem.getTuitionmincoaching(),educationTuitionDetailsItem.getTuitionmaxcoaching(),educationTuitionDetailsItem.getTuitionadditional()
         );
     }
-    public long insertItem(int eduId, String tuitionfree, String tuitionlevel, String tuitionstipendfacility,
-                           String tuitionstipendtype, String tuitiondetails, String tuitionminfee, String tuitionmaxfee,
-                           String tuitionmincoaching, String tuitionmaxcoaching, String tuitionadditional) {
+    public long insertItem(int eduId, int serviceproviderId, String tuitionfree, String tuitionlevel,
+                           String tuitionstipendfacility, String tuitionstipendtype, String tuitiondetails,
+                           String tuitionminfee, String tuitionmaxfee, String tuitionmincoaching,
+                           String tuitionmaxcoaching, String tuitionadditional) {
         if (isFieldExist(eduId)) {
             return updateItem(
-                    eduId,
+                    eduId,serviceproviderId,
                     tuitionfree,
                     tuitionlevel,
                     tuitionstipendfacility,
@@ -86,6 +89,7 @@ public class EducationTuitionDetailsTable {
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_TUITION_FREE, tuitionfree);
         rowValue.put(KEY_TUITION_LEVEL, tuitionlevel);
         rowValue.put(KEY_TUITION_STIPEND, tuitionstipendfacility);
@@ -106,12 +110,13 @@ public class EducationTuitionDetailsTable {
         return ret;}
 
 
-    private long updateItem(int eduId, String tuitionfree, String tuitionlevel, String tuitionstipendfacility,
+    private long updateItem(int eduId,  int serviceproviderId,String tuitionfree, String tuitionlevel, String tuitionstipendfacility,
                             String tuitionstipendtype, String tuitiondetails, String tuitionminfee, String tuitionmaxfee,
                             String tuitionmincoaching, String tuitionmaxcoaching, String tuitionadditional) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_TUITION_FREE, tuitionfree);
         rowValue.put(KEY_TUITION_LEVEL, tuitionlevel);
         rowValue.put(KEY_TUITION_STIPEND, tuitionstipendfacility);
@@ -171,21 +176,21 @@ public class EducationTuitionDetailsTable {
 
     private EducationTuitionDetailsItem cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
+        int _sproviderId = cursor.getInt(1);
+        String _tuitionfree= cursor.getString(2);
+        String _tuitionlevel = cursor.getString(3);
+        String _tuitionstipendfacility = cursor.getString(4);
+        String _tuitionstipendtype = cursor.getString(5);
+        String _tuitiondetails= cursor.getString(6);
+        String _tuitionminfee = cursor.getString(7);
+        String _tuitionmaxfee = cursor.getString(8);
+        String _tuitionmincoaching = cursor.getString(9);
+        String _tuitionmaxcoaching= cursor.getString(10);
+        String _tuitionadditional = cursor.getString(11);
 
-        String _tuitionfree= cursor.getString(1);
-        String _tuitionlevel = cursor.getString(2);
-        String _tuitionstipendfacility = cursor.getString(3);
-        String _tuitionstipendtype = cursor.getString(4);
-        String _tuitiondetails= cursor.getString(5);
-        String _tuitionminfee = cursor.getString(6);
-        String _tuitionmaxfee = cursor.getString(7);
-        String _tuitionmincoaching = cursor.getString(8);
-        String _tuitionmaxcoaching= cursor.getString(9);
-        String _tuitionadditional = cursor.getString(10);
 
 
-
-        return new EducationTuitionDetailsItem(_eduId,
+        return new EducationTuitionDetailsItem(_eduId,_sproviderId,
                 _tuitionfree,_tuitionlevel,_tuitionstipendfacility,_tuitionstipendtype,_tuitiondetails,_tuitionminfee,
                 _tuitionmaxfee,_tuitionmincoaching,_tuitionmaxcoaching,_tuitionadditional);
     }

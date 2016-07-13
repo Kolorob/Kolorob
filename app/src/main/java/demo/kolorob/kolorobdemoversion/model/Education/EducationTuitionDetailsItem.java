@@ -20,7 +20,10 @@ public class EducationTuitionDetailsItem {
     private String tuitionmaxcoaching;
     private String tuitionadditional;
 
-    public EducationTuitionDetailsItem(int eduId, int serviceproviderId, String tuitionfree, String tuitionlevel, String tuitionstipendfacility, String tuitionstipendtype, String tuitiondetails, String tuitionminfee, String tuitionmaxfee, String tuitionmincoaching, String tuitionmaxcoaching, String tuitionadditional) {
+    public EducationTuitionDetailsItem(int eduId, int serviceproviderId, String tuitionfree, String tuitionlevel,
+                                       String tuitionstipendfacility, String tuitionstipendtype, String tuitiondetails,
+                                       String tuitionminfee, String tuitionmaxfee, String tuitionmincoaching,
+                                       String tuitionmaxcoaching, String tuitionadditional) {
         this.eduId = eduId;
         this.serviceproviderId = serviceproviderId;
         this.tuitionfree = tuitionfree;
@@ -121,6 +124,14 @@ public class EducationTuitionDetailsItem {
 
     public void setTuitionadditional(String tuitionadditional) {
         this.tuitionadditional = tuitionadditional;
+    }
+
+    public int getServiceproviderId() {
+        return serviceproviderId;
+    }
+
+    public void setServiceproviderId(int serviceproviderId) {
+        this.serviceproviderId = serviceproviderId;
     }
 
     public static EducationTuitionDetailsItem parseEducationTuitionDetailsItem(JSONObject jo) throws JSONException {

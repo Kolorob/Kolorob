@@ -16,7 +16,8 @@ public class GovernmentServiceDetailsItem {
     private String servicesubtype;
 
 
-    public GovernmentServiceDetailsItem(int finId, int serviceproviderId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
+    public GovernmentServiceDetailsItem(int finId, int serviceproviderId, String servicecost, String responsibleperson,
+                                        String detailstep, String servicetype, String servicesubtype) {
         this.finId = finId;
         this.serviceproviderId = serviceproviderId;
         this.servicecost = servicecost;
@@ -28,6 +29,14 @@ public class GovernmentServiceDetailsItem {
 
     public int getFinId() {
         return finId;
+    }
+
+    public int getServiceproviderId() {
+        return serviceproviderId;
+    }
+
+    public void setServiceproviderId(int serviceproviderId) {
+        this.serviceproviderId = serviceproviderId;
     }
 
     public void setFinId(int finId) {

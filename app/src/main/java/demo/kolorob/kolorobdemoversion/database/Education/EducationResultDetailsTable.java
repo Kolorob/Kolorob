@@ -19,6 +19,7 @@ public class EducationResultDetailsTable {
     private static final String TAG = EducationResultDetailsTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.EDU_PROVIDER_RESULT_TABLE;
     private static final String KEY_NODE_ID = "_eduId";
+    private static final String KEY_SERVICE_ID = "_sproviderid";
     private static final String KEY_EXAM_NAME = "_examname"; // 1 - text
     private static final String KEY_STUDENT_NO= "_studentno"; //
     private static final String KEY_PASSED = "_passed"; // 0 -integer
@@ -38,6 +39,7 @@ public class EducationResultDetailsTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_NODE_ID + " INTEGER , "
+                + KEY_SERVICE_ID + " INTEGER , "
                 + KEY_EXAM_NAME + "  TEXT  , " // 0 - int "
                 + KEY_STUDENT_NO + "  TEXT , "
                 + KEY_PASSED   + "  TEXT , "
@@ -57,7 +59,7 @@ public class EducationResultDetailsTable {
 
     public long insertItem(EducationResultItemNew educationResultItemNew) {
         return insertItem(
-                educationResultItemNew.getEduId(),educationResultItemNew.getExamname(),educationResultItemNew.getStudentno(),
+                educationResultItemNew.getEduId(),educationResultItemNew.getServiceproviderId(),educationResultItemNew.getExamname(),educationResultItemNew.getStudentno(),
                 educationResultItemNew.getPassed(),educationResultItemNew.getGoldena(),educationResultItemNew.getAplus()
         );
     }
@@ -76,10 +78,11 @@ public class EducationResultDetailsTable {
         closeDB();
         return siList;
     }
-    public long insertItem(int eduId, String examname, String studentno, String passed, String goldena, String aplus) {
+    public long insertItem(int eduId, int serviceproviderId, String examname, String studentno,
+                           String passed, String goldena, String aplus) {
         if (isFieldExist(eduId)) {
             return updateItem(
-                    eduId,
+                    eduId,serviceproviderId,
                     examname,
                     studentno,
                     passed,
@@ -102,7 +105,8 @@ public class EducationResultDetailsTable {
         return ret;}
 
 
-    private long updateItem(int eduId, String examname, String studentno, String passed, String goldena, String aplus) {
+    private long updateItem(int eduId, int serviceproviderId, String examname, String studentno,
+                            String passed, String goldena, String aplus) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
@@ -145,17 +149,18 @@ public class EducationResultDetailsTable {
 
     private EducationResultItemNew cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
-        String _examname= cursor.getString(1);
-        String _studentno = cursor.getString(2);
-        String _passed = cursor.getString(3);
-        String _goldena = cursor.getString(4);
-        String _aplus= cursor.getString(5);
+        int _sproviderId = cursor.getInt(1);
+        String _examname= cursor.getString(2);
+        String _studentno = cursor.getString(3);
+        String _passed = cursor.getString(4);
+        String _goldena = cursor.getString(5);
+        String _aplus= cursor.getString(6);
 
 
 
 
 
-        return new EducationResultItemNew(_eduId,
+        return new EducationResultItemNew(_eduId,_sproviderId,
                 _examname,_studentno,_passed,_goldena,_aplus);
     }
 

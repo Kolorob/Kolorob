@@ -17,6 +17,7 @@ public class GovernmentServiceDetailsTable {
     private static final String TAG = GovernmentServiceDetailsTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.GOVERNMENT_SERVICE_DETAILS;
     private static final String KEY_NODE_ID = "_finId";
+    private static final String KEY_SERVICE_ID = "_sproviderid";
     private static final String KEY_SERVICE_COST = "_servicecost"; // 1 - text
     private static final String KEY_SERVICE_PERSON = "_person"; //
     private static final String KEY_SERVICE_DETAIL = "_detail"; //
@@ -35,6 +36,7 @@ public class GovernmentServiceDetailsTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_NODE_ID + " INTEGER , "
+                + KEY_SERVICE_ID + " INTEGER , "
                 + KEY_SERVICE_COST + "  TEXT  , " // 0 - int "
                 + KEY_SERVICE_PERSON + " TEXT , "
                 + KEY_SERVICE_DETAIL + " TEXT , "
@@ -54,7 +56,7 @@ public class GovernmentServiceDetailsTable {
 
     public long insertItem(GovernmentServiceDetailsItem governmentServiceDetailsItem) {
         return insertItem(
-                governmentServiceDetailsItem.getFinId(),
+                governmentServiceDetailsItem.getFinId(),governmentServiceDetailsItem.getServiceproviderId(),
                 governmentServiceDetailsItem.getServicecost(),
                 governmentServiceDetailsItem.getResponsibleperson(),
                 governmentServiceDetailsItem.getDetailstep(),
@@ -62,10 +64,11 @@ public class GovernmentServiceDetailsTable {
                 governmentServiceDetailsItem.getServicesubtype()
         );
     }
-    public long insertItem(int finId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
+    public long insertItem(int finId, int serviceproviderId, String servicecost, String responsibleperson,
+                           String detailstep, String servicetype, String servicesubtype) {
         if (isFieldExist(finId)) {
             return updateItem(
-                    finId,
+                    finId,serviceproviderId,
                     servicecost,
                     responsibleperson,detailstep,
                     servicetype,
@@ -74,6 +77,7 @@ public class GovernmentServiceDetailsTable {
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , finId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_SERVICE_COST, servicecost);
         rowValue.put(KEY_SERVICE_PERSON, responsibleperson);
         rowValue.put(KEY_SERVICE_DETAIL, detailstep);
@@ -88,10 +92,11 @@ public class GovernmentServiceDetailsTable {
         return ret;}
 
 
-    private long updateItem(int finId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
+    private long updateItem(int finId,int serviceproviderId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , finId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_SERVICE_COST, servicecost);
         rowValue.put(KEY_SERVICE_PERSON, responsibleperson);
         rowValue.put(KEY_SERVICE_DETAIL, detailstep);
@@ -129,15 +134,16 @@ public class GovernmentServiceDetailsTable {
     }
     private GovernmentServiceDetailsItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
-        String _servicecost= cursor.getString(1);
-        String _person = cursor.getString(2);
-        String _detail = cursor.getString(3);
-        String _servicetype = cursor.getString(4);
-        String _servicesubtype = cursor.getString(5);
+        int _sproviderId = cursor.getInt(1);
+        String _servicecost= cursor.getString(2);
+        String _person = cursor.getString(3);
+        String _detail = cursor.getString(4);
+        String _servicetype = cursor.getString(5);
+        String _servicesubtype = cursor.getString(6);
 
 
 
-        return new GovernmentServiceDetailsItem(_finId,
+        return new GovernmentServiceDetailsItem(_finId,_sproviderId,
                 _servicecost,_person,_detail,_servicetype,_servicesubtype);
 
     }

@@ -27,7 +27,8 @@ public class EducationResultItemNew implements Serializable {
         this.serviceproviderId = serviceproviderId;
     }
 
-    public EducationResultItemNew(int eduId, int serviceproviderId, String examname, String studentno, String passed, String goldena, String aplus) {
+    public EducationResultItemNew(int eduId, int serviceproviderId, String examname, String studentno,
+                                  String passed, String goldena, String aplus) {
         this.eduId = eduId;
         this.serviceproviderId = serviceproviderId;
         this.examname = examname;

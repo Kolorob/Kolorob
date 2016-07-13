@@ -15,7 +15,8 @@ public class EducationTrainingDetailsItem {
     private String trainingnametype;
     private String trainingnamesubtype;
 
-    public EducationTrainingDetailsItem(int eduId, int serviceproviderId, String courseduration, String admissionmonth, String cost, String trainingnametype, String trainingnamesubtype) {
+    public EducationTrainingDetailsItem(int eduId, int serviceproviderId, String courseduration, String admissionmonth,
+                                        String cost, String trainingnametype, String trainingnamesubtype) {
         this.eduId = eduId;
         this.serviceproviderId = serviceproviderId;
         this.courseduration = courseduration;

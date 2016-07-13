@@ -19,6 +19,7 @@ public class EducationTrainingDetailsTable {
     private static final String TAG = EducationTrainingDetailsTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.EDU_TRAINING_TABLE;
     private static final String KEY_NODE_ID = "_eduId";
+    private static final String KEY_SERVICE_ID = "_sproviderid";
     private static final String KEY_COURSE_DURATION = "_courseduration"; // 1 - text
     private static final String KEY_AD_MONTH= "_admissionmonth"; //
     private static final String KEY_AD_COST = "_cost"; // 0 -integer
@@ -38,6 +39,7 @@ public class EducationTrainingDetailsTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_NODE_ID + " INTEGER , "
+                + KEY_SERVICE_ID + " INTEGER , "
                 + KEY_COURSE_DURATION + "  TEXT  , " // 0 - int "
                 + KEY_AD_MONTH + "  TEXT , "
                 + KEY_AD_COST   + "  TEXT , "
@@ -57,14 +59,15 @@ public class EducationTrainingDetailsTable {
 
     public long insertItem(EducationTrainingDetailsItem educationTrainingDetailsItem) {
         return insertItem(
-                educationTrainingDetailsItem.getEduId(),educationTrainingDetailsItem.getCourseduration(),educationTrainingDetailsItem.getAdmissionmonth(),
+                educationTrainingDetailsItem.getEduId(),educationTrainingDetailsItem.getServiceproviderId(),educationTrainingDetailsItem.getCourseduration(),educationTrainingDetailsItem.getAdmissionmonth(),
                 educationTrainingDetailsItem.getCost(),educationTrainingDetailsItem.getTrainingnametype(),educationTrainingDetailsItem.getTrainingnamesubtype()
         );
     }
-    public long insertItem(int eduId, String courseduration, String admissionmonth, String cost, String trainingnametype, String trainingnamesubtype) {
+    public long insertItem(int eduId, int serviceproviderId, String courseduration, String admissionmonth,
+                           String cost, String trainingnametype, String trainingnamesubtype) {
         if (isFieldExist(eduId)) {
             return updateItem(
-                    eduId,
+                    eduId,serviceproviderId,
                     courseduration,
                     admissionmonth,
                     cost,
@@ -73,6 +76,7 @@ public class EducationTrainingDetailsTable {
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_COURSE_DURATION, courseduration);
         rowValue.put(KEY_AD_MONTH, admissionmonth);
         rowValue.put(KEY_AD_COST, cost);
@@ -101,10 +105,12 @@ public class EducationTrainingDetailsTable {
         closeDB();
         return siList;
     }
-    private long updateItem(int eduId, String courseduration, String admissionmonth, String cost, String trainingnametype, String trainingnamesubtype) {
+    private long updateItem(int eduId, int serviceproviderId, String courseduration, String admissionmonth,
+                            String cost, String trainingnametype, String trainingnamesubtype) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_COURSE_DURATION, courseduration);
         rowValue.put(KEY_AD_MONTH, admissionmonth);
         rowValue.put(KEY_AD_COST, cost);
@@ -145,17 +151,18 @@ public class EducationTrainingDetailsTable {
 
     private EducationTrainingDetailsItem cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
-        String _courseduration= cursor.getString(1);
-        String _admissionmonth = cursor.getString(2);
-        String _cost = cursor.getString(3);
-        String _trainingnametype = cursor.getString(4);
-        String _trainingnamesubtype= cursor.getString(5);
+        int _sproviderId = cursor.getInt(1);
+        String _courseduration= cursor.getString(2);
+        String _admissionmonth = cursor.getString(3);
+        String _cost = cursor.getString(4);
+        String _trainingnametype = cursor.getString(5);
+        String _trainingnamesubtype= cursor.getString(6);
 
 
 
 
 
-        return new EducationTrainingDetailsItem(_eduId,
+        return new EducationTrainingDetailsItem(_eduId,_sproviderId,
                 _courseduration,_admissionmonth,_cost,_trainingnametype,_trainingnamesubtype);
     }
 
