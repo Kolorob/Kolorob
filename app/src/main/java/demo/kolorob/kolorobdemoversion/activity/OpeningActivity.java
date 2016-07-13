@@ -38,12 +38,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
-//import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
@@ -81,7 +84,11 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
@@ -117,6 +124,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
+
+//import demo.kolorob.kolorobdemoversion.adapters.Trialholder;
 /**
  * Created by Yeakub Hassan Rafi on 27-Dec-15.
  * @author mity,arafat
@@ -366,17 +375,21 @@ int countofDb;
                         }
                     }
             );
-//                                    JSONArray jo = new JSONArray(apiContent);
-//
-//                                    savenewGov(jo);
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//            );
-//
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    savenewEdu(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
                        @Override
                         public void onResponse(int status, String apiContent) {
@@ -519,37 +532,9 @@ int countofDb;
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/finance", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                try {
-                                    JSONArray jo = new JSONArray(apiContent);
 
-                                    savenewFinance(jo);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/government", new VolleyApiCallback() {
-            @Override
-            public void onResponse(int status, String apiContent) {
-                if (status == AppConstants.SUCCESS_CODE) {
-                    try {
-                        JSONArray jo = new JSONArray(apiContent);
-
-                        savenewGov(jo);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        );
+//
 
 //            getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
 //                        @Override
@@ -980,6 +965,70 @@ int countofDb;
         }
         countofDb++;
     }
+    private void savenewEdu(JSONArray edu ) {
+        EducationNewTable educationNewTable= new EducationNewTable(OpeningActivity.this);
+        EducationResultDetailsTable educationResultDetailsTable= new EducationResultDetailsTable(OpeningActivity.this);
+        EducationTrainingDetailsTable educationTrainingDetailsTable=new EducationTrainingDetailsTable(OpeningActivity.this);
+        EducationTuitionDetailsTable educationTuitionDetailsTable=new EducationTuitionDetailsTable(OpeningActivity.this);
+        educationNewTable.dropTable();
+        educationResultDetailsTable.dropTable();
+        educationTrainingDetailsTable.dropTable();
+        educationTuitionDetailsTable.dropTable();
+
+
+        int eduServiceProviderCount = edu.length();
+
+        for (int i = 0; i < eduServiceProviderCount; i++) {
+            try {
+                JSONObject jo = edu.getJSONObject(i);
+                EducationNewItem et = EducationNewItem.parseEducationNewItem(jo);
+                educationNewTable.insertItem(et);
+
+
+                if(jo.has("tution_details"))//
+                {
+                    JSONArray service_details = jo.getJSONArray("tution_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        EducationTuitionDetailsItem educationTuitionDetailsItem = EducationTuitionDetailsItem.parseEducationTuitionDetailsItem(joes);
+                        educationTuitionDetailsTable.insertItem(educationTuitionDetailsItem);
+
+                    }
+
+                }
+                if(jo.has("result_details"))//
+                {
+                    JSONArray service_details = jo.getJSONArray("result_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        EducationResultItemNew educationResultItemNew=EducationResultItemNew.parseEducationResultItemNew(joes);
+                        educationResultDetailsTable.insertItem(educationResultItemNew);
+
+                    }
+
+                }
+                if(jo.has("training_details"))//
+                {
+                    JSONArray service_details = jo.getJSONArray("training_details");
+                    for( int j=0;j<service_details.length();j++)
+                    {
+                        JSONObject joes= service_details.getJSONObject(j);
+                        EducationTrainingDetailsItem educationTrainingDetailsItem = EducationTrainingDetailsItem.parseEducationTrainingDetailsItem(joes);
+                        educationTrainingDetailsTable.insertItem(educationTrainingDetailsItem);
+
+                    }
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
     private void savenewFinance(JSONArray financial ) {
         FinancialServiceNewTable financialServiceNewTable=new FinancialServiceNewTable(OpeningActivity.this);
 
@@ -990,9 +1039,9 @@ int countofDb;
         financialServiceNewTable.dropTable();
 
 
-        int financialProviderCount = financial.length();
+        int legalaidServiceProviderCount = financial.length();
 
-        for (int i = 0; i < financialProviderCount; i++) {
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
             try {
                 JSONObject jo = financial.getJSONObject(i);
                 FinancialNewItem et = FinancialNewItem.parseFinancialMapInfoItem(jo);

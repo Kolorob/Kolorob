@@ -122,7 +122,7 @@ public class EducationTuitionDetailsItem {
         this.tuitionadditional = tuitionadditional;
     }
 
-    public static EducationTuitionDetailsItem parseFinancialServiceDetailsItem(JSONObject jo) throws JSONException {
+    public static EducationTuitionDetailsItem parseEducationTuitionDetailsItem(JSONObject jo) throws JSONException {
         int _eduId = jo.getInt("id");
 
         String _tuitionfree = jo.getString("tuition_free");

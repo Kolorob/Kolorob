@@ -501,7 +501,7 @@ public class EducationNewItem {
         this.refnumm = refnumm;
     }
 
-    public static EducationNewItem parseFinancialMapInfoItem(JSONObject jo) throws JSONException {
+    public static EducationNewItem parseEducationNewItem(JSONObject jo) throws JSONException {
         int _eduId = jo.getInt("id");
         String _namebn = jo.getString("node_bn");
         String _nameen = jo.getString("node_name");
