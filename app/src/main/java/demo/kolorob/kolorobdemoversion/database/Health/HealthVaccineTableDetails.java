@@ -132,8 +132,10 @@ public class HealthVaccineTableDetails {
 
 
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ",
+        long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ?",
                 new String[]{nodeId + ""});
+
+
         closeDB();
         return ret;
     }

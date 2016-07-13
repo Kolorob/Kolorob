@@ -89,7 +89,6 @@ public class SubCategoryTableNew {
         rowValue.put(KEY_REF_NAME_BN,subCatNameBn);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-        Log.d("Check Subcategory Table","======"+ret);
         closeDB();
         return ret;
     }
@@ -183,8 +182,8 @@ public class SubCategoryTableNew {
 
         SQLiteDatabase db = openDB();
         int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
-
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
         if (cursor.moveToFirst()) {
             do {
