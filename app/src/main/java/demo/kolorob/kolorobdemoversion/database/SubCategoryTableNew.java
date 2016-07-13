@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -88,6 +89,7 @@ public class SubCategoryTableNew {
         rowValue.put(KEY_REF_NAME_BN,subCatNameBn);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+        Log.d("Check Subcategory Table","======"+ret);
         closeDB();
         return ret;
     }
@@ -176,7 +178,7 @@ public class SubCategoryTableNew {
         closeDB();
         return siList;
     }
-    public ArrayList<String> getSubnameedu(int id,String head) {
+    public ArrayList<String> getSubnameedu(int id) {
         ArrayList<String> siList=new ArrayList<>();
 
         SQLiteDatabase db = openDB();
@@ -186,7 +188,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(2);
+                String name = cursor.getString(7);
                 int subid=cursor.getInt(1);
                 siList.add(i,name);
                 i++;

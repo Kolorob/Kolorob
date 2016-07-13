@@ -73,8 +73,10 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
@@ -975,11 +977,16 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             case AppConstants.HEALTH:
 
                 SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = cat_id;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
+                HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+
                 HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printhea = null;
+                ArrayList<String> RefHealth=null;
                 groups.removeAllElements();
+                RefHealth=subCategoryTableNew.getSubnameedu(currentCategoryID);
                 printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
                 for (int j = 0; j < printhea.size(); j++) {
                     Group group = new Group(printhea.get(j));
