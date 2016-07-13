@@ -488,6 +488,36 @@ int countofDb;
 
                 }
             });
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    savenewFinance(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    savenewGov(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
             @Override

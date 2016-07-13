@@ -171,6 +171,7 @@ public class EducationTuitionDetailsTable {
 
     private EducationTuitionDetailsItem cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
+
         String _tuitionfree= cursor.getString(1);
         String _tuitionlevel = cursor.getString(2);
         String _tuitionstipendfacility = cursor.getString(3);

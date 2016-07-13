@@ -17,6 +17,7 @@ public class FinancialServiceDetailsTable {
     private static final String TAG = FinancialServiceDetailsTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_DETAILS;
     private static final String KEY_FIN_NODE_ID = "_finId";
+    private static final String KEY_SERVICE_ID = "_sproviderid";
     private static final String KEY_FIN_SERVICE_COST = "_servicecost"; // 1 - text
     private static final String KEY_FIN_SERVICE_REMARK = "_serviceremark"; //
     private static final String KEY_FIN_SERVICE_TYPE = "_servicetype"; // 0 -integer
@@ -34,6 +35,7 @@ public class FinancialServiceDetailsTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_FIN_NODE_ID + " INTEGER , "
+                + KEY_SERVICE_ID + " INTEGER , "
                 + KEY_FIN_SERVICE_COST + "  TEXT  , " // 0 - int "
                 + KEY_FIN_SERVICE_REMARK + " TEXT , "
                 + KEY_FIN_SERVICE_TYPE   + " TEXT , "
@@ -52,17 +54,18 @@ public class FinancialServiceDetailsTable {
 
     public long insertItem(FinancialServiceDetailsItem financialServiceDetailsItem) {
         return insertItem(
-                financialServiceDetailsItem.getFinId(),
+                financialServiceDetailsItem.getFinId(),financialServiceDetailsItem.getServiceproviderId(),
                 financialServiceDetailsItem.getServicecost(),
                 financialServiceDetailsItem.getServiceremark(),
                 financialServiceDetailsItem.getServicetype(),
                 financialServiceDetailsItem.getServicesubtype()
         );
     }
-    public long insertItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    public long insertItem(int finId, int serviceproviderId, String servicecost, String serviceremark,
+                           String servicetype, String servicesubtype) {
         if (isFieldExist(finId)) {
             return updateItem(
-                    finId,
+                    finId,serviceproviderId,
                     servicecost,
                     serviceremark,
                     servicetype,
@@ -71,6 +74,7 @@ public class FinancialServiceDetailsTable {
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID , finId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_FIN_SERVICE_COST, servicecost);
         rowValue.put(KEY_FIN_SERVICE_REMARK, serviceremark);
         rowValue.put(KEY_FIN_SERVICE_TYPE, servicetype);
@@ -84,15 +88,16 @@ public class FinancialServiceDetailsTable {
         return ret;}
 
 
-    private long updateItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    private long updateItem(int finId, int serviceproviderId, String servicecost, String serviceremark,
+                            String servicetype, String servicesubtype) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_FIN_NODE_ID , finId);
+        rowValue.put(KEY_SERVICE_ID , serviceproviderId);
         rowValue.put(KEY_FIN_SERVICE_COST, servicecost);
         rowValue.put(KEY_FIN_SERVICE_REMARK, serviceremark);
         rowValue.put(KEY_FIN_SERVICE_TYPE, servicetype);
         rowValue.put(KEY_FIN_SERVICE_SUBTYPE, servicesubtype);
-
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_FIN_NODE_ID + " = ?  ",
@@ -124,14 +129,15 @@ public class FinancialServiceDetailsTable {
     }
     private FinancialServiceDetailsItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
-        String _servicecost= cursor.getString(1);
-        String _serviceremark = cursor.getString(2);
-        String _servicetype = cursor.getString(3);
-        String _servicesubtype = cursor.getString(4);
+        int _sproviderId = cursor.getInt(1);
+        String _servicecost= cursor.getString(2);
+        String _serviceremark = cursor.getString(3);
+        String _servicetype = cursor.getString(4);
+        String _servicesubtype = cursor.getString(5);
 
 
 
-        return new FinancialServiceDetailsItem(_finId,
+        return new FinancialServiceDetailsItem(_finId,_sproviderId,
                 _servicecost,_serviceremark,_servicetype,_servicesubtype);
 
 

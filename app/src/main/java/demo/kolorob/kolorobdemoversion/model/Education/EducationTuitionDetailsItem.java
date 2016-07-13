@@ -8,7 +8,7 @@ import org.json.JSONObject;
  */
 public class EducationTuitionDetailsItem {
     private int eduId;
-
+    private int serviceproviderId;
     private String tuitionfree;
     private String tuitionlevel;
     private String tuitionstipendfacility;
@@ -20,8 +20,9 @@ public class EducationTuitionDetailsItem {
     private String tuitionmaxcoaching;
     private String tuitionadditional;
 
-    public EducationTuitionDetailsItem(int eduId, String tuitionfree, String tuitionlevel, String tuitionstipendfacility, String tuitionstipendtype, String tuitiondetails, String tuitionminfee, String tuitionmaxfee, String tuitionmincoaching, String tuitionmaxcoaching, String tuitionadditional) {
+    public EducationTuitionDetailsItem(int eduId, int serviceproviderId, String tuitionfree, String tuitionlevel, String tuitionstipendfacility, String tuitionstipendtype, String tuitiondetails, String tuitionminfee, String tuitionmaxfee, String tuitionmincoaching, String tuitionmaxcoaching, String tuitionadditional) {
         this.eduId = eduId;
+        this.serviceproviderId = serviceproviderId;
         this.tuitionfree = tuitionfree;
         this.tuitionlevel = tuitionlevel;
         this.tuitionstipendfacility = tuitionstipendfacility;
@@ -124,7 +125,7 @@ public class EducationTuitionDetailsItem {
 
     public static EducationTuitionDetailsItem parseEducationTuitionDetailsItem(JSONObject jo) throws JSONException {
         int _eduId = jo.getInt("id");
-
+        int _sproviderid = jo.getInt("_service_provider");
         String _tuitionfree = jo.getString("tuition_free");
         String _tuitionlevel = jo.getString("tuition_level");
         String _tuitionstipendfacility = jo.getString("tuition_stipend_speciality");
@@ -135,7 +136,7 @@ public class EducationTuitionDetailsItem {
         String _tuitionmincoaching = jo.getString("tuition_min_coaching");
         String _tuitionmaxcoaching = jo.getString("tuition_max_coaching");
         String _tuitionadditional = jo.getString("tuition_additional");
-        return new EducationTuitionDetailsItem(_eduId,
+        return new EducationTuitionDetailsItem(_eduId,_sproviderid,
                 _tuitionfree,_tuitionlevel,_tuitionstipendfacility,_tuitionstipendtype,_tuitiondetails,_tuitionminfee,
                 _tuitionmaxfee,_tuitionmincoaching,_tuitionmaxcoaching,_tuitionadditional);
     }
