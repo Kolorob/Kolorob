@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -176,17 +177,17 @@ public class SubCategoryTableNew {
         closeDB();
         return siList;
     }
-    public ArrayList<String> getSubnameedu(int id,String head) {
+    public ArrayList<String> getSubnameedu(int id) {
         ArrayList<String> siList=new ArrayList<>();
 
         SQLiteDatabase db = openDB();
         int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
-
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(2);
+                String name = cursor.getString(7);
                 int subid=cursor.getInt(1);
                 siList.add(i,name);
                 i++;

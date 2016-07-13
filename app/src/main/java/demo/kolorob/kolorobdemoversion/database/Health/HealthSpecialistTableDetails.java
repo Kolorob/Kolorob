@@ -122,7 +122,7 @@ public class HealthSpecialistTableDetails {
         rowValue.put(KEY_OTHER_FEE   , other_fee);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-        Log.d("health_specialist_d","==="+ret);
+      //  Log.d("health_specialist_d","==="+ret);
         closeDB();
         return ret;
 
