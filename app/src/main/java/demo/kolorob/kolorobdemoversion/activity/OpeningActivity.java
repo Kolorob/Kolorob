@@ -519,8 +519,37 @@ int countofDb;
                         }
                     }
             );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/finance", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
 
-//
+                                    savenewFinance(jo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp2/government", new VolleyApiCallback() {
+            @Override
+            public void onResponse(int status, String apiContent) {
+                if (status == AppConstants.SUCCESS_CODE) {
+                    try {
+                        JSONArray jo = new JSONArray(apiContent);
+
+                        savenewGov(jo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        );
 
 //            getRequest(OpeningActivity.this, "job", new VolleyApiCallback() {
 //                        @Override
@@ -961,9 +990,9 @@ int countofDb;
         financialServiceNewTable.dropTable();
 
 
-        int legalaidServiceProviderCount = financial.length();
+        int financialProviderCount = financial.length();
 
-        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+        for (int i = 0; i < financialProviderCount; i++) {
             try {
                 JSONObject jo = financial.getJSONObject(i);
                 FinancialNewItem et = FinancialNewItem.parseFinancialMapInfoItem(jo);
