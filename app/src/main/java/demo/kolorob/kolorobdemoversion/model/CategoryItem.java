@@ -59,7 +59,7 @@ public class CategoryItem implements Serializable{
     }
 
     public static CategoryItem parseCategoryItem(JSONObject jo) throws JSONException {
-        int id = jo.getInt("category_id");
+        int id = jo.getInt("id");
         String name = jo.getString("name");
         boolean isActive = jo.getBoolean("active");
 

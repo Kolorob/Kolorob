@@ -309,7 +309,7 @@ int countofDb;
 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
-          getRequest(OpeningActivity.this, "get_categories", new VolleyApiCallback() {
+          getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
                        @Override
                       public void onResponse(int status, String apiContent) {
                            if (status == AppConstants.SUCCESS_CODE) {
