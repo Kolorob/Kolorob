@@ -8,18 +8,28 @@ import org.json.JSONObject;
  */
 public class FinancialServiceDetailsItem {
     private int finId;
-
+    private int serviceproviderId;
     private String servicecost;
     private String serviceremark;
     private String servicetype;
     private String servicesubtype;
 
-    public FinancialServiceDetailsItem(int finId, String servicecost, String serviceremark, String servicetype, String servicesubtype) {
+    public FinancialServiceDetailsItem(int finId, int serviceproviderId, String servicecost, String serviceremark,
+                                       String servicetype, String servicesubtype) {
         this.finId = finId;
+        this.serviceproviderId = serviceproviderId;
         this.servicecost = servicecost;
         this.serviceremark = serviceremark;
         this.servicetype = servicetype;
         this.servicesubtype = servicesubtype;
+    }
+
+    public int getServiceproviderId() {
+        return serviceproviderId;
+    }
+
+    public void setServiceproviderId(int serviceproviderId) {
+        this.serviceproviderId = serviceproviderId;
     }
 
     public int getFinId() {
@@ -64,12 +74,12 @@ public class FinancialServiceDetailsItem {
 
     public static FinancialServiceDetailsItem parseFinancialServiceDetailsItem(JSONObject jo) throws JSONException {
         int _finId = jo.getInt("id");
-
+        int _sproviderid = jo.getInt("_service_provider");
         String _servicecost = jo.getString("financial_cost");
         String _serviceremark = jo.getString("financial_remarks");
         String _servicetype = jo.getJSONObject("financial_services").getString("type");
         String _servicesubtype = jo.getJSONObject("financial_services").getString("sub_type");
-        return new FinancialServiceDetailsItem(_finId,
+        return new FinancialServiceDetailsItem(_finId,_sproviderid,
                  _servicecost,_serviceremark,_servicetype,_servicesubtype);
     }
 }

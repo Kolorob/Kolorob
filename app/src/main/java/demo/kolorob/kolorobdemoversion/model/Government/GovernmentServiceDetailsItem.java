@@ -8,14 +8,18 @@ import org.json.JSONObject;
  */
 public class GovernmentServiceDetailsItem {
     private int finId;
+    private int serviceproviderId;
     private String servicecost;
     private String responsibleperson;
     private String detailstep;
     private String servicetype;
     private String servicesubtype;
 
-    public GovernmentServiceDetailsItem(int finId, String servicecost, String responsibleperson, String detailstep, String servicetype, String servicesubtype) {
+
+    public GovernmentServiceDetailsItem(int finId, int serviceproviderId, String servicecost, String responsibleperson,
+                                        String detailstep, String servicetype, String servicesubtype) {
         this.finId = finId;
+        this.serviceproviderId = serviceproviderId;
         this.servicecost = servicecost;
         this.responsibleperson = responsibleperson;
         this.detailstep = detailstep;
@@ -25,6 +29,14 @@ public class GovernmentServiceDetailsItem {
 
     public int getFinId() {
         return finId;
+    }
+
+    public int getServiceproviderId() {
+        return serviceproviderId;
+    }
+
+    public void setServiceproviderId(int serviceproviderId) {
+        this.serviceproviderId = serviceproviderId;
     }
 
     public void setFinId(int finId) {
@@ -73,13 +85,13 @@ public class GovernmentServiceDetailsItem {
 
     public static GovernmentServiceDetailsItem parseGovernmentServiceDetailsItem(JSONObject jo) throws JSONException {
         int _finId = jo.getInt("id");
-
+        int _sproviderid = jo.getInt("_service_provider");
         String _servicecost = jo.getString("cost");
         String _person = jo.getString("responsible_person");
         String _detail = jo.getString("detail_step");
         String _servicetype = jo.getJSONObject("gov_service").getString("type");
         String _servicesubtype = jo.getJSONObject("gov_service").getString("sub_type");
-        return new GovernmentServiceDetailsItem(_finId,
+        return new GovernmentServiceDetailsItem(_finId,_sproviderid,
                  _servicecost,_person,_detail,_servicetype,_servicesubtype);
     }
 }
