@@ -997,14 +997,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews2;
                // printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
 
-                for (int j = 0; j < printhea.size(); j++) {
+                for (int j = 0; j < RefHealth.size(); j++) {
                     Group group = new Group(RefHealth.get(j));
                     printnameshea = null;
-                    int refId=subCategoryTableNew.getRefId(printhea.get(j));
+                    int refId=subCategoryTableNew.getRefId(RefHealth.get(j));
                     ArrayList<SubCategoryItemNew>subCategoryItemNews;
                    // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
                     //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
-                    printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, printhea.get(j), placeChoice);
+                    printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
                     }
