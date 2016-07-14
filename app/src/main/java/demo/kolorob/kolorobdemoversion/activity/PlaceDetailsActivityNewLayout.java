@@ -1001,7 +1001,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     Group group = new Group(RefHealth.get(j));
                     printnameshea = null;
                     int refId=subCategoryTableNew.getRefId(printhea.get(j));
-                    healthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
+                    ArrayList<SubCategoryItemNew>subCategoryItemNews;
+                   // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
+                    //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
                     printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, printhea.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
