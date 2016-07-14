@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by touhid on 10/30/15.
  * @author touhid
  */
-public class CategoryItem implements Serializable{
+public class CategoryItem implements Serializable,Comparable<CategoryItem>{
     private int id;
     private String catName;
     private boolean catActive;
@@ -59,10 +59,18 @@ public class CategoryItem implements Serializable{
     }
 
     public static CategoryItem parseCategoryItem(JSONObject jo) throws JSONException {
-        int id = jo.getInt("category_id");
+        int id = jo.getInt("id");
         String name = jo.getString("name");
         boolean isActive = jo.getBoolean("active");
 
         return new CategoryItem(id, name, isActive);
+    }
+
+    @Override
+    public int compareTo(CategoryItem another) {
+        int compareQuantity = ((CategoryItem) another).getId();
+
+        //ascending order
+        return this.id - compareQuantity;
     }
 }
