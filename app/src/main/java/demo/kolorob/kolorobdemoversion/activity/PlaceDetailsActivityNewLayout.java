@@ -980,7 +980,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 break;
             case AppConstants.HEALTH:
 
-                SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                //SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
                 String p="Diagonostic Centre";
 
@@ -995,7 +995,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 groups.removeAllElements();
                 RefHealth=subCategoryTableNew.getSubnameedu(1);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews2;
-                printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
+               // printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
 
                 for (int j = 0; j < printhea.size(); j++) {
                     Group group = new Group(RefHealth.get(j));
