@@ -169,8 +169,8 @@ public class SubCategoryTable {
         if (cursor.moveToFirst()) {
             do {
                 String name = cursor.getString(2);
-                int subid=cursor.getInt(1);
-                siList.add(i,name);
+                int subid=cursor.getInt(5);
+                siList.add(subid,name);
                 i++;
             } while (cursor.moveToNext());
         }

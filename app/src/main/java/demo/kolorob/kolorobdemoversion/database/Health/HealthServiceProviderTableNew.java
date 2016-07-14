@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -854,7 +855,21 @@ public class HealthServiceProviderTableNew {
 //        closeDB();
 //        return subCatList;
 //    }
+public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
+    ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
+    SQLiteDatabase db = openDB();
+    Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
 
+    if (cursor.moveToFirst()) {
+        do {
+            System.out.println("abc="+cursor.getString(4));
+            subCatList.add(cursorToSubCatList(cursor));
+        } while (cursor.moveToNext());
+    }
+    cursor.close();
+    closeDB();
+    return subCatList;
+   }
 
 //    public ArrayList<HealthServiceProviderItem> getAllHealthSubCategoriesInfo(int cat_id) {
 //        ArrayList<HealthServiceProviderItem> subCatList = new ArrayList<>();
@@ -890,6 +905,45 @@ public class HealthServiceProviderTableNew {
 //        closeDB();
 //        return subCatList;
 //    }
+
+
+    public ArrayList<HealthServiceProviderItemNew> Heanames(int cat_id,int refId,String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+
+
+        String refids= String.valueOf(refId);
+
+          refids=","+refids+",";
+
+
+
+        ArrayList<HealthServiceProviderItemNew> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" , null);
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
+      //  Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" + "=" +refId);
+//        Toast.makeText(this, +cursor,
+//                Toast.LENGTH_LONG).show();
+
+        String f="SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'";
+        Log.d("hello","===="+f);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
+    }
 
     private HealthServiceProviderItemNew cursorToSubCatList(Cursor cursor) {
         String id= cursor.getString(0);

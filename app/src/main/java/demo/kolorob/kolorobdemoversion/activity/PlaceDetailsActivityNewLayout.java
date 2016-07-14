@@ -84,6 +84,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
@@ -159,7 +160,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItem> printnamesleg;
-    ArrayList<HealthServiceProviderItem> printnameshea;
+    ArrayList<HealthServiceProviderItemNew> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
     ArrayList<String> allData= new ArrayList<>();
     private DrawerLayout drawer;
@@ -981,6 +982,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                String p="Diagonostic Centre";
+
                 currentCategoryID = cat_id;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
                 HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
@@ -991,11 +994,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ArrayList<SubCategoryItemNew> RefHealthx=null;
                 groups.removeAllElements();
                 RefHealth=subCategoryTableNew.getSubnameedu(1);
+                ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews2;
                 printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
+
                 for (int j = 0; j < printhea.size(); j++) {
-                    Group group = new Group(printhea.get(j));
+                    Group group = new Group(RefHealth.get(j));
                     printnameshea = null;
-                    printnameshea = healthServiceProviderTable.Heanames(currentCategoryID, head, printhea.get(j), placeChoice);
+                    int refId=subCategoryTableNew.getRefId(printhea.get(j));
+                    healthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
+                    printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, printhea.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
                     }

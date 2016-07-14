@@ -31,6 +31,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -148,9 +149,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 });
                 break;
             case AppConstants.HEALTH:
-                final HealthServiceProviderItem dethea = groups.get(groupPosition).getChildrenhea().get(childPosition);
+                final HealthServiceProviderItemNew dethea = groups.get(groupPosition).getChildrenhea().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
-                text.setText(dethea.getNameBn());
+                text.setText(dethea.getNode_name());
                 linearLayout.setBackgroundResource(R.color.health_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override

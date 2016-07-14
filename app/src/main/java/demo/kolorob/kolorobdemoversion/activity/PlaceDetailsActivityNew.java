@@ -833,9 +833,9 @@ public class PlaceDetailsActivityNew extends AppCompatActivity implements View.O
                 for (int j = 0; j < printhea.size(); j++) {
                     Group group = new Group(printhea.get(j));
                     printnameshea = null;
-                    printnameshea = healthServiceProviderTable.Heanames(currentCategoryID, head, printhea.get(j), placeChoice);
+                 //   printnameshea = healthServiceProviderTable.Heanames(currentCategoryID, head, printhea.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
-                        group.childrenhea.add(i,printnameshea .get(i));
+                  //      group.childrenhea.add(i,printnameshea .get(i));
                     }
                     groups.add(j, group);
                 }
