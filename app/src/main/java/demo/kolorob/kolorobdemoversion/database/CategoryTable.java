@@ -131,6 +131,7 @@ public class CategoryTable {
 
         if (cursor.moveToFirst()) {
             do {
+
                 ciList.add(cursorToCategory(cursor));
             } while (cursor.moveToNext());
         }

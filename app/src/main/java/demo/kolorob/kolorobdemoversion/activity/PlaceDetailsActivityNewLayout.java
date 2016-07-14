@@ -69,6 +69,7 @@ import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
@@ -80,6 +81,7 @@ import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -178,7 +180,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     }
 
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
-    public static int currentCategoryID;
+    public static int currentCategoryID,currentCategoryIDconverted;
     private  ViewGroup.LayoutParams kk;
     Vector<Group> groups = new Vector<Group>();
     TextView header;
@@ -188,6 +190,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ImageButton expandableListShowing,more,MapButton,ListButton,SearchButton,CompareButton;
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
+    ArrayList<CategoryItem> categoryList2=new ArrayList<>();
     Boolean SearchClicked=false,MapClicked=false,ListClicked=false,CompareClicked=false;
     private Context con;
     public RelativeLayout getRlSubCatHolder() {
@@ -541,7 +544,46 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
          **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNewLayout.this);
         categoryList=categoryTable.getAllCategories();
-        constructCategoryList(categoryList);
+        categoryList2=categoryList;
+        for(int i=0;i<categoryList2.size();i++)
+        {
+
+            int cid=categoryList2.get(i).getId();
+
+            if (cid==1)
+            {
+                categoryList2.get(i).setId(2);
+            }
+            else   if (cid==53)
+            {
+               categoryList2.get(i).setId(7);
+            }
+          else   if (cid==5)
+            {
+                categoryList2.get(i).setId(1);
+            }
+            else   if (cid==14)
+            {
+                categoryList2.get(i).setId(3);
+            }
+            else  if (cid==29)
+            {
+                categoryList2.get(i).setId(5);
+            }
+            else  if (cid==11)
+            {
+                categoryList2.get(i).setId(6);
+            }
+            else  if (cid==33)
+            {
+                categoryList2.get(i).setId(4);
+            }
+
+
+
+        }
+        categoryList2.size();
+        constructCategoryList(categoryList2);
         //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
@@ -1251,13 +1293,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-    private void constructCategoryList(ArrayList<CategoryItem> categoryList) {
-        constructCategoryList(categoryList, 1.0);
+    private void constructCategoryList(ArrayList<CategoryItem> categoryList2) {
+        constructCategoryList(categoryList2, 1.0);
     }
 
-    private void constructCategoryList(ArrayList<CategoryItem> categoryList, double dwPercentage) {
+    private void constructCategoryList(ArrayList<CategoryItem> categoryList2, double dwPercentage) {
         llCatListHolder.removeAllViews();
-        for ( CategoryItem ci : categoryList) {
+        Collections.sort(categoryList2);
+        for ( CategoryItem ci : categoryList2) {
             setCi(ci);
             llCatListHolder.addView(getCategoryListItemView(ci, dwPercentage));
 
@@ -1315,6 +1358,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 clicked.clear();
                 Headerholder.clear();
                 currentCategoryID = ci.getId();
+
                 for(int i= 0; i < llCatListHolder.getChildCount(); i++){
                     ImageView iv = (ImageView) ((ViewGroup)llCatListHolder.getChildAt(i)).getChildAt(0);
 
@@ -1367,8 +1411,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                             llSubCatListHolder.setVisibility(View.GONE);
 
-                            ArrayList<EducationServiceProviderItem> educationServiceProvider;
-                            educationServiceProvider = constructEducationListItem(ci.getId());
+                            ArrayList<EducationNewItem> educationServiceProvider;
+                            educationServiceProvider = constructEducationListItem();
                             ivIcon.setImageResource(R.drawable.education_selected);
                             callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
 
@@ -1886,7 +1930,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
+                       // callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
@@ -2110,11 +2154,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /*********************************************************methods for education**********************************************/
 
-    private ArrayList<EducationServiceProviderItem> constructEducationListItem(int cat_id)
+    private ArrayList<EducationNewItem> constructEducationListItem()
     {
-        ArrayList<EducationServiceProviderItem> educationServiceProvider;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfo(cat_id);
+        ArrayList<EducationNewItem> educationServiceProvider;
+        EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo();
         return educationServiceProvider;
     }
 
@@ -2126,7 +2170,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return educationServiceProvider;
     }
 
-    private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationServiceProviderItem> educationServiceProviderItems)
+    private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2150,8 +2194,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
           if(educlicked){
               //educlicked=false;
               mapFragment.setCategoryId(1);
-              ArrayList<EducationServiceProviderItem> educationServiceProviderItems;
-              educationServiceProviderItems = constructEducationListItem(1);
+              ArrayList<EducationNewItem> educationServiceProviderItems;
+              educationServiceProviderItems = constructEducationListItem();
              mapFragment.setEducationServiceProvider(educationServiceProviderItems);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

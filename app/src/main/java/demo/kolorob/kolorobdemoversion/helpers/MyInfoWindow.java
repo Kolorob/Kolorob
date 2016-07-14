@@ -34,6 +34,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  */
 public class MyInfoWindow extends InfoWindow {
     String titlemarker,contact2,node,address;
+    int n;
     EducationServiceProviderItem nulledu;
     HealthServiceProviderItem nullhel;
     EntertainmentServiceProviderItem nullent;
@@ -49,6 +50,16 @@ public class MyInfoWindow extends InfoWindow {
         this.titlemarker=title;
         this.contact2=contact;
         this.node=Node;
+        this.catid=categoryid;
+        this.address=add;
+    }
+    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add) {
+        super(layoutResId, mapView);
+        this.con=con;
+        this.pp=point;
+        this.titlemarker=title;
+        this.contact2=contact;
+        this.n=Node;
         this.catid=categoryid;
         this.address=add;
     }

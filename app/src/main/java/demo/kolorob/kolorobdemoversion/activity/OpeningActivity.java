@@ -315,10 +315,10 @@ int countofDb;
                            if (status == AppConstants.SUCCESS_CODE) {
 
                                 try {
-                                    JSONObject jo = new JSONObject(apiContent);
-                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                        saveCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
+
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    saveCategoryList(jo);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                }
