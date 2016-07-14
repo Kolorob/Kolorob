@@ -215,7 +215,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         ups_text=(TextView)findViewById(R.id.ups_text);
         ups_text.setTextSize(width/25);
-        ups_text.setText(educationServiceProviderItem.getEduNameBan());
+      //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = height/20;
@@ -223,62 +223,6 @@ public class DetailsInfoActivityHealthNew extends Activity {
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0,0,width/30,0);
         Log.d("width","===="+width);
-
-
-        if(educationServiceProviderItem.getTotalStudents()!=0)
-        {
-            totalStudents.setVisibility(View.VISIBLE);
-            totalStudents.setText(" মোট ছাত্র সংখ্যা: "+English_to_bengali_number_conversion(String.valueOf(educationServiceProviderItem.getTotalStudents()))+ " জন");
-        }
-        if(educationServiceProviderItem.getTotalClasses()!=0)
-        {
-            totalClasses.setVisibility(View.VISIBLE);
-            totalClasses.setText(" মোট শ্রেণি সংখ্যা: "+English_to_bengali_number_conversion(String.valueOf(educationServiceProviderItem.getTotalClasses()))+ " টি");
-        }
-
-        if(educationServiceProviderItem.getTotalTeachers()!=0)
-        {
-            totalTeachers.setVisibility(View.VISIBLE);
-            totalTeachers.setText(" মোট শিক্ষক সংখ্যা: "+English_to_bengali_number_conversion(String.valueOf(educationServiceProviderItem.getTotalTeachers()))+ " জন");
-        }
-
-        if(!educationServiceProviderItem.getPlayground().equals(""))
-        {
-            playground.setVisibility(View.VISIBLE);
-            playground.setText(" খেলার মাঠ: "+educationServiceProviderItem.getPlayground());
-        }
-
-        if(!educationServiceProviderItem.getHostelFacility().equals(""))
-        {
-            hostel.setVisibility(View.VISIBLE);
-            hostel.setText(" আবাসন/হোস্টেল সুবিধা : "+educationServiceProviderItem.getHostelFacility());
-        }
-
-        if(!educationServiceProviderItem.getHostelFacility().equals(""))
-        {
-            transport.setVisibility(View.VISIBLE);
-            transport.setText(" যাতায়াত সুবিধা: "+educationServiceProviderItem.getHostelFacility());
-        }
-
-        result_concate="";
-
-
-        if(!educationServiceProviderItem.getRoad().equals(""))
-            concateBasic("রাস্তা: ", educationServiceProviderItem.getRoad());
-
-        if(!educationServiceProviderItem.getBlock().equals(""))
-            concateBasic("ব্লক: ",educationServiceProviderItem.getBlock());
-
-
-
-        if(!educationServiceProviderItem.getAddress().equals(""))
-            concateBasic("",educationServiceProviderItem.getAddress());
-
-
-        if(!educationServiceProviderItem.getLandmark().equals(""))
-            concateBasic(educationServiceProviderItem.getLandmark(), "  এর নিকটে");
-
-        Log.d("===","final Address"+result_concate);
 
 
 
@@ -512,44 +456,44 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
             Helpes.getListViewSize(courseListView);
 
-            right_image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(educationServiceProviderItem.getEmailAddress().equals(""))
-                    {
-                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                                "ই মেইল আই ডি পাওয়া যায়নি");
-                    }
-                }
-            });
-
-            phone_mid.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                    if(!educationServiceProviderItem.getContactNo().equals(""))
-                    {
-                        callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
-                        if(checkPermission())
-                            startActivity(callIntent1);
-                        else{
-                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                    "ফোন নম্বর পাওয়া যায়নি");
-                            Toast.makeText(getApplicationContext(),
-                                    "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    }
-                    else {
-
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
-                        Toast.makeText(getApplicationContext(),
-                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                                .show();
-                    }
-                }
-            });
+//            right_image.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if(educationServiceProviderItem.getEmailAddress().equals(""))
+//                    {
+//                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+//                                "ই মেইল আই ডি পাওয়া যায়নি");
+//                    }
+//                }
+//            });
+//
+//            phone_mid.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+//                    if(!educationServiceProviderItem.getContactNo().equals(""))
+//                    {
+//                        callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
+//                        if(checkPermission())
+//                            startActivity(callIntent1);
+//                        else{
+//                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+//                                    "ফোন নম্বর পাওয়া যায়নি");
+//                            Toast.makeText(getApplicationContext(),
+//                                    "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+//                                    .show();
+//                        }
+//                    }
+//                    else {
+//
+//                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+//                                "ফোন নম্বর পাওয়া যায়নি");
+//                        Toast.makeText(getApplicationContext(),
+//                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+//                                .show();
+//                    }
+//                }
+//            });
 
 
 
