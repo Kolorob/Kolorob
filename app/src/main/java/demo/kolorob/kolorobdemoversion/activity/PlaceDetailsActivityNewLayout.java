@@ -968,7 +968,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 for (int j = 0; j < printent.size(); j++) {
                     Group group = new Group(printent.get(j));
                     printnamesent = null;
+
                     printnamesent = entertainmentServiceProviderTable.Entnames(currentCategoryID, head, printent.get(j), placeChoice);
+
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
                     }
