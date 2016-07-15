@@ -24,32 +24,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/health_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/education"/>
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/top_logo"
+                    android:background="@drawable/health"/>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="40dp"></LinearLayout>
+                android:layout_height="wrap_content"></LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
-                android:gravity="center_vertical|right"
-                android:layout_height="40dp">
+                android:gravity="right"
+                android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/cross"/>
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/cross_jb"
+                    android:background="@drawable/cross_jb"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -57,13 +63,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/health_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.2"
+                android:layout_weight="0.25"
                 android:gravity="center"
+                android:id="@+id/service_icon_layout"
                 android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="50dp"
@@ -76,14 +83,14 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_weight="0.9"
+                android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/education_color"
+                android:background="@color/health_color"
                 android:layout_height="wrap_content">
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/upperText"
                     android:orientation="vertical"
@@ -92,23 +99,37 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="বাউনিয়াবাদ আইডিয়াল হাই স্কুল "
-                        android:textSize="18dp"
-                        android:layout_marginLeft="10dp"
+                        android:text="ব্র্যাক ডেলিভারি সেন্টার"
+                        android:textSize="18sp"
                         android:textColor="@color/white"
 
                         android:id="@+id/ups_text"
 
                         />
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="?android:attr/ratingBarStyleIndicator"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="29sp"
+                            android:text="Rating: "/>
+                        <RatingBar
+                            android:id="@+id/ratingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="?android:attr/ratingBarStyleIndicator"
 
-                        android:numStars="5"
-                        android:stepSize="0"
-                        android:rating="2.3" />
+                            android:numStars="5"
+                            android:stepSize="0"
+                            android:rating="2.3" />
+
+                    </LinearLayout>
+
+
 
 
 
@@ -147,7 +168,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="0.3"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/middle_phone"
                         android:orientation="vertical"
                         android:gravity="center">
@@ -173,12 +194,12 @@
                         android:orientation="vertical"
                         android:id="@+id/right_email"
 
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:id="@+id/right_side_email"
                             android:background="@drawable/email_icon"/>
 
@@ -577,8 +598,8 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
 
-        android:layout_height="60dp"
-        android:background="@color/education_color"
+        android:layout_height="wrap_content"
+        android:background="@color/health_color"
         android:id="@+id/bottom_bar"
 
         android:gravity="center_vertical">
@@ -607,11 +628,15 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|right">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
 
                 android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"

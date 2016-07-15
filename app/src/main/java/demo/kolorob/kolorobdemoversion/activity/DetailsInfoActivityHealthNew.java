@@ -82,7 +82,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button,phone_mid,distance_left,feedback;
+    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
@@ -134,7 +134,11 @@ public class DetailsInfoActivityHealthNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         // close_button=(ImageView)findViewById(R.id.close_button);
-        phone_mid = (ImageView) findViewById(R.id.phone_middl);
+
+        top_logo=(ImageView)findViewById(R.id.top_logo);
+        cross=(ImageView)findViewById(R.id.cross_jb);
+
+
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
@@ -175,10 +179,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         upperHand.setLayoutParams(params2);
 
 
-        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        // int  vd=params_upperText.height = height/24;
-        // params_upperText.width = width;
-        upperText.setLayoutParams(params_upperText);
+//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+//        // int  vd=params_upperText.height = height/24;
+//        // params_upperText.width = width;
+//        upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;
@@ -186,23 +190,33 @@ public class DetailsInfoActivityHealthNew extends Activity {
         left_way.setLayoutParams(params_left_way);
 
 
-        left_image.getLayoutParams().height = (lett_img * 2) / 3;
-        left_image.getLayoutParams().width = right_img / 2;
-        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
-        int vcc = params_bottom_bar.height = height / 15;
-        params_bottom_bar.width = width;
-        bottom_bar.setLayoutParams(params_bottom_bar);
+
+
+        top_logo.getLayoutParams().height=width/8;
+        top_logo.getLayoutParams().width=width/8;
+
+        middle_image.getLayoutParams().height=width/8;
+        middle_image.getLayoutParams().width=width/8;
+
+        cross.getLayoutParams().height=width/13;
+        cross.getLayoutParams().width=width/13;
+
+        right_image.getLayoutParams().height = width/8;
+        right_image.getLayoutParams().width = width/8;
+
+        left_image.getLayoutParams().height =  width/8;
+        left_image.getLayoutParams().width =  width/8;
+
+
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int vx = params_middle_phone.height = (height * 3) / 24;
         params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
 
-        middle_image.getLayoutParams().height = (lett_img * 2) / 3;
-        middle_image.getLayoutParams().width = right_img / 2;
 
-        right_image.getLayoutParams().height = (lett_img * 2) / 3;
-        right_image.getLayoutParams().width = right_img / 2;
+
+
 
         LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
         int vc = params_right_email.height = (height * 3) / 24;
@@ -214,8 +228,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = height / 20;
-        feedbacks.width = height / 20;
+        feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
         Log.d("width", "====" + width);
