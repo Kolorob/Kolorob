@@ -75,6 +75,7 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/service_logo"
                     android:background="@drawable/school_logo_default"/>
 
             </LinearLayout>
