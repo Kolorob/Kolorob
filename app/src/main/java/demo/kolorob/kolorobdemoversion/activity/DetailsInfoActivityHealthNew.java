@@ -82,6 +82,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
+    private TextView ratingText;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
@@ -133,6 +134,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         playground = (TextView) findViewById(R.id.tv_playground);
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
+        ratingText=(TextView)findViewById(R.id.ratingText);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -228,6 +230,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
+        ratingText.setTextSize(width / 25);
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
