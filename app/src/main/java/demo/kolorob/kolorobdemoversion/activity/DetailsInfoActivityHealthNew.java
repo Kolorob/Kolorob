@@ -106,7 +106,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         if (null != intent) {
             healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
-
+            Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
@@ -600,14 +600,17 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //
 
 
-    private String concateBasic(String value1,String value2){
+    private void CheckConcate(String value1,String value2){
 
-        String value= value1+value2;
-        result_concate= result_concate+value + "\n";
+
+        if(!value1.equals("")) {
+            String value = value1 + value2;
+            result_concate = result_concate + value + "\n";
+        }
 
         Log.d("....>>>", "Values   " + result_concate);
 
 
-        return result_concate;
+
     }
 }

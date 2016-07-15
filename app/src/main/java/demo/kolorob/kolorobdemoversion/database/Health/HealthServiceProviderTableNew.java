@@ -929,8 +929,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
 //        Toast.makeText(this, +cursor,
 //                Toast.LENGTH_LONG).show();
 
-        String f="SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'";
-        Log.d("hello","===="+f);
+
 
         if (cursor.moveToFirst()) {
             do {
