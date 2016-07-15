@@ -93,7 +93,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_info_activity_education);
+        setContentView(R.layout.activity_details_info_activity_health_new);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;

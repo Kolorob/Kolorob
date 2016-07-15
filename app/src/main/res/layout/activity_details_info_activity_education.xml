@@ -33,7 +33,8 @@
                android:layout_height="40dp">
                <ImageView
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content" />
+                   android:layout_height="wrap_content"
+                   android:background="@drawable/education"/>
 
            </LinearLayout>
             <LinearLayout
@@ -43,7 +44,15 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
-                android:layout_height="40dp"></LinearLayout>
+                android:layout_height="40dp"
+                android:gravity="center_vertical|right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cross"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -85,7 +94,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="বাউনিয়াবাদ আইডিয়াল হাই স্কুল "
+                        android:text="ব্র্যাক ডেলিভারি সেন্টার "
                         android:textSize="18dp"
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/white"
