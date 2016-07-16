@@ -83,6 +83,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText;
+    private TextView serviceDetails;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
@@ -106,7 +107,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         if (null != intent) {
             healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
-            Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
+           // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
@@ -135,6 +136,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
+        serviceDetails=(TextView)findViewById(R.id.serviceDetails);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -147,6 +149,23 @@ public class DetailsInfoActivityHealthNew extends Activity {
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
+
+
+        CheckConcate("প্রতিস্টানের ধরন",healthServiceProviderItemNew.getInstitute_type());
+        CheckConcate("ধারন ক্ষমতা",healthServiceProviderItemNew.getCapacity());
+        CheckConcate("পুরুষ ডাক্তার",healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("মহিলা ডাক্তার",healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("রোগী এবং ডাক্তারের অনুপাত",healthServiceProviderItemNew.getPatient_doctor_ratio());
+        CheckConcate("পুরুষ ডাক্তার",healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("মহিলা ডাক্তার",healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("রোগী নার্সের অনুপাত",healthServiceProviderItemNew.getPatient_nurse_ratio());
+        CheckConcate("পরিচিত স্থান",healthServiceProviderItemNew.getLandmark());
+        CheckConcate("প্রতিস্টানের ধরন",healthServiceProviderItemNew.getInstitute_type());
+
+
+
+        serviceDetails.setText(result_concate);
+
 
 
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -603,12 +622,13 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private void CheckConcate(String value1,String value2){
 
 
-        if(!value1.equals("")) {
+        if(!value2.equals("null")||!value2.equals("")) {
+            Log.d("=======", "value2   " + value2);
             String value = value1 + value2;
             result_concate = result_concate + value + "\n";
         }
 
-        Log.d("....>>>", "Values   " + result_concate);
+
 
 
 
