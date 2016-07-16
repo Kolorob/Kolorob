@@ -137,10 +137,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
         serviceDetails=(TextView)findViewById(R.id.serviceDetails);
-        // close_button=(ImageView)findViewById(R.id.close_button);
+         close_button=(ImageView)findViewById(R.id.close_buttonc);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
-        cross=(ImageView)findViewById(R.id.cross_jb);
+        //cross=(ImageView)findViewById(R.id.cross_jb);
         school_logo_default=(ImageView)findViewById(R.id.service_logo);
 
 
@@ -178,6 +178,12 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         serviceDetails.setText(result_concate);
 
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -232,8 +238,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         middle_image.getLayoutParams().height=width/8;
         middle_image.getLayoutParams().width=width/8;
 
-        cross.getLayoutParams().height=width/13;
-        cross.getLayoutParams().width=width/13;
+        close_button.getLayoutParams().height=width/13;
+        close_button.getLayoutParams().width=width/13;
 
         right_image.getLayoutParams().height = width/8;
         right_image.getLayoutParams().width = width/8;
@@ -331,12 +337,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 //        }
 
-//        close_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+
 
 
 //        distance_left.setOnClickListener(new View.OnClickListener() {

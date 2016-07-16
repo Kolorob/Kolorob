@@ -54,7 +54,7 @@
                     android:layout_height="50dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/cross_jb"
+                    android:id="@+id/close_buttonc"
                     android:background="@drawable/cross_jb"/>
             </LinearLayout>
 
