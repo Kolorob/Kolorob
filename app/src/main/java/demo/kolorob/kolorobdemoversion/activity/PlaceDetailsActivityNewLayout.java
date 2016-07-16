@@ -763,7 +763,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
-                Log.d("====", "CategoryId" + currentCategoryID);
+
                 categoryListBuildUp(1);
 
 //                else
@@ -784,67 +784,79 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchClicked=false;
-                MapClicked=false;
-                ListClicked=false;
-                CompareClicked=true;
-                if(MapClicked==false||SearchClicked==false||ListClicked==false)
+                Log.d("====", "CategoryId at compare" + currentCategoryID);
+
+                if(currentCategoryID==1||currentCategoryID==2)
                 {
+                    SearchClicked=false;
+                    MapClicked=false;
+                    ListClicked=false;
+                    CompareClicked=true;
 
-                    params4.height=larg;
-                    CompareButton.setLayoutParams(params4);
+                    if(MapClicked==false||SearchClicked==false||ListClicked==false)
+                    {
 
-                    params2.height=smal;
-                    SearchButton.setLayoutParams(params2);
-                    params.height=smal;
-                    MapButton.setLayoutParams(params);
-                    params.height=smal;
-                    ListButton.setLayoutParams(params);
+                        params4.height=larg;
+                        CompareButton.setLayoutParams(params4);
+
+                        params2.height=smal;
+                        SearchButton.setLayoutParams(params2);
+                        params.height=smal;
+                        MapButton.setLayoutParams(params);
+                        params.height=smal;
+                        ListButton.setLayoutParams(params);
 
 
-                }
-                if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
-                {
-                    AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                            "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
-                }
-                else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
-                {
-                   AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                            "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
-                }
-                else {
-                    SearchButton.setImageResource(0);
-                    MapButton.setImageResource(0);
-                    CompareButton.setImageResource(0);
-                    ListButton.setImageResource(0);
-                    SearchButton.setBackgroundResource(R.drawable.search);
-                    ListButton.setBackgroundResource(R.drawable.list);
-                    MapButton.setBackgroundResource(R.drawable.map);
-                    CompareButton.setBackgroundResource(R.drawable.compare_selected);
-                    compare_layout.setVisibility(View.VISIBLE);
-
-                    // @@@@arafat
-                    // need to add condition for health and add color code for health,
-                    // else educaton color code is okay
-                    if(SearchClicked){
-                        compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
-                    }else{
-                        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
                     }
+                    if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                    {
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                    }
+                    else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    {
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                    }
+                    else {
+                        SearchButton.setImageResource(0);
+                        MapButton.setImageResource(0);
+                        CompareButton.setImageResource(0);
+                        ListButton.setImageResource(0);
+                        SearchButton.setBackgroundResource(R.drawable.search);
+                        ListButton.setBackgroundResource(R.drawable.list);
+                        MapButton.setBackgroundResource(R.drawable.map);
+                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
+                        compare_layout.setVisibility(View.VISIBLE);
 
-                    map.setVisibility(View.GONE);
-                    llCatListHolder.setVisibility(View.GONE);
-                    subCatItemList.setVisibility(View.GONE);
-                    explist.setVisibility(View.GONE);
-                    searchviewholder.setVisibility(View.GONE);
-                    svs.setVisibility(View.GONE);
-                    sv.setVisibility(View.GONE);
-                    svholder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
-                    compareTool();
-                    llSubCatListHolder.setVisibility(View.GONE);
+                        // @@@@arafat
+                        // need to add condition for health and add color code for health,
+                        // else educaton color code is okay
+                        if(SearchClicked){
+                            compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
+                        }else{
+                            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+                        }
+
+                        map.setVisibility(View.GONE);
+                        llCatListHolder.setVisibility(View.GONE);
+                        subCatItemList.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
+                        searchviewholder.setVisibility(View.GONE);
+                        svs.setVisibility(View.GONE);
+                        sv.setVisibility(View.GONE);
+                        svholder.setVisibility(View.GONE);
+                        svsholder.setVisibility(View.GONE);
+                        compareTool();
+                        llSubCatListHolder.setVisibility(View.GONE);
+                    }
                 }
+
+                else
+                    AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "বর্তমান ক্যাটাগরির জন্য তুলনা সম্ভব নয়");
+
+
 
             }
         });

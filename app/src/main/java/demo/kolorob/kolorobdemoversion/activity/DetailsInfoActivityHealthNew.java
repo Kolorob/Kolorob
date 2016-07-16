@@ -190,20 +190,21 @@ public class DetailsInfoActivityHealthNew extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int compareValue;
-                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
+                compareValue= SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
                 if(compareValue>=2)
                     AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
                             "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
                 else if (compareValue==0)
                 {
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getIdentifierId(),1);
+                    Log.d("compareValue", "====" + compareValue);
+                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getId(),1);
                 }
 
                 else if(compareValue==1)
                 {
                     String previous_node;
                     previous_node=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
+                    previous_node= previous_node+" "+healthServiceProviderItemNew.getId();
                     SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,previous_node,2);
                 }
 
@@ -275,7 +276,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
-        Log.d("width", "====" + width);
+
 
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
@@ -636,7 +637,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         String timeInBengali="";
 
         String[] separated = time.split(":");
-        Log.d("=======", "value2   " + separated);
+
 
 
 
