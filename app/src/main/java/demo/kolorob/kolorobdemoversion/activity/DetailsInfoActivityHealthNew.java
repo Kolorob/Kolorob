@@ -88,7 +88,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
-    String result_concate;
+    String result_concate="";
     private CheckBox checkBox;
 
 
@@ -160,8 +160,18 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("মহিলা ডাক্তার",healthServiceProviderItemNew.getFemale_doctors());
         CheckConcate("রোগী নার্সের অনুপাত",healthServiceProviderItemNew.getPatient_nurse_ratio());
         CheckConcate("পরিচিত স্থান",healthServiceProviderItemNew.getLandmark());
-        CheckConcate("প্রতিস্টানের ধরন",healthServiceProviderItemNew.getInstitute_type());
-
+        CheckConcate("ব্লক",healthServiceProviderItemNew.getAddress());
+        CheckConcate("ফ্লোর",healthServiceProviderItemNew.getFloor());
+        CheckConcate("বাড়ির নাম",healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("রাস্তা",healthServiceProviderItemNew.getRoad());
+        CheckConcate("লাইন ",healthServiceProviderItemNew.getLine());
+        CheckConcate("এভিনিউ",healthServiceProviderItemNew.getAvenue());
+        CheckConcate("পোস্ট অফিস",healthServiceProviderItemNew.getPost_office());
+        CheckConcate("পুলিশ স্টেশন",healthServiceProviderItemNew.getPolice_station());
+        CheckConcate("খোলার সময়",healthServiceProviderItemNew.getOpening_time());
+        CheckConcate("বিরতির সময়",healthServiceProviderItemNew.getBreak_time());
+        CheckConcate("বন্ধের সময়",healthServiceProviderItemNew.getClosing_time());
+        CheckConcate("ছুটির দিন",healthServiceProviderItemNew.getOff_day());
 
 
         serviceDetails.setText(result_concate);
@@ -250,7 +260,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
-        //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
+        ups_text.setText(healthServiceProviderItemNew.getNode_bn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -622,9 +632,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private void CheckConcate(String value1,String value2){
 
 
-        if(!value2.equals("null")||!value2.equals("")) {
+        if(!value2.equals("null")||value2.equals("")) {
             Log.d("=======", "value2   " + value2);
-            String value = value1 + value2;
+            String value ="      "+ value1 +":  "+ value2;
             result_concate = result_concate + value + "\n";
         }
 
