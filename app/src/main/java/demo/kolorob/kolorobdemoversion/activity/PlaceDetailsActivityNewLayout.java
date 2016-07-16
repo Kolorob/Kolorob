@@ -142,7 +142,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String firstData="",SecondData="";
     int checker=0;
     private Button prebutton;
-
+    private HealthServiceProviderTableNew healthServiceProviderTableNew;
     private int sideIndexHeight;
     private LinearLayout compare_layout;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -793,29 +793,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     ListClicked=false;
                     CompareClicked=true;
 
-                    if(MapClicked==false||SearchClicked==false||ListClicked==false)
-                    {
 
-                        params4.height=larg;
-                        CompareButton.setLayoutParams(params4);
-
-                        params2.height=smal;
-                        SearchButton.setLayoutParams(params2);
-                        params.height=smal;
-                        MapButton.setLayoutParams(params);
-                        params.height=smal;
-                        ListButton.setLayoutParams(params);
-                        SearchButton.setImageResource(0);
-                        MapButton.setImageResource(0);
-                        CompareButton.setImageResource(0);
-                        ListButton.setImageResource(0);
-                        SearchButton.setBackgroundResource(R.drawable.search);
-                        ListButton.setBackgroundResource(R.drawable.list);
-                        MapButton.setBackgroundResource(R.drawable.map);
-                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
-
-
-                    }
                     if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
@@ -827,7 +805,26 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                     }
                     else {
+                        if(MapClicked==false||SearchClicked==false||ListClicked==false)
+                        {
 
+                            params4.height=larg;
+                            CompareButton.setLayoutParams(params4);
+
+                            params2.height=smal;
+                            SearchButton.setLayoutParams(params2);
+                            params.height=smal;
+                            MapButton.setLayoutParams(params);
+                            params.height=smal;
+                            ListButton.setLayoutParams(params);
+                            SearchButton.setImageResource(0);
+                            MapButton.setImageResource(0);
+                            CompareButton.setImageResource(0);
+                            ListButton.setImageResource(0);
+
+
+
+                        }
 
                         compare_layout.setVisibility(View.VISIBLE);
 
@@ -839,7 +836,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }else{
                             compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
                         }
-
+                        SearchButton.setBackgroundResource(R.drawable.search);
+                        ListButton.setBackgroundResource(R.drawable.list);
+                        MapButton.setBackgroundResource(R.drawable.map);
+                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
                         map.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.GONE);
                         subCatItemList.setVisibility(View.GONE);
@@ -849,8 +849,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         sv.setVisibility(View.GONE);
                         svholder.setVisibility(View.GONE);
                         svsholder.setVisibility(View.GONE);
-                        compareTool();
                         llSubCatListHolder.setVisibility(View.GONE);
+                        compareTool();
                     }
                 }
 
@@ -900,7 +900,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void compareTool()
     {
 
-        comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+        if(currentCategoryID==1)
+            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+        else
+            comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
 
         int size=comapreData.length();
         for(int i=0;i<size;i++)
@@ -919,8 +922,29 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 firstData=firstData+comapreData.charAt(i);
             Log.d("===","firstData" +firstData);
         }
+        if(currentCategoryID==1)
+            compareEducation();
+        else
+            compareHealth();
 
 
+
+
+
+
+
+
+    }
+
+
+    public void compareHealth()
+    {
+        healthServiceProviderTableNew=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+    }
+
+
+    public void compareEducation()
+    {
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
         firstDataSet=educationServiceProviderTable.getEducationData(firstData);
         secondDataSet=educationServiceProviderTable.getEducationData(SecondData);
@@ -956,12 +980,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         }
 
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
-
-
-
-
-
     }
+
     public void populateSearch()
     {
 
