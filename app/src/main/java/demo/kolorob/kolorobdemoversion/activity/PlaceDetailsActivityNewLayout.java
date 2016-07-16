@@ -805,6 +805,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         MapButton.setLayoutParams(params);
                         params.height=smal;
                         ListButton.setLayoutParams(params);
+                        SearchButton.setImageResource(0);
+                        MapButton.setImageResource(0);
+                        CompareButton.setImageResource(0);
+                        ListButton.setImageResource(0);
+                        SearchButton.setBackgroundResource(R.drawable.search);
+                        ListButton.setBackgroundResource(R.drawable.list);
+                        MapButton.setBackgroundResource(R.drawable.map);
+                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
 
 
                     }
@@ -819,14 +827,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                     }
                     else {
-                        SearchButton.setImageResource(0);
-                        MapButton.setImageResource(0);
-                        CompareButton.setImageResource(0);
-                        ListButton.setImageResource(0);
-                        SearchButton.setBackgroundResource(R.drawable.search);
-                        ListButton.setBackgroundResource(R.drawable.list);
-                        MapButton.setBackgroundResource(R.drawable.map);
-                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
+
+
                         compare_layout.setVisibility(View.VISIBLE);
 
                         // @@@@arafat
