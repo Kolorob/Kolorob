@@ -56,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -78,6 +79,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
     ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
     ArrayList<HealthSpecialistItemDetails>healthSpecialistItemDetailses;
+    ArrayList<HealthVaccineItemDetails>healthVaccineItemDetailses;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
@@ -184,6 +186,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
             for(HealthSpecialistItemDetails healthSpecialistItemDetails: healthSpecialistItemDetailses)
             {
                 result_concate="";
+                specialist.setVisibility(View.VISIBLE);
                 CheckConcate("সেবার ধরন",healthSpecialistItemDetails.getSpecialisttype());
                 CheckConcate("ডাক্তারের সংখা",healthSpecialistItemDetails.getSpecialistId());
                 CheckConcate("প্রথম ভিজিট ফি",healthSpecialistItemDetails.getSpecialistfees());
