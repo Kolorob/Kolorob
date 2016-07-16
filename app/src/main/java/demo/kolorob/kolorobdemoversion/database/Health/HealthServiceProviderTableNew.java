@@ -907,7 +907,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
 //        return subCatList;
 //    }
 
-    public ArrayList<HealthServiceProviderItemNew> getEducationData(String node_id) {
+    public ArrayList<HealthServiceProviderItemNew> getHealthData(String node_id) {
         ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();

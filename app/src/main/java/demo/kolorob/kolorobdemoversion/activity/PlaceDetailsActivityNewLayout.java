@@ -109,6 +109,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     EducationServiceProviderTable educationServiceProviderTable;
     ArrayList<EducationServiceProviderItem> firstDataSet;
     ArrayList<EducationServiceProviderItem> secondDataSet;
+    ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
+    ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
     public void setShowList(int showList) {
         this.showList = showList;
     }
@@ -794,17 +796,31 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     CompareClicked=true;
 
 
-                    if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
                     }
-                    else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                   else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==0)
+                {
+                    AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                }
+                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    {
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                    }
+                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                     }
                     else {
+
+
+
+
                         if(MapClicked==false||SearchClicked==false||ListClicked==false)
                         {
 
@@ -939,7 +955,39 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     public void compareHealth()
     {
-        healthServiceProviderTableNew=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+        healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        firstDataSetHealth=healthServiceProviderTableNew.getHealthData(firstData);
+        secondDataSetHealth=healthServiceProviderTableNew.getHealthData(SecondData);
+
+        for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
+        {
+//            edu_name_ban.setText(healthServiceProviderItemNew.getEduNameEng());
+//            edtype.setText(healthServiceProviderItemNew.getEduType());
+//            hostel_facility.setText(healthServiceProviderItemNew.getHostelFacility());
+//            transport_facility.setText(healthServiceProviderItemNew.getTransportFacility());
+//            playground.setText(healthServiceProviderItemNew.getPlayground());
+//            total_students.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
+//            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
+//            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
+//            course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
+//            shift.setText(healthServiceProviderItemNew.getShift());
+//            canteen_facility.setText(healthServiceProviderItemNew.getCanteenFacility());
+        }
+        for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
+        {
+//            edu_name_ban1.setText(healthServiceProviderItemNew.getEduNameEng());
+//            edtype1.setText(healthServiceProviderItemNew.getEduType());
+//            hostel_facility1.setText(healthServiceProviderItemNew.getHostelFacility());
+//            transport_facility1.setText(healthServiceProviderItemNew.getTransportFacility());
+//            playground1.setText(healthServiceProviderItemNew.getPlayground());
+//            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
+//            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
+//            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
+//            course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
+//            shift1.setText(healthServiceProviderItemNew.getShift());
+//            canteen_facility1.setText(healthServiceProviderItemNew.getCanteenFacility());
+        }
+        SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
     }
 
 
