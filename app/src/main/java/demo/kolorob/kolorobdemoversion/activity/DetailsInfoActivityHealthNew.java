@@ -186,31 +186,31 @@ public class DetailsInfoActivityHealthNew extends Activity {
         });
 
 
-//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                int compareValue;
-//                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
-//                if(compareValue>=2)
-//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-//                else if (compareValue==0)
-//                {
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
-//                }
-//
-//                else if(compareValue==1)
-//                {
-//                    String previous_node;
-//                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
-//                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
-//                }
-//
-//
-//            }
-//        });
-//
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int compareValue;
+                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
+                if(compareValue>=2)
+                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+                else if (compareValue==0)
+                {
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityHealthNew.this,educationServiceProviderItem.getIdentifierId(),1);
+                }
+
+                else if(compareValue==1)
+                {
+                    String previous_node;
+                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityHealthNew.this);
+                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityHealthNew.this,previous_node,2);
+                }
+
+
+            }
+        });
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
