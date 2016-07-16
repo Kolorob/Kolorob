@@ -202,7 +202,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         }
-        HealthVaccineTableDetails healthVaccineTableDetails= new HealthVaccineTableDetails(DetailsInfoActivityEntertainmentNew.this);
+        HealthVaccineTableDetails healthVaccineTableDetails= new HealthVaccineTableDetails(DetailsInfoActivityHealthNew.this);
         healthVaccineItemDetailses= healthVaccineTableDetails.getHealthVaccineData(healthServiceProviderItemNew.getId());
         int healthVaccineSize=healthVaccineItemDetailses.size();
         if (healthVaccineSize!=0)
@@ -210,13 +210,14 @@ public class DetailsInfoActivityHealthNew extends Activity {
             health_vaccine.setVisibility(View.VISIBLE);
             result_concate="";
 
-            for ()
-            CheckConcate("সেবার ধরন",healthSpecialistItemDetails.getSpecialisttype());
-            CheckConcate("ডাক্তারের সংখা",healthSpecialistItemDetails.getSpecialistId());
-            CheckConcate("প্রথম ভিজিট ফি",healthSpecialistItemDetails.getSpecialistfees());
-            CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getWeek_fee());
-            CheckConcate("এক মাসের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getMonth_fee());
-            CheckConcate("রিপোর্ট ফি",healthSpecialistItemDetails.getReport_fee());
+            for (HealthVaccineItemDetails healthVaccineItemDetails: healthVaccineItemDetailses)
+            {
+                CheckConcate("সেবার ধরন",healthVaccineItemDetails.getVaccinename());
+                CheckConcate("ডাক্তারের সংখা",healthVaccineItemDetails.getVaccinefee());
+                CheckConcate("প্রথম ভিজিট ফি",healthVaccineItemDetails.getVaccineremarks());
+
+            }
+
         }
 
 
