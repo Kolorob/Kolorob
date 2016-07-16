@@ -168,9 +168,13 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("এভিনিউ",healthServiceProviderItemNew.getAvenue());
         CheckConcate("পোস্ট অফিস",healthServiceProviderItemNew.getPost_office());
         CheckConcate("পুলিশ স্টেশন",healthServiceProviderItemNew.getPolice_station());
-        CheckConcate("খোলার সময়",healthServiceProviderItemNew.getOpening_time());
-        CheckConcate("বিরতির সময়",healthServiceProviderItemNew.getBreak_time());
-        CheckConcate("বন্ধের সময়",healthServiceProviderItemNew.getClosing_time());
+
+        String opening_time=timeConverter(healthServiceProviderItemNew.getOpening_time());
+        String closing_time=timeConverter(healthServiceProviderItemNew.getClosing_time());
+        String break_time=timeConverter(healthServiceProviderItemNew.getBreak_time());
+        CheckConcate("খোলার সময়",opening_time);
+        CheckConcate("বিরতির সময়",break_time);
+        CheckConcate("বন্ধের সময়",closing_time);
         CheckConcate("ছুটির দিন",healthServiceProviderItemNew.getOff_day());
 
 
@@ -583,7 +587,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //        }
   }
 
-    private String English_to_bengali_number_conversion(String english_number) {
+    public String English_to_bengali_number_conversion(String english_number) {
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
@@ -628,12 +632,52 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //
 //
 
+    private String timeConverter(String time)
+    {
+        String timeInBengali="";
+        String first_half="";
+        String second_half="";
+        String timesx= "17:30";
+        String[] separated = timesx.split(":");
+        Log.d("=======", "value2   " + separated);
+
+
+
+
+        int hour= Integer.valueOf(separated[0]);
+        int times= Integer.valueOf(separated[1]);
+
+        if(hour>6&&hour<12)
+            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+       else if(hour==12)
+            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+        else if(hour>12&&hour<16)
+            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+        else if(hour>15&&hour<18)
+            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+        else if(hour>17&&hour<20)
+            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+        else if(hour>20)
+            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+
+
+        return timeInBengali;
+    }
+
+
+    private void timeProcessing(String value1,String value2)
+    {
+        if(!value2.equals("null")||value2.equals("")) {
+           String GetTime= timeConverter(value2);
+
+        }
+    }
 
     private void CheckConcate(String value1,String value2){
 
 
         if(!value2.equals("null")||value2.equals("")) {
-            Log.d("=======", "value2   " + value2);
+
             String value ="      "+ value1 +":  "+ value2;
             result_concate = result_concate + value + "\n";
         }
