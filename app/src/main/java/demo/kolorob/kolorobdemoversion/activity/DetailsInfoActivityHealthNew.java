@@ -55,6 +55,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -76,6 +77,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     HealthServiceProviderItemNew healthServiceProviderItemNew;
     ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
     ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
+    ArrayList<HealthSpecialistItemDetails>healthSpecialistItemDetailses;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
@@ -83,7 +85,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText;
-    private TextView serviceDetails;
+    private TextView serviceDetails,specialist;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
@@ -138,6 +140,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ratingText=(TextView)findViewById(R.id.ratingText);
         serviceDetails=(TextView)findViewById(R.id.serviceDetails);
          close_button=(ImageView)findViewById(R.id.close_buttonc);
+        specialist = (TextView) findViewById(R.id.specialist);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
@@ -174,6 +177,30 @@ public class DetailsInfoActivityHealthNew extends Activity {
         timeProcessing("বন্ধে সময়",healthServiceProviderItemNew.getClosing_time());
         CheckConcate("বিরতির সময়",healthServiceProviderItemNew.getBreak_time());
         CheckConcate("ছুটির দিন",healthServiceProviderItemNew.getOff_day());
+        healthSpecialistItemDetailses=healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
+        int specialist_size=healthSpecialistItemDetailses.size();
+        if(specialist_size!=0)
+        {
+            for(HealthSpecialistItemDetails healthSpecialistItemDetails: healthSpecialistItemDetailses)
+            {
+                result_concate="";
+                CheckConcate("সেবার ধরন",healthSpecialistItemDetails.getSpecialisttype());
+                CheckConcate("ডাক্তারের সংখা",healthSpecialistItemDetails.getSpecialistId());
+                CheckConcate("প্রথম ভিজিট ফি",healthSpecialistItemDetails.getSpecialistfees());
+                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getWeek_fee());
+                CheckConcate("এক মাসের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getMonth_fee());
+                CheckConcate("রিপোর্ট ফি",healthSpecialistItemDetails.getReport_fee());
+
+                specialist.setText(result_concate);
+
+            }
+
+
+        }
+
+
+
+
 
 
         serviceDetails.setText(result_concate);
