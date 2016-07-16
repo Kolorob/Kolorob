@@ -169,12 +169,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("পোস্ট অফিস",healthServiceProviderItemNew.getPost_office());
         CheckConcate("পুলিশ স্টেশন",healthServiceProviderItemNew.getPolice_station());
 
-        String opening_time=timeConverter(healthServiceProviderItemNew.getOpening_time());
-        String closing_time=timeConverter(healthServiceProviderItemNew.getClosing_time());
-        String break_time=timeConverter(healthServiceProviderItemNew.getBreak_time());
-        CheckConcate("খোলার সময়",opening_time);
-        CheckConcate("বিরতির সময়",break_time);
-        CheckConcate("বন্ধের সময়",closing_time);
+
+        timeProcessing("খোলার সময়",healthServiceProviderItemNew.getOpening_time());
+        timeProcessing("বন্ধে সময়",healthServiceProviderItemNew.getClosing_time());
+        CheckConcate("বিরতির সময়",healthServiceProviderItemNew.getBreak_time());
         CheckConcate("ছুটির দিন",healthServiceProviderItemNew.getOff_day());
 
 
@@ -635,10 +633,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private String timeConverter(String time)
     {
         String timeInBengali="";
-        String first_half="";
-        String second_half="";
-        String timesx= "17:30";
-        String[] separated = timesx.split(":");
+
+        String[] separated = time.split(":");
         Log.d("=======", "value2   " + separated);
 
 
@@ -648,19 +644,21 @@ public class DetailsInfoActivityHealthNew extends Activity {
         int times= Integer.valueOf(separated[1]);
 
         if(hour>6&&hour<12)
-            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour));
        else if(hour==12)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour));
         else if(hour>12&&hour<16)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
         else if(hour>15&&hour<18)
-            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
         else if(hour>17&&hour<20)
-            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
+            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
         else if(hour>20)
-            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12)) + " টা " + English_to_bengali_number_conversion(String.valueOf(times)+ " মিনিট");
-
-
+            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
+        if(times!=0)
+       timeInBengali=timeInBengali+ " টা " + English_to_bengali_number_conversion(String.valueOf(times))+" মিনিট";
+        else
+            timeInBengali=timeInBengali+ " টা";
         return timeInBengali;
     }
 
@@ -669,6 +667,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     {
         if(!value2.equals("null")||value2.equals("")) {
            String GetTime= timeConverter(value2);
+            CheckConcate(value1,GetTime);
 
         }
     }
