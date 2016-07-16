@@ -117,6 +117,21 @@ public final class SharedPreferencesHelper {
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
 				.getInt(SharedPreferencesHelper.COMPARE_2, 0);
 	}
+
+	public static void setCompareDataHealth(final Context ctx, final String node_id,int compare)
+	{
+		final SharedPreferences prefs = ctx.getSharedPreferences(SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor= prefs.edit();
+		editor.putString(COMAPARE_1,node_id);
+		editor.putInt(COMPARE_2,compare);
+
+		editor.commit();
+	}
+	public static int getComapreValueHealth(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getInt(SharedPreferencesHelper.COMPARE_2, 0);
+	}
 	public static String getComapreData(final Context ctx) {
 		return ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)

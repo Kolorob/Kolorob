@@ -196,7 +196,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
                             "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
                 else if (compareValue==0)
                 {
-                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityHealthNew.this,educationServiceProviderItem.getIdentifierId(),1);
+                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getIdentifierId(),1);
                 }
 
                 else if(compareValue==1)
