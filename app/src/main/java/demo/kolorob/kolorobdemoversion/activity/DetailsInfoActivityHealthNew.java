@@ -49,6 +49,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
@@ -87,7 +88,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText;
-    private TextView serviceDetails,specialist;
+    private TextView serviceDetails,specialist,health_vaccine;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
@@ -143,6 +144,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         serviceDetails=(TextView)findViewById(R.id.serviceDetails);
          close_button=(ImageView)findViewById(R.id.close_buttonc);
         specialist = (TextView) findViewById(R.id.specialist);
+        health_vaccine = (TextView) findViewById(R.id.health_vaccine);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
@@ -200,6 +202,24 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         }
+        HealthVaccineTableDetails healthVaccineTableDetails= new HealthVaccineTableDetails(DetailsInfoActivityEntertainmentNew.this);
+        healthVaccineItemDetailses= healthVaccineTableDetails.getHealthVaccineData(healthServiceProviderItemNew.getId());
+        int healthVaccineSize=healthVaccineItemDetailses.size();
+        if (healthVaccineSize!=0)
+        {
+            health_vaccine.setVisibility(View.VISIBLE);
+            result_concate="";
+
+            for ()
+            CheckConcate("সেবার ধরন",healthSpecialistItemDetails.getSpecialisttype());
+            CheckConcate("ডাক্তারের সংখা",healthSpecialistItemDetails.getSpecialistId());
+            CheckConcate("প্রথম ভিজিট ফি",healthSpecialistItemDetails.getSpecialistfees());
+            CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getWeek_fee());
+            CheckConcate("এক মাসের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getMonth_fee());
+            CheckConcate("রিপোর্ট ফি",healthSpecialistItemDetails.getReport_fee());
+        }
+
+
 
 
 

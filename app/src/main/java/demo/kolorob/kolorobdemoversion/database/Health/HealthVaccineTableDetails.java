@@ -148,7 +148,7 @@ public class HealthVaccineTableDetails {
         closeDB();
     }
 
-    public ArrayList<HealthVaccineItemDetails> getHealthSpecialistData(String node_id) {
+    public ArrayList<HealthVaccineItemDetails> getHealthVaccineData(String node_id) {
         ArrayList<HealthVaccineItemDetails> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
