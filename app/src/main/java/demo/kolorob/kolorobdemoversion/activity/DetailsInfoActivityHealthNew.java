@@ -675,7 +675,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private void CheckConcate(String value1,String value2){
 
 
-        if(!value2.equals("null")||value2.equals("")) {
+        if(!value2.equals("null")&&!value2.equals("")) {
 
             String value ="      "+ value1 +":  "+ value2;
             result_concate = result_concate + value + "\n";
