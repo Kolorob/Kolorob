@@ -1491,6 +1491,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         catstatus=true;
                         calladapter(catstatus);
 
+
                         if(showList==1) {
 /*
                             explist.setVisibility(View.VISIBLE);
