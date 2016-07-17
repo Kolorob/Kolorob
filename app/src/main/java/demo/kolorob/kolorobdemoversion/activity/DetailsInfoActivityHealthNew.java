@@ -1,22 +1,13 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -24,43 +15,19 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
-import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
-import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
@@ -117,7 +84,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityHealthNew.this);
-        EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivityHealthNew.this);
+
 
         courseListView = (ListView) findViewById(R.id.courseListView);
         listView = (ListView) findViewById(R.id.listView5);
