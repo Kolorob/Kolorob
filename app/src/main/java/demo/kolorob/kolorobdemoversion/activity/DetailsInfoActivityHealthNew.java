@@ -142,7 +142,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
         serviceDetails=(TextView)findViewById(R.id.serviceDetails);
-         close_button=(ImageView)findViewById(R.id.close_buttonc);
+        close_button=(ImageView)findViewById(R.id.close_buttonc);
         specialist = (TextView) findViewById(R.id.specialist);
         health_vaccine = (TextView) findViewById(R.id.health_vaccine);
 
@@ -183,10 +183,12 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("ছুটির দিন",healthServiceProviderItemNew.getOff_day());
         healthSpecialistItemDetailses=healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size=healthSpecialistItemDetailses.size();
+
         if(specialist_size!=0)
         {
             for(HealthSpecialistItemDetails healthSpecialistItemDetails: healthSpecialistItemDetailses)
             {
+                Log.d("It's Specialist", "====" + specialist_size);
                 result_concate="";
                 specialist.setVisibility(View.VISIBLE);
                 CheckConcate("সেবার ধরন",healthSpecialistItemDetails.getSpecialisttype());
@@ -207,6 +209,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         int healthVaccineSize=healthVaccineItemDetailses.size();
         if (healthVaccineSize!=0)
         {
+            Log.d("It's Vaccine", "====" + healthVaccineSize);
             health_vaccine.setVisibility(View.VISIBLE);
             result_concate="";
 
@@ -217,6 +220,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                 CheckConcate("প্রথম ভিজিট ফি",healthVaccineItemDetails.getVaccineremarks());
 
             }
+
+            health_vaccine.setText(result_concate);
 
         }
 
@@ -247,7 +252,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
                             "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
                 else if (compareValue==0)
                 {
-                    Log.d("compareValue", "====" + compareValue);
+
                     SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getId(),1);
                 }
 
