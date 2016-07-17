@@ -349,16 +349,16 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //        });
 
 
-//            right_image.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if(educationServiceProviderItem.getEmailAddress().equals(""))
-//                    {
-//                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-//                                "ই মেইল আই ডি পাওয়া যায়নি");
-//                    }
-//                }
-//            });
+        right_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(healthServiceProviderItemNew.getNode_contact2().equals(""))
+                {
+                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                            "ই মেইল আই ডি পাওয়া যায়নি");
+                }
+            }
+        });
 //
 //            phone_mid.setOnClickListener(new View.OnClickListener() {
 //                @Override
