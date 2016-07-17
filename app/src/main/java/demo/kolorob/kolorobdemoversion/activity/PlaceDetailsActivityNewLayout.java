@@ -109,6 +109,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     EducationServiceProviderTable educationServiceProviderTable;
     ArrayList<EducationServiceProviderItem> firstDataSet;
     ArrayList<EducationServiceProviderItem> secondDataSet;
+    ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
+    ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
     public void setShowList(int showList) {
         this.showList = showList;
     }
@@ -142,7 +144,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String firstData="",SecondData="";
     int checker=0;
     private Button prebutton;
-
+    private HealthServiceProviderTableNew healthServiceProviderTableNew;
     private int sideIndexHeight;
     private LinearLayout compare_layout;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
@@ -763,7 +765,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
-                Log.d("====", "CategoryId" + currentCategoryID);
+
                 categoryListBuildUp(1);
 
 //                else
@@ -784,67 +786,95 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchClicked=false;
-                MapClicked=false;
-                ListClicked=false;
-                CompareClicked=true;
-                if(MapClicked==false||SearchClicked==false||ListClicked==false)
+                Log.d("====", "CategoryId at compare" + currentCategoryID);
+
+                if(currentCategoryID==1||currentCategoryID==2)
                 {
-
-                    params4.height=larg;
-                    CompareButton.setLayoutParams(params4);
-
-                    params2.height=smal;
-                    SearchButton.setLayoutParams(params2);
-                    params.height=smal;
-                    MapButton.setLayoutParams(params);
-                    params.height=smal;
-                    ListButton.setLayoutParams(params);
+                    SearchClicked=false;
+                    MapClicked=false;
+                    ListClicked=false;
+                    CompareClicked=true;
 
 
-                }
-                if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                    {
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                    }
+                   else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==0)
                 {
                     AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                             "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
                 }
-                else if(SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
-                {
-                   AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                            "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
-                }
-                else {
-                    SearchButton.setImageResource(0);
-                    MapButton.setImageResource(0);
-                    CompareButton.setImageResource(0);
-                    ListButton.setImageResource(0);
-                    SearchButton.setBackgroundResource(R.drawable.search);
-                    ListButton.setBackgroundResource(R.drawable.list);
-                    MapButton.setBackgroundResource(R.drawable.map);
-                    CompareButton.setBackgroundResource(R.drawable.compare_selected);
-                    compare_layout.setVisibility(View.VISIBLE);
-
-                    // @@@@arafat
-                    // need to add condition for health and add color code for health,
-                    // else educaton color code is okay
-                    if(SearchClicked){
-                        compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
-                    }else{
-                        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    {
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                     }
+                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    {
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                    }
+                    else {
 
-                    map.setVisibility(View.GONE);
-                    llCatListHolder.setVisibility(View.GONE);
-                    subCatItemList.setVisibility(View.GONE);
-                    explist.setVisibility(View.GONE);
-                    searchviewholder.setVisibility(View.GONE);
-                    svs.setVisibility(View.GONE);
-                    sv.setVisibility(View.GONE);
-                    svholder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
-                    compareTool();
-                    llSubCatListHolder.setVisibility(View.GONE);
+
+
+
+                        if(MapClicked==false||SearchClicked==false||ListClicked==false)
+                        {
+
+                            params4.height=larg;
+                            CompareButton.setLayoutParams(params4);
+
+                            params2.height=smal;
+                            SearchButton.setLayoutParams(params2);
+                            params.height=smal;
+                            MapButton.setLayoutParams(params);
+                            params.height=smal;
+                            ListButton.setLayoutParams(params);
+                            SearchButton.setImageResource(0);
+                            MapButton.setImageResource(0);
+                            CompareButton.setImageResource(0);
+                            ListButton.setImageResource(0);
+
+
+
+                        }
+
+                        compare_layout.setVisibility(View.VISIBLE);
+
+                        // @@@@arafat
+                        // need to add condition for health and add color code for health,
+                        // else educaton color code is okay
+                        if(SearchClicked){
+                            compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
+                        }else{
+                            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+                        }
+                        SearchButton.setBackgroundResource(R.drawable.search);
+                        ListButton.setBackgroundResource(R.drawable.list);
+                        MapButton.setBackgroundResource(R.drawable.map);
+                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
+                        map.setVisibility(View.GONE);
+                        llCatListHolder.setVisibility(View.GONE);
+                        subCatItemList.setVisibility(View.GONE);
+                        explist.setVisibility(View.GONE);
+                        searchviewholder.setVisibility(View.GONE);
+                        svs.setVisibility(View.GONE);
+                        sv.setVisibility(View.GONE);
+                        svholder.setVisibility(View.GONE);
+                        svsholder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.GONE);
+                        compareTool();
+                    }
                 }
+
+                else
+                    AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                            "বর্তমান ক্যাটাগরির জন্য তুলনা সম্ভব নয়");
+
+
 
             }
         });
@@ -886,7 +916,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void compareTool()
     {
 
-        comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+        if(currentCategoryID==1)
+            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+        else
+            comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
 
         int size=comapreData.length();
         for(int i=0;i<size;i++)
@@ -905,8 +938,61 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 firstData=firstData+comapreData.charAt(i);
             Log.d("===","firstData" +firstData);
         }
+        if(currentCategoryID==1)
+            compareEducation();
+        else
+            compareHealth();
 
 
+
+
+
+
+
+
+    }
+
+
+    public void compareHealth()
+    {
+        healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        firstDataSetHealth=healthServiceProviderTableNew.getHealthData(firstData);
+        secondDataSetHealth=healthServiceProviderTableNew.getHealthData(SecondData);
+
+        for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
+        {
+//            edu_name_ban.setText(healthServiceProviderItemNew.getEduNameEng());
+//            edtype.setText(healthServiceProviderItemNew.getEduType());
+//            hostel_facility.setText(healthServiceProviderItemNew.getHostelFacility());
+//            transport_facility.setText(healthServiceProviderItemNew.getTransportFacility());
+//            playground.setText(healthServiceProviderItemNew.getPlayground());
+//            total_students.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
+//            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
+//            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
+//            course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
+//            shift.setText(healthServiceProviderItemNew.getShift());
+//            canteen_facility.setText(healthServiceProviderItemNew.getCanteenFacility());
+        }
+        for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
+        {
+//            edu_name_ban1.setText(healthServiceProviderItemNew.getEduNameEng());
+//            edtype1.setText(healthServiceProviderItemNew.getEduType());
+//            hostel_facility1.setText(healthServiceProviderItemNew.getHostelFacility());
+//            transport_facility1.setText(healthServiceProviderItemNew.getTransportFacility());
+//            playground1.setText(healthServiceProviderItemNew.getPlayground());
+//            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
+//            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
+//            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
+//            course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
+//            shift1.setText(healthServiceProviderItemNew.getShift());
+//            canteen_facility1.setText(healthServiceProviderItemNew.getCanteenFacility());
+        }
+        SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
+    }
+
+
+    public void compareEducation()
+    {
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
         firstDataSet=educationServiceProviderTable.getEducationData(firstData);
         secondDataSet=educationServiceProviderTable.getEducationData(SecondData);
@@ -942,12 +1028,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         }
 
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
-
-
-
-
-
     }
+
     public void populateSearch()
     {
 

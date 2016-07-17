@@ -114,6 +114,7 @@ public class DetailsInfoActivityFinancialNew extends Activity {
 
             financialServiceProviderItem = (FinancialServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIAL);
 
+
         }
 
 

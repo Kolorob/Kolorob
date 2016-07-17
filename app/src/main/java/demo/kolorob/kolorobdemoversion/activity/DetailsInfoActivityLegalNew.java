@@ -11,16 +11,19 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,476 +43,571 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
+import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+
+/**
+ * Created by arafat on 28/05/2016.
+ */
 
 public class DetailsInfoActivityLegalNew extends Activity {
-
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
-    String basic_part;
-    TextView ups_text,itemopeningTime;
-    private ImageView close_button,distance_left;
-    private LinearLayout ll3,scrollingPart;
-    LinearLayout ll1,ll2;
-    ImageView close,legal,phone_mid;
-    TextView close_tv;
-    ImageButton Feedback;
-    ListView lv11,lv2;
-    String result_concate="";
-    ArrayList<LegalAidtypeServiceProviderLegalAdviceTable> legalAidtypeServiceProviderLegalAdviceTables;
-    ArrayList<LegalAidLegalAdviceItem> legalAidLegalAdviceItems;
-    ArrayList<LegalAidSalishiItem> legalAidSalishiItems;
-    LegalAidServiceProviderItem legalAidServiceProviderItem;
-    private Context con;
-
-    /**
-     * Created by arafat on 28/05/2016.
-     */
+    TextView ups_text;
+    ListView courseListView,listView;
+    Context con;
+    HealthServiceProviderItemNew healthServiceProviderItemNew;
+    ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
+    ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
+    private TextView totalStudents;
+    private TextView totalClasses;
+    private TextView totalTeachers;
+    private TextView playground;
+    private TextView hostel;
+    private TextView transport;
+    private TextView ratingText;
+    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
+    RadioGroup feedRadio;
+    RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
+    String result_concate;
+    private CheckBox checkBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_info_activity_legal_new);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        height= displayMetrics.heightPixels;
-        width=displayMetrics.widthPixels;
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+        con = this;
+
 
         Intent intent = getIntent();
-        con=this;
 
-        if (null != intent)
-        {
-            legalAidServiceProviderItem = (LegalAidServiceProviderItem)intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
+
+        if (null != intent) {
+            healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
 
         }
 
 
+        HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityLegalNew.this);
+        EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivityLegalNew.this);
+
+        courseListView = (ListView) findViewById(R.id.courseListView);
+        listView = (ListView) findViewById(R.id.listView5);
+        linearLayout = (LinearLayout) findViewById(R.id.lll);
+        upperHand = (LinearLayout) findViewById(R.id.upper_part);
+        upperText = (LinearLayout) findViewById(R.id.upperText);
+        left_way = (LinearLayout) findViewById(R.id.left_go_process);
+        middle_phone = (LinearLayout) findViewById(R.id.middle_phone);
+        right_email = (LinearLayout) findViewById(R.id.right_email);
+        left_image = (ImageView) findViewById(R.id.distance_left);
+        bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
+        middle_image = (ImageView) findViewById(R.id.phone_middl);
+        right_image = (ImageView) findViewById(R.id.right_side_email);
+        address_text = (TextView) findViewById(R.id.address_text);
+        phone_text = (TextView) findViewById(R.id.phone_text);
+        email_text = (TextView) findViewById(R.id.email_text);
+        totalStudents = (TextView) findViewById(R.id.tv_total_students);
+        totalClasses = (TextView) findViewById(R.id.tv_total_class);
+        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
+        playground = (TextView) findViewById(R.id.tv_playground);
+        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
+        transport = (TextView) findViewById(R.id.tv_transport_facility);
+        ratingText=(TextView)findViewById(R.id.ratingText);
+        // close_button=(ImageView)findViewById(R.id.close_button);
+
+        top_logo=(ImageView)findViewById(R.id.top_logo);
+        cross=(ImageView)findViewById(R.id.cross_jb);
+        school_logo_default=(ImageView)findViewById(R.id.service_logo);
 
 
 
-
-        linearLayout=(LinearLayout)findViewById(R.id.lll);
-        upperHand=(LinearLayout)findViewById(R.id.upper_part);
-        upperText=(LinearLayout)findViewById(R.id.upperText);
-        left_way=(LinearLayout)findViewById(R.id.left_go_process);
-        middle_phone=(LinearLayout)findViewById(R.id.middle_phone);
-        right_email=(LinearLayout)findViewById(R.id.right_email);
-        left_image=(ImageView)findViewById(R.id.distance_left);
-        bottom_bar=(LinearLayout)findViewById(R.id.bottom_bar);
-        middle_image=(ImageView)findViewById(R.id.phone_middl);
-        right_image=(ImageView)findViewById(R.id.right_side_email);
-        address_text=(TextView)findViewById(R.id.address_text);
-        phone_text=(TextView)findViewById(R.id.phone_text);
-        email_text=(TextView)findViewById(R.id.email_text);
-        close_button=(ImageView)findViewById(R.id.close_button);
-        scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
-        lv11 = (ListView) findViewById(R.id.listView7);
-        lv2 = (ListView) findViewById(R.id.listView8);
-        ll1=(LinearLayout)findViewById(R.id.first_list);
-        ll2=(LinearLayout)findViewById(R.id.second_list);
-        itemopeningTime=(TextView)findViewById(R.id.opening_time);
-        distance_left=(ImageView)findViewById(R.id.distance_left);
-
-        phone_mid=(ImageView)findViewById(R.id.phone_middl);
-
-        result_concate="";
+        distance_left = (ImageView) findViewById(R.id.distance_left);
+        email_btn = (ImageView) findViewById(R.id.right_side_email);
+        feedback = (ImageView) findViewById(R.id.feedback);
+        checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        if(!legalAidServiceProviderItem.getRoad().equals(""))
-            concateBasic("রাস্তা: ", legalAidServiceProviderItem.getRoad());
-
-        if(!legalAidServiceProviderItem.getBlock().equals(""))
-            concateBasic("ব্লক: ",legalAidServiceProviderItem.getBlock());
-
-
-
-        if(!legalAidServiceProviderItem.getAddress().equals(""))
-            concateBasic("",legalAidServiceProviderItem.getAddress());
-
-
-        if(!legalAidServiceProviderItem.getLandmark().equals(""))
-            concateBasic(legalAidServiceProviderItem.getLandmark(), "  এর নিকটে");
-        address_text.setText(result_concate);
-        result_concate="";
-
-
-        if(!legalAidServiceProviderItem.getOpeningtime().equals(""))
-            concateBasic(" খোলার সময়: ",legalAidServiceProviderItem.getOpeningtime());
-        if(!legalAidServiceProviderItem.getAdditionaltime().equals(""))
-            concateBasic(" অতিরিক্ত সময়: ",legalAidServiceProviderItem.getAdditionaltime());
-
-        if(!legalAidServiceProviderItem.getClosingtime().equals(""))
-            concateBasic(" বন্ধ করার সময়: ",legalAidServiceProviderItem.getClosingtime());
-
-
-        itemopeningTime.setText(result_concate);
-        result_concate="";
-
-
-
+//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                int compareValue;
+//                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
+//                if(compareValue>=2)
+//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+//                else if (compareValue==0)
+//                {
+//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
+//                }
+//
+//                else if(compareValue==1)
+//                {
+//                    String previous_node;
+//                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
+//                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
+//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
+//                }
+//
+//
+//            }
+//        });
+//
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        int upperhad_height=params2.height = height/6;
+        //int upperhad_height=params2.height = height/6;
+
         upperHand.setLayoutParams(params2);
-        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        int  vd=params_upperText.height = height/24;
-        params_upperText.width = width;
-        upperText.setLayoutParams(params_upperText);
+
+
+//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+//        // int  vd=params_upperText.height = height/24;
+//        // params_upperText.width = width;
+//        upperText.setLayoutParams(params_upperText);
+
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img=params_left_way.height = (height*3)/24;
-        int right_img=params_left_way.width = width/3;
+        int lett_img = params_left_way.height = (height * 3) / 24;
+        int right_img = params_left_way.width = width / 3;
         left_way.setLayoutParams(params_left_way);
-        left_image.getLayoutParams().height= (lett_img*2)/3;
-        left_image.getLayoutParams().width=right_img/2;
+
+
+
+
+        top_logo.getLayoutParams().height=width/8;
+        top_logo.getLayoutParams().width=width/8;
+
+        middle_image.getLayoutParams().height=width/8;
+        middle_image.getLayoutParams().width=width/8;
+
+        cross.getLayoutParams().height=width/13;
+        cross.getLayoutParams().width=width/13;
+
+        right_image.getLayoutParams().height = width/8;
+        right_image.getLayoutParams().width = width/8;
+
+        left_image.getLayoutParams().height =  width/8;
+        left_image.getLayoutParams().width =  width/8;
+
+        school_logo_default.getLayoutParams().height =  width/5;
+        school_logo_default.getLayoutParams().width =  width/5;
+
+
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int  vx=params_middle_phone.height = (height*3)/24;
-        params_middle_phone.width = width/3;
+        int vx = params_middle_phone.height = (height * 3) / 24;
+        params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
-        middle_image.getLayoutParams().height= (lett_img*2)/3;
-        middle_image.getLayoutParams().width=right_img/2;
-        right_image.getLayoutParams().height= (lett_img*2)/3;
-        right_image.getLayoutParams().width=right_img/2;
+
+
+
+
+
         LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int  vc=params_right_email.height = (height*3)/24;
-        params_right_email.width = width/3;
+        int vc = params_right_email.height = (height * 3) / 24;
+        params_right_email.width = width / 3;
         right_email.setLayoutParams(params_right_email);
-        ups_text=(TextView)findViewById(R.id.ups_text);
-        ups_text.setTextSize(width/25);
-        ups_text.setText(legalAidServiceProviderItem.getLegalaidNameBan());
-        phone_text.setText(legalAidServiceProviderItem.getContactNo());
-        email_text.setText(legalAidServiceProviderItem.getEmailAddress());
+
+        ups_text = (TextView) findViewById(R.id.ups_text);
+        ups_text.setTextSize(width / 25);
+        ratingText.setTextSize(width / 25);
+        //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
+
+        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
+        feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
+        feedback.setLayoutParams(feedbacks);
+        feedbacks.setMargins(0, 0, width / 30, 0);
+        Log.d("width", "====" + width);
 
 
-        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
-        int  vcc=params_bottom_bar.height = height/13;
-        params_bottom_bar.width = width;
-        bottom_bar.setLayoutParams(params_bottom_bar);
-
-        LinearLayout.LayoutParams expnlist = (LinearLayout.LayoutParams) scrollingPart.getLayoutParams();
-        expnlist.setMargins(0,0,0,vcc);
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
-        phone_mid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if(!legalAidServiceProviderItem.getContactNo().equals(""))
-                {
-                    callIntent1.setData(Uri.parse("tel:" + legalAidServiceProviderItem.getContactNo()));
-                    if(checkPermission())
-                        startActivity(callIntent1);
-                    else{
-                        Toast.makeText(getApplicationContext(),
-                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                                .show();
-                    }
-                }
-                else {
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-                }
-            }
-        });
-
-        right_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(legalAidServiceProviderItem.getEmailAddress().equals(""))
-                {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
-                }
-            }
-        });
-
-        distance_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        feedback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
+//                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
+//                feedIntent.putExtra("categoryId","1");
+//                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
+//
+//                startActivity(feedIntent);
+//
+//            }
+//        });
 
 
-                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
-
-                    String lat = legalAidServiceProviderItem.getLatitude().toString();
-                    // double latitude = Double.parseDouble(lat);
-                    String lon = legalAidServiceProviderItem.getLongitude().toString();
-                    String name= legalAidServiceProviderItem.getLegalaidNameBan().toString();
-                    // double longitude = Double.parseDouble(lon);
-                    boolean fromornot=true;
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("Latitude", lat);
-                    editor.putString("Longitude", lon);
-                    editor.putString("Name", name);
-                    editor.putBoolean("Value", fromornot);
-                    editor.commit();
-
-
-                    String Longitude = pref.getString("Latitude", null);
-                    String Latitude = pref.getString("Longitude", null);
-
-                    if (Latitude != null && Longitude != null) {
-                        Double Lon = Double.parseDouble(Longitude);
-                        Double Lat = Double.parseDouble(Latitude);
-                        // Toast.makeText(getApplicationContext(), "Your Longitude is " + Lon, Toast.LENGTH_SHORT).show();
-                        //  Toast.makeText(getApplicationContext(), "Your Latitude is " + Lat,Toast.LENGTH_SHORT).show();
-                        // implementFragment();
-
-                        //username and password are present, do your stuff
-                    }
-
-
-                    finish();
-                }
-                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-
-                    AppUtils.showSettingsAlert(DetailsInfoActivityLegalNew.this);
-
-                }
-
-                else
-                {
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
-                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+//            right_image.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if(educationServiceProviderItem.getEmailAddress().equals(""))
+//                    {
+//                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+//                                "ই মেইল আই ডি পাওয়া যায়নি");
+//                    }
+//                }
+//            });
+//
+//            phone_mid.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+//                    if(!educationServiceProviderItem.getContactNo().equals(""))
+//                    {
+//                        callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
+//                        if(checkPermission())
+//                            startActivity(callIntent1);
+//                        else{
+//                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+//                                    "ফোন নম্বর পাওয়া যায়নি");
+//                            Toast.makeText(getApplicationContext(),
+//                                    "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+//                                    .show();
+//                        }
+//                    }
+//                    else {
+//
+//                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+//                                "ফোন নম্বর পাওয়া যায়নি");
+//                        Toast.makeText(getApplicationContext(),
+//                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+//                                .show();
+//                    }
+//                }
+//            });
 
 
-
-                }
-            }
-        });
+        // phermacy.setText(lat);
 
 
+//        }
 
+//        close_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+
+
+//        distance_left.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+//
+//
+//                    String lat = educationServiceProviderItem.getLatitude().toString();
+//                    // double latitude = Double.parseDouble(lat);
+//                    String lon = educationServiceProviderItem.getLongitude().toString();
+//                    // double longitude = Double.parseDouble(lon);
+//                    String name= educationServiceProviderItem.getEduNameBan().toString();
+//                    String node=educationServiceProviderItem.getIdentifierId();
+//                    boolean fromornot=true;
+//                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = pref.edit();
+//                    editor.putString("Latitude", lat);
+//                    editor.putString("Longitude", lon);
+//                    editor.putString("Name", name);
+//                    editor.putBoolean("Value", fromornot);
+//                    editor.putString("nValue", node);
+//                    editor.commit();
+//
+//
+//                    String Longitude = pref.getString("Longitude", null);
+//                    String Latitude = pref.getString("Latitude", null);
+//
+//                    if (Latitude != null && Longitude != null) {
+//                        Double Lon = Double.parseDouble(Longitude);
+//                        Double Lat = Double.parseDouble(Latitude);
+//                        // implementFragment();
+//                        //username and password are present, do your stuff
+//                    }
+//
+//
+//                    finish();
+//
+//                }
+//                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+//
+//                    AppUtils.showSettingsAlert(DetailsInfoActivityEducation.this);
+//
+//                }
+//
+//                else
+//                {
+//
+//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
+//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                    alertDialog.show();
+//
+//                }
+//            }
+//        });
+//
+//
+//    }
+//
+//    public void verifyRegistration(View v){
+//
+//        Boolean register=RegisteredOrNot();
+//
+//        if(register.equals(false))
+//        {
+//            requestToRegister();
+//        }
+//
+//        else {
+//
+//            feedBackAlert();
+//            sendReviewToServer();
+//        }
+//
+//
+//    }
+
+//    public void feedBackAlert()
+//    {
+//
+//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
+//        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
+//        alertDialogBuilder.setView(promptView);
+//
+//
+//        final Button submit= (Button) promptView.findViewById(R.id.submit);
+//
+//
+//        final AlertDialog alert = alertDialogBuilder.create();
+//
+//
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                declareRadiobutton();
+//
+//
+//                alert.cancel();
+//
+//            }
+//        });
+//        // setup a dialog window
+//        alertDialogBuilder.setCancelable(false);
+//
+//
+//
+//        alert.show();
+//    }
+
+
+//    public void sendReviewToServer()
+//    {
+//        int rating;
+//        if(status.equals("ভাল"))
+//            rating=1;
+//        else if(status.equals("মোটামোট"))
+//            rating=2;
+//        else
+//            rating=3;
+//        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationServiceProviderItem.getIdentifierId()+"&service="+"1"+"&rating="+rating;
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Toast.makeText(DetailsInfoActivityEducation.this,response,Toast.LENGTH_SHORT).show();
+//                        // Log.d(">>>>>","status "+response);
+//                        try {
+//                            JSONObject jo = new JSONObject(response);
+//                            String forms;
+//                            forms = jo.getString("status");
+//                            Log.d(">>>>>","status "+forms);
+//                            //Log.d(">>>>>","status ");
+//
+//                            if(forms.equals("true"))
+//                            {
+//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+//                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+//                            }
+//                            else
+//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+//                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+//
+//
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(DetailsInfoActivityEducation.this,error.toString(),Toast.LENGTH_LONG).show();
+//                    }
+//                }) {
+//
+//            @Override
+//            protected Map<String, String> getParams() {
+//
+//                Map<String, String> params = new HashMap<>();
+//
+//                return params;
+//            }
+//
+//        };
+
+//// Adding request to request queue
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityEducation.this);
+//        requestQueue.add(stringRequest);
+//    }
+
+//    public void declareRadiobutton()
+//    {
+//        // int selected = feedRadio.getCheckedRadioButtonId();
+//        // RadioButton rb1 = (RadioButton) findViewById(selected);
+//        //  status = rb1.getText().toString();
+//
+//        // Arafat, i set it as static 1, pls change this codes;
+//
+//        status = "1";
+//    }
+
+//    public void requestToRegister()
+//    {
+//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
+//        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
+//        alertDialogBuilder.setView(promptView);
+//
+//
+//        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
+//        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
+//
+//        final AlertDialog alert = alertDialogBuilder.create();
+//
+//
+//        yes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityEducation.this,PhoneRegActivity.class);
+//                startActivity(intentPhoneRegistration);
+//
+//            }
+//        });
+//
+//
+//
+//        no.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                alert.cancel();
+//
+//            }
+//        });
+//        // setup a dialog window
+//        alertDialogBuilder.setCancelable(false);
+//
+//
+//
+//        alert.show();
+//    }
+//
+//
+//    private boolean checkPermission(){
+//        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+//        if (result == PackageManager.PERMISSION_GRANTED){
+//
+//            return true;
+//
+//        } else {
+//
+//            return false;
+//
+//        }
     }
 
-    public Boolean RegisteredOrNot()
-    {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        //  editor.putString("registered", lat);
-        registered = pref.getString("registered", null);
-        phone_num = pref.getString("phone",null);
-        // editor.commit();
-        //  if(registered.equals("yes"))
-        return true;
-        //  else
-        //   return true;
-
-
-
-    }
-
-    public void verifyRegistration(View v){
-
-        Boolean register=RegisteredOrNot();
-
-        if(register.equals(false))
-        {
-            requestToRegister();
+    private String English_to_bengali_number_conversion(String english_number) {
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
         }
-
-        else {
-
-            feedBackAlert();
-            sendReviewToServer();
-        }
-
-
+        return concatResult;
     }
 
-    public void feedBackAlert()
-    {
+//    public Boolean RegisteredOrNot()
+//    {
+//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = pref.edit();
+//        //  editor.putString("registered", lat);
+//        registered = pref.getString("registered", null);
+//        phone_num = pref.getString("phone",null);
+//        // editor.commit();
+//        //  if(registered.equals("yes"))
+//        return true;
+//        //  else
+//        //   return true;
+//
+//
+//
+//
 
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
-        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this);
-        alertDialogBuilder.setView(promptView);
-
-
-        final Button submit= (Button) promptView.findViewById(R.id.submit);
-
-
-        final AlertDialog alert = alertDialogBuilder.create();
-
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                declareRadiobutton();
-
-
-                alert.cancel();
-
-            }
-        });
-        // setup a dialog window
-        alertDialogBuilder.setCancelable(false);
-
-
-
-        alert.show();
-    }
-
-
-    public void sendReviewToServer()
-    {
-        int rating;
-        if(status.equals("ভাল"))
-            rating=1;
-        else if(status.equals("মোটামোট"))
-            rating=2;
-        else
-            rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+legalAidServiceProviderItem.getIdentifierId() +"&service="+"1"+"&rating="+rating;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DetailsInfoActivityLegalNew.this,response,Toast.LENGTH_SHORT).show();
-                        // Log.d(">>>>>","status "+response);
-                        try {
-                            JSONObject jo = new JSONObject(response);
-                            String forms;
-                            forms = jo.getString("status");
-                            Log.d(">>>>>", "status " + forms);
-                            //Log.d(">>>>>","status ");
-
-                            if(forms.equals("true"))
-                            {
-                                AlertMessage.showMessage(DetailsInfoActivityLegalNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
-                            }
-                            else
-                              AlertMessage.showMessage(DetailsInfoActivityLegalNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DetailsInfoActivityLegalNew.this,error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-
-        };
-
-// Adding request to request queue
-
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityLegalNew.this);
-        requestQueue.add(stringRequest);
-    }
-
-    public void declareRadiobutton()
-    {
-        // int selected = feedRadio.getCheckedRadioButtonId();
-        // RadioButton rb1 = (RadioButton) findViewById(selected);
-        //  status = rb1.getText().toString();
-
-        // Arafat, i set it as static 1, pls change this codes;
-
-        status = "1";
-    }
-
-
-    public void requestToRegister()
-    {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
-        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this);
-        alertDialogBuilder.setView(promptView);
-
-
-        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
-        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
-
-        final AlertDialog alert = alertDialogBuilder.create();
-
-
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityLegalNew.this,PhoneRegActivity.class);
-                startActivity(intentPhoneRegistration);
-
-            }
-        });
-
-
-
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alert.cancel();
-
-            }
-        });
-        // setup a dialog window
-        alertDialogBuilder.setCancelable(false);
-
-
-
-        alert.show();
-    }
-
-
-    private boolean checkPermission(){
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
-        if (result == PackageManager.PERMISSION_GRANTED){
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
-    }
 
     private String concateBasic(String value1,String value2){
 
         String value= value1+value2;
         result_concate= result_concate+value + "\n";
+
+        Log.d("....>>>", "Values   " + result_concate);
+
+
         return result_concate;
     }
 }

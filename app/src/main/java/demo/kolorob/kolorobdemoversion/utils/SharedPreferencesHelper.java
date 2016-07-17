@@ -40,6 +40,8 @@ public final class SharedPreferencesHelper {
 	private static final String FEEDBACK = "feedback";
 	private static final String COMAPARE_1 = "compare1";
 	private static final String COMPARE_2 = "compare";
+	private static final String COMAPARE_1H = "compare_health_1";
+	private static final String COMPARE_2H = "compare_health";
 
 
 	// Getters for Application configuration attributes and preferences defined
@@ -116,6 +118,27 @@ public final class SharedPreferencesHelper {
 		return ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
 				.getInt(SharedPreferencesHelper.COMPARE_2, 0);
+	}
+
+	public static void setCompareDataHealth(final Context ctx, final String node_id,int compare)
+	{
+		final SharedPreferences prefs = ctx.getSharedPreferences(SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor= prefs.edit();
+		editor.putString(COMAPARE_1H,node_id);
+		editor.putInt(COMPARE_2H,compare);
+
+		editor.commit();
+	}
+	public static int getComapreValueHealth(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getInt(SharedPreferencesHelper.COMPARE_2H, 0);
+	}
+
+	public static String getComapreDataHealth(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.COMAPARE_1H, "");
 	}
 	public static String getComapreData(final Context ctx) {
 		return ctx.getSharedPreferences(

@@ -159,7 +159,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
 
                         Intent iihea = new Intent(getActivity(), DetailsInfoActivityHealthNew.class);
-                        iihea.putExtra(AppConstants.KEY_DETAILS_HEALTH, dethea);
+                        iihea.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, dethea);
                         activity.startActivity(iihea);
 
 

@@ -177,22 +177,39 @@ public class HealthSpecialistTableDetails {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
-//    public ArrayList<HealthSpecialistItem> getSpecialistforNode(String nodeId) {
-//        ArrayList<HealthSpecialistItem> specialistList = new ArrayList<>();
-//        //System.out.println(cat_id+"  "+sub_cat_id);
-//        SQLiteDatabase db = openDB();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+nodeId+"'" , null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                //System.out.println("abc="+cursor.getString(4));
-//                specialistList.add(cursorToSubCatList(cursor));
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        closeDB();
-//        return specialistList;
-//    }
+    public ArrayList<HealthSpecialistItemDetails> getSpecialistforNode(String nodeId) {
+        ArrayList<HealthSpecialistItemDetails> specialistList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+nodeId+"'" , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                System.out.println("abc="+cursor.getString(4));
+                specialistList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return specialistList;
+    }
+
+    public ArrayList<HealthSpecialistItemDetails> getHealthSpecialistData(String node_id) {
+        ArrayList<HealthSpecialistItemDetails> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_REF_NUM +" = "+node_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
 
     private HealthSpecialistItemDetails cursorToSubCatList(Cursor cursor) {
         String _nodeId=cursor.getString(0);

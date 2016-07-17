@@ -13,6 +13,7 @@ import java.util.Vector;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 
+import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
@@ -906,6 +907,23 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
 //        return subCatList;
 //    }
 
+    public ArrayList<HealthServiceProviderItemNew> getHealthData(String node_id) {
+        ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_ID +" = "+node_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
 
     public ArrayList<HealthServiceProviderItemNew> Heanames(int cat_id,int refId,String a,String place) {
         String subcatnames=null;
@@ -929,8 +947,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
 //        Toast.makeText(this, +cursor,
 //                Toast.LENGTH_LONG).show();
 
-        String f="SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'";
-        Log.d("hello","===="+f);
+
 
         if (cursor.moveToFirst()) {
             do {

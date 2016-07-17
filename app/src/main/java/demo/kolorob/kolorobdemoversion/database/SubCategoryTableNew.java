@@ -203,11 +203,11 @@ public class SubCategoryTableNew {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_EN+" = '"+name+"'", null);
 
-        Log.d("cursor","======"+cursor);
+      //  Log.d("cursor","======"+cursor);
         if (cursor.moveToFirst()) {
             do {
                  ids = cursor.getInt(5);
-                Log.d("cursor","======"+ids);
+              //  Log.d("cursor","======"+ids);
             } while (cursor.moveToNext());
         }
 

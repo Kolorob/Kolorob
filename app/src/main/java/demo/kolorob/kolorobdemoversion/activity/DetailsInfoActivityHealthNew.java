@@ -49,12 +49,15 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -76,24 +79,28 @@ public class DetailsInfoActivityHealthNew extends Activity {
     HealthServiceProviderItemNew healthServiceProviderItemNew;
     ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
     ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
+    ArrayList<HealthSpecialistItemDetails>healthSpecialistItemDetailses;
+    ArrayList<HealthVaccineItemDetails>healthVaccineItemDetailses;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private ImageView close_button,phone_mid,distance_left,feedback;
+    private TextView ratingText;
+    private TextView serviceDetails,specialist,health_vaccine;
+    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
-    String result_concate;
+    String result_concate="";
     private CheckBox checkBox;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_info_activity_education);
+        setContentView(R.layout.activity_details_info_activity_health_new);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
@@ -105,7 +112,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         if (null != intent) {
             healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
-
+           // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
@@ -133,8 +140,17 @@ public class DetailsInfoActivityHealthNew extends Activity {
         playground = (TextView) findViewById(R.id.tv_playground);
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
-        // close_button=(ImageView)findViewById(R.id.close_button);
-        phone_mid = (ImageView) findViewById(R.id.phone_middl);
+        ratingText=(TextView)findViewById(R.id.ratingText);
+        serviceDetails=(TextView)findViewById(R.id.serviceDetails);
+         close_button=(ImageView)findViewById(R.id.close_buttonc);
+        specialist = (TextView) findViewById(R.id.specialist);
+        health_vaccine = (TextView) findViewById(R.id.health_vaccine);
+
+        top_logo=(ImageView)findViewById(R.id.top_logo);
+        //cross=(ImageView)findViewById(R.id.cross_jb);
+        school_logo_default=(ImageView)findViewById(R.id.service_logo);
+
+
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
@@ -142,31 +158,111 @@ public class DetailsInfoActivityHealthNew extends Activity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                int compareValue;
-//                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
-//                if(compareValue>=2)
-//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-//                else if (compareValue==0)
-//                {
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
-//                }
-//
-//                else if(compareValue==1)
-//                {
-//                    String previous_node;
-//                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
-//                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
-//                }
-//
-//
-//            }
-//        });
-//
+        CheckConcate("প্রতিস্টানের ধরন",healthServiceProviderItemNew.getInstitute_type());
+        CheckConcate("ধারন ক্ষমতা",healthServiceProviderItemNew.getCapacity());
+        CheckConcate("পুরুষ ডাক্তার",healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("মহিলা ডাক্তার",healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("রোগী এবং ডাক্তারের অনুপাত",healthServiceProviderItemNew.getPatient_doctor_ratio());
+        CheckConcate("পুরুষ ডাক্তার",healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("মহিলা ডাক্তার",healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("রোগী নার্সের অনুপাত",healthServiceProviderItemNew.getPatient_nurse_ratio());
+        CheckConcate("পরিচিত স্থান",healthServiceProviderItemNew.getLandmark());
+        CheckConcate("ব্লক",healthServiceProviderItemNew.getAddress());
+        CheckConcate("ফ্লোর",healthServiceProviderItemNew.getFloor());
+        CheckConcate("বাড়ির নাম",healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("রাস্তা",healthServiceProviderItemNew.getRoad());
+        CheckConcate("লাইন ",healthServiceProviderItemNew.getLine());
+        CheckConcate("এভিনিউ",healthServiceProviderItemNew.getAvenue());
+        CheckConcate("পোস্ট অফিস",healthServiceProviderItemNew.getPost_office());
+        CheckConcate("পুলিশ স্টেশন",healthServiceProviderItemNew.getPolice_station());
+
+
+        timeProcessing("খোলার সময়",healthServiceProviderItemNew.getOpening_time());
+        timeProcessing("বন্ধে সময়",healthServiceProviderItemNew.getClosing_time());
+        CheckConcate("বিরতির সময়",healthServiceProviderItemNew.getBreak_time());
+        CheckConcate("ছুটির দিন",healthServiceProviderItemNew.getOff_day());
+        healthSpecialistItemDetailses=healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
+        int specialist_size=healthSpecialistItemDetailses.size();
+        if(specialist_size!=0)
+        {
+            for(HealthSpecialistItemDetails healthSpecialistItemDetails: healthSpecialistItemDetailses)
+            {
+                result_concate="";
+                specialist.setVisibility(View.VISIBLE);
+                CheckConcate("সেবার ধরন",healthSpecialistItemDetails.getSpecialisttype());
+                CheckConcate("ডাক্তারের সংখা",healthSpecialistItemDetails.getSpecialistId());
+                CheckConcate("প্রথম ভিজিট ফি",healthSpecialistItemDetails.getSpecialistfees());
+                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getWeek_fee());
+                CheckConcate("এক মাসের মধ্যে ভিজিট ফি",healthSpecialistItemDetails.getMonth_fee());
+                CheckConcate("রিপোর্ট ফি",healthSpecialistItemDetails.getReport_fee());
+
+                specialist.setText(result_concate);
+
+            }
+
+
+        }
+        HealthVaccineTableDetails healthVaccineTableDetails= new HealthVaccineTableDetails(DetailsInfoActivityHealthNew.this);
+        healthVaccineItemDetailses= healthVaccineTableDetails.getHealthVaccineData(healthServiceProviderItemNew.getId());
+        int healthVaccineSize=healthVaccineItemDetailses.size();
+        if (healthVaccineSize!=0)
+        {
+            health_vaccine.setVisibility(View.VISIBLE);
+            result_concate="";
+
+            for (HealthVaccineItemDetails healthVaccineItemDetails: healthVaccineItemDetailses)
+            {
+                CheckConcate("সেবার ধরন",healthVaccineItemDetails.getVaccinename());
+                CheckConcate("ডাক্তারের সংখা",healthVaccineItemDetails.getVaccinefee());
+                CheckConcate("প্রথম ভিজিট ফি",healthVaccineItemDetails.getVaccineremarks());
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+        serviceDetails.setText(result_concate);
+
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int compareValue;
+                compareValue= SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
+                if(compareValue>=2)
+                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+                else if (compareValue==0)
+                {
+                    Log.d("compareValue", "====" + compareValue);
+                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getId(),1);
+                }
+
+                else if(compareValue==1)
+                {
+                    String previous_node;
+                    previous_node=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
+                    previous_node= previous_node+" "+healthServiceProviderItemNew.getId();
+                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,previous_node,2);
+                }
+
+
+            }
+        });
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -175,10 +271,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         upperHand.setLayoutParams(params2);
 
 
-        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        // int  vd=params_upperText.height = height/24;
-        // params_upperText.width = width;
-        upperText.setLayoutParams(params_upperText);
+//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+//        // int  vd=params_upperText.height = height/24;
+//        // params_upperText.width = width;
+//        upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;
@@ -186,23 +282,35 @@ public class DetailsInfoActivityHealthNew extends Activity {
         left_way.setLayoutParams(params_left_way);
 
 
-        left_image.getLayoutParams().height = (lett_img * 2) / 3;
-        left_image.getLayoutParams().width = right_img / 2;
-        RelativeLayout.LayoutParams params_bottom_bar = (RelativeLayout.LayoutParams) bottom_bar.getLayoutParams();
-        int vcc = params_bottom_bar.height = height / 15;
-        params_bottom_bar.width = width;
-        bottom_bar.setLayoutParams(params_bottom_bar);
+
+
+        top_logo.getLayoutParams().height=width/8;
+        top_logo.getLayoutParams().width=width/8;
+
+        middle_image.getLayoutParams().height=width/8;
+        middle_image.getLayoutParams().width=width/8;
+
+        close_button.getLayoutParams().height=width/13;
+        close_button.getLayoutParams().width=width/13;
+
+        right_image.getLayoutParams().height = width/8;
+        right_image.getLayoutParams().width = width/8;
+
+        left_image.getLayoutParams().height =  width/8;
+        left_image.getLayoutParams().width =  width/8;
+
+        school_logo_default.getLayoutParams().height =  width/5;
+        school_logo_default.getLayoutParams().width =  width/5;
+
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int vx = params_middle_phone.height = (height * 3) / 24;
         params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
 
-        middle_image.getLayoutParams().height = (lett_img * 2) / 3;
-        middle_image.getLayoutParams().width = right_img / 2;
 
-        right_image.getLayoutParams().height = (lett_img * 2) / 3;
-        right_image.getLayoutParams().width = right_img / 2;
+
+
 
         LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
         int vc = params_right_email.height = (height * 3) / 24;
@@ -211,14 +319,15 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
-        //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
+        ratingText.setTextSize(width / 25);
+        ups_text.setText(healthServiceProviderItemNew.getNode_bn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = height / 20;
-        feedbacks.width = height / 20;
+        feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
-        Log.d("width", "====" + width);
+
 
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
@@ -280,12 +389,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 //        }
 
-//        close_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+
 
 
 //        distance_left.setOnClickListener(new View.OnClickListener() {
@@ -534,7 +638,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //        }
   }
 
-    private String English_to_bengali_number_conversion(String english_number) {
+    public String English_to_bengali_number_conversion(String english_number) {
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
@@ -579,15 +683,60 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //
 //
 
+    private String timeConverter(String time)
+    {
+        String timeInBengali="";
 
-    private String concateBasic(String value1,String value2){
-
-        String value= value1+value2;
-        result_concate= result_concate+value + "\n";
-
-        Log.d("....>>>", "Values   " + result_concate);
+        String[] separated = time.split(":");
 
 
-        return result_concate;
+
+
+
+        int hour= Integer.valueOf(separated[0]);
+        int times= Integer.valueOf(separated[1]);
+
+        if(hour>6&&hour<12)
+            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour));
+       else if(hour==12)
+            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour));
+        else if(hour>12&&hour<16)
+            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
+        else if(hour>15&&hour<18)
+            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
+        else if(hour>17&&hour<20)
+            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
+        else if(hour>20)
+            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
+        if(times!=0)
+       timeInBengali=timeInBengali+ " টা " + English_to_bengali_number_conversion(String.valueOf(times))+" মিনিট";
+        else
+            timeInBengali=timeInBengali+ " টা";
+        return timeInBengali;
+    }
+
+
+    private void timeProcessing(String value1,String value2)
+    {
+        if(!value2.equals("null")||value2.equals("")) {
+           String GetTime= timeConverter(value2);
+            CheckConcate(value1,GetTime);
+
+        }
+    }
+
+    private void CheckConcate(String value1,String value2){
+
+
+        if(!value2.equals("null")&&!value2.equals("")) {
+
+            String value ="      "+ value1 +":  "+ value2;
+            result_concate = result_concate + value + "\n";
+        }
+
+
+
+
+
     }
 }
