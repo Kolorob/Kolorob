@@ -108,9 +108,7 @@ public class DetailsLayoutEducation extends Activity {
         ratingText=(TextView)findViewById(R.id.ratingText);
         serviceDetails=(TextView)findViewById(R.id.serviceDetails);
         close_button=(ImageView)findViewById(R.id.close_buttonc);
-        result = (TextView) findViewById(R.id.result);
-        training = (TextView) findViewById(R.id.training);
-        tuition = (TextView) findViewById(R.id.tuition);
+
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
 
@@ -193,7 +191,7 @@ public class DetailsLayoutEducation extends Activity {
             for(EducationTrainingDetailsItem educationTrainingDetailsItem: educationTrainingDetailsItems)
             {
 
-                training.setVisibility(View.VISIBLE);
+
                 CheckConcate("সেবার ধরন",educationTrainingDetailsItem.getCourseduration());
                 CheckConcate("ডাক্তারের সংখা",educationTrainingDetailsItem.getAdmissionmonth());
                 CheckConcate("প্রথম ভিজিট ফি",educationTrainingDetailsItem.getCost());
@@ -225,7 +223,7 @@ public class DetailsLayoutEducation extends Activity {
                 CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",educationTuitionDetailsItem.getTuitionmincoaching());
                 CheckConcate("এক মাসের মধ্যে ভিজিট ফি",educationTuitionDetailsItem.getTuitionmaxcoaching());
                 CheckConcate("রিপোর্ট ফি",educationTuitionDetailsItem.getTuitionadditional());
-                
+
 
             }
 
