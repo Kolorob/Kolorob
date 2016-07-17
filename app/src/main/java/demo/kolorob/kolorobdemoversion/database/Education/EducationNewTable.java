@@ -431,6 +431,7 @@ public class EducationNewTable {
         closeDB();
         return false;
     }
+
     private EducationNewItem cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
         String _nameen= cursor.getString(1);

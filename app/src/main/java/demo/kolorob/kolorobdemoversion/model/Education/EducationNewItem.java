@@ -4,10 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 6/26/2016.
  */
-public class EducationNewItem {
+public class EducationNewItem implements Serializable {
     int eduId;
     String nameen;
     String namebn;

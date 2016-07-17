@@ -49,6 +49,22 @@ public class EducationTrainingDetailsTable {
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
+    public ArrayList<EducationTrainingDetailsItem> gettrainingInfo(int node_id) {
+        ArrayList<EducationTrainingDetailsItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SERVICE_ID +" = "+node_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     private SQLiteDatabase openDB() {
         return DatabaseManager.getInstance(tContext).openDatabase();
     }
