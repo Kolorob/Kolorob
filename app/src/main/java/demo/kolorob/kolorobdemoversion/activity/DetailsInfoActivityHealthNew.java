@@ -432,9 +432,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
     public void verifyRegistration(View v) {
 
-        Boolean register = RegisteredOrNot();
+        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
 
-        if (register.equals(false)) {
+        if (register.equals("")) {
             requestToRegister();
         } else {
 
