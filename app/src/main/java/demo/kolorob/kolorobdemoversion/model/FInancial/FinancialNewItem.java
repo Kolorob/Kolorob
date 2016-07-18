@@ -6,10 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 6/26/2016.
  */
-public class FinancialNewItem {
+public class FinancialNewItem  implements Serializable {
     int finId;
     String nameen;
     String namebn;

@@ -13,19 +13,19 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -40,7 +40,7 @@ public class MyInfoWindow extends InfoWindow {
     EducationNewItem nulledu2;
     HealthServiceProviderItem nullhel;
     EntertainmentServiceProviderItem nullent;
-    FinancialServiceProviderItem nullfin;
+    FinancialNewItem nullfin;
     LegalAidServiceProviderItem nullleg;
     Activity con;
     GeoPoint pp;
@@ -127,10 +127,10 @@ public class MyInfoWindow extends InfoWindow {
                     case AppConstants.FINANCIAL:
                        // Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(MyInfoWindow.this.con);
-                        nullfin = financialServiceProviderTable.getfinNode2(node);
-                        Intent iifin = new Intent(MyInfoWindow.this.con, DetailsInfoActivityFinancialNew.class);
-                        iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, nullfin);
+                        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(MyInfoWindow.this.con);
+                        nullfin = financialServiceNewTable.getfinNode2(n);
+                        Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutFinance.class);
+                        iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
 
                         break;

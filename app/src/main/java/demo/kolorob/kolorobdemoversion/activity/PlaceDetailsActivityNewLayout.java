@@ -291,7 +291,7 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<HealthServiceProviderItem> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItem>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
-    ArrayList<FinancialServiceProviderItem>FIN=new ArrayList<>();
+    ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
@@ -1670,8 +1670,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
                         ArrayList<FinancialNewItem> financialNewItems;
-                        financialNewItems = constructfinancialListItem(ci.getId());
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
+                        financialNewItems = constructfinancialListItem();
+                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialNewItems);
                         mapcalledstatus=true;
 
 
@@ -2122,7 +2122,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.FINANCIAL:
                         Headerholder.add(si.getSubcatHeader());
-                        for(int s=0;s<Headerholder.size();s++)
+                        /*for(int s=0;s<Headerholder.size();s++)
                         {
                             financialItem = constructfinancialListItemForHeader(cat_id,  Headerholder.get(s));
 
@@ -2132,7 +2132,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             FIN.add(financialItem.get(ss));
                         }
 
-                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
+                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);*/
                         break;
                     case AppConstants.JOB:
                         map.removeAllViews();
@@ -2487,7 +2487,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
     /**********************************************************Methods for financial**********************************************/
-    private ArrayList<FinancialNewItem> constructfinancialListItem(int cat_id)
+    private ArrayList<FinancialNewItem> constructfinancialListItem()
     {
         ArrayList<FinancialNewItem> financialNewItems;
         FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
@@ -2495,15 +2495,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return financialNewItems;
     }
 
-    private ArrayList<FinancialServiceProviderItem> constructfinancialListItemForHeader(int cat_id, String header)
+    /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)
     {
-        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
+        ArrayList<FinancialNewItem> financialServiceProvider;
+        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+      //  financialServiceProvider = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
         return financialServiceProvider;
-    }
+    }*/
 
-    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
+    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());

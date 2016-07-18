@@ -42,6 +42,7 @@ public class FinancialServiceNewTable {
     private static final String KEY_NODE_WEBSITE = "_node_website"; //
     private static final String KEY_NODE_FACEBOOK= "_node_facebook"; //
     private static final String KEY_NODE_DESIGNATION = "_node_designation"; //
+    private static final String KEY_NODE_ADDRESS = "_node_address"; //
     private static final String KEY_SERVICE_OPENTIME = "_opentime"; // 1 - text
     private static final String KEY_SERVICE_BREAKTIME = "_breaktime"; //
     private static final String KEY_SERVICE_CLOSETIME = "_closetime"; //
@@ -88,6 +89,7 @@ public class FinancialServiceNewTable {
                 + KEY_NODE_WEBSITE + " TEXT, "
                 + KEY_NODE_FACEBOOK + " TEXT, "
                 + KEY_NODE_DESIGNATION + " TEXT, "
+                + KEY_NODE_ADDRESS + " TEXT, "
                 + KEY_SERVICE_OPENTIME + "  TEXT  , "
                 + KEY_SERVICE_BREAKTIME + "  TEXT  , "
                 + KEY_SERVICE_CLOSETIME + "  TEXT  , "
@@ -120,7 +122,7 @@ public class FinancialServiceNewTable {
                 financialNewItem.getPostoffice(),financialNewItem.getPolicestation(),
                 financialNewItem.getCity(),financialNewItem.getCountry(),financialNewItem.getNode_contact(),
                 financialNewItem.getNode_contact2(),financialNewItem.getNode_email(),financialNewItem.getNode_website(),
-                financialNewItem.getNode_facebook(),financialNewItem.getNode_designation(),
+                financialNewItem.getNode_facebook(),financialNewItem.getNode_designation(),financialNewItem.getAddress(),
                 financialNewItem.getOpeningtime(),
                 financialNewItem.getBreaktime(),
                 financialNewItem.getClosetime(),
@@ -132,7 +134,7 @@ public class FinancialServiceNewTable {
                             String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
-                            String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
+                            String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
         if (isFieldExist(finId)) {
             return updateItem(
@@ -156,7 +158,7 @@ public class FinancialServiceNewTable {
                     node_contact2,
                     node_email,node_website,
                     node_facebook,
-                    node_designation,  openingtime,
+                    node_designation, address, openingtime,
                     closetime,breaktime,offday  ,registeredwith,
                     registerednumber,categoryId,refnumm);
 
@@ -186,6 +188,7 @@ public class FinancialServiceNewTable {
         rowValue.put(KEY_NODE_WEBSITE , node_website);
         rowValue.put(KEY_NODE_FACEBOOK  , node_facebook);
         rowValue.put(KEY_NODE_DESIGNATION  , node_designation);
+        rowValue.put(KEY_NODE_ADDRESS  , address);
         rowValue.put(KEY_SERVICE_OPENTIME, openingtime);
         rowValue.put(KEY_SERVICE_BREAKTIME, closetime);
         rowValue.put(KEY_SERVICE_CLOSETIME , breaktime);
@@ -204,7 +207,7 @@ public class FinancialServiceNewTable {
                             String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
-                            String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
+                            String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
 
         ContentValues rowValue = new ContentValues();
@@ -232,6 +235,7 @@ public class FinancialServiceNewTable {
         rowValue.put(KEY_NODE_WEBSITE , node_website);
         rowValue.put(KEY_NODE_FACEBOOK  , node_facebook);
         rowValue.put(KEY_NODE_DESIGNATION  , node_designation);
+        rowValue.put(KEY_NODE_ADDRESS  , address);
         rowValue.put(KEY_SERVICE_OPENTIME, openingtime);
         rowValue.put(KEY_SERVICE_BREAKTIME, closetime);
         rowValue.put(KEY_SERVICE_CLOSETIME , breaktime);
@@ -289,6 +293,28 @@ public class FinancialServiceNewTable {
         closeDB();
         return false;
     }
+    public FinancialNewItem getfinNode2(int Node) {
+
+        SQLiteDatabase db = openDB();
+        FinancialNewItem financialNewItem=null;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+"="+Node, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                financialNewItem=new FinancialNewItem(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),
+                        cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),
+                        cursor.getString(9), cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),
+                        cursor.getString(14),cursor.getString(15),cursor.getString(16),cursor.getString(17),cursor.getString(18),
+                        cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),cursor.getString(23),
+                        cursor.getString(24),cursor.getString(25), cursor.getString(26),cursor.getString(27),cursor.getString(28),
+                        cursor.getString(29),cursor.getString(30),cursor.getInt(31),cursor.getString(32));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return financialNewItem;
+    }
     private FinancialNewItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
         String _nameen= cursor.getString(1);
@@ -320,16 +346,17 @@ public class FinancialServiceNewTable {
         String _node_facebook=cursor.getString(22);
 
         String _node_designation=cursor.getString(23);
-        String _opentime= cursor.getString(24);
-        String _breaktime = cursor.getString(25);
-        String _closetime= cursor.getString(26);
-        String _offday = cursor.getString(27);
-        String _regwith= cursor.getString(28);
-        String _regnum = cursor.getString(29);
-        int _catid=cursor.getInt(30);
-        String _refnumm=cursor.getString(31);
+        String _address=cursor.getString(24);
+        String _opentime= cursor.getString(25);
+        String _breaktime = cursor.getString(26);
+        String _closetime= cursor.getString(27);
+        String _offday = cursor.getString(28);
+        String _regwith= cursor.getString(29);
+        String _regnum = cursor.getString(30);
+        int _catid=cursor.getInt(31);
+        String _refnumm=cursor.getString(32);
         return new FinancialNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
-                _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
+                _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,_address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
                 _regnum,_catid,_refnumm);

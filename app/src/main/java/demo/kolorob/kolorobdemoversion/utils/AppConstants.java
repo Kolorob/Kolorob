@@ -125,6 +125,7 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
     public static final String KEY_DETAILS_HEALTH_NEW = "heaProvider_new";
     public static final String KEY_DETAILS_LEGAL = "legalaidprovider";
     public static final String KEY_DETAILS_FINANCIAL = "financialprovider";
+    public static final String KEY_DETAILS_FINANCIALNEW = "financialprovider";
     public static final int EDUCATION= 1;
     public static final int HEALTH = 2;
     public static final int ENTERTAINMENT = 3;
