@@ -99,7 +99,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://kolorob.net/demo/api/customer_reg?phone=01711310912
-        String url = "http://www.kolorob.net/KolorobApi/api/customers/register?phone="+phone;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -108,17 +108,14 @@ public class PhoneRegActivity extends Activity {
                         Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
                        // Log.d(">>>>>","status "+response);
                         try {
-                            JSONObject jo = new JSONObject(response);
-                            String forms;
-                            forms = jo.getString("status");
-                            Log.d(">>>>>","status "+forms);
+
                             //Log.d(">>>>>","status ");
 
-                            if(forms.equals("true"))
+                            if(response.equals("true"))
                             {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
                                 AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                                        "রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
                                 AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
@@ -130,7 +127,7 @@ public class PhoneRegActivity extends Activity {
 
 
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
