@@ -40,6 +40,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
@@ -93,7 +94,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
-    private ArrayList<FinancialServiceProviderItem> financialServiceProvider = null;
+    private ArrayList<FinancialNewItem> financialServiceProvider = null;
     private ArrayList<EducationNewItem> educationServiceProvider = null;
     MapView mapView,mapp;
     private int categoryId;
@@ -124,7 +125,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.legalaidServiceProvider = et;
     }
 
-    public void setFinancialServiceProvider(ArrayList<FinancialServiceProviderItem> et) {
+    public void setFinancialServiceProvider(ArrayList<FinancialNewItem> et) {
         this.financialServiceProvider = et;
     }
 
@@ -252,13 +253,13 @@ setMapView(mapView);
                 }
                 break;
             case AppConstants.FINANCIAL:
-                for (FinancialServiceProviderItem et : financialServiceProvider) {
+                for (FinancialNewItem et : financialServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId = et.getRefNum();
-                    latDouble = Double.parseDouble(et.getLatitude());
-                    longDouble = Double.parseDouble(et.getLongitude());
+                    subcategotyId2 = et.getRefnumm();
+                    latDouble = Double.parseDouble(et.getLat());
+                    longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerFin(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getRefNum());
+                    drawMarkerFin(point, et.getNamebn(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getRefNum());
                 }
                 break;
             case AppConstants.JOB:

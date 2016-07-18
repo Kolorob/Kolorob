@@ -73,6 +73,7 @@ import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
@@ -86,6 +87,7 @@ import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
@@ -1667,8 +1669,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
-                        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-                        financialServiceProvider = constructfinancialListItem(ci.getId());
+                        ArrayList<FinancialNewItem> financialNewItems;
+                        financialNewItems = constructfinancialListItem(ci.getId());
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
                         mapcalledstatus=true;
 
@@ -2358,9 +2360,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(finclicked){
                // finclicked=false;
                 mapFragment.setCategoryId(6);
-                ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
-                financialServiceProviderItems = constructfinancialListItem(6);
-                mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+                ArrayList<FinancialNewItem> financialNewItems;
+                financialNewItems = constructfinancialListItem();
+                mapFragment.setFinancialServiceProvider(financialNewItems);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
@@ -2485,12 +2487,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
     /**********************************************************Methods for financial**********************************************/
-    private ArrayList<FinancialServiceProviderItem> constructfinancialListItem(int cat_id)
+    private ArrayList<FinancialNewItem> constructfinancialListItem(int cat_id)
     {
-        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfo(cat_id);
-        return financialServiceProvider;
+        ArrayList<FinancialNewItem> financialNewItems;
+        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo();
+        return financialNewItems;
     }
 
     private ArrayList<FinancialServiceProviderItem> constructfinancialListItemForHeader(int cat_id, String header)
