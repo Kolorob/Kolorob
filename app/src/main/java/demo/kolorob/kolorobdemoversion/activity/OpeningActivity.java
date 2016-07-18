@@ -513,6 +513,7 @@ int countofDb;
 
                         JSONArray allData=new JSONArray(apiContent);
                         HealthDatSize=allData.length();
+                         Log.d("HealthDatSize","======"+HealthDatSize);
 
                         for(int i=0;i<HealthDatSize;i++)
                         {
@@ -698,7 +699,6 @@ int countofDb;
                 JSONArray healthVaccine=jsonObject.getJSONArray("health_vaccine_details");
                 int HealthVaccineDataSize=healthVaccine.length();
 
-               // Log.d("healthVaccineItemDetai","==="+HealthVaccineDataSize);
                 for (int v=0;v<HealthVaccineDataSize;v++)
                 {
                     JSONObject healthVaccineItem= healthVaccine.getJSONObject(v);

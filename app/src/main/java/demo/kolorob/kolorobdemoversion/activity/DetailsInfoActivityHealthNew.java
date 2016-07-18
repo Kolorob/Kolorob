@@ -82,8 +82,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView ratingText;
     private TextView serviceDetails, specialist, health_vaccine;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
-    RadioGroup feedRadio;
-    RadioButton rb1, rb2, rb3;
+    private RadioGroup feedRadio;
+    RadioButton rb1, rb2, rb3,rb4,rb5;
     String status = "", phone_num = "", registered = "";
     String result_concate = "";
     private CheckBox checkBox;
@@ -111,7 +111,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         Intent intent = getIntent();
-
+      //  declareRadiobutton();
 
         if (null != intent) {
             healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
@@ -149,6 +149,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         specialist = (TextView) findViewById(R.id.specialist);
         health_vaccine = (TextView) findViewById(R.id.health_vaccine);
         feedback_comment=(EditText)findViewById(R.id.feedback_comment);
+
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
@@ -256,6 +257,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
             }
         });
+
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -444,7 +447,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         } else {
 
             feedBackAlert();
-            sendReviewToServer();
+          //  sendReviewToServer();
         }
 
 
@@ -468,8 +471,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                declareRadiobutton();
-
+              //  declareRadiobutton();
+                sendReviewToServer();
 
                 alert.cancel();
 
@@ -490,6 +493,14 @@ public class DetailsInfoActivityHealthNew extends Activity {
             rating = 2;
         else
             rating = 3;
+        RadioGroup feedRadio=(RadioGroup)findViewById(R.id.feedRadio);
+        String comment="";
+        int selected = feedRadio.getCheckedRadioButtonId();
+        Log.d("Selected ","======"+selected);
+        RadioButton rb1 = (RadioButton) findViewById(selected);
+        status = rb1.getText().toString();
+
+        comment=feedback_comment.getText().toString();
        // http://kolorob.net/demo/api/sp_rating/1?phone=01711310912&review=this%20is%20a%20review&rating=4
         String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +feedback_comment.getText().toString()+ "&rating="+rating;
 
@@ -498,15 +509,11 @@ public class DetailsInfoActivityHealthNew extends Activity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(DetailsInfoActivityHealthNew.this, response, Toast.LENGTH_SHORT).show();
-                        Log.d(">>>>>", "status " + response);
+                        Log.d("========", "status " + response);
                         try {
-                            JSONObject jo = new JSONObject(response);
-                            String forms;
-                            forms = jo.getString("status");
-                            Log.d(">>>>>", "status " + forms);
-                            Log.d(">>>>>", "status ");
 
-                            if (forms.equals("true")) {
+
+                            if (response.equals("true")) {
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             } else
@@ -514,7 +521,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
 
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -541,16 +548,19 @@ public class DetailsInfoActivityHealthNew extends Activity {
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityHealthNew.this);
         requestQueue.add(stringRequest);
     }
-
-    public void declareRadiobutton() {
-        int selected = feedRadio.getCheckedRadioButtonId();
-        RadioButton rb1 = (RadioButton) findViewById(selected);
-        status = rb1.getText().toString();
-
-      //  Arafat, i set it as static 1, pls change this codes;
-
-        status = "1";
-    }
+//
+//    public void declareRadiobutton() {
+////        feedRadio=(RadioGroup)findViewById(R.id.feedRadio);
+////        Log.d("Selected ","======");
+////        int selected = feedRadio.getCheckedRadioButtonId();
+////        Log.d("Selected ","======"+selected);
+////        RadioButton rb1 = (RadioButton) findViewById(selected);
+////        status = rb1.getText().toString();
+//
+//      //  Arafat, i set it as static 1, pls change this codes;
+//
+//
+//    }
 
     public void requestToRegister() {
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
