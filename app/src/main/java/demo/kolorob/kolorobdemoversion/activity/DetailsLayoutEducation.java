@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,7 +27,9 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by israt.jahan on 7/17/2016.
@@ -124,24 +128,24 @@ public class DetailsLayoutEducation extends Activity {
 
         CheckConcate("প্রতিষ্ঠানের ধরণ ",educationNewItem.getEdtype());
         CheckConcate("শাখা",educationNewItem.getShift());
-        CheckConcate("পুরুষ ডাক্তার",educationNewItem.getStudentno());
-        CheckConcate("মহিলা ডাক্তার",educationNewItem.getTeachersno());
-        CheckConcate("রোগী এবং ডাক্তারের অনুপাত",educationNewItem.getClassno());
-        CheckConcate("পুরুষ ডাক্তার",educationNewItem.getAdditional());
-        CheckConcate("মহিলা ডাক্তার",educationNewItem.getMalestudent());
-        CheckConcate("রোগী নার্সের অনুপাত",educationNewItem.getFemalestudent());
+        CheckConcate("ছাত্রছাত্রী সংখ্যা",educationNewItem.getStudentno());
+        CheckConcate("শিক্ষক সংখ্যা",educationNewItem.getTeachersno());
+        CheckConcate("ক্লাস সংখ্যা",educationNewItem.getClassno());
+        CheckConcate("অন্যান্য তথ্য",educationNewItem.getAdditional());
+        CheckConcate("ছাত্র সংখ্যা",educationNewItem.getMalestudent());
+        CheckConcate("ছাত্রী সংখ্যা",educationNewItem.getFemalestudent());
 
-        CheckConcate("প্রতিস্টানের ধরন",educationNewItem.getSpecialneeds());
-        CheckConcate("",educationNewItem.getWashroom_no());
-        CheckConcate("পুরুষ ডাক্তার",educationNewItem.getWashroom_male());
-        CheckConcate("মহিলা ডাক্তার",educationNewItem.getWashroomcleanliness());
-        CheckConcate("রোগী এবং ডাক্তারের অনুপাত",educationNewItem.getWatercondition());
-        CheckConcate("পুরুষ ডাক্তার",educationNewItem.getWatersource());
-        CheckConcate("মহিলা ডাক্তার",educationNewItem.getAveragestudent());
-        CheckConcate("রোগী নার্সের অনুপাত",educationNewItem.getWashroomfemale());
+        CheckConcate("বিশেষ সুবিধা",educationNewItem.getSpecialneeds());
+        CheckConcate("বাথরুম সংখ্যা",educationNewItem.getWashroom_no());
+        CheckConcate("ছেলেদের বাথরুম",educationNewItem.getWashroom_male());
+        CheckConcate("বাথরুমের অবস্থা",educationNewItem.getWashroomcleanliness());
+        CheckConcate("খাবার পানির অবস্থা",educationNewItem.getWatercondition());
+        CheckConcate("খাবার পানির উৎস",educationNewItem.getWatersource());
+        CheckConcate("গড় ছাত্রছাত্রী",educationNewItem.getAveragestudent());
+        CheckConcate("মেয়েদের বাথরুম ",educationNewItem.getWashroomfemale());
 
         CheckConcate("পরিচিত স্থান",educationNewItem.getLandmark());
-        CheckConcate("ব্লক",educationNewItem.getAddress());
+        CheckConcate("ঠিকানা",educationNewItem.getAddress());
         CheckConcate("ফ্লোর",educationNewItem.getFloor());
         CheckConcate("বাড়ির নাম",educationNewItem.getHousename());
         CheckConcate("রাস্তা",educationNewItem.getRoad());
@@ -150,20 +154,20 @@ public class DetailsLayoutEducation extends Activity {
         CheckConcate("পোস্ট অফিস",educationNewItem.getPostoffice());
         CheckConcate("পুলিশ স্টেশন",educationNewItem.getPolicestation());
 
-        CheckConcate("পুলিশ স্টেশন",educationNewItem.getNode_contact());
-        CheckConcate("পুলিশ স্টেশন",educationNewItem.getNode_contact2());
-        CheckConcate("পুলিশ স্টেশন",educationNewItem.getNode_email());
-        CheckConcate("পুলিশ স্টেশন",educationNewItem.getNode_website());
-        CheckConcate("পুলিশ স্টেশন",educationNewItem.getNode_facebook());
-        CheckConcate("পুলিশ স্টেশন",educationNewItem.getNode_designation());
+        CheckConcate("যোগাযোগ",educationNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ",educationNewItem.getNode_contact2());
+        CheckConcate("ইমেইল",educationNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট",educationNewItem.getNode_website());
+        CheckConcate("ফেসবুক",educationNewItem.getNode_facebook());
+        CheckConcate("তথ্যপ্রদান কারীর পদবী",educationNewItem.getNode_designation());
 
 
         timeProcessing("খোলার সময়",educationNewItem.getOpeningtime());
         timeProcessing("বন্ধে সময়",educationNewItem.getClosetime());
         CheckConcate("বিরতির সময়",educationNewItem.getBreaktime());
-        CheckConcate("ছুটির দিন",educationNewItem.getOffday());
-        CheckConcate("বিরতির সময়",educationNewItem.getRegisterednumber());
-        CheckConcate("ছুটির দিন",educationNewItem.getRegisteredwith());
+        CheckConcate("কবে বন্ধ থাকে",educationNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার",educationNewItem.getRegisterednumber());
+        CheckConcate("কাদের সাথে রেজিস্টার্ড ",educationNewItem.getRegisteredwith());
         educationResultItemNews=educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
         int result_size=educationResultItemNews.size();
         if(result_size!=0)
@@ -172,11 +176,11 @@ public class DetailsLayoutEducation extends Activity {
             {
                 //result_concate="";
 
-                CheckConcate("সেবার ধরন",educationResultItemNew.getExamname());
-                CheckConcate("ডাক্তারের সংখা",educationResultItemNew.getStudentno());
-                CheckConcate("প্রথম ভিজিট ফি",educationResultItemNew.getPassed());
-                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",educationResultItemNew.getGoldena());
-                CheckConcate("এক মাসের মধ্যে ভিজিট ফি",educationResultItemNew.getAplus());
+                CheckConcate("পরীক্ষা নাম",educationResultItemNew.getExamname());
+                CheckConcate("ছাত্রছাত্রী সংখ্যা",educationResultItemNew.getStudentno());
+                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী",educationResultItemNew.getPassed());
+                CheckConcate("গোল্ডেন এ",educationResultItemNew.getGoldena());
+                CheckConcate("জিপিএ ৫",educationResultItemNew.getAplus());
 
 
 
@@ -192,11 +196,11 @@ public class DetailsLayoutEducation extends Activity {
             {
 
 
-                CheckConcate("সেবার ধরন",educationTrainingDetailsItem.getCourseduration());
-                CheckConcate("ডাক্তারের সংখা",educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("প্রথম ভিজিট ফি",educationTrainingDetailsItem.getCost());
-                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",educationTrainingDetailsItem.getTrainingnametype());
-                CheckConcate("এক মাসের মধ্যে ভিজিট ফি",educationTrainingDetailsItem.getTrainingnamesubtype());
+                CheckConcate("কত মাসের কোর্স",educationTrainingDetailsItem.getCourseduration());
+                CheckConcate("ভর্তি (মাস)",educationTrainingDetailsItem.getAdmissionmonth());
+                CheckConcate("খরচ",educationTrainingDetailsItem.getCost());
+                CheckConcate("ধরন",educationTrainingDetailsItem.getTrainingnametype());
+                CheckConcate("ট্রেনিং এর নাম",educationTrainingDetailsItem.getTrainingnamesubtype());
 
 
 
@@ -212,17 +216,17 @@ public class DetailsLayoutEducation extends Activity {
             {
                 //result_concate="";
 
-                CheckConcate("সেবার ধরন",educationTuitionDetailsItem.getTuitionlevel());
-                CheckConcate("ডাক্তারের সংখা",educationTuitionDetailsItem.getTuitionfree());
-                CheckConcate("প্রথম ভিজিট ফি",educationTuitionDetailsItem.getTuitionstipendfacility());
-                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",educationTuitionDetailsItem.getTuitionstipendtype());
-                CheckConcate("এক মাসের মধ্যে ভিজিট ফি",educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("রিপোর্ট ফি",educationTuitionDetailsItem.getTuitionminfee());
+                CheckConcate("কোন ক্লাস পড়ান হয়",educationTuitionDetailsItem.getTuitionlevel());
+                CheckConcate("খরচ",educationTuitionDetailsItem.getTuitionfree());
+                CheckConcate("বৃত্তি সুবিধা",educationTuitionDetailsItem.getTuitionstipendfacility());
+                CheckConcate("বৃত্তি সুবিধার ধরন",educationTuitionDetailsItem.getTuitionstipendtype());
+                CheckConcate("পড়া সম্পর্কিত তথ্যি",educationTuitionDetailsItem.getTuitiondetails());
+                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ",educationTuitionDetailsItem.getTuitionminfee());
 
-                CheckConcate("প্রথম ভিজিট ফি",educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি",educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("এক মাসের মধ্যে ভিজিট ফি",educationTuitionDetailsItem.getTuitionmaxcoaching());
-                CheckConcate("রিপোর্ট ফি",educationTuitionDetailsItem.getTuitionadditional());
+                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ",educationTuitionDetailsItem.getTuitionmaxfee());
+                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ",educationTuitionDetailsItem.getTuitionmincoaching());
+                CheckConcate("সর্বোচ্চ খরচ( কোচিং)",educationTuitionDetailsItem.getTuitionmaxcoaching());
+                CheckConcate("অন্যান্য তথ্য",educationTuitionDetailsItem.getTuitionadditional());
 
 
             }
@@ -244,32 +248,33 @@ public class DetailsLayoutEducation extends Activity {
         });
 
 
-       /* checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int compareValue;
-                compareValue= SharedPreferencesHelper.getComapreValueHealth(DetailsLayoutEducation.this);
+               String node= String.valueOf(educationNewItem.getEduId());
+                compareValue= SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
                 if(compareValue>=2)
                     AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
                             "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
                 else if (compareValue==0)
                 {
                     Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsLayoutEducation.this,healthServiceProviderItemNew.getId(),1);
+                    SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this,node,1);
                 }
 
                 else if(compareValue==1)
                 {
                     String previous_node;
-                    previous_node=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                    previous_node= previous_node+" "+healthServiceProviderItemNew.getId();
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,previous_node,2);
+                    previous_node=SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                    previous_node= previous_node + " " + node;
+                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this,previous_node,2);
                 }
 
 
             }
         });
-*/
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
