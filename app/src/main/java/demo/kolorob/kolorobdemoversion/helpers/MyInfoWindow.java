@@ -16,7 +16,7 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
-import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutfinance;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
@@ -129,7 +129,7 @@ public class MyInfoWindow extends InfoWindow {
                         layout.setVisibility(View.VISIBLE);
                         FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(MyInfoWindow.this.con);
                         nullfin = financialServiceNewTable.getfinNode2(n);
-                        Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutFinance.class);
+                        Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutfinance.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
                         MyInfoWindow.this.con.startActivity(iifin);
 
