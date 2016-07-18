@@ -90,7 +90,6 @@ public class PhoneRegActivity extends Activity {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
         } else {
-            SharedPreferencesHelper.setNumber(con,phoneNumber);
             sendPhoneNumberToServer(phoneNumber);
         }
     }
@@ -98,6 +97,8 @@ public class PhoneRegActivity extends Activity {
 
     public void sendPhoneNumberToServer(final String phone)
     {
+
+       // http://kolorob.net/demo/api/customer_reg?phone=01711310912
         String url = "http://www.kolorob.net/KolorobApi/api/customers/register?phone="+phone;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -115,6 +116,7 @@ public class PhoneRegActivity extends Activity {
 
                             if(forms.equals("true"))
                             {
+                                SharedPreferencesHelper.setNumber(con,phoneNumber);
                                 AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
