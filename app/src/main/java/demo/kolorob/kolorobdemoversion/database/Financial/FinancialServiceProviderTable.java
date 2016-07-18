@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -253,6 +254,7 @@ private  FinancialServiceProviderItem financialServiceProviderItem;
         closeDB();
         return subCatList;
     }
+
     public ArrayList<FinancialServiceProviderItem> Finnames(int cat_id,String head,String a,String place) {
         String subcatnames=null;
         subcatnames=a;

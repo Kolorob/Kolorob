@@ -40,7 +40,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -93,7 +93,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
-    private ArrayList<FinancialServiceProviderItem> financialServiceProvider = null;
+    private ArrayList<FinancialNewItem> financialServiceProvider = null;
     private ArrayList<EducationNewItem> educationServiceProvider = null;
     MapView mapView,mapp;
     private int categoryId;
@@ -124,7 +124,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.legalaidServiceProvider = et;
     }
 
-    public void setFinancialServiceProvider(ArrayList<FinancialServiceProviderItem> et) {
+    public void setFinancialServiceProvider(ArrayList<FinancialNewItem> et) {
         this.financialServiceProvider = et;
     }
 
@@ -252,13 +252,13 @@ setMapView(mapView);
                 }
                 break;
             case AppConstants.FINANCIAL:
-                for (FinancialServiceProviderItem et : financialServiceProvider) {
+                for (FinancialNewItem et : financialServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId = et.getRefNum();
-                    latDouble = Double.parseDouble(et.getLatitude());
-                    longDouble = Double.parseDouble(et.getLongitude());
+                    subcategotyId2 = et.getRefnumm();
+                    latDouble = Double.parseDouble(et.getLat());
+                    longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerFin(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getRefNum());
+                    drawMarkerFin(point, et.getNamebn(), et.getAddress(), et.getNode_contact(), et.getFinId(), subcategotyId2);
                 }
                 break;
             case AppConstants.JOB:
@@ -415,27 +415,33 @@ setMapView(mapView);
         mapView.getOverlays().add(marker);
     }
 
-    private void drawMarkerFin(GeoPoint point, String title, String address, String contact, String node, int subcategotyId) {
+    private void drawMarkerFin(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+        String delims = "[,]";
+        String[] tokens = subcategotyId2.split(delims);
+
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        if (subcategotyId >= 1 && subcategotyId <= 4)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-        else if (subcategotyId >= 5 && subcategotyId <= 8)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-        else if (subcategotyId >= 20 && subcategotyId <= 21)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-        else if (subcategotyId >= 9 && subcategotyId <= 12)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-        else if (subcategotyId >= 13 && subcategotyId <= 15)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
-        else if (subcategotyId >= 16 && subcategotyId <= 18)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+        for(int i=0;i<tokens.length;i++) {
+            subcategotyId=Integer.parseInt(tokens[i]);
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-        marker.setInfoWindow(infoWindow);
+            if (subcategotyId ==179||subcategotyId ==163||subcategotyId ==161||subcategotyId ==145)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            else if (subcategotyId >= 13 && subcategotyId <= 17)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            else if (subcategotyId >= 18 && subcategotyId <= 19)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            else if (subcategotyId >= 20 && subcategotyId <= 21)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            else if (subcategotyId ==24||subcategotyId ==94||subcategotyId ==64||subcategotyId ==63||subcategotyId ==7)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
 
-        mapView.getOverlays().add(marker);
+            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+            marker.setInfoWindow(infoWindow);
+
+            mapView.getOverlays().add(marker);
+            //marker.setTitle("Title of the marker");
+        }
     }
 public void DrawRoute(String lat, String lon)
 {

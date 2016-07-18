@@ -42,13 +42,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -57,7 +53,7 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 /**
  * Created by israt.jahan on 7/17/2016.
  */
-public class DetailsLayoutEducation extends Activity {
+public class DetailsLayoutfinance extends Activity {
     Dialog dialog;
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
     ImageView left_image, middle_image, right_image, email_btn;
@@ -66,11 +62,9 @@ public class DetailsLayoutEducation extends Activity {
     TextView ups_text;
     ListView courseListView, listView;
     Context con;
-    EducationNewItem educationNewItem;
+    FinancialNewItem financialNewItem;
 
-    ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
-    ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
-    ArrayList<EducationResultItemNew> educationResultItemNews;
+    ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
@@ -90,7 +84,7 @@ public class DetailsLayoutEducation extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_layout_education);
+        setContentView(R.layout.activity_details_layout_finance);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
@@ -101,14 +95,13 @@ public class DetailsLayoutEducation extends Activity {
 
 
         if (null != intent) {
-            educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU);
+            financialNewItem = (FinancialNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIALNEW);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
-        EducationTuitionDetailsTable educationTuitionDetailsTable = new EducationTuitionDetailsTable(DetailsLayoutEducation.this);
-        EducationTrainingDetailsTable educationTrainingDetailsTable = new EducationTrainingDetailsTable(DetailsLayoutEducation.this);
-        EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(DetailsLayoutEducation.this);
+        FinancialServiceDetailsTable financialServiceDetailsTable = new FinancialServiceDetailsTable(DetailsLayoutfinance.this);
+
 
 
         courseListView = (ListView) findViewById(R.id.courseListView);
@@ -148,98 +141,44 @@ public class DetailsLayoutEducation extends Activity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
-        CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", educationNewItem.getStudentno());
-        CheckConcate("শিক্ষক সংখ্যা", educationNewItem.getTeachersno());
-        CheckConcate("ক্লাস সংখ্যা", educationNewItem.getClassno());
-        CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
-        CheckConcate("ছাত্র সংখ্যা", educationNewItem.getMalestudent());
-        CheckConcate("ছাত্রী সংখ্যা", educationNewItem.getFemalestudent());
-
-        CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা", educationNewItem.getWashroom_no());
-        CheckConcate("ছেলেদের বাথরুম", educationNewItem.getWashroom_male());
-        CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
-        CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
-        CheckConcate("খাবার পানির উৎস", educationNewItem.getWatersource());
-        CheckConcate("গড় ছাত্রছাত্রী", educationNewItem.getAveragestudent());
-        CheckConcate("মেয়েদের বাথরুম ", educationNewItem.getWashroomfemale());
-
-        CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
-        CheckConcate("ঠিকানা", educationNewItem.getAddress());
-        CheckConcate("ফ্লোর", educationNewItem.getFloor());
-        CheckConcate("বাড়ির নাম", educationNewItem.getHousename());
-        CheckConcate("রাস্তা", educationNewItem.getRoad());
-        CheckConcate("লাইন ", educationNewItem.getLine());
-        CheckConcate("এভিনিউ", educationNewItem.getAvenue());
-        CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
-
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact2());
-        CheckConcate("ইমেইল", educationNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট", educationNewItem.getNode_website());
-        CheckConcate("ফেসবুক", educationNewItem.getNode_facebook());
-        CheckConcate("তথ্যপ্রদান কারীর পদবী", educationNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
-        timeProcessing("বন্ধে সময়", educationNewItem.getClosetime());
-        CheckConcate("বিরতির সময়", educationNewItem.getBreaktime());
-        CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
-        educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
-        int result_size = educationResultItemNews.size();
-        if (result_size != 0) {
-            for (EducationResultItemNew educationResultItemNew : educationResultItemNews) {
-                //result_concate="";
+        CheckConcate("পরিচিত স্থান", financialNewItem.getLandmark());
+        CheckConcate("ঠিকানা", financialNewItem.getAddress());
+        CheckConcate("ফ্লোর", financialNewItem.getFloor());
+        CheckConcate("বাড়ির নাম", financialNewItem.getHousename());
+        CheckConcate("রাস্তা", financialNewItem.getRoad());
+        CheckConcate("লাইন ", financialNewItem.getLine());
+        CheckConcate("এভিনিউ", financialNewItem.getAvenue());
+        CheckConcate("পোস্ট অফিস", financialNewItem.getPostoffice());
+        CheckConcate("পুলিশ স্টেশন", financialNewItem.getPolicestation());
 
-                CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
-                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
-                CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
-                CheckConcate("জিপিএ ৫", educationResultItemNew.getAplus());
-
-
-            }
+        CheckConcate("যোগাযোগ", financialNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ", financialNewItem.getNode_contact2());
+        CheckConcate("ইমেইল", financialNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট", financialNewItem.getNode_website());
+        CheckConcate("ফেসবুক", financialNewItem.getNode_facebook());
+        CheckConcate("তথ্যপ্রদান কারীর পদবী", financialNewItem.getNode_designation());
 
 
-        }
-        educationTrainingDetailsItems = educationTrainingDetailsTable.gettrainingInfo(educationNewItem.getEduId());
-        int training_size = educationTrainingDetailsItems.size();
-        if (training_size != 0) {
-            for (EducationTrainingDetailsItem educationTrainingDetailsItem : educationTrainingDetailsItems) {
+        timeProcessing("খোলার সময়", financialNewItem.getOpeningtime());
+        timeProcessing("বন্ধে সময়", financialNewItem.getClosetime());
+        CheckConcate("বিরতির সময়", financialNewItem.getBreaktime());
+        CheckConcate("কবে বন্ধ থাকে", financialNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার", financialNewItem.getRegisterednumber());
+        CheckConcate("কাদের সাথে রেজিস্টার্ড ", financialNewItem.getRegisteredwith());
 
-
-                CheckConcate("কত মাসের কোর্স", educationTrainingDetailsItem.getCourseduration());
-                CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("খরচ", educationTrainingDetailsItem.getCost());
-                CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
-                CheckConcate("ট্রেনিং এর নাম", educationTrainingDetailsItem.getTrainingnamesubtype());
-
-
-            }
-        }
-
-        educationTuitionDetailsItems = educationTuitionDetailsTable.gettuitionInfo(educationNewItem.getEduId());
-        int tuition_size = educationTuitionDetailsItems.size();
+        financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
+        int tuition_size = financialServiceDetailsItems.size();
         if (tuition_size != 0) {
-            for (EducationTuitionDetailsItem educationTuitionDetailsItem : educationTuitionDetailsItems) {
+            for (FinancialServiceDetailsItem financialServiceDetailsItem : financialServiceDetailsItems) {
                 //result_concate="";
 
-                CheckConcate("কোন ক্লাস পড়ান হয়", educationTuitionDetailsItem.getTuitionlevel());
-                CheckConcate("খরচ", educationTuitionDetailsItem.getTuitionfree());
-                CheckConcate("বৃত্তি সুবিধা", educationTuitionDetailsItem.getTuitionstipendfacility());
-                CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
-                CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionminfee());
+                CheckConcate("কোন ক্লাস পড়ান হয়", financialServiceDetailsItem.getServicecost());
+                CheckConcate("খরচ", financialServiceDetailsItem.getServiceremark());
+                CheckConcate("বৃত্তি সুবিধা", financialServiceDetailsItem.getServicesubtype());
+                CheckConcate("বৃত্তি সুবিধার ধরন", financialServiceDetailsItem.getServicetype());
 
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", educationTuitionDetailsItem.getTuitionmaxcoaching());
-                CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
 
 
             }
@@ -260,7 +199,7 @@ public class DetailsLayoutEducation extends Activity {
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (educationNewItem.getNode_contact2().equals("")) {
+                if (financialNewItem.getNode_contact2().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
@@ -270,19 +209,19 @@ public class DetailsLayoutEducation extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int compareValue;
-                String node = String.valueOf(educationNewItem.getEduId());
-                compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
+                String node = String.valueOf(financialNewItem.getFinId());
+                compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutfinance.this);
                 if (compareValue >= 2)
                     AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
                             "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
                 else if (compareValue == 0) {
                     Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this, node, 1);
+                    SharedPreferencesHelper.setCompareData(DetailsLayoutfinance.this, node, 1);
                 } else if (compareValue == 1) {
                     String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutfinance.this);
                     previous_node = previous_node + " " + node;
-                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutfinance.this, previous_node, 2);
                 }
 
 
@@ -340,7 +279,7 @@ public class DetailsLayoutEducation extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
-        ups_text.setText(educationNewItem.getNamebn());
+        ups_text.setText(financialNewItem.getNamebn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -352,8 +291,8 @@ public class DetailsLayoutEducation extends Activity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!educationNewItem.getNode_contact().equals("")) {
-                    callIntent1.setData(Uri.parse("tel:" + educationNewItem.getNode_contact()));
+                if (!financialNewItem.getNode_contact().equals("")) {
+                    callIntent1.setData(Uri.parse("tel:" + financialNewItem.getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
@@ -377,10 +316,10 @@ public class DetailsLayoutEducation extends Activity {
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent feedIntent = new Intent(DetailsLayoutEducation.this, FeedBackActivityNew.class);
-                feedIntent.putExtra("id", educationNewItem.getEduId());
+                Intent feedIntent = new Intent(DetailsLayoutfinance.this, FeedBackActivityNew.class);
+                feedIntent.putExtra("id", financialNewItem.getFinId());
                 feedIntent.putExtra("categoryId", "1");
-                Log.d(">>>>", "Button is clicked1 " + educationNewItem.getEduId());
+                Log.d(">>>>", "Button is clicked1 " + financialNewItem.getFinId());
 
                 startActivity(feedIntent);
 
@@ -393,12 +332,12 @@ public class DetailsLayoutEducation extends Activity {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = educationNewItem.getLat().toString();
+                    String lat = financialNewItem.getLat().toString();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = educationNewItem.getLon().toString();
+                    String lon = financialNewItem.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
-                    String name= educationNewItem.getNamebn().toString();
-                    String node=String.valueOf(educationNewItem.getEduId());
+                    String name= financialNewItem.getNamebn().toString();
+                    String node=String.valueOf(financialNewItem.getFinId());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -426,14 +365,14 @@ public class DetailsLayoutEducation extends Activity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showSettingsAlert(DetailsLayoutEducation.this);
+                    AppUtils.showSettingsAlert(DetailsLayoutfinance.this);
 
                 }
 
                 else
                 {
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutfinance.this, AlertDialog.THEME_HOLO_LIGHT).create();
                     alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
                     alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -508,9 +447,9 @@ public class DetailsLayoutEducation extends Activity {
     public void feedBackAlert()
     {
 
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutfinance.this);
         View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutEducation.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutfinance.this);
         alertDialogBuilder.setView(promptView);
 
 
@@ -547,13 +486,13 @@ public class DetailsLayoutEducation extends Activity {
             rating=2;
         else
             rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationNewItem.getEduId()+"&service="+"1"+"&rating="+rating;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialNewItem.getFinId()+"&service="+"1"+"&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutEducation.this,response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailsLayoutfinance.this,response,Toast.LENGTH_SHORT).show();
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);
@@ -564,11 +503,11 @@ public class DetailsLayoutEducation extends Activity {
 
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(DetailsLayoutEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                AlertMessage.showMessage(DetailsLayoutfinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                AlertMessage.showMessage(DetailsLayoutfinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
 
 
@@ -582,7 +521,7 @@ public class DetailsLayoutEducation extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DetailsLayoutEducation.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailsLayoutfinance.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }) {
 
@@ -598,7 +537,7 @@ public class DetailsLayoutEducation extends Activity {
 
  //Adding request to request queue
 
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutEducation.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutfinance.this);
        requestQueue.add(stringRequest);
     }
 
@@ -615,9 +554,9 @@ public class DetailsLayoutEducation extends Activity {
 
    public void requestToRegister()
     {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutfinance.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutEducation.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutfinance.this);
         alertDialogBuilder.setView(promptView);
 
 
@@ -631,7 +570,7 @@ public class DetailsLayoutEducation extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intentPhoneRegistration= new Intent(DetailsLayoutEducation.this,PhoneRegActivity.class);
+                Intent intentPhoneRegistration= new Intent(DetailsLayoutfinance.this,PhoneRegActivity.class);
                 startActivity(intentPhoneRegistration);
 
             }

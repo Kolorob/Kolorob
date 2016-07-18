@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -270,7 +269,7 @@ public class GovernmentNewTable {
         closeDB();
         return false;
     }
-    private FinancialNewItem cursorToSubCatList(Cursor cursor) {
+    private GovernmentNewItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
         String _nameen= cursor.getString(1);
         String _namebn = cursor.getString(2);
@@ -309,7 +308,7 @@ public class GovernmentNewTable {
         String _regnum = cursor.getString(29);
         int _catid=cursor.getInt(30);
         String _refnumm=cursor.getString(31);
-        return new FinancialNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
+        return new GovernmentNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,

@@ -342,7 +342,22 @@ public class EducationNewTable {
         return ret;
 
     }
+    public ArrayList<EducationNewItem> getEducationData(String node_id) {
+        ArrayList<EducationNewItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_NODE_ID +" = "+node_id, null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public ArrayList<EducationNewItem> getAllSubCat() {
         ArrayList<EducationNewItem> siList = new ArrayList<>();
 

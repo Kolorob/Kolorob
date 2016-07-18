@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -35,6 +36,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -50,7 +52,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -72,6 +73,7 @@ import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
@@ -80,10 +82,12 @@ import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
@@ -96,7 +100,6 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
-
 /**
  * Created by touhid on 12/3/15.
  *
@@ -107,8 +110,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return showList;
     }
     EducationServiceProviderTable educationServiceProviderTable;
-    ArrayList<EducationServiceProviderItem> firstDataSet;
-    ArrayList<EducationServiceProviderItem> secondDataSet;
+    EducationNewTable educationNewTable;
+    ArrayList<EducationNewItem> firstDataSet;
+    ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
     public void setShowList(int showList) {
@@ -124,7 +128,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
-    private Spinner spItems;
+    private KolorobSpinner spItems;
     ArrayAdapter arrayAdapter;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
@@ -276,6 +280,7 @@ RelativeLayout searchviewholder,filterholder;
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
+
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItem> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
@@ -286,10 +291,11 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<HealthServiceProviderItem> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItem>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
-    ArrayList<FinancialServiceProviderItem>FIN=new ArrayList<>();
+    ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
+    EducationNewItem nulledu2;
     String nodefromback;
 
     public String getNodefromback() {
@@ -592,12 +598,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
         // callMapFragment();
-        spItems = (Spinner) findViewById(R.id.areaitems);
+        spItems = (KolorobSpinner) findViewById(R.id.areaitems);
         spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
         spItems.setAdapter(arrayAdapter);
-        spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        spItems.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -613,6 +621,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 if(mapcalledstatus){
 
                 }
+
             }
 
             @Override
@@ -659,7 +668,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
-
+                    toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.VISIBLE);
                 }
@@ -669,6 +678,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     filterholder.setVisibility(View.GONE);
                 }
                 else filterholder.setVisibility(View.VISIBLE);
+                toggleButton.setVisibility(View.VISIBLE);
 
             }
         });
@@ -711,7 +721,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                 }
-
+                toggleButton.setVisibility(View.VISIBLE);
                 map.setVisibility(View.VISIBLE);
 
 
@@ -762,7 +772,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                 setShowList(1);
-
+                toggleButton.setVisibility(View.VISIBLE);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
@@ -796,7 +806,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     CompareClicked=true;
 
 
-                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==0)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
@@ -806,12 +816,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                             "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
                 }
-                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==1)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                     }
-                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==1)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
@@ -852,6 +862,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }else{
                             compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
                         }
+                        toggleButton.setVisibility(View.GONE);
                         SearchButton.setBackgroundResource(R.drawable.search);
                         ListButton.setBackgroundResource(R.drawable.list);
                         MapButton.setBackgroundResource(R.drawable.map);
@@ -994,37 +1005,39 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void compareEducation()
     {
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        firstDataSet=educationServiceProviderTable.getEducationData(firstData);
-        secondDataSet=educationServiceProviderTable.getEducationData(SecondData);
+        educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+
+        firstDataSet=educationNewTable.getEducationData(String.valueOf(firstData));
+        secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
 
 
-        for (EducationServiceProviderItem educationServiceProviderItem: firstDataSet)
+        for (EducationNewItem educationNewItem: firstDataSet)
         {
-            edu_name_ban.setText(educationServiceProviderItem.getEduNameEng());
-            edtype.setText(educationServiceProviderItem.getEduType());
-            hostel_facility.setText(educationServiceProviderItem.getHostelFacility());
-            transport_facility.setText(educationServiceProviderItem.getTransportFacility());
-            playground.setText(educationServiceProviderItem.getPlayground());
-            total_students.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
-            total_classes.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
-            total_teachers.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
-            course_provided.setText(educationServiceProviderItem.getCourseProvided());
-            shift.setText(educationServiceProviderItem.getShift());
-            canteen_facility.setText(educationServiceProviderItem.getCanteenFacility());
+            edu_name_ban.setText(educationNewItem.getNamebn());
+            edtype.setText(educationNewItem.getEdtype());
+            hostel_facility.setText(educationNewItem.getFloor());
+            transport_facility.setText(educationNewItem.getAddress());
+            playground.setText(educationNewItem.getAveragestudent());
+            total_students.setText(String.valueOf(educationNewItem.getStudentno()));
+            total_classes.setText(String.valueOf(educationNewItem.getClassno()));
+            total_teachers.setText(String.valueOf(educationNewItem.getTeachersno()));
+            course_provided.setText(educationNewItem.getWatercondition());
+            shift.setText(educationNewItem.getShift());
+            canteen_facility.setText(educationNewItem.getWatersource());
         }
-        for (EducationServiceProviderItem educationServiceProviderItem: secondDataSet)
+        for (EducationNewItem educationNewItem: secondDataSet)
         {
-            edu_name_ban1.setText(educationServiceProviderItem.getEduNameEng());
-            edtype1.setText(educationServiceProviderItem.getEduType());
-            hostel_facility1.setText(educationServiceProviderItem.getHostelFacility());
-            transport_facility1.setText(educationServiceProviderItem.getTransportFacility());
-            playground1.setText(educationServiceProviderItem.getPlayground());
-            total_students1.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
-            total_classes1.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
-            total_teachers1.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
-            course_provided1.setText(educationServiceProviderItem.getCourseProvided());
-            shift1.setText(educationServiceProviderItem.getShift());
-            canteen_facility1.setText(educationServiceProviderItem.getCanteenFacility());
+            edu_name_ban1.setText(educationNewItem.getNamebn());
+            edtype1.setText(educationNewItem.getEdtype());
+            hostel_facility1.setText(educationNewItem.getFloor());
+            transport_facility1.setText(educationNewItem.getAddress());
+            playground1.setText(educationNewItem.getAveragestudent());
+            total_students1.setText(String.valueOf(educationNewItem.getStudentno()));
+            total_classes1.setText(String.valueOf(educationNewItem.getClassno()));
+            total_teachers1.setText(String.valueOf(educationNewItem.getTeachersno()));
+            course_provided1.setText(educationNewItem.getWatercondition());
+            shift1.setText(educationNewItem.getShift());
+            canteen_facility1.setText(educationNewItem.getWatersource());
         }
 
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
@@ -1340,10 +1353,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             {
                 NavigationCalledOnce=true;
                 String node=getNodefromback();
-                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this.con);
-                nulledu = educationServiceProviderTable.geteduNode2(node);
-                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsInfoActivityEducation.class);
-                iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+                EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this.con);
+                nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
+                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsLayoutEducation.class);
+                iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
                 this.startActivity(iient);
 
             }
@@ -1485,6 +1498,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 switch (currentCategoryID) {
 
                     case AppConstants.EDUCATION:
+                        MediaPlayer mp_e = MediaPlayer.create(getApplicationContext(), R.raw.education);
+                        mp_e.start();
+
                         EDD.clear();
                         educlicked=true;
                         setFilcatid(currentCategoryID);
@@ -1524,6 +1540,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         break;
                     case AppConstants.HEALTH:
+                        MediaPlayer mp_h = MediaPlayer.create(getApplicationContext(), R.raw.health);
+                        mp_h.start();
                         HEL.clear();
                         helclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1545,6 +1563,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
+
                         ENT.clear();
                         entclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1565,7 +1584,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             llSubCatListHolder.setVisibility(View.GONE);
 
 
-
+                        MediaPlayer mp_en = MediaPlayer.create(getApplicationContext(), R.raw.entertainment);
+                        mp_en.start();
 
 
 
@@ -1577,6 +1597,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
+                        MediaPlayer mp_g = MediaPlayer.create(getApplicationContext(), R.raw.government);
+                        mp_g.start();
                         govclicked=true;
                         setFilcatid(currentCategoryID);
                         filterholder.setVisibility(View.VISIBLE);
@@ -1606,6 +1628,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         alertDialog.show();*/
                         break;
                     case AppConstants.LEGAL:
+                        MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
+                        mp_l.start();
                         LEG.clear();
                         legclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1634,6 +1658,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         break;
                     case AppConstants.FINANCIAL:
+                        MediaPlayer mp_f = MediaPlayer.create(getApplicationContext(), R.raw.finance);
+                        mp_f.start();
                         FIN.clear();
                         finclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1643,9 +1669,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
-                        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-                        financialServiceProvider = constructfinancialListItem(ci.getId());
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialServiceProvider);
+                        ArrayList<FinancialNewItem> financialNewItems;
+                        financialNewItems = constructfinancialListItem();
+                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialNewItems);
                         mapcalledstatus=true;
 
 
@@ -1659,6 +1685,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         break;
                     case AppConstants.JOB:
+                        MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
+                        mp_j.start();
                         JJOB.clear();
                         jobclicked=true;
                         setFilcatid(currentCategoryID);
@@ -2094,7 +2122,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.FINANCIAL:
                         Headerholder.add(si.getSubcatHeader());
-                        for(int s=0;s<Headerholder.size();s++)
+                        /*for(int s=0;s<Headerholder.size();s++)
                         {
                             financialItem = constructfinancialListItemForHeader(cat_id,  Headerholder.get(s));
 
@@ -2104,7 +2132,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             FIN.add(financialItem.get(ss));
                         }
 
-                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
+                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);*/
                         break;
                     case AppConstants.JOB:
                         map.removeAllViews();
@@ -2332,9 +2360,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(finclicked){
                // finclicked=false;
                 mapFragment.setCategoryId(6);
-                ArrayList<FinancialServiceProviderItem> financialServiceProviderItems;
-                financialServiceProviderItems = constructfinancialListItem(6);
-                mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+                ArrayList<FinancialNewItem> financialNewItems;
+                financialNewItems = constructfinancialListItem();
+                mapFragment.setFinancialServiceProvider(financialNewItems);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
@@ -2459,23 +2487,23 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
     /**********************************************************Methods for financial**********************************************/
-    private ArrayList<FinancialServiceProviderItem> constructfinancialListItem(int cat_id)
+    private ArrayList<FinancialNewItem> constructfinancialListItem()
     {
-        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfo(cat_id);
-        return financialServiceProvider;
+        ArrayList<FinancialNewItem> financialNewItems;
+        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo();
+        return financialNewItems;
     }
 
-    private ArrayList<FinancialServiceProviderItem> constructfinancialListItemForHeader(int cat_id, String header)
+    /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)
     {
-        ArrayList<FinancialServiceProviderItem> financialServiceProvider;
-        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        financialServiceProvider = financialServiceProviderTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
+        ArrayList<FinancialNewItem> financialServiceProvider;
+        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+      //  financialServiceProvider = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
         return financialServiceProvider;
-    }
+    }*/
 
-    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialServiceProviderItem> financialServiceProviderItems)
+    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2779,6 +2807,8 @@ NavigationCalled=true;
             llCatListHolder.setVisibility(View.GONE);
             llSubCatListHolder.setVisibility(View.GONE);
             toggleButton.setVisibility(View.GONE);
+            svsholder.setVisibility(View.GONE);
+            svholder.setVisibility(View.GONE);
             implementRouteDrawingFragmentOSM();
         }
 
@@ -2855,4 +2885,7 @@ NavigationCalled=true;
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
+
 }
