@@ -169,7 +169,6 @@ int countofDb;
 
 
     Context context;
-    Spinner spinner2,spinner3,spinner4;
     ImageView rotateImage;
     private Handler handler;
     int in = 0;
@@ -227,22 +226,22 @@ int countofDb;
         }
         else if(in ==4){
             rotateImage.setBackgroundResource(R.drawable.a12);
-            System.out.println("-----okkkkk2--------");
+            System.out.println("-----okkkkk12--------");
 
         }
         else if(in ==5){
             rotateImage.setBackgroundResource(R.drawable.a15);
-            System.out.println("-----okkkkk2--------");
+            System.out.println("-----okkkkk15--------");
 
         }
         else if(in ==6){
             rotateImage.setBackgroundResource(R.drawable.a16);
-            System.out.println("-----okkkkk2--------");
+            System.out.println("-----okkkkk16-------");
 
         }
         else if(in ==7){
             rotateImage.setBackgroundResource(R.drawable.a18);
-            System.out.println("-----okkkkk2--------");
+            System.out.println("-----okkkkk18--------");
 
         }
 
@@ -272,32 +271,34 @@ int countofDb;
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
 
+        context = this;
+
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
 
 
-        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
-        LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
+//        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
+//        LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
 
-        RelativeLayout.LayoutParams kolorob_logo = new RelativeLayout.LayoutParams(width, height / 3);
-        RelativeLayout.LayoutParams boy_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3);
-        RelativeLayout.LayoutParams girl_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3 - height / 15);
+//        RelativeLayout.LayoutParams kolorob_logo = new RelativeLayout.LayoutParams(width, height / 3);
+//        RelativeLayout.LayoutParams boy_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3);
+//        RelativeLayout.LayoutParams girl_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3 - height / 15);
+//
+//        boy_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        boy_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
+//        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//
+//        boy.setLayoutParams(boy_layout);
+//        girl.setLayoutParams(girl_layout);
+//
+//        boy.bringToFront();
+//        girl.bringToFront();
 
-        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-        boy.setLayoutParams(boy_layout);
-        girl.setLayoutParams(girl_layout);
-
-        boy.bringToFront();
-        girl.bringToFront();
-
-        kolorob_logo.setMargins(0, 15, 0, 0);
-        kolorobLogo.setLayoutParams(kolorob_logo);
+//        kolorob_logo.setMargins(0, 15, 0, 0);
+//        kolorobLogo.setLayoutParams(kolorob_logo);
 
 
 
@@ -408,6 +409,7 @@ int countofDb;
         moving wheel while loading data into local database
 
          */
+        rotateImage = (ImageView) findViewById(R.id.rotate_image);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
