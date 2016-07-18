@@ -12,16 +12,17 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -36,6 +37,7 @@ public class MyInfoWindow extends InfoWindow {
     String titlemarker,contact2,node,address;
     int n;
     EducationServiceProviderItem nulledu;
+    EducationNewItem nulledu2;
     HealthServiceProviderItem nullhel;
     EntertainmentServiceProviderItem nullent;
     FinancialServiceProviderItem nullfin;
@@ -85,11 +87,11 @@ public class MyInfoWindow extends InfoWindow {
                         // Override Marker's onClick behaviour here
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(MyInfoWindow.this.con);
-                        nulledu = educationServiceProviderTable.geteduNode2(node);
-                        Intent iient = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEducation.class);
-                        iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
-                        MyInfoWindow.this.con.startActivity(iient);
+                         EducationNewTable educationNewTable = new EducationNewTable(MyInfoWindow.this.con);
+                        nulledu2 = educationNewTable.geteduNode2(n);
+                        Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
+                        iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
+                        MyInfoWindow.this.con.startActivity(iiedu);
 
                         break;
                     case AppConstants.HEALTH:
