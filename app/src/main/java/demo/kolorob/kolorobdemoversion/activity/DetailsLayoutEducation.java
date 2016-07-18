@@ -122,8 +122,8 @@ public class DetailsLayoutEducation extends Activity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        CheckConcate("প্রতিস্টানের ধরন",educationNewItem.getEdtype());
-        CheckConcate("d",educationNewItem.getShift());
+        CheckConcate("প্রতিষ্ঠানের ধরণ ",educationNewItem.getEdtype());
+        CheckConcate("শাখা",educationNewItem.getShift());
         CheckConcate("পুরুষ ডাক্তার",educationNewItem.getStudentno());
         CheckConcate("মহিলা ডাক্তার",educationNewItem.getTeachersno());
         CheckConcate("রোগী এবং ডাক্তারের অনুপাত",educationNewItem.getClassno());

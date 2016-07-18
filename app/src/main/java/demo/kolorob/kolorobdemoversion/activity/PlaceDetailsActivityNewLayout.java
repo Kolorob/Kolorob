@@ -35,6 +35,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -80,6 +81,7 @@ import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -96,7 +98,6 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
-
 /**
  * Created by touhid on 12/3/15.
  *
@@ -124,7 +125,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
-    private Spinner spItems;
+    private KolorobSpinner spItems;
     ArrayAdapter arrayAdapter;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
@@ -276,6 +277,7 @@ RelativeLayout searchviewholder,filterholder;
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
+
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItem> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
@@ -592,12 +594,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
         // callMapFragment();
-        spItems = (Spinner) findViewById(R.id.areaitems);
+        spItems = (KolorobSpinner) findViewById(R.id.areaitems);
         spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
         spItems.setAdapter(arrayAdapter);
-        spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        spItems.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -613,6 +617,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 if(mapcalledstatus){
 
                 }
+
             }
 
             @Override
@@ -2855,4 +2860,7 @@ NavigationCalled=true;
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
+
 }
