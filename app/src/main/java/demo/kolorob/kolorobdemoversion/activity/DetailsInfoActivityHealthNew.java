@@ -177,8 +177,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
-        timeProcessing("বন্ধে সময়", healthServiceProviderItemNew.getClosing_time());
-        CheckConcate("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
+        timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
+        breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
         CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size = healthSpecialistItemDetailses.size();
@@ -685,6 +685,14 @@ public class DetailsInfoActivityHealthNew extends Activity {
         else
             timeInBengali=timeInBengali+ " টা";
         return timeInBengali;
+    }
+
+    private void breakTimeProcessing(String value1, String value2)
+    {
+        if(!value2.equals("null")||!value2.equals(", "))
+        {
+            CheckConcate(value1,value2);
+        }
     }
 
 
