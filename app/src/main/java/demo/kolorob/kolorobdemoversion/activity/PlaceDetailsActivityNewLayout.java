@@ -293,6 +293,7 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
+    EducationNewItem nulledu2;
     String nodefromback;
 
     public String getNodefromback() {
@@ -1350,10 +1351,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             {
                 NavigationCalledOnce=true;
                 String node=getNodefromback();
-                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this.con);
-                nulledu = educationServiceProviderTable.geteduNode2(node);
-                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsInfoActivityEducation.class);
-                iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+                EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this.con);
+                nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
+                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsLayoutEducation.class);
+                iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
                 this.startActivity(iient);
 
             }
@@ -2804,6 +2805,8 @@ NavigationCalled=true;
             llCatListHolder.setVisibility(View.GONE);
             llSubCatListHolder.setVisibility(View.GONE);
             toggleButton.setVisibility(View.GONE);
+            svsholder.setVisibility(View.GONE);
+            svholder.setVisibility(View.GONE);
             implementRouteDrawingFragmentOSM();
         }
 
