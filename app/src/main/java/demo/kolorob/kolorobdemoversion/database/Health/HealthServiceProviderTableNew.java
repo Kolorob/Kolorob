@@ -555,6 +555,8 @@ public class HealthServiceProviderTableNew {
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
 
+        Log.d("Data Insert Health","========="+ret);
+
         closeDB();
         return ret;
     }
@@ -928,12 +930,13 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
     public ArrayList<HealthServiceProviderItemNew> Heanames(int cat_id,int refId,String a,String place) {
         String subcatnames=null;
         subcatnames=a;
+        String places;
 
 
         String refids= String.valueOf(refId);
 
           refids=","+refids+",";
-
+        places="Mirpur-11";
 
 
         ArrayList<HealthServiceProviderItemNew> nameslist=new ArrayList<>();
@@ -941,7 +944,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
         SQLiteDatabase db = openDB();
 
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" , null);
         //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
       //  Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" + "=" +refId);
 //        Toast.makeText(this, +cursor,

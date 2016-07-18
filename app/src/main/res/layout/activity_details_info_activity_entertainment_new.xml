@@ -622,6 +622,7 @@
                 android:buttonTint="@color/white"
                 android:layout_marginLeft="20dp"
 
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
 

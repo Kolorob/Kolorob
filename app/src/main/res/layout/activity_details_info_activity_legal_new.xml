@@ -618,7 +618,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
 
-
+                android:visibility="gone"
                 android:buttonTint="@color/white"
                 android:layout_marginLeft="20dp"
 

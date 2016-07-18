@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
@@ -126,6 +128,22 @@ public class FinancialServiceDetailsTable {
         cursor.close();
         closeDB();
         return false;
+    }
+    public ArrayList<FinancialServiceDetailsItem> getfinanceinfo(int node_id) {
+        ArrayList<FinancialServiceDetailsItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SERVICE_ID +" = "+node_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
     }
     private FinancialServiceDetailsItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);

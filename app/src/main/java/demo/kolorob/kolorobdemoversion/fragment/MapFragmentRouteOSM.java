@@ -217,7 +217,7 @@ double roadlength;
         mapView.setUseDataConnection(true);
 
 
-        mapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setTilesScaledToDpi(true);
 
         mapViewController = mapView.getController();

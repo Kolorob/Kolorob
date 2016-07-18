@@ -475,13 +475,13 @@ public class EducationServiceProviderTable  {
     public ArrayList<EducationServiceProviderItem> Edunames(int cat_id,String head,String a,String place) {
         String subcatnames=null;
        subcatnames=a;
-
+        String places;
         ArrayList<EducationServiceProviderItem> nameslist=new ArrayList<>();
-
+        places="Mirpur-10";
         SQLiteDatabase db = openDB();
 
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
-                    + " AND "+KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_EDU_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+                    + " AND "+KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_EDU_SUBCATEGORY_ID + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
 
 
             if (cursor.moveToFirst()) {

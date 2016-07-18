@@ -11,14 +11,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -26,6 +30,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -161,6 +166,99 @@ int countofDb;
         this.countofDb = countofDb;
     }
 
+
+
+    Context context;
+    ImageView rotateImage;
+    private Handler handler;
+    int in = 0;
+    View view=null;
+
+
+    public RefreshHandler mRedrawHandler = new RefreshHandler();
+
+    class RefreshHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            OpeningActivity.this.setImage();
+        }
+
+        public void sleep(long delayMillis) {
+            this.removeMessages(0);
+            sendMessageDelayed(obtainMessage(0), delayMillis);
+        }
+    };
+
+    private void setImage() {
+        try {
+            in++;
+
+//            if(in == 5) {
+//                rotateImage.setBackgroundResource(R.drawable.glow);
+//                Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.glow_animation);
+//                rotateImage.startAnimation(startRotateAnimation);
+//            }
+
+        } catch (final Exception e) {
+
+
+        }
+
+        if(in ==1){
+            rotateImage.setBackgroundResource(R.drawable.a1);
+            System.out.println("-----okkkkk1--------");
+            // startActivity(new Intent(SplashActivity.this, OpeningActivity.class));
+        }
+        else if(in ==2){
+            rotateImage.setBackgroundResource(R.drawable.a3);
+            System.out.println("-----okkkkk2--------");
+
+        }
+        else if(in ==3){
+            rotateImage.setBackgroundResource(R.drawable.a7);
+            System.out.println("-----okkkkk--------");
+
+        }
+        else if(in ==3){
+            rotateImage.setBackgroundResource(R.drawable.a7);
+            System.out.println("-----okkkkk7--------");
+
+        }
+        else if(in ==4){
+            rotateImage.setBackgroundResource(R.drawable.a12);
+            System.out.println("-----okkkkk12--------");
+
+        }
+        else if(in ==5){
+            rotateImage.setBackgroundResource(R.drawable.a15);
+            System.out.println("-----okkkkk15--------");
+
+        }
+        else if(in ==6){
+            rotateImage.setBackgroundResource(R.drawable.a16);
+            System.out.println("-----okkkkk16-------");
+
+        }
+        else if(in ==7){
+            rotateImage.setBackgroundResource(R.drawable.a18);
+            System.out.println("-----okkkkk18--------");
+
+        }
+
+        else if(in == 8){
+           // rotateImage.setBackgroundResource(R.drawable.glow);
+            rotateImage.setBackgroundResource(R.drawable.a18);
+            startActivity(new Intent(OpeningActivity.this, PlaceChoiceActivity2.class));
+            mRedrawHandler.removeMessages(0);
+            finish();
+            System.out.println("-----okkkkk74--------" );
+            // in=0;
+        }
+
+        mRedrawHandler.sleep(500);
+
+    }
+
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,32 +271,34 @@ int countofDb;
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
 
+        context = this;
+
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
 
 
-        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
-        LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
+//        LinearLayout boy = (LinearLayout) findViewById(R.id.boy);
+//        LinearLayout girl = (LinearLayout) findViewById(R.id.girl);
 
-        RelativeLayout.LayoutParams kolorob_logo = new RelativeLayout.LayoutParams(width, height / 3);
-        RelativeLayout.LayoutParams boy_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3);
-        RelativeLayout.LayoutParams girl_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3 - height / 15);
+//        RelativeLayout.LayoutParams kolorob_logo = new RelativeLayout.LayoutParams(width, height / 3);
+//        RelativeLayout.LayoutParams boy_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3);
+//        RelativeLayout.LayoutParams girl_layout = new RelativeLayout.LayoutParams(width / 2, (2 * height) / 3 - height / 15);
+//
+//        boy_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        boy_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
+//        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//
+//        boy.setLayoutParams(boy_layout);
+//        girl.setLayoutParams(girl_layout);
+//
+//        boy.bringToFront();
+//        girl.bringToFront();
 
-        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        girl_layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-        boy.setLayoutParams(boy_layout);
-        girl.setLayoutParams(girl_layout);
-
-        boy.bringToFront();
-        girl.bringToFront();
-
-        kolorob_logo.setMargins(0, 15, 0, 0);
-        kolorobLogo.setLayoutParams(kolorob_logo);
+//        kolorob_logo.setMargins(0, 15, 0, 0);
+//        kolorobLogo.setLayoutParams(kolorob_logo);
 
 
 
@@ -304,7 +404,25 @@ int countofDb;
     public void LoadData()
     {
 
+        /*
+        @@@@ arafat, you have to control wheel from here
+        moving wheel while loading data into local database
 
+         */
+        rotateImage = (ImageView) findViewById(R.id.rotate_image);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                                /* start the activity */
+                //    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                overridePendingTransition(0, 0);
+                finish();
+            }
+        }, 6000);
+
+        setImage();
 
 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
@@ -513,6 +631,7 @@ int countofDb;
 
                         JSONArray allData=new JSONArray(apiContent);
                         HealthDatSize=allData.length();
+                         Log.d("HealthDatSize","======"+HealthDatSize);
 
                         for(int i=0;i<HealthDatSize;i++)
                         {
@@ -698,7 +817,6 @@ int countofDb;
                 JSONArray healthVaccine=jsonObject.getJSONArray("health_vaccine_details");
                 int HealthVaccineDataSize=healthVaccine.length();
 
-               // Log.d("healthVaccineItemDetai","==="+HealthVaccineDataSize);
                 for (int v=0;v<HealthVaccineDataSize;v++)
                 {
                     JSONObject healthVaccineItem= healthVaccine.getJSONObject(v);
