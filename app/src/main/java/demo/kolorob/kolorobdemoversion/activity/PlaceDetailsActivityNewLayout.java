@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -1490,6 +1491,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 switch (currentCategoryID) {
 
                     case AppConstants.EDUCATION:
+                        MediaPlayer mp_e = MediaPlayer.create(getApplicationContext(), R.raw.education);
+                        mp_e.start();
+
                         EDD.clear();
                         educlicked=true;
                         setFilcatid(currentCategoryID);
@@ -1529,6 +1533,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         break;
                     case AppConstants.HEALTH:
+                        MediaPlayer mp_h = MediaPlayer.create(getApplicationContext(), R.raw.health);
+                        mp_h.start();
                         HEL.clear();
                         helclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1550,6 +1556,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for health
 
                     case AppConstants.ENTERTAINMENT:
+
                         ENT.clear();
                         entclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1570,7 +1577,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             llSubCatListHolder.setVisibility(View.GONE);
 
 
-
+                        MediaPlayer mp_en = MediaPlayer.create(getApplicationContext(), R.raw.entertainment);
+                        mp_en.start();
 
 
 
@@ -1582,6 +1590,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
+                        MediaPlayer mp_g = MediaPlayer.create(getApplicationContext(), R.raw.government);
+                        mp_g.start();
                         govclicked=true;
                         setFilcatid(currentCategoryID);
                         filterholder.setVisibility(View.VISIBLE);
@@ -1611,6 +1621,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         alertDialog.show();*/
                         break;
                     case AppConstants.LEGAL:
+                        MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
+                        mp_l.start();
                         LEG.clear();
                         legclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1639,6 +1651,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         break;
                     case AppConstants.FINANCIAL:
+                        MediaPlayer mp_f = MediaPlayer.create(getApplicationContext(), R.raw.finance);
+                        mp_f.start();
                         FIN.clear();
                         finclicked=true;
                         setFilcatid(currentCategoryID);
@@ -1664,6 +1678,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         break;
                     case AppConstants.JOB:
+                        MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
+                        mp_j.start();
                         JJOB.clear();
                         jobclicked=true;
                         setFilcatid(currentCategoryID);
