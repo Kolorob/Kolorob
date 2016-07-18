@@ -36,6 +36,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -51,7 +52,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -81,6 +81,7 @@ import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -97,7 +98,6 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
-
 /**
  * Created by touhid on 12/3/15.
  *
@@ -108,8 +108,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         return showList;
     }
     EducationServiceProviderTable educationServiceProviderTable;
-    ArrayList<EducationServiceProviderItem> firstDataSet;
-    ArrayList<EducationServiceProviderItem> secondDataSet;
+    EducationNewTable educationNewTable;
+    ArrayList<EducationNewItem> firstDataSet;
+    ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
     public void setShowList(int showList) {
@@ -125,7 +126,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout llSubCatListHolder;
     private HashMap<String, Integer> sections = new HashMap<String, Integer>();
     private static FrameLayout map;
-    private Spinner spItems;
+    private KolorobSpinner spItems;
     ArrayAdapter arrayAdapter;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
@@ -277,6 +278,7 @@ RelativeLayout searchviewholder,filterholder;
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
+
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItem> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
@@ -593,12 +595,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
         // callMapFragment();
-        spItems = (Spinner) findViewById(R.id.areaitems);
+        spItems = (KolorobSpinner) findViewById(R.id.areaitems);
         spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
         arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
         spItems.setAdapter(arrayAdapter);
-        spItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+        spItems.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -614,6 +618,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 if(mapcalledstatus){
 
                 }
+
             }
 
             @Override
@@ -660,7 +665,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
-
+                    toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.VISIBLE);
                 }
@@ -670,6 +675,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     filterholder.setVisibility(View.GONE);
                 }
                 else filterholder.setVisibility(View.VISIBLE);
+                toggleButton.setVisibility(View.VISIBLE);
 
             }
         });
@@ -712,7 +718,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                 }
-
+                toggleButton.setVisibility(View.VISIBLE);
                 map.setVisibility(View.VISIBLE);
 
 
@@ -763,7 +769,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                 setShowList(1);
-
+                toggleButton.setVisibility(View.VISIBLE);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
@@ -797,7 +803,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     CompareClicked=true;
 
 
-                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==0)
+                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==0)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
@@ -807,12 +813,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                             "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
                 }
-                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==1)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                     }
-                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValue(PlaceDetailsActivityNewLayout.this)==1)
+                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==1)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                 "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
@@ -853,6 +859,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }else{
                             compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
                         }
+                        toggleButton.setVisibility(View.GONE);
                         SearchButton.setBackgroundResource(R.drawable.search);
                         ListButton.setBackgroundResource(R.drawable.list);
                         MapButton.setBackgroundResource(R.drawable.map);
@@ -995,37 +1002,39 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void compareEducation()
     {
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        firstDataSet=educationServiceProviderTable.getEducationData(firstData);
-        secondDataSet=educationServiceProviderTable.getEducationData(SecondData);
+        educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+
+        firstDataSet=educationNewTable.getEducationData(String.valueOf(firstData));
+        secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
 
 
-        for (EducationServiceProviderItem educationServiceProviderItem: firstDataSet)
+        for (EducationNewItem educationNewItem: firstDataSet)
         {
-            edu_name_ban.setText(educationServiceProviderItem.getEduNameEng());
-            edtype.setText(educationServiceProviderItem.getEduType());
-            hostel_facility.setText(educationServiceProviderItem.getHostelFacility());
-            transport_facility.setText(educationServiceProviderItem.getTransportFacility());
-            playground.setText(educationServiceProviderItem.getPlayground());
-            total_students.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
-            total_classes.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
-            total_teachers.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
-            course_provided.setText(educationServiceProviderItem.getCourseProvided());
-            shift.setText(educationServiceProviderItem.getShift());
-            canteen_facility.setText(educationServiceProviderItem.getCanteenFacility());
+            edu_name_ban.setText(educationNewItem.getNamebn());
+            edtype.setText(educationNewItem.getEdtype());
+            hostel_facility.setText(educationNewItem.getFloor());
+            transport_facility.setText(educationNewItem.getAddress());
+            playground.setText(educationNewItem.getAveragestudent());
+            total_students.setText(String.valueOf(educationNewItem.getStudentno()));
+            total_classes.setText(String.valueOf(educationNewItem.getClassno()));
+            total_teachers.setText(String.valueOf(educationNewItem.getTeachersno()));
+            course_provided.setText(educationNewItem.getWatercondition());
+            shift.setText(educationNewItem.getShift());
+            canteen_facility.setText(educationNewItem.getWatersource());
         }
-        for (EducationServiceProviderItem educationServiceProviderItem: secondDataSet)
+        for (EducationNewItem educationNewItem: secondDataSet)
         {
-            edu_name_ban1.setText(educationServiceProviderItem.getEduNameEng());
-            edtype1.setText(educationServiceProviderItem.getEduType());
-            hostel_facility1.setText(educationServiceProviderItem.getHostelFacility());
-            transport_facility1.setText(educationServiceProviderItem.getTransportFacility());
-            playground1.setText(educationServiceProviderItem.getPlayground());
-            total_students1.setText(String.valueOf(educationServiceProviderItem.getTotalStudents()));
-            total_classes1.setText(String.valueOf(educationServiceProviderItem.getTotalClasses()));
-            total_teachers1.setText(String.valueOf(educationServiceProviderItem.getTotalTeachers()));
-            course_provided1.setText(educationServiceProviderItem.getCourseProvided());
-            shift1.setText(educationServiceProviderItem.getShift());
-            canteen_facility1.setText(educationServiceProviderItem.getCanteenFacility());
+            edu_name_ban1.setText(educationNewItem.getNamebn());
+            edtype1.setText(educationNewItem.getEdtype());
+            hostel_facility1.setText(educationNewItem.getFloor());
+            transport_facility1.setText(educationNewItem.getAddress());
+            playground1.setText(educationNewItem.getAveragestudent());
+            total_students1.setText(String.valueOf(educationNewItem.getStudentno()));
+            total_classes1.setText(String.valueOf(educationNewItem.getClassno()));
+            total_teachers1.setText(String.valueOf(educationNewItem.getTeachersno()));
+            course_provided1.setText(educationNewItem.getWatercondition());
+            shift1.setText(educationNewItem.getShift());
+            canteen_facility1.setText(educationNewItem.getWatersource());
         }
 
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
@@ -2871,4 +2880,7 @@ NavigationCalled=true;
     protected void onDestroy() {
         super.onDestroy();
     }
+
+
+
 }

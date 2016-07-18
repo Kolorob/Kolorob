@@ -129,12 +129,30 @@ public final class SharedPreferencesHelper {
 
 		editor.commit();
 	}
+	public static void setComapareEdu(final Context ctx, final String node_id,int compare)
+	{
+		final SharedPreferences prefs = ctx.getSharedPreferences(SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor= prefs.edit();
+		editor.putString(COMAPARE_1,node_id);
+		editor.putInt(COMPARE_2,compare);
+
+		editor.commit();
+	}
 	public static int getComapreValueHealth(final Context ctx) {
 		return ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
 				.getInt(SharedPreferencesHelper.COMPARE_2H, 0);
 	}
-
+	public static int getComapreValueEdu(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getInt(SharedPreferencesHelper.COMPARE_2, 0);
+	}
+	public static int getComapreValueEdu2(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getInt(SharedPreferencesHelper.COMAPARE_1, 0);
+	}
 	public static String getComapreDataHealth(final Context ctx) {
 		return ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
