@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -86,6 +87,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     String status = "", phone_num = "", registered = "";
     String result_concate = "";
     private CheckBox checkBox;
+    private EditText feedback_comment;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -146,6 +148,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         close_button = (ImageView) findViewById(R.id.close_buttonc);
         specialist = (TextView) findViewById(R.id.specialist);
         health_vaccine = (TextView) findViewById(R.id.health_vaccine);
+        feedback_comment=(EditText)findViewById(R.id.feedback_comment);
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
@@ -433,9 +436,11 @@ public class DetailsInfoActivityHealthNew extends Activity {
     public void verifyRegistration(View v) {
 
         String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
+        phone_num=register;
 
         if (register.equals("")) {
-            requestToRegister();
+            Intent intentv = new Intent(DetailsInfoActivityHealthNew.this,PhoneRegActivity.class);
+            startActivity(intentv);
         } else {
 
             feedBackAlert();
@@ -485,7 +490,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
             rating = 2;
         else
             rating = 3;
-        String url = "http:www.kolorob.net/KolorobApi/api/rating/save_feedback?phone=" + phone_num + "&node=" + healthServiceProviderItemNew.getId() + "&service=" + "1" + "&rating=" + rating;
+       // http://kolorob.net/demo/api/sp_rating/1?phone=01711310912&review=this%20is%20a%20review&rating=4
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +feedback_comment.getText().toString()+ "&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -633,7 +639,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         SharedPreferences.Editor editor = pref.edit();
        // editor.putString("registered", lat);
         registered = pref.getString("registered", null);
-        phone_num = pref.getString("phone", null);
+       // phone_num = pref.getString("phone", null);
         editor.commit();
         if (registered.equals("yes"))
             return true;
