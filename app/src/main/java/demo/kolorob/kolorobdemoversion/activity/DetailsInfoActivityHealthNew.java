@@ -89,7 +89,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     String status = "", phone_num = "", registered = "";
     String result_concate = "";
     private CheckBox checkBox;
-    private EditText feedback_comment;
+    EditText feedback_comment;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -150,7 +150,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         close_button = (ImageView) findViewById(R.id.close_buttonc);
         specialist = (TextView) findViewById(R.id.specialist);
         health_vaccine = (TextView) findViewById(R.id.health_vaccine);
-        feedback_comment=(EditText)findViewById(R.id.feedback_comment);
+
 
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
@@ -458,7 +458,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     public void feedBackAlert() {
 
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this);
         alertDialogBuilder.setView(promptView);
 
@@ -473,6 +473,11 @@ public class DetailsInfoActivityHealthNew extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
+                int selected = feedRadio.getCheckedRadioButtonId();
+                rb1 = (RadioButton)promptView.findViewById(selected);
+                status = rb1.getText().toString();
               //  declareRadiobutton();
                 sendReviewToServer();
 
@@ -495,14 +500,16 @@ public class DetailsInfoActivityHealthNew extends Activity {
             rating = 2;
         else
             rating = 3;
-        RadioGroup feedRadio=(RadioGroup)findViewById(R.id.feedRadio);
+
         String comment="";
-        int selected = feedRadio.getCheckedRadioButtonId();
-        Log.d("Selected ","======"+selected);
-        RadioButton rb1 = (RadioButton) findViewById(selected);
-        status = rb1.getText().toString();
+
+
+
+
+
 
         comment=feedback_comment.getText().toString();
+        Log.d("status ","======"+status);
        // http://kolorob.net/demo/api/sp_rating/1?phone=01711310912&review=this%20is%20a%20review&rating=4
         String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +feedback_comment.getText().toString()+ "&rating="+rating;
 
@@ -516,8 +523,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
                             if (response.equals("true")) {
-                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ করার জন্য আপনাকে ধন্যবাদ");
                             } else
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");

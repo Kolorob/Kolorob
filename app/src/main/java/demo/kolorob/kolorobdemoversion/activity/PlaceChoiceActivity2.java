@@ -1065,20 +1065,7 @@ help=(ImageButton)findViewById(R.id.helpicon);
             }
         });
         // setup a dialog window
-        alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //resultText.setText("Hello, " + userfeedback.getText());
-                        back();
-                    }
-                })
-                .setNegativeButton("বাতিল করুন",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                back();
-                            }
-                        });
+        alertDialogBuilder.setCancelable(false);
 
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();
