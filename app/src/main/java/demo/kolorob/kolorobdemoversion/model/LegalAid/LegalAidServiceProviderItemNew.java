@@ -1,5 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.LegalAid;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -242,8 +244,9 @@ public class LegalAidServiceProviderItemNew implements Serializable {
 
 
         JSONObject map_info= jo.getJSONObject("map_info");
-        String _latitude = map_info.getString("latitude");
-        String _longitude = map_info.getString("longitude");
+        String _latitude = map_info.getString("lat");
+        String _longitude = map_info.getString("lon");
+
 
         JSONObject contactInfo= jo.getJSONObject("contact_info");
         String floor=contactInfo.getString("floor");
@@ -285,7 +288,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         _breaktime2=_breaktime2.replace(']',',');
 
         int _categoryId = jo.getInt("category");
-
+        Log.d("_breaktime2","======"+_breaktime2);
 
         int _legalaidSubCategoryId = 2;
 

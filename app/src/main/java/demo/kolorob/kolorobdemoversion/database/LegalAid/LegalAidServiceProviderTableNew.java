@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -99,7 +100,7 @@ public class LegalAidServiceProviderTableNew {
                 + KEY_HOUSE_NO+ " TEXT, "
                 + KEY_LINE + " TEXT, "
                 + KEY_AVENUE + " TEXT, "
-                + KEY_POLICE_STATION + " TEXT, PRIMARY KEY(" + KEY_CATEGORY_ID + ", " + KEY_LEGAL_AID_SUBCATEGORY_ID + ", " + KEY_POST_OFFICE + "))";
+                + KEY_POLICE_STATION + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -172,7 +173,7 @@ public class LegalAidServiceProviderTableNew {
                            String avenue,
                            String police_station
     ) {
-        if (isFieldExist(identifierId, categoryId, legalaidSubCategoryId)) {
+        if (isFieldExist(identifierId)) {
             return updateItem(
                     identifierId,
                     post_office,
@@ -244,6 +245,8 @@ public class LegalAidServiceProviderTableNew {
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+
+        Log.d("Legal Data Saving","======"+ret);
         closeDB();
         return ret;
     }
@@ -293,13 +296,13 @@ public class LegalAidServiceProviderTableNew {
         return  nameslist;
     }
 
-    public boolean isFieldExist(String id, int cat_id, int sub_cat_id) {
+    public boolean isFieldExist(String id) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0)) && Integer.parseInt(cursor.getString(3)) == cat_id && Integer.parseInt(cursor.getString(2)) == sub_cat_id) {
+                if (id.equals(cursor.getString(0))) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -379,8 +382,8 @@ public class LegalAidServiceProviderTableNew {
         rowValue.put(KEY_AVENUE,avenue);
         rowValue.put(KEY_POLICE_STATION,police_station);
         SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ? AND " + KEY_LEGAL_AID_SUBCATEGORY_ID + " = ? AND " + KEY_CATEGORY_ID + " = ? ",
-                new String[]{identifierId + "", legalaidSubCategoryId + "", categoryId + ""});
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
+                new String[]{identifierId + ""});
         closeDB();
         return ret;
     }

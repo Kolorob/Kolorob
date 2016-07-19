@@ -79,6 +79,7 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDeta
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
@@ -123,6 +124,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -594,28 +596,28 @@ int countofDb;
             );
 
 
-            getRequest(OpeningActivity.this, "http: kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
-                            Log.d("====","Response"+apiContent);
+
 
 
                             try {
 
                                 JSONArray legal_array= new JSONArray(apiContent);
-                                JSONObject jo = new JSONObject(apiContent);
+
                                 int p= legal_array.length();
-                                Log.d("====","LengthArray "+p);
+
 
                                 for(int i=0;i<p;i++)
                                 {
                                     JSONObject jsonObject=legal_array.getJSONObject(i);
+                                    SaveLegaltData(jsonObject);
+
 
                                 }
 
-                                String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                    saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -633,7 +635,6 @@ int countofDb;
 
                         JSONArray allData=new JSONArray(apiContent);
                         HealthDatSize=allData.length();
-                         Log.d("HealthDatSize","======"+HealthDatSize);
 
                         for(int i=0;i<HealthDatSize;i++)
                         {
@@ -806,6 +807,21 @@ int countofDb;
             }
         }
         countofDb++;
+    }
+
+    private void SaveLegaltData(JSONObject jsonObject)
+    {
+        LegalAidServiceProviderTableNew legalAidServiceProviderTableNew= new LegalAidServiceProviderTableNew(OpeningActivity.this);
+        try {
+            LegalAidServiceProviderItemNew legalAidServiceProviderItemNew=LegalAidServiceProviderItemNew.parseLegalAidServiceProviderItemNew(jsonObject);
+            legalAidServiceProviderTableNew.insertItem(legalAidServiceProviderItemNew);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void SaveHealthtData(JSONObject jsonObject)
