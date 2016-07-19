@@ -226,7 +226,7 @@ setMapView(mapView);
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerHealth(point, et.getNode_bn(), et.getAddress(), et.getNode_contact(), et.getNode_id(), et.getReferences());
+                    drawMarkerHealth(point, et.getNode_bn(), et.getAddress(), et.getNode_contact(), et.getId(), subcategotyId);
                 }
                 break;
             case AppConstants.ENTERTAINMENT:
@@ -316,7 +316,7 @@ setMapView(mapView);
     }
 
     private void drawMarkerEdu(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
-        Log.d("separated","========="+subcategotyId2);
+
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
 
@@ -359,7 +359,7 @@ setMapView(mapView);
 
 
 
-
+     //   Log.d("node","========="+node);
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
