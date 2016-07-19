@@ -53,7 +53,7 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 /**
  * Created by israt.jahan on 7/17/2016.
  */
-public class DetailsLayoutfinance extends Activity {
+public class DetailsLayoutFinance extends Activity {
     Dialog dialog;
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
     ImageView left_image, middle_image, right_image, email_btn;
@@ -100,7 +100,7 @@ public class DetailsLayoutfinance extends Activity {
         }
 
 
-        FinancialServiceDetailsTable financialServiceDetailsTable = new FinancialServiceDetailsTable(DetailsLayoutfinance.this);
+        FinancialServiceDetailsTable financialServiceDetailsTable = new FinancialServiceDetailsTable(DetailsLayoutFinance.this);
 
 
 
@@ -210,18 +210,18 @@ public class DetailsLayoutfinance extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int compareValue;
                 String node = String.valueOf(financialNewItem.getFinId());
-                compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutfinance.this);
+                compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutFinance.this);
                 if (compareValue >= 2)
                     AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
                             "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
                 else if (compareValue == 0) {
                     Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareData(DetailsLayoutfinance.this, node, 1);
+                    SharedPreferencesHelper.setCompareData(DetailsLayoutFinance.this, node, 1);
                 } else if (compareValue == 1) {
                     String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutfinance.this);
+                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutFinance.this);
                     previous_node = previous_node + " " + node;
-                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutfinance.this, previous_node, 2);
+                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutFinance.this, previous_node, 2);
                 }
 
 
@@ -316,7 +316,7 @@ public class DetailsLayoutfinance extends Activity {
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent feedIntent = new Intent(DetailsLayoutfinance.this, FeedBackActivityNew.class);
+                Intent feedIntent = new Intent(DetailsLayoutFinance.this, FeedBackActivityNew.class);
                 feedIntent.putExtra("id", financialNewItem.getFinId());
                 feedIntent.putExtra("categoryId", "1");
                 Log.d(">>>>", "Button is clicked1 " + financialNewItem.getFinId());
@@ -365,14 +365,14 @@ public class DetailsLayoutfinance extends Activity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showSettingsAlert(DetailsLayoutfinance.this);
+                    AppUtils.showSettingsAlert(DetailsLayoutFinance.this);
 
                 }
 
                 else
                 {
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutfinance.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutFinance.this, AlertDialog.THEME_HOLO_LIGHT).create();
                     alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
                     alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -447,9 +447,9 @@ public class DetailsLayoutfinance extends Activity {
     public void feedBackAlert()
     {
 
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutfinance.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
         View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutfinance.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutFinance.this);
         alertDialogBuilder.setView(promptView);
 
 
@@ -492,7 +492,7 @@ public class DetailsLayoutfinance extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutfinance.this,response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailsLayoutFinance.this,response,Toast.LENGTH_SHORT).show();
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);
@@ -503,11 +503,11 @@ public class DetailsLayoutfinance extends Activity {
 
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(DetailsLayoutfinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
                                         "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutfinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
 
 
@@ -521,7 +521,7 @@ public class DetailsLayoutfinance extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DetailsLayoutfinance.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailsLayoutFinance.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }) {
 
@@ -537,7 +537,7 @@ public class DetailsLayoutfinance extends Activity {
 
  //Adding request to request queue
 
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutfinance.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutFinance.this);
        requestQueue.add(stringRequest);
     }
 
@@ -554,9 +554,9 @@ public class DetailsLayoutfinance extends Activity {
 
    public void requestToRegister()
     {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutfinance.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutfinance.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutFinance.this);
         alertDialogBuilder.setView(promptView);
 
 
@@ -570,7 +570,7 @@ public class DetailsLayoutfinance extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intentPhoneRegistration= new Intent(DetailsLayoutfinance.this,PhoneRegActivity.class);
+                Intent intentPhoneRegistration= new Intent(DetailsLayoutFinance.this,PhoneRegActivity.class);
                 startActivity(intentPhoneRegistration);
 
             }

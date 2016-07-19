@@ -52,7 +52,7 @@
                 android:textColor="@color/white"
                 android:textSize="29sp"
                 android:id="@+id/textView19"
-                android:text="Finance"
+                android:text="finance"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 

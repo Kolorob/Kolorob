@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="50dp"
     android:gravity="center">
 
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:id="@+id/feedbackRadio"
+        android:id="@+id/feedRadio"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="30dp"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="@string/feedback4"
             android:textColor="@color/orange"
-
+            android:checked="true"
             android:id="@+id/feedback4" />
         <ImageView
             android:layout_width="match_parent"
@@ -82,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Feedback"
+            android:id="@+id/feedback_comment"
 
 
             />

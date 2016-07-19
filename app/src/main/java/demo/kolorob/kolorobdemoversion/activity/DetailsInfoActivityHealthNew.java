@@ -2,18 +2,25 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,7 +29,22 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
@@ -41,18 +63,18 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 public class DetailsInfoActivityHealthNew extends Activity {
     Dialog dialog;
-    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image,email_btn;
-    TextView address_text,phone_text,email_text;
-    int width,height;
+    LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
+    ImageView left_image, middle_image, right_image, email_btn;
+    TextView address_text, phone_text, email_text;
+    int width, height;
     TextView ups_text;
-    ListView courseListView,listView;
+    ListView courseListView, listView;
     Context con;
     HealthServiceProviderItemNew healthServiceProviderItemNew;
     ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
-    ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
-    ArrayList<HealthSpecialistItemDetails>healthSpecialistItemDetailses;
-    ArrayList<HealthVaccineItemDetails>healthVaccineItemDetailses;
+    ArrayList<HealthServiceProviderItem> healthServiceProviderItemsz;
+    ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
+    ArrayList<HealthVaccineItemDetails> healthVaccineItemDetailses;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
@@ -60,13 +82,24 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText;
-    private TextView serviceDetails,specialist,health_vaccine;
-    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
-    RadioGroup feedRadio;
-    RadioButton rb1,rb2,rb3;
-    String status="",phone_num="",registered="";
-    String result_concate="";
+    private TextView serviceDetails, specialist, health_vaccine;
+    private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
+    private RadioGroup feedRadio;
+    RadioButton rb1, rb2, rb3,rb4,rb5;
+    String status = "", phone_num = "", registered = "";
+    String result_concate = "";
     private CheckBox checkBox;
+    EditText feedback_comment;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client2;
 
 
     @Override
@@ -80,7 +113,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         Intent intent = getIntent();
-
+      //  declareRadiobutton();
 
         if (null != intent) {
             healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
@@ -118,6 +151,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         specialist = (TextView) findViewById(R.id.specialist);
         health_vaccine = (TextView) findViewById(R.id.health_vaccine);
 
+
+
         top_logo = (ImageView) findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
         school_logo_default = (ImageView) findViewById(R.id.service_logo);
@@ -149,8 +184,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
         timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
-        timeProcessing("বন্ধে সময়", healthServiceProviderItemNew.getClosing_time());
-        CheckConcate("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
+        timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
+        breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
         CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size = healthSpecialistItemDetailses.size();
@@ -224,6 +259,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
             }
         });
+
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -396,178 +433,184 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //        });
 //
 //
-//    }
-//
-//    public void verifyRegistration(View v){
-//
-//        Boolean register=RegisteredOrNot();
-//
-//        if(register.equals(false))
-//        {
-//            requestToRegister();
-//        }
-//
-//        else {
-//
-//            feedBackAlert();
-//            sendReviewToServer();
-//        }
-//
-//
-//    }
-
-//    public void feedBackAlert()
-//    {
-//
-//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
-//        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//
-//        final Button submit= (Button) promptView.findViewById(R.id.submit);
-//
-//
-//        final AlertDialog alert = alertDialogBuilder.create();
-//
-//
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                declareRadiobutton();
-//
-//
-//                alert.cancel();
-//
-//            }
-//        });
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false);
-//
-//
-//
-//        alert.show();
-//    }
-
-
-//    public void sendReviewToServer()
-//    {
-//        int rating;
-//        if(status.equals("ভাল"))
-//            rating=1;
-//        else if(status.equals("মোটামোট"))
-//            rating=2;
-//        else
-//            rating=3;
-//        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationServiceProviderItem.getIdentifierId()+"&service="+"1"+"&rating="+rating;
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(DetailsInfoActivityEducation.this,response,Toast.LENGTH_SHORT).show();
-//                        // Log.d(">>>>>","status "+response);
-//                        try {
-//                            JSONObject jo = new JSONObject(response);
-//                            String forms;
-//                            forms = jo.getString("status");
-//                            Log.d(">>>>>","status "+forms);
-//                            //Log.d(">>>>>","status ");
-//
-//                            if(forms.equals("true"))
-//                            {
-//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-//                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
-//                            }
-//                            else
-//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-//                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-//
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(DetailsInfoActivityEducation.this,error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                }) {
-//
-//            @Override
-//            protected Map<String, String> getParams() {
-//
-//                Map<String, String> params = new HashMap<>();
-//
-//                return params;
-//            }
-//
-//        };
-
-//// Adding request to request queue
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityEducation.this);
-//        requestQueue.add(stringRequest);
-//    }
-
-//    public void declareRadiobutton()
-//    {
-//        // int selected = feedRadio.getCheckedRadioButtonId();
-//        // RadioButton rb1 = (RadioButton) findViewById(selected);
-//        //  status = rb1.getText().toString();
-//
-//        // Arafat, i set it as static 1, pls change this codes;
-//
-//        status = "1";
-//    }
-
-//    public void requestToRegister()
-//    {
-//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
-//        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//
-//        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
-//        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
-//
-//        final AlertDialog alert = alertDialogBuilder.create();
-//
-//
-//        yes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityEducation.this,PhoneRegActivity.class);
-//                startActivity(intentPhoneRegistration);
-//
-//            }
-//        });
-//
-//
-//
-//        no.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alert.cancel();
-//
-//            }
-//        });
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false);
-//
-//
-//
-//        alert.show();
-//    }
-//
-//
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+    public void verifyRegistration(View v) {
+
+        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
+        phone_num=register;
+
+        if (register.equals("")) {
+            Intent intentv = new Intent(DetailsInfoActivityHealthNew.this,PhoneRegActivity.class);
+            startActivity(intentv);
+        } else {
+
+            feedBackAlert();
+          //  sendReviewToServer();
+        }
+
+
+    }
+
+    public void feedBackAlert() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
+        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final Button submit = (Button) promptView.findViewById(R.id.submit);
+
+
+        final AlertDialog alert;
+        alert = alertDialogBuilder.create();
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
+                int selected = feedRadio.getCheckedRadioButtonId();
+                rb1 = (RadioButton)promptView.findViewById(selected);
+                status = rb1.getText().toString();
+              //  declareRadiobutton();
+                sendReviewToServer();
+
+                alert.cancel();
+
+            }
+        });
+        alertDialogBuilder.setCancelable(false);
+
+
+        alert.show();
+    }
+
+
+    public void sendReviewToServer() {
+        int rating;
+        if (status.equals("ভাল"))
+            rating = 1;
+        else if (status.equals("মোটামোট"))
+            rating = 2;
+        else
+            rating = 3;
+
+        String comment="";
+
+
+
+
+
+
+        comment=feedback_comment.getText().toString();
+        Log.d("status ","======"+status);
+       // http://kolorob.net/demo/api/sp_rating/1?phone=01711310912&review=this%20is%20a%20review&rating=4
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +feedback_comment.getText().toString()+ "&rating="+rating;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(DetailsInfoActivityHealthNew.this, response, Toast.LENGTH_SHORT).show();
+                        Log.d("========", "status " + response);
+                        try {
+
+
+                            if (response.equals("true")) {
+                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ করার জন্য আপনাকে ধন্যবাদ");
+                            } else
+                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(DetailsInfoActivityHealthNew.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityHealthNew.this);
+        requestQueue.add(stringRequest);
+    }
+//
+//    public void declareRadiobutton() {
+////        feedRadio=(RadioGroup)findViewById(R.id.feedRadio);
+////        Log.d("Selected ","======");
+////        int selected = feedRadio.getCheckedRadioButtonId();
+////        Log.d("Selected ","======"+selected);
+////        RadioButton rb1 = (RadioButton) findViewById(selected);
+////        status = rb1.getText().toString();
+//
+//      //  Arafat, i set it as static 1, pls change this codes;
+//
+//
+//    }
+
+    public void requestToRegister() {
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
+        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+        final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityHealthNew.this, PhoneRegActivity.class);
+                startActivity(intentPhoneRegistration);
+
+            }
+        });
+
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+
+            }
+        });
+     //   setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+        alert.show();
+    }
+
+
+
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         if (result == PackageManager.PERMISSION_GRANTED) {
@@ -580,7 +623,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         }
 
-  }
+    }
 
     public String English_to_bengali_number_conversion(String english_number) {
         int v = english_number.length();
@@ -610,77 +653,73 @@ public class DetailsInfoActivityHealthNew extends Activity {
         return concatResult;
     }
 
-//    public Boolean RegisteredOrNot()
-//    {
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        //  editor.putString("registered", lat);
-//        registered = pref.getString("registered", null);
-//        phone_num = pref.getString("phone",null);
-//        // editor.commit();
-//        //  if(registered.equals("yes"))
-//        return true;
-//        //  else
-//        //   return true;
-//
-//
-//
-//
+    public Boolean RegisteredOrNot() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+       // editor.putString("registered", lat);
+        registered = pref.getString("registered", null);
+       // phone_num = pref.getString("phone", null);
+        editor.commit();
+        if (registered.equals("yes"))
+            return true;
+        else
+            return true;
+    }
 
-    private String timeConverter(String time)
-    {
-        String timeInBengali="";
+    private String timeConverter(String time) {
+        String timeInBengali = "";
 
         String[] separated = time.split(":");
 
 
+        int hour = Integer.valueOf(separated[0]);
+        int times = Integer.valueOf(separated[1]);
 
-
-
-        int hour= Integer.valueOf(separated[0]);
-        int times= Integer.valueOf(separated[1]);
-
-        if(hour>6&&hour<12)
-            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour));
-       else if(hour==12)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour));
-        else if(hour>12&&hour<16)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>15&&hour<18)
-            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>17&&hour<20)
-            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>20)
-            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        if(times!=0)
-       timeInBengali=timeInBengali+ " টা " + English_to_bengali_number_conversion(String.valueOf(times))+" মিনিট";
+        if (hour > 6 && hour < 12)
+            timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour == 12)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour > 12 && hour < 16)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 15 && hour < 18)
+            timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 17 && hour < 20)
+            timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 20)
+            timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        if (times != 0)
+            timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
         else
-            timeInBengali=timeInBengali+ " টা";
+            timeInBengali = timeInBengali + " টা";
         return timeInBengali;
     }
 
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            CheckConcate(value1, value2);
+        }
+    }
 
-    private void timeProcessing(String value1,String value2)
-    {
-        if(!value2.equals("null")||value2.equals("")) {
-           String GetTime= timeConverter(value2);
-            CheckConcate(value1,GetTime);
+
+    private void timeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || value2.equals("")) {
+            String GetTime = timeConverter(value2);
+            CheckConcate(value1, GetTime);
 
         }
     }
 
-    private void CheckConcate(String value1,String value2){
+    private void CheckConcate(String value1, String value2) {
 
 
-        if(!value2.equals("null")&&!value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")) {
 
-            String value ="      "+ value1 +":  "+ value2;
+            String value = "      " + value1 + ":  " + value2;
             result_concate = result_concate + value + "\n";
         }
 
 
-
-
-
     }
+
+
 }
