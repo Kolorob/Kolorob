@@ -40,6 +40,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -1025,12 +1026,14 @@ help=(ImageButton)findViewById(R.id.helpicon);
     public void help(){
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceChoiceActivity2.this);
         View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceChoiceActivity2.this);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceChoiceActivity2.this);
         alertDialogBuilder.setView(promptView);
 
         final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
         final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
         final Button button= (Button)promptView.findViewById(R.id.phone_call);
+        final ImageView imageView7= (ImageView)promptView.findViewById(R.id.imageView7);
+
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -1064,6 +1067,18 @@ help=(ImageButton)findViewById(R.id.helpicon);
                 Toast.makeText(PlaceChoiceActivity2.this, "...ok....",Toast.LENGTH_LONG).show();
             }
         });
+
+        imageView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alert = alertDialogBuilder.create();
+
+                alert.cancel();
+                finish();
+            }
+        });
+
+
         // setup a dialog window
         alertDialogBuilder.setCancelable(false);
 
