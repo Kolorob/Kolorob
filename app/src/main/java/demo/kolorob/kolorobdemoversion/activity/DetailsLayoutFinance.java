@@ -17,8 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -48,7 +46,6 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsIt
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
-import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by israt.jahan on 7/17/2016.
@@ -78,7 +75,6 @@ public class DetailsLayoutFinance extends Activity {
     RadioButton rb1, rb2, rb3;
     String status = "", phone_num = "", registered = "";
     String result_concate = "";
-    private CheckBox checkBox;
 
 
     @Override
@@ -138,7 +134,7 @@ public class DetailsLayoutFinance extends Activity {
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
-        checkBox = (CheckBox) findViewById(R.id.compare);
+
 
 
 
@@ -173,11 +169,12 @@ public class DetailsLayoutFinance extends Activity {
         if (tuition_size != 0) {
             for (FinancialServiceDetailsItem financialServiceDetailsItem : financialServiceDetailsItems) {
                 //result_concate="";
+                CheckConcate("সুবিধার নাম ", financialServiceDetailsItem.getServicetype());
+                CheckConcate("কি ধরনের সুবিধা", financialServiceDetailsItem.getServicesubtype());
+                CheckConcate("খরচ", financialServiceDetailsItem.getServicecost());
+                CheckConcate("মন্তব্য", financialServiceDetailsItem.getServiceremark());
 
-                CheckConcate("কোন ক্লাস পড়ান হয়", financialServiceDetailsItem.getServicecost());
-                CheckConcate("খরচ", financialServiceDetailsItem.getServiceremark());
-                CheckConcate("বৃত্তি সুবিধা", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("বৃত্তি সুবিধার ধরন", financialServiceDetailsItem.getServicetype());
+
 
 
 
@@ -203,28 +200,6 @@ public class DetailsLayoutFinance extends Activity {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
-            }
-        });
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int compareValue;
-                String node = String.valueOf(financialNewItem.getFinId());
-                compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutFinance.this);
-                if (compareValue >= 2)
-                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-                else if (compareValue == 0) {
-                    Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareData(DetailsLayoutFinance.this, node, 1);
-                } else if (compareValue == 1) {
-                    String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutFinance.this);
-                    previous_node = previous_node + " " + node;
-                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutFinance.this, previous_node, 2);
-                }
-
-
             }
         });
 

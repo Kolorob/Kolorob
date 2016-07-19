@@ -332,17 +332,7 @@
 
             android:layout_height="match_parent"
             android:gravity="center_vertical|left">
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/compare"
-
-
-                android:buttonTint="@color/white"
-                android:layout_marginLeft="20dp"
-
-                android:textColor="@color/white"
-                android:text="@string/compare"/>
+         
 
         </LinearLayout>
 
