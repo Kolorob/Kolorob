@@ -22,7 +22,7 @@
         >
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="match_pargit ent"
             android:orientation="horizontal"
             android:background="@color/education_color"
             android:layout_height="wrap_content">
