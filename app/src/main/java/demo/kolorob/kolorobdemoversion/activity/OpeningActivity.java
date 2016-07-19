@@ -666,24 +666,24 @@ int countofDb;
 //                    }
 //                }
 //            });
-            getRequest(OpeningActivity.this, "legal/all", new VolleyApiCallback() {
-                       @Override
-                        public void onResponse(int status, String apiContent) {
-
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-                                try {
-                                    JSONObject jo = new JSONObject(apiContent);
-                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
+//            getRequest(OpeningActivity.this, "legal/all", new VolleyApiCallback() {
+//                       @Override
+//                        public void onResponse(int status, String apiContent) {
+//
+//                            if (status == AppConstants.SUCCESS_CODE) {
+//
+//                                try {
+//                                    JSONObject jo = new JSONObject(apiContent);
+//                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+//                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+//                                        saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                    }
+//            );
 
 
 //
