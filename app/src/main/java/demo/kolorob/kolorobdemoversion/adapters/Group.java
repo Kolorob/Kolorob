@@ -6,10 +6,10 @@ package demo.kolorob.kolorobdemoversion.adapters;
 import java.util.ArrayList;
 import java.util.List;
 
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -18,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderIte
 public class Group {
 
     public String string;
-    public  List<EducationServiceProviderItem> children = new ArrayList<EducationServiceProviderItem>();
+    public  List<EducationNewItem> children = new ArrayList<EducationNewItem>();
     public  List<EntertainmentServiceProviderItem> childrenent = new ArrayList<EntertainmentServiceProviderItem>();
     public  List<HealthServiceProviderItemNew> childrenhea = new ArrayList<HealthServiceProviderItemNew>();
     public  List<FinancialServiceProviderItem> childrenfin = new ArrayList<FinancialServiceProviderItem>();
@@ -65,7 +65,7 @@ public class Group {
         this.childrenent = childrenent;
     }
 
-    public List<EducationServiceProviderItem> getchildren() {
+    public List<EducationNewItem> getchildren() {
         return children;
     }
 

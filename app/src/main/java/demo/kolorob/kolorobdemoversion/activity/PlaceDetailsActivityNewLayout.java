@@ -175,7 +175,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
     Context context;
     ArrayList <String>Headerholder=new ArrayList<>();
-    ArrayList<EducationServiceProviderItem> printnames;
+    ArrayList<EducationNewItem> printnames;
     //common for all categories
     public LinearLayout sideIndex,searchLayout;
     public CategoryItem getCi() {
@@ -1068,20 +1068,20 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         switch (cat_id) {
             case AppConstants.EDUCATION:
 
-                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = cat_id;
-                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = 5;
+                EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> print = null;
                 groups.removeAllElements();
 
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
                // subCatItemList.setChildDivider(R.color.black);
 
-                print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+                print = subCategoryTable.getSubnameedu(currentCategoryID);
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
-                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
+                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
 
                     // Log.d(">>>>", "printnames "+printnames);
                     /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);

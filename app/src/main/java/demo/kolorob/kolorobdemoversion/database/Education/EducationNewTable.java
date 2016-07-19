@@ -342,6 +342,30 @@ public class EducationNewTable {
         return ret;
 
     }
+    public ArrayList<EducationNewItem> Edunames(String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+        String places;
+        ArrayList<EducationNewItem> nameslist=new ArrayList<>();
+        places="Mirpur-10";
+        SQLiteDatabase db = openDB();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "
+                +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFNUMS + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
+    }
     public ArrayList<EducationNewItem> getEducationData(String node_id) {
         ArrayList<EducationNewItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);

@@ -7,7 +7,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/back_drop"
+    android:background="@color/white"
 
     tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
 
@@ -24,7 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/financial_color"
             android:layout_height="wrap_content">
 
 
@@ -62,7 +62,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/financial_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/education_color"
+                android:background="@color/financial_color"
                 android:layout_height="wrap_content">
 
 
@@ -236,25 +236,29 @@
 
         </LinearLayout>
 
-
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/middle"
             android:background="@color/white"
             >
 
             <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top">
+                android:layout_gravity="top"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:id="@+id/scrollView3"
+                android:layout_centerInParent="true">
+
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:layout_gravity="top"
+                    android:layout_gravity="center_vertical|center_horizontal"
                     android:orientation="vertical">
 
 
@@ -263,133 +267,51 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/result" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/tuition" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/training" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
                         android:gravity="top"
                         android:id="@+id/serviceDetails"
-                        android:layout_gravity="top" />
+                        android:layout_gravity="top"
+
+                        android:layout_centerHorizontal="true" />
                 </RelativeLayout>
-
-
-
-
             </ScrollView>
 
 
-
-        </LinearLayout>
-
-
-
-
-
-
-
-
-
-
+        </RelativeLayout>
 
 
     </LinearLayout>
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-
         android:layout_height="wrap_content"
-        android:background="@color/education_color"
-        android:id="@+id/bottom_bar"
 
-        android:gravity="center_vertical">
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|left">
+        android:background="@color/financial_color"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right">
+
+
+
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-
-
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"
 
 
 
 
-                android:id="@+id/feedback"/>
-
-        </LinearLayout>
+                android:id="@+id/feedback" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

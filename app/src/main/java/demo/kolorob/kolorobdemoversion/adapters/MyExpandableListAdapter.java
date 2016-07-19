@@ -27,10 +27,9 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -109,9 +108,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         linearLayout=(LinearLayout)v.findViewById(R.id.row_view);
         switch (catid) {
             case AppConstants.EDUCATION:
-            final EducationServiceProviderItem det = groups.get(groupPosition).getchildren().get(childPosition);
+            final EducationNewItem det = groups.get(groupPosition).getchildren().get(childPosition);
             text = (TextView) v.findViewById(R.id.textView1);
-            text.setText(det.getEduNameBan());
+            text.setText(det.getNamebn());
                 linearLayout.setBackgroundResource(R.color.education_color);
 
 
