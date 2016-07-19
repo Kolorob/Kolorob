@@ -34,7 +34,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/health"/>
+                    android:background="@drawable/finance"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:textColor="@color/white"
                 android:textSize="29sp"
                 android:id="@+id/textView19"
-                android:text="finance"
+                android:text="@string/Financial"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
@@ -332,17 +332,7 @@
 
             android:layout_height="match_parent"
             android:gravity="center_vertical|left">
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/compare"
 
-
-                android:buttonTint="@color/white"
-                android:layout_marginLeft="20dp"
-
-                android:textColor="@color/white"
-                android:text="@string/compare"/>
 
         </LinearLayout>
 
