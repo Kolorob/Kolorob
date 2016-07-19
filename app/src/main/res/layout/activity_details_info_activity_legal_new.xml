@@ -24,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/health_color"
+            android:background="@color/legal_aid_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -63,7 +63,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/health_color"
+            android:background="@color/legal_aid_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/health_color"
+                android:background="@color/legal_aid_color"
                 android:layout_height="wrap_content">
 
 
@@ -275,7 +275,7 @@
         android:orientation="horizontal"
 
         android:layout_height="wrap_content"
-        android:background="@color/health_color"
+        android:background="@color/legal_aid_color"
         android:id="@+id/bottom_bar"
 
         android:gravity="center_vertical">
