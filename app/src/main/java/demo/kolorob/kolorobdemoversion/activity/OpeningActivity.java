@@ -207,7 +207,7 @@ int countofDb;
         if(in ==1){
             rotateImage.setBackgroundResource(R.drawable.a1);
             System.out.println("-----okkkkk1--------");
-            // startActivity(new Intent(SplashActivity.this, OpeningActivity.class));
+
         }
         else if(in ==2){
             rotateImage.setBackgroundResource(R.drawable.a3);
@@ -415,7 +415,7 @@ int countofDb;
             @Override
             public void run() {
                                 /* start the activity */
-                //    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
                 //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 overridePendingTransition(0, 0);
                 finish();
