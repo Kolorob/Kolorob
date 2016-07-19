@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -88,7 +90,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         }
     }
 
-    private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
+    private ArrayList<HealthServiceProviderItemNew> healthServiceProvider = null;
     IMapController mapViewController;
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider = null;
@@ -150,11 +152,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay, anotherItemizedIconOverlay2, anotherItemizedIconOverlay7, anotherItemizedIconOverlay8, anotherItemizedIconOverlay3, anotherItemizedIconOverlay4, anotherItemizedIconOverlay5, anotherItemizedIconOverlay6;
     ArrayList<ItemizedIconOverlay> overlayholder = null;
 
-    public ArrayList<HealthServiceProviderItem> getHealthServiceProvider() {
+    public ArrayList<HealthServiceProviderItemNew> getHealthServiceProvider() {
         return healthServiceProvider;
     }
 
-    public void setHealthServiceProvider(ArrayList<HealthServiceProviderItem> et) {
+    public void setHealthServiceProvider(ArrayList<HealthServiceProviderItemNew> et) {
         this.healthServiceProvider = et;
     }
 
@@ -219,13 +221,13 @@ setMapView(mapView);
                 }
                 break;
             case AppConstants.HEALTH:
-                for (HealthServiceProviderItem et : healthServiceProvider) {
+                for (HealthServiceProviderItemNew et : healthServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId = et.getRefNum();
-                    latDouble = Double.parseDouble(et.getLatitude());
-                    longDouble = Double.parseDouble(et.getLongitude());
+                    String subcategotyId = et.getReferences();
+                    latDouble = Double.parseDouble(et.getLat());
+                    longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerHealth(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getRefNum());
+                    drawMarkerHealth(point, et.getNode_bn(), et.getAddress(), et.getNode_contact(), et.getNode_id(), et.getReferences());
                 }
                 break;
             case AppConstants.ENTERTAINMENT:
@@ -315,6 +317,7 @@ setMapView(mapView);
     }
 
     private void drawMarkerEdu(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+        Log.d("separated","========="+subcategotyId2);
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
 
@@ -343,28 +346,45 @@ setMapView(mapView);
     }
     }
 
-    private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, String node, int subcategotyId) {
+    private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, String node, String subcategotyId2) {
+        Log.d("separated","========="+subcategotyId);
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-        if (subcategotyId >= 1 && subcategotyId <= 7)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-        else if (subcategotyId >= 8 && subcategotyId <= 12)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-        else if (subcategotyId >= 13 && subcategotyId <= 15)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-        else if (subcategotyId >= 16 && subcategotyId <= 20)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-        else if (subcategotyId == 21)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
-        else if (subcategotyId == 22)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+        String subcategory;
+        subcategory=subcategotyId2.substring(1);
+        String CurrentString = subcategory;
+        String[] separated = CurrentString.split(",");
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-        marker.setInfoWindow(infoWindow);
 
-        mapView.getOverlays().add(marker);
+
+
+        for (int i=0;i<separated.length;i++)
+        {
+            subcategotyId= Integer.parseInt(separated[i]);
+            if (subcategotyId >= 1 && subcategotyId <= 7)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            else if (subcategotyId >= 8 && subcategotyId <= 12)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            else if (subcategotyId >= 13 && subcategotyId <= 15)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            else if (subcategotyId >= 16 && subcategotyId <= 20)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            else if (subcategotyId == 21)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            else if (subcategotyId == 22)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+
+            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+            marker.setInfoWindow(infoWindow);
+
+            mapView.getOverlays().add(marker);
+        }
+
+
+
+
     }
 
     private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, String node, int subcategotyId) {
