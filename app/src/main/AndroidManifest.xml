@@ -105,7 +105,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.DetailsLayoutfinance"
+            android:name=".activity.DetailsLayoutFinance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.DetailsInfoActivityFinancialNew" />

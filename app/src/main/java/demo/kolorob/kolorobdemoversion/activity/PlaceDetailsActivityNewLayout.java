@@ -1551,8 +1551,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
-                        ArrayList<HealthServiceProviderItem> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem(ci.getId());
+                        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+                        healthServiceProvider = constructHealthListItem();
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
@@ -2070,7 +2070,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
+                        //callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -2327,8 +2327,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(helclicked){
                 //helclicked=false;
                 mapFragment.setCategoryId(2);
-                ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
-                healthServiceProviderItems = constructHealthListItem(2);
+                ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
+                healthServiceProviderItems = constructHealthListItem();
                 mapFragment.setHealthServiceProvider(healthServiceProviderItems);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -2378,15 +2378,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /***********************************************************Methods for Health*************************************************/
 
-    private ArrayList<HealthServiceProviderItem> constructHealthListItem(int cat_id)
+    private ArrayList<HealthServiceProviderItemNew> constructHealthListItem()
     {
-        ArrayList<HealthServiceProviderItem> healthServiceProvider;
-        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo(cat_id);
+        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo();
         return healthServiceProvider;
     }
 
-    private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItem> healthServiceProviderItems)
+    private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
