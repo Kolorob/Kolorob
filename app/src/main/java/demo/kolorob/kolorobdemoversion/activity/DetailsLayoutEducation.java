@@ -750,6 +750,7 @@ public class DetailsLayoutEducation extends Activity {
 
         if(!value2.equals("null")&&!value2.equals("")) {
 
+
             String value ="      "+ value1 +":  "+ value2;
             result_concate = result_concate + value + "\n";
         }

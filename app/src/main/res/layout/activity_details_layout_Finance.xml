@@ -6,17 +6,17 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+
     android:background="@color/white"
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
+    tools:context=".activity.DetailsLayoutFinance">
 
 
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
 
         android:id="@+id/upper"
         >
@@ -24,7 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/financial_color"
+            android:background="@color/education_color"
             android:layout_height="wrap_content">
 
 
@@ -62,7 +62,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/financial_color"
+            android:background="@color/education_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/financial_color"
+                android:background="@color/education_color"
                 android:layout_height="wrap_content">
 
 
@@ -278,17 +278,15 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:background="@color/financial_color"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
 
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:background="@color/financial_color"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+            android:layout_gravity="bottom">
 
 
 
@@ -311,7 +309,9 @@
                 android:id="@+id/feedback" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 
+
+    </LinearLayout>
 </RelativeLayout>

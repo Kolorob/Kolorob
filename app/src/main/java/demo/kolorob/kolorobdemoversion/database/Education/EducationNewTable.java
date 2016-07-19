@@ -346,19 +346,31 @@ public class EducationNewTable {
         String subcatnames=null;
         subcatnames=a;
         String places;
+        int k =0;
         ArrayList<EducationNewItem> nameslist=new ArrayList<>();
+        ArrayList<Integer>s=new ArrayList<Integer>();
         places="Mirpur-10";
         SQLiteDatabase db = openDB();
+        int i=0;
+        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatname = '"+subcatnames+"'" ,null);
+        if (cursor.moveToFirst()) {
+            do {
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "
-                +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFNUMS + "=" + "(SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _sub_cat_name = '"+subcatnames+"')", null);
+                k=cursor.getInt(5);
+
+
+
+            } while (cursor.moveToNext());
+        }
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "
+                +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFNUMS + "LIKE" + k , null);
 
 
         if (cursor.moveToFirst()) {
             do {
 
 
-                nameslist.add(cursorToSubCatList(cursor));
+                nameslist.add(cursorToSubCatList(cursor2));
 
             } while (cursor.moveToNext());
         }

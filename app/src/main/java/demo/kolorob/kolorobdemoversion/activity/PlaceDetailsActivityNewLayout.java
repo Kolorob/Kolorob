@@ -1067,7 +1067,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
             case AppConstants.EDUCATION:
-
+/*
                 SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = 5;
                 EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
@@ -1093,6 +1093,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     }
                     groups.add(j, group);
                 }
+                */
                 break;
             case AppConstants.ENTERTAINMENT:
 

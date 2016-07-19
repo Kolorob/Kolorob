@@ -254,7 +254,7 @@ public class DetailsLayoutFinance extends Activity {
         feedbacks.height = width / 6;
         feedbacks.width = width / 6;
         feedback.setLayoutParams(feedbacks);
-        //feedbacks.setMargins(10, 0, width / 30, 0);
+      //  feedbacks.setMargins(0, 0, width / 30, 0);
 
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
