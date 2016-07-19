@@ -55,6 +55,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -73,9 +74,9 @@ public class DetailsInfoActivityLegalNew extends Activity {
     TextView ups_text;
     ListView courseListView,listView;
     Context con;
-    HealthServiceProviderItemNew healthServiceProviderItemNew;
-    ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
-    ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
+    LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
+    ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItemNews;
+    ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
@@ -105,13 +106,12 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 
         if (null != intent) {
-            healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
+            legalAidServiceProviderItemNew = (LegalAidServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
 
         }
 
 
-        HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityLegalNew.this);
-        EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivityLegalNew.this);
+
 
         courseListView = (ListView) findViewById(R.id.courseListView);
         listView = (ListView) findViewById(R.id.listView5);
