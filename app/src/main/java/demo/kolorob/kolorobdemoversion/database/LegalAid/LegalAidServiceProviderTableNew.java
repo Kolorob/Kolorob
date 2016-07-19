@@ -271,6 +271,45 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return legalAidServiceProviderItem;
     }
+
+    public ArrayList<LegalAidServiceProviderItemNew> LegalInfo(int cat_id,int refId,String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+        String places;
+
+
+        String refids= String.valueOf(refId);
+
+        refids=","+refids+",";
+        places="Mirpur-11";
+
+
+        ArrayList<LegalAidServiceProviderItemNew> nameslist=new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_BREAKTIME2+ " LIKE '%"+refids+"%'" , null);
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
+          Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_BREAKTIME2+ " LIKE '%"+refids+"%'" + "=" +refId);
+//        Toast.makeText(this, +cursor,
+//                Toast.LENGTH_LONG).show();
+
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                nameslist.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return  nameslist;
+    }
+
     public ArrayList<LegalAidServiceProviderItemNew> Legnames(int cat_id,String head,String a,String place) {
         String subcatnames=null;
         subcatnames=a;

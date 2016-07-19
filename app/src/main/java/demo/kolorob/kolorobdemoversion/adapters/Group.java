@@ -13,6 +13,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 
 
 public class Group {
@@ -22,7 +23,7 @@ public class Group {
     public  List<EntertainmentServiceProviderItem> childrenent = new ArrayList<EntertainmentServiceProviderItem>();
     public  List<HealthServiceProviderItemNew> childrenhea = new ArrayList<HealthServiceProviderItemNew>();
     public  List<FinancialServiceProviderItem> childrenfin = new ArrayList<FinancialServiceProviderItem>();
-    public  List<LegalAidServiceProviderItem> childrenleg = new ArrayList<LegalAidServiceProviderItem>();
+    public  List<LegalAidServiceProviderItemNew> childrenleg = new ArrayList<LegalAidServiceProviderItemNew>();
     public  List<JobServiceProviderItem> childrenjob = new ArrayList<JobServiceProviderItem>();
 
     public List<HealthServiceProviderItemNew> getChildrenhea() {
@@ -49,11 +50,11 @@ public class Group {
         this.childrenjob = childrenjob;
     }
 
-    public List<LegalAidServiceProviderItem> getChildrenleg() {
+    public List<LegalAidServiceProviderItemNew> getChildrenleg() {
         return childrenleg;
     }
 
-    public void setChildrenleg(List<LegalAidServiceProviderItem> childrenleg) {
+    public void setChildrenleg(List<LegalAidServiceProviderItemNew> childrenleg) {
         this.childrenleg = childrenleg;
     }
 

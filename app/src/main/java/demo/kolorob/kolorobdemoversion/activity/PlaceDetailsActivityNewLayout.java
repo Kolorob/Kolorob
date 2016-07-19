@@ -78,6 +78,7 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
@@ -93,6 +94,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -167,7 +169,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
-    ArrayList<LegalAidServiceProviderItem> printnamesleg;
+    ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
     ArrayList<FinancialServiceProviderItem> printnamesfin;
     ArrayList<String> allData= new ArrayList<>();
@@ -1155,6 +1157,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 currentCategoryID = cat_id;
                 FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printfin = null;
+           //     ArrayList<String> printfin = null;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
                 groups.removeAllElements();
                 printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
@@ -1169,18 +1172,26 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 break;
             case AppConstants.LEGAL:
+                SubCategoryTableNew subCategoryTableNews=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
 
-                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+             //   SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = cat_id;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.legal_aid_color));
-                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printleg = null;
+                LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+                //ArrayList<String> printleg = null;
+                ArrayList<String> RefLegal = null;
+                RefLegal=subCategoryTableNews.getSubnameedu(29);
+                Log.d("RefLegal","======"+RefLegal);
+
                 groups.removeAllElements();
-                printleg = subCategoryTable5.getSubnameedu(currentCategoryID, head);
-                for (int j = 0; j < printleg.size(); j++) {
-                    Group group = new Group(printleg.get(j));
+               // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < RefLegal.size(); j++) {
+                    Group group = new Group(RefLegal.get(j));
+                    int refId=subCategoryTableNews.getRefId(RefLegal.get(j));
+
                     printnamesleg = null;
-                    printnamesleg = legalAidServiceProviderTable.Legnames(currentCategoryID, head, printleg.get(j), placeChoice);
+                    printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
+
                     for (int i = 0; i < printnamesleg.size(); i++) {
                         group.childrenleg.add(i, printnamesleg.get(i));
                     }

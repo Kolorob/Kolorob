@@ -33,6 +33,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 
@@ -183,7 +184,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 });
                 break;
             case AppConstants.LEGAL:
-                final LegalAidServiceProviderItem detleg = groups.get(groupPosition).getChildrenleg().get(childPosition);
+                final LegalAidServiceProviderItemNew detleg = groups.get(groupPosition).getChildrenleg().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detleg.getLegalaidNameBan());
                 linearLayout.setBackgroundResource(R.color.legal_aid_color);
