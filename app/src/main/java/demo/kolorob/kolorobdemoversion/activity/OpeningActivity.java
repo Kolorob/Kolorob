@@ -338,7 +338,6 @@ int countofDb;
                 LoadData();
 
                 pd.dismiss();
-                // Intent i = new Intent(OpeningActivity.this, LocationAskActivity.class);
             }
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
