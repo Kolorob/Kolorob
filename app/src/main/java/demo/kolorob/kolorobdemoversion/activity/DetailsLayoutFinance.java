@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -249,11 +250,11 @@ public class DetailsLayoutFinance extends Activity {
         ratingText.setTextSize(width / 25);
         ups_text.setText(financialNewItem.getNamebn());
 
-        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 8;
-        feedbacks.width = width / 8;
+       RelativeLayout.LayoutParams feedbacks = (RelativeLayout.LayoutParams) feedback.getLayoutParams();
+        feedbacks.height = width / 6;
+        feedbacks.width = width / 6;
         feedback.setLayoutParams(feedbacks);
-        feedbacks.setMargins(0, 0, width / 30, 0);
+      //  feedbacks.setMargins(0, 0, width / 30, 0);
 
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
