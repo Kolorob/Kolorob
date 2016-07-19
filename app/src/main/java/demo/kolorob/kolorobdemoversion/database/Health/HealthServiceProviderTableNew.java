@@ -909,6 +909,41 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
     }
 
 
+    public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfoWithHead(int cat_id,String header) {
+        ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_REFERENCES + " LIKE '%"+header+"%'", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+    public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo(int cat_id) {
+        ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+
     public ArrayList<HealthServiceProviderItemNew> Heanames(int cat_id,int refId,String a,String place) {
         String subcatnames=null;
         subcatnames=a;

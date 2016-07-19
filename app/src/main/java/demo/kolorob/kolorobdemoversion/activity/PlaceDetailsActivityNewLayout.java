@@ -282,13 +282,13 @@ RelativeLayout searchviewholder,filterholder;
     int val;
 
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
-    ArrayList<HealthServiceProviderItem> healthItem=new ArrayList<>();
+    ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItem> legalItem=new ArrayList<>();
     ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
 
     ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
-    ArrayList<HealthServiceProviderItem> HEL=new ArrayList<>();
+    ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItem>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
@@ -1552,7 +1552,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
                         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem();
+                        healthServiceProvider = constructHealthListItem(1);
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
@@ -2328,7 +2328,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 //helclicked=false;
                 mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
-                healthServiceProviderItems = constructHealthListItem();
+                healthServiceProviderItems = constructHealthListItem(2);
                 mapFragment.setHealthServiceProvider(healthServiceProviderItems);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -2378,7 +2378,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /***********************************************************Methods for Health*************************************************/
 
-    private ArrayList<HealthServiceProviderItemNew> constructHealthListItem()
+    private ArrayList<HealthServiceProviderItemNew> constructHealthListItem(int cat_id)
     {
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
@@ -2400,11 +2400,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
-    private ArrayList<HealthServiceProviderItem> constructHealthListItemForHeader(int cat_id, String header)
+    private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
     {
-        ArrayList<HealthServiceProviderItem> healthServiceProvider;
-        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, header);
+        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+        int refId=subCategoryTableNew.getRefId(header);
+        String refIds=String.valueOf(refId);
+
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
         return healthServiceProvider;
     }
 
