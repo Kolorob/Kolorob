@@ -444,8 +444,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         phone_num=register;
 
         if (register.equals("")) {
-            Intent intentv = new Intent(DetailsInfoActivityHealthNew.this,PhoneRegActivity.class);
-            startActivity(intentv);
+            requestToRegister();
         } else {
 
             feedBackAlert();
