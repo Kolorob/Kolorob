@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.helpers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -27,6 +28,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
@@ -38,7 +40,7 @@ public class MyInfoWindow extends InfoWindow {
     int n;
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
-    HealthServiceProviderItem nullhel;
+    HealthServiceProviderItemNew nullhel;
     EntertainmentServiceProviderItem nullent;
     FinancialNewItem nullfin;
     LegalAidServiceProviderItem nullleg;
@@ -77,6 +79,7 @@ public class MyInfoWindow extends InfoWindow {
         TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
         TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
         txtTitle.setText(titlemarker);
+
         // contact.setText(contact2);
         txtSubdescription.setText("যোগাযোগঃ "+contact2);
         adddescription.setText("ঠিকানাঃ " + address);
@@ -88,6 +91,7 @@ public class MyInfoWindow extends InfoWindow {
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                          EducationNewTable educationNewTable = new EducationNewTable(MyInfoWindow.this.con);
+
                         nulledu2 = educationNewTable.geteduNode2(n);
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
                         iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
@@ -97,10 +101,11 @@ public class MyInfoWindow extends InfoWindow {
                     case AppConstants.HEALTH:
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
+                     //   Log.d("Value of N","======="+node);
                         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(MyInfoWindow.this.con);
-                        nullhel = healthServiceProviderTable.gethelNode2(node);
+                        nullhel = healthServiceProviderTable.gethelNode2(Integer.valueOf(node));
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
-                        iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
+                        iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
 
                         break;
