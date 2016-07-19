@@ -1552,7 +1552,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
                         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem(ci.getId());
+                        healthServiceProvider = constructHealthListItem(1);
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
@@ -2070,7 +2070,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
+                        //callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -2382,7 +2382,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo(cat_id);
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo();
         return healthServiceProvider;
     }
 
