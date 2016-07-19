@@ -78,6 +78,7 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
@@ -121,6 +122,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -815,7 +817,17 @@ int countofDb;
         try {
             LegalAidServiceProviderItemNew legalAidServiceProviderItemNew=LegalAidServiceProviderItemNew.parseLegalAidServiceProviderItemNew(jsonObject);
             legalAidServiceProviderTableNew.insertItem(legalAidServiceProviderItemNew);
+            if (jsonObject.has("lservice_details"))
+            {
+                JSONArray lservice_details=jsonObject.getJSONArray("lservice_details");
+                int lservice_detailsSize=lservice_details.length();
 
+                for (int v=0;v<lservice_detailsSize;v++)
+                {
+                    JSONObject lservice_detailsSizeItem= lservice_details.getJSONObject(v);
+                    SaveLegalDetailsData(lservice_detailsSizeItem,jsonObject.getInt("id"));
+                }
+            }
 
 
         } catch (JSONException e) {
@@ -875,7 +887,20 @@ int countofDb;
         }
 
     }
+    private void SaveLegalDetailsData(JSONObject jsonObject,int foreign_key)
+    {
+        LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(OpeningActivity.this);
+        try {
+            LeagalAidDetailsItem leagalAidDetailsItem=LeagalAidDetailsItem.parseLegalAidDetailsItem(jsonObject,foreign_key);
+            legalAidDetailsTable.insertItem(leagalAidDetailsItem);
 
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     private void SaveSpecialistData(JSONObject jsonObject,int foreign_key)
     {
         HealthSpecialistTableDetails healthVaccineTableDetails= new HealthSpecialistTableDetails(OpeningActivity.this);

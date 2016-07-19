@@ -288,7 +288,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         _breaktime2=_breaktime2.replace(']',',');
 
         int _categoryId = jo.getInt("category");
-        Log.d("_breaktime2","======"+_breaktime2);
+
 
         int _legalaidSubCategoryId = 2;
 
