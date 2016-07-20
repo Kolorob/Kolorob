@@ -171,7 +171,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
-    ArrayList<FinancialServiceProviderItem> printnamesfin;
+    ArrayList<FinancialNewItem> printnamesfin;
     ArrayList<String> allData= new ArrayList<>();
     private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
@@ -1153,18 +1153,18 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 break;
             case AppConstants.FINANCIAL:
 
-                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = cat_id;
-                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTable4 = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = 11;
+                FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printfin = null;
-           //     ArrayList<String> printfin = null;
+
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
                 groups.removeAllElements();
-                printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
+                printfin= subCategoryTable4.getSubnameedu(currentCategoryID);
                 for (int j = 0; j <  printfin.size(); j++) {
                     Group group = new Group(printfin.get(j));
                     printnamesfin = null;
-                    printnamesfin= financialServiceProviderTable.Finnames(currentCategoryID, head, printfin.get(j), placeChoice);
+                    printnamesfin= financialServiceProviderTable.Finnames(printfin.get(j),placeChoice);;
                     for (int i = 0; i < printnamesfin.size(); i++) {
                         group.childrenfin.add(i, printnamesfin.get(i));
                     }

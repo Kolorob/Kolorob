@@ -28,8 +28,10 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
@@ -170,15 +172,15 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 });
                 break;
             case AppConstants.FINANCIAL:
-                final FinancialServiceProviderItem detfin = groups.get(groupPosition).getChildrenfin().get(childPosition);
+                final FinancialNewItem detfin = groups.get(groupPosition).getChildrenfin().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detfin.getNamebn());
                 linearLayout.setBackgroundResource(R.color.financial_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent iifin = new Intent(getActivity(), DetailsInfoActivityFinancialNew.class);
-                        iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, detfin);
+                        Intent iifin = new Intent(getActivity(), DetailsLayoutFinance.class);
+                        iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, detfin);
                         activity.startActivity(iifin);
 
                     }
