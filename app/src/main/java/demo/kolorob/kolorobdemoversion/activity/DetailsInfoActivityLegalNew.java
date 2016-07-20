@@ -83,7 +83,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private TextView ratingText;
+    private TextView ratingText,common_details,other_details;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
@@ -135,6 +135,9 @@ public class DetailsInfoActivityLegalNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
+        common_details=(TextView)findViewById(R.id.common_details);
+        other_details=(TextView)findViewById(R.id.other_details);
+
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -599,15 +602,17 @@ public class DetailsInfoActivityLegalNew extends Activity {
 //
 //
 
-
-    private String concateBasic(String value1,String value2){
-
-        String value= value1+value2;
-        result_concate= result_concate+value + "\n";
-
-        Log.d("....>>>", "Values   " + result_concate);
+    private void CheckConcate(String value1, String value2) {
 
 
-        return result_concate;
+        if (!value2.equals("null") && !value2.equals("")) {
+
+            String value = "      " + value1 + ":  " + value2;
+            result_concate = result_concate + value + "\n";
+        }
+
+
     }
+
+
 }

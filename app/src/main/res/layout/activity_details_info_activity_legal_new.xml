@@ -37,13 +37,25 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/health"/>
+                    android:background="@drawable/legal"/>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:layout_height="wrap_content"></LinearLayout>
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="37sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="আইন কানুন"/>
+
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
@@ -236,7 +248,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/details_info_scrollview_background"
+            android:background="@color/white"
             >
 
             <ScrollView
@@ -244,10 +256,25 @@
                 android:layout_height="wrap_content">
 
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/common_details" />
 
-
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:id="@+id/other_details" />
+                </LinearLayout>
             </ScrollView>
 
 
