@@ -45,6 +45,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -92,7 +93,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<HealthServiceProviderItemNew> healthServiceProvider = null;
     IMapController mapViewController;
     private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
-    private ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider = null;
+    private ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialNewItem> financialServiceProvider = null;
     private ArrayList<EducationNewItem> educationServiceProvider = null;
@@ -121,7 +122,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.entertainmentServiceProvider = et;
     }
 
-    public void setLegalaidServiceProvider(ArrayList<LegalAidServiceProviderItem> et) {
+    public void setLegalaidServiceProvider(ArrayList<LegalAidServiceProviderItemNew> et) {
         this.legalaidServiceProvider = et;
     }
 
@@ -223,6 +224,7 @@ setMapView(mapView);
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getReferences();
+                    Log.d("subcategotyId_Legal","=======");
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -243,13 +245,14 @@ setMapView(mapView);
                 //TODO write necessary codes for government
                 break;
             case AppConstants.LEGAL:
-                for (LegalAidServiceProviderItem et : legalaidServiceProvider) {
+                for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId = et.getLegalaidSubCategoryId();
+                    String subcategotyId = et.getBreaktime2();
+
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerLeg(point, et.getLegalaidNameEng(), et.getAddress(), et.getContactNo(), et.getIdentifierId(), et.getLegalaidSubCategoryId());
+                    drawMarkerLeg(point, et.getLegalaidNameBan(), et.getAddress(), et.getContactNo(), et.getIdentifierId(), et.getBreaktime2());
                 }
                 break;
             case AppConstants.FINANCIAL:
@@ -351,7 +354,7 @@ setMapView(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-
+        Log.d("HealthSub","======="+String.valueOf(subcategotyId2));
         String subcategory;
         subcategory=subcategotyId2.substring(1);
         String CurrentString = subcategory;
@@ -387,6 +390,33 @@ setMapView(mapView);
 
     }
 
+    private void drawMarkerLeg(GeoPoint point, String title, String address, String contact, String node, String subcategotyId2) {
+        Marker marker = new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        Log.d("LegSub","======="+String.valueOf(subcategotyId2));
+
+        String subcategory;
+        subcategory=subcategotyId2.substring(1);
+        String CurrentString = subcategory;
+        String[] separated = CurrentString.split(",");
+        for (int i=0;i<separated.length;i++)
+        {
+            subcategotyId= Integer.parseInt(separated[i]);
+            if (subcategotyId == 1)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+
+            else if (subcategotyId >= 2 && subcategotyId <= 5)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+            marker.setInfoWindow(infoWindow);
+
+            mapView.getOverlays().add(marker);
+        }
+
+
+
+    }
     private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, String node, int subcategotyId) {
 
 
@@ -419,21 +449,6 @@ setMapView(mapView);
     }
 
 
-    private void drawMarkerLeg(GeoPoint point, String title, String address, String contact, String node, int subcategotyId) {
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-
-        if (subcategotyId == 1)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-
-        else if (subcategotyId >= 2 && subcategotyId <= 5)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-        marker.setInfoWindow(infoWindow);
-
-        mapView.getOverlays().add(marker);
-    }
 
     private void drawMarkerFin(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
         String delims = "[,]";
@@ -474,7 +489,7 @@ public void DrawRoute(String lat, String lon)
     Double endlon=Double.parseDouble("90.411343");
 mapp=getMapView();
    // double latt=mylocation.getMyLocation().getLatitude();
-   // Log.d("latt",String.valueOf(latt));
+
     Marker destinationmarker=new Marker(mapp);
     destinationmarker.setPosition(servicepoint);
     mapp.getOverlays().add(destinationmarker);

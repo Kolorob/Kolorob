@@ -286,12 +286,12 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
-    ArrayList<LegalAidServiceProviderItem> legalItem=new ArrayList<>();
+    ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
     ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
 
     ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
-    ArrayList<LegalAidServiceProviderItem>LEG=new ArrayList<>();
+    ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
@@ -1651,7 +1651,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         filterholder.setVisibility(View.VISIBLE);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.legal_selected);
-                        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+                        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
@@ -2361,7 +2361,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(legclicked){
                // legclicked=false;
                 mapFragment.setCategoryId(5);
-                ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
+                ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
                 mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -2467,23 +2467,24 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /**********************************************************Methods for legal***************************************************/
 
-    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItem(int cat_id)
+    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItem(int cat_id)
     {
-        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
+        Log.d("subcategotyId_Legal","======="+legalaidServiceProvider);
         return legalaidServiceProvider;
     }
 
-    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItemForHeader(int cat_id, String header)
+    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItemForHeader(int cat_id, String header)
     {
-        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, header);
         return legalaidServiceProvider;
     }
 
-    private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
+    private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());

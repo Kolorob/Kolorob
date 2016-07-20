@@ -23,6 +23,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServi
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -30,6 +31,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
@@ -43,7 +45,7 @@ public class MyInfoWindow extends InfoWindow {
     HealthServiceProviderItemNew nullhel;
     EntertainmentServiceProviderItem nullent;
     FinancialNewItem nullfin;
-    LegalAidServiceProviderItem nullleg;
+    LegalAidServiceProviderItemNew nullleg;
     Activity con;
     GeoPoint pp;
     int catid;
@@ -122,8 +124,8 @@ public class MyInfoWindow extends InfoWindow {
                     case AppConstants.LEGAL:
                       //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(MyInfoWindow.this.con);
-                        nullleg = legalAidServiceProviderTable.getlegNode2(node);
+                        LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(MyInfoWindow.this.con);
+                        nullleg = legalAidServiceProviderTableNew.getlegNode2(node);
                         Intent iileg = new Intent(MyInfoWindow.this.con, DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
