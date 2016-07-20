@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -132,6 +135,7 @@ public class GovernmentServiceDetailsTable {
         closeDB();
         return false;
     }
+
     private GovernmentServiceDetailsItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
         int _sproviderId = cursor.getInt(1);

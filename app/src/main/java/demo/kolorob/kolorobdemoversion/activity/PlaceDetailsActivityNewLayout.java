@@ -75,6 +75,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
@@ -90,6 +91,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
@@ -294,6 +296,7 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<LegalAidServiceProviderItem>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
+    ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
@@ -1612,7 +1615,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         MediaPlayer mp_g = MediaPlayer.create(getApplicationContext(), R.raw.government);
                         mp_g.start();
                         govclicked=true;
+                        GOV.clear();
                         setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
@@ -1620,24 +1626,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
-                        //TODO write necessary codes for government
+
+
+
+
+
+                        ArrayList<GovernmentNewItem> governmentNewItems;
+                        governmentNewItems = constructgovListItem();
+                        callMapFragmentWithGovInfo(ci.getCatName(), ci.getId(), governmentNewItems);
+
+
+
+
 
                         toolbar.setVisibility(View.VISIBLE);
-                       /* final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
-                        alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-
-
-                                        alertDialog.dismiss();
-
-                                        finish();
-                                    }
-                                });
-                        alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();*/
                         break;
                     case AppConstants.LEGAL:
                         MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
@@ -2462,7 +2465,30 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /**********************************************************Methods for government**********************************************/
 
+    private ArrayList<GovernmentNewItem> constructgovListItem()
+    {
+        ArrayList<GovernmentNewItem> governmentNewItems;
+        GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo();
+        return governmentNewItems;
+    }
+    private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        // mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
 
+        mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setGovernmentNewItems(governmentNewItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+
+
+
+    }
 
 
     /**********************************************************Methods for legal***************************************************/

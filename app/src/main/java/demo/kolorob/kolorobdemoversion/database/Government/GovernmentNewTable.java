@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
@@ -16,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class GovernmentNewTable {
     private static final String TAG = FinancialServiceDetailsTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_NEW;
+    private static final String TABLE_NAME = DatabaseHelper.GOV_MAIN;
     private static final String KEY_NODE_ID = "_finId";
     private static final String KEY_NAME_EN = "_nameen"; // 1 - text
     private static final String KEY_NAME_BN = "_namebn"; //
@@ -250,7 +252,26 @@ public class GovernmentNewTable {
 
     }
 
+    public ArrayList<GovernmentNewItem> getAllGovSubCategoriesInfo() {
+        ArrayList<GovernmentNewItem> subCatList = new ArrayList<>();
 
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_NAME_EN, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
 
     public boolean isFieldExist(int nodeid) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
