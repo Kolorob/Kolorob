@@ -328,12 +328,12 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 //        }
 
-//        close_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 //        distance_left.setOnClickListener(new View.OnClickListener() {
