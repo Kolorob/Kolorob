@@ -72,14 +72,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         object= groups.get(groupPosition).getchildren().get(childPosition);
         else if(catid==AppConstants.ENTERTAINMENT)
             object= groups.get(groupPosition).getChildrenent().get(childPosition);
-        if (catid==AppConstants.HEALTH)
+        else if (catid==AppConstants.HEALTH)
             object= groups.get(groupPosition).getChildrenhea().get(childPosition);
         else if(catid==AppConstants.FINANCIAL)
             object= groups.get(groupPosition).getChildrenfin().get(childPosition);
-        if (catid==AppConstants.LEGAL)
+        else if (catid==AppConstants.LEGAL)
+
             object= groups.get(groupPosition).getChildrenleg().get(childPosition);
         else if(catid==AppConstants.JOB)
             object= groups.get(groupPosition).getChildrenjob().get(childPosition);
+        else if(catid==AppConstants.GOVERNMENT)
+            object= groups.get(groupPosition).getChildrengov().get(childPosition);
         return object;
     }
 
@@ -97,6 +100,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             longs= groups.get(groupPosition).getChildrenleg().get(childPosition).hashCode();
         else if(catid==AppConstants.JOB)
             longs= groups.get(groupPosition).getChildrenjob().get(childPosition).hashCode();
+        else if(catid==AppConstants.GOVERNMENT)
+            longs= groups.get(groupPosition).getChildrengov().get(childPosition).hashCode();
         return longs;
     }
 
@@ -231,7 +236,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             case AppConstants.GOVERNMENT:
                 final GovernmentNewItem detgov = groups.get(groupPosition).getChildrengov().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
-                text.setText(detgov.getArea());
+                text.setText(detgov.getAddress());
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -262,14 +267,16 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             size= groups.get(groupPosition).children.size();
         else if(catid==AppConstants.ENTERTAINMENT)
             size= groups.get(groupPosition).childrenent.size();
-        if (catid==AppConstants.HEALTH)
+        else if (catid==AppConstants.HEALTH)
             size= groups.get(groupPosition).childrenhea.size();
         else if(catid==AppConstants.FINANCIAL)
             size= groups.get(groupPosition).childrenfin.size();
-        if (catid==AppConstants.LEGAL)
+        else  if (catid==AppConstants.LEGAL)
             size= groups.get(groupPosition).childrenleg.size();
         else if(catid==AppConstants.JOB)
             size= groups.get(groupPosition).childrenjob.size();
+        else if(catid==AppConstants.GOVERNMENT)
+            size= groups.get(groupPosition).childrengov.size();
         return size;
     }
 
@@ -317,6 +324,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         else if(catid==5)
             ((CheckedTextView) convertView).setBackgroundResource(R.color.legal_aid_color);
         else if(catid==6)
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
+        else if(catid==4)
             ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
 
 

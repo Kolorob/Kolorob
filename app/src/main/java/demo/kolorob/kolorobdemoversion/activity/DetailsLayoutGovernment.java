@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -135,7 +136,7 @@ public class DetailsLayoutGovernment extends Activity {
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
-        checkBox = (CheckBox) findViewById(R.id.compare);
+
 
 
 
@@ -189,34 +190,13 @@ public class DetailsLayoutGovernment extends Activity {
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (educationNewItem.getNode_contact2().equals("")) {
+                if (governmentNewItem.getNode_contact2().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
             }
         });
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int compareValue;
-                String node = String.valueOf(educationNewItem.getEduId());
-                compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutGovernment.this);
-                if (compareValue >= 2)
-                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-                else if (compareValue == 0) {
-                    Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareData(DetailsLayoutGovernment.this, node, 1);
-                } else if (compareValue == 1) {
-                    String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutGovernment.this);
-                    previous_node = previous_node + " " + node;
-                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutGovernment.this, previous_node, 2);
-                }
 
-
-            }
-        });
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -269,20 +249,19 @@ public class DetailsLayoutGovernment extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
-        ups_text.setText(educationNewItem.getNamebn());
+        ups_text.setText(governmentNewItem.getNamebn());
 
-        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 8;
-        feedbacks.width = width / 8;
+        RelativeLayout.LayoutParams feedbacks = (RelativeLayout.LayoutParams) feedback.getLayoutParams();
+        feedbacks.height = width / 6;
+        feedbacks.width = width / 6;
         feedback.setLayoutParams(feedbacks);
-        feedbacks.setMargins(0, 0, width / 30, 0);
 
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!educationNewItem.getNode_contact().equals("")) {
-                    callIntent1.setData(Uri.parse("tel:" + educationNewItem.getNode_contact()));
+                if (!governmentNewItem.getNode_contact().equals("")) {
+                    callIntent1.setData(Uri.parse("tel:" + governmentNewItem.getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
@@ -307,9 +286,9 @@ public class DetailsLayoutGovernment extends Activity {
             @Override
             public void onClick(View v) {
                 Intent feedIntent = new Intent(DetailsLayoutGovernment.this, FeedBackActivityNew.class);
-                feedIntent.putExtra("id", educationNewItem.getEduId());
+                feedIntent.putExtra("id", governmentNewItem.getFinId());
                 feedIntent.putExtra("categoryId", "1");
-                Log.d(">>>>", "Button is clicked1 " + educationNewItem.getEduId());
+                Log.d(">>>>", "Button is clicked1 " + governmentNewItem.getFinId());
 
                 startActivity(feedIntent);
 
@@ -322,12 +301,12 @@ public class DetailsLayoutGovernment extends Activity {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = educationNewItem.getLat().toString();
+                    String lat = governmentNewItem.getLat().toString();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = educationNewItem.getLon().toString();
+                    String lon = governmentNewItem.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
-                    String name= educationNewItem.getNamebn().toString();
-                    String node=String.valueOf(educationNewItem.getEduId());
+                    String name= governmentNewItem.getNamebn().toString();
+                    String node=String.valueOf(governmentNewItem.getFinId());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -476,7 +455,7 @@ public class DetailsLayoutGovernment extends Activity {
             rating=2;
         else
             rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationNewItem.getEduId()+"&service="+"1"+"&rating="+rating;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+governmentNewItem.getFinId()+"&service="+"1"+"&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
