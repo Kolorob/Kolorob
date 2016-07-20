@@ -88,7 +88,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
-    String result_concate;
+    String result_concate="";
     private CheckBox checkBox;
 
 
@@ -241,7 +241,32 @@ public class DetailsInfoActivityLegalNew extends Activity {
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
-        Log.d("width", "====" + width);
+     //   Log.d("width", "====" + width);
+
+
+
+        CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
+        CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
+        CheckConcate("বাসার নম্বর", legalAidServiceProviderItemNew.getHouse_no());
+        CheckConcate("রাস্তার ", legalAidServiceProviderItemNew.getRoad());
+        CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
+        CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
+        CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
+        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getArea());
+        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
+        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPost_office());
+
+        CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
+        timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
+        timeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
+        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
+        CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
+        CheckConcate("যার মাধ্যমে রেজিস্ট্রেশন করা হয়েছে", legalAidServiceProviderItemNew.getRegisteredWith());
+
+
+        common_details.setText(result_concate);
+
+
 
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
@@ -585,6 +610,40 @@ public class DetailsInfoActivityLegalNew extends Activity {
         return concatResult;
     }
 
+    private String timeConverter(String time) {
+
+        String timeInBengali = "";
+
+
+
+        String[] separated = time.split(":");
+        Log.d("time","====="+separated[0]);
+
+
+
+
+        int hour = Integer.valueOf(separated[0]);
+        int times = Integer.valueOf(separated[1]);
+
+        if (hour > 6 && hour < 12)
+            timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour == 12)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour > 12 && hour < 16)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 15 && hour < 18)
+            timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 17 && hour < 20)
+            timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 20)
+            timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        if (times != 0)
+            timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+        else
+            timeInBengali = timeInBengali + " টা";
+        return timeInBengali;
+    }
+
 //    public Boolean RegisteredOrNot()
 //    {
 //        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -601,6 +660,22 @@ public class DetailsInfoActivityLegalNew extends Activity {
 //
 //
 //
+
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            CheckConcate(value1, value2);
+        }
+    }
+
+
+    private void timeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || value2.equals("")) {
+
+            String GetTime = timeConverter(value2);
+            CheckConcate(value1, GetTime);
+
+        }
+    }
 
     private void CheckConcate(String value1, String value2) {
 
