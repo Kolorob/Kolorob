@@ -18,9 +18,11 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
@@ -28,6 +30,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -42,6 +45,7 @@ public class MyInfoWindow extends InfoWindow {
     int n;
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
+    GovernmentNewItem nullgov;
     HealthServiceProviderItemNew nullhel;
     EntertainmentServiceProviderItem nullent;
     FinancialNewItem nullfin;
@@ -98,6 +102,18 @@ public class MyInfoWindow extends InfoWindow {
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);
                         iiedu.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
                         MyInfoWindow.this.con.startActivity(iiedu);
+
+                        break;
+                    case AppConstants.GOVERNMENT:
+                        // Override Marker's onClick behaviour here
+                        //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                        layout.setVisibility(View.VISIBLE);
+                        GovernmentNewTable governmentNewTable = new GovernmentNewTable(MyInfoWindow.this.con);
+
+                        nullgov = governmentNewTable.getgovNode2(n);
+                        Intent iigov = new Intent(MyInfoWindow.this.con, DetailsLayoutGovernment.class);
+                        iigov.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
+                        MyInfoWindow.this.con.startActivity(iigov);
 
                         break;
                     case AppConstants.HEALTH:

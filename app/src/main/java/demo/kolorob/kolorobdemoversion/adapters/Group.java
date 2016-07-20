@@ -9,7 +9,9 @@ import java.util.List;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -22,10 +24,10 @@ public class Group {
     public  List<EducationNewItem> children = new ArrayList<EducationNewItem>();
     public  List<EntertainmentServiceProviderItem> childrenent = new ArrayList<EntertainmentServiceProviderItem>();
     public  List<HealthServiceProviderItemNew> childrenhea = new ArrayList<HealthServiceProviderItemNew>();
-    public  List<FinancialServiceProviderItem> childrenfin = new ArrayList<FinancialServiceProviderItem>();
+    public  List<FinancialNewItem> childrenfin = new ArrayList<FinancialNewItem>();
     public  List<LegalAidServiceProviderItemNew> childrenleg = new ArrayList<LegalAidServiceProviderItemNew>();
     public  List<JobServiceProviderItem> childrenjob = new ArrayList<JobServiceProviderItem>();
-
+    public  List<GovernmentNewItem> childrengov = new ArrayList<GovernmentNewItem>();
     public List<HealthServiceProviderItemNew> getChildrenhea() {
         return childrenhea;
     }
@@ -34,11 +36,11 @@ public class Group {
         this.childrenhea = childrenhea;
     }
 
-    public List<FinancialServiceProviderItem> getChildrenfin() {
+    public List<FinancialNewItem> getChildrenfin() {
         return childrenfin;
     }
 
-    public void setChildrenfin(List<FinancialServiceProviderItem> childrenfin) {
+    public void setChildrenfin(List<FinancialNewItem> childrenfin) {
         this.childrenfin = childrenfin;
     }
 
@@ -64,6 +66,22 @@ public class Group {
 
     public void setChildrenent(List<EntertainmentServiceProviderItem> childrenent) {
         this.childrenent = childrenent;
+    }
+
+    public List<EducationNewItem> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<EducationNewItem> children) {
+        this.children = children;
+    }
+
+    public List<GovernmentNewItem> getChildrengov() {
+        return childrengov;
+    }
+
+    public void setChildrengov(List<GovernmentNewItem> childrengov) {
+        this.childrengov = childrengov;
     }
 
     public List<EducationNewItem> getchildren() {

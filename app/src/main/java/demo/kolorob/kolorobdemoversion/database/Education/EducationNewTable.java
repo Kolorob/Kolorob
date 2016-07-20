@@ -352,7 +352,7 @@ public class EducationNewTable {
         places="Mirpur-10";
         SQLiteDatabase db = openDB();
         int i=0;
-        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatname = '"+subcatnames+"'" ,null);
+        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatnamebn = '"+subcatnames+"'" ,null);
         if (cursor.moveToFirst()) {
             do {
 
@@ -362,19 +362,30 @@ public class EducationNewTable {
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
+
         Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "
-                +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFNUMS + "LIKE" + k , null);
+                +KEY_AREA+" = '"+places+"'"  , null);
 
 
-        if (cursor.moveToFirst()) {
+        if (cursor2.moveToFirst()) {
             do {
 
+              String getter=cursor2.getString(48);
+               String delims = "[,]";
+               String[] tokens = getter.split(delims);
+                for (int ii=0;ii<tokens.length;ii++)
+                {
+                    if(Integer.parseInt(tokens[i])==k)
+                    {
+                        nameslist.add(cursorToSubCatList(cursor2));
+                    }
+                }
 
-                nameslist.add(cursorToSubCatList(cursor2));
 
-            } while (cursor.moveToNext());
+            } while (cursor2.moveToNext());
         }
-        cursor.close();
+        cursor2.close();
         closeDB();
         return  nameslist;
     }

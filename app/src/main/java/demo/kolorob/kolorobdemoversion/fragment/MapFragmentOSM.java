@@ -42,6 +42,7 @@ import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -97,8 +98,17 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialNewItem> financialServiceProvider = null;
     private ArrayList<EducationNewItem> educationServiceProvider = null;
+    private ArrayList<GovernmentNewItem> governmentNewItems = null;
     MapView mapView,mapp;
     private int categoryId;
+
+    public ArrayList<GovernmentNewItem> getGovernmentNewItems() {
+        return governmentNewItems;
+    }
+
+    public void setGovernmentNewItems(ArrayList<GovernmentNewItem> governmentNewItems) {
+        this.governmentNewItems = governmentNewItems;
+    }
 
     ArrayAdapter arrayAdapter;
 
@@ -242,7 +252,16 @@ setMapView(mapView);
                 }
                 break;
             case AppConstants.GOVERNMENT:
-                //TODO write necessary codes for government
+                if (governmentNewItems != null) {
+                    for (GovernmentNewItem et : governmentNewItems) {
+                        //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        subcategotyId2 = et.getRefnumm();
+                        latDouble = Double.parseDouble(et.getLat());
+                        longDouble = Double.parseDouble(et.getLon());
+                        GeoPoint point = new GeoPoint(latDouble, longDouble);
+                        drawMarkerGov(point, et.getNameen(), et.getArea(), et.getNode_contact(), et.getFinId(),subcategotyId2);
+                    }
+                }
                 break;
             case AppConstants.LEGAL:
                 for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
@@ -347,7 +366,36 @@ setMapView(mapView);
         //marker.setTitle("Title of the marker");
     }
     }
+    private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
+        String delims = "[,]";
+        String[] tokens = subcategotyId2.split(delims);
+
+        Marker marker = new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        for(int i=0;i<tokens.length;i++) {
+            if (tokens[i]=="")continue;
+            subcategotyId=Integer.parseInt(tokens[i]);
+
+            if (subcategotyId ==179||subcategotyId ==163||subcategotyId ==161||subcategotyId ==145)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            else if (subcategotyId >= 13 && subcategotyId <= 17)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            else if (subcategotyId >= 18 && subcategotyId <= 19)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            else if (subcategotyId >= 20 && subcategotyId <= 21)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            else if (subcategotyId ==24||subcategotyId ==94||subcategotyId ==64||subcategotyId ==63||subcategotyId ==7)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+
+            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+            marker.setInfoWindow(infoWindow);
+
+            mapView.getOverlays().add(marker);
+            //marker.setTitle("Title of the marker");
+        }
+    }
     private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, String node, String subcategotyId2) {
 
         Marker marker = new Marker(mapView);

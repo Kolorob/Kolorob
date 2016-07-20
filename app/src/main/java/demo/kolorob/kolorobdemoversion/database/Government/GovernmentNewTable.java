@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
@@ -16,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class GovernmentNewTable {
     private static final String TAG = FinancialServiceDetailsTable.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_NEW;
+    private static final String TABLE_NAME = DatabaseHelper.GOV_MAIN;
     private static final String KEY_NODE_ID = "_finId";
     private static final String KEY_NAME_EN = "_nameen"; // 1 - text
     private static final String KEY_NAME_BN = "_namebn"; //
@@ -41,6 +43,7 @@ public class GovernmentNewTable {
     private static final String KEY_NODE_WEBSITE = "_node_website"; //
     private static final String KEY_NODE_FACEBOOK= "_node_facebook"; //
     private static final String KEY_NODE_DESIGNATION = "_node_designation"; //
+    private static final String KEY_NODE_ADDRESS = "_node_address"; //
     private static final String KEY_SERVICE_OPENTIME = "_opentime"; // 1 - text
     private static final String KEY_SERVICE_BREAKTIME = "_breaktime"; //
     private static final String KEY_SERVICE_CLOSETIME = "_closetime"; //
@@ -87,6 +90,7 @@ public class GovernmentNewTable {
                 + KEY_NODE_WEBSITE + " TEXT, "
                 + KEY_NODE_FACEBOOK + " TEXT, "
                 + KEY_NODE_DESIGNATION + " TEXT, "
+                + KEY_NODE_ADDRESS + " TEXT, "
                 + KEY_SERVICE_OPENTIME + "  TEXT  , "
                 + KEY_SERVICE_BREAKTIME + "  TEXT  , "
                 + KEY_SERVICE_CLOSETIME + "  TEXT  , "
@@ -119,7 +123,7 @@ public class GovernmentNewTable {
                 governmentNewItem.getPostoffice(),governmentNewItem.getPolicestation(),
                 governmentNewItem.getCity(),governmentNewItem.getCountry(),governmentNewItem.getNode_contact(),
                 governmentNewItem.getNode_contact2(),governmentNewItem.getNode_email(),governmentNewItem.getNode_website(),
-                governmentNewItem.getNode_facebook(),governmentNewItem.getNode_designation(),
+                governmentNewItem.getNode_facebook(),governmentNewItem.getNode_designation(),governmentNewItem.getAddress(),
                 governmentNewItem.getOpeningtime(),
                 governmentNewItem.getBreaktime(),
                 governmentNewItem.getClosetime(),
@@ -131,7 +135,7 @@ public class GovernmentNewTable {
                             String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
-                            String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
+                            String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
         if (isFieldExist(finId)) {
             return updateItem(
@@ -155,7 +159,7 @@ public class GovernmentNewTable {
                     node_contact2,
                     node_email,node_website,
                     node_facebook,
-                    node_designation,  openingtime,
+                    node_designation,address,  openingtime,
                     closetime,breaktime,offday  ,registeredwith,
                     registerednumber,categoryId,refnumm);
 
@@ -185,6 +189,7 @@ public class GovernmentNewTable {
         rowValue.put(KEY_NODE_WEBSITE , node_website);
         rowValue.put(KEY_NODE_FACEBOOK  , node_facebook);
         rowValue.put(KEY_NODE_DESIGNATION  , node_designation);
+        rowValue.put(KEY_NODE_ADDRESS  , address);
         rowValue.put(KEY_SERVICE_OPENTIME, openingtime);
         rowValue.put(KEY_SERVICE_BREAKTIME, closetime);
         rowValue.put(KEY_SERVICE_CLOSETIME , breaktime);
@@ -203,7 +208,7 @@ public class GovernmentNewTable {
                             String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
-                            String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
+                            String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
 
         ContentValues rowValue = new ContentValues();
@@ -231,6 +236,7 @@ public class GovernmentNewTable {
         rowValue.put(KEY_NODE_WEBSITE , node_website);
         rowValue.put(KEY_NODE_FACEBOOK  , node_facebook);
         rowValue.put(KEY_NODE_DESIGNATION  , node_designation);
+        rowValue.put(KEY_NODE_ADDRESS  , address);
         rowValue.put(KEY_SERVICE_OPENTIME, openingtime);
         rowValue.put(KEY_SERVICE_BREAKTIME, closetime);
         rowValue.put(KEY_SERVICE_CLOSETIME , breaktime);
@@ -250,8 +256,97 @@ public class GovernmentNewTable {
 
     }
 
+    public ArrayList<GovernmentNewItem> getAllGovSubCategoriesInfo() {
+        ArrayList<GovernmentNewItem> subCatList = new ArrayList<>();
+
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_NAME_EN, null);
+
+        if (cursor.moveToFirst()) {
+            do {
 
 
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+    public ArrayList<GovernmentNewItem> Govnames(String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+        String places;
+        int k =0;
+        ArrayList<GovernmentNewItem> nameslist=new ArrayList<>();
+        ArrayList<Integer>s=new ArrayList<Integer>();
+        places="Mirpur-11";
+        SQLiteDatabase db = openDB();
+        int i=0;
+        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatnamebn = '"+subcatnames+"'" ,null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                k=cursor.getInt(5);
+
+
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "
+                +KEY_AREA+" = '"+places+"'"  , null);
+
+
+        if (cursor2.moveToFirst()) {
+            do {
+
+                String getter=cursor2.getString(32);
+                String delims = "[,]";
+                String[] tokens = getter.split(delims);
+                for (int ii=0;ii<tokens.length;ii++)
+                {
+                    if (tokens[i]=="")continue;
+                    if(Integer.parseInt(tokens[i])==k)
+                    {
+                        nameslist.add(cursorToSubCatList(cursor2));
+                    }
+                }
+
+
+            } while (cursor2.moveToNext());
+        }
+        cursor2.close();
+        closeDB();
+        return  nameslist;
+    }
+
+    public GovernmentNewItem getgovNode2(int Node) {
+
+        SQLiteDatabase db = openDB();
+        GovernmentNewItem governmentNewItem=null;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+"="+Node, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                governmentNewItem=new GovernmentNewItem(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),
+                        cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),
+                        cursor.getString(9), cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),
+                        cursor.getString(14),cursor.getString(15),cursor.getString(16),cursor.getString(17),cursor.getString(18),
+                        cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),cursor.getString(23),
+                        cursor.getString(24),cursor.getString(25), cursor.getString(26),cursor.getString(27),cursor.getString(28),
+                        cursor.getString(29),cursor.getString(30),cursor.getInt(31),cursor.getString(32));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return governmentNewItem;
+    }
     public boolean isFieldExist(int nodeid) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
@@ -300,16 +395,18 @@ public class GovernmentNewTable {
         String _node_facebook=cursor.getString(22);
 
         String _node_designation=cursor.getString(23);
-        String _opentime= cursor.getString(24);
-        String _breaktime = cursor.getString(25);
-        String _closetime= cursor.getString(26);
-        String _offday = cursor.getString(27);
-        String _regwith= cursor.getString(28);
-        String _regnum = cursor.getString(29);
-        int _catid=cursor.getInt(30);
-        String _refnumm=cursor.getString(31);
+        String _address=cursor.getString(24);
+        String _opentime= cursor.getString(25);
+        String _breaktime = cursor.getString(26);
+        String _closetime= cursor.getString(27);
+        String _offday = cursor.getString(28);
+        String _regwith= cursor.getString(29);
+        String _regnum = cursor.getString(30);
+        int _catid=cursor.getInt(31);
+        String _refnumm=cursor.getString(32);
         return new GovernmentNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
-                _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
+                _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,
+                _node_designation,_address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
                 _regnum,_catid,_refnumm);

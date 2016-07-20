@@ -186,7 +186,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(6);
+                String name = cursor.getString(7);
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());
