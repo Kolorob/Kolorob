@@ -273,6 +273,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
+                        android:visibility="gone"
                         android:id="@+id/other_details" />
                 </LinearLayout>
             </ScrollView>
