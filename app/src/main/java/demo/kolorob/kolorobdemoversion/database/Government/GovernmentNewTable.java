@@ -283,7 +283,7 @@ public class GovernmentNewTable {
         int k =0;
         ArrayList<GovernmentNewItem> nameslist=new ArrayList<>();
         ArrayList<Integer>s=new ArrayList<Integer>();
-        places="Mirpur-10";
+        places="Mirpur-11";
         SQLiteDatabase db = openDB();
         int i=0;
         Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatnamebn = '"+subcatnames+"'" ,null);
@@ -305,7 +305,7 @@ public class GovernmentNewTable {
         if (cursor2.moveToFirst()) {
             do {
 
-                String getter=cursor2.getString(48);
+                String getter=cursor2.getString(32);
                 String delims = "[,]";
                 String[] tokens = getter.split(delims);
                 for (int ii=0;ii<tokens.length;ii++)
@@ -323,6 +323,7 @@ public class GovernmentNewTable {
         closeDB();
         return  nameslist;
     }
+
     public GovernmentNewItem getgovNode2(int Node) {
 
         SQLiteDatabase db = openDB();

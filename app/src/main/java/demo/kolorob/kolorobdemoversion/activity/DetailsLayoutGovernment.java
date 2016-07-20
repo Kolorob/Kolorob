@@ -45,10 +45,13 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -66,17 +69,11 @@ public class DetailsLayoutGovernment extends Activity {
     TextView ups_text;
     ListView courseListView, listView;
     Context con;
-    EducationNewItem educationNewItem;
+    GovernmentNewItem governmentNewItem;
 
-    ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
-    ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
-    ArrayList<EducationResultItemNew> educationResultItemNews;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
+    ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
+
+
     private TextView ratingText;
     private TextView serviceDetails, result, training, tuition;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
@@ -101,14 +98,12 @@ public class DetailsLayoutGovernment extends Activity {
 
 
         if (null != intent) {
-            educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU);
+            governmentNewItem = (GovernmentNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_GOV);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
-        EducationTuitionDetailsTable educationTuitionDetailsTable = new EducationTuitionDetailsTable(DetailsLayoutGovernment.this);
-        EducationTrainingDetailsTable educationTrainingDetailsTable = new EducationTrainingDetailsTable(DetailsLayoutGovernment.this);
-        EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(DetailsLayoutGovernment.this);
+        GovernmentServiceDetailsTable governmentServiceDetailsTable = new GovernmentServiceDetailsTable(DetailsLayoutGovernment.this);
 
 
         courseListView = (ListView) findViewById(R.id.courseListView);
@@ -126,12 +121,7 @@ public class DetailsLayoutGovernment extends Activity {
         address_text = (TextView) findViewById(R.id.address_text);
         phone_text = (TextView) findViewById(R.id.phone_text);
         email_text = (TextView) findViewById(R.id.email_text);
-        totalStudents = (TextView) findViewById(R.id.tv_total_students);
-        totalClasses = (TextView) findViewById(R.id.tv_total_class);
-        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-        playground = (TextView) findViewById(R.id.tv_playground);
-        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
-        transport = (TextView) findViewById(R.id.tv_transport_facility);
+
         ratingText = (TextView) findViewById(R.id.ratingText);
         serviceDetails = (TextView) findViewById(R.id.serviceDetails);
         close_button = (ImageView) findViewById(R.id.close_buttonc);
@@ -148,103 +138,42 @@ public class DetailsLayoutGovernment extends Activity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
-        CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", educationNewItem.getStudentno());
-        CheckConcate("শিক্ষক সংখ্যা", educationNewItem.getTeachersno());
-        CheckConcate("ক্লাস সংখ্যা", educationNewItem.getClassno());
-        CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
-        CheckConcate("ছাত্র সংখ্যা", educationNewItem.getMalestudent());
-        CheckConcate("ছাত্রী সংখ্যা", educationNewItem.getFemalestudent());
 
-        CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা", educationNewItem.getWashroom_no());
-        CheckConcate("ছেলেদের বাথরুম", educationNewItem.getWashroom_male());
-        CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
-        CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
-        CheckConcate("খাবার পানির উৎস", educationNewItem.getWatersource());
-        CheckConcate("গড় ছাত্রছাত্রী", educationNewItem.getAveragestudent());
-        CheckConcate("মেয়েদের বাথরুম ", educationNewItem.getWashroomfemale());
+        CheckConcate("পরিচিত স্থান         :", governmentNewItem.getLandmark());
+        CheckConcate("ঠিকানা                   :", governmentNewItem.getAddress());
+        CheckConcate("ফ্লোর                    :", governmentNewItem.getFloor());
+        CheckConcate("বাড়ির নাম                  :", governmentNewItem.getHousename());
+        CheckConcate("রাস্তা                       :", governmentNewItem.getRoad());
+        CheckConcate("লাইন                        :", governmentNewItem.getLine());
+        CheckConcate("এভিনিউ                     :", governmentNewItem.getAvenue());
+        CheckConcate("পোস্ট অফিস               :", governmentNewItem.getPostoffice());
+        CheckConcate("পুলিশ স্টেশন                :", governmentNewItem.getPolicestation());
 
-        CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
-        CheckConcate("ঠিকানা", educationNewItem.getAddress());
-        CheckConcate("ফ্লোর", educationNewItem.getFloor());
-        CheckConcate("বাড়ির নাম", educationNewItem.getHousename());
-        CheckConcate("রাস্তা", educationNewItem.getRoad());
-        CheckConcate("লাইন ", educationNewItem.getLine());
-        CheckConcate("এভিনিউ", educationNewItem.getAvenue());
-        CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
-
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact2());
-        CheckConcate("ইমেইল", educationNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট", educationNewItem.getNode_website());
-        CheckConcate("ফেসবুক", educationNewItem.getNode_facebook());
-        CheckConcate("তথ্যপ্রদান কারীর পদবী", educationNewItem.getNode_designation());
+        CheckConcate("যোগাযোগ              :", governmentNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ              :", governmentNewItem.getNode_contact2());
+        CheckConcate("ইমেইল                   :", governmentNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট               :", governmentNewItem.getNode_website());
+        CheckConcate("ফেসবুক                  :", governmentNewItem.getNode_facebook());
+        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি  :", governmentNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
-        timeProcessing("বন্ধে সময়", educationNewItem.getClosetime());
-        CheckConcate("বিরতির সময়", educationNewItem.getBreaktime());
-        CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
-        educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
-        int result_size = educationResultItemNews.size();
-        if (result_size != 0) {
-            for (EducationResultItemNew educationResultItemNew : educationResultItemNews) {
-                //result_concate="";
+        timeProcessing("খোলার সময়      :", governmentNewItem.getOpeningtime());
+        timeProcessing("বন্ধে সময়        :", governmentNewItem.getClosetime());
+        CheckConcate("বিরতির সময়        :", governmentNewItem.getBreaktime());
+        CheckConcate("বন্ধের দিন          :", governmentNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার    :", governmentNewItem.getRegisterednumber());
+        CheckConcate("কাদের সাথে রেজিস্টার্ড  :", governmentNewItem.getRegisteredwith());
 
-                CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
-                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
-                CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
-                CheckConcate("জিপিএ ৫", educationResultItemNew.getAplus());
-
-
-            }
-
-
-        }
-        educationTrainingDetailsItems = educationTrainingDetailsTable.gettrainingInfo(educationNewItem.getEduId());
-        int training_size = educationTrainingDetailsItems.size();
-        if (training_size != 0) {
-            for (EducationTrainingDetailsItem educationTrainingDetailsItem : educationTrainingDetailsItems) {
-
-
-                CheckConcate("কত মাসের কোর্স", educationTrainingDetailsItem.getCourseduration());
-                CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("খরচ", educationTrainingDetailsItem.getCost());
-                CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
-                CheckConcate("ট্রেনিং এর নাম", educationTrainingDetailsItem.getTrainingnamesubtype());
-
-
-            }
-        }
-
-        educationTuitionDetailsItems = educationTuitionDetailsTable.gettuitionInfo(educationNewItem.getEduId());
-        int tuition_size = educationTuitionDetailsItems.size();
+        governmentServiceDetailsItems = governmentServiceDetailsTable.getgovinfo(governmentNewItem.getFinId());
+        int tuition_size = governmentServiceDetailsItems.size();
         if (tuition_size != 0) {
-            for (EducationTuitionDetailsItem educationTuitionDetailsItem : educationTuitionDetailsItems) {
+            for (GovernmentServiceDetailsItem governmentServiceDetailsItem : governmentServiceDetailsItems) {
                 //result_concate="";
-
-                CheckConcate("কোন ক্লাস পড়ান হয়", educationTuitionDetailsItem.getTuitionlevel());
-                CheckConcate("খরচ", educationTuitionDetailsItem.getTuitionfree());
-                CheckConcate("বৃত্তি সুবিধা", educationTuitionDetailsItem.getTuitionstipendfacility());
-                CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
-                CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionminfee());
-
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", educationTuitionDetailsItem.getTuitionmaxcoaching());
-                CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
-
-
+                CheckConcate("সুবিধার ধরন         :", governmentServiceDetailsItem.getServicetype());
+                CheckConcate("সুবিধার নাম          :", governmentServiceDetailsItem.getServicesubtype());
+                CheckConcate("খরচ                        :", governmentServiceDetailsItem.getServicecost());
+                CheckConcate("মন্তব্য                      :", governmentServiceDetailsItem.getDetailstep());
             }
-
-
         }
 
 
