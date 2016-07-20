@@ -90,7 +90,7 @@ public class DetailsLayoutGovernment extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_layout_education);
+        setContentView(R.layout.activity_details_layout_government);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
