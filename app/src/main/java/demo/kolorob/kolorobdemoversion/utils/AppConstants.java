@@ -120,6 +120,7 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
     public static final String KEY_DETAILS_JOB = "jobprovider";
     public static final String KEY_DETAILS_ENT = "entProvider";
     public static final String KEY_DETAILS_VIEW = "eduProvider";
+    public static final String KEY_DETAILS_GOV = "govProvider";
     public static final String KEY_DETAILS_EDU= "eduProviderNew";
     public static final String KEY_DETAILS_HEALTH = "heaProvider";
     public static final String KEY_DETAILS_HEALTH_NEW = "heaProvider_new";

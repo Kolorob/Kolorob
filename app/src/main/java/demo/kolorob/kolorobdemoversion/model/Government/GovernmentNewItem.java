@@ -4,10 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 6/26/2016.
  */
-public class GovernmentNewItem {
+public class GovernmentNewItem implements Serializable {
     int finId;
     String nameen;
     String namebn;
@@ -32,6 +34,7 @@ public class GovernmentNewItem {
     String node_website;
     String node_facebook;
     String node_designation;
+    String address;
     String openingtime;
     String closetime;
     String breaktime;
@@ -42,12 +45,13 @@ public class GovernmentNewItem {
 
     String refnumm;
 
-    public GovernmentNewItem(int finId, String nameen, String namebn, String lat, String lon,
-                             String floor, String housename, String houseno, String road, String line, String avenue,
-                             String block, String area, String landmark, String postoffice, String policestation, String city,
-                             String country, String node_contact, String node_contact2, String node_email, String node_website,
-                             String node_facebook, String node_designation, String openingtime, String closetime, String breaktime,
-                             String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+    public GovernmentNewItem(int finId, String nameen, String namebn, String lat, String lon, String floor,
+                             String housename, String houseno, String road, String line, String avenue, String block,
+                             String area, String landmark, String postoffice, String policestation, String city,
+                             String country, String node_contact, String node_contact2, String node_email,
+                             String node_website, String node_facebook, String node_designation, String address,
+                             String openingtime, String closetime, String breaktime, String offday,
+                             String registeredwith, String registerednumber, int categoryId, String refnumm) {
         this.finId = finId;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -72,6 +76,7 @@ public class GovernmentNewItem {
         this.node_website = node_website;
         this.node_facebook = node_facebook;
         this.node_designation = node_designation;
+        this.address = address;
         this.openingtime = openingtime;
         this.closetime = closetime;
         this.breaktime = breaktime;
@@ -80,6 +85,14 @@ public class GovernmentNewItem {
         this.registerednumber = registerednumber;
         this.categoryId = categoryId;
         this.refnumm = refnumm;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public GovernmentNewItem(int finId, String nameen, String namebn) {
@@ -372,6 +385,7 @@ public class GovernmentNewItem {
 
         String _node_facebook=jo.getJSONObject("contact_info").getString("node_facebook");
         String _node_designation=jo.getJSONObject("contact_info").getString("node_designation");
+        String _address=jo.getJSONObject("contact_info").getString("address");
         String _opentime = jo.getJSONObject("timing_info").getString("opening_time");
         String _breaktime = jo.getJSONObject("timing_info").getString("break_time");
         String _closetime = jo.getJSONObject("timing_info").getString("closing_time");
@@ -385,7 +399,8 @@ public class GovernmentNewItem {
         String k=jr.toString();
         String _refnumm=k.substring(1,k.length()-1);
         return new GovernmentNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
-                _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,
+                _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,
+                _node_designation,_address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
                 _regnum,_catid,_refnumm);

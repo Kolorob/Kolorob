@@ -180,6 +180,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     Context context;
     ArrayList <String>Headerholder=new ArrayList<>();
     ArrayList<EducationNewItem> printnames;
+    ArrayList<GovernmentNewItem> printgovs;
     //common for all categories
     public LinearLayout sideIndex,searchLayout;
     public CategoryItem getCi() {
@@ -1072,7 +1073,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
             case AppConstants.EDUCATION:
-
                 SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = 5;
                 EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
@@ -1087,18 +1087,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     Group group = new Group(print.get(j));
                     printnames = null;
                     printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
-
-                    // Log.d(">>>>", "printnames "+printnames);
-                    /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
-                    // Log.d(">>>>", "head "+head);
-                    // Log.d(">>>>", "print.get(j) "+print.get(j));
-                    // Log.d(">>>>", "placeChoice "+placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
                     groups.add(j, group);
                 }
-
                 break;
             case AppConstants.ENTERTAINMENT:
 
@@ -1117,6 +1110,27 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.GOVERNMENT:
+                SubCategoryTableNew subCategoryTableg = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = 5;
+                GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printgov = null;
+                groups.removeAllElements();
+
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
+                // subCatItemList.setChildDivider(R.color.black);
+
+                printgov = subCategoryTableg.getSubnameedu(currentCategoryID);
+                for (int j = 0; j < printgov.size(); j++) {
+                    Group group = new Group(printgov.get(j));
+                    printgovs = null;
+                    printgovs = governmentNewTable.Govnames(printgov.get(j),placeChoice);
+                    for (int i = 0; i < printgovs.size(); i++) {
+                        group.childrengov.add(i, printgovs.get(i));
                     }
                     groups.add(j, group);
                 }

@@ -29,10 +29,12 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -217,6 +219,26 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
                         Intent iijob = new Intent(getActivity(), DetailsJobActivity.class);
                         iijob.putExtra(AppConstants.KEY_DETAILS_JOB, detjob);
+                        activity.startActivity(iijob);
+
+
+                    }
+
+
+                });
+                break;
+
+            case AppConstants.GOVERNMENT:
+                final GovernmentNewItem detgov = groups.get(groupPosition).getChildrengov().get(childPosition);
+                text = (TextView) v.findViewById(R.id.textView1);
+                text.setText(detgov.getArea());
+                v.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        Intent iijob = new Intent(getActivity(), DetailsLayoutGovernment.class);
+                        iijob.putExtra(AppConstants.KEY_DETAILS_GOV, detgov);
                         activity.startActivity(iijob);
 
 

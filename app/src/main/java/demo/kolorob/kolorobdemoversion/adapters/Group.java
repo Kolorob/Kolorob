@@ -11,6 +11,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
@@ -26,7 +27,7 @@ public class Group {
     public  List<FinancialNewItem> childrenfin = new ArrayList<FinancialNewItem>();
     public  List<LegalAidServiceProviderItemNew> childrenleg = new ArrayList<LegalAidServiceProviderItemNew>();
     public  List<JobServiceProviderItem> childrenjob = new ArrayList<JobServiceProviderItem>();
-
+    public  List<GovernmentNewItem> childrengov = new ArrayList<GovernmentNewItem>();
     public List<HealthServiceProviderItemNew> getChildrenhea() {
         return childrenhea;
     }
@@ -65,6 +66,22 @@ public class Group {
 
     public void setChildrenent(List<EntertainmentServiceProviderItem> childrenent) {
         this.childrenent = childrenent;
+    }
+
+    public List<EducationNewItem> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<EducationNewItem> children) {
+        this.children = children;
+    }
+
+    public List<GovernmentNewItem> getChildrengov() {
+        return childrengov;
+    }
+
+    public void setChildrengov(List<GovernmentNewItem> childrengov) {
+        this.childrengov = childrengov;
     }
 
     public List<EducationNewItem> getchildren() {
