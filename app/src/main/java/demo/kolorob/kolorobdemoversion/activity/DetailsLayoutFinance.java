@@ -88,6 +88,7 @@ public class DetailsLayoutFinance extends Activity {
         con = this;
 
 
+
         Intent intent = getIntent();
 
 

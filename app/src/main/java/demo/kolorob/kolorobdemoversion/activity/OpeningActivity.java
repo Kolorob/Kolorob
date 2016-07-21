@@ -58,6 +58,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitne
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialLoanTable;
@@ -102,6 +103,7 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialLoanItem;
@@ -924,12 +926,42 @@ int countofDb;
                 EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew=EntertainmentServiceProviderItemNew.parseEntertainmentServiceProviderItem(jsonObject,i);
                 entertainmentServiceProviderTableNew.insertItem(entertainmentServiceProviderItemNew);
 
+                if (jsonObject.has("rspot_details"))
+                {
+                    JSONArray rspot_details=jsonObject.getJSONArray("rspot_details");
+                    int rspot_detailsSize=rspot_details.length();
+
+
+                    for (int v=0;v<rspot_detailsSize;v++)
+                    {
+                        JSONObject rspot_detailsSizeItem= rspot_details.getJSONObject(v);
+                        Saverspot_detailsData(rspot_detailsSizeItem,jsonObject.getInt("id"));
+
+                    }
+                }
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+
+    }
+
+
+    private void Saverspot_detailsData(JSONObject jsonObject,int foreign_key)
+    {
+        EntertainmetTypeTable entertainmetTypeTable= new EntertainmetTypeTable(OpeningActivity.this);
+        try {
+
+            EntertainmentTypeItem entertainmentTypeItem=EntertainmentTypeItem.parseEntertainmentTypeItem(foreign_key,jsonObject);
+            entertainmetTypeTable.insertItem(entertainmentTypeItem);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 

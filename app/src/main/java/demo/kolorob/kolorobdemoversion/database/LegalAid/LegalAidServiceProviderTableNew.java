@@ -291,7 +291,7 @@ public class LegalAidServiceProviderTableNew {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_BREAKTIME2+ " LIKE '%"+refids+"%'" , null);
         //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
-          Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_BREAKTIME2+ " LIKE '%"+refids+"%'" + "=" +refId);
+       //   Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_BREAKTIME2+ " LIKE '%"+refids+"%'" + "=" +refId);
 //        Toast.makeText(this, +cursor,
 //                Toast.LENGTH_LONG).show();
 
