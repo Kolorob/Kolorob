@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -68,6 +69,7 @@ public class DetailsLayoutGovernment extends Activity {
     TextView address_text, phone_text, email_text;
     int width, height;
     TextView ups_text;
+    EditText feedback_comment;
     ListView courseListView, listView;
     Context con;
     GovernmentNewItem governmentNewItem;
@@ -282,18 +284,7 @@ public class DetailsLayoutGovernment extends Activity {
             }
         });
 
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent feedIntent = new Intent(DetailsLayoutGovernment.this, FeedBackActivityNew.class);
-                feedIntent.putExtra("id", governmentNewItem.getFinId());
-                feedIntent.putExtra("categoryId", "1");
-                Log.d(">>>>", "Button is clicked1 " + governmentNewItem.getFinId());
 
-                startActivity(feedIntent);
-
-            }
-        });
 
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -381,64 +372,52 @@ public class DetailsLayoutGovernment extends Activity {
 
     public void verifyRegistration(View v){
 
-       Boolean register=RegisteredOrNot();
+        String  register = SharedPreferencesHelper.getNumber(DetailsLayoutGovernment.this);
+        phone_num=register;
 
-        if(register.equals(false))
-       {
+        if (register.equals("")) {
             requestToRegister();
-        }
-
-        else {
+        } else {
 
             feedBackAlert();
-            sendReviewToServer();
+            //  sendReviewToServer();
         }
 
 
-    }
-    public Boolean RegisteredOrNot()
-    {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        //  editor.putString("registered", lat);
-        registered = pref.getString("registered", null);
-        phone_num = pref.getString("phone",null);
-        // editor.commit();
-        //  if(registered.equals("yes"))
-        return true;
-        //  else
-        //   return true;
-
-
-
 
     }
+
     public void feedBackAlert()
     {
 
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutGovernment.this);
-        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutGovernment.this);
         alertDialogBuilder.setView(promptView);
 
 
-        final Button submit= (Button) promptView.findViewById(R.id.submit);
+        final Button submit = (Button) promptView.findViewById(R.id.submit);
 
 
-        final AlertDialog alert = alertDialogBuilder.create();
+        final AlertDialog alert;
+        alert = alertDialogBuilder.create();
 
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                declareRadiobutton();
-
+                feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
+                int selected = feedRadio.getCheckedRadioButtonId();
+                rb1 = (RadioButton)promptView.findViewById(selected);
+                status = rb1.getText().toString();
+                //  declareRadiobutton();
+                sendReviewToServer();
 
                 alert.cancel();
 
-           }
+            }
         });
-        // setup a dialog window
         alertDialogBuilder.setCancelable(false);
 
 
@@ -449,13 +428,17 @@ public class DetailsLayoutGovernment extends Activity {
     public void sendReviewToServer()
     {
         int rating;
-        if(status.equals("ভাল"))
+        if(status.equals(R.string.feedback1))
             rating=1;
-        else if(status.equals("মোটামোট"))
+        else if(status.equals(R.string.feedback2))
             rating=2;
-        else
+        else if(status.equals(R.string.feedback3))
             rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+governmentNewItem.getFinId()+"&service="+"1"+"&rating="+rating;
+        else if(status.equals(R.string.feedback4))
+            rating=4;
+        else
+            rating=5;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+governmentNewItem.getFinId()+"&service="+"33"+"&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -472,12 +455,12 @@ public class DetailsLayoutGovernment extends Activity {
 
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(DetailsLayoutGovernment.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertMessage.showMessage(DetailsLayoutGovernment.this, "আপনার মতামত দেয়া হয়েছে",
+                                        "আপনার মতামতের জন্য আপনাকে ধন্যবাদ!");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutGovernment.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+                                AlertMessage.showMessage(DetailsLayoutGovernment.this, "আপনার মতামত দেয়া  হয় নি",
+                                        "দয়া করে আবার চেষ্টা করুন");
 
 
 
@@ -504,22 +487,12 @@ public class DetailsLayoutGovernment extends Activity {
 
         };
 
- //Adding request to request queue
+        //Adding request to request queue
 
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutGovernment.this);
-       requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);
     }
 
-    public void declareRadiobutton()
-    {
-        // int selected = feedRadio.getCheckedRadioButtonId();
-        // RadioButton rb1 = (RadioButton) findViewById(selected);
-        //  status = rb1.getText().toString();
-
-        // Arafat, i set it as static 1, pls change this codes;
-
-        status = "1";
-   }
 
    public void requestToRegister()
     {
@@ -594,6 +567,7 @@ public class DetailsLayoutGovernment extends Activity {
         return concatResult;
     }
 
+
 //    public Boolean RegisteredOrNot()
 //    {
 //        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -611,47 +585,52 @@ public class DetailsLayoutGovernment extends Activity {
 //
 //
 
- /*   private String timeConverter(String time)
-    {
-        String timeInBengali="";
+    private String timeConverter(String time) {
+
+
+        String timeInBengali = "";
 
         String[] separated = time.split(":");
 
 
+        int hour = Integer.valueOf(separated[0]);
+        int times = Integer.valueOf(separated[1]);
 
-
-
-        int hour= Integer.valueOf(separated[0]);
-        int times= Integer.valueOf(separated[1]);
-
-        if(hour>6&&hour<12)
-            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour));
-        else if(hour==12)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour));
-        else if(hour>12&&hour<16)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>15&&hour<18)
-            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>17&&hour<20)
-            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>20)
-            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        if(times!=0)
-            timeInBengali=timeInBengali+ " টা " + English_to_bengali_number_conversion(String.valueOf(times))+" মিনিট";
+        if (hour >= 6 && hour < 12)
+            timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour == 12)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour > 12 && hour < 16)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 15 && hour < 18)
+            timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 17 && hour < 20)
+            timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 20)
+            timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        if (times != 0)
+            timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
         else
-            timeInBengali=timeInBengali+ " টা";
+            timeInBengali = timeInBengali + " টা";
         return timeInBengali;
-    }
-*/
 
-    private void timeProcessing(String value1,String value2)
-    {
-        if(!value2.equals("null")||value2.equals("")) {
-          //  String GetTime= timeConverter(value2);
-           // CheckConcate(value1,GetTime);
+    }
+
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            CheckConcate(value1, value2);
+        }
+    }
+
+
+    private void timeProcessing(String value1, String value2) {
+        if (!value2.equals("null") && !value2.equals("")) {
+            String GetTime = timeConverter(value2);
+            CheckConcate(value1, GetTime);
 
         }
     }
+
 
     private void CheckConcate(String value1,String value2){
 
