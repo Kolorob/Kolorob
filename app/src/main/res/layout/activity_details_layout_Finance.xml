@@ -24,7 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/financial_color"
             android:layout_height="wrap_content">
 
 
@@ -62,7 +62,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/financial_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/education_color"
+                android:background="@color/financial_color"
                 android:layout_height="wrap_content">
 
 
@@ -256,7 +256,7 @@
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:orientation="vertical">
@@ -286,7 +286,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
+
         android:background="@color/financial_color"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
