@@ -9,6 +9,7 @@ import java.util.List;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -22,7 +23,7 @@ public class Group {
 
     public String string;
     public  List<EducationNewItem> children = new ArrayList<EducationNewItem>();
-    public  List<EntertainmentServiceProviderItem> childrenent = new ArrayList<EntertainmentServiceProviderItem>();
+    public  List<EntertainmentServiceProviderItemNew> childrenent = new ArrayList<EntertainmentServiceProviderItemNew>();
     public  List<HealthServiceProviderItemNew> childrenhea = new ArrayList<HealthServiceProviderItemNew>();
     public  List<FinancialNewItem> childrenfin = new ArrayList<FinancialNewItem>();
     public  List<LegalAidServiceProviderItemNew> childrenleg = new ArrayList<LegalAidServiceProviderItemNew>();
@@ -60,11 +61,11 @@ public class Group {
         this.childrenleg = childrenleg;
     }
 
-    public List<EntertainmentServiceProviderItem> getChildrenent() {
+    public List<EntertainmentServiceProviderItemNew> getChildrenent() {
         return childrenent;
     }
 
-    public void setChildrenent(List<EntertainmentServiceProviderItem> childrenent) {
+    public void setChildrenent(List<EntertainmentServiceProviderItemNew> childrenent) {
         this.childrenent = childrenent;
     }
 

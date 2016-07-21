@@ -1029,7 +1029,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
 
           refids=","+refids+",";
         places="Mirpur-11";
-
+        Log.d("refisd test","------"+refids);
 
         ArrayList<HealthServiceProviderItemNew> nameslist=new ArrayList<>();
 
@@ -1038,7 +1038,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" , null);
         //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
-      //  Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" + "=" +refId);
+        Log.d("Ref Id","------"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" + "=" +refId);
 //        Toast.makeText(this, +cursor,
 //                Toast.LENGTH_LONG).show();
 

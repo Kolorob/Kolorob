@@ -180,13 +180,15 @@ public class SubCategoryTableNew {
     public ArrayList<String> getSubnameedu(int id) {
         ArrayList<String> siList=new ArrayList<>();
 
+//        Log.d("CategoryId","======="+id);
+
         SQLiteDatabase db = openDB();
         int i=0;
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(7);
+                String name = cursor.getString(6);
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());
@@ -198,12 +200,12 @@ public class SubCategoryTableNew {
 
     public int  getRefId(String name) {
         int ids=0;
+      //   Log.d("Ent Name","------"+name);
 
         SQLiteDatabase db = openDB();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_EN+" = '"+name+"'", null);
 
-      //  Log.d("cursor","======"+cursor);
         if (cursor.moveToFirst()) {
             do {
                  ids = cursor.getInt(5);
