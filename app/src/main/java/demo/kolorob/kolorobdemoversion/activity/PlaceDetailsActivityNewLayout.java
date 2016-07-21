@@ -289,13 +289,13 @@ RelativeLayout searchviewholder,filterholder;
     boolean doubleBackToExitPressedOnce = false;
     int val;
 
-    ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
+    ArrayList<EducationNewItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItemNew> entItem=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
     ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
 
-    ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
+    ArrayList<EducationNewItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
@@ -1898,7 +1898,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        tvName.setText(si.getSubcatHeader());
+        tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2080,7 +2080,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     case AppConstants.EDUCATION:
 
 
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
                             eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s));
@@ -2092,7 +2092,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                       // callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
+                      callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
@@ -2324,12 +2324,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationServiceProviderItem> constructEducationListItemForHeader(int cat_id, String header)
+    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header)
     {
-        ArrayList<EducationServiceProviderItem> educationServiceProvider;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfoWithHead(cat_id, header);
-        return educationServiceProvider;
+        ArrayList<EducationNewItem> educationNewItems;
+        EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
+        return educationNewItems;
     }
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
