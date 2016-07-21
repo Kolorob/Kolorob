@@ -244,7 +244,7 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-      //  Log.d("Insert","===="+ret);
+
         closeDB();
         return ret;
 
