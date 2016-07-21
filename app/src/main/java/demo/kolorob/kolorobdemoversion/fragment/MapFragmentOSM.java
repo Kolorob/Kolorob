@@ -226,7 +226,7 @@ setMapView(mapView);
                         latDouble = Double.parseDouble(et.getLat());
                         longDouble = Double.parseDouble(et.getLon());
                       GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerEdu(point, et.getNameen(), et.getArea(), et.getNode_contact(), et.getEduId(),subcategotyId2);
+                        drawMarkerEdu(point, et.getNamebn(), et.getAddress(), et.getNode_contact(), et.getEduId(),subcategotyId2);
                     }
                 }
                 break;
