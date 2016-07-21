@@ -73,6 +73,7 @@ import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
@@ -1095,18 +1096,22 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 break;
             case AppConstants.ENTERTAINMENT:
 
-                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                //SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTableNewEnt=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
                 currentCategoryID = cat_id;
-                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printent = null;
+                EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+               // ArrayList<String> printent = null;
+                ArrayList<String> RefEnt = null;
                 groups.removeAllElements();
-                printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
-                for (int j = 0; j < printent.size(); j++) {
-                    Group group = new Group(printent.get(j));
+                RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
+
+              //  printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < RefEnt.size(); j++) {
+                    Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
 
-                    printnamesent = entertainmentServiceProviderTable.Entnames(currentCategoryID, head, printent.get(j), placeChoice);
+                    printnamesent = entertainmentServiceProviderTableNew.Entnames(currentCategoryID, head, RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
