@@ -108,7 +108,7 @@ public class PhoneRegActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
                        // Log.d(">>>>>","status "+response);
                         try {
 
@@ -116,7 +116,7 @@ public class PhoneRegActivity extends Activity {
 
                             if(response.equals("true"))
                             {
-                                SharedPreferencesHelper.setNumber(con,phoneNumber);
+
                                 AlertDialog alertDialog = new AlertDialog.Builder(PhoneRegActivity.this).create();
                                 alertDialog.setTitle("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
                                 alertDialog.setMessage("নিবন্ধন করার জন্য আপনাকে ধন্যবাদ");
@@ -132,8 +132,12 @@ public class PhoneRegActivity extends Activity {
                                 alertDialog.show();
                             }
                             else
+                            {
+                                SharedPreferencesHelper.setNumber(con,phoneNumber);
                                 AlertMessage.showMessage(PhoneRegActivity.this, "নিবন্ধনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
+                            }
+
                                         //  finish();
 
 
