@@ -96,7 +96,6 @@ public class EntertainmetTypeTable {
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-     //   Log.d("Ent Type Table","===="+ret);
         closeDB();
         return ret;
     }

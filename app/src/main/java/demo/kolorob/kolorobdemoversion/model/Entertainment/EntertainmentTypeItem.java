@@ -78,7 +78,6 @@ public class EntertainmentTypeItem {
         if (jo.has("recreation_services"))
         {
             JSONObject recreation_services=jo.getJSONObject("recreation_services");
-           // Log.d("Details Data Parsing","========"+recreation_services);
 
 
             type = recreation_services.getString("type");
