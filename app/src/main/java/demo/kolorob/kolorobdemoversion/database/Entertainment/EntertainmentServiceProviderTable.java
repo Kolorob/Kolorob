@@ -12,6 +12,7 @@ import java.util.Vector;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 
@@ -436,6 +437,7 @@ public class EntertainmentServiceProviderTable {
         closeDB();
         return subCatList;
     }
+
 
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id,int sub_cat_id) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();

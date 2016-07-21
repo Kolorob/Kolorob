@@ -41,6 +41,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
@@ -93,7 +94,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
     private ArrayList<HealthServiceProviderItemNew> healthServiceProvider = null;
     IMapController mapViewController;
-    private ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider = null;
+    private ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialNewItem> financialServiceProvider = null;
@@ -128,7 +129,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.mapViewController = mapViewController;
     }
 
-    public void setEntertainmentServiceProvider(ArrayList<EntertainmentServiceProviderItem> et) {
+    public void setEntertainmentServiceProvider(ArrayList<EntertainmentServiceProviderItemNew> et) {
         this.entertainmentServiceProvider = et;
     }
 
@@ -234,7 +235,7 @@ setMapView(mapView);
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getReferences();
-                    Log.d("subcategotyId_Legal","=======");
+                    //Log.d("subcategotyId_Legal","=======");
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -242,13 +243,13 @@ setMapView(mapView);
                 }
                 break;
             case AppConstants.ENTERTAINMENT:
-                for (EntertainmentServiceProviderItem et : entertainmentServiceProvider) {
+                for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     subcategotyId = et.getEntSubCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getEntSubCategoryId());
+                    drawMarkerEnt(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getNodeEmail());
                 }
                 break;
             case AppConstants.GOVERNMENT:
@@ -465,12 +466,16 @@ setMapView(mapView);
 
 
     }
-    private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, String node, int subcategotyId) {
+    private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, String node, String subcategotyId23) {
 
 
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        String subcategory;
+        subcategory=subcategotyId23.substring(1);
+        String CurrentString = subcategory;
+        String[] separated = CurrentString.split(",");
         if (subcategotyId == 1)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
 
