@@ -12,6 +12,7 @@ import java.util.Vector;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 
@@ -244,7 +245,7 @@ public class EntertainmentServiceProviderTable {
         rowValue.put(KEY_ADTIME  , additionaltime );
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-      //  Log.d("Insert","===="+ret);
+
         closeDB();
         return ret;
 
@@ -436,6 +437,7 @@ public class EntertainmentServiceProviderTable {
         closeDB();
         return subCatList;
     }
+
 
     public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id,int sub_cat_id) {
         ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();

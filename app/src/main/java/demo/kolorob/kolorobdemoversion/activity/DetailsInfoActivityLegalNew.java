@@ -328,7 +328,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 //        }
 
-        close_button.setOnClickListener(new View.OnClickListener() {
+        cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

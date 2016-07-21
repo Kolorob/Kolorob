@@ -492,25 +492,25 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
     public void sendReviewToServer() {
-        int rating;
-        if (status.equals("ভাল"))
+        int rating=0;
+        if (status.equals("খুবই অসন্তুষ্ট"))
             rating = 1;
-        else if (status.equals("মোটামোট"))
+        else if (status.equals("অসন্তুষ্ট"))
             rating = 2;
-        else
+        else if (status.equals("বিশেষ অনুভূতি নেই"))
+
             rating = 3;
+        else if (status.equals("সন্তুষ্ট "))
+
+            rating =4;
+        else if (status.equals("খুবই সন্তুষ্ট"))
+
+            rating = 5;
 
         String comment="";
-
-
-
-
-
-
         comment=feedback_comment.getText().toString();
         Log.d("status ","======"+status);
-       // http://kolorob.net/demo/api/sp_rating/1?phone=01711310912&review=this%20is%20a%20review&rating=4
-        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +feedback_comment.getText().toString()+ "&rating="+rating;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -525,8 +525,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ করার জন্য আপনাকে ধন্যবাদ");
                             } else
-                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
+                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয় নি",
+                                        "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
 
 
                         } catch (Exception e) {
@@ -556,19 +556,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityHealthNew.this);
         requestQueue.add(stringRequest);
     }
-//
-//    public void declareRadiobutton() {
-////        feedRadio=(RadioGroup)findViewById(R.id.feedRadio);
-////        Log.d("Selected ","======");
-////        int selected = feedRadio.getCheckedRadioButtonId();
-////        Log.d("Selected ","======"+selected);
-////        RadioButton rb1 = (RadioButton) findViewById(selected);
-////        status = rb1.getText().toString();
-//
-//      //  Arafat, i set it as static 1, pls change this codes;
-//
-//
-//    }
+
 
     public void requestToRegister() {
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
@@ -588,6 +576,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
             public void onClick(View v) {
 
                 Intent intentPhoneRegistration = new Intent(DetailsInfoActivityHealthNew.this, PhoneRegActivity.class);
+                alert.cancel();
                 startActivity(intentPhoneRegistration);
 
             }

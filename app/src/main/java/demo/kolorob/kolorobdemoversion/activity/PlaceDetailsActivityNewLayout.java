@@ -66,13 +66,15 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
+
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
+import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
@@ -89,6 +91,7 @@ import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -169,7 +172,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
 
-    ArrayList<EntertainmentServiceProviderItem> printnamesent;
+    ArrayList<EntertainmentServiceProviderItemNew> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
@@ -288,14 +291,14 @@ RelativeLayout searchviewholder,filterholder;
 
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
-    ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
+    ArrayList<EntertainmentServiceProviderItemNew> entItem=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
     ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
 
     ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
-    ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
+    ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
@@ -1095,18 +1098,25 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 break;
             case AppConstants.ENTERTAINMENT:
 
-                SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                //SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTableNewEnt=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
                 currentCategoryID = cat_id;
-                EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printent = null;
+                EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+               // ArrayList<String> printent = null;
+                ArrayList<String> RefEnt = null;
                 groups.removeAllElements();
-                printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
-                for (int j = 0; j < printent.size(); j++) {
-                    Group group = new Group(printent.get(j));
-                    printnamesent = null;
+                RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
+                printnamesent=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
-                    printnamesent = entertainmentServiceProviderTable.Entnames(currentCategoryID, head, printent.get(j), placeChoice);
+
+              //  printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < RefEnt.size(); j++) {
+                    Group group = new Group(RefEnt.get(j));
+                    printnamesent = null;
+                    int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
+                    Log.d("Sending refId","------"+refId);
+                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId, RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
@@ -1161,6 +1171,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     ArrayList<SubCategoryItemNew>subCategoryItemNews;
                    // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
                     //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
+
                     printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
@@ -1601,7 +1612,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
+                        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
@@ -1859,7 +1870,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
         createData(currentCategoryID,"",getLocationNameEng());
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
+        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
         subCatItemList.setAdapter(adapter);
 
     }
@@ -2367,7 +2378,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(entclicked){
               //  entclicked=false;
                 mapFragment.setCategoryId(3);
-                ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems;
+                ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
                 mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -2443,15 +2454,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /**********************************************************Methods for entertainment*******************************************/
 
-    private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItem(int cat_id)
+    private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItem(int cat_id)
     {
-        ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo(cat_id);
-        return entertainmentServiceProvider;
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+        return entertainmentServiceProviderItemNews;
     }
 
-    private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProviderItems)
+    private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2467,11 +2478,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     }
 
-    private ArrayList<EntertainmentServiceProviderItem> constructEntertainmentListItemForHeader(int cat_id, String header)
+    private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItemForHeader(int cat_id, String header)
     {
-        ArrayList<EntertainmentServiceProviderItem> entertainmentServiceProvider;
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable = new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, header);
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTable = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+        int refId=subCategoryTableNew.getRefId(header);
+        String refIds=String.valueOf(refId);
+        entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
         return entertainmentServiceProvider;
     }
 
@@ -2512,6 +2526,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
+
         Log.d("subcategotyId_Legal","======="+legalaidServiceProvider);
         return legalaidServiceProvider;
     }
@@ -2829,7 +2844,7 @@ NavigationCalled=true;
         if(showList==1)
         {
 
-            MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
+            ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
             subCatItemList.setAdapter(adapter);
         }
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);

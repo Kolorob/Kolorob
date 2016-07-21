@@ -1,5 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.Entertainment;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,13 +66,24 @@ public class EntertainmentTypeItem {
         this.sub_type = sub_type;
     }
 
-    public static EntertainmentTypeItem parseEntertainmentTypeItem(String nodeId,JSONObject jo) throws JSONException {
-        String id = nodeId;
+    public static EntertainmentTypeItem parseEntertainmentTypeItem(int nodeId,JSONObject jo) throws JSONException {
+        String type="";
+        String sub_type="";
+        String id = String.valueOf(nodeId);
         String recreation_price = jo.getString("recreation_price");
         String recreation_remark = jo.getString("recreation_remark");
 
-        String type = jo.getString("type");
-        String sub_type = jo.getString("sub_type");
+
+
+        if (jo.has("recreation_services"))
+        {
+            JSONObject recreation_services=jo.getJSONObject("recreation_services");
+
+
+            type = recreation_services.getString("type");
+            sub_type = recreation_services.getString("sub_type");
+        }
+
 
 
 

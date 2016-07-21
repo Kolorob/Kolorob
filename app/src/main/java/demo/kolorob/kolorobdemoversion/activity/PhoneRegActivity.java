@@ -2,7 +2,10 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -114,13 +117,24 @@ public class PhoneRegActivity extends Activity {
                             if(response.equals("true"))
                             {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
-                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertDialog alertDialog = new AlertDialog.Builder(PhoneRegActivity.this).create();
+                                alertDialog.setTitle("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
+                                alertDialog.setMessage("নিবন্ধন করার জন্য আপনাকে ধন্যবাদ");
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "আচ্ছা",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+
+
+                                                finish();
+                                            }
+                                        });
+                                alertDialog.show();
                             }
                             else
-                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-
+                                AlertMessage.showMessage(PhoneRegActivity.this, "নিবন্ধনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                        "আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
+                                        //  finish();
 
 
 
