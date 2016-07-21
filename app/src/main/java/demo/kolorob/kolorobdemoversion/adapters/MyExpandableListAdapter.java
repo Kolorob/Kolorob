@@ -32,6 +32,7 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -141,7 +142,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             });
         break;
             case AppConstants.ENTERTAINMENT:
-                final EntertainmentServiceProviderItem detent = groups.get(groupPosition).getChildrenent().get(childPosition);
+                final EntertainmentServiceProviderItemNew detent = groups.get(groupPosition).getChildrenent().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detent.getNodeNameBn());
                 linearLayout.setBackgroundResource(R.color.entertainment_color);

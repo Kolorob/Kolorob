@@ -295,14 +295,14 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         _nodeAdditional=_nodeAdditional.replace(']',',');
 
 
-
+      //  Log.d("saved","--------"+_nodeAdditional);
 
 
         String _address = "address";
 
         int _categoryId= jo.getInt("category");
 
-        Log.d("saved","==="+_nodeAdditional);
+
 
 
 

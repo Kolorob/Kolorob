@@ -66,8 +66,9 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-import demo.kolorob.kolorobdemoversion.adapters.MyExpandableListAdapter;
+
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
+import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
@@ -90,6 +91,7 @@ import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -170,7 +172,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
 
-    ArrayList<EntertainmentServiceProviderItem> printnamesent;
+    ArrayList<EntertainmentServiceProviderItemNew> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
     ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
@@ -1105,13 +1107,16 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ArrayList<String> RefEnt = null;
                 groups.removeAllElements();
                 RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
+                printnamesent=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+
 
               //  printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
                 for (int j = 0; j < RefEnt.size(); j++) {
                     Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
-
-                    printnamesent = entertainmentServiceProviderTableNew.Entnames(currentCategoryID, head, RefEnt.get(j), placeChoice);
+                    int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
+                    Log.d("Sending refId","------"+refId);
+                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId, RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
@@ -1166,6 +1171,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     ArrayList<SubCategoryItemNew>subCategoryItemNews;
                    // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
                     //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
+
                     printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
@@ -1864,7 +1870,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
         createData(currentCategoryID,"",getLocationNameEng());
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
+        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
         subCatItemList.setAdapter(adapter);
 
     }
@@ -2834,7 +2840,7 @@ NavigationCalled=true;
         if(showList==1)
         {
 
-            MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, currentCategoryID);
+            ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
             subCatItemList.setAdapter(adapter);
         }
         SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);

@@ -530,7 +530,7 @@ public class EntertainmentServiceProviderTableNew {
 //    }
 
 
-    public ArrayList<HealthServiceProviderItemNew> Heanames(int cat_id,int refId,String a,String place) {
+    public ArrayList<EntertainmentServiceProviderItemNew> EntNames(int cat_id,int refId,String a,String place) {
         String subcatnames=null;
         subcatnames=a;
         String places;
@@ -542,14 +542,17 @@ public class EntertainmentServiceProviderTableNew {
         places="Mirpur-11";
 
 
-        ArrayList<HealthServiceProviderItemNew> nameslist=new ArrayList<>();
+
+
+        ArrayList<EntertainmentServiceProviderItemNew> nameslist=new ArrayList<>();
 
         SQLiteDatabase db = openDB();
 
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_NODE_EMAIL+ " LIKE '%"+refids+"%'" , null);
         //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
-        //  Log.d("Ref Id","======"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_REFERENCES+ " LIKE '%"+refids+"%'" + "=" +refId);
+        Log.d("Key Area","------"+KEY_NODE_ADDITIONAL);
+         Log.d("Ref Id","------"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_NODE_ADDITIONAL+ " LIKE '%"+refids+"%'");
 //        Toast.makeText(this, +cursor,
 //                Toast.LENGTH_LONG).show();
 
