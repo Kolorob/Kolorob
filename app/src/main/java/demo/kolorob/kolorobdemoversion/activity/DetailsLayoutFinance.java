@@ -454,15 +454,15 @@ EditText feedback_comment;
                             Log.d(">>>>>","status "+forms);
                             //Log.d(">>>>>","status ");
 
+
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া হয়েছে",
+                                        "আপনার মতামতের জন্য আপনাকে ধন্যবাদ!");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া  হয় নি",
+                                        "দয়া করে আবার চেষ্টা করুন");
 
 
                         } catch (JSONException e) {
