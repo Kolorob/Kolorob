@@ -315,6 +315,54 @@ public class FinancialServiceNewTable {
         closeDB();
         return financialNewItem;
     }
+
+    public ArrayList<FinancialNewItem> Finnames(String a,String place) {
+        String subcatnames=null;
+        subcatnames=a;
+        String places;
+        int k =0;
+        ArrayList<FinancialNewItem> nameslist=new ArrayList<>();
+        ArrayList<Integer>s=new ArrayList<Integer>();
+        places="Mirpur-10";
+        SQLiteDatabase db = openDB();
+        int i=0;
+        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatnamebn = '"+subcatnames+"'" ,null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                k=cursor.getInt(5);
+
+
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "
+                +KEY_AREA+" = '"+places+"'"  , null);
+
+
+        if (cursor2.moveToFirst()) {
+            do {
+
+                String getter=cursor2.getString(32);
+                String delims = "[,]";
+                String[] tokens = getter.split(delims);
+                for (int ii=0;ii<tokens.length;ii++)
+                {
+                    if(Integer.parseInt(tokens[i])==k)
+                    {
+                        nameslist.add(cursorToSubCatList(cursor2));
+                    }
+                }
+
+
+            } while (cursor2.moveToNext());
+        }
+        cursor2.close();
+        closeDB();
+        return  nameslist;
+    }
     private FinancialNewItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
         String _nameen= cursor.getString(1);

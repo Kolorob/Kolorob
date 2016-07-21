@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -96,6 +97,8 @@ public class LegalAidDetailsTable {
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+
+        Log.d("Legal Insert","======"+ret);
         closeDB();
         return ret;
     }

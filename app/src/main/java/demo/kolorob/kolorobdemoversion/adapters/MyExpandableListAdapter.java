@@ -27,13 +27,18 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 
@@ -67,14 +72,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         object= groups.get(groupPosition).getchildren().get(childPosition);
         else if(catid==AppConstants.ENTERTAINMENT)
             object= groups.get(groupPosition).getChildrenent().get(childPosition);
-        if (catid==AppConstants.HEALTH)
+        else if (catid==AppConstants.HEALTH)
             object= groups.get(groupPosition).getChildrenhea().get(childPosition);
         else if(catid==AppConstants.FINANCIAL)
             object= groups.get(groupPosition).getChildrenfin().get(childPosition);
-        if (catid==AppConstants.LEGAL)
+        else if (catid==AppConstants.LEGAL)
+
             object= groups.get(groupPosition).getChildrenleg().get(childPosition);
         else if(catid==AppConstants.JOB)
             object= groups.get(groupPosition).getChildrenjob().get(childPosition);
+        else if(catid==AppConstants.GOVERNMENT)
+            object= groups.get(groupPosition).getChildrengov().get(childPosition);
         return object;
     }
 
@@ -92,6 +100,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             longs= groups.get(groupPosition).getChildrenleg().get(childPosition).hashCode();
         else if(catid==AppConstants.JOB)
             longs= groups.get(groupPosition).getChildrenjob().get(childPosition).hashCode();
+        else if(catid==AppConstants.GOVERNMENT)
+            longs= groups.get(groupPosition).getChildrengov().get(childPosition).hashCode();
         return longs;
     }
 
@@ -109,9 +119,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         linearLayout=(LinearLayout)v.findViewById(R.id.row_view);
         switch (catid) {
             case AppConstants.EDUCATION:
-            final EducationServiceProviderItem det = groups.get(groupPosition).getchildren().get(childPosition);
+            final EducationNewItem det = groups.get(groupPosition).getchildren().get(childPosition);
             text = (TextView) v.findViewById(R.id.textView1);
-            text.setText(det.getEduNameBan());
+            text.setText(det.getNamebn());
                 linearLayout.setBackgroundResource(R.color.education_color);
 
 
@@ -120,8 +130,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 public void onClick(View v) {
 
 
-                    Intent ii = new Intent(getActivity(), DetailsInfoActivityEducation.class);
-                    ii.putExtra(AppConstants.KEY_DETAILS_VIEW, det);
+                    Intent ii = new Intent(getActivity(), DetailsLayoutEducation.class);
+                    ii.putExtra(AppConstants.KEY_DETAILS_EDU, det);
                     activity.startActivity(ii);
 
 
@@ -169,22 +179,22 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 });
                 break;
             case AppConstants.FINANCIAL:
-                final FinancialServiceProviderItem detfin = groups.get(groupPosition).getChildrenfin().get(childPosition);
+                final FinancialNewItem detfin = groups.get(groupPosition).getChildrenfin().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detfin.getNamebn());
                 linearLayout.setBackgroundResource(R.color.financial_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent iifin = new Intent(getActivity(), DetailsInfoActivityFinancialNew.class);
-                        iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, detfin);
+                        Intent iifin = new Intent(getActivity(), DetailsLayoutFinance.class);
+                        iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, detfin);
                         activity.startActivity(iifin);
 
                     }
                 });
                 break;
             case AppConstants.LEGAL:
-                final LegalAidServiceProviderItem detleg = groups.get(groupPosition).getChildrenleg().get(childPosition);
+                final LegalAidServiceProviderItemNew detleg = groups.get(groupPosition).getChildrenleg().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detleg.getLegalaidNameBan());
                 linearLayout.setBackgroundResource(R.color.legal_aid_color);
@@ -222,6 +232,26 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
                 });
                 break;
+
+            case AppConstants.GOVERNMENT:
+                final GovernmentNewItem detgov = groups.get(groupPosition).getChildrengov().get(childPosition);
+                text = (TextView) v.findViewById(R.id.textView1);
+                text.setText(detgov.getAddress());
+                v.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        Intent iijob = new Intent(getActivity(), DetailsLayoutGovernment.class);
+                        iijob.putExtra(AppConstants.KEY_DETAILS_GOV, detgov);
+                        activity.startActivity(iijob);
+
+
+                    }
+
+
+                });
+                break;
             default:break;
         }
 
@@ -237,14 +267,16 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             size= groups.get(groupPosition).children.size();
         else if(catid==AppConstants.ENTERTAINMENT)
             size= groups.get(groupPosition).childrenent.size();
-        if (catid==AppConstants.HEALTH)
+        else if (catid==AppConstants.HEALTH)
             size= groups.get(groupPosition).childrenhea.size();
         else if(catid==AppConstants.FINANCIAL)
             size= groups.get(groupPosition).childrenfin.size();
-        if (catid==AppConstants.LEGAL)
+        else  if (catid==AppConstants.LEGAL)
             size= groups.get(groupPosition).childrenleg.size();
         else if(catid==AppConstants.JOB)
             size= groups.get(groupPosition).childrenjob.size();
+        else if(catid==AppConstants.GOVERNMENT)
+            size= groups.get(groupPosition).childrengov.size();
         return size;
     }
 
@@ -292,6 +324,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         else if(catid==5)
             ((CheckedTextView) convertView).setBackgroundResource(R.color.legal_aid_color);
         else if(catid==6)
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
+        else if(catid==4)
             ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
 
 

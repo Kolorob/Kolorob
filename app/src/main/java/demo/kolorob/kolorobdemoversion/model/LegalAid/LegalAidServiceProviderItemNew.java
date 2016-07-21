@@ -1,5 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.LegalAid;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -227,41 +229,68 @@ public class LegalAidServiceProviderItemNew implements Serializable {
 
     public static LegalAidServiceProviderItemNew parseLegalAidServiceProviderItemNew(JSONObject jo) throws JSONException {
 
-        String _identifierId = jo.getString("identifier_id");
-        String post_office = jo.getString("post_office");
-        int _legalaidSubCategoryId = jo.getInt("legal_aid_subcategory_id");
-        int _categoryId = jo.getInt("category_id");
-        String _legalaidNameEng = jo.getString("legal_aid_name_eng");
-        String _legalaidBan = jo.getString("legal_aid_name_ban");
-        String _contactPersonDesignation = jo.getString("contact_person_designation");
-        String _contactNo = jo.getString("contact_no");
-        String _emailAddress = jo.getString("email_address");
-        String _websiteLink = jo.getString("website_link");
-        String _fbLink = jo.getString("fb_link");
-        String _registeredWith = jo.getString("registered_with");
-        String _registrationNo = jo.getString("registration_no");
-        String _additionalInfo = jo.getString("additional_info");
-        String _area = jo.getString("area");
-        String _address = jo.getString("address");
-        String _latitude = jo.getString("latitude");
-        String _longitude = jo.getString("longitude");
-        String _openingtime=jo.getString("opening_time");
-        String _breaktime=jo.getString("break_time");
-        String _closingtime=jo.getString("closing_time");
-        String _landmark=jo.getString("landmark");
-        String _road=jo.getString("road");
-        String _block =jo.getString("block");
-        String _breaktime2=jo.getString("break_time2");
-        String off_day=jo.getString("off_day");
-        String floor=jo.getString("floor");
-        String house_name=jo.getString("house_name");
-        String house_no=jo.getString("house_no");
-        String line=jo.getString("line");
-        String avenue=jo.getString("off_day");
-        String police_station=jo.getString("off_day");
+
+        String _openingtime="";
+        String _breaktime="";
+        String _closingtime="";
+        String off_day="";
+        String _registeredWith="";
+        String _registrationNo="";
+
+        String _identifierId = jo.getString("id");
+        String _legalaidNameEng = jo.getString("node_name");
+        String _legalaidBan = jo.getString("node_bn");
 
 
 
+        JSONObject map_info= jo.getJSONObject("map_info");
+        String _latitude = map_info.getString("lat");
+        String _longitude = map_info.getString("lon");
+
+
+        JSONObject contactInfo= jo.getJSONObject("contact_info");
+        String floor=contactInfo.getString("floor");
+        String house_name=contactInfo.getString("house_name");
+        String house_no=contactInfo.getString("house_no");
+        String _road=contactInfo.getString("road");
+        String line=contactInfo.getString("line");
+        String avenue=contactInfo.getString("avenue");
+        String _block =contactInfo.getString("block");
+        String _area = contactInfo.getString("area");
+        String _landmark=contactInfo.getString("landmark");
+        String post_office = contactInfo.getString("post_office");
+        String police_station=contactInfo.getString("police_station");
+        String _contactNo = contactInfo.getString("node_contact");
+        String _emailAddress = contactInfo.getString("node_email");
+        String _websiteLink = contactInfo.getString("node_website");
+        String _fbLink = contactInfo.getString("node_facebook");
+        String _contactPersonDesignation = contactInfo.getString("node_designation");
+        String _additionalInfo = contactInfo.getString("city");
+        String _address = contactInfo.getString("country");
+
+        if(jo.has("timing_info")) {
+            JSONObject timingInfo= jo.getJSONObject("timing_info");
+            _openingtime=timingInfo.getString("opening_time");
+            _breaktime=timingInfo.getString("break_time");
+            _closingtime=timingInfo.getString("closing_time");
+             off_day=timingInfo.getString("off_day");
+        }
+
+        if (jo.has("registration_info"))
+        {
+
+            JSONObject registrationInfo= jo.getJSONObject("registration_info");
+            _registeredWith = registrationInfo.getString("node_registered_with");
+            _registrationNo = registrationInfo.getString("node_registered_number");
+        }
+        String _breaktime2=jo.getString("references");
+        _breaktime2=_breaktime2.replace('[',',');
+        _breaktime2=_breaktime2.replace(']',',');
+
+        int _categoryId = jo.getInt("category");
+
+
+        int _legalaidSubCategoryId = 2;
 
 
 

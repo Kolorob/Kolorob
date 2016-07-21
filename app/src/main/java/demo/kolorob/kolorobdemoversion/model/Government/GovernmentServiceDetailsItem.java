@@ -3,10 +3,12 @@ package demo.kolorob.kolorobdemoversion.model.Government;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 2/7/2016.
  */
-public class GovernmentServiceDetailsItem {
+public class GovernmentServiceDetailsItem  implements Serializable {
     private int finId;
     private int serviceproviderId;
     private String servicecost;

@@ -55,6 +55,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -73,21 +74,21 @@ public class DetailsInfoActivityLegalNew extends Activity {
     TextView ups_text;
     ListView courseListView,listView;
     Context con;
-    HealthServiceProviderItemNew healthServiceProviderItemNew;
-    ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
-    ArrayList<HealthServiceProviderItem>healthServiceProviderItemsz;
+    LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
+    ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItemNews;
+    ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;
     private TextView totalStudents;
     private TextView totalClasses;
     private TextView totalTeachers;
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private TextView ratingText;
+    private TextView ratingText,common_details,other_details;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
-    String result_concate;
+    String result_concate="";
     private CheckBox checkBox;
 
 
@@ -105,13 +106,12 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 
         if (null != intent) {
-            healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
+            legalAidServiceProviderItemNew = (LegalAidServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
 
         }
 
 
-        HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityLegalNew.this);
-        EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivityLegalNew.this);
+
 
         courseListView = (ListView) findViewById(R.id.courseListView);
         listView = (ListView) findViewById(R.id.listView5);
@@ -135,6 +135,9 @@ public class DetailsInfoActivityLegalNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
+        common_details=(TextView)findViewById(R.id.common_details);
+        other_details=(TextView)findViewById(R.id.other_details);
+
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -238,7 +241,32 @@ public class DetailsInfoActivityLegalNew extends Activity {
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
-        Log.d("width", "====" + width);
+     //   Log.d("width", "====" + width);
+
+
+
+        CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
+        CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
+        CheckConcate("বাসার নম্বর", legalAidServiceProviderItemNew.getHouse_no());
+        CheckConcate("রাস্তার ", legalAidServiceProviderItemNew.getRoad());
+        CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
+        CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
+        CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
+        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getArea());
+        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
+        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPost_office());
+
+        CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
+        timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
+        timeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
+        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
+        CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
+        CheckConcate("যার মাধ্যমে রেজিস্ট্রেশন করা হয়েছে", legalAidServiceProviderItemNew.getRegisteredWith());
+
+
+        common_details.setText(result_concate);
+
+
 
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
@@ -300,12 +328,12 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 //        }
 
-//        close_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 //        distance_left.setOnClickListener(new View.OnClickListener() {
@@ -582,6 +610,40 @@ public class DetailsInfoActivityLegalNew extends Activity {
         return concatResult;
     }
 
+    private String timeConverter(String time) {
+
+        String timeInBengali = "";
+
+
+
+        String[] separated = time.split(":");
+        Log.d("time","====="+separated[0]);
+
+
+
+
+        int hour = Integer.valueOf(separated[0]);
+        int times = Integer.valueOf(separated[1]);
+
+        if (hour > 6 && hour < 12)
+            timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour == 12)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour > 12 && hour < 16)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 15 && hour < 18)
+            timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 17 && hour < 20)
+            timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 20)
+            timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        if (times != 0)
+            timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+        else
+            timeInBengali = timeInBengali + " টা";
+        return timeInBengali;
+    }
+
 //    public Boolean RegisteredOrNot()
 //    {
 //        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -599,15 +661,33 @@ public class DetailsInfoActivityLegalNew extends Activity {
 //
 //
 
-
-    private String concateBasic(String value1,String value2){
-
-        String value= value1+value2;
-        result_concate= result_concate+value + "\n";
-
-        Log.d("....>>>", "Values   " + result_concate);
-
-
-        return result_concate;
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            CheckConcate(value1, value2);
+        }
     }
+
+
+    private void timeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || value2.equals("")) {
+
+            String GetTime = timeConverter(value2);
+            CheckConcate(value1, GetTime);
+
+        }
+    }
+
+    private void CheckConcate(String value1, String value2) {
+
+
+        if (!value2.equals("null") && !value2.equals("")) {
+
+            String value = "      " + value1 + ":  " + value2;
+            result_concate = result_concate + value + "\n";
+        }
+
+
+    }
+
+
 }

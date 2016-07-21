@@ -78,7 +78,9 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
@@ -120,9 +122,11 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -207,7 +211,7 @@ int countofDb;
         if(in ==1){
             rotateImage.setBackgroundResource(R.drawable.a1);
             System.out.println("-----okkkkk1--------");
-            // startActivity(new Intent(SplashActivity.this, OpeningActivity.class));
+
         }
         else if(in ==2){
             rotateImage.setBackgroundResource(R.drawable.a3);
@@ -414,7 +418,7 @@ int countofDb;
             @Override
             public void run() {
                                 /* start the activity */
-                //    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
                 //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 overridePendingTransition(0, 0);
                 finish();
@@ -594,28 +598,28 @@ int countofDb;
             );
 
 
-            getRequest(OpeningActivity.this, "http: kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
-                            Log.d("====","Response"+apiContent);
+
 
 
                             try {
 
                                 JSONArray legal_array= new JSONArray(apiContent);
-                                JSONObject jo = new JSONObject(apiContent);
+
                                 int p= legal_array.length();
-                                Log.d("====","LengthArray "+p);
+
 
                                 for(int i=0;i<p;i++)
                                 {
                                     JSONObject jsonObject=legal_array.getJSONObject(i);
+                                    SaveLegaltData(jsonObject);
+
 
                                 }
 
-                                String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                    saveLegalaidServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -633,7 +637,6 @@ int countofDb;
 
                         JSONArray allData=new JSONArray(apiContent);
                         HealthDatSize=allData.length();
-                         Log.d("HealthDatSize","======"+HealthDatSize);
 
                         for(int i=0;i<HealthDatSize;i++)
                         {
@@ -808,6 +811,31 @@ int countofDb;
         countofDb++;
     }
 
+    private void SaveLegaltData(JSONObject jsonObject)
+    {
+        LegalAidServiceProviderTableNew legalAidServiceProviderTableNew= new LegalAidServiceProviderTableNew(OpeningActivity.this);
+        try {
+            LegalAidServiceProviderItemNew legalAidServiceProviderItemNew=LegalAidServiceProviderItemNew.parseLegalAidServiceProviderItemNew(jsonObject);
+            legalAidServiceProviderTableNew.insertItem(legalAidServiceProviderItemNew);
+            if (jsonObject.has("lservice_details"))
+            {
+                JSONArray lservice_details=jsonObject.getJSONArray("lservice_details");
+                int lservice_detailsSize=lservice_details.length();
+
+                for (int v=0;v<lservice_detailsSize;v++)
+                {
+                    JSONObject lservice_detailsSizeItem= lservice_details.getJSONObject(v);
+                    SaveLegalDetailsData(lservice_detailsSizeItem,jsonObject.getInt("id"));
+                }
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void SaveHealthtData(JSONObject jsonObject)
     {
         HealthServiceProviderTableNew healthServiceProviderTableNew= new HealthServiceProviderTableNew(OpeningActivity.this);
@@ -859,7 +887,20 @@ int countofDb;
         }
 
     }
+    private void SaveLegalDetailsData(JSONObject jsonObject,int foreign_key)
+    {
+        LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(OpeningActivity.this);
+        try {
+            LeagalAidDetailsItem leagalAidDetailsItem=LeagalAidDetailsItem.parseLegalAidDetailsItem(jsonObject,foreign_key);
+            legalAidDetailsTable.insertItem(leagalAidDetailsItem);
 
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     private void SaveSpecialistData(JSONObject jsonObject,int foreign_key)
     {
         HealthSpecialistTableDetails healthVaccineTableDetails= new HealthSpecialistTableDetails(OpeningActivity.this);

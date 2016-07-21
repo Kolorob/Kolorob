@@ -75,9 +75,11 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
@@ -89,10 +91,12 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderI
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -167,15 +171,16 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     ArrayList<EntertainmentServiceProviderItem> printnamesent;
     ArrayList<JobServiceProviderItem> printnamesjob;
-    ArrayList<LegalAidServiceProviderItem> printnamesleg;
+    ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
-    ArrayList<FinancialServiceProviderItem> printnamesfin;
+    ArrayList<FinancialNewItem> printnamesfin;
     ArrayList<String> allData= new ArrayList<>();
     private DrawerLayout drawer;
     ArrayList<SearchHolder> searchheads=new ArrayList<>();
     Context context;
     ArrayList <String>Headerholder=new ArrayList<>();
-    ArrayList<EducationServiceProviderItem> printnames;
+    ArrayList<EducationNewItem> printnames;
+    ArrayList<GovernmentNewItem> printgovs;
     //common for all categories
     public LinearLayout sideIndex,searchLayout;
     public CategoryItem getCi() {
@@ -284,14 +289,15 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem> entItem=new ArrayList<>();
-    ArrayList<LegalAidServiceProviderItem> legalItem=new ArrayList<>();
+    ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
     ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
 
     ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
-    ArrayList<LegalAidServiceProviderItem>LEG=new ArrayList<>();
+    ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItem>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
+    ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
     ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
@@ -1067,27 +1073,20 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void createData(int cat_id, String head,String placeChoice) {
         switch (cat_id) {
             case AppConstants.EDUCATION:
-
-                SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = cat_id;
-                EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = 5;
+                EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> print = null;
                 groups.removeAllElements();
 
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
                // subCatItemList.setChildDivider(R.color.black);
 
-                print = subCategoryTable.getSubnameedu(currentCategoryID, head);
+                print = subCategoryTable.getSubnameedu(currentCategoryID);
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
-                    printnames = educationServiceProviderTable.Edunames(currentCategoryID, "", print.get(j), placeChoice);
-
-                    // Log.d(">>>>", "printnames "+printnames);
-                    /////  Log.d(">>>>", "currentCategoryID  "+currentCategoryID);
-                    // Log.d(">>>>", "head "+head);
-                    // Log.d(">>>>", "print.get(j) "+print.get(j));
-                    // Log.d(">>>>", "placeChoice "+placeChoice);
+                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -1111,6 +1110,27 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
+                    }
+                    groups.add(j, group);
+                }
+                break;
+            case AppConstants.GOVERNMENT:
+                SubCategoryTableNew subCategoryTableg = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = 33;
+                GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+                ArrayList<String> printgov = null;
+                groups.removeAllElements();
+
+                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
+                // subCatItemList.setChildDivider(R.color.black);
+
+                printgov = subCategoryTableg.getSubnameedu(currentCategoryID);
+                for (int j = 0; j < printgov.size(); j++) {
+                    Group group = new Group(printgov.get(j));
+                    printgovs = null;
+                    printgovs = governmentNewTable.Govnames(printgov.get(j),placeChoice);
+                    for (int i = 0; i < printgovs.size(); i++) {
+                        group.childrengov.add(i, printgovs.get(i));
                     }
                     groups.add(j, group);
                 }
@@ -1150,17 +1170,18 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 break;
             case AppConstants.FINANCIAL:
 
-                SubCategoryTable subCategoryTable4 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = cat_id;
-                FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+                SubCategoryTableNew subCategoryTable4 = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+                currentCategoryID = 11;
+                FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printfin = null;
+
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
                 groups.removeAllElements();
-                printfin= subCategoryTable4.getSubnameedu(currentCategoryID, head);
+                printfin= subCategoryTable4.getSubnameedu(currentCategoryID);
                 for (int j = 0; j <  printfin.size(); j++) {
                     Group group = new Group(printfin.get(j));
                     printnamesfin = null;
-                    printnamesfin= financialServiceProviderTable.Finnames(currentCategoryID, head, printfin.get(j), placeChoice);
+                    printnamesfin= financialServiceProviderTable.Finnames(printfin.get(j),placeChoice);;
                     for (int i = 0; i < printnamesfin.size(); i++) {
                         group.childrenfin.add(i, printnamesfin.get(i));
                     }
@@ -1168,18 +1189,26 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 break;
             case AppConstants.LEGAL:
+                SubCategoryTableNew subCategoryTableNews=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
 
-                SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+             //   SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 currentCategoryID = cat_id;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.legal_aid_color));
-                LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printleg = null;
+                LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+                //ArrayList<String> printleg = null;
+                ArrayList<String> RefLegal = null;
+                RefLegal=subCategoryTableNews.getSubnameedu(29);
+                Log.d("RefLegal","======"+RefLegal);
+
                 groups.removeAllElements();
-                printleg = subCategoryTable5.getSubnameedu(currentCategoryID, head);
-                for (int j = 0; j < printleg.size(); j++) {
-                    Group group = new Group(printleg.get(j));
+               // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
+                for (int j = 0; j < RefLegal.size(); j++) {
+                    Group group = new Group(RefLegal.get(j));
+                    int refId=subCategoryTableNews.getRefId(RefLegal.get(j));
+
                     printnamesleg = null;
-                    printnamesleg = legalAidServiceProviderTable.Legnames(currentCategoryID, head, printleg.get(j), placeChoice);
+                    printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
+
                     for (int i = 0; i < printnamesleg.size(); i++) {
                         group.childrenleg.add(i, printnamesleg.get(i));
                     }
@@ -1600,7 +1629,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         MediaPlayer mp_g = MediaPlayer.create(getApplicationContext(), R.raw.government);
                         mp_g.start();
                         govclicked=true;
+                        GOV.clear();
                         setFilcatid(currentCategoryID);
+                        catstatus=true;
+                        calladapter(catstatus);
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
@@ -1608,24 +1640,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
-                        //TODO write necessary codes for government
+
+
+
+
+
+                        ArrayList<GovernmentNewItem> governmentNewItems;
+                        governmentNewItems = constructgovListItem();
+                        callMapFragmentWithGovInfo(ci.getCatName(), ci.getId(), governmentNewItems);
+
+
+
+
 
                         toolbar.setVisibility(View.VISIBLE);
-                       /* final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
 
-                        alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-
-
-                                        alertDialog.dismiss();
-
-                                        finish();
-                                    }
-                                });
-                        alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();*/
                         break;
                     case AppConstants.LEGAL:
                         MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
@@ -1639,7 +1668,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         filterholder.setVisibility(View.VISIBLE);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.legal_selected);
-                        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
+                        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
@@ -2349,7 +2378,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(legclicked){
                // legclicked=false;
                 mapFragment.setCategoryId(5);
-                ArrayList<LegalAidServiceProviderItem> legalAidServiceProviderItems;
+                ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
                 mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -2450,28 +2479,52 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     /**********************************************************Methods for government**********************************************/
 
+    private ArrayList<GovernmentNewItem> constructgovListItem()
+    {
+        ArrayList<GovernmentNewItem> governmentNewItems;
+        GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo();
+        return governmentNewItems;
+    }
+    private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        // mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
 
+        mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setGovernmentNewItems(governmentNewItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+
+
+
+    }
 
 
     /**********************************************************Methods for legal***************************************************/
 
-    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItem(int cat_id)
+    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItem(int cat_id)
     {
-        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
+        Log.d("subcategotyId_Legal","======="+legalaidServiceProvider);
         return legalaidServiceProvider;
     }
 
-    private ArrayList<LegalAidServiceProviderItem> constructlegalaidListItemForHeader(int cat_id, String header)
+    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItemForHeader(int cat_id, String header)
     {
-        ArrayList<LegalAidServiceProviderItem> legalaidServiceProvider;
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, header);
         return legalaidServiceProvider;
     }
 
-    private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItem> legalaidServiceProviderItems)
+    private void callMapFragmentWithLegalAidInfo(String item_name,int cat_id,ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
