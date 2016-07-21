@@ -429,13 +429,17 @@ EditText feedback_comment;
     public void sendReviewToServer()
     {
         int rating;
-        if(status.equals("ভাল"))
+        if(status.equals(R.string.feedback1))
             rating=1;
-        else if(status.equals("মোটামোট"))
+        else if(status.equals(R.string.feedback2))
             rating=2;
-        else
+        else if(status.equals(R.string.feedback3))
             rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialNewItem.getFinId()+"&service="+"1"+"&rating="+rating;
+        else if(status.equals(R.string.feedback4))
+            rating=4;
+        else
+            rating=5;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialNewItem.getFinId()+"&service="+"11"+"&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -490,16 +494,6 @@ EditText feedback_comment;
        requestQueue.add(stringRequest);
     }
 
-    public void declareRadiobutton()
-    {
-        // int selected = feedRadio.getCheckedRadioButtonId();
-        // RadioButton rb1 = (RadioButton) findViewById(selected);
-        //  status = rb1.getText().toString();
-
-        // Arafat, i set it as static 1, pls change this codes;
-
-        status = "1";
-   }
 
    public void requestToRegister()
     {
