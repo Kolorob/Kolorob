@@ -763,16 +763,17 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //
 //
 //
+    private void CheckConcate(String value1, String value2) {
 
 
-    private String concateBasic(String value1,String value2){
+    if (!value2.equals("null") && !value2.equals("")) {
 
-        String value= value1+value2;
-        result_concate= result_concate+value + "\n";
-
-        Log.d("....>>>", "Values   " + result_concate);
-
-
-        return result_concate;
+        String value = "      " + value1 + ":  " + value2;
+        result_concate = result_concate + value + "\n";
     }
+
+
+}
+
+
 }
