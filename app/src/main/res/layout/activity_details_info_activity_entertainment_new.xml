@@ -24,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/health_color"
+            android:background="@color/entertainment_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -37,7 +37,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/health"/>
+                    android:background="@drawable/entertainment"/>
 
             </LinearLayout>
             <LinearLayout
@@ -63,7 +63,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/health_color"
+            android:background="@color/entertainment_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/health_color"
+                android:background="@color/entertainment_color"
                 android:layout_height="wrap_content">
 
 
@@ -236,7 +236,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/details_info_scrollview_background"
+            android:background="@color/white"
             >
 
             <ScrollView
@@ -275,7 +275,7 @@
         android:orientation="horizontal"
 
         android:layout_height="wrap_content"
-        android:background="@color/health_color"
+        android:background="@color/entertainment_color"
         android:id="@+id/bottom_bar"
 
         android:gravity="center_vertical">
