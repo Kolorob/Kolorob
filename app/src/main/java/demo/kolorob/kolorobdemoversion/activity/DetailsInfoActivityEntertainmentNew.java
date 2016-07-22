@@ -48,6 +48,7 @@ import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
@@ -55,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -76,7 +78,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     ListView courseListView,listView;
     Context con;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
-    ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
+    ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
     ArrayList<EntertainmentServiceProviderItemNew>entertainmentServiceProviderItemNewsx;
     private TextView totalStudents;
     private TextView totalClasses;
@@ -113,8 +115,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         }
 
 
-        HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityEntertainmentNew.this);
-        EducationFeeTable educationFeeTable = new EducationFeeTable(DetailsInfoActivityEntertainmentNew.this);
+
 
         courseListView = (ListView) findViewById(R.id.courseListView);
         listView = (ListView) findViewById(R.id.listView5);
@@ -254,6 +255,16 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
         CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolice_station());
+        CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
+        timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
+        timeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
+        timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
+        CheckConcate("সাপ্তাহিক ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
+        CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
+
+
+        EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
+
 
 
 

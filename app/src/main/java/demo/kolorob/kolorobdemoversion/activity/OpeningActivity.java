@@ -316,7 +316,7 @@ int countofDb;
         if (firstRun == false)//if running for first time
         {
             SharedPreferences.Editor editor = settings.edit();
-         //   editor.putBoolean("firstRun", true);
+            editor.putBoolean("firstRun", true);
             editor.commit();
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
@@ -329,7 +329,7 @@ int countofDb;
                                 dialog.dismiss();
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
-                          //      editor.putBoolean("firstRun", false);
+                                editor.putBoolean("firstRun", false);
                                 editor.commit();
                                 finish();
                             }
