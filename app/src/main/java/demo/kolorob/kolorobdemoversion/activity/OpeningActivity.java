@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -152,6 +153,7 @@ public class OpeningActivity extends Activity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private AnimationDrawable frameAnimation;
     private Context ctx;
     public static final String EDU_PROVIDER_TABLE = "edu_provider";
     public  SQLiteDatabase db3;
@@ -181,89 +183,89 @@ int countofDb;
     View view=null;
 
 
-    public RefreshHandler mRedrawHandler = new RefreshHandler();
-
-    class RefreshHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            OpeningActivity.this.setImage();
-        }
-
-        public void sleep(long delayMillis) {
-            this.removeMessages(0);
-            sendMessageDelayed(obtainMessage(0), delayMillis);
-        }
-    };
-
-    private void setImage() {
-        try {
-            in++;
-
-//            if(in == 5) {
-//                rotateImage.setBackgroundResource(R.drawable.glow);
-//                Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.glow_animation);
-//                rotateImage.startAnimation(startRotateAnimation);
-//            }
-
-        } catch (final Exception e) {
-
-
-        }
-
-        if(in ==1){
-            rotateImage.setBackgroundResource(R.drawable.a1);
-            System.out.println("-----okkkkk1--------");
-
-        }
-        else if(in ==2){
-            rotateImage.setBackgroundResource(R.drawable.a3);
-            System.out.println("-----okkkkk2--------");
-
-        }
-        else if(in ==3){
-            rotateImage.setBackgroundResource(R.drawable.a7);
-            System.out.println("-----okkkkk--------");
-
-        }
-        else if(in ==3){
-            rotateImage.setBackgroundResource(R.drawable.a7);
-            System.out.println("-----okkkkk7--------");
-
-        }
-        else if(in ==4){
-            rotateImage.setBackgroundResource(R.drawable.a12);
-            System.out.println("-----okkkkk12--------");
-
-        }
-        else if(in ==5){
-            rotateImage.setBackgroundResource(R.drawable.a15);
-            System.out.println("-----okkkkk15--------");
-
-        }
-        else if(in ==6){
-            rotateImage.setBackgroundResource(R.drawable.a16);
-            System.out.println("-----okkkkk16-------");
-
-        }
-        else if(in ==7){
-            rotateImage.setBackgroundResource(R.drawable.a18);
-            System.out.println("-----okkkkk18--------");
-
-        }
-
-        else if(in == 8){
-           // rotateImage.setBackgroundResource(R.drawable.glow);
-            rotateImage.setBackgroundResource(R.drawable.a18);
-            startActivity(new Intent(OpeningActivity.this, PlaceChoiceActivity2.class));
-            mRedrawHandler.removeMessages(0);
-            finish();
-            System.out.println("-----okkkkk74--------" );
-            // in=0;
-        }
-
-        mRedrawHandler.sleep(500);
-
-    }
+//    public RefreshHandler mRedrawHandler = new RefreshHandler();
+//
+//    class RefreshHandler extends Handler {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            OpeningActivity.this.setImage();
+//        }
+//
+//        public void sleep(long delayMillis) {
+//            this.removeMessages(0);
+//            sendMessageDelayed(obtainMessage(0), delayMillis);
+//        }
+//    };
+//
+//    private void setImage() {
+//        try {
+//            in++;
+//
+////            if(in == 5) {
+////                rotateImage.setBackgroundResource(R.drawable.glow);
+////                Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.glow_animation);
+////                rotateImage.startAnimation(startRotateAnimation);
+////            }
+//
+//        } catch (final Exception e) {
+//
+//
+//        }
+//
+//        if(in ==1){
+//            rotateImage.setBackgroundResource(R.drawable.a1);
+//            System.out.println("-----okkkkk1--------");
+//
+//        }
+//        else if(in ==2){
+//            rotateImage.setBackgroundResource(R.drawable.a3);
+//            System.out.println("-----okkkkk2--------");
+//
+//        }
+//        else if(in ==3){
+//            rotateImage.setBackgroundResource(R.drawable.a7);
+//            System.out.println("-----okkkkk--------");
+//
+//        }
+//        else if(in ==3){
+//            rotateImage.setBackgroundResource(R.drawable.a7);
+//            System.out.println("-----okkkkk7--------");
+//
+//        }
+//        else if(in ==4){
+//            rotateImage.setBackgroundResource(R.drawable.a12);
+//            System.out.println("-----okkkkk12--------");
+//
+//        }
+//        else if(in ==5){
+//            rotateImage.setBackgroundResource(R.drawable.a15);
+//            System.out.println("-----okkkkk15--------");
+//
+//        }
+//        else if(in ==6){
+//            rotateImage.setBackgroundResource(R.drawable.a16);
+//            System.out.println("-----okkkkk16-------");
+//
+//        }
+//        else if(in ==7){
+//            rotateImage.setBackgroundResource(R.drawable.a18);
+//            System.out.println("-----okkkkk18--------");
+//
+//        }
+//
+//        else if(in == 8){
+//           // rotateImage.setBackgroundResource(R.drawable.glow);
+//            rotateImage.setBackgroundResource(R.drawable.a18);
+//            startActivity(new Intent(OpeningActivity.this, PlaceChoiceActivity2.class));
+//            mRedrawHandler.removeMessages(0);
+//            finish();
+//            System.out.println("-----okkkkk74--------" );
+//            // in=0;
+//        }
+//
+//        mRedrawHandler.sleep(500);
+//
+//    }
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -276,6 +278,7 @@ int countofDb;
         setContentView(R.layout.activity_opening);
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
+
 
         context = this;
 
@@ -313,7 +316,7 @@ int countofDb;
         if (firstRun == false)//if running for first time
         {
             SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("firstRun", true);
+         //   editor.putBoolean("firstRun", true);
             editor.commit();
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
@@ -326,7 +329,7 @@ int countofDb;
                                 dialog.dismiss();
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
-                                editor.putBoolean("firstRun", false);
+                          //      editor.putBoolean("firstRun", false);
                                 editor.commit();
                                 finish();
                             }
@@ -338,12 +341,12 @@ int countofDb;
 
 
             {
-                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
-                pd.setIndeterminate(true);
-                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
+//                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
+//                pd.setIndeterminate(true);
+//                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
                 LoadData();
 
-                pd.dismiss();
+             //   pd.dismiss();
             }
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
@@ -373,9 +376,9 @@ int countofDb;
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putInt("KValue", countofDb);
                                 editor.commit();
-                                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
-                                pd.setIndeterminate(true);
-                                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
+//                                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
+//                                pd.setIndeterminate(true);
+//                                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
 
 
                                 LoadData();
@@ -414,24 +417,61 @@ int countofDb;
         moving wheel while loading data into local database
 
          */
-        rotateImage = (ImageView) findViewById(R.id.rotate_image);
+
+
+
+
+
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                                /* start the activity */
+                                  /* start the activity */
 
-                //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 overridePendingTransition(0, 0);
-                finish();
+                Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class); // Default Activity
+                startActivity(a);
+
+                //  finish();
             }
-        }, 6000);
+        }, 60000);
+        //setImage();
 
-        setImage();
 
+
+        rotateImage = (ImageView) findViewById(R.id.rotate_image);
+        rotateImage.setBackgroundResource(R.drawable.frame_animation_list);
+        frameAnimation = (AnimationDrawable) rotateImage.getBackground();
+        frameAnimation.setOneShot(false);
+        frameAnimation.start();
 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
+
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    try {
+                        JSONArray allData=new JSONArray(apiContent);
+                        HealthDatSize=allData.length();
+                        for(int i=0;i<HealthDatSize;i++)
+                        {
+                            JSONObject jsonObject=allData.getJSONObject(i);
+                            SaveHealthtData(jsonObject);
+
+                        }
+                        Log.d("Loading health ","-------");
+                        //   saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
           getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
                        @Override
                       public void onResponse(int status, String apiContent) {
@@ -442,6 +482,8 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     saveCategoryList(jo);
+                                    Log.d("Loading categories ","-------");
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                }
@@ -462,9 +504,8 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     savesubcat(jo);
-                                    SubCategoryTableNew subCategoryTableNew= new SubCategoryTableNew(OpeningActivity.this);
-                                    si3=subCategoryTableNew.getAllSubCat();
-                                    si3.size();
+
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -478,9 +519,19 @@ int countofDb;
                             if (status == AppConstants.SUCCESS_CODE) {
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
-
                                     savenewEdu(jo);
+                                    Log.d("Loading education ","-------");
+                                    frameAnimation.stop();
 
+//                                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+//                                    SharedPreferences.Editor editor = settings.edit();
+//                                    editor.putInt("KValue", countofDb);
+//                                    editor.commit();
+//                                    Log.e("open2",String.valueOf(countofDb));
+//                                    Log.d("Going to Another ","-------");
+//                                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//                                    pd.dismiss();
+//            //                        Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -491,27 +542,19 @@ int countofDb;
             );
 
 
-
-
-
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
-
-
-
                     try {
-
                         JSONArray allData=new JSONArray(apiContent);
                         EntDataSize=allData.length();
-
                         for(int i=0;i<=EntDataSize;i++)
                         {
                             JSONObject jsonObject=allData.getJSONObject(i);
                             SaveEntertainmentData(jsonObject,i);
-                        }
 
-                       //saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
+                        }
+                        Log.d("Loading entertainment ","-------");
                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -526,6 +569,8 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     savenewFinance(jo);
+
+                                    Log.d("Loading financial ","-------");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -541,6 +586,8 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     savenewGov(jo);
+                                    Log.d("Loading government ","-------");
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -553,64 +600,22 @@ int countofDb;
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
-
-
-
                             try {
-
                                 JSONArray legal_array= new JSONArray(apiContent);
-
                                 int p= legal_array.length();
-
-
                                 for(int i=0;i<p;i++)
                                 {
                                     JSONObject jsonObject=legal_array.getJSONObject(i);
                                     SaveLegaltData(jsonObject);
 
-
                                 }
-
-
+                                Log.d("Loading legal ","-------");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     }
             );
-
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
-            @Override
-            public void onResponse(int status, String apiContent) {
-
-
-                    try {
-
-                        JSONArray allData=new JSONArray(apiContent);
-                        HealthDatSize=allData.length();
-
-                        for(int i=0;i<HealthDatSize;i++)
-                        {
-                            JSONObject jsonObject=allData.getJSONObject(i);
-                            SaveHealthtData(jsonObject);
-
-                        }
-
-                     //   saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-            }
-        });
-
-
-
-
-
-
-
 
 
 
@@ -729,6 +734,8 @@ int countofDb;
                     SaveSpecialistData(healthSpecialistItem,jsonObject.getInt("id"));
                 }
             }
+
+
 
 
         } catch (JSONException e) {
@@ -897,6 +904,7 @@ int countofDb;
                 }
 
 
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -1001,6 +1009,10 @@ int countofDb;
                 e.printStackTrace();
             }
         }
+
+
+
+
     }
 
 
@@ -1159,27 +1171,11 @@ int countofDb;
 //            startActivity(i);
 //
 //        } else {
-        pd.dismiss();
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("KValue", countofDb);
-        editor.commit();
-        Log.e("open2",String.valueOf(countofDb));
-        Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);//Default Activity
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        //Intent a = new Intent(OpeningActivity.this, FeedbackActivity.class);
-        startActivity(a);
+
 
         //    }
 
     }
-
-
-
-
-
-
-
 
 
     @Override
