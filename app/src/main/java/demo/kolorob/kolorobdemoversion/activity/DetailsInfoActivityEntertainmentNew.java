@@ -243,6 +243,19 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         feedbacks.setMargins(0, 0, width / 30, 0);
         Log.d("width", "====" + width);
 
+        CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
+        CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
+        CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("রাস্তার ", entertainmentServiceProviderItemNew.getRoad());
+        CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
+        CheckConcate("এভিনিউ", entertainmentServiceProviderItemNew.getAvenue());
+        CheckConcate("ব্লক", entertainmentServiceProviderItemNew.getBlock());
+        CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getArea());
+        CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
+        CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
+        CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolice_station());
+
+
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -718,6 +731,16 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     }
 
 
+    private void timeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || value2.equals("")) {
+
+            String GetTime = timeConverter(value2);
+            CheckConcate(value1, GetTime);
+
+        }
+    }
+
+
 
     private String English_to_bengali_number_conversion(String english_number) {
         int v = english_number.length();
@@ -745,6 +768,40 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                 concatResult = concatResult + "০";
         }
         return concatResult;
+    }
+
+    private String timeConverter(String time) {
+
+        String timeInBengali = "";
+
+
+
+        String[] separated = time.split(":");
+        Log.d("time","====="+separated[0]);
+
+
+
+
+        int hour = Integer.valueOf(separated[0]);
+        int times = Integer.valueOf(separated[1]);
+
+        if (hour > 6 && hour < 12)
+            timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour == 12)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+        else if (hour > 12 && hour < 16)
+            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 15 && hour < 18)
+            timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 17 && hour < 20)
+            timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        else if (hour > 20)
+            timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+        if (times != 0)
+            timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+        else
+            timeInBengali = timeInBengali + " টা";
+        return timeInBengali;
     }
 
 //    public Boolean RegisteredOrNot()
