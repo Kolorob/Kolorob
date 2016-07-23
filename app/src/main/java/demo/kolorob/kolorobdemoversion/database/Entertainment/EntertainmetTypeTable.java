@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
@@ -136,6 +138,25 @@ public class EntertainmetTypeTable {
         closeDB();
         return false;
     }
+
+
+    public ArrayList<EntertainmentTypeItem> getEntTypeItem(String idenId) {
+        ArrayList<EntertainmentTypeItem> FieldList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+idenId+"'" , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                FieldList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return FieldList;
+    }
+
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

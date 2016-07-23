@@ -86,12 +86,12 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private TextView ratingText;
+    private TextView ratingText,detailsEntertainment,other_detailsEnt;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
-    String result_concate;
+    String result_concate="";
     private CheckBox checkBox;
     EditText feedback_comment;
 
@@ -139,6 +139,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
+        detailsEntertainment=(TextView)findViewById(R.id.detailsEntertainment);
+        other_detailsEnt=(TextView)findViewById(R.id.other_detailsEnt);
+
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -235,7 +238,6 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
-        //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -261,9 +263,30 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
         CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
+         ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
+
+        detailsEntertainment.setText(result_concate);
 
 
         EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
+        entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
+
+
+        result_concate ="";
+        if(!entertainmentTypeItems.equals("")) {
+            other_detailsEnt.setVisibility(View.VISIBLE);
+            for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
+                CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
+                CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
+                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", entertainmentTypeItem.getRecreation_price());
+                CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
+
+
+            }
+        }
+
+        other_detailsEnt.setText(result_concate);
+
 
 
 
