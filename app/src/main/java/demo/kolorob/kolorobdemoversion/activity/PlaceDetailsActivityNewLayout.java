@@ -756,11 +756,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 SearchClicked=false;
                 MapClicked=false;
                 ListClicked=true;
                 CompareClicked=false;
                 searchviewholder.setVisibility(View.GONE);
+                llCatListHolder.setVisibility(View.VISIBLE);
                 if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                     SearchButton.setImageResource(0);
                     MapButton.setImageResource(0);
@@ -786,10 +789,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
 
-                svs.setVisibility(View.GONE);
-                svholder.setVisibility(View.GONE);
+                Log.d("1SearchClicked","------"+SearchClicked);
+                Log.d("1MapClicked","------"+MapClicked);
+                Log.d("1ListClicked","------"+ListClicked);
+                Log.d("1CompareClicked","------"+CompareClicked);
+
+                svs.setVisibility(View.VISIBLE);
+                svholder.setVisibility(View.VISIBLE);
                 svsholder.setVisibility(View.GONE);
-                sv.setVisibility(View.GONE);
+                sv.setVisibility(View.VISIBLE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
@@ -1254,7 +1262,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     groups.add(j, group);
                 }
                 break;
-            case AppConstants.JOB:
 
 
         }
@@ -2867,8 +2874,13 @@ NavigationCalled=true;
         super.onResume();
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
-
+        Log.d("2SearchClicked","------"+SearchClicked);
+        Log.d("2MapClicked","------"+MapClicked);
+        Log.d("2ListClicked","------"+ListClicked);
+        Log.d("2CompareClicked","------"+CompareClicked);
         //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+//
+//            map.setVisibility(View.GONE);
         if(showList==1)
         {
 
@@ -2903,6 +2915,7 @@ NavigationCalled=true;
         {
             spItems.setVisibility(View.GONE);
             explist.setVisibility(View.GONE);
+            if(!ListClicked.equals(true))
             map.setVisibility(View.VISIBLE);
             llCatListHolder.setVisibility(View.GONE);
             llSubCatListHolder.setVisibility(View.GONE);
@@ -2925,7 +2938,8 @@ NavigationCalled=true;
                     locationName = AppConstants.PARIS_ROAD;
                     setPlaceChoice(locationName);
                 }
-                map.setVisibility(View.VISIBLE);
+                if(!ListClicked.equals(true))
+                    map.setVisibility(View.VISIBLE);
             }
             editor.putInt("LocationNameId", locationNameId);
             editor.commit();
