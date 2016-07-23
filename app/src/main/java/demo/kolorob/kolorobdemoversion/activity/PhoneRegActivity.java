@@ -116,7 +116,7 @@ public class PhoneRegActivity extends Activity {
 
                             if(response.equals("true"))
                             {
-
+                                SharedPreferencesHelper.setNumber(con,phoneNumber);
                                 AlertDialog alertDialog = new AlertDialog.Builder(PhoneRegActivity.this).create();
                                 alertDialog.setTitle("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
                                 alertDialog.setMessage("নিবন্ধন করার জন্য আপনাকে ধন্যবাদ");

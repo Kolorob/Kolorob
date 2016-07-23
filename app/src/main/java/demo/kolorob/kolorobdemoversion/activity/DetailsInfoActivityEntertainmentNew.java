@@ -653,6 +653,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
         String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
         phone_num=register;
+        Log.d("Phone_num","------"+phone_num);
 
         if (register.equals("")) {
             requestToRegister();
