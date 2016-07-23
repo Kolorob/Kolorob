@@ -1899,7 +1899,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        tvName.setText(si.getSubCatHeaderBn());
+        tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2080,7 +2080,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     case AppConstants.EDUCATION:
 
-                         Headerholder.add(si.getSubCatHeaderBn());
+                         Headerholder.add(si.getSubcatHeader());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2135,7 +2135,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        Headerholder.add(si.getSubCatHeaderBn());
+                        Headerholder.add(si.getSubcatHeader());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2166,21 +2166,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, LEG);
                         break;
                     case AppConstants.FINANCIAL:
-                        Headerholder.add(si.getSubCatHeaderBn());
+                        Headerholder.add(si.getSubcatHeader());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
-                            financialItem=constructGovernmentListItemForHeader(cat_id, Headerholder.get(s));
+                            financialItem=constructFinancialListItemForHeader(cat_id, Headerholder.get(s));
 
                         }
 
-                        for (int ss=0;ss<govItem.size();ss++)
+                        for (int ss=0;ss<financialItem.size();ss++)
                         {
-                            GOV.add(govItem.get(ss));
+                            FIN.add(financialItem.get(ss));
                         }
 
 
-                        callMapFragmentWithGovInfo(si.getSubcatHeader(), cat_id, GOV);
+                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
                         break;
                     case AppConstants.JOB:
                         map.removeAllViews();
@@ -2601,8 +2601,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
         ArrayList<FinancialNewItem> financialNewItems;
         FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        financialNewItems = financialServiceNewTable.getAllGovSubCategoriesInfoWithHead(header);
-        return governmentNewItems;
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(header);
+        return financialNewItems;
     }
     /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)
     {
@@ -2612,23 +2612,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return financialServiceProvider;
     }*/
 
-    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialServiceProviderItems)
+    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialNewItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
+        //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
         mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+        mapFragment.setFinancialServiceProvider(financialNewItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
-
-
-
     }
+
 
 
 

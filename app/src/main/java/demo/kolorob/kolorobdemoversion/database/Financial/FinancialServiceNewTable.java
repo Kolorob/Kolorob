@@ -372,7 +372,7 @@ public class FinancialServiceNewTable {
         ArrayList<Integer> s = new ArrayList<Integer>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headbn = '" + header + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headen = '" + header + "'", null);
         if (cursor.moveToFirst()) {
             do {
 
@@ -388,7 +388,7 @@ public class FinancialServiceNewTable {
         if (cursor2.moveToFirst()) {
             do {
 
-                String getter = cursor2.getString(48);
+                String getter = cursor2.getString(32);
                 String delims = "[,]";
                 String[] tokens = getter.split(delims);
                 for (int j = 0; j < s.size(); j++) {
