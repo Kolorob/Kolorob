@@ -288,6 +288,43 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         other_detailsEnt.setText(result_concate);
 
 
+        right_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (entertainmentServiceProviderItemNew.getNodeWebsite().equals("null")) {
+                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeWebsite());
+                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
+                            "ই মেইল আই ডি পাওয়া যায়নি");
+                }
+            }
+        });
+
+        middle_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if (!entertainmentServiceProviderItemNew.getNodeAdditional().equals("null")) {
+                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeAdditional());
+                    callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItemNew.getNodeAdditional()));
+                    if (checkPermission())
+                        startActivity(callIntent1);
+                    else {
+                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                "ফোন নম্বর পাওয়া যায়নি");
+                        Toast.makeText(getApplicationContext(),
+                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                } else {
+
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
+                    Toast.makeText(getApplicationContext(),
+                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        });
 
 
 
@@ -865,6 +902,21 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
 }
+
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
 
 
 }
