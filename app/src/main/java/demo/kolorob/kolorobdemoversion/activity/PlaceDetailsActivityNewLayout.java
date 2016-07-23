@@ -173,7 +173,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
     ArrayList<EntertainmentServiceProviderItemNew> printnamesent;
-    ArrayList<JobServiceProviderItem> printnamesjob;
+
     ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
     ArrayList<FinancialNewItem> printnamesfin;
@@ -301,7 +301,7 @@ RelativeLayout searchviewholder,filterholder;
     ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
-    ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
+
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
@@ -1581,7 +1581,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
-
+                        if(ListClicked.equals(true))
+                        explist.setVisibility(View.VISIBLE);
 
                         if(showList==1) {
 /*
@@ -1631,6 +1632,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
                         break;
@@ -1652,6 +1655,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
                         mapcalledstatus=true;
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
 
@@ -1685,7 +1690,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.government_selected);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
-
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
 
@@ -1718,7 +1724,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
-
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
 
@@ -1748,7 +1755,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         financialNewItems = constructfinancialListItem();
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialNewItems);
                         mapcalledstatus=true;
-
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
                             llSubCatListHolder.setVisibility(View.GONE);
@@ -1762,13 +1770,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     case AppConstants.JOB:
                         MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
                         mp_j.start();
-                        JJOB.clear();
-                        jobclicked=true;
-                        setFilcatid(currentCategoryID);
-                        catstatus=true;
-                        calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        explist.setVisibility(View.GONE);
+
+                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
+                        startActivity(intentJ);
+                       // JJOB.clear();
+                      //  jobclicked=true;
+                       // setFilcatid(currentCategoryID);
+                        //catstatus=true;
+                        //calladapter(catstatus);
+                        //filterholder.setVisibility(View.VISIBLE);
+                        //populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.job_selected);
                         // mapcalledstatus=false;
@@ -1788,10 +1800,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 //                                });
 //                        alertDialog2.getWindow().setLayout(200, 300);
 //                        alertDialog2.show();
+                        break;
 
-
-                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
-                        startActivity(intentJ);
 
 
                     default:
@@ -2210,18 +2220,19 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);*/
                         break;
                     case AppConstants.JOB:
-                        map.removeAllViews();
-                        final AlertDialog alertDialog2 = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
-
-                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog2.dismiss();
-                                    }
-                                });
-                        alertDialog2.getWindow().setLayout(200, 300);
-                        alertDialog2.show();
+//                        map.removeAllViews();
+//                        final AlertDialog alertDialog2 = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+//
+//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+//                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        alertDialog2.dismiss();
+//                                    }
+//                                });
+//                        alertDialog2.getWindow().setLayout(200, 300);
+//                        alertDialog2.show();
+                        break;
 
 
                     default:
@@ -2874,11 +2885,7 @@ NavigationCalled=true;
         super.onResume();
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
-        Log.d("2SearchClicked","------"+SearchClicked);
-        Log.d("2MapClicked","------"+MapClicked);
-        Log.d("2ListClicked","------"+ListClicked);
-        Log.d("2CompareClicked","------"+CompareClicked);
-        //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+
 //
 //            map.setVisibility(View.GONE);
         if(showList==1)
@@ -2891,7 +2898,7 @@ NavigationCalled=true;
         SharedPreferences.Editor editor = pref.edit();
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
-
+//
 
         setNodefromback(pref.getString("nValue",null));
         Boolean valuecheck=pref.getBoolean("Value",false);
