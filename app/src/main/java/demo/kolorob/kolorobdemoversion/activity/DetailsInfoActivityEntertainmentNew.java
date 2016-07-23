@@ -350,12 +350,12 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 //        }
 
-//        close_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 //        distance_left.setOnClickListener(new View.OnClickListener() {
