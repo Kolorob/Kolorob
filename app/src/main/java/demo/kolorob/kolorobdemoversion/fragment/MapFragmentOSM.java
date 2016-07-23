@@ -146,9 +146,6 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
         educationServiceProvider = et;
     }
-    public void setEducationServiceProvider2(ArrayList<EducationNewItem> et2) {
-        educationServiceProvider = et2;
-    }
 
     int subcategotyId;
     String subcategotyId2;
@@ -349,15 +346,19 @@ setMapView(mapView);
     for(int i=0;i<tokens.length;i++) {
         subcategotyId=Integer.parseInt(tokens[i]);
 
-        if (subcategotyId ==179||subcategotyId ==163||subcategotyId ==161||subcategotyId ==145)
+        if (subcategotyId ==179 ||subcategotyId ==163 ||subcategotyId ==161 ||subcategotyId ==123 ||subcategotyId ==145
+        ||subcategotyId ==108 ||subcategotyId ==100 ||subcategotyId ==79 ||subcategotyId ==50 ||subcategotyId ==49
+        ||subcategotyId ==44 ||subcategotyId ==43)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-        else if (subcategotyId >= 13 && subcategotyId <= 17)
+        else if (subcategotyId ==147 ||subcategotyId ==146 ||subcategotyId ==62 ||subcategotyId ==59|| subcategotyId ==52)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-        else if (subcategotyId >= 18 && subcategotyId <= 19)
+        else if (subcategotyId ==164 ||subcategotyId ==93)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-        else if (subcategotyId >= 20 && subcategotyId <= 21)
+        else if (subcategotyId ==150 ||subcategotyId ==149)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-        else if (subcategotyId ==24||subcategotyId ==94||subcategotyId ==64||subcategotyId ==63||subcategotyId ==7)
+        else if (subcategotyId ==128 ||subcategotyId ==94 ||subcategotyId ==64 ||subcategotyId ==63 ||subcategotyId ==7
+        ||subcategotyId ==165|| subcategotyId ==104||subcategotyId ==91||subcategotyId ==32||subcategotyId ==26
+        ||subcategotyId ==180 ||subcategotyId ==78||subcategotyId ==77)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
 
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
@@ -379,16 +380,22 @@ setMapView(mapView);
             if (tokens[i]=="")continue;
             subcategotyId=Integer.parseInt(tokens[i]);
 
-            if (subcategotyId ==179||subcategotyId ==163||subcategotyId ==161||subcategotyId ==145)
+            if (subcategotyId ==170 ||subcategotyId ==143 ||subcategotyId ==135 ||subcategotyId ==117 ||subcategotyId ==48
+                    ||subcategotyId ==47 ||subcategotyId ==151 ||subcategotyId ==80 ||subcategotyId ==70 ||subcategotyId ==69
+                    ||subcategotyId ==44 ||subcategotyId ==43)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId >= 13 && subcategotyId <= 17)
+            else if (subcategotyId ==172 ||subcategotyId ==171 ||subcategotyId ==120 ||subcategotyId ==119
+                    ||subcategotyId ==118 ||subcategotyId ==105 ||subcategotyId ==103 ||subcategotyId ==56 ||subcategotyId ==41
+                    ||subcategotyId ==40 )
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            else if (subcategotyId >= 18 && subcategotyId <= 19)
+            else if (subcategotyId ==99 ||subcategotyId ==98 )
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-            else if (subcategotyId >= 20 && subcategotyId <= 21)
+            else if (subcategotyId ==122)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-            else if (subcategotyId ==24||subcategotyId ==94||subcategotyId ==64||subcategotyId ==63||subcategotyId ==7)
+            else if (subcategotyId ==35)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            else if (subcategotyId ==174)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
 
             InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
             marker.setInfoWindow(infoWindow);
@@ -513,17 +520,18 @@ setMapView(mapView);
         for(int i=0;i<tokens.length;i++) {
             subcategotyId=Integer.parseInt(tokens[i]);
 
-            if (subcategotyId ==179||subcategotyId ==163||subcategotyId ==161||subcategotyId ==145)
+            if (subcategotyId ==177||subcategotyId ==125||subcategotyId ==124||subcategotyId ==13)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId >= 13 && subcategotyId <= 17)
+            else if (subcategotyId ==157||subcategotyId ==156||subcategotyId ==154||subcategotyId ==140||subcategotyId ==67||subcategotyId ==66)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            else if (subcategotyId >= 18 && subcategotyId <= 19)
+            else if (subcategotyId ==151||subcategotyId ==80||subcategotyId ==70||subcategotyId ==69)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-            else if (subcategotyId >= 20 && subcategotyId <= 21)
+            else if (subcategotyId ==158||subcategotyId ==152||subcategotyId ==87)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-            else if (subcategotyId ==24||subcategotyId ==94||subcategotyId ==64||subcategotyId ==63||subcategotyId ==7)
+            else if (subcategotyId ==159||subcategotyId ==153||subcategotyId ==72)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
-
+            else if (subcategotyId ==74)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
             InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
             marker.setInfoWindow(infoWindow);
 

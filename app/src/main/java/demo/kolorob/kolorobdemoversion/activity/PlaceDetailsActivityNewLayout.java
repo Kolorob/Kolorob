@@ -289,13 +289,14 @@ RelativeLayout searchviewholder,filterholder;
     boolean doubleBackToExitPressedOnce = false;
     int val;
 
-    ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
+    ArrayList<EducationNewItem> eduItem=new ArrayList<>();
+    ArrayList<GovernmentNewItem> govItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItemNew> entItem=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
-    ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
+    ArrayList<FinancialNewItem> financialItem=new ArrayList<>();
 
-    ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
+    ArrayList<EducationNewItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
@@ -2134,20 +2135,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     case AppConstants.EDUCATION:
 
+                         Headerholder.add(si.getSubcatHeader());
 
-                        Headerholder.add(si.getSubcatHeader());
                         for(int s=0;s<Headerholder.size();s++)
                         {
                             eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s));
 
                         }
+
                         for (int ss=0;ss<eduItem.size();ss++)
                         {
                             EDD.add(eduItem.get(ss));
                         }
 
 
-                       // callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
+                      callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
@@ -2188,18 +2190,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        map.removeAllViews();
-                        final AlertDialog alertDialog = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+                        Headerholder.add(si.getSubcatHeader());
 
-                        alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog.dismiss();
-                                    }
-                                });
-                        alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();
+                        for(int s=0;s<Headerholder.size();s++)
+                        {
+                            govItem=constructGovernmentListItemForHeader(cat_id, Headerholder.get(s));
+
+                        }
+
+                        for (int ss=0;ss<govItem.size();ss++)
+                        {
+                            GOV.add(govItem.get(ss));
+                        }
+
+
+                        callMapFragmentWithGovInfo(si.getSubcatHeader(), cat_id, GOV);
                         break;
                     case AppConstants.LEGAL:
                         Headerholder.add(si.getSubcatHeader());
@@ -2217,17 +2222,20 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.FINANCIAL:
                         Headerholder.add(si.getSubcatHeader());
-                        /*for(int s=0;s<Headerholder.size();s++)
+
+                        for(int s=0;s<Headerholder.size();s++)
                         {
-                            financialItem = constructfinancialListItemForHeader(cat_id,  Headerholder.get(s));
+                            financialItem=constructFinancialListItemForHeader(cat_id, Headerholder.get(s));
 
                         }
+
                         for (int ss=0;ss<financialItem.size();ss++)
                         {
                             FIN.add(financialItem.get(ss));
                         }
 
-                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);*/
+
+                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
                         break;
                     case AppConstants.JOB:
 //                        map.removeAllViews();
@@ -2380,12 +2388,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationServiceProviderItem> constructEducationListItemForHeader(int cat_id, String header)
+    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header)
     {
-        ArrayList<EducationServiceProviderItem> educationServiceProvider;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfoWithHead(cat_id, header);
-        return educationServiceProvider;
+        ArrayList<EducationNewItem> educationNewItems;
+        EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
+        return educationNewItems;
     }
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
@@ -2556,7 +2564,30 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo();
         return governmentNewItems;
     }
+
+    private ArrayList<GovernmentNewItem> constructGovernmentListItemForHeader(int cat_id, String header)
+    {
+        ArrayList<GovernmentNewItem> governmentNewItems;
+        GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfoWithHead(header);
+        return governmentNewItems;
+    }
     private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        //   mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+
+        mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setGovernmentNewItems(governmentNewItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+    }
+
+   /* private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2572,7 +2603,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-    }
+    }*/
 
 
     /**********************************************************Methods for legal***************************************************/
@@ -2622,7 +2653,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo();
         return financialNewItems;
     }
-
+    private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(int cat_id, String header)
+    {
+        ArrayList<FinancialNewItem> financialNewItems;
+        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(header);
+        return financialNewItems;
+    }
     /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)
     {
         ArrayList<FinancialNewItem> financialServiceProvider;
@@ -2631,23 +2668,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return financialServiceProvider;
     }*/
 
-    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialServiceProviderItems)
+    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialNewItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
+        //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
         mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+        mapFragment.setFinancialServiceProvider(financialNewItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
-
-
-
     }
+
 
 
 
