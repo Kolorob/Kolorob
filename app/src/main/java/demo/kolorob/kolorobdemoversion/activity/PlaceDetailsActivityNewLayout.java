@@ -808,7 +808,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
+                Log.d("currentCategoryID",".------"+currentCategoryID);
+                if(currentCategoryID<1)
                 categoryListBuildUp(1);
+                else
+                categoryListBuildUp(currentCategoryID);
 
 //                else
 //                {
