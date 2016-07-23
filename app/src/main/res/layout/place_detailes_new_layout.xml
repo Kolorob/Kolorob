@@ -219,7 +219,7 @@
                         android:textColor="@color/white"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/total_students"
-                        android:id="@+id/textView16" />
+                        android:id="@+id/total_students1" />
 
                 </LinearLayout>
 
@@ -800,6 +800,8 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:id="@+id/shift1_11"
+
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -871,6 +873,8 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:id="@+id/canteen_facility_11"
+
                     android:layout_height="wrap_content">
 
                     <LinearLayout

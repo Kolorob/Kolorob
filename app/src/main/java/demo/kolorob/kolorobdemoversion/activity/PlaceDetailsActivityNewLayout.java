@@ -157,7 +157,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Button prebutton;
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
     private int sideIndexHeight;
-    private LinearLayout compare_layout;
+    private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
     public int layoutstatus;
@@ -167,7 +167,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Toolbar toolbar,toolbar2;
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
-
+    TextView edu_name_ban2,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
@@ -348,6 +348,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
+
+        shift1_1=(LinearLayout)findViewById(R.id.shift1_1);
+        shift1_11=(LinearLayout)findViewById(R.id.shift1_11);
+        canteen_facility_1=(LinearLayout)findViewById(R.id.canteen_facility_1);
+        canteen_facility_11=(LinearLayout)findViewById(R.id.canteen_facility_11);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
@@ -498,7 +503,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         shift1=(TextView)findViewById(R.id.shift3);
         canteen_facility1=(TextView)findViewById(R.id.canteen_facility3);
 
-
+    //    edu_name_ban2=(TextView)findViewById(R.id.edu_name_ban1);
+        edtype2=(TextView)findViewById(R.id.eduType1);
+        hostel_facility2=(TextView)findViewById(R.id.hostel_facility1);
+        transport_facility2=(TextView)findViewById(R.id.transport_facility1);
+        playground2=(TextView)findViewById(R.id.playground1);
+        total_students2=(TextView)findViewById(R.id.total_students1);
+        total_classes2=(TextView)findViewById(R.id.total_classes1);
+        total_teachers2=(TextView)findViewById(R.id.total_teachers1);
+        course_provided2=(TextView)findViewById(R.id.course_provided1);
+        shift2=(TextView)findViewById(R.id.shift1);
+        canteen_facility2=(TextView)findViewById(R.id.canteen_facility1);
 
 
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
@@ -979,33 +994,46 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         firstDataSetHealth=healthServiceProviderTableNew.getHealthData(firstData);
         secondDataSetHealth=healthServiceProviderTableNew.getHealthData(SecondData);
 
+
+        edtype2.setText("খোলার সময়");
+        hostel_facility2.setText("প্রচলিত ভাষা");
+        transport_facility2.setText("সেবার খরচ");
+        playground2.setText("সেবার ধরন");
+        total_students2.setText("বিশেষজ্ঞের ধরন");
+        total_classes2.setText("পরিষ্কার পরিচ্ছন্নতা");
+        total_teachers2.setText("গোপনীয়তা");
+        course_provided2.setText("ভাল সুবিধা এবং যন্ত্রপাতি");
+        shift1_11.setVisibility(View.GONE);
+        shift1_1.setVisibility(View.GONE);
+        canteen_facility_1.setVisibility(View.GONE);
+        canteen_facility_11.setVisibility(View.GONE);
+
+
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
-//            edu_name_ban.setText(healthServiceProviderItemNew.getEduNameEng());
-//            edtype.setText(healthServiceProviderItemNew.getEduType());
-//            hostel_facility.setText(healthServiceProviderItemNew.getHostelFacility());
-//            transport_facility.setText(healthServiceProviderItemNew.getTransportFacility());
-//            playground.setText(healthServiceProviderItemNew.getPlayground());
-//            total_students.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
-//            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
-//            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
-//            course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
-//            shift.setText(healthServiceProviderItemNew.getShift());
-//            canteen_facility.setText(healthServiceProviderItemNew.getCanteenFacility());
+            edu_name_ban.setText(healthServiceProviderItemNew.getNode_bn());
+            edtype.setText(healthServiceProviderItemNew.getSpoken_lang());
+            hostel_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
+            transport_facility.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            playground.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            total_students.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getQuality_equipments()));
+           // course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
+
         }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
-//            edu_name_ban1.setText(healthServiceProviderItemNew.getEduNameEng());
-//            edtype1.setText(healthServiceProviderItemNew.getEduType());
-//            hostel_facility1.setText(healthServiceProviderItemNew.getHostelFacility());
-//            transport_facility1.setText(healthServiceProviderItemNew.getTransportFacility());
-//            playground1.setText(healthServiceProviderItemNew.getPlayground());
-//            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
-//            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
-//            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
-//            course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
-//            shift1.setText(healthServiceProviderItemNew.getShift());
-//            canteen_facility1.setText(healthServiceProviderItemNew.getCanteenFacility());
+            edu_name_ban1.setText(healthServiceProviderItemNew.getNode_bn());
+            edtype1.setText(healthServiceProviderItemNew.getSpoken_lang());
+            hostel_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
+            transport_facility1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            playground1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getQuality_equipments()));
+          //  course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
+
         }
         SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
     }
