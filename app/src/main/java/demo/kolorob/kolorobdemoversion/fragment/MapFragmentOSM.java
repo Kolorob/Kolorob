@@ -384,7 +384,7 @@ setMapView(mapView);
                     ||subcategotyId ==47 ||subcategotyId ==151 ||subcategotyId ==80 ||subcategotyId ==70 ||subcategotyId ==69
                     ||subcategotyId ==44 ||subcategotyId ==43)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId ==35 ||subcategotyId ==172 ||subcategotyId ==171 ||subcategotyId ==120 ||subcategotyId ==119
+            else if (subcategotyId ==172 ||subcategotyId ==171 ||subcategotyId ==120 ||subcategotyId ==119
                     ||subcategotyId ==118 ||subcategotyId ==105 ||subcategotyId ==103 ||subcategotyId ==56 ||subcategotyId ==41
                     ||subcategotyId ==40 )
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
