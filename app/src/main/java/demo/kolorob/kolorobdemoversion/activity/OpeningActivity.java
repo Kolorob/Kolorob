@@ -12,11 +12,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -29,9 +27,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -46,19 +41,11 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentBookTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFieldTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentFitnessTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentTheatreTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialBillsTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialInsuranceTable;
@@ -73,37 +60,22 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTransactionTa
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialTuitionTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderLegalAdviceTable;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidtypeServiceProviderSalishiTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentBookShopItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFieldItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentFitnessItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTheatreItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialBillsItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialInsuranceItem;
@@ -118,17 +90,10 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTransactionItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialTuitionItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidLegalAdviceItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidSalishiItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
@@ -472,6 +437,24 @@ int countofDb;
 
                 }
             });
+            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                try {
+                                    JSONObject jo = new JSONObject(apiContent);
+                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        saveSubCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
           getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
                        @Override
                       public void onResponse(int status, String apiContent) {
@@ -1015,6 +998,24 @@ int countofDb;
 
     }
 
+    private void saveSubCategoryList(JSONArray subCategoryArray) {
+        SubCategoryTable subCatTable = new SubCategoryTable(OpeningActivity.this);
+        subCatTable.dropTable();
+        int subCatCount = subCategoryArray.length();
+        for (int i = 0; i < subCatCount; i++) {
+            try {
+                JSONObject jo = subCategoryArray.getJSONObject(i);
+                SubCategoryItem si = SubCategoryItem.parseSubCategoryItem(jo);
+                subCatTable.insertItem(si);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        countofDb++;
+        si2=subCatTable.getAllSubCategories(1);
+        si2.size();
+    }
 
     private void saveFinancialServiceProvider(JSONArray financialServiceProvider) {
         FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(OpeningActivity.this);

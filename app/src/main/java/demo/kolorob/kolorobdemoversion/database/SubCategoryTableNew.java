@@ -160,7 +160,21 @@ public class SubCategoryTableNew {
         closeDB();
         return siList;
     }
+    public ArrayList<SubCategoryItemNew> getAllSubCategories(int id) {
+        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCategory(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
     public ArrayList<SubCategoryItemNew> getAllSubCategories() {
         ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
