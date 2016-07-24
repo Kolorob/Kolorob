@@ -351,7 +351,7 @@ public class GovernmentNewTable {
         ArrayList<Integer> s = new ArrayList<Integer>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headen = '" + header + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headbn = '" + header + "'", null);
         if (cursor.moveToFirst()) {
             do {
 

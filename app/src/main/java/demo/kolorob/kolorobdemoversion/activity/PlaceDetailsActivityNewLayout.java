@@ -1944,7 +1944,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        tvName.setText(si.getSubcatHeader());
+        tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2125,7 +2125,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     case AppConstants.EDUCATION:
 
-                         Headerholder.add(si.getSubcatHeader());
+                         Headerholder.add(si.getSubCatHeaderBn());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2139,11 +2139,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                      callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
+                      callMapFragmentWithEducationInfo(si.getSubCatHeaderBn(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
@@ -2162,7 +2162,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.ENTERTAINMENT:
 
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
@@ -2175,12 +2175,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, ENT);
+                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, ENT);
                         break;
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2194,7 +2194,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithGovInfo(si.getSubcatHeader(), cat_id, GOV);
+                        callMapFragmentWithGovInfo(si.getSubCatHeaderBn(), cat_id, GOV);
                         break;
                     case AppConstants.LEGAL:
                         Headerholder.add(si.getSubcatHeader());
@@ -2211,7 +2211,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, LEG);
                         break;
                     case AppConstants.FINANCIAL:
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2225,7 +2225,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
+                        callMapFragmentWithFinancialInfo(si.getSubCatHeaderBn(), cat_id, FIN);
                         break;
                     case AppConstants.JOB:
 //                        map.removeAllViews();
