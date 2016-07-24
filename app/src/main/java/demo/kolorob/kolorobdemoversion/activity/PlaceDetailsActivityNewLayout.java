@@ -321,7 +321,7 @@ RelativeLayout searchviewholder,filterholder;
 
         editor.commit();
 
-NavigationCalled=false;
+        NavigationCalled=false;
         NavigationCalledOnce=false;
         /// Log.d(">>>>>>","You are in onResume");
 
@@ -2947,10 +2947,7 @@ NavigationCalled=true;
     @Override
     protected void onResume() {
         super.onResume();
-        if(SearchClicked)
-        {
-            map.setVisibility(View.GONE);
-        }
+
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
@@ -3015,8 +3012,9 @@ NavigationCalled=true;
                 }
                 if(!ListClicked.equals(true))
                     map.setVisibility(View.VISIBLE);
-                if(!SearchClicked.equals(true))
-                    map.setVisibility(View.VISIBLE);
+                if(SearchClicked){
+                    map.setVisibility(View.GONE);
+                }
             }
             editor.putInt("LocationNameId", locationNameId);
             editor.commit();
