@@ -281,7 +281,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
-
+    String checknum;
+    boolean filterclicked=false;
     ArrayList<EducationNewItem> eduItem=new ArrayList<>();
     ArrayList<GovernmentNewItem> govItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
@@ -323,14 +324,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         editor.commit();
 
-NavigationCalled=false;
+        NavigationCalled=false;
         NavigationCalledOnce=false;
         /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
         Log.e("ASinplaceDetails",String.valueOf(val));
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-
+      int checkheight=  getApplicationContext().getResources().getConfiguration().screenHeightDp;
+        int checkwidth=  getApplicationContext().getResources().getConfiguration().screenWidthDp;
         dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
@@ -1114,11 +1116,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         ImageButton more=(ImageButton)findViewById(R.id.morebutton);
+        catholder.setVisibility(View.VISIBLE);
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                filterclicked=true;
 
-                catholder.setVisibility(View.VISIBLE);
                 fholder.setVisibility(View.VISIBLE);
                 populatefilterwords(getFilcatid());
 
@@ -1560,6 +1563,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             public void onClick(View v) {
 
                 clicked.clear();
+                filterclicked=false;
                 Headerholder.clear();
                 currentCategoryID = ci.getId();
 
@@ -1601,7 +1605,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         EDD.clear();
                         educlicked=true;
-                        setFilcatid(currentCategoryID);
+                        setFilcatid(5);
                         catstatus=true;
                         calladapter(catstatus);
                         if(ListClicked.equals(true))
@@ -1623,7 +1627,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             ivIcon.setImageResource(R.drawable.education_selected);
-                            callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+                            callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
 
 
                         }
@@ -1643,7 +1647,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mp_h.start();
                         HEL.clear();
                         helclicked=true;
-                        setFilcatid(currentCategoryID);
+                        setFilcatid(1);
                         catstatus=true;
                         calladapter(catstatus);
                         filterholder.setVisibility(View.VISIBLE);
@@ -1652,7 +1656,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.health_selected);
                         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(1);
-                        callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+                        callMapFragmentWithHealthInfo(ci.getCatName(), 2, healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
@@ -1667,7 +1671,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         ENT.clear();
                         entclicked=true;
-                        setFilcatid(currentCategoryID);
+                        setFilcatid(14);
                         catstatus=true;
                         calladapter(catstatus);
                         filterholder.setVisibility(View.VISIBLE);
@@ -1676,7 +1680,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
-                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
+                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -1704,7 +1708,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mp_g.start();
                         govclicked=true;
                         GOV.clear();
-                        setFilcatid(currentCategoryID);
+                        setFilcatid(33);
                         catstatus=true;
                         calladapter(catstatus);
                         filterholder.setVisibility(View.VISIBLE);
@@ -1722,7 +1726,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         ArrayList<GovernmentNewItem> governmentNewItems;
                         governmentNewItems = constructgovListItem();
-                        callMapFragmentWithGovInfo(ci.getCatName(), ci.getId(), governmentNewItems);
+                        callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
 
 
 
@@ -1736,7 +1740,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mp_l.start();
                         LEG.clear();
                         legclicked=true;
-                        setFilcatid(currentCategoryID);
+                        setFilcatid(29);
                         catstatus=true;
                         calladapter(catstatus);
                         populatefilterwords(getFilcatid());
@@ -1746,7 +1750,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                        callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
+                        callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
@@ -1767,7 +1771,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mp_f.start();
                         FIN.clear();
                         finclicked=true;
-                        setFilcatid(currentCategoryID);
+                        setFilcatid(11);
                         catstatus=true;
                         calladapter(catstatus);
                         filterholder.setVisibility(View.VISIBLE);
@@ -1776,7 +1780,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.finance_selected);
                         ArrayList<FinancialNewItem> financialNewItems;
                         financialNewItems = constructfinancialListItem();
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialNewItems);
+                        callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -1848,6 +1852,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 if(SearchClicked==true)
                 {
+                    svsholder.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                 }
                 else if(showList!=1 && SearchClicked==false)
@@ -2830,7 +2835,11 @@ NavigationCalled=true;
                     catHolders.add(allHolders.get(ii));
                 }
             }
-            String checknum= String.valueOf(getSnumber());
+            if(filterclicked)
+            {
+                checknum= String.valueOf(getSnumber());
+            }
+            else  checknum= String.valueOf(0);
             if(Integer.parseInt(checknum)!=0)
             {
                 subcatHolders.clear();
@@ -2845,7 +2854,7 @@ NavigationCalled=true;
 
                 allitemList.setAdapter(adapter);
             }
-            else if (Integer.parseInt(checknum)!=0){
+            else if (Integer.parseInt(checknum)==0){
                 adapter = new ListViewAdapterAllCategories(this, catHolders);
 
                 allitemList.setAdapter(adapter);
@@ -2869,6 +2878,7 @@ NavigationCalled=true;
                 String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
 
                 adapter.filter(text);
+                //calladapter(true);
             }
 
             @Override
@@ -2959,6 +2969,7 @@ NavigationCalled=true;
     @Override
     protected void onResume() {
         super.onResume();
+
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
@@ -3023,6 +3034,9 @@ NavigationCalled=true;
                 }
                 if(!ListClicked.equals(true))
                     map.setVisibility(View.VISIBLE);
+                if(SearchClicked){
+                    map.setVisibility(View.GONE);
+                }
             }
             editor.putInt("LocationNameId", locationNameId);
             editor.commit();
