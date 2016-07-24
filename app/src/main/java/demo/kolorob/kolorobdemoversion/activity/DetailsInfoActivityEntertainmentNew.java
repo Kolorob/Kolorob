@@ -253,6 +253,21 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         feedbacks.setMargins(0, 0, width / 30, 0);
         Log.d("width", "====" + width);
 
+        EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
+        entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
+        result_concate ="";
+        if(!entertainmentTypeItems.equals("")) {
+            other_detailsEnt.setVisibility(View.VISIBLE);
+            for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
+                CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
+                CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
+                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", entertainmentTypeItem.getRecreation_price());
+                CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
+
+
+            }
+        }
+
         CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
         CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
         CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
@@ -275,22 +290,10 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         detailsEntertainment.setText(result_concate);
 
 
-        EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
-        entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
 
 
-        result_concate ="";
-        if(!entertainmentTypeItems.equals("")) {
-            other_detailsEnt.setVisibility(View.VISIBLE);
-            for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
-                CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-                CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
-                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", entertainmentTypeItem.getRecreation_price());
-                CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
-            }
-        }
 
         other_detailsEnt.setText(result_concate);
 
