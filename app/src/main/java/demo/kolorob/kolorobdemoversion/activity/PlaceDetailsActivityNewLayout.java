@@ -2703,12 +2703,14 @@ NavigationCalled=true;
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTable=new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+        GovernmentNewTable governmentNewTable=new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
         fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo();
         fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch();
         fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfosearch();
         fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo();
+        fetchedgov=governmentNewTable.getAllGovSubCategoriesInfo();
         String nameen;
         String namebn;
 
@@ -2731,7 +2733,7 @@ NavigationCalled=true;
         {
 
             nameen=fetchedhel.get(i).getNode_name();
-            node= Integer.parseInt(fetchedhel.get(i).getNode_id());
+            node= Integer.parseInt(fetchedhel.get(i).getId());
             refname=fetchedhel.get(i).getReferences();
             namebn=fetchedhel.get(i).getNode_bn();
 
