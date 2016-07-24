@@ -464,7 +464,7 @@ int countofDb;
                             SaveHealthtData(jsonObject);
 
                         }
-                        Log.d("Loading health ","-------");
+
                         //   saveEntertainmentServiceProvider(jo.getJSONArray(AppConstants.KEY_DATA));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -482,7 +482,7 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     saveCategoryList(jo);
-                                    Log.d("Loading categories ","-------");
+
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -520,7 +520,7 @@ int countofDb;
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
                                     savenewEdu(jo);
-                                    Log.d("Loading education ","-------");
+
                                     frameAnimation.stop();
 
 //                                    SharedPreferences settings = getSharedPreferences("prefs", 0);
@@ -554,7 +554,7 @@ int countofDb;
                             SaveEntertainmentData(jsonObject,i);
 
                         }
-                        Log.d("Loading entertainment ","-------");
+
                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -570,7 +570,7 @@ int countofDb;
 
                                     savenewFinance(jo);
 
-                                    Log.d("Loading financial ","-------");
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -586,7 +586,7 @@ int countofDb;
                                     JSONArray jo = new JSONArray(apiContent);
 
                                     savenewGov(jo);
-                                    Log.d("Loading government ","-------");
+
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -609,7 +609,7 @@ int countofDb;
                                     SaveLegaltData(jsonObject);
 
                                 }
-                                Log.d("Loading legal ","-------");
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

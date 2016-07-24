@@ -89,6 +89,7 @@ public class SubCategoryTableNew {
         rowValue.put(KEY_REF_NAME_BN,subCatNameBn);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
+        Log.d("Loading ret ","-------"+ret);
         closeDB();
         return ret;
     }

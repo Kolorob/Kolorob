@@ -529,25 +529,9 @@ public class EntertainmentServiceProviderTableNew {
 
 
 
-//    public ArrayList<EntertainmentServiceProviderItem> getAllEntertainmentSubCategoriesInfo(int cat_id) {
-//        ArrayList<EntertainmentServiceProviderItem> subCatList = new ArrayList<>();
-//        //System.out.println(cat_id+"  "+sub_cat_id);
-//        SQLiteDatabase db = openDB();
-//
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_CATEGORY_ID+"="+cat_id +" ORDER BY " +KEY_NODE_NAME, null);
-//
-//
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                //System.out.println("abc="+cursor.getString(4));
-//                subCatList.add(cursorToSubCatList(cursor));
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        closeDB();
-//        return subCatList;
-//    }
+
+
+
 
 
     public ArrayList<EntertainmentServiceProviderItemNew> EntNames(int cat_id,int refId,String a,String place) {

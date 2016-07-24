@@ -742,7 +742,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     subCatItemList.setVisibility(View.GONE);
 
-                   explist.setVisibility(View.GONE);
+                    explist.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                 }
@@ -935,11 +935,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
 
-                    if(ListClicked.equals(false))
-                    {
-
-                        svsholder.setVisibility(View.GONE);
-                    }
+//                    if(ListClicked.equals(true))
+//                    {
+//
+                       svsholder.setVisibility(View.VISIBLE);
+//                    }
                     sv.setVisibility(View.VISIBLE);
 
                     svholder.setVisibility(View.VISIBLE);

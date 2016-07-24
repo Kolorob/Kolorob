@@ -52,6 +52,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
@@ -59,6 +60,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -83,7 +85,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     Float rating;
     RatingBar ratingBar;
     LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
-    ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItemNews;
+    ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
     ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;
     private TextView totalStudents;
     private TextView totalClasses;
@@ -276,6 +278,25 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 
         common_details.setText(result_concate);
+        result_concate="";
+
+        LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
+        leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(Integer.valueOf(legalAidServiceProviderItemNew.getIdentifierId()));
+
+        if(!leagalAidDetailsItems.equals(""))
+        {
+            other_details.setVisibility(View.VISIBLE);
+            for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
+            {
+                CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
+                CheckConcate("যে বিষয়ে আইন সহায়তা দেয়া হয়", leagalAidDetailsItem.getSub_type());
+                CheckConcate("সেবার খরচ", leagalAidDetailsItem.getLagal_cost());
+                CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
+            }
+            other_details.setText(result_concate);
+        }
+
+
 
 
 

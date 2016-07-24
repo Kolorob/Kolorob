@@ -127,6 +127,23 @@ public class LegalAidDetailsTable {
     }
 
 
+    public ArrayList<LeagalAidDetailsItem> getAllLegalAidSubCategoriesInfo(int id) {
+        ArrayList<LeagalAidDetailsItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+"="+id, null);
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+
 
     public boolean isFieldExist(String nodeId) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);

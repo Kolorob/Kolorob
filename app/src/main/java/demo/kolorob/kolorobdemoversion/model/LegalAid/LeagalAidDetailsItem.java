@@ -80,10 +80,11 @@ public class LeagalAidDetailsItem {
     }
 
     public static LeagalAidDetailsItem parseLegalAidDetailsItem(JSONObject jo,int foreign_key) throws JSONException {
-        String id = String.valueOf(foreign_key);
+        String id = ;
+        String id = jo.getString("id");
         String legal_cost = jo.getString("legal_cost");
         String legal_responsible_person = jo.getString("legal_responsible_person");
-        String legal_remark = jo.getString("legal_remark");
+        String legal_remark = String.valueOf(foreign_key);
         JSONObject legal_service=jo.getJSONObject("legal_service");
         String type = legal_service.getString("type");
         String sub_type = legal_service.getString("sub_type");

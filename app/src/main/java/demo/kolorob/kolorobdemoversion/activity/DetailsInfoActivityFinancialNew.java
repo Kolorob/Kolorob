@@ -821,7 +821,8 @@ public class DetailsInfoActivityFinancialNew extends Activity {
 
             return true;
 
-        } else {
+        }
+        else {
 
             return false;
 
