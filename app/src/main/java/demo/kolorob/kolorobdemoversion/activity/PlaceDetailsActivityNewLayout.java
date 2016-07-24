@@ -1136,7 +1136,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
-                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
+                  printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
+                 //   printnames = educationServiceProviderTable.getAllSubCat();
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
