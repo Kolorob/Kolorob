@@ -1541,6 +1541,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             public void onClick(View v) {
 
                 clicked.clear();
+                filterclicked=false;
                 Headerholder.clear();
                 currentCategoryID = ci.getId();
 
@@ -1604,7 +1605,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             ivIcon.setImageResource(R.drawable.education_selected);
-                            callMapFragmentWithEducationInfo(ci.getCatName(), ci.getId(), educationServiceProvider);
+                            callMapFragmentWithEducationInfo(ci.getCatName(), 5, educationServiceProvider);
 
 
                         }
@@ -2946,6 +2947,10 @@ NavigationCalled=true;
     @Override
     protected void onResume() {
         super.onResume();
+        if(SearchClicked)
+        {
+            map.setVisibility(View.GONE);
+        }
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
@@ -3009,6 +3014,8 @@ NavigationCalled=true;
                     setPlaceChoice(locationName);
                 }
                 if(!ListClicked.equals(true))
+                    map.setVisibility(View.VISIBLE);
+                if(!SearchClicked.equals(true))
                     map.setVisibility(View.VISIBLE);
             }
             editor.putInt("LocationNameId", locationNameId);

@@ -16,14 +16,16 @@ import java.util.List;
 import java.util.Locale;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
@@ -116,15 +118,15 @@ int catt=worldpopulationlist.get(position).getCatid();
 				else if (catt==5) {
 					EducationNewTable educationServiceProviderTable=new EducationNewTable(ListViewAdapterAllCategories.this.mContext);
 					nulledu=educationServiceProviderTable.geteduNode2(worldpopulationlist.get(position).getNodeid());
-					Intent iient = new Intent(getActivity(), DetailsInfoActivityEducation.class);
-					iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
+					Intent iient = new Intent(getActivity(), DetailsLayoutEducation.class);
+					iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu);
 					activity.startActivity(iient);
 				}
 				else if (catt==1) {
 					HealthServiceProviderTableNew healthServiceProviderTable=new HealthServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
 					nullhel=healthServiceProviderTable.gethelNode2(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityHealthNew.class);
-					iient.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
+					iient.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
 					activity.startActivity(iient);
 				}
 				else if (catt==14) {
@@ -144,6 +146,14 @@ int catt=worldpopulationlist.get(position).getCatid();
 					iient.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
 					activity.startActivity(iient);
 							}
+
+				else if (catt==33) {
+					GovernmentNewTable governmentNewTable=new GovernmentNewTable(ListViewAdapterAllCategories.this.mContext);
+					nullgov=governmentNewTable.getgovNode2(worldpopulationlist.get(position).getNodeid());
+					Intent iient = new Intent(getActivity(), DetailsLayoutGovernment.class);
+					iient.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
+					activity.startActivity(iient);
+				}
 				SharedPreferences pref = getActivity().getSharedPreferences("MyPref", mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = pref.edit();
 				editor.putBoolean("Search", true);
