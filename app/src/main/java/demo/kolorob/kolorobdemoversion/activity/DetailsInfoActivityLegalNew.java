@@ -275,7 +275,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
         CheckConcate("যার মাধ্যমে রেজিস্ট্রেশন করা হয়েছে", legalAidServiceProviderItemNew.getRegisteredWith());
-
+        ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
 
         common_details.setText(result_concate);
         result_concate="";

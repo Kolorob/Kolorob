@@ -131,7 +131,7 @@ public class LegalAidDetailsTable {
         ArrayList<LeagalAidDetailsItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+"="+id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_LEGAL_REMARKS+"="+id, null);
         if (cursor.moveToFirst()) {
             do {
                 //System.out.println("abc="+cursor.getString(4));
