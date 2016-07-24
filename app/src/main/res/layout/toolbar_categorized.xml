@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Which area do you\n want to search?"
+                    android:text="@string/uptext"
                     android:id="@+id/textView15"
                     android:layout_centerVertical="true"
 

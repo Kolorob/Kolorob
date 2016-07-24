@@ -157,7 +157,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Button prebutton;
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
     private int sideIndexHeight;
-    private LinearLayout compare_layout;
+    private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
     public int layoutstatus;
@@ -167,13 +167,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Toolbar toolbar,toolbar2;
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
-
+    TextView edu_name_ban2,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
 
     ArrayList<EntertainmentServiceProviderItemNew> printnamesent;
-    ArrayList<JobServiceProviderItem> printnamesjob;
+
     ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
     ArrayList<FinancialNewItem> printnamesfin;
@@ -289,19 +289,20 @@ RelativeLayout searchviewholder,filterholder;
     boolean doubleBackToExitPressedOnce = false;
     int val;
 
-    ArrayList<EducationServiceProviderItem> eduItem=new ArrayList<>();
+    ArrayList<EducationNewItem> eduItem=new ArrayList<>();
+    ArrayList<GovernmentNewItem> govItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItemNew> entItem=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
-    ArrayList<FinancialServiceProviderItem> financialItem=new ArrayList<>();
+    ArrayList<FinancialNewItem> financialItem=new ArrayList<>();
 
-    ArrayList<EducationServiceProviderItem> EDD=new ArrayList<>();
+    ArrayList<EducationNewItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
     ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
-    ArrayList<JobServiceProviderItem>JJOB=new ArrayList<>();
+
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
@@ -348,6 +349,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
+
+        shift1_1=(LinearLayout)findViewById(R.id.shift1_1);
+        shift1_11=(LinearLayout)findViewById(R.id.shift1_11);
+        canteen_facility_1=(LinearLayout)findViewById(R.id.canteen_facility_1);
+        canteen_facility_11=(LinearLayout)findViewById(R.id.canteen_facility_11);
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
@@ -498,7 +504,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         shift1=(TextView)findViewById(R.id.shift3);
         canteen_facility1=(TextView)findViewById(R.id.canteen_facility3);
 
-
+    //    edu_name_ban2=(TextView)findViewById(R.id.edu_name_ban1);
+        edtype2=(TextView)findViewById(R.id.eduType1);
+        hostel_facility2=(TextView)findViewById(R.id.hostel_facility1);
+        transport_facility2=(TextView)findViewById(R.id.transport_facility1);
+        playground2=(TextView)findViewById(R.id.playground1);
+        total_students2=(TextView)findViewById(R.id.total_students1);
+        total_classes2=(TextView)findViewById(R.id.total_classes1);
+        total_teachers2=(TextView)findViewById(R.id.total_teachers1);
+        course_provided2=(TextView)findViewById(R.id.course_provided1);
+        shift2=(TextView)findViewById(R.id.shift1);
+        canteen_facility2=(TextView)findViewById(R.id.canteen_facility1);
 
 
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
@@ -741,11 +757,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 SearchClicked=false;
                 MapClicked=false;
                 ListClicked=true;
                 CompareClicked=false;
                 searchviewholder.setVisibility(View.GONE);
+                llCatListHolder.setVisibility(View.VISIBLE);
                 if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                     SearchButton.setImageResource(0);
                     MapButton.setImageResource(0);
@@ -771,10 +790,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
 
-                svs.setVisibility(View.GONE);
-                svholder.setVisibility(View.GONE);
+                Log.d("1SearchClicked","------"+SearchClicked);
+                Log.d("1MapClicked","------"+MapClicked);
+                Log.d("1ListClicked","------"+ListClicked);
+                Log.d("1CompareClicked","------"+CompareClicked);
+
+                svs.setVisibility(View.VISIBLE);
+                svholder.setVisibility(View.VISIBLE);
                 svsholder.setVisibility(View.GONE);
-                sv.setVisibility(View.GONE);
+                sv.setVisibility(View.VISIBLE);
                 llSubCatListHolder.setVisibility(View.GONE);
                 subCatItemList.setVisibility(View.VISIBLE);
                 explist.setVisibility(View.VISIBLE);
@@ -785,7 +809,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
+                Log.d("currentCategoryID",".------"+currentCategoryID);
+                if(currentCategoryID<1)
                 categoryListBuildUp(1);
+                else
+                categoryListBuildUp(currentCategoryID);
 
 //                else
 //                {
@@ -906,9 +934,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             @Override
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
+
+                    if(ListClicked.equals(false))
+                    {
+
+                        svsholder.setVisibility(View.GONE);
+                    }
                     sv.setVisibility(View.VISIBLE);
+
                     svholder.setVisibility(View.VISIBLE);
-                    svsholder.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
@@ -979,33 +1013,46 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         firstDataSetHealth=healthServiceProviderTableNew.getHealthData(firstData);
         secondDataSetHealth=healthServiceProviderTableNew.getHealthData(SecondData);
 
+
+        edtype2.setText("খোলার সময়");
+        hostel_facility2.setText("প্রচলিত ভাষা");
+        transport_facility2.setText("সেবার খরচ");
+        playground2.setText("সেবার ধরন");
+        total_students2.setText("বিশেষজ্ঞের ধরন");
+        total_classes2.setText("পরিষ্কার পরিচ্ছন্নতা");
+        total_teachers2.setText("গোপনীয়তা");
+        course_provided2.setText("ভাল সুবিধা এবং যন্ত্রপাতি");
+        shift1_11.setVisibility(View.GONE);
+        shift1_1.setVisibility(View.GONE);
+        canteen_facility_1.setVisibility(View.GONE);
+        canteen_facility_11.setVisibility(View.GONE);
+
+
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
-//            edu_name_ban.setText(healthServiceProviderItemNew.getEduNameEng());
-//            edtype.setText(healthServiceProviderItemNew.getEduType());
-//            hostel_facility.setText(healthServiceProviderItemNew.getHostelFacility());
-//            transport_facility.setText(healthServiceProviderItemNew.getTransportFacility());
-//            playground.setText(healthServiceProviderItemNew.getPlayground());
-//            total_students.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
-//            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
-//            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
-//            course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
-//            shift.setText(healthServiceProviderItemNew.getShift());
-//            canteen_facility.setText(healthServiceProviderItemNew.getCanteenFacility());
+            edu_name_ban.setText(healthServiceProviderItemNew.getNode_bn());
+            edtype.setText(healthServiceProviderItemNew.getSpoken_lang());
+            hostel_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
+            transport_facility.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            playground.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            total_students.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getQuality_equipments()));
+           // course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
+
         }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
-//            edu_name_ban1.setText(healthServiceProviderItemNew.getEduNameEng());
-//            edtype1.setText(healthServiceProviderItemNew.getEduType());
-//            hostel_facility1.setText(healthServiceProviderItemNew.getHostelFacility());
-//            transport_facility1.setText(healthServiceProviderItemNew.getTransportFacility());
-//            playground1.setText(healthServiceProviderItemNew.getPlayground());
-//            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getTotalStudents()));
-//            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getTotalClasses()));
-//            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getTotalTeachers()));
-//            course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
-//            shift1.setText(healthServiceProviderItemNew.getShift());
-//            canteen_facility1.setText(healthServiceProviderItemNew.getCanteenFacility());
+            edu_name_ban1.setText(healthServiceProviderItemNew.getNode_bn());
+            edtype1.setText(healthServiceProviderItemNew.getSpoken_lang());
+            hostel_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
+            transport_facility1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            playground1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getQuality_equipments()));
+          //  course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
+
         }
         SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
     }
@@ -1226,7 +1273,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     groups.add(j, group);
                 }
                 break;
-            case AppConstants.JOB:
 
 
         }
@@ -1546,7 +1592,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
-
+                        if(ListClicked.equals(true))
+                        explist.setVisibility(View.VISIBLE);
 
                         if(showList==1) {
 /*
@@ -1596,6 +1643,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
                         break;
@@ -1617,6 +1666,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
                         callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
                         mapcalledstatus=true;
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
 
@@ -1650,7 +1701,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.government_selected);
                         mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
-
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
 
@@ -1683,7 +1735,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
-
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
 
@@ -1713,7 +1766,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         financialNewItems = constructfinancialListItem();
                         callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialNewItems);
                         mapcalledstatus=true;
-
+                        if(ListClicked.equals(true))
+                            explist.setVisibility(View.VISIBLE);
 
 
                             llSubCatListHolder.setVisibility(View.GONE);
@@ -1727,13 +1781,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     case AppConstants.JOB:
                         MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
                         mp_j.start();
-                        JJOB.clear();
-                        jobclicked=true;
-                        setFilcatid(currentCategoryID);
-                        catstatus=true;
-                        calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        explist.setVisibility(View.GONE);
+
+                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
+                        startActivity(intentJ);
+                       // JJOB.clear();
+                      //  jobclicked=true;
+                       // setFilcatid(currentCategoryID);
+                        //catstatus=true;
+                        //calladapter(catstatus);
+                        //filterholder.setVisibility(View.VISIBLE);
+                        //populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.job_selected);
                         // mapcalledstatus=false;
@@ -1753,10 +1811,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 //                                });
 //                        alertDialog2.getWindow().setLayout(200, 300);
 //                        alertDialog2.show();
+                        break;
 
-
-                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
-                        startActivity(intentJ);
 
 
                     default:
@@ -2079,20 +2135,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     case AppConstants.EDUCATION:
 
+                         Headerholder.add(si.getSubcatHeader());
 
-                        Headerholder.add(si.getSubcatHeader());
                         for(int s=0;s<Headerholder.size();s++)
                         {
                             eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s));
 
                         }
+
                         for (int ss=0;ss<eduItem.size();ss++)
                         {
                             EDD.add(eduItem.get(ss));
                         }
 
 
-                       // callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
+                      callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
@@ -2133,18 +2190,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        map.removeAllViews();
-                        final AlertDialog alertDialog = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+                        Headerholder.add(si.getSubcatHeader());
 
-                        alertDialog.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog.dismiss();
-                                    }
-                                });
-                        alertDialog.getWindow().setLayout(200, 300);
-                        alertDialog.show();
+                        for(int s=0;s<Headerholder.size();s++)
+                        {
+                            govItem=constructGovernmentListItemForHeader(cat_id, Headerholder.get(s));
+
+                        }
+
+                        for (int ss=0;ss<govItem.size();ss++)
+                        {
+                            GOV.add(govItem.get(ss));
+                        }
+
+
+                        callMapFragmentWithGovInfo(si.getSubcatHeader(), cat_id, GOV);
                         break;
                     case AppConstants.LEGAL:
                         Headerholder.add(si.getSubcatHeader());
@@ -2162,31 +2222,35 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.FINANCIAL:
                         Headerholder.add(si.getSubcatHeader());
-                        /*for(int s=0;s<Headerholder.size();s++)
+
+                        for(int s=0;s<Headerholder.size();s++)
                         {
-                            financialItem = constructfinancialListItemForHeader(cat_id,  Headerholder.get(s));
+                            financialItem=constructFinancialListItemForHeader(cat_id, Headerholder.get(s));
 
                         }
+
                         for (int ss=0;ss<financialItem.size();ss++)
                         {
                             FIN.add(financialItem.get(ss));
                         }
 
-                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);*/
+
+                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
                         break;
                     case AppConstants.JOB:
-                        map.removeAllViews();
-                        final AlertDialog alertDialog2 = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
-
-                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertDialog2.dismiss();
-                                    }
-                                });
-                        alertDialog2.getWindow().setLayout(200, 300);
-                        alertDialog2.show();
+//                        map.removeAllViews();
+//                        final AlertDialog alertDialog2 = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+//
+//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+//                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        alertDialog2.dismiss();
+//                                    }
+//                                });
+//                        alertDialog2.getWindow().setLayout(200, 300);
+//                        alertDialog2.show();
+                        break;
 
 
                     default:
@@ -2324,12 +2388,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationServiceProviderItem> constructEducationListItemForHeader(int cat_id, String header)
+    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header)
     {
-        ArrayList<EducationServiceProviderItem> educationServiceProvider;
-        EducationServiceProviderTable educationServiceProviderTable = new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationServiceProviderTable.getAllEducationSubCategoriesInfoWithHead(cat_id, header);
-        return educationServiceProvider;
+        ArrayList<EducationNewItem> educationNewItems;
+        EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
+        return educationNewItems;
     }
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
@@ -2500,7 +2564,30 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo();
         return governmentNewItems;
     }
+
+    private ArrayList<GovernmentNewItem> constructGovernmentListItemForHeader(int cat_id, String header)
+    {
+        ArrayList<GovernmentNewItem> governmentNewItems;
+        GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfoWithHead(header);
+        return governmentNewItems;
+    }
     private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
+    {
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        //   mapFragment.setMapIndicatorText(item_name);
+        mapFragment.setCategoryId(cat_id);
+
+        mapFragment.setLocationNameId(locationNameId);
+        mapFragment.setGovernmentNewItems(governmentNewItems);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+        fragmentTransaction.commit();
+    }
+
+   /* private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -2516,7 +2603,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-    }
+    }*/
 
 
     /**********************************************************Methods for legal***************************************************/
@@ -2566,7 +2653,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo();
         return financialNewItems;
     }
-
+    private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(int cat_id, String header)
+    {
+        ArrayList<FinancialNewItem> financialNewItems;
+        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(header);
+        return financialNewItems;
+    }
     /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)
     {
         ArrayList<FinancialNewItem> financialServiceProvider;
@@ -2575,23 +2668,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         return financialServiceProvider;
     }*/
 
-    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialServiceProviderItems)
+    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialNewItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
+        //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
 
         mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setFinancialServiceProvider(financialServiceProviderItems);
+        mapFragment.setFinancialServiceProvider(financialNewItems);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
-
-
-
     }
+
 
 
 
@@ -2840,7 +2931,8 @@ NavigationCalled=true;
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
-        //Log.d(">>>>>>>>","CategoryId "+currentCategoryID);
+//
+//            map.setVisibility(View.GONE);
         if(showList==1)
         {
 
@@ -2851,7 +2943,7 @@ NavigationCalled=true;
         SharedPreferences.Editor editor = pref.edit();
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
-
+//
 
         setNodefromback(pref.getString("nValue",null));
         Boolean valuecheck=pref.getBoolean("Value",false);
@@ -2875,6 +2967,7 @@ NavigationCalled=true;
         {
             spItems.setVisibility(View.GONE);
             explist.setVisibility(View.GONE);
+            if(!ListClicked.equals(true))
             map.setVisibility(View.VISIBLE);
             llCatListHolder.setVisibility(View.GONE);
             llSubCatListHolder.setVisibility(View.GONE);
@@ -2897,7 +2990,8 @@ NavigationCalled=true;
                     locationName = AppConstants.PARIS_ROAD;
                     setPlaceChoice(locationName);
                 }
-                map.setVisibility(View.VISIBLE);
+                if(!ListClicked.equals(true))
+                    map.setVisibility(View.VISIBLE);
             }
             editor.putInt("LocationNameId", locationNameId);
             editor.commit();

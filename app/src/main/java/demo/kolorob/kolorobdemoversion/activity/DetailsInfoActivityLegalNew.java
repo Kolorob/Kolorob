@@ -19,11 +19,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,6 +53,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
@@ -60,6 +64,8 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by arafat on 28/05/2016.
@@ -74,6 +80,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
     TextView ups_text;
     ListView courseListView,listView;
     Context con;
+    Float rating;
+    RatingBar ratingBar;
     LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
     ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItemNews;
     ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;
@@ -90,6 +98,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     String status="",phone_num="",registered="";
     String result_concate="";
     private CheckBox checkBox;
+    EditText feedback_comment;
 
 
     @Override
@@ -151,6 +160,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
 
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        setRatingBar();
 
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
@@ -334,7 +345,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
                 finish();
             }
         });
-
+    }
 
 //        distance_left.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -399,175 +410,203 @@ public class DetailsInfoActivityLegalNew extends Activity {
 //
 //
 //    }
-//
-//    public void verifyRegistration(View v){
-//
-//        Boolean register=RegisteredOrNot();
-//
-//        if(register.equals(false))
-//        {
-//            requestToRegister();
-//        }
-//
-//        else {
-//
-//            feedBackAlert();
-//            sendReviewToServer();
-//        }
-//
-//
-//    }
 
-//    public void feedBackAlert()
-//    {
-//
-//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
-//        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//
-//        final Button submit= (Button) promptView.findViewById(R.id.submit);
-//
-//
-//        final AlertDialog alert = alertDialogBuilder.create();
-//
-//
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                declareRadiobutton();
-//
-//
-//                alert.cancel();
-//
-//            }
-//        });
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false);
-//
-//
-//
-//        alert.show();
-//    }
+    public void setRatingBar()
+    {
+        getRequest(DetailsInfoActivityLegalNew.this, "http://kolorob.net/demo/api/get_sp_rating/legal", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            try {
+                                JSONArray jo = new JSONArray(apiContent);
+                                int size= jo.length();
+                                for(int i=0;i<size;i++)
+                                {
+                                    JSONObject ratingH=jo.getJSONObject(i);
+                                    String id= ratingH.getString("id");
+                                    if(id.equals(legalAidServiceProviderItemNew.getIdentifierId()))
+                                    {
 
 
-//    public void sendReviewToServer()
-//    {
-//        int rating;
-//        if(status.equals("ভাল"))
-//            rating=1;
-//        else if(status.equals("মোটামোট"))
-//            rating=2;
-//        else
-//            rating=3;
-//        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationServiceProviderItem.getIdentifierId()+"&service="+"1"+"&rating="+rating;
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(DetailsInfoActivityEducation.this,response,Toast.LENGTH_SHORT).show();
-//                        // Log.d(">>>>>","status "+response);
-//                        try {
-//                            JSONObject jo = new JSONObject(response);
-//                            String forms;
-//                            forms = jo.getString("status");
-//                            Log.d(">>>>>","status "+forms);
-//                            //Log.d(">>>>>","status ");
-//
-//                            if(forms.equals("true"))
-//                            {
-//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-//                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
-//                            }
-//                            else
-//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-//                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-//
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(DetailsInfoActivityEducation.this,error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                }) {
-//
-//            @Override
-//            protected Map<String, String> getParams() {
-//
-//                Map<String, String> params = new HashMap<>();
-//
-//                return params;
-//            }
-//
-//        };
+                                        rating=Float.parseFloat(ratingH.getString("avg"));
+                                        ratingBar.setRating(rating);
+                                        break;
 
-//// Adding request to request queue
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityEducation.this);
-//        requestQueue.add(stringRequest);
-//    }
+                                    }
 
-//    public void declareRadiobutton()
-//    {
-//        // int selected = feedRadio.getCheckedRadioButtonId();
-//        // RadioButton rb1 = (RadioButton) findViewById(selected);
-//        //  status = rb1.getText().toString();
-//
-//        // Arafat, i set it as static 1, pls change this codes;
-//
-//        status = "1";
-//    }
 
-//    public void requestToRegister()
-//    {
-//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
-//        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//
-//        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
-//        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
-//
-//        final AlertDialog alert = alertDialogBuilder.create();
-//
-//
-//        yes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityEducation.this,PhoneRegActivity.class);
-//                startActivity(intentPhoneRegistration);
-//
-//            }
-//        });
-//
-//
-//
-//        no.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alert.cancel();
-//
-//            }
-//        });
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false);
-//
-//
-//
-//        alert.show();
-//    }
-//
+                                }
+
+
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        );
+    }
+    public void verifyRegistration(View v) {
+
+        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityLegalNew.this);
+        phone_num=register;
+
+        if (register.equals("")) {
+            requestToRegister();
+        } else {
+
+            feedBackAlert();
+            //  sendReviewToServer();
+        }
+
+
+    }
+
+    public void feedBackAlert() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
+        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final Button submit = (Button) promptView.findViewById(R.id.submit);
+
+
+        final AlertDialog alert;
+        alert = alertDialogBuilder.create();
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
+                int selected = feedRadio.getCheckedRadioButtonId();
+                rb1 = (RadioButton)promptView.findViewById(selected);
+                status = rb1.getText().toString();
+                //  declareRadiobutton();
+                sendReviewToServer();
+
+                alert.cancel();
+
+            }
+        });
+        alertDialogBuilder.setCancelable(false);
+
+
+        alert.show();
+    }
+
+
+    public void sendReviewToServer() {
+        int rating=0;
+        if (status.equals("খুবই অসন্তুষ্ট"))
+            rating = 1;
+        else if (status.equals("অসন্তুষ্ট"))
+            rating = 2;
+        else if (status.equals("বিশেষ অনুভূতি নেই"))
+
+            rating = 3;
+        else if (status.equals("সন্তুষ্ট "))
+
+            rating =4;
+        else if (status.equals("খুবই সন্তুষ্ট"))
+
+            rating = 5;
+
+        String comment="";
+        comment=feedback_comment.getText().toString();
+        Log.d("status ","======"+status);
+        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(DetailsInfoActivityLegalNew.this, response, Toast.LENGTH_SHORT).show();
+                        Log.d("========", "status " + response);
+                        try {
+
+
+                            if (response.equals("true")) {
+                                AlertMessage.showMessage(DetailsInfoActivityLegalNew.this, "মতামতটি গ্রহন করা হয়েছে",
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ করার জন্য আপনাকে ধন্যবাদ");
+                            } else
+                                AlertMessage.showMessage(DetailsInfoActivityLegalNew.this, "মতামতটি গ্রহন করা হয় নি",
+                                        "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(DetailsInfoActivityLegalNew.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityLegalNew.this);
+        requestQueue.add(stringRequest);
+    }
+
+
+    public void requestToRegister() {
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
+        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this);
+        alertDialogBuilder.setView(promptView);
+
+
+        final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+        final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+
+        final AlertDialog alert = alertDialogBuilder.create();
+
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityLegalNew.this, PhoneRegActivity.class);
+                alert.cancel();
+                startActivity(intentPhoneRegistration);
+
+            }
+        });
+
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+
+            }
+        });
+        //   setup a dialog window
+        alertDialogBuilder.setCancelable(false);
+
+
+        alert.show();
+    }
 //
 //    private boolean checkPermission(){
 //        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
@@ -580,7 +619,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 //            return false;
 //
 //        }
-    }
+
 
     private String English_to_bengali_number_conversion(String english_number) {
         int v = english_number.length();

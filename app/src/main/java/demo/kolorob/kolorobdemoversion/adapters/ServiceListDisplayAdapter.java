@@ -80,8 +80,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
         else if (catid==AppConstants.LEGAL)
 
             object= groups.get(groupPosition).getChildrenleg().get(childPosition);
-        else if(catid==AppConstants.JOB)
-            object= groups.get(groupPosition).getChildrenjob().get(childPosition);
+
         else if(catid==AppConstants.GOVERNMENT)
             object= groups.get(groupPosition).getChildrengov().get(childPosition);
         return object;
@@ -99,8 +98,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
             longs= groups.get(groupPosition).getChildrenfin().get(childPosition).hashCode();
         if (catid==AppConstants.LEGAL)
             longs= groups.get(groupPosition).getChildrenleg().get(childPosition).hashCode();
-        else if(catid==AppConstants.JOB)
-            longs= groups.get(groupPosition).getChildrenjob().get(childPosition).hashCode();
+
         else if(catid==AppConstants.GOVERNMENT)
             longs= groups.get(groupPosition).getChildrengov().get(childPosition).hashCode();
         return longs;
@@ -214,25 +212,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
 
                 });
                 break;
-            case AppConstants.JOB:
-                final JobServiceProviderItem detjob = groups.get(groupPosition).getChildrenjob().get(childPosition);
-                text = (TextView) v.findViewById(R.id.textView1);
-                text.setText(detjob.getAddress());
-                v.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-
-                        Intent iijob = new Intent(getActivity(), DetailsJobActivity.class);
-                        iijob.putExtra(AppConstants.KEY_DETAILS_JOB, detjob);
-                        activity.startActivity(iijob);
-
-
-                    }
-
-
-                });
-                break;
 
             case AppConstants.GOVERNMENT:
                 final GovernmentNewItem detgov = groups.get(groupPosition).getChildrengov().get(childPosition);
@@ -274,8 +254,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
             size= groups.get(groupPosition).childrenfin.size();
         else  if (catid==AppConstants.LEGAL)
             size= groups.get(groupPosition).childrenleg.size();
-        else if(catid==AppConstants.JOB)
-            size= groups.get(groupPosition).childrenjob.size();
+
         else if(catid==AppConstants.GOVERNMENT)
             size= groups.get(groupPosition).childrengov.size();
         return size;

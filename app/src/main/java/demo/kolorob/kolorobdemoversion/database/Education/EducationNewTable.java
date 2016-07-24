@@ -342,6 +342,49 @@ public class EducationNewTable {
         return ret;
 
     }
+    public ArrayList<EducationNewItem> getAllEducationSubCategoriesInfoWithHead(String header) {
+
+
+        int[] k = new int[100];
+        ArrayList<EducationNewItem> nameslist = new ArrayList<>();
+        ArrayList<Integer> s = new ArrayList<Integer>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headen = '" + header + "'", null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                s.add(cursor.getInt(5));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+            Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+
+            if (cursor2.moveToFirst()) {
+                do {
+
+                    String getter = cursor2.getString(48);
+                    String delims = "[,]";
+                    String[] tokens = getter.split(delims);
+                    for (int j = 0; j < s.size(); j++) {
+                        for (int ii = 0; ii < tokens.length; ii++) {
+                            if (Integer.parseInt(tokens[ii]) == s.get(j)) {
+                                nameslist.add(cursorToSubCatList(cursor2));
+                            }
+                        }
+                    }
+
+                } while (cursor2.moveToNext());
+            }
+            cursor2.close();
+
+        closeDB();
+return nameslist;
+
+    }
     public ArrayList<EducationNewItem> Edunames(String a,String place) {
         String subcatnames=null;
         subcatnames=a;

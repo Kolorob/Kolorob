@@ -7,9 +7,9 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/back_drop"
+    android:background="@color/white"
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation">
 
 
 
@@ -52,7 +52,7 @@
                 android:textColor="@color/white"
                 android:textSize="29sp"
                 android:id="@+id/textView19"
-                android:text="Education"
+                android:text="@string/Education"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
@@ -239,15 +239,16 @@
 
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             >
 
             <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_gravity="top">
 
                 <RelativeLayout
@@ -297,7 +298,7 @@
 
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
 

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -47,6 +48,7 @@ import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsIt
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 /**
  * Created by israt.jahan on 7/17/2016.
@@ -61,7 +63,7 @@ public class DetailsLayoutFinance extends Activity {
     ListView courseListView, listView;
     Context con;
     FinancialNewItem financialNewItem;
-
+EditText feedback_comment;
     ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
     private TextView totalStudents;
     private TextView totalClasses;
@@ -159,8 +161,8 @@ public class DetailsLayoutFinance extends Activity {
         CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি  :", financialNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়      :", financialNewItem.getOpeningtime());
-        timeProcessing("বন্ধে সময়        :", financialNewItem.getClosetime());
+        timeProcessing("খোলার সময়        :", financialNewItem.getOpeningtime());
+        timeProcessing("বন্ধের সময়          :", financialNewItem.getClosetime());
         CheckConcate("বিরতির সময়        :", financialNewItem.getBreaktime());
         CheckConcate("বন্ধের দিন          :", financialNewItem.getOffday());
         CheckConcate("রেজিস্ট্রেশন নাম্বার    :", financialNewItem.getRegisterednumber());
@@ -283,18 +285,7 @@ public class DetailsLayoutFinance extends Activity {
             }
         });
 
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent feedIntent = new Intent(DetailsLayoutFinance.this, FeedBackActivityNew.class);
-                feedIntent.putExtra("id", financialNewItem.getFinId());
-                feedIntent.putExtra("categoryId", "1");
-                Log.d(">>>>", "Button is clicked1 " + financialNewItem.getFinId());
 
-                startActivity(feedIntent);
-
-            }
-        });
 
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -382,64 +373,52 @@ public class DetailsLayoutFinance extends Activity {
 
     public void verifyRegistration(View v){
 
-       Boolean register=RegisteredOrNot();
+        String  register = SharedPreferencesHelper.getNumber(DetailsLayoutFinance.this);
+        phone_num=register;
 
-        if(register.equals(false))
-       {
+        if (register.equals("")) {
             requestToRegister();
-        }
-
-        else {
+        } else {
 
             feedBackAlert();
-            sendReviewToServer();
+            //  sendReviewToServer();
         }
 
 
-    }
-    public Boolean RegisteredOrNot()
-    {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        //  editor.putString("registered", lat);
-        registered = pref.getString("registered", null);
-        phone_num = pref.getString("phone",null);
-        // editor.commit();
-        //  if(registered.equals("yes"))
-        return true;
-        //  else
-        //   return true;
-
-
-
 
     }
+
     public void feedBackAlert()
     {
 
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
-        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutFinance.this);
         alertDialogBuilder.setView(promptView);
 
 
-        final Button submit= (Button) promptView.findViewById(R.id.submit);
+        final Button submit = (Button) promptView.findViewById(R.id.submit);
 
 
-        final AlertDialog alert = alertDialogBuilder.create();
+        final AlertDialog alert;
+        alert = alertDialogBuilder.create();
 
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                declareRadiobutton();
-
+                feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
+                int selected = feedRadio.getCheckedRadioButtonId();
+                rb1 = (RadioButton)promptView.findViewById(selected);
+                status = rb1.getText().toString();
+                //  declareRadiobutton();
+                sendReviewToServer();
 
                 alert.cancel();
 
-           }
+            }
         });
-        // setup a dialog window
         alertDialogBuilder.setCancelable(false);
 
 
@@ -450,13 +429,17 @@ public class DetailsLayoutFinance extends Activity {
     public void sendReviewToServer()
     {
         int rating;
-        if(status.equals("ভাল"))
+        if(status.equals(R.string.feedback1))
             rating=1;
-        else if(status.equals("মোটামোট"))
+        else if(status.equals(R.string.feedback2))
             rating=2;
-        else
+        else if(status.equals(R.string.feedback3))
             rating=3;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialNewItem.getFinId()+"&service="+"1"+"&rating="+rating;
+        else if(status.equals(R.string.feedback4))
+            rating=4;
+        else
+            rating=5;
+        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialNewItem.getFinId()+"&service="+"11"+"&rating="+rating;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -471,15 +454,15 @@ public class DetailsLayoutFinance extends Activity {
                             Log.d(">>>>>","status "+forms);
                             //Log.d(">>>>>","status ");
 
+
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া হয়েছে",
+                                        "আপনার মতামতের জন্য আপনাকে ধন্যবাদ!");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া  হয় নি",
+                                        "দয়া করে আবার চেষ্টা করুন");
 
 
                         } catch (JSONException e) {
@@ -511,16 +494,6 @@ public class DetailsLayoutFinance extends Activity {
        requestQueue.add(stringRequest);
     }
 
-    public void declareRadiobutton()
-    {
-        // int selected = feedRadio.getCheckedRadioButtonId();
-        // RadioButton rb1 = (RadioButton) findViewById(selected);
-        //  status = rb1.getText().toString();
-
-        // Arafat, i set it as static 1, pls change this codes;
-
-        status = "1";
-   }
 
    public void requestToRegister()
     {
@@ -595,64 +568,65 @@ public class DetailsLayoutFinance extends Activity {
         return concatResult;
     }
 
-//    public Boolean RegisteredOrNot()
-//    {
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        //  editor.putString("registered", lat);
-//        registered = pref.getString("registered", null);
-//        phone_num = pref.getString("phone",null);
-//        // editor.commit();
-//        //  if(registered.equals("yes"))
-//        return true;
-//        //  else
-//        //   return true;
-//
-//
-//
-//
-
- /*   private String timeConverter(String time)
-    {
-        String timeInBengali="";
-
-        String[] separated = time.split(":");
-
-
-
-
-
-        int hour= Integer.valueOf(separated[0]);
-        int times= Integer.valueOf(separated[1]);
-
-        if(hour>6&&hour<12)
-            timeInBengali="সকাল "+ English_to_bengali_number_conversion(String.valueOf(hour));
-        else if(hour==12)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour));
-        else if(hour>12&&hour<16)
-            timeInBengali="দুপুর  "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>15&&hour<18)
-            timeInBengali="বিকেল "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>17&&hour<20)
-            timeInBengali="সন্ধ্যা "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        else if(hour>20)
-            timeInBengali="রাত "+ English_to_bengali_number_conversion(String.valueOf(hour-12));
-        if(times!=0)
-            timeInBengali=timeInBengali+ " টা " + English_to_bengali_number_conversion(String.valueOf(times))+" মিনিট";
+    public Boolean RegisteredOrNot() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        // editor.putString("registered", lat);
+        registered = pref.getString("registered", null);
+        // phone_num = pref.getString("phone", null);
+        editor.commit();
+        if (registered.equals("yes"))
+            return true;
         else
-            timeInBengali=timeInBengali+ " টা";
-        return timeInBengali;
+            return true;
     }
-*/
 
-    private void timeProcessing(String value1,String value2)
-    {
-        if(!value2.equals("null")||value2.equals("")) {
-          //  String GetTime= timeConverter(value2);
-           // CheckConcate(value1,GetTime);
+    private String timeConverter(String time) {
+
+
+            String timeInBengali = "";
+
+            String[] separated = time.split(":");
+
+
+            int hour = Integer.valueOf(separated[0]);
+            int times = Integer.valueOf(separated[1]);
+
+            if (hour >= 6 && hour < 12)
+                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour == 12)
+                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour > 12 && hour < 16)
+                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 15 && hour < 18)
+                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 17 && hour < 20)
+                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 20)
+                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            if (times != 0)
+                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+            else
+                timeInBengali = timeInBengali + " টা";
+            return timeInBengali;
+
+    }
+
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            CheckConcate(value1, value2);
+        }
+    }
+
+
+    private void timeProcessing(String value1, String value2) {
+        if (!value2.equals("null") && !value2.equals("")) {
+            String GetTime = timeConverter(value2);
+            CheckConcate(value1, GetTime);
 
         }
     }
+
 
     private void CheckConcate(String value1,String value2){
 

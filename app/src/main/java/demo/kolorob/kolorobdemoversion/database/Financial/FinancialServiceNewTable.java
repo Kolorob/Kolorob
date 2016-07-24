@@ -363,6 +363,50 @@ public class FinancialServiceNewTable {
         closeDB();
         return  nameslist;
     }
+
+    public ArrayList<FinancialNewItem> getAllFinancialSubCategoriesInfoWithHead(String header) {
+
+
+        int[] k = new int[100];
+        ArrayList<FinancialNewItem> nameslist = new ArrayList<>();
+        ArrayList<Integer> s = new ArrayList<Integer>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headen = '" + header + "'", null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                s.add(cursor.getInt(5));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+
+        if (cursor2.moveToFirst()) {
+            do {
+
+                String getter = cursor2.getString(32);
+                String delims = "[,]";
+                String[] tokens = getter.split(delims);
+                for (int j = 0; j < s.size(); j++) {
+                    for (int ii = 0; ii < tokens.length; ii++) {
+                        if (Integer.parseInt(tokens[ii]) == s.get(j)) {
+                            nameslist.add(cursorToSubCatList(cursor2));
+                        }
+                    }
+                }
+
+            } while (cursor2.moveToNext());
+        }
+        cursor2.close();
+
+        closeDB();
+        return nameslist;
+
+    }
     private FinancialNewItem cursorToSubCatList(Cursor cursor) {
         int _finId = cursor.getInt(0);
         String _nameen= cursor.getString(1);
