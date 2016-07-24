@@ -278,7 +278,8 @@ RelativeLayout searchviewholder,filterholder;
     }
     boolean doubleBackToExitPressedOnce = false;
     int val;
-
+    String checknum;
+    boolean filterclicked=false;
     ArrayList<EducationNewItem> eduItem=new ArrayList<>();
     ArrayList<GovernmentNewItem> govItem=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
@@ -1094,11 +1095,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         ImageButton more=(ImageButton)findViewById(R.id.morebutton);
+        catholder.setVisibility(View.VISIBLE);
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                filterclicked=true;
 
-                catholder.setVisibility(View.VISIBLE);
                 fholder.setVisibility(View.VISIBLE);
                 populatefilterwords(getFilcatid());
 
@@ -1827,6 +1829,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 if(SearchClicked==true)
                 {
+                    svsholder.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                 }
                 else if(showList!=1 && SearchClicked==false)
@@ -2809,7 +2812,11 @@ NavigationCalled=true;
                     catHolders.add(allHolders.get(ii));
                 }
             }
-            String checknum= String.valueOf(getSnumber());
+            if(filterclicked)
+            {
+                checknum= String.valueOf(getSnumber());
+            }
+            else  checknum= String.valueOf(0);
             if(Integer.parseInt(checknum)!=0)
             {
                 subcatHolders.clear();
@@ -2824,7 +2831,7 @@ NavigationCalled=true;
 
                 allitemList.setAdapter(adapter);
             }
-            else if (Integer.parseInt(checknum)!=0){
+            else if (Integer.parseInt(checknum)==0){
                 adapter = new ListViewAdapterAllCategories(this, catHolders);
 
                 allitemList.setAdapter(adapter);
@@ -2848,6 +2855,7 @@ NavigationCalled=true;
                 String text = filterText.getText().toString().toLowerCase(Locale.getDefault());
 
                 adapter.filter(text);
+                //calladapter(true);
             }
 
             @Override

@@ -18,9 +18,9 @@ import java.util.Locale;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
-import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
+import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
@@ -104,30 +104,30 @@ GovernmentNewItem nullgov;
 			@Override
 			public void onClick(View arg0) {
 int catt=worldpopulationlist.get(position).getCatid();
-				if (catt==6) {
+				if (catt==11) {
 					// Send single item click data to SingleItemView Class
 					FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(ListViewAdapterAllCategories.this.mContext);
 					nullfin = financialServiceProviderTable.getfinNode2(worldpopulationlist.get(position).getNodeid());
-					Intent iient = new Intent(getActivity(), DetailsInfoActivityFinancialNew.class);
-					iient.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, nullfin);
+					Intent iient = new Intent(getActivity(), DetailsLayoutFinance.class);
+					iient.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);
 					activity.startActivity(iient);
 //				Toast.makeText(mContext, "rank " + worldpopulationlist.get(position).getNodeid(), Toast.LENGTH_LONG).show();
 				}
-				if (catt==1) {
+				else if (catt==5) {
 					EducationNewTable educationServiceProviderTable=new EducationNewTable(ListViewAdapterAllCategories.this.mContext);
 					nulledu=educationServiceProviderTable.geteduNode2(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityEducation.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
 					activity.startActivity(iient);
 				}
-				if (catt==2) {
+				else if (catt==1) {
 					HealthServiceProviderTableNew healthServiceProviderTable=new HealthServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
 					nullhel=healthServiceProviderTable.gethelNode2(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityHealthNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
 					activity.startActivity(iient);
 				}
-				if (catt==3) {
+				else if (catt==14) {
 					EntertainmentServiceProviderTableNew entertainmentServiceProviderTable=new EntertainmentServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
 
 					nullent=entertainmentServiceProviderTable.getentNode2(String.valueOf(worldpopulationlist.get(position).getNodeid()));
@@ -137,7 +137,7 @@ int catt=worldpopulationlist.get(position).getCatid();
 
 //				Toast.makeText(mContext, "rank " + worldpopulationlist.get(position).getNodeid(), Toast.LENGTH_LONG).show();
 				}
-				if (catt==5) {
+				else if (catt==29) {
 					LegalAidServiceProviderTableNew legalAidServiceProviderTable=new LegalAidServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
 					nullleg=legalAidServiceProviderTable.getlegNode2(String.valueOf(worldpopulationlist.get(position).getNodeid()));
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityLegalNew.class);
