@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -211,6 +210,8 @@ public class HealthServiceProviderTableNew {
     private void closeDB() {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
+
+
 
 
     public long insertItemHealth(HealthServiceProviderItemNew healthServiceProviderItemNew) {
@@ -555,6 +556,27 @@ public class HealthServiceProviderTableNew {
 
         closeDB();
         return ret;
+    }
+
+    public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfosearch() {
+        ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
+
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +  " ORDER BY " +KEY_NODE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
     }
     public HealthServiceProviderItemNew gethelNode2(int Node) {
 

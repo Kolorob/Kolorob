@@ -21,16 +21,17 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainment
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityFinancialNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class ListViewAdapterAllCategories extends BaseAdapter {
@@ -42,11 +43,12 @@ public class ListViewAdapterAllCategories extends BaseAdapter {
 	Activity activity;
 	private List<AllHolder> worldpopulationlist = null;
 	private ArrayList<AllHolder> arraylist;
-FinancialServiceProviderItem nullfin;
-	EducationServiceProviderItem nulledu;
-	EntertainmentServiceProviderItem nullent;
-	LegalAidServiceProviderItem nullleg;
-	HealthServiceProviderItem nullhel;
+FinancialNewItem nullfin;
+	EducationNewItem nulledu;
+	EntertainmentServiceProviderItemNew nullent;
+	LegalAidServiceProviderItemNew nullleg;
+	HealthServiceProviderItemNew nullhel;
+GovernmentNewItem nullgov;
 
 	public ListViewAdapterAllCategories(Activity act, List<AllHolder> worldpopulationlist) {
 		this.activity = act;
@@ -104,7 +106,7 @@ FinancialServiceProviderItem nullfin;
 int catt=worldpopulationlist.get(position).getCatid();
 				if (catt==6) {
 					// Send single item click data to SingleItemView Class
-					FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
+					FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(ListViewAdapterAllCategories.this.mContext);
 					nullfin = financialServiceProviderTable.getfinNode2(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityFinancialNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_FINANCIAL, nullfin);
@@ -112,23 +114,23 @@ int catt=worldpopulationlist.get(position).getCatid();
 //				Toast.makeText(mContext, "rank " + worldpopulationlist.get(position).getNodeid(), Toast.LENGTH_LONG).show();
 				}
 				if (catt==1) {
-					EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
+					EducationNewTable educationServiceProviderTable=new EducationNewTable(ListViewAdapterAllCategories.this.mContext);
 					nulledu=educationServiceProviderTable.geteduNode2(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityEducation.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_VIEW, nulledu);
 					activity.startActivity(iient);
 				}
 				if (catt==2) {
-					HealthServiceProviderTable healthServiceProviderTable=new HealthServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
+					HealthServiceProviderTableNew healthServiceProviderTable=new HealthServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
 					nullhel=healthServiceProviderTable.gethelNode2(worldpopulationlist.get(position).getNodeid());
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityHealthNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_HEALTH, nullhel);
 					activity.startActivity(iient);
 				}
 				if (catt==3) {
-					EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
+					EntertainmentServiceProviderTableNew entertainmentServiceProviderTable=new EntertainmentServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
 
-					nullent=entertainmentServiceProviderTable.getentNode2(worldpopulationlist.get(position).getNodeid());
+					nullent=entertainmentServiceProviderTable.getentNode2(String.valueOf(worldpopulationlist.get(position).getNodeid()));
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityEntertainmentNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
 					activity.startActivity(iient);
@@ -136,8 +138,8 @@ int catt=worldpopulationlist.get(position).getCatid();
 //				Toast.makeText(mContext, "rank " + worldpopulationlist.get(position).getNodeid(), Toast.LENGTH_LONG).show();
 				}
 				if (catt==5) {
-					LegalAidServiceProviderTable legalAidServiceProviderTable=new LegalAidServiceProviderTable(ListViewAdapterAllCategories.this.mContext);
-					nullleg=legalAidServiceProviderTable.getlegNode2(worldpopulationlist.get(position).getNodeid());
+					LegalAidServiceProviderTableNew legalAidServiceProviderTable=new LegalAidServiceProviderTableNew(ListViewAdapterAllCategories.this.mContext);
+					nullleg=legalAidServiceProviderTable.getlegNode2(String.valueOf(worldpopulationlist.get(position).getNodeid()));
 					Intent iient = new Intent(getActivity(), DetailsInfoActivityLegalNew.class);
 					iient.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
 					activity.startActivity(iient);

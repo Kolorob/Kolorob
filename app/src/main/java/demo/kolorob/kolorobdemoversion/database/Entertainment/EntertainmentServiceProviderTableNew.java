@@ -7,11 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -379,28 +377,28 @@ public class EntertainmentServiceProviderTableNew {
 
 
 
-    public Vector<String> getAllEntertainmentSubCategoriesInfo() {
-        Vector<String> subCatList = new Vector<>();
+
+
+    public ArrayList<EntertainmentServiceProviderItemNew> getAllEntertainmentSubCategoriesInfo() {
+        ArrayList<EntertainmentServiceProviderItemNew> subCatList = new ArrayList<>();
+
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        int cat_id=3;
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID+"="+cat_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +  " ORDER BY " +KEY_NODE_NAME, null);
 
         if (cursor.moveToFirst()) {
             do {
-                //System.out.println("abc="+cursor.getString(4));
-                String  subCatLists = cursor.getString(cursor.getColumnIndex(KEY_NODE_NAME));
 
-                subCatList.add(subCatLists);
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
         return subCatList;
     }
-
-
     public ArrayList<EntertainmentServiceProviderItemNew> getAllEntertainmentSubCategoriesInfoWithHead(int cat_id, String header) {
         ArrayList<EntertainmentServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);

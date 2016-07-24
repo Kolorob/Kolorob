@@ -4,13 +4,13 @@ package demo.kolorob.kolorobdemoversion.adapters;
  * Created by israt.jahan on 5/26/2016.
  */
 public class AllHolder {
-    String nodeid;
-    int refnum;
+    int nodeid;
+    String refnum;
     String nameen;
     String namebn;
     int catid;
 
-    public AllHolder(String nodeid, int refnum, String nameen, String namebn, int catid) {
+    public AllHolder(int nodeid, String refnum, String nameen, String namebn, int catid) {
         this.nodeid = nodeid;
         this.refnum = refnum;
         this.nameen = nameen;
@@ -18,19 +18,19 @@ public class AllHolder {
         this.catid = catid;
     }
 
-    public String getNodeid() {
+    public int getNodeid() {
         return nodeid;
     }
 
-    public void setNodeid(String nodeid) {
+    public void setNodeid(int nodeid) {
         this.nodeid = nodeid;
     }
 
-    public int getRefnum() {
+    public String getRefnum() {
         return refnum;
     }
 
-    public void setRefnum(int refnum) {
+    public void setRefnum(String refnum) {
         this.refnum = refnum;
     }
 
