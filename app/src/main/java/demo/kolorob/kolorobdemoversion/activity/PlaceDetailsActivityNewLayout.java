@@ -1,12 +1,10 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -66,21 +64,19 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-
 import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
@@ -90,15 +86,11 @@ import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
-import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
@@ -265,15 +257,16 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     CheckBox check;
     Boolean NavigationCalled,NavigationCalledOnce;
     LinearLayout fholder,fleft,fright,mbholder,lbholder,sbholder,cbholder;
-RelativeLayout searchviewholder,filterholder;
+    RelativeLayout searchviewholder,filterholder;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
     ArrayList<AllHolder>subcatHolders=new ArrayList<>();
-    private ArrayList<FinancialServiceProviderItem>fetchedfin;
-    private ArrayList<EducationServiceProviderItem>fetchededu;
-    private ArrayList<LegalAidServiceProviderItem>fetchedleg;
-    private ArrayList<EntertainmentServiceProviderItem>fetchedent;
-    private ArrayList<HealthServiceProviderItem>fetchedhel;
+    private ArrayList<FinancialNewItem>fetchedfin;
+    private ArrayList<EducationNewItem>fetchededu;
+    private ArrayList<LegalAidServiceProviderItemNew>fetchedleg;
+    private ArrayList<EntertainmentServiceProviderItemNew>fetchedent;
+    private ArrayList<HealthServiceProviderItemNew>fetchedhel;
+    public ArrayList<GovernmentNewItem>fetchedgov;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
     RadioGroup catgroup,fgrp1,fgrp2;
     int va;
@@ -1007,11 +1000,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
 
 
-    public void compareHealth()
-    {
-        healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        firstDataSetHealth=healthServiceProviderTableNew.getHealthData(firstData);
-        secondDataSetHealth=healthServiceProviderTableNew.getHealthData(SecondData);
+    public void compareHealth() {
+        healthServiceProviderTableNew = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
+        secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
+
 
 
         edtype2.setText("খোলার সময়");
@@ -1026,32 +1019,50 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         shift1_1.setVisibility(View.GONE);
         canteen_facility_1.setVisibility(View.GONE);
         canteen_facility_11.setVisibility(View.GONE);
+        HealthSpecialistTableDetails healthSpecialistTable = new HealthSpecialistTableDetails(PlaceDetailsActivityNewLayout.this);
+        ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
+        ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses2;
+        healthSpecialistItemDetailses = healthSpecialistTable.getHealthSpecialistData(firstData);
+        healthSpecialistItemDetailses2 = healthSpecialistTable.getHealthSpecialistData(SecondData);
 
+        String firstSpecialistItem = "";
+        String secondSpecialistItem = "";
 
+        if (!healthSpecialistItemDetailses.equals("")) {
+            for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses) {
+                firstSpecialistItem = firstSpecialistItem + healthSpecialistItemDetails.getSpecialisttype() + ", ";
+            }
+        }
+
+        if (!healthSpecialistItemDetailses2.equals("")){
+            for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
+                secondSpecialistItem = secondSpecialistItem + healthSpecialistItemDetails.getSpecialisttype() + ", ";
+            }
+    }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
             edu_name_ban.setText(healthServiceProviderItemNew.getNode_bn());
-            edtype.setText(healthServiceProviderItemNew.getSpoken_lang());
-            hostel_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
-            transport_facility.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            edtype.setText(healthServiceProviderItemNew.getOpening_time());
+            hostel_facility.setText(healthServiceProviderItemNew.getSpoken_lang());
+            transport_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
             playground.setText(healthServiceProviderItemNew.getPharmacy_speciality());
-            total_students.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
-            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
-            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getQuality_equipments()));
-           // course_provided.setText(healthServiceProviderItemNew.getCourseProvided());
+            total_students.setText(firstSpecialistItem);
+            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            course_provided.setText(healthServiceProviderItemNew.getQuality_equipments());
 
         }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
             edu_name_ban1.setText(healthServiceProviderItemNew.getNode_bn());
-            edtype1.setText(healthServiceProviderItemNew.getSpoken_lang());
-            hostel_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
-            transport_facility1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            edtype1.setText(healthServiceProviderItemNew.getOpening_time());
+            hostel_facility1.setText(healthServiceProviderItemNew.getSpoken_lang());
+            transport_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
             playground1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
-            total_students1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
-            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
-            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getQuality_equipments()));
-          //  course_provided1.setText(healthServiceProviderItemNew.getCourseProvided());
+            total_students1.setText(secondSpecialistItem);
+            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            course_provided1.setText(healthServiceProviderItemNew.getQuality_equipments());
 
         }
         SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
@@ -1282,7 +1293,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     public void populatefilterwords(int filcatid)
     {
-        SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+        SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         subholders.clear();
         subholders=subCategoryTable.getcatSubCategories(filcatid);
 
@@ -1955,7 +1966,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        tvName.setText(si.getSubcatHeader());
+        tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2136,7 +2147,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     case AppConstants.EDUCATION:
 
-                         Headerholder.add(si.getSubcatHeader());
+                         Headerholder.add(si.getSubCatHeaderBn());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2150,11 +2161,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                      callMapFragmentWithEducationInfo(si.getSubcatHeader(), cat_id, EDD);
+                      callMapFragmentWithEducationInfo(si.getSubCatHeaderBn(), cat_id, EDD);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
@@ -2173,7 +2184,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.ENTERTAINMENT:
 
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
@@ -2186,12 +2197,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithEntertainmentInfo(si.getSubcatHeader(), cat_id, ENT);
+                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, ENT);
                         break;
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2205,7 +2216,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithGovInfo(si.getSubcatHeader(), cat_id, GOV);
+                        callMapFragmentWithGovInfo(si.getSubCatHeaderBn(), cat_id, GOV);
                         break;
                     case AppConstants.LEGAL:
                         Headerholder.add(si.getSubcatHeader());
@@ -2222,7 +2233,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, LEG);
                         break;
                     case AppConstants.FINANCIAL:
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
@@ -2236,7 +2247,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithFinancialInfo(si.getSubcatHeader(), cat_id, FIN);
+                        callMapFragmentWithFinancialInfo(si.getSubCatHeaderBn(), cat_id, FIN);
                         break;
                     case AppConstants.JOB:
 //                        map.removeAllViews();
@@ -2710,27 +2721,32 @@ NavigationCalled=true;
     public void Populateholder()
     {
         filterText = (EditText)findViewById(R.id.searchall);
-        EducationServiceProviderTable educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        EntertainmentServiceProviderTable entertainmentServiceProviderTable=new EntertainmentServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        FinancialServiceProviderTable financialServiceProviderTable = new FinancialServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        LegalAidServiceProviderTable legalAidServiceProviderTable = new LegalAidServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo(3);
-        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(6);
-        fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(5);
-        fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfo(2);
-        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(1);
-        String nameen,namebn,catid,node;
-        int refname;
+        EducationNewTable educationServiceProviderTable=new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+        EntertainmentServiceProviderTableNew entertainmentServiceProviderTable=new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+        GovernmentNewTable governmentNewTable=new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
+        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo();
+        fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch();
+        fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfosearch();
+        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo();
+        fetchedgov=governmentNewTable.getAllGovSubCategoriesInfo();
+        String nameen;
+        String namebn;
+
+        int node;
+        String refname;
         for (int i=0;i<fetchededu.size();i++)
         {
 
-            nameen=fetchededu.get(i).getEduNameEng();
-            node=fetchededu.get(i).getIdentifierId();
-            refname=fetchededu.get(i).getEduSubCategoryId();
-            namebn=fetchededu.get(i).getEduNameBan();
+            nameen=fetchededu.get(i).getNameen();
+            node=fetchededu.get(i).getEduId();
+            refname=fetchededu.get(i).getRefnumm();
+            namebn=fetchededu.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,1);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,5);
             allHolders.add(all);
         }
 
@@ -2738,12 +2754,12 @@ NavigationCalled=true;
         for (int i=0;i<fetchedhel.size();i++)
         {
 
-            nameen=fetchedhel.get(i).getNodeName();
-            node=fetchedhel.get(i).getNodeId();
-            refname=fetchedhel.get(i).getRefNum();
-            namebn=fetchedhel.get(i).getNameBn();
+            nameen=fetchedhel.get(i).getNode_name();
+            node= Integer.parseInt(fetchedhel.get(i).getId());
+            refname=fetchedhel.get(i).getReferences();
+            namebn=fetchedhel.get(i).getNode_bn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,2);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,1);
             allHolders.add(all);
         }
 
@@ -2752,33 +2768,47 @@ NavigationCalled=true;
         {
 
             nameen=fetchedleg.get(i).getLegalaidNameEng();
-            node=fetchedleg.get(i).getIdentifierId();
-            refname=fetchedleg.get(i).getLegalaidSubCategoryId();
+            node= Integer.parseInt(fetchedleg.get(i).getIdentifierId());
+            refname=fetchedleg.get(i).getBreaktime2();
             namebn=fetchedleg.get(i).getLegalaidNameBan();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,5);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,29);
             allHolders.add(all);
         }
         for (int i=0;i<fetchedent.size();i++)
         {
 
             nameen=fetchedent.get(i).getNodeName();
-            node=fetchedent.get(i).getNodeId();
-            refname=fetchedent.get(i).getEntSubCategoryId();
+            node= Integer.parseInt(fetchedent.get(i).getNodeId());
+            refname=fetchedent.get(i).getNodeAdditional();
             namebn=fetchedent.get(i).getNodeNameBn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,3);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,14);
             allHolders.add(all);
         }
         for (int i=0;i<fetchedfin.size();i++)
         {
 
-            nameen=fetchedfin.get(i).getNodeName();
-            node=fetchedfin.get(i).getNodeId();
-            refname=fetchedfin.get(i).getRefNum();
+            nameen=fetchedfin.get(i).getNameen();
+            node=fetchedfin.get(i).getFinId();
+            refname=fetchedfin.get(i).getRefnumm();
             namebn=fetchedfin.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,6);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,11);
+            allHolders.add(all);
+
+
+        }
+
+        for (int i=0;i<fetchedgov.size();i++)
+        {
+
+            nameen=fetchedgov.get(i).getNameen();
+            node=fetchedgov.get(i).getFinId();
+            refname=fetchedgov.get(i).getRefnumm();
+            namebn=fetchedgov.get(i).getNamebn();
+
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,33);
             allHolders.add(all);
 
 
@@ -2800,13 +2830,13 @@ NavigationCalled=true;
                     catHolders.add(allHolders.get(ii));
                 }
             }
-            int checknum=getSnumber();
-            if(checknum!=0)
+            String checknum= String.valueOf(getSnumber());
+            if(Integer.parseInt(checknum)!=0)
             {
                 subcatHolders.clear();
                 for(int iii=0;iii<catHolders.size();iii++)
                 {
-                    if(catHolders.get(iii).getRefnum()==checknum)
+                    if(catHolders.get(iii).getRefnum().contains(checknum))
                     {
                         subcatHolders.add(catHolders.get(iii));
                     }
@@ -2815,7 +2845,7 @@ NavigationCalled=true;
 
                 allitemList.setAdapter(adapter);
             }
-            else if (checknum==0){
+            else if (Integer.parseInt(checknum)!=0){
                 adapter = new ListViewAdapterAllCategories(this, catHolders);
 
                 allitemList.setAdapter(adapter);

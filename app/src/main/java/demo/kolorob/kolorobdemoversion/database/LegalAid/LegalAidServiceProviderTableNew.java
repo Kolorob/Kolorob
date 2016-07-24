@@ -6,14 +6,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -250,6 +248,27 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return ret;
     }
+
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalSubCategoriesInfosearch() {
+        ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
+
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +  " ORDER BY " +KEY_LEGAL_AID_NAME_ENG, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public LegalAidServiceProviderItemNew getlegNode2(String Node) {
 
         SQLiteDatabase db = openDB();
@@ -444,7 +463,7 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
-    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfo(int cat_id) {
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfosearch() {
         ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
@@ -461,7 +480,22 @@ public class LegalAidServiceProviderTableNew {
         return subCatList;
     }
 
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfo(int cat_id) {
+        ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public Vector<String> getAllLegalAidSubCategoriesInfo() {
         Vector<String> subCatList = new Vector<>();
         //System.out.println(cat_id+"  "+sub_cat_id);

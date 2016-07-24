@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -89,7 +88,7 @@ public class SubCategoryTableNew {
         rowValue.put(KEY_REF_NAME_BN,subCatNameBn);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
-        Log.d("Loading ret ","-------"+ret);
+
         closeDB();
         return ret;
     }
@@ -138,8 +137,8 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 =cursor.getString(4);
-                int subcatid=cursor.getInt(1);
+                String catid2 =cursor.getString(7);
+                int subcatid=cursor.getInt(5);
                 siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());
         }
@@ -162,7 +161,21 @@ public class SubCategoryTableNew {
         closeDB();
         return siList;
     }
+    public ArrayList<SubCategoryItemNew> getAllSubCategories(int id) {
+        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCategory(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
     public ArrayList<SubCategoryItemNew> getAllSubCategories() {
         ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 

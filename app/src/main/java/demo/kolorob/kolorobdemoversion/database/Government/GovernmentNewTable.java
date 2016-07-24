@@ -255,7 +255,26 @@ public class GovernmentNewTable {
         return ret;
 
     }
+    public ArrayList<GovernmentNewItem> getAllGovernmentSubCategoriesInfo() {
+        ArrayList<GovernmentNewItem> subCatList = new ArrayList<>();
 
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +  " ORDER BY " +KEY_NAME_EN, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public ArrayList<GovernmentNewItem> getAllGovSubCategoriesInfo() {
         ArrayList<GovernmentNewItem> subCatList = new ArrayList<>();
 
@@ -332,7 +351,7 @@ public class GovernmentNewTable {
         ArrayList<Integer> s = new ArrayList<Integer>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headen = '" + header + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW + " WHERE _headbn = '" + header + "'", null);
         if (cursor.moveToFirst()) {
             do {
 
