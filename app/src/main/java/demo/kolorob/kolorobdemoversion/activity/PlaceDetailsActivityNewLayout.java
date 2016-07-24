@@ -1605,7 +1605,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             ivIcon.setImageResource(R.drawable.education_selected);
-                            callMapFragmentWithEducationInfo(ci.getCatName(), 5, educationServiceProvider);
+                            callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
 
 
                         }
@@ -1634,7 +1634,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.health_selected);
                         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(1);
-                        callMapFragmentWithHealthInfo(ci.getCatName(), ci.getId(), healthServiceProvider);
+                        callMapFragmentWithHealthInfo(ci.getCatName(), 2, healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
@@ -1658,7 +1658,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
-                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), ci.getId(), entertainmentServiceProvider);
+                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -1704,7 +1704,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         ArrayList<GovernmentNewItem> governmentNewItems;
                         governmentNewItems = constructgovListItem();
-                        callMapFragmentWithGovInfo(ci.getCatName(), ci.getId(), governmentNewItems);
+                        callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
 
 
 
@@ -1728,7 +1728,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                        callMapFragmentWithLegalAidInfo(ci.getCatName(), ci.getId(), legalaidServiceProvider);
+                        callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
@@ -1758,7 +1758,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.finance_selected);
                         ArrayList<FinancialNewItem> financialNewItems;
                         financialNewItems = constructfinancialListItem();
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), ci.getId(), financialNewItems);
+                        callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
