@@ -192,6 +192,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_for());
         CheckConcate("বিনামূল্যে সেবার ধরন", healthServiceProviderItemNew.getGeneral_free_services());
 
+        CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_services());
+        CheckConcate("সাধারন খরচ", healthServiceProviderItemNew.getGeneral_cost());
+        CheckConcate("সাধারন অনন্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
         CheckConcate("এ্যাম্বুলেন্সের খরচ", healthServiceProviderItemNew.getAmbulance_cost());
         CheckConcate("এ্যাম্বুলেন্সের অনন্য তথ্য", healthServiceProviderItemNew.getAmbulance_remark());
         CheckConcate("মাতৃত্ব জনিত সেবার খরচ", healthServiceProviderItemNew.getMaternity_cost());
