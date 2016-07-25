@@ -963,29 +963,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         if(currentCategoryID==1)
-        { compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
+        { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);}
         else {
-            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+           // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
         }
-        int size=comapreData.length();
-        for(int i=0;i<size;i++)
-        {
+        String delims = "[,]";
+        String[] tokens = comapreData.split(delims);
 
-            if(checker==1)
-            {
-                SecondData=SecondData+comapreData.charAt(i);
-                Log.d("===","second_data" +SecondData);
-            }
-            else  if(comapreData.charAt(i)==' ')
-            {
-                checker=1;
-            }
-            else
-                firstData=firstData+comapreData.charAt(i);
-            Log.d("===","firstData" +firstData);
-        }
+        firstData=tokens[0];
+        SecondData=tokens[1];
         if(currentCategoryID==1)
             compareEducation();
         else
