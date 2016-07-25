@@ -257,7 +257,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
         result_concate ="";
         if(!entertainmentTypeItems.equals("")) {
-            other_detailsEnt.setVisibility(View.VISIBLE);
+         //   other_detailsEnt.setVisibility(View.VISIBLE);
             for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
                 CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
                 CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
@@ -295,7 +295,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
 
-        other_detailsEnt.setText(result_concate);
+     //   other_detailsEnt.setText(result_concate);
 
 
         right_image.setOnClickListener(new View.OnClickListener() {

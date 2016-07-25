@@ -977,7 +977,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(checker==1)
             {
                 SecondData=SecondData+comapreData.charAt(i);
-                Log.d("===","second_data" +SecondData);
+               // Log.d("===","second_data" +SecondData);
             }
             else  if(comapreData.charAt(i)==' ')
             {
@@ -985,7 +985,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             }
             else
                 firstData=firstData+comapreData.charAt(i);
-            Log.d("===","firstData" +firstData);
+          //  Log.d("===","firstData" +firstData);
         }
         if(currentCategoryID==1)
             compareEducation();
