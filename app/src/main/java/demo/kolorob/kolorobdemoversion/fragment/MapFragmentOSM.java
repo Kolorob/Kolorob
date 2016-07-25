@@ -40,13 +40,11 @@ import java.util.List;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -209,10 +207,10 @@ setMapView(mapView);
 
         if (locationNameId == 1) {
 
-            mapViewController.setZoom(18);
+            mapViewController.setZoom(16);
             mapViewController.setCenter(AppConstants.BAUNIA1);
         } else if (locationNameId == 2) {
-            mapViewController.setZoom(17);
+            mapViewController.setZoom(16);
             mapViewController.setCenter(AppConstants.PARIS1);
         }
         switch (categoryId) {

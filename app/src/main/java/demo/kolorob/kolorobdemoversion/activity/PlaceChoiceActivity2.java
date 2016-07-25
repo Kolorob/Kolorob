@@ -179,27 +179,7 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
         /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
-        if (val==6)val=val+1;
-        Log.e("ASinplaceDetails",String.valueOf(val));
-        if (val!=7)
-        {
-            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceChoiceActivity2.this).create();
 
-            alertDialog.setMessage("Data have not uploaded probably");
-            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent i = new Intent(PlaceChoiceActivity2.this, OpeningActivity.class);
-
-                            alertDialog.dismiss();
-                            startActivity(i);
-                            finish();
-                        }
-                    });
-            alertDialog.getWindow().setLayout(200, 300);
-            alertDialog.show();
-        }
         Log.d("...>>>","Layout width"+width);
 
         try
@@ -554,30 +534,33 @@ help=(ImageButton)findViewById(R.id.helpicon);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        } else if (id == R.id.info_change) {
+        }
+        else if (id == R.id.emergency_info) {
 
-            Intent em = new Intent(this, Information_UpdateActivity.class);
-            startActivity(em);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-        } else if (id == R.id.emergency_info) {
-
-          //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
             Intent em = new Intent(this, NewEmergency.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        } else if (id == R.id.local_representative) {
-
-           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
-
-        } else if (id == R.id.adv_info) {
-          //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-
-            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
-        } else if (id == R.id.adv) {
-            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
         }
+//        else if (id == R.id.info_change) {
+//
+//            Intent em = new Intent(this, Information_UpdateActivity.class);
+//            startActivity(em);
+//            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//
+//        }
+//         else if (id == R.id.local_representative) {
+//
+//           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+//
+//        } else if (id == R.id.adv_info) {
+//          //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//
+//            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
+//        } else if (id == R.id.adv) {
+//            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
+//        }
 
 //        else if (id == R.id.nav_share) {
 //

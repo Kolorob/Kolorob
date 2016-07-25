@@ -966,6 +966,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             String delims = "[,]";
             String[] tokens = comapreData.split(delims);
 
+<<<<<<< HEAD
+            if(checker==1)
+            {
+                SecondData=SecondData+comapreData.charAt(i);
+               // Log.d("===","second_data" +SecondData);
+            }
+            else  if(comapreData.charAt(i)==' ')
+=======
             firstData=tokens[0];
             SecondData=tokens[1];
             if(currentCategoryID==1)
@@ -976,12 +984,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
             int size=comapreData.length();
             for(int i=0;i<size;i++)
+>>>>>>> b5839d4068a49ae3930bafb88e486c49f540434d
             {
 
                 if(checker==1)
                 {
                     SecondData=SecondData+comapreData.charAt(i);
-               // Log.d("===","second_data" +SecondData);
+                    Log.d("===","second_data" +SecondData);
                 }
                 else  if(comapreData.charAt(i)==' ')
                 {
@@ -989,8 +998,18 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 else
                     firstData=firstData+comapreData.charAt(i);
-          //  Log.d("===","firstData" +firstData);
+                Log.d("===","firstData" +firstData);
             }
+<<<<<<< HEAD
+            else
+                firstData=firstData+comapreData.charAt(i);
+          //  Log.d("===","firstData" +firstData);
+        }
+        if(currentCategoryID==1)
+            compareEducation();
+        else
+=======
+>>>>>>> b5839d4068a49ae3930bafb88e486c49f540434d
             compareHealth();
         }
     }

@@ -283,7 +283,7 @@ public class DetailsLayoutEducation extends Activity {
                 } else if (compareValue == 1) {
                     String previous_node;
                     previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
-                    previous_node = previous_node + " " + node;
+                    previous_node = previous_node + "," + node;
                     SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
                 }
 

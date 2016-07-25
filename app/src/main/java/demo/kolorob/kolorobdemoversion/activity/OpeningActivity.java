@@ -117,6 +117,7 @@ public class OpeningActivity extends Activity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
+    AlertDialog alertDialog;
     private GoogleApiClient client;
     private AnimationDrawable frameAnimation;
     private Context ctx;
@@ -221,7 +222,7 @@ int countofDb;
 //        else if(in == 8){
 //           // rotateImage.setBackgroundResource(R.drawable.glow);
 //            rotateImage.setBackgroundResource(R.drawable.a18);
-//            startActivity(new Intent(OpeningActivity.this, PlaceChoiceActivity2.class));
+//            startActivity(new Intent(OpeningActivity.this, PlaceSelectionActivity.class));
 //            mRedrawHandler.removeMessages(0);
 //            finish();
 //            System.out.println("-----okkkkk74--------" );
@@ -285,8 +286,9 @@ int countofDb;
             editor.commit();
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
-                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+               alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                alertDialog.setCanceledOnTouchOutside(false);
                 alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
@@ -314,15 +316,15 @@ int countofDb;
              //   pd.dismiss();
             }
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+           AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
             alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
-
+            alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
                             Log.e("open4",String.valueOf(getCountofDb()));
-                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
+                            Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
                             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             startActivity(i);
 
@@ -348,15 +350,17 @@ int countofDb;
 
                                 LoadData();
                             } else {
-                                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                              AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+
                                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                                alertDialog.setCanceledOnTouchOutside(false);
                                 alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
                                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
                                                 Log.e("open3",String.valueOf(countofDb));
-                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
+                                                Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
                                                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                                                 startActivity(i);
                                                 dialog.dismiss();
@@ -372,6 +376,7 @@ int countofDb;
                     });
 
             alertDialog.show();
+            alertDialog.setCanceledOnTouchOutside(false);
         }
     }
     public void LoadData()
@@ -397,7 +402,7 @@ int countofDb;
 
 //                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 overridePendingTransition(0, 0);
-                Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class); // Default Activity
+                Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                 startActivity(a);
 
                 //  finish();
@@ -611,7 +616,7 @@ int countofDb;
                 if (db.isTableExists(db3,EDU_PROVIDER_TABLE)){
                     pd.dismiss();
                     Log.e("open1",String.valueOf(countofDb));
-                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity2.class);//Default Activity
+                    Intent a = new Intent(getApplicationContext(),PlaceSelectionActivity.class);//Default Activity
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //getApplicationContext().startActivity(a);
@@ -1228,7 +1233,15 @@ int countofDb;
         inFromRight.setInterpolator(new AccelerateInterpolator());
         return inFromRight;
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+            alertDialog = null;
+        }
 
+    }
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
