@@ -708,7 +708,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 MapClicked=true;
                 ListClicked=false;
                 CompareClicked=false;
-                map.removeAllViews();
+                callMapFragment(locationNameId);;
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                 {
 
