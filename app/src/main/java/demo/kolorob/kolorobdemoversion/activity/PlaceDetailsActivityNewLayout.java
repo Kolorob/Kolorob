@@ -891,11 +891,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         // @@@@arafat
                         // need to add condition for health and add color code for health,
                         // else educaton color code is okay
-                        if(SearchClicked){
-                            compare_layout.setBackgroundColor(Color.parseColor("#F7FF1E"));
-                        }else{
-                            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
-                        }
                         toggleButton.setVisibility(View.GONE);
                         SearchButton.setBackgroundResource(R.drawable.search);
                         ListButton.setBackgroundResource(R.drawable.list);
@@ -968,10 +963,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         if(currentCategoryID==1)
-            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
-        else
+        { compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
+            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);}
+        else {
+            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-
+        }
         int size=comapreData.length();
         for(int i=0;i<size;i++)
         {
