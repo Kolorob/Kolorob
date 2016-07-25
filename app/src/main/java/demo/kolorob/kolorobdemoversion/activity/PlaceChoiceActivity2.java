@@ -179,27 +179,7 @@ placemain=(LinearLayout)findViewById(R.id.placemainpageholder);
         /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
-        if (val==6)val=val+1;
-        Log.e("ASinplaceDetails",String.valueOf(val));
-        if (val!=7)
-        {
-            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PlaceChoiceActivity2.this).create();
 
-            alertDialog.setMessage("Data have not uploaded probably");
-            alertDialog.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent i = new Intent(PlaceChoiceActivity2.this, OpeningActivity.class);
-
-                            alertDialog.dismiss();
-                            startActivity(i);
-                            finish();
-                        }
-                    });
-            alertDialog.getWindow().setLayout(200, 300);
-            alertDialog.show();
-        }
         Log.d("...>>>","Layout width"+width);
 
         try
