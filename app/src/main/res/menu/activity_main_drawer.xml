@@ -6,22 +6,22 @@
             android:id="@+id/phone_reg"
             android:icon="@drawable/advertising_icon"
             android:title="@string/phone_registration" />
-        <item
-            android:id="@+id/info_change"
-            android:icon="@drawable/profile_icon"
-            android:title="@string/information_change" />
-        <item
-            android:id="@+id/local_representative"
-            android:icon="@drawable/protinidhi_icon"
-            android:title="@string/area_member" />
-        <item
-            android:id="@+id/adv_info"
-            android:icon="@drawable/advertising_icon"
-            android:title="@string/advertisements" />
-        <item
-            android:id="@+id/adv"
-            android:icon="@drawable/advertisement"
-            android:title="@string/know_adv" />
+        <!--<item-->
+            <!--android:id="@+id/info_change"-->
+            <!--android:icon="@drawable/profile_icon"-->
+            <!--android:title="@string/information_change" />-->
+        <!--<item-->
+            <!--android:id="@+id/local_representative"-->
+            <!--android:icon="@drawable/protinidhi_icon"-->
+            <!--android:title="@string/area_member" />-->
+        <!--<item-->
+            <!--android:id="@+id/adv_info"-->
+            <!--android:icon="@drawable/advertising_icon"-->
+            <!--android:title="@string/advertisements" />-->
+        <!--<item-->
+            <!--android:id="@+id/adv"-->
+            <!--android:icon="@drawable/advertisement"-->
+            <!--android:title="@string/know_adv" />-->
     </group>
 
     <item android:title="Communicate">

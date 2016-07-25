@@ -1385,30 +1385,31 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        } else if (id == R.id.info_change) {
-
-            Intent em = new Intent(this, Information_UpdateActivity.class);
-            startActivity(em);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-        } else if (id == R.id.emergency_info) {
+        }  else if (id == R.id.emergency_info) {
 
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
             Intent em = new Intent(this, NewEmergency.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        } else if (id == R.id.local_representative) {
-
-            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
-
-        } else if (id == R.id.adv_info) {
-            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-
-            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
-        } else if (id == R.id.adv) {
-            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
         }
+//        else if (id == R.id.info_change) {
+//
+//            Intent em = new Intent(this, Information_UpdateActivity.class);
+//            startActivity(em);
+//            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//
+//        }else if (id == R.id.local_representative) {
+//
+//            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+//
+//        } else if (id == R.id.adv_info) {
+//            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//
+//            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
+//        } else if (id == R.id.adv) {
+//            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
+//        }
 
 //        else if (id == R.id.nav_share) {
 //
