@@ -155,7 +155,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Boolean list_expand=false;
     private TextView listOrMapDisplayText;
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
-    private Toolbar toolbar,toolbar2;
+    private Toolbar toolbar;
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
     TextView edu_name_ban2,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
@@ -743,6 +743,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 toggleButton.setVisibility(View.VISIBLE);
                 map.setVisibility(View.VISIBLE);
+                toolbar.setVisibility(View.VISIBLE);
 
 
 
@@ -800,6 +801,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                 setShowList(1);
+                toolbar.setVisibility(View.VISIBLE);
                 toggleButton.setVisibility(View.VISIBLE);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
@@ -883,7 +885,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
                         }
-
+                        toolbar.setVisibility(View.GONE);
                         compare_layout.setVisibility(View.VISIBLE);
 
                         // @@@@arafat
