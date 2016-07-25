@@ -1037,27 +1037,27 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
-            if(healthServiceProviderItemNew.getNode_bn()==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
                 edu_name_ban.setText("X");
             else
             edu_name_ban.setText(healthServiceProviderItemNew.getNode_bn());
 
-            if(healthServiceProviderItemNew.getOpening_time()==null)
+            if(healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")||healthServiceProviderItemNew.getOpening_time()==null)
                 edtype.setText("X");
             else
             edtype.setText(healthServiceProviderItemNew.getOpening_time());
 
-            if(healthServiceProviderItemNew.getSpoken_lang()==null)
+            if(healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
                 hostel_facility.setText("X");
             else
             hostel_facility.setText(healthServiceProviderItemNew.getSpoken_lang());
 
-            if(healthServiceProviderItemNew.getGeneral_cost()==null)
+            if(healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null")||healthServiceProviderItemNew.getGeneral_cost()==null)
                 transport_facility.setText("X");
             else
             transport_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
 
-            if(healthServiceProviderItemNew.getPharmacy_speciality()==null)
+            if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
                 playground.setText("X");
             else
             playground.setText(healthServiceProviderItemNew.getPharmacy_speciality());
@@ -1067,17 +1067,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             else
             total_students.setText(firstSpecialistItem);
 
-            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
+            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
                 total_classes.setText("X");
             else
             total_classes.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
 
-            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
+            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
                 total_teachers.setText("X");
             else
             total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
 
-            if(healthServiceProviderItemNew.getQuality_equipments()==null )
+            if(healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null") || healthServiceProviderItemNew.getQuality_equipments()==null )
                 course_provided.setText("X");
             else
             course_provided.setText(healthServiceProviderItemNew.getQuality_equipments());
@@ -1086,27 +1086,27 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
 
-            if(healthServiceProviderItemNew.getNode_bn()==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
                 edu_name_ban1.setText("X");
             else
             edu_name_ban1.setText(healthServiceProviderItemNew.getNode_bn());
 
-            if(healthServiceProviderItemNew.getOpening_time()==null)
+            if(healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")|| healthServiceProviderItemNew.getOpening_time()==null)
                 edtype1.setText("X");
             else
             edtype1.setText(healthServiceProviderItemNew.getOpening_time());
 
-            if(healthServiceProviderItemNew.getSpoken_lang()==null)
+            if(healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
                 hostel_facility1.setText("X");
             else
             hostel_facility1.setText(healthServiceProviderItemNew.getSpoken_lang());
 
-            if(healthServiceProviderItemNew.getGeneral_cost()==null)
+            if(healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null")||healthServiceProviderItemNew.getGeneral_cost()==null)
                 transport_facility1.setText("X");
             else
             transport_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
 
-            if(healthServiceProviderItemNew.getPharmacy_speciality()==null)
+            if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
                 playground1.setText("X");
             else
             playground1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
@@ -1116,17 +1116,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             else
             total_students1.setText(secondSpecialistItem);
 
-            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
+            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")|| String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
                 total_classes1.setText("X");
             else
             total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
 
-            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
+            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null") || String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
                 total_teachers1.setText("X");
             else
             total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
 
-            if(healthServiceProviderItemNew.getQuality_equipments()==null)
+            if(healthServiceProviderItemNew.getQuality_equipments()==null || healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
               course_provided1.setText("X");
             else
                 course_provided1.setText(healthServiceProviderItemNew.getQuality_equipments());
@@ -1149,30 +1149,117 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         for (EducationNewItem educationNewItem: firstDataSet)
         {
+            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
+                edu_name_ban.setText("X");
+            else
             edu_name_ban.setText(educationNewItem.getNamebn());
+
+            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null"))
+                edtype.setText("X");
+            else
             edtype.setText(educationNewItem.getEdtype());
+
+            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null"))
+                hostel_facility.setText("X");
+            else
             hostel_facility.setText(educationNewItem.getFloor());
+
+            if(educationNewItem.getAddress()==null || educationNewItem.getAddress().equalsIgnoreCase("null"))
+                transport_facility.setText("X");
+            else
             transport_facility.setText(educationNewItem.getAddress());
+
+            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null"))
+                playground.setText("X");
+            else
             playground.setText(educationNewItem.getAveragestudent());
+
+            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null"))
+                total_students.setText("X");
+            else
             total_students.setText(String.valueOf(educationNewItem.getStudentno()));
+
+            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null"))
+                total_classes.setText("X");
+            else
             total_classes.setText(String.valueOf(educationNewItem.getClassno()));
+
+            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null"))
+                total_teachers.setText("X");
+            else
             total_teachers.setText(String.valueOf(educationNewItem.getTeachersno()));
+
+            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null"))
+                course_provided.setText("X");
+            else
             course_provided.setText(educationNewItem.getWatercondition());
+
+            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null"))
+                shift.setText("X");
+            else
             shift.setText(educationNewItem.getShift());
+
+            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null"))
+                canteen_facility.setText("X");
+            else
             canteen_facility.setText(educationNewItem.getWatersource());
         }
         for (EducationNewItem educationNewItem: secondDataSet)
         {
+
+            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
+                edu_name_ban1.setText("X");
+            else
             edu_name_ban1.setText(educationNewItem.getNamebn());
+
+            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null"))
+                edtype1.setText("X");
+            else
             edtype1.setText(educationNewItem.getEdtype());
+
+            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null"))
+                hostel_facility1.setText("X");
+            else
             hostel_facility1.setText(educationNewItem.getFloor());
+
+            if(educationNewItem.getAddress()==null || educationNewItem.getAddress().equalsIgnoreCase("null"))
+                transport_facility1.setText("X");
+            else
             transport_facility1.setText(educationNewItem.getAddress());
+
+            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null"))
+                playground1.setText("X");
+            else
             playground1.setText(educationNewItem.getAveragestudent());
+
+            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null"))
+                total_students1.setText("X");
+            else
             total_students1.setText(String.valueOf(educationNewItem.getStudentno()));
+
+            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null"))
+                total_classes1.setText("X");
+            else
             total_classes1.setText(String.valueOf(educationNewItem.getClassno()));
+
+            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null"))
+                total_teachers1.setText("X");
+            else
             total_teachers1.setText(String.valueOf(educationNewItem.getTeachersno()));
+
+            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null"))
+                course_provided1.setText("X");
+            else
             course_provided1.setText(educationNewItem.getWatercondition());
+
+            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null"))
+                shift1.setText("X");
+            else
             shift1.setText(educationNewItem.getShift());
+
+            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null"))
+                canteen_facility1.setText("X");
+            else
             canteen_facility1.setText(educationNewItem.getWatersource());
         }
 
