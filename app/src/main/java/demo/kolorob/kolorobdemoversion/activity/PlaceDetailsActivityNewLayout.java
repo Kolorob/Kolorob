@@ -553,9 +553,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         expnlist.setMargins((s*9)/10,40,5,40);
 
-
-
-
         lp.height=100;
 
         if(height<1000)
@@ -1040,28 +1037,101 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
+            if(healthServiceProviderItemNew.getNode_bn()==null)
+                edu_name_ban.setText("X");
+            else
             edu_name_ban.setText(healthServiceProviderItemNew.getNode_bn());
+
+            if(healthServiceProviderItemNew.getOpening_time()==null)
+                edtype.setText("X");
+            else
             edtype.setText(healthServiceProviderItemNew.getOpening_time());
+
+            if(healthServiceProviderItemNew.getSpoken_lang()==null)
+                hostel_facility.setText("X");
+            else
             hostel_facility.setText(healthServiceProviderItemNew.getSpoken_lang());
+
+            if(healthServiceProviderItemNew.getGeneral_cost()==null)
+                transport_facility.setText("X");
+            else
             transport_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
+
+            if(healthServiceProviderItemNew.getPharmacy_speciality()==null)
+                playground.setText("X");
+            else
             playground.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+
+            if(firstSpecialistItem==null || firstSpecialistItem.length()==0)
+                total_students.setText("X");
+            else
             total_students.setText(firstSpecialistItem);
+
+            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
+                total_classes.setText("X");
+            else
             total_classes.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+
+            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
+                total_teachers.setText("X");
+            else
             total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+
+            if(healthServiceProviderItemNew.getQuality_equipments()==null )
+                course_provided.setText("X");
+            else
             course_provided.setText(healthServiceProviderItemNew.getQuality_equipments());
 
         }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
+
+            if(healthServiceProviderItemNew.getNode_bn()==null)
+                edu_name_ban1.setText("X");
+            else
             edu_name_ban1.setText(healthServiceProviderItemNew.getNode_bn());
+
+            if(healthServiceProviderItemNew.getOpening_time()==null)
+                edtype1.setText("X");
+            else
             edtype1.setText(healthServiceProviderItemNew.getOpening_time());
+
+            if(healthServiceProviderItemNew.getSpoken_lang()==null)
+                hostel_facility1.setText("X");
+            else
             hostel_facility1.setText(healthServiceProviderItemNew.getSpoken_lang());
+
+            if(healthServiceProviderItemNew.getGeneral_cost()==null)
+                transport_facility1.setText("X");
+            else
             transport_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
+
+            if(healthServiceProviderItemNew.getPharmacy_speciality()==null)
+                playground1.setText("X");
+            else
             playground1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+
+            if(secondSpecialistItem==null || secondSpecialistItem.length()==0)
+                total_students1.setText("X");
+            else
             total_students1.setText(secondSpecialistItem);
+
+            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
+                total_classes1.setText("X");
+            else
             total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+
+            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
+                total_teachers1.setText("X");
+            else
             total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
-            course_provided1.setText(healthServiceProviderItemNew.getQuality_equipments());
+
+            if(healthServiceProviderItemNew.getQuality_equipments()==null)
+              course_provided1.setText("X");
+            else
+                course_provided1.setText(healthServiceProviderItemNew.getQuality_equipments());
+
+
 
         }
         SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
@@ -1382,30 +1452,31 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        } else if (id == R.id.info_change) {
-
-            Intent em = new Intent(this, Information_UpdateActivity.class);
-            startActivity(em);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-        } else if (id == R.id.emergency_info) {
+        }  else if (id == R.id.emergency_info) {
 
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
             Intent em = new Intent(this, NewEmergency.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        } else if (id == R.id.local_representative) {
-
-            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
-
-        } else if (id == R.id.adv_info) {
-            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-
-            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
-        } else if (id == R.id.adv) {
-            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
         }
+//        else if (id == R.id.info_change) {
+//
+//            Intent em = new Intent(this, Information_UpdateActivity.class);
+//            startActivity(em);
+//            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//
+//        }else if (id == R.id.local_representative) {
+//
+//            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+//
+//        } else if (id == R.id.adv_info) {
+//            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//
+//            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
+//        } else if (id == R.id.adv) {
+//            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
+//        }
 
 //        else if (id == R.id.nav_share) {
 //
