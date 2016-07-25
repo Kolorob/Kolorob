@@ -117,6 +117,7 @@ public class OpeningActivity extends Activity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
+    AlertDialog alertDialog;
     private GoogleApiClient client;
     private AnimationDrawable frameAnimation;
     private Context ctx;
@@ -285,8 +286,9 @@ int countofDb;
             editor.commit();
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
-                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+               alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                alertDialog.setCanceledOnTouchOutside(false);
                 alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
@@ -314,9 +316,9 @@ int countofDb;
              //   pd.dismiss();
             }
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+           AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
             alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
-
+            alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -348,8 +350,10 @@ int countofDb;
 
                                 LoadData();
                             } else {
-                                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                              AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+
                                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                                alertDialog.setCanceledOnTouchOutside(false);
                                 alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
                                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                         new DialogInterface.OnClickListener() {
@@ -372,6 +376,7 @@ int countofDb;
                     });
 
             alertDialog.show();
+            alertDialog.setCanceledOnTouchOutside(false);
         }
     }
     public void LoadData()
@@ -1228,7 +1233,15 @@ int countofDb;
         inFromRight.setInterpolator(new AccelerateInterpolator());
         return inFromRight;
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+            alertDialog = null;
+        }
 
+    }
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
