@@ -75,7 +75,6 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTab
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
@@ -709,6 +708,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 MapClicked=true;
                 ListClicked=false;
                 CompareClicked=false;
+                map.removeAllViews();
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                 {
 
@@ -2969,7 +2969,12 @@ NavigationCalled=true;
     @Override
     protected void onResume() {
         super.onResume();
+        if(SearchClicked)
+        {
+            searchviewholder.setVisibility(View.GONE);
+            SearchClicked=false;
 
+        }
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
