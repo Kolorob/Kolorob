@@ -961,31 +961,41 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     public void compareTool()
     {
-
+        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
         if(currentCategoryID==1)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
-            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);}
+            comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+
+            String delims = "[,]";
+            String[] tokens = comapreData.split(delims);
+
+            firstData=tokens[0];
+            SecondData=tokens[1];
+            if(currentCategoryID==1)
+                compareEducation();}
+
         else {
            // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-        }
-        String delims = "[,]";
-        String[] tokens = comapreData.split(delims);
+            int size=comapreData.length();
+            for(int i=0;i<size;i++)
+            {
 
-        firstData=tokens[0];
-        SecondData=tokens[1];
-        if(currentCategoryID==1)
-            compareEducation();
-        else
+                if(checker==1)
+                {
+                    SecondData=SecondData+comapreData.charAt(i);
+                    Log.d("===","second_data" +SecondData);
+                }
+                else  if(comapreData.charAt(i)==' ')
+                {
+                    checker=1;
+                }
+                else
+                    firstData=firstData+comapreData.charAt(i);
+                Log.d("===","firstData" +firstData);
+            }
             compareHealth();
-
-
-
-
-
-
-
-
+        }
     }
 
 
