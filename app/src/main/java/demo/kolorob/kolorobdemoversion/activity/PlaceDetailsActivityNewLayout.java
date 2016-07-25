@@ -804,7 +804,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
-                Log.d("currentCategoryID",".------"+currentCategoryID);
+               // Log.d("currentCategoryID",".------"+currentCategoryID);
                 if(currentCategoryID<1)
                 categoryListBuildUp(1);
                 else
@@ -1177,7 +1177,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-                    Log.d("Sending refId","------"+refId);
+                  //  Log.d("Sending refId","------"+refId);
                     printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId, RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
@@ -1271,7 +1271,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 //ArrayList<String> printleg = null;
                 ArrayList<String> RefLegal = null;
                 RefLegal=subCategoryTableNews.getSubnameedu(29);
-                Log.d("RefLegal","======"+RefLegal);
+                //("RefLegal","======"+RefLegal);
 
                 groups.removeAllElements();
                // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
@@ -1901,7 +1901,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         int i=0;
 
 
-
         //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
@@ -2281,6 +2280,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // showSubCatListItem.setEnabled(true);
                 // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
+                Log.d("SubcategoryId","******"+si.getSubcatHeader());
             }
         });
 
