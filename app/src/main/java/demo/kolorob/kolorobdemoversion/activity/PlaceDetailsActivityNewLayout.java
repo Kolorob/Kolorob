@@ -151,6 +151,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
+    RelativeLayout compare_layoutedu;
     public int layoutstatus;
     private Boolean list_expand=false;
     private TextView listOrMapDisplayText;
@@ -485,7 +486,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         shift=(TextView)findViewById(R.id.shift2);
         canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-
+       compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
         edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
         edtype1=(TextView)findViewById(R.id.eduType3);
         hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
@@ -686,6 +687,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     explist.setVisibility(View.GONE);
                     toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
+                    compare_layoutedu.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.VISIBLE);
                 }
                 if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
@@ -737,6 +739,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     explist.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
+                    compare_layoutedu.setVisibility(View.GONE);
                 }
                 toggleButton.setVisibility(View.VISIBLE);
                 map.setVisibility(View.VISIBLE);
@@ -782,6 +785,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
+                compare_layoutedu.setVisibility(View.GONE);
 
                 Log.d("1SearchClicked","------"+SearchClicked);
                 Log.d("1MapClicked","------"+MapClicked);
@@ -968,7 +972,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
             firstData=tokens[0];
             SecondData=tokens[1];
-            if(currentCategoryID==1)
+            compare_layout.setVisibility(View.GONE);
+            compare_layoutedu.setVisibility(View.VISIBLE);
+            compare_layoutedu.setBackgroundColor(Color.parseColor("#2F7281"));
                 compareEducation();}
 
         else {
