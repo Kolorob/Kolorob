@@ -930,13 +930,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
 
-//                    if(ListClicked.equals(true))
-//                    {
-//
-                       svsholder.setVisibility(View.VISIBLE);
-//                    }
-                    sv.setVisibility(View.VISIBLE);
+                   if(ListClicked.equals(true))
+                   {
 
+                       svsholder.setVisibility(View.VISIBLE);
+                   }
+                    sv.setVisibility(View.VISIBLE);
+                    svsholder.setVisibility(View.GONE);
                     svholder.setVisibility(View.VISIBLE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
