@@ -151,7 +151,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
-    RelativeLayout compare_layoutedu;
     public int layoutstatus;
     private Boolean list_expand=false;
     private TextView listOrMapDisplayText;
@@ -486,7 +485,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         shift=(TextView)findViewById(R.id.shift2);
         canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-       compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
+
         edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
         edtype1=(TextView)findViewById(R.id.eduType3);
         hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
@@ -687,7 +686,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     explist.setVisibility(View.GONE);
                     toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
-                    compare_layoutedu.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.VISIBLE);
                 }
                 if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
@@ -739,7 +737,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     explist.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
-                    compare_layoutedu.setVisibility(View.GONE);
                 }
                 toggleButton.setVisibility(View.VISIBLE);
                 map.setVisibility(View.VISIBLE);
@@ -785,7 +782,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     explist.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
-                compare_layoutedu.setVisibility(View.GONE);
 
                 Log.d("1SearchClicked","------"+SearchClicked);
                 Log.d("1MapClicked","------"+MapClicked);
@@ -807,7 +803,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
-               // Log.d("currentCategoryID",".------"+currentCategoryID);
+                Log.d("currentCategoryID",".------"+currentCategoryID);
                 if(currentCategoryID<1)
                 categoryListBuildUp(1);
                 else
@@ -972,9 +968,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
             firstData=tokens[0];
             SecondData=tokens[1];
-            compare_layout.setVisibility(View.GONE);
-            compare_layoutedu.setVisibility(View.VISIBLE);
-            compare_layoutedu.setBackgroundColor(Color.parseColor("#2F7281"));
+            if(currentCategoryID==1)
                 compareEducation();}
 
         else {
@@ -987,7 +981,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 if(checker==1)
                 {
                     SecondData=SecondData+comapreData.charAt(i);
-               // Log.d("===","second_data" +SecondData);
+                    Log.d("===","second_data" +SecondData);
                 }
                 else  if(comapreData.charAt(i)==' ')
                 {
@@ -995,7 +989,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 else
                     firstData=firstData+comapreData.charAt(i);
-          //  Log.d("===","firstData" +firstData);
+                Log.d("===","firstData" +firstData);
             }
             compareHealth();
         }
@@ -1337,7 +1331,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-                  //  Log.d("Sending refId","------"+refId);
+                    Log.d("Sending refId","------"+refId);
                     printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId, RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
@@ -1431,7 +1425,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 //ArrayList<String> printleg = null;
                 ArrayList<String> RefLegal = null;
                 RefLegal=subCategoryTableNews.getSubnameedu(29);
-                //("RefLegal","======"+RefLegal);
+                Log.d("RefLegal","======"+RefLegal);
 
                 groups.removeAllElements();
                // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
@@ -2045,11 +2039,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
     public void constructSubCategoryItemList(int cat_id,String header)
     {
-        Log.d("header","******" +header);
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
         //     Log.d("cat_id",">>>" +cat_id);
-
+        //   Log.d("header",">>>" +header);
           Log.d("======","catsss Id" +cat_id);
 
 
@@ -2061,6 +2054,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             itemName.add(si.getSubCatName());
         }
         int i=0;
+
 
 
         //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
@@ -2080,7 +2074,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ArrayList<SubCategoryItem> subCategoryItems;
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
         subCategoryItems=subCategoryTable.getAllSubCategoriesHeader(cat_id,header);
-
 
         return subCategoryItems;
     }
@@ -2126,15 +2119,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
             ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[ subcategory++]);
 
-            ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
+        ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
 
             lpIv.width = (int) (primaryIconWidth * dwPercentage);
 
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        Log.d("Subcategory_name","*******"+si.getSubCatHeaderBn());
-        tvName.setText(si.getSubcatHeader());
+        tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2333,26 +2325,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
-
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
 
 
                         }
-
-
                         for (int ss=0;ss<healthItem.size();ss++)
                         {
-                            ArrayList<HealthServiceProviderItemNew> arrayList=new ArrayList<>();
-                            arrayList.add(healthItem.get(ss));
                             HEL.add(healthItem.get(ss));
                         }
 
 
 
-                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
+                        //callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -2449,7 +2436,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // showSubCatListItem.setEnabled(true);
                 // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
-                Log.d("SubcategoryId","******"+si.getSubcatHeader());
             }
         });
 
@@ -2692,9 +2678,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
     private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
     {
-
-        Log.d("cat_id","####"+cat_id);
-        Log.d("header","####"+header);
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);

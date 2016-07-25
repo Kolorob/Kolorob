@@ -222,7 +222,7 @@ public class OpeningActivity extends Activity {
 //        else if(in == 8){
 //           // rotateImage.setBackgroundResource(R.drawable.glow);
 //            rotateImage.setBackgroundResource(R.drawable.a18);
-//            startActivity(new Intent(OpeningActivity.this, PlaceChoiceActivity2.class));
+//            startActivity(new Intent(OpeningActivity.this, PlaceSelectionActivity.class));
 //            mRedrawHandler.removeMessages(0);
 //            finish();
 //            System.out.println("-----okkkkk74--------" );
@@ -324,7 +324,7 @@ public class OpeningActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             Log.e("open4",String.valueOf(getCountofDb()));
-                            Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
+                            Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
                             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             startActivity(i);
 
@@ -360,7 +360,7 @@ public class OpeningActivity extends Activity {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
                                                 Log.e("open3",String.valueOf(countofDb));
-                                                Intent i = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class);
+                                                Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
                                                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                                                 startActivity(i);
                                                 dialog.dismiss();
@@ -401,7 +401,7 @@ public class OpeningActivity extends Activity {
 
 //                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 overridePendingTransition(0, 0);
-                Intent a = new Intent(OpeningActivity.this, PlaceChoiceActivity2.class); // Default Activity
+                Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                 startActivity(a);
 
                 //  finish();
@@ -615,7 +615,7 @@ public class OpeningActivity extends Activity {
                 if (db.isTableExists(db3,EDU_PROVIDER_TABLE)){
                     pd.dismiss();
                     Log.e("open1",String.valueOf(countofDb));
-                    Intent a = new Intent(getApplicationContext(),PlaceChoiceActivity2.class);//Default Activity
+                    Intent a = new Intent(getApplicationContext(),PlaceSelectionActivity.class);//Default Activity
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     //getApplicationContext().startActivity(a);

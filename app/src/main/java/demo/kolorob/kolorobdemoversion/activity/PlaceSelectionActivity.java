@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 
 public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener{
@@ -106,10 +108,16 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     t.cancel();
 //                if (y < ((float)height) / 2.0) {
                 if (mirpur10Hit) {
+                    Intent intent =new Intent(PlaceSelectionActivity.this,PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 1);
+                    startActivity(intent);
                     t = Toast.makeText(getApplicationContext(), "BAUNIABHAD!!!", Toast.LENGTH_SHORT);
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
+                    Intent intent =new Intent(PlaceSelectionActivity.this,PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 2);
+                    startActivity(intent);
                     t = Toast.makeText(getApplicationContext(), "PARIS ROAD!!!", Toast.LENGTH_SHORT);
                     anyHit = true;
 

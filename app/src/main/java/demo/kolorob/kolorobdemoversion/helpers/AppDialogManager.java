@@ -28,7 +28,7 @@ public class AppDialogManager {
                                             final RetryCallBackForNoInternet rc4NoInt) {
     try {
         AlertDialog.Builder b = new AlertDialog.Builder(context);
-        b.setMessage("No internet! Please connect to internet ...");
+        b.setMessage("আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
         b.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -37,7 +37,7 @@ public class AppDialogManager {
                 context.startActivity(intent);
             }
         });
-        b.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+        b.setPositiveButton("পুনরায় চেস্টা করুন", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
