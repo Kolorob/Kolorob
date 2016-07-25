@@ -1884,10 +1884,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
     public void constructSubCategoryItemList(int cat_id,String header)
     {
+        Log.d("header","******" +header);
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
         //     Log.d("cat_id",">>>" +cat_id);
-        //   Log.d("header",">>>" +header);
+
           Log.d("======","catsss Id" +cat_id);
 
 
@@ -1918,6 +1919,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ArrayList<SubCategoryItem> subCategoryItems;
         SubCategoryTable subCategoryTable = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
         subCategoryItems=subCategoryTable.getAllSubCategoriesHeader(cat_id,header);
+
 
         return subCategoryItems;
     }
@@ -1963,14 +1965,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
             ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[ subcategory++]);
 
-        ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
+            ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
 
             lpIv.width = (int) (primaryIconWidth * dwPercentage);
 
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        tvName.setText(si.getSubCatHeaderBn());
+        Log.d("Subcategory_name","*******"+si.getSubCatHeaderBn());
+        tvName.setText(si.getSubcatHeader());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2169,21 +2172,26 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubCatHeaderBn());
+                        Headerholder.add(si.getSubcatHeader());
                         for(int s=0;s<Headerholder.size();s++)
                         {
+
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
 
 
                         }
+
+
                         for (int ss=0;ss<healthItem.size();ss++)
                         {
+                            ArrayList<HealthServiceProviderItemNew> arrayList=new ArrayList<>();
+                            arrayList.add(healthItem.get(ss));
                             HEL.add(healthItem.get(ss));
                         }
 
 
 
-                        //callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
+                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -2523,6 +2531,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
     private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
     {
+
+        Log.d("cat_id","####"+cat_id);
+        Log.d("header","####"+header);
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
