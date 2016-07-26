@@ -2746,7 +2746,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTable = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-        int refId=subCategoryTableNew.getRefId(header);
+        int refId=subCategoryTableNew.getSubcategoryId(header);
         String refIds=String.valueOf(refId);
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
         return entertainmentServiceProvider;

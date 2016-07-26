@@ -89,7 +89,7 @@ public class EntertainmentServiceProviderTableNew {
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_LATITUDE + " TEXT, "
                 + KEY_LONGITUDE + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, "
+                + KEY_CATEGORY_ID + " TEXT, "
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_BREAKTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
@@ -174,7 +174,7 @@ public class EntertainmentServiceProviderTableNew {
                            String address,
                            String latitude,
                            String longitude,
-                           int categoryId,
+                           String categoryId,
                            String openingtime,
                            String breaktime,
                            String closingtime,
@@ -311,7 +311,7 @@ public class EntertainmentServiceProviderTableNew {
                              String address,
                              String latitude,
                              String longitude,
-                             int categoryId,
+                             String categoryId,
                              String openingtime,
                              String breaktime,
                              String closingtime,
@@ -601,7 +601,7 @@ public class EntertainmentServiceProviderTableNew {
                         cursor.getString(14),
                         cursor.getString(15),
                         cursor.getString(16),
-                        cursor.getInt(17),
+                        cursor.getString(17),
                         cursor.getString(18),
                         cursor.getString(19),
                         cursor.getString(20),
@@ -643,7 +643,7 @@ public class EntertainmentServiceProviderTableNew {
         String _address = cursor.getString(14);
         String _latitude = cursor.getString(15);
         String _longitude= cursor.getString(16);
-        int _categoryId= cursor.getInt(17);
+        String _categoryId= cursor.getString(17);
         String _openingtime=cursor.getString(18);
         String _breaktime=cursor.getString(19);
         String _closingtime=cursor.getString(20);
