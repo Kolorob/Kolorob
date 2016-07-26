@@ -72,10 +72,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
-            android:name=".activity.DetailsInfoActivityEntertainment_new"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
             android:name=".activity.DetailsFinancialActivity_new"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
