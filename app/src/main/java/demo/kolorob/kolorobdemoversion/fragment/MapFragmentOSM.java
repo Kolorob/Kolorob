@@ -485,6 +485,7 @@ setMapView(mapView);
         String CurrentString = subcategory;
         String[] separated = CurrentString.split(",");
         for (int i=0;i<separated.length;i++) {
+            subcategotyId= Integer.parseInt(separated[i]);
             if (subcategotyId == 129)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
             else if (subcategotyId == 131)

@@ -2352,7 +2352,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         }
 
 
-                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, ENT);
+                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, entItem);
                         break;
                     //TODO write necessary codes for entertainment
 
