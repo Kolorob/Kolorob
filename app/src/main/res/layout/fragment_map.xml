@@ -45,10 +45,11 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/transportlayout"
         android:id="@+id/transportdetailslayout"
         android:visibility="gone"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/catimagetop"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
 
@@ -64,7 +65,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_marginTop="60dp"
-    android:layout_height="80dp">
+    android:layout_height="120dp">
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
