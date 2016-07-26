@@ -18,14 +18,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,14 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -76,7 +67,8 @@ public class DetailsLayoutGovernment extends Activity {
 
     ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
 
-
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     private TextView ratingText;
     private TextView serviceDetails, result, training, tuition;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
@@ -253,7 +245,7 @@ public class DetailsLayoutGovernment extends Activity {
         ratingText.setTextSize(width / 25);
         ups_text.setText(governmentNewItem.getNamebn());
 
-        RelativeLayout.LayoutParams feedbacks = (RelativeLayout.LayoutParams) feedback.getLayoutParams();
+        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 6;
         feedbacks.width = width / 6;
         feedback.setLayoutParams(feedbacks);
@@ -438,7 +430,9 @@ public class DetailsLayoutGovernment extends Activity {
             rating=4;
         else
             rating=5;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+governmentNewItem.getFinId()+"&service="+"33"+"&rating="+rating;
+        String comment="";
+        comment=feedback_comment.getText().toString();
+        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

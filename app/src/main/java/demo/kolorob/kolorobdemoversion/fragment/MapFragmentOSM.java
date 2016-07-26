@@ -343,6 +343,7 @@ setMapView(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
     for(int i=0;i<tokens.length;i++) {
+        if (tokens[i]=="")continue;
         subcategotyId=Integer.parseInt(tokens[i]);
 
         if (subcategotyId ==179 ||subcategotyId ==163 ||subcategotyId ==161 ||subcategotyId ==123 ||subcategotyId ==145
@@ -517,6 +518,7 @@ setMapView(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         for(int i=0;i<tokens.length;i++) {
+            if (tokens[i]=="")continue;
             subcategotyId=Integer.parseInt(tokens[i]);
 
             if (subcategotyId ==177||subcategotyId ==125||subcategotyId ==124||subcategotyId ==13)

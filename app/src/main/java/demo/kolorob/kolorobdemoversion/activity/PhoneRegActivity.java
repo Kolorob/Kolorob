@@ -5,11 +5,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,9 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +37,8 @@ public class PhoneRegActivity extends Activity {
     ImageView close,kivabejabejob;
     TextView close_tv;
     ImageButton Feedback;
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     /**
      * Following components are only for LegalAid
      * For other categories this components may vary
@@ -102,7 +99,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://kolorob.net/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

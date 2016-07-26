@@ -112,6 +112,8 @@ public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -421,7 +423,7 @@ public class OpeningActivity extends Activity {
                 ) {
 
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
                     try {
@@ -441,17 +443,18 @@ public class OpeningActivity extends Activity {
 
                 }
             });
-            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
 
 
                                 try {
-                                    JSONObject jo = new JSONObject(apiContent);
-                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                        saveSubCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    savesubcat2(jo);
+
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -459,7 +462,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -481,7 +484,7 @@ public class OpeningActivity extends Activity {
 //
 //
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -500,7 +503,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -529,7 +532,7 @@ public class OpeningActivity extends Activity {
             );
 
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
                     try {
@@ -548,7 +551,7 @@ public class OpeningActivity extends Activity {
 
                 }
             });
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -565,7 +568,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -584,7 +587,7 @@ public class OpeningActivity extends Activity {
             );
 
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             try {
@@ -978,6 +981,8 @@ public class OpeningActivity extends Activity {
     }
 
 
+
+
     private void savesubcat(JSONArray subcat ) {
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(OpeningActivity.this);
 
@@ -992,6 +997,29 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = subcat.getJSONObject(i);
                 SubCategoryItemNew et = SubCategoryItemNew.parseSubCategoryItem(jo);
                 subCategoryTableNew.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+    }
+    private void savesubcat2(JSONArray subcat ) {
+        SubCategoryTable subCategoryTable=new SubCategoryTable(OpeningActivity.this);
+
+
+
+        subCategoryTable.dropTable();
+
+        int legalaidServiceProviderCount = subcat.length();
+
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+            try {
+                JSONObject jo = subcat.getJSONObject(i);
+                SubCategoryItem et = SubCategoryItem.parseSubCategoryItem(jo);
+                subCategoryTable.insertItem(et);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -2135,7 +2135,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
         Log.d("Subcategory_name","*******"+si.getSubCatHeaderBn());
-        tvName.setText(si.getSubcatHeader());
+        tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;

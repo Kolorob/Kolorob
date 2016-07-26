@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +54,8 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
  */
 public class DetailsLayoutFinance extends Activity {
     Dialog dialog;
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
     ImageView left_image, middle_image, right_image, email_btn;
     TextView address_text, phone_text, email_text;
@@ -253,7 +254,7 @@ EditText feedback_comment;
         ratingText.setTextSize(width / 25);
         ups_text.setText(financialNewItem.getNamebn());
 
-       RelativeLayout.LayoutParams feedbacks = (RelativeLayout.LayoutParams) feedback.getLayoutParams();
+        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 6;
         feedbacks.width = width / 6;
         feedback.setLayoutParams(feedbacks);
@@ -439,7 +440,9 @@ EditText feedback_comment;
             rating=4;
         else
             rating=5;
-        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+financialNewItem.getFinId()+"&service="+"11"+"&rating="+rating;
+        String comment="";
+        comment=feedback_comment.getText().toString();
+        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

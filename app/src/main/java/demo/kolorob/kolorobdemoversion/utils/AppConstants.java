@@ -97,10 +97,10 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
     //region Keys of the activity data-passing extras
     public static final String KEY_CAT_OBJ = "category_object";
     public static final String KEY_PLACE = "place";
-    public static final String BAUNIABADH = "বাউনিয়া বাঁধ";
+    public static final String BAUNIABADH = "মিরপুর ১১";
     public static final String WAITTAG = "একটু অপেক্ষা করুন";
     public static final String WAITDET = "তথ্য সংগ্রহ হচ্ছে.....";
-    public static final String PARIS_ROAD = "প্যারিস রোড";
+    public static final String PARIS_ROAD = "মিরপুর ১০";
     public static final int PLACE_BAUNIABADH = 1;
     public static final int PLACE_PARIS_ROAD = 2;
     //endregion
