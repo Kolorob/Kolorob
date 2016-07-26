@@ -1394,6 +1394,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                    // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
                     //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
 
+                    printnameshea = healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
                     printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));

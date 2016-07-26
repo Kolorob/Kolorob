@@ -1154,7 +1154,9 @@ public class HealthServiceProviderItemNew implements Serializable {
 
 
 
-        category=jo.getString("category");
+        category=jo.getString("sub_categories");
+        category=category.replace('[',',');
+        category=category.replace(']',',');
         references=jo.getString("references");
         references=references.replace('[',',');
         references=references.replace(']',',');
