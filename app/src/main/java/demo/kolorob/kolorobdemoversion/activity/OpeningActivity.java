@@ -112,8 +112,8 @@ public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
-    String user="username";
-    String pass="password";
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
