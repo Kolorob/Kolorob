@@ -157,6 +157,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private TextView listOrMapDisplayText;
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
     private Toolbar toolbar;
+    TextView health_name2,opening_time2,language_spoken2,service_type2,specialist_available2,clean_facilities2,privacy2,quality_equipment2;
+    TextView health_name1,opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1;
+    TextView health_name3,opening_time3,language_spoken3,service_type3,specialist_available3,clean_facilities3,privacy3,quality_equipment3;
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
     TextView edu_name_ban2,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
@@ -474,7 +477,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-        edu_name_ban=(TextView)findViewById(R.id.health_name2);
+        health_name2=(TextView)findViewById(R.id.health_name2);
         opening_time2=(TextView)findViewById(R.id.opening_time2);
         language_spoken2=(TextView)findViewById(R.id.language_spoken2);
         service_type2=(TextView)findViewById(R.id.service_type2);
@@ -482,12 +485,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         clean_facilities2=(TextView)findViewById(R.id.clean_facilities2);
         privacy2=(TextView)findViewById(R.id.privacy2);
         quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
-
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
         compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
-
-
-
         health_name3=(TextView)findViewById(R.id.health_name3);
         opening_time3=(TextView)findViewById(R.id.opening_time3);
         language_spoken3=(TextView)findViewById(R.id.language_spoken3);
@@ -496,9 +495,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         clean_facilities3=(TextView)findViewById(R.id.clean_facilities3);
         privacy3=(TextView)findViewById(R.id.privacy3);
         quality_equipment3=(TextView)findViewById(R.id.quality_equipment3);
-
-
-    //    edu_name_ban2=(TextView)findViewById(R.id.edu_name_ban1);
         opening_time1=(TextView)findViewById(R.id.opening_time1);
         language_spoken1=(TextView)findViewById(R.id.language_spoken1);
         service_type1=(TextView)findViewById(R.id.service_type1);
