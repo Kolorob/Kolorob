@@ -101,7 +101,6 @@
             android:name=".activity.DetailsLayoutGovernment"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />
         <activity android:name=".activity.FeedBackActivityNew" />
