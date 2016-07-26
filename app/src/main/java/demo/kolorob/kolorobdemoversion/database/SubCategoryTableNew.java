@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -214,7 +215,7 @@ public class SubCategoryTableNew {
 
     public int  getRefId(String name) {
         int ids=0;
-      //   Log.d("Ent Name","------"+name);
+        Log.d("Ent Name","######"+name);
 
         SQLiteDatabase db = openDB();
 
@@ -223,7 +224,7 @@ public class SubCategoryTableNew {
         if (cursor.moveToFirst()) {
             do {
                  ids = cursor.getInt(5);
-              //  Log.d("cursor","======"+ids);
+                Log.d("cursor","######"+ids);
             } while (cursor.moveToNext());
         }
 

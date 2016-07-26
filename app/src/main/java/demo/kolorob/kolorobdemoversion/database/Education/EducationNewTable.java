@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -366,6 +367,8 @@ public class EducationNewTable {
     public ArrayList<EducationNewItem> getAllEducationSubCategoriesInfoWithHead(String header) {
 
 
+       // Log.d("cat_id","####"+cat_id);
+        Log.d("header/Query****","####"+header);
         int[] k = new int[100];
         ArrayList<EducationNewItem> nameslist = new ArrayList<>();
         ArrayList<Integer> s = new ArrayList<Integer>();

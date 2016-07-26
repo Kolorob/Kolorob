@@ -2330,6 +2330,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
                       callMapFragmentWithEducationInfo(si.getSubCatHeaderBn(), cat_id, EDD);
+
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
@@ -2575,7 +2576,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
 
     private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header)
+
     {
+
+        Log.d("cat_id","####"+cat_id);
+        Log.d("header","####"+header);
         ArrayList<EducationNewItem> educationNewItems;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
         educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
@@ -2595,6 +2600,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
+       // EDD.clear();
     }
 
     private void callMapFragment(int locationNameId) {
