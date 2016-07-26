@@ -241,11 +241,11 @@ setMapView(mapView);
             case AppConstants.ENTERTAINMENT:
                 for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId = et.getEntSubCategoryId();
+                     String subcategotyId = et.getCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), et.getNodeEmail());
+                    drawMarkerEnt(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), subcategotyId);
                 }
                 break;
             case AppConstants.GOVERNMENT:
@@ -479,28 +479,29 @@ setMapView(mapView);
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        Log.d("subcategotyId23","******" +subcategotyId23);
         String subcategory;
         subcategory=subcategotyId23.substring(1);
         String CurrentString = subcategory;
         String[] separated = CurrentString.split(",");
-        if (subcategotyId == 1)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-
-        else if (subcategotyId == 2 || subcategotyId == 5 || subcategotyId == 21)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-        else if (subcategotyId == 3)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-        else if (subcategotyId == 4 || subcategotyId == 6 || subcategotyId == 7 || subcategotyId == 8)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-        else if (subcategotyId >= 9 && subcategotyId <= 11)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
-        else if (subcategotyId == 12)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
-        else if (subcategotyId == 13 || subcategotyId == 14 || subcategotyId == 16 || subcategotyId == 19 || subcategotyId == 20)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_7));
-        else if (subcategotyId == 15 || subcategotyId == 17 || subcategotyId == 18)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
-
+        for (int i=0;i<separated.length;i++) {
+            if (subcategotyId == 129)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            else if (subcategotyId == 131)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            else if (subcategotyId == 106)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            else if (subcategotyId == 15)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            else if (subcategotyId == 18)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            else if (subcategotyId == 112)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            else if (subcategotyId == 23)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_7));
+            else if (subcategotyId == 27)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+        }
 
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
         marker.setInfoWindow(infoWindow);

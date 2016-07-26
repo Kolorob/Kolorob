@@ -241,7 +241,7 @@ public class SubCategoryTableNew {
 
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_SUB_CAT_HEADER_EN+" = '"+name+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_SUB_CAT_HEADER_BN+" = '"+name+"'", null);
 
         if (cursor.moveToFirst()) {
             do {

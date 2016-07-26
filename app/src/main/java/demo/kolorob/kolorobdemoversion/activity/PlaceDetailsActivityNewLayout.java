@@ -329,7 +329,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         NavigationCalled=false;
         NavigationCalledOnce=false;
-        /// Log.d(">>>>>>","You are in onResume");
 
         val = settings.getInt("KValue", 0);
         Log.e("ASinplaceDetails",String.valueOf(val));
@@ -436,7 +435,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //  Log.d(">>>>","test_dpi "+dpi);
         // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
@@ -559,7 +557,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-        //Log.d(">>>>>>>>","View_width       "+s);
         /**
          * constructing category list
          **/
@@ -782,10 +779,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     compare_layout.setVisibility(View.GONE);
                 compare_layoutedu.setVisibility(View.GONE);
 
-                Log.d("1SearchClicked","------"+SearchClicked);
-                Log.d("1MapClicked","------"+MapClicked);
-                Log.d("1ListClicked","------"+ListClicked);
-                Log.d("1CompareClicked","------"+CompareClicked);
 
                 svs.setVisibility(View.VISIBLE);
                 svholder.setVisibility(View.VISIBLE);
@@ -802,7 +795,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 list_expand = true;
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
-               // Log.d("currentCategoryID",".------"+currentCategoryID);
                 if(currentCategoryID<1)
                 categoryListBuildUp(1);
                 else
@@ -826,7 +818,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         CompareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("====", "CategoryId at compare" + currentCategoryID);
 
                 if(currentCategoryID==1||currentCategoryID==2)
                 {
@@ -982,7 +973,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 if(checker==1)
                 {
                     SecondData=SecondData+comapreData.charAt(i);
-               // Log.d("===","second_data" +SecondData);
                 }
                 else  if(comapreData.charAt(i)==' ')
                 {
@@ -990,7 +980,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
                 else
                     firstData=firstData+comapreData.charAt(i);
-          //  Log.d("===","firstData" +firstData);
             }
             compareHealth();
         }
@@ -1322,20 +1311,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
                 currentCategoryID = cat_id;
                 EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-               // ArrayList<String> printent = null;
                 ArrayList<String> RefEnt = null;
                 groups.removeAllElements();
                 RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
                 printnamesent=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
 
-              //  printent = subCategoryTable2.getSubnameedu(currentCategoryID, head);
                 for (int j = 0; j < RefEnt.size(); j++) {
                     Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-                  //  Log.d("Sending refId","------"+refId);
-                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId, RefEnt.get(j), placeChoice);
+                    printnamesent = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo();
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
@@ -2043,12 +2029,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     }
     public void constructSubCategoryItemList(int cat_id,String header)
     {
-        Log.d("header","******" +header);
+
         ArrayList<SubCategoryItem> subCategoryItems;
         subCategoryItems = constructSubCategoryListItem(cat_id,header);
-        //     Log.d("cat_id",">>>" +cat_id);
 
-          Log.d("======","catsss Id" +cat_id);
 
 
 
@@ -2093,7 +2077,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             if(!header.contains(si.getSubcatHeader()))
             {
                 header.add(si.getSubcatHeader());
-
                 llSubCatListHolder.addView(getSubCategoryListItemView(si,dwPercentage,cat_id));
             }
         }
@@ -2741,10 +2724,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItemForHeader(int cat_id, String header)
     {
         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
+        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider1;
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTable = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         int refId=subCategoryTableNew.getSubcategoryId(header);
         String refIds=String.valueOf(refId);
+        Log.d("SubcatHeader","@@@@@@"+refId);
+        entertainmentServiceProvider1 = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
+
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
         return entertainmentServiceProvider;
     }
@@ -2810,7 +2797,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
 
-        Log.d("subcategotyId_Legal","======="+legalaidServiceProvider);
+
         return legalaidServiceProvider;
     }
 
@@ -3183,7 +3170,6 @@ NavigationCalled=true;
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
 
-        /// Log.d(">>>>>>","You are in onResume");
         if (NavigationCalledOnce==true)
         {
             callMapFragment(locationNameId);
@@ -3252,7 +3238,6 @@ NavigationCalled=true;
     @Override
     protected void onPause() {
         super.onPause();
-        // Log.d(">>>>>>","You are in onPause");
     }
 
 
