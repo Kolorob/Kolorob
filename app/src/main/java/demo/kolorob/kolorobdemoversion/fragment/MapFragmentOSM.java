@@ -51,6 +51,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by israt.jahan on 5/5/2016.
+ * Modified By Arafat
 
  */
 public class MapFragmentOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
@@ -420,9 +421,9 @@ setMapView(mapView);
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId >= 1 && subcategotyId <= 7)
+            if (subcategotyId == 3 || subcategotyId == 4|| subcategotyId == 8|| subcategotyId == 84|| subcategotyId == 95|| subcategotyId == 96|| subcategotyId == 162)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId >= 8 && subcategotyId <= 12)
+            else if (subcategotyId == 10 || subcategotyId == 81||subcategotyId == 88 || subcategotyId == 109||subcategotyId == 127)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
             else if (subcategotyId >= 13 && subcategotyId <= 15)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
