@@ -36,10 +36,10 @@ android:layout_weight="10"
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/government"/>
+                    android:background="@drawable/government_t"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@ android:layout_weight="10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/service_logo"
-                    android:background="@drawable/school_logo_default"/>
+                    android:background="@drawable/blank_logo_details"/>
 
             </LinearLayout>
 
@@ -122,7 +122,7 @@ android:layout_weight="10"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:id="@+id/ratingText"
-                            android:text="Rating: "
+                            android:text="@string/rating"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/ratingBar"
                             android:layout_toStartOf="@+id/ratingBar" />
