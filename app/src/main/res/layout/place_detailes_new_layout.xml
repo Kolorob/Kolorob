@@ -162,7 +162,6 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/clean_facilities"
                         android:id="@+id/clean_facilities1" />
 
                 </LinearLayout>
@@ -510,7 +509,6 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:padding="5dp"
-                        android:text="@string/privacy"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                 </LinearLayout>
 
@@ -577,7 +575,6 @@
 
                         android:textColor="@color/white"
                         android:padding="5dp"
-                        android:text="@string/quality_equipment"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                 </LinearLayout>
 
@@ -651,10 +648,10 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:id="@+id/course_provided1_1"
+                    android:id="@+id/cost111_1"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/course_provided1"
+                        android:id="@+id/cost1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -681,7 +678,7 @@
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/course_provided2"
+                            android:id="@+id/cost2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -700,7 +697,7 @@
 
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/course_provided3"
+                            android:id="@+id/cost3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -723,147 +720,7 @@
 
 
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/shift1_1"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/shift1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:padding="5dp"
-                        android:text="@string/shift"
-                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:id="@+id/shift1_11"
-
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
-                        android:gravity="center"
-
-                        android:layout_weight="0.5"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/shift2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-
-                            android:padding="5dp"
-                            android:text="TextView"
-                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
-                        android:gravity="center"
-
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/shift3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-
-                            android:padding="5dp"
-                            android:text="TextView"
-                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-
-
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:id="@+id/canteen_facility_1"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/canteen_facility1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:padding="5dp"
-                        android:text="@string/canteen_facility"
-                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:id="@+id/canteen_facility_11"
-
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/custom_border"
-                        android:gravity="center"
-                        android:layout_weight="0.5"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/canteen_facility2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-
-                            android:padding="5dp"
-                            android:text="TextView"
-                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:gravity="center"
-
-                        android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
-
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/canteen_facility3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:padding="5dp"
-                            android:text="TextView"
-                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
 
 
 

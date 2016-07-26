@@ -158,7 +158,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
     private Toolbar toolbar;
     TextView health_name2,opening_time2,language_spoken2,service_type2,specialist_available2,clean_facilities2,privacy2,quality_equipment2;
-    TextView health_name1,opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1;
+    TextView health_name1,opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1,cost1,cost2,cost3;
     TextView health_name3,opening_time3,language_spoken3,service_type3,specialist_available3,clean_facilities3,privacy3,quality_equipment3;
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
@@ -485,6 +485,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         clean_facilities2=(TextView)findViewById(R.id.clean_facilities2);
         privacy2=(TextView)findViewById(R.id.privacy2);
         quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
+        cost2=(TextView)findViewById(R.id.cost2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
         compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
         health_name3=(TextView)findViewById(R.id.health_name3);
@@ -495,6 +496,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         clean_facilities3=(TextView)findViewById(R.id.clean_facilities3);
         privacy3=(TextView)findViewById(R.id.privacy3);
         quality_equipment3=(TextView)findViewById(R.id.quality_equipment3);
+        cost3=(TextView)findViewById(R.id.cost3);
         opening_time1=(TextView)findViewById(R.id.opening_time1);
         language_spoken1=(TextView)findViewById(R.id.language_spoken1);
         service_type1=(TextView)findViewById(R.id.service_type1);
@@ -502,7 +504,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         clean_facilities1=(TextView)findViewById(R.id.clean_facilities1);
         privacy1=(TextView)findViewById(R.id.privacy1);
         quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
-
+        cost1=(TextView)findViewById(R.id.cost1);
 
 
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
@@ -1004,15 +1006,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
 
 
-
-        edtype2.setText("খোলার সময়");
-        hostel_facility2.setText("প্রচলিত ভাষা");
-        transport_facility2.setText("সেবার খরচ");
-        playground2.setText("সেবার ধরন");
-        total_students2.setText("বিশেষজ্ঞের ধরন");
-        total_classes2.setText("পরিষ্কার পরিচ্ছন্নতা");
-        total_teachers2.setText("গোপনীয়তা");
-        course_provided2.setText("ভাল সুবিধা এবং যন্ত্রপাতি");
+        opening_time1.setText("খোলার সময়");
+        language_spoken1.setText("প্রচলিত ভাষা");
+        service_type1.setText("সেবার ধরন");
+        specialist_available1.setText("বিশেষজ্ঞের ধরন");
+        clean_facilities1.setText("পরিষ্কার পরিচ্ছন্নতা");
+        privacy1.setText("গোপনীয়তা");
+        quality_equipment1.setText("ভাল সুবিধা এবং যন্ত্রপাতি");
+        cost1.setText("সেবার খরচ");
         shift1_11.setVisibility(View.GONE);
         shift1_1.setVisibility(View.GONE);
         canteen_facility_1.setVisibility(View.GONE);
@@ -1036,102 +1037,102 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
                 secondSpecialistItem = secondSpecialistItem + healthSpecialistItemDetails.getSpecialisttype() + ", ";
             }
-    }
+        }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
             if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
-                edu_name_ban.setText("X");
+                health_name3.setText("X");
             else
-            edu_name_ban.setText(healthServiceProviderItemNew.getNode_bn());
+                health_name3.setText(healthServiceProviderItemNew.getNode_bn());
 
             if(healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")||healthServiceProviderItemNew.getOpening_time()==null)
-                edtype.setText("X");
+                opening_time3.setText("X");
             else
-            edtype.setText(healthServiceProviderItemNew.getOpening_time());
+                opening_time3.setText(healthServiceProviderItemNew.getOpening_time());
 
             if(healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
-                hostel_facility.setText("X");
+                language_spoken3.setText("X");
             else
-            hostel_facility.setText(healthServiceProviderItemNew.getSpoken_lang());
+                language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
 
             if(healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null")||healthServiceProviderItemNew.getGeneral_cost()==null)
-                transport_facility.setText("X");
+                service_type3.setText("X");
             else
-            transport_facility.setText(healthServiceProviderItemNew.getGeneral_cost());
+                service_type3.setText(healthServiceProviderItemNew.getGeneral_cost());
 
             if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
-                playground.setText("X");
+                specialist_available3.setText("X");
             else
-            playground.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+                specialist_available3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
 
             if(firstSpecialistItem==null || firstSpecialistItem.length()==0)
-                total_students.setText("X");
+                clean_facilities3.setText("X");
             else
-            total_students.setText(firstSpecialistItem);
+                clean_facilities3.setText(firstSpecialistItem);
 
             if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
-                total_classes.setText("X");
+                privacy3.setText("X");
             else
-            total_classes.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+                privacy3.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
 
             if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
-                total_teachers.setText("X");
+                quality_equipment3.setText("X");
             else
-            total_teachers.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+                quality_equipment3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
 
             if(healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null") || healthServiceProviderItemNew.getQuality_equipments()==null )
-                course_provided.setText("X");
+                cost3.setText("X");
             else
-            course_provided.setText(healthServiceProviderItemNew.getQuality_equipments());
+                cost3.setText(healthServiceProviderItemNew.getQuality_equipments());
 
         }
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
 
             if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
-                edu_name_ban1.setText("X");
+                health_name2.setText("X");
             else
-            edu_name_ban1.setText(healthServiceProviderItemNew.getNode_bn());
-
+                health_name2.setText(healthServiceProviderItemNew.getNode_bn());
             if(healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")|| healthServiceProviderItemNew.getOpening_time()==null)
-                edtype1.setText("X");
+                opening_time2.setText("X");
             else
-            edtype1.setText(healthServiceProviderItemNew.getOpening_time());
+                opening_time2.setText(healthServiceProviderItemNew.getOpening_time());
 
             if(healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
-                hostel_facility1.setText("X");
+                language_spoken2.setText("X");
             else
-            hostel_facility1.setText(healthServiceProviderItemNew.getSpoken_lang());
+                language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
 
             if(healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null")||healthServiceProviderItemNew.getGeneral_cost()==null)
-                transport_facility1.setText("X");
+                service_type2.setText("X");
             else
-            transport_facility1.setText(healthServiceProviderItemNew.getGeneral_cost());
+                service_type2.setText(healthServiceProviderItemNew.getGeneral_cost());
 
             if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
-                playground1.setText("X");
+                specialist_available2.setText("X");
             else
-            playground1.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+                specialist_available2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
 
             if(secondSpecialistItem==null || secondSpecialistItem.length()==0)
-                total_students1.setText("X");
+                clean_facilities2.setText("X");
             else
-            total_students1.setText(secondSpecialistItem);
+                clean_facilities2.setText(secondSpecialistItem);
 
             if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")|| String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
-                total_classes1.setText("X");
+                privacy2.setText("X");
             else
-            total_classes1.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
+                privacy2.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
 
             if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null") || String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
-                total_teachers1.setText("X");
+                quality_equipment2.setText("X");
             else
-            total_teachers1.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+                quality_equipment2.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
 
             if(healthServiceProviderItemNew.getQuality_equipments()==null || healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
-              course_provided1.setText("X");
+                cost2.setText("X");
             else
-                course_provided1.setText(healthServiceProviderItemNew.getQuality_equipments());
+                cost2.setText(healthServiceProviderItemNew.getQuality_equipments());
+
 
 
 
