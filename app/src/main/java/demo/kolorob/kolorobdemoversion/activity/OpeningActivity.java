@@ -441,17 +441,18 @@ public class OpeningActivity extends Activity {
 
                 }
             });
-            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
 
 
                                 try {
-                                    JSONObject jo = new JSONObject(apiContent);
-                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                        saveSubCategoryList(jo.getJSONArray(AppConstants.KEY_DATA));
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    savesubcat2(jo);
+
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -978,6 +979,8 @@ public class OpeningActivity extends Activity {
     }
 
 
+
+
     private void savesubcat(JSONArray subcat ) {
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(OpeningActivity.this);
 
@@ -992,6 +995,29 @@ public class OpeningActivity extends Activity {
                 JSONObject jo = subcat.getJSONObject(i);
                 SubCategoryItemNew et = SubCategoryItemNew.parseSubCategoryItem(jo);
                 subCategoryTableNew.insertItem(et);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+    }
+    private void savesubcat2(JSONArray subcat ) {
+        SubCategoryTable subCategoryTable=new SubCategoryTable(OpeningActivity.this);
+
+
+
+        subCategoryTable.dropTable();
+
+        int legalaidServiceProviderCount = subcat.length();
+
+        for (int i = 0; i < legalaidServiceProviderCount; i++) {
+            try {
+                JSONObject jo = subcat.getJSONObject(i);
+                SubCategoryItem et = SubCategoryItem.parseSubCategoryItem(jo);
+                subCategoryTable.insertItem(et);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
