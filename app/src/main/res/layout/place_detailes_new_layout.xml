@@ -40,69 +40,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-android:visibility="gone"
+                android:visibility="gone"
                 android:id="@+id/compare_layout"
 
-               >
-
-                <!--android:visibility="gone"-->
-                <!--<LinearLayout-->
-                    <!--android:orientation="horizontal"-->
-                    <!--android:id="@+id/header_compare"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content">-->
-
-
-                    <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:id="@+id/first_screen_logo"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:layout_height="wrap_content">-->
-
-                        <!--<ImageView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:background="@drawable/school_logo_default"-->
-                            <!--android:id="@+id/first_screen_logo_image"-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--/>-->
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:id="@+id/compare_logo"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content">-->
-
-                        <!--<ImageView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:background="@drawable/compare_logo_default"-->
-
-                            <!--android:id="@+id/compare_logo_image"-->
-                            <!--/>-->
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:id="@+id/second_school_logo"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content">-->
-
-                        <!--<ImageView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:background="@drawable/school_logo_default"-->
-
-
-                            <!--android:id="@+id/second_school_logo_image"-->
-                            <!--/>-->
-                    <!--</LinearLayout>-->
+                >
 
 
 
-                <!--</LinearLayout>-->
 
 
                 <LinearLayout
@@ -171,7 +115,7 @@ android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/edu_name_ban2"
+                            android:id="@+id/health_name2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -193,7 +137,7 @@ android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/edu_name_ban3"
+                            android:id="@+id/health_name3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -218,8 +162,8 @@ android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/total_students"
-                        android:id="@+id/total_students1" />
+                        android:text="@string/clean_facilities"
+                        android:id="@+id/clean_facilities1" />
 
                 </LinearLayout>
 
@@ -237,7 +181,7 @@ android:visibility="gone"
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/ttl_students"
+                            android:id="@+id/clean_facilities2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -257,7 +201,7 @@ android:visibility="gone"
 
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/total_students3"
+                            android:id="@+id/clean_facilities3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -281,7 +225,7 @@ android:visibility="gone"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/eduType1"
+                        android:id="@+id/opening_time1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -307,7 +251,7 @@ android:visibility="gone"
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/eduType2"
+                            android:id="@+id/opening_time2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -327,7 +271,7 @@ android:visibility="gone"
 
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/eduType3"
+                            android:id="@+id/opening_time3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -351,7 +295,7 @@ android:visibility="gone"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/hostel_facility1"
+                        android:id="@+id/language_spoken1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -377,7 +321,7 @@ android:visibility="gone"
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/hostel_facility2"
+                            android:id="@+id/language_spoken2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -396,7 +340,7 @@ android:visibility="gone"
 
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/hostel_facility3"
+                            android:id="@+id/language_spoken3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -415,11 +359,11 @@ android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:id="@+id/transport_facility1_l"
+                    android:id="@+id/service_type1_l"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/transport_facility1"
+                        android:id="@+id/service_type1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -444,7 +388,7 @@ android:visibility="gone"
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/transport_facility2"
+                            android:id="@+id/service_type2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -464,7 +408,7 @@ android:visibility="gone"
 
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/transport_facility3"
+                            android:id="@+id/service_type3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -480,93 +424,21 @@ android:visibility="gone"
 
 
                 <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:id="@+id/playground1_l"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/playground1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-
-
-                            android:padding="5dp"
-                            android:text="@string/playground"
-                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:background="@drawable/custom_border"
-                            android:gravity="center"
-
-                            android:layout_weight="0.5"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/playground2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="0.5"
-                            android:background="@drawable/custom_border2"
-                            android:gravity="center"
-
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/playground3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                        </LinearLayout>
-
-
-
-                    </LinearLayout>
-
-
-
-
-
-
-                <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:id="@+id/total_classes_l"
+                    android:id="@+id/specialist_available1_l"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/total_classes1"
+                        android:id="@+id/specialist_available1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
+
+
                         android:padding="5dp"
-                        android:text="@string/total_classes"
+                        android:text="@string/playground"
                         android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
                 </LinearLayout>
 
@@ -585,7 +457,7 @@ android:visibility="gone"
                         android:layout_weight="0.5"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/total_classes2"
+                            android:id="@+id/specialist_available2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -605,7 +477,79 @@ android:visibility="gone"
 
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/total_classes3"
+                            android:id="@+id/specialist_available3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/privacy_l"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/privacy1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="5dp"
+                        android:text="@string/privacy"
+                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border"
+                        android:gravity="center"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/privacy2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border2"
+                        android:gravity="center"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/privacy3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -618,75 +562,75 @@ android:visibility="gone"
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+
+                    android:id="@+id/quality_equipment1_1"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/quality_equipment1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/white"
+                        android:padding="5dp"
+                        android:text="@string/quality_equipment"
+                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border"
                         android:gravity="center"
 
-                        android:id="@+id/total_teachers1_1"
+                        android:layout_weight="0.5"
                         android:layout_height="wrap_content">
-
                         <TextView
-                            android:id="@+id/total_teachers1"
+                            android:id="@+id/quality_equipment2"
                             android:layout_width="wrap_content"
+                            android:textColor="@color/white"
+
                             android:layout_height="wrap_content"
 
-                            android:textColor="@color/white"
                             android:padding="5dp"
-                            android:text="@string/total_teachers"
+                            android:text="TextView"
                             android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border2"
+                        android:gravity="center"
+
                         android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/quality_equipment3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:background="@drawable/custom_border"
-                            android:gravity="center"
-
-                            android:layout_weight="0.5"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/total_teachers2"
-                                android:layout_width="wrap_content"
-                                android:textColor="@color/white"
-
-                                android:layout_height="wrap_content"
-
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="0.5"
-                            android:background="@drawable/custom_border2"
-                            android:gravity="center"
-
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/total_teachers3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-
-                                android:padding="5dp"
-                                android:text="TextView"
-                                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-
-                        </LinearLayout>
-
-
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                     </LinearLayout>
+
+
+
+                </LinearLayout>
 
 
 
@@ -927,6 +871,7 @@ android:visibility="gone"
 
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"

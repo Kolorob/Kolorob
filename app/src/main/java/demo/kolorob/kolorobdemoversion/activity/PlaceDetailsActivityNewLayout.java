@@ -474,42 +474,39 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban2);
-        edtype=(TextView)findViewById(R.id.eduType2);
-        hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
-        transport_facility=(TextView)findViewById(R.id.transport_facility2);
-        playground=(TextView)findViewById(R.id.playground2);
-        total_students=(TextView)findViewById(R.id.ttl_students);
-        total_classes=(TextView)findViewById(R.id.total_classes2);
-        total_teachers=(TextView)findViewById(R.id.total_teachers2);
-        course_provided=(TextView)findViewById(R.id.course_provided2);
-        shift=(TextView)findViewById(R.id.shift2);
-        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
+        edu_name_ban=(TextView)findViewById(R.id.health_name2);
+        opening_time2=(TextView)findViewById(R.id.opening_time2);
+        language_spoken2=(TextView)findViewById(R.id.language_spoken2);
+        service_type2=(TextView)findViewById(R.id.service_type2);
+        specialist_available2=(TextView)findViewById(R.id.specialist_available2);
+        clean_facilities2=(TextView)findViewById(R.id.clean_facilities2);
+        privacy2=(TextView)findViewById(R.id.privacy2);
+        quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
+
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-       compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
-        edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
-        edtype1=(TextView)findViewById(R.id.eduType3);
-        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
-        transport_facility1=(TextView)findViewById(R.id.transport_facility3);
-        playground1=(TextView)findViewById(R.id.playground3);
-        total_students1=(TextView)findViewById(R.id.total_students3);
-        total_classes1=(TextView)findViewById(R.id.total_classes3);
-        total_teachers1=(TextView)findViewById(R.id.total_teachers3);
-        course_provided1=(TextView)findViewById(R.id.course_provided3);
-        shift1=(TextView)findViewById(R.id.shift3);
-        canteen_facility1=(TextView)findViewById(R.id.canteen_facility3);
+        compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
+
+
+
+        health_name3=(TextView)findViewById(R.id.health_name3);
+        opening_time3=(TextView)findViewById(R.id.opening_time3);
+        language_spoken3=(TextView)findViewById(R.id.language_spoken3);
+        service_type3=(TextView)findViewById(R.id.service_type3);
+        specialist_available3=(TextView)findViewById(R.id.specialist_available3);
+        clean_facilities3=(TextView)findViewById(R.id.clean_facilities3);
+        privacy3=(TextView)findViewById(R.id.privacy3);
+        quality_equipment3=(TextView)findViewById(R.id.quality_equipment3);
+
 
     //    edu_name_ban2=(TextView)findViewById(R.id.edu_name_ban1);
-        edtype2=(TextView)findViewById(R.id.eduType1);
-        hostel_facility2=(TextView)findViewById(R.id.hostel_facility1);
-        transport_facility2=(TextView)findViewById(R.id.transport_facility1);
-        playground2=(TextView)findViewById(R.id.playground1);
-        total_students2=(TextView)findViewById(R.id.total_students1);
-        total_classes2=(TextView)findViewById(R.id.total_classes1);
-        total_teachers2=(TextView)findViewById(R.id.total_teachers1);
-        course_provided2=(TextView)findViewById(R.id.course_provided1);
-        shift2=(TextView)findViewById(R.id.shift1);
-        canteen_facility2=(TextView)findViewById(R.id.canteen_facility1);
+        opening_time1=(TextView)findViewById(R.id.opening_time1);
+        language_spoken1=(TextView)findViewById(R.id.language_spoken1);
+        service_type1=(TextView)findViewById(R.id.service_type1);
+        playground2=(TextView)findViewById(R.id.specialist_available1);
+        total_students2=(TextView)findViewById(R.id.clean_facilities1);
+        total_classes2=(TextView)findViewById(R.id.privacy1);
+        total_teachers2=(TextView)findViewById(R.id.quality_equipment1);
+
 
 
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
@@ -1003,6 +1000,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
     public void compareHealth() {
+        compare_layout.setVisibility(View.VISIBLE);
+        compare_layoutedu.setVisibility(View.GONE);
+
         healthServiceProviderTableNew = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
