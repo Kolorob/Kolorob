@@ -241,11 +241,11 @@ public class SubCategoryTableNew {
 
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_EN+" = '"+name+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_SUB_CAT_HEADER_EN+" = '"+name+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
-                ids = cursor.getInt(5);
+                ids = cursor.getInt(2);
                 Log.d("cursor","######"+ids);
             } while (cursor.moveToNext());
         }

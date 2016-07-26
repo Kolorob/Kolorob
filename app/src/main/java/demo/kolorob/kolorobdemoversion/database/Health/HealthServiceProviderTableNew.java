@@ -1010,7 +1010,8 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
         ArrayList<HealthServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_REFERENCES + " LIKE '%"+header+"%'", null);
+        header=","+header+",";
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY + " LIKE '%"+header+"%'", null);
 
         if (cursor.moveToFirst()) {
             do {

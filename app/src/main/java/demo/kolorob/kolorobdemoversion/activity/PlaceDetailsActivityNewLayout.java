@@ -2354,7 +2354,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
+                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -2700,14 +2700,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
     {
 
-        Log.d("cat_id","####"+cat_id);
-        Log.d("header","####"+header);
+       // Log.d("cat_id","####"+cat_id);
+       // Log.d("header","####"+header);
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+        ArrayList<HealthServiceProviderItemNew> healthServiceProvider1;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-        int refId=subCategoryTableNew.getRefId(header);
+        int refId=subCategoryTableNew.getSubcategoryId(header);
+       // Log.d("refId_newer","####"+refId);
         String refIds=String.valueOf(refId);
 
+        healthServiceProvider1 = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
         healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
         return healthServiceProvider;
     }
