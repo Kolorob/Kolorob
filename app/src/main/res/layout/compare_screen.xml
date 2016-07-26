@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/compare_layoutedu"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+android:visibility="gone"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+
+
+        >
+
+        <!--android:visibility="gone"-->
+        <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/header_compare"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+
+        <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/first_screen_logo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/school_logo_default"-->
+        <!--android:id="@+id/first_screen_logo_image"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--/>-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/compare_logo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/compare_logo_default"-->
+
+        <!--android:id="@+id/compare_logo_image"-->
+        <!--/>-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/second_school_logo"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/school_logo_default"-->
+
+
+        <!--android:id="@+id/second_school_logo_image"-->
+        <!--/>-->
+        <!--</LinearLayout>-->
+
+
+
+        <!--</LinearLayout>-->
+
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:id="@+id/header_compare"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="169dp">
+
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/school_logo_default"
+                android:id="@+id/first_screen_logo_image"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="10dp" />
+
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/compare_logo_default"
+
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/compare_logo_image"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/school_logo_default"
+
+
+                android:id="@+id/second_school_logo_image"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="10dp" />
+
+
+
+
+        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/divider_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/school_name">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:id="@+id/left_school_name"
+
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/edu_name_ban22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="@string/edu_name_ban"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:id="@+id/right_school_name"
+
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/edu_name_ban3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="@string/edu_name_ban"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/number_of_students"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/total_students"
+                android:id="@+id/total_students1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ttl_students"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/total_students3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/edtype1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/eduType1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:text="@string/edtype"
+
+
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/eduType2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/eduType3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/hostel_facility_l"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/hostel_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+
+
+                android:textColor="@color/white"
+                android:text="@string/hostel_facility"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hostel_facility2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hostel_facility3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/transport_facility1_l"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/transport_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+
+                android:text="@string/transport_facility"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/transport_facility2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/transport_facility3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/playground1_l"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/playground1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+
+
+                android:padding="5dp"
+                android:text="@string/playground"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/divider_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/playground2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/playground3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/total_classes_l"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_classes1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:text="@string/total_classes"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/total_classes2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/total_classes3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+
+            android:id="@+id/total_teachers1_1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/total_teachers1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:text="@string/total_teachers"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/total_teachers2"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:layout_height="wrap_content"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/total_teachers3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/course_provided1_1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/course_provided1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:text="@string/course_provided"
+                android:textAppearance="?android:attr/textAppearanceMedium">
+
+
+            </TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/divider_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/course_provided2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/course_provided3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/shift1_1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/shift1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:text="@string/shift"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/divider_all"
+            android:layout_width="match_parent"
+            android:id="@+id/shift1_11"
+
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/shift2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:gravity="center"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/shift3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/canteen_facility_1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/canteen_facility1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:text="@string/canteen_facility"
+                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/divider_all"
+            android:id="@+id/canteen_facility_11"
+
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:textColor="@color/white"
+
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/canteen_facility2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:gravity="center"
+
+                android:layout_weight="0.5"
+
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/canteen_facility3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="TextView"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

@@ -24,7 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/government_color"
             android:layout_height="wrap_content">
 
 
@@ -34,7 +34,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/finance"/>
+                    android:background="@drawable/government"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:textColor="@color/white"
                 android:textSize="29sp"
                 android:id="@+id/textView19"
-                android:text="@string/Financial"
+                android:text="@string/Government"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
@@ -62,7 +62,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:background="@color/education_color"
+            android:background="@color/government_color"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/education_color"
+                android:background="@color/government_color"
                 android:layout_height="wrap_content">
 
 
@@ -287,7 +287,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="100dp"
-        android:background="@color/financial_color"
+        android:background="@color/government_color"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
 

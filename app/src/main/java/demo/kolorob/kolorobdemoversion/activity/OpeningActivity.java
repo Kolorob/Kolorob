@@ -128,14 +128,14 @@ public class OpeningActivity extends Activity {
     Boolean  firstRun;
     private int EntDataSize,HealthDatSize;
     private static final int ANIM_INTERVAL = 200;
-int countofDb;
+    int countofDb;
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
 
     public int getCountofDb() {
         return countofDb;
     }
-   // ArrayList<Trialholder>holdertrial=new ArrayList<>();
+    // ArrayList<Trialholder>holdertrial=new ArrayList<>();
     public void setCountofDb(int countofDb) {
         this.countofDb = countofDb;
     }
@@ -286,7 +286,7 @@ int countofDb;
             editor.commit();
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
-               alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
                 alertDialog.setCanceledOnTouchOutside(false);
                 alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
@@ -313,10 +313,10 @@ int countofDb;
 //                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
                 LoadData();
 
-             //   pd.dismiss();
+                //   pd.dismiss();
             }
         } else {
-           AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
             alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
             alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
@@ -350,7 +350,7 @@ int countofDb;
 
                                 LoadData();
                             } else {
-                              AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
 
                                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
                                 alertDialog.setCanceledOnTouchOutside(false);
@@ -385,7 +385,6 @@ int countofDb;
         /*
         @@@@ arafat, you have to control wheel from here
         moving wheel while loading data into local database
-
          */
 
 
@@ -460,10 +459,10 @@ int countofDb;
                         }
                     }
             );
-          getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
-                       @Override
-                      public void onResponse(int status, String apiContent) {
-                           if (status == AppConstants.SUCCESS_CODE) {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
 
                                 try {
 
@@ -474,10 +473,10 @@ int countofDb;
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                               }
+                                }
                             }
                         }
-                   }
+                    }
             );
 //
 //
@@ -536,14 +535,14 @@ int countofDb;
                     try {
                         JSONArray allData=new JSONArray(apiContent);
                         EntDataSize=allData.length();
-                        for(int i=0;i<=EntDataSize;i++)
+                        for(int i=0;i<EntDataSize;i++)
                         {
                             JSONObject jsonObject=allData.getJSONObject(i);
                             SaveEntertainmentData(jsonObject,i);
 
                         }
 
-                   } catch (JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -779,28 +778,28 @@ int countofDb;
     private void SaveEntertainmentData(JSONObject jsonObject, int i) {
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew= new EntertainmentServiceProviderTableNew(OpeningActivity.this);
         //entertainmentServiceProviderTableNew.dropTable();
-            try {
-                EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew=EntertainmentServiceProviderItemNew.parseEntertainmentServiceProviderItem(jsonObject,i);
-                entertainmentServiceProviderTableNew.insertItem(entertainmentServiceProviderItemNew);
+        try {
+            EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew=EntertainmentServiceProviderItemNew.parseEntertainmentServiceProviderItem(jsonObject,i);
+            entertainmentServiceProviderTableNew.insertItem(entertainmentServiceProviderItemNew);
 
-                if (jsonObject.has("rspot_details"))
+            if (jsonObject.has("rspot_details"))
+            {
+                JSONArray rspot_details=jsonObject.getJSONArray("rspot_details");
+                int rspot_detailsSize=rspot_details.length();
+
+
+                for (int v=0;v<rspot_detailsSize;v++)
                 {
-                    JSONArray rspot_details=jsonObject.getJSONArray("rspot_details");
-                    int rspot_detailsSize=rspot_details.length();
+                    JSONObject rspot_detailsSizeItem= rspot_details.getJSONObject(v);
+                    Saverspot_detailsData(rspot_detailsSizeItem,jsonObject.getInt("id"));
 
-
-                    for (int v=0;v<rspot_detailsSize;v++)
-                    {
-                        JSONObject rspot_detailsSizeItem= rspot_details.getJSONObject(v);
-                        Saverspot_detailsData(rspot_detailsSizeItem,jsonObject.getInt("id"));
-
-                    }
                 }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
