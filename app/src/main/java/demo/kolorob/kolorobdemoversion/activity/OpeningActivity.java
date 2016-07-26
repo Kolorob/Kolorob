@@ -161,6 +161,8 @@ public class OpeningActivity extends Activity {
     public int height,width;
     Boolean  firstRun;
     private int EntDataSize,HealthDatSize;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     private static final int ANIM_INTERVAL = 200;
 int countofDb;
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
@@ -437,7 +439,7 @@ int countofDb;
 
         if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(activity, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)
                 ) {
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -457,7 +459,7 @@ int countofDb;
 //
 //
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -477,7 +479,7 @@ int countofDb;
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -494,22 +496,25 @@ int countofDb;
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "get_sub_categories", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old?username="+user+"&password="+pass+"", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
 
 
-                                try {
-                                    JSONObject jo = new JSONObject(apiContent);
-                                    String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                        new SaveSubCategoryListTask().execute(jo.getJSONArray(AppConstants.KEY_DATA));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                        try {
+                            JSONArray jo = new JSONArray(apiContent);
+
+                            new SaveSubCategoryListTask().execute(jo);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+                    }
+                }
+
+
+
                     }
             );
 //            getRequest(OpeningActivity.this, "education/all", new VolleyApiCallback() {
@@ -549,7 +554,7 @@ int countofDb;
 //                }
 //            });
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
 
@@ -565,7 +570,7 @@ int countofDb;
 
                 }
             });
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -580,7 +585,7 @@ int countofDb;
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -597,7 +602,7 @@ int countofDb;
             );
 
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
 
@@ -616,7 +621,7 @@ int countofDb;
                     }
             );
 
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username="+user+"&password="+pass+"", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
 
