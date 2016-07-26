@@ -230,7 +230,7 @@ setMapView(mapView);
             case AppConstants.HEALTH:
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getReferences();
+                    String subcategotyId = et.getCategory();
                     //Log.d("subcategotyId_Legal","=======");
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
@@ -422,17 +422,17 @@ setMapView(mapView);
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId == 3 || subcategotyId == 4|| subcategotyId == 8|| subcategotyId == 84|| subcategotyId == 95|| subcategotyId == 96|| subcategotyId == 162)
+            if (subcategotyId == 2)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId == 10 || subcategotyId == 81||subcategotyId == 88 || subcategotyId == 109||subcategotyId == 127)
+            else if (subcategotyId == 9)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            else if (subcategotyId >= 13 && subcategotyId <= 15)
+            else if (subcategotyId == 89)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-            else if (subcategotyId >= 16 && subcategotyId <= 20)
+            else if (subcategotyId == 25)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-            else if (subcategotyId == 21)
+            else if (subcategotyId == 20)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
-            else if (subcategotyId == 22)
+            else if (subcategotyId == 133)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
 
             InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
