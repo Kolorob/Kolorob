@@ -502,10 +502,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         opening_time1=(TextView)findViewById(R.id.opening_time1);
         language_spoken1=(TextView)findViewById(R.id.language_spoken1);
         service_type1=(TextView)findViewById(R.id.service_type1);
-        playground2=(TextView)findViewById(R.id.specialist_available1);
-        total_students2=(TextView)findViewById(R.id.clean_facilities1);
-        total_classes2=(TextView)findViewById(R.id.privacy1);
-        total_teachers2=(TextView)findViewById(R.id.quality_equipment1);
+        specialist_available1=(TextView)findViewById(R.id.specialist_available1);
+        clean_facilities1=(TextView)findViewById(R.id.clean_facilities1);
+        privacy1=(TextView)findViewById(R.id.privacy1);
+        quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
 
 
 
