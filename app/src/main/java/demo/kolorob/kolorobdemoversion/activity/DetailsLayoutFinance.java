@@ -144,29 +144,29 @@ EditText feedback_comment;
 
 
 
-        CheckConcate("পরিচিত স্থান         :", financialNewItem.getLandmark());
-        CheckConcate("ঠিকানা                   :", financialNewItem.getAddress());
-        CheckConcate("ফ্লোর                    :", financialNewItem.getFloor());
-        CheckConcate("বাড়ির নাম                  :", financialNewItem.getHousename());
-        CheckConcate("রাস্তা                       :", financialNewItem.getRoad());
-        CheckConcate("লাইন                        :", financialNewItem.getLine());
-        CheckConcate("এভিনিউ                     :", financialNewItem.getAvenue());
-        CheckConcate("পোস্ট অফিস               :", financialNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন                :", financialNewItem.getPolicestation());
+        CheckConcate("পরিচিত স্থান :", financialNewItem.getLandmark());
+        CheckConcate("ঠিকানা :", financialNewItem.getAddress());
+        CheckConcate("ফ্লোর :", financialNewItem.getFloor());
+        CheckConcate("বাড়ির নাম :", financialNewItem.getHousename());
+        CheckConcate("রাস্তা :", financialNewItem.getRoad());
+        CheckConcate("লাইন :", financialNewItem.getLine());
+        CheckConcate("এভিনিউ :", financialNewItem.getAvenue());
+        CheckConcate("পোস্ট অফিস :", financialNewItem.getPostoffice());
+        CheckConcate("পুলিশ স্টেশন:", financialNewItem.getPolicestation());
 
-        CheckConcate("যোগাযোগ              :", financialNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ              :", financialNewItem.getNode_contact2());
-        CheckConcate("ইমেইল                   :", financialNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট               :", financialNewItem.getNode_website());
-        CheckConcate("ফেসবুক                  :", financialNewItem.getNode_facebook());
-        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি  :", financialNewItem.getNode_designation());
+        CheckConcate("যোগাযোগ:", financialNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ:", financialNewItem.getNode_contact2());
+        CheckConcate("ইমেইল :", financialNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট :", financialNewItem.getNode_website());
+        CheckConcate("ফেসবুক  :", financialNewItem.getNode_facebook());
+        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্ত:", financialNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়        :", financialNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়          :", financialNewItem.getClosetime());
-        CheckConcate("বিরতির সময়        :", financialNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন          :", financialNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার    :", financialNewItem.getRegisterednumber());
+        timeProcessing("খোলার সময় :", financialNewItem.getOpeningtime());
+        timeProcessing("বন্ধের সময় :", financialNewItem.getClosetime());
+        CheckConcate("বিরতির সময় :", financialNewItem.getBreaktime());
+        CheckConcate("বন্ধের দিন :", financialNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার:", financialNewItem.getRegisterednumber());
         CheckConcate("কাদের সাথে রেজিস্টার্ড  :", financialNewItem.getRegisteredwith());
 
         financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
@@ -174,10 +174,10 @@ EditText feedback_comment;
         if (tuition_size != 0) {
             for (FinancialServiceDetailsItem financialServiceDetailsItem : financialServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("সুবিধার ধরন         :", financialServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম          :", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ                        :", financialServiceDetailsItem.getServicecost());
-                CheckConcate("মন্তব্য                      :", financialServiceDetailsItem.getServiceremark());
+                CheckConcate("সুবিধার ধরন :", financialServiceDetailsItem.getServicetype());
+                CheckConcate("সুবিধার নাম :", financialServiceDetailsItem.getServicesubtype());
+                CheckConcate("খরচ :", financialServiceDetailsItem.getServicecost());
+                CheckConcate("মন্তব্য :", financialServiceDetailsItem.getServiceremark());
             }
         }
 

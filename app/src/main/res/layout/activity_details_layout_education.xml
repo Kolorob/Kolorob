@@ -263,30 +263,6 @@
                     android:layout_marginTop="15dp"
                     android:layout_gravity="top"
                     android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/result" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/tuition" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/training" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -1,0 +1,44 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body, html {
+    min-height: 100%;
+}
+
+.place_choice{
+position: center;
+}
+#img {
+    width: 100%;
+    height: auto;
+}
+#baunia{
+position:absolute;
+    top:26%;
+    left:45%;
+    height:50px;
+    width:50px;
+}
+#mirpur_11{
+position:absolute;
+    top:30%;
+    left:20%;
+    height:50px;
+    width:50px;
+}
+#paris_road{
+position:absolute;
+    top:54%;
+    left:19%;
+    height:50px;
+    width:50px;
+}
+#mirpur_10{
+position:absolute;
+    top:64%;
+    left:20%;
+    height:50px;
+    width:50px;
+}

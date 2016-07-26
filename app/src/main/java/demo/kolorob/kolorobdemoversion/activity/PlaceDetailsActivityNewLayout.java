@@ -159,7 +159,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private Toolbar toolbar;
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
-    TextView edu_name_ban2,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
+    TextView edu_name_ban22,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
@@ -475,6 +475,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
         edu_name_ban=(TextView)findViewById(R.id.edu_name_ban2);
+        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
         edtype=(TextView)findViewById(R.id.eduType2);
         hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
         transport_facility=(TextView)findViewById(R.id.transport_facility2);
@@ -1156,9 +1157,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         for (EducationNewItem educationNewItem: firstDataSet)
         {
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
-                edu_name_ban.setText("X");
+                edu_name_ban22.setText("X");
             else
-            edu_name_ban.setText(educationNewItem.getNamebn());
+            edu_name_ban22.setText(educationNewItem.getNamebn());
 
             if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null"))
                 edtype.setText("X");

@@ -1,0 +1,33 @@
+/*		Tablet Layout: 768px.
+	  */
+
+@media only screen and (min-width: 360px) and (min-height:640px) {
+    #paris_road{left:29%;top:50%}
+    #mirpur_10{left:30%}
+    #mirpur_11{left:36%}
+    #baunia{left:70%}
+   
+}
+
+
+
+/*		Mobile Layout: 320px.
+		  */
+
+@media only screen and (max-width: 767px) {
+	
+   
+	
+	
+}
+
+
+
+/*		Wide Mobile Layout: 480px.
+		   */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+	
+
+}
