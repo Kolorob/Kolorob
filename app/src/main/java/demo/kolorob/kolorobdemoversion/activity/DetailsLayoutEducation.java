@@ -264,7 +264,7 @@ public class DetailsLayoutEducation extends Activity {
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (educationNewItem.getNode_contact2().equals("")) {
+                if (!educationNewItem.getNode_contact2().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
