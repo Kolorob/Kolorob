@@ -2321,20 +2321,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         {
 
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
-
-
                         }
-
-
-                        for (int ss=0;ss<healthItem.size();ss++)
-                        {
-                            ArrayList<HealthServiceProviderItemNew> arrayList=new ArrayList<>();
-                            arrayList.add(healthItem.get(ss));
-                            HEL.add(healthItem.get(ss));
-                        }
-
-
-
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
                         break;
@@ -2346,10 +2333,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                             entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s));
 
-                        }
-                        for (int ss=0;ss<entItem.size();ss++)
-                        {
-                            ENT.add(entItem.get(ss));
                         }
 
 
@@ -2380,12 +2363,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         {
                             legalItem = constructlegalaidListItemForHeader(cat_id, Headerholder.get(s));
                         }
-                        for (int ss=0;ss<legalItem.size();ss++)
-                        {
-                            LEG.add(legalItem.get(ss));
-                        }
-
-
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
