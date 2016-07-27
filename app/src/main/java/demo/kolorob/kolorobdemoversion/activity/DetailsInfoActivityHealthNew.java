@@ -170,6 +170,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        if(width<500)
+        ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+//        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
+
         setRatingBar();
 
         CheckConcate("প্রতিস্টানের ধরন", healthServiceProviderItemNew.getInstitute_type());

@@ -79,7 +79,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
-    TextView ups_text;
+    TextView ups_text,headerx;
     ListView courseListView,listView;
     Context con;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
@@ -147,6 +147,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ratingText=(TextView)findViewById(R.id.ratingText);
         detailsEntertainment=(TextView)findViewById(R.id.detailsEntertainment);
         other_detailsEnt=(TextView)findViewById(R.id.other_detailsEnt);
+        headerx=(TextView)findViewById(R.id.headerx);
 
         // close_button=(ImageView)findViewById(R.id.close_button);
 
@@ -196,10 +197,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
+        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+
+
+        params_upperText.setMargins(width/14,0,0,0);
+        upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;
@@ -245,6 +247,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
+        headerx.setTextSize(width / 21);
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
