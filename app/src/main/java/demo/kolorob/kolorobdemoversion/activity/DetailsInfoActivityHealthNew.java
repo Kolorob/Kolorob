@@ -346,6 +346,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
 
+        checkBox.setTextSize(width/25);
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
 //            @Override

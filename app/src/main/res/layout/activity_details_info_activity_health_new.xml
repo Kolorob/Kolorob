@@ -344,8 +344,9 @@
                 android:buttonTint="@color/white"
                 android:layout_marginLeft="20dp"
                 android:textSize="30dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:paddingLeft="7dp"
 
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
