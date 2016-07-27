@@ -29,7 +29,7 @@
             <item
                 android:id="@+id/emergency_info"
                 android:icon="@drawable/emergency_icon"
-                android:title="Emergency Services" />
+                android:title="জরুরী সেবা" />
             <!--<item-->
                 <!--android:id="@+id/nav_share"-->
                 <!--android:icon="@drawable/advertising_icon"-->

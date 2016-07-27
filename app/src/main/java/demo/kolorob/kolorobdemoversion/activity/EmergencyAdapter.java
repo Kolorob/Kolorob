@@ -131,7 +131,9 @@ Log.d("========", "-----------------"+i);
 //				 Toast.makeText(context,
 //						 "Sorry, Location is not found! ", Toast.LENGTH_LONG)
 //						 .show();
-				 AlertMessage.showMessage(context,"Location ","Sorry, Location is not found!");
+			//	 AlertMessage.showMessage(context,"Location ","Sorry, Location is not found!");
+				 AlertMessage.showMessage(context, "ডিরেকশন দেয়া সম্ভব হচ্ছে না",
+						 "ডিরেকশন খুজে পাওয়া যায় নি ");
 
                //  PresentActivity.this.startActivity(activityChangeIntent);
              }
@@ -152,7 +154,9 @@ Log.d("========", "-----------------"+i);
 //					 Toast.makeText(context,
 //							 "Sorry, Phone call is not possible now.", Toast.LENGTH_LONG)
 //							 .show();
-					 AlertMessage.showMessage(context, "Phone ", "Sorry, Phone call is not possible now.");
+
+					 AlertMessage.showMessage(context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+							 "ফোন নম্বর পাওয়া যায়নি");
 				 }
 
              }
@@ -167,7 +171,8 @@ Log.d("========", "-----------------"+i);
 //					Toast.makeText(context,
 //							"Sorry, Email is not found! ", Toast.LENGTH_LONG)
 //							.show();
-				AlertMessage.showMessage(context, "Email ", "Sorry, Email ID is not found!");
+				AlertMessage.showMessage(context, "ই মেইল করা সম্ভব হচ্ছে না",
+						"ই মেইল আই ডি পাওয়া যায়নি");
 
 
 			}
