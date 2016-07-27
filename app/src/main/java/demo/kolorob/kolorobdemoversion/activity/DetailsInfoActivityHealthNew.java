@@ -170,6 +170,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        if(width<500)
+        ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+//        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
+
         setRatingBar();
 
         CheckConcate("প্রতিস্টানের ধরন", healthServiceProviderItemNew.getInstitute_type());
@@ -290,10 +294,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+       LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
 //        // int  vd=params_upperText.height = height/24;
 //        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
+        upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;
@@ -342,6 +346,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
 
+        checkBox.setTextSize(width/25);
 
 //        feedback.setOnClickListener(new View.OnClickListener() {
 //            @Override

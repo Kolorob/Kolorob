@@ -6,6 +6,9 @@
     <string name="title_activity_button_click_baunia">ButtonClickBaunia</string>
     <string name="hello_world">Hello world!</string>
     <string name="searchtext">কোথায় খুঁজতে চান?</string>
+    <string name="emergencylocationtext"> দুঃখিত! ডিরেকশন খুজে পাওয়া যায় নি </string>
+    <string name="emergencyemailtext">দুঃখিত!ইমেইল খুজে পাওয়া যায় নি  </string>
+    <string name="emergencytext">জরুরী সেবা ূ</string>
     <string name="search"> এখানে লিখে খুঁজুন</string>
     <string name="csearch">খুঁজুন</string>
     <string name="rating">রেটিং :</string>

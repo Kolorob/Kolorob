@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="29sp"
+                android:textSize="29dp"
                 android:id="@+id/textView19"
                 android:text="@string/Education"
                 android:layout_centerVertical="true"
@@ -98,49 +98,44 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/upperText"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="right">
+                    android:layout_gravity="left">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="@color/white"
 
                         android:id="@+id/ups_text"
 
                         />
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_horizontal">
+                      >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="20dp"
                             android:id="@+id/ratingText"
                             android:text="@string/rating"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/ratingBar"
-                            android:layout_toStartOf="@+id/ratingBar" />
+                            />
                         <RatingBar
                             android:id="@+id/ratingBar"
-                            android:layout_width="165dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="?android:attr/ratingBarStyleIndicator"
-                            android:scaleX="0.6"
-                            android:scaleY="0.6"
+
                             android:numStars="5"
                             android:stepSize="0"
                             android:rating="2.3"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                          />
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
 
 
@@ -313,7 +308,7 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
 
             android:layout_height="match_parent"
             android:gravity="center_vertical|left">
@@ -322,10 +317,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
 
-
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:buttonTint="@color/white"
-                android:layout_marginLeft="20dp"
-
+                android:layout_marginLeft="@dimen/margincheckbox"
+                android:textSize="29dp"
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
 
@@ -333,7 +329,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"

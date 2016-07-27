@@ -15,7 +15,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
     private String identifierId;
     private String post_office;
     private int legalaidSubCategoryId;
-    private int categoryId;
+    private String categoryId;
     private String legalaidNameEng;
     private String legalaidNameBan;
     private String contactPersonDesignation;
@@ -45,7 +45,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
     private String avenue;
     private String police_station;
 
-    public LegalAidServiceProviderItemNew(String identifierId, String post_office, int legalaidSubCategoryId, int categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day, String floor
+    public LegalAidServiceProviderItemNew(String identifierId, String post_office, int legalaidSubCategoryId, String categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day, String floor
             , String house_name,
              String house_no,
              String line,
@@ -143,7 +143,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         return legalaidSubCategoryId;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
@@ -287,7 +287,9 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         _breaktime2=_breaktime2.replace('[',',');
         _breaktime2=_breaktime2.replace(']',',');
 
-        int _categoryId = jo.getInt("category");
+        String _categoryId = jo.getString("sub_categories");
+        _categoryId=_categoryId.replace('[',',');
+        _categoryId=_categoryId.replace(']',',');
 
 
         int _legalaidSubCategoryId = 2;

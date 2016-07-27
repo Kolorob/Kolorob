@@ -301,7 +301,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
 
         String _address = "address";
 
-        String _categoryId= jo.getString("category");
+        String _categoryId= jo.getString("sub_categories");
         _categoryId=_categoryId.replace('[',',');
         _categoryId=_categoryId.replace(']',',');
 

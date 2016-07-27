@@ -70,7 +70,7 @@ public class LegalAidServiceProviderTableNew {
                 + KEY_IDENTIFIER_ID + "  INTEGER , " // 0 - int
                 + KEY_POST_OFFICE + "  INTEGER, "              // 1 - text
                 + KEY_LEGAL_AID_SUBCATEGORY_ID + " INTEGER, "
-                + KEY_CATEGORY_ID + " INTEGER, "// 2 - text
+                + KEY_CATEGORY_ID + " TEXT, "// 2 - text
                 + KEY_LEGAL_AID_NAME_ENG + " TEXT, "
                 + KEY_LEGAL_AID_NAME_BAN + " TEXT, "
                 + KEY_CONTACT_PERSON_DESIGNATION + " TEXT, "
@@ -141,7 +141,7 @@ public class LegalAidServiceProviderTableNew {
     public long insertItem(String identifierId,
                            String post_office,
                            int legalaidSubCategoryId,
-                           int categoryId,
+                           String categoryId,
                            String legalaidNameEng,
                            String legalaidNameBan,
                            String contactPersonDesignation,
@@ -278,7 +278,7 @@ public class LegalAidServiceProviderTableNew {
             do {
                 //System.out.println("abc="+cursor.getString(4));
                 legalAidServiceProviderItem=new LegalAidServiceProviderItemNew(cursor.getString(0),cursor.getString(1),
-                        cursor.getInt(2),cursor.getInt(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),
+                        cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),
                         cursor.getString(8),cursor.getString(9),
                         cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
                         cursor.getString(16), cursor.getString(17),cursor.getString(18),cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),
@@ -376,7 +376,7 @@ public class LegalAidServiceProviderTableNew {
             String identifierId,
             String post_office,
             int legalaidSubCategoryId,
-            int categoryId,
+            String categoryId,
             String legalaidNameEng,
             String legalaidNameBan,
             String contactPersonDesignation,
@@ -538,14 +538,12 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
-
-
-    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfoWithHead(int cat_id, String header) {
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
-                + " AND " + KEY_LEGAL_AID_SUBCATEGORY_ID + " in (SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_header = '" + header + "')", null);
+        header=","+header+",";
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID + " LIKE '%"+header+"%'", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -558,11 +556,13 @@ public class LegalAidServiceProviderTableNew {
         return subCatList;
     }
 
+
+
     private LegalAidServiceProviderItemNew cursorToSubCatList(Cursor cursor) {
         String _identifierId = cursor.getString(0);
         String post_office = cursor.getString(1);
         int _legalaidSubCategoryId = cursor.getInt(2);
-        int _categoryId = cursor.getInt(3);
+        String _categoryId = cursor.getString(3);
         String _legalaidNameEng = cursor.getString(4);
         String _legalaidBan = cursor.getString(5);
         String _contactPersonDesignation = cursor.getString(6);

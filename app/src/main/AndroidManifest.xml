@@ -57,24 +57,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
 
-        <activity3z
-            android:name=".activity.LocationInstructionActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
+        <!--<activity-->
+            <!--android:name=".activity.LocationInstructionActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/Theme.Transparent" />-->
 
 
         <activity
             android:name=".activity.PlaceDetailsActivityNewLayout"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".activity.DetailsInfoActivityHealth_new"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
-        <activity
-            android:name=".activity.DetailsInfoActivityEntertainment_new"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".activity.DetailsFinancialActivity_new"
             android:screenOrientation="portrait"
@@ -83,10 +75,6 @@
             android:name=".activity.PlaceChoiceActivity2"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.DetailsLegalActivity_new"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Transparent" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -113,7 +101,6 @@
             android:name=".activity.DetailsLayoutGovernment"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DetailsInfoActivityFinancialNew" />
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />
         <activity android:name=".activity.FeedBackActivityNew" />

@@ -79,7 +79,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
-    TextView ups_text;
+    TextView ups_text,headerx;
     ListView courseListView,listView;
     Context con;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
@@ -147,6 +147,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ratingText=(TextView)findViewById(R.id.ratingText);
         detailsEntertainment=(TextView)findViewById(R.id.detailsEntertainment);
         other_detailsEnt=(TextView)findViewById(R.id.other_detailsEnt);
+        headerx=(TextView)findViewById(R.id.headerx);
 
         // close_button=(ImageView)findViewById(R.id.close_button);
 
@@ -161,6 +162,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        if(width<500)
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         setRatingBar();
 
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -196,10 +199,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
+        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+
+
+      //  params_upperText.setMargins(width/3,0,0,0);
+        upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;
@@ -245,6 +249,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
+        headerx.setTextSize(width / 21);
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -281,7 +286,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolice_station());
         CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
-        timeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
+        CheckConcate("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
         CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
@@ -363,33 +368,6 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //                }
 //            });
 //
-//            phone_mid.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-//                    if(!educationServiceProviderItem.getContactNo().equals(""))
-//                    {
-//                        callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
-//                        if(checkPermission())
-//                            startActivity(callIntent1);
-//                        else{
-//                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-//                                    "ফোন নম্বর পাওয়া যায়নি");
-//                            Toast.makeText(getApplicationContext(),
-//                                    "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-//                                    .show();
-//                        }
-//                    }
-//                    else {
-//
-//                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-//                                "ফোন নম্বর পাওয়া যায়নি");
-//                        Toast.makeText(getApplicationContext(),
-//                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-//                                .show();
-//                    }
-//                }
-//            });
 
 
         // phermacy.setText(lat);
