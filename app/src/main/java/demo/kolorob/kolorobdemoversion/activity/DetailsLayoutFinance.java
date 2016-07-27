@@ -60,6 +60,8 @@ public class DetailsLayoutFinance extends Activity {
     int width, height;
     TextView ups_text;
     ListView courseListView, listView;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     Context con;
     FinancialNewItem financialNewItem;
 EditText feedback_comment;

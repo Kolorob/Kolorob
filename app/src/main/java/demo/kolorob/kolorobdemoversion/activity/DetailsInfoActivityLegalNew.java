@@ -84,6 +84,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
     Context con;
     Float rating;
     RatingBar ratingBar;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
     ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
     ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;

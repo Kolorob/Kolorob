@@ -61,6 +61,8 @@ public class DetailsLayoutGovernment extends Activity {
     ListView courseListView, listView;
     Context con;
     GovernmentNewItem governmentNewItem;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
 
     ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
 

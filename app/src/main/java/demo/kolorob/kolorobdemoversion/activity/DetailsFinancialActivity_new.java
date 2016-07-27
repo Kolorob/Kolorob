@@ -56,6 +56,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
         ImageView btnroute;
     ImageButton Feedback;
     String basic_part="";
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
         /**
          * Following components are only for Financial
          * For other categories this components may vary

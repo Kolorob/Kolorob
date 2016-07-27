@@ -75,6 +75,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
     TextView ups_text;
     ListView courseListView, listView;
     Context con;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     Float rating;
     HealthServiceProviderItemNew healthServiceProviderItemNew;
     ArrayList<HealthServiceProviderItem> healthServiceProviderItems;

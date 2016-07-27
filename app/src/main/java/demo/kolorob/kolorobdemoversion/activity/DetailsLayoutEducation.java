@@ -70,6 +70,8 @@ public class DetailsLayoutEducation extends Activity {
     TextView address_text, phone_text, email_text;
     int width, height;
     TextView ups_text;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     ListView courseListView, listView;
     Context con;
     EducationNewItem educationNewItem;

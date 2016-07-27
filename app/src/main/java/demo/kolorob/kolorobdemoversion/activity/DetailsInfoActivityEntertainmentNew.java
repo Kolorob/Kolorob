@@ -81,6 +81,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     int width,height;
     TextView ups_text,headerx;
     ListView courseListView,listView;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     Context con;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;

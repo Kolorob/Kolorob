@@ -96,6 +96,7 @@ public class HealthServiceProviderItemNew implements Serializable {
     private String references;
 
 
+
     public HealthServiceProviderItemNew
             (
                     String id,
@@ -1006,7 +1007,8 @@ public class HealthServiceProviderItemNew implements Serializable {
                 family_contraceptive="",
                 family_privacy="",
                 category,
-                references;
+                references,
+                checker="";
 
         id=jo.getString("id");
         node_name= jo.getString("node_name");
@@ -1106,6 +1108,7 @@ public class HealthServiceProviderItemNew implements Serializable {
 
         if (jo.has("health_emergency_info"))
         {
+            checker=checker+"1";
             JSONObject health_emergency_info= jo.getJSONObject("health_emergency_info");
             emergency_free=health_emergency_info.getString("emergency_free");
             emergency_free_for=health_emergency_info.getString("emergency_free_for");
@@ -1118,6 +1121,7 @@ public class HealthServiceProviderItemNew implements Serializable {
 
         if (jo.has("health_ambulance_info"))
         {
+            checker=checker+"2";
             JSONObject health_ambulance_info= jo.getJSONObject("health_ambulance_info");
             ambulance_free=health_ambulance_info.getString("ambulance_free");
 
@@ -1130,6 +1134,7 @@ public class HealthServiceProviderItemNew implements Serializable {
 
         if (jo.has("health_maternity_info"))
         {
+            checker=checker+"3";
             JSONObject health_maternity_info= jo.getJSONObject("health_maternity_info");
             maternity_free=health_maternity_info.getString("maternity_free");
             maternity_free_for=health_maternity_info.getString("maternity_free_for");
@@ -1151,6 +1156,7 @@ public class HealthServiceProviderItemNew implements Serializable {
             family_contraceptive=health_fp_info.getString("family_contraceptive");
             family_privacy=health_fp_info.getString("family_privacy");
         }
+        family_privacy=checker;
 
 
 
