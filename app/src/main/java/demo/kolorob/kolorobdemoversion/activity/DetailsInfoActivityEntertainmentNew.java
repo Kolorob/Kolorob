@@ -368,33 +368,6 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //                }
 //            });
 //
-//            phone_mid.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-//                    if(!educationServiceProviderItem.getContactNo().equals(""))
-//                    {
-//                        callIntent1.setData(Uri.parse("tel:" + educationServiceProviderItem.getContactNo()));
-//                        if(checkPermission())
-//                            startActivity(callIntent1);
-//                        else{
-//                            AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-//                                    "ফোন নম্বর পাওয়া যায়নি");
-//                            Toast.makeText(getApplicationContext(),
-//                                    "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-//                                    .show();
-//                        }
-//                    }
-//                    else {
-//
-//                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-//                                "ফোন নম্বর পাওয়া যায়নি");
-//                        Toast.makeText(getApplicationContext(),
-//                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-//                                .show();
-//                    }
-//                }
-//            });
 
 
         // phermacy.setText(lat);
