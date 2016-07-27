@@ -53,15 +53,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
 
-        <ImageButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:id="@+id/currlocation"
-            android:background="@drawable/location"
-            android:layout_above="@+id/linearLayout6"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp" />
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_marginTop="60dp"
@@ -171,7 +163,7 @@
             android:text="Medium Text"
             android:id="@+id/distancetext"
             android:background="#fe0f3b"
-            android:layout_above="@+id/linearLayout6"
+
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="30dp" />

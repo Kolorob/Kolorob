@@ -203,7 +203,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(6);
+                String name = cursor.getString(7);
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());
@@ -219,7 +219,7 @@ public class SubCategoryTableNew {
 
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_EN+" = '"+name+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_BN+" = '"+name+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
