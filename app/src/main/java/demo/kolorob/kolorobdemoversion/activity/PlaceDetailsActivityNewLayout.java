@@ -2115,7 +2115,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        Log.d("Subcategory_name","*******"+si.getSubCatHeaderBn());
+
         tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -2316,7 +2316,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
@@ -2432,7 +2432,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // showSubCatListItem.setEnabled(true);
                 // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
-                Log.d("SubcategoryId","******"+si.getSubcatHeader());
             }
         });
 
@@ -2884,7 +2883,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         //listholder.setVisibility(View.GONE);
-NavigationCalled=true;
+        NavigationCalled=true;
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
