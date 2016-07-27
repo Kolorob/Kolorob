@@ -912,7 +912,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         }
                         toolbar.setVisibility(View.GONE);
-                        compare_layout.setVisibility(View.VISIBLE);
+                       // compare_layout.setVisibility(View.VISIBLE);
 
                         // @@@@arafat
                         // need to add condition for health and add color code for health,
@@ -987,7 +987,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     public void compareTool()
     {
-        compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+       // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
         if(currentCategoryID==1)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
@@ -1003,7 +1003,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 compareEducation();}
 
         else {
-           // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+            compare_layout.setVisibility(View.VISIBLE);
+            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
             int size=comapreData.length();
             for(int i=0;i<size;i++)
@@ -1323,7 +1324,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         switch (cat_id) {
             case AppConstants.EDUCATION:
                 SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = 5;
+                //currentCategoryID = 5;
                 EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> print = null;
                 groups.removeAllElements();
@@ -1331,7 +1332,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
                // subCatItemList.setChildDivider(R.color.black);
 
-                print = subCategoryTable.getSubnameedu(currentCategoryID);
+                print = subCategoryTable.getSubnameedu(5);
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
@@ -1370,7 +1371,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 break;
             case AppConstants.GOVERNMENT:
                 SubCategoryTableNew subCategoryTableg = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = 33;
+               // currentCategoryID = 33;
                 GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printgov = null;
                 groups.removeAllElements();
@@ -1378,7 +1379,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
                 // subCatItemList.setChildDivider(R.color.black);
 
-                printgov = subCategoryTableg.getSubnameedu(currentCategoryID);
+                printgov = subCategoryTableg.getSubnameedu(33);
                 for (int j = 0; j < printgov.size(); j++) {
                     Group group = new Group(printgov.get(j));
                     printgovs = null;
@@ -1427,13 +1428,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             case AppConstants.FINANCIAL:
 
                 SubCategoryTableNew subCategoryTable4 = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = 11;
+               // currentCategoryID = 11;
                 FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> printfin = null;
 
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
                 groups.removeAllElements();
-                printfin= subCategoryTable4.getSubnameedu(currentCategoryID);
+                printfin= subCategoryTable4.getSubnameedu(11);
                 for (int j = 0; j <  printfin.size(); j++) {
                     Group group = new Group(printfin.get(j));
                     printnamesfin = null;
