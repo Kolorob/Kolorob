@@ -184,7 +184,7 @@ public class DetailsLayoutGovernment extends Activity {
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (governmentNewItem.getNode_contact2().equals("")) {
+                if (!governmentNewItem.getNode_contact2().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
