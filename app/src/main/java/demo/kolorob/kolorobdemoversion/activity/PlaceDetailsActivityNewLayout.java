@@ -458,19 +458,19 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
             if(locationNameId== AppConstants.PLACE_BAUNIABADH)
             {
-                setPlaceChoice("Baunia Badh");
+                setPlaceChoice("Mirpur-11");
                 locationName = AppConstants.BAUNIABADH;
                 listData.add(AppConstants.BAUNIABADH);
                 listData.add(AppConstants.PARIS_ROAD);
-                setLocationNameEng("Baunia Badh");
+                setLocationNameEng("Mirpur-11");
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
             {
-                setPlaceChoice("Paris Road");
+                setPlaceChoice("Mirpur-10");
                 locationName = AppConstants.PARIS_ROAD;
                 listData.add(AppConstants.PARIS_ROAD);
                 listData.add(AppConstants.BAUNIABADH);
-                setLocationNameEng("Paris Road");
+                setLocationNameEng("Mirpur-10");
             }
         }
 
