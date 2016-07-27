@@ -1464,6 +1464,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                     printnamesleg = null;
                     printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
+                  //  printnamesleg = legalAidServiceProviderTableNew.getAllLegalAidSubCategoriesInfosearch();
 
                     for (int i = 0; i < printnamesleg.size(); i++) {
                         group.childrenleg.add(i, printnamesleg.get(i));
@@ -2154,7 +2155,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        Log.d("Subcategory_name","*******"+si.getSubCatHeaderBn());
+
         tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -2355,25 +2356,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
-
-
                         }
-
-
-                        for (int ss=0;ss<healthItem.size();ss++)
-                        {
-                            ArrayList<HealthServiceProviderItemNew> arrayList=new ArrayList<>();
-                            arrayList.add(healthItem.get(ss));
-                            HEL.add(healthItem.get(ss));
-                        }
-
-
-
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
                         break;
@@ -2385,10 +2373,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                             entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s));
 
-                        }
-                        for (int ss=0;ss<entItem.size();ss++)
-                        {
-                            ENT.add(entItem.get(ss));
                         }
 
 
@@ -2414,18 +2398,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         callMapFragmentWithGovInfo(si.getSubCatHeaderBn(), cat_id, GOV);
                         break;
                     case AppConstants.LEGAL:
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
                             legalItem = constructlegalaidListItemForHeader(cat_id, Headerholder.get(s));
                         }
-                        for (int ss=0;ss<legalItem.size();ss++)
-                        {
-                            LEG.add(legalItem.get(ss));
-                        }
-
-
-                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, LEG);
+                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
                         Headerholder.add(si.getSubCatHeaderBn());
@@ -2471,7 +2449,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // showSubCatListItem.setEnabled(true);
                 // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
-                Log.d("SubcategoryId","******"+si.getSubcatHeader());
             }
         });
 
@@ -2844,8 +2821,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItemForHeader(int cat_id, String header)
     {
         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, header);
+        int refId=subCategoryTableNew.getSubcategoryId(header);
+        String refIds=String.valueOf(refId);
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, refIds);
         return legalaidServiceProvider;
     }
 
@@ -2920,7 +2900,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         //listholder.setVisibility(View.GONE);
-NavigationCalled=true;
+        NavigationCalled=true;
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();

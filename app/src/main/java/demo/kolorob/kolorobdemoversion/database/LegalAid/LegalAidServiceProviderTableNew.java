@@ -538,14 +538,12 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
-
-
-    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfoWithHead(int cat_id, String header) {
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfoWithHead(int cat_id,String header) {
         ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CATEGORY_ID + "=" + cat_id
-                + " AND " + KEY_LEGAL_AID_SUBCATEGORY_ID + " in (SELECT _sub_cat_id from " + DatabaseHelper.SUB_CATEGORY + " WHERE _sub_cat_header = '" + header + "')", null);
+        header=","+header+",";
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID + " LIKE '%"+header+"%'", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -557,6 +555,8 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
+
+
 
     private LegalAidServiceProviderItemNew cursorToSubCatList(Cursor cursor) {
         String _identifierId = cursor.getString(0);
