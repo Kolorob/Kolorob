@@ -134,29 +134,29 @@ public class DetailsLayoutGovernment extends Activity {
 
 
 
-        CheckConcate("পরিচিত স্থান         :", governmentNewItem.getLandmark());
-        CheckConcate("ঠিকানা                   :", governmentNewItem.getAddress());
-        CheckConcate("ফ্লোর                    :", governmentNewItem.getFloor());
-        CheckConcate("বাড়ির নাম                  :", governmentNewItem.getHousename());
-        CheckConcate("রাস্তা                       :", governmentNewItem.getRoad());
-        CheckConcate("লাইন                        :", governmentNewItem.getLine());
-        CheckConcate("এভিনিউ                     :", governmentNewItem.getAvenue());
-        CheckConcate("পোস্ট অফিস               :", governmentNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন                :", governmentNewItem.getPolicestation());
+        CheckConcate("পরিচিত স্থান :", governmentNewItem.getLandmark());
+        CheckConcate("ঠিকানা :", governmentNewItem.getAddress());
+        CheckConcate("ফ্লোর :", governmentNewItem.getFloor());
+        CheckConcate("বাড়ির নাম :", governmentNewItem.getHousename());
+        CheckConcate("রাস্তা  :", governmentNewItem.getRoad());
+        CheckConcate("লাইন   :", governmentNewItem.getLine());
+        CheckConcate("এভিনিউ :", governmentNewItem.getAvenue());
+        CheckConcate("পোস্ট অফিস :", governmentNewItem.getPostoffice());
+        CheckConcate("পুলিশ স্টেশন:", governmentNewItem.getPolicestation());
 
-        CheckConcate("যোগাযোগ              :", governmentNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ              :", governmentNewItem.getNode_contact2());
-        CheckConcate("ইমেইল                   :", governmentNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট               :", governmentNewItem.getNode_website());
-        CheckConcate("ফেসবুক                  :", governmentNewItem.getNode_facebook());
+        CheckConcate("যোগাযোগ :", governmentNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ :", governmentNewItem.getNode_contact2());
+        CheckConcate("ইমেইল :", governmentNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট :", governmentNewItem.getNode_website());
+        CheckConcate("ফেসবুক :", governmentNewItem.getNode_facebook());
         CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি  :", governmentNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়      :", governmentNewItem.getOpeningtime());
-        timeProcessing("বন্ধে সময়        :", governmentNewItem.getClosetime());
-        CheckConcate("বিরতির সময়        :", governmentNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন          :", governmentNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার    :", governmentNewItem.getRegisterednumber());
+        timeProcessing("খোলার সময় :", governmentNewItem.getOpeningtime());
+        timeProcessing("বন্ধে সময় :", governmentNewItem.getClosetime());
+        CheckConcate("বিরতির সময় :", governmentNewItem.getBreaktime());
+        CheckConcate("বন্ধের দিন  :", governmentNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার:", governmentNewItem.getRegisterednumber());
         CheckConcate("কাদের সাথে রেজিস্টার্ড  :", governmentNewItem.getRegisteredwith());
 
         governmentServiceDetailsItems = governmentServiceDetailsTable.getgovinfo(governmentNewItem.getFinId());
@@ -164,10 +164,10 @@ public class DetailsLayoutGovernment extends Activity {
         if (tuition_size != 0) {
             for (GovernmentServiceDetailsItem governmentServiceDetailsItem : governmentServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("সুবিধার ধরন         :", governmentServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম          :", governmentServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ                        :", governmentServiceDetailsItem.getServicecost());
-                CheckConcate("মন্তব্য                      :", governmentServiceDetailsItem.getDetailstep());
+                CheckConcate("সুবিধার ধরন :", governmentServiceDetailsItem.getServicetype());
+                CheckConcate("সুবিধার নাম :", governmentServiceDetailsItem.getServicesubtype());
+                CheckConcate("খরচ  :", governmentServiceDetailsItem.getServicecost());
+                CheckConcate("মন্তব্য :", governmentServiceDetailsItem.getDetailstep());
             }
         }
 

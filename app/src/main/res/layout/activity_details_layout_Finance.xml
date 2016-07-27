@@ -91,7 +91,7 @@ android:layout_weight="10"
                 android:layout_width="0dp"
                 android:layout_weight="0.75"
                 android:id="@+id/upper_part"
-                android:background="@color/financial_color"
+                android:background="@color/transparent"
                 android:layout_height="wrap_content">
 
 
@@ -245,26 +245,25 @@ android:layout_weight="10"
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/middle"
             android:background="@color/white"
+            android:id="@+id/middle"
+            android:layout_marginBottom="20dp"
             >
 
             <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:id="@+id/scrollView3"
                 android:layout_centerInParent="true">
 
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:layout_gravity="center_vertical|center_horizontal"
+
+                    android:layout_gravity="top"
                     android:orientation="vertical">
 
 
@@ -276,8 +275,7 @@ android:layout_weight="10"
                         android:gravity="top"
                         android:id="@+id/serviceDetails"
                         android:layout_gravity="top"
-
-                        android:layout_centerHorizontal="true" />
+/>
                 </RelativeLayout>
             </ScrollView>
 
