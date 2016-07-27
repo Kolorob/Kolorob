@@ -294,10 +294,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+       LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
 //        // int  vd=params_upperText.height = height/24;
 //        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
+        upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;

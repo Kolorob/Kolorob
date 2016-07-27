@@ -49,6 +49,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:textSize="37sp"
+                    android:id="@+id/header"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
@@ -123,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="left">
+                        android:gravity="center_vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -136,7 +137,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="?android:attr/ratingBarStyleIndicator"
-                            android:layout_marginTop="5dp"
                             android:numStars="5"
                             android:stepSize="0"
                             android:rating="2.3" />

@@ -93,7 +93,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
     private TextView playground;
     private TextView hostel;
     private TextView transport;
-    private TextView ratingText,common_details,other_details;
+    private TextView ratingText,common_details,other_details,header;
     private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
@@ -148,6 +148,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         ratingText=(TextView)findViewById(R.id.ratingText);
         common_details=(TextView)findViewById(R.id.common_details);
         other_details=(TextView)findViewById(R.id.other_details);
+        header=(TextView)findViewById(R.id.header);
 
         // close_button=(ImageView)findViewById(R.id.close_button);
 
@@ -247,6 +248,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(width / 25);
         ratingText.setTextSize(width / 25);
+        header.setTextSize(width/25);
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();

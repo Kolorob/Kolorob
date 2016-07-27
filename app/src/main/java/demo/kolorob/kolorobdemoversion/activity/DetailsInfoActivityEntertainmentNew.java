@@ -162,6 +162,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        if(width<500)
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         setRatingBar();
 
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -200,7 +202,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
 
 
-        params_upperText.setMargins(width/14,0,0,0);
+      //  params_upperText.setMargins(width/3,0,0,0);
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
