@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="@color/white"
 
                         android:id="@+id/ups_text"
@@ -120,7 +120,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="20dp"
                             android:id="@+id/ratingText"
                             android:text="@string/rating"
                             android:layout_centerVertical="true"
@@ -322,9 +322,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
 
-
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 android:buttonTint="@color/white"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:textSize="29dp"
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
