@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="29sp"
+                android:textSize="29dp"
                 android:id="@+id/textView19"
                 android:text="@string/Education"
                 android:layout_centerVertical="true"
@@ -325,7 +325,7 @@
 
                 android:buttonTint="@color/white"
                 android:layout_marginLeft="20dp"
-
+                android:textSize="29dp"
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
 
