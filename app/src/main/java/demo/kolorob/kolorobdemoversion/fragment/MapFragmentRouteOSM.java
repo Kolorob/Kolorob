@@ -245,6 +245,7 @@ double roadlength;
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
             statusofservice = true;
             buildGoogleApiClient();
+            Drawroute(userlocation, markerlocation);
         } else {
             Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
             int requestCode = 10;
