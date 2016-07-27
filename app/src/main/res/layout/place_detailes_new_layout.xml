@@ -772,6 +772,7 @@ android:visibility="gone"
                     android:layout_marginRight="@dimen/search_margin"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/search_top"
+                    android:layout_alignLeft="@+id/filterholder"
                     android:layout_alignStart="@+id/filterholder" />
                 <ListView
                     android:layout_width="match_parent"
