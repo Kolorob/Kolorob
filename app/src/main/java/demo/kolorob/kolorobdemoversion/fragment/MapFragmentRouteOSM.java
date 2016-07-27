@@ -243,8 +243,8 @@ double roadlength;
         // Showing status
         if (gpsVersion >= 8400000) {
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
-            statusofservice = true;
-            buildGoogleApiClient();
+            statusofservice = true;;
+            Drawroute(userlocation, markerlocation);
         } else {
             Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
             int requestCode = 10;
@@ -532,7 +532,7 @@ public void calltransportlayout()
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
+        mGoogleApiClient.connect();
 
     }
     @Override
