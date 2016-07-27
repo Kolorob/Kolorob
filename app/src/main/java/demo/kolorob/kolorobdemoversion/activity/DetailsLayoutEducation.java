@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,6 +47,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
@@ -52,6 +55,8 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsIt
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by israt.jahan on 7/17/2016.
@@ -68,6 +73,7 @@ public class DetailsLayoutEducation extends Activity {
     ListView courseListView, listView;
     Context con;
     EducationNewItem educationNewItem;
+    RatingBar ratingBar;
 
     ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
     ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
@@ -97,7 +103,7 @@ public class DetailsLayoutEducation extends Activity {
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
         con = this;
-
+        setRatingBar();
 
         Intent intent = getIntent();
 
@@ -137,6 +143,7 @@ public class DetailsLayoutEducation extends Activity {
         ratingText = (TextView) findViewById(R.id.ratingText);
         serviceDetails = (TextView) findViewById(R.id.serviceDetails);
         close_button = (ImageView) findViewById(R.id.close_buttonc);
+        ratingBar=(RatingBar)findViewById(R.id.ratingBar);
 
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
@@ -398,6 +405,7 @@ public class DetailsLayoutEducation extends Activity {
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
+                    editor.putString("nValue", node);
                     editor.commit();
 
 
@@ -651,6 +659,47 @@ public class DetailsLayoutEducation extends Activity {
         }
         return concatResult;
     }
+
+
+    public void setRatingBar()
+    {
+        getRequest(DetailsLayoutEducation.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            try {
+                                JSONArray jo = new JSONArray(apiContent);
+                                int size= jo.length();
+                                for(int i=0;i<size;i++)
+                                {
+                                    JSONObject ratingH=jo.getJSONObject(i);
+                                    String id= ratingH.getString("id");
+                                    if(id.equals(educationNewItem.getEduId()))
+                                    {
+
+                                        Float rating;
+                                        rating=Float.parseFloat(ratingH.getString("avg"));
+                                        ratingBar.setRating(rating);
+                                        break;
+
+                                    }
+
+
+                                }
+
+
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        );
+    }
+
 
     public Boolean RegisteredOrNot() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
