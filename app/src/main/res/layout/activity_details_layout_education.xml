@@ -313,7 +313,7 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
 
             android:layout_height="match_parent"
             android:gravity="center_vertical|left">
@@ -322,10 +322,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
 
-                android:scaleX="1.2"
-                android:scaleY="1.2"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
                 android:buttonTint="@color/white"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/margincheckbox"
                 android:textSize="29dp"
                 android:textColor="@color/white"
                 android:text="@string/compare"/>
@@ -334,7 +334,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
