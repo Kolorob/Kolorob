@@ -31,8 +31,6 @@ import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
-import org.osmdroid.views.overlay.mylocation.IMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -300,7 +298,7 @@ setMapView(mapView);
 
 
         ImageButton curButton=(ImageButton) rootView.findViewById(R.id.currlocation);
-        curButton.setOnClickListener(new View.OnClickListener() {
+      /*  curButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -313,7 +311,7 @@ setMapView(mapView);
                 mylocation.getMyLocation();
                 mapView.getOverlays().add(mylocation);
             }
-        });
+        });*/
 
 
 

@@ -292,7 +292,7 @@ double roadlength;
 
 
         ImageButton curButton = (ImageButton) rootView.findViewById(R.id.currlocation);
-        curButton.setOnClickListener(new View.OnClickListener() {
+     /*   curButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -313,7 +313,7 @@ double roadlength;
                 }
             }
         });
-
+*/
 
 
         return rootView;
