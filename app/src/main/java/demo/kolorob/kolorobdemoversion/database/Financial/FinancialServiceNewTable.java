@@ -323,7 +323,7 @@ public class FinancialServiceNewTable {
         int k =0;
         ArrayList<FinancialNewItem> nameslist=new ArrayList<>();
         ArrayList<Integer>s=new ArrayList<Integer>();
-        places="Mirpur-10";
+        places=place;
         SQLiteDatabase db = openDB();
         int i=0;
         Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatname = '"+subcatnames+"'" ,null);

@@ -302,7 +302,7 @@ public class GovernmentNewTable {
         int k =0;
         ArrayList<GovernmentNewItem> nameslist=new ArrayList<>();
         ArrayList<Integer>s=new ArrayList<Integer>();
-        places="Mirpur-11";
+        places=place;
         SQLiteDatabase db = openDB();
         int i=0;
         Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatnamebn = '"+subcatnames+"'" ,null);
