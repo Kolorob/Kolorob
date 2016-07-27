@@ -2,12 +2,16 @@ package demo.kolorob.kolorobdemoversion.helpers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
@@ -27,6 +31,7 @@ import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
@@ -38,6 +43,9 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by HP on 5/14/2016.
@@ -54,6 +62,9 @@ public class MyInfoWindow extends InfoWindow {
     LegalAidServiceProviderItemNew nullleg;
     Activity con;
     GeoPoint pp;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
+    String rating;
     int catid;
     public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, String Node, int categoryid,String add) {
         super(layoutResId, mapView);
@@ -79,18 +90,29 @@ public class MyInfoWindow extends InfoWindow {
     }
 
     public void onOpen(Object arg0) {
+        setRating();
         final LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
         Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
-        TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
+        final TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
         txtTitle.setTextSize(20);
         // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
-        TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
-        TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
-        txtTitle.setText(titlemarker);
+        final TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
+        final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
+
 
         // contact.setText(contact2);
-        txtSubdescription.setText("যোগাযোগঃ "+contact2);
-        adddescription.setText("ঠিকানাঃ " + address);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                txtTitle.setText(titlemarker);
+                txtSubdescription.setText("রেটিংঃয" + rating);
+                adddescription.setText("োগাযোগ  " + contact2);
+            }
+        }, 000);
+
         layout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switch (catid) {
@@ -163,5 +185,42 @@ public class MyInfoWindow extends InfoWindow {
 
             }
         });
+    }
+
+    public void setRating()
+    {
+        if(AppUtils.isNetConnected(con.getApplicationContext())) {
+        getRequest(MyInfoWindow.this.con, "http://kolorob.net/demo/api/get_sp_rating?username="+user+"&password="+pass+" ", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            try {
+                                JSONArray jo = new JSONArray(apiContent);
+                                int size = jo.length();
+                                for (int i = 0; i < size; i++) {
+                                    JSONObject ratingH = jo.getJSONObject(i);
+                                    String id = ratingH.getString("id");
+                                    if ((id.equals(n)) || id.equals(String.valueOf(node))) {
+
+
+                                        rating = (ratingH.getString("avg"));
+                                        break;
+
+                                    }
+
+
+                                }
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        );
+
+    }
+
     }
 }
