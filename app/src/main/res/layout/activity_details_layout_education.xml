@@ -322,8 +322,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/compare"
 
-                android:scaleX="0.6"
-                android:scaleY="0.6"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:buttonTint="@color/white"
                 android:layout_marginLeft="@dimen/margincheckbox"
                 android:textSize="29dp"
