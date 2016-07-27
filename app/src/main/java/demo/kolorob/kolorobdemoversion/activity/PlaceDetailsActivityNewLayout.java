@@ -1606,10 +1606,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 this.startActivity(iient);
 
             }
-            else if (NavigationCalled==false)
-            {
-                callMapFragment(locationNameId);
-            }
+
+        }
+        else if (NavigationCalled==false)
+        {
+            callMapFragment(locationNameId);
         }
 
 
