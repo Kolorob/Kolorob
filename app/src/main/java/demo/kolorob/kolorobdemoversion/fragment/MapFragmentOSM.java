@@ -263,12 +263,12 @@ setMapView(mapView);
             case AppConstants.LEGAL:
                 for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getBreaktime2();
+                    String subcategotyId = et.getCategoryId();
 
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerLeg(point, et.getLegalaidNameBan(), et.getAddress(), et.getContactNo(), et.getIdentifierId(), et.getBreaktime2());
+                    drawMarkerLeg(point, et.getLegalaidNameBan(), et.getAddress(), et.getContactNo(), et.getIdentifierId(), subcategotyId);
                 }
                 break;
             case AppConstants.FINANCIAL:
@@ -459,10 +459,10 @@ setMapView(mapView);
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId == 1)
+            if (subcategotyId == 30)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
 
-            else if (subcategotyId >= 2 && subcategotyId <= 5)
+            else if (subcategotyId ==36)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
             InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
             marker.setInfoWindow(infoWindow);
