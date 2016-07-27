@@ -99,7 +99,7 @@
                     android:id="@+id/upperText"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:layout_gravity="right">
+                    android:layout_gravity="left">
 
                     <TextView
                         android:layout_width="wrap_content"
