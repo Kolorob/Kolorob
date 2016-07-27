@@ -160,6 +160,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     TextView health_name2,opening_time2,language_spoken2,service_type2,specialist_available2,clean_facilities2,privacy2,quality_equipment2;
     TextView health_name1,opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1,cost1,cost2,cost3;
     TextView health_name3,opening_time3,language_spoken3,service_type3,specialist_available3,clean_facilities3,privacy3,quality_equipment3;
+
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
     TextView edu_name_ban22,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
@@ -505,6 +506,44 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         cost1=(TextView)findViewById(R.id.cost1);
 
 
+
+        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
+        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
+        edtype=(TextView)findViewById(R.id.eduType2);
+        hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
+        transport_facility=(TextView)findViewById(R.id.transport_facility2);
+        playground=(TextView)findViewById(R.id.playground2);
+        total_students=(TextView)findViewById(R.id.ttl_students);
+        total_classes=(TextView)findViewById(R.id.total_classes2);
+        total_teachers=(TextView)findViewById(R.id.total_teachers2);
+        course_provided=(TextView)findViewById(R.id.course_provided2);
+        shift=(TextView)findViewById(R.id.shift2);
+        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
+        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
+        compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
+        edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
+        edtype1=(TextView)findViewById(R.id.eduType3);
+        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
+        transport_facility1=(TextView)findViewById(R.id.transport_facility3);
+        playground1=(TextView)findViewById(R.id.playground3);
+        total_students1=(TextView)findViewById(R.id.total_students3);
+        total_classes1=(TextView)findViewById(R.id.total_classes3);
+        total_teachers1=(TextView)findViewById(R.id.total_teachers3);
+        course_provided1=(TextView)findViewById(R.id.course_provided3);
+        shift1=(TextView)findViewById(R.id.shift3);
+        canteen_facility1=(TextView)findViewById(R.id.canteen_facility3);
+
+        //    edu_name_ban2=(TextView)findViewById(R.id.edu_name_ban1);
+        edtype2=(TextView)findViewById(R.id.eduType1);
+        hostel_facility2=(TextView)findViewById(R.id.hostel_facility1);
+        transport_facility2=(TextView)findViewById(R.id.transport_facility1);
+        playground2=(TextView)findViewById(R.id.playground1);
+        total_students2=(TextView)findViewById(R.id.total_students1);
+        total_classes2=(TextView)findViewById(R.id.total_classes1);
+        total_teachers2=(TextView)findViewById(R.id.total_teachers1);
+        course_provided2=(TextView)findViewById(R.id.course_provided1);
+        shift2=(TextView)findViewById(R.id.shift1);
+        canteen_facility2=(TextView)findViewById(R.id.canteen_facility1);
         //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
         //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
         //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
@@ -1200,9 +1239,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         {
 
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
-                edu_name_ban1.setText("X");
+                edu_name_ban.setText("X");
             else
-            edu_name_ban1.setText(educationNewItem.getNamebn());
+            edu_name_ban.setText(educationNewItem.getNamebn());
 
             if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null"))
                 edtype1.setText("X");
@@ -1607,10 +1646,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 this.startActivity(iient);
 
             }
-            else if (NavigationCalled==false)
-            {
-                callMapFragment(locationNameId);
-            }
+
+        }
+        else if (NavigationCalled==false)
+        {
+            callMapFragment(locationNameId);
         }
 
 
@@ -2115,7 +2155,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
-        Log.d("Subcategory_name","*******"+si.getSubCatHeaderBn());
+
         tvName.setText(si.getSubCatHeaderBn());
 
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
@@ -2316,25 +2356,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         break;
                     case AppConstants.HEALTH:
                         //TODO write necessary codes for health
-                        Headerholder.add(si.getSubcatHeader());
+                        Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
-
-
                         }
-
-
-                        for (int ss=0;ss<healthItem.size();ss++)
-                        {
-                            ArrayList<HealthServiceProviderItemNew> arrayList=new ArrayList<>();
-                            arrayList.add(healthItem.get(ss));
-                            HEL.add(healthItem.get(ss));
-                        }
-
-
-
                         callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
 
                         break;
@@ -2346,10 +2373,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                             entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s));
 
-                        }
-                        for (int ss=0;ss<entItem.size();ss++)
-                        {
-                            ENT.add(entItem.get(ss));
                         }
 
 
@@ -2380,12 +2403,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         {
                             legalItem = constructlegalaidListItemForHeader(cat_id, Headerholder.get(s));
                         }
-                        for (int ss=0;ss<legalItem.size();ss++)
-                        {
-                            LEG.add(legalItem.get(ss));
-                        }
-
-
                         callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
                         break;
                     case AppConstants.FINANCIAL:
@@ -2432,7 +2449,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // showSubCatListItem.setEnabled(true);
                 // subCatItemListHeader.setText(si.getSubcatHeader());
                 constructSubCategoryItemList(cat_id, si.getSubcatHeader());
-                Log.d("SubcategoryId","******"+si.getSubcatHeader());
             }
         });
 
@@ -2884,7 +2900,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     {
 
         //listholder.setVisibility(View.GONE);
-NavigationCalled=true;
+        NavigationCalled=true;
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
         FragmentManager fragmentManager=getFragmentManager();
