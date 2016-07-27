@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
 
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
                     android:background="@drawable/finance_t"/>
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/upperText"
                         android:orientation="vertical"
-                        android:gravity="center">
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -113,10 +113,10 @@
 
                             />
                         <RelativeLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:gravity="center_horizontal">
+                            >
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -129,11 +129,10 @@
                                 android:layout_toStartOf="@+id/ratingBar" />
                             <RatingBar
                                 android:id="@+id/ratingBar"
-                                android:layout_width="165dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="?android:attr/ratingBarStyleIndicator"
-                                android:scaleX="0.6"
-                                android:scaleY="0.6"
+
                                 android:numStars="5"
                                 android:stepSize="0"
                                 android:rating="2.3"
