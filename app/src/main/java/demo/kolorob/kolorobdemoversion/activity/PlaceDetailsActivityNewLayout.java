@@ -1361,7 +1361,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-                    printnamesent = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo();
+                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
