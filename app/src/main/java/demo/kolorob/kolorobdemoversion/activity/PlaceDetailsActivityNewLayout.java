@@ -740,7 +740,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ListClicked=false;
                 CompareClicked=false;
                 callMapFragment(locationNameId);;
-
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                 {
 
@@ -787,7 +786,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             @Override
             public void onClick(View v) {
 
-                toggleButton.setVisibility(View.GONE);
+
                 SearchClicked=false;
                 MapClicked=false;
                 ListClicked=true;
@@ -990,14 +989,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     public void compareTool()
     {
-
-
        // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
 
         if(currentCategoryID==1)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
-            toggleButton.setVisibility(View.GONE);
+
             String delims = "[,]";
             String[] tokens = comapreData.split(delims);
 
@@ -1009,7 +1006,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 compareEducation();}
 
         else {
-            toggleButton.setVisibility(View.GONE);
             compare_layout.setVisibility(View.VISIBLE);
 
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
@@ -1034,7 +1030,6 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
     public void compareHealth() {
-        toggleButton.setVisibility(View.GONE);
         compare_layout.setVisibility(View.VISIBLE);
         compare_layoutedu.setVisibility(View.GONE);
 
@@ -1222,7 +1217,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
     public void compareEducation()
-    {toggleButton.setVisibility(View.GONE);
+    {
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
         educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
 
@@ -3213,7 +3208,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             SearchClicked=false;
 
         }
-      //  toggleButton.setVisibility(View.VISIBLE);
+        toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
 //
