@@ -427,6 +427,7 @@ public class OpeningActivity extends Activity {
                 @Override
                 public void onResponse(int status, String apiContent) {
                     try {
+                        Log.d("JsonArray Health","######"+apiContent);
                         JSONArray allData=new JSONArray(apiContent);
                         HealthDatSize=allData.length();
                         for(int i=0;i<HealthDatSize;i++)
