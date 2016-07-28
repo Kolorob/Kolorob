@@ -455,12 +455,12 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         headtext = (TextView) rootView.findViewById(R.id.headtext);
         headtext.setText(centername);
         String distance = String.format("%.2f", roadlength);
-        disttext = (TextView) rootView.findViewById(R.id.distancetext);
+       // disttext = (TextView) rootView.findViewById(R.id.distancetext);
         Cngtext = (TextView) rootView.findViewById(R.id.cngtext);
         Bustext = (TextView) rootView.findViewById(R.id.bustext);
         Ricksawtext = (TextView) rootView.findViewById(R.id.ricksawtext);
         Walkingtext = (TextView) rootView.findViewById(R.id.walkingtext);
-        disttext.setText(getString(R.string.distance) + ": " + distance + " km");
+        //disttext.setText(getString(R.string.distance) + ": " + distance + " km");
         double Busfare = roadlength * 1.55;
         double bustime = (roadlength / 15) * 60;
         if (Busfare <= 7.00) Bustext.setText("7 " + "Taka ");
