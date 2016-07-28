@@ -28,6 +28,7 @@ public class DetailsJobActivityNew extends Activity {
     ImageView left_image,middle_image,right_image;
     TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
+    LinearLayout left_job_icon,right_cross_button;
     TextView ups_text;
     String result_concate="";
     private ImageView close_button;
@@ -72,6 +73,19 @@ public class DetailsJobActivityNew extends Activity {
         break_time=(TextView)findViewById(R.id.break_time);
        // off_day=(TextView)findViewById(R.id.off_day);
         opening_time=(TextView)findViewById(R.id.opening_time);
+        left_job_icon=(LinearLayout)findViewById(R.id.left_job_icon);
+        right_cross_button=(LinearLayout) findViewById(R.id.right_cross_button);
+
+
+        LinearLayout.LayoutParams left_job_icons = (LinearLayout.LayoutParams) left_job_icon.getLayoutParams();
+        int vc = left_job_icons.height = width /7;
+        left_job_icons.width = width / 7;
+        left_job_icon.setLayoutParams(left_job_icons);
+
+        LinearLayout.LayoutParams params_right_emails = (LinearLayout.LayoutParams) right_cross_button.getLayoutParams();
+        params_right_emails.height = width /7;;
+        params_right_emails.width = width /7;;
+        right_cross_button.setLayoutParams(params_right_emails);
 
         job_type=(TextView)findViewById(R.id.job_type);
        // job_responsibility=(TextView)findViewById(R.id.job_responsibility);
