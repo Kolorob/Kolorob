@@ -48,7 +48,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textSize="37sp"
+                    android:textSize="29dp"
                     android:id="@+id/header"
                     android:textColor="@color/white"
                     android:textStyle="bold"
