@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -982,7 +983,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // Do Something
             }
         });
-
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(PlaceDetailsActivityNewLayout.this, R.anim.twin);
+        toggleButton.startAnimation(myFadeInAnimation);
     }
 
     public void compareTool()
