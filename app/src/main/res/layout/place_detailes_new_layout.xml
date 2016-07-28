@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:id="@+id/compare_layout"
 
@@ -54,6 +54,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:id="@+id/header_compare"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -937,7 +938,7 @@ android:visibility="gone"
                 </LinearLayout>
 
             </ScrollView>
-</LinearLayout>
+                </LinearLayout>
             <LinearLayout
                 android:id="@+id/llSubCategoryListHolderback"
                 android:layout_width="@dimen/sidebarwidth"

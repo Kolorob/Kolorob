@@ -988,6 +988,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void compareTool()
     {
        // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+
         if(currentCategoryID==1)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
@@ -1080,11 +1081,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 {
                     if(healthService.charAt(i)=='1')
                     {
-                        health_service_data1=health_service_data1+"Emergency Service";
+                        health_service_data1=health_service_data1+"Emergency Service,";
                     }
                     else if(healthService.charAt(i)=='2')
                     {
-                        health_service_data1=health_service_data1+" Ambulance Service";
+                        health_service_data1=health_service_data1+" Ambulance Service,";
                     }
                     else
                         health_service_data1=health_service_data1+" Maternity Service";
@@ -1146,15 +1147,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             healthService1=healthServiceProviderItemNew.getFamily_privacy();
             if(!healthService.equals(""))
             {
-                for (int i=0;i<healthService.length();i++)
+                for (int i=0;i<healthService1.length();i++)
                 {
-                    if(healthService.charAt(i)=='1')
+                    if(healthService1.charAt(i)=='1')
                     {
-                        health_service_data2=health_service_data1+"Emergency Service";
+                        health_service_data2=health_service_data1+"Emergency Service, ";
                     }
-                    else if(healthService.charAt(i)=='2')
+                    else if(healthService1.charAt(i)=='2')
                     {
-                        health_service_data2=health_service_data1+" Ambulance Service";
+                        health_service_data2=health_service_data1+" Ambulance Service, ";
                     }
                     else
                         health_service_data2=health_service_data1+" Maternity Service";
