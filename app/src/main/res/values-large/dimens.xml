@@ -7,7 +7,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">5dp</dimen>
     <dimen name="margincheckbox">30dp</dimen>
-    <dimen name="transportlayout">250dp</dimen>
+    <dimen name="transportlayout">100dp</dimen>
     <dimen name="bottomtransport">80dp</dimen>
     <dimen name="search_margin">15dp</dimen>
     <dimen name="listheight">420dp</dimen>

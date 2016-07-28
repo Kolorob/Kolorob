@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+
     android:layout_height="fill_parent"
     android:orientation="vertical" android:layout_weight="1"
     android:background="#EBDED5" android:padding="6dp">
@@ -17,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:id="@+id/headerlayout"
 
-android:visibility="gone"
+        android:visibility="gone"
         android:layout_marginTop="20dp"
         android:background="#29ABE2">
 
@@ -45,10 +46,7 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/transportlayout"
             android:id="@+id/transportdetailslayout"
-
 android:visibility="gone"
-
-
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 

@@ -211,6 +211,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
                 final GovernmentNewItem detgov = groups.get(groupPosition).getChildrengov().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
                 text.setText(detgov.getAddress());
+                linearLayout.setBackgroundResource(R.color.government_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -299,7 +300,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
         else if(catid==6)
             ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
         else if(catid==4)
-            ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.government_color);
 
 
         //
