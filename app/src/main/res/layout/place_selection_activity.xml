@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         android:id="@+id/holder"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/place_choice_screen_720"
+        android:background="@drawable/place_choice_screen_720_m"
         android:layout_alignParentTop="true"></FrameLayout>
 </RelativeLayout>
