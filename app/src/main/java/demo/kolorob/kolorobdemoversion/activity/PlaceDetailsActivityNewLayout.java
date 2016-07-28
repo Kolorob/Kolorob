@@ -1005,7 +1005,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         else {
             compare_layout.setVisibility(View.VISIBLE);
-            compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
             int size=comapreData.length();
             for(int i=0;i<size;i++)

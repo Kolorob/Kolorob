@@ -7,7 +7,7 @@
     </item>
     <item android:top="5dp" >
         <shape android:shape="rectangle">
-            <solid android:color="#F7931E" />
+            <solid android:color="@color/health_color" />
         </shape>
     </item>
 </layer-list>
