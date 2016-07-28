@@ -86,7 +86,7 @@ public class MyInfoWindow extends InfoWindow {
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
 
         txtTitle.setText(titlemarker);
-        txtSubdescription.setText("রেটি " + address);
+        txtSubdescription.setText("রেটিং " + address +"\n"+ "\n"  +" (বিস্তারিত দেখুন)");
         adddescription.setText("োগাযোগ  " + contact2);
         // contact.setText(contact2);
 
