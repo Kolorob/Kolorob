@@ -329,8 +329,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         Notification.Builder builder = new Notification.Builder(PlaceSelectionActivity.this);
 
         builder.setAutoCancel(false);
-        builder.setTicker("New Version of Kolorob is Available");
-        builder.setContentTitle("Update kolorob");
+        builder.setTicker("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে");
+        builder.setContentTitle("কলরব ভার্সন");
         //  builder.setContentText("To update click here.");
         builder.setSmallIcon(R.drawable.kolorob_logo_first_page);
         builder.setContentIntent(pendingIntent);

@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:textSize="37sp"
+                    android:textSize="29dp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
