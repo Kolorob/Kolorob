@@ -153,7 +153,7 @@ public class DetailsLayoutGovernment extends Activity {
 
         timeProcessing("খোলার সময় :", governmentNewItem.getOpeningtime());
         timeProcessing("বন্ধে সময় :", governmentNewItem.getClosetime());
-        if(governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
+        if(!governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
         breakTimeProcessing("বিরতির সময় :", governmentNewItem.getBreaktime());
         CheckConcate("বন্ধের দিন  :", governmentNewItem.getOffday());
         CheckConcate("রেজিস্ট্রেশন নাম্বার:", governmentNewItem.getRegisterednumber());
