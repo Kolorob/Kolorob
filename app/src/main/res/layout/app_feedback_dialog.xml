@@ -11,7 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Feedback"
+        android:text="মতামত"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:id="@+id/feedback" />
@@ -30,8 +32,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Comment"
+        android:text="কলরব সম্পর্কে লিখুন"
+        android:textColor="@color/orange"
+
         android:layout_gravity="center_horizontal"
+        android:textSize="17sp"
         android:layout_marginTop="10dp"
         />
 
@@ -41,7 +46,8 @@
         android:id="@+id/submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="feedback"
+        android:hint="মতামত"
+        android:gravity="center"
         android:lines="4"
         />
 
