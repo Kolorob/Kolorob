@@ -288,7 +288,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolice_station());
         CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
-        CheckConcate("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
+        if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
+        breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
         CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
@@ -630,7 +631,27 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //
 //        }
     }
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            String timeInBengali = "";
+            value2=value2+",";
 
+            String[] breakTIme = value2.split(",");
+
+
+            String[] realTIme=breakTIme[0].split("-");
+
+
+            value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+
+
+
+
+
+
+            CheckConcate(value1, value2);
+        }
+    }
 
     public void verifyRegistration(View v) {
 

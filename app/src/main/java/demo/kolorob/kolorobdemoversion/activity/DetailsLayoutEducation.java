@@ -198,7 +198,8 @@ public class DetailsLayoutEducation extends Activity {
 
         timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
         timeProcessing("বন্ধে সময়", educationNewItem.getClosetime());
-        CheckConcate("বিরতির সময়", educationNewItem.getBreaktime());
+        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
+        breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
         CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
         CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
         CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
@@ -750,7 +751,25 @@ public class DetailsLayoutEducation extends Activity {
 
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
-            CheckConcate(value1, value2);
+            if (!value2.equals("null") || !value2.equals(", ")) {
+                String timeInBengali = "";
+                value2=value2+",";
+
+                String[] breakTIme = value2.split(",");
+
+
+                String[] realTIme=breakTIme[0].split("-");
+
+
+                value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+
+
+
+
+
+
+                CheckConcate(value1, value2);
+            }
         }
     }
 

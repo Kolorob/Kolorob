@@ -153,7 +153,8 @@ public class DetailsLayoutGovernment extends Activity {
 
         timeProcessing("খোলার সময় :", governmentNewItem.getOpeningtime());
         timeProcessing("বন্ধে সময় :", governmentNewItem.getClosetime());
-        CheckConcate("বিরতির সময় :", governmentNewItem.getBreaktime());
+        if(governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
+        breakTimeProcessing("বিরতির সময় :", governmentNewItem.getBreaktime());
         CheckConcate("বন্ধের দিন  :", governmentNewItem.getOffday());
         CheckConcate("রেজিস্ট্রেশন নাম্বার:", governmentNewItem.getRegisterednumber());
         CheckConcate("কাদের সাথে রেজিস্টার্ড  :", governmentNewItem.getRegisteredwith());
@@ -611,7 +612,25 @@ public class DetailsLayoutGovernment extends Activity {
 
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
-            CheckConcate(value1, value2);
+            if (!value2.equals("null") || !value2.equals(", ")) {
+                String timeInBengali = "";
+                value2=value2+",";
+
+                String[] breakTIme = value2.split(",");
+
+
+                String[] realTIme=breakTIme[0].split("-");
+
+
+                value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+
+
+
+
+
+
+                CheckConcate(value1, value2);
+            }
         }
     }
 

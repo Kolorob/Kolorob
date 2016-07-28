@@ -164,7 +164,8 @@ EditText feedback_comment;
 
         timeProcessing("খোলার সময় :", financialNewItem.getOpeningtime());
         timeProcessing("বন্ধের সময় :", financialNewItem.getClosetime());
-        CheckConcate("বিরতির সময় :", financialNewItem.getBreaktime());
+        if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
+        breakTimeProcessing("বিরতির সময় :", financialNewItem.getBreaktime());
         CheckConcate("বন্ধের দিন :", financialNewItem.getOffday());
         CheckConcate("রেজিস্ট্রেশন নাম্বার:", financialNewItem.getRegisterednumber());
         CheckConcate("কাদের সাথে রেজিস্টার্ড  :", financialNewItem.getRegisteredwith());
@@ -617,7 +618,25 @@ EditText feedback_comment;
 
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
-            CheckConcate(value1, value2);
+            if (!value2.equals("null") || !value2.equals(", ")) {
+                String timeInBengali = "";
+                value2=value2+",";
+
+                String[] breakTIme = value2.split(",");
+
+
+                String[] realTIme=breakTIme[0].split("-");
+
+
+                value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+
+
+
+
+
+
+                CheckConcate(value1, value2);
+            }
         }
     }
 

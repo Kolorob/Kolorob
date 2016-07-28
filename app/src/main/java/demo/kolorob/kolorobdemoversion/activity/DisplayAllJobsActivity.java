@@ -160,6 +160,7 @@ public class DisplayAllJobsActivity extends Activity {
         String[] address = new String[size];
 
         String[] contact_number = new String[size];
+        String[] positions = new String[size];
 
         int increment= 0;
 
@@ -172,6 +173,7 @@ public class DisplayAllJobsActivity extends Activity {
             remaining_date[increment]= remaining_date(jobAdvertisementItem.getApplication_last_date());
             address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
             contact_number[increment] = jobAdvertisementItem.getMobile1();
+            positions[increment] = jobAdvertisementItem.getPosition();
             increment++;
 
         }
@@ -181,7 +183,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         joblist=(ListView)findViewById(R.id.jobList);
 
-        DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number);
+        DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
         joblist.setAdapter(displayAllJobList);
 
 

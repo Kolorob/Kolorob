@@ -275,7 +275,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
-        timeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
+        if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
+        breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
         CheckConcate("যার মাধ্যমে রেজিস্ট্রেশন করা হয়েছে", legalAidServiceProviderItemNew.getRegisteredWith());
@@ -528,6 +529,28 @@ public class DetailsInfoActivityLegalNew extends Activity {
     }
 
 
+    private void breakTimeProcessing(String value1, String value2) {
+        if (!value2.equals("null") || !value2.equals(", ")) {
+            String timeInBengali = "";
+            value2=value2+",";
+
+            String[] breakTIme = value2.split(",");
+
+
+            String[] realTIme=breakTIme[0].split("-");
+
+
+            value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+
+
+
+
+
+
+            CheckConcate(value1, value2);
+        }
+    }
+
     public void sendReviewToServer() {
         int rating=0;
         if (status.equals("খুবই অসন্তুষ্ট"))
@@ -725,11 +748,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 //
 //
 
-    private void breakTimeProcessing(String value1, String value2) {
-        if (!value2.equals("null") || !value2.equals(", ")) {
-            CheckConcate(value1, value2);
-        }
-    }
+
 
 
     private void timeProcessing(String value1, String value2) {

@@ -232,8 +232,13 @@ public class DetailsJobActivityNew extends Activity {
 
     private String concateBasic(String value1,String value2){
 
-        String value= value1+value2;
-        result_concate= result_concate+value + "\n";
+        if(!value2.equals("null")&&!value2.equals(""))
+        {
+            String value= value1+value2;
+            result_concate= result_concate+value + "\n";
+        }
+
+
 
 
         return result_concate;

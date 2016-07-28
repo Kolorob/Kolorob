@@ -85,6 +85,16 @@
                      android:id="@+id/contact_number"
                      />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contract Number"
+        android:textColor="@color/white"
+
+
+        android:id="@+id/positions"
+        />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="15dp">

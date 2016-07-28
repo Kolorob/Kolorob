@@ -24,12 +24,13 @@ public class DisplayAllJobList extends BaseAdapter
     long remaing_date[];
     String address[];
     String contract_number[];
+    String positions[];
     LinearLayout titlePart,salaryPart,addressPart,numberpart,remainingdate_lin,salary_range_lin;
     int height,width;
     View top,bottom;
 
 
-    public DisplayAllJobList(Activity context, String[] title,String[] salary_range,long[] remaining_date, String[] address,String[] contract_number) {
+    public DisplayAllJobList(Activity context, String[] title,String[] salary_range,long[] remaining_date, String[] address,String[] contract_number,String[] positions) {
         super();
         this.context = context;
         this.title = title;
@@ -37,6 +38,7 @@ public class DisplayAllJobList extends BaseAdapter
         this.remaing_date = remaining_date;
         this.address =address;
         this.contract_number=contract_number;
+        this.positions=positions;
 
 
 
@@ -64,6 +66,7 @@ public class DisplayAllJobList extends BaseAdapter
         TextView remaining_date;
         TextView address;
         TextView contact_number;
+        TextView positions;
 
 
     }
@@ -83,6 +86,7 @@ public class DisplayAllJobList extends BaseAdapter
             holder.remaining_date = (TextView) convertView.findViewById(R.id.remaining_date);
             holder.address = (TextView) convertView.findViewById(R.id.address);
             holder.contact_number = (TextView) convertView.findViewById(R.id.contact_number);
+            holder.positions = (TextView) convertView.findViewById(R.id.positions);
 
 
             convertView.setTag(holder);
@@ -111,6 +115,7 @@ public class DisplayAllJobList extends BaseAdapter
         holder.remaining_date.setText("সময় বাকি আছে: " + remaing_date[position] +"দিন");
         holder.address.setText("ঠিকানা: " + address[position]);
         holder.contact_number.setText("যোগাযোগের নম্বর: " + contract_number[position]);
+        holder.positions.setText("পজিশন: " + positions[position]);
 
 
 
