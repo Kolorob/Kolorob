@@ -87,7 +87,7 @@ public class MyInfoWindow extends InfoWindow {
 
         txtTitle.setText(titlemarker);
         txtSubdescription.setText("রেটিং " + address +"\n"+ "\n"  +" (বিস্তারিত দেখুন)");
-        adddescription.setText("োগাযোগ  " + contact2);
+        adddescription.setText("যোগাযোগ " + contact2);
         // contact.setText(contact2);
 
 
