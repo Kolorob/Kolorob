@@ -614,22 +614,23 @@ public class DetailsLayoutGovernment extends Activity {
         if (!value2.equals("null") || !value2.equals(", ")) {
             if (!value2.equals("null") || !value2.equals(", ")) {
                 String timeInBengali = "";
-                value2=value2+",";
+                try {
 
-                String[] breakTIme = value2.split(",");
+                    value2 = value2 + ",";
 
-
-                String[] realTIme=breakTIme[0].split("-");
-
-
-                value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+                    String[] breakTIme = value2.split(",");
 
 
+                    String[] realTIme = breakTIme[0].split("-");
 
 
+                    value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
+                    CheckConcate(value1, value2);
+                }
+                catch (Exception e)
+                {
 
-
-                CheckConcate(value1, value2);
+                }
             }
         }
     }
