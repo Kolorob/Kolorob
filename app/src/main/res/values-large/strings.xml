@@ -90,16 +90,16 @@
     <string name="verify_registration">মতামত দেয়ার আগে আপনাকে রেজিস্ট্রেশন করতে হবে আপনি কি রেজিস্ট্রেশন করবেন? </string>
     <string name="compare">তুলনা করুন </string>
     <string name="edu_name_ban">তুলনা করুন </string>
-    <string name="edtype">Education Type</string>
-    <string name="hostel_facility">Floor</string>
-    <string name="transport_facility">Address</string>
-    <string name="playground">Average Students</string>
-    <string name="total_students">Total Students</string>
-    <string name="total_classes">Total Classes</string>
-    <string name="total_teachers">Total Teachers</string>
-    <string name="course_provided">Water Condition</string>
-    <string name="shift">Shift</string>
-    <string name="canteen_facility">Water Source</string>
+    <string name="edtype"> পড়াশুনার ধরণ </string>
+    <string name="hostel_facility"> প্রতিষ্ঠানের ধরন </string>
+    <string name="transport_facility">আশে পাশের পরিচিত স্থান </string>
+    <string name="playground"> গড় ছাত্র ছাত্রী সংখ্যা  </string>
+    <string name="total_students">ছাত্র ছাত্রী সংখা</string>
+    <string name="total_classes"> কয়টি ক্লাস রুম রয়েছে  </string>
+    <string name="total_teachers">শিক্ষক সংখা </string>
+    <string name="course_provided">কাদের সাথে রেজিস্টার্ড</string>
+    <string name="shift">শাখা</string>
+    <string name="canteen_facility">সরবরাহকৃত পানির অবস্থা </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
