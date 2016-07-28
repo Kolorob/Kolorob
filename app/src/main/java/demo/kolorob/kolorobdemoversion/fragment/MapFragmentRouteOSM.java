@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,6 +35,8 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
@@ -71,20 +76,33 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
  * Created by israt.jahan on 5/5/2016.
 
  */
+
 public class MapFragmentRouteOSM extends Fragment implements View.OnClickListener, MapEventsReceiver, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
+
+    private static final String TAG = "LocationActivity";
+    private static final long INTERVAL = 1000 * 10;
+    private static final long FASTEST_INTERVAL = 1000 * 5;
+
+    TextView tvLocation;
+
+    Location mCurrentLocation;
+    String mLastUpdateTime;
     Drawable newMarker;
     Marker marker;
     MyLocationNewOverlay mylocation;
     private LinearLayout subcatlistholder;
-    String stlat, stlong,centername;
+    String stlat, stlong, centername;
     int ind = 0;
     Polyline roadOverlay;
     Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     List<String> listData = new ArrayList<String>();
-double laat,longg;
+    double laat, longg;
+
+    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+
     public String getLocationName() {
         return locationName;
     }
@@ -97,7 +115,9 @@ double laat,longg;
     private int locationNameId;
     private static double VIEW_WIDTH;
     private int primaryIconWidth;
-double roadlength;
+    boolean check = false;
+    double roadlength;
+
     public int getLocationNameId() {
         return locationNameId;
     }
@@ -151,7 +171,7 @@ double roadlength;
         educationServiceProvider = et;
     }
 
-    int subcategotyId,height,width;
+    int subcategotyId, height, width;
     View rootView;
     ArrayList<OverlayItem> anotherOverlayItemArray, anotherOverlayItemArrayfinal, anotherOverlayItemArray2, anotherOverlayItemArray3, anotherOverlayItemArray4, anotherOverlayItemArray7, anotherOverlayItemArray8, anotherOverlayItemArray5, anotherOverlayItemArray6;
 
@@ -177,7 +197,13 @@ double roadlength;
     Location location;
     IMapController mapViewController;
 
-    @Override
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -226,7 +252,7 @@ double roadlength;
 
         String Latitude = pref.getString("Latitude", null);
         String Longitude = pref.getString("Longitude", null);
-         centername = pref.getString("Name", null);
+        centername = pref.getString("Name", null);
         locationNameId = pref.getInt("LocationNameId", 0);
         double lat = Double.parseDouble(Latitude);
         double lon = Double.parseDouble(Longitude);
@@ -243,44 +269,22 @@ double roadlength;
         // Showing status
         if (gpsVersion >= 8400000) {
             Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
-            statusofservice = true;;
-            Drawroute(userlocation, markerlocation);
+
         } else {
             Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), requestCode);
             dialog.show();//dialog needs to be modified more of an alert dialog
-            locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-            // Creating an empty criteria object
-            Criteria criteria = new Criteria();
-
-            // Getting the name of the provider that meets the criteria
-            provider = locationManager.getBestProvider(criteria, false);
-
-
-            if (provider != null && !provider.equals("")) {
-
-                // Get the location from the given provider
-                location = locationManager.getLastKnownLocation(provider);
-
-
-                locationManager.requestLocationUpdates(provider, 60000, 0.0f, this);
-
-
-                if (location != null) {
-                    onLocationChanged(location);
-                    Drawroute(userlocation, markerlocation);
-                } else
-                    Toast.makeText(getActivity(), "Location can't be retrieved", Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(getActivity(), "No Provider Found", Toast.LENGTH_SHORT).show();
-            }
         }
+        createLocationRequest();
+        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
         mapViewController.setZoom(18);
         mapViewController.setCenter(markerlocation);
-
 
 
         //---
@@ -317,58 +321,169 @@ double roadlength;
 
 
         return rootView;
+
     }
-public void calltransportlayout()
-{
-    RelativeLayout trlayout,headlayout;
-    TextView disttext,Bustext,Ricksawtext,Cngtext,Walkingtext,headtext;
-    trlayout=(RelativeLayout)rootView.findViewById(R.id.transportdetailslayout);
 
-    trlayout.setVisibility(View.VISIBLE);
-    headlayout=(RelativeLayout)rootView.findViewById(R.id.headerlayout);
-    headlayout.setVisibility(View.VISIBLE);
-    headtext=(TextView)rootView.findViewById(R.id.headtext);
-    headtext.setText(centername);
-    String distance= String.format("%.2f", roadlength);
-    disttext=(TextView)rootView.findViewById(R.id.distancetext);
-    Cngtext=(TextView)rootView.findViewById(R.id.cngtext);
-    Bustext=(TextView)rootView.findViewById(R.id.bustext);
-    Ricksawtext=(TextView)rootView.findViewById(R.id.ricksawtext);
-    Walkingtext=(TextView)rootView.findViewById(R.id.walkingtext);
-    disttext.setText(getString(R.string.distance) +": " +distance+ " km" );
-    double Busfare=roadlength*1.55;
-    double bustime=(roadlength/15)*60;
-            if (Busfare <=7.00)Bustext.setText( "7 " + "Taka ");
-    else {
-                String Bfare=String.format("%.2f", Busfare);
-                String Btime=String.format("%.2f", bustime);
-                Bustext.setText(Bfare + " Taka and might take " + Btime+ " minutes"  );
-            }
-    double CNGfare=(roadlength-2)*12+40;
-    double CNGtime=(roadlength/13)*60;
-    if (CNGfare <=40.00)Cngtext.setText( "40 " + "Taka and very minimum time required");
-    else {
-        String Cfare=String.format("%.2f", CNGfare);
-        String Ctime=String.format("%.2f", CNGtime);
-        Cngtext.setText(Cfare + " Taka and might take " + Ctime+ " minutes"  );
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart fired ..............");
+        mGoogleApiClient.connect();
     }
-    double rickfare=(roadlength)*15;
-    double ricktime=(roadlength/10)*60;
-    if (rickfare <=10.00)Ricksawtext.setText( "10 " + "Taka and very minimum time required");
-    else {
-        String Rfare=String.format("%.2f", rickfare);
-        String Rtime=String.format("%.2f", ricktime);
-        Ricksawtext.setText(Rfare + " Taka and might take " + Rtime+ " minutes"  );
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop fired ..............");
+        mGoogleApiClient.disconnect();
+        Log.d(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
     }
-    double wfare=0.0;
-    double wtime=(roadlength/8)*60;
+
+    private boolean isGooglePlayServicesAvailable() {
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getActivity());
+        if (ConnectionResult.SUCCESS == status) {
+            return true;
+        } else {
+            GooglePlayServicesUtil.getErrorDialog(status, this.getActivity(), 0).show();
+            return false;
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.d(TAG, "onConnected - isConnected ...............: " + mGoogleApiClient.isConnected());
+        startLocationUpdates();
+    }
+
+    protected void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+       /* PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest,this.getActivity());*/
+        Log.d(TAG, "Location update started ..............: ");
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.d(TAG, "Connection failed: " + connectionResult.toString());
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.d(TAG, "Firing onLocationChanged..............................................");
+        mCurrentLocation = location;
+        ;
+        updateUI();
+    }
+
+    private void updateUI() {
+        Log.d(TAG, "UI update initiated .............");
+        if (null != mCurrentLocation) {;
+            mapView.getOverlays().remove(usermarker);
+            stlat = String.valueOf(mCurrentLocation.getLatitude());
+            stlong = String.valueOf(mCurrentLocation.getLongitude());
+            laat = location.getLatitude();
+            longg = location.getLongitude();
+            usermarker = new Marker(mapView);
+            userlocation = new GeoPoint(laat, longg);
+            usermarker.setPosition(userlocation);
+            mapView.getOverlays().add(usermarker);
+            Drawroute(userlocation,markerlocation);
 
 
-        String wwfare=String.format("%.2f", wfare);
-        String wwtime=String.format("%.2f", wtime);
-        Walkingtext.setText(wwfare + " Taka and might take " + wwtime+ " minutes"  );
+        } else {
+            Log.d(TAG, "location is null ...............");
+        }
+    }
 
-}
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, (com.google.android.gms.location.LocationListener) this.getActivity());
+        Log.d(TAG, "Location update stopped .......................");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mGoogleApiClient.isConnected()) {
+            startLocationUpdates();
+            Log.d(TAG, "Location update resumed .....................");
+        }
+    }
+
+
+    public void calltransportlayout() {
+        RelativeLayout trlayout, headlayout;
+        TextView disttext, Bustext, Ricksawtext, Cngtext, Walkingtext, headtext;
+        trlayout = (RelativeLayout) rootView.findViewById(R.id.transportdetailslayout);
+
+        trlayout.setVisibility(View.VISIBLE);
+        headlayout = (RelativeLayout) rootView.findViewById(R.id.headerlayout);
+        headlayout.setVisibility(View.VISIBLE);
+        headtext = (TextView) rootView.findViewById(R.id.headtext);
+        headtext.setText(centername);
+        String distance = String.format("%.2f", roadlength);
+        disttext = (TextView) rootView.findViewById(R.id.distancetext);
+        Cngtext = (TextView) rootView.findViewById(R.id.cngtext);
+        Bustext = (TextView) rootView.findViewById(R.id.bustext);
+        Ricksawtext = (TextView) rootView.findViewById(R.id.ricksawtext);
+        Walkingtext = (TextView) rootView.findViewById(R.id.walkingtext);
+        disttext.setText(getString(R.string.distance) + ": " + distance + " km");
+        double Busfare = roadlength * 1.55;
+        double bustime = (roadlength / 15) * 60;
+        if (Busfare <= 7.00) Bustext.setText("7 " + "Taka ");
+        else {
+            String Bfare = String.format("%.2f", Busfare);
+            String Btime = String.format("%.2f", bustime);
+            Bustext.setText(Bfare + " Taka and might take " + Btime + " minutes");
+        }
+        double CNGfare = (roadlength - 2) * 12 + 40;
+        double CNGtime = (roadlength / 13) * 60;
+        if (CNGfare <= 40.00) Cngtext.setText("40 " + "Taka and very minimum time required");
+        else {
+            String Cfare = String.format("%.2f", CNGfare);
+            String Ctime = String.format("%.2f", CNGtime);
+            Cngtext.setText(Cfare + " Taka and might take " + Ctime + " minutes");
+        }
+        double rickfare = (roadlength) * 15;
+        double ricktime = (roadlength / 10) * 60;
+        if (rickfare <= 10.00) Ricksawtext.setText("10 " + "Taka and very minimum time required");
+        else {
+            String Rfare = String.format("%.2f", rickfare);
+            String Rtime = String.format("%.2f", ricktime);
+            Ricksawtext.setText(Rfare + " Taka and might take " + Rtime + " minutes");
+        }
+        double wfare = 0.0;
+        double wtime = (roadlength / 8) * 60;
+
+
+        String wwfare = String.format("%.2f", wfare);
+        String wwtime = String.format("%.2f", wtime);
+        Walkingtext.setText(wwfare + " Taka and might take " + wwtime + " minutes");
+
+    }
+
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
         mapView.getOverlays().remove(roadOverlay);
         RoadManager roadManager = new OSRMRoadManager(getActivity());
@@ -381,7 +496,7 @@ public void calltransportlayout()
 
         roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
         roadOverlay.setColor(Color.YELLOW);
-        roadlength=road.mLength;
+        roadlength = road.mLength;
         mapView.getOverlays().add(roadOverlay);
         havePolyLine = true;
         if (havePolyLine) {
@@ -438,31 +553,6 @@ public void calltransportlayout()
         this.mapView = mapView;
     }
 
-    public void onLocationChanged(Location location) {
-        // Getting reference to TextView tv_longitude
-        if (statusofservice == false) {
-            mapView.getOverlays().remove(usermarker);
-            Toast.makeText(getActivity(), "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-            usermarker = new Marker(mapView);
-          laat = location.getLatitude();
-          longg = location.getLongitude();
-            userlocation = new GeoPoint(laat, longg);
-            usermarker.setPosition(userlocation);
-            mapView.getOverlays().add(usermarker);
-        } else {
-            mapView.getOverlays().remove(usermarker);
-            stlat = String.valueOf(location.getLatitude());
-            stlong = String.valueOf(location.getLongitude());
-            laat = location.getLatitude();
-            longg = location.getLongitude();
-            usermarker = new Marker(mapView);
-            userlocation = new GeoPoint(laat, longg);
-            usermarker.setPosition(userlocation);
-            mapView.getOverlays().add(usermarker);
-            Toast.makeText(getActivity(), "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -478,85 +568,6 @@ public void calltransportlayout()
     public void onProviderDisabled(String provider) {
 
     }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(100); // Update location every second
-
-//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, getActivity());
-
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            stlat = String.valueOf(mLastLocation.getLatitude());
-            stlong = String.valueOf(mLastLocation.getLongitude());
-            double laat = mLastLocation.getLatitude();
-            double longg = mLastLocation.getLongitude();
-            userlocation=new GeoPoint(laat,longg);
-            usermarker=new Marker(mapView);
-            usermarker.setPosition(userlocation);
-            mapView.getOverlays().add(usermarker);
-            Drawroute(userlocation, markerlocation);
-
-        }
-         Toast.makeText(getActivity(), "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-    synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("s", "onStart fired ..............");
-        if(statusofservice==true)
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onStop() {
-
-        if(statusofservice==true) {
-            mGoogleApiClient.disconnect();
-            Log.d("s", "isConnected ...............: " + mGoogleApiClient.isConnected());
-        }
-
-
-        super.onStop();
-        Log.d("s", "onStop fired ..............");
-    }
-
-
 
 
    /* @Override
@@ -574,4 +585,6 @@ public void calltransportlayout()
     }
 */
 }
+
+
 

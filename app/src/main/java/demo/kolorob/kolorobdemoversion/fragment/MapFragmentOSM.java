@@ -14,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
@@ -37,6 +40,7 @@ import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
@@ -46,6 +50,8 @@ import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by israt.jahan on 5/5/2016.
@@ -99,7 +105,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<GovernmentNewItem> governmentNewItems = null;
     MapView mapView,mapp;
     private int categoryId;
-
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     public ArrayList<GovernmentNewItem> getGovernmentNewItems() {
         return governmentNewItems;
     }
@@ -212,6 +219,8 @@ setMapView(mapView);
             mapViewController.setZoom(16);
             mapViewController.setCenter(AppConstants.PARIS1);
         }
+
+
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
@@ -317,6 +326,7 @@ setMapView(mapView);
 
         return rootView;
     }
+
 
 
 

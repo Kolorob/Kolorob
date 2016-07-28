@@ -77,7 +77,7 @@
 			/>
 
 		<TextView
-			android:text=" way" android:id="@+id/call_id"
+			android:text=" way"
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:textColor="#3A4296"

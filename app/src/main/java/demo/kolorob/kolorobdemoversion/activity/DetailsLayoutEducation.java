@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -54,6 +55,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsI
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
@@ -386,7 +388,7 @@ public class DetailsLayoutEducation extends Activity {
 
 
 
-       /* distance_left.setOnClickListener(new View.OnClickListener() {
+        distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
@@ -446,7 +448,7 @@ public class DetailsLayoutEducation extends Activity {
 
                 }
             }
-        });*/
+        });
     }
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
