@@ -187,7 +187,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
         CheckConcate("রোগী নার্সের অনুপাত", healthServiceProviderItemNew.getPatient_nurse_ratio());
         CheckConcate("পরিচিত স্থান", healthServiceProviderItemNew.getLandmark());
-        CheckConcate("ব্লক", healthServiceProviderItemNew.getAddress());
+        CheckConcate("ব্লক", healthServiceProviderItemNew.getBlock());
         CheckConcate("ফ্লোর", healthServiceProviderItemNew.getFloor());
         CheckConcate("বাড়ির নাম", healthServiceProviderItemNew.getHouse_name());
         CheckConcate("রাস্তা", healthServiceProviderItemNew.getRoad());
@@ -197,6 +197,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolice_station());
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_for());
         CheckConcate("বিনামূল্যে সেবার ধরন", healthServiceProviderItemNew.getGeneral_free_services());
+
+
+        CheckConcate("ফার্মেসি চিকিৎসা সেবা", healthServiceProviderItemNew.getPharmacy_speciality());
+        CheckConcate("ফার্মেসি ফি", healthServiceProviderItemNew.getPharmacy_fee());
 
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_services());
         CheckConcate("সাধারন খরচ", healthServiceProviderItemNew.getGeneral_cost());
@@ -212,6 +216,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
         timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
+        if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
         breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
         CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
@@ -752,6 +757,22 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
+            String timeInBengali = "";
+            value2=value2+",";
+
+            String[] breakTIme = value2.split(",");
+
+
+            String[] realTIme=breakTIme[0].split("-");
+
+
+            value2=timeConverter(realTIme[0])+" থেকে " + timeConverter(realTIme [1]);
+
+
+
+
+
+
             CheckConcate(value1, value2);
         }
     }

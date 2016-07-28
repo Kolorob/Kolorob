@@ -146,11 +146,11 @@ public class DetailsJobActivityNew extends Activity {
 
            if(!jobAdvertisementItem.getReference_person().equals(""))
            {
-               concateBasic("যার সাথে যোগাযোগ করা হবে :",jobAdvertisementItem.getReference_person());
+               concateBasic(" যার সাথে যোগাযোগ করা হবে :",jobAdvertisementItem.getReference_person());
 
            }
            if(!jobAdvertisementItem.getCollector_name().equals(""))
-               concateBasic("সংগ্রহকারীর নাম : ",jobAdvertisementItem.getCollector_name());
+               concateBasic(" সংগ্রহকারীর নাম : ",jobAdvertisementItem.getCollector_name());
             reference_person.setText(result_concate);
             result_concate="";
            }
