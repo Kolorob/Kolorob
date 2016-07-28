@@ -133,7 +133,7 @@ Log.d("========", "-----------------"+i);
 //						 .show();
 			//	 AlertMessage.showMessage(context,"Location ","Sorry, Location is not found!");
 				 AlertMessage.showMessage(context, "দিকনির্দেশনা",
-						 " দেয়ায় হবে");
+						 " দেওয়া হবে");
 
                //  PresentActivity.this.startActivity(activityChangeIntent);
              }
