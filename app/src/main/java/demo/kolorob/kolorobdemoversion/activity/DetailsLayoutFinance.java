@@ -588,7 +588,10 @@ EditText feedback_comment;
     private String timeConverter(String time) {
 
 
-            String timeInBengali = "";
+        String timeInBengali = "";
+
+        try
+        {
 
             String[] separated = time.split(":");
 
@@ -612,7 +615,13 @@ EditText feedback_comment;
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
                 timeInBengali = timeInBengali + " টা";
-            return timeInBengali;
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        return timeInBengali;
 
     }
 

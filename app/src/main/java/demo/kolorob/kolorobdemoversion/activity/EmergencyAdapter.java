@@ -132,8 +132,8 @@ Log.d("========", "-----------------"+i);
 //						 "Sorry, Location is not found! ", Toast.LENGTH_LONG)
 //						 .show();
 			//	 AlertMessage.showMessage(context,"Location ","Sorry, Location is not found!");
-				 AlertMessage.showMessage(context, "ডিরেকশন দেয়া সম্ভব হচ্ছে না",
-						 "ডিরেকশন খুজে পাওয়া যায় নি ");
+				 AlertMessage.showMessage(context, "দিকনির্দেশনা",
+						 " দেয়ায় হবে");
 
                //  PresentActivity.this.startActivity(activityChangeIntent);
              }

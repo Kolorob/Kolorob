@@ -562,50 +562,44 @@ public class DetailsLayoutGovernment extends Activity {
     }
 
 
-//    public Boolean RegisteredOrNot()
-//    {
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        //  editor.putString("registered", lat);
-//        registered = pref.getString("registered", null);
-//        phone_num = pref.getString("phone",null);
-//        // editor.commit();
-//        //  if(registered.equals("yes"))
-//        return true;
-//        //  else
-//        //   return true;
-//
-//
-//
-//
+
 
     private String timeConverter(String time) {
 
 
         String timeInBengali = "";
 
-        String[] separated = time.split(":");
+        try
+        {
+
+            String[] separated = time.split(":");
 
 
-        int hour = Integer.valueOf(separated[0]);
-        int times = Integer.valueOf(separated[1]);
+            int hour = Integer.valueOf(separated[0]);
+            int times = Integer.valueOf(separated[1]);
 
-        if (hour >= 6 && hour < 12)
-            timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
-        else if (hour == 12)
-            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
-        else if (hour > 12 && hour < 16)
-            timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-        else if (hour > 15 && hour < 18)
-            timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-        else if (hour > 17 && hour < 20)
-            timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-        else if (hour > 20)
-            timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-        if (times != 0)
-            timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
-        else
-            timeInBengali = timeInBengali + " টা";
+            if (hour >= 6 && hour < 12)
+                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour == 12)
+                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour > 12 && hour < 16)
+                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 15 && hour < 18)
+                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 17 && hour < 20)
+                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 20)
+                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            if (times != 0)
+                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+            else
+                timeInBengali = timeInBengali + " টা";
+        }
+        catch (Exception e)
+        {
+
+        }
+
         return timeInBengali;
 
     }
