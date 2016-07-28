@@ -1,46 +1,30 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
-import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 
 public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener{
     ImageButton img;
+
+    private RatingBar ratingBar;
+    private TextView txtRatingValue;
+    private Button btnSubmit;
+
     Toast t = null;
-    boolean doubleBackToExitPressedOnce = false;
     float [][]mirpur10Coords = {
             { 42,267 },
             { 80,420 },
@@ -89,200 +73,15 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             { 119,575 },
             { 80,421 }
     };
-    @Override
-    public void onBackPressed() {
 
-        help();
-
-//        if (doubleBackToExitPressedOnce) {
-//            new AlertDialog.Builder(this)
-//                    .setTitle("Close")
-//                    .setMessage("Are you sure you want to close Kolorob")
-//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-//                    {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            finish();
-//                        }
-//
-//                    })
-//                    .setNegativeButton("No", null)
-//                    .show();
-//        }
-//searchmain.setVisibility(View.GONE);
-//        placemain.setVisibility(View.VISIBLE);
-//        this.doubleBackToExitPressedOnce = true;
-//
-//
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                doubleBackToExitPressedOnce=false;
-//            }
-//        }, 2000);
-    }
-
-
-
-    public void help(){
-        LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
-        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
-        alertDialogBuilder.setView(promptView);
-
-        final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
-        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
-        final Button button= (Button)promptView.findViewById(R.id.phone_call);
-        final ImageView imageView7= (ImageView)promptView.findViewById(R.id.imageView7);
-
-
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String user= SharedPreferencesHelper.getUser(PlaceSelectionActivity.this);
-                String testUser=SharedPreferencesHelper.getFeedback(PlaceSelectionActivity.this);
-                if(user.equals(testUser))
-                {
-
-                    AlertMessage.showMessage(PlaceSelectionActivity.this, "দুঃখিত মতামত গ্রহন করা সম্ভব হচ্ছে না", "আপনি ইতিপূর্বে মতামত দিয়ে ফেলেছেন");
-                    back();
-                }
-
-                else
-                    sendDataToserver(userfeedback.getText().toString());
-
-            }
-        });
-//        prebutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                PlaceDetailsActivityNewLayout.this.onBackPressed();
-//
-//            }
-//        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(PlaceSelectionActivity.this, "...ok....",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        imageView7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog alert = alertDialogBuilder.create();
-
-                alert.cancel();
-                finish();
-            }
-        });
-
-
-        // setup a dialog window
-        alertDialogBuilder.setCancelable(false);
-
-        // create an alert dialog
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
-    }
-
-    public void back(){
-
-        new AlertDialog.Builder(this)
-                .setTitle("Close")
-                .setMessage("আপনি কি কলরব বন্ধ করতে চান?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-
-                })
-                .setNegativeButton("No", null)
-                .show();
-
-
-        this.doubleBackToExitPressedOnce = true;
-
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
-    }
-    public void sendDataToserver(final String text)
-    {
-        String username=SharedPreferencesHelper.getUser(PlaceSelectionActivity.this);
-        SharedPreferencesHelper.setFeedback(PlaceSelectionActivity.this,username);
-
-        String url = "http://www.kolorob.net/KolorobApi/api/help/save_query?query="+text;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(PlaceSelectionActivity.this,response,Toast.LENGTH_SHORT).show();
-
-                        try {
-                            JSONObject jo = new JSONObject(response);
-                            JSONArray forms = jo.getJSONArray("true");
-
-                            if(forms.toString().equals("true"))
-                            {
-                                AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্যটি পাঠানো হয়ছে",
-                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-                                back();
-                            }
-                            else {
-                                AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্য পাঠানো সফল হয়নি",
-                                        "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-                                back();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PlaceSelectionActivity.this,error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-
-        };
-
-// Adding request to request queue
-
-        RequestQueue requestQueue = Volley.newRequestQueue(PlaceSelectionActivity.this);
-        requestQueue.add(stringRequest);
-
-
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
+
+
+        addListenerOnRatingBar();
+        addListenerOnButton();
 
         // Get Display Metrics
         DisplayMetrics metrics = new DisplayMetrics();
@@ -392,6 +191,45 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //
 //        holder.addView(img, params);
 //        holder.addView(img2, params2);
+
+    }
+
+
+    public void addListenerOnRatingBar() {
+
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+      //  txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
+
+        //if rating is changed,
+        //display the current rating value in the result (textview) automatically
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+
+                txtRatingValue.setText(String.valueOf(rating));
+
+            }
+        });
+    }
+
+    public void addListenerOnButton() {
+
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+      //  btnSubmit = (Button) findViewById(R.id.btnSubmit);
+
+        //if click on me, then display the current rating value.
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+//                Toast.makeText(PlaceSelectionActivity.this,
+//                        String.valueOf(ratingBar.getRating()),
+//                        Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
 
     }
 
