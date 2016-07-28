@@ -1366,7 +1366,7 @@ public class OpeningActivity extends Activity {
         protected Long doInBackground(JSONArray... jsonObjects) {
             JSONArray RatingArray = jsonObjects[0];
             RatingTable subCatTable = new RatingTable(OpeningActivity.this);
-           subCatTable.dropTable();
+            subCatTable.dropTable();
             int subCatCount = RatingArray.length();
             for (int i = 0; i < subCatCount; i++) {
                 try {
