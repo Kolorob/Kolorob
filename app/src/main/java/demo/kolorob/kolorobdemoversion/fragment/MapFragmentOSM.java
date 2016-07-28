@@ -294,7 +294,7 @@ setMapView(mapView);
 
                     }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeName(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
+                    drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
                 }
                 break;
             case AppConstants.GOVERNMENT:
