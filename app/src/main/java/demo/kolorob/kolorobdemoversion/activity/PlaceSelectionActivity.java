@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -16,6 +19,11 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener{
     ImageButton img;
+
+    private RatingBar ratingBar;
+    private TextView txtRatingValue;
+    private Button btnSubmit;
+
     Toast t = null;
     float [][]mirpur10Coords = {
             { 42,267 },
@@ -70,6 +78,10 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
+
+
+        addListenerOnRatingBar();
+        addListenerOnButton();
 
         // Get Display Metrics
         DisplayMetrics metrics = new DisplayMetrics();
@@ -179,6 +191,45 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //
 //        holder.addView(img, params);
 //        holder.addView(img2, params2);
+
+    }
+
+
+    public void addListenerOnRatingBar() {
+
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+      //  txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
+
+        //if rating is changed,
+        //display the current rating value in the result (textview) automatically
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+
+                txtRatingValue.setText(String.valueOf(rating));
+
+            }
+        });
+    }
+
+    public void addListenerOnButton() {
+
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+      //  btnSubmit = (Button) findViewById(R.id.btnSubmit);
+
+        //if click on me, then display the current rating value.
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+//                Toast.makeText(PlaceSelectionActivity.this,
+//                        String.valueOf(ratingBar.getRating()),
+//                        Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
 
     }
 

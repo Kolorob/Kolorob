@@ -669,7 +669,7 @@ help=(ImageButton)findViewById(R.id.helpicon);
 
     public void help(){
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceChoiceActivity2.this);
-        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
+        View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceChoiceActivity2.this);
         alertDialogBuilder.setView(promptView);
 
@@ -734,7 +734,7 @@ help=(ImageButton)findViewById(R.id.helpicon);
     public void helpDialog(View v){
 
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceChoiceActivity2.this);
-        View promptView = layoutInflater.inflate(R.layout.help_dialog, null);
+        View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceChoiceActivity2.this);
         alertDialogBuilder.setView(promptView);
 
