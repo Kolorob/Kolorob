@@ -143,7 +143,7 @@ ArrayList<RatingModel>rm=new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 int catid2 =cursor.getInt(0);
-                avg=cursor.getString(2);
+                avg=cursor.getString(1);
                 String olddate=cursor.getString(2);
 
             } while (cursor.moveToNext());

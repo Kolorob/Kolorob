@@ -139,7 +139,7 @@ public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
-    private static final int NUMBER_OF_TASKS = 9;
+    private static final int NUMBER_OF_TASKS = 10;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
 

@@ -5,19 +5,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" android:layout_weight="1"
     android:background="#EBDED5" android:padding="6dp">
-    <org.osmdroid.views.MapView
-        android:id="@+id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:layout_alignParentTop="true" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:id="@+id/headerlayout"
-
-android:visibility="gone"
         android:layout_marginTop="20dp"
         android:background="#29ABE2">
 
@@ -45,10 +38,6 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/transportlayout"
             android:id="@+id/transportdetailslayout"
-
-android:visibility="gone"
-
-
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
