@@ -96,7 +96,7 @@ android:visibility="gone"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="80dp"
                 android:layout_marginBottom="10dp" />
 
 
@@ -126,7 +126,7 @@ android:visibility="gone"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="80dp"
                 android:layout_marginBottom="10dp" />
 
 
@@ -135,11 +135,13 @@ android:visibility="gone"
         </RelativeLayout>
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="180dp" >
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="280dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="6dp"
@@ -155,7 +157,7 @@ android:visibility="gone"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:id="@+id/left_school_name"
-
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -174,7 +176,7 @@ android:visibility="gone"
                 android:gravity="center"
 
                 android:id="@+id/right_school_name"
-
+                android:layout_marginTop="10dp"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
 
@@ -204,6 +206,8 @@ android:visibility="gone"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/white"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/total_students"
@@ -222,7 +226,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -241,7 +245,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -267,6 +271,8 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:gravity="center"
             android:id="@+id/edtype1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -293,7 +299,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -312,7 +318,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -337,6 +343,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/hostel_facility_l"
             android:layout_height="wrap_content">
 
@@ -364,7 +372,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -382,7 +390,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -406,6 +414,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/transport_facility1_l"
             android:layout_height="wrap_content">
 
@@ -432,7 +442,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -451,7 +461,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -476,6 +486,8 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:gravity="center"
             android:id="@+id/playground1_l"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -502,7 +514,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -523,7 +535,7 @@ android:visibility="gone"
                 android:layout_weight="0.5"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/playground3"
@@ -550,6 +562,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/total_classes_l"
             android:layout_height="wrap_content">
 
@@ -573,7 +587,7 @@ android:visibility="gone"
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_weight="0.5"
@@ -594,7 +608,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -616,7 +630,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
-
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/total_teachers1_1"
             android:layout_height="wrap_content">
 
@@ -643,7 +658,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -663,7 +678,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -702,6 +717,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/course_provided1_1"
             android:layout_height="wrap_content">
             <TextView
@@ -729,7 +746,7 @@ android:visibility="gone"
                 android:layout_width="0dp"
 
                 android:gravity="center"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
                 <TextView
@@ -747,7 +764,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -779,6 +796,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/shift1_1"
             android:layout_height="wrap_content">
 
@@ -804,7 +823,7 @@ android:visibility="gone"
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_weight="0.5"
@@ -825,7 +844,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
 
                 android:layout_height="wrap_content">
@@ -853,6 +872,8 @@ android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/canteen_facility_1"
             android:layout_height="wrap_content">
 
@@ -879,7 +900,7 @@ android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:textColor="@color/white"
-
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:layout_weight="0.5"
                 android:layout_height="wrap_content">
@@ -901,7 +922,7 @@ android:visibility="gone"
                 android:gravity="center"
 
                 android:layout_weight="0.5"
-
+                android:layout_marginTop="10dp"
 
                 android:layout_height="wrap_content">
                 <TextView
