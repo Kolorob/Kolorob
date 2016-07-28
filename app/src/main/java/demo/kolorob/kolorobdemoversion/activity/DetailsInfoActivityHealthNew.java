@@ -75,6 +75,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
     TextView ups_text;
     ListView courseListView, listView;
     Context con;
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     Float rating;
     HealthServiceProviderItemNew healthServiceProviderItemNew;
     ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
@@ -576,7 +578,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         String comment="";
         comment=feedback_comment.getText().toString();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

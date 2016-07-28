@@ -81,6 +81,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     int width,height;
     TextView ups_text,headerx;
     ListView courseListView,listView;
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     Context con;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
@@ -703,7 +705,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         String comment="";
         comment=feedback_comment.getText().toString();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -753,7 +755,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsInfoActivityEntertainmentNew.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment", new VolleyApiCallback() {
+        getRequest(DetailsInfoActivityEntertainmentNew.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {

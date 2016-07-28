@@ -72,6 +72,7 @@ public class DetailsLayoutEducation extends Activity {
     TextView address_text, phone_text, email_text;
     int width, height;
     TextView ups_text;
+
     ListView courseListView, listView;
     Context con;
     EducationNewItem educationNewItem;
@@ -665,7 +666,7 @@ public class DetailsLayoutEducation extends Activity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsLayoutEducation.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment", new VolleyApiCallback() {
+        getRequest(DetailsLayoutEducation.this, "http://kolorob.net/demo/api/get_sp_rating/education", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {

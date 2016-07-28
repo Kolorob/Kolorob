@@ -84,6 +84,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
     Context con;
     Float rating;
     RatingBar ratingBar;
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
     ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
     ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;
@@ -545,7 +547,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         String comment="";
         comment=feedback_comment.getText().toString();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

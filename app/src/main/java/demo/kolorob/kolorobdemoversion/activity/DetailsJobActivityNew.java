@@ -98,60 +98,59 @@ public class DetailsJobActivityNew extends Activity {
 
             if(!jobAdvertisementItem.getJob_type().equals(""))
             {
-                concateBasic("চাকরির ধরণ ", jobAdvertisementItem.getJob_type());
+                concateBasic("চাকরির ধরণ : ", jobAdvertisementItem.getJob_type());
             }
 
             if(!jobAdvertisementItem.getPost_type().equals(""))
             {
-                concateBasic("পদের ধরণ  ", jobAdvertisementItem.getPost_type());
+                concateBasic("পদের ধরণ  : ", jobAdvertisementItem.getPost_type());
             }
 
             if(!jobAdvertisementItem.getJob_responsibility().equals(""))
-                concateBasic("কাজের বিবরণ ",jobAdvertisementItem.getJob_responsibility());
+                concateBasic("কাজের বিবরণ : ",jobAdvertisementItem.getJob_responsibility());
 
             if(!jobAdvertisementItem.getRequired_experience().equals(""))
-                concateBasic("প্রয়োজনীয় অভিজ্ঞতা ", jobAdvertisementItem.getRequired_experience());
+                concateBasic("প্রয়োজনীয় অভিজ্ঞতা :", jobAdvertisementItem.getRequired_experience());
+
             if(!jobAdvertisementItem.getApplication_medium().equals(""))
-                concateBasic("অন্যান্য সুবিধাসমুহ ", jobAdvertisementItem.getApplication_medium());
-            if(!jobAdvertisementItem.getApplication_medium().equals(""))
-                concateBasic("আবেদনের মাধ্যম ",jobAdvertisementItem.getApplication_medium());
+                concateBasic("আবেদনের মাধ্যম :",jobAdvertisementItem.getApplication_medium());
 
             job_type.setText(result_concate);
             result_concate="";
 
             if(!jobAdvertisementItem.getOpening().equals(""))
-                concateBasic("খোলার সময় ",jobAdvertisementItem.getOpening());
+                concateBasic("খোলার সময় : ",jobAdvertisementItem.getOpening());
             if(!jobAdvertisementItem.getClosing().equals(""))
-                concateBasic("বন্ধের সময় ", jobAdvertisementItem.getClosing());
+                concateBasic("বন্ধের সময় : ", jobAdvertisementItem.getClosing());
             if(!jobAdvertisementItem.getBreaks().equals(""))
-                concateBasic("বিরতির সময় ",jobAdvertisementItem.getBreaks());
+                concateBasic("বিরতির সময় : ",jobAdvertisementItem.getBreaks());
             if(!jobAdvertisementItem.getOff_day().equals(""))
-                concateBasic("বন্ধের দিন ", jobAdvertisementItem.getOff_day());
+                concateBasic("বন্ধের দিন : ", jobAdvertisementItem.getOff_day());
 
 
             opening_time.setText(result_concate);
             result_concate="";
 
             if(!jobAdvertisementItem.getPost_date().equals(""))
-                concateBasic("আবেদন প্রকাশের সময় ", jobAdvertisementItem.getPost_date());
+                concateBasic("আবেদন প্রকাশের সময় : ", jobAdvertisementItem.getPost_date());
 
             if(!jobAdvertisementItem.getApplication_last_date().equals(""))
-                concateBasic("আবেদনের শেষ সময় ", jobAdvertisementItem.getApplication_last_date());
+                concateBasic("আবেদনের শেষ সময় : ", jobAdvertisementItem.getApplication_last_date());
 
             application_post_date.setText(result_concate);
             result_concate="";
 
 
-            salary_range.setText("বেতন সীমা " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
+            salary_range.setText("বেতন সীমা :" + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
 
 
            if(!jobAdvertisementItem.getReference_person().equals(""))
            {
-               concateBasic("যার সাথে যোগাযোগ করা হবে ",jobAdvertisementItem.getReference_person());
+               concateBasic("যার সাথে যোগাযোগ করা হবে :",jobAdvertisementItem.getReference_person());
 
            }
            if(!jobAdvertisementItem.getCollector_name().equals(""))
-               concateBasic("সংগ্রহকারীর নাম ",jobAdvertisementItem.getCollector_name());
+               concateBasic("সংগ্রহকারীর নাম : ",jobAdvertisementItem.getCollector_name());
             reference_person.setText(result_concate);
             result_concate="";
            }
@@ -219,11 +218,11 @@ public class DetailsJobActivityNew extends Activity {
 
 
     public void showdirection(View v){
-        AlertMessage.showMessage(con,"Sorry","Direction is not found!");
+        AlertMessage.showMessage(con,"দুঃখিত","দিকনির্দেশনা পাওয়া যায়নি");
     }
 
     public void sendemail(View v){
-        AlertMessage.showMessage(con,"Sorry","Email ID is not found!");
+        AlertMessage.showMessage(con,"দুঃখিত","ইমেইল আইডি পাওয়া যায়নি");
     }
 
 //    public void closepage(View v){

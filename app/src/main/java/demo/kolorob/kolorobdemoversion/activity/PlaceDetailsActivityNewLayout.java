@@ -988,6 +988,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     public void compareTool()
     {
        // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
+
         if(currentCategoryID==1)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
@@ -1067,8 +1068,31 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 secondSpecialistItem = secondSpecialistItem + healthSpecialistItemDetails.getSpecialisttype() + ", ";
             }
         }
+
+        String healthService="";
+        String health_service_data1="";
+
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
+            healthService=healthServiceProviderItemNew.getFamily_privacy();
+            if(!healthService.equals(""))
+            {
+                for (int i=0;i<healthService.length();i++)
+                {
+                    if(healthService.charAt(i)=='1')
+                    {
+                        health_service_data1=health_service_data1+"Emergency Service,";
+                    }
+                    else if(healthService.charAt(i)=='2')
+                    {
+                        health_service_data1=health_service_data1+" Ambulance Service,";
+                    }
+                    else
+                        health_service_data1=health_service_data1+" Maternity Service";
+
+                }
+            }
+
             if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
                 health_name3.setText("X");
             else
@@ -1084,11 +1108,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             else
                 language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
 
-            if(healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null")||healthServiceProviderItemNew.getGeneral_cost()==null)
-                service_type3.setText("X");
+            if(!health_service_data1.equals(""))
+                service_type3.setText(health_service_data1);
             else
-                service_type3.setText(healthServiceProviderItemNew.getGeneral_cost());
-
+                service_type3.setText("X");
             if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
                 specialist_available3.setText("X");
             else
@@ -1115,9 +1138,30 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 cost3.setText(healthServiceProviderItemNew.getQuality_equipments());
 
         }
+
+
+        String healthService1="";
+        String health_service_data2="";
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
+            healthService1=healthServiceProviderItemNew.getFamily_privacy();
+            if(!healthService.equals(""))
+            {
+                for (int i=0;i<healthService1.length();i++)
+                {
+                    if(healthService1.charAt(i)=='1')
+                    {
+                        health_service_data2=health_service_data1+"Emergency Service, ";
+                    }
+                    else if(healthService1.charAt(i)=='2')
+                    {
+                        health_service_data2=health_service_data1+" Ambulance Service, ";
+                    }
+                    else
+                        health_service_data2=health_service_data1+" Maternity Service";
 
+                }
+            }
             if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
                 health_name2.setText("X");
             else
@@ -1132,10 +1176,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             else
                 language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
 
-            if(healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null")||healthServiceProviderItemNew.getGeneral_cost()==null)
-                service_type2.setText("X");
+            if(!health_service_data1.equals(""))
+                service_type2.setText(health_service_data2);
             else
-                service_type2.setText(healthServiceProviderItemNew.getGeneral_cost());
+                service_type2.setText("X");
 
             if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
                 specialist_available2.setText("X");
@@ -1361,7 +1405,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     Group group = new Group(RefEnt.get(j));
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-                    printnamesent = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo();
+                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));

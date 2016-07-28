@@ -107,10 +107,10 @@ public class DisplayAllJobList extends BaseAdapter
 
         holder.title.setText("" +title[position]);
         holder.title.setTextSize(26);
-        holder.salary_range.setText("স্যালারি : " + salary_range[position]);
-        holder.remaining_date.setText("সময় বাকি আছেঃ " + remaing_date[position]);
-        holder.address.setText("ঠিকানাঃ " + address[position]);
-        holder.contact_number.setText("যোগাযোগের নম্বরঃ " + contract_number[position]);
+        holder.salary_range.setText("স্যালারি : " + salary_range[position]+" টাকা");
+        holder.remaining_date.setText("সময় বাকি আছে: " + remaing_date[position] +"দিন");
+        holder.address.setText("ঠিকানা: " + address[position]);
+        holder.contact_number.setText("যোগাযোগের নম্বর: " + contract_number[position]);
 
 
 
