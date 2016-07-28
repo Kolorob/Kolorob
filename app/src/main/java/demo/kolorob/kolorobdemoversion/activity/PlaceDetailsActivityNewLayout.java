@@ -1040,7 +1040,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         language_spoken1.setText("প্রচলিত ভাষা");
         service_type1.setText("সেবার ধরন");
         specialist_available1.setText("বিশেষজ্ঞের ধরন");
-        clean_facilities1.setText("পরিষ্কার পরিচ্ছন্নতা");
+        clean_facilities1.setText("ফার্মেসি সুবিধা");
         privacy1.setText("গোপনীয়তা");
         quality_equipment1.setText("ভাল সুবিধা এবং যন্ত্রপাতি");
         cost1.setText("সেবার খরচ");
@@ -1093,17 +1093,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 }
             }
 
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
                 health_name3.setText("X");
             else
                 health_name3.setText(healthServiceProviderItemNew.getNode_bn());
 
-            if(healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")||healthServiceProviderItemNew.getOpening_time()==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")||healthServiceProviderItemNew.getOpening_time()==null)
                 opening_time3.setText("X");
             else
                 opening_time3.setText(healthServiceProviderItemNew.getOpening_time());
 
-            if(healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
                 language_spoken3.setText("X");
             else
                 language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
@@ -1112,27 +1112,27 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 service_type3.setText(health_service_data1);
             else
                 service_type3.setText("X");
-            if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
+            if(firstSpecialistItem==null)
                 specialist_available3.setText("X");
             else
-                specialist_available3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+                specialist_available3.setText(firstSpecialistItem);
 
-            if(firstSpecialistItem==null || firstSpecialistItem.length()==0)
+            if(healthServiceProviderItemNew.getPharmacy_speciality()==""||healthServiceProviderItemNew.getPharmacy_speciality()=="null")
                 clean_facilities3.setText("X");
             else
                 clean_facilities3.setText(firstSpecialistItem);
 
-            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
                 privacy3.setText("X");
             else
                 privacy3.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
 
-            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
                 quality_equipment3.setText("X");
             else
                 quality_equipment3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
 
-            if(healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null") || healthServiceProviderItemNew.getQuality_equipments()==null )
+            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null") || healthServiceProviderItemNew.getQuality_equipments()==null )
                 cost3.setText("X");
             else
                 cost3.setText(healthServiceProviderItemNew.getQuality_equipments());
@@ -1176,20 +1176,20 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             else
                 language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
 
-            if(!health_service_data1.equals(""))
+            if(!health_service_data2.equals(""))
                 service_type2.setText(health_service_data2);
             else
                 service_type2.setText("X");
 
             if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
-                specialist_available2.setText("X");
-            else
-                specialist_available2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
-
-            if(secondSpecialistItem==null || secondSpecialistItem.length()==0)
                 clean_facilities2.setText("X");
             else
-                clean_facilities2.setText(secondSpecialistItem);
+                clean_facilities2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+
+            if(firstSpecialistItem==null)
+                specialist_available2.setText("X");
+            else
+                specialist_available2.setText(firstSpecialistItem);
 
             if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")|| String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
                 privacy2.setText("X");
