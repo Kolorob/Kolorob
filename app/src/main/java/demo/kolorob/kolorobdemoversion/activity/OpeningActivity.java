@@ -1264,7 +1264,7 @@ public class OpeningActivity extends Activity {
 
         @Override
         protected void onPostExecute(Result result) {
-            if (((Long) result).longValue() == 0.0) { // Means the task is successful
+            if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS)  { // Means the task is successful
                 countofDb++;
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
