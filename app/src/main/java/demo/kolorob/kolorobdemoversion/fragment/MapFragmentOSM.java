@@ -14,9 +14,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
@@ -35,12 +32,15 @@ import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
-import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
@@ -48,10 +48,9 @@ import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.RatingModel;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
-
-import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by israt.jahan on 5/5/2016.
@@ -107,6 +106,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private int categoryId;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
+    ArrayList<RatingModel>rating=new ArrayList<>();
     public ArrayList<GovernmentNewItem> getGovernmentNewItems() {
         return governmentNewItems;
     }
@@ -151,6 +151,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         educationServiceProvider = et;
     }
 
+    Date today = Calendar.getInstance().getTime();
     int subcategotyId;
     String subcategotyId2;
     View rootView;
@@ -167,11 +168,12 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     public ArrayList<HealthServiceProviderItemNew> getHealthServiceProvider() {
         return healthServiceProvider;
     }
-
+    String ratingavg;
     public void setHealthServiceProvider(ArrayList<HealthServiceProviderItemNew> et) {
         this.healthServiceProvider = et;
     }
-
+    SimpleDateFormat simpleDateFormat =
+            new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -220,7 +222,7 @@ setMapView(mapView);
             mapViewController.setCenter(AppConstants.PARIS1);
         }
 
-
+        RatingTable ratingTable=new RatingTable(MapFragmentOSM.this.getActivity());
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
@@ -228,9 +230,23 @@ setMapView(mapView);
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
+
+                     ratingavg =  ratingTable.getavg(et.getEduId());
+                     if(ratingavg==null)
+                     {
+                         ratingavg="পাওয়া যায় নি";
+
+                     }
+                        else {
+
+
+                        String ratingdate=ratingTable.getdate(et.getEduId());
+                        String current_date=simpleDateFormat.format(today);
+
+                     }
                         longDouble = Double.parseDouble(et.getLon());
                       GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerEdu(point, et.getNamebn(), et.getAddress(), et.getNode_contact(), et.getEduId(),subcategotyId2);
+                        drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
                     }
                 }
                 break;
@@ -239,10 +255,23 @@ setMapView(mapView);
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getCategory();
                     //Log.d("subcategotyId_Legal","=======");
+                    ratingavg =  ratingTable.getavg(Integer.parseInt(et.getId()));
+                    if(ratingavg==null)
+                    {
+                        ratingavg="পাওয়া যায় নি";
+
+                    }
+                    else {
+
+
+                        String ratingdate=ratingTable.getdate(Integer.parseInt(et.getId()));
+                        String current_date=simpleDateFormat.format(today);
+
+                    }
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerHealth(point, et.getNode_bn(), et.getAddress(), et.getNode_contact(), et.getId(), subcategotyId);
+                    drawMarkerHealth(point, et.getNode_bn(), ratingavg, et.getNode_contact(), et.getId(), subcategotyId);
                 }
                 break;
             case AppConstants.ENTERTAINMENT:
@@ -251,8 +280,21 @@ setMapView(mapView);
                      String subcategotyId = et.getCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
+                    ratingavg =  ratingTable.getavg(Integer.parseInt(et.getNodeId()));
+                    if(ratingavg==null)
+                    {
+                        ratingavg="পাওয়া যায় নি";
+
+                    }
+                    else {
+
+
+                        String ratingdate=ratingTable.getdate(Integer.parseInt(et.getNodeId()));
+                        String current_date=simpleDateFormat.format(today);
+
+                    }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeName(), et.getAddress(), et.getNodeContact(), et.getNodeId(), subcategotyId);
+                    drawMarkerEnt(point, et.getNodeName(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
                 }
                 break;
             case AppConstants.GOVERNMENT:
@@ -262,8 +304,21 @@ setMapView(mapView);
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
                         longDouble = Double.parseDouble(et.getLon());
+                        ratingavg =  ratingTable.getavg(et.getFinId());
+                        if(ratingavg==null)
+                        {
+                            ratingavg="পাওয়া যায় নি";
+
+                        }
+                        else {
+
+
+                            String ratingdate=ratingTable.getdate(et.getFinId());
+                            String current_date=simpleDateFormat.format(today);
+
+                        }
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerGov(point, et.getNameen(), et.getArea(), et.getNode_contact(), et.getFinId(),subcategotyId2);
+                        drawMarkerGov(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
                 }
                 break;
@@ -274,8 +329,21 @@ setMapView(mapView);
 
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
+                    ratingavg =  ratingTable.getavg(Integer.parseInt(et.getIdentifierId()));
+                    if(ratingavg==null)
+                    {
+                        ratingavg="পাওয়া যায় নি";
+
+                    }
+                    else {
+
+
+                        String ratingdate=ratingTable.getdate(Integer.parseInt(et.getIdentifierId()));
+                        String current_date=simpleDateFormat.format(today);
+
+                    }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerLeg(point, et.getLegalaidNameBan(), et.getAddress(), et.getContactNo(), et.getIdentifierId(), subcategotyId);
+                    drawMarkerLeg(point, et.getLegalaidNameBan(), ratingavg, et.getContactNo(), et.getIdentifierId(), subcategotyId);
                 }
                 break;
             case AppConstants.FINANCIAL:
@@ -284,8 +352,21 @@ setMapView(mapView);
                     subcategotyId2 = et.getRefnumm();
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
+                    ratingavg =  ratingTable.getavg(et.getFinId());
+                    if(ratingavg==null)
+                    {
+                        ratingavg="পাওয়া যায় নি";
+
+                    }
+                    else {
+
+
+                        String ratingdate=ratingTable.getdate(et.getFinId());
+                        String current_date=simpleDateFormat.format(today);
+
+                    }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerFin(point, et.getNamebn(), et.getAddress(), et.getNode_contact(), et.getFinId(), subcategotyId2);
+                    drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(), subcategotyId2);
                 }
                 break;
             case AppConstants.JOB:
@@ -342,7 +423,7 @@ setMapView(mapView);
         return false;
     }
 
-    private void drawMarkerEdu(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+    private void drawMarkerEdu(GeoPoint point, String title, String add, String contact, int node, String subcategotyId2) {
 
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
@@ -369,7 +450,7 @@ setMapView(mapView);
         ||subcategotyId ==180 ||subcategotyId ==78||subcategotyId ==77)
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,add);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);

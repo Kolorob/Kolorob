@@ -299,7 +299,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
         else if(catid==6)
             ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
         else if(catid==4)
-            ((CheckedTextView) convertView).setBackgroundResource(R.color.financial_color);
+            ((CheckedTextView) convertView).setBackgroundResource(R.color.government_color);
 
 
         //

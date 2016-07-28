@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static  String DB_PATH ;
     public static final int DB_VERSION = 1;
-
+    public static final String RATING = "rating_table";
     public static final String SERVICE_CATEGORY = "service_category";
     public static final String SUB_CATEGORY = "sub_category";
     public static final String SUB_CATEGORY_NEW = "sub_category_new";
