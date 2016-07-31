@@ -285,7 +285,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
     public void checkVersion(final double current_version)
     {
-        getRequest(PlaceSelectionActivity.this, "http://kolorob.net/app_version.json", new VolleyApiCallback() {
+        getRequest(PlaceSelectionActivity.this, "http://10.11.0.76/app_version.json", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         Log.d(">>>","Start Json Parsing "+apiContent);
