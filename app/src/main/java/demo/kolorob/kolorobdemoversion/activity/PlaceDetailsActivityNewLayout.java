@@ -1179,11 +1179,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             else
                 language_spoken2.setText("X");
 
-            if(!health_service_data1.equals(""))
+            if(!health_service_data2.equals(""))
                 service_type2.setText(health_service_data1);
             else
                 service_type2.setText("X");
-            if(!firstSpecialistItem.equals(""))
+            if(!secondSpecialistItem.equals(""))
                 specialist_available2.setText(firstSpecialistItem);
             else
                 specialist_available2.setText("X");
