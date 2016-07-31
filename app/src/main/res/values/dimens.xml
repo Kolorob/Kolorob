@@ -7,13 +7,14 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">0dp</dimen>
     <dimen name="margincheckbox">10dp</dimen>
+    <dimen name="comparelogoleft">30dp</dimen>
     <dimen name="search_margin">15dp</dimen>
     <dimen name="catimagetop">10dp</dimen>
     <dimen name="bottomtransport">50dp</dimen>
     <dimen name="catlayouttop">10dp</dimen>
     <dimen name="transportlayout">200dp</dimen>
     <dimen name="subcatlayouttop">00dp</dimen>
-    <dimen name="searchbar">300dp</dimen>
+    <dimen name="searchbar">230dp</dimen>
     <dimen name="catbuttonheight">55dp</dimen>
     <dimen name="listheight">120dp</dimen>
     <dimen name="fab_marginforsearch">20dp</dimen>
