@@ -1020,20 +1020,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
             int size=comapreData.length();
-            for(int i=0;i<size;i++)
-            {
+            String DataSet[]= comapreData.split(",");
+            firstData=DataSet[0];
+            SecondData=DataSet[1];
 
-                if(checker==1)
-                {
-                    SecondData=SecondData+comapreData.charAt(i);
-                }
-                else  if(comapreData.charAt(i)==' ')
-                {
-                    checker=1;
-                }
-                else
-                    firstData=firstData+comapreData.charAt(i);
-            }
             compareHealth();
         }
     }
