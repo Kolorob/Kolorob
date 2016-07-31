@@ -43,7 +43,8 @@
         <activity
             android:name=".activity.PlaceSelectionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:windowSoftInputMode="stateHidden"
+             />
         <activity
             android:name=".activity.NewEmergency"
             android:screenOrientation="portrait"
