@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/distance_left"
                         android:onClick="showdirection"
-                        android:background="@drawable/distance_icon"/>
+                        android:background="@drawable/direction_icon"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/phone_middl"
-                        android:background="@drawable/call_btn"/>
+                        android:background="@drawable/phone_icon"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/right_side_email"
                         android:onClick="sendemail"
-                        android:background="@drawable/email_btn"/>
+                        android:background="@drawable/email_icon"/>
 
                     <TextView
                         android:layout_width="wrap_content"

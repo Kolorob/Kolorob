@@ -10,10 +10,17 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBarDrawerToggle;
+
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +37,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,8 +56,9 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 
-public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener {
+public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     ImageButton img;
+    Toolbar toolbar;
     private String comment = "";
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
@@ -54,7 +66,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     private Notification myNotication;
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
-    Float  ratings;
+    Float ratings;
     float[][] mirpur10Coords = {
             {42, 267},
             {80, 420},
@@ -103,12 +115,16 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             {119, 575},
             {80, 421}
     };
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.place_selection_activity);
-
+        setContentView(R.layout.activity_place_choice2);
 
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -123,7 +139,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         final int coordsHeight = 800;
         final int coordsWidth = 480;
         final String comment = "";
-        String app_ver="";
+        String app_ver = "";
         NotificationManager manager;
 
 //        Log.e("heightPixels", String.valueOf(height));
@@ -173,6 +189,49 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             }
         });
 
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        else
+//           toolbar = (Toolbar) findViewById(R.id.toolbars);
+
+        // toolbar.setBackgroundResource(android.R.color.transparent);
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                //  getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                // getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toggle.setDrawerIndicatorEnabled(true);
+        drawer.setDrawerListener(toggle);
+        //toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+
 //        ImageButton img = new ImageButton(this);
 //        ImageButton img2 = new ImageButton(this);
 //        img.setOnClickListener(new View.OnClickListener()
@@ -197,19 +256,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //            }
 //        });
 
-        try
-        {
+        try {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-        }
-
-
-        catch (PackageManager.NameNotFoundException e) {
+        } catch (PackageManager.NameNotFoundException e) {
             // Log.e(tag, e.getMessage());
 
 
-
-
-                }
+        }
 
         checkVersion(Double.parseDouble(app_ver));
 //
@@ -240,6 +293,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //        holder.addView(img, params);
 //        holder.addView(img2, params2);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -282,20 +338,17 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //    }
 
 
-
-    public void checkVersion(final double current_version)
-    {
-        getRequest(PlaceSelectionActivity.this, "http://10.11.0.76/app_version.json", new VolleyApiCallback() {
+    public void checkVersion(final double current_version) {
+        getRequest(PlaceSelectionActivity.this, "http://kolorob.net/app_version.json", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
-                        Log.d(">>>","Start Json Parsing "+apiContent);
+                        Log.d(">>>", "Start Json Parsing " + apiContent);
                         try {
                             JSONObject jo = new JSONObject(apiContent);
-                            Log.d(">>>","JsonObject: "+jo);
+                            Log.d(">>>", "JsonObject: " + jo);
                             Double remote_version = jo.getDouble("version");
 
-                            if(remote_version>current_version)
-                            {
+                            if (remote_version > current_version) {
                                 Toast.makeText(PlaceSelectionActivity.this, "You must update the App =)",
                                         Toast.LENGTH_LONG).show();
                                 generateNotification();
@@ -311,9 +364,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     }
 
 
-
-    public void generateNotification()
-    {
+    public void generateNotification() {
         String url = "https://play.google.com/store/apps/details?id=demo.kolorob.kolorobdemoversion&hl=en";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
@@ -343,6 +394,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         myNotication = builder.getNotification();
         manager.notify(11, myNotication);
     }
+
     @Override
     public void onBackPressed() {
 
@@ -376,17 +428,18 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //            }
 //        }, 2000);
     }
-    public void help(){
+
+    public void help() {
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
         View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
-               final AlertDialog alert = alertDialogBuilder.create();
+        final AlertDialog alert = alertDialogBuilder.create();
 
         alertDialogBuilder.setView(promptView);
-        final RatingBar ratingBar=(RatingBar)promptView.findViewById(R.id.ratingBar);
-        final EditText submit_btn=(EditText)promptView.findViewById(R.id.submit_btn);
-        final Button btnSubmit=(Button)promptView.findViewById(R.id.btnSubmit);
-        final Button btnclose=(Button)promptView.findViewById(R.id.btnclose);
+        final RatingBar ratingBar = (RatingBar) promptView.findViewById(R.id.ratingBar);
+        final EditText submit_btn = (EditText) promptView.findViewById(R.id.submit_btn);
+        final Button btnSubmit = (Button) promptView.findViewById(R.id.btnSubmit);
+        final Button btnclose = (Button) promptView.findViewById(R.id.btnclose);
 
 //       final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
 //        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
@@ -394,27 +447,22 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //        final ImageView imageView7= (ImageView)promptView.findViewById(R.id.imageView7);
 
 
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user= SharedPreferencesHelper.getUser(PlaceSelectionActivity.this);
-                String testUser=SharedPreferencesHelper.getFeedback(PlaceSelectionActivity.this);
+                String user = SharedPreferencesHelper.getUser(PlaceSelectionActivity.this);
+                String testUser = SharedPreferencesHelper.getFeedback(PlaceSelectionActivity.this);
 
 
+                ratings = ratingBar.getRating();
 
-                 ratings = ratingBar.getRating();
-
-                    sendDataToserver(ratings,comment);
+                sendDataToserver(ratings, comment);
                 alert.cancel();
                 finish();
                 //   back();
 
 
-
-
-
-                }
+            }
 
         });
 //        prebutton.setOnClickListener(new View.OnClickListener() {
@@ -434,8 +482,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         });
 
 
-
-
         // setup a dialog window
         alertDialogBuilder.setCancelable(false);
 
@@ -445,7 +491,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     }
 
 
-
     public boolean isPointInPolygon(float x, float y, float[][] coords) {
 
 
@@ -453,10 +498,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         boolean oddNodes = false;
 
         for (int i = 0; i < coords.length; i++) {
-            if ( ( coords[i][1] < y && coords[j][1] >= y ) || ( coords[j][1] < y && coords[i][1] >= y ) )
-            {
+            if ((coords[i][1] < y && coords[j][1] >= y) || (coords[j][1] < y && coords[i][1] >= y)) {
                 if (coords[i][0] +
-                        (y - coords[i][1]) / (coords[j][1] - coords[i][1])*(coords[j][0] - coords[i][0]) < x) {
+                        (y - coords[i][1]) / (coords[j][1] - coords[i][1]) * (coords[j][0] - coords[i][0]) < x) {
                     oddNodes = !oddNodes;
                 }
             }
@@ -467,30 +511,27 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     }
 
 
-    public void sendDataToserver(Float rating,String comment)
-    {
-        String username=SharedPreferencesHelper.getUser(PlaceSelectionActivity.this);
-        SharedPreferencesHelper.setFeedback(PlaceSelectionActivity.this,username);
-        String  phone = SharedPreferencesHelper.getNumber(PlaceSelectionActivity.this);
+    public void sendDataToserver(Float rating, String comment) {
+        String username = SharedPreferencesHelper.getUser(PlaceSelectionActivity.this);
+        SharedPreferencesHelper.setFeedback(PlaceSelectionActivity.this, username);
+        String phone = SharedPreferencesHelper.getNumber(PlaceSelectionActivity.this);
 
 
-        if(phone.equals(""))
-        {
+        if (phone.equals("")) {
             AlertMessage.showMessage(PlaceSelectionActivity.this, "ফোন নম্বরটি নিবন্ধন করা হয়নি",
                     "অনুগ্রহ পূর্বক ফোন নম্বরটি নিবন্ধন করুন");
-        }
-        else {
-            String url = "http://kolorob.net/demo/api/app_rating?phone="+phone+"&review="+comment+"&rating="+rating+"&username=" + this.usernames + "&password=" + this.password;
+        } else {
+            String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(PlaceSelectionActivity.this,response,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlaceSelectionActivity.this, response, Toast.LENGTH_SHORT).show();
 
                             try {
-                                Log.d("ratings","********"+ratings);
-                                Toast.makeText(PlaceSelectionActivity.this,response.toString(),Toast.LENGTH_LONG).show();
+                                Log.d("ratings", "********" + ratings);
+                                Toast.makeText(PlaceSelectionActivity.this, response.toString(), Toast.LENGTH_LONG).show();
 
 //                                if(response.toString().trim().equalsIgnoreCase("true"))
 //                                {
@@ -503,7 +544,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
 
 
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -513,7 +553,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(PlaceSelectionActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(PlaceSelectionActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                         }
                     }) {
 
@@ -539,13 +579,62 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     }
 
 
-    public void back(){
+
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        int id = menuItem.getItemId();
+
+        if (id == R.id.phone_reg) {
+            // Handle the camera action
+            Intent em = new Intent(this, PhoneRegActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        } else if (id == R.id.emergency_info) {
+
+            //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, NewEmergency.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+//        else if (id == R.id.info_change) {
+//
+//            Intent em = new Intent(this, Information_UpdateActivity.class);
+//            startActivity(em);
+//            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//
+//        }
+//         else if (id == R.id.local_representative) {
+//
+//           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
+//
+//        } else if (id == R.id.adv_info) {
+//          //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
+//
+//            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
+//        } else if (id == R.id.adv) {
+//            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
+//        }
+
+//        else if (id == R.id.nav_share) {
+//
+//        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
+
+
+    public void back() {
 
         new AlertDialog.Builder(this)
                 .setTitle("বন্ধ করুন")
                 .setMessage("আপনি কি কলরব বন্ধ করতে চান?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -562,13 +651,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
 
 
     }

@@ -4,56 +4,23 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="wrap_content"
     android:background="#F7941E"
+
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+ >
 
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+
         android:orientation="horizontal">
 
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_weight="0.3"
-            android:id="@+id/toolbar_logoa"
-            android:background="@color/white"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/searchall"
-                android:layout_width="50dp"
-                android:layout_weight="0.87"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:drawableLeft="@drawable/search_icons"
-                android:textColor="@color/black"
-                android:hint="@string/search"
-                android:textColorHint="@color/red"
-                android:background="@color/white"
-                android:layout_height="40dp"
-                android:popupBackground="#ffffff"
-                android:layout_alignLeft="@+id/textView2"
-                android:layout_below="@+id/textView2"
-
-                android:ems="10" />
-
-
-        </LinearLayout>
 
 
 
