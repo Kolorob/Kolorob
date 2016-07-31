@@ -985,6 +985,16 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         });
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(PlaceDetailsActivityNewLayout.this, R.anim.twin);
         toggleButton.startAnimation(myFadeInAnimation);
+        toggleButton.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+
+           toggleButton.clearAnimation();
+
+            return false;
+        }
+    });
     }
 
     public void compareTool()

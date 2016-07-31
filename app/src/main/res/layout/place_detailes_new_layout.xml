@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:background="@color/health_color"
                     android:id="@+id/compare_layout"
 
@@ -766,8 +766,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/searchholder"
-android:visibility="gone"
 
+                android:visibility="gone"
                 android:layout_height="match_parent">
 
                 <EditText
@@ -925,7 +925,7 @@ android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:layout_above="@+id/toggle"
-                android:layout_marginTop="@dimen/nav_header_heightcat"
+                android:layout_marginTop="@dimen/nav_header_heightcat2"
 
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
                 android:layout_gravity="center|top">
