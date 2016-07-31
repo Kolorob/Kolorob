@@ -873,10 +873,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                                 "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
                     }
                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==0)
-                {
+                    {
                     AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                             "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
-                }
+                    }
                     else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==1)
                     {
                         AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
@@ -1071,142 +1071,142 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             }
         }
 
-        String healthService="";
+        String healthService1="";
         String health_service_data1="";
 
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
-            healthService=healthServiceProviderItemNew.getFamily_privacy();
-            if(!healthService.equals(""))
-            {
-                for (int i=0;i<healthService.length();i++)
-                {
-                    if(healthService.charAt(i)=='1')
-                    {
-                        health_service_data1=health_service_data1+"Emergency Service,";
-                    }
-                    else if(healthService.charAt(i)=='2')
-                    {
-                        health_service_data1=health_service_data1+" Ambulance Service,";
-                    }
-                    else
-                        health_service_data1=health_service_data1+" Maternity Service";
-
-                }
-            }
-
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
-                health_name3.setText("X");
-            else
-                health_name3.setText(healthServiceProviderItemNew.getNode_bn());
-
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")||healthServiceProviderItemNew.getOpening_time()==null)
-                opening_time3.setText("X");
-            else
-                opening_time3.setText(healthServiceProviderItemNew.getOpening_time());
-
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
-                language_spoken3.setText("X");
-            else
-                language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
-
-            if(!health_service_data1.equals(""))
-                service_type3.setText(health_service_data1);
-            else
-                service_type3.setText("X");
-            if(firstSpecialistItem==null)
-                specialist_available3.setText("X");
-            else
-                specialist_available3.setText(firstSpecialistItem);
-
-            if(healthServiceProviderItemNew.getPharmacy_speciality()==""||healthServiceProviderItemNew.getPharmacy_speciality()=="null")
-                clean_facilities3.setText("X");
-            else
-                clean_facilities3.setText(firstSpecialistItem);
-
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
-                privacy3.setText("X");
-            else
-                privacy3.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
-
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null")||String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
-                quality_equipment3.setText("X");
-            else
-                quality_equipment3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
-
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("")||healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null") || healthServiceProviderItemNew.getQuality_equipments()==null )
-                cost3.setText("X");
-            else
-                cost3.setText(healthServiceProviderItemNew.getQuality_equipments());
-
-        }
-
-
-        String healthService1="";
-        String health_service_data2="";
-        for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
-        {
             healthService1=healthServiceProviderItemNew.getFamily_privacy();
-            if(!healthService.equals(""))
+            if(!healthService1.equals(""))
             {
                 for (int i=0;i<healthService1.length();i++)
                 {
                     if(healthService1.charAt(i)=='1')
                     {
-                        health_service_data2=health_service_data1+"Emergency Service, ";
+                        health_service_data1=health_service_data1+"Emergency Service,";
                     }
                     else if(healthService1.charAt(i)=='2')
                     {
-                        health_service_data2=health_service_data1+" Ambulance Service, ";
+                        health_service_data1=health_service_data1 +" Ambulance Service,";
                     }
                     else
-                        health_service_data2=health_service_data1+" Maternity Service";
+                        health_service_data1=health_service_data1 +" Maternity Service";
 
                 }
             }
-            if(healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||healthServiceProviderItemNew.getNode_bn()==null)
-                health_name2.setText("X");
+
+            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase(""))
+                health_name3.setText(healthServiceProviderItemNew.getNode_bn());
             else
+                health_name3.setText("X");
+
+            if(!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("")||!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null"))
+                opening_time3.setText(timeConverter(healthServiceProviderItemNew.getOpening_time()));
+            else
+                opening_time3.setText("X");
+
+            if(!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("")||!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
+                language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
+            else
+                language_spoken3.setText("X");
+
+            if(!health_service_data1.equals(""))
+                service_type3.setText(health_service_data1);
+            else
+                service_type3.setText("X");
+            if(!firstSpecialistItem.equals(""))
+                specialist_available3.setText(firstSpecialistItem);
+            else
+                specialist_available3.setText("X");
+
+            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")||!healthServiceProviderItemNew.getPharmacy_speciality().equals(""))
+                clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            else
+                clean_facilities3.setText("X");
+
+            if(healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("")||healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase(""))
+                privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            else
+                privacy3.setText("X");
+
+            if(!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("")||!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase(""))
+                quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
+            else
+                quality_equipment3.setText("X");
+
+            if(!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("")||!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
+                cost3.setText(healthServiceProviderItemNew.getGeneral_cost());
+            else
+                cost3.setText("X");
+
+        }
+
+
+        String healthService2="";
+        String health_service_data2="";
+        for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
+        {
+            healthService2=healthServiceProviderItemNew.getFamily_privacy();
+            if(!healthService2.equals(""))
+            {
+                for (int i=0;i<healthService2.length();i++)
+                {
+                    if(healthService2.charAt(i)=='1')
+                    {
+                        health_service_data2=health_service_data1+"Emergency Service, ";
+                    }
+                    else if(healthService2.charAt(i)=='2')
+                    {
+                        health_service_data2=health_service_data2+" Ambulance Service, ";
+                    }
+                    else
+                        health_service_data2=health_service_data2+" Maternity Service";
+
+                }
+            }
+            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||!healthServiceProviderItemNew.getNode_bn    ().equalsIgnoreCase(""))
                 health_name2.setText(healthServiceProviderItemNew.getNode_bn());
-            if(healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null")|| healthServiceProviderItemNew.getOpening_time()==null)
+            else
+                health_name2.setText("X");
+
+            if(!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("")||!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null"))
+                opening_time2.setText(timeConverter(healthServiceProviderItemNew.getOpening_time()));
+            else
                 opening_time2.setText("X");
-            else
-                opening_time2.setText(healthServiceProviderItemNew.getOpening_time());
 
-            if(healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null")||healthServiceProviderItemNew.getSpoken_lang()==null)
-                language_spoken2.setText("X");
-            else
+            if(!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("")||!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
+            else
+                language_spoken2.setText("X");
 
-            if(!health_service_data2.equals(""))
-                service_type2.setText(health_service_data2);
+            if(!health_service_data1.equals(""))
+                service_type2.setText(health_service_data1);
             else
                 service_type2.setText("X");
-
-            if(healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null")||healthServiceProviderItemNew.getPharmacy_speciality()==null)
-                clean_facilities2.setText("X");
-            else
-                clean_facilities2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
-
-            if(firstSpecialistItem==null)
-                specialist_available2.setText("X");
-            else
+            if(!firstSpecialistItem.equals(""))
                 specialist_available2.setText(firstSpecialistItem);
+            else
+                specialist_available2.setText("X");
 
-            if(String.valueOf(healthServiceProviderItemNew.getNode_facebook()).equalsIgnoreCase("null")|| String.valueOf(healthServiceProviderItemNew.getNode_facebook())==null)
+            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")||!healthServiceProviderItemNew.getPharmacy_speciality().equals(""))
+                clean_facilities2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            else
+                clean_facilities2.setText("X");
+
+            if(healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("")||healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase(""))
+                privacy2.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            else
                 privacy2.setText("X");
-            else
-                privacy2.setText(String.valueOf(healthServiceProviderItemNew.getNode_facebook()));
 
-            if(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()).equalsIgnoreCase("null") || String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy())==null)
+            if(!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("")||!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase(""))
+                quality_equipment2.setText(healthServiceProviderItemNew.getQuality_equipments());
+            else
                 quality_equipment2.setText("X");
-            else
-                quality_equipment2.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
 
-            if(healthServiceProviderItemNew.getQuality_equipments()==null || healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
-                cost2.setText("X");
+            if(!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("")||!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
+                cost2.setText(healthServiceProviderItemNew.getGeneral_cost());
             else
-                cost2.setText(healthServiceProviderItemNew.getQuality_equipments());
+                cost2.setText("X");
 
 
 
@@ -3054,6 +3054,78 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         calladapter(false);
 
     }
+
+    private String timeConverter(String time) {
+
+
+        String timeInBengali = "";
+
+        try
+        {
+
+            String[] separated = time.split(":");
+
+
+            int hour = Integer.valueOf(separated[0]);
+            int times = Integer.valueOf(separated[1]);
+
+            if (hour >= 6 && hour < 12)
+                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour == 12)
+                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour > 12 && hour < 16)
+                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 15 && hour < 18)
+                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 17 && hour < 20)
+                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 20)
+                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            if (times != 0)
+                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+            else
+                timeInBengali = timeInBengali + " টা";
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        return timeInBengali;
+
+    }
+
+
+
+    public String English_to_bengali_number_conversion(String english_number) {
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+        }
+        return concatResult;
+    }
+
+
     private void calladapter(boolean status)
     {
         boolean instatus=status;
