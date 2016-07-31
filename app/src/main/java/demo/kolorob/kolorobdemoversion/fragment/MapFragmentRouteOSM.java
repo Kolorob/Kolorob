@@ -384,7 +384,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
 
         roadOverlay = graphHopperRoadManager.buildRoadOverlay(road, getActivity());
-        roadOverlay.setColor(Color.);
+        roadOverlay.setColor(Color.YELLOW);
         roadlength=road.mLength;
         mapView.getOverlays().add(roadOverlay);
         havePolyLine = true;
