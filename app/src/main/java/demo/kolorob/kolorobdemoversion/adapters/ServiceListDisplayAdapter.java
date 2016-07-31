@@ -221,10 +221,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
                         iijob.putExtra(AppConstants.KEY_DETAILS_GOV, detgov);
                         activity.startActivity(iijob);
 
-
                     }
-
-
                 });
                 break;
             default:break;

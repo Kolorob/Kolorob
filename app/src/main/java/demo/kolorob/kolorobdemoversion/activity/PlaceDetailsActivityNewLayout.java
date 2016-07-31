@@ -1379,11 +1379,15 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                // subCatItemList.setChildDivider(R.color.black);
 
                 print = subCategoryTable.getSubnameedu(5);
+                Collections.sort(print);
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
-                  printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
-                 //   printnames = educationServiceProviderTable.getAllSubCat();
+                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
+
+
+
+                    //   printnames = educationServiceProviderTable.getAllSubCat();
                     for (int i = 0; i < printnames.size(); i++) {
                         group.children.add(i, printnames.get(i));
                     }
@@ -1400,6 +1404,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ArrayList<String> RefEnt = null;
                 groups.removeAllElements();
                 RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
+                Collections.sort(RefEnt);
                 printnamesent=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
 
@@ -1426,6 +1431,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 // subCatItemList.setChildDivider(R.color.black);
 
                 printgov = subCategoryTableg.getSubnameedu(33);
+                Collections.sort(printgov);
                 for (int j = 0; j < printgov.size(); j++) {
                     Group group = new Group(printgov.get(j));
                     printgovs = null;
@@ -1454,7 +1460,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 RefHealth=subCategoryTableNew.getSubnameedu(1);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews2;
                // printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
-
+                Collections.sort(RefHealth);
                 for (int j = 0; j < RefHealth.size(); j++) {
                     Group group = new Group(RefHealth.get(j));
                     printnameshea = null;
@@ -1481,6 +1487,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
                 groups.removeAllElements();
                 printfin= subCategoryTable4.getSubnameedu(11);
+                Collections.sort(printfin);
                 for (int j = 0; j <  printfin.size(); j++) {
                     Group group = new Group(printfin.get(j));
                     printnamesfin = null;
@@ -1502,6 +1509,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 ArrayList<String> RefLegal = null;
                 RefLegal=subCategoryTableNews.getSubnameedu(29);
                 //("RefLegal","======"+RefLegal);
+                Collections.sort(RefLegal);
 
                 groups.removeAllElements();
                // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
