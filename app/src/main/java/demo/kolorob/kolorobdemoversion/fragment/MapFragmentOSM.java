@@ -223,7 +223,7 @@ setMapView(mapView);
         }
 
 
-
+        Log.d("Map Fragment Calling","=======");
         RatingTable ratingTable=new RatingTable(MapFragmentOSM.this.getActivity());
         switch (categoryId) {
             case AppConstants.EDUCATION:
@@ -256,7 +256,7 @@ setMapView(mapView);
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getCategory();
-                    //Log.d("subcategotyId_Legal","=======");
+                    //
                     ratingavg =  ratingTable.getavg(Integer.parseInt(et.getId()));
                     if(ratingavg==null)
                     {

@@ -1936,10 +1936,10 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         {
                             ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
                             entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
-                            ivIcon.setImageResource(R.drawable.entertainment_selected);
+
                             callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
                         }
-
+                        ivIcon.setImageResource(R.drawable.entertainment_selected);
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -2050,9 +2050,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
-                        ArrayList<FinancialNewItem> financialNewItems;
-                        financialNewItems = constructfinancialListItem();
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
+
+                        if(ListClicked==false)
+                        {
+                            ArrayList<FinancialNewItem> financialNewItems;
+                            financialNewItems = constructfinancialListItem();
+                            callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
+                        }
+
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -2213,6 +2218,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     private void categoryListBuildUp(int currentCategoryID)
     {
+
+
         createData(currentCategoryID,"",getLocationNameEng());
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
