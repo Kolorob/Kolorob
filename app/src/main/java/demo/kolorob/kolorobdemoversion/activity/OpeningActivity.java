@@ -234,8 +234,6 @@ public class OpeningActivity extends Activity {
             }
             else
 
-
-
             {
 //                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
 //                pd.setIndeterminate(true);
@@ -246,7 +244,7 @@ public class OpeningActivity extends Activity {
             }
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-            alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
+            alertDialog.setTitle("আপনি কি তথ্য আপডেট করতে চান? ");
             alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
                     new DialogInterface.OnClickListener() {
@@ -370,7 +368,7 @@ public class OpeningActivity extends Activity {
                 ) {
 
 
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
                     if (status == AppConstants.SUCCESS_CODE) {
@@ -385,7 +383,7 @@ public class OpeningActivity extends Activity {
                     }
                 }
             });
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/refs_old?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -405,7 +403,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/get_sp_rating?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/get_sp_rating?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -425,7 +423,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/categories?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -446,7 +444,7 @@ public class OpeningActivity extends Activity {
             //
             //
 
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/refs?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -465,7 +463,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -486,7 +484,7 @@ public class OpeningActivity extends Activity {
             );
 
 
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                 @Override
                 public void onResponse(int status, String apiContent) {
 
@@ -502,7 +500,7 @@ public class OpeningActivity extends Activity {
 
                 }
             });
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/sp/financial?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -518,7 +516,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -536,7 +534,7 @@ public class OpeningActivity extends Activity {
             );
 
 
-            getRequest(OpeningActivity.this, "http://192.168.43.57/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             try {
