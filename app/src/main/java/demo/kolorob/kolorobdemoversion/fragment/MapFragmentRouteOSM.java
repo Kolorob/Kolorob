@@ -361,7 +361,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
 
             Ricksawtext.setText(rickfare + " টাকা এবং " + ricktime+ " মিনিট সময় লাগতে পারে"  );
         }
-        
+
         String wtime=EtoBconversion( String.valueOf((int) Math.round((roadlength/8)*60)));
 
 
