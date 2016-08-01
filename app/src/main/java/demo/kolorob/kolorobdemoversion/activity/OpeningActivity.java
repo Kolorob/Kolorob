@@ -234,8 +234,6 @@ public class OpeningActivity extends Activity {
             }
             else
 
-
-
             {
 //                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
 //                pd.setIndeterminate(true);
@@ -246,7 +244,7 @@ public class OpeningActivity extends Activity {
             }
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-            alertDialog.setTitle("আপনি কি তথ্য হালনাগাদ করতে চান? ");
+            alertDialog.setTitle("আপনি কি তথ্য আপডেট করতে চান? ");
             alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
                     new DialogInterface.OnClickListener() {

@@ -408,11 +408,12 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                  ratings = ratingBar.getRating();
 
                     sendDataToserver(ratings,comment);
+
+
+
                 alert.cancel();
                 finish();
                 //   back();
-
-
 
 
 
