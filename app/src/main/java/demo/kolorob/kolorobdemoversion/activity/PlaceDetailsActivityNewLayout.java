@@ -209,7 +209,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
     ArrayList<CategoryItem> categoryList2=new ArrayList<>();
-    Boolean SearchClicked=false,MapClicked=false,ListClicked=false,CompareClicked=false;
+    Boolean SearchClicked=false,MapClicked=true,ListClicked=false,CompareClicked=false;
     private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -1838,7 +1838,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 llCatListHolder.getChildAt(6).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chakri_bakri));
 */
 
-
+                Log.d("Fragment","@@@@@@"+SearchClicked);
+                Log.d("MapClicked","@@@@@@"+MapClicked);
+                Log.d("ListClicked","@@@@@@"+ListClicked);
 
                 //
                 /*code for category*/
@@ -1877,11 +1879,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.education_selected);
 
 
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
 
-
-                        
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.education_selected);
                         llSubCatListHolder.setVisibility(View.GONE);
@@ -1895,8 +1898,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(1);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
 
@@ -1927,8 +1934,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(14);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
+
                         ivIcon.setImageResource(0);
                         if(MapClicked)
                         {
@@ -1968,8 +1980,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(33);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.government_selected);
 
@@ -2005,8 +2021,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(29);
                         catstatus=true;
                         calladapter(catstatus);
-                        populatefilterwords(getFilcatid());
-                        filterholder.setVisibility(View.VISIBLE);
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.legal_selected);
 
@@ -2045,8 +2066,11 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         setFilcatid(11);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
 
@@ -2687,7 +2711,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         mapFragment.setLocationName(getPlaceChoice());
         //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-//        Log.d("Fragment","@@@@@@"+cat_id);
+//
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
