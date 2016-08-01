@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
@@ -41,6 +42,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,7 +68,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     private Notification myNotication;
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
-    Float ratings;
+    Float  ratings;
     float[][] mirpur10Coords = {
             {42, 267},
             {80, 420},
@@ -125,7 +127,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_place_choice2);
+        setContentView(R.layout.place_selection_activity);
 
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
