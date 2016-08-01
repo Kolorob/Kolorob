@@ -1866,11 +1866,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                             llSubCatListHolder.setVisibility(View.GONE);
 
-                            ArrayList<EducationNewItem> educationServiceProvider;
-                            educationServiceProvider = constructEducationListItem();
-                            ivIcon.setImageResource(R.drawable.education_selected);
-                            Log.d("currentCategoryID","@@@@@@"+ci.getCatName());
-                            callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
+                            if(ListClicked==false)
+                            {
+                                ArrayList<EducationNewItem> educationServiceProvider;
+                                educationServiceProvider = constructEducationListItem();
+                                ivIcon.setImageResource(R.drawable.education_selected);
+
+                                callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
+                            }
 
 
 
@@ -1898,10 +1901,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
-                        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem(1);
-                        Log.d("currentCategoryID","@@@@@@"+ci.getCatName());
-                        callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
+
+                        if(ListClicked==false)
+                        {
+                            ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+                            healthServiceProvider = constructHealthListItem(1);
+
+                            callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
+                        }
+
+
+
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
@@ -1922,10 +1932,14 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         filterholder.setVisibility(View.VISIBLE);
                         populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
-                        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
-                        entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
-                        ivIcon.setImageResource(R.drawable.entertainment_selected);
-                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
+                        if(ListClicked==false)
+                        {
+                            ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
+                            entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
+                            ivIcon.setImageResource(R.drawable.entertainment_selected);
+                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
+                        }
+
                         mapcalledstatus=true;
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -1961,7 +1975,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.government_selected);
                         mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        if(ListClicked==false)
+                        {
+                            ArrayList<GovernmentNewItem> governmentNewItems;
+                            governmentNewItems = constructgovListItem();
+                            callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
+                        }
+                            llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
@@ -1969,9 +1989,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
 
-                        ArrayList<GovernmentNewItem> governmentNewItems;
-                        governmentNewItems = constructgovListItem();
-                        callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
+
 
 
 
@@ -1992,12 +2010,21 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         filterholder.setVisibility(View.VISIBLE);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.legal_selected);
-                        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
-                        mapcalledstatus=true;
-                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                        callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
+
+                        if(ListClicked==false)
+                        {
+
+                            ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+                            mapcalledstatus=true;
+                            legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                            callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
+                        }
+
+
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
+
+
 
 
 
@@ -2653,7 +2680,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         mapFragment.setLocationName(getPlaceChoice());
         //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-        Log.d("Fragment","@@@@@@"+cat_id);
+//        Log.d("Fragment","@@@@@@"+cat_id);
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
@@ -2669,7 +2696,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setLocationNameId(locationNameId);
         if (mapcalledstatus == true) {
-          if(educlicked){
+          if(currentCategoryID==1){
               educlicked=false;
               mapFragment.setCategoryId(1);
               ArrayList<EducationNewItem> educationServiceProviderItems;
@@ -2680,7 +2707,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
               fragmentTransaction.replace(R.id.map_fragment,mapFragment);
             fragmentTransaction.commit();
           }
-           else if(helclicked){
+           else if(currentCategoryID==2){
                 helclicked=false;
                 mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
@@ -2691,7 +2718,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-          else if(entclicked){
+          else if(currentCategoryID==3){
                 entclicked=false;
                 mapFragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
@@ -2702,7 +2729,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-          else if(legclicked){
+          else if(currentCategoryID==5){
                 legclicked=false;
                 mapFragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
@@ -2713,7 +2740,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-          else if(finclicked){
+          else if(currentCategoryID==6){
                 finclicked=false;
                 mapFragment.setCategoryId(6);
                 ArrayList<FinancialNewItem> financialNewItems;
@@ -2788,7 +2815,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(3);
-        Log.d("ntWithEntertainment","@@@@@@"+cat_id);
+
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();

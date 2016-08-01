@@ -223,7 +223,7 @@ setMapView(mapView);
         }
 
 
-        Log.d("OSM test","%%%%%%"+categoryId);
+
         RatingTable ratingTable=new RatingTable(MapFragmentOSM.this.getActivity());
         switch (categoryId) {
             case AppConstants.EDUCATION:
@@ -501,7 +501,6 @@ setMapView(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-        Log.d("HealthSub","======="+String.valueOf(subcategotyId2));
         String subcategory;
         subcategory=subcategotyId2.substring(1);
         String CurrentString = subcategory;
@@ -509,7 +508,6 @@ setMapView(mapView);
 
 
 
-     //   Log.d("node","========="+node);
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
@@ -541,7 +539,6 @@ setMapView(mapView);
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        Log.d("LegSub","======="+String.valueOf(subcategotyId2));
 
         String subcategory;
         subcategory=subcategotyId2.substring(1);
@@ -570,7 +567,6 @@ setMapView(mapView);
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        Log.d("subcategotyId23","******" +subcategotyId23);
         String subcategory;
         subcategory=subcategotyId23.substring(1);
         String CurrentString = subcategory;
