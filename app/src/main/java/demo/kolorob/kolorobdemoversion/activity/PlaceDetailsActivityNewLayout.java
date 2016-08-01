@@ -229,6 +229,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ListView allitemList;
     String filterword;
     TextView searchtext;
+    private int smal;
 
     int snumber=0;
 
@@ -367,8 +368,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         double d=buttonWidth*0.56;
         double large=buttonWidth*0.69;
         final int larg=(int)Math.round(large);
-        final int smal=(int)Math.round(d);
+        smal=(int)Math.round(d);
         params.height=larg;
+        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
+        RelativeLayout.LayoutParams com_layout = (RelativeLayout.LayoutParams) compare_layout.getLayoutParams();
+        com_layout.setMargins(0,0,0,smal);
+
+        compare_layout.setLayoutParams(com_layout);
 
         MapButton.setLayoutParams(params);
         final LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
@@ -1042,9 +1048,9 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         language_spoken1.setText("প্রচলিত ভাষা");
         service_type1.setText("সেবার ধরন");
         specialist_available1.setText("বিশেষজ্ঞের ধরন");
-        clean_facilities1.setText("ফার্মেসি সুবিধা");
+        clean_facilities1.setText("ফার্মেসি সেবা");
         privacy1.setText("গোপনীয়তা");
-        quality_equipment1.setText("ভাল সুবিধা এবং যন্ত্রপাতি");
+        quality_equipment1.setText("সেবার মান এবং যন্ত্রপাতি");
         cost1.setText("সেবার খরচ");
         shift1_11.setVisibility(View.GONE);
         shift1_1.setVisibility(View.GONE);
@@ -1135,7 +1141,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 quality_equipment3.setText("X");
 
             if(!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("")||!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost3.setText(healthServiceProviderItemNew.getGeneral_cost());
+                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
             else
                 cost3.setText("X");
 
@@ -1204,8 +1210,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 quality_equipment2.setText("X");
 
             if(!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("")||!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost2.setText(healthServiceProviderItemNew.getGeneral_cost());
-            else
+                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));            else
                 cost2.setText("X");
 
 
