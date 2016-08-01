@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +35,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.GraphHopperRoadManager;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.helpers.KOLOROBRoadManager;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
@@ -229,7 +230,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
         locationNameId = pref.getInt("LocationNameId", 0);
         double lat = Double.parseDouble(Latitude);
         double lon = Double.parseDouble(Longitude);
-        markerlocation = new GeoPoint(lat, lon);
+        markerlocation = new GeoPoint(lat,lon);
         Marker centermarker = new Marker(mapView);
         centermarker.setPosition(markerlocation);
         centermarker.setTitle("Destination");
@@ -370,15 +371,19 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
     }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
         mapView.getOverlays().remove(roadOverlay);
-        RoadManager roadManager = new OSRMRoadManager(getActivity());
+
+
         ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
         waypoints.add(userlocation);
         waypoints.add(markerlocation);
-        Road road = roadManager.getRoad(waypoints);
+
+        GraphHopperRoadManager graphHopperRoadManager=new GraphHopperRoadManager("AMFmC5P8s958tcjfFRJmefNboJ5H0HN6PLFyvdm3");
+
+        Road road = graphHopperRoadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK)
             Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
 
-        roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
+        roadOverlay = graphHopperRoadManager.buildRoadOverlay(road, getActivity());
         roadOverlay.setColor(Color.YELLOW);
         roadlength=road.mLength;
         mapView.getOverlays().add(roadOverlay);
@@ -445,7 +450,7 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
             usermarker = new Marker(mapView);
             laat = location.getLatitude();
             longg = location.getLongitude();
-            userlocation = new GeoPoint(laat, longg);
+            userlocation = new GeoPoint(laat,longg);
             usermarker.setPosition(userlocation);
             mapView.getOverlays().add(usermarker);
         } else {
