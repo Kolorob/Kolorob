@@ -1100,51 +1100,51 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 }
             }
-
-            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase(""))
+            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
                 health_name3.setText(healthServiceProviderItemNew.getNode_bn());
             else
-                health_name3.setText("X");
+                health_name3.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("")||!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null"))
-                opening_time3.setText(timeConverter(healthServiceProviderItemNew.getOpening_time()));
+            String time2="";
+            time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
+            if(!time2.equals("")&&!time2.equals("null"))
+                opening_time3.setText(time2);
             else
-                opening_time3.setText("X");
+                opening_time3.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("")||!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
+            if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
             else
-                language_spoken3.setText("X");
+                language_spoken3.setText("শিগ্রই আসছে");
 
-            if(!health_service_data1.equals(""))
+            if(!health_service_data1.equals("")&&!health_service_data1.equals("null"))
                 service_type3.setText(health_service_data1);
             else
-                service_type3.setText("X");
-            if(!firstSpecialistItem.equals(""))
+                service_type3.setText("শিগ্রই আসছে");
+            if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
                 specialist_available3.setText(firstSpecialistItem);
             else
-                specialist_available3.setText("X");
+                specialist_available3.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")||!healthServiceProviderItemNew.getPharmacy_speciality().equals(""))
+            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
                 clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
             else
-                clean_facilities3.setText("X");
+                clean_facilities3.setText("শিগ্রই আসছে");
 
-            if(healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("")||healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase(""))
+            if(healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
-                privacy3.setText("X");
+                privacy3.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("")||!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase(""))
+            if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
                 quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
             else
-                quality_equipment3.setText("X");
+                quality_equipment3.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("")||!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
+            if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
                 cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
             else
-                cost3.setText("X");
-
+                cost3.setText("শিগ্রই আসছে");
         }
 
 
@@ -1170,50 +1170,51 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                 }
             }
-            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")||!healthServiceProviderItemNew.getNode_bn    ().equalsIgnoreCase(""))
+            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
                 health_name2.setText(healthServiceProviderItemNew.getNode_bn());
             else
-                health_name2.setText("X");
+                health_name2.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("")||!healthServiceProviderItemNew.getOpening_time().equalsIgnoreCase("null"))
-                opening_time2.setText(timeConverter(healthServiceProviderItemNew.getOpening_time()));
+            String time1="";
+            time1=timeConverter(healthServiceProviderItemNew.getOpening_time());
+            if(!time1.equals("")&&!time1.equals("null"))
+                opening_time2.setText(time1);
             else
-                opening_time2.setText("X");
+                opening_time2.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("")||!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
+            if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
             else
-                language_spoken2.setText("X");
+                language_spoken2.setText("শিগ্রই আসছে");
 
-            if(!health_service_data2.equals(""))
+            if(!health_service_data2.equals("")&&!health_service_data2.equals("null"))
                 service_type2.setText(health_service_data1);
             else
-                service_type2.setText("X");
-            if(!secondSpecialistItem.equals(""))
+                service_type2.setText("শিগ্রই আসছে");
+            if(!secondSpecialistItem.equals("")&&!secondSpecialistItem.equals("null"))
                 specialist_available2.setText(firstSpecialistItem);
             else
-                specialist_available2.setText("X");
+                specialist_available2.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")||!healthServiceProviderItemNew.getPharmacy_speciality().equals(""))
+            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equals("null"))
                 clean_facilities2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
             else
-                clean_facilities2.setText("X");
+                clean_facilities2.setText("শিগ্রই আসছে");
 
-            if(healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("")||healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase(""))
+            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy2.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
-                privacy2.setText("X");
+                privacy2.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("")||!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase(""))
+            if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
                 quality_equipment2.setText(healthServiceProviderItemNew.getQuality_equipments());
             else
-                quality_equipment2.setText("X");
+                quality_equipment2.setText("শিগ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("")||!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));            else
-                cost2.setText("X");
-
-
+            if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
+                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
+            else
+                cost2.setText("শিগ্রই আসছে");
 
 
         }
