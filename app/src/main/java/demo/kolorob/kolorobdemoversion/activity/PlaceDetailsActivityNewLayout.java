@@ -1681,7 +1681,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
             super.onBackPressed();
             return;
         }
-
+toolbar.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
 
         if(NavigationCalled)
