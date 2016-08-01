@@ -222,6 +222,8 @@ setMapView(mapView);
             mapViewController.setCenter(AppConstants.PARIS1);
         }
 
+
+        Log.d("OSM test","%%%%%%"+categoryId);
         RatingTable ratingTable=new RatingTable(MapFragmentOSM.this.getActivity());
         switch (categoryId) {
             case AppConstants.EDUCATION:

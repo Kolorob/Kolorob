@@ -194,6 +194,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     public static int currentCategoryID,currentCategoryIDconverted;
     private  ViewGroup.LayoutParams kk;
+//    Vector<Group> education_groups = new Vector<Group>();
+//    Vector<Group> health_group = new Vector<Group>();
+//    Vector<Group> entertainment_group = new Vector<Group>();
+//    Vector<Group> govt_group = new Vector<Group>();
+//    Vector<Group> financial_group = new Vector<Group>();
+//    Vector<Group>  = new Vector<Group>();
     Vector<Group> groups = new Vector<Group>();
     TextView header;
     private String placeChoice;
@@ -1833,8 +1839,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 */
 
 
-                //
 
+                //
                 /*code for category*/
                 /*following code will be different for each category*/
                 /*category id 1 means education.
@@ -1858,26 +1864,17 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         if(ListClicked.equals(true))
                         explist.setVisibility(View.VISIBLE);
 
-                        if(showList==1) {
-/*
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                            llSubCatListHolder.setVisibility(View.GONE);
-                            subCatItemList.setVisibility(View.VISIBLE);
-*/
-
-                        }
-                        else {
-
                             llSubCatListHolder.setVisibility(View.GONE);
 
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             ivIcon.setImageResource(R.drawable.education_selected);
+                            Log.d("currentCategoryID","@@@@@@"+ci.getCatName());
                             callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
 
 
-                        }
+
+
 
 
                         
@@ -1903,7 +1900,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         ivIcon.setImageResource(R.drawable.health_selected);
                         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
                         healthServiceProvider = constructHealthListItem(1);
-                        callMapFragmentWithHealthInfo(ci.getCatName(), 2, healthServiceProvider);
+                        Log.d("currentCategoryID","@@@@@@"+ci.getCatName());
+                        callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
                         mapcalledstatus=true;
                             llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
@@ -2640,8 +2638,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     {
 
-        Log.d("cat_id","####"+cat_id);
-        Log.d("header","####"+header);
+
         ArrayList<EducationNewItem> educationNewItems;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
         educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
@@ -2650,11 +2647,13 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
     {
+
+
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-
+        Log.d("Fragment","@@@@@@"+cat_id);
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
@@ -2671,7 +2670,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         mapFragment.setLocationNameId(locationNameId);
         if (mapcalledstatus == true) {
           if(educlicked){
-              //educlicked=false;
+              educlicked=false;
               mapFragment.setCategoryId(1);
               ArrayList<EducationNewItem> educationServiceProviderItems;
               educationServiceProviderItems = constructEducationListItem();
@@ -2681,8 +2680,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
               fragmentTransaction.replace(R.id.map_fragment,mapFragment);
             fragmentTransaction.commit();
           }
-            if(helclicked){
-                //helclicked=false;
+           else if(helclicked){
+                helclicked=false;
                 mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
                 healthServiceProviderItems = constructHealthListItem(2);
@@ -2692,8 +2691,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-            if(entclicked){
-              //  entclicked=false;
+          else if(entclicked){
+                entclicked=false;
                 mapFragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
@@ -2703,8 +2702,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-            if(legclicked){
-               // legclicked=false;
+          else if(legclicked){
+                legclicked=false;
                 mapFragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
@@ -2714,8 +2713,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-            if(finclicked){
-               // finclicked=false;
+          else if(finclicked){
+                finclicked=false;
                 mapFragment.setCategoryId(6);
                 ArrayList<FinancialNewItem> financialNewItems;
                 financialNewItems = constructfinancialListItem();
@@ -2748,7 +2747,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
+        mapFragment.setCategoryId(2);
 
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setHealthServiceProvider(healthServiceProviderItems);
@@ -2760,14 +2759,12 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
     private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
     {
 
-       // Log.d("cat_id","####"+cat_id);
-       // Log.d("header","####"+header);
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider1;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         int refId=subCategoryTableNew.getSubcategoryId(header);
-       // Log.d("refId_newer","####"+refId);
+
         String refIds=String.valueOf(refId);
 
         healthServiceProvider1 = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
@@ -2790,8 +2787,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
-
+        mapFragment.setCategoryId(3);
+        Log.d("ntWithEntertainment","@@@@@@"+cat_id);
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
@@ -2809,7 +2806,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         int refId=subCategoryTableNew.getSubcategoryId(header);
         String refIds=String.valueOf(refId);
-        Log.d("SubcatHeader","@@@@@@"+refId);
+
         entertainmentServiceProvider1 = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
 
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
