@@ -117,6 +117,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     };
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
+     *  ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;

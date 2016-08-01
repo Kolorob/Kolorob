@@ -1475,7 +1475,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                    // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
                     //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
 
-                    printnameshea = healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
+//                    printnameshea = healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
                     printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
@@ -2118,7 +2118,8 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                         showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                     else
                         showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
-                        categoryListBuildUp(currentCategoryID);
+
+                    categoryListBuildUp(currentCategoryID);
                 }
 
 
