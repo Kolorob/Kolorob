@@ -276,15 +276,24 @@ public class DetailsInfoActivityHealthNew extends Activity {
                 int compareValue;
                 compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
                 if (compareValue >= 2)
-                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+                {
+                    String compare_Data="";
+                    String new_compare_Data="";
+                    compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
+                    String multipule[]= compare_Data.split(",");
+                    new_compare_Data = multipule[1]+","+healthServiceProviderItemNew.getId();
+                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 2);
+
+
+                }
                 else if (compareValue == 0) {
 
                     SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getId(), 1);
-                } else if (compareValue == 1) {
+                }
+                else if (compareValue == 1) {
                     String previous_node;
                     previous_node = SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                    previous_node = previous_node + " " + healthServiceProviderItemNew.getId();
+                    previous_node = previous_node + "," + healthServiceProviderItemNew.getId();
                     SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, previous_node, 2);
                 }
 

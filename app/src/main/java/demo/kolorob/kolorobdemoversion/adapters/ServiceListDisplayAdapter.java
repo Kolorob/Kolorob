@@ -153,7 +153,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
             case AppConstants.HEALTH:
                 final HealthServiceProviderItemNew dethea = groups.get(groupPosition).getChildrenhea().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
-                text.setText(dethea.getNode_name());
+                text.setText(dethea.getNode_bn());
                 linearLayout.setBackgroundResource(R.color.health_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override
@@ -221,10 +221,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
                         iijob.putExtra(AppConstants.KEY_DETAILS_GOV, detgov);
                         activity.startActivity(iijob);
 
-
                     }
-
-
                 });
                 break;
             default:break;

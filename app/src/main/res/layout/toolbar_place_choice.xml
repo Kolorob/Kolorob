@@ -5,52 +5,11 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/transparent"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
 
-<FrameLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
-
-    <ImageView
-        android:id="@+id/toolbar_logos"
-        android:src="@drawable/menu_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="?attr/actionBarSize"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_gravity="left" />
-
-    <ImageView
-        android:id="@+id/toolbar_logoa"
-        android:src="@drawable/sear_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="?attr/actionBarSize"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_gravity="center" />
-
-    <ImageView
-        android:id="@+id/toolbar_logo"
-        android:src="@drawable/search_icons"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="?attr/actionBarSize"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_gravity="right" />
-
-
-
-
-</FrameLayout>
 
 
 

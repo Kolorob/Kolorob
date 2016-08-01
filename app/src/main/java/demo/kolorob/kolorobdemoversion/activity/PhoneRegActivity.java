@@ -98,8 +98,8 @@ public class PhoneRegActivity extends Activity {
     public void sendPhoneNumberToServer(final String phone)
     {
 
-       // http://kolorob.net/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&username="+username+"&password="+password+"" ;
+       // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
+        String url = "http://192.168.43.57/demo/api/customer_reg?phone="+phone+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
