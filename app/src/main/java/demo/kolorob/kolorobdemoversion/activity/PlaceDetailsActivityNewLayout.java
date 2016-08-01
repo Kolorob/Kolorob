@@ -2119,6 +2119,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
                     else
                         showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
 
+                    if(ListClicked)
                     categoryListBuildUp(currentCategoryID);
                 }
 
