@@ -12,7 +12,7 @@
     <dimen name="catimagetop">10dp</dimen>
     <dimen name="bottomtransport">50dp</dimen>
     <dimen name="catlayouttop">10dp</dimen>
-    <dimen name="transportlayout">200dp</dimen>
+    <dimen name="transportlayout">120dp</dimen>
     <dimen name="subcatlayouttop">00dp</dimen>
     <dimen name="searchbar">230dp</dimen>
     <dimen name="catbuttonheight">55dp</dimen>

@@ -2953,7 +2953,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
     public void implementRouteDrawingFragmentOSM()
     {
-
+        toolbar.setVisibility(View.GONE);
         //listholder.setVisibility(View.GONE);
         NavigationCalled=true;
         MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
