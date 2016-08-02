@@ -1,10 +1,7 @@
 package demo.kolorob.kolorobdemoversion.model.Entertainment;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.io.Serializable;
 
@@ -51,6 +48,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
     private String police_station;
     private String city;
     private String off_day;
+    String rating;
 
 
 
@@ -92,7 +90,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                     String post_office,
                     String police_station,
                     String city,
-                    String off_day){
+                    String off_day,String rating){
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;
@@ -130,6 +128,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         this.police_station = police_station;
         this.city = city;
         this.off_day = off_day;
+        this.rating=rating;
 
 
 
@@ -304,6 +303,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         String _categoryId= jo.getString("sub_categories");
         _categoryId=_categoryId.replace('[',',');
         _categoryId=_categoryId.replace(']',',');
+        String _rating=jo.getString("rating");
 
 
 
@@ -339,7 +339,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 post_office,
                  police_station,
                  city,
-                off_day);
+                off_day,_rating);
     }
 
 
