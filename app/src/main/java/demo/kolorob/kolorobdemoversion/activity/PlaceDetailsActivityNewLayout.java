@@ -81,7 +81,6 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
-import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
@@ -1706,13 +1705,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
             if (currentCategoryID==1)
             {
-                NavigationCalledOnce=true;
+              /*  NavigationCalledOnce=true;
                 String node=getNodefromback();
                 EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this.con);
                 nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
                 Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsLayoutEducation.class);
                 iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
-                this.startActivity(iient);
+                this.startActivity(iient);*/
 
             }
 
@@ -3012,7 +3011,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
 
-    public void implementRouteDrawingFragmentOSM()
+   /* public void implementRouteDrawingFragmentOSM()
     {
         toolbar.setVisibility(View.GONE);
         //listholder.setVisibility(View.GONE);
@@ -3023,7 +3022,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
         fragmentTransaction.commit();
-    }
+    }*/
 
     public void Populateholder()
     {
@@ -3391,7 +3390,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             toggleButton.setVisibility(View.GONE);
             svsholder.setVisibility(View.GONE);
             svholder.setVisibility(View.GONE);
-            implementRouteDrawingFragmentOSM();
+            //implementRouteDrawingFragmentOSM();
         }
 
         else if (NavigationCalledOnce==true)
