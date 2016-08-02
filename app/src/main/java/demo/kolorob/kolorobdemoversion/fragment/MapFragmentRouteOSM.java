@@ -246,11 +246,11 @@ public class MapFragmentRouteOSM extends Fragment implements View.OnClickListene
 
         // Showing status
         if (gpsVersion >= 8400000) {
-            Toast.makeText(getActivity(), "Playservice available", Toast.LENGTH_SHORT).show();
+
             statusofservice = true;
             buildGoogleApiClient();
         } else {
-            Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
+
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), requestCode);
             dialog.show();//dialog needs to be modified more of an alert dialog
