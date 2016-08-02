@@ -102,7 +102,7 @@ public class HealthServiceProviderTableNew {
     private static final String KEY_CATEGORY= "category";
     private static final String KEY_REFERENCES= "referencesx";
 
-
+    private static final String KEY_RATING= "_rating";
 
     private Context tContext;
 
@@ -196,7 +196,8 @@ public class HealthServiceProviderTableNew {
                 + KEY_FAMILY_CONTRACEPTIVE + "  TEXT, "
                 + KEY_FAMILY_PRIVACY + "  TEXT, "
                 + KEY_CATEGORY + "  TEXT, "
-                + KEY_REFERENCES + " TEXT, PRIMARY KEY(" + KEY_ID + "))";
+                + KEY_REFERENCES + " TEXT, "
+                + KEY_RATING + " TEXT, PRIMARY KEY(" + KEY_ID + "))";
 
 
         db.execSQL(CREATE_TABLE_SQL);
@@ -295,7 +296,7 @@ public class HealthServiceProviderTableNew {
                 healthServiceProviderItemNew.getFamily_contraceptive(),
                 healthServiceProviderItemNew.getFamily_privacy(),
                 healthServiceProviderItemNew.getCategory(),
-                healthServiceProviderItemNew.getReferences()
+                healthServiceProviderItemNew.getReferences(),healthServiceProviderItemNew.getRating()
 
         );
     }
@@ -380,7 +381,7 @@ public class HealthServiceProviderTableNew {
             String family_contraceptive,
             String family_privacy,
             String category,
-            String references) {
+            String references,String rating) {
         if (isFieldExist(id)) {
             return updateItem(
                     id,
@@ -462,7 +463,7 @@ public class HealthServiceProviderTableNew {
                     family_contraceptive,
                     family_privacy,
                     category,
-                    references);
+                    references,rating);
         }
 
         ContentValues rowValue = new ContentValues();
@@ -547,7 +548,7 @@ public class HealthServiceProviderTableNew {
         rowValue.put(KEY_FAMILY_PRIVACY,  family_privacy  );
         rowValue.put(KEY_CATEGORY,  category  );
         rowValue.put(KEY_REFERENCES,  references  );
-
+        rowValue.put(KEY_RATING,  rating  );
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
@@ -668,7 +669,7 @@ public class HealthServiceProviderTableNew {
                         cursor.getString(76),
                         cursor.getString(77),
                         cursor.getString(78),
-                        cursor.getString(79));
+                        cursor.getString(79), cursor.getString(80));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -796,7 +797,7 @@ public class HealthServiceProviderTableNew {
                              String family_contraceptive,
                              String family_privacy,
                              String category,
-                             String references) {
+                             String references,String rating) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_ID,  id  );
         rowValue.put(KEY_NODE_NAME,  node_name  );
@@ -878,7 +879,7 @@ public class HealthServiceProviderTableNew {
         rowValue.put(KEY_FAMILY_PRIVACY,  family_privacy  );
         rowValue.put(KEY_CATEGORY,  category  );
         rowValue.put(KEY_REFERENCES,  references  );
-
+        rowValue.put(KEY_RATING,  rating  );
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_ID + " = ? ",
@@ -1161,7 +1162,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
         String family_privacy= cursor.getString(77);
         String category= cursor.getString(78);
         String references=cursor.getString(79);
-
+        String rating=cursor.getString(80);
 
         return new HealthServiceProviderItemNew(
                 id,
@@ -1243,7 +1244,7 @@ public ArrayList<HealthServiceProviderItemNew> getAllHealthSubCategoriesInfo() {
                 family_contraceptive,
                 family_privacy,
                 category,
-                references);
+                references,rating);
     }
 
 }

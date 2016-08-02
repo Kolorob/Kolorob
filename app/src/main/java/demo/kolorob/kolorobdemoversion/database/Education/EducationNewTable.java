@@ -268,7 +268,7 @@ public class EducationNewTable {
         rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
-        rowValue.put(KEY_RATING, refnumm);
+        rowValue.put(KEY_RATING, rating);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -337,7 +337,7 @@ public class EducationNewTable {
         rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
-        rowValue.put(KEY_RATING, refnumm);
+        rowValue.put(KEY_RATING, rating);
 
 
         SQLiteDatabase db = openDB();

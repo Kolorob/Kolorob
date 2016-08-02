@@ -53,7 +53,7 @@ public class LegalAidServiceProviderTableNew {
     private static final String KEY_LINE = "_line"; //
     private static final String KEY_AVENUE = "_avenue"; //
     private static final String KEY_POLICE_STATION = "_police_station"; //
-
+    private static final String KEY_RATING = "_rating"; //
 
     private Context tContext;
 
@@ -98,7 +98,8 @@ public class LegalAidServiceProviderTableNew {
                 + KEY_HOUSE_NO+ " TEXT, "
                 + KEY_LINE + " TEXT, "
                 + KEY_AVENUE + " TEXT, "
-                + KEY_POLICE_STATION + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
+                + KEY_POLICE_STATION + " TEXT, "
+                + KEY_RATING + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -133,7 +134,7 @@ public class LegalAidServiceProviderTableNew {
                 legalAidServiceProviderItem.getHouse_no(),
                 legalAidServiceProviderItem.getLine(),
                 legalAidServiceProviderItem.getAvenue(),
-                legalAidServiceProviderItem.getPolice_station()
+                legalAidServiceProviderItem.getPolice_station(),legalAidServiceProviderItem.getRating()
         );
     }
 
@@ -169,7 +170,7 @@ public class LegalAidServiceProviderTableNew {
                            String house_no,
                            String line,
                            String avenue,
-                           String police_station
+                           String police_station,String rating
     ) {
         if (isFieldExist(identifierId)) {
             return updateItem(
@@ -203,7 +204,7 @@ public class LegalAidServiceProviderTableNew {
                     house_no,
                     line,
                     avenue,
-                    police_station
+                    police_station,rating
                     );
         }
         ContentValues rowValue = new ContentValues();
@@ -241,6 +242,7 @@ public class LegalAidServiceProviderTableNew {
         rowValue.put(KEY_AVENUE,avenue);
         rowValue.put(KEY_POLICE_STATION,police_station);
 
+        rowValue.put(KEY_RATING,rating);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
 
@@ -283,7 +285,7 @@ public class LegalAidServiceProviderTableNew {
                         cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
                         cursor.getString(16), cursor.getString(17),cursor.getString(18),cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),
                         cursor.getString(23),cursor.getString(24),cursor.getString(25),cursor.getString(26),cursor.getString(27),
-                        cursor.getString(28),cursor.getString(29),cursor.getString(30),cursor.getString(31));
+                        cursor.getString(28),cursor.getString(29),cursor.getString(30),cursor.getString(31),cursor.getString(32));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -404,7 +406,7 @@ public class LegalAidServiceProviderTableNew {
             String house_no,
             String line,
             String avenue,
-            String police_station) {
+            String police_station,String rating) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_IDENTIFIER_ID, identifierId);
@@ -439,6 +441,7 @@ public class LegalAidServiceProviderTableNew {
         rowValue.put(KEY_LINE,line);
         rowValue.put(KEY_AVENUE,avenue);
         rowValue.put(KEY_POLICE_STATION,police_station);
+        rowValue.put(KEY_RATING,rating);
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
                 new String[]{identifierId + ""});
@@ -591,7 +594,7 @@ public class LegalAidServiceProviderTableNew {
         String line=cursor.getString(29);
         String avenue=cursor.getString(30);
         String police_station=cursor.getString(31);
-
+        String rating=cursor.getString(32);
 
         return new LegalAidServiceProviderItemNew(_identifierId, post_office, _legalaidSubCategoryId,
                 _categoryId, _legalaidNameEng, _legalaidBan, _contactPersonDesignation, _contactNo, _emailAddress, _websiteLink,
@@ -608,7 +611,7 @@ public class LegalAidServiceProviderTableNew {
                 house_no,
                 line,
                 avenue,
-                police_station
+                police_station,rating
                 );
 
     }

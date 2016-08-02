@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ import java.util.Date;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
@@ -221,29 +219,19 @@ setMapView(mapView);
             mapViewController.setCenter(AppConstants.PARIS1);
         }
 
-        RatingTable ratingTable=new RatingTable(MapFragmentOSM.this.getActivity());
-        rating =  ratingTable.getAllCategories();
+
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
                     for (EducationNewItem et : educationServiceProvider) {
-                        ratingavg=null;
+
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
+                                ratingavg=et.getRating();
 
 
-                        int check= et.getEduId();
-                        for(int l=0;l<rating.size();l++)
-                        {
-                            if(rating.get(l).getId()==check)
-                            {
-                                ratingavg=rating.get(l).getRatingvalue();
-                            }
-                        }
-
-
-                        if(ratingavg==null)
+                        if(ratingavg.equals("null"))
                         {
                             ratingavg="পাওয়া যায় নি";
 
@@ -256,21 +244,16 @@ setMapView(mapView);
                 break;
             case AppConstants.HEALTH:
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
-                    ratingavg=null;
+
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getCategory();
                     //Log.d("subcategotyId_Legal","=======");
-                    int check= Integer.parseInt(et.getId());
-                    for(int l=0;l<rating.size();l++)
-                    {
-                        if(rating.get(l).getId()==check)
-                        {
-                            ratingavg=rating.get(l).getRatingvalue();
-                        }
-                    }
+
+                    ratingavg=et.getRating();
 
 
-                    if(ratingavg==null)
+
+                    if(ratingavg.equals("null"))
                     {
                         ratingavg="পাওয়া যায় নি";
 
@@ -287,17 +270,10 @@ setMapView(mapView);
                      String subcategotyId = et.getCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
-                    int check= Integer.parseInt(et.getNodeId());
-                    for(int l=0;l<rating.size();l++)
-                    {
-                        if(rating.get(l).getId()==check)
-                        {
-                            ratingavg=rating.get(l).getRatingvalue();
-                        }
-                    }
+                    ratingavg=et.getRating();
 
 
-                    if(ratingavg==null)
+                    if(ratingavg.equals("null"))
                     {
                         ratingavg="পাওয়া যায় নি";
 
@@ -309,22 +285,14 @@ setMapView(mapView);
             case AppConstants.GOVERNMENT:
                 if (governmentNewItems != null) {
                     for (GovernmentNewItem et : governmentNewItems) {
-                        ratingavg=null;
+
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
                         longDouble = Double.parseDouble(et.getLon());
-                       int check= et.getFinId();
-                        for(int l=0;l<rating.size();l++)
-                        {
-                            if(rating.get(l).getId()==check)
-                            {
-                                ratingavg=rating.get(l).getRatingvalue();
-                            }
-                        }
+                        ratingavg=et.getRating();
 
-
-                        if(ratingavg==null)
+                        if(ratingavg.equals("null"))
                         {
                             ratingavg="পাওয়া যায় নি";
 
@@ -337,23 +305,16 @@ setMapView(mapView);
                 break;
             case AppConstants.LEGAL:
                 for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
-                    ratingavg=null;
+
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getCategoryId();
 
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
-                    int check= Integer.parseInt(et.getIdentifierId());
-                    for(int l=0;l<rating.size();l++)
-                    {
-                        if(rating.get(l).getId()==check)
-                        {
-                            ratingavg=rating.get(l).getRatingvalue();
-                        }
-                    }
+                    ratingavg=et.getRating();
 
 
-                    if(ratingavg==null)
+                    if(ratingavg.equals("null"))
                     {
                         ratingavg="পাওয়া যায় নি";
 
@@ -364,22 +325,14 @@ setMapView(mapView);
                 break;
             case AppConstants.FINANCIAL:
                 for (FinancialNewItem et : financialServiceProvider) {
-                    ratingavg=null;
+
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     subcategotyId2 = et.getRefnumm();
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
-                    int check= et.getFinId();
-                    for(int l=0;l<rating.size();l++)
-                    {
-                        if(rating.get(l).getId()==check)
-                        {
-                            ratingavg=rating.get(l).getRatingvalue();
-                        }
-                    }
+                    ratingavg=et.getRating();
 
-
-                    if(ratingavg==null)
+                    if(ratingavg.equals("null"))
                     {
                         ratingavg="পাওয়া যায় নি";
 
