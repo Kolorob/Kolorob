@@ -1394,6 +1394,8 @@ public class OpeningActivity extends Activity {
             HealthServiceProviderTableNew healthServiceProviderTableNew = new HealthServiceProviderTableNew(OpeningActivity.this);
             HealthDatSize = allData.length();
 
+            Log.d("HealthData","********"+HealthDatSize);
+
             for (int i = 0; i < HealthDatSize; i++) {
                 try {
                     JSONObject jsonObject = allData.getJSONObject(i);

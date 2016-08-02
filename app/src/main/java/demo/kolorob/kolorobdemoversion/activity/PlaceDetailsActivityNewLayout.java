@@ -194,6 +194,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     public static int currentCategoryID,currentCategoryIDconverted;
     private  ViewGroup.LayoutParams kk;
+//    Vector<Group> education_groups = new Vector<Group>();
+//    Vector<Group> health_group = new Vector<Group>();
+//    Vector<Group> entertainment_group = new Vector<Group>();
+//    Vector<Group> govt_group = new Vector<Group>();
+//    Vector<Group> financial_group = new Vector<Group>();
+//    Vector<Group>  = new Vector<Group>();
     Vector<Group> groups = new Vector<Group>();
     TextView header;
     private String placeChoice;
@@ -203,7 +209,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private RelativeLayout mapholderr;
     ArrayList<CategoryItem> categoryList;
     ArrayList<CategoryItem> categoryList2=new ArrayList<>();
-    Boolean SearchClicked=false,MapClicked=false,ListClicked=false,CompareClicked=false;
+    Boolean SearchClicked=false,MapClicked=true,ListClicked=false,CompareClicked=false;
     private Context con;
     public RelativeLayout getRlSubCatHolder() {
         return rlSubCatHolder;
@@ -1832,9 +1838,11 @@ toolbar.setVisibility(View.VISIBLE);
                 llCatListHolder.getChildAt(6).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chakri_bakri));
 */
 
+                Log.d("Fragment","@@@@@@"+SearchClicked);
+                Log.d("MapClicked","@@@@@@"+MapClicked);
+                Log.d("ListClicked","@@@@@@"+ListClicked);
 
                 //
-
                 /*code for category*/
                 /*following code will be different for each category*/
                 /*category id 1 means education.
@@ -1858,34 +1866,27 @@ toolbar.setVisibility(View.VISIBLE);
                         if(ListClicked.equals(true))
                         explist.setVisibility(View.VISIBLE);
 
-                        if(showList==1) {
-/*
-                            explist.setVisibility(View.VISIBLE);
-                            explist.setAnimation(slideOutFromLeftAnim());
-                            llSubCatListHolder.setVisibility(View.GONE);
-                            subCatItemList.setVisibility(View.VISIBLE);
-*/
-
-                        }
-                        else {
-
                             llSubCatListHolder.setVisibility(View.GONE);
 
-                            ArrayList<EducationNewItem> educationServiceProvider;
-                            educationServiceProvider = constructEducationListItem();
-                            ivIcon.setImageResource(R.drawable.education_selected);
-                            callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
+                            if(MapClicked)
+                            {
+                                ArrayList<EducationNewItem> educationServiceProvider;
+                                educationServiceProvider = constructEducationListItem();
+                                mapcalledstatus=true;
+                                callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
+                            }
+
+                        ivIcon.setImageResource(R.drawable.education_selected);
 
 
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
                         }
 
-
-                        
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.education_selected);
-                        mapcalledstatus=true;
                         llSubCatListHolder.setVisibility(View.GONE);
 
                         break;
@@ -1897,14 +1898,26 @@ toolbar.setVisibility(View.VISIBLE);
                         setFilcatid(1);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
-                        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem(1);
-                        callMapFragmentWithHealthInfo(ci.getCatName(), 2, healthServiceProvider);
-                        mapcalledstatus=true;
+
+                        if(MapClicked)
+                        {
+                            ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+                            healthServiceProvider = constructHealthListItem(1);
+                            mapcalledstatus=true;
+
+                            callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
+                        }
+
+
+
                             llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -1921,14 +1934,23 @@ toolbar.setVisibility(View.VISIBLE);
                         setFilcatid(14);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
+
                         ivIcon.setImageResource(0);
-                        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
-                        entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
+                        if(MapClicked)
+                        {
+                            ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
+                            entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
+                            mapcalledstatus=true;
+                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
+                        }
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
-                        callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
-                        mapcalledstatus=true;
+
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
@@ -1958,12 +1980,23 @@ toolbar.setVisibility(View.VISIBLE);
                         setFilcatid(33);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.government_selected);
-                        mapcalledstatus=true;
-                        llSubCatListHolder.setVisibility(View.GONE);
+
+                        if(MapClicked)
+                        {
+                            mapcalledstatus=true;
+                            ArrayList<GovernmentNewItem> governmentNewItems;
+                            governmentNewItems = constructgovListItem();
+                            callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
+                        }
+                            llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
@@ -1971,9 +2004,7 @@ toolbar.setVisibility(View.VISIBLE);
 
 
 
-                        ArrayList<GovernmentNewItem> governmentNewItems;
-                        governmentNewItems = constructgovListItem();
-                        callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
+
 
 
 
@@ -1990,16 +2021,30 @@ toolbar.setVisibility(View.VISIBLE);
                         setFilcatid(29);
                         catstatus=true;
                         calladapter(catstatus);
-                        populatefilterwords(getFilcatid());
-                        filterholder.setVisibility(View.VISIBLE);
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.legal_selected);
-                        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
-                        mapcalledstatus=true;
-                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                        callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
+
+                        if(MapClicked)
+                        {
+
+                            ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+                            mapcalledstatus=true;
+                            legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                            callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
+                        }
+
+
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
+
+
 
 
 
@@ -2021,14 +2066,23 @@ toolbar.setVisibility(View.VISIBLE);
                         setFilcatid(11);
                         catstatus=true;
                         calladapter(catstatus);
-                        filterholder.setVisibility(View.VISIBLE);
-                        populatefilterwords(getFilcatid());
+                        if(SearchClicked)
+                        {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
-                        ArrayList<FinancialNewItem> financialNewItems;
-                        financialNewItems = constructfinancialListItem();
-                        callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
-                        mapcalledstatus=true;
+
+                        if(MapClicked)
+                        {
+                            ArrayList<FinancialNewItem> financialNewItems;
+                            financialNewItems = constructfinancialListItem();
+                            callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
+                            mapcalledstatus=true;
+                        }
+
+
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
@@ -2188,6 +2242,8 @@ toolbar.setVisibility(View.VISIBLE);
 
     private void categoryListBuildUp(int currentCategoryID)
     {
+
+
         createData(currentCategoryID,"",getLocationNameEng());
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
@@ -2640,8 +2696,7 @@ toolbar.setVisibility(View.VISIBLE);
 
     {
 
-        Log.d("cat_id","####"+cat_id);
-        Log.d("header","####"+header);
+
         ArrayList<EducationNewItem> educationNewItems;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
         educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
@@ -2650,11 +2705,13 @@ toolbar.setVisibility(View.VISIBLE);
 
     private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
     {
+
+
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setCategoryId(cat_id);
-
+//
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEducationServiceProvider(educationServiceProviderItems);
         FragmentManager fragmentManager = getFragmentManager();
@@ -2670,8 +2727,8 @@ toolbar.setVisibility(View.VISIBLE);
         //   mapFragment.setMapIndicatorText(item_name);
         mapFragment.setLocationNameId(locationNameId);
         if (mapcalledstatus == true) {
-          if(educlicked){
-              //educlicked=false;
+          if(currentCategoryID==1){
+              educlicked=false;
               mapFragment.setCategoryId(1);
               ArrayList<EducationNewItem> educationServiceProviderItems;
               educationServiceProviderItems = constructEducationListItem();
@@ -2681,8 +2738,8 @@ toolbar.setVisibility(View.VISIBLE);
               fragmentTransaction.replace(R.id.map_fragment,mapFragment);
             fragmentTransaction.commit();
           }
-            if(helclicked){
-                //helclicked=false;
+           else if(currentCategoryID==2){
+                helclicked=false;
                 mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
                 healthServiceProviderItems = constructHealthListItem(2);
@@ -2692,8 +2749,8 @@ toolbar.setVisibility(View.VISIBLE);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-            if(entclicked){
-              //  entclicked=false;
+          else if(currentCategoryID==3){
+                entclicked=false;
                 mapFragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
@@ -2703,8 +2760,8 @@ toolbar.setVisibility(View.VISIBLE);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-            if(legclicked){
-               // legclicked=false;
+          else if(currentCategoryID==5){
+                legclicked=false;
                 mapFragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
@@ -2714,8 +2771,8 @@ toolbar.setVisibility(View.VISIBLE);
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
-            if(finclicked){
-               // finclicked=false;
+          else if(currentCategoryID==6){
+                finclicked=false;
                 mapFragment.setCategoryId(6);
                 ArrayList<FinancialNewItem> financialNewItems;
                 financialNewItems = constructfinancialListItem();
@@ -2748,7 +2805,7 @@ toolbar.setVisibility(View.VISIBLE);
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
+        mapFragment.setCategoryId(2);
 
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setHealthServiceProvider(healthServiceProviderItems);
@@ -2760,14 +2817,12 @@ toolbar.setVisibility(View.VISIBLE);
     private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
     {
 
-       // Log.d("cat_id","####"+cat_id);
-       // Log.d("header","####"+header);
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider1;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         int refId=subCategoryTableNew.getSubcategoryId(header);
-       // Log.d("refId_newer","####"+refId);
+
         String refIds=String.valueOf(refId);
 
         healthServiceProvider1 = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
@@ -2790,7 +2845,7 @@ toolbar.setVisibility(View.VISIBLE);
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
         // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
+        mapFragment.setCategoryId(3);
 
         mapFragment.setLocationNameId(locationNameId);
         mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
@@ -2809,7 +2864,7 @@ toolbar.setVisibility(View.VISIBLE);
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         int refId=subCategoryTableNew.getSubcategoryId(header);
         String refIds=String.valueOf(refId);
-        Log.d("SubcatHeader","@@@@@@"+refId);
+
         entertainmentServiceProvider1 = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
 
         entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);

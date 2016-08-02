@@ -283,7 +283,6 @@ setMapView(mapView);
                 break;
             case AppConstants.ENTERTAINMENT:
                 for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
-                    ratingavg=null;
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                      String subcategotyId = et.getCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
@@ -519,7 +518,6 @@ setMapView(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-        Log.d("HealthSub","======="+String.valueOf(subcategotyId2));
         String subcategory;
         subcategory=subcategotyId2.substring(1);
         String CurrentString = subcategory;
@@ -527,7 +525,6 @@ setMapView(mapView);
 
 
 
-     //   Log.d("node","========="+node);
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
@@ -559,7 +556,6 @@ setMapView(mapView);
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        Log.d("LegSub","======="+String.valueOf(subcategotyId2));
 
         String subcategory;
         subcategory=subcategotyId2.substring(1);
@@ -588,7 +584,6 @@ setMapView(mapView);
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        Log.d("subcategotyId23","******" +subcategotyId23);
         String subcategory;
         subcategory=subcategotyId23.substring(1);
         String CurrentString = subcategory;
