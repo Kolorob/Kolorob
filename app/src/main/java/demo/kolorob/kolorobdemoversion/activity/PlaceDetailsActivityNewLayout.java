@@ -966,20 +966,23 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
 
-                    if(ListClicked.equals(true))
+                    if(ListClicked.equals(true)||SearchClicked.equals(true))
                     {
 
-                        svsholder.setVisibility(View.VISIBLE);
+                        svsholder.setVisibility(View.GONE);
+                        svs.setVisibility(View.GONE);
                     }
                     sv.setVisibility(View.VISIBLE);
-                    svsholder.setVisibility(View.GONE);
                     svholder.setVisibility(View.VISIBLE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
+                        if (!ListClicked.equals(true)&&!SearchClicked.equals(true))
+                        {
                         svsholder.setVisibility(View.VISIBLE);
                         svs.setVisibility(View.VISIBLE);
                         llSubCatListHolder.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
                 else {
@@ -1698,13 +1701,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         if(NavigationCalled)
         {
-            NavigationCalled=false;
             toggleButton.setVisibility(View.VISIBLE);
             toggleButton.setChecked(false);
 
             if (currentCategoryID==1)
             {
-                NavigationCalledOnce=false;
+                NavigationCalledOnce=true;
                 String node=getNodefromback();
                 EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this.con);
                 nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
@@ -3376,10 +3378,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
 
 
-       else if (NavigationCalledOnce==true)
-        {
-            callMapFragment(locationNameId);
-        }
+
 
         if (valuecheck!=false & NavigationCalledOnce==false)
         {
@@ -3395,7 +3394,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             implementRouteDrawingFragmentOSM();
         }
 
-
+        else if (NavigationCalledOnce==true)
+        {
+            callMapFragment(locationNameId);
+        }
         else {
             Intent intent;
             intent = getIntent();
