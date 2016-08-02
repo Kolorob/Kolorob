@@ -618,7 +618,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //            return false;
 //
 //        }
-    
+
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
             String timeInBengali = "";
