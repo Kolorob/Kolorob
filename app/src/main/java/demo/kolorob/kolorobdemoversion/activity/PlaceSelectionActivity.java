@@ -145,14 +145,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         String app_ver = "";
         NotificationManager manager;
 
-//        Log.e("heightPixels", String.valueOf(height));
-//        Log.e("widthPixels", String.valueOf(width));
-//        Log.e("density", String.valueOf(metrics.density));
-//        Log.e("densityDpi", String.valueOf(metrics.densityDpi));
-//        Log.e("scaledDensity", String.valueOf(metrics.scaledDensity));
-//        Log.e("xdpi", String.valueOf(metrics.xdpi));
-//        Log.e("ydpi", String.valueOf(metrics.ydpi));
-//        Log.e("rel img width", String.valueOf(relativeWidthOfImage));
+
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         FrameLayout holder = (FrameLayout) findViewById(R.id.holder);
@@ -175,15 +168,14 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 1);
                     startActivity(intent);
-                    t = Toast.makeText(getApplicationContext(), "BAUNIABHAD!!!", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "BAUNIABHAD!", Toast.LENGTH_SHORT);
                     anyHit = true;
                 } else if (mirpur11Hit) {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 2);
                     startActivity(intent);
-                    t = Toast.makeText(getApplicationContext(), "PARIS ROAD!!!", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "PARIS ROAD!", Toast.LENGTH_SHORT);
                     anyHit = true;
-
 
                 }
                 if (anyHit)
@@ -233,32 +225,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
 
-
-
-//        ImageButton img = new ImageButton(this);
-//        ImageButton img2 = new ImageButton(this);
-//        img.setOnClickListener(new View.OnClickListener()
-//        {
-//            public void onClick(View v)
-//            {
-//                if (t != null)
-//                    t.cancel();
-//                t = Toast.makeText(getApplicationContext(), "marker 1 clicked", Toast.LENGTH_SHORT);
-//                t.show();
-//            }
-//        });
-//
-//        img2.setOnClickListener(new View.OnClickListener()
-//        {
-//            public void onClick(View v)
-//            {
-//                if (t != null)
-//                    t.cancel();
-//                t = Toast.makeText(getApplicationContext(), "marker 2 clicked", Toast.LENGTH_SHORT);
-//                t.show();
-//            }
-//        });
-
         try {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -268,77 +234,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         }
 
         checkVersion(Double.parseDouble(app_ver));
-//
-//        img.setImageResource(R.drawable.place_marker);
-//        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//        img2.setImageResource(R.drawable.place_marker);
-//        img2.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        params.width = relativeWidthOfImage;
-//        params.height = relativeWidthOfImage;
-//        params.leftMargin = (int) ((int) width * 0.7);
-//        TypedValue typedValue = new TypedValue();
-//        getResources().getValue(R.dimen.my_value, typedValue, true);
-//        float myFloatValue = typedValue.getFloat();
-//        params.topMargin  = (int) (height/myFloatValue);
-//        img.setLayoutParams(params);
-//
-//        FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        params2.width = relativeWidthOfImage;
-//        params2.height = relativeWidthOfImage;
-//        float myFloatValue2= (float) (myFloatValue - 0.2);
-//        params2.leftMargin = (int) ((int) width * 0.45);
-//        params2.topMargin  = (int) (height / myFloatValue2);
-//        img2.setLayoutParams(params2);
-//
-//
-//        holder.addView(img, params);
-//        holder.addView(img2, params2);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-
-//    public void addListenerOnRatingBar() {
-//
-//        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-//      //  txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
-//
-//        //if rating is changed,
-//        //display the current rating value in the result (textview) automatically
-//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            public void onRatingChanged(RatingBar ratingBar, float rating,
-//                                        boolean fromUser) {
-//
-//                txtRatingValue.setText(String.valueOf(rating));
-//
-//            }
-//        });
-//    /}
-//
-//    public void addListenerOnButton() {
-//
-//        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-//      //  btnSubmit = (Button) findViewById(R.id.btnSubmit);
-//
-//        //if click on me, then display the current rating value.
-//        btnSubmit.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-////                Toast.makeText(PlaceSelectionActivity.this,
-////                        String.valueOf(ratingBar.getRating()),
-////                        Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//        });
-//
-//    }
 
 
     public void checkVersion(final double current_version) {
