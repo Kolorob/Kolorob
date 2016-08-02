@@ -409,7 +409,7 @@ public class DetailsLayoutEducation extends Activity {
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
-                    editor.putString("nValue", node);
+
                     editor.commit();
 
 
