@@ -1696,9 +1696,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             return;
         }
         toolbar.setVisibility(View.VISIBLE);
+        toggleButton.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
 
-        if(NavigationCalled)
+      /*  if(NavigationCalled)
         {
             toggleButton.setVisibility(View.VISIBLE);
             toggleButton.setChecked(false);
@@ -1711,17 +1712,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
                 Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsLayoutEducation.class);
                 iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
-                this.startActivity(iient);*/
+                this.startActivity(iient);
 
             }
 
         }
+
         else if (NavigationCalled==false)
         {
             callMapFragment(locationNameId);
         }
-
-
+*/
 
         new Handler().postDelayed(new Runnable() {
 

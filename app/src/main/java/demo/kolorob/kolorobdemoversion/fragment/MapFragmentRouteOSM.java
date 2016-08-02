@@ -147,7 +147,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         double latDouble, longDouble;
         int i = 0;
 
-        setContentView(R.layout.fragment_map);
+        setContentView(R.layout.fragment_map1);
         super.onCreate(savedInstanceState);
 
 
