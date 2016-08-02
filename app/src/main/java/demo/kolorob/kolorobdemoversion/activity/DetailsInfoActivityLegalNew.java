@@ -265,7 +265,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(Integer.valueOf(legalAidServiceProviderItemNew.getIdentifierId()));
 
 
-        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value);
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
 
         if(!leagalAidDetailsItems.equals(""))

@@ -375,7 +375,7 @@ public class DetailsLayoutEducation extends Activity {
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
 
-        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value);
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override

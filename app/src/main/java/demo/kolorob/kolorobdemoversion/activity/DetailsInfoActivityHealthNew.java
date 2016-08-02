@@ -428,7 +428,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         });
 
 
-        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value);
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override

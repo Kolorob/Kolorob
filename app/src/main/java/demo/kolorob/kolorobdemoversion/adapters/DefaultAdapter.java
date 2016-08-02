@@ -20,22 +20,24 @@ public class DefaultAdapter extends BaseAdapter
     String key[];
     String value[];
     String p="";
+    int increment;
 
 
 
 
-    public DefaultAdapter(Activity context, String[] key,String[] value) {
+    public DefaultAdapter(Activity context, String[] key,String[] value,int increment) {
         super();
         this.context = context;
         this.key = key;
         this.value = value;
+        this.increment=increment;
 
 
     }
 
     public int getCount() {
         // TODO Auto-generated method stub
-        return key.length;
+        return increment;
     }
 
     public Object getItem(int position) {
