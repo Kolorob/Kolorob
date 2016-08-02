@@ -19,6 +19,7 @@ public class DefaultAdapter extends BaseAdapter
     Activity context;
     String key[];
     String value[];
+    String p="";
 
 
 
@@ -75,16 +76,17 @@ public class DefaultAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        String p= value[position];
+         p= key[position];
 
         Log.d("Postion St","$$$$$$$"+p);
 
-        if(p.equalsIgnoreCase("null"))
+        if( p == null )
         {
             holder.key.setText("");
             holder.value.setText("");
         }
-        else {
+        else
+        {
             holder.key.setText(key[position] + ":");
             holder.value.setText(value[position]);
         }
