@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -46,6 +47,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
@@ -79,11 +81,14 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
+    int increment=0;
     TextView ups_text,headerx;
     ListView courseListView,listView;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Context con;
+    String[] key;
+    String[] value;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
     ArrayList<EntertainmentServiceProviderItemNew>entertainmentServiceProviderItemNewsx;
@@ -103,6 +108,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     EditText feedback_comment;
     Float rating;
     RatingBar ratingBar;
+    ListView alldata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,10 +153,14 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
-        detailsEntertainment=(TextView)findViewById(R.id.detailsEntertainment);
-        other_detailsEnt=(TextView)findViewById(R.id.other_detailsEnt);
-        headerx=(TextView)findViewById(R.id.headerx);
 
+        headerx=(TextView)findViewById(R.id.headerx);
+        alldata=(ListView)findViewById(R.id.allData);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -263,7 +273,12 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
         entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
         result_concate ="";
-        if(!entertainmentTypeItems.equals("")) {
+
+        key = new String[25];
+
+        value = new String[25];
+
+
          //   other_detailsEnt.setVisibility(View.VISIBLE);
             for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
                 CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
@@ -272,8 +287,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                 CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
-            }
+
         }
+
 
         CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
         CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
@@ -295,10 +311,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
          ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
 
-        detailsEntertainment.setText(result_concate);
+       // detailsEntertainment.setText(result_concate);
 
 
-
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value);
+        alldata.setAdapter(defaultAdapter);
 
 
 
@@ -951,14 +968,21 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     private void CheckConcate(String value1, String value2) {
 
 
-    if (!value2.equals("null") && !value2.equals("")) {
 
-        String value = "      " + value1 + ":  " + value2;
-        result_concate = result_concate + value + "\n";
-    }
+
+
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
+
+        }
 
 
 }
+
+
+
 
 
     private boolean checkPermission() {

@@ -75,6 +75,36 @@ public class DefaultAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
+        String p= value[position];
+
+        Log.d("Postion St","$$$$$$$"+p);
+
+        if(p.equalsIgnoreCase("null"))
+        {
+            holder.key.setText("");
+            holder.value.setText("");
+        }
+        else {
+            holder.key.setText(key[position] + ":");
+            holder.value.setText(value[position]);
+        }
+
+
+
+
+//            }
+//        else
+//            {
+//
+//            }
+
+
+//        }
+//        catch (Exception e)
+//        {
+//
+//        }
+
 
 
 

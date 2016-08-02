@@ -251,33 +251,33 @@
             android:background="@color/white"
             >
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
 
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content">
-                    <TextView
+
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                        <!--android:text="Large Text"-->
+                        <!--android:visibility="gone"-->
+                        <!--android:id="@+id/other_detailsEnt" />-->
+
+
+                    <ListView
                         android:layout_width="wrap_content"
+                        android:gravity="left"
+
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/other_detailsEnt" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:id="@+id/detailsEntertainment" />
+                        android:id="@+id/allData" />
 
 
                 </LinearLayout>
-            </ScrollView>
 
 
 
