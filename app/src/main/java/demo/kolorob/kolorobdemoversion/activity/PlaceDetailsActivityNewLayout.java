@@ -1840,9 +1840,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 llCatListHolder.getChildAt(6).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chakri_bakri));
 */
 
-                Log.d("Fragment","@@@@@@"+SearchClicked);
-                Log.d("MapClicked","@@@@@@"+MapClicked);
-                Log.d("ListClicked","@@@@@@"+ListClicked);
+
 
                 //
                 /*code for category*/
@@ -1870,13 +1868,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         llSubCatListHolder.setVisibility(View.GONE);
 
-                        if(MapClicked)
-                        {
+
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             mapcalledstatus=true;
                             callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
-                        }
+
 
                         ivIcon.setImageResource(R.drawable.education_selected);
 
@@ -1909,14 +1906,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.health_selected);
 
-                        if(MapClicked)
-                        {
+
                             ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
                             healthServiceProvider = constructHealthListItem(1);
                             mapcalledstatus=true;
 
                             callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
-                        }
+
 
 
 
@@ -1944,13 +1940,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
                         ivIcon.setImageResource(0);
-                        if(MapClicked)
-                        {
+
                             ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
                             entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                             mapcalledstatus=true;
                             callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
-                        }
+
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
 
                         if(ListClicked.equals(true))
@@ -1991,13 +1986,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.government_selected);
 
-                        if(MapClicked)
-                        {
+
                             mapcalledstatus=true;
                             ArrayList<GovernmentNewItem> governmentNewItems;
                             governmentNewItems = constructgovListItem();
                             callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
-                        }
+
                         llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
@@ -2033,14 +2027,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.legal_selected);
 
-                        if(MapClicked)
-                        {
+
 
                             ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
                             mapcalledstatus=true;
                             legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                             callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
-                        }
+
 
 
                         if(ListClicked.equals(true))
@@ -2076,13 +2069,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.finance_selected);
 
-                        if(MapClicked)
-                        {
+
                             ArrayList<FinancialNewItem> financialNewItems;
                             financialNewItems = constructfinancialListItem();
                             callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
                             mapcalledstatus=true;
-                        }
+                        
 
 
                         if(ListClicked.equals(true))
