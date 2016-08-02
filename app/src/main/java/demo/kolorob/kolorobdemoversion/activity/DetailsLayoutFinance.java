@@ -42,6 +42,7 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -325,7 +326,7 @@ EditText feedback_comment;
                     }
 
 
-                    finish();
+                   // finish();
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
@@ -349,6 +350,9 @@ EditText feedback_comment;
                     alertDialog.show();
 
                 }
+
+                Intent intentJ = new Intent(DetailsLayoutFinance.this,MapFragmentRouteOSM.class);
+                startActivity(intentJ);
             }
         });
     }
