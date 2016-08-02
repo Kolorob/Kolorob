@@ -68,7 +68,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
-    int increment=0;
+
     TextView ups_text,headerx;
     ListView courseListView,listView;
     String username="kolorobapp";
@@ -76,6 +76,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     Context con;
     String[] key;
     String[] value;
+    int increment=0;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
     ArrayList<EntertainmentServiceProviderItemNew>entertainmentServiceProviderItemNewsx;
@@ -301,7 +302,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
        // detailsEntertainment.setText(result_concate);
 
 
-        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value);
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
 
 

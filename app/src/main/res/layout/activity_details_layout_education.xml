@@ -246,32 +246,31 @@
             android:background="@color/white"
             android:layout_marginBottom="20dp">
 
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="top">
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="Large Text"-->
+                <!--android:visibility="gone"-->
+                <!--android:id="@+id/other_detailsEnt" />-->
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:gravity="left"
+
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_gravity="top"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:gravity="top"
-                        android:id="@+id/serviceDetails"
-                        android:layout_gravity="top" />
-                </RelativeLayout>
+                    android:id="@+id/allData" />
 
 
-
-
-            </ScrollView>
+            </LinearLayout>
 
 
 

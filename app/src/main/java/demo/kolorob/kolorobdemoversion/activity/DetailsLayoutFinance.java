@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,6 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
@@ -66,6 +68,10 @@ public class DetailsLayoutFinance extends Activity {
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
     Context con;
+    String[] key;
+    String[] value;
+    int increment=0;
+    ListView alldata;
     FinancialNewItem financialNewItem;
 EditText feedback_comment;
     ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
@@ -130,7 +136,7 @@ EditText feedback_comment;
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText = (TextView) findViewById(R.id.ratingText);
-        serviceDetails = (TextView) findViewById(R.id.serviceDetails);
+
         close_button = (ImageView) findViewById(R.id.close_buttonc);
 
 
@@ -144,7 +150,15 @@ EditText feedback_comment;
         feedback = (ImageView) findViewById(R.id.feedback);
 
 
+        key = new String[60];
 
+        value = new String[60];
+        alldata=(ListView)findViewById(R.id.allData);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
 
 
         CheckConcate("পরিচিত স্থান :", financialNewItem.getLandmark());
@@ -186,7 +200,7 @@ EditText feedback_comment;
         }
 
 
-        serviceDetails.setText(result_concate);
+
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,7 +278,8 @@ EditText feedback_comment;
         feedbacks.width = width / 6;
         feedback.setLayoutParams(feedbacks);
       //  feedbacks.setMargins(0, 0, width / 30, 0);
-
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
+        alldata.setAdapter(defaultAdapter);
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -671,10 +686,13 @@ EditText feedback_comment;
     private void CheckConcate(String value1,String value2){
 
 
-        if(!value2.equals("null")&&!value2.equals("")) {
 
-            String value ="      "+ value1 +"  "+ value2;
-            result_concate = result_concate + value + "\n";
+
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
+
         }
 
 

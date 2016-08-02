@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
@@ -70,6 +72,10 @@ public class DetailsInfoActivityLegalNew extends Activity {
     ListView courseListView,listView;
     Context con;
     Float rating;
+    String[] key;
+    String[] value;
+    int increment=0;
+    ListView alldata;
     RatingBar ratingBar;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
@@ -135,10 +141,17 @@ public class DetailsInfoActivityLegalNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
-        common_details=(TextView)findViewById(R.id.common_details);
-        other_details=(TextView)findViewById(R.id.other_details);
-        header=(TextView)findViewById(R.id.header);
 
+        header=(TextView)findViewById(R.id.header);
+        key = new String[25];
+
+        value = new String[25];
+        alldata=(ListView)findViewById(R.id.allData);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -245,15 +258,19 @@ public class DetailsInfoActivityLegalNew extends Activity {
         CheckConcate("যার মাধ্যমে রেজিস্ট্রেশন করা হয়েছে", legalAidServiceProviderItemNew.getRegisteredWith());
         ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
 
-        common_details.setText(result_concate);
+
         result_concate="";
 
         LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(Integer.valueOf(legalAidServiceProviderItemNew.getIdentifierId()));
 
+
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
+        alldata.setAdapter(defaultAdapter);
+
         if(!leagalAidDetailsItems.equals(""))
         {
-            other_details.setVisibility(View.VISIBLE);
+
             for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
             {
                 CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
@@ -261,7 +278,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
                 CheckConcate("সেবার খরচ", leagalAidDetailsItem.getLagal_cost());
                 CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
             }
-            other_details.setText(result_concate);
+
         }
 
 
@@ -735,10 +752,12 @@ public class DetailsInfoActivityLegalNew extends Activity {
     private void CheckConcate(String value1, String value2) {
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
 
-            String value = "      " + value1 + ":  " + value2;
-            result_concate = result_concate + value + "\n";
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
+
         }
 
 

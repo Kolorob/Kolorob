@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -45,6 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
@@ -73,7 +75,10 @@ public class DetailsLayoutEducation extends Activity {
     TextView address_text, phone_text, email_text;
     int width, height;
     TextView ups_text;
-
+    String[] key;
+    String[] value;
+    int increment=0;
+    ListView alldata;
     ListView courseListView, listView;
     Context con;
     EducationNewItem educationNewItem;
@@ -89,7 +94,7 @@ public class DetailsLayoutEducation extends Activity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText;
-    private TextView serviceDetails, result, training, tuition;
+    private TextView  result, training, tuition;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1, rb2, rb3;
@@ -145,10 +150,18 @@ public class DetailsLayoutEducation extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText = (TextView) findViewById(R.id.ratingText);
-        serviceDetails = (TextView) findViewById(R.id.serviceDetails);
+
         close_button = (ImageView) findViewById(R.id.close_buttonc);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
+        key = new String[60];
 
+        value = new String[60];
+        alldata=(ListView)findViewById(R.id.allData);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
@@ -262,7 +275,6 @@ public class DetailsLayoutEducation extends Activity {
         }
 
 
-        serviceDetails.setText(result_concate);
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -363,6 +375,8 @@ public class DetailsLayoutEducation extends Activity {
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
 
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
+        alldata.setAdapter(defaultAdapter);
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -802,11 +816,11 @@ public class DetailsLayoutEducation extends Activity {
     private void CheckConcate(String value1,String value2){
 
 
-        if(!value2.equals("null")&&!value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
 
-
-            String value ="      "+ value1 +":  "+ value2;
-            result_concate = result_concate + value + "\n";
         }
 
 

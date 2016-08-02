@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -64,6 +66,10 @@ public class DetailsLayoutGovernment extends Activity {
     EditText feedback_comment;
     ListView courseListView, listView;
     Context con;
+    String[] key;
+    String[] value;
+    int increment=0;
+    ListView alldata;
     GovernmentNewItem governmentNewItem;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
@@ -73,7 +79,7 @@ public class DetailsLayoutGovernment extends Activity {
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     private TextView ratingText;
-    private TextView serviceDetails, result, training, tuition;
+    private TextView result, training, tuition;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1, rb2, rb3;
@@ -121,7 +127,7 @@ public class DetailsLayoutGovernment extends Activity {
         email_text = (TextView) findViewById(R.id.email_text);
 
         ratingText = (TextView) findViewById(R.id.ratingText);
-        serviceDetails = (TextView) findViewById(R.id.serviceDetails);
+
         close_button = (ImageView) findViewById(R.id.close_buttonc);
 
 
@@ -129,7 +135,15 @@ public class DetailsLayoutGovernment extends Activity {
 
         school_logo_default = (ImageView) findViewById(R.id.service_logo);
 
+        key = new String[60];
 
+        value = new String[60];
+        alldata=(ListView)findViewById(R.id.allData);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
@@ -176,7 +190,9 @@ public class DetailsLayoutGovernment extends Activity {
         }
 
 
-        serviceDetails.setText(result_concate);
+
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
+        alldata.setAdapter(defaultAdapter);
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -650,11 +666,12 @@ public class DetailsLayoutGovernment extends Activity {
     private void CheckConcate(String value1,String value2){
 
 
-        if(!value2.equals("null")&&!value2.equals("")) {
 
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
 
-            String value ="      "+ value1 +"  "+ value2;
-            result_concate = result_concate + value + "\n";
         }
 
 

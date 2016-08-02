@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -46,6 +47,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
@@ -74,6 +76,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
     TextView ups_text;
     ListView courseListView, listView;
     Context con;
+    int increment=0;
+    String[] key;
+    String[] value;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Float rating;
@@ -97,6 +102,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     String result_concate = "";
     private CheckBox checkBox;
     EditText feedback_comment;
+    ListView alldata;
     RatingBar ratingBar;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -129,6 +135,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
         }
 
 
+        key = new String[50];
+
+        value = new String[50];
         HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityHealthNew.this);
 
 
@@ -154,10 +163,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText = (TextView) findViewById(R.id.ratingText);
-        serviceDetails = (TextView) findViewById(R.id.serviceDetails);
+
         close_button = (ImageView) findViewById(R.id.close_buttonc);
-        specialist = (TextView) findViewById(R.id.specialist);
-        health_vaccine = (TextView) findViewById(R.id.health_vaccine);
+
 
 
 
@@ -234,7 +242,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
                 CheckConcate("এক মাসের মধ্যে ভিজিট ফি", healthSpecialistItemDetails.getMonth_fee());
                 CheckConcate("রিপোর্ট ফি", healthSpecialistItemDetails.getReport_fee());
 
-                specialist.setText(result_concate);
+
 
             }
 
@@ -255,7 +263,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
             }
 
-            health_vaccine.setText(result_concate);
+
 
         }
 
@@ -301,7 +309,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
             }
         });
 
-        serviceDetails.setText(result_concate);
+
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -376,7 +384,12 @@ public class DetailsInfoActivityHealthNew extends Activity {
 //
 //            }
 //        });
+        alldata=(ListView)findViewById(R.id.allData);
 
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -413,6 +426,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
                 }
             }
         });
+
+
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
+        alldata.setAdapter(defaultAdapter);
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -813,10 +830,12 @@ public class DetailsInfoActivityHealthNew extends Activity {
     private void CheckConcate(String value1, String value2) {
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
 
-            String value = "      " + value1 + ":  " + value2;
-            result_concate = result_concate + value + "\n";
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
+
         }
 
 

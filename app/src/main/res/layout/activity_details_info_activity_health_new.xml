@@ -257,45 +257,30 @@
             android:background="@color/white"
             >
 
-            <ScrollView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="Large Text"-->
+                <!--android:visibility="gone"-->
+                <!--android:id="@+id/other_detailsEnt" />-->
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:gravity="left"
+
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:id="@+id/allData" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:id="@+id/serviceDetails" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/specialist" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/health_vaccine" />
-                </LinearLayout>
-
-
-
-
-            </ScrollView>
+            </LinearLayout>
 
 
 
