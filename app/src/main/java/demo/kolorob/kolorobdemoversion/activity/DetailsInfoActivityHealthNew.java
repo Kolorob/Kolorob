@@ -263,7 +263,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
             }
 
-            health_vaccine.setText(result_concate);
+
 
         }
 
