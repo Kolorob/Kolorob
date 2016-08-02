@@ -159,8 +159,8 @@
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:id="@+id/distance_left"
                                 android:background="@drawable/direction_icon"/>
 
@@ -184,8 +184,8 @@
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:id="@+id/phone_middl"
                                 android:background="@drawable/phone_icon"/>
 
@@ -246,35 +246,31 @@
                 android:layout_marginBottom="20dp"
                 >
 
-                <ScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:id="@+id/scrollView3"
-                    android:layout_centerInParent="true">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
 
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                    <!--android:text="Large Text"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:id="@+id/other_detailsEnt" />-->
+
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:gravity="left"
+
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-
-                        android:layout_gravity="top"
-                        android:orientation="vertical">
+                        android:id="@+id/allData" />
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="Large Text"
-                            android:gravity="top"
-                            android:id="@+id/serviceDetails"
-                            android:layout_gravity="top"
-                            />
-                    </RelativeLayout>
-                </ScrollView>
-
+                </LinearLayout>
 
             </RelativeLayout>
 
