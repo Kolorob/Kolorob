@@ -173,6 +173,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<500)
         ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+        float k=ratingBar.getRating();
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
         setRatingBar();
@@ -484,7 +485,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health", new VolleyApiCallback() {
+        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health?username=" + username + "&password=" + password + " ", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {
