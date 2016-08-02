@@ -94,7 +94,7 @@ public class DetailsLayoutEducation extends Activity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText;
-    private TextView serviceDetails, result, training, tuition;
+    private TextView  result, training, tuition;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1, rb2, rb3;
