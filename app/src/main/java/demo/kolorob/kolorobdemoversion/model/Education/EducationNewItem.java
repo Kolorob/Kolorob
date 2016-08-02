@@ -476,6 +476,14 @@ public class EducationNewItem implements Serializable {
         this.breaktime = breaktime;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     public String getOffday() {
         return offday;
     }
