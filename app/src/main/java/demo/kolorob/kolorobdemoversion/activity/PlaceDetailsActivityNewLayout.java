@@ -3343,12 +3343,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     @Override
     protected void onResume() {
         super.onResume();
-        if(SearchClicked)
-        {
-            searchviewholder.setVisibility(View.GONE);
-            SearchClicked=false;
 
-        }
         toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
@@ -3360,18 +3355,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
             subCatItemList.setAdapter(adapter);
         }
-        SharedPreferences pref = this.getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        String Latitude = pref.getString("Latitude", null);
-        String Longitude = pref.getString("Longitude", null);
-//
 
-        setNodefromback(pref.getString("nValue",null));
-        Boolean valuecheck=pref.getBoolean("Value",false);
-        if (valuecheck==false)
-        {
-            //  map.setVisibility(View.GONE);
-        }
 
 
 
@@ -3380,21 +3364,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
 
-        if (valuecheck!=false & NavigationCalledOnce==false)
-        {
-            spItems.setVisibility(View.GONE);
-            explist.setVisibility(View.GONE);
-            if(!ListClicked.equals(true))
-                map.setVisibility(View.VISIBLE);
-            llCatListHolder.setVisibility(View.GONE);
-            llSubCatListHolder.setVisibility(View.GONE);
-            toggleButton.setVisibility(View.GONE);
-            svsholder.setVisibility(View.GONE);
-            svholder.setVisibility(View.GONE);
-            //implementRouteDrawingFragmentOSM();
-        }
 
-        else if (NavigationCalledOnce==true)
+        if (NavigationCalledOnce==true)
         {
             callMapFragment(locationNameId);
         }
@@ -3416,18 +3387,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     map.setVisibility(View.GONE);
                 }
             }
-            editor.putInt("LocationNameId", locationNameId);
-            editor.commit();
 
-            if (Latitude != null && AppUtils.isNetConnected(getApplicationContext())) {
-                Double Lon = Double.parseDouble(Longitude);
-                Double Lat = Double.parseDouble(Latitude);
 
 
 
             }
         }
-    }
+
 
 
 
