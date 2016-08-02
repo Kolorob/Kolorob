@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +26,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,22 +46,11 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
-import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -402,70 +389,71 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
             }
         });
 
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
-//        distance_left.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
-//
-//
-//                    String lat = educationServiceProviderItem.getLatitude().toString();
-//                    // double latitude = Double.parseDouble(lat);
-//                    String lon = educationServiceProviderItem.getLongitude().toString();
-//                    // double longitude = Double.parseDouble(lon);
-//                    String name= educationServiceProviderItem.getEduNameBan().toString();
-//                    String node=educationServiceProviderItem.getIdentifierId();
-//                    boolean fromornot=true;
-//                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("Latitude", lat);
-//                    editor.putString("Longitude", lon);
-//                    editor.putString("Name", name);
-//                    editor.putBoolean("Value", fromornot);
-//                    editor.putString("nValue", node);
-//                    editor.commit();
-//
-//
-//                    String Longitude = pref.getString("Longitude", null);
-//                    String Latitude = pref.getString("Latitude", null);
-//
-//                    if (Latitude != null && Longitude != null) {
-//                        Double Lon = Double.parseDouble(Longitude);
-//                        Double Lat = Double.parseDouble(Latitude);
-//                        // implementFragment();
-//                        //username and password are present, do your stuff
-//                    }
-//
-//
-//                    finish();
-//
-//                }
-//                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-//
-//                    AppUtils.showSettingsAlert(DetailsInfoActivityEducation.this);
-//
-//                }
-//
-//                else
-//                {
-//
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
-//
-//                }
-//            }
-//        });
-//
-//
-//    }
+
+                    String lat = entertainmentServiceProviderItemNew.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = entertainmentServiceProviderItemNew.getLongitude().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    String name= entertainmentServiceProviderItemNew.getNodeNameBn().toString();
+                    String node=String.valueOf(entertainmentServiceProviderItemNew.getNodeId());
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.putString("nValue", node);
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Longitude", null);
+                    String Latitude = pref.getString("Latitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        // implementFragment();
+                        //username and password are present, do your stuff
+                    }
+
+
+                    // finish();
+
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityEntertainmentNew.this);
+
+                }
+
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
+
+                Intent intentJ = new Intent(DetailsInfoActivityEntertainmentNew.this,MapFragmentRouteOSM.class);
+                startActivity(intentJ);
+            }
+        });
+
+  }
 //
 //    public void verifyRegistration(View v){
 //
@@ -647,7 +635,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //            return false;
 //
 //        }
-    }
+
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
             String timeInBengali = "";

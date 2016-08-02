@@ -48,6 +48,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
@@ -410,7 +411,7 @@ public class DetailsLayoutEducation extends Activity {
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
-                    editor.putString("nValue", node);
+
                     editor.commit();
 
 
@@ -425,7 +426,7 @@ public class DetailsLayoutEducation extends Activity {
                     }
 
 
-                    finish();
+                   // finish();
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
@@ -449,6 +450,9 @@ public class DetailsLayoutEducation extends Activity {
                     alertDialog.show();
 
                 }
+
+                Intent intentJ = new Intent(DetailsLayoutEducation.this,MapFragmentRouteOSM.class);
+                startActivity(intentJ);
             }
         });
     }

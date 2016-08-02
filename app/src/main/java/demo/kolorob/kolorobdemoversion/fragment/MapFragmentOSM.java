@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -222,30 +221,33 @@ setMapView(mapView);
             mapViewController.setCenter(AppConstants.PARIS1);
         }
 
-
-        Log.d("Map Fragment Calling","=======");
         RatingTable ratingTable=new RatingTable(MapFragmentOSM.this.getActivity());
+        rating =  ratingTable.getAllCategories();
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
                     for (EducationNewItem et : educationServiceProvider) {
+                        ratingavg=null;
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
 
-                     ratingavg =  ratingTable.getavg(et.getEduId());
-                     if(ratingavg==null)
-                     {
-                         ratingavg="পাওয়া যায় নি";
 
-                     }
-                        else {
+                        int check= et.getEduId();
+                        for(int l=0;l<rating.size();l++)
+                        {
+                            if(rating.get(l).getId()==check)
+                            {
+                                ratingavg=rating.get(l).getRatingvalue();
+                            }
+                        }
 
 
-                        String ratingdate=ratingTable.getdate(et.getEduId());
-                        String current_date=simpleDateFormat.format(today);
+                        if(ratingavg==null)
+                        {
+                            ratingavg="পাওয়া যায় নি";
 
-                     }
+                        }
                         longDouble = Double.parseDouble(et.getLon());
                       GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
@@ -254,20 +256,23 @@ setMapView(mapView);
                 break;
             case AppConstants.HEALTH:
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
+                    ratingavg=null;
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getCategory();
-                    //
-                    ratingavg =  ratingTable.getavg(Integer.parseInt(et.getId()));
+                    //Log.d("subcategotyId_Legal","=======");
+                    int check= Integer.parseInt(et.getId());
+                    for(int l=0;l<rating.size();l++)
+                    {
+                        if(rating.get(l).getId()==check)
+                        {
+                            ratingavg=rating.get(l).getRatingvalue();
+                        }
+                    }
+
+
                     if(ratingavg==null)
                     {
                         ratingavg="পাওয়া যায় নি";
-
-                    }
-                    else {
-
-
-                        String ratingdate=ratingTable.getdate(Integer.parseInt(et.getId()));
-                        String current_date=simpleDateFormat.format(today);
 
                     }
                     latDouble = Double.parseDouble(et.getLat());
@@ -282,17 +287,19 @@ setMapView(mapView);
                      String subcategotyId = et.getCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
-                    ratingavg =  ratingTable.getavg(Integer.parseInt(et.getNodeId()));
+                    int check= Integer.parseInt(et.getNodeId());
+                    for(int l=0;l<rating.size();l++)
+                    {
+                        if(rating.get(l).getId()==check)
+                        {
+                            ratingavg=rating.get(l).getRatingvalue();
+                        }
+                    }
+
+
                     if(ratingavg==null)
                     {
                         ratingavg="পাওয়া যায় নি";
-
-                    }
-                    else {
-
-
-                        String ratingdate=ratingTable.getdate(Integer.parseInt(et.getNodeId()));
-                        String current_date=simpleDateFormat.format(today);
 
                     }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -302,23 +309,27 @@ setMapView(mapView);
             case AppConstants.GOVERNMENT:
                 if (governmentNewItems != null) {
                     for (GovernmentNewItem et : governmentNewItems) {
+                        ratingavg=null;
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
                         longDouble = Double.parseDouble(et.getLon());
-                        ratingavg =  ratingTable.getavg(et.getFinId());
+                       int check= et.getFinId();
+                        for(int l=0;l<rating.size();l++)
+                        {
+                            if(rating.get(l).getId()==check)
+                            {
+                                ratingavg=rating.get(l).getRatingvalue();
+                            }
+                        }
+
+
                         if(ratingavg==null)
                         {
                             ratingavg="পাওয়া যায় নি";
 
                         }
-                        else {
 
-
-                            String ratingdate=ratingTable.getdate(et.getFinId());
-                            String current_date=simpleDateFormat.format(today);
-
-                        }
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerGov(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
@@ -326,22 +337,25 @@ setMapView(mapView);
                 break;
             case AppConstants.LEGAL:
                 for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
+                    ratingavg=null;
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     String subcategotyId = et.getCategoryId();
 
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
-                    ratingavg =  ratingTable.getavg(Integer.parseInt(et.getIdentifierId()));
+                    int check= Integer.parseInt(et.getIdentifierId());
+                    for(int l=0;l<rating.size();l++)
+                    {
+                        if(rating.get(l).getId()==check)
+                        {
+                            ratingavg=rating.get(l).getRatingvalue();
+                        }
+                    }
+
+
                     if(ratingavg==null)
                     {
                         ratingavg="পাওয়া যায় নি";
-
-                    }
-                    else {
-
-
-                        String ratingdate=ratingTable.getdate(Integer.parseInt(et.getIdentifierId()));
-                        String current_date=simpleDateFormat.format(today);
 
                     }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -350,21 +364,24 @@ setMapView(mapView);
                 break;
             case AppConstants.FINANCIAL:
                 for (FinancialNewItem et : financialServiceProvider) {
+                    ratingavg=null;
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                     subcategotyId2 = et.getRefnumm();
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
-                    ratingavg =  ratingTable.getavg(et.getFinId());
+                    int check= et.getFinId();
+                    for(int l=0;l<rating.size();l++)
+                    {
+                        if(rating.get(l).getId()==check)
+                        {
+                            ratingavg=rating.get(l).getRatingvalue();
+                        }
+                    }
+
+
                     if(ratingavg==null)
                     {
                         ratingavg="পাওয়া যায় নি";
-
-                    }
-                    else {
-
-
-                        String ratingdate=ratingTable.getdate(et.getFinId());
-                        String current_date=simpleDateFormat.format(today);
 
                     }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -389,8 +406,8 @@ setMapView(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);
 
 
-        ImageButton curButton=(ImageButton) rootView.findViewById(R.id.currlocation);
-      /*  curButton.setOnClickListener(new View.OnClickListener() {
+      /*   ImageButton curButton=(ImageButton) rootView.findViewById(R.id.currlocation);
+       curButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {

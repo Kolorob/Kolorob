@@ -210,7 +210,7 @@ public class ServiceListDisplayAdapter extends BaseExpandableListAdapter {
             case AppConstants.GOVERNMENT:
                 final GovernmentNewItem detgov = groups.get(groupPosition).getChildrengov().get(childPosition);
                 text = (TextView) v.findViewById(R.id.textView1);
-                text.setText(detgov.getAddress());
+                text.setText(detgov.getNamebn());
                 linearLayout.setBackgroundResource(R.color.government_color);
                 v.setOnClickListener(new OnClickListener() {
                     @Override

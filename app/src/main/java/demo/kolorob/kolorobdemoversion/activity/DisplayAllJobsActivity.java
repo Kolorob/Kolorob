@@ -170,7 +170,7 @@ public class DisplayAllJobsActivity extends Activity {
         {
 
             tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
-            salary_range[increment]=jobAdvertisementItem.getStart_salary()+" "+jobAdvertisementItem.getEnd_salary();
+            salary_range[increment]=jobAdvertisementItem.getStart_salary()+" - "+jobAdvertisementItem.getEnd_salary();
             remaining_date[increment]= remaining_date(jobAdvertisementItem.getApplication_last_date());
             address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
             contact_number[increment] = jobAdvertisementItem.getMobile1();

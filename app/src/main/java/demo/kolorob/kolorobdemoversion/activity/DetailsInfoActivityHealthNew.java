@@ -5,11 +5,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -36,8 +35,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
@@ -51,6 +48,7 @@ import java.util.Map;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
@@ -58,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
@@ -174,6 +173,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<500)
         ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+        float k=ratingBar.getRating();
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
         setRatingBar();
@@ -413,77 +413,79 @@ public class DetailsInfoActivityHealthNew extends Activity {
                 }
             }
         });
-//        distance_left.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
-//
-//
-//                    String lat = educationServiceProviderItem.getLatitude().toString();
-//                    // double latitude = Double.parseDouble(lat);
-//                    String lon = educationServiceProviderItem.getLongitude().toString();
-//                    // double longitude = Double.parseDouble(lon);
-//                    String name= educationServiceProviderItem.getEduNameBan().toString();
-//                    String node=educationServiceProviderItem.getIdentifierId();
-//                    boolean fromornot=true;
-//                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("Latitude", lat);
-//                    editor.putString("Longitude", lon);
-//                    editor.putString("Name", name);
-//                    editor.putBoolean("Value", fromornot);
-//                    editor.putString("nValue", node);
-//                    editor.commit();
-//
-//
-//                    String Longitude = pref.getString("Longitude", null);
-//                    String Latitude = pref.getString("Latitude", null);
-//
-//                    if (Latitude != null && Longitude != null) {
-//                        Double Lon = Double.parseDouble(Longitude);
-//                        Double Lat = Double.parseDouble(Latitude);
-//                        // implementFragment();
-//                        //username and password are present, do your stuff
-//                    }
-//
-//
-//                    finish();
-//
-//                }
-//                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-//
-//                    AppUtils.showSettingsAlert(DetailsInfoActivityEducation.this);
-//
-//                }
-//
-//                else
-//                {
-//
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
-//
-//                }
-//            }
-//        });
-//
-//
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
+
+
+                    String lat = healthServiceProviderItemNew.getLat().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = healthServiceProviderItemNew.getLon().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    String name= healthServiceProviderItemNew.getNode_bn().toString();
+                    String node=String.valueOf(healthServiceProviderItemNew.getId());
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.putString("nValue", node);
+
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Longitude", null);
+                    String Latitude = pref.getString("Latitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        // implementFragment();
+                        //username and password are present, do your stuff
+                    }
+
+
+                    // finish();
+
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityHealthNew.this);
+
+                }
+
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
+
+                Intent intentJ = new Intent(DetailsInfoActivityHealthNew.this,MapFragmentRouteOSM.class);
+                startActivity(intentJ);
+            }
+        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
 
     public void setRatingBar()
     {
-        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health", new VolleyApiCallback() {
+        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health?username=" + username + "&password=" + password + " ", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {

@@ -1921,8 +1921,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+<<<<<<< HEAD
+                            llSubCatListHolder.setVisibility(View.GONE);
                             if(ListClicked.equals(true))
+=======
+                        llSubCatListHolder.setVisibility(View.GONE);
+                        if(ListClicked.equals(true))
+>>>>>>> b4cedd7d34a5104f1c4535dd70ffaed3ef20b9a8
                             explist.setVisibility(View.VISIBLE);
 
 
