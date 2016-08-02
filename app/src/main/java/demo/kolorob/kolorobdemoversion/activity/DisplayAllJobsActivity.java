@@ -160,6 +160,7 @@ public class DisplayAllJobsActivity extends Activity {
         String[] address = new String[size];
 
         String[] contact_number = new String[size];
+
         String[] positions = new String[size];
 
         int increment= 0;

@@ -157,8 +157,8 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:id="@+id/distance_left"
                             android:background="@drawable/direction_icon"/>
 
@@ -182,8 +182,8 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:id="@+id/phone_middl"
                             android:background="@drawable/phone_icon"/>
 

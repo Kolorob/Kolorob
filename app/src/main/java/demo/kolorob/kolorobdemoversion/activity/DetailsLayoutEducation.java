@@ -352,8 +352,9 @@ public class DetailsLayoutEducation extends Activity {
         right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(width / 25);
-        ratingText.setTextSize(width / 25);
+
+        ups_text.setTextSize(23);
+        ratingText.setTextSize(23);
         ups_text.setText(educationNewItem.getNamebn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();

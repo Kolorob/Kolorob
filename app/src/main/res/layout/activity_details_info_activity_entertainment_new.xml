@@ -54,7 +54,7 @@
                     android:textStyle="bold"
                     android:id="@+id/headerx"
                     android:layout_height="wrap_content"
-                    android:text="আনন্দ বিনোদন"/>
+                    android:text="বিনোদন"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="@color/white"
                         android:id="@+id/ups_text"
 
@@ -163,8 +163,8 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/distance_left"
                             android:background="@drawable/direction_icon"/>
 
@@ -188,8 +188,8 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/phone_middl"
                             android:background="@drawable/phone_icon"/>
 
@@ -251,33 +251,33 @@
             android:background="@color/white"
             >
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
 
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content">
-                    <TextView
+
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                        <!--android:text="Large Text"-->
+                        <!--android:visibility="gone"-->
+                        <!--android:id="@+id/other_detailsEnt" />-->
+
+
+                    <ListView
                         android:layout_width="wrap_content"
+                        android:gravity="left"
+
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:visibility="gone"
-                        android:id="@+id/other_detailsEnt" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
-                        android:id="@+id/detailsEntertainment" />
+                        android:id="@+id/allData" />
 
 
                 </LinearLayout>
-            </ScrollView>
 
 
 
