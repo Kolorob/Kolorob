@@ -16,9 +16,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +26,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,22 +45,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.EducationCourseAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.EducationCourseFee;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationCourseTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationFeeTable;
+import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
-import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationCourseItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationFeeItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -79,11 +68,14 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
+    int increment=0;
     TextView ups_text,headerx;
     ListView courseListView,listView;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Context con;
+    String[] key;
+    String[] value;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
     ArrayList<EntertainmentServiceProviderItemNew>entertainmentServiceProviderItemNewsx;
@@ -103,6 +95,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     EditText feedback_comment;
     Float rating;
     RatingBar ratingBar;
+    ListView alldata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,10 +140,14 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
-        detailsEntertainment=(TextView)findViewById(R.id.detailsEntertainment);
-        other_detailsEnt=(TextView)findViewById(R.id.other_detailsEnt);
-        headerx=(TextView)findViewById(R.id.headerx);
 
+        headerx=(TextView)findViewById(R.id.headerx);
+        alldata=(ListView)findViewById(R.id.allData);
+
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+                .getLayoutParams();
+
+        mlp.setMargins(width/15,0,width/9,width/15);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -249,9 +246,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(width / 25);
-        ratingText.setTextSize(width / 25);
-        headerx.setTextSize(width / 21);
+        ups_text.setTextSize(23);
+        ratingText.setTextSize(23);
+
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -263,7 +260,12 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
         entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
         result_concate ="";
-        if(!entertainmentTypeItems.equals("")) {
+
+        key = new String[25];
+
+        value = new String[25];
+
+
          //   other_detailsEnt.setVisibility(View.VISIBLE);
             for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
                 CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
@@ -272,8 +274,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                 CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
-            }
+
         }
+
 
         CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
         CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
@@ -295,10 +298,11 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
          ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
 
-        detailsEntertainment.setText(result_concate);
+       // detailsEntertainment.setText(result_concate);
 
 
-
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value);
+        alldata.setAdapter(defaultAdapter);
 
 
 
@@ -385,70 +389,71 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
             }
         });
 
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
-//        distance_left.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
-//
-//
-//                    String lat = educationServiceProviderItem.getLatitude().toString();
-//                    // double latitude = Double.parseDouble(lat);
-//                    String lon = educationServiceProviderItem.getLongitude().toString();
-//                    // double longitude = Double.parseDouble(lon);
-//                    String name= educationServiceProviderItem.getEduNameBan().toString();
-//                    String node=educationServiceProviderItem.getIdentifierId();
-//                    boolean fromornot=true;
-//                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("Latitude", lat);
-//                    editor.putString("Longitude", lon);
-//                    editor.putString("Name", name);
-//                    editor.putBoolean("Value", fromornot);
-//                    editor.putString("nValue", node);
-//                    editor.commit();
-//
-//
-//                    String Longitude = pref.getString("Longitude", null);
-//                    String Latitude = pref.getString("Latitude", null);
-//
-//                    if (Latitude != null && Longitude != null) {
-//                        Double Lon = Double.parseDouble(Longitude);
-//                        Double Lat = Double.parseDouble(Latitude);
-//                        // implementFragment();
-//                        //username and password are present, do your stuff
-//                    }
-//
-//
-//                    finish();
-//
-//                }
-//                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-//
-//                    AppUtils.showSettingsAlert(DetailsInfoActivityEducation.this);
-//
-//                }
-//
-//                else
-//                {
-//
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
-//
-//                }
-//            }
-//        });
-//
-//
-//    }
+
+                    String lat = entertainmentServiceProviderItemNew.getLatitude().toString();
+                    // double latitude = Double.parseDouble(lat);
+                    String lon = entertainmentServiceProviderItemNew.getLongitude().toString();
+                    // double longitude = Double.parseDouble(lon);
+                    String name= entertainmentServiceProviderItemNew.getNodeNameBn().toString();
+                    String node=String.valueOf(entertainmentServiceProviderItemNew.getNodeId());
+                    boolean fromornot=true;
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", lat);
+                    editor.putString("Longitude", lon);
+                    editor.putString("Name", name);
+                    editor.putBoolean("Value", fromornot);
+                    editor.putString("nValue", node);
+                    editor.commit();
+
+
+                    String Longitude = pref.getString("Longitude", null);
+                    String Latitude = pref.getString("Latitude", null);
+
+                    if (Latitude != null && Longitude != null) {
+                        Double Lon = Double.parseDouble(Longitude);
+                        Double Lat = Double.parseDouble(Latitude);
+                        // implementFragment();
+                        //username and password are present, do your stuff
+                    }
+
+
+                    // finish();
+
+                }
+                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
+
+                    AppUtils.showSettingsAlert(DetailsInfoActivityEntertainmentNew.this);
+
+                }
+
+                else
+                {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
+
+                Intent intentJ = new Intent(DetailsInfoActivityEntertainmentNew.this,MapFragmentRouteOSM.class);
+                startActivity(intentJ);
+            }
+        });
+
+  }
 //
 //    public void verifyRegistration(View v){
 //
@@ -630,7 +635,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //            return false;
 //
 //        }
-    }
+
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
             String timeInBengali = "";
@@ -951,14 +956,21 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     private void CheckConcate(String value1, String value2) {
 
 
-    if (!value2.equals("null") && !value2.equals("")) {
 
-        String value = "      " + value1 + ":  " + value2;
-        result_concate = result_concate + value + "\n";
-    }
+
+
+        if (!value2.equals("null") && !value2.equals("")) {
+            key[increment] = value1;
+            value[increment] = value2;
+            increment++;
+
+        }
 
 
 }
+
+
+
 
 
     private boolean checkPermission() {

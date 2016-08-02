@@ -9,7 +9,7 @@
 
     android:background="@color/white"
 
-    tools:context=".activity.DetailsLayoutFinance">
+    tools:context=".activity.DetailsLayoutGovernment">
 
 
     <LinearLayout

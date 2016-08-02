@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="@color/white"
 
                         android:id="@+id/ups_text"
@@ -163,8 +163,8 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/distance_left"
                             android:background="@drawable/direction_icon"/>
 
@@ -188,8 +188,8 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/phone_middl"
                             android:background="@drawable/phone_icon"/>
 
