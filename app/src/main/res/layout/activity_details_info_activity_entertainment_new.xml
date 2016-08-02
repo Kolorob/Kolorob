@@ -54,7 +54,7 @@
                     android:textStyle="bold"
                     android:id="@+id/headerx"
                     android:layout_height="wrap_content"
-                    android:text="আনন্দ বিনোদন"/>
+                    android:text="বিনোদন"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"

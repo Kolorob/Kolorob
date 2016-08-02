@@ -352,8 +352,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
-
-        ratingText.setTextSize(width / 25);
+        ups_text.setTextSize(23);
+        ratingText.setTextSize(23);
         ups_text.setText(healthServiceProviderItemNew.getNode_bn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();

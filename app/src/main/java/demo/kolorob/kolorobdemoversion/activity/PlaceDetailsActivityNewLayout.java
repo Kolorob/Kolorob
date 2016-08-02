@@ -129,6 +129,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private static FrameLayout map;
     private KolorobSpinner spItems;
     ArrayAdapter arrayAdapter;
+    ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
     private View nextChild;
@@ -406,6 +407,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
         mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
+        healthServiceProvider = constructHealthListItem(1);
 
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
         Searchall=(EditText)findViewById(R.id.searchall);
@@ -1909,8 +1911,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
                         if(MapClicked)
                         {
-                            ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                            healthServiceProvider = constructHealthListItem(1);
+
                             mapcalledstatus=true;
 
                             callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
@@ -1919,7 +1920,7 @@ fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
 
 
                             llSubCatListHolder.setVisibility(View.GONE);
-                        if(ListClicked.equals(true))
+                            if(ListClicked.equals(true))
                             explist.setVisibility(View.VISIBLE);
 
 

@@ -249,7 +249,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         ups_text = (TextView) findViewById(R.id.ups_text);
 
-        ratingText.setTextSize(width / 25);
+        ups_text.setTextSize(23);
+        ratingText.setTextSize(23);
 
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
