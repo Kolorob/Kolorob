@@ -139,6 +139,7 @@ public class EducationNewTable {
                 + KEY_CATID + " INTEGER , "
                 + KEY_REFNUMS + " TEXT , "
                 + KEY_RATING + " TEXT ,   PRIMARY KEY(" + KEY_NODE_ID + "))";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }

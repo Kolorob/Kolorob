@@ -342,6 +342,13 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 off_day,_rating);
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getNodeId() {
         return nodeId;
