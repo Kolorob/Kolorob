@@ -1693,12 +1693,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
+       if (doubleBackToExitPressedOnce) {
+//
             super.onBackPressed();
+        //    finish();
             return;
         }
-        toolbar.setVisibility(View.VISIBLE);
-        toggleButton.setVisibility(View.VISIBLE);
+//        toolbar.setVisibility(View.VISIBLE);
+//        toggleButton.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
 
       /*  if(NavigationCalled)
@@ -1726,13 +1728,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         }
 */
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+//        new Handler().postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                doubleBackToExitPressedOnce=false;
+//            }
+//        }, 2000);
     }
 
 
