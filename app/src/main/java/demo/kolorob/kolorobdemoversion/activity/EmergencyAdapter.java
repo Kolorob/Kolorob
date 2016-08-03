@@ -1,13 +1,10 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -27,7 +26,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
 	String[] values = new String[] { "Bangladesh Fire Service, \nবাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
 			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",
-			"Pllabi Police Station, পল্লবী থানা",
+			"Pallabi Police Station, পল্লবী থানা",
 			"RAB – 4, র্যাব - ৪",
 			"DESCO - Electricity, \nডেসকো – ইলেক্ট্রিসিটি ",
 			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, তিতাস গ্যাস ","Dhaka WASA, ঢাকা ওয়াসা",
@@ -39,7 +38,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 			"পল্লবী থানা",
 			"Dhaka",
 			"DESCO, Pallabi, Dhaka",
-			"Dhaka","Pllabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
+			"Dhaka","Pallabi, Dhaka","Dhaka","Red Crescent","Dhaka","","",
 	};
 	String[] name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্",
 			"পুলিশ কন্ট্রোল রুম",
@@ -75,7 +74,15 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 			"১০৯৪১","০২৯০১৪২৯১","১৬১৬২","০২৯১৩৯৯৪০","১৬৩৬৪","১০৯২১","১০৯৪১"
 	};
 
+	String[] location = new String[] { "23.8069959 90.3665992",
+			"not found",
+			"23.8260387 90.366459",
+			"23.78613 90.3570516",
+			"23.8320088 90.4187671",
+			"23.7296558 90.4090196","23.7505538 90.3934337","23.7531737 90.3925594","23.753432 90.4045906","23.7932742 90.4080312","23.7475818 90.399754"
+	};
 
+	String[] splitStr;
 	protected static final String LOG_TAG = EmergencyAdapter.class.getSimpleName();
 	
 	private List<Emergency> items;
@@ -122,19 +129,22 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 		//setNameTextChangeListener(holder);
 		holder.loc.setOnClickListener(new View.OnClickListener() {
              public void onClick(View v) {
-                 // Perform action on click   
-
-               //  Intent activityChangeIntent = new Intent(PresentActivity.this, NextActivity.class);
-
-                 // currentContext.startActivity(activityChangeIntent);
-Log.d("========", "-----------------"+i);
-//				 Toast.makeText(context,
-//						 "Sorry, Location is not found! ", Toast.LENGTH_LONG)
-//						 .show();
-			//	 AlertMessage.showMessage(context,"Location ","Sorry, Location is not found!");
-				 AlertMessage.showMessage(context, "দিকনির্দেশনা",
-						 " দেওয়া হবে");
-
+				if(location[i]=="not found")
+				{
+					AlertMessage.showMessage(context, "দুঃখিত!",
+							"পথ পাওয়া যায় নি ");
+				}
+				 else {
+					splitStr = location[i].split("\\s+");
+					SharedPreferences pref = EmergencyAdapter.this.getContext().getSharedPreferences("MyPref", getContext().MODE_PRIVATE);
+					SharedPreferences.Editor editor = pref.edit();
+					editor.putString("Latitude", splitStr[0]);
+					editor.putString("Longitude", splitStr[1]);
+					editor.putString("Name", values[i]);
+					editor.commit();
+					Intent intentJ = new Intent(EmergencyAdapter.this.getContext(), MapFragmentRouteOSM.class);
+					getContext().startActivity(intentJ);
+				}
                //  PresentActivity.this.startActivity(activityChangeIntent);
              }
          });
