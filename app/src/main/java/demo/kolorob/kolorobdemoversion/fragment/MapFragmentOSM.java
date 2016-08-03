@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
@@ -100,6 +102,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<EducationNewItem> educationServiceProvider = null;
     private ArrayList<GovernmentNewItem> governmentNewItems = null;
     MapView mapView,mapp;
+    String datevalue;
     private int categoryId;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
@@ -179,7 +182,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         int i = 0;
 
         super.onCreate(savedInstanceState);
-
+        SharedPreferences settings = MapFragmentOSM.this.getActivity().getSharedPreferences("prefs", 0);
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         rootView = inflater.inflate(R.layout.fragment_map, container,
                 false);
@@ -220,6 +223,15 @@ setMapView(mapView);
         }
 
 
+// get the time and make a date out of it
+        Date date2 = new Date(settings.getLong("time", 0));
+Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
+
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue="(আজকের তথ্য)";
+        else
+        datevalue="( "+ String.valueOf(diffInDays) + " দিন আগের তথ্য)";
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
@@ -236,6 +248,7 @@ setMapView(mapView);
                             ratingavg="পাওয়া যায় নি";
 
                         }
+                        else ratingavg=ratingavg.concat(datevalue);
                         longDouble = Double.parseDouble(et.getLon());
                       GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
@@ -258,6 +271,7 @@ setMapView(mapView);
                         ratingavg="পাওয়া যায় নি";
 
                     }
+                    else ratingavg=ratingavg.concat(datevalue);
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -278,8 +292,9 @@ setMapView(mapView);
                         ratingavg="পাওয়া যায় নি";
 
                     }
+                    else ratingavg=ratingavg.concat(datevalue);
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
+                    drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeAdditional(), et.getNodeId(), subcategotyId);
                 }
                 break;
             case AppConstants.GOVERNMENT:
@@ -297,7 +312,7 @@ setMapView(mapView);
                             ratingavg="পাওয়া যায় নি";
 
                         }
-
+                        else ratingavg=ratingavg.concat(datevalue);
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerGov(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
@@ -319,6 +334,7 @@ setMapView(mapView);
                         ratingavg="পাওয়া যায় নি";
 
                     }
+                    else ratingavg=ratingavg.concat(datevalue);
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
                     drawMarkerLeg(point, et.getLegalaidNameBan(), ratingavg, et.getContactNo(), et.getIdentifierId(), subcategotyId);
                 }
@@ -337,6 +353,7 @@ setMapView(mapView);
                         ratingavg="পাওয়া যায় নি";
 
                     }
+                    else ratingavg=ratingavg.concat(datevalue);
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
                     drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(), subcategotyId2);
                 }
