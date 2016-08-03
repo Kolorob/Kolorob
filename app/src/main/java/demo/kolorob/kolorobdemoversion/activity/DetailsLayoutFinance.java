@@ -158,7 +158,7 @@ EditText feedback_comment;
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/9,width/15);
+        mlp.setMargins(width/15,0,width/90,width/15);
 
 
         CheckConcate("পরিচিত স্থান :", financialNewItem.getLandmark());

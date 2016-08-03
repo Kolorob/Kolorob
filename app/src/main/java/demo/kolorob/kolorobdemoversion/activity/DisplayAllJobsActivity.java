@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,9 @@ public class DisplayAllJobsActivity extends Activity {
 
     private ImageView close_button;
     private ProgressDialog progress;
+    private int width;
+    private int height;
+    private ImageView iv_kolorob_logo;
     private TextView tv_button;
         ArrayList<JobAdvertisementItem> jobAdvertisementItems;
         JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
@@ -51,6 +55,9 @@ public class DisplayAllJobsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_all_jobs);
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        height= displayMetrics.heightPixels;
+        width=displayMetrics.widthPixels;
 
 
 
@@ -96,8 +103,12 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.show();
 
         close_button=(ImageView)findViewById(R.id.iv_close);
+        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+        close_button.getLayoutParams().height=width/11;
+        close_button.getLayoutParams().width=width/11;
         tv_button=(TextView)findViewById(R.id.tv_close);
-
+        iv_kolorob_logo.getLayoutParams().height=width/11;
+        iv_kolorob_logo.getLayoutParams().width=width/11;
 
         context=this;
 
@@ -174,7 +185,7 @@ public class DisplayAllJobsActivity extends Activity {
         {
 
             tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
-            salary_range[increment]=jobAdvertisementItem.getStart_salary()+" - "+jobAdvertisementItem.getEnd_salary();
+            salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
             remaining_date[increment]= remaining_date(jobAdvertisementItem.getApplication_last_date());
             address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
             contact_number[increment] = jobAdvertisementItem.getMobile1();
@@ -234,6 +245,33 @@ public class DisplayAllJobsActivity extends Activity {
         return diff/ (24 * 60 * 60 * 1000);
     }
 
+    public String English_to_bengali_number_conversion(String english_number) {
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+        }
+        return concatResult;
+    }
 
 
 

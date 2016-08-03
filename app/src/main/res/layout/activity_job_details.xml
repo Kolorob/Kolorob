@@ -23,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/upperText"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
@@ -31,15 +31,14 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="0.2"
-                    android:id="@+id/left_job_icon"
+                    android:layout_weight=".15"
+                    android:id="@+id/jobS"
                     android:layout_height="wrap_content"
                     android:gravity="left">
                     <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-
-                        android:id="@+id/iv_kolorob_logo"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/left_job_icon"
                         android:layout_marginLeft="24dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/job_topimge"
@@ -48,17 +47,15 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="0.8"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:layout_height="match_parent"
                     android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="চাকুরীর বিস্তারিত বিবরন "
-                        android:textSize="30dp"
-                        android:gravity="center_horizontal"
+                        android:text="চাকুরীর বিবরন "
+                        android:textSize="25dp"
 
-                        android:layout_marginLeft="5dp"
 
                         android:textColor="@color/white"
                         android:id="@+id/ups_texts"
@@ -69,7 +66,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="0.2"
+                    android:layout_weight="0.15"
                     android:id="@+id/right_cross_button"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal|right">
@@ -154,7 +151,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/school_logo_default"
-                                android:id="@+id/JobIcon"/>
+                                android:id="@+id/school_logo_default"/>
 
 
                         </LinearLayout>
@@ -217,6 +214,7 @@
                             android:textSize="20sp"
                             android:paddingLeft="20dp"
                             android:padding="5dp"
+                            android:id="@+id/time"
                             android:textColor="@color/white"
                             android:layout_marginLeft="20dp"/>
 
@@ -356,9 +354,9 @@
             android:layout_width="match_parent"
             android:id="@+id/left_go_process"
 
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="05dp"
             android:layout_below="@+id/bottom2"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             >
 
             <ImageView

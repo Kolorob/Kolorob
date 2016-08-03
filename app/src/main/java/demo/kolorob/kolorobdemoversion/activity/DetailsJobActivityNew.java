@@ -25,11 +25,13 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 public class DetailsJobActivityNew extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,school_logo_default;
     TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
-    LinearLayout left_job_icon,right_cross_button;
-    TextView ups_text;
+    LinearLayout right_cross_button;
+    ImageView left_job_icon;
+    TextView ups_text,time;
+    int timer=0;
     String result_concate="";
     private ImageView close_button;
     ListView navlist,navlist1,navlist2;
@@ -70,22 +72,33 @@ public class DetailsJobActivityNew extends Activity {
         right_image=(ImageView)findViewById(R.id.right_side_email);
 
         close_button=(ImageView)findViewById(R.id.close_button);
+        school_logo_default=(ImageView)findViewById(R.id.school_logo_default);
         break_time=(TextView)findViewById(R.id.break_time);
-       // off_day=(TextView)findViewById(R.id.off_day);
+        // off_day=(TextView)findViewById(R.id.off_day);
         opening_time=(TextView)findViewById(R.id.opening_time);
-        left_job_icon=(LinearLayout)findViewById(R.id.left_job_icon);
+        left_job_icon=(ImageView) findViewById(R.id.left_job_icon);
         right_cross_button=(LinearLayout) findViewById(R.id.right_cross_button);
 
+        school_logo_default.getLayoutParams().height=width/7;
+        school_logo_default.getLayoutParams().width=width/7;
+        time=(TextView)findViewById(R.id.time);
 
-        LinearLayout.LayoutParams left_job_icons = (LinearLayout.LayoutParams) left_job_icon.getLayoutParams();
-        int vc = left_job_icons.height = width /7;
-        left_job_icons.width = width / 7;
-        left_job_icon.setLayoutParams(left_job_icons);
 
-        LinearLayout.LayoutParams params_right_emails = (LinearLayout.LayoutParams) right_cross_button.getLayoutParams();
-        params_right_emails.height = width /7;;
-        params_right_emails.width = width /7;;
-        right_cross_button.setLayoutParams(params_right_emails);
+        left_job_icon.getLayoutParams().height=width/11;
+        left_job_icon.getLayoutParams().width=width/11;
+
+        close_button.getLayoutParams().height=width/11;
+        close_button.getLayoutParams().width=width/11;
+        middle_image.getLayoutParams().height= width/11;
+        middle_image.getLayoutParams().width=width/11;
+
+        left_image.getLayoutParams().height= width/11;
+        left_image.getLayoutParams().width=width/11;
+
+        right_image.getLayoutParams().height= width/11;
+        right_image.getLayoutParams().width=width/11;
+
+
 
         job_type=(TextView)findViewById(R.id.job_type);
        // job_responsibility=(TextView)findViewById(R.id.job_responsibility);
@@ -112,34 +125,52 @@ public class DetailsJobActivityNew extends Activity {
 
             if(!jobAdvertisementItem.getJob_type().equals(""))
             {
-                concateBasic("চাকরির ধরণ : ", jobAdvertisementItem.getJob_type());
+                concateBasic("চাকরির ধরণ: ", jobAdvertisementItem.getJob_type());
             }
 
             if(!jobAdvertisementItem.getPost_type().equals(""))
             {
-                concateBasic("পদের ধরণ  : ", jobAdvertisementItem.getPost_type());
+                concateBasic("পদের ধরণ : ", jobAdvertisementItem.getPost_type());
             }
 
             if(!jobAdvertisementItem.getJob_responsibility().equals(""))
-                concateBasic("কাজের বিবরণ : ",jobAdvertisementItem.getJob_responsibility());
+                concateBasic("কাজের বিবরণ: ",jobAdvertisementItem.getJob_responsibility());
 
             if(!jobAdvertisementItem.getRequired_experience().equals(""))
-                concateBasic("প্রয়োজনীয় অভিজ্ঞতা :", jobAdvertisementItem.getRequired_experience());
+                concateBasic("প্রয়োজনীয় অভিজ্ঞতা: ", jobAdvertisementItem.getRequired_experience());
 
             if(!jobAdvertisementItem.getApplication_medium().equals(""))
-                concateBasic("আবেদনের মাধ্যম :",jobAdvertisementItem.getApplication_medium());
+                concateBasic("আবেদনের মাধ্যম: ",jobAdvertisementItem.getApplication_medium());
 
             job_type.setText(result_concate);
             result_concate="";
 
-            if(!jobAdvertisementItem.getOpening().equals(""))
+
+            if(!jobAdvertisementItem.getOpening().equals("0 : 00"))
                 concateBasic("খোলার সময় : ",jobAdvertisementItem.getOpening());
-            if(!jobAdvertisementItem.getClosing().equals(""))
+            else
+            timer++;
+            Log.d("TImer1","%%%%%%"+timer);
+
+            if(!jobAdvertisementItem.getClosing().equals("0 : 00"))
                 concateBasic("বন্ধের সময় : ", jobAdvertisementItem.getClosing());
-            if(!jobAdvertisementItem.getBreaks().equals(""))
+            else
+                timer++;
+            Log.d("TImer2","%%%%%%"+timer);
+            if(!jobAdvertisementItem.getBreaks().equals("0 : 00"))
                 concateBasic("বিরতির সময় : ",jobAdvertisementItem.getBreaks());
+            else
+                timer++;
+            Log.d("TImer3","%%%%%%"+timer);
             if(!jobAdvertisementItem.getOff_day().equals(""))
                 concateBasic("বন্ধের দিন : ", jobAdvertisementItem.getOff_day());
+            else
+                timer++;
+
+            Log.d("TImer4","%%%%%%"+timer);
+            if(timer>=4)
+                time.setVisibility(View.GONE);
+
 
 
             opening_time.setText(result_concate);
@@ -155,7 +186,7 @@ public class DetailsJobActivityNew extends Activity {
             result_concate="";
 
 
-            salary_range.setText("বেতন সীমা :" + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
+            salary_range.setText("বেতন সীমা : " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
 
 
            if(!jobAdvertisementItem.getReference_person().equals(""))
@@ -196,8 +227,7 @@ public class DetailsJobActivityNew extends Activity {
 //        params_middle_phone.width = width/3;
 //        middle_phone.setLayoutParams(params_middle_phone);
 
-//        middle_image.getLayoutParams().height= (lett_img*2)/3;
-//        middle_image.getLayoutParams().width=right_img/2;
+//
 //
 //        right_image.getLayoutParams().height= (lett_img*2)/3;
 //        right_image.getLayoutParams().width=right_img/2;
@@ -242,9 +272,41 @@ public class DetailsJobActivityNew extends Activity {
 //    public void closepage(View v){
 //        this.finish();
 //    }
+public String English_to_bengali_number_conversion(String english_number) {
+    int v = english_number.length();
+    String concatResult = "";
+    for (int i = 0; i < v; i++) {
+        if (english_number.charAt(i) == '1')
+            concatResult = concatResult + "১";
+        else if (english_number.charAt(i) == '2')
+            concatResult = concatResult + "২";
+        else if (english_number.charAt(i) == '3')
+            concatResult = concatResult + "৩";
+        else if (english_number.charAt(i) == '4')
+            concatResult = concatResult + "৪";
+        else if (english_number.charAt(i) == '5')
+            concatResult = concatResult + "৫";
+        else if (english_number.charAt(i) == '6')
+            concatResult = concatResult + "৬";
+        else if (english_number.charAt(i) == '7')
+            concatResult = concatResult + "৭";
+        else if (english_number.charAt(i) == '8')
+            concatResult = concatResult + "৮";
+        else if (english_number.charAt(i) == '9')
+            concatResult = concatResult + "৯";
+        else if (english_number.charAt(i) == '0')
+            concatResult = concatResult + "০";
+    }
+    return concatResult;
+}
 
+    @Override
+    protected void onResume() {
+        timer=0;
+        super.onResume();
+    }
 
-    private String concateBasic(String value1,String value2){
+    private String concateBasic(String value1, String value2){
 
         if(!value2.equals("null")&&!value2.equals(""))
         {
