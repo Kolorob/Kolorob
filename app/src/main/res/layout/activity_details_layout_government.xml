@@ -133,7 +133,7 @@ android:layout_weight="10"
 
                             android:numStars="5"
                             android:stepSize="0"
-                            android:rating="2.3"
+                            android:rating="0"
                           />
 
                     </LinearLayout>
