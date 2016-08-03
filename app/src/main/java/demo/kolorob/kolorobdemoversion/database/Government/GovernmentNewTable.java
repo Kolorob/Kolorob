@@ -331,8 +331,8 @@ public class GovernmentNewTable {
                 String[] tokens = getter.split(delims);
                 for (int ii=0;ii<tokens.length;ii++)
                 {
-                    if (tokens[i]=="")continue;
-                    if(Integer.parseInt(tokens[i])==k)
+                    if (tokens[ii]=="")continue;
+                    if(Integer.parseInt(tokens[ii])==k)
                     {
                         nameslist.add(cursorToSubCatList(cursor2));
                     }
