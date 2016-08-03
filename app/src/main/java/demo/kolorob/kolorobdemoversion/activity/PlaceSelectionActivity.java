@@ -69,6 +69,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
     Float  ratings;
+    Boolean click=false;
     float[][] mirpur10Coords = {
             {42, 267},
             {80, 420},
@@ -152,6 +153,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         holder.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
+
                 float x = event.getX();
                 float y = event.getY();
                 // Hack to deal with issue in original image source
@@ -165,15 +168,29 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     t.cancel();
 //                if (y < ((float)height) / 2.0) {
                 if (mirpur10Hit) {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 1);
-                    startActivity(intent);
+                    if(click==false)
+                    {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 1);
+                        startActivity(intent);
+                        click=true;
+                    }
+
+                    Log.d("BAUNIABHAD", "********" );
                     t = Toast.makeText(getApplicationContext(), "BAUNIABHAD!", Toast.LENGTH_SHORT);
                     anyHit = true;
-                } else if (mirpur11Hit) {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 2);
-                    startActivity(intent);
+                }
+                else if (mirpur11Hit) {
+
+                    if(click==false)
+                    {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 2);
+                        startActivity(intent);
+                        click=true;
+                    }
+
+                    Log.d("PARIS ROAD", "********" );
                     t = Toast.makeText(getApplicationContext(), "PARIS ROAD!", Toast.LENGTH_SHORT);
                     anyHit = true;
 
@@ -435,7 +452,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                             Toast.makeText(PlaceSelectionActivity.this, response, Toast.LENGTH_SHORT).show();
 
                             try {
-                                Log.d("ratings", "********" + ratings);
+
                                 Toast.makeText(PlaceSelectionActivity.this, response.toString(), Toast.LENGTH_LONG).show();
 
 //                                if(response.toString().trim().equalsIgnoreCase("true"))
@@ -567,5 +584,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
     }
 
-
+    @Override
+    protected void onResume() {
+        click=false;
+        super.onResume();
+    }
 }
