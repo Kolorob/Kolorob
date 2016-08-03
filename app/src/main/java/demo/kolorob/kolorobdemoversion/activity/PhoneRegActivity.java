@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,7 +100,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://192.168.43.57/demo/api/customer_reg?phone="+phone+"&username="+username+"&password="+password+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -109,10 +110,11 @@ public class PhoneRegActivity extends Activity {
                        // Log.d(">>>>>","status "+response);
                         try {
 
-                            //Log.d(">>>>>","status ");
+                            //
 
                             if(response.equals("true"))
                             {
+                                Log.d("######","status "+response);
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
                                 AlertDialog alertDialog = new AlertDialog.Builder(PhoneRegActivity.this).create();
                                 alertDialog.setTitle("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
