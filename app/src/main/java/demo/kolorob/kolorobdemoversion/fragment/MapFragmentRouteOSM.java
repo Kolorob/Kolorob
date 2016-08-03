@@ -343,7 +343,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         }
         else {
             roadOverlay = roadManager.buildRoadOverlay(road, this);
-            roadOverlay.setColor(Color.YELLOW);
+            roadOverlay.setColor(getResources().getColor(R.color.orange));
             roadlength = road.mLength;
             mapView.getOverlays().add(roadOverlay);
             havePolyLine = true;

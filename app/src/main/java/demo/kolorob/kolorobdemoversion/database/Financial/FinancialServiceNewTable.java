@@ -204,7 +204,26 @@ public class FinancialServiceNewTable {
         closeDB();
         return ret;}
 
+    public ArrayList<FinancialNewItem> getAllFinancialSubCategoriesInfo() {
+        ArrayList<FinancialNewItem> subCatList = new ArrayList<>();
 
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_NAME_EN, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     private long updateItem(int finId, String nameen, String namebn, String lat, String lon,
                             String floor, String housename, String houseno, String road, String line, String avenue,
                             String block, String area, String landmark, String postoffice, String policestation, String city,
@@ -256,12 +275,12 @@ public class FinancialServiceNewTable {
         return ret;
 
     }
-    public ArrayList<FinancialNewItem> getAllFinancialSubCategoriesInfo() {
+    public ArrayList<FinancialNewItem> getAllFinancialSubCategoriesInfo(String place) {
         ArrayList<FinancialNewItem> subCatList = new ArrayList<>();
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_NAME_EN, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"' ORDER BY " +KEY_NAME_EN,null);
 
         if (cursor.moveToFirst()) {
             do {
