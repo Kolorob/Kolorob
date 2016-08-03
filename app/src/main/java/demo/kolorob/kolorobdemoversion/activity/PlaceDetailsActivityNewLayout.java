@@ -680,7 +680,12 @@ TextView uptext;
                     setPlaceChoice("Mirpur-11");
                     callMapFragment(locationNameId);
                     allHolders.clear();
-                    Populateholder("Mirpur-11");
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
+                    {
+                        Populateholder("Mirpur-11");
+                        calladapter(true);
+                    }
+                    else Populateholder("Mirpur-11");
 
                     createData(currentCategoryID,"","Mirpur-11");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
@@ -690,7 +695,12 @@ TextView uptext;
                     setPlaceChoice("Mirpur-10");
                     callMapFragment(locationNameId);
                     allHolders.clear();
-                    Populateholder("Mirpur-10");
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
+                    {
+                        Populateholder("Mirpur-10");
+                        calladapter(true);
+                    }
+                    else Populateholder("Mirpur-10");
                     createData(currentCategoryID,"","Mirpur-10");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);}
@@ -767,7 +777,7 @@ TextView uptext;
                 SearchClicked=false;
                 MapClicked=true;
                 ListClicked=false;
-                if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
+                if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
                     svsholder.setVisibility(View.VISIBLE);
                     svs.setVisibility(View.VISIBLE);
@@ -777,7 +787,7 @@ TextView uptext;
                 uptext.setVisibility(View.VISIBLE);
                 CompareClicked=false;
                 callMapFragment(locationNameId);;
-                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
+                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
 
                     svsholder.setVisibility(View.VISIBLE);
