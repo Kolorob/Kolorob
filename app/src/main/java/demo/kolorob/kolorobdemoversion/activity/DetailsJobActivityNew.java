@@ -28,7 +28,8 @@ public class DetailsJobActivityNew extends Activity {
     ImageView left_image,middle_image,right_image,school_logo_default;
     TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
-    LinearLayout left_job_icon,right_cross_button;
+    LinearLayout right_cross_button;
+    ImageView left_job_icon;
     TextView ups_text;
     String result_concate="";
     private ImageView close_button;
@@ -74,17 +75,18 @@ public class DetailsJobActivityNew extends Activity {
         break_time=(TextView)findViewById(R.id.break_time);
         // off_day=(TextView)findViewById(R.id.off_day);
         opening_time=(TextView)findViewById(R.id.opening_time);
-        left_job_icon=(LinearLayout)findViewById(R.id.left_job_icon);
+        left_job_icon=(ImageView) findViewById(R.id.left_job_icon);
         right_cross_button=(LinearLayout) findViewById(R.id.right_cross_button);
 
         school_logo_default.getLayoutParams().height=width/7;
         school_logo_default.getLayoutParams().width=width/7;
 
 
-        LinearLayout.LayoutParams left_job_icons = (LinearLayout.LayoutParams) left_job_icon.getLayoutParams();
-        int vc = left_job_icons.height = width /7;
-        left_job_icons.width = width / 7;
-        left_job_icon.setLayoutParams(left_job_icons);
+        left_job_icon.getLayoutParams().height=width/11;
+        left_job_icon.getLayoutParams().width=width/11;
+
+        close_button.getLayoutParams().height=width/11;
+        close_button.getLayoutParams().width=width/11;
 
 
 
@@ -116,31 +118,31 @@ public class DetailsJobActivityNew extends Activity {
 
             if(!jobAdvertisementItem.getJob_type().equals(""))
             {
-                concateBasic("চাকরির ধরণ : ", jobAdvertisementItem.getJob_type());
+                concateBasic("চাকরির ধরণ: ", jobAdvertisementItem.getJob_type());
             }
 
             if(!jobAdvertisementItem.getPost_type().equals(""))
             {
-                concateBasic("পদের ধরণ  : ", jobAdvertisementItem.getPost_type());
+                concateBasic("পদের ধরণ : ", jobAdvertisementItem.getPost_type());
             }
 
             if(!jobAdvertisementItem.getJob_responsibility().equals(""))
-                concateBasic("কাজের বিবরণ : ",jobAdvertisementItem.getJob_responsibility());
+                concateBasic("কাজের বিবরণ: ",jobAdvertisementItem.getJob_responsibility());
 
             if(!jobAdvertisementItem.getRequired_experience().equals(""))
-                concateBasic("প্রয়োজনীয় অভিজ্ঞতা :", jobAdvertisementItem.getRequired_experience());
+                concateBasic("প্রয়োজনীয় অভিজ্ঞতা: ", jobAdvertisementItem.getRequired_experience());
 
             if(!jobAdvertisementItem.getApplication_medium().equals(""))
-                concateBasic("আবেদনের মাধ্যম :",jobAdvertisementItem.getApplication_medium());
+                concateBasic("আবেদনের মাধ্যম: ",jobAdvertisementItem.getApplication_medium());
 
             job_type.setText(result_concate);
             result_concate="";
 
-            if(!jobAdvertisementItem.getOpening().equals(""))
+            if(!jobAdvertisementItem.getOpening().equals("0 : 00"))
                 concateBasic("খোলার সময় : ",jobAdvertisementItem.getOpening());
-            if(!jobAdvertisementItem.getClosing().equals(""))
+            if(!jobAdvertisementItem.getClosing().equals("0 : 00"))
                 concateBasic("বন্ধের সময় : ", jobAdvertisementItem.getClosing());
-            if(!jobAdvertisementItem.getBreaks().equals(""))
+            if(!jobAdvertisementItem.getBreaks().equals("0 : 00"))
                 concateBasic("বিরতির সময় : ",jobAdvertisementItem.getBreaks());
             if(!jobAdvertisementItem.getOff_day().equals(""))
                 concateBasic("বন্ধের দিন : ", jobAdvertisementItem.getOff_day());
@@ -159,7 +161,7 @@ public class DetailsJobActivityNew extends Activity {
             result_concate="";
 
 
-            salary_range.setText("বেতন সীমা :" + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
+            salary_range.setText("বেতন সীমা : " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
 
 
            if(!jobAdvertisementItem.getReference_person().equals(""))
