@@ -131,7 +131,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
              public void onClick(View v) {
 				if(location[i]=="not found")
 				{
-					AlertMessage.showMessage(context, "দুঃখিত!",
+					AlertMessage.showMessage(context, " দুঃখিত!",
 							"পথ পাওয়া যায় নি ");
 				}
 				 else {
