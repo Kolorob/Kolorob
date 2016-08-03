@@ -554,7 +554,7 @@ public class EntertainmentServiceProviderTableNew {
         SQLiteDatabase db = openDB();
 
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_NODE_EMAIL+ " LIKE '%"+refids+"%'" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  + " AND "+ KEY_NODE_EMAIL+ " LIKE '%"+refids+"%'" , null);
         //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+place+"'"  , null);
         Log.d("Key Area","------"+KEY_NODE_ADDITIONAL);
          Log.d("Ref Id","------"+"SELECT * FROM " + TABLE_NAME + " WHERE " +KEY_AREA+" = '"+places+"'"  + " AND "+ KEY_NODE_ADDITIONAL+ " LIKE '%"+refids+"%'");
