@@ -40,6 +40,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 public class DisplayAllJobsActivity extends Activity {
 
     private ImageView close_button;
+    private ProgressDialog progress;
     private TextView tv_button;
         ArrayList<JobAdvertisementItem> jobAdvertisementItems;
         JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
@@ -53,7 +54,7 @@ public class DisplayAllJobsActivity extends Activity {
 
 
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+       final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("আপনি কি নতুন চাকুরি খুজতে চান? ");
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
@@ -66,7 +67,9 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
+                        alertDialog.cancel();
+                        progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
+                                "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
 
                         getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
                                     @Override
@@ -130,7 +133,7 @@ public class DisplayAllJobsActivity extends Activity {
                 jobAdvertisementTable.insertItem(si);
               // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
               //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
-
+                progress.dismiss();
                 displayData();
 
 
@@ -146,6 +149,7 @@ public class DisplayAllJobsActivity extends Activity {
 
     public void displayData()
     {
+
 
         jobAdvertisementItems= jobAdvertisementTable.jobAdvertisementItems();
 
@@ -186,6 +190,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
         joblist.setAdapter(displayAllJobList);
+
 
 
         joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
