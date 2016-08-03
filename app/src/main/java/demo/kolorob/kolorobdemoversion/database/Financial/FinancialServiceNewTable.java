@@ -352,7 +352,7 @@ public class FinancialServiceNewTable {
                 String[] tokens = getter.split(delims);
                 for (int ii=0;ii<tokens.length;ii++)
                 {
-                    if(Integer.parseInt(tokens[i])==k)
+                    if(Integer.parseInt(tokens[ii])==k)
                     {
                         nameslist.add(cursorToSubCatList(cursor2));
                     }
