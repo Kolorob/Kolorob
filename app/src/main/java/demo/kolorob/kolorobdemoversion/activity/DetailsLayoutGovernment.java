@@ -143,7 +143,7 @@ public class DetailsLayoutGovernment extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/9,width/15);
+        mlp.setMargins(width/15,0,width/90,width/15);
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
