@@ -33,7 +33,7 @@ android:layout_marginTop="20dp"
 
             <ImageView
                 android:layout_width="55dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/iv_kolorob_logo"
                 android:layout_marginLeft="35dp"
                 android:layout_marginBottom="1dp"
@@ -54,8 +54,8 @@ android:layout_marginTop="20dp"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="সকল চাকুরির তালিকা "
-                android:textSize="27dp"
+                android:text="চাকুরির তালিকা "
+                android:textSize="23dp"
                 android:paddingLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"/>

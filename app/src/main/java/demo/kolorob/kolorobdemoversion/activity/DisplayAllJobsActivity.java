@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,9 @@ public class DisplayAllJobsActivity extends Activity {
 
     private ImageView close_button;
     private ProgressDialog progress;
+    private int width;
+    private int height;
+    private ImageView iv_kolorob_logo;
     private TextView tv_button;
         ArrayList<JobAdvertisementItem> jobAdvertisementItems;
         JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
@@ -51,6 +55,9 @@ public class DisplayAllJobsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_all_jobs);
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        height= displayMetrics.heightPixels;
+        width=displayMetrics.widthPixels;
 
 
 
@@ -96,8 +103,12 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.show();
 
         close_button=(ImageView)findViewById(R.id.iv_close);
+        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+        close_button.getLayoutParams().height=width/11;
+        close_button.getLayoutParams().width=width/11;
         tv_button=(TextView)findViewById(R.id.tv_close);
-
+        iv_kolorob_logo.getLayoutParams().height=width/11;
+        iv_kolorob_logo.getLayoutParams().width=width/11;
 
         context=this;
 

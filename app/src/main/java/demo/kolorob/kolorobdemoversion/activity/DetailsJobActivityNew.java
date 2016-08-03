@@ -30,7 +30,8 @@ public class DetailsJobActivityNew extends Activity {
     int width,height;
     LinearLayout right_cross_button;
     ImageView left_job_icon;
-    TextView ups_text;
+    TextView ups_text,time;
+    int timer=0;
     String result_concate="";
     private ImageView close_button;
     ListView navlist,navlist1,navlist2;
@@ -80,6 +81,7 @@ public class DetailsJobActivityNew extends Activity {
 
         school_logo_default.getLayoutParams().height=width/7;
         school_logo_default.getLayoutParams().width=width/7;
+        time=(TextView)findViewById(R.id.time);
 
 
         left_job_icon.getLayoutParams().height=width/11;
@@ -87,9 +89,14 @@ public class DetailsJobActivityNew extends Activity {
 
         close_button.getLayoutParams().height=width/11;
         close_button.getLayoutParams().width=width/11;
+        middle_image.getLayoutParams().height= width/11;
+        middle_image.getLayoutParams().width=width/11;
 
+        left_image.getLayoutParams().height= width/11;
+        left_image.getLayoutParams().width=width/11;
 
-
+        right_image.getLayoutParams().height= width/11;
+        right_image.getLayoutParams().width=width/11;
 
 
 
@@ -138,14 +145,32 @@ public class DetailsJobActivityNew extends Activity {
             job_type.setText(result_concate);
             result_concate="";
 
+
             if(!jobAdvertisementItem.getOpening().equals("0 : 00"))
                 concateBasic("খোলার সময় : ",jobAdvertisementItem.getOpening());
+            else
+            timer++;
+            Log.d("TImer1","%%%%%%"+timer);
+
             if(!jobAdvertisementItem.getClosing().equals("0 : 00"))
                 concateBasic("বন্ধের সময় : ", jobAdvertisementItem.getClosing());
+            else
+                timer++;
+            Log.d("TImer2","%%%%%%"+timer);
             if(!jobAdvertisementItem.getBreaks().equals("0 : 00"))
                 concateBasic("বিরতির সময় : ",jobAdvertisementItem.getBreaks());
+            else
+                timer++;
+            Log.d("TImer3","%%%%%%"+timer);
             if(!jobAdvertisementItem.getOff_day().equals(""))
                 concateBasic("বন্ধের দিন : ", jobAdvertisementItem.getOff_day());
+            else
+                timer++;
+
+            Log.d("TImer4","%%%%%%"+timer);
+            if(timer>=4)
+                time.setVisibility(View.GONE);
+
 
 
             opening_time.setText(result_concate);
@@ -202,8 +227,7 @@ public class DetailsJobActivityNew extends Activity {
 //        params_middle_phone.width = width/3;
 //        middle_phone.setLayoutParams(params_middle_phone);
 
-//        middle_image.getLayoutParams().height= (lett_img*2)/3;
-//        middle_image.getLayoutParams().width=right_img/2;
+//
 //
 //        right_image.getLayoutParams().height= (lett_img*2)/3;
 //        right_image.getLayoutParams().width=right_img/2;
@@ -276,8 +300,13 @@ public String English_to_bengali_number_conversion(String english_number) {
     return concatResult;
 }
 
+    @Override
+    protected void onResume() {
+        timer=0;
+        super.onResume();
+    }
 
-    private String concateBasic(String value1,String value2){
+    private String concateBasic(String value1, String value2){
 
         if(!value2.equals("null")&&!value2.equals(""))
         {
