@@ -102,7 +102,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<EducationNewItem> educationServiceProvider = null;
     private ArrayList<GovernmentNewItem> governmentNewItems = null;
     MapView mapView,mapp;
-    String datevalue;
+    String datevalue,datevaluebn;
     private int categoryId;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
@@ -231,7 +231,8 @@ Date today=new Date();
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         if (diffInDays==0) datevalue="(আজকের তথ্য)";
         else
-        datevalue="( "+ String.valueOf(diffInDays) + " দিন আগের তথ্য)";
+        datevaluebn=EtoBconversion(String.valueOf(diffInDays));
+        datevalue="( "+ datevaluebn + " দিন আগের তথ্য)";
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
@@ -683,6 +684,33 @@ mapp=getMapView();
     @Override
     public void onClick(View v) {
 
+    }
+    public String EtoBconversion(String english_number) {
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+        }
+        return concatResult;
     }
 
 
