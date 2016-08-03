@@ -676,10 +676,18 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 setPlaceChoice(imc_met);
                 if(imc_met==AppConstants.BAUNIABADH) {
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
+                    setPlaceChoice("Mirpur-11");
                     callMapFragment(locationNameId);
+                    createData(currentCategoryID,"","Mirpur-11");
+                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+                    subCatItemList.setAdapter(adapter);
                 }
                 else {locationNameId=AppConstants.PLACE_PARIS_ROAD;
-                    callMapFragment(locationNameId);}
+                    setPlaceChoice("Mirpur-10");
+                    callMapFragment(locationNameId);
+                    createData(currentCategoryID,"","Mirpur-10");
+                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+                    subCatItemList.setAdapter(adapter);}
                 if(mapcalledstatus){
 
                 }
