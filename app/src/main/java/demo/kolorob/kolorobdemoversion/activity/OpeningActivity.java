@@ -78,7 +78,6 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
-import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
@@ -139,7 +138,7 @@ public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
-    private static final int NUMBER_OF_TASKS = 10;
+    private static final int NUMBER_OF_TASKS = 9;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
 
@@ -235,6 +234,10 @@ public class OpeningActivity extends Activity {
             else
 
             {
+
+                settings.edit().putLong("time", System.currentTimeMillis()).commit();
+// get the time and make a date out of it
+
 //                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
 //                pd.setIndeterminate(true);
 //                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
@@ -268,7 +271,9 @@ public class OpeningActivity extends Activity {
                                 countofDb=0 ;
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
-                                editor.putInt("KValue", countofDb);
+                                settings.edit().putLong("time", System.currentTimeMillis()).commit();
+
+                               editor.putInt("KValue", countofDb);
                                 editor.commit();
 //                                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
 //                                pd.setIndeterminate(true);
@@ -403,26 +408,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/get_sp_rating?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
 
-
-                                try {
-                                    JSONArray jo = new JSONArray(apiContent);
-                                    new SaveRatingTask(OpeningActivity.this).execute(jo);
-                                    // String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    // if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                    //     new SaveSubCategoryListTask(OpeningActivity.this).execute(jo.getJSONArray(AppConstants.KEY_DATA));
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -1356,32 +1342,7 @@ public class OpeningActivity extends Activity {
             return new Long(0);
         }
     }
-    class SaveRatingTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
-        public SaveRatingTask(Context ctx) {
-            super(ctx);
-        }
 
-        protected Long doInBackground(JSONArray... jsonObjects) {
-            JSONArray RatingArray = jsonObjects[0];
-            RatingTable subCatTable = new RatingTable(OpeningActivity.this);
-            subCatTable.dropTable();
-            int subCatCount = RatingArray.length();
-            for (int i = 0; i < subCatCount; i++) {
-                try {
-                    JSONObject jo = RatingArray.getJSONObject(i);
-                    RatingModel si = RatingModel.parseRatingModel(jo);
-                    subCatTable.insertItem(si);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            si22 = subCatTable.getAllCategories();
-            si22.size();
-            return new Long(0);
-        }
-    }
 
     class SaveHealthtDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveHealthtDataTask(Context ctx) {
