@@ -334,7 +334,7 @@ Date today=new Date();
                             ratingavg=ratingavgbn.concat(datevalue);
                         }
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerGov(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
+                        drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
                 }
                 break;
