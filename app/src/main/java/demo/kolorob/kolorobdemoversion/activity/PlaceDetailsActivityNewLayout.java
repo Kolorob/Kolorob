@@ -1430,7 +1430,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 groups.removeAllElements();
                 RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
                 Collections.sort(RefEnt);
-                printnamesent=entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+
 
 
                 for (int j = 0; j < RefEnt.size(); j++) {
