@@ -282,7 +282,7 @@ public class GovernmentNewTable {
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_NAME_EN, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
 
         if (cursor.moveToFirst()) {
             do {

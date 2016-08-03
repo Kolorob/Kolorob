@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text="চাকুরীর বিস্তারিত বিবরন "
                         android:textSize="30dp"
-                        android:gravity="center_horizontal"
+                        android:gravity="center"
 
                         android:layout_marginLeft="5dp"
 
@@ -154,7 +154,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/school_logo_default"
-                                android:id="@+id/JobIcon"/>
+                                android:id="@+id/school_logo_default"/>
 
 
                         </LinearLayout>

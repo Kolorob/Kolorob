@@ -1399,6 +1399,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 for (int j = 0; j < print.size(); j++) {
                     Group group = new Group(print.get(j));
                     printnames = null;
+
                     printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
 
 
@@ -1451,6 +1452,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 for (int j = 0; j < printgov.size(); j++) {
                     Group group = new Group(printgov.get(j));
                     printgovs = null;
+
                     printgovs = governmentNewTable.Govnames(printgov.get(j),placeChoice);
                     for (int i = 0; i < printgovs.size(); i++) {
                         group.childrengov.add(i, printgovs.get(i));

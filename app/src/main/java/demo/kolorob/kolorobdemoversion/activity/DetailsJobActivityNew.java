@@ -25,7 +25,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 public class DetailsJobActivityNew extends Activity {
     Dialog dialog;
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
-    ImageView left_image,middle_image,right_image;
+    ImageView left_image,middle_image,right_image,school_logo_default;
     TextView address_text,phone_text,email_text,itemopeningTime;
     int width,height;
     LinearLayout left_job_icon,right_cross_button;
@@ -70,11 +70,15 @@ public class DetailsJobActivityNew extends Activity {
         right_image=(ImageView)findViewById(R.id.right_side_email);
 
         close_button=(ImageView)findViewById(R.id.close_button);
+        school_logo_default=(ImageView)findViewById(R.id.school_logo_default);
         break_time=(TextView)findViewById(R.id.break_time);
-       // off_day=(TextView)findViewById(R.id.off_day);
+        // off_day=(TextView)findViewById(R.id.off_day);
         opening_time=(TextView)findViewById(R.id.opening_time);
         left_job_icon=(LinearLayout)findViewById(R.id.left_job_icon);
         right_cross_button=(LinearLayout) findViewById(R.id.right_cross_button);
+
+        school_logo_default.getLayoutParams().height=width/7;
+        school_logo_default.getLayoutParams().width=width/7;
 
 
         LinearLayout.LayoutParams left_job_icons = (LinearLayout.LayoutParams) left_job_icon.getLayoutParams();
@@ -82,10 +86,10 @@ public class DetailsJobActivityNew extends Activity {
         left_job_icons.width = width / 7;
         left_job_icon.setLayoutParams(left_job_icons);
 
-        LinearLayout.LayoutParams params_right_emails = (LinearLayout.LayoutParams) right_cross_button.getLayoutParams();
-        params_right_emails.height = width /7;;
-        params_right_emails.width = width /7;;
-        right_cross_button.setLayoutParams(params_right_emails);
+
+
+
+
 
         job_type=(TextView)findViewById(R.id.job_type);
        // job_responsibility=(TextView)findViewById(R.id.job_responsibility);
@@ -242,6 +246,33 @@ public class DetailsJobActivityNew extends Activity {
 //    public void closepage(View v){
 //        this.finish();
 //    }
+public String English_to_bengali_number_conversion(String english_number) {
+    int v = english_number.length();
+    String concatResult = "";
+    for (int i = 0; i < v; i++) {
+        if (english_number.charAt(i) == '1')
+            concatResult = concatResult + "১";
+        else if (english_number.charAt(i) == '2')
+            concatResult = concatResult + "২";
+        else if (english_number.charAt(i) == '3')
+            concatResult = concatResult + "৩";
+        else if (english_number.charAt(i) == '4')
+            concatResult = concatResult + "৪";
+        else if (english_number.charAt(i) == '5')
+            concatResult = concatResult + "৫";
+        else if (english_number.charAt(i) == '6')
+            concatResult = concatResult + "৬";
+        else if (english_number.charAt(i) == '7')
+            concatResult = concatResult + "৭";
+        else if (english_number.charAt(i) == '8')
+            concatResult = concatResult + "৮";
+        else if (english_number.charAt(i) == '9')
+            concatResult = concatResult + "৯";
+        else if (english_number.charAt(i) == '0')
+            concatResult = concatResult + "০";
+    }
+    return concatResult;
+}
 
 
     private String concateBasic(String value1,String value2){
