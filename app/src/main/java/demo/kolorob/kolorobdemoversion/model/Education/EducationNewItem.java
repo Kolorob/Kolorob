@@ -60,6 +60,7 @@ public class EducationNewItem implements Serializable {
     int categoryId;
 
     String refnumm;
+    String rating;
 
     public EducationNewItem(int eduId, String nameen, String namebn, String edtype, String shift, String studentno,
                             String teachersno, String classno, String additional, String malestudent, String femalestudent,
@@ -70,7 +71,7 @@ public class EducationNewItem implements Serializable {
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation, String address, String openingtime,
                             String closetime, String breaktime, String offday, String registeredwith,
-                            String registerednumber, int categoryId, String refnumm) {
+                            String registerednumber, int categoryId, String refnumm,String rating) {
         this.eduId = eduId;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -120,6 +121,7 @@ public class EducationNewItem implements Serializable {
         this.registerednumber = registerednumber;
         this.categoryId = categoryId;
         this.refnumm = refnumm;
+        this.rating=rating;
     }
 
     public int getEduId() {
@@ -474,6 +476,14 @@ public class EducationNewItem implements Serializable {
         this.breaktime = breaktime;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     public String getOffday() {
         return offday;
     }
@@ -578,11 +588,12 @@ public class EducationNewItem implements Serializable {
 
         String k=jr.toString();
         String _refnumm=k.substring(1,k.length()-1);
+        String _rating=jo.getString("rating");
         return new EducationNewItem(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_classno,_additional,_malestudent,
                 _femalestudent,_specialneeds,_washroom_no,_washroom_male,_washroomcleanliness,_watercondition,_watersource,_averagestudent,_washroomfemale,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,_address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
-                _regnum,_catid,_refnumm);
+                _regnum,_catid,_refnumm,_rating);
     }
 }

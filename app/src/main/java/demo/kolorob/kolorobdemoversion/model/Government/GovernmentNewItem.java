@@ -44,6 +44,7 @@ public class GovernmentNewItem implements Serializable {
     int categoryId;
 
     String refnumm;
+    String rating;
 
     public GovernmentNewItem(int finId, String nameen, String namebn, String lat, String lon, String floor,
                              String housename, String houseno, String road, String line, String avenue, String block,
@@ -51,7 +52,7 @@ public class GovernmentNewItem implements Serializable {
                              String country, String node_contact, String node_contact2, String node_email,
                              String node_website, String node_facebook, String node_designation, String address,
                              String openingtime, String closetime, String breaktime, String offday,
-                             String registeredwith, String registerednumber, int categoryId, String refnumm) {
+                             String registeredwith, String registerednumber, int categoryId, String refnumm,String rating) {
         this.finId = finId;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -85,6 +86,7 @@ public class GovernmentNewItem implements Serializable {
         this.registerednumber = registerednumber;
         this.categoryId = categoryId;
         this.refnumm = refnumm;
+        this.rating=rating;
     }
 
     public String getAddress() {
@@ -96,6 +98,14 @@ public class GovernmentNewItem implements Serializable {
     }
 
     public GovernmentNewItem(int finId, String nameen, String namebn) {
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public int getFinId() {
@@ -398,11 +408,12 @@ public class GovernmentNewItem implements Serializable {
 
         String k=jr.toString();
         String _refnumm=k.substring(1,k.length()-1);
+        String _rating=jo.getString("rating");
         return new GovernmentNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,
                 _node_designation,_address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
-                _regnum,_catid,_refnumm);
+                _regnum,_catid,_refnumm,_rating);
     }
 }

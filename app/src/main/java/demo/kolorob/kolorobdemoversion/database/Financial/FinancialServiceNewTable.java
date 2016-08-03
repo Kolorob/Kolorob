@@ -52,7 +52,7 @@ public class FinancialServiceNewTable {
 
     private static final String KEY_CATID = "_catid"; // 1 - text
     private static final String KEY_REFNUMS = "_refnumm"; //
-
+    private static final String KEY_RATING = "_rating"; //
 
     private Context tContext;
 
@@ -97,7 +97,8 @@ public class FinancialServiceNewTable {
                 + KEY_SERVICE_REGWITH + "  TEXT  , " // 0 - int "
                 + KEY_SERVICE_REGNO + "  TEXT  , " // 0 - int "
                 + KEY_CATID + " INTEGER , "
-                + KEY_REFNUMS + " TEXT ,   PRIMARY KEY(" + KEY_NODE_ID + "))";
+                + KEY_REFNUMS + " TEXT , "
+                + KEY_RATING + " TEXT ,   PRIMARY KEY(" + KEY_NODE_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -127,7 +128,7 @@ public class FinancialServiceNewTable {
                 financialNewItem.getBreaktime(),
                 financialNewItem.getClosetime(),
                 financialNewItem.getOffday(), financialNewItem.getRegisteredwith(),
-                financialNewItem.getRegisterednumber(),financialNewItem.getCategoryId(),financialNewItem.getRefnumm()
+                financialNewItem.getRegisterednumber(),financialNewItem.getCategoryId(),financialNewItem.getRefnumm(),financialNewItem.getRating()
         );
     }
     private long insertItem(int finId, String nameen, String namebn, String lat, String lon,
@@ -135,7 +136,7 @@ public class FinancialServiceNewTable {
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
-                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm,String rating) {
         if (isFieldExist(finId)) {
             return updateItem(
                     finId,
@@ -160,7 +161,7 @@ public class FinancialServiceNewTable {
                     node_facebook,
                     node_designation, address, openingtime,
                     closetime,breaktime,offday  ,registeredwith,
-                    registerednumber,categoryId,refnumm);
+                    registerednumber,categoryId,refnumm,rating);
 
         }
         ContentValues rowValue = new ContentValues();
@@ -197,6 +198,7 @@ public class FinancialServiceNewTable {
         rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
+        rowValue.put(KEY_RATING, rating);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -208,7 +210,7 @@ public class FinancialServiceNewTable {
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
-                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm,String rating) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , finId);
@@ -244,7 +246,7 @@ public class FinancialServiceNewTable {
         rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
-
+        rowValue.put(KEY_RATING, rating);
 
 
         SQLiteDatabase db = openDB();
@@ -308,7 +310,7 @@ public class FinancialServiceNewTable {
                         cursor.getString(14),cursor.getString(15),cursor.getString(16),cursor.getString(17),cursor.getString(18),
                         cursor.getString(19),cursor.getString(20),cursor.getString(21),cursor.getString(22),cursor.getString(23),
                         cursor.getString(24),cursor.getString(25), cursor.getString(26),cursor.getString(27),cursor.getString(28),
-                        cursor.getString(29),cursor.getString(30),cursor.getInt(31),cursor.getString(32));
+                        cursor.getString(29),cursor.getString(30),cursor.getInt(31),cursor.getString(32),cursor.getString(33));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -447,11 +449,12 @@ public class FinancialServiceNewTable {
         String _regnum = cursor.getString(30);
         int _catid=cursor.getInt(31);
         String _refnumm=cursor.getString(32);
+        String _rating=cursor.getString(33);
         return new FinancialNewItem(_finId,_nameen,_namebn,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,_address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
-                _regnum,_catid,_refnumm);
+                _regnum,_catid,_refnumm,_rating);
 
     }
 

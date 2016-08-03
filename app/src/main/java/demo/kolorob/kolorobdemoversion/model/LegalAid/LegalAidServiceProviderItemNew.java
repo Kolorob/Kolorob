@@ -1,8 +1,5 @@
 package demo.kolorob.kolorobdemoversion.model.LegalAid;
 
-import android.util.Log;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,13 +41,15 @@ public class LegalAidServiceProviderItemNew implements Serializable {
     private String line;
     private String avenue;
     private String police_station;
+    String rating;
+
 
     public LegalAidServiceProviderItemNew(String identifierId, String post_office, int legalaidSubCategoryId, String categoryId, String legalaidNameEng, String legalaidNameBan, String contactPersonDesignation, String contactNo, String emailAddress, String websiteLink, String fbLink, String registeredWith, String registrationNo, String additionalInfo, String area, String address, String latitude, String longitude, String openingtime, String breaktime, String closingtime, String landmark, String road, String block, String breaktime2, String off_day, String floor
             , String house_name,
              String house_no,
              String line,
              String avenue,
-             String police_station) {
+             String police_station,String rating) {
         this.identifierId = identifierId;
         this.post_office = post_office;
         this.legalaidSubCategoryId = legalaidSubCategoryId;
@@ -88,7 +87,16 @@ public class LegalAidServiceProviderItemNew implements Serializable {
         this.line=line;
         this.avenue=avenue;
         this.police_station=police_station;
+        this.rating=rating;
 
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getOpeningtime() {
@@ -293,7 +301,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
 
 
         int _legalaidSubCategoryId = 2;
-
+        String _rating=jo.getString("rating");
 
 
 
@@ -302,7 +310,7 @@ public class LegalAidServiceProviderItemNew implements Serializable {
                 _categoryId,_legalaidNameEng, _legalaidBan, _contactPersonDesignation, _contactNo, _emailAddress, _websiteLink,
                 _fbLink, _registeredWith, _registrationNo,
                 _additionalInfo, _area, _address, _latitude, _longitude, _openingtime, _breaktime, _closingtime, _landmark, _road, _block, _breaktime2,
-                off_day,floor,house_name,house_no,line,avenue,police_station);
+                off_day,floor,house_name,house_no,line,avenue,police_station,_rating);
 
     }
 }

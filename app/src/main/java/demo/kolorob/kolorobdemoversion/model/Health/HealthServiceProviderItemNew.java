@@ -1,7 +1,5 @@
 package demo.kolorob.kolorobdemoversion.model.Health;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -94,6 +92,7 @@ public class HealthServiceProviderItemNew implements Serializable {
     private String family_privacy;
     private String category;
     private String references;
+    String rating;
 
 
 
@@ -178,7 +177,7 @@ public class HealthServiceProviderItemNew implements Serializable {
                     String family_contraceptive,
                     String family_privacy,
                     String category,
-                    String references){
+                    String references,String rating){
 
         this.id=id;
         this.node_name=node_name;
@@ -280,6 +279,7 @@ public class HealthServiceProviderItemNew implements Serializable {
         this.break_time = break_time;
         this.closing_time = closing_time;
         this.off_day = off_day;
+        this.rating=rating;
 
 
 
@@ -424,6 +424,14 @@ public class HealthServiceProviderItemNew implements Serializable {
 
     public String getHouse_no() {
         return house_no;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public void setHouse_no(String house_no) {
@@ -1173,7 +1181,7 @@ public class HealthServiceProviderItemNew implements Serializable {
       //  Log.d("references","======"+references.length());
 
 
-
+String _rating=jo.getString("rating");
 
         return new HealthServiceProviderItemNew(
                 id,
@@ -1255,7 +1263,7 @@ public class HealthServiceProviderItemNew implements Serializable {
                 family_contraceptive,
                 family_privacy,
                 category,
-                references);
+                references,_rating);
 
 
 

@@ -72,6 +72,7 @@ public class EducationNewTable {
 
     private static final String KEY_CATID = "_catid"; // 1 - text
     private static final String KEY_REFNUMS = "_refnumm"; //
+    private static final String KEY_RATING = "_rating"; //
 
 
     private Context tContext;
@@ -136,7 +137,9 @@ public class EducationNewTable {
                 + KEY_SERVICE_REGWITH + "  TEXT  , " // 0 - int "
                 + KEY_SERVICE_REGNO + "  TEXT  , " // 0 - int "
                 + KEY_CATID + " INTEGER , "
-                + KEY_REFNUMS + " TEXT ,   PRIMARY KEY(" + KEY_NODE_ID + "))";
+                + KEY_REFNUMS + " TEXT , "
+                + KEY_RATING + " TEXT ,   PRIMARY KEY(" + KEY_NODE_ID + "))";
+
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -167,7 +170,7 @@ public class EducationNewTable {
                 educationNewItem.getBreaktime(),
                 educationNewItem.getClosetime(),
                 educationNewItem.getOffday(), educationNewItem.getRegisteredwith(),
-                educationNewItem.getRegisterednumber(),educationNewItem.getCategoryId(),educationNewItem.getRefnumm()
+                educationNewItem.getRegisterednumber(),educationNewItem.getCategoryId(),educationNewItem.getRefnumm(),educationNewItem.getRating()
 
         );
     }
@@ -179,7 +182,7 @@ public class EducationNewTable {
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
-                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm,String rating) {
         if (isFieldExist(eduId)) {
             return updateItem(
                     eduId,
@@ -210,7 +213,7 @@ public class EducationNewTable {
                     node_facebook,
                     node_designation,address,  openingtime,
                     closetime,breaktime,offday  ,registeredwith,
-                    registerednumber,categoryId,refnumm);
+                    registerednumber,categoryId,refnumm,rating);
 
         }
         ContentValues rowValue = new ContentValues();
@@ -265,6 +268,7 @@ public class EducationNewTable {
         rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
+        rowValue.put(KEY_RATING, rating);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
@@ -279,7 +283,7 @@ public class EducationNewTable {
                             String block, String area, String landmark, String postoffice, String policestation, String city,
                             String country, String node_contact, String node_contact2, String node_email, String node_website,
                             String node_facebook, String node_designation,String address, String openingtime, String closetime, String breaktime,
-                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm) {
+                            String offday, String registeredwith, String registerednumber, int categoryId, String refnumm,String rating) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
@@ -333,7 +337,7 @@ public class EducationNewTable {
         rowValue.put(KEY_SERVICE_REGNO, registerednumber);
         rowValue.put(KEY_CATID , categoryId);
         rowValue.put(KEY_REFNUMS, refnumm);
-
+        rowValue.put(KEY_RATING, rating);
 
 
         SQLiteDatabase db = openDB();
@@ -517,7 +521,7 @@ return nameslist;
                cursor.getString(45),
                cursor.getString(46),
                 cursor.getInt(47),
-               cursor.getString(48));
+               cursor.getString(48),cursor.getString(49));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -599,12 +603,13 @@ return nameslist;
         String _regnum = cursor.getString(46);
         int _catid=cursor.getInt(47);
         String _refnumm=cursor.getString(48);
+        String _rating=cursor.getString(49);
         return new EducationNewItem(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_classno,_additional,_malestudent,
                 _femalestudent,_specialneeds,_washroom_no,_washroom_male,_washroomcleanliness,_watercondition,_watersource,_averagestudent,_washroomfemale,_lat, _lon,_floor,_housename,_houseno,_road,_line,_avenue,_block,_area,_landmark,_postoffice,_policestation,
                 _city,_country,_node_contact,_node_contact2,_node_email,_node_website,_node_facebook,_node_designation,_Address,
                 _opentime,
                 _breaktime,_closetime,_offday,_regwith,
-                _regnum,_catid,_refnumm);
+                _regnum,_catid,_refnumm,_rating);
 
     }
 
