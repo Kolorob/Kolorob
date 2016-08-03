@@ -334,7 +334,7 @@ public class DetailsLayoutGovernment extends Activity {
                     }
 
 
-                    finish();
+                  //  finish();
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){

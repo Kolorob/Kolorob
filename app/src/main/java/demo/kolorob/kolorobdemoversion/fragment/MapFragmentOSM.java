@@ -168,7 +168,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     public ArrayList<HealthServiceProviderItemNew> getHealthServiceProvider() {
         return healthServiceProvider;
     }
-    String ratingavg;
+    String ratingavg,ratingavgbn;
     public void setHealthServiceProvider(ArrayList<HealthServiceProviderItemNew> et) {
         this.healthServiceProvider = et;
     }
@@ -229,10 +229,13 @@ Date today=new Date();
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue="(আজকের তথ্য)";
+        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
         else
-        datevaluebn=EtoBconversion(String.valueOf(diffInDays));
-        datevalue="( "+ datevaluebn + " দিন আগের তথ্য)";
+        {
+            datevaluebn=EtoBconversion(String.valueOf(diffInDays));
+            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+        }
+
         switch (categoryId) {
             case AppConstants.EDUCATION:
                 if (educationServiceProvider != null) {
@@ -249,7 +252,11 @@ Date today=new Date();
                             ratingavg="পাওয়া যায় নি";
 
                         }
-                        else ratingavg=ratingavg.concat(datevalue);
+                        else  {
+                            ratingavgbn=EtoBconversion(ratingavg);
+
+                         ratingavg=ratingavgbn.concat(datevalue);
+                        }
                         longDouble = Double.parseDouble(et.getLon());
                       GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
@@ -272,7 +279,11 @@ Date today=new Date();
                         ratingavg="পাওয়া যায় নি";
 
                     }
-                    else ratingavg=ratingavg.concat(datevalue);
+                    else  {
+                        ratingavgbn=EtoBconversion(ratingavg);
+
+                        ratingavg=ratingavgbn.concat(datevalue);
+                    }
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -293,7 +304,11 @@ Date today=new Date();
                         ratingavg="পাওয়া যায় নি";
 
                     }
-                    else ratingavg=ratingavg.concat(datevalue);
+                    else  {
+                        ratingavgbn=EtoBconversion(ratingavg);
+
+                        ratingavg=ratingavgbn.concat(datevalue);
+                    }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
                     drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeAdditional(), et.getNodeId(), subcategotyId);
                 }
@@ -313,9 +328,13 @@ Date today=new Date();
                             ratingavg="পাওয়া যায় নি";
 
                         }
-                        else ratingavg=ratingavg.concat(datevalue);
+                        else  {
+                            ratingavgbn=EtoBconversion(ratingavg);
+
+                            ratingavg=ratingavgbn.concat(datevalue);
+                        }
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerGov(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
+                        drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
                 }
                 break;
@@ -335,7 +354,11 @@ Date today=new Date();
                         ratingavg="পাওয়া যায় নি";
 
                     }
-                    else ratingavg=ratingavg.concat(datevalue);
+                    else  {
+                        ratingavgbn=EtoBconversion(ratingavg);
+
+                        ratingavg=ratingavgbn.concat(datevalue);
+                    }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
                     drawMarkerLeg(point, et.getLegalaidNameBan(), ratingavg, et.getContactNo(), et.getIdentifierId(), subcategotyId);
                 }
@@ -354,7 +377,11 @@ Date today=new Date();
                         ratingavg="পাওয়া যায় নি";
 
                     }
-                    else ratingavg=ratingavg.concat(datevalue);
+                    else  {
+                        ratingavgbn=EtoBconversion(ratingavg);
+
+                        ratingavg=ratingavgbn.concat(datevalue);
+                    }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
                     drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(), subcategotyId2);
                 }
@@ -709,6 +736,8 @@ mapp=getMapView();
                 concatResult = concatResult + "৯";
             else if (english_number.charAt(i) == '0')
                 concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '.')
+                concatResult = concatResult + ".";
         }
         return concatResult;
     }
