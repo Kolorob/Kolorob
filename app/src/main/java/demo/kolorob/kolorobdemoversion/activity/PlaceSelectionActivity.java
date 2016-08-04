@@ -269,7 +269,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                         Log.d(">>>", "Start Json Parsing " + apiContent);
                         try {
                             JSONObject jo = new JSONObject(apiContent);
-                            Log.d(">>>", "JsonObject: " + jo);
+                            Log.d(">>>", "JsonObject: " + current_version);
                             Double remote_version = jo.getDouble("version");
 
                             if (remote_version > current_version) {
@@ -318,8 +318,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         builder.setNumber(100);
         //   builder.build();
 
-        builder.setContentTitle("Update kolorob").setContentText("New Version of Kolorob is Available")
-                .setSmallIcon(R.drawable.kolorob_logo_first_page).getNotification();
+        builder.setContentTitle("কলরব আপডেট করুন").setContentText("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে")
+                .setSmallIcon(R.drawable.notify_logo_1).getNotification();
 
         myNotication = builder.getNotification();
         manager.notify(11, myNotication);
