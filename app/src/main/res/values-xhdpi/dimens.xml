@@ -11,7 +11,7 @@
     <dimen name="comparelogoleft">30dp</dimen>
     <dimen name="search_margin">15dp</dimen>
     <dimen name="catimagetop">10dp</dimen>
-    <dimen name="nav_header_heightcat2">16dp</dimen>
+    <dimen name="nav_header_heightcat2">40dp</dimen>
     <dimen name="bottomtransport">50dp</dimen>
     <dimen name="catlayouttop">10dp</dimen>
     <dimen name="transportlayout">200dp</dimen>
