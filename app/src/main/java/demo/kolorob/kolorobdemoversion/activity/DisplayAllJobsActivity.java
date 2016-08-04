@@ -46,10 +46,10 @@ public class DisplayAllJobsActivity extends Activity {
     private int height;
     private ImageView iv_kolorob_logo;
     private TextView tv_button;
-        ArrayList<JobAdvertisementItem> jobAdvertisementItems;
-        JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
-        Context context;
-        ListView joblist;
+    ArrayList<JobAdvertisementItem> jobAdvertisementItems;
+    JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
+    Context context;
+    ListView joblist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class DisplayAllJobsActivity extends Activity {
 
 
 
-       final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("আপনি কি নতুন চাকুরি খুজতে চান? ");
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
@@ -140,10 +140,10 @@ public class DisplayAllJobsActivity extends Activity {
                 JSONObject jo = joblistArray.getJSONObject(i);
                 JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(i+1,jo);
 
-             //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
+                //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
                 jobAdvertisementTable.insertItem(si);
-              // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
-              //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
+                // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
+                //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
                 progress.dismiss();
                 displayData();
 
@@ -170,7 +170,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         String[] salary_range = new String[size];
 
-        long[] remaining_date = new long[size];
+        String[] remaining_date = new String[size];
 
         String[] address = new String[size];
 
@@ -186,7 +186,7 @@ public class DisplayAllJobsActivity extends Activity {
 
             tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
             salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
-            remaining_date[increment]= remaining_date(jobAdvertisementItem.getApplication_last_date());
+            remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
             address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
             contact_number[increment] = jobAdvertisementItem.getMobile1();
             positions[increment] = jobAdvertisementItem.getPosition();
@@ -223,7 +223,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         Datetime = dateformat.format(c.getTime());
-      //  Log.d(">>>>>","today "+Datetime);
+        //  Log.d(">>>>>","today "+Datetime);
         Date enddate=new Date();
         Date today=new Date();
 
@@ -231,8 +231,8 @@ public class DisplayAllJobsActivity extends Activity {
             enddate=dateformat.parse(lastDate);
             today= dateformat.parse(Datetime);
 
-          //  Log.d(">>>>>","today "+today);
-          //  Log.d(">>>>>","endDay "+enddate);
+            //  Log.d(">>>>>","today "+today);
+            //  Log.d(">>>>>","endDay "+enddate);
 
 
         }
