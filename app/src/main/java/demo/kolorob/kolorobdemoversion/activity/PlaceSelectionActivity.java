@@ -273,7 +273,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                             Double remote_version = jo.getDouble("version");
 
                             if (remote_version > current_version) {
-                                Toast.makeText(PlaceSelectionActivity.this, "You must update the App =)",
+                                Toast.makeText(PlaceSelectionActivity.this, "কলরবের নতুন ভার্সন পাওয়া যাচ্ছে",
                                         Toast.LENGTH_LONG).show();
                                 generateNotification();
                             }
