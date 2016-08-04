@@ -434,6 +434,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         // create an alert dialog
         AlertDialog alerts = alertDialogBuilder.create();
         alerts.show();
+//        alerts.getWindow().setLayout((height*3/7), (height*4/7));
+
+
     }
 
 
