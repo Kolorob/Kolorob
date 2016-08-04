@@ -68,6 +68,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     private Notification myNotication;
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
+    Intent i;
     Float  ratings;
     Boolean click=false;
     float[][] mirpur10Coords = {
@@ -244,6 +245,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         try {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+            SharedPreferencesHelper.setVersion(PlaceSelectionActivity.this,app_ver);
         } catch (PackageManager.NameNotFoundException e) {
             // Log.e(tag, e.getMessage());
 
@@ -288,8 +290,14 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
     public void generateNotification() {
         String url = "https://play.google.com/store/apps/details?id=demo.kolorob.kolorobdemoversion&hl=en";
-        Intent i = new Intent(Intent.ACTION_VIEW);
+
+
+        i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
+
+
+
+      //  startActivity(i);
         // i.setData(Uri.parse("package:demo.kolorob.kolorobdemoversion"));
 
         //Intent intent = new Intent(this,NotificationView.class);
@@ -299,7 +307,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         Notification.Builder builder = new Notification.Builder(PlaceSelectionActivity.this);
 
-        builder.setAutoCancel(false);
+        builder.setAutoCancel(true);
         builder.setTicker("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে");
         builder.setContentTitle("কলরব ভার্সন");
         //  builder.setContentText("To update click here.");

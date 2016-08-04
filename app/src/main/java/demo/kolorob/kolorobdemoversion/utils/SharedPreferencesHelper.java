@@ -37,6 +37,7 @@ public final class SharedPreferencesHelper {
 	private static final String USER = "user";
 	private static final String NUMBER = "number";
 	private static final String EMAIL = "email";
+	private static final String VERSION = "version";
 	private static final String FEEDBACK = "feedback";
 	private static final String COMAPARE_1 = "compare1";
 	private static final String COMPARE_2 = "compare";
@@ -102,6 +103,21 @@ public final class SharedPreferencesHelper {
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
 		final Editor editor = prefs.edit();
 		editor.putString(SharedPreferencesHelper.EMAIL, user);
+		editor.commit();
+	}
+
+
+	public static String getVersion(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.VERSION, "");
+	}
+
+	public static void setVersion(final Context ctx, final String user) {
+		final SharedPreferences prefs = ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor = prefs.edit();
+		editor.putString(SharedPreferencesHelper.VERSION, user);
 		editor.commit();
 	}
 

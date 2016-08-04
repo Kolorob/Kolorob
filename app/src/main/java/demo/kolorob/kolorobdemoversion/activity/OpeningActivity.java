@@ -125,6 +125,7 @@ import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -141,6 +142,8 @@ public class OpeningActivity extends Activity {
     private static final int NUMBER_OF_TASKS = 9;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
+    String app_ver="";
+    Boolean drop=false;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -195,6 +198,23 @@ public class OpeningActivity extends Activity {
         setContentView(R.layout.activity_opening);
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
+        try
+        {
+            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+
+            Float currentVersion= Float.parseFloat(app_ver);
+            Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
+
+            if(currentVersion>=previousVersion)
+                drop=true;
+            else
+                drop=false;
+
+        }
+        catch (Exception e)
+        {
+
+        }
 
 
         context = this;
@@ -1354,6 +1374,9 @@ public class OpeningActivity extends Activity {
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray allData = jsonArrays[0];
             HealthServiceProviderTableNew healthServiceProviderTableNew = new HealthServiceProviderTableNew(OpeningActivity.this);
+            if(drop)
+                healthServiceProviderTableNew.dropTable();
+
             HealthDatSize = allData.length();
 
             Log.d("HealthData","********"+HealthDatSize);
@@ -1393,8 +1416,10 @@ public class OpeningActivity extends Activity {
 
         private void SaveSpecialistData(JSONObject jsonObject, int foreign_key) {
             HealthSpecialistTableDetails healthVaccineTableDetails = new HealthSpecialistTableDetails(OpeningActivity.this);
+            healthVaccineTableDetails.dropTable();
             try {
                 HealthSpecialistItemDetails healthSpecialistItemDetails = HealthSpecialistItemDetails.parseHealthSpecialistItem(jsonObject, foreign_key);
+
                 healthVaccineTableDetails.insertItemHealth(healthSpecialistItemDetails);
 
             } catch (JSONException e) {
@@ -1405,6 +1430,7 @@ public class OpeningActivity extends Activity {
 
         private void SaveHealthVaccineData(JSONObject jsonObject, int foreign_key) {
             HealthVaccineTableDetails healthVaccineTableDetails = new HealthVaccineTableDetails(OpeningActivity.this);
+            healthVaccineTableDetails.dropTable();
             try {
                 HealthVaccineItemDetails healthVaccineItemDetails = HealthVaccineItemDetails.parseHealthVaccinesItem(jsonObject, foreign_key);
                 healthVaccineTableDetails.insertItemHealth(healthVaccineItemDetails);
@@ -1427,12 +1453,14 @@ public class OpeningActivity extends Activity {
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray allData = jsonArrays[0];
             int entDataSize = allData.length();
+            EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(OpeningActivity.this);
+
+                entertainmentServiceProviderTableNew.dropTable();
 
             for (int i = 0; i < entDataSize; i++) {
                 try {
                     JSONObject jsonObject = allData.getJSONObject(i);
-                    EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(OpeningActivity.this);
-                    //entertainmentServiceProviderTableNew.dropTable();
+
                     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew = EntertainmentServiceProviderItemNew.parseEntertainmentServiceProviderItem(jsonObject, i);
                     entertainmentServiceProviderTableNew.insertItem(entertainmentServiceProviderItemNew);
 
@@ -1455,6 +1483,7 @@ public class OpeningActivity extends Activity {
 
         private void Saverspot_detailsData(JSONObject jsonObject, int foreign_key) {
             EntertainmetTypeTable entertainmetTypeTable = new EntertainmetTypeTable(OpeningActivity.this);
+            entertainmetTypeTable.dropTable();
             try {
 
                 EntertainmentTypeItem entertainmentTypeItem = EntertainmentTypeItem.parseEntertainmentTypeItem(foreign_key, jsonObject);
@@ -1584,13 +1613,14 @@ public class OpeningActivity extends Activity {
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray legal_array = jsonArrays[0];
             int p = legal_array.length();
-
+            LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(OpeningActivity.this);
+                legalAidServiceProviderTableNew.dropTable();
 
             for (int i = 0; i < p; i++) {
                 try {
                     JSONObject jsonObject = legal_array.getJSONObject(i);
-                    LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(OpeningActivity.this);
                     LegalAidServiceProviderItemNew legalAidServiceProviderItemNew = LegalAidServiceProviderItemNew.parseLegalAidServiceProviderItemNew(jsonObject);
+
                     legalAidServiceProviderTableNew.insertItem(legalAidServiceProviderItemNew);
                     if (jsonObject.has("lservice_details")) {
                         JSONArray lservice_details = jsonObject.getJSONArray("lservice_details");
@@ -1613,6 +1643,7 @@ public class OpeningActivity extends Activity {
 
         private void SaveLegalDetailsData(JSONObject jsonObject, int foreign_key) {
             LegalAidDetailsTable legalAidDetailsTable = new LegalAidDetailsTable(OpeningActivity.this);
+            legalAidDetailsTable.dropTable();
             try {
                 LeagalAidDetailsItem leagalAidDetailsItem = LeagalAidDetailsItem.parseLegalAidDetailsItem(jsonObject, foreign_key);
                 legalAidDetailsTable.insertItem(leagalAidDetailsItem);
