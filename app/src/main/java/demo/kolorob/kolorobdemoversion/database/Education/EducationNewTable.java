@@ -348,6 +348,26 @@ public class EducationNewTable {
 
     }
 
+    public ArrayList<EducationNewItem> getAllEducationSubCategoriesInfo(String place) {
+        ArrayList<EducationNewItem> subCatList = new ArrayList<>();
+
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"' ORDER BY " +KEY_NAME_EN,null);;
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public ArrayList<EducationNewItem> getAllEducationSubCategoriesInfo() {
         ArrayList<EducationNewItem> subCatList = new ArrayList<>();
 

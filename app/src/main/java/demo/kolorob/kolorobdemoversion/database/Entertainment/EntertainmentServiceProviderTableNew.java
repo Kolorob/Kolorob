@@ -381,12 +381,12 @@ public class EntertainmentServiceProviderTableNew {
 
 
 
-    public ArrayList<EntertainmentServiceProviderItemNew> getAllEntertainmentSubCategoriesInfo() {
+    public ArrayList<EntertainmentServiceProviderItemNew> getAllEntertainmentSubCategoriesInfo(String place) {
         ArrayList<EntertainmentServiceProviderItemNew> subCatList = new ArrayList<>();
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +  " ORDER BY " +KEY_NODE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"' ORDER BY " +KEY_NODE_NAME,null);
 
         if (cursor.moveToFirst()) {
             do {

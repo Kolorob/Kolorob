@@ -466,11 +466,11 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
-    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfosearch() {
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfosearch(String place) {
         ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"' ORDER BY " +KEY_LEGAL_AID_NAME_ENG,null);;
 
         if (cursor.moveToFirst()) {
             do {

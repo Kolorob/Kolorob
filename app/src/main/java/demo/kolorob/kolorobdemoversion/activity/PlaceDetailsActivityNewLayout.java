@@ -308,7 +308,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
-
+TextView uptext;
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
@@ -406,6 +406,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
+        uptext=(TextView)findViewById(R.id.textView15);
         healthServiceProvider = constructHealthListItem(1);
 
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
@@ -678,6 +679,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
                     setPlaceChoice("Mirpur-11");
                     callMapFragment(locationNameId);
+                    allHolders.clear();
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
+                    {
+                        Populateholder("Mirpur-11");
+                        calladapter(true);
+                    }
+                    else Populateholder("Mirpur-11");
+
                     createData(currentCategoryID,"","Mirpur-11");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);
@@ -685,6 +694,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 else {locationNameId=AppConstants.PLACE_PARIS_ROAD;
                     setPlaceChoice("Mirpur-10");
                     callMapFragment(locationNameId);
+                    allHolders.clear();
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
+                    {
+                        Populateholder("Mirpur-10");
+                        calladapter(true);
+                    }
+                    else Populateholder("Mirpur-10");
                     createData(currentCategoryID,"","Mirpur-10");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);}
@@ -701,7 +717,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             }
         });
 
-        Populateholder();
+        Populateholder(getPlaceChoice());
         callMapFragment(locationNameId);
         MapButton.setBackgroundResource(R.drawable.map_selected);
 
@@ -712,6 +728,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 MapClicked=false;
                 ListClicked=false;
                 CompareClicked=false;
+
+
 
                 populateSearch();
                 if (CompareClicked==false||MapClicked==false||ListClicked==false)
@@ -759,13 +777,22 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 SearchClicked=false;
                 MapClicked=true;
                 ListClicked=false;
+                if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
+                {
+                    svsholder.setVisibility(View.VISIBLE);
+                    svs.setVisibility(View.VISIBLE);
+                    llSubCatListHolder.setVisibility(View.VISIBLE);
+                }
+                spItems.setVisibility(View.VISIBLE);
+                uptext.setVisibility(View.VISIBLE);
                 CompareClicked=false;
                 callMapFragment(locationNameId);;
-                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
+                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
 
-                    svs.setVisibility(View.VISIBLE);
                     svsholder.setVisibility(View.VISIBLE);
+
+                    svs.setVisibility(View.VISIBLE);
                     llSubCatListHolder.setVisibility(View.VISIBLE);
                 }
                 if (CompareClicked==false||SearchClicked==false||ListClicked==false)
@@ -807,7 +834,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
 
-
+                spItems.setVisibility(View.VISIBLE);
+                uptext.setVisibility(View.VISIBLE);
                 SearchClicked=false;
                 MapClicked=false;
                 ListClicked=true;
@@ -3031,21 +3059,22 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         fragmentTransaction.commit();
     }*/
 
-    public void Populateholder()
+    public void Populateholder(String place)
     {
         filterText = (EditText)findViewById(R.id.searchall);
+        filterText.setTextColor(getResources().getColor(R.color.white));
         EducationNewTable educationServiceProviderTable=new EducationNewTable(PlaceDetailsActivityNewLayout.this);
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTable=new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
         GovernmentNewTable governmentNewTable=new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo();
-        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo();
-        fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch();
-        fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfosearch();
-        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo();
-        fetchedgov=governmentNewTable.getAllGovSubCategoriesInfo();
+        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo(place);
+        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(place);
+        fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch(place);
+        fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfosearch(place);
+        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(place);
+        fetchedgov=governmentNewTable.getAllGovSubCategoriesInfo(place);
         String nameen;
         String namebn;
 
