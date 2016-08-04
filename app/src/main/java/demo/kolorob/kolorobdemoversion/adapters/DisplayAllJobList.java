@@ -21,7 +21,7 @@ public class DisplayAllJobList extends BaseAdapter
     Activity context;
     String title[];
     String salary_range[];
-    long remaing_date[];
+    String remaing_date[];
     String address[];
     String contract_number[];
     String positions[];
@@ -30,7 +30,7 @@ public class DisplayAllJobList extends BaseAdapter
     View top,bottom;
 
 
-    public DisplayAllJobList(Activity context, String[] title,String[] salary_range,long[] remaining_date, String[] address,String[] contract_number,String[] positions) {
+    public DisplayAllJobList(Activity context, String[] title,String[] salary_range,String[] remaining_date, String[] address,String[] contract_number,String[] positions) {
         super();
         this.context = context;
         this.title = title;
@@ -109,20 +109,46 @@ public class DisplayAllJobList extends BaseAdapter
 
 
 
-        holder.title.setText("" +title[position]);
+        holder.title.setText("" + positions[position]);
         holder.title.setTextSize(26);
         holder.salary_range.setText("স্যালারি : " + salary_range[position]+" টাকা");
-        holder.remaining_date.setText("সময় বাকি আছে: " + remaing_date[position] +"দিন");
+        holder.remaining_date.setText("সেশ সময়: " + English_to_bengali_number_conversion(remaing_date[position]));
         holder.address.setText("ঠিকানা: " + address[position]);
         holder.contact_number.setText("যোগাযোগের নম্বর: " + contract_number[position]);
-        holder.positions.setText("পজিশন: " + positions[position]);
-
-
-
-
-
+        holder.positions.setText("কম্পানি: " + title[position]);
 
         return convertView;
+    }
+
+    public String English_to_bengali_number_conversion(String english_number) {
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+            else{
+                concatResult = concatResult + english_number.charAt(i);
+            }
+        }
+        return concatResult;
     }
 
 }

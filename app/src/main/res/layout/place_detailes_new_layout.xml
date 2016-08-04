@@ -991,7 +991,7 @@
                     android:id="@+id/svSubCategoryListHolder"
                     android:layout_width="@dimen/sidebarwidth"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/nav_header_heightcat"
+                    android:layout_marginTop="@dimen/siderighttop"
 
                     android:layout_marginBottom="@dimen/nav_header_heightcat"
                     android:layout_above="@+id/toggle"
