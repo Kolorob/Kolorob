@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -69,6 +70,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
     Intent i;
+    private int height;
+    private int width;
     Float  ratings;
     Boolean click=false;
     float[][] mirpur10Coords = {
@@ -137,8 +140,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         // Get Display Metrics
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        final int height = metrics.heightPixels;
-        final int width = metrics.widthPixels;
+        height = metrics.heightPixels;
+        width = metrics.widthPixels;
 
         //   int relativeWidthOfImage = (int)(width * 0.1);
         final int coordsHeight = 800;
@@ -370,6 +373,19 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         final EditText submit_btn = (EditText) promptView.findViewById(R.id.submit_btn);
         final Button btnSubmit = (Button) promptView.findViewById(R.id.btnSubmit);
         final Button btnclose = (Button) promptView.findViewById(R.id.btnclose);
+
+
+        ViewGroup.LayoutParams params = btnSubmit.getLayoutParams();
+        params.height=width/8;
+        params.width=width/8;
+        btnSubmit.setLayoutParams(params);
+
+        ViewGroup.LayoutParams params1 = btnSubmit.getLayoutParams();
+        params1.height=width/8;
+        params1.width=width/8;
+        btnclose.setLayoutParams(params1);
+
+
 
 //       final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
 //        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);

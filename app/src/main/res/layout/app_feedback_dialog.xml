@@ -68,6 +68,7 @@
             android:background="@drawable/tick_icon_feedback"
             android:layout_gravity="center_horizontal"
             android:onClick="phonecall"
+            android:layout_marginRight="10dp"
             android:padding="10dp" />
 
 
@@ -75,7 +76,7 @@
             android:id="@+id/btnclose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/cross_icon_feedback"
             android:layout_gravity="center_horizontal"
             android:onClick="phonecall"
