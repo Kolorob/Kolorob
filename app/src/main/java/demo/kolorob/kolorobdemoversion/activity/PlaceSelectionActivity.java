@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -69,6 +70,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
     Intent i;
+    private int height;
+    private int width;
     Float  ratings;
     Boolean click=false;
     float[][] mirpur10Coords = {
@@ -137,8 +140,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         // Get Display Metrics
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        final int height = metrics.heightPixels;
-        final int width = metrics.widthPixels;
+        height = metrics.heightPixels;
+        width = metrics.widthPixels;
 
         //   int relativeWidthOfImage = (int)(width * 0.1);
         final int coordsHeight = 800;
@@ -178,7 +181,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     }
 
                     Log.d("BAUNIABHAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "BAUNIABHAD!", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "প্যারিস রোড", Toast.LENGTH_SHORT);
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
@@ -192,7 +195,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     }
 
                     Log.d("PARIS ROAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "PARIS ROAD!", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "বাউনিয়াবাদ", Toast.LENGTH_SHORT);
                     anyHit = true;
 
                 }
@@ -269,11 +272,11 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                         Log.d(">>>", "Start Json Parsing " + apiContent);
                         try {
                             JSONObject jo = new JSONObject(apiContent);
-                            Log.d(">>>", "JsonObject: " + jo);
+                            Log.d(">>>", "JsonObject: " + current_version);
                             Double remote_version = jo.getDouble("version");
 
                             if (remote_version > current_version) {
-                                Toast.makeText(PlaceSelectionActivity.this, "You must update the App =)",
+                                Toast.makeText(PlaceSelectionActivity.this, "কলরবের নতুন ভার্সন পাওয়া যাচ্ছে",
                                         Toast.LENGTH_LONG).show();
                                 generateNotification();
                             }
@@ -318,8 +321,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         builder.setNumber(100);
         //   builder.build();
 
-        builder.setContentTitle("Update kolorob").setContentText("New Version of Kolorob is Available")
-                .setSmallIcon(R.drawable.kolorob_logo_first_page).getNotification();
+        builder.setContentTitle("কলরব আপডেট করুন").setContentText("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে")
+                .setSmallIcon(R.drawable.notify_logo_1).getNotification();
 
         myNotication = builder.getNotification();
         manager.notify(11, myNotication);
@@ -371,6 +374,19 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         final Button btnSubmit = (Button) promptView.findViewById(R.id.btnSubmit);
         final Button btnclose = (Button) promptView.findViewById(R.id.btnclose);
 
+
+        ViewGroup.LayoutParams params = btnSubmit.getLayoutParams();
+        params.height=width/8;
+        params.width=width/8;
+        btnSubmit.setLayoutParams(params);
+
+        ViewGroup.LayoutParams params1 = btnSubmit.getLayoutParams();
+        params1.height=width/8;
+        params1.width=width/8;
+        btnclose.setLayoutParams(params1);
+
+
+
 //       final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
 //        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
 //        final Button button= (Button)promptView.findViewById(R.id.phone_call);
@@ -418,6 +434,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         // create an alert dialog
         AlertDialog alerts = alertDialogBuilder.create();
         alerts.show();
+//        alerts.getWindow().setLayout((height*3/7), (height*4/7));
+
+
     }
 
 
