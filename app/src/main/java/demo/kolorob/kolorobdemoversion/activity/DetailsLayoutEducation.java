@@ -153,9 +153,9 @@ public class DetailsLayoutEducation extends Activity {
 
         close_button = (ImageView) findViewById(R.id.close_buttonc);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
-        key = new String[60];
+        key = new String[600];
 
-        value = new String[60];
+        value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
