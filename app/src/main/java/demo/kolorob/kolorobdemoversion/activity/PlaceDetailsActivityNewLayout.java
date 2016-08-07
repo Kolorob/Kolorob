@@ -1264,7 +1264,7 @@ TextView uptext;
 
 
         }
-        SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
+           SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
     }
 
 

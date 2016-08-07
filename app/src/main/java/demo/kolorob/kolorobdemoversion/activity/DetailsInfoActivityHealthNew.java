@@ -104,6 +104,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
     EditText feedback_comment;
     ListView alldata;
     RatingBar ratingBar;
+    private String compare_Data="";
+    int compareValue;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -278,31 +280,83 @@ public class DetailsInfoActivityHealthNew extends Activity {
         });
 
 
+        compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
+        compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
+        String multipule[]= compare_Data.split(",");
+        Log.d("compare_Data ","@@@@@@"+compare_Data);
+        Log.d("compareValue ","@@@@@@"+compareValue);
+
+        if(compareValue==1&&compare_Data.equals(healthServiceProviderItemNew.getId()))
+        {
+            Log.d("foundInValue1 ","@@@@@@");
+            checkBox.setChecked(true);
+        }
+        else if(compareValue==2&&(multipule[0].equals(healthServiceProviderItemNew.getId())||multipule[1].equals(healthServiceProviderItemNew.getId())))
+        {
+            Log.d("foundInValue2 ","@@@@@@");
+            checkBox.setChecked(true);
+        }
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int compareValue;
+
                 compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
+
+                Log.d("isChecked ","@@@@@@"+isChecked);
+                Log.d("Selected  ","@@@@@@"+compareValue);
+
                 if (compareValue >= 2)
                 {
-                    String compare_Data="";
-                    String new_compare_Data="";
-                    compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                    String multipule[]= compare_Data.split(",");
-                    new_compare_Data = multipule[1]+","+healthServiceProviderItemNew.getId();
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 2);
+                    if(isChecked)
+                    {
+
+                        String new_compare_Data="";
+                        compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
+                        String multipule[]= compare_Data.split(",");
+                        new_compare_Data = multipule[1]+","+healthServiceProviderItemNew.getId();
+                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 2);
+                    }
+                    else
+                    {
+                        String compare_Data="";
+                        String new_compare_Data="";
+                        compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
+                        String multipule[]= compare_Data.split(",");
+                        new_compare_Data = multipule[0];
+                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 1);
+                    }
+
+
+
 
 
                 }
                 else if (compareValue == 0) {
+                    if(isChecked)
+                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getId(), 1);
 
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getId(), 1);
+
+
                 }
                 else if (compareValue == 1) {
-                    String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                    previous_node = previous_node + "," + healthServiceProviderItemNew.getId();
-                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, previous_node, 2);
+
+                    if(isChecked)
+                    {
+                        Log.d("Delete in 1 value","$$$$$$"+compareValue);
+                        String previous_node;
+                        previous_node = SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
+                        previous_node = previous_node + "," + healthServiceProviderItemNew.getId();
+                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, previous_node, 2);
+
+                    }
+                    else
+                    {
+                        Log.d("Delete in 1 value","$$$$$$"+compareValue);
+                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,"",0);
+
+                    }
+
                 }
 
 
