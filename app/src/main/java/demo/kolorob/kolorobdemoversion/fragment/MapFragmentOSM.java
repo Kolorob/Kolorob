@@ -430,7 +430,7 @@ Date today=new Date();
 
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
-        Toast.makeText(getActivity(), "Tap on (" + p.getLatitude() + "," + p.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+
         InfoWindow.closeAllInfoWindowsOn(mapView);
         return true;
     }
