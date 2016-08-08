@@ -221,7 +221,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
         String _nodeWebsite="";
         String _nodeFacebook="";
         String _nodeDesignation="";
-
+        String _address="";
 //        String _nodeIds= String.valueOf(i)="";
 
         String _openingtime="";
@@ -262,7 +262,8 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
             _nodeEmail = contact_info.getString("node_email");
             _nodeWebsite = contact_info.getString("node_website");
             _nodeFacebook = contact_info.getString("node_facebook");
-            _nodeDesignation = contact_info.getString("address");
+            _nodeDesignation = contact_info.getString("node_designation");
+           _address = contact_info.getString("address");;
         }
 
 
@@ -278,11 +279,11 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
 
 
 
-        //JSONObject registration_info=jo.getJSONObject("registration_info");
-       // String _nodeRegisteredWiths = registration_info.getString("node_registered_with");
-        String _nodeRegisteredWith = "node_registered_with";
-       // String _nodeRegistrationNumbers = registration_info.getString("node_registered_number");
-        String _nodeRegistrationNumber =  "node_registered_number";
+        JSONObject registration_info=jo.getJSONObject("registration_info");
+        String _nodeRegisteredWith = registration_info.getString("node_registered_with");
+
+        String _nodeRegistrationNumber = registration_info.getString("node_registered_number");
+
 //
 
         Integer _entSubCategoryId= 2;
@@ -298,7 +299,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
       //  Log.d("saved","--------"+_nodeAdditional);
 
 
-        String _address = "address";
+
 
         String _categoryId= jo.getString("sub_categories");
         _categoryId=_categoryId.replace('[',',');
