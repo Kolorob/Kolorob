@@ -422,7 +422,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsInfoActivityLegalNew.this, "http://kolorob.net/demo/api/get_sp_rating/legal", new VolleyApiCallback() {
+        getRequest(DetailsInfoActivityLegalNew.this, "http://kolorob.net/demo/api/get_sp_rating/legal?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {
