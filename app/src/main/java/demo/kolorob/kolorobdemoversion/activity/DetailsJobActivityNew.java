@@ -89,8 +89,10 @@ public class DetailsJobActivityNew extends Activity {
         time=(TextView)findViewById(R.id.time);
 
 
-        left_job_icon.getLayoutParams().height=width/11;
-        left_job_icon.getLayoutParams().width=width/11;
+
+
+        int p=left_job_icon.getLayoutParams().width=width/11;
+        left_job_icon.getLayoutParams().height=(p*5)/6;
 
         close_button.getLayoutParams().height=width/11;
         close_button.getLayoutParams().width=width/11;
