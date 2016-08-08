@@ -137,9 +137,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
         }
 
 
-        key = new String[50];
+        key = new String[600];
 
-        value = new String[50];
+        value = new String[600];
         HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityHealthNew.this);
 
 

@@ -143,9 +143,9 @@ public class DetailsInfoActivityLegalNew extends Activity {
         ratingText=(TextView)findViewById(R.id.ratingText);
 
         header=(TextView)findViewById(R.id.header);
-        key = new String[25];
+        key = new String[600];
 
-        value = new String[25];
+        value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
