@@ -262,9 +262,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
         result_concate ="";
 
-        key = new String[25];
+        key = new String[600];
 
-        value = new String[25];
+        value = new String[600];
 
 
          //   other_detailsEnt.setVisibility(View.VISIBLE);

@@ -142,9 +142,9 @@ public class DetailsLayoutGovernment extends Activity {
 
         school_logo_default = (ImageView) findViewById(R.id.service_logo);
 
-        key = new String[60];
+        key = new String[600];
 
-        value = new String[60];
+        value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
