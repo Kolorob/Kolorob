@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -20,14 +19,14 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class EntertainmetTypeTable {
 
-    private static final String TAG = EntertainmentTheatreTable.class.getSimpleName();
+    private static final String TAG = EntertainmetTypeTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.ENT_DETAILS_INFO;
     public static final String KEY_NODE_ID = "_node_id";
     public static final String KEY_RECREATION_PRICE = "name";
     public static final String KEY_RECREATION_REMARKS = "bn_label";
     private static final String KEY_TYPE = "_facilities"; // 1 - text
     private static final String KEY_SUB_TYPE = "facilities"; // 2 - text*/
-
+    private static final String KEY_ID = "sid"; // 2 - text*/
 
 
 
@@ -49,7 +48,8 @@ public class EntertainmetTypeTable {
                 + KEY_RECREATION_PRICE + "  TEXT , " // 0 - int
                 + KEY_RECREATION_REMARKS + "  TEXT, "              // 1 - text
                 + KEY_TYPE + " TEXT, "
-                + KEY_SUB_TYPE + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + "))";
+                + KEY_SUB_TYPE + " TEXT, "
+                + KEY_ID + " TEXT, PRIMARY KEY(" + KEY_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -69,22 +69,22 @@ public class EntertainmetTypeTable {
                 entertainmetTypeTable.getRecreation_remarks(),
                 entertainmetTypeTable.getType(),
 
-                entertainmetTypeTable.getSub_type()
+                entertainmetTypeTable.getSub_type(),entertainmetTypeTable.getSId()
         );
     }
 
-    private long insertItem(String nodeId, String price, String remarks, String type, String subtype
+    private long insertItem(String nodeId, String price, String remarks, String type, String subtype,String sid
                             ) {
 
 
 
-        if (isFieldExist(nodeId)) {
+        if (isFieldExist(sid)) {
             return updateItem(
                     nodeId,
                     price,
                     remarks,
                     type,
-                    subtype);
+                    subtype,sid);
 
         }
         ContentValues rowValue = new ContentValues();
@@ -93,6 +93,7 @@ public class EntertainmetTypeTable {
         rowValue.put(KEY_RECREATION_REMARKS, remarks);
         rowValue.put(KEY_TYPE, type);
         rowValue.put(KEY_SUB_TYPE, subtype);
+        rowValue.put(KEY_ID, sid);
 
 
 
@@ -102,14 +103,14 @@ public class EntertainmetTypeTable {
         return ret;
     }
 
-    private long updateItem(String nodeId, String price, String remarks, String type, String subtype) {
+    private long updateItem(String nodeId, String price, String remarks, String type, String subtype,String sid) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID, nodeId);
         rowValue.put(KEY_RECREATION_PRICE,price );
         rowValue.put(KEY_RECREATION_REMARKS, remarks);
         rowValue.put(KEY_TYPE, type);
         rowValue.put(KEY_SUB_TYPE, subtype);
-
+        rowValue.put(KEY_ID, sid);
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_NODE_ID + " = ?  ",
@@ -121,13 +122,13 @@ public class EntertainmetTypeTable {
 
 
 
-    public boolean isFieldExist(String nodeId) {
+    public boolean isFieldExist(String sid) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (nodeId.equals(cursor.getString(0))) {
+                if (sid.equals(cursor.getString(5))) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -156,7 +157,22 @@ public class EntertainmetTypeTable {
         closeDB();
         return FieldList;
     }
+    public ArrayList<EntertainmentTypeItem> getall() {
+        ArrayList<EntertainmentTypeItem> FieldList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME  , null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                FieldList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return FieldList;
+    }
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -171,14 +187,14 @@ public class EntertainmetTypeTable {
         String remarks = cursor.getString(2);
         String type = cursor.getString(3);
         String subtype = cursor.getString(4);
-
+        String sid = cursor.getString(5);
 
         return new EntertainmentTypeItem(
                 id,
                 price,
                 remarks,
                 type,
-                subtype
+                subtype,sid
 
 
 
