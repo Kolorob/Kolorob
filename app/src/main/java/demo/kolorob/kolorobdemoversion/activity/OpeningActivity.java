@@ -166,7 +166,7 @@ public class OpeningActivity extends Activity {
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
     HealthVaccineTableDetails healthVaccineTableDetails;
     HealthSpecialistTableDetails healthVaccineTableDetails1;
-
+    LegalAidDetailsTable legalAidDetailsTable;
     // LM's variables
     private Toast t = null;
     static int countOfDBLocal = 0;
@@ -555,6 +555,8 @@ public class OpeningActivity extends Activity {
                             try {
 
                                 JSONArray legal_array = new JSONArray(apiContent);
+                                legalAidDetailsTable = new LegalAidDetailsTable(OpeningActivity.this);
+                                legalAidDetailsTable.dropTable();
                                 new SaveLegaltDataTask(OpeningActivity.this).execute(legal_array);
 
                             } catch (JSONException e) {
@@ -1649,8 +1651,7 @@ public class OpeningActivity extends Activity {
         }
 
         private void SaveLegalDetailsData(JSONObject jsonObject, int foreign_key) {
-            LegalAidDetailsTable legalAidDetailsTable = new LegalAidDetailsTable(OpeningActivity.this);
-            legalAidDetailsTable.dropTable();
+
             try {
                 LeagalAidDetailsItem leagalAidDetailsItem = LeagalAidDetailsItem.parseLegalAidDetailsItem(jsonObject, foreign_key);
                 legalAidDetailsTable.insertItem(leagalAidDetailsItem);
