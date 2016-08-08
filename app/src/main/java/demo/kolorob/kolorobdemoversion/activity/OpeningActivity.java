@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
@@ -361,6 +362,17 @@ public class OpeningActivity extends Activity {
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
 
+            //get All using sql api
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                new SaveSQL(OpeningActivity.this).execute(apiContent);
+                            }
+                        }
+                    }
+            );
+
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                 @Override
@@ -497,7 +509,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -512,7 +524,7 @@ public class OpeningActivity extends Activity {
                             }
                         }
                     }
-            );
+            );*/
 
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
@@ -960,6 +972,41 @@ public class OpeningActivity extends Activity {
         }
     }
 
+
+
+    //this class gets the entire sql string breaks it down and executes
+    class SaveSQL extends GenericSaveDBTask<String, Integer, Long> {
+        public SaveSQL(Context ctx) {
+            super(ctx);
+        }
+
+
+        protected Long doInBackground(String... sqls) {
+            //ge the db instance
+            SQLiteDatabase db = DatabaseManager.getInstance(OpeningActivity.this).openDatabase();
+
+            //split into single sql queries
+            String[] sql = sqls[0].split(";");
+            Log.d("sql","******"+sql);
+            //block db
+            //db.beginTransaction();
+
+            //run the sqls one by one
+            for (int i = 0; i<sql.length-1;i++)
+            {
+                db.execSQL(sql[i]);
+            }
+
+            //unblock db
+            //db.endTransaction();
+
+            //close db
+            DatabaseManager.getInstance(OpeningActivity.this).closeDatabase();
+
+            return new Long(0);
+        }
+
+    }
 
     class SavenewGovTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SavenewGovTask(Context ctx) {
