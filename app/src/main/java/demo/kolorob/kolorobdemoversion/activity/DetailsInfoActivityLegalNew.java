@@ -234,9 +234,21 @@ public class DetailsInfoActivityLegalNew extends Activity {
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
         feedbacks.setMargins(0, 0, width / 30, 0);
-     //   Log.d("width", "====" + width);
+        Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
+        LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
+        leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
+        if(!leagalAidDetailsItems.equals(""))
+        {
 
+            for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
+            {
+                CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
+                CheckConcate("যে বিষয়ে আইন সহায়তা দেয়া হয়", leagalAidDetailsItem.getSub_type());
+                CheckConcate("সেবার খরচ", leagalAidDetailsItem.getLagal_cost());
+                CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
+            }
 
+        }
 
         CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
         CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
@@ -261,27 +273,15 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         result_concate="";
 
-        LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
-        leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(Integer.valueOf(legalAidServiceProviderItemNew.getIdentifierId()));
+
+
+
+
+
 
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
-
-        if(!leagalAidDetailsItems.equals(""))
-        {
-
-            for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
-            {
-                CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
-                CheckConcate("যে বিষয়ে আইন সহায়তা দেয়া হয়", leagalAidDetailsItem.getSub_type());
-                CheckConcate("সেবার খরচ", leagalAidDetailsItem.getLagal_cost());
-                CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
-            }
-
-        }
-
-
 
 
 
