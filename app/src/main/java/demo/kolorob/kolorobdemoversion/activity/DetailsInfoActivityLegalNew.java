@@ -141,17 +141,23 @@ public class DetailsInfoActivityLegalNew extends Activity {
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
-
+        feedback = (ImageView) findViewById(R.id.feedback);
         header=(TextView)findViewById(R.id.header);
         key = new String[600];
 
         value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
+        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
+        int fh=feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
+        feedback.setLayoutParams(feedbacks);
+        feedbacks.setMargins(0, 0, width / 30, 0);
+
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/15);
+        mlp.setMargins(width/15,0,fh+20,width/15);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -162,7 +168,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
-        feedback = (ImageView) findViewById(R.id.feedback);
+
         checkBox = (CheckBox) findViewById(R.id.compare);
 
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
@@ -229,11 +235,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
-        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 8;
-        feedbacks.width = width / 8;
-        feedback.setLayoutParams(feedbacks);
-        feedbacks.setMargins(0, 0, width / 30, 0);
+
         Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
         LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
