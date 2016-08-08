@@ -686,7 +686,7 @@ public class DetailsLayoutEducation extends Activity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsLayoutEducation.this, "http://kolorob.net/demo/api/get_sp_rating/education", new VolleyApiCallback() {
+        getRequest(DetailsLayoutEducation.this, "http://kolorob.net/demo/api/get_sp_rating/education?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {
