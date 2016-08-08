@@ -53,6 +53,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -1819,6 +1820,11 @@ TextView uptext;
         //    finish();
             return;
         }
+
+        Toast.makeText(this, "এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ",
+                Toast.LENGTH_LONG).show();
+
+
 //        toolbar.setVisibility(View.VISIBLE);
 //        toggleButton.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
