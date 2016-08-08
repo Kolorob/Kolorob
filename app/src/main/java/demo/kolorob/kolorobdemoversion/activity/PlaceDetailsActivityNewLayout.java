@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -461,11 +460,12 @@ TextView uptext;
         HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
         svholder=(LinearLayout)findViewById(R.id.llCategoryListHolderback);
         svsholder=(LinearLayout)findViewById(R.id.llSubCategoryListHolderback);
-        svholder.setVisibility(View.GONE);
+        svholder.setVisibility(View.VISIBLE);
         svsholder.setVisibility(View.GONE);
         sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
         svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
-        sv.setVisibility(View.GONE);
+        sv.setVisibility(View.VISIBLE);
+
         svs.setVisibility(View.GONE);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
@@ -591,7 +591,7 @@ TextView uptext;
         //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
         llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
-        llCatListHolder.setVisibility(View.GONE);
+        llCatListHolder.setVisibility(View.VISIBLE);
         //rlSubCatHolder.setVisibility(View.VISIBLE);
         llSubCatListHolder.setVisibility(View.GONE);
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
@@ -1008,6 +1008,14 @@ TextView uptext;
             public void onClick(View arg0) {
                 if(toggleButton.isChecked()){
 
+                    sv.setVisibility(View.GONE);
+                    svs.setVisibility(View.GONE);
+                    svholder.setVisibility(View.GONE);
+                    svsholder.setVisibility(View.GONE);
+                    llCatListHolder.setVisibility(View.GONE);
+                    llSubCatListHolder.setVisibility(View.GONE);
+                }
+                else {
                     if(ListClicked.equals(true)||SearchClicked.equals(true))
                     {
 
@@ -1021,37 +1029,18 @@ TextView uptext;
                     {
                         if (!ListClicked.equals(true)&&!SearchClicked.equals(true))
                         {
-                        svsholder.setVisibility(View.VISIBLE);
-                        svs.setVisibility(View.VISIBLE);
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
+                            svsholder.setVisibility(View.VISIBLE);
+                            svs.setVisibility(View.VISIBLE);
+                            llSubCatListHolder.setVisibility(View.VISIBLE);
                         }
                     }
-                }
-                else {
-                    sv.setVisibility(View.GONE);
-                    svs.setVisibility(View.GONE);
-                    svholder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
-                    llCatListHolder.setVisibility(View.GONE);
-                    llSubCatListHolder.setVisibility(View.GONE);
                 }
 
                 //Button is OFF
                 // Do Something
             }
         });
-        Animation myFadeInAnimation = AnimationUtils.loadAnimation(PlaceDetailsActivityNewLayout.this, R.anim.twin);
-        toggleButton.startAnimation(myFadeInAnimation);
-        toggleButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
 
-
-                toggleButton.clearAnimation();
-
-                return false;
-            }
-        });
     }
 
     public void compareTool()

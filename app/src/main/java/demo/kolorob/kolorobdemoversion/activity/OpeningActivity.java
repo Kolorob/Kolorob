@@ -62,6 +62,7 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
@@ -395,6 +396,26 @@ public class OpeningActivity extends Activity {
                     }
                 }
             });
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/get_sp_rating?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+                                    new SaveRatingTask(OpeningActivity.this).execute(jo);
+                                    // String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                    // if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                    //     new SaveSubCategoryListTask(OpeningActivity.this).execute(jo.getJSONArray(AppConstants.KEY_DATA));
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -914,6 +935,32 @@ public class OpeningActivity extends Activity {
 
     }
 
+    class SaveRatingTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveRatingTask(Context ctx) {
+            super(ctx);
+        }
+
+        protected Long doInBackground(JSONArray... jsonObjects) {
+            JSONArray RatingArray = jsonObjects[0];
+            RatingTable subCatTable = new RatingTable(OpeningActivity.this);
+            subCatTable.dropTable();
+            int subCatCount = RatingArray.length();
+            for (int i = 0; i < subCatCount; i++) {
+                try {
+                    JSONObject jo = RatingArray.getJSONObject(i);
+                    RatingModel si = RatingModel.parseRatingModel(jo);
+                    subCatTable.insertItem(si);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            si22 = subCatTable.getAllCategories();
+            si22.size();
+            return new Long(0);
+        }
+    }
 
     class SavenewFinanceTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SavenewFinanceTask(Context ctx) {

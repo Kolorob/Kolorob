@@ -3,6 +3,6 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content">
 
-        <item android:drawable="@drawable/slide_in" android:state_checked="true"/>
-        <item android:drawable="@drawable/slide_out" android:state_checked="false"/>
+        <item android:drawable="@drawable/slide_out" android:state_checked="true"/>
+        <item android:drawable="@drawable/slide_in" android:state_checked="false"/>
     </selector>
