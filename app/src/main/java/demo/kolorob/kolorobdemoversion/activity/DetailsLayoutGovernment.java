@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,12 +48,15 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by israt.jahan on 7/17/2016.
@@ -86,6 +91,8 @@ public class DetailsLayoutGovernment extends Activity {
     String status = "", phone_num = "", registered = "";
     String result_concate = "";
     private CheckBox checkBox;
+    RatingBar ratingBar;
+    Float rating;
 
 
     @Override
@@ -135,9 +142,9 @@ public class DetailsLayoutGovernment extends Activity {
 
         school_logo_default = (ImageView) findViewById(R.id.service_logo);
 
-        key = new String[60];
+        key = new String[600];
 
-        value = new String[60];
+        value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
@@ -555,6 +562,44 @@ public class DetailsLayoutGovernment extends Activity {
     }
 //
 //
+public void setRatingBar()
+{
+    getRequest(DetailsLayoutGovernment.this, "http://kolorob.net/demo/api/get_sp_rating/government?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+                        try {
+                            JSONArray jo = new JSONArray(apiContent);
+                            int size= jo.length();
+                            for(int i=0;i<size;i++)
+                            {
+                                JSONObject ratingH=jo.getJSONObject(i);
+                                String id= ratingH.getString("id");
+                                if(id.equals(governmentNewItem.getFinId()))
+                                {
+
+
+                                    rating=Float.parseFloat(ratingH.getString("avg"));
+                                    ratingBar.setRating(rating);
+                                    break;
+
+                                }
+
+
+                            }
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+    );
+}
 
 
 

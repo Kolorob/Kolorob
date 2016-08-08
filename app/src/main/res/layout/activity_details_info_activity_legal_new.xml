@@ -9,7 +9,7 @@
     android:layout_marginBottom="8dp"
     android:background="@drawable/back_drop"
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew">
 
 
 

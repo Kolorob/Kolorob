@@ -98,7 +98,7 @@ public class LegalAidDetailsTable {
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
 
-        Log.d("Legal Insert","======"+ret);
+        Log.d("Legal Insert","%%%%%%%%"+ret);
         closeDB();
         return ret;
     }
@@ -127,11 +127,12 @@ public class LegalAidDetailsTable {
     }
 
 
-    public ArrayList<LeagalAidDetailsItem> getAllLegalAidSubCategoriesInfo(int id) {
+    public ArrayList<LeagalAidDetailsItem> getAllLegalAidSubCategoriesInfo(String id) {
         ArrayList<LeagalAidDetailsItem> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_LEGAL_REMARKS+"="+id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_LEGAL_REMARKS+"='"+id+"'", null);
+      //  Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
         if (cursor.moveToFirst()) {
             do {
                 //System.out.println("abc="+cursor.getString(4));

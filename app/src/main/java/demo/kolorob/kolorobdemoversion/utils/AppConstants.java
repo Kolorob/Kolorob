@@ -51,10 +51,10 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
     public static final String[] SUB_CAT_LAW_BN = {"আইনজীবী", "আইন-কেন্দ্র", "সালিশ কেন্দ্র"};
     public static final String[] SUB_CAT_MONEY_BN = {"sub-category-1", "sub-category-2", "sub-category-3"};
 
-    public static final GeoPoint BAUNIA1 = new GeoPoint(23.8197971,90.3803564);
-    public static final GeoPoint PARIS1 = new GeoPoint(23.8135117,90.3707107);
-    public static final LatLng BAUNIA = new LatLng(23.8197971,90.3803564);
-    public static final LatLng PARIS = new LatLng(23.8135117,90.3707107);
+    public static final GeoPoint BAUNIA1 = new GeoPoint(23.8185747,90.3742368);
+    public static final GeoPoint PARIS1 = new GeoPoint(23.8105392,90.371817);
+    public static final LatLng BAUNIA = new LatLng(23.8185747,90.3742368);
+    public static final LatLng PARIS = new LatLng(23.8105392,90.371817);
     public static final String[][] SUB_CATEGORIES = {SUB_CAT_EDU_BN, SUB_CAT_FUN_BN, SUB_CAT_GOVT_BN,
             SUB_CAT_HEALTH_BN, SUB_CAT_JOB_BN, SUB_CAT_LAW_BN, SUB_CAT_MONEY_BN};
 

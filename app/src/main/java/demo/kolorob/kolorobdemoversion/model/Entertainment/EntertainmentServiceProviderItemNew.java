@@ -90,7 +90,9 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                     String post_office,
                     String police_station,
                     String city,
-                    String off_day,String rating){
+                    String off_day,
+                    String rating)
+        {
 
         this.nodeId=nodeId;
         this.entSubCategoryId=entSubCategoryId;

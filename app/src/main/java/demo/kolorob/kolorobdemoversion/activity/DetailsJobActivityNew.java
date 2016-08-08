@@ -1,11 +1,15 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,7 +37,7 @@ public class DetailsJobActivityNew extends Activity {
     ImageView left_job_icon;
     TextView ups_text,time;
     int timer=0;
-    String result_concate="";
+    String result_concate="",phone_number="";
     private ImageView close_button;
     ListView navlist,navlist1,navlist2;
     private LinearLayout ll3,scrollingPart;
@@ -84,8 +89,10 @@ public class DetailsJobActivityNew extends Activity {
         time=(TextView)findViewById(R.id.time);
 
 
-        left_job_icon.getLayoutParams().height=width/11;
-        left_job_icon.getLayoutParams().width=width/11;
+
+
+        int p=left_job_icon.getLayoutParams().width=width/11;
+        left_job_icon.getLayoutParams().height=(p*5)/6;
 
         close_button.getLayoutParams().height=width/11;
         close_button.getLayoutParams().width=width/11;
@@ -198,6 +205,8 @@ public class DetailsJobActivityNew extends Activity {
                concateBasic(" সংগ্রহকারীর নাম : ",jobAdvertisementItem.getCollector_name());
             reference_person.setText(result_concate);
             result_concate="";
+
+            phone_number=jobAdvertisementItem.getMobile1();
            }
 
 
@@ -239,7 +248,27 @@ public class DetailsJobActivityNew extends Activity {
 //        params_right_email.width = width/3;
 //        right_email.setLayoutParams(params_right_email);
 
+        middle_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if (!phone_number.equals("")) {
+                    callIntent1.setData(Uri.parse("tel:" + phone_number));
+                    if (checkPermission())
+                        startActivity(callIntent1);
+                    else {
+                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                "ফোন নম্বর পাওয়া যায়নি");
 
+                    }
+                } else {
+
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
+
+                }
+            }
+        });
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -322,5 +351,20 @@ public String English_to_bengali_number_conversion(String english_number) {
 
 
         return result_concate;
+    }
+
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
     }
 }
