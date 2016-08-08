@@ -6,8 +6,10 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-android:visibility="gone"
+    android:visibility="gone"
     >
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,62 +79,55 @@ android:visibility="gone"
         <!--</LinearLayout>-->
 
 
-        <RelativeLayout
+        <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/header_compare"
+            android:layout_marginTop="15dp"
+
             android:layout_width="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="169dp">
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.45"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/school_logo_default"
+                    android:id="@+id/first_screen_logo_image"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/compare_logo_default"
+
+                    android:id="@+id/compare_logo_image"
+                    /></LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.45"
+                android:gravity="center_horizontal"
 
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/school_logo_default"
+                    android:id="@+id/second_school_logo_image"
+                    />
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/school_logo_default"
-                android:id="@+id/first_screen_logo_image"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="@dimen/comparelogoleft"
-                android:layout_marginBottom="10dp" />
-
-
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/compare_logo_default"
-
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/compare_logo_image"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp" />
-
-
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/school_logo_default"
-
-
-                android:id="@+id/second_school_logo_image"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="@dimen/comparelogoleft"
-                android:layout_marginBottom="10dp" />
-
-
-
-
-        </RelativeLayout>
+        </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
