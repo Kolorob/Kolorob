@@ -327,16 +327,10 @@ public class DetailsInfoActivityHealthNew extends Activity {
                         SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 1);
                     }
 
-
-
-
-
                 }
                 else if (compareValue == 0) {
                     if(isChecked)
                         SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getId(), 1);
-
-
 
                 }
                 else if (compareValue == 1) {

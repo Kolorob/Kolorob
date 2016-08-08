@@ -39,6 +39,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
@@ -152,6 +153,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
+    CheckBox checkBox,checkBox2;
     RelativeLayout compare_layoutedu;
     public int layoutstatus;
     private Boolean list_expand=false;
@@ -363,6 +365,8 @@ TextView uptext;
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
+        checkBox=(CheckBox)findViewById(R.id.compared);
+        checkBox2=(CheckBox)findViewById(R.id.compared2);
 
         explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
@@ -1084,6 +1088,8 @@ TextView uptext;
     public void compareHealth() {
         compare_layout.setVisibility(View.VISIBLE);
         compare_layoutedu.setVisibility(View.GONE);
+        checkBox.setChecked(true);
+        checkBox2.setChecked(true);
 
         healthServiceProviderTableNew = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
@@ -1128,6 +1134,42 @@ TextView uptext;
 
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
+
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
+
+                    if(compareValue==2)
+                     {
+                         if(!isChecked)
+                         {
+                             String  compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+
+                             String compare_Datas="";
+                             String new_compare_Data="";
+                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                             String multipule[]= compare_Datas.split(",");
+                             new_compare_Data = multipule[0];
+                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 1);
+                         }
+                     }
+
+                    else if(compareValue==1)
+                    {
+                        if(!isChecked)
+                        {
+
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
+                        }
+                    }
+
+
+
+                }
+            });
+
+
             healthService1=healthServiceProviderItemNew.getFamily_privacy();
             if(!healthService1.equals(""))
             {
@@ -1198,6 +1240,46 @@ TextView uptext;
         String health_service_data2="";
         for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
+            checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    String  compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                    int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
+
+
+                    if(compareValue==2)
+                    {
+                        if(!isChecked)
+                        {
+
+                            String compare_Datas="";
+                            String new_compare_Data="";
+                            compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String multipule[]= compare_Datas.split(",");
+                            new_compare_Data = multipule[1];
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 1);
+                        }
+                    }
+                    else if(compareValue==1)
+                    {
+                        if(!isChecked)
+                        {
+
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
+                        }
+                    }
+
+
+
+
+
+
+                }
+            });
+
+
+
             healthService2=healthServiceProviderItemNew.getFamily_privacy();
             if(!healthService2.equals(""))
             {
@@ -1264,7 +1346,7 @@ TextView uptext;
 
 
         }
-           SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
+         //  SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
     }
 
 
