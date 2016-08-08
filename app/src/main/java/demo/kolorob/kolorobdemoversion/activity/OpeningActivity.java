@@ -881,7 +881,8 @@ public class OpeningActivity extends Activity {
             JSONArray allData = jsonArrays[0];
             int entDataSize = allData.length();
             EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(OpeningActivity.this);
-
+            EntertainmetTypeTable entertainmetTypeTable = new EntertainmetTypeTable(OpeningActivity.this);
+            entertainmetTypeTable.dropTable();
                 entertainmentServiceProviderTableNew.dropTable();
 
             for (int i = 0; i < entDataSize; i++) {
@@ -897,7 +898,9 @@ public class OpeningActivity extends Activity {
 
                         for (int v = 0; v < rspot_detailsSize; v++) {
                             JSONObject rspot_detailsSizeItem = rspot_details.getJSONObject(v);
-                            Saverspot_detailsData(rspot_detailsSizeItem, jsonObject.getInt("id"));
+
+                            EntertainmentTypeItem entertainmentTypeItem = EntertainmentTypeItem.parseEntertainmentTypeItem(jsonObject.getInt("id"), rspot_detailsSizeItem);
+                            entertainmetTypeTable.insertItem(entertainmentTypeItem);
                         }
                     }
                 } catch (JSONException e) {
@@ -908,19 +911,6 @@ public class OpeningActivity extends Activity {
             return new Long(0);
         }
 
-        private void Saverspot_detailsData(JSONObject jsonObject, int foreign_key) {
-            EntertainmetTypeTable entertainmetTypeTable = new EntertainmetTypeTable(OpeningActivity.this);
-            entertainmetTypeTable.dropTable();
-            try {
-
-                EntertainmentTypeItem entertainmentTypeItem = EntertainmentTypeItem.parseEntertainmentTypeItem(foreign_key, jsonObject);
-                entertainmetTypeTable.insertItem(entertainmentTypeItem);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
 
     }
 

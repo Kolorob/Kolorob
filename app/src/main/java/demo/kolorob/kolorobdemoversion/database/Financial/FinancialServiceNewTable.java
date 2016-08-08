@@ -16,7 +16,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  * Created by israt.jahan on 6/27/2016.
  */
 public class FinancialServiceNewTable {
-    private static final String TAG = FinancialServiceDetailsTable.class.getSimpleName();
+    private static final String TAG = FinancialServiceNewTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_SERVICE_NEW;
     private static final String KEY_NODE_ID = "_finId";
     private static final String KEY_NAME_EN = "_nameen"; // 1 - text
