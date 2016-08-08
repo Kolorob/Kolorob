@@ -23,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/upperText"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_weight=".15"
                     android:id="@+id/jobS"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="left">
                     <ImageView
                         android:layout_width="25dp"
@@ -68,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.15"
                     android:id="@+id/right_cross_button"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal|right">
                     <ImageView
                         android:layout_width="wrap_content"
