@@ -181,7 +181,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     }
 
                     Log.d("BAUNIABHAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "প্যারিস রোড", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "বাউনিয়াবাদ ", Toast.LENGTH_SHORT);
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
@@ -195,7 +195,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     }
 
                     Log.d("PARIS ROAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "বাউনিয়াবাদ", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "প্যারিস রোড", Toast.LENGTH_SHORT);
                     anyHit = true;
 
                 }
