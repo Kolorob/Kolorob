@@ -164,6 +164,8 @@ public class OpeningActivity extends Activity {
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
     ArrayList<RatingModel>si22=new ArrayList<>();
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
+    HealthVaccineTableDetails healthVaccineTableDetails;
+    HealthSpecialistTableDetails healthVaccineTableDetails1;
 
     // LM's variables
     private Toast t = null;
@@ -401,7 +403,13 @@ public class OpeningActivity extends Activity {
                         try {
 
                             JSONArray allData = new JSONArray(apiContent);
+                            healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
+                            healthVaccineTableDetails.dropTable();
+                            healthVaccineTableDetails1 = new HealthSpecialistTableDetails(OpeningActivity.this);
+                            healthVaccineTableDetails1.dropTable();
                             new SaveHealthtDataTask(OpeningActivity.this).execute(allData);
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1374,7 +1382,6 @@ public class OpeningActivity extends Activity {
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray allData = jsonArrays[0];
             HealthServiceProviderTableNew healthServiceProviderTableNew = new HealthServiceProviderTableNew(OpeningActivity.this);
-            if(drop)
                 healthServiceProviderTableNew.dropTable();
 
             HealthDatSize = allData.length();
@@ -1383,6 +1390,7 @@ public class OpeningActivity extends Activity {
 
             for (int i = 0; i < HealthDatSize; i++) {
                 try {
+
                     JSONObject jsonObject = allData.getJSONObject(i);
                     HealthServiceProviderItemNew healthServiceProviderItemNew = HealthServiceProviderItemNew.parseHealthServiceProviderItem(jsonObject);
                     healthServiceProviderTableNew.insertItemHealth(healthServiceProviderItemNew);
@@ -1415,12 +1423,11 @@ public class OpeningActivity extends Activity {
         }
 
         private void SaveSpecialistData(JSONObject jsonObject, int foreign_key) {
-            HealthSpecialistTableDetails healthVaccineTableDetails = new HealthSpecialistTableDetails(OpeningActivity.this);
-            healthVaccineTableDetails.dropTable();
+
             try {
                 HealthSpecialistItemDetails healthSpecialistItemDetails = HealthSpecialistItemDetails.parseHealthSpecialistItem(jsonObject, foreign_key);
 
-                healthVaccineTableDetails.insertItemHealth(healthSpecialistItemDetails);
+                healthVaccineTableDetails1.insertItemHealth(healthSpecialistItemDetails);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1429,8 +1436,8 @@ public class OpeningActivity extends Activity {
         }
 
         private void SaveHealthVaccineData(JSONObject jsonObject, int foreign_key) {
-            HealthVaccineTableDetails healthVaccineTableDetails = new HealthVaccineTableDetails(OpeningActivity.this);
-            healthVaccineTableDetails.dropTable();
+
+
             try {
                 HealthVaccineItemDetails healthVaccineItemDetails = HealthVaccineItemDetails.parseHealthVaccinesItem(jsonObject, foreign_key);
                 healthVaccineTableDetails.insertItemHealth(healthVaccineItemDetails);
