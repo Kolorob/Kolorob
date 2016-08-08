@@ -64,14 +64,14 @@ public class DisplayAllJobsActivity extends Activity {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("আপনি কি নতুন চাকুরি খুজতে চান? ");
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         displayData();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         alertDialog.cancel();
