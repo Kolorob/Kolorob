@@ -295,6 +295,10 @@ public class DetailsJobActivityNew extends Activity {
     public void sendemail(View v){
         AlertMessage.showMessage(con,"দুঃখিত","ইমেইল আইডি পাওয়া যায়নি");
     }
+    public void phonecall(View v){
+        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                "ফোন নম্বর পাওয়া যায়নি");
+    }
 
 //    public void closepage(View v){
 //        this.finish();

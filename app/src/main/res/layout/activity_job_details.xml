@@ -377,6 +377,7 @@
                 android:id="@+id/phone_middl"
                 android:layout_centerInParent="true"
 
+                android:onClick="phonecall"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/phone_icon"/>
 
