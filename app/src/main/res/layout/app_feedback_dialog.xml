@@ -7,6 +7,7 @@
     android:background="@drawable/rounded"
     android:padding="10dp">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,8 +27,8 @@
         android:layout_gravity="center_horizontal"
         android:numStars="5"
         android:stepSize="1.2"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
+        android:scaleX="1.0"
+        android:scaleY="1.0"
 
         android:rating="0" />
 
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:hint="মতামত"
         android:gravity="center"
-        android:lines="2"
+        android:lines="4"
         />
 
 
@@ -65,8 +66,8 @@
 
         <Button
             android:id="@+id/btnSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/tick_icon_feedback"
             android:layout_gravity="center_horizontal"
             android:onClick="phonecall"
@@ -76,8 +77,8 @@
 
         <Button
             android:id="@+id/btnclose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/cross_icon_feedback"
             android:layout_gravity="center_horizontal"

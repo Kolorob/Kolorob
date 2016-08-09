@@ -26,6 +26,11 @@
         <item name="colorAccent">@color/orange</item>
     </style>
 
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="DialogTheme" parent="android:Theme.Dialog">
 
         <item name="android:layout_width">fill_parent</item>

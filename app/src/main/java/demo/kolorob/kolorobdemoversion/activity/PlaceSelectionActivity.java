@@ -1,12 +1,15 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +27,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -368,24 +373,39 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     public void help() {
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
         View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
-        final AlertDialog alert = alertDialogBuilder.create();
+     //   final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
+      //  final AlertDialog alert = alertDialogBuilder.create();
 
-        alertDialogBuilder.setView(promptView);
+     //   alertDialogBuilder.setView(promptView);
+
+        final Dialog alertDialog = new Dialog(PlaceSelectionActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        alertDialog.getWindow().setLayout((width*4)/5, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+
+
         final RatingBar ratingBar = (RatingBar) promptView.findViewById(R.id.ratingBar);
         final EditText submit_btn = (EditText) promptView.findViewById(R.id.submit_btn);
         final Button btnSubmit = (Button) promptView.findViewById(R.id.btnSubmit);
         final Button btnclose = (Button) promptView.findViewById(R.id.btnclose);
+//        Dialog mDialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+//        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+
+
 
 
         ViewGroup.LayoutParams params = btnSubmit.getLayoutParams();
-        params.height=width/8;
-        params.width=width/8;
+//        params.height=width/9;
+//        params.width=width/9;
         btnSubmit.setLayoutParams(params);
 
         ViewGroup.LayoutParams params1 = btnSubmit.getLayoutParams();
-        params1.height=width/8;
-        params1.width=width/8;
+//        params1.height=width/9;
+//        params1.width=width/9;
         btnclose.setLayoutParams(params1);
 
 
@@ -406,7 +426,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 ratings = ratingBar.getRating();
 
                 sendDataToserver(ratings, comment);
-                alert.cancel();
+                alertDialog.cancel();
                 finish();
                 //   back();
 
@@ -432,11 +452,11 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
         // setup a dialog window
-        alertDialogBuilder.setCancelable(false);
+        alertDialog.setCancelable(false);
 
         // create an alert dialog
-        AlertDialog alerts = alertDialogBuilder.create();
-        alerts.show();
+        alertDialog.show();
+     //   alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
 //        alerts.getWindow().setLayout((height*3/7), (height*4/7));
 
 
