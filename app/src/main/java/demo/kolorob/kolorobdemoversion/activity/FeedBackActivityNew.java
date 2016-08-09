@@ -55,11 +55,16 @@ public class FeedBackActivityNew extends AppCompatActivity {
 //        age.add("মোটামোটি");
 //        age.add("ভাল না");
 
-        age.add("খুবই অসন্তুষ্ট ");
-        age.add("অসন্তুষ্ট ");
-        age.add("বিশেষ অনুভূতি নেই");
-        age.add("সন্তুষ্ট ");
+
+
+// order should be in this order and now add stars with corresponding text
+
+
         age.add("খুবই সন্তুষ্ট");
+        age.add("সন্তুষ্ট ");
+        age.add("বিশেষ অনুভূতি নেই");
+        age.add("অসন্তুষ্ট ");
+        age.add("খুবই অসন্তুষ্ট ");
 
 
 

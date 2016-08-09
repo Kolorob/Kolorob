@@ -74,6 +74,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     private int width;
     Float  ratings;
     Boolean click=false;
+
+
+
     float[][] mirpur10Coords = {
             {42, 267},
             {80, 420},

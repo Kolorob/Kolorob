@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
@@ -101,6 +102,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<FinancialNewItem> financialServiceProvider = null;
     private ArrayList<EducationNewItem> educationServiceProvider = null;
     private ArrayList<GovernmentNewItem> governmentNewItems = null;
+    private  ArrayList<AllHolder>allitems=null;
     MapView mapView,mapp;
     String datevalue,datevaluebn;
     private int categoryId;
@@ -116,6 +118,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     }
 
     ArrayAdapter arrayAdapter;
+
+    public ArrayList<AllHolder> getAllitems() {
+        return allitems;
+    }
+
+    public void setAllitems(ArrayList<AllHolder> allitems) {
+        this.allitems = allitems;
+    }
 
     public int getCategoryId() {
         return categoryId;
@@ -314,7 +324,7 @@ Date today=new Date();
                 }
                 break;
             case AppConstants.GOVERNMENT:
-                if (governmentNewItems != null) {
+              /*  if (governmentNewItems != null) {
                     for (GovernmentNewItem et : governmentNewItems) {
 
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
@@ -336,7 +346,29 @@ Date today=new Date();
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
-                }
+                }*/
+              /*  if (allitems != null) {
+                    for (AllHolder et : allitems) {
+
+                        //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                        subcategotyId2 = et.getRefnum();
+                        latDouble = Double.parseDouble(et.getLat());
+                        longDouble = Double.parseDouble(et.getLon());
+
+
+                        if(ratingavg.equals("null"))
+                        {
+                            ratingavg="পাওয়া যায় নি";
+
+                        }
+                        else  {
+                            ratingavgbn=EtoBconversion(ratingavg);
+
+                            ratingavg=ratingavgbn.concat(datevalue);
+                        }
+                        GeoPoint point = new GeoPoint(latDouble, longDouble);
+                        drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
+                    }*/
                 break;
             case AppConstants.LEGAL:
                 for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
