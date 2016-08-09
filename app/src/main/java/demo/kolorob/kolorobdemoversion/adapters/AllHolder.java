@@ -10,6 +10,7 @@ public class AllHolder {
     String namebn;
     int catid;
 
+
     public AllHolder(int nodeid, String refnum, String nameen, String namebn, int catid) {
         this.nodeid = nodeid;
         this.refnum = refnum;
