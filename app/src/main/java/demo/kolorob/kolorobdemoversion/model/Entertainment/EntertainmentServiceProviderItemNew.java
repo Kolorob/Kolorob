@@ -265,7 +265,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
             _nodeWebsite = contact_info.getString("node_website");
             _nodeFacebook = contact_info.getString("node_facebook");
             _nodeDesignation = contact_info.getString("node_designation");
-           _address = contact_info.getString("address");;
+             _address = contact_info.getString("address");;
         }
 
 
@@ -341,7 +341,7 @@ public class EntertainmentServiceProviderItemNew implements Serializable {
                 avenue,
                 post_office,
                  police_station,
-                 city,
+                city,
                 off_day,_rating);
     }
 

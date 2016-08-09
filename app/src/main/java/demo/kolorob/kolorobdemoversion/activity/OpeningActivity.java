@@ -364,7 +364,7 @@ public class OpeningActivity extends Activity {
                 ) {
 
             //get All using sql api
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -372,7 +372,7 @@ public class OpeningActivity extends Activity {
                             }
                         }
                     }
-            );
+            );*/
 
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
@@ -477,7 +477,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -495,7 +495,7 @@ public class OpeningActivity extends Activity {
                             }
                         }
                     }
-            );*/
+            );
 
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
@@ -530,7 +530,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -545,7 +545,7 @@ public class OpeningActivity extends Activity {
                             }
                         }
                     }
-            );*/
+            );
 
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {

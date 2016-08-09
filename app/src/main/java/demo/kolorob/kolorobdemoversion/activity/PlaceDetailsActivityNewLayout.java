@@ -1122,7 +1122,7 @@ TextView uptext;
         String healthService1="";
         String health_service_data1="";
 
-        for (HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
+        for (final HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
         {
 
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -1143,6 +1143,8 @@ TextView uptext;
                              new_compare_Data = multipule[0];
                              SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 1);
                          }
+
+
                      }
 
                     else if(compareValue==1)
@@ -1152,6 +1154,21 @@ TextView uptext;
 
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
                         }
+
+                        else {
+                            String new_compare_Data="";
+                            String compare_Data="";
+                            compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String multipule[]= compare_Data.split(",");
+                            new_compare_Data = multipule[0]+","+healthServiceProviderItemNew.getId();
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 2);
+                        }
+                    }
+
+                    else if (compareValue == 0) {
+                        if(isChecked)
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNew.getId(), 1);
+
                     }
 
 
@@ -1228,7 +1245,7 @@ TextView uptext;
 
         String healthService2="";
         String health_service_data2="";
-        for (HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
+        for (final HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
         {
             checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -1250,6 +1267,7 @@ TextView uptext;
                             new_compare_Data = multipule[1];
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 1);
                         }
+
                     }
                     else if(compareValue==1)
                     {
@@ -1258,6 +1276,19 @@ TextView uptext;
 
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
                         }
+                        else {
+                            String new_compare_Data="";
+                            compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String multipule[]= compare_Data.split(",");
+                            new_compare_Data = multipule[0]+","+healthServiceProviderItemNew.getId();
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 2);
+                        }
+                    }
+
+                    else if (compareValue == 0) {
+                        if(isChecked)
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNew.getId(), 1);
+
                     }
 
 
