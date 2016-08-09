@@ -20,17 +20,20 @@
         android:gravity="center">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/yes"
-            android:background="@drawable/yes_button"/>
+            android:layout_marginRight="10dp"
+            android:background="@drawable/yes_icon"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/no"
+            android:layout_marginLeft="10dp"
 
-            android:background="@drawable/no_button"/>
+
+            android:background="@drawable/no_icon"/>
 
 
     </LinearLayout>
