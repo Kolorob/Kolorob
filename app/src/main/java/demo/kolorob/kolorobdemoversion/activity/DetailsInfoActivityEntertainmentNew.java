@@ -111,6 +111,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         width = displayMetrics.widthPixels;
         con = this;
 
+        Log.d("ccc","######"+width);
 
         Intent intent = getIntent();
 
@@ -846,7 +847,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         textAsk.setTextSize(23);
         else
             textAsk.setTextSize(17);
-        alertDialog.getWindow().setLayout((width*9)/10, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
         yes.setOnClickListener(new View.OnClickListener() {
