@@ -477,7 +477,7 @@ public class OpeningActivity extends Activity {
                         }
                     }
             );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -495,7 +495,7 @@ public class OpeningActivity extends Activity {
                             }
                         }
                     }
-            );
+            );*/
 
 
             getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
@@ -1024,12 +1024,12 @@ public class OpeningActivity extends Activity {
 
             //split into single sql queries
             String[] sql = sqls[0].split(";");
-            Log.d("sql","******"+sql);
+
             //block db
             //db.beginTransaction();
 
             //run the sqls one by one
-            for (int i = 0; i<sql.length-1;i++)
+            for (int i = 0; i<sql.length;i++)
             {
                 db.execSQL(sql[i]);
             }
