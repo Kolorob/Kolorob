@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -823,14 +827,26 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     public void requestToRegister() {
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this);
-        alertDialogBuilder.setView(promptView);
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this);
+//        alertDialogBuilder.setView(promptView);
+
+        final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
 
 
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
-
-        final AlertDialog alert = alertDialogBuilder.create();
+        final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        textAsk.setText(text);
+        if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityEntertainmentNew.this))
+        textAsk.setTextSize(23);
+        else
+            textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout((width*9)/10, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
         yes.setOnClickListener(new View.OnClickListener() {
@@ -838,7 +854,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
             public void onClick(View v) {
 
                 Intent intentPhoneRegistration = new Intent(DetailsInfoActivityEntertainmentNew.this, PhoneRegActivity.class);
-                alert.cancel();
+                alertDialog.cancel();
                 startActivity(intentPhoneRegistration);
 
             }
@@ -848,15 +864,15 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alert.cancel();
+                alertDialog.cancel();
 
             }
         });
         //   setup a dialog window
-        alertDialogBuilder.setCancelable(false);
+        alertDialog.setCancelable(false);
 
 
-        alert.show();
+        alertDialog.show();
     }
 
 

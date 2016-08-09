@@ -4,13 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
-    android:gravity="fill_vertical">
+    android:background="@drawable/rounded"
+    android:gravity="center">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/verify_registration"
-        android:id="@+id/textView" />
+        android:id="@+id/textAsk" />
 
     <LinearLayout
         android:layout_width="match_parent"
