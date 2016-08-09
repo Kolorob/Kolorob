@@ -582,12 +582,8 @@ public class OpeningActivity extends Activity {
                     this.finish();
                 }
                 else {
-                    AppDialogManager.showNoInternetDialog(this, new RetryCallBackForNoInternet() {
-                        @Override
-                        public void retry() {
-                            LoadData();
-                        }
-                    });
+                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+                            Toast.LENGTH_LONG).show();
                 }
 
             } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED )
