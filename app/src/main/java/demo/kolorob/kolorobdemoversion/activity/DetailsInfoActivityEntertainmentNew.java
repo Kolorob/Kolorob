@@ -331,9 +331,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!entertainmentServiceProviderItemNew.getNodeAdditional().equals("null")) {
-                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeAdditional());
-                    callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItemNew.getNodeAdditional()));
+                if (!entertainmentServiceProviderItemNew.getNodeContact().equals("null")&&!entertainmentServiceProviderItemNew.getNodeContact().equals("")) {
+                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeContact());
+                    callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItemNew.getNodeContact()));
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
