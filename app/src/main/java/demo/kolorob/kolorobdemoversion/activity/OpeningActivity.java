@@ -366,34 +366,59 @@ public class OpeningActivity extends Activity {
                 ) {
             if(LOADINF_MODE=="SQL") { //for the newer version loading
                 NUMBER_OF_TASKS = 3;
-                //get All using sql api
-                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql1?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                            @Override
-                            public void onResponse(int status, String apiContent) {
-                                if (status == AppConstants.SUCCESS_CODE) {
-                                    new SaveSQL(OpeningActivity.this).execute(apiContent);
+
+                new SaveSQL(OpeningActivity.this).execute("1");
+                new SaveSQL(OpeningActivity.this).execute("2");
+                new SaveSQL(OpeningActivity.this).execute("3");
+
+
+                //first third
+                /*if(sql1==null) {
+                    getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql1?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                                @Override
+                                public void onResponse(int status, String apiContent) {
+                                    if (status == AppConstants.SUCCESS_CODE) {
+                                        new SaveSQL(OpeningActivity.this).execute(apiContent);
+                                    }
                                 }
                             }
-                        }
-                );
-                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql2?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                            @Override
-                            public void onResponse(int status, String apiContent) {
-                                if (status == AppConstants.SUCCESS_CODE) {
-                                    new SaveSQL(OpeningActivity.this).execute(apiContent);
+                    );
+                }
+                else{
+                    new SaveSQL(OpeningActivity.this).execute(sql1);
+                }
+
+                //Second third
+                if(sql2==null) {
+                    getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql2?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                                @Override
+                                public void onResponse(int status, String apiContent) {
+                                    if (status == AppConstants.SUCCESS_CODE) {
+                                        new SaveSQL(OpeningActivity.this).execute(apiContent);
+                                    }
                                 }
                             }
-                        }
-                );
-                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql3?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                            @Override
-                            public void onResponse(int status, String apiContent) {
-                                if (status == AppConstants.SUCCESS_CODE) {
-                                    new SaveSQL(OpeningActivity.this).execute(apiContent);
+                    );
+                }
+                else{
+                    new SaveSQL(OpeningActivity.this).execute(sql2);
+                }
+
+                //Third third
+                if(sql3==null) {
+                    getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql3?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                                @Override
+                                public void onResponse(int status, String apiContent) {
+                                    if (status == AppConstants.SUCCESS_CODE) {
+                                        new SaveSQL(OpeningActivity.this).execute(apiContent);
+                                    }
                                 }
                             }
-                        }
-                );
+                    );
+                }
+                else{
+                    new SaveSQL(OpeningActivity.this).execute(sql3);
+                }*/
             }
             else if(LOADINF_MODE=="JSON") {//fot json older version loading
                 getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
@@ -1032,11 +1057,28 @@ public class OpeningActivity extends Activity {
 
 
         protected Long doInBackground(String... sqls) {
+
+            String query="";
+
+            //wait till its populated
+            if(sqls[0]=="1"){
+                while(DatabaseHelper.sql1==null);
+                query = DatabaseHelper.sql1;
+            }
+            else if(sqls[0]=="2"){
+                while(DatabaseHelper.sql2==null);
+                query = DatabaseHelper.sql2;
+            }
+            else if(sqls[0]=="3"){
+                while(DatabaseHelper.sql3==null);
+                query = DatabaseHelper.sql3;
+            }
+
             //ge the db instance
             SQLiteDatabase db = DatabaseManager.getInstance(OpeningActivity.this).openDatabase();
 
             //split into single sql queries
-            String[] sql = sqls[0].split(";");
+            String[] sql = query.split(";");
 
             //block db
             //db.beginTransaction();
