@@ -341,7 +341,8 @@ public class DetailsLayoutGovernment extends Activity {
                     }
 
 
-                  //  finish();
+                    Intent intentJ = new Intent(DetailsLayoutGovernment.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){

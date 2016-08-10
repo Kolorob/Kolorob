@@ -428,8 +428,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                         //username and password are present, do your stuff
                     }
 
-
-                    // finish();
+                    Intent intentJ = new Intent(DetailsInfoActivityEntertainmentNew.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){

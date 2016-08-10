@@ -349,7 +349,8 @@ EditText feedback_comment;
                     }
 
 
-                   // finish();
+                    Intent intentJ = new Intent(DetailsLayoutFinance.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
