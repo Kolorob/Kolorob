@@ -50,14 +50,14 @@ public class AppUtils {
         final Context cont;
         cont = con;
         // Setting Dialog Title
-        alertDialog.setTitle("GPS is disabled!");
+        alertDialog.setTitle("জিপিএস বন্ধ করা রয়েছে!");
 
         // Setting Dialog Message
         alertDialog
-                .setMessage("GPS is not enabled. Do you want to go to settings menu?");
+                .setMessage(" আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Settings",
+        alertDialog.setPositiveButton("সেটিংস",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(
@@ -67,7 +67,7 @@ public class AppUtils {
                 });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton("দরকার নেই",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
