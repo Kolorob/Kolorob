@@ -147,6 +147,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ScrollView sv,svs;
     String firstData="",SecondData="";
     int checker=0;
+    Boolean InCompare=false;
     private Button prebutton;
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
     private int sideIndexHeight;
@@ -728,7 +729,7 @@ TextView uptext;
                 MapClicked=false;
                 ListClicked=false;
                 CompareClicked=false;
-
+                InCompare=false;
 
 
                 populateSearch();
@@ -790,7 +791,10 @@ TextView uptext;
                 spItems.setVisibility(View.VISIBLE);
                 uptext.setVisibility(View.VISIBLE);
                 CompareClicked=false;
-                callMapFragment(locationNameId);;
+                if(InCompare==false) {
+                    callMapFragment(locationNameId);
+
+                }
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
 
@@ -842,6 +846,7 @@ TextView uptext;
                 uptext.setVisibility(View.VISIBLE);
                 SearchClicked=false;
                 MapClicked=false;
+                InCompare=false;
                 ListClicked=true;
                 CompareClicked=false;
                 searchviewholder.setVisibility(View.GONE);
@@ -918,7 +923,7 @@ TextView uptext;
                     MapClicked=false;
                     ListClicked=false;
                     CompareClicked=true;
-
+                    InCompare=true;
 
                     if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==0)
                     {
