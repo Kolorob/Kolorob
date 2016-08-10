@@ -366,8 +366,7 @@ public class DetailsLayoutGovernment extends Activity {
                     alertDialog.show();
 
                 }
-                Intent intentJ = new Intent(DetailsLayoutGovernment.this,MapFragmentRouteOSM.class);
-                startActivity(intentJ);
+
             }
 
         });

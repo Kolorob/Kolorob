@@ -454,8 +454,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
                 }
 
-                Intent intentJ = new Intent(DetailsInfoActivityEntertainmentNew.this,MapFragmentRouteOSM.class);
-                startActivity(intentJ);
+
             }
         });
 

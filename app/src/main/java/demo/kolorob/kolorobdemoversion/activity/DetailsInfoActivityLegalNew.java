@@ -415,8 +415,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
                 }
 
-                Intent intentJ = new Intent(DetailsInfoActivityLegalNew.this,MapFragmentRouteOSM.class);
-                startActivity(intentJ);
+
             }
         });
     }

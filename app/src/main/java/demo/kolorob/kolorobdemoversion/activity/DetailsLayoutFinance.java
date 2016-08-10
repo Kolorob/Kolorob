@@ -375,8 +375,7 @@ EditText feedback_comment;
 
                 }
 
-                Intent intentJ = new Intent(DetailsLayoutFinance.this,MapFragmentRouteOSM.class);
-                startActivity(intentJ);
+
             }
         });
     }
