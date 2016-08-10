@@ -196,12 +196,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ArrayList<SubCategoryItem> currentSubCategoryItem;
     public static int currentCategoryID,currentCategoryIDconverted;
     private  ViewGroup.LayoutParams kk;
-    //    Vector<Group> education_groups = new Vector<Group>();
-//    Vector<Group> health_group = new Vector<Group>();
-//    Vector<Group> entertainment_group = new Vector<Group>();
-//    Vector<Group> govt_group = new Vector<Group>();
-//    Vector<Group> financial_group = new Vector<Group>();
-//    Vector<Group>  = new Vector<Group>();
+
     Vector<Group> groups = new Vector<Group>();
     TextView header;
     private String placeChoice;
@@ -766,12 +761,16 @@ TextView uptext;
                     compare_layoutedu.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.VISIBLE);
                 }
-                if(educlicked==false||helclicked==false||entclicked==false||legclicked==false||finclicked==false)
+                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
 
-                    filterholder.setVisibility(View.GONE);
+                    filterholder.setVisibility(View.VISIBLE);
+                    toggleButton.setVisibility(View.VISIBLE);
                 }
-                else filterholder.setVisibility(View.VISIBLE);
+                else{ filterholder.setVisibility(View.GONE);}
+                svholder.setVisibility(View.VISIBLE);
+                sv.setVisibility(View.VISIBLE);
+                llCatListHolder.setVisibility(View.VISIBLE);
                 toggleButton.setVisibility(View.VISIBLE);
 
             }
@@ -1181,48 +1180,48 @@ TextView uptext;
             if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
                 health_name3.setText(healthServiceProviderItemNew.getNode_bn());
             else
-                health_name3.setText("শিগ্রই আসছে");
+                health_name3.setText("শীঘ্রই আসছে");
 
             String time2="";
             time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
             if(!time2.equals("")&&!time2.equals("null"))
                 opening_time3.setText(time2);
             else
-                opening_time3.setText("শিগ্রই আসছে");
+                opening_time3.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
             else
-                language_spoken3.setText("শিগ্রই আসছে");
+                language_spoken3.setText("শীঘ্রই আসছে");
 
             if(!health_service_data1.equals("")&&!health_service_data1.equals("null"))
                 service_type3.setText(health_service_data1);
             else
-                service_type3.setText("শিগ্রই আসছে");
+                service_type3.setText("শীঘ্রই আসছে");
             if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
                 specialist_available3.setText(firstSpecialistItem);
             else
-                specialist_available3.setText("শিগ্রই আসছে");
+                specialist_available3.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
                 clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
             else
-                clean_facilities3.setText("শিগ্রই আসছে");
+                clean_facilities3.setText("শীঘ্রই আসছে");
 
             if(healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
-                privacy3.setText("শিগ্রই আসছে");
+                privacy3.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
                 quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
             else
-                quality_equipment3.setText("শিগ্রই আসছে");
+                quality_equipment3.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
                 cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
             else
-                cost3.setText("শিগ্রই আসছে");
+                cost3.setText("শীঘ্রই আসছে");
         }
 
 
@@ -1291,48 +1290,48 @@ TextView uptext;
             if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
                 health_name2.setText(healthServiceProviderItemNew.getNode_bn());
             else
-                health_name2.setText("শিগ্রই আসছে");
+                health_name2.setText("শীঘ্রই আসছে");
 
             String time1="";
             time1=timeConverter(healthServiceProviderItemNew.getOpening_time());
             if(!time1.equals("")&&!time1.equals("null"))
                 opening_time2.setText(time1);
             else
-                opening_time2.setText("শিগ্রই আসছে");
+                opening_time2.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
             else
-                language_spoken2.setText("শিগ্রই আসছে");
+                language_spoken2.setText("শীঘ্রই আসছে");
 
             if(!health_service_data2.equals("")&&!health_service_data2.equals("null"))
                 service_type2.setText(health_service_data1);
             else
-                service_type2.setText("শিগ্রই আসছে");
+                service_type2.setText("শীঘ্রই আসছে");
             if(!secondSpecialistItem.equals("")&&!secondSpecialistItem.equals("null"))
                 specialist_available2.setText(firstSpecialistItem);
             else
-                specialist_available2.setText("শিগ্রই আসছে");
+                specialist_available2.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equals("null"))
                 clean_facilities2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
             else
-                clean_facilities2.setText("শিগ্রই আসছে");
+                clean_facilities2.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy2.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
-                privacy2.setText("শিগ্রই আসছে");
+                privacy2.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
                 quality_equipment2.setText(healthServiceProviderItemNew.getQuality_equipments());
             else
-                quality_equipment2.setText("শিগ্রই আসছে");
+                quality_equipment2.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
                 cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
             else
-                cost2.setText("শিগ্রই আসছে");
+                cost2.setText("শীঘ্রই আসছে");
 
 
         }
@@ -1938,6 +1937,7 @@ TextView uptext;
 
                 clicked.clear();
                 filterclicked=false;
+                fholder.setVisibility(View.GONE);
                 Headerholder.clear();
                 currentCategoryID = ci.getId();
 
