@@ -107,7 +107,8 @@ public class OpeningActivity extends Activity {
     public static final String DB_NAME = "kolorob.db";
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
-    private static final int NUMBER_OF_TASKS = 9;
+    private static int NUMBER_OF_TASKS = 10;
+    private static final String LOADINF_MODE="JSON"; //SQL or JSON
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
     String app_ver="";
@@ -138,6 +139,7 @@ public class OpeningActivity extends Activity {
     // LM's variables
     private Toast t = null;
     static int countOfDBLocal = 0;
+
 
 
     public int getCountofDb() {
@@ -362,208 +364,205 @@ public class OpeningActivity extends Activity {
 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
-
-            //get All using sql api
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                new SaveSQL(OpeningActivity.this).execute(apiContent);
-                            }
-                        }
-                    }
-            );
-
-
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                @Override
-                public void onResponse(int status, String apiContent) {
-                    if (status == AppConstants.SUCCESS_CODE) {
-                        try {
-
-                            JSONArray allData = new JSONArray(apiContent);
-                            healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
-                            healthVaccineTableDetails.dropTable();
-                            healthVaccineTableDetails1 = new HealthSpecialistTableDetails(OpeningActivity.this);
-                            healthVaccineTableDetails1.dropTable();
-                            new SaveHealthtDataTask(OpeningActivity.this).execute(allData);
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/get_sp_rating?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-
-                                try {
-                                    JSONArray jo = new JSONArray(apiContent);
-                                    new SaveRatingTask(OpeningActivity.this).execute(jo);
-                                    // String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    // if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                    //     new SaveSubCategoryListTask(OpeningActivity.this).execute(jo.getJSONArray(AppConstants.KEY_DATA));
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+            if(LOADINF_MODE=="SQL") { //for the newer version loading
+                NUMBER_OF_TASKS = 1;
+                //get All using sql api
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+                                    new SaveSQL(OpeningActivity.this).execute(apiContent);
                                 }
                             }
                         }
-                    }
-            );
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-
-                                try {
-                                    JSONArray jo = new JSONArray(apiContent);
-                                    new SaveSubCategoryListTask(OpeningActivity.this).execute(jo);
-                                    // String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                    // if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                    //     new SaveSubCategoryListTask(OpeningActivity.this).execute(jo.getJSONArray(AppConstants.KEY_DATA));
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
-
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-                                try {
-
-                                    JSONArray jo = new JSONArray(apiContent);
-
-                                    new SaveCategoryListTask(OpeningActivity.this).execute(jo);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
-            //
-            //
-
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-
-                                try {
-                                    JSONArray jo = new JSONArray(apiContent);
-
-                                    new SaveSubCategoryNewListTask(OpeningActivity.this).execute(jo);
-
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
-            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-                                try {
-
-                                    JSONArray allData = new JSONArray(apiContent);
-                                    new SavenewEduTask(OpeningActivity.this).execute(allData);
-
-//                                          frameAnimation.stop();
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );*/
-
-
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                @Override
-                public void onResponse(int status, String apiContent) {
-
-
-                    try {
-
-                        JSONArray allData = new JSONArray(apiContent);
-                        new SaveEntertainmentDataTask(OpeningActivity.this).execute(allData);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            });
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                try {
-
-                                    JSONArray jo = new JSONArray(apiContent);
-                                    new SavenewFinanceTask(OpeningActivity.this).execute(jo);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );
-            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                try {
-
-                                    JSONArray jo = new JSONArray(apiContent);
-                                    new SavenewGovTask(OpeningActivity.this).execute(jo);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-            );*/
-
-
-            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
+                );
+            }
+            else if(LOADINF_MODE=="JSON") {//fot json older version loading
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+                        if (status == AppConstants.SUCCESS_CODE) {
                             try {
 
-                                JSONArray legal_array = new JSONArray(apiContent);
-                                legalAidDetailsTable = new LegalAidDetailsTable(OpeningActivity.this);
-                                legalAidDetailsTable.dropTable();
-                                new SaveLegaltDataTask(OpeningActivity.this).execute(legal_array);
+                                JSONArray allData = new JSONArray(apiContent);
+                                healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
+                                healthVaccineTableDetails.dropTable();
+                                healthVaccineTableDetails1 = new HealthSpecialistTableDetails(OpeningActivity.this);
+                                healthVaccineTableDetails1.dropTable();
+                                new SaveHealthtDataTask(OpeningActivity.this).execute(allData);
+
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
-            );
+                });
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/get_sp_rating?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                    try {
+                                        JSONArray jo = new JSONArray(apiContent);
+                                        new SaveRatingTask(OpeningActivity.this).execute(jo);
+                                        // String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                        // if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        //     new SaveSubCategoryListTask(OpeningActivity.this).execute(jo.getJSONArray(AppConstants.KEY_DATA));
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs_old?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                    try {
+                                        JSONArray jo = new JSONArray(apiContent);
+                                        new SaveSubCategoryListTask(OpeningActivity.this).execute(jo);
+                                        // String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                        // if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                        //     new SaveSubCategoryListTask(OpeningActivity.this).execute(jo.getJSONArray(AppConstants.KEY_DATA));
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/categories?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+
+                                    try {
+
+                                        JSONArray jo = new JSONArray(apiContent);
+
+                                        new SaveCategoryListTask(OpeningActivity.this).execute(jo);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/refs?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                    try {
+                                        JSONArray jo = new JSONArray(apiContent);
+
+                                        new SaveSubCategoryNewListTask(OpeningActivity.this).execute(jo);
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+
+                                    try {
+
+                                        JSONArray allData = new JSONArray(apiContent);
+                                        new SavenewEduTask(OpeningActivity.this).execute(allData);
+
+    //                                          frameAnimation.stop();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+
+
+                        try {
+
+                            JSONArray allData = new JSONArray(apiContent);
+                            new SaveEntertainmentDataTask(OpeningActivity.this).execute(allData);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/financial?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+                                    try {
+
+                                        JSONArray jo = new JSONArray(apiContent);
+                                        new SavenewFinanceTask(OpeningActivity.this).execute(jo);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+                                    try {
+
+                                        JSONArray jo = new JSONArray(apiContent);
+                                        new SavenewGovTask(OpeningActivity.this).execute(jo);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                );
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                try {
+
+                                    JSONArray legal_array = new JSONArray(apiContent);
+                                    legalAidDetailsTable = new LegalAidDetailsTable(OpeningActivity.this);
+                                    legalAidDetailsTable.dropTable();
+                                    new SaveLegaltDataTask(OpeningActivity.this).execute(legal_array);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                );
+            }
 
         } else {
             if (!AppUtils.isNetConnected(getApplicationContext())) {
@@ -1032,6 +1031,13 @@ public class OpeningActivity extends Activity {
 
             //unblock db
             //db.endTransaction();
+
+            int edu = db.rawQuery("select * from edu_provider_new", null).getCount();
+            int helth= db.rawQuery("select * from hel_provider_new", null).getCount();
+            int gov = db.rawQuery("select * from gov_main", null).getCount();
+            int legal= db.rawQuery("select * from legal_aid_provider", null).getCount();
+            int rec= db.rawQuery("select * from ent_provider_new", null).getCount();
+            int fin= db.rawQuery("select * from financial_new", null).getCount();
 
             //close db
             DatabaseManager.getInstance(OpeningActivity.this).closeDatabase();
