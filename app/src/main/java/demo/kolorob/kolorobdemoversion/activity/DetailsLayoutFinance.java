@@ -474,7 +474,7 @@ EditText feedback_comment;
                                 {
                                     JSONObject ratingH=jo.getJSONObject(i);
                                     String id= ratingH.getString("id");
-                                    if(id.equals(financialNewItem.getFinId()))
+                                    if(id.equals(String.valueOf(financialNewItem.getFinId())))
                                     {
 
 
