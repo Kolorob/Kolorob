@@ -1130,7 +1130,8 @@ public class OpeningActivity extends Activity {
                     }
 
 
-                } catch (JSONException e) {
+                } catch (JSONException e)
+                {
                     e.printStackTrace();
                     return new Long(-1);
                 }

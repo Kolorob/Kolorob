@@ -101,7 +101,8 @@ public class EntertainmentTypeItem {
                 recreation_price,
                 recreation_remark,
                 type,
-                sub_type,sid
+                sub_type,
+                sid
 
 
         );
