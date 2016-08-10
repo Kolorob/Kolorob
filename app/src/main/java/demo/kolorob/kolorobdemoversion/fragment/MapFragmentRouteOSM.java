@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -24,6 +23,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -186,7 +186,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         markerlocation = new GeoPoint(lat,lon);
         Marker centermarker = new Marker(mapView);
         centermarker.setPosition(markerlocation);
-        centermarker.setTitle("Destination");
+        centermarker.setTitle("     গন্তব্য");
 
         mapView.getOverlays().add(centermarker);
 
@@ -244,7 +244,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         mapView.getOverlays().add(myScaleBarOverlay);
 
 
-        /*ImageButton curButton = (ImageButton) rootView.findViewById(R.id.currlocation);
+        ImageButton curButton = (ImageButton) findViewById(R.id.imageButton);
         curButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -261,11 +261,10 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
                     else {
                         setloc=location;
                         onLocationChanged(location);}
-                    Drawroute(userlocation, markerlocation);
                     mapViewController.animateTo(new GeoPoint(setloc));
                 }
             }
-        });*/
+        });
 
 
 
@@ -282,12 +281,15 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         headtext=(TextView)findViewById(R.id.headtext);
         headtext.setText(centername);
         String distance= String.format("%.2f", roadlength);
-        ///  disttext=(TextView)findViewById(R.id.distancetext);
+        disttext=(TextView)findViewById(R.id.textView16);
+        disttext.setVisibility(View.GONE);
         Cngtext=(TextView)findViewById(R.id.cngtext);
         Bustext=(TextView)findViewById(R.id.bustext);
         Ricksawtext=(TextView)findViewById(R.id.ricksawtext);
         Walkingtext=(TextView)findViewById(R.id.walkingtext);
-     //   disttext.setText(getString(R.string.distance) +": " +distance+ " km" );
+      String bdistance= EtoBconversion(distance);
+        disttext.setText(getString(R.string.distance) +": " +bdistance+ " কি.মি" );
+        disttext.setVisibility(View.VISIBLE);
         String Busfare= EtoBconversion(String.valueOf((int) Math.round(roadlength*1.55)));
         String bustime= EtoBconversion(String.valueOf((int) Math.round((roadlength/15)*60)));
         if (Integer.parseInt(Busfare) <=7.00)Bustext.setText( "৭ "+ "টাকা এবং খুব কম সময় লাগার কথা");
@@ -313,7 +315,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         String wtime=EtoBconversion( String.valueOf((int) Math.round((roadlength/8)*60)));
 
 
-        Walkingtext.setText("কোন খরচ লাগবে না এবং " + wtime+ " মিনিট সময় লাগতে পারে"  );
+        Walkingtext.setText( wtime+ " মিনিট সময় লাগতে পারে"  );
 
     }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
@@ -407,7 +409,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         // Getting reference to TextView tv_longitude
         if (statusofservice == false) {
             mapView.getOverlays().remove(usermarker);
-            Toast.makeText(this, "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
             usermarker = new Marker(mapView);
             laat = location.getLatitude();
             longg = location.getLongitude();
@@ -424,7 +426,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             userlocation = new GeoPoint(laat, longg);
             usermarker.setPosition(userlocation);
             mapView.getOverlays().add(usermarker);
-            Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -477,7 +479,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             Drawroute(userlocation, markerlocation);
 
         }
-        Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -546,6 +548,8 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
                 concatResult = concatResult + "৯";
             else if (english_number.charAt(i) == '0')
                 concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '.')
+                concatResult = concatResult + ".";
         }
         return concatResult;
     }
