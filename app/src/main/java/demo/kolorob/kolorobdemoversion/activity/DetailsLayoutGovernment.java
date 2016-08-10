@@ -158,10 +158,12 @@ public class DetailsLayoutGovernment extends Activity {
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        if(width<500)
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
 
 
-
-
+        setRatingBar();
 
         CheckConcate("পরিচিত স্থান  ", governmentNewItem.getLandmark());
         CheckConcate("ঠিকানা  ", governmentNewItem.getAddress());
@@ -584,15 +586,18 @@ public void setRatingBar()
                         try {
                             JSONArray jo = new JSONArray(apiContent);
                             int size= jo.length();
+                            Log.d("$$$$$$", "size " + size);
                             for(int i=0;i<size;i++)
                             {
                                 JSONObject ratingH=jo.getJSONObject(i);
                                 String id= ratingH.getString("id");
-                                if(id.equals(governmentNewItem.getFinId()))
+                                Log.d("$$$$$$", "getFinId " + governmentNewItem.getFinId());
+                                Log.d("$$$$$$", "id " + id);
+                                if(id.equals(String.valueOf(governmentNewItem.getFinId())))
                                 {
-
-
+                                    Log.d("$$$$$$", "size ");
                                     rating=Float.parseFloat(ratingH.getString("avg"));
+
                                     ratingBar.setRating(rating);
                                     break;
 

@@ -561,13 +561,14 @@ public class DetailsInfoActivityHealthNew extends Activity {
                             try {
                                 JSONArray jo = new JSONArray(apiContent);
                                 int size= jo.length();
+
                                 for(int i=0;i<size;i++)
                                 {
                                     JSONObject ratingH=jo.getJSONObject(i);
                                     String id= ratingH.getString("id");
                                     if(id.equals(healthServiceProviderItemNew.getId()))
                                     {
-
+                                        Log.d("$$$$$$", "id " + id);
 
                                         rating=Float.parseFloat(ratingH.getString("avg"));
                                         ratingBar.setRating(rating);
