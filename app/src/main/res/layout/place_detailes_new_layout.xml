@@ -835,7 +835,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/searchholder"
-
                 android:visibility="gone"
                 android:layout_height="match_parent">
 
@@ -884,7 +883,13 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="@dimen/search_margin">
-
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/morebutton"
+                        android:background="@drawable/filter"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -894,10 +899,10 @@
 
                         android:layout_alignParentLeft="false"
                         android:layout_alignParentStart="true"
-                        android:layout_alignParentRight="true"
                         android:layout_below="@+id/morebutton"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="@dimen/search_margin">
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true">
 
 
 
@@ -910,7 +915,7 @@
                                 android:id="@+id/LinearLayoutfilter"
                                 android:visibility="gone"
                                 android:layout_width="@dimen/searchbar"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
 
                                 android:orientation="horizontal"
                                 android:weightSum="2"
@@ -950,13 +955,7 @@
 
                     </RelativeLayout>
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/morebutton"
-                        android:background="@drawable/filter"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+
                 </RelativeLayout>
 
             </RelativeLayout>

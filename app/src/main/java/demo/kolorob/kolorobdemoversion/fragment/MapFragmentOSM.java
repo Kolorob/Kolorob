@@ -257,7 +257,7 @@ Date today=new Date();
                                 ratingavg=et.getRating();
 
 
-                        if(ratingavg.equals("null"))
+                        if((ratingavg.equals("null"))||(ratingavg.equals("")))
                         {
                             ratingavg="পাওয়া যায় নি";
 
@@ -284,7 +284,7 @@ Date today=new Date();
 
 
 
-                    if(ratingavg.equals("null"))
+                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
                     {
                         ratingavg="পাওয়া যায় নি";
 
@@ -309,7 +309,7 @@ Date today=new Date();
                     ratingavg=et.getRating();
 
 
-                    if(ratingavg.equals("null"))
+                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
                     {
                         ratingavg="পাওয়া যায় নি";
 
@@ -333,7 +333,7 @@ Date today=new Date();
                         longDouble = Double.parseDouble(et.getLon());
                         ratingavg=et.getRating();
 
-                        if(ratingavg.equals("null"))
+                        if((ratingavg.equals("null"))||(ratingavg.equals("")))
                         {
                             ratingavg="পাওয়া যায় নি";
 
@@ -381,7 +381,7 @@ Date today=new Date();
                     ratingavg=et.getRating();
 
 
-                    if(ratingavg.equals("null"))
+                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
                     {
                         ratingavg="পাওয়া যায় নি";
 
@@ -404,7 +404,7 @@ Date today=new Date();
                     longDouble = Double.parseDouble(et.getLon());
                     ratingavg=et.getRating();
 
-                    if(ratingavg.equals("null"))
+                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
                     {
                         ratingavg="পাওয়া যায় নি";
 
