@@ -22,11 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-
+            android:visibility="gone"
             android:layout_marginBottom="30dp"
             android:id="@+id/headerlayout"
 
-            android:visibility="gone"
+
             android:background="#F7941E">
 
 
@@ -88,6 +88,7 @@
                         android:text="Bus Text"
                         android:id="@+id/bustext"
                         android:textColor="#ffffff"
+                        android:textSize="18dp"
                         android:layout_marginLeft="37dp"
                         android:layout_marginStart="37dp"
                         android:layout_centerVertical="true"
@@ -123,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="cngtext"
+                        android:textSize="18dp"
                         android:id="@+id/cngtext"
                         android:textColor="#ffffff"
                         android:layout_marginLeft="37dp"
@@ -160,6 +162,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="ricksawtext"
+                        android:textSize="18dp"
                         android:id="@+id/ricksawtext"
                         android:textColor="#ffffff"
                         android:layout_marginLeft="37dp"
@@ -196,6 +199,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="walking"
+                        android:textSize="18dp"
                         android:id="@+id/walkingtext"
                         android:textColor="#ffffff"
                         android:layout_marginLeft="37dp"
@@ -210,6 +214,39 @@
         </RelativeLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=""
+                android:id="@+id/textView16"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="#ff0101"
+                android:textColor="#ffffff" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:background="@drawable/location"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>
