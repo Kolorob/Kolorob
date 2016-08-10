@@ -706,7 +706,7 @@ public class DetailsLayoutEducation extends Activity {
                                 {
                                     JSONObject ratingH=jo.getJSONObject(i);
                                     String id= ratingH.getString("id");
-                                    if(id.equals(educationNewItem.getEduId()))
+                                    if(id.equals(String.valueOf(educationNewItem.getEduId())))
                                     {
 
                                         Float rating;
