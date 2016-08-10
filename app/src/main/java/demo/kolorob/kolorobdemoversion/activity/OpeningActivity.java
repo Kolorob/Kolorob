@@ -108,7 +108,7 @@ public class OpeningActivity extends Activity {
     private final static int SPLASH_TIME_OUT = 500;
     private static final int INTERNET_PERMISSION = 1;
     private static int NUMBER_OF_TASKS = 10;
-    private static final String LOADINF_MODE="JSON"; //SQL or JSON
+    private static final String LOADINF_MODE="SQL"; //SQL or JSON
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
     String app_ver="";
@@ -339,7 +339,7 @@ public class OpeningActivity extends Activity {
             int timeCounter = 0;
             @Override
             public void run() {
-                if (OpeningActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 60000) {
+                if (OpeningActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
                     overridePendingTransition(0, 0);
                     handler.removeCallbacks(this);
                     Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
@@ -365,9 +365,27 @@ public class OpeningActivity extends Activity {
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
             if(LOADINF_MODE=="SQL") { //for the newer version loading
-                NUMBER_OF_TASKS = 1;
+                NUMBER_OF_TASKS = 3;
                 //get All using sql api
-                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql1?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+                                    new SaveSQL(OpeningActivity.this).execute(apiContent);
+                                }
+                            }
+                        }
+                );
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql2?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+                                    new SaveSQL(OpeningActivity.this).execute(apiContent);
+                                }
+                            }
+                        }
+                );
+                getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql3?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                             @Override
                             public void onResponse(int status, String apiContent) {
                                 if (status == AppConstants.SUCCESS_CODE) {
@@ -1031,13 +1049,6 @@ public class OpeningActivity extends Activity {
 
             //unblock db
             //db.endTransaction();
-
-            int edu = db.rawQuery("select * from edu_provider_new", null).getCount();
-            int helth= db.rawQuery("select * from hel_provider_new", null).getCount();
-            int gov = db.rawQuery("select * from gov_main", null).getCount();
-            int legal= db.rawQuery("select * from legal_aid_provider", null).getCount();
-            int rec= db.rawQuery("select * from ent_provider_new", null).getCount();
-            int fin= db.rawQuery("select * from financial_new", null).getCount();
 
             //close db
             DatabaseManager.getInstance(OpeningActivity.this).closeDatabase();
