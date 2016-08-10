@@ -320,7 +320,7 @@ Date today=new Date();
                         ratingavg=ratingavgbn.concat(datevalue);
                     }
                     GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeAdditional(), et.getNodeId(), subcategotyId);
+                    drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
                 }
                 break;
             case AppConstants.GOVERNMENT:
