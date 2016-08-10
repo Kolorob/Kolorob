@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -570,45 +574,54 @@ EditText feedback_comment;
     }
 
 
-   public void requestToRegister()
-    {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+    public void requestToRegister() {
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutFinance.this);
-        alertDialogBuilder.setView(promptView);
 
 
-        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
-        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
+        final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
 
-        final AlertDialog alert = alertDialogBuilder.create();
+
+        final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+        final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+        final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        textAsk.setText(text);
+        if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityHealthNew.this))
+            textAsk.setTextSize(23);
+        else
+            textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intentPhoneRegistration= new Intent(DetailsLayoutFinance.this,PhoneRegActivity.class);
+                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityHealthNew.this, PhoneRegActivity.class);
+                alertDialog.cancel();
                 startActivity(intentPhoneRegistration);
 
             }
         });
 
 
-
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alert.cancel();
+                alertDialog.cancel();
 
             }
         });
-        // setup a dialog window
-        alertDialogBuilder.setCancelable(false);
+        //   setup a dialog window
+        alertDialog.setCancelable(false);
 
 
-
-        alert.show();
+        alertDialog.show();
     }
 //
 //
