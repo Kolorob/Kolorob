@@ -440,7 +440,8 @@ public class DetailsLayoutEducation extends Activity {
                     }
 
 
-                   // finish();
+                    Intent intentJ = new Intent(DetailsLayoutEducation.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
@@ -465,8 +466,7 @@ public class DetailsLayoutEducation extends Activity {
 
                 }
 
-                Intent intentJ = new Intent(DetailsLayoutEducation.this,MapFragmentRouteOSM.class);
-                startActivity(intentJ);
+
             }
         });
     }

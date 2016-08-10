@@ -513,7 +513,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                     }
 
 
-                    // finish();
+                    Intent intentJ = new Intent(DetailsInfoActivityHealthNew.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){

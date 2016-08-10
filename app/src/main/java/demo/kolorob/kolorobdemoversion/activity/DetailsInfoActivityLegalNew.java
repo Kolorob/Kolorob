@@ -389,7 +389,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
                     }
 
 
-                    // finish();
+                    Intent intentJ = new Intent(DetailsInfoActivityLegalNew.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
