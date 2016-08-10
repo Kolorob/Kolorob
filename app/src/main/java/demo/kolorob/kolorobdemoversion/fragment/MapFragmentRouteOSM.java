@@ -123,7 +123,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     String provider;
     boolean havePolyLine;
 
-
+    Marker curposition;
     boolean statusofservice = false;
     Location location;
     ProgressDialog dialog;
@@ -136,7 +136,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         dialog = new ProgressDialog(MapFragmentRouteOSM.this);
-        dialog.setMessage("Please wait!");
+        dialog.setMessage("দয়া করে অপেক্ষা করুন");
         dialog.show();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
@@ -185,7 +185,9 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         double lon = Double.parseDouble(Longitude);
         markerlocation = new GeoPoint(lat,lon);
         Marker centermarker = new Marker(mapView);
+        curposition = new Marker(mapView);
         centermarker.setPosition(markerlocation);
+        centermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
         centermarker.setTitle("     গন্তব্য");
 
         mapView.getOverlays().add(centermarker);
@@ -249,6 +251,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
             @Override
             public void onClick(View view) {
+                mapView.getOverlays().remove(curposition);
                 if (mLastLocation != null|| location!=null) {
                     Location setloc;
                     if (mLastLocation!=null) {
@@ -261,7 +264,13 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
                     else {
                         setloc=location;
                         onLocationChanged(location);}
+
+
+                    curposition.setPosition(new GeoPoint(setloc));
+                    curposition.setIcon(getApplicationContext().getResources().getDrawable(R.drawable.my_location_2_icon));
                     mapViewController.animateTo(new GeoPoint(setloc));
+                    mapView.getOverlays().add(curposition);
+                    curposition.setTitle("আপনি এখন এখানে");
                 }
             }
         });
@@ -290,26 +299,28 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
       String bdistance= EtoBconversion(distance);
         disttext.setText(getString(R.string.distance) +": " +bdistance+ " কি.মি" );
         disttext.setVisibility(View.VISIBLE);
-        String Busfare= EtoBconversion(String.valueOf((int) Math.round(roadlength*1.55)));
+        String Busfare= EtoBconversion(String.valueOf((int) Math.round(roadlength*1.7)));
+        String Busfare2= EtoBconversion(String.valueOf((int) Math.round(roadlength*3.7)));
         String bustime= EtoBconversion(String.valueOf((int) Math.round((roadlength/15)*60)));
         if (Integer.parseInt(Busfare) <=7.00)Bustext.setText( "৭ "+ "টাকা এবং খুব কম সময় লাগার কথা");
         else {
 
-            Bustext.setText(Busfare + " টাকা এবং  " + bustime+ " মিনিট সময় লাগতে পারে"  );
+            Bustext.setText("আনুমানিক "+Busfare + "- "+Busfare2+" টাকা এবং "  + bustime+ " মিনিট সময় লাগতে পারে"  );
         }
         String CNGfare= EtoBconversion(String.valueOf((int) Math.round((roadlength-2)*12+40)));
+        String CNGfare2= EtoBconversion(String.valueOf((int) Math.round((roadlength-2)*12+70)));
         String CNGtime= EtoBconversion(String.valueOf((int) Math.round((roadlength/13)*60)));
         if (Integer.parseInt(CNGfare) <=40.00)Cngtext.setText( "৪০ " + "টাকা এবং খুব কম সময় লাগার কথা");
         else {
 
-            Cngtext.setText(CNGfare + " টাকা এবং " + CNGtime+ " মিনিট সময় লাগতে পারে"  );
+            Cngtext.setText("আনুমানিক "+CNGfare + "- "+CNGfare2+" টাকা এবং " + CNGtime+ " মিনিট সময় লাগতে পারে"  );
         }
-        String rickfare= EtoBconversion(String.valueOf((int) Math.round((roadlength)*15)));
+        String rickfare= EtoBconversion(String.valueOf((int) Math.round((roadlength)*20)));
         String ricktime=EtoBconversion( String.valueOf((int) Math.round((roadlength/10)*60)));
         if (Integer.parseInt(rickfare) <=10.00)Ricksawtext.setText( "১০ " + "টাকা এবং খুব কম সময় লাগার কথা");
         else {
 
-            Ricksawtext.setText(rickfare + " টাকা এবং " + ricktime+ " মিনিট সময় লাগতে পারে"  );
+            Ricksawtext.setText("আনুমানিক "+rickfare + " টাকা এবং " + ricktime+ " মিনিট সময় লাগতে পারে"  );
         }
 
         String wtime=EtoBconversion( String.valueOf((int) Math.round((roadlength/8)*60)));
@@ -332,9 +343,9 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         Road road = roadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Error when loading the road")
+            builder.setMessage("দুঃখিত! যান্ত্রিক গোলযোগের কারনে পথ দেখানো সম্ভব  হচ্ছে না। দয়া করে কিছুক্ষণ পরে চেষ্টা করুন!")
                     .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //do things
                         }
@@ -415,6 +426,8 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             longg = location.getLongitude();
             userlocation = new GeoPoint(laat,longg);
             usermarker.setPosition(userlocation);
+            usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            usermarker.setTitle("     গন্তব্য");
             mapView.getOverlays().add(usermarker);
         } else {
             mapView.getOverlays().remove(usermarker);
@@ -425,6 +438,8 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             usermarker = new Marker(mapView);
             userlocation = new GeoPoint(laat, longg);
             usermarker.setPosition(userlocation);
+            usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            usermarker.setTitle("১ম অবস্থান");
             mapView.getOverlays().add(usermarker);
           //  Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
         }
@@ -475,6 +490,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             userlocation=new GeoPoint(laat,longg);
             usermarker=new Marker(mapView);
             usermarker.setPosition(userlocation);
+            usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
             mapView.getOverlays().add(usermarker);
             Drawroute(userlocation, markerlocation);
 
