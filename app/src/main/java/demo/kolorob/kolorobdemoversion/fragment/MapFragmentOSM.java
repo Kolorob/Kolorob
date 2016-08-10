@@ -257,7 +257,7 @@ Date today=new Date();
                                 ratingavg=et.getRating();
 
 
-                        if(ratingavg.equals("null"))
+                        if((ratingavg.equals("null"))||(ratingavg.equals("")))
                         {
                             ratingavg="পাওয়া যায় নি";
 
