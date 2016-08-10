@@ -575,11 +575,11 @@ EditText feedback_comment;
 
 
     public void requestToRegister() {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
 
 
-        final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
+        final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setContentView(promptView);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -591,7 +591,7 @@ EditText feedback_comment;
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
         String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
         textAsk.setText(text);
-        if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityHealthNew.this))
+        if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutFinance.this))
             textAsk.setTextSize(23);
         else
             textAsk.setTextSize(17);
@@ -602,7 +602,7 @@ EditText feedback_comment;
             @Override
             public void onClick(View v) {
 
-                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityHealthNew.this, PhoneRegActivity.class);
+                Intent intentPhoneRegistration = new Intent(DetailsLayoutFinance.this, PhoneRegActivity.class);
                 alertDialog.cancel();
                 startActivity(intentPhoneRegistration);
 
