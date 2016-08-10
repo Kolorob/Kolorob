@@ -1134,17 +1134,21 @@ TextView uptext;
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
 
+                    String id1="";
+                    id1=healthServiceProviderItemNew.getId();
+
                     if(compareValue==2)
                      {
                          if(!isChecked)
                          {
-                             String  compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
 
                              String compare_Datas="";
                              String new_compare_Data="";
                              compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                              String multipule[]= compare_Datas.split(",");
                              new_compare_Data = multipule[0];
+                             Log.d("new_compare_Dataxx","######"+new_compare_Data);
+
                              SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 1);
                          }
 
@@ -1160,12 +1164,14 @@ TextView uptext;
                         }
 
                         else {
-                            String new_compare_Data="";
-                            String compare_Data="";
-                            compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-                            String multipule[]= compare_Data.split(",");
-                            new_compare_Data = multipule[0]+","+healthServiceProviderItemNew.getId();
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 2);
+                            String new_compare_Datac="";
+                            String compare_Datac="";
+                            compare_Datac=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+
+                            new_compare_Datac = compare_Datac+","+id1;
+                            Log.d("id1","######"+id1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Datac, 2);
+                            Log.d("New Compare Data1","######"+new_compare_Datac);
                         }
                     }
 
@@ -1249,14 +1255,15 @@ TextView uptext;
 
         String healthService2="";
         String health_service_data2="";
-        for (final HealthServiceProviderItemNew healthServiceProviderItemNew: secondDataSetHealth)
+        for (final HealthServiceProviderItemNew healthServiceProviderItemNewx: secondDataSetHealth)
         {
             checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    String  compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
+                    String id="";
+
 
 
                     if(compareValue==2)
@@ -1268,7 +1275,9 @@ TextView uptext;
                             String new_compare_Data="";
                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Datas.split(",");
+
                             new_compare_Data = multipule[1];
+                            Log.d("new_compare_Dataxxx","######"+new_compare_Data);
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 1);
                         }
 
@@ -1282,16 +1291,21 @@ TextView uptext;
                         }
                         else {
                             String new_compare_Data="";
+                            String compare_Data="";
                             compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-                            String multipule[]= compare_Data.split(",");
-                            new_compare_Data = multipule[0]+","+healthServiceProviderItemNew.getId();
+
+
+                            Log.d("getId()","######"+id);
+                            // String multipule[]= compare_Data.split(",");
+                            new_compare_Data = compare_Data+","+id;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, new_compare_Data, 2);
+                            Log.d("New Compare Data2","######"+new_compare_Data);
                         }
                     }
 
                     else if (compareValue == 0) {
                         if(isChecked)
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNew.getId(), 1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNewx.getId(), 1);
 
                     }
 
@@ -1305,7 +1319,7 @@ TextView uptext;
 
 
 
-            healthService2=healthServiceProviderItemNew.getFamily_privacy();
+            healthService2=healthServiceProviderItemNewx.getFamily_privacy();
             if(!healthService2.equals(""))
             {
                 for (int i=0;i<healthService2.length();i++)
@@ -1323,20 +1337,20 @@ TextView uptext;
 
                 }
             }
-            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
-                health_name2.setText(healthServiceProviderItemNew.getNode_bn());
+            if(!healthServiceProviderItemNewx.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getNode_bn().equals(""))
+                health_name2.setText(healthServiceProviderItemNewx.getNode_bn());
             else
                 health_name2.setText("শীঘ্রই আসছে");
 
             String time1="";
-            time1=timeConverter(healthServiceProviderItemNew.getOpening_time());
+            time1=timeConverter(healthServiceProviderItemNewx.getOpening_time());
             if(!time1.equals("")&&!time1.equals("null"))
                 opening_time2.setText(time1);
             else
                 opening_time2.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
-                language_spoken2.setText(healthServiceProviderItemNew.getSpoken_lang());
+            if(!healthServiceProviderItemNewx.getSpoken_lang().equals("")&&!healthServiceProviderItemNewx.getSpoken_lang().equalsIgnoreCase("null"))
+                language_spoken2.setText(healthServiceProviderItemNewx.getSpoken_lang());
             else
                 language_spoken2.setText("শীঘ্রই আসছে");
 
@@ -1349,23 +1363,23 @@ TextView uptext;
             else
                 specialist_available2.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equals("null"))
-                clean_facilities2.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+            if(!healthServiceProviderItemNewx.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNewx.getPharmacy_speciality().equals("null"))
+                clean_facilities2.setText(healthServiceProviderItemNewx.getPharmacy_speciality());
             else
                 clean_facilities2.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
-                privacy2.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+            if(!healthServiceProviderItemNewx.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNewx.getPharmacy_privacy().equalsIgnoreCase("null"))
+                privacy2.setText(String.valueOf(healthServiceProviderItemNewx.getPharmacy_privacy()));
             else
                 privacy2.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
-                quality_equipment2.setText(healthServiceProviderItemNew.getQuality_equipments());
+            if(!healthServiceProviderItemNewx.getQuality_equipments().equals("")&&!healthServiceProviderItemNewx.getQuality_equipments().equalsIgnoreCase("null"))
+                quality_equipment2.setText(healthServiceProviderItemNewx.getQuality_equipments());
             else
                 quality_equipment2.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
+            if(!healthServiceProviderItemNewx.getGeneral_cost().equals("")&&!healthServiceProviderItemNewx.getGeneral_cost().equalsIgnoreCase("null"))
+                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNewx.getGeneral_cost()));
             else
                 cost2.setText("শীঘ্রই আসছে");
 
