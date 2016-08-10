@@ -364,6 +364,26 @@ public class OpeningActivity extends Activity {
 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
+<<<<<<< HEAD
+
+            //get All using sql api
+            /*getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                new SaveSQL(OpeningActivity.this).execute(apiContent);
+                            }
+                        }
+                    }
+            );*/
+
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/health?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                @Override
+                public void onResponse(int status, String apiContent) {
+                    if (status == AppConstants.SUCCESS_CODE) {
+                        try {
+=======
             if(LOADINF_MODE=="SQL") { //for the newer version loading
                 NUMBER_OF_TASKS = 1;
                 //get All using sql api
@@ -383,6 +403,7 @@ public class OpeningActivity extends Activity {
                     public void onResponse(int status, String apiContent) {
                         if (status == AppConstants.SUCCESS_CODE) {
                             try {
+>>>>>>> d04b44d1779b5d2673184596ddfa18a81742b625
 
                                 JSONArray allData = new JSONArray(apiContent);
                                 healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
@@ -477,11 +498,20 @@ public class OpeningActivity extends Activity {
                                 }
                             }
                         }
+<<<<<<< HEAD
+                    }
+            );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+=======
                 );
                 getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                             @Override
                             public void onResponse(int status, String apiContent) {
                                 if (status == AppConstants.SUCCESS_CODE) {
+>>>>>>> d04b44d1779b5d2673184596ddfa18a81742b625
 
                                     try {
 
@@ -496,7 +526,12 @@ public class OpeningActivity extends Activity {
                                 }
                             }
                         }
+<<<<<<< HEAD
+                    }
+            );
+=======
                 );
+>>>>>>> d04b44d1779b5d2673184596ddfa18a81742b625
 
                 getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/entertainment?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                     @Override
@@ -529,6 +564,14 @@ public class OpeningActivity extends Activity {
                                 }
                             }
                         }
+<<<<<<< HEAD
+                    }
+            );
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+=======
                 );
                 getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/government?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                             @Override
@@ -549,6 +592,7 @@ public class OpeningActivity extends Activity {
                 getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                             @Override
                             public void onResponse(int status, String apiContent) {
+>>>>>>> d04b44d1779b5d2673184596ddfa18a81742b625
                                 try {
 
                                     JSONArray legal_array = new JSONArray(apiContent);
@@ -561,8 +605,31 @@ public class OpeningActivity extends Activity {
                                 }
                             }
                         }
+<<<<<<< HEAD
+                    }
+            );
+
+
+            getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/sp/legal?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            try {
+
+                                JSONArray legal_array = new JSONArray(apiContent);
+                                legalAidDetailsTable = new LegalAidDetailsTable(OpeningActivity.this);
+                                legalAidDetailsTable.dropTable();
+                                new SaveLegaltDataTask(OpeningActivity.this).execute(legal_array);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+            );
+=======
                 );
             }
+>>>>>>> d04b44d1779b5d2673184596ddfa18a81742b625
 
         } else {
             if (!AppUtils.isNetConnected(getApplicationContext())) {

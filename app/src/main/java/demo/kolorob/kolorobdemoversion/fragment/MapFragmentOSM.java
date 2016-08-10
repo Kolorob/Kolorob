@@ -324,7 +324,7 @@ Date today=new Date();
                 }
                 break;
             case AppConstants.GOVERNMENT:
-              /*  if (governmentNewItems != null) {
+              if (governmentNewItems != null) {
                     for (GovernmentNewItem et : governmentNewItems) {
 
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
@@ -346,7 +346,7 @@ Date today=new Date();
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
-                }*/
+                }
               /*  if (allitems != null) {
                     for (AllHolder et : allitems) {
 
