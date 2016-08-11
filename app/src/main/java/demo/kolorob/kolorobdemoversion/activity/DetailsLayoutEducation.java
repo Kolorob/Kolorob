@@ -228,20 +228,19 @@ ArrayList<String>examname=new ArrayList<>();
         if (result_size != 0) {
             for (EducationResultItemNew educationResultItemNew : educationResultItemNews) {
                 //result_concate="";
+               /* if (educationResultItemNew.getStudentno() != "") {
+                    int student_number = Integer.parseInt(educationResultItemNew.getStudentno());
+                    if (student_number > 0) {
 
-                int student_number= Integer.parseInt(educationResultItemNew.getStudentno());
-                if(student_number>0) {
-                    CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                    CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
-                    CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
-                    CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
-                    CheckConcate("জিপিএ ৫", educationResultItemNew.getAplus());
-                }
-                else examname.add(educationResultItemNew.getExamname());
+                    } else examname.add(educationResultItemNew.getExamname());
 
+                } else examname.add(educationResultItemNew.getExamname());
+*/   CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
+                CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
+                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
+                CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
+                CheckConcate("জিপিএ ৫", educationResultItemNew.getAplus());
             }
-
-
         }
         for(int i=0;i<examname.size();i++)
         {
@@ -257,7 +256,8 @@ ArrayList<String>examname=new ArrayList<>();
 
         }
 
-        Exam.length();
+
+        //Exam.length();
 
 
         educationTrainingDetailsItems = educationTrainingDetailsTable.gettrainingInfo(educationNewItem.getEduId());
@@ -286,13 +286,13 @@ ArrayList<String>examname=new ArrayList<>();
                boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
                 if (tuitioncost)
                 {
-                    CheckConcate("খরচ", educationTuitionDetailsItem.getTuitionfree());
+                    CheckConcate("বিনা বেতনে পড়ার সুযোগ", "আছে");
                 }
                 else {
-
+                    CheckConcate("বিনা বেতনে পড়ার সুযোগ", "নাই");
                 }
 
-                CheckConcate("বৃত্তি সুবিধা", educationTuitionDetailsItem.getTuitionstipendfacility());
+                CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
                 CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
                 CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
                 CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionminfee());
@@ -545,12 +545,17 @@ ArrayList<String>examname=new ArrayList<>();
 
 
         final Button submit = (Button) promptView.findViewById(R.id.submit);
-
+        final Button close = (Button) promptView.findViewById(R.id.btnclose);
 
         final AlertDialog alert;
         alert = alertDialogBuilder.create();
 
-
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

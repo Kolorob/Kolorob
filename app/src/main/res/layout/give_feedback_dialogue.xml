@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/rounded"
@@ -14,12 +14,13 @@
         android:textColor="@color/orange"
 
 
-        android:textSize="25sp"
+        android:textSize="25dp"
         android:layout_gravity="center" />
 
     <RadioGroup
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:id="@+id/feedRadio"
+
         android:layout_height="wrap_content"
       android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -29,49 +30,61 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feedback1"
+            android:drawableRight="@drawable/five"
+            android:text="@string/feedback5"
             android:layout_marginLeft="1dp"
+            android:drawablePadding="27dp"
             android:textColor="@color/orange"
-            android:id="@+id/bad" />
+            android:textSize="18dp"
+            android:id="@+id/best" />
 
 
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feedback2"
+            android:drawableRight="@drawable/four"
             android:layout_marginLeft="1dp"
+            android:drawablePadding="65dp"
             android:textColor="@color/orange"
-
-            android:id="@+id/moderate" />
-
-
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/feedback3"
-            android:textColor="@color/orange"
-
+            android:text="@string/feedback4"
+            android:textSize="18dp"
             android:id="@+id/good" />
 
 
+
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feedback4"
+            android:drawableRight="@drawable/three"
+            android:textSize="18dp"
             android:textColor="@color/orange"
             android:checked="true"
-            android:id="@+id/feedback4" />
+            android:drawablePadding="33dp"
+            android:text="@string/feedback3"
+            android:id="@+id/medium" />
 
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feedback5"
+            android:drawableRight="@drawable/two"
+            android:textSize="18dp"
+            android:drawablePadding="50dp"
             android:textColor="@color/orange"
+            android:text="@string/feedback2"
+            android:id="@+id/bad" />
 
-            android:id="@+id/feedback5" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:drawableRight="@drawable/one"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:drawablePadding="11dp"
+            android:textColor="@color/orange"
+            android:text="@string/feedback1"
+            android:id="@+id/worst" />
 
 
 
@@ -121,8 +134,8 @@
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/tick_icon_feedback"
             android:layout_gravity="center_horizontal"
 
@@ -132,12 +145,12 @@
 
         <Button
             android:id="@+id/btnclose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/cross_icon_feedback"
             android:layout_gravity="center_horizontal"
-            android:onClick="phonecall"
+
             />
     </LinearLayout>
 
