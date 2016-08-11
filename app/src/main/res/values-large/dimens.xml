@@ -9,6 +9,7 @@
     <dimen name="margincheckbox">30dp</dimen>
     <dimen name="comparelogoleft">80dp</dimen>
     <dimen name="transportscroll">200dp</dimen>
+    <dimen name="leftpadding">33dp</dimen>
     <dimen name="transportlayout">100dp</dimen>
     <dimen name="bottomtransport">80dp</dimen>
     <dimen name="search_margin">15dp</dimen>
