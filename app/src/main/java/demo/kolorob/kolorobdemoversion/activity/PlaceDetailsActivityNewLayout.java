@@ -154,7 +154,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
     private List<Object[]> alphabet = new ArrayList<Object[]>();
     Activity act;
-    CheckBox checkBox,checkBox2;
+    CheckBox checkBox,checkBox2,checkLeft,checkRight;
     RelativeLayout compare_layoutedu;
     public int layoutstatus;
     private Boolean list_expand=false;
@@ -299,7 +299,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<EntertainmentServiceProviderItemNew> entItem=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
     ArrayList<FinancialNewItem> financialItem=new ArrayList<>();
-    String idx,idxx;
+    String idx,idxx,idxxx,idxxxx;
     ArrayList<EducationNewItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
     ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
@@ -363,6 +363,9 @@ TextView uptext;
         allitemList=(ListView)findViewById(R.id.allitem);
         checkBox=(CheckBox)findViewById(R.id.compared);
         checkBox2=(CheckBox)findViewById(R.id.compared2);
+
+        checkLeft=(CheckBox)findViewById(R.id.checkLeft);
+        checkRight=(CheckBox)findViewById(R.id.checkRight);
 
         explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
@@ -1391,6 +1394,11 @@ TextView uptext;
 
     public void compareEducation()
     {
+
+        checkLeft.setChecked(true);
+        checkRight.setChecked(true);
+
+
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
         educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
 
@@ -1398,8 +1406,68 @@ TextView uptext;
         secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
 
 
-        for (EducationNewItem educationNewItem: firstDataSet)
+        for (final EducationNewItem educationNewItem: firstDataSet)
         {
+
+            checkLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    int compareValue=0;
+                    compareValue = SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this);
+                    if(compareValue==2)
+                    {
+                        if(!isChecked)
+                        {
+                            String compare_Data="";
+                            compare_Data=SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+                            String multipule[]= compare_Data.split(",");
+                            compare_Data = multipule[1];
+                            idxxx=multipule[0];
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 1);
+
+
+
+                        }
+
+                    }
+                    else if(compareValue==1)
+                    {
+                        if(!isChecked)
+                        {
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this,"",0);
+                        }
+                        else {
+
+                            String compare_Data="";
+                            compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+
+                            compare_Data = compare_Data+","+idxxx;
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
+
+
+
+
+                        }
+                    }
+
+                    else if (compareValue == 0) {
+                        if(isChecked)
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getEduId()), 1);
+
+                    }
+
+
+
+
+
+
+                }
+            });
+
+
+
+
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
                 edu_name_ban22.setText("শীঘ্রই আসছে ");
             else
@@ -1455,8 +1523,68 @@ TextView uptext;
             else
                 canteen_facility.setText(educationNewItem.getWatersource());
         }
-        for (EducationNewItem educationNewItem: secondDataSet)
+        for ( final EducationNewItem educationNewItem: secondDataSet)
         {
+
+
+            checkRight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    int compareValue=0;
+                    compareValue = SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this);
+                    if(compareValue==2)
+                    {
+                        if(!isChecked)
+                        {
+                            String compare_Data="";
+                            compare_Data=SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+                            String multipule[]= compare_Data.split(",");
+                            compare_Data = multipule[0];
+                            idxxxx=multipule[1];
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 1);
+
+
+
+                        }
+
+                    }
+                    else if(compareValue==1)
+                    {
+                        if(!isChecked)
+                        {
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this,"",0);
+                        }
+                        else {
+
+                            String compare_Data="";
+                            compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
+
+                            compare_Data = compare_Data+","+idxxxx;
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
+
+
+
+
+                        }
+                    }
+
+                    else if (compareValue == 0) {
+                        if(isChecked)
+                            SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getEduId()), 1);
+
+                    }
+
+
+
+
+
+
+                }
+            });
+
+
+
 
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
                 edu_name_ban.setText("শীঘ্রই আসছে ");
