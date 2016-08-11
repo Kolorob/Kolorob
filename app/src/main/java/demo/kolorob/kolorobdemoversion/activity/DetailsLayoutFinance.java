@@ -434,10 +434,17 @@ EditText feedback_comment;
 
         final Button submit = (Button) promptView.findViewById(R.id.submit);
 
+        final Button close = (Button) promptView.findViewById(R.id.btnclose);
 
         final AlertDialog alert;
         alert = alertDialogBuilder.create();
 
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
