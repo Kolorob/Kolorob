@@ -3,21 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="50dp"
-    android:gravity="center">
+    android:background="@drawable/rounded"
+    android:padding="10dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="মতামত"
+        android:textColor="@color/orange"
+
+
+        android:textSize="25sp"
+        android:layout_gravity="center" />
 
     <RadioGroup
         android:layout_width="match_parent"
         android:id="@+id/feedRadio"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="30dp"
+      android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="left">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line_de"/>
+
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -27,10 +34,7 @@
             android:textColor="@color/orange"
             android:id="@+id/bad" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line_de"/>
+
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -41,10 +45,7 @@
 
             android:id="@+id/moderate" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line_de"/>
+
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -53,10 +54,7 @@
             android:textColor="@color/orange"
 
             android:id="@+id/good" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line_de"/>
+
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -65,10 +63,7 @@
             android:textColor="@color/orange"
             android:checked="true"
             android:id="@+id/feedback4" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line_de"/>
+
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -78,30 +73,73 @@
 
             android:id="@+id/feedback5" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Feedback"
-            android:id="@+id/feedback_comment"
 
-
-            />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line_de"/>
 
 
     </RadioGroup>
-
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="দেয়া হয়েছে"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:id="@+id/submit" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="বিস্তারিত লিখুন"
+            android:textColor="@color/orange"
+
+
+            android:textSize="17sp"
+            />
+
+
+
+        <EditText
+            android:id="@+id/feedback_comment"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="মতামত"
+            android:gravity="center"
+            android:background="@color/white"
+            android:lines="4"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tick_icon_feedback"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginRight="10dp"
+            />
+
+
+        <Button
+            android:id="@+id/btnclose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/cross_icon_feedback"
+            android:layout_gravity="center_horizontal"
+            android:onClick="phonecall"
+            />
+    </LinearLayout>
 
 
 </LinearLayout>
