@@ -87,7 +87,8 @@ public class DetailsLayoutEducation extends Activity {
     Context con;
     EducationNewItem educationNewItem;
     RatingBar ratingBar;
-
+    int compareValue;
+    String previous_node;
     ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
     ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
     ArrayList<EducationResultItemNew> educationResultItemNews;
@@ -296,10 +297,28 @@ public class DetailsLayoutEducation extends Activity {
                 }
             }
         });
+
+        compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
+        previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+        String multipule[]= previous_node.split(",");
+
+        if(compareValue==1&&previous_node.equals(String.valueOf(educationNewItem.getEduId())))
+        {
+
+            checkBox.setChecked(true);
+        }
+        else if(compareValue==2&&(multipule[0].equals(String.valueOf(educationNewItem.getEduId()))||multipule[1].equals(String.valueOf(educationNewItem.getEduId()))))
+        {
+
+            checkBox.setChecked(true);
+        }
+
+
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int compareValue;
+
                 String node = String.valueOf(educationNewItem.getEduId());
                 compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
                 if (compareValue >= 2)
@@ -309,7 +328,7 @@ public class DetailsLayoutEducation extends Activity {
                     Log.d("compareValue", "====" + compareValue);
                     SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this, node, 1);
                 } else if (compareValue == 1) {
-                    String previous_node;
+
                     previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
                     previous_node = previous_node + "," + node;
                     SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);

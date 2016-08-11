@@ -1514,7 +1514,7 @@ TextView uptext;
                 canteen_facility1.setText(educationNewItem.getWatersource());
         }
 
-        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
+//        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
     }
 
     public void populateSearch()
