@@ -1,35 +1,64 @@
 package demo.kolorob.kolorobdemoversion.utils;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
 
 public class AlertMessage {
+	public static int width;
+	public static int height;
 
 	public static void showMessage(final Context c, final String title,
-			final String s) {
-		final AlertDialog.Builder aBuilder = new AlertDialog.Builder(c);
-		aBuilder.setTitle(title);
-		aBuilder.setIcon(R.drawable.info);
-		aBuilder.setMessage(s);
+			final String body) {
 
-		aBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+		height = displayMetrics.heightPixels;
+		width = displayMetrics.widthPixels;
 
+		LayoutInflater layoutInflater = LayoutInflater.from(c);
+		View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+		final Dialog alertDialog = new Dialog(c);
+		alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		alertDialog.setContentView(promptView);
+		alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		alertDialog.show();
+
+
+		final TextView header = (TextView) promptView.findViewById(R.id.headers);
+		final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+		final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+		header.setText(title);
+		bodys.setText(body);
+
+		okay.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				dialog.dismiss();
+			public void onClick(View v) {
+				alertDialog.cancel();
 			}
-
 		});
-		try {
-			aBuilder.show();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+
+		alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+		alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
 	}
 
