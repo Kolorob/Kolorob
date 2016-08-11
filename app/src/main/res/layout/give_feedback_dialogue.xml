@@ -60,7 +60,7 @@
             android:textSize="18dp"
             android:textColor="@color/orange"
             android:checked="true"
-            android:drawablePadding="33dp"
+            android:drawablePadding="@dimen/leftpadding"
             android:text="@string/feedback3"
             android:id="@+id/medium" />
 
