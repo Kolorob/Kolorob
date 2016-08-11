@@ -55,6 +55,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String LEGAL_AID_SERVICE_PROVIDER_TABLE="legal_aid_provider";
     public static final String LEGAL_AID_LEGAL_ADVICE_TABLE="legal_aid_legal_advice";
     public static final String LEGAL_AID_SALISHI_TABLE="legal_aid_salishi";
+
+    //sqls
+    public static String sql1=null;
+    public static String sql2=null;
+    public static String sql3=null;
+
     public Context context;
     public boolean mDataBaseExist;
 

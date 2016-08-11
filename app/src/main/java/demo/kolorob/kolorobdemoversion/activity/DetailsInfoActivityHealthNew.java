@@ -515,7 +515,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                     }
 
 
-                    // finish();
+                    Intent intentJ = new Intent(DetailsInfoActivityHealthNew.this,MapFragmentRouteOSM.class);
+                    startActivity(intentJ);
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
@@ -540,8 +541,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
                 }
 
-                Intent intentJ = new Intent(DetailsInfoActivityHealthNew.this,MapFragmentRouteOSM.class);
-                startActivity(intentJ);
+
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
