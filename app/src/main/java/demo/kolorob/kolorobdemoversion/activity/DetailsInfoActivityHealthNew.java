@@ -307,8 +307,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
                 compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
 
-                Log.d("isChecked ","@@@@@@"+isChecked);
-                Log.d("Selected  ","@@@@@@"+compareValue);
+
 
                 if (compareValue >= 2)
                 {
