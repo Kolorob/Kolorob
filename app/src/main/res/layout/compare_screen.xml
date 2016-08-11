@@ -147,13 +147,29 @@
 
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:id="@+id/left_school_name"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkLeft"
+
+
+
+                    android:buttonTint="@color/white"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="30dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:paddingLeft="7dp"
+
+                    android:textColor="@color/white"
+                    />
 
                 <TextView
                     android:id="@+id/edu_name_ban22"
@@ -167,7 +183,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:gravity="center"
 
                 android:id="@+id/right_school_name"
@@ -176,6 +192,23 @@
                 android:layout_weight="0.5"
 
                 android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkRight"
+
+
+
+                    android:buttonTint="@color/white"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="30dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:paddingLeft="7dp"
+
+                    android:textColor="@color/white"
+                    />
 
                 <TextView
                     android:id="@+id/edu_name_ban3"

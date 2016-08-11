@@ -315,12 +315,12 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
      //   other_detailsEnt.setText(result_concate);
 
+        Log.d("Entertainment Parsing","###### "+entertainmentServiceProviderItemNew.getNodeWebsite());
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (entertainmentServiceProviderItemNew.getNodeWebsite().equals("null")) {
-                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeWebsite());
+                if (entertainmentServiceProviderItemNew.getNodeWebsite().equals("null")||entertainmentServiceProviderItemNew.getNodeWebsite().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }

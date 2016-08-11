@@ -87,7 +87,8 @@ public class DetailsLayoutEducation extends Activity {
     Context con;
     EducationNewItem educationNewItem;
     RatingBar ratingBar;
-
+    int compareValue;
+    String previous_node;
     ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
     ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
     ArrayList<EducationResultItemNew> educationResultItemNews;
@@ -320,30 +321,107 @@ ArrayList<String>examname=new ArrayList<>();
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!educationNewItem.getNode_contact2().equals("")) {
+                if (educationNewItem.getNode_email().equals("")||educationNewItem.getNode_email().equals("null")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
             }
         });
+
+        compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
+        previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+        String multipule[]= previous_node.split(",");
+
+        if(compareValue==1&&previous_node.equals(String.valueOf(educationNewItem.getEduId())))
+        {
+
+            checkBox.setChecked(true);
+        }
+        else if(compareValue==2&&(multipule[0].equals(String.valueOf(educationNewItem.getEduId()))||multipule[1].equals(String.valueOf(educationNewItem.getEduId()))))
+        {
+
+            checkBox.setChecked(true);
+        }
+
+
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int compareValue;
+
                 String node = String.valueOf(educationNewItem.getEduId());
                 compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
+//                if (compareValue >= 2)
+//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+//                else if (compareValue == 0) {
+//                    Log.d("compareValue", "====" + compareValue);
+//                    SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this, node, 1);
+//                } else if (compareValue == 1) {
+//
+//                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+//                    previous_node = previous_node + "," + node;
+//                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+//                }
+
+
+
+
+
+
+
+
+
                 if (compareValue >= 2)
-                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-                else if (compareValue == 0) {
-                    Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this, node, 1);
-                } else if (compareValue == 1) {
-                    String previous_node;
-                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
-                    previous_node = previous_node + "," + node;
-                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+                {
+                    if(isChecked)
+                    {
+
+                        String compare_Data="";
+                        compare_Data=SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                        String multipule[]= compare_Data.split(",");
+                        compare_Data = multipule[1]+","+String.valueOf(educationNewItem.getEduId());
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, compare_Data, 2);
+                    }
+                    else
+                    {
+                        String compare_Data="";
+                        String new_compare_Data="";
+                        compare_Data=SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                        String multipule[]= compare_Data.split(",");
+                        new_compare_Data = multipule[0];
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, new_compare_Data, 1);
+                    }
+
                 }
+                else if (compareValue == 0) {
+                    if(isChecked)
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, String.valueOf(educationNewItem.getEduId()), 1);
+
+                }
+                else if (compareValue == 1) {
+
+                    if(isChecked)
+                    {
+
+                        String previous_node;
+                        previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                        previous_node = previous_node + "," + String.valueOf(educationNewItem.getEduId());
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+
+                    }
+                    else
+                    {
+
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this,"",0);
+
+                    }
+
+                }
+
+
+
+
 
 
             }

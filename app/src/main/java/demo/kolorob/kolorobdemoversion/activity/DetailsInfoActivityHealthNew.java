@@ -287,17 +287,16 @@ public class DetailsInfoActivityHealthNew extends Activity {
         compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
         compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
         String multipule[]= compare_Data.split(",");
-        Log.d("compare_Data ","@@@@@@"+compare_Data);
-        Log.d("compareValue ","@@@@@@"+compareValue);
+
 
         if(compareValue==1&&compare_Data.equals(healthServiceProviderItemNew.getId()))
         {
-            Log.d("foundInValue1 ","@@@@@@");
+
             checkBox.setChecked(true);
         }
         else if(compareValue==2&&(multipule[0].equals(healthServiceProviderItemNew.getId())||multipule[1].equals(healthServiceProviderItemNew.getId())))
         {
-            Log.d("foundInValue2 ","@@@@@@");
+
             checkBox.setChecked(true);
         }
 
@@ -307,8 +306,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
                 compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
 
-                Log.d("isChecked ","@@@@@@"+isChecked);
-                Log.d("Selected  ","@@@@@@"+compareValue);
+
 
                 if (compareValue >= 2)
                 {
