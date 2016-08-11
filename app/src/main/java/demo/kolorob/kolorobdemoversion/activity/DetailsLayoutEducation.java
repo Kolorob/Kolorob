@@ -321,18 +321,77 @@ public class DetailsLayoutEducation extends Activity {
 
                 String node = String.valueOf(educationNewItem.getEduId());
                 compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
-                if (compareValue >= 2)
-                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-                else if (compareValue == 0) {
-                    Log.d("compareValue", "====" + compareValue);
-                    SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this, node, 1);
-                } else if (compareValue == 1) {
+//                if (compareValue >= 2)
+//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
+//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
+//                else if (compareValue == 0) {
+//                    Log.d("compareValue", "====" + compareValue);
+//                    SharedPreferencesHelper.setCompareData(DetailsLayoutEducation.this, node, 1);
+//                } else if (compareValue == 1) {
+//
+//                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+//                    previous_node = previous_node + "," + node;
+//                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+//                }
 
-                    previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
-                    previous_node = previous_node + "," + node;
-                    SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+
+
+
+
+
+
+
+
+                if (compareValue >= 2)
+                {
+                    if(isChecked)
+                    {
+
+                        String compare_Data="";
+                        compare_Data=SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                        String multipule[]= compare_Data.split(",");
+                        compare_Data = multipule[1]+","+String.valueOf(educationNewItem.getEduId());
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, compare_Data, 2);
+                    }
+                    else
+                    {
+                        String compare_Data="";
+                        String new_compare_Data="";
+                        compare_Data=SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                        String multipule[]= compare_Data.split(",");
+                        new_compare_Data = multipule[0];
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, new_compare_Data, 1);
+                    }
+
                 }
+                else if (compareValue == 0) {
+                    if(isChecked)
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, String.valueOf(educationNewItem.getEduId()), 1);
+
+                }
+                else if (compareValue == 1) {
+
+                    if(isChecked)
+                    {
+
+                        String previous_node;
+                        previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+                        previous_node = previous_node + "," + String.valueOf(educationNewItem.getEduId());
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
+
+                    }
+                    else
+                    {
+
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this,"",0);
+
+                    }
+
+                }
+
+
+
+
 
 
             }
