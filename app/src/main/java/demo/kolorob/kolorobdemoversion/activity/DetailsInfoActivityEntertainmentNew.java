@@ -434,7 +434,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showSettingsAlert(DetailsInfoActivityEntertainmentNew.this);
+                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
+                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
 
                 }
 

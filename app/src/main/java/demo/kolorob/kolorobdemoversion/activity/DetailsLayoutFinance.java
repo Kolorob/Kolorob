@@ -359,7 +359,8 @@ EditText feedback_comment;
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showSettingsAlert(DetailsLayoutFinance.this);
+                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
+                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
 
                 }
 

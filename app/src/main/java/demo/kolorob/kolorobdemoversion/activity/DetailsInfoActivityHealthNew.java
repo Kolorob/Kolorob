@@ -521,7 +521,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showSettingsAlert(DetailsInfoActivityHealthNew.this);
+                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
+                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
 
                 }
 
