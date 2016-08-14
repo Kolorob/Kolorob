@@ -78,19 +78,7 @@
             android:background="@color/entertainment_color"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:gravity="center"
-                android:id="@+id/service_icon_layout"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/service_logo"
-                    android:background="@drawable/school_logo_default"/>
 
-            </LinearLayout>
 
 
             <LinearLayout
@@ -108,13 +96,13 @@
                     android:id="@+id/upperText"
                     android:orientation="vertical"
 
-                    android:gravity="left">
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18dp"
+                        android:textSize="30sp"
                         android:textColor="@color/white"
                         android:id="@+id/ups_text"
 
@@ -123,12 +111,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="29sp"
+                            android:textSize="23sp"
                             android:id="@+id/ratingText"
                             android:text="রেটিং: "/>
                         <RatingBar
@@ -137,6 +125,8 @@
                             android:layout_height="wrap_content"
                             style="?android:attr/ratingBarStyleIndicator"
 
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
                             android:numStars="5"
                             android:stepSize="0"
                             android:rating="0" />
@@ -160,7 +150,7 @@
                         android:id="@+id/left_go_process"
                         android:layout_weight="0.3"
                         android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="right|center_vertical">
 
                         <ImageView
                             android:layout_width="55dp"
@@ -181,7 +171,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:layout_height="wrap_content"
                         android:id="@+id/middle_phone"
                         android:orientation="vertical"
@@ -209,7 +199,7 @@
                         android:id="@+id/right_email"
 
                         android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:gravity="left|center_vertical">
 
                         <ImageView
                             android:layout_width="50dp"
@@ -310,26 +300,6 @@
         android:gravity="center_vertical">
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|left">
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/compare"
-
-
-                android:buttonTint="@color/white"
-                android:layout_marginLeft="20dp"
-
-                android:visibility="gone"
-                android:textColor="@color/white"
-                android:text="@string/compare"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -338,7 +308,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|right">
+            android:gravity="center">
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
