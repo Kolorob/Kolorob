@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -102,7 +103,7 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 /**
  * Created by touhid on 12/3/15.
  *
- * @author touhid,israt,arafat
+ * @author israt,arafat
  */
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     public int getShowList() {
@@ -682,7 +683,8 @@ TextView uptext;
                 if(imc_met==AppConstants.BAUNIABADH) {
                     locationNameId = AppConstants.PLACE_BAUNIABADH;
                     setPlaceChoice("Mirpur-11");
-                    callMapFragment(locationNameId);
+                    setLocationNameEng("Mirpur-11");
+
                     allHolders.clear();
                     if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
                     {
@@ -690,14 +692,15 @@ TextView uptext;
                         calladapter(true);
                     }
                     else Populateholder("Mirpur-11");
-
+                    callMapFragment(locationNameId);
                     createData(currentCategoryID,"","Mirpur-11");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);
                 }
                 else {locationNameId=AppConstants.PLACE_PARIS_ROAD;
                     setPlaceChoice("Mirpur-10");
-                    callMapFragment(locationNameId);
+                    setLocationNameEng("Mirpur-10");
+
                     allHolders.clear();
                     if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
                     {
@@ -705,6 +708,7 @@ TextView uptext;
                         calladapter(true);
                     }
                     else Populateholder("Mirpur-10");
+                    callMapFragment(locationNameId);
                     createData(currentCategoryID,"","Mirpur-10");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);}
@@ -2028,6 +2032,7 @@ TextView uptext;
 //                doubleBackToExitPressedOnce=false;
 //            }
 //        }, 2000);
+        currentCategoryID=0;
     }
 
 
@@ -2305,7 +2310,19 @@ TextView uptext;
 
 
                         toolbar.setVisibility(View.VISIBLE);
+                        if (governmentNewItems.size()==0) {
+                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
 
+                            alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                            alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertDialog2.dismiss();
+                                        }
+                                    });
+                            alertDialog2.getWindow().setLayout(200, 300);
+                            alertDialog2.show();
+                        }
                         break;
                     case AppConstants.LEGAL:
                         MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
@@ -2980,7 +2997,7 @@ TextView uptext;
     {
         ArrayList<EducationNewItem> educationServiceProvider;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo();
+        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo(getPlaceChoice());
         return educationServiceProvider;
     }
 
@@ -3052,6 +3069,31 @@ TextView uptext;
                 fragmentTransaction.replace(R.id.map_fragment,mapFragment);
                 fragmentTransaction.commit();
             }
+            else if(currentCategoryID==4) {
+                govclicked = false;
+                mapFragment.setCategoryId(4);
+                ArrayList<GovernmentNewItem> governmentNewItems;
+                governmentNewItems = constructgovListItem();
+                if (governmentNewItems.size() == 0) {
+                    final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+
+                    alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                    alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog2.dismiss();
+                                }
+                            });
+                    alertDialog2.getWindow().setLayout(200, 300);
+                    alertDialog2.show();
+                }
+                    mapFragment.setGovernmentNewItems(governmentNewItems);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+                    fragmentTransaction.commit();
+
+            }
             else if(currentCategoryID==5){
                 legclicked=false;
                 mapFragment.setCategoryId(5);
@@ -3088,7 +3130,7 @@ TextView uptext;
     {
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfo();
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfosearch(getPlaceChoice());
         return healthServiceProvider;
     }
 
@@ -3128,7 +3170,7 @@ TextView uptext;
     {
         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo(getPlaceChoice());
         return entertainmentServiceProviderItemNews;
     }
 
@@ -3171,7 +3213,7 @@ TextView uptext;
     {
         ArrayList<GovernmentNewItem> governmentNewItems;
         GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo();
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo(getPlaceChoice());
         return governmentNewItems;
     }
 
@@ -3218,7 +3260,7 @@ TextView uptext;
     {
         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfo(cat_id);
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch(getPlaceChoice());
 
 
         return legalaidServiceProvider;
@@ -3259,7 +3301,7 @@ TextView uptext;
     {
         ArrayList<FinancialNewItem> financialNewItems;
         FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo();
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo(getPlaceChoice());
         return financialNewItems;
     }
     private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(int cat_id, String header)
