@@ -42,11 +42,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="feedback5">খুবই সন্তুষ্ট</string>
-    <string name="feedback4">সন্তুষ্ট </string>
-    <string name="feedback3">বিশেষ অনুভূতি নেই</string>
-    <string name="feedback2">অসন্তুষ্ট </string>
-    <string name="feedback1">খুবই অসন্তুষ্ট </string>
+    <string name="feedback5">খুবই সন্তুষ্ট  </string>
+    <string name="feedback4">সন্তুষ্ট  </string>
+    <string name="feedback3">ঠিক আছে  </string>
+    <string name="feedback2">অসন্তুষ্ট  </string>
+    <string name="feedback1">খুবই অসন্তুষ্ট  </string>
 
 
 

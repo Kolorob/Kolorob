@@ -4,7 +4,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-
+        <item name="colorControlActivated">@color/orange</item>
+        //black is the color of the normal state
+        <item name="colorControlNormal">@color/white</item>
         <item name="android:textColorSecondary">@color/orange</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/white</item>
