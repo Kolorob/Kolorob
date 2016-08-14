@@ -158,7 +158,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
         cross=(ImageView)findViewById(R.id.cross_jb);
-        school_logo_default=(ImageView)findViewById(R.id.service_logo);
+//        school_logo_default=(ImageView)findViewById(R.id.service_logo);
 
 
 
@@ -233,8 +233,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         left_image.getLayoutParams().height =  width/8;
         left_image.getLayoutParams().width =  width/8;
 
-        school_logo_default.getLayoutParams().height =  width/5;
-        school_logo_default.getLayoutParams().width =  width/5;
+//        school_logo_default.getLayoutParams().height =  width/5;
+//        school_logo_default.getLayoutParams().width =  width/5;
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
