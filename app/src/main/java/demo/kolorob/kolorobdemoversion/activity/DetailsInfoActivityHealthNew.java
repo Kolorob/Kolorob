@@ -177,7 +177,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
-        school_logo_default = (ImageView) findViewById(R.id.service_logo);
+//        school_logo_default = (ImageView) findViewById(R.id.service_logo);
 
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
@@ -394,8 +394,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-        school_logo_default.getLayoutParams().height = width / 5;
-        school_logo_default.getLayoutParams().width = width / 5;
+//        school_logo_default.getLayoutParams().height = width / 5;
+//        school_logo_default.getLayoutParams().width = width / 5;
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -410,7 +410,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(23);
+        ups_text.setTextSize(27);
         ratingText.setTextSize(23);
         ups_text.setText(healthServiceProviderItemNew.getNode_bn());
 
