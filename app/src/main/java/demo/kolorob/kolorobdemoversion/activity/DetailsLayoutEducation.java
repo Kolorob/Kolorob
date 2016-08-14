@@ -616,22 +616,30 @@ ArrayList<String>examname=new ArrayList<>();
     public void feedBackAlert()
     {
 
+
+
+
+
+
+
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
-        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsLayoutEducation.this);
-        alertDialogBuilder.setView(promptView);
+         final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
 
 
         final Button submit = (Button) promptView.findViewById(R.id.submit);
         final Button close = (Button) promptView.findViewById(R.id.btnclose);
 
-        final AlertDialog alert;
-        alert = alertDialogBuilder.create();
+
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alert.dismiss();
+                alertDialog.dismiss();
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
@@ -645,14 +653,14 @@ ArrayList<String>examname=new ArrayList<>();
                 //  declareRadiobutton();
                 sendReviewToServer();
 
-                alert.cancel();
+                alertDialog.cancel();
 
             }
         });
-        alertDialogBuilder.setCancelable(false);
+        alertDialog.setCancelable(false);
 
 
-        alert.show();
+        alertDialog.show();
     }
 
 
