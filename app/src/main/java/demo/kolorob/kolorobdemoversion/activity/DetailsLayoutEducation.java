@@ -616,12 +616,6 @@ ArrayList<String>examname=new ArrayList<>();
     public void feedBackAlert()
     {
 
-
-
-
-
-
-
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
          final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
         final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);

@@ -484,20 +484,23 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
         final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this);
-        alertDialogBuilder.setView(promptView);
+        final Dialog alertDialog = new Dialog(DetailsInfoActivityLegalNew.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
 
 
         final Button submit = (Button) promptView.findViewById(R.id.submit);
         final Button close = (Button) promptView.findViewById(R.id.btnclose);
 
-        final AlertDialog alert;
-        alert = alertDialogBuilder.create();
+
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alert.dismiss();
+                alertDialog.dismiss();
             }
         });
 
@@ -513,14 +516,14 @@ public class DetailsInfoActivityLegalNew extends Activity {
                 //  declareRadiobutton();
                 sendReviewToServer();
 
-                alert.cancel();
+                alertDialog.cancel();
 
             }
         });
-        alertDialogBuilder.setCancelable(false);
+        alertDialog.setCancelable(false);
 
 
-        alert.show();
+        alertDialog.show();
     }
 
 
