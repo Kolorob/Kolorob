@@ -252,7 +252,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(23);
+        ups_text.setTextSize(27);
         ratingText.setTextSize(23);
 
 
