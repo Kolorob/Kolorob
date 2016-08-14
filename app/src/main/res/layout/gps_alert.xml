@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:background="@drawable/rounded"
+    >
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/kolorob_logo"
+
+            android:id="@+id/imageView16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="23sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Title"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/headers" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/orange"
+        android:layout_height="3dp">
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/verify_registration"
+        android:id="@+id/body" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/orange"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:layout_marginBottom="5dp"
+        android:layout_height="3dp">
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginBottom="10dp"
+
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/tick_icon_feedback"
+            android:id="@+id/okay"
+            android:layout_margin="10dp" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/cross_icon_feedback"
+            android:id="@+id/close"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

@@ -557,8 +557,9 @@ ArrayList<String>examname=new ArrayList<>();
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-
-                    AppUtils.showSettingsAlert(DetailsLayoutEducation.this);
+                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
+                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    //AppUtils.showSettingsAlert(DetailsLayoutEducation.this);
 
                 }
 
