@@ -15,6 +15,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -37,6 +38,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -113,6 +119,7 @@ public class OpeningActivity extends Activity {
     String pass="2Jm!4jFe3WgBZKEN";
     String app_ver="";
     Boolean drop=false;
+    String first=null;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -130,6 +137,7 @@ public class OpeningActivity extends Activity {
     private int EntDataSize,HealthDatSize;
     private static final int ANIM_INTERVAL = 200;
     int countofDb;
+    String checkversion;
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
     ArrayList<RatingModel>si22=new ArrayList<>();
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
@@ -139,7 +147,7 @@ public class OpeningActivity extends Activity {
     // LM's variables
     private Toast t = null;
     static int countOfDBLocal = 0;
-
+    byte[] bytes;
 
 
     public int getCountofDb() {
@@ -157,7 +165,7 @@ public class OpeningActivity extends Activity {
     private Handler handler;
     int in = 0;
     View view=null;
-
+    Float currentVersion;
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -176,7 +184,25 @@ public class OpeningActivity extends Activity {
 
             Float currentVersion= Float.parseFloat(app_ver);
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
+            if(currentVersion >previousVersion)
+            {
+                File path = OpeningActivity.this.getApplicationContext().getExternalFilesDir(null);
 
+                File file = new File(path, "kolorob.txt");
+                if(file.exists())
+                {
+                    file.delete();
+                }
+             /*  File dir = new File(Environment.getExternalStorageDirectory()+"/osmdroid");
+                if (dir.isDirectory())
+                {
+                    String[] children = dir.list();
+                    for (int i = 0; i < children.length; i++)
+                    {
+                        new File(dir, children[i]).delete();
+                    }
+                }*/
+            }
             if(currentVersion>=previousVersion)
                 drop=true;
             else
@@ -195,15 +221,96 @@ public class OpeningActivity extends Activity {
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
 
+        File path = context.getExternalFilesDir(null);
 
+        File file = new File(path, "kolorob.txt");
+        if(! new File(path, "kolorob.txt").exists()) {
+            FileOutputStream stream = null;
+            try {
+                stream = new FileOutputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                try {
+                    String body = app_ver + ",yes";
+                    stream.write(body.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } finally {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            int length = (int) file.length();
+
+            bytes = new byte[length];
+
+            FileInputStream in = null;
+            try {
+                in = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                try {
+                    in.read(bytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } finally {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            String contents = new String(bytes);
+            String delims = "[,]";
+            String[] tokens = contents.split(delims);
+            first=tokens[1];
+        }
+        else {
+            int length = (int) file.length();
+
+            bytes = new byte[length];
+
+            FileInputStream in = null;
+            try {
+                in = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                try {
+                    in.read(bytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } finally {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            String contents = new String(bytes);
+            String delims = "[,]";
+            String[] tokens = contents.split(delims);
+
+            first=tokens[1];
+        }
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         firstRun = settings.getBoolean("firstRun", false);
-        if (firstRun == false)//if running for first time
+        if (first.equals("yes"))//if running for first time
         {
             SharedPreferences.Editor editor = settings.edit();
 
-            editor.commit();
+
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
                 alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
@@ -247,6 +354,7 @@ public class OpeningActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             Log.e("open4",String.valueOf(getCountofDb()));
+
                             Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
                             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             startActivity(i);
@@ -264,6 +372,7 @@ public class OpeningActivity extends Activity {
                                 countofDb=0 ;
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
+                                editor.putString("First", first);
                                 settings.edit().putLong("time", System.currentTimeMillis()).commit();
 
                                editor.putInt("KValue", countofDb);
@@ -341,6 +450,11 @@ public class OpeningActivity extends Activity {
             public void run() {
                 if (OpeningActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
                     overridePendingTransition(0, 0);
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("First", first);
+
+                    editor.commit();
                     handler.removeCallbacks(this);
                     Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                     frameAnimation.stop();

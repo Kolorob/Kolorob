@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,12 @@ import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -111,6 +118,7 @@ boolean firstRun;
     private int categoryId;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
+    String first;
     ArrayList<RatingModel>rating=new ArrayList<>();
     public ArrayList<GovernmentNewItem> getGovernmentNewItems() {
         return governmentNewItems;
@@ -153,7 +161,7 @@ boolean firstRun;
     public void setLegalaidServiceProvider(ArrayList<LegalAidServiceProviderItemNew> et) {
         this.legalaidServiceProvider = et;
     }
-
+    byte[] bytes;
     public void setFinancialServiceProvider(ArrayList<FinancialNewItem> et) {
         this.financialServiceProvider = et;
     }
@@ -214,14 +222,54 @@ setMapView(mapView);
 
 
         mapView.setTilesScaledToDpi(true);
-        firstRun = settings.getBoolean("firstRun", false);
-        if (firstRun == false)//if running for first time
-        {   Log.d("ss","********"+firstRun);
-            SharedPreferences.Editor editor = settings.edit();
+        first = settings.getString("First", null);
+        if (first.equals("yes"))//if running for first time
+        {   Log.d("ss","********"+first);
+            File path = MapFragmentOSM.this.getActivity().getExternalFilesDir(null);
 
+            File file = new File(path, "kolorob.txt");
 
-            editor.putBoolean("firstRun", true);
-            editor.commit();
+                try
+                {
+                    int length = (int) file.length();
+
+                    bytes = new byte[length];
+
+                    FileInputStream in = null;
+                    try {
+                        in = new FileInputStream(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        try {
+                            in.read(bytes);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } finally {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    String contents = new String(bytes);
+                    String delims = "[,]";
+                    String[] tokens = contents.split(delims);
+                    String text= tokens[0]+",no";
+
+                    FileOutputStream fOut = new FileOutputStream(file);
+                    OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+                    myOutWriter.write("");
+                    myOutWriter.append(text);
+                    myOutWriter.close();
+                    fOut.close();
+                } catch(Exception e)
+                {
+
+                }
+
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
             mapView.setTileSource(TileSourceFactory.MAPNIK);
