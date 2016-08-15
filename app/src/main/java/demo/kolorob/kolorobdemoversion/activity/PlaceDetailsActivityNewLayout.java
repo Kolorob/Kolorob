@@ -3715,7 +3715,7 @@ TextView uptext;
 
         if (NavigationCalledOnce==true)
         {
-            callMapFragment(locationNameId);
+            //callMapFragment(locationNameId);
         }
         else {
             Intent intent;

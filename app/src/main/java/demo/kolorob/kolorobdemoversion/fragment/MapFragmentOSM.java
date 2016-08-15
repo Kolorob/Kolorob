@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private int locationNameId;
     private static double VIEW_WIDTH;
     private int primaryIconWidth;
-
+boolean firstRun;
     public int getLocationNameId() {
         return locationNameId;
     }
@@ -208,11 +209,28 @@ setMapView(mapView);
 
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
-        mapView.setUseDataConnection(true);
 
-        OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
-        mapView.setTileSource(TileSourceFactory.MAPNIK);
+
+
+
         mapView.setTilesScaledToDpi(true);
+        firstRun = settings.getBoolean("firstRun", false);
+        if (firstRun == false)//if running for first time
+        {   Log.d("ss","********"+firstRun);
+            SharedPreferences.Editor editor = settings.edit();
+
+
+            editor.putBoolean("firstRun", true);
+            editor.commit();
+            mapView.setUseDataConnection(true);
+            OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+            mapView.setTileSource(TileSourceFactory.MAPNIK);
+        }
+        else {
+            //OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+            mapView.setUseDataConnection(false);
+            //mapView.setTileSource(TileSourceFactory.MAPNIK);
+        }
       /*  mapView.setTilesScaledToDpi(true);
         // Test code
         float density = mapView.isTilesScaledToDpi() ? mapView.getResources().getDisplayMetrics().density : 1;

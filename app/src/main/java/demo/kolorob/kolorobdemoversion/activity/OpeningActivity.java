@@ -202,7 +202,7 @@ public class OpeningActivity extends Activity {
         if (firstRun == false)//if running for first time
         {
             SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("firstRun", true);
+
             editor.commit();
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
