@@ -2791,7 +2791,11 @@ TextView uptext;
 
                             healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
                         }
-                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, healthItem);
+                        for (int ss=0;ss<healthItem.size();ss++)
+                        {
+                            HEL.add(healthItem.get(ss));
+                        }
+                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -2803,9 +2807,12 @@ TextView uptext;
                             entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s));
 
                         }
+                        for (int ss=0;ss<entItem.size();ss++)
+                        {
+                            ENT.add(entItem.get(ss));
+                        }
 
-
-                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, entItem);
+                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, ENT);
                         break;
                     //TODO write necessary codes for entertainment
 
@@ -2832,7 +2839,11 @@ TextView uptext;
                         {
                             legalItem = constructlegalaidListItemForHeader(cat_id, Headerholder.get(s));
                         }
-                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, legalItem);
+                        for (int ss=0;ss<legalItem.size();ss++)
+                        {
+                            LEG.add(legalItem.get(ss));
+                        }
+                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, LEG);
                         break;
                     case AppConstants.FINANCIAL:
                         Headerholder.add(si.getSubCatHeaderBn());
