@@ -38,6 +38,7 @@ import org.json.JSONObject;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.security.PublicKey;
 import java.util.Collections;
 import java.util.List;
 
@@ -269,6 +270,21 @@ public class AppUtils {
 
     public static boolean isDevicePortrait(Resources res) {
         return res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    }
+
+    //Created by Arafat
+
+    public static Double ScreenSize(Context context)
+    {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        int densityDpi = (displayMetrics.densityDpi);
+
+        Double diagonal;
+
+        diagonal =  Math.sqrt(width*width+height*height)/densityDpi;
+        return diagonal;
     }
 
 

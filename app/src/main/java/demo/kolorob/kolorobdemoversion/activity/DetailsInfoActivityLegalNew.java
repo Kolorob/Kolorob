@@ -166,7 +166,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
         cross=(ImageView)findViewById(R.id.cross_jb);
-        school_logo_default=(ImageView)findViewById(R.id.service_logo);
+
 
 
 
@@ -214,8 +214,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         left_image.getLayoutParams().height =  width/8;
         left_image.getLayoutParams().width =  width/8;
 
-        school_logo_default.getLayoutParams().height =  width/5;
-        school_logo_default.getLayoutParams().width =  width/5;
+
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -250,7 +249,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
             {
                 CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
                 CheckConcate("যে বিষয়ে আইন সহায়তা দেয়া হয়", leagalAidDetailsItem.getSub_type());
-                CheckConcate("সেবার খরচ", leagalAidDetailsItem.getLagal_cost());
+                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost()+" টাকা"));
                 CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
             }
 
@@ -781,7 +780,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
 
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;

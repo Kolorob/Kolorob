@@ -153,7 +153,7 @@ EditText feedback_comment;
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
-        school_logo_default = (ImageView) findViewById(R.id.service_logo);
+
 
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
@@ -194,7 +194,7 @@ EditText feedback_comment;
         if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
             breakTimeProcessing("বিরতির সময়  ", financialNewItem.getBreaktime());
         CheckConcate("বন্ধের দিন  ", financialNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার ", financialNewItem.getRegisterednumber());
+
         CheckConcate("কাদের সাথে রেজিস্টার্ড   ", financialNewItem.getRegisteredwith());
 
         financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
@@ -204,7 +204,7 @@ EditText feedback_comment;
                 //result_concate="";
                 CheckConcate("সুবিধার ধরন  ", financialServiceDetailsItem.getServicetype());
                 CheckConcate("সুবিধার নাম  ", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", financialServiceDetailsItem.getServicecost());
+                CheckConcate("খরচ  ", financialServiceDetailsItem.getServicecost()+" টাকা");
                 CheckConcate("মন্তব্য  ", financialServiceDetailsItem.getServiceremark());
             }
         }
@@ -263,8 +263,7 @@ EditText feedback_comment;
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-        school_logo_default.getLayoutParams().height = width / 5;
-        school_logo_default.getLayoutParams().width = width / 5;
+
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -760,7 +759,7 @@ EditText feedback_comment;
 
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;

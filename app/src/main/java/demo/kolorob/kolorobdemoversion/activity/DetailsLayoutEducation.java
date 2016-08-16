@@ -171,7 +171,7 @@ ArrayList<String>examname=new ArrayList<>();
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
-        school_logo_default = (ImageView) findViewById(R.id.service_logo);
+
 
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
@@ -182,15 +182,15 @@ ArrayList<String>examname=new ArrayList<>();
 
         CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
         CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno()));
-        CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno()));
-        CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno()));
+        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno()+" জন"));
+        CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno())+" জন");
+        CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno())+" টি");
         CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
-        CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent()));
-        CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent()));
+        CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent())+" জন");
+        CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent())+" জন");
 
         CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no())));
+        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no()))+" টি");
         CheckConcate("ছেলেদের বাথরুম", EtoB( educationNewItem.getWashroom_male()));
         CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
         CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
@@ -236,11 +236,11 @@ ArrayList<String>examname=new ArrayList<>();
                     } else examname.add(educationResultItemNew.getExamname());
 
                 } else examname.add(educationResultItemNew.getExamname());
-*/   CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
-                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
-                CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
-                CheckConcate("জিপিএ ৫", educationResultItemNew.getAplus());
+*/              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
+                CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno()));
+                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", EtoB(educationResultItemNew.getPassed()));
+                CheckConcate("গোল্ডেন এ", EtoB(educationResultItemNew.getGoldena()));
+                CheckConcate("জিপিএ ৫", EtoB(educationResultItemNew.getAplus()));
             }
         }
         for(int i=0;i<examname.size();i++)
@@ -267,9 +267,9 @@ ArrayList<String>examname=new ArrayList<>();
             for (EducationTrainingDetailsItem educationTrainingDetailsItem : educationTrainingDetailsItems) {
 
 
-                CheckConcate("কত মাসের কোর্স", educationTrainingDetailsItem.getCourseduration());
+                CheckConcate("কত মাসের কোর্স", EtoB(educationTrainingDetailsItem.getCourseduration()));
                 CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("খরচ", educationTrainingDetailsItem.getCost());
+                CheckConcate("খরচ", educationTrainingDetailsItem.getCost()+" টাকা");
                 CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
                 CheckConcate("ট্রেনিং এর নাম", educationTrainingDetailsItem.getTrainingnamesubtype());
 
@@ -296,11 +296,11 @@ ArrayList<String>examname=new ArrayList<>();
                 CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
                 CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
                 CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionminfee());
+                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionminfee()));
 
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", educationTuitionDetailsItem.getTuitionmaxcoaching());
+                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
+                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", EtoB(educationTuitionDetailsItem.getTuitionmincoaching()));
+                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", EtoB(educationTuitionDetailsItem.getTuitionmaxcoaching()));
                 CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
 
 
@@ -460,8 +460,7 @@ ArrayList<String>examname=new ArrayList<>();
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-        school_logo_default.getLayoutParams().height = width / 5;
-        school_logo_default.getLayoutParams().width = width / 5;
+
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -943,7 +942,7 @@ ArrayList<String>examname=new ArrayList<>();
     private void CheckConcate(String value1,String value2){
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টি")&& !value2.equals(" জন")&& !value2.equals(" টাকা") && !value2.equals("No") && !value2.equals("0")&& !value2.equals("০")&& !value2.equals("০ টি")&& !value2.equals("০ জন")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;

@@ -144,7 +144,7 @@ public class DetailsLayoutGovernment extends Activity {
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
-        school_logo_default = (ImageView) findViewById(R.id.service_logo);
+
 
         key = new String[600];
 
@@ -198,7 +198,7 @@ public class DetailsLayoutGovernment extends Activity {
                 //result_concate="";
                 CheckConcate("সুবিধার ধরন ", governmentServiceDetailsItem.getServicetype());
                 CheckConcate("সুবিধার নাম ", governmentServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", governmentServiceDetailsItem.getServicecost());
+                CheckConcate("খরচ  ", governmentServiceDetailsItem.getServicecost()+ "টাকা");
                 CheckConcate("মন্তব্য ", governmentServiceDetailsItem.getDetailstep());
             }
         }
@@ -259,8 +259,7 @@ public class DetailsLayoutGovernment extends Activity {
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-        school_logo_default.getLayoutParams().height = width / 5;
-        school_logo_default.getLayoutParams().width = width / 5;
+
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -742,7 +741,7 @@ public void setRatingBar()
 
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("") &&!value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;

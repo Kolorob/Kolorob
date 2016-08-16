@@ -69,19 +69,6 @@
             android:background="@color/education_color"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:gravity="center"
-                android:id="@+id/service_icon_layout"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/service_logo"
-                    android:background="@drawable/blank_logo_details"/>
-
-            </LinearLayout>
 
 
             <LinearLayout
@@ -98,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/upperText"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_gravity="left">
 
                     <TextView
@@ -113,6 +101,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+
                         android:orientation="horizontal"
                       >
                         <TextView
@@ -129,6 +119,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="?android:attr/ratingBarStyleIndicator"
+
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
 
                             android:numStars="5"
                             android:stepSize="0"
@@ -154,7 +147,7 @@
                         android:id="@+id/left_go_process"
                         android:layout_weight="0.3"
                         android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="right|center">
 
                         <ImageView
                             android:layout_width="50dp"
@@ -175,7 +168,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:layout_height="wrap_content"
                         android:id="@+id/middle_phone"
                         android:orientation="vertical"
@@ -203,7 +196,7 @@
                         android:id="@+id/right_email"
 
                         android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:gravity="center|left">
 
                         <ImageView
                             android:layout_width="50dp"
