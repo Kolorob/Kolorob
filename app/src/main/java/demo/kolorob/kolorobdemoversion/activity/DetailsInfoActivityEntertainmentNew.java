@@ -276,7 +276,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
             for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
                 CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
                 CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
-                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", entertainmentTypeItem.getRecreation_price());
+                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
                 CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
@@ -287,11 +287,10 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
         CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
         CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
-        CheckConcate("রাস্তার ", entertainmentServiceProviderItemNew.getRoad());
+        CheckConcate("রাস্তার নাম", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
         CheckConcate("এভিনিউ", entertainmentServiceProviderItemNew.getAvenue());
         CheckConcate("ব্লক", entertainmentServiceProviderItemNew.getBlock());
-        CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getArea());
         CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
         CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolice_station());
