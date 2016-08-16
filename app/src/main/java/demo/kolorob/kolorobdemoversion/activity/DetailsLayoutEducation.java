@@ -237,10 +237,10 @@ ArrayList<String>examname=new ArrayList<>();
 
                 } else examname.add(educationResultItemNew.getExamname());
 */              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
-                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
-                CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
-                CheckConcate("জিপিএ ৫", educationResultItemNew.getAplus());
+                CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno()));
+                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", EtoB(educationResultItemNew.getPassed()));
+                CheckConcate("গোল্ডেন এ", EtoB(educationResultItemNew.getGoldena()));
+                CheckConcate("জিপিএ ৫", EtoB(educationResultItemNew.getAplus()));
             }
         }
         for(int i=0;i<examname.size();i++)
@@ -267,7 +267,7 @@ ArrayList<String>examname=new ArrayList<>();
             for (EducationTrainingDetailsItem educationTrainingDetailsItem : educationTrainingDetailsItems) {
 
 
-                CheckConcate("কত মাসের কোর্স", educationTrainingDetailsItem.getCourseduration());
+                CheckConcate("কত মাসের কোর্স", EtoB(educationTrainingDetailsItem.getCourseduration()));
                 CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
                 CheckConcate("খরচ", educationTrainingDetailsItem.getCost()+" টাকা");
                 CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
@@ -296,11 +296,11 @@ ArrayList<String>examname=new ArrayList<>();
                 CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
                 CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
                 CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionminfee());
+                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionminfee()));
 
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", educationTuitionDetailsItem.getTuitionmaxcoaching());
+                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
+                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", EtoB(educationTuitionDetailsItem.getTuitionmincoaching()));
+                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", EtoB(educationTuitionDetailsItem.getTuitionmaxcoaching()));
                 CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
 
 
