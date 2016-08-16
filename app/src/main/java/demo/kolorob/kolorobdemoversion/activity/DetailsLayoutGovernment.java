@@ -144,7 +144,7 @@ public class DetailsLayoutGovernment extends Activity {
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
-        school_logo_default = (ImageView) findViewById(R.id.service_logo);
+
 
         key = new String[600];
 
@@ -259,8 +259,7 @@ public class DetailsLayoutGovernment extends Activity {
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-        school_logo_default.getLayoutParams().height = width / 5;
-        school_logo_default.getLayoutParams().width = width / 5;
+
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
