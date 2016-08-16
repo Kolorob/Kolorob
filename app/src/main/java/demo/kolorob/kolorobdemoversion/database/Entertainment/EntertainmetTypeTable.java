@@ -21,12 +21,12 @@ public class EntertainmetTypeTable {
 
     private static final String TAG = EntertainmetTypeTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.ENT_DETAILS_INFO;
-    public static final String KEY_NODE_ID = "_node_id";
+    public static final String KEY_NODE_ID = "node_id";
     public static final String KEY_RECREATION_PRICE = "name";
     public static final String KEY_RECREATION_REMARKS = "bn_label";
     private static final String KEY_TYPE = "_facilities"; // 1 - text
-    private static final String KEY_SUB_TYPE = "facilities"; // 2 - text*/
-    private static final String KEY_ID = "sid"; // 2 - text*/
+    private static final String KEY_SUB_TYPE = "subType"; // 2 - text*/
+    private static final String KEY_ID = "id"; // 2 - text*/
 
 
 
@@ -49,7 +49,7 @@ public class EntertainmetTypeTable {
                 + KEY_RECREATION_REMARKS + "  TEXT, "              // 1 - text
                 + KEY_TYPE + " TEXT, "
                 + KEY_SUB_TYPE + " TEXT, "
-                + KEY_ID + " TEXT, PRIMARY KEY(" + KEY_ID + "))";
+                + KEY_ID + " TEXT, PRIMARY KEY(" + KEY_NODE_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -145,7 +145,8 @@ public class EntertainmetTypeTable {
         ArrayList<EntertainmentTypeItem> FieldList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_ID+" = '"+idenId+"'" , null);
+       Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_NODE_ID+" = '"+idenId+"'" , null);
+      //  Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME  , null);
 
         if (cursor.moveToFirst()) {
             do {
