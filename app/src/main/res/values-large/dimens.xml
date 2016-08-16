@@ -28,6 +28,12 @@
     <dimen name="nav_header_height2">230dp</dimen>
     <dimen name="nav_header_height3">300dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
-
+    //feedbackstars
+    <dimen name="firststarspace">21dp</dimen>
+    <dimen name="secondstarspace">60dp</dimen>
+    <dimen name="thirdstarspace">38dp</dimen>
+    <dimen name="fourthstarspace">75dp</dimen>
+    <dimen name="fifthstarspace">37dp</dimen>
+    <dimen name="feedbacktextsize">28dp</dimen>
 
 </resources>
