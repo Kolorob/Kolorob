@@ -164,20 +164,24 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
+                width = v.getWidth();
+                height = v.getHeight();
 
                 float x = event.getX();
                 float y = event.getY();
                 // Hack to deal with issue in original image source
-                y = y - 37;
+
                 x = x * ((float) coordsWidth / (float) width);
                 y = y * ((float) coordsHeight / (float) height);
+                y = y + 37;
+                t=Toast.makeText(getApplicationContext(),"value ", Toast.LENGTH_SHORT);
                 boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
                 boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
                 boolean anyHit = false;
                 if (t != null)
                     t.cancel();
 //                if (y < ((float)height) / 2.0) {
-                if (mirpur10Hit) {
+            if (mirpur10Hit) {
                     if(click==false)
                     {
                         Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
