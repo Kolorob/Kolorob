@@ -110,6 +110,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
     RatingBar ratingBar;
     private String compare_Data="";
     int compareValue;
+    private Double screenSize;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -129,7 +130,12 @@ public class DetailsInfoActivityHealthNew extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
+        int densityDpi = (displayMetrics.densityDpi);
         con = this;
+
+        screenSize = AppUtils.ScreenSize(this);
+
+        Log.d("Screen Size ", "&&&&&&" + screenSize);
 
 
         Intent intent = getIntent();
@@ -238,7 +244,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         if (specialist_size != 0) {
             for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses) {
-                Log.d("It's Specialist", "====" + specialist_size);
+
              //   result_concate = "";
             //    specialist.setVisibility(View.VISIBLE);
                 CheckConcate("বিশেষজ্ঞ ডাক্তারের ধরন ", healthSpecialistItemDetails.getSpecialisttype());
@@ -410,7 +416,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(27);
+        ups_text.setTextSize(25);
         ratingText.setTextSize(23);
         ups_text.setText(healthServiceProviderItemNew.getNode_bn());
 
