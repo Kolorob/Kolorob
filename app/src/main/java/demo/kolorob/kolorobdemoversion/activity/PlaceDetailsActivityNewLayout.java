@@ -1988,6 +1988,7 @@ TextView uptext;
        if (doubleBackToExitPressedOnce) {
 //
             super.onBackPressed();
+
         //    finish();
             return;
         }
@@ -2032,7 +2033,7 @@ TextView uptext;
 //                doubleBackToExitPressedOnce=false;
 //            }
 //        }, 2000);
-        currentCategoryID=0;
+
     }
 
 
@@ -2175,7 +2176,7 @@ TextView uptext;
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             mapcalledstatus=true;
-                            callMapFragmentWithEducationInfo(ci.getCatName(), 1, educationServiceProvider);
+                            callMapFragmentWithEducationInfo(ci.getCatName(),1, educationServiceProvider);
 
 
                         ivIcon.setImageResource(R.drawable.education_selected);
@@ -2997,7 +2998,7 @@ TextView uptext;
     {
         ArrayList<EducationNewItem> educationServiceProvider;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo(getPlaceChoice());
+        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo(getLocationNameEng());
         return educationServiceProvider;
     }
 
@@ -3130,7 +3131,7 @@ TextView uptext;
     {
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
         HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfosearch(getPlaceChoice());
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfosearch(getLocationNameEng());
         return healthServiceProvider;
     }
 
@@ -3170,7 +3171,7 @@ TextView uptext;
     {
         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
         EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo(getPlaceChoice());
+        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo(getLocationNameEng());
         return entertainmentServiceProviderItemNews;
     }
 
@@ -3213,7 +3214,7 @@ TextView uptext;
     {
         ArrayList<GovernmentNewItem> governmentNewItems;
         GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo(getPlaceChoice());
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo(getLocationNameEng());
         return governmentNewItems;
     }
 
@@ -3260,7 +3261,7 @@ TextView uptext;
     {
         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch(getPlaceChoice());
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch(getLocationNameEng());
 
 
         return legalaidServiceProvider;
@@ -3301,7 +3302,7 @@ TextView uptext;
     {
         ArrayList<FinancialNewItem> financialNewItems;
         FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo(getPlaceChoice());
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo(getLocationNameEng());
         return financialNewItems;
     }
     private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(int cat_id, String header)
