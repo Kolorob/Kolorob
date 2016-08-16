@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.BuildConfig;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -31,6 +35,12 @@ import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,7 +88,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private int locationNameId;
     private static double VIEW_WIDTH;
     private int primaryIconWidth;
-
+boolean firstRun;
     public int getLocationNameId() {
         return locationNameId;
     }
@@ -108,6 +118,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private int categoryId;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
+    String first;
     ArrayList<RatingModel>rating=new ArrayList<>();
     public ArrayList<GovernmentNewItem> getGovernmentNewItems() {
         return governmentNewItems;
@@ -150,7 +161,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     public void setLegalaidServiceProvider(ArrayList<LegalAidServiceProviderItemNew> et) {
         this.legalaidServiceProvider = et;
     }
-
+    byte[] bytes;
     public void setFinancialServiceProvider(ArrayList<FinancialNewItem> et) {
         this.financialServiceProvider = et;
     }
@@ -206,11 +217,68 @@ setMapView(mapView);
 
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
-        mapView.setUseDataConnection(true);
 
 
-        mapView.setTileSource(TileSourceFactory.MAPNIK);
+
+
         mapView.setTilesScaledToDpi(true);
+        first = settings.getString("First", null);
+        if (first.equals("yes"))//if running for first time
+        {   Log.d("ss","********"+first);
+            File path = MapFragmentOSM.this.getActivity().getExternalFilesDir(null);
+
+            File file = new File(path, "kolorob.txt");
+
+                try
+                {
+                    int length = (int) file.length();
+
+                    bytes = new byte[length];
+
+                    FileInputStream in = null;
+                    try {
+                        in = new FileInputStream(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        try {
+                            in.read(bytes);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } finally {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    String contents = new String(bytes);
+                    String delims = "[,]";
+                    String[] tokens = contents.split(delims);
+                    String text= tokens[0]+",no";
+
+                    FileOutputStream fOut = new FileOutputStream(file);
+                    OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+                    myOutWriter.write("");
+                    myOutWriter.append(text);
+                    myOutWriter.close();
+                    fOut.close();
+                } catch(Exception e)
+                {
+
+                }
+
+            mapView.setUseDataConnection(true);
+            OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+            mapView.setTileSource(TileSourceFactory.MAPNIK);
+        }
+        else {
+            //OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+            mapView.setUseDataConnection(false);
+            //mapView.setTileSource(TileSourceFactory.MAPNIK);
+        }
       /*  mapView.setTilesScaledToDpi(true);
         // Test code
         float density = mapView.isTilesScaledToDpi() ? mapView.getResources().getDisplayMetrics().density : 1;
