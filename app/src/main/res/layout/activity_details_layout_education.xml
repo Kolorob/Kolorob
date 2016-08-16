@@ -120,6 +120,9 @@
                             android:layout_height="wrap_content"
                             style="?android:attr/ratingBarStyleIndicator"
 
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
+
                             android:numStars="5"
                             android:stepSize="0"
                             android:rating="0"
