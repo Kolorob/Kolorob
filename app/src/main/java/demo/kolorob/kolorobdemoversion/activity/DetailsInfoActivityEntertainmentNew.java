@@ -293,7 +293,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         CheckConcate("ব্লক", entertainmentServiceProviderItemNew.getBlock());
         CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
         CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
-        CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolice_station());
+
         CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
@@ -980,11 +980,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 //
     private void CheckConcate(String value1, String value2) {
 
-
-
-
-
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
