@@ -219,18 +219,19 @@ public class DetailsInfoActivityHealthNew extends Activity {
         CheckConcate("বিনামূল্যে সেবার ধরন", healthServiceProviderItemNew.getGeneral_free_services());
 
 
+
         CheckConcate("ফার্মেসি চিকিৎসা সেবা", healthServiceProviderItemNew.getPharmacy_speciality());
-        CheckConcate("ফার্মেসি ফি", healthServiceProviderItemNew.getPharmacy_fee());
+        CheckConcate("ফার্মেসি ফি", English_to_bengali_number_conversion(healthServiceProviderItemNew.getPharmacy_fee())+" টাকা");
 
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_services());
-        CheckConcate("সাধারন খরচ", healthServiceProviderItemNew.getGeneral_cost());
+        CheckConcate("সাধারন খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+" টাকা");
         CheckConcate("সাধারন অনন্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
-        CheckConcate("এ্যাম্বুলেন্সের খরচ", healthServiceProviderItemNew.getAmbulance_cost());
+        CheckConcate("এ্যাম্বুলেন্সের খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getAmbulance_cost())+" টাকা");
         CheckConcate("এ্যাম্বুলেন্সের অনন্য তথ্য", healthServiceProviderItemNew.getAmbulance_remark());
-        CheckConcate("মাতৃত্ব জনিত সেবার খরচ", healthServiceProviderItemNew.getMaternity_cost());
+        CheckConcate("মাতৃত্ব জনিত সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getMaternity_cost())+" টাকা");
         CheckConcate("মাতৃত্ব জনিত সেবার অন্যন্য তথ্য", healthServiceProviderItemNew.getMaternity_remark());
-        CheckConcate("জরুরী সেবার খরচ", healthServiceProviderItemNew.getEmergency_cost());
-        CheckConcate("জরুরী সেবার অনন্য খরচ", healthServiceProviderItemNew.getEmergency_remark());
+        CheckConcate("জরুরী সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_cost())+" টাকা");
+        CheckConcate("জরুরী সেবার অনন্য খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_remark())+" টাকা");
 
 
 
@@ -248,11 +249,11 @@ public class DetailsInfoActivityHealthNew extends Activity {
              //   result_concate = "";
             //    specialist.setVisibility(View.VISIBLE);
                 CheckConcate("বিশেষজ্ঞ ডাক্তারের ধরন ", healthSpecialistItemDetails.getSpecialisttype());
-                CheckConcate("ডাক্তারের সংখা", healthSpecialistItemDetails.getSpecialistId());
-                CheckConcate("প্রথম ভিজিট ফি", healthSpecialistItemDetails.getSpecialistfees());
-                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি", healthSpecialistItemDetails.getWeek_fee());
-                CheckConcate("এক মাসের মধ্যে ভিজিট ফি", healthSpecialistItemDetails.getMonth_fee());
-                CheckConcate("রিপোর্ট ফি", healthSpecialistItemDetails.getReport_fee());
+                CheckConcate("ডাক্তারের সংখা", English_to_bengali_number_conversion(healthSpecialistItemDetails.getSpecialistId())+" জন");
+                CheckConcate("প্রথম ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getSpecialistfees())+ " টাকা");
+                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getWeek_fee())+" টাকা");
+                CheckConcate("এক মাসের মধ্যে ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getMonth_fee())+" টাকা");
+                CheckConcate("রিপোর্ট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getReport_fee())+" টাকা");
 
 
 
@@ -270,7 +271,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
             for (HealthVaccineItemDetails healthVaccineItemDetails : healthVaccineItemDetailses) {
                 CheckConcate("ভ্যাকসিনের নাম", healthVaccineItemDetails.getVaccinename());
-                CheckConcate("ভ্যাকসিনের ফী", healthVaccineItemDetails.getVaccinefee());
+                CheckConcate("ভ্যাকসিনের ফী", English_to_bengali_number_conversion(healthVaccineItemDetails.getVaccinefee())+" টাকা");
                 CheckConcate("ভ্যাকসিনের অন্যন্য তথ্য", healthVaccineItemDetails.getVaccineremarks());
 
             }
@@ -906,7 +907,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
