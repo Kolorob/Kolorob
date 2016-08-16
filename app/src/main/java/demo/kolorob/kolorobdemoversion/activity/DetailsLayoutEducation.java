@@ -182,15 +182,15 @@ ArrayList<String>examname=new ArrayList<>();
 
         CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
         CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno()));
-        CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno()));
-        CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno()));
+        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno()+" জন"));
+        CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno())+" জন");
+        CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno())+" টি");
         CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
-        CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent()));
-        CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent()));
+        CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent())+" জন");
+        CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent())+" জন");
 
         CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no())));
+        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no()))+" টি");
         CheckConcate("ছেলেদের বাথরুম", EtoB( educationNewItem.getWashroom_male()));
         CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
         CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
@@ -236,7 +236,7 @@ ArrayList<String>examname=new ArrayList<>();
                     } else examname.add(educationResultItemNew.getExamname());
 
                 } else examname.add(educationResultItemNew.getExamname());
-*/   CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
+*/              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
                 CheckConcate("ছাত্রছাত্রী সংখ্যা", educationResultItemNew.getStudentno());
                 CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", educationResultItemNew.getPassed());
                 CheckConcate("গোল্ডেন এ", educationResultItemNew.getGoldena());
@@ -269,7 +269,7 @@ ArrayList<String>examname=new ArrayList<>();
 
                 CheckConcate("কত মাসের কোর্স", educationTrainingDetailsItem.getCourseduration());
                 CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("খরচ", educationTrainingDetailsItem.getCost());
+                CheckConcate("খরচ", educationTrainingDetailsItem.getCost()+" টাকা");
                 CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
                 CheckConcate("ট্রেনিং এর নাম", educationTrainingDetailsItem.getTrainingnamesubtype());
 
@@ -942,7 +942,7 @@ ArrayList<String>examname=new ArrayList<>();
     private void CheckConcate(String value1,String value2){
 
 
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টি")&& !value2.equals(" জন")&& !value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
