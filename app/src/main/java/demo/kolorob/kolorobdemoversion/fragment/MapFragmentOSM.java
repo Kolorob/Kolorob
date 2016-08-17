@@ -344,7 +344,7 @@ Date today=new Date();
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
 
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getCategory();
+                    String subcategotyId = et.getReferences();
                     //Log.d("subcategotyId_Legal","=======");
 
                     ratingavg=et.getRating();
@@ -625,7 +625,8 @@ Date today=new Date();
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId == 2)
+            if (subcategotyId == 1||subcategotyId == 2||subcategotyId == 3||subcategotyId == 4||
+                    subcategotyId == 5|| subcategotyId == 6||subcategotyId == 7)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
             else if (subcategotyId == 9)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
