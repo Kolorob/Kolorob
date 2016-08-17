@@ -809,7 +809,6 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                                     if(id.equals(entertainmentServiceProviderItemNew.getNodeId()))
                                     {
 
-
                                         rating=Float.parseFloat(ratingH.getString("avg"));
                                         ratingBar.setRating(rating);
                                         break;
