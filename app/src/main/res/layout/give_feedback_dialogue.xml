@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="মতামত"
+        android:layout_marginTop="10dp"
         android:textColor="@color/orange"
 
 
-        android:textSize="25dp"
+        android:textSize="@dimen/feedbackalltext"
         android:layout_gravity="center" />
 
     <RadioGroup
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
       android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:gravity="left">
 
 
@@ -33,9 +35,9 @@
             android:drawableRight="@drawable/five"
             android:text="@string/feedback5"
             android:layout_marginLeft="1dp"
-            android:drawablePadding="27dp"
+            android:drawablePadding="@dimen/fifthstarspace"
             android:textColor="@color/orange"
-            android:textSize="18dp"
+            android:textSize="@dimen/feedbacktextsize"
             android:id="@+id/best" />
 
 
@@ -45,10 +47,10 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/four"
             android:layout_marginLeft="1dp"
-            android:drawablePadding="65dp"
+            android:drawablePadding="@dimen/fourthstarspace"
             android:textColor="@color/orange"
             android:text="@string/feedback4"
-            android:textSize="18dp"
+            android:textSize="@dimen/feedbacktextsize"
             android:id="@+id/good" />
 
 
@@ -57,10 +59,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/three"
-            android:textSize="18dp"
+            android:textSize="@dimen/feedbacktextsize"
             android:textColor="@color/orange"
             android:checked="true"
-            android:drawablePadding="@dimen/leftpadding"
+            android:drawablePadding="@dimen/thirdstarspace"
             android:text="@string/feedback3"
             android:id="@+id/medium" />
 
@@ -69,8 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/two"
-            android:textSize="18dp"
-            android:drawablePadding="50dp"
+            android:textSize="@dimen/feedbacktextsize"
+            android:drawablePadding="@dimen/secondstarspace"
             android:textColor="@color/orange"
             android:text="@string/feedback2"
             android:id="@+id/bad" />
@@ -80,8 +82,8 @@
             android:layout_width="wrap_content"
             android:drawableRight="@drawable/one"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:drawablePadding="11dp"
+            android:textSize="@dimen/feedbacktextsize"
+            android:drawablePadding="@dimen/firststarspace"
             android:textColor="@color/orange"
             android:text="@string/feedback1"
             android:id="@+id/worst" />
@@ -108,7 +110,7 @@
             android:textColor="@color/orange"
 
 
-            android:textSize="17sp"
+            android:textSize="@dimen/feedbackalltext"
             />
 
 
@@ -134,8 +136,8 @@
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/bwidth"
+            android:layout_height="@dimen/bheight"
             android:background="@drawable/tick_icon_feedback"
             android:layout_gravity="center_horizontal"
 
@@ -145,8 +147,8 @@
 
         <Button
             android:id="@+id/btnclose"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/bwidth"
+            android:layout_height="@dimen/bheight"
             android:layout_marginLeft="10dp"
             android:background="@drawable/cross_icon_feedback"
             android:layout_gravity="center_horizontal"

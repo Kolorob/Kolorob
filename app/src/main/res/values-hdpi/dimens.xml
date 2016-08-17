@@ -30,6 +30,14 @@
     <dimen name="search_top">20dp</dimen>
     <dimen name="nav_header_height3">80dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
-
-
+    //feedbackstars
+    <dimen name="firststarspace">16dp</dimen>
+    <dimen name="secondstarspace">53dp</dimen>
+    <dimen name="thirdstarspace">30dp</dimen>
+    <dimen name="fourthstarspace">67dp</dimen>
+    <dimen name="fifthstarspace">30dp</dimen>
+    <dimen name="feedbacktextsize">25dp</dimen>
+    <dimen name="feedbackalltext">25dp</dimen>
+    <dimen name="bwidth">50dp</dimen>
+    <dimen name="bheight">50dp</dimen>
 </resources>

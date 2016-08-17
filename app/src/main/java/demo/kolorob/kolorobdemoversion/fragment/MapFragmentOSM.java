@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +63,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by israt.jahan on 5/5/2016.
- * Modified By Arafat
+
 
  */
 public class MapFragmentOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
