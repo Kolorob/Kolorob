@@ -145,7 +145,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int showList;
     private String locationNameEng;
     private String comapreData;
-    ScrollView sv,svs;
+    ScrollView sv,svs,scrolling_part;
+
     String firstData="",SecondData="";
     int checker=0;
     Boolean InCompare=false;
@@ -381,6 +382,14 @@ TextView uptext;
         smal=(int)Math.round(d);
         params.height=larg;
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
+
+        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
+
+        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
+        scrolling_partc.setMargins(0,0,0,smal);
+
+
+
         RelativeLayout.LayoutParams com_layout = (RelativeLayout.LayoutParams) compare_layout.getLayoutParams();
         com_layout.setMargins(0,0,0,smal);
 

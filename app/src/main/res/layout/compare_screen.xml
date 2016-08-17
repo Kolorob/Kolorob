@@ -37,12 +37,13 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="180dp" >
+            android:id="@+id/scrolling_part"
+          >
             <LinearLayout
            android:orientation="vertical"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginBottom="280dp">
+          >
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="6dp"
