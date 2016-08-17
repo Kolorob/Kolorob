@@ -153,7 +153,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/15);
+        mlp.setMargins(width/15,0,width/90,width/10);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -275,9 +275,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
          //   other_detailsEnt.setVisibility(View.VISIBLE);
             for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
                 CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-                CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
-                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
-                CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
+                CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
+                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
+                CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
 
@@ -299,8 +299,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
         breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
-        CheckConcate("সাপ্তাহিক ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
-        CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
+        CheckConcate("ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
+
          ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
 
        // detailsEntertainment.setText(result_concate);
@@ -808,7 +808,6 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
                                     String id= ratingH.getString("id");
                                     if(id.equals(entertainmentServiceProviderItemNew.getNodeId()))
                                     {
-
 
                                         rating=Float.parseFloat(ratingH.getString("avg"));
                                         ratingBar.setRating(rating);

@@ -225,13 +225,13 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_services());
         CheckConcate("সাধারন খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+" টাকা");
-        CheckConcate("সাধারন অনন্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
+        CheckConcate("অনন্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
         CheckConcate("এ্যাম্বুলেন্সের খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getAmbulance_cost())+" টাকা");
-        CheckConcate("এ্যাম্বুলেন্সের অনন্য তথ্য", healthServiceProviderItemNew.getAmbulance_remark());
-        CheckConcate("মাতৃত্ব জনিত সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getMaternity_cost())+" টাকা");
-        CheckConcate("মাতৃত্ব জনিত সেবার অন্যন্য তথ্য", healthServiceProviderItemNew.getMaternity_remark());
+        CheckConcate("অনন্য তথ্য", healthServiceProviderItemNew.getAmbulance_remark());
+        CheckConcate("মাতৃত্বজনিত সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getMaternity_cost())+" টাকা");
+        CheckConcate("মাতৃত্বজনিত অন্যন্য তথ্য", healthServiceProviderItemNew.getMaternity_remark());
         CheckConcate("জরুরী সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_cost())+" টাকা");
-        CheckConcate("জরুরী সেবার অনন্য খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_remark())+" টাকা");
+        CheckConcate("অনন্য খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_remark())+" টাকা");
 
 
 
@@ -446,7 +446,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/15);
+        mlp.setMargins(width/19,0,width/90,width/10);
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override

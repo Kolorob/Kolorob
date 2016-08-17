@@ -147,6 +147,7 @@ EditText feedback_comment;
         hostel = (TextView) findViewById(R.id.tv_hostel_fac);
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText = (TextView) findViewById(R.id.ratingText);
+        ratingBar=(RatingBar)findViewById(R.id.ratingBar);
 
         close_button = (ImageView) findViewById(R.id.close_buttonc);
 
@@ -169,7 +170,7 @@ EditText feedback_comment;
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/15);
+        mlp.setMargins(width/15,0,width/90,width/10);
 
         CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
         CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
@@ -483,6 +484,7 @@ EditText feedback_comment;
                                 {
                                     JSONObject ratingH=jo.getJSONObject(i);
                                     String id= ratingH.getString("id");
+
                                     if(id.equals(String.valueOf(financialNewItem.getFinId())))
                                     {
 
