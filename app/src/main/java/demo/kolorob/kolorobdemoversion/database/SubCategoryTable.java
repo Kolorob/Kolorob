@@ -147,7 +147,7 @@ public class SubCategoryTable {
         ArrayList<SubCategoryItem> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id , null);
 
         if (cursor.moveToFirst()) {
             do {
