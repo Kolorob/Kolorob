@@ -275,9 +275,9 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
          //   other_detailsEnt.setVisibility(View.VISIBLE);
             for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
                 CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-                CheckConcate("প্রতিষ্ঠানের সেবার ধরন", entertainmentTypeItem.getSub_type());
-                CheckConcate("প্রতিষ্ঠানের সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
-                CheckConcate("প্রতিষ্ঠানের সেবা বাবদ অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
+                CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
+                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
+                CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
 
@@ -299,8 +299,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
         breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
-        CheckConcate("সাপ্তাহিক ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
-        CheckConcate("যার মাধ্যমে নিবন্ধন করা হয়েছে", entertainmentServiceProviderItemNew.getNodeRegisteredWith());
+        CheckConcate("ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
+
          ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
 
        // detailsEntertainment.setText(result_concate);

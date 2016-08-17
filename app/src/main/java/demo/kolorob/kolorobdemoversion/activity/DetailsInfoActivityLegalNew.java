@@ -248,7 +248,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
             for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
             {
                 CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
-                Log.d("আইন","======"+leagalAidDetailsItem.getSub_type());
+
                 CheckConcate("আইন পরামর্শ", leagalAidDetailsItem.getSub_type());
                 CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost()+" টাকা"));
                 CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());

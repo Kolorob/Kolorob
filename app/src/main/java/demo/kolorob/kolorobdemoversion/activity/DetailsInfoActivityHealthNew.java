@@ -446,7 +446,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/15);
+        mlp.setMargins(width/15,0,width/90,width/10);
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
