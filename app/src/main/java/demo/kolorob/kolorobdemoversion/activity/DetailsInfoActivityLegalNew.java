@@ -161,7 +161,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,fh+20,width/15);
+        mlp.setMargins(width/15,0,width/90,width/10);
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
@@ -248,7 +248,8 @@ public class DetailsInfoActivityLegalNew extends Activity {
             for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
             {
                 CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
-                CheckConcate("যে বিষয়ে আইন সহায়তা দেয়া হয়", leagalAidDetailsItem.getSub_type());
+                Log.d("আইন","======"+leagalAidDetailsItem.getSub_type());
+                CheckConcate("আইন পরামর্শ", leagalAidDetailsItem.getSub_type());
                 CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost()+" টাকা"));
                 CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
             }

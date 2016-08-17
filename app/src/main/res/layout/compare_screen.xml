@@ -34,16 +34,7 @@
                     />
 
         </LinearLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrolling_part"
-          >
-            <LinearLayout
-           android:orientation="vertical"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-          >
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="6dp"
@@ -65,8 +56,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkLeft"
-
-
 
                     android:buttonTint="@color/white"
                     android:layout_marginLeft="5dp"
@@ -130,6 +119,17 @@
             </LinearLayout>
 
         </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrolling_part"
+          >
+           <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+          >
+
 
         <LinearLayout
             android:orientation="horizontal"
