@@ -17,9 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
 import demo.kolorob.kolorobdemoversion.http.VolleySingleton;
-import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -193,7 +191,7 @@ public class VolleyApiParser {
                                         + ", NetResponse data length = " + error.networkResponse.data.length);
                             else
                                 Lg.e(TAG,
-                                        "onErrorResponse : Even halar-bai VolleyError is also null (>_<)");
+                                        "onErrorResponse :  VolleyError is also null (>_<)");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
