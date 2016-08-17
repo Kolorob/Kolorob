@@ -14,95 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
-
-
         >
-
-        <!--android:visibility="gone"-->
-        <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:id="@+id/header_compare"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-
-
-        <!--<LinearLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:id="@+id/first_screen_logo"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/school_logo_default"-->
-        <!--android:id="@+id/first_screen_logo_image"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--/>-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:id="@+id/compare_logo"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/compare_logo_default"-->
-
-        <!--android:id="@+id/compare_logo_image"-->
-        <!--/>-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:id="@+id/second_school_logo"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/school_logo_default"-->
-
-
-        <!--android:id="@+id/second_school_logo_image"-->
-        <!--/>-->
-        <!--</LinearLayout>-->
-
-
-
-        <!--</LinearLayout>-->
-
 
         <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/header_compare"
             android:layout_marginTop="15dp"
+            android:gravity="center"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/compare_logo_default"
 
-
-
-
-
+                    android:id="@+id/compare_logo_image"
+                    />
 
         </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="180dp" >
-         <LinearLayout
-         android:orientation="vertical"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginBottom="280dp">
+            <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="280dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="6dp"
