@@ -87,6 +87,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/upperText"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
                         android:gravity="center"
                         android:orientation="vertical"
                         >
@@ -104,6 +106,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginLeft="8dp"
                             android:orientation="horizontal"
                             >
                             <TextView
@@ -111,6 +115,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
                                 android:textSize="20sp"
+                                android:gravity="center"
                                 android:id="@+id/ratingText"
                                 android:text="@string/rating"
                                 android:layout_centerVertical="true"

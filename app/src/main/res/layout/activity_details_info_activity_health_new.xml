@@ -92,6 +92,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/upperText"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
                     android:orientation="vertical"
                     android:gravity="center">
 
@@ -100,6 +102,7 @@
                         android:layout_height="wrap_content"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
                         android:textSize="18dp"
+                        android:gravity="center"
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/white"
 
@@ -109,6 +112,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
                         android:orientation="horizontal"
                         android:gravity="center">
                         <TextView
@@ -116,6 +121,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:layout_marginLeft="10dp"
+
 
                             android:textSize="23sp"
                             android:id="@+id/ratingText"
