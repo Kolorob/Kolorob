@@ -1719,7 +1719,7 @@ TextView uptext;
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
                     printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
-                   // printnamesent = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+                  //  printnamesent = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
                     for (int i = 0; i < printnamesent.size(); i++) {
                         group.childrenent.add(i, printnamesent.get(i));
