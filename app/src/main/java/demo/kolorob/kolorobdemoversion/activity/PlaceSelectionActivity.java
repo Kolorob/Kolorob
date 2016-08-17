@@ -391,7 +391,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
         final RatingBar ratingBar = (RatingBar) promptView.findViewById(R.id.ratingBar);
-        final EditText submit_btn = (EditText) promptView.findViewById(R.id.submit_btn);
+        final EditText submit_review = (EditText) promptView.findViewById(R.id.submit_review);
         final Button btnSubmit = (Button) promptView.findViewById(R.id.btnSubmit);
         final Button btnclose = (Button) promptView.findViewById(R.id.btnclose);
 //        Dialog mDialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
@@ -426,6 +426,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
                 ratings = ratingBar.getRating();
+                comment=submit_review.getText().toString();
 
                 sendDataToserver(ratings, comment);
                 alertDialog.cancel();
@@ -502,11 +503,11 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(PlaceSelectionActivity.this, response, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlaceSelectionActivity.this, "ধন্যবাদ", Toast.LENGTH_SHORT).show();
 
                             try {
 
-                                Toast.makeText(PlaceSelectionActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(PlaceSelectionActivity.this, "ধন্যবাদ", Toast.LENGTH_LONG).show();
 
 //                                if(response.toString().trim().equalsIgnoreCase("true"))
 //                                {
