@@ -1836,7 +1836,7 @@ TextView uptext;
 
                     printnamesleg = null;
                     printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
-                      //printnamesleg = legalAidServiceProviderTableNew.getAllLegalAidSubCategoriesInfo(3);
+                    //  printnamesleg = legalAidServiceProviderTableNew.getAllLegalAidSubCategoriesInfo(3);
 
                     for (int i = 0; i < printnamesleg.size(); i++) {
                         group.childrenleg.add(i, printnamesleg.get(i));

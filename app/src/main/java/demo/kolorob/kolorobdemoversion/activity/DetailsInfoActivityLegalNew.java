@@ -265,7 +265,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
         CheckConcate("এলাকা", legalAidServiceProviderItemNew.getArea());
         CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
-        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPost_office());
+        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
 
         CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
@@ -273,7 +273,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
-        CheckConcate("যার মাধ্যমে রেজিস্ট্রেশন করা হয়েছে", legalAidServiceProviderItemNew.getRegisteredWith());
+        CheckConcate("রেজিস্ট্রেশনমাধ্যমে", legalAidServiceProviderItemNew.getRegisteredWith());
         ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
 
 
