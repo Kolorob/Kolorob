@@ -63,8 +63,6 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by israt.jahan on 5/5/2016.
-
-
  */
 public class MapFragmentOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
     Drawable newMarker;
@@ -87,7 +85,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private int locationNameId;
     private static double VIEW_WIDTH;
     private int primaryIconWidth;
-boolean firstRun;
+    boolean firstRun;
     public int getLocationNameId() {
         return locationNameId;
     }
@@ -209,7 +207,7 @@ boolean firstRun;
         VIEW_WIDTH = AppUtils.getScreenWidth(getActivity()) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
         mapView = (MapView) rootView.findViewById(R.id.mapview);
-setMapView(mapView);
+        setMapView(mapView);
 
         mapView.setClickable(true);
 
@@ -228,46 +226,46 @@ setMapView(mapView);
 
             File file = new File(path, "kolorob.txt");
 
-                try
-                {
-                    int length = (int) file.length();
+            try
+            {
+                int length = (int) file.length();
 
-                    bytes = new byte[length];
+                bytes = new byte[length];
 
-                    FileInputStream in = null;
+                FileInputStream in = null;
+                try {
+                    in = new FileInputStream(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
                     try {
-                        in = new FileInputStream(file);
-                    } catch (FileNotFoundException e) {
+                        in.read(bytes);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } finally {
                     try {
-                        try {
-                            in.read(bytes);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } finally {
-                        try {
-                            in.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    String contents = new String(bytes);
-                    String delims = "[,]";
-                    String[] tokens = contents.split(delims);
-                    String text= tokens[0]+",no";
-
-                    FileOutputStream fOut = new FileOutputStream(file);
-                    OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                    myOutWriter.write("");
-                    myOutWriter.append(text);
-                    myOutWriter.close();
-                    fOut.close();
-                } catch(Exception e)
-                {
-
                 }
+                String contents = new String(bytes);
+                String delims = "[,]";
+                String[] tokens = contents.split(delims);
+                String text= tokens[0]+",no";
+
+                FileOutputStream fOut = new FileOutputStream(file);
+                OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+                myOutWriter.write("");
+                myOutWriter.append(text);
+                myOutWriter.close();
+                fOut.close();
+            } catch(Exception e)
+            {
+
+            }
 
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
@@ -302,7 +300,7 @@ setMapView(mapView);
 
 // get the time and make a date out of it
         Date date2 = new Date(settings.getLong("time", 0));
-Date today=new Date();
+        Date today=new Date();
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
@@ -321,7 +319,7 @@ Date today=new Date();
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnumm();
                         latDouble = Double.parseDouble(et.getLat());
-                                ratingavg=et.getRating();
+                        ratingavg=et.getRating();
 
 
                         if((ratingavg.equals("null"))||(ratingavg.equals("")))
@@ -332,10 +330,10 @@ Date today=new Date();
                         else  {
                             ratingavgbn=EtoBconversion(ratingavg);
 
-                         ratingavg=ratingavgbn.concat(datevalue);
+                            ratingavg=ratingavgbn.concat(datevalue);
                         }
                         longDouble = Double.parseDouble(et.getLon());
-                      GeoPoint point = new GeoPoint(latDouble, longDouble);
+                        GeoPoint point = new GeoPoint(latDouble, longDouble);
                         drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
                     }
                 }
@@ -344,7 +342,7 @@ Date today=new Date();
                 for (HealthServiceProviderItemNew et : healthServiceProvider) {
 
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getReferences();
+                    String subcategotyId = et.getCategory();
                     //Log.d("subcategotyId_Legal","=======");
 
                     ratingavg=et.getRating();
@@ -370,7 +368,7 @@ Date today=new Date();
             case AppConstants.ENTERTAINMENT:
                 for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                     String subcategotyId = et.getCategoryId();
+                    String subcategotyId = et.getCategoryId();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
                     ratingavg=et.getRating();
@@ -391,7 +389,7 @@ Date today=new Date();
                 }
                 break;
             case AppConstants.GOVERNMENT:
-              if (governmentNewItems != null) {
+                if (governmentNewItems != null) {
                     for (GovernmentNewItem et : governmentNewItems) {
 
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
@@ -416,21 +414,16 @@ Date today=new Date();
                 }
               /*  if (allitems != null) {
                     for (AllHolder et : allitems) {
-
                         //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
                         subcategotyId2 = et.getRefnum();
                         latDouble = Double.parseDouble(et.getLat());
                         longDouble = Double.parseDouble(et.getLon());
-
-
                         if(ratingavg.equals("null"))
                         {
                             ratingavg="পাওয়া যায় নি";
-
                         }
                         else  {
                             ratingavgbn=EtoBconversion(ratingavg);
-
                             ratingavg=ratingavgbn.concat(datevalue);
                         }
                         GeoPoint point = new GeoPoint(latDouble, longDouble);
@@ -505,15 +498,11 @@ Date today=new Date();
 
       /*   ImageButton curButton=(ImageButton) rootView.findViewById(R.id.currlocation);
        curButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 mylocation = new MyLocationNewOverlay(mapView);
                 mylocation.enableMyLocation();
-
                 IMyLocationProvider s= mylocation.getMyLocationProvider();
-
-
                 mylocation.getMyLocation();
                 mapView.getOverlays().add(mylocation);
             }
@@ -547,31 +536,31 @@ Date today=new Date();
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-    for(int i=0;i<tokens.length;i++) {
-        if (tokens[i]=="")continue;
-        subcategotyId=Integer.parseInt(tokens[i]);
+        for(int i=0;i<tokens.length;i++) {
+            if (tokens[i]=="")continue;
+            subcategotyId=Integer.parseInt(tokens[i]);
 
-        if (subcategotyId ==179 ||subcategotyId ==163 ||subcategotyId ==161 ||subcategotyId ==123 ||subcategotyId ==145
-        ||subcategotyId ==108 ||subcategotyId ==100 ||subcategotyId ==79 ||subcategotyId ==50 ||subcategotyId ==49
-        ||subcategotyId ==44 ||subcategotyId ==43)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-        else if (subcategotyId ==147 ||subcategotyId ==146 ||subcategotyId ==62 ||subcategotyId ==59|| subcategotyId ==52)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-        else if (subcategotyId ==164 ||subcategotyId ==93)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-        else if (subcategotyId ==150 ||subcategotyId ==149)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-        else if (subcategotyId ==128 ||subcategotyId ==94 ||subcategotyId ==64 ||subcategotyId ==63 ||subcategotyId ==7
-        ||subcategotyId ==165|| subcategotyId ==104||subcategotyId ==91||subcategotyId ==32||subcategotyId ==26
-        ||subcategotyId ==180 ||subcategotyId ==78||subcategotyId ==77)
-            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            if (subcategotyId ==179 ||subcategotyId ==163 ||subcategotyId ==161 ||subcategotyId ==123 ||subcategotyId ==145
+                    ||subcategotyId ==108 ||subcategotyId ==100 ||subcategotyId ==79 ||subcategotyId ==50 ||subcategotyId ==49
+                    ||subcategotyId ==44 ||subcategotyId ==43)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            else if (subcategotyId ==147 ||subcategotyId ==146 ||subcategotyId ==62 ||subcategotyId ==59|| subcategotyId ==52)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            else if (subcategotyId ==164 ||subcategotyId ==93)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            else if (subcategotyId ==150 ||subcategotyId ==149)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            else if (subcategotyId ==128 ||subcategotyId ==94 ||subcategotyId ==64 ||subcategotyId ==63 ||subcategotyId ==7
+                    ||subcategotyId ==165|| subcategotyId ==104||subcategotyId ==91||subcategotyId ==32||subcategotyId ==26
+                    ||subcategotyId ==180 ||subcategotyId ==78||subcategotyId ==77)
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,add);
-        marker.setInfoWindow(infoWindow);
+            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,add);
+            marker.setInfoWindow(infoWindow);
 
-        mapView.getOverlays().add(marker);
-        //marker.setTitle("Title of the marker");
-    }
+            mapView.getOverlays().add(marker);
+            //marker.setTitle("Title of the marker");
+        }
     }
     private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
@@ -625,8 +614,7 @@ Date today=new Date();
         for (int i=0;i<separated.length;i++)
         {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId == 1||subcategotyId == 2||subcategotyId == 3||subcategotyId == 4||
-                    subcategotyId == 5|| subcategotyId == 6||subcategotyId == 7)
+            if (subcategotyId == 2)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
             else if (subcategotyId == 9)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
@@ -744,70 +732,70 @@ Date today=new Date();
             //marker.setTitle("Title of the marker");
         }
     }
-public void DrawRoute(String lat, String lon)
-{
+    public void DrawRoute(String lat, String lon)
+    {
 
-    Double servicelat=Double.parseDouble(lat);
-    Double servicelon=Double.parseDouble(lon);
-    GeoPoint servicepoint=new GeoPoint(servicelat,servicelon);
+        Double servicelat=Double.parseDouble(lat);
+        Double servicelon=Double.parseDouble(lon);
+        GeoPoint servicepoint=new GeoPoint(servicelat,servicelon);
 
-    Double endlat=Double.parseDouble("23.791902");
-    Double endlon=Double.parseDouble("90.411343");
-mapp=getMapView();
-   // double latt=mylocation.getMyLocation().getLatitude();
+        Double endlat=Double.parseDouble("23.791902");
+        Double endlon=Double.parseDouble("90.411343");
+        mapp=getMapView();
+        // double latt=mylocation.getMyLocation().getLatitude();
 
-    Marker destinationmarker=new Marker(mapp);
-    destinationmarker.setPosition(servicepoint);
-    mapp.getOverlays().add(destinationmarker);
+        Marker destinationmarker=new Marker(mapp);
+        destinationmarker.setPosition(servicepoint);
+        mapp.getOverlays().add(destinationmarker);
 
-    GeoPoint my=new GeoPoint(endlat,endlon);
+        GeoPoint my=new GeoPoint(endlat,endlon);
 
- //   double latitude = my.getLatitudeE6() / 1E6;
+        //   double latitude = my.getLatitudeE6() / 1E6;
 //
- //   double longitude = my.getLongitudeE6() / 1E6;
+        //   double longitude = my.getLongitudeE6() / 1E6;
 
-    //2. Playing with the RoadManager
-    //RoadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
-    //roadManager.addRequestOption("routeType=bicycle");
-    ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
-    waypoints.add(my);
-    waypoints.add(servicepoint);
-
-
-    //GeoPoint endPoint = new GeoPoint(48.4, -1.9);
+        //2. Playing with the RoadManager
+        //RoadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
+        //roadManager.addRequestOption("routeType=bicycle");
+        ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
+        waypoints.add(my);
+        waypoints.add(servicepoint);
 
 
-    RoadManager roadManager = new OSRMRoadManager(getActivity());
-    Road road = roadManager.getRoad(waypoints);
-    if (road.mStatus != Road.STATUS_OK)
-        Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
+        //GeoPoint endPoint = new GeoPoint(48.4, -1.9);
 
-    Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
-    mapp.getOverlays().add(roadOverlay);
 
-    //3. Showing the Route steps on the map
-    FolderOverlay roadMarkers = new FolderOverlay(getActivity());
-    mapp.getOverlays().add(roadMarkers);
-    Drawable nodeIcon = getResources().getDrawable(R.drawable.map_marker);
-    for (int i = 0; i < road.mNodes.size(); i++) {
-        RoadNode node = road.mNodes.get(i);
-        Marker nodeMarker = new Marker(mapp);
-        nodeMarker.setPosition(node.mLocation);
-        nodeMarker.setIcon(nodeIcon);
+        RoadManager roadManager = new OSRMRoadManager(getActivity());
+        Road road = roadManager.getRoad(waypoints);
+        if (road.mStatus != Road.STATUS_OK)
+            Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
 
-        //4. Filling the bubbles
-        nodeMarker.setTitle("Step " + i);
-        nodeMarker.setSnippet(node.mInstructions);
-        nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
-        Drawable iconContinue = getResources().getDrawable(R.drawable.map_marker);
-        nodeMarker.setImage(iconContinue);
-        //4. end
+        Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
+        mapp.getOverlays().add(roadOverlay);
 
-        roadMarkers.add(nodeMarker);
+        //3. Showing the Route steps on the map
+        FolderOverlay roadMarkers = new FolderOverlay(getActivity());
+        mapp.getOverlays().add(roadMarkers);
+        Drawable nodeIcon = getResources().getDrawable(R.drawable.map_marker);
+        for (int i = 0; i < road.mNodes.size(); i++) {
+            RoadNode node = road.mNodes.get(i);
+            Marker nodeMarker = new Marker(mapp);
+            nodeMarker.setPosition(node.mLocation);
+            nodeMarker.setIcon(nodeIcon);
+
+            //4. Filling the bubbles
+            nodeMarker.setTitle("Step " + i);
+            nodeMarker.setSnippet(node.mInstructions);
+            nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
+            Drawable iconContinue = getResources().getDrawable(R.drawable.map_marker);
+            nodeMarker.setImage(iconContinue);
+            //4. end
+
+            roadMarkers.add(nodeMarker);
+        }
+
+
     }
-
-
-}
     @Override
     public void onClick(View v) {
 
@@ -851,4 +839,3 @@ mapp=getMapView();
         this.mapView = mapView;
     }
 }
-
