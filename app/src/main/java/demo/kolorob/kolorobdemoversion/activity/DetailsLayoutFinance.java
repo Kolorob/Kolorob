@@ -170,7 +170,7 @@ EditText feedback_comment;
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/10);
+        mlp.setMargins(width/15,0,width/90,width/8);
 
         CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
         CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
