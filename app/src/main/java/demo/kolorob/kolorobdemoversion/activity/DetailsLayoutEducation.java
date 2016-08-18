@@ -182,7 +182,7 @@ ArrayList<String>examname=new ArrayList<>();
 
         CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
         CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno()+" জন"));
+        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno())+" জন");
         CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno())+" জন");
         CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno())+" টি");
         CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
@@ -200,11 +200,11 @@ ArrayList<String>examname=new ArrayList<>();
 
         CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
         CheckConcate("ঠিকানা", educationNewItem.getAddress());
-        CheckConcate("ফ্লোর", educationNewItem.getFloor());
-        CheckConcate("বাড়ির নাম", educationNewItem.getHousename());
-        CheckConcate("রাস্তা", educationNewItem.getRoad());
-        CheckConcate("লাইন ", educationNewItem.getLine());
-        CheckConcate("এভিনিউ", educationNewItem.getAvenue());
+        CheckConcate("ফ্লোর", EtoB(educationNewItem.getFloor()));
+        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHousename()));
+        CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));
+        CheckConcate("লাইন ", EtoB(educationNewItem.getLine()));
+        CheckConcate("এভিনিউ", EtoB(educationNewItem.getAvenue()));
         CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
         CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
 
@@ -780,6 +780,8 @@ ArrayList<String>examname=new ArrayList<>();
     }
 
     public String EtoB(String english_number) {
+        if(english_number.equals("null")||english_number.equals(""))
+            return english_number;
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
@@ -805,6 +807,12 @@ ArrayList<String>examname=new ArrayList<>();
                 concatResult = concatResult + "০";
             else if (english_number.charAt(i) == '.')
                 concatResult = concatResult + ".";
+            else if(english_number.charAt(i) == '/')
+                concatResult = concatResult + "/";
+            else {
+                return english_number;
+            }
+
         }
         return concatResult;
     }
