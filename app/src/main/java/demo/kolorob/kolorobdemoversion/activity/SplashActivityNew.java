@@ -46,29 +46,11 @@ public class SplashActivityNew extends ActionBarActivity {
 
         //now make the early request just in case
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
-            getRequest(SplashActivityNew.this, "http://kolorob.net/demo/api/getsql1?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(SplashActivityNew.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
-                                DatabaseHelper.sql1 = apiContent;
-                            }
-                        }
-                    }
-            );
-            getRequest(SplashActivityNew.this, "http://kolorob.net/demo/api/getsql2?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                DatabaseHelper.sql2 = apiContent;
-                            }
-                        }
-                    }
-            );
-            getRequest(SplashActivityNew.this, "http://kolorob.net/demo/api/getsql3?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                DatabaseHelper.sql3 = apiContent;
+                                DatabaseHelper.sql = apiContent;
                             }
                         }
                     }
