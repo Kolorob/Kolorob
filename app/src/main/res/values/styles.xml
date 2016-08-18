@@ -20,7 +20,7 @@
         <item name="android:fadeScrollbars">true</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_vertical_thumb</item>
         <item name="android:scrollbarTrackVertical">@drawable/scrollbar_vertical_track</item>
-        <item name="android:scrollbarSize">12dp</item>
+        <item name="android:scrollbarSize">8dp</item>
         <item name="android:scrollbarFadeDuration">2000</item>
         <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
     </style>
