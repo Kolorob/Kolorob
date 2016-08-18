@@ -241,7 +241,7 @@
             android:layout_height="wrap_content"
 
             android:background="@color/white"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="0dp">
 
 
             <LinearLayout
@@ -262,7 +262,9 @@
                 <ListView
                     android:layout_width="wrap_content"
                     android:gravity="left"
+                    android:fadeScrollbars="false"
 
+                    style="@style/scrollbar_shape_style"
                     android:layout_height="wrap_content"
                     android:id="@+id/allData" />
 
