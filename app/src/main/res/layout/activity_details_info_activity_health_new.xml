@@ -256,6 +256,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_height="wrap_content">
 
 
@@ -271,7 +272,10 @@
                 <ListView
                     android:layout_width="wrap_content"
                     android:gravity="left"
-
+                    android:scrollbarStyle="outsideInset"
+                    android:paddingRight="5dp"
+                    style="@style/scrollbar_shape_style"
+                    android:fadeScrollbars="false"
                     android:layout_height="wrap_content"
                     android:id="@+id/allData" />
 

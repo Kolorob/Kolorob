@@ -154,7 +154,8 @@ public class DetailsLayoutGovernment extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/10);
+        mlp.setMargins(width/100,0,width/990,width/8);
+
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
@@ -632,6 +633,8 @@ public void setRatingBar()
 
 
     public String English_to_bengali_number_conversion(String english_number) {
+        if(english_number.equals("null")||english_number.equals(""))
+            return english_number;
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
@@ -655,6 +658,14 @@ public void setRatingBar()
                 concatResult = concatResult + "৯";
             else if (english_number.charAt(i) == '0')
                 concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '.')
+                concatResult = concatResult + ".";
+            else if(english_number.charAt(i) == '/')
+                concatResult = concatResult + "/";
+            else {
+                return english_number;
+            }
+
         }
         return concatResult;
     }

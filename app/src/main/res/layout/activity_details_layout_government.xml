@@ -22,7 +22,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-android:layout_weight="10"
+        android:layout_weight="10"
         android:id="@+id/upper"
         >
 
@@ -238,7 +238,6 @@ android:layout_weight="10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/middle"
-            android:layout_marginBottom="20dp"
             android:background="@color/white"
             >
 
@@ -260,7 +259,10 @@ android:layout_weight="10"
                 <ListView
                     android:layout_width="wrap_content"
                     android:gravity="left"
-
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="outsideInset"
+                    android:paddingRight="5dp"
+                    style="@style/scrollbar_shape_style"
                     android:layout_height="wrap_content"
                     android:id="@+id/allData" />
 
@@ -305,7 +307,6 @@ android:layout_weight="10"
                     android:layout_height="wrap_content"
                     android:background="@drawable/feedback_icon"
                     android:onClick="verifyRegistration"
-
                     android:id="@+id/feedback"/>
 
             </LinearLayout>

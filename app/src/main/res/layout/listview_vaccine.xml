@@ -9,9 +9,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:paddingLeft="10dp"
         android:paddingTop="2dp"
+        android:textStyle="bold"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="key"
         android:textColor="@color/black"
@@ -20,8 +21,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:paddingLeft="10dp"
+
         android:paddingTop="2dp"
         android:paddingBottom="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium"        android:text="value"

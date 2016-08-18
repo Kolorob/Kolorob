@@ -249,6 +249,8 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+
                 android:layout_height="wrap_content">
 
 
@@ -264,7 +266,10 @@
                 <ListView
                     android:layout_width="wrap_content"
                     android:gravity="left"
-
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="outsideInset"
+                    android:paddingRight="5dp"
+                    style="@style/scrollbar_shape_style"
                     android:layout_height="wrap_content"
                     android:id="@+id/allData" />
 
@@ -302,25 +307,7 @@
         android:gravity="center_vertical">
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
 
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|left">
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/compare"
-
-                android:visibility="gone"
-                android:buttonTint="@color/white"
-                android:layout_marginLeft="20dp"
-
-                android:textColor="@color/white"
-                android:text="@string/compare"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -329,7 +316,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|right">
+            android:gravity="center">
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"

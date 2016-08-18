@@ -479,11 +479,9 @@ public class OpeningActivity extends Activity {
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )
                 ) {
             if(LOADINF_MODE=="SQL") { //for the newer version loading
-                NUMBER_OF_TASKS = 3;
+                NUMBER_OF_TASKS = 1;
 
                 new SaveSQL(OpeningActivity.this).execute("1");
-                new SaveSQL(OpeningActivity.this).execute("2");
-                new SaveSQL(OpeningActivity.this).execute("3");
 
 
                 //first third
@@ -1174,25 +1172,14 @@ public class OpeningActivity extends Activity {
 
             String query="";
 
-            //wait till its populated
-            if(sqls[0]=="1"){
-                while(DatabaseHelper.sql1==null);
-                query = DatabaseHelper.sql1;
-            }
-            else if(sqls[0]=="2"){
-                while(DatabaseHelper.sql2==null);
-                query = DatabaseHelper.sql2;
-            }
-            else if(sqls[0]=="3"){
-                while(DatabaseHelper.sql3==null);
-                query = DatabaseHelper.sql3;
-            }
+            while(DatabaseHelper.sql==null);
+            query = DatabaseHelper.sql;
 
             //ge the db instance
             SQLiteDatabase db = DatabaseManager.getInstance(OpeningActivity.this).openDatabase();
 
             //split into single sql queries
-            String[] sql = query.split(";");
+            String[] sql = query.split("~");
 
             //block db
             //db.beginTransaction();

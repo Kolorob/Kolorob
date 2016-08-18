@@ -170,15 +170,16 @@ EditText feedback_comment;
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/10);
+        mlp.setMargins(width/100,0,width/990,width/8);
+
 
         CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
         CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", financialNewItem.getFloor());
+        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
         CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
-        CheckConcate("রাস্তা  ", financialNewItem.getRoad());
-        CheckConcate("লাইন  ", financialNewItem.getLine());
-        CheckConcate("এভিনিউ  ", financialNewItem.getAvenue());
+        CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
+        CheckConcate("লাইন  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
+        CheckConcate("এভিনিউ  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
         CheckConcate("পোস্ট অফিস  ", financialNewItem.getPostoffice());
         CheckConcate("পুলিশ স্টেশন ", financialNewItem.getPolicestation());
 
@@ -640,6 +641,8 @@ EditText feedback_comment;
 
 
     public String English_to_bengali_number_conversion(String english_number) {
+        if(english_number.equals("null")||english_number.equals(""))
+            return english_number;
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
@@ -663,6 +666,14 @@ EditText feedback_comment;
                 concatResult = concatResult + "৯";
             else if (english_number.charAt(i) == '0')
                 concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '.')
+                concatResult = concatResult + ".";
+            else if(english_number.charAt(i) == '/')
+                concatResult = concatResult + "/";
+            else {
+                return english_number;
+            }
+
         }
         return concatResult;
     }
