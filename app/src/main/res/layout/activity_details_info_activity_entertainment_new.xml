@@ -267,8 +267,10 @@
                     <ListView
                         android:layout_width="wrap_content"
                         android:gravity="left"
+                        android:fadeScrollbars="false"
 
-                        android:layout_height="wrap_content"
+                        style="@style/scrollbar_shape_style"
+                        android:layout_height="match_parent"
                         android:id="@+id/allData" />
 
 
