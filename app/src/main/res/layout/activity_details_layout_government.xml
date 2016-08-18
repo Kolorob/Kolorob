@@ -307,7 +307,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/feedback_icon"
                     android:onClick="verifyRegistration"
-
                     android:id="@+id/feedback"/>
 
             </LinearLayout>
