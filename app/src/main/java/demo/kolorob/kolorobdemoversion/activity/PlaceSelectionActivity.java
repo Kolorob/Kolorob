@@ -574,13 +574,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
-//        else if (id == R.id.info_change) {
-//
-//            Intent em = new Intent(this, Information_UpdateActivity.class);
-//            startActivity(em);
-//            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-//
-//        }
+     else if (id == R.id.about_us) {
+
+            Intent em = new Intent(this, AboutUs.class);
+           startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+       }
 //         else if (id == R.id.local_representative) {
 //
 //           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();

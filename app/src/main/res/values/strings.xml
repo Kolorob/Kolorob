@@ -35,6 +35,10 @@
     <string name="time">সময়</string>
     <string name="loading">একটু অপেক্ষা করেন \n কলরব তৈরি হচ্ছে </string>
     <string name="roam"> আর লাট্টুর মত ঘুরতে হবে না </string>
+    <string name="aboutus"> "          "কলরব একটি অনন্য প্রচেষ্টা, যার উদ্যোক্তা সেইভ দা চিলড্রেন বাংলাদেশ এবং সহায়তায় রয়েছে সেইভ দা চিলড্রেন অস্ট্রেলিয়া।
+যেকোন প্রয়োজনে চলে আসুন আমাদের তথ্য কেন্দ্রে: রোড ২, বাড়ি ৯, ব্লক এ, বাউনিয়াবাধ, মিরপুর, ঢাকা, অথবা যোগাযোগ করুন ফোন বা ইমেইলের মাধ্যমে।
+    </string>
+    <string name="abouttext">#Kolorob \n#LightingUpTheCity \n#LetsKolorobit </string>
     <string name="title_activity_details_info_activity_entertainment">
         DetailsInfoActivityEntertainment
     </string>
@@ -47,9 +51,6 @@
     <string name="feedback3">ঠিক আছে  </string>
     <string name="feedback2">অসন্তুষ্ট  </string>
     <string name="feedback1">খুবই অসন্তুষ্ট  </string>
-
-
-
 
 
     <string name="title_activity_review">ReviewActivity</string>
@@ -107,6 +108,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_about_us">AboutUs</string>
 
 
 </resources>

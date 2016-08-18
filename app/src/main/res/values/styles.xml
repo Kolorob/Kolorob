@@ -11,6 +11,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/white</item>
     </style>
+
     <style name="style_Spinner">
         <item name="android:background">@drawable/searchbar</item>
         <item name="android:dropDownSelector">@android:color/transparent</item>
@@ -23,6 +24,7 @@
         <item name="colorControlNormal">@color/orange</item>
         <item name="colorControlActivated">@color/which_transparent</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -48,10 +50,10 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-    <item name="colorPrimary">@android:color/transparent</item>
-    <item name="windowActionBarOverlay">true</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
     </style>
 

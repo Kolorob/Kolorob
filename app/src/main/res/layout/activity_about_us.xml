@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/about_us_screen"
+    android:weightSum="3"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1">
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_weight="1">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:id="@+id/scrollView4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/aboutus"
+                    android:textSize="@dimen/feedbacktextsize"
+                    android:id="@+id/aboutus"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/feedbacktextsize"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/abouttext"
+                    android:id="@+id/textView20"
+                    android:textColor="#ffffff"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="2"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connect with us"
+                android:id="@+id/connecttext"
+                android:layout_gravity="center"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:weightSum="6"
+                android:layout_margin="10dp">
+                <ImageButton
+                    android:id="@+id/btnbl"
+                    android:layout_width="@dimen/bwidth"
+                    android:layout_height="@dimen/bheight"
+
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/btnfb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/facebook_icon"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/btntwt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/twitter_icon"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+                <ImageButton
+                    android:id="@+id/btninsta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/instagram_icon"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+                <ImageButton
+                    android:id="@+id/btnweb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/web_icon"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+                <ImageButton
+                    android:id="@+id/btnbl2"
+                    android:layout_width="@dimen/bwidth"
+                    android:layout_height="@dimen/bheight"
+
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Us"
+                android:id="@+id/textView18"
+                android:layout_gravity="center"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_margin="10dp">
+
+
+                <Button
+                    android:id="@+id/phn"
+                    android:layout_width="@dimen/bwidth"
+                    android:layout_height="@dimen/bheight"
+                    android:background="@drawable/phone_icon_orange"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_marginRight="10dp"
+                    />
+
+
+                <Button
+                    android:id="@+id/emailbtn"
+                    android:layout_width="@dimen/bwidth"
+                    android:layout_height="@dimen/bheight"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/email_icon_orange"
+                    android:layout_gravity="center_horizontal"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
