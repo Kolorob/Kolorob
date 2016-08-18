@@ -175,11 +175,11 @@ EditText feedback_comment;
 
         CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
         CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", financialNewItem.getFloor());
+        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
         CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
-        CheckConcate("রাস্তা  ", financialNewItem.getRoad());
-        CheckConcate("লাইন  ", financialNewItem.getLine());
-        CheckConcate("এভিনিউ  ", financialNewItem.getAvenue());
+        CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
+        CheckConcate("লাইন  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
+        CheckConcate("এভিনিউ  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
         CheckConcate("পোস্ট অফিস  ", financialNewItem.getPostoffice());
         CheckConcate("পুলিশ স্টেশন ", financialNewItem.getPolicestation());
 
