@@ -153,7 +153,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/5);
+        mlp.setMargins(width/100,0,width/990,width/8);
+
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);

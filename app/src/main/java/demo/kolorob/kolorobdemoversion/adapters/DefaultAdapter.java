@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class DefaultAdapter extends BaseAdapter
 {
@@ -67,10 +68,20 @@ public class DefaultAdapter extends BaseAdapter
         {
             convertView = inflater.inflate(R.layout.listview_vaccine, null);
             holder = new ViewHolder();
+
             holder.key = (TextView) convertView.findViewById(R.id.key);
             holder.value = (TextView) convertView.findViewById(R.id.value);
 
-
+            Double screenSize = AppUtils.ScreenSize(context);
+            if(screenSize>6.5)
+            {
+                holder.key.setTextSize(20);
+                holder.value.setTextSize(20);
+            }
+            else {
+                holder.key.setTextSize(16);
+                holder.value.setTextSize(16);
+            }
             convertView.setTag(holder);
         }
         else

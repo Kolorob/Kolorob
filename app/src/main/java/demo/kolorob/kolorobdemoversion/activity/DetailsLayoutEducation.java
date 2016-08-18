@@ -167,7 +167,7 @@ ArrayList<String>examname=new ArrayList<>();
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
 
-        mlp.setMargins(width/15,0,width/90,width/8);
+        mlp.setMargins(width/100,0,width/990,width/8);
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
