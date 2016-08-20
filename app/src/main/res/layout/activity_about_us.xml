@@ -15,8 +15,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
-
+        android:layout_height="100dp"
+android:layout_marginBottom="30dp"
 
 
         android:layout_weight="1">
@@ -25,6 +25,9 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            style="@style/scrollbar_shape_style"
+            android:fadeScrollbars="false"
+            android:scrollbarStyle="insideInset"
 
             android:id="@+id/scrollView4"
             android:scrollIndicators="right">
@@ -43,8 +46,8 @@
                     android:textSize="@dimen/feedbacktextsize"
                     android:id="@+id/aboutus"
                     android:textColor="#ffffff"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp" />
+                    
+                    android:layout_marginLeft="15dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,22 +73,23 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
 
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:weightSum="2"
         android:layout_weight="1">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Connect with us"
+            android:text="আমাদের সাথে যোগ দিন "
             android:id="@+id/connecttext"
+
             android:layout_gravity="center_horizontal|top"
-            android:textSize="@dimen/feedbacktextsize" />
+            android:textSize="@dimen/feedbacktextsize"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_weight="1"
-
-
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -95,8 +99,8 @@
 
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:weightSum="4"
-               android:layout_marginTop="10dp">
+
+              >
 
 
                 <ImageButton
@@ -137,7 +141,7 @@
                     android:layout_marginLeft="10dp"
 
                     android:background="@drawable/web_icon"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
 
                     />
 
@@ -149,22 +153,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact Us"
+                android:text="যোগাযোগ করুন"
+
                 android:id="@+id/textView18"
-                android:layout_gravity="center"
-                android:textSize="@dimen/feedbacktextsize" />
+                android:layout_gravity="center|bottom"
+                android:textSize="@dimen/feedbacktextsize"
+                android:layout_marginBottom="10dp"
+                android:layout_margin="5dp" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_weight="1"
+
+
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:weightSum="2"
@@ -175,12 +183,13 @@
                     android:id="@+id/btnphn"
                     android:layout_width="@dimen/bwidth"
                     android:layout_height="@dimen/bwidth"
-                    android:layout_marginLeft="10dp"
-
                     android:background="@drawable/phone_icon_orange"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
 
+                    android:layout_marginRight="10dp"
                     />
+
+
                 <ImageButton
                     android:id="@+id/btnemail"
                     android:layout_width="@dimen/bwidth"
@@ -188,9 +197,10 @@
                     android:layout_marginLeft="10dp"
 
                     android:background="@drawable/email_icon_orange"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
 
                     />
+
 
 
             </LinearLayout>
