@@ -46,7 +46,7 @@ android:layout_marginBottom="30dp"
                     android:textSize="@dimen/feedbacktextsize"
                     android:id="@+id/aboutus"
                     android:textColor="#ffffff"
-                    
+
                     android:layout_marginLeft="15dp" />
 
                 <TextView
