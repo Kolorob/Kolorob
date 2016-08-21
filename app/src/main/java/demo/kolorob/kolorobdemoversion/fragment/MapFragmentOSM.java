@@ -347,12 +347,12 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
                     ratingavg=et.getRating();
 
-                    ratingavg="পাওয়া যায় নি";
+
 
 
                     if((ratingavg.equals("null"))||(ratingavg.equals("")))
                     {
-
+                        ratingavg="পাওয়া যায় নি";
                     }
                     else  {
                         ratingavgbn=EtoBconversion(ratingavg);
@@ -459,7 +459,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 for (FinancialNewItem et : financialServiceProvider) {
 
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId2 = et.getRefnumm();
+                    subcategotyId2 = et.getSubref();
                     latDouble = Double.parseDouble(et.getLat());
                     longDouble = Double.parseDouble(et.getLon());
                     ratingavg=et.getRating();
