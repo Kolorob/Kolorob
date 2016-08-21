@@ -101,16 +101,7 @@ android:layout_marginBottom="30dp"
                 android:gravity="center"
 
               >
-                <ImageButton
-                    android:id="@+id/btntwt"
-                    android:layout_width="@dimen/bwidth"
-                    android:layout_height="@dimen/bwidth"
-                    android:layout_marginLeft="@dimen/aboutusleftpadding"
 
-                    android:background="@drawable/twitter_icon"
-                    android:layout_gravity="center_horizontal"
-
-                    />
 
                 <ImageButton
                     android:id="@+id/btnfb"
@@ -123,13 +114,22 @@ android:layout_marginBottom="30dp"
                     />
 
 
+                <ImageButton
+                    android:id="@+id/btntwt"
+                    android:layout_width="@dimen/bwidth"
+                    android:layout_height="@dimen/bwidth"
+                    android:layout_marginLeft="@dimen/aboutusleftpadding"
+                    android:layout_marginRight="@dimen/aboutusleftpadding"
+                    android:background="@drawable/twitter_icon"
+                    android:layout_gravity="center_horizontal"
 
+                    />
                 <ImageButton
                     android:id="@+id/btninsta"
                     android:layout_width="@dimen/bwidth"
                     android:layout_height="@dimen/bwidth"
                     android:layout_marginLeft="@dimen/aboutusleftpadding"
-
+                    android:layout_marginRight="@dimen/aboutusleftpadding"
                     android:background="@drawable/instagram_icon"
                     android:layout_gravity="center_horizontal"
 
@@ -156,7 +156,7 @@ android:layout_marginBottom="30dp"
                 android:text="যোগাযোগ করুন"
 
                 android:id="@+id/textView18"
-                android:layout_gravity="center|bottom"
+                android:layout_gravity="center_horizontal|top"
                 android:textSize="@dimen/feedbacktextsize"
                 android:layout_marginBottom="@dimen/aboutusbottompadding"
                 android:layout_margin="@dimen/aboutusallpadding" />
@@ -171,6 +171,7 @@ android:layout_marginBottom="30dp"
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/aboutustoppadding"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
