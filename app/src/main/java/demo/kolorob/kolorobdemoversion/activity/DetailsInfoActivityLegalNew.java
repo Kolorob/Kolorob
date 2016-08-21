@@ -146,7 +146,7 @@ public class DetailsInfoActivityLegalNew extends Activity {
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
         feedback = (ImageView) findViewById(R.id.feedback);
-        header=(TextView)findViewById(R.id.header);
+
         key = new String[600];
 
         value = new String[600];

@@ -29,36 +29,25 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:gravity="center"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/entertainment"/>
+                    android:background="@drawable/entertainment_white"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="29dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:id="@+id/headerx"
-                    android:layout_height="wrap_content"
-                    android:text="বিনোদন"/>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.25"
+                android:layout_weight="0.2"
                 android:gravity="right"
                 android:layout_height="wrap_content">
                 <ImageView

@@ -30,33 +30,28 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+
                     android:id="@+id/top_logo"
-                    android:background="@drawable/legal"/>
+                    android:background="@drawable/legal_white"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="match_parent"
-                android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="29dp"
-                    android:id="@+id/header"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:text="আইন কানুন"/>
-
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
