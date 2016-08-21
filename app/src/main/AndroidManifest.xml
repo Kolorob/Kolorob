@@ -11,7 +11,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".google_analytics.MyApplication"
         android:allowBackup="true"
@@ -26,7 +27,7 @@
             android:value="AIzaSyBN-XOOR5ERV-mk9Q5F5Mo9gJTXFQiXZro" />
 
         <activity
-            android:name="demo.kolorob.kolorobdemoversion.activity.SplashActivityNew"
+            android:name=".activity.SplashActivityNew"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -39,12 +40,10 @@
             android:name=".activity.OpeningActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
-
         <activity
             android:name=".activity.PlaceSelectionActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-             />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.NewEmergency"
             android:screenOrientation="portrait"
@@ -58,11 +57,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
 
-        <!--<activity-->
-            <!--android:name=".activity.LocationInstructionActivity"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/Theme.Transparent" />-->
-
+        <!-- <activity -->
+        <!-- android:name=".activity.LocationInstructionActivity" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@style/Theme.Transparent" /> -->
 
         <activity
             android:name=".activity.PlaceDetailsActivityNewLayout"
@@ -73,10 +71,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".activity.DisplayAllJobsActivity"
-             />
-
+        <activity android:name=".activity.DisplayAllJobsActivity" />
         <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
         <activity
             android:name=".activity.DetailsInfoActivityHealthNew"
@@ -98,7 +93,6 @@
             android:name=".fragment.MapFragmentRouteOSM"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />
         <activity android:name=".activity.FeedBackActivityNew" />
@@ -130,7 +124,10 @@
 
         <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
 
-
+        <activity
+            android:name=".activity.AboutUs"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
