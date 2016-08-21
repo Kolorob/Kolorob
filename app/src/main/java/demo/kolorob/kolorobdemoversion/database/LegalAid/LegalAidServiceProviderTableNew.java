@@ -541,12 +541,12 @@ public class LegalAidServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
-    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfoWithHead(int cat_id,String header) {
+    public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfoWithHead(String header,String place) {
         ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
         header=","+header+",";
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID + " LIKE '%"+header+"%'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID + " LIKE '%"+header+"%'" +" AND "+ KEY_AREA+" = '"+place+"'", null);
 
         if (cursor.moveToFirst()) {
             do {

@@ -388,7 +388,7 @@ public class FinancialServiceNewTable {
         return  nameslist;
     }
 
-    public ArrayList<FinancialNewItem> getAllFinancialSubCategoriesInfoWithHead(String header) {
+    public ArrayList<FinancialNewItem> getAllFinancialSubCategoriesInfoWithHead(String header,String place) {
 
 
         int[] k = new int[100];
@@ -406,7 +406,7 @@ public class FinancialServiceNewTable {
         }
         cursor.close();
 
-        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"'", null);
 
 
         if (cursor2.moveToFirst()) {
