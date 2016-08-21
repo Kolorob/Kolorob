@@ -581,6 +581,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
        }
+        else if (id == R.id.disclaimer) {
+
+            Intent em = new Intent(this, Disclaimer.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
 //         else if (id == R.id.local_representative) {
 //
 //           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
