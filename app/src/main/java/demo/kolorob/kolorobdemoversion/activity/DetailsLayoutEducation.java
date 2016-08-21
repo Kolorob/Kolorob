@@ -55,6 +55,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetails
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
@@ -324,6 +325,9 @@ ArrayList<String>examname=new ArrayList<>();
                 if (educationNewItem.getNode_email().equals("")||educationNewItem.getNode_email().equals("null")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
+                }
+                else{
+                    Helpes.sendEmail(DetailsLayoutEducation.this, educationNewItem.getNode_email());
                 }
             }
         });
