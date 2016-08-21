@@ -390,7 +390,7 @@ public class EducationNewTable {
         closeDB();
         return subCatList;
     }
-    public ArrayList<EducationNewItem> getAllEducationSubCategoriesInfoWithHead(String header) {
+    public ArrayList<EducationNewItem> getAllEducationSubCategoriesInfoWithHead(String header,String place) {
 
 
        // Log.d("cat_id","####"+cat_id);
@@ -410,7 +410,7 @@ public class EducationNewTable {
         }
         cursor.close();
 
-            Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+            Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"'" , null);
 
 
             if (cursor2.moveToFirst()) {

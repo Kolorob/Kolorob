@@ -2786,7 +2786,7 @@ TextView uptext;
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
-                            eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s));
+                            eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s),getLocationNameEng());
 
                         }
 
@@ -3029,14 +3029,14 @@ TextView uptext;
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header)
+    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header,String place)
 
     {
 
 
         ArrayList<EducationNewItem> educationNewItems;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
+        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header,place);
         return educationNewItems;
     }
 
