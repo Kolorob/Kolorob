@@ -34,6 +34,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -154,6 +155,7 @@ public class OpeningActivity extends Activity {
     private Toast t = null;
     static int countOfDBLocal = 0;
     byte[] bytes;
+    RelativeLayout mainLayout;
 
 
     public int getCountofDb() {
@@ -222,7 +224,8 @@ public class OpeningActivity extends Activity {
 
 
         context = this;
-
+        mainLayout =(RelativeLayout)findViewById(R.id.mainLayout);
+        mainLayout.setBackgroundResource(R.drawable.bg);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
@@ -360,14 +363,17 @@ public class OpeningActivity extends Activity {
             View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
 
 
+
             final Dialog alertDialog = new Dialog(OpeningActivity.this);
             alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             alertDialog.setContentView(promptView);
             alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            alertDialog.show();
 
+
+            alertDialog.show();
+            mainLayout.setBackgroundResource(R.drawable.bg);
 
             final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
             final ImageView no = (ImageView) promptView.findViewById(R.id.no);
