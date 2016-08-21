@@ -839,8 +839,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
     public void requestToRegister() {
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this);
-//        alertDialogBuilder.setView(promptView);
+
 
         final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
