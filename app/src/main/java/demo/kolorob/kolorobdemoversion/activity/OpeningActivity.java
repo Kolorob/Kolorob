@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +12,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,14 +24,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -345,72 +351,137 @@ public class OpeningActivity extends Activity {
                 //   pd.dismiss();
             }
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-            alertDialog.setTitle("আপনি কি তথ্য আপডেট করতে চান? ");
-            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            alertDialog.setCanceledOnTouchOutside(false);
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
 
-                            Log.e("open4",String.valueOf(getCountofDb()));
 
-                            Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
-                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                            startActivity(i);
 
-                            dialog.dismiss();
-                            finish();
-                        }
-                    });
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
 
-                            if (AppUtils.isNetConnected(getApplicationContext())) {
-                                countofDb=0 ;
-                                SharedPreferences settings = getSharedPreferences("prefs", 0);
-                                SharedPreferences.Editor editor = settings.edit();
-                                editor.putString("First", first);
-                                settings.edit().putLong("time", System.currentTimeMillis()).commit();
 
-                               editor.putInt("KValue", countofDb);
-                                editor.commit();
+            LayoutInflater layoutInflater = LayoutInflater.from(OpeningActivity.this);
+            View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+
+
+            final Dialog alertDialog = new Dialog(OpeningActivity.this);
+            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            alertDialog.setContentView(promptView);
+            alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.show();
+
+
+            final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+            final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+            final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+            String text="আপনি কি তথ্য আপডেট করতে চান? ";
+            textAsk.setText(text);
+            if(SharedPreferencesHelper.isTabletDevice(OpeningActivity.this))
+                textAsk.setTextSize(23);
+            else
+                textAsk.setTextSize(17);
+//            alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+            yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (AppUtils.isNetConnected(getApplicationContext())) {
+                        countofDb=0 ;
+                        SharedPreferences settings = getSharedPreferences("prefs", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString("First", first);
+                        settings.edit().putLong("time", System.currentTimeMillis()).commit();
+
+                        editor.putInt("KValue", countofDb);
+                        editor.commit();
 //                                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
 //                                pd.setIndeterminate(true);
 //                                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
 
 
-                                LoadData();
-                            } else {
-                                AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+                        LoadData();
+                    } else {
+                        AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
 
-                                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
-                                alertDialog.setCanceledOnTouchOutside(false);
-                                alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
-                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                                Log.e("open3",String.valueOf(countofDb));
-                                                Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
-                                                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                                                startActivity(i);
-                                                dialog.dismiss();
-                                                finish();
-                                            }
-                                        });
-                                alertDialog.show();
+                        alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।  ");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        Log.e("open3",String.valueOf(countofDb));
+                                        Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
+                                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                                        startActivity(i);
+                                        dialog.dismiss();
+                                        finish();
+                                    }
+                                });
+                        alertDialog.show();
 
 
-                            }
+                    }
+                    alertDialog.cancel();
 
-                        }
-                    });
+
+                }
+            });
+
+
+            no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("open4",String.valueOf(getCountofDb()));
+
+                    Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    startActivity(i);
+
+
+                    finish();
+                    alertDialog.cancel();
+
+                }
+            });
+            //   setup a dialog window
+            alertDialog.setCancelable(false);
+
 
             alertDialog.show();
-            alertDialog.setCanceledOnTouchOutside(false);
+
+
+
+
+
+
+
+
+
+//
+//            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+//            alertDialog.setTitle("আপনি কি তথ্য আপডেট করতে চান? ");
+//            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+//            alertDialog.setCanceledOnTouchOutside(false);
+//            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//
+//                        }
+//                    });
+//            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//
+//
+//
+//                        }
+//                    });
+//
+//            alertDialog.show();
+//            alertDialog.setCanceledOnTouchOutside(false);
         }
     }
     public void LoadData()
