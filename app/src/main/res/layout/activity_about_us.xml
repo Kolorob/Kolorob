@@ -8,14 +8,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="50dp"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/aboutusupheight"
         android:layout_weight="1">
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/aboutuscenterheight"
 android:layout_marginBottom="30dp"
 
 
@@ -24,7 +24,7 @@ android:layout_marginBottom="30dp"
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/aboutusscrollheight"
             style="@style/scrollbar_shape_style"
             android:fadeScrollbars="false"
             android:scrollbarStyle="insideInset"
@@ -73,7 +73,7 @@ android:layout_marginBottom="30dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
 
-        android:layout_height="70dp"
+        android:layout_height="@dimen/aboutuslowerheight"
         android:weightSum="2"
         android:layout_weight="1">
         <TextView
@@ -84,8 +84,8 @@ android:layout_marginBottom="30dp"
 
             android:layout_gravity="center_horizontal|top"
             android:textSize="@dimen/feedbacktextsize"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginBottom="@dimen/aboutusbottompadding"
+            android:layout_marginTop="@dimen/aboutustoppadding" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -101,7 +101,16 @@ android:layout_marginBottom="30dp"
                 android:gravity="center"
 
               >
+                <ImageButton
+                    android:id="@+id/btntwt"
+                    android:layout_width="@dimen/bwidth"
+                    android:layout_height="@dimen/bwidth"
+                    android:layout_marginLeft="@dimen/aboutusleftpadding"
 
+                    android:background="@drawable/twitter_icon"
+                    android:layout_gravity="center_horizontal"
+
+                    />
 
                 <ImageButton
                     android:id="@+id/btnfb"
@@ -110,25 +119,16 @@ android:layout_marginBottom="30dp"
                     android:background="@drawable/facebook_icon"
                     android:layout_gravity="center_horizontal"
 
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="@dimen/aboutusleftpadding"
                     />
 
 
-                <ImageButton
-                    android:id="@+id/btntwt"
-                    android:layout_width="@dimen/bwidth"
-                    android:layout_height="@dimen/bwidth"
-                    android:layout_marginLeft="10dp"
 
-                    android:background="@drawable/twitter_icon"
-                    android:layout_gravity="center_horizontal"
-
-                    />
                 <ImageButton
                     android:id="@+id/btninsta"
                     android:layout_width="@dimen/bwidth"
                     android:layout_height="@dimen/bwidth"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/aboutusleftpadding"
 
                     android:background="@drawable/instagram_icon"
                     android:layout_gravity="center_horizontal"
@@ -138,7 +138,7 @@ android:layout_marginBottom="30dp"
                     android:id="@+id/btnweb"
                     android:layout_width="@dimen/bwidth"
                     android:layout_height="@dimen/bwidth"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/aboutusleftpadding"
 
                     android:background="@drawable/web_icon"
                     android:layout_gravity="center"
@@ -158,8 +158,8 @@ android:layout_marginBottom="30dp"
                 android:id="@+id/textView18"
                 android:layout_gravity="center|bottom"
                 android:textSize="@dimen/feedbacktextsize"
-                android:layout_marginBottom="10dp"
-                android:layout_margin="5dp" />
+                android:layout_marginBottom="@dimen/aboutusbottompadding"
+                android:layout_margin="@dimen/aboutusallpadding" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -186,7 +186,7 @@ android:layout_marginBottom="30dp"
                     android:background="@drawable/phone_icon_orange"
                     android:layout_gravity="center_horizontal"
 
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="@dimen/aboutusleftpadding"
                     />
 
 
@@ -194,7 +194,7 @@ android:layout_marginBottom="30dp"
                     android:id="@+id/btnemail"
                     android:layout_width="@dimen/bwidth"
                     android:layout_height="@dimen/bwidth"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/aboutusleftpadding"
 
                     android:background="@drawable/email_icon_orange"
                     android:layout_gravity="center_horizontal"
