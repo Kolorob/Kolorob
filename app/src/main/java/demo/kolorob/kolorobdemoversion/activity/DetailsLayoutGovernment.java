@@ -691,7 +691,9 @@ public void setRatingBar()
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
 
-            if (hour >= 6 && hour < 12)
+            if (hour ==0 && times==0)
+                timeInBengali = "রাত ১২";
+            else if (hour >= 6 && hour < 12)
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour == 12)
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
