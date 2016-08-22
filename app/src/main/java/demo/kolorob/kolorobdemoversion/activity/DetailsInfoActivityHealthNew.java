@@ -859,7 +859,9 @@ public class DetailsInfoActivityHealthNew extends Activity {
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
 
-            if (hour >= 6 && hour < 12)
+            if (hour ==0 && times==0)
+                timeInBengali = "রাত ১২ টা";
+           else if (hour >= 6 && hour < 12)
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour == 12)
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
@@ -921,7 +923,7 @@ public class DetailsInfoActivityHealthNew extends Activity {
 
 
 
-        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")) {
+        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")&&!value2.equals(" টা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
