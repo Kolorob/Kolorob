@@ -890,7 +890,7 @@ ArrayList<String>examname=new ArrayList<>();
             int times = Integer.valueOf(separated[1]);
 
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২ টা";
+                timeInBengali = "রাত ১২";
             else if (hour >= 6 && hour < 12)
                 timeInBengali = "সকাল " + EtoB(String.valueOf(hour));
             else if (hour == 12)
