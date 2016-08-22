@@ -18,7 +18,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -78,8 +77,6 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
-import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
-import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
@@ -325,6 +322,7 @@ public class OpeningActivity extends Activity {
                 alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
                 alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
                 alertDialog.setCanceledOnTouchOutside(false);
+
                 alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
@@ -338,6 +336,9 @@ public class OpeningActivity extends Activity {
                             }
                         });
                 alertDialog.show();
+                WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                alertDialog.getWindow().setAttributes(lp);
             }
             else
 
@@ -365,14 +366,18 @@ public class OpeningActivity extends Activity {
 
 
             final Dialog alertDialog = new Dialog(OpeningActivity.this);
+
             alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             alertDialog.setContentView(promptView);
             alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
             alertDialog.show();
+            WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+            lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+            alertDialog.getWindow().setAttributes(lp);
+
+
             mainLayout.setBackgroundResource(R.drawable.bg);
 
             final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
