@@ -33,6 +33,7 @@ import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -138,14 +139,21 @@ public class DisplayAllJobsActivity extends Activity {
         for (int i = 0; i < joblistCount; i++) {
             try {
                 JSONObject jo = joblistArray.getJSONObject(i);
-                JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(i+1,jo);
 
-                //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
-                jobAdvertisementTable.insertItem(si);
-                // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
-                //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
-                progress.dismiss();
-                displayData();
+                if(!jo.equals(null))
+                {
+                    JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(i+1,jo);
+
+                    //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
+                    jobAdvertisementTable.insertItem(si);
+                    // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
+                    //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
+                    progress.dismiss();
+                    displayData();
+                }
+                else
+                    AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
+
 
 
 
