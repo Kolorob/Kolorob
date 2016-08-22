@@ -18,7 +18,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -78,8 +77,6 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProvider
 import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
-import demo.kolorob.kolorobdemoversion.helpers.AppDialogManager;
-import demo.kolorob.kolorobdemoversion.interfaces.RetryCallBackForNoInternet;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
@@ -357,6 +354,9 @@ public class OpeningActivity extends Activity {
                 alertDialog.setCancelable(false);
 //		if(SharedPreferencesHelper.isTabletDevice(c))
 //			textAsk.setTextSize(23);
+                WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                alertDialog.getWindow().setAttributes(lp);
 //		else
 //			textAsk.setTextSize(17);
                 alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -404,14 +404,18 @@ public class OpeningActivity extends Activity {
 
 
             final Dialog alertDialog = new Dialog(OpeningActivity.this);
+
             alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             alertDialog.setContentView(promptView);
             alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
             alertDialog.show();
+            WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+            lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+            alertDialog.getWindow().setAttributes(lp);
+
+
             mainLayout.setBackgroundResource(R.drawable.bg);
 
             final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);

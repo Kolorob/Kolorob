@@ -51,6 +51,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
@@ -228,6 +229,9 @@ EditText feedback_comment;
                 if (financialNewItem.getNode_email().equals("")||financialNewItem.getNode_email().equals("null")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
+                }
+                else{
+                    Helpes.sendEmail(DetailsLayoutFinance.this, financialNewItem.getNode_email());
                 }
             }
         });
