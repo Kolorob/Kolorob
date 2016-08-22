@@ -26,43 +26,58 @@
         android:id="@+id/upper"
         >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:background="@color/government_color"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"></LinearLayout>
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:gravity="center"
+                android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
                     android:id="@+id/top_logo"
-                    android:background="@drawable/government_t"/>
+                    android:background="@drawable/government_white"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/close_buttonc"
-                android:background="@drawable/cross_jb"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="29sp"
-                android:id="@+id/textView19"
-                android:text="@string/Government"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/close_buttonc"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/cross_jb"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    />
+            </LinearLayout>
 
 
-        </RelativeLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -158,7 +158,7 @@ ArrayList<String>examname=new ArrayList<>();
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText = (TextView) findViewById(R.id.ratingText);
 
-        close_button = (ImageView) findViewById(R.id.close_buttonc);
+        close_button = (ImageView) findViewById(R.id.cross_jb);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
         key = new String[600];
 
@@ -449,8 +449,8 @@ ArrayList<String>examname=new ArrayList<>();
         left_way.setLayoutParams(params_left_way);
 
 
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
+        top_logo.getLayoutParams().height = width / 10;
+        top_logo.getLayoutParams().width = width / 10;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
