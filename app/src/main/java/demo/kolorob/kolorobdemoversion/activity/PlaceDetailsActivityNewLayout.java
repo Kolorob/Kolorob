@@ -2786,7 +2786,7 @@ TextView uptext;
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
-                            eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s));
+                            eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s),getLocationNameEng());
 
                         }
 
@@ -2805,7 +2805,7 @@ TextView uptext;
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
-                            healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s));
+                            healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s),getLocationNameEng());
                         }
                         for (int ss=0;ss<healthItem.size();ss++)
                         {
@@ -2820,7 +2820,7 @@ TextView uptext;
                         for(int s=0;s<Headerholder.size();s++)
                         {
 
-                            entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s));
+                            entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s),getLocationNameEng());
 
                         }
                         for (int ss=0;ss<entItem.size();ss++)
@@ -2837,7 +2837,7 @@ TextView uptext;
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
-                            govItem=constructGovernmentListItemForHeader(cat_id, Headerholder.get(s));
+                            govItem=constructGovernmentListItemForHeader(Headerholder.get(s),getLocationNameEng());
 
                         }
 
@@ -2853,7 +2853,7 @@ TextView uptext;
                         Headerholder.add(si.getSubCatHeaderBn());
                         for(int s=0;s<Headerholder.size();s++)
                         {
-                            legalItem = constructlegalaidListItemForHeader(cat_id, Headerholder.get(s));
+                            legalItem = constructlegalaidListItemForHeader(Headerholder.get(s),getLocationNameEng());
                         }
                         for (int ss=0;ss<legalItem.size();ss++)
                         {
@@ -2866,7 +2866,7 @@ TextView uptext;
 
                         for(int s=0;s<Headerholder.size();s++)
                         {
-                            financialItem=constructFinancialListItemForHeader(cat_id, Headerholder.get(s));
+                            financialItem=constructFinancialListItemForHeader(Headerholder.get(s),getLocationNameEng());
 
                         }
 
@@ -3029,14 +3029,14 @@ TextView uptext;
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header)
+    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header,String place)
 
     {
 
 
         ArrayList<EducationNewItem> educationNewItems;
         EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header);
+        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header,place);
         return educationNewItems;
     }
 
@@ -3176,7 +3176,7 @@ TextView uptext;
         fragmentTransaction.replace(R.id.map_fragment,mapFragment);
         fragmentTransaction.commit();
     }
-    private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header)
+    private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header,String place)
     {
 
         ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
@@ -3187,8 +3187,8 @@ TextView uptext;
 
         String refIds=String.valueOf(refId);
 
-        healthServiceProvider1 = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead(cat_id, refIds);
+
+        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead( refIds,place);
         return healthServiceProvider;
     }
 
@@ -3218,7 +3218,7 @@ TextView uptext;
 
     }
 
-    private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItemForHeader(int cat_id, String header)
+    private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItemForHeader(int cat_id, String header,String place)
     {
         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
         ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider1;
@@ -3227,9 +3227,8 @@ TextView uptext;
         int refId=subCategoryTableNew.getSubcategoryId(header);
         String refIds=String.valueOf(refId);
 
-        entertainmentServiceProvider1 = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
 
-        entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(cat_id, refIds);
+        entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(refIds,place);
         return entertainmentServiceProvider;
     }
 
@@ -3245,11 +3244,11 @@ TextView uptext;
         return governmentNewItems;
     }
 
-    private ArrayList<GovernmentNewItem> constructGovernmentListItemForHeader(int cat_id, String header)
+    private ArrayList<GovernmentNewItem> constructGovernmentListItemForHeader( String header,String place)
     {
         ArrayList<GovernmentNewItem> governmentNewItems;
         GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfoWithHead(header);
+        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfoWithHead(header,place);
         return governmentNewItems;
     }
     private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
@@ -3294,14 +3293,14 @@ TextView uptext;
         return legalaidServiceProvider;
     }
 
-    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItemForHeader(int cat_id, String header)
+    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItemForHeader( String header,String place)
     {
         ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
         SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
         LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         int refId=subCategoryTableNew.getSubcategoryId(header);
         String refIds=String.valueOf(refId);
-        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(cat_id, refIds);
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfoWithHead(refIds,place);
         return legalaidServiceProvider;
     }
 
@@ -3332,11 +3331,11 @@ TextView uptext;
         financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo(getLocationNameEng());
         return financialNewItems;
     }
-    private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(int cat_id, String header)
+    private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(String header,String place)
     {
         ArrayList<FinancialNewItem> financialNewItems;
         FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(header);
+        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(header,place);
         return financialNewItems;
     }
     /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)

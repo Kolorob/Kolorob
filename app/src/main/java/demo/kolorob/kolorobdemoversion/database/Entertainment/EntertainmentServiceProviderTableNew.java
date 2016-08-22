@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -401,12 +400,12 @@ public class EntertainmentServiceProviderTableNew {
         closeDB();
         return subCatList;
     }
-    public ArrayList<EntertainmentServiceProviderItemNew> getAllEntertainmentSubCategoriesInfoWithHead(int cat_id, String header) {
+    public ArrayList<EntertainmentServiceProviderItemNew> getAllEntertainmentSubCategoriesInfoWithHead(String header,String place) {
         ArrayList<EntertainmentServiceProviderItemNew> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         header=","+header+",";
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID + " LIKE '%"+header+"%'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_CATEGORY_ID + " LIKE '%"+header+"%'"+" AND "+ KEY_AREA+" = '"+place+"'", null);
 
         if (cursor.moveToFirst()) {
             do {

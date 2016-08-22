@@ -367,7 +367,7 @@ public class GovernmentNewTable {
         closeDB();
         return  nameslist;
     }
-    public ArrayList<GovernmentNewItem> getAllGovSubCategoriesInfoWithHead(String header) {
+    public ArrayList<GovernmentNewItem> getAllGovSubCategoriesInfoWithHead(String header,String place) {
 
 
         int[] k = new int[100];
@@ -385,7 +385,7 @@ public class GovernmentNewTable {
         }
         cursor.close();
 
-        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+        Cursor cursor2 = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"'" , null);
 
 
         if (cursor2.moveToFirst()) {
