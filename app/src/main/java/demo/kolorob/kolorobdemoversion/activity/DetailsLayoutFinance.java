@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,7 +66,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 /**
  * Created by israt.jahan on 7/17/2016.
  */
-public class DetailsLayoutFinance extends Activity {
+public class DetailsLayoutFinance extends AppCompatActivity {
     Dialog dialog;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
