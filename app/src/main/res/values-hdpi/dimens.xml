@@ -43,8 +43,8 @@
 
     <dimen name="aboutusupheight"> 60dp </dimen>
     <dimen name="aboutuslowerheight"> 70dp </dimen>
-    <dimen name="aboutuscenterheight"> 100dp</dimen>
-    <dimen name="aboutusscrollheight">200dp  </dimen>
+    <dimen name="aboutuscenterheight"> 100dp </dimen>
+    <dimen name="aboutusscrollheight"> 200dp  </dimen>
     <dimen name="aboutusleftpadding"> 10dp </dimen>
     <dimen name="aboutusallpadding"> 5dp </dimen>
     <dimen name="aboutustoppadding"> 10dp </dimen>
