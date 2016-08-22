@@ -37,4 +37,6 @@ dependencies {
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.7.12'
     compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+
 }
