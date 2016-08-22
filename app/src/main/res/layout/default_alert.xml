@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="5dp"
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
     android:background="@drawable/rounded"
@@ -46,22 +46,19 @@
 
    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/verify_registration"
-        android:id="@+id/body" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/orange"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:layout_marginBottom="5dp"
-        android:layout_height="3dp">
-
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/verify_registration"
+            android:id="@+id/body" />
 
 
     </LinearLayout>
@@ -69,9 +66,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="15dp"
 
-        android:layout_marginBottom="10dp"
 
         android:layout_height="wrap_content">
         <ImageView
