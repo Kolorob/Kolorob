@@ -2,17 +2,23 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -36,6 +42,7 @@ import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -62,46 +69,101 @@ public class DisplayAllJobsActivity extends Activity {
 
 
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("আপনি কি নতুন চাকুরি খুজতে চান? ");
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
 
-                        displayData();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        alertDialog.cancel();
-                        progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
-                                "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
+        LayoutInflater layoutInflater = LayoutInflater.from(DisplayAllJobsActivity.this);
+        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
 
-                        getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
-                                    @Override
-                                    public void onResponse(int status, String apiContent) {
-                                        if (status == AppConstants.SUCCESS_CODE) {
-                                            try {
-                                                JSONObject jo = new JSONObject(apiContent);
-                                                String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                                if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                                    SaveNewJobs(jo.getJSONArray(AppConstants.KEY_DATA));
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
+
+        final Dialog alertDialog = new Dialog(DisplayAllJobsActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+
+        final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+        final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+        final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+        String text="আপনি কি নতুন চাকুরি খুজতে চান? ";
+        textAsk.setText(text);
+        WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+        lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+        alertDialog.getWindow().setAttributes(lp);
+        if(SharedPreferencesHelper.isTabletDevice(DisplayAllJobsActivity.this))
+            textAsk.setTextSize(23);
+        else
+            textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.cancel();
+                progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
+                        "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
+
+                getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
+                            @Override
+                            public void onResponse(int status, String apiContent) {
+                                if (status == AppConstants.SUCCESS_CODE) {
+                                    try {
+                                        JSONObject jo = new JSONObject(apiContent);
+                                        String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                        if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                            SaveNewJobs(jo.getJSONArray(AppConstants.KEY_DATA));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
                                 }
-                        );
+                            }
+                        }
+                );
+
+            }
+        });
 
 
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+                displayData();
 
-                    }
-                });
+            }
+        });
+        //   setup a dialog window
+        alertDialog.setCancelable(false);
+
 
         alertDialog.show();
+
+
+
+
+
+//        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+//        alertDialog.setTitle("আপনি কি নতুন চাকুরি খুজতে চান? ");
+//
+//        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//
+//                    }
+//                });
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//
+//
+//
+//                    }
+//                });
+//
+//        alertDialog.show();
 
         close_button=(ImageView)findViewById(R.id.iv_close);
         iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
