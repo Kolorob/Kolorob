@@ -2335,17 +2335,19 @@ TextView uptext;
 
                         toolbar.setVisibility(View.VISIBLE);
                         if (governmentNewItems.size()==0) {
-                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
 
-                            alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                            alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            alertDialog2.dismiss();
-                                        }
-                                    });
-                            alertDialog2.getWindow().setLayout(200, 300);
-                            alertDialog2.show();
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
+//                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+//
+//                            alertDialog2.setMessage("");
+//                            alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+//                                    new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            alertDialog2.dismiss();
+//                                        }
+//                                    });
+//                            alertDialog2.getWindow().setLayout(200, 300);
+//                            alertDialog2.show();
                         }
                         break;
                     case AppConstants.LEGAL:

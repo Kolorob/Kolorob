@@ -46,7 +46,6 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:id="@+id/top_logo"
                     android:background="@drawable/education_white"/>
 
@@ -135,15 +134,14 @@
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="?android:attr/ratingBarStyleIndicator"
+                            android:theme="@style/RatingBar"
+                            android:isIndicator="true"
 
-                            android:scaleX="0.9"
-                            android:scaleY="0.9"
-
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
                             android:numStars="5"
                             android:stepSize="0"
-                            android:rating="0"
-                          />
+                            android:rating="0" />
 
                     </LinearLayout>
 
