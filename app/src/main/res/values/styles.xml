@@ -13,6 +13,9 @@
     </style>
 
 
+
+
+
     <style name="scrollbar_shape_style">
         <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>

@@ -72,7 +72,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".activity.DisplayAllJobsActivity" />
-        <activity android:name=".activity.DetailsInfoActivityEntertainmentNew" />
+        <activity android:name=".activity.DetailsInfoActivityEntertainmentNew"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.DetailsInfoActivityHealthNew"
             android:screenOrientation="portrait"

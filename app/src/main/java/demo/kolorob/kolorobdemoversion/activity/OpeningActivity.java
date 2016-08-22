@@ -322,22 +322,60 @@ public class OpeningActivity extends Activity {
 
 
             if(!AppUtils.isNetConnected(getApplicationContext())) {
-                alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
-                alertDialog.setCanceledOnTouchOutside(false);
-                alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                SharedPreferences settings = getSharedPreferences("prefs", 0);
-                                SharedPreferences.Editor editor = settings.edit();
-                                editor.putBoolean("firstRun", false);
-                                editor.commit();
-                                finish();
-                            }
-                        });
+
+
+                LayoutInflater layoutInflater = LayoutInflater.from(this);
+                View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+                final Dialog alertDialog = new Dialog(this);
+                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                alertDialog.setContentView(promptView);
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialog.show();
+
+
+                final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+                header.setText("ইন্টারনেট সংযোগ সচল নয়");
+                bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+
+                okay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.cancel();
+                        SharedPreferences settings = getSharedPreferences("prefs", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putBoolean("firstRun", false);
+                        editor.commit();
+                        finish();
+                    }
+                });
+
+                alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+
+
+//                alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
+//                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
+//                alertDialog.setCanceledOnTouchOutside(false);
+//                alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+//                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//
+//                            }
+//                        });
+//                alertDialog.show();
             }
             else
 

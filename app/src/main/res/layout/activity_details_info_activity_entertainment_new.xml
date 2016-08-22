@@ -117,7 +117,8 @@
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="?android:attr/ratingBarStyleIndicator"
+                            android:progressTint="@color/orange"
+                            android:theme="@style/RatingBar"
 
                             android:scaleX="0.9"
                             android:scaleY="0.9"
