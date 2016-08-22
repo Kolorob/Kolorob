@@ -340,6 +340,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
         RoadManager roadManager=new OSRMRoadManager(this);
 
+
         Road road = roadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

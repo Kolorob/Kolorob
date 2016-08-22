@@ -38,14 +38,16 @@
     <dimen name="fifthstarspace">30dp</dimen>
     <dimen name="feedbacktextsize">25dp</dimen>
     <dimen name="feedbackalltext">25dp</dimen>
-    <dimen name="bwidth">50dp</dimen>
-    <dimen name="bheight">50dp</dimen>
+    <dimen name="bwidth">40dp</dimen>
+    <dimen name="bheight">40dp</dimen>
 
-    <dimen name="aboutusupheight"> 60dp </dimen>
-    <dimen name="aboutuslowerheight"> 70dp </dimen>
-    <dimen name="aboutuscenterheight"> 100dp </dimen>
-    <dimen name="aboutusscrollheight"> 200dp  </dimen>
-    <dimen name="aboutusleftpadding"> 10dp </dimen>
-    <dimen name="aboutusallpadding"> 5dp </dimen>
-    <dimen name="aboutustoppadding"> 10dp </dimen>
+    <dimen name="abttext">15dp</dimen>
+    <dimen name="aboutusupheight">65dp</dimen>
+    <dimen name="aboutuslowerheight">80dp</dimen>
+    <dimen name="aboutuscenterheight">120dp</dimen>
+    <dimen name="aboutusscrollheight">190dp</dimen>
+    <dimen name="aboutusleftpadding">10dp</dimen>
+    <dimen name="aboutusallpadding">5dp</dimen>
+    <dimen name="aboutustoppadding">5dp</dimen>
+    <dimen name="aboutusbottompadding">5dp</dimen>
 </resources>
