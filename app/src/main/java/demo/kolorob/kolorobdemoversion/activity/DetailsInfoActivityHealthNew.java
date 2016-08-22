@@ -387,8 +387,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         left_way.setLayoutParams(params_left_way);
 
 
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
+        top_logo.getLayoutParams().height = width / 10;
+        top_logo.getLayoutParams().width = width / 10;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
@@ -399,8 +399,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         right_image.getLayoutParams().height = width / 8;
         right_image.getLayoutParams().width = width / 8;
 
-        left_image.getLayoutParams().height = width / 10;
-        left_image.getLayoutParams().width = width / 10;
+        left_image.getLayoutParams().height = width / 8;
+        left_image.getLayoutParams().width = width / 8;
 
 //        school_logo_default.getLayoutParams().height = width / 5;
 //        school_logo_default.getLayoutParams().width = width / 5;
