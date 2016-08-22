@@ -1955,6 +1955,13 @@ TextView uptext;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.disclaimer) {
+
+            Intent em = new Intent(this, Disclaimer.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
 //        else if (id == R.id.info_change) {
 //
 //            Intent em = new Intent(this, Information_UpdateActivity.class);
