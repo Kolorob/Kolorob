@@ -39,7 +39,7 @@
         <activity
             android:name=".activity.OpeningActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.PlaceSelectionActivity"
             android:screenOrientation="portrait"

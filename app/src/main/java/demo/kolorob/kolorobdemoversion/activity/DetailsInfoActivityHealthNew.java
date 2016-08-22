@@ -399,8 +399,8 @@ public class DetailsInfoActivityHealthNew extends Activity {
         right_image.getLayoutParams().height = width / 8;
         right_image.getLayoutParams().width = width / 8;
 
-        left_image.getLayoutParams().height = width / 8;
-        left_image.getLayoutParams().width = width / 8;
+        left_image.getLayoutParams().height = width / 10;
+        left_image.getLayoutParams().width = width / 10;
 
 //        school_logo_default.getLayoutParams().height = width / 5;
 //        school_logo_default.getLayoutParams().width = width / 5;

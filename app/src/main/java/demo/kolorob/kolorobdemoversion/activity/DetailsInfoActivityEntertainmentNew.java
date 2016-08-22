@@ -148,7 +148,7 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
 
-        headerx=(TextView)findViewById(R.id.headerx);
+       // headerx=(TextView)findViewById(R.id.headerx);
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
@@ -220,8 +220,8 @@ public class DetailsInfoActivityEntertainmentNew extends Activity {
 
 
 
-        top_logo.getLayoutParams().height=width/8;
-        top_logo.getLayoutParams().width=width/8;
+        top_logo.getLayoutParams().height=width/10;
+        top_logo.getLayoutParams().width=width/10;
 
         middle_image.getLayoutParams().height=width/8;
         middle_image.getLayoutParams().width=width/8;
