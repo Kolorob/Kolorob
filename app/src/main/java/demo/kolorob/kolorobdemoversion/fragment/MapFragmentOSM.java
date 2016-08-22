@@ -368,7 +368,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             case AppConstants.ENTERTAINMENT:
                 for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getCategoryId();
+                    String subcategotyId = et.getNodeAdditional();
                     latDouble = Double.parseDouble(et.getLatitude());
                     longDouble = Double.parseDouble(et.getLongitude());
                     ratingavg=et.getRating();
@@ -676,21 +676,21 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         String[] separated = CurrentString.split(",");
         for (int i=0;i<separated.length;i++) {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId == 129)
+            if (subcategotyId == 130)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId == 131)
+            else if (subcategotyId == 19||subcategotyId == 22||subcategotyId == 114)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            else if (subcategotyId == 106)
+            else if (subcategotyId == 113)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-            else if (subcategotyId == 15)
+            else if (subcategotyId == 24||subcategotyId == 111||subcategotyId == 115||subcategotyId == 116||subcategotyId == 141)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-            else if (subcategotyId == 18)
+            else if (subcategotyId == 28||subcategotyId == 45||subcategotyId == 168)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
-            else if (subcategotyId == 112)
+            else if (subcategotyId == 132||subcategotyId == 166||subcategotyId == 169)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
-            else if (subcategotyId == 23)
+            else if (subcategotyId == 107)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_7));
-            else if (subcategotyId == 27)
+            else if (subcategotyId == 16||subcategotyId == 17||subcategotyId == 110||subcategotyId == 167)
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
         }
 
