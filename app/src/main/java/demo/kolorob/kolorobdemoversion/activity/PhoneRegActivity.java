@@ -3,13 +3,21 @@ package demo.kolorob.kolorobdemoversion.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -50,6 +58,8 @@ public class PhoneRegActivity extends Activity {
     private TextView itemType;
     private TextView itemContact;
     private String phoneNumber;
+    private int width;
+    private int height;
 
     private EditText phone;
     private EditText name;
@@ -72,7 +82,9 @@ public class PhoneRegActivity extends Activity {
 
 
         con = this;
-
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
 
     }
 
@@ -114,25 +126,96 @@ public class PhoneRegActivity extends Activity {
 
                             if(response.equals("true"))
                             {
-                                Log.d("######","status "+response);
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
-                                AlertDialog alertDialog = new AlertDialog.Builder(PhoneRegActivity.this).create();
-                                alertDialog.setTitle("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
-                                alertDialog.setMessage("নিবন্ধন করার জন্য আপনাকে ধন্যবাদ");
-                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "আচ্ছা",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
+
+                                LayoutInflater layoutInflater = LayoutInflater.from(PhoneRegActivity.this);
+                                View promptView = layoutInflater.inflate(R.layout.default_alert, null);
 
 
-                                                finish();
-                                            }
-                                        });
+                                final Dialog alertDialog = new Dialog(PhoneRegActivity.this);
+                                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                alertDialog.setContentView(promptView);
+                                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 alertDialog.show();
+
+
+                                final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                                final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                                final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+                                header.setText("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
+                                bodys.setText(" নিবন্ধন করার জন্য আপনাকে ধন্যবাদ ");
+
+                                okay.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        //alertDialog.cancel();
+
+                                        finish();
+                                    }
+                                });
+
+                                alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+                                WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+                                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                                alertDialog.getWindow().setAttributes(lp);
+//		else
+//			textAsk.setTextSize(17);
+                                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+
+
                             }
                             else
                             {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
+
+
+
+                                LayoutInflater layoutInflater = LayoutInflater.from(PhoneRegActivity.this);
+                                View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+                                final Dialog alertDialog = new Dialog(PhoneRegActivity.this);
+                                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                alertDialog.setContentView(promptView);
+                                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                alertDialog.show();
+
+
+                                final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                                final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                                final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+                                header.setText("নিবন্ধনটি সফলভাবে সম্পন্ন হয়ে নি");
+                                bodys.setText(" আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
+
+                                okay.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        alertDialog.cancel();
+
+                                        finish();
+                                    }
+                                });
+
+                                alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+                                WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+                                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                                alertDialog.getWindow().setAttributes(lp);
+//		else
+//			textAsk.setTextSize(17);
+                                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+
+
+
                                 AlertMessage.showMessage(PhoneRegActivity.this, "নিবন্ধনটি সফলভাবে সম্পন্ন হয়ে নি",
                                         "আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
                             }
