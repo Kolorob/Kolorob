@@ -490,12 +490,6 @@ public class OpeningActivity extends Activity {
 //			textAsk.setTextSize(17);
                         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
-
-
-
-
-
-
                     }
                     alertDialog.cancel();
 
@@ -549,9 +543,6 @@ public class OpeningActivity extends Activity {
 //                    new DialogInterface.OnClickListener() {
 //                        public void onClick(DialogInterface dialog, int which) {
 //                            dialog.dismiss();
-//
-//
-//
 //                        }
 //                    });
 //
@@ -628,6 +619,7 @@ public class OpeningActivity extends Activity {
                 NUMBER_OF_TASKS = 1;
 
                 new SaveSQL(OpeningActivity.this).execute("1");
+
 
 
                 //first third
@@ -1318,7 +1310,38 @@ public class OpeningActivity extends Activity {
 
             String query="";
 
-            while(DatabaseHelper.sql==null);
+            int tmr = 20;
+            while(DatabaseHelper.sql==null){
+
+                //if 10 msec passed make another attempt
+                if(tmr==10){
+                    getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                                @Override
+                                public void onResponse(int status, String apiContent) {
+                                    if (status == AppConstants.SUCCESS_CODE) {
+                                        DatabaseHelper.sql = apiContent;
+                                    }
+                                }
+                            }
+                    );
+                }
+                //if 20 secons passed end it!!
+                if(tmr<0){
+                    //two possible options
+                    //either it is the first time in that case close app
+                    //or continue with the app... not done
+
+                    return new Long(0);
+                }
+
+                tmr--;
+                try {
+                    Thread.sleep(1000);
+                }catch (Exception e){
+                    continue;
+                }
+
+            }
             query = DatabaseHelper.sql;
 
             //ge the db instance
