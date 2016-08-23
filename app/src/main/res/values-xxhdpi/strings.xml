@@ -49,7 +49,7 @@
     <string name="feedback3">ঠিক আছে  </string>
     <string name="feedback4">সন্তুষ্ট </string>
     <string name="feedback5">খুবই সন্তুষ্ট</string>
-
+    <string name="interstitial_kolorob">ca-app-pub-9079587410696304/9489035875</string>
 
     <string name="title_activity_review">ReviewActivity</string>
     <string name="title_activity_feedback">FeedbackActivity</string>
