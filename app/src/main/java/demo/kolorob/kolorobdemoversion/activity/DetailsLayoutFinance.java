@@ -291,8 +291,8 @@ EditText feedback_comment;
         ups_text.setText(financialNewItem.getNamebn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 6;
-        feedbacks.width = width / 6;
+        feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
       //  feedbacks.setMargins(0, 0, width / 30, 0);
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
