@@ -24,7 +24,7 @@
             <!--android:title="@string/know_adv" />-->
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="অন্যান্য">
         <menu>
             <item
                 android:id="@+id/emergency_info"
