@@ -864,9 +864,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityEntertainmentNew.this, PhoneRegActivity.class);
                 alertDialog.cancel();
+                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityEntertainmentNew.this, PhoneRegActivity.class);
+
                 startActivity(intentPhoneRegistration);
 
             }

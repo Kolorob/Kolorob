@@ -253,7 +253,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
 
                 CheckConcate("আইন পরামর্শ", leagalAidDetailsItem.getSub_type());
-                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost()+" টাকা"));
+                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" টাকা");
                 CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
             }
 
@@ -266,8 +266,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
         CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
         CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
-        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getArea());
-        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
+         CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
         CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
 
         CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
@@ -798,7 +797,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
 
-        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")&&!value2.equals(" ০")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
