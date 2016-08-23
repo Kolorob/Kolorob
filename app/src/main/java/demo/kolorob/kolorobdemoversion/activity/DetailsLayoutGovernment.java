@@ -286,8 +286,8 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         ups_text.setText(governmentNewItem.getNamebn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 6;
-        feedbacks.width = width / 6;
+        feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
 
         middle_image.setOnClickListener(new View.OnClickListener() {
