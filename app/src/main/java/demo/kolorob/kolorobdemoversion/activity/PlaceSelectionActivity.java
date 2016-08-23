@@ -169,6 +169,22 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             public void onAdLoaded() {
                 showInterstitial();
             }
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
         });
 
 
