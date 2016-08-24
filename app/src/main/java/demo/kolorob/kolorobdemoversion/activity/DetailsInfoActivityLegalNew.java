@@ -202,8 +202,8 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
 
-        top_logo.getLayoutParams().height=width/8;
-        top_logo.getLayoutParams().width=width/8;
+        top_logo.getLayoutParams().height = width / 8;
+        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height=width/8;
         middle_image.getLayoutParams().width=width/8;

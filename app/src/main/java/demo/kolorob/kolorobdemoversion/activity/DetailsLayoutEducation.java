@@ -450,8 +450,8 @@ ArrayList<String>examname=new ArrayList<>();
         left_way.setLayoutParams(params_left_way);
 
 
-        top_logo.getLayoutParams().height = width / 10;
-        top_logo.getLayoutParams().width = width / 10;
+        top_logo.getLayoutParams().height = width / 8;
+        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
