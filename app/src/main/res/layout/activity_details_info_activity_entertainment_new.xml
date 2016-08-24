@@ -83,8 +83,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/upperText"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
                     android:orientation="vertical"
 
                     android:gravity="center">
@@ -103,7 +101,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_marginRight="8dp"
                         android:layout_marginLeft="8dp"
                         android:gravity="center">
                         <TextView
@@ -113,18 +110,22 @@
                             android:textSize="23sp"
                             android:id="@+id/ratingText"
                             android:text="রেটিং: "/>
+
                         <RatingBar
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:theme="@style/RatingBar"
-                            android:isIndicator="true"
 
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
                             android:numStars="5"
-                            android:stepSize="0"
+                            android:transformPivotX="0dp"
+                            android:transformPivotY="28dp"
+                            android:stepSize="0.1"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
+
                             android:rating="0" />
+
 
                     </LinearLayout>
 
