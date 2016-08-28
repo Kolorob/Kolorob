@@ -111,6 +111,7 @@
     <string name="title_activity_about_us">AboutUs</string>
     <string name="disclaimerhead"> পূর্ব ঘোষণা </string>
     <string name="abouthead"> কলরবের পরিচয় </string>
+    <string name="interstitial_kolorob">ca-app-pub-9079587410696304/9489035875</string>
 
     <string name="disclaimertext"> Kolorob provides Kolorob Application as a service to the public.
     Kolorob is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the application. While the information contained within the application is periodically updated, no guarantee is given that the information provided in this application is 100 % correct, complete, and up-to-date.

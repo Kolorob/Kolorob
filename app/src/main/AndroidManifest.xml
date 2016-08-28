@@ -127,12 +127,12 @@
 
         <activity
             android:name=".activity.AboutUs"
-            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".activity.Disclaimer"
-
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
