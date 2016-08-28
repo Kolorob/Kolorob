@@ -1263,7 +1263,7 @@ TextView uptext;
                 quality_equipment3.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost()));
+                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+ " টাকা");
             else
                 cost3.setText("শীঘ্রই আসছে");
         }
@@ -1395,7 +1395,7 @@ TextView uptext;
                 quality_equipment2.setText("শীঘ্রই আসছে");
 
             if(!healthServiceProviderItemNewx.getGeneral_cost().equals("")&&!healthServiceProviderItemNewx.getGeneral_cost().equalsIgnoreCase("null"))
-                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNewx.getGeneral_cost()));
+                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNewx.getGeneral_cost())+ " টাকা");
             else
                 cost2.setText("শীঘ্রই আসছে");
 
