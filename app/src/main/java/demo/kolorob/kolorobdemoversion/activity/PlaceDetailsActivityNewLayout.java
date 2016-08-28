@@ -1481,57 +1481,57 @@ TextView uptext;
 
 
 
-            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
+            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
                 edu_name_ban22.setText("শীঘ্রই আসছে ");
             else
                 edu_name_ban22.setText(educationNewItem.getNamebn());
 
-            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null"))
+            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
                 edtype.setText("শীঘ্রই আসছে ");
             else
                 edtype.setText(educationNewItem.getEdtype());
 
-            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null"))
+            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
                 hostel_facility.setText("শীঘ্রই আসছে "); //center type
             else
-                hostel_facility.setText(educationNewItem.getFloor());
+                hostel_facility.setText(English_to_bengali_number_conversion(educationNewItem.getFloor()));
 
-            if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null"))
+            if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
                 transport_facility.setText("শীঘ্রই আসছে");
             else
                 transport_facility.setText(educationNewItem.getLandmark());//done
 
-            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null"))
+            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null")|| educationNewItem.getAveragestudent().equals(""))
                 playground.setText("শীঘ্রই আসছে ");
             else
-                playground.setText(educationNewItem.getAveragestudent()); //done
+                playground.setText(English_to_bengali_number_conversion(educationNewItem.getAveragestudent())+ " জন"); //done
 
-            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null"))
+            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
                 total_students.setText("শীঘ্রই আসছে ");
             else
-                total_students.setText(String.valueOf(educationNewItem.getStudentno()));
+                total_students.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno()))+" জন");
 
-            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null"))
+            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
                 total_classes.setText("শীঘ্রই আসছে ");
             else
-                total_classes.setText(String.valueOf(educationNewItem.getClassno()));
+                total_classes.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getClassno()))+ " টি");
 
-            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null"))
+            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null")|| educationNewItem.getTeachersno().equals(""))
                 total_teachers.setText("শীঘ্রই আসছে ");
             else
-                total_teachers.setText(String.valueOf(educationNewItem.getTeachersno()));
+                total_teachers.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getTeachersno()))+ " জন");
 
-            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null"))
+            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null")|| educationNewItem.getWatercondition().equals(""))
                 course_provided.setText("শীঘ্রই আসছে ");
             else
                 course_provided.setText(educationNewItem.getWatercondition());
 
-            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null"))
+            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null")|| educationNewItem.getShift().equals(""))
                 shift.setText("শীঘ্রই আসছে ");
             else
                 shift.setText(educationNewItem.getShift());
 
-            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null"))
+            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
                 canteen_facility.setText("শীঘ্রই আসছে ");
             else
                 canteen_facility.setText(educationNewItem.getWatersource());
@@ -1599,57 +1599,57 @@ TextView uptext;
 
 
 
-            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null"))
+            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
                 edu_name_ban.setText("শীঘ্রই আসছে ");
             else
                 edu_name_ban.setText(educationNewItem.getNamebn());
 
-            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null"))
+            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
                 edtype1.setText("শীঘ্রই আসছে ");
             else
                 edtype1.setText(educationNewItem.getEdtype());
 
-            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null"))
+            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
                 hostel_facility1.setText("শীঘ্রই আসছে ");
             else
-                hostel_facility1.setText(educationNewItem.getFloor());
+                hostel_facility1.setText(English_to_bengali_number_conversion(educationNewItem.getFloor()));
 
-            if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null"))
+            if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
                 transport_facility1.setText("শীঘ্রই আসছে ");
             else
                 transport_facility1.setText(educationNewItem.getLandmark());
 
-            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null"))
+            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null")|| educationNewItem.getAveragestudent().equals(""))
                 playground1.setText("শীঘ্রই আসছে ");
             else
-                playground1.setText(educationNewItem.getAveragestudent());
+                playground1.setText(English_to_bengali_number_conversion(educationNewItem.getAveragestudent())+ " জন");
 
-            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null"))
+            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
                 total_students1.setText("শীঘ্রই আসছে ");
             else
-                total_students1.setText(String.valueOf(educationNewItem.getStudentno()));
+                total_students1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())));
 
-            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null"))
+            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
                 total_classes1.setText("শীঘ্রই আসছে ");
             else
-                total_classes1.setText(String.valueOf(educationNewItem.getClassno()));
+                total_classes1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getClassno()))+ " টি");
 
-            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null"))
+            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null")|| educationNewItem.getTeachersno().equals(""))
                 total_teachers1.setText("শীঘ্রই আসছে ");
             else
-                total_teachers1.setText(String.valueOf(educationNewItem.getTeachersno()));
+                total_teachers1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getTeachersno()))+ " জন");
 
-            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null"))
+            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null")|| educationNewItem.getWatercondition().equals(""))
                 course_provided1.setText("শীঘ্রই আসছে ");
             else
                 course_provided1.setText(educationNewItem.getWatercondition());
 
-            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null"))
+            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null")|| educationNewItem.getShift().equals(""))
                 shift1.setText("শীঘ্রই আসছে ");
             else
                 shift1.setText(educationNewItem.getShift());
 
-            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null"))
+            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
                 canteen_facility1.setText("শীঘ্রই আসছে ");
             else
                 canteen_facility1.setText(educationNewItem.getWatersource());
