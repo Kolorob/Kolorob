@@ -365,16 +365,20 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 else
                 {
 
-                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutGovernment.this, AlertDialog.THEME_HOLO_LIGHT).create();
-                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+
+                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
+                                    "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+
+//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutGovernment.this, AlertDialog.THEME_HOLO_LIGHT).create();
+//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
+//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
+//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                    alertDialog.show();
 
                 }
 

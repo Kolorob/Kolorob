@@ -1063,7 +1063,19 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listbutton"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/list"
 
+
+                    android:layout_toRightOf="@+id/mapbutton"
+                    android:layout_toEndOf="@+id/mapbutton"
+                    android:layout_gravity="bottom" />
 
 
                 <ImageButton
@@ -1094,19 +1106,7 @@
                     android:layout_toEndOf="@+id/searchbutton"
                     android:layout_gravity="bottom" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listbutton"
-                    android:adjustViewBounds="true"
-                    android:layout_alignParentBottom="true"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/list"
 
-
-                    android:layout_toRightOf="@+id/mapbutton"
-                    android:layout_toEndOf="@+id/mapbutton"
-                    android:layout_gravity="bottom" />
             </LinearLayout>
 
         </RelativeLayout>

@@ -57,6 +57,7 @@ import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -343,16 +344,19 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
         Road road = roadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("দুঃখিত! যান্ত্রিক গোলযোগের কারনে পথ দেখানো সম্ভব  হচ্ছে না। দয়া করে কিছুক্ষণ পরে চেষ্টা করুন!")
-                    .setCancelable(false)
-                    .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //do things
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+
+            AlertMessage.showMessage(this,"দুঃখিত!"," যান্ত্রিক গোলযোগের কারনে পথ দেখানো সম্ভব  হচ্ছে না। দয়া করে কিছুক্ষণ পরে চেষ্টা করুন!");
+
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage("দুঃখিত! যান্ত্রিক গোলযোগের কারনে পথ দেখানো সম্ভব  হচ্ছে না। দয়া করে কিছুক্ষণ পরে চেষ্টা করুন!")
+//                    .setCancelable(false)
+//                    .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            //do things
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
 
         }
         else {
