@@ -98,7 +98,6 @@ import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 /**
  * Created by touhid on 12/3/15.
@@ -121,7 +120,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     }
     ToggleButton toggleButton;
     private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
-    private static final int ANIM_INTERVAL = 200;
+    private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,mapnother,listholder,explist,svholder,svsholder;
@@ -2955,7 +2954,7 @@ int index;
                 constructSubCategoryList(subCatList, 1.0, cat_id);
             }
         }, ANIM_INTERVAL *
-                (int) (150 *
+                (int) (50 *
                         (AppConstants.CAT_LIST_LG_WIDTH_PERC
                                 - AppConstants.CAT_LIST_SM_WIDTH_PERC)
                 ));
@@ -2964,35 +2963,7 @@ int index;
 
 
 
-    private void decCatListWidth(final double dwPerc) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Lg.i(TAG, "decCatListWidth : dwPerc = " + dwPerc);
-                if (height < 1000d && dwPerc == 1)
-                    return;
-                else if (dwPerc < 0.99 && dpi>300)return;
-                else if (dwPerc < 0.99)
-                    return;
-                // Decrease category-list width
-                ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
-                lp.width = (int) (VIEW_WIDTH * dwPerc);
-                llCatListHolder.setLayoutParams(lp);
 
-                int csz = llCatListHolder.getChildCount();
-                for (int i = 0; i < csz; i++) {
-                    View v = llCatListHolder.getChildAt(i);
-                    ImageView iv = (ImageView) v.findViewById(R.id.ivIconCatList);
-                    ViewGroup.LayoutParams lpIv = iv.getLayoutParams();
-                    lpIv.width = (int) (primaryIconWidth * dwPerc);
-                    iv.setLayoutParams(lpIv);
-                    /*TextView tv = (TextView) v.findViewById(R.id.tvNameCatList);
-                    tv.setTextSize();*/
-                }
-                decCatListWidth(dwPerc - 0.05);
-            }
-        }, ANIM_INTERVAL);
-    }
 
     private Animation slideInFromRightAnim() {
 
@@ -3003,7 +2974,7 @@ int index;
                 Animation.RELATIVE_TO_PARENT, 0.0f
         );
         inFromRight.setDuration(ANIM_INTERVAL *
-                (int) (200 *
+                (int) (100 *
                         (AppConstants.CAT_LIST_LG_WIDTH_PERC
                                 - AppConstants.CAT_LIST_SM_WIDTH_PERC)
                 )
@@ -3012,21 +2983,7 @@ int index;
         return inFromRight;
     }
 
-    private Animation slideOutFromLeftAnim() {
-        Animation outToLeft = new TranslateAnimation(
-                Animation.RELATIVE_TO_PARENT, 0.0f,
-                Animation.RELATIVE_TO_PARENT, 0.0f,
-                Animation.RELATIVE_TO_PARENT, 0.95f,
-                Animation.RELATIVE_TO_PARENT, 0.0f);
-        outToLeft.setDuration(ANIM_INTERVAL *
-                (int) (200 *
-                        (AppConstants.CAT_LIST_LG_WIDTH_PERC
-                                - AppConstants.CAT_LIST_SM_WIDTH_PERC)
-                )
-        );
-        outToLeft.setInterpolator(new AccelerateInterpolator());
-        return outToLeft;
-    }
+
 
 
     /*********************************************************methods for education**********************************************/
