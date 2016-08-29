@@ -3,7 +3,6 @@ package demo.kolorob.kolorobdemoversion.fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.BuildConfig;
@@ -58,12 +56,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
  * Created by israt.jahan on 5/5/2016.
  */
 public class MapFragmentOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
-    Drawable newMarker;
-    Marker marker,marker1,marker2,marker3,marker4,marker5,marker6,marker7,marker8;
-    org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay mylocation;
-    private LinearLayout subcatlistholder;
-    GeoPoint pp;
-    int ind = 0;
+
+
     List<String> listData = new ArrayList<String>();
 
     public String getLocationName() {
