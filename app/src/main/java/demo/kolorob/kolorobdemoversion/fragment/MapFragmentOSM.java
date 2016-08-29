@@ -687,7 +687,7 @@ public void clear()
 {
     mapView.getOverlays().clear();
 }
-    public void Drawedu(int edid)
+    public void Drawedu(int edid,boolean state)
     {
 
         mapView.invalidate();
@@ -699,45 +699,82 @@ public void clear()
 
             }
         }
-       else if(edid==1) {
-            for (Marker m : items1) {
+        if (state==false)  {
+            if (edid == 1) {
+                for (Marker m : items1) {
 
 
-                mapView.getOverlays().add(m);
+                    mapView.getOverlays().remove(m);
 
 
+                }
+            } else if (edid == 2) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (edid == 3) {
+                for (Marker m : items3) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (edid == 4) {
+                for (Marker m : items4) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (edid == 5) {
+                for (Marker m : items5) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
             }
         }
-        else        if(edid==2) {
-        for (Marker m : items2) {
+        else {
+            if (edid == 1) {
+                for (Marker m : items1) {
 
 
-            mapView.getOverlays().add(m);
-
-        }
-    }
-        else       if(edid==3) {
-            for (Marker m : items3) {
+                    mapView.getOverlays().add(m);
 
 
-                mapView.getOverlays().add(m);
-
-            }
-        }
-        else       if(edid==4) {
-            for (Marker m : items4) {
+                }
+            } else if (edid == 2) {
+                for (Marker m : items2) {
 
 
-                mapView.getOverlays().add(m);
+                    mapView.getOverlays().add(m);
 
-            }
-        }
-        else       if(edid==5) {
-            for (Marker m : items5) {
+                }
+            } else if (edid == 3) {
+                for (Marker m : items3) {
 
 
-                mapView.getOverlays().add(m);
+                    mapView.getOverlays().add(m);
 
+                }
+            } else if (edid == 4) {
+                for (Marker m : items4) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (edid == 5) {
+                for (Marker m : items5) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
             }
         }
 
