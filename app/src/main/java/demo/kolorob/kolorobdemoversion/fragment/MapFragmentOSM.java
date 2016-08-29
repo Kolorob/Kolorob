@@ -12,25 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.BuildConfig;
-import org.osmdroid.bonuspack.routing.OSRMRoadManager;
-import org.osmdroid.bonuspack.routing.Road;
-import org.osmdroid.bonuspack.routing.RoadManager;
-import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
@@ -66,7 +59,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
  */
 public class MapFragmentOSM extends Fragment implements View.OnClickListener, MapEventsReceiver {
     Drawable newMarker;
-    Marker marker;
+    Marker marker,marker1,marker2,marker3,marker4,marker5,marker6,marker7,marker8;
     org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay mylocation;
     private LinearLayout subcatlistholder;
     GeoPoint pp;
@@ -116,6 +109,15 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
     String first;
+    final ArrayList<Marker> items = new ArrayList<Marker>();
+    final ArrayList<Marker> items1 = new ArrayList<Marker>();
+    final ArrayList<Marker> items2 = new ArrayList<Marker>();
+    final ArrayList<Marker> items3 = new ArrayList<Marker>();
+    final ArrayList<Marker> items4 = new ArrayList<Marker>();
+    final ArrayList<Marker> items5 = new ArrayList<Marker>();
+    final ArrayList<Marker> items6 = new ArrayList<Marker>();
+    final ArrayList<Marker> items7 = new ArrayList<Marker>();
+    final ArrayList<Marker> items8 = new ArrayList<Marker>();
     ArrayList<RatingModel>rating=new ArrayList<>();
     public ArrayList<GovernmentNewItem> getGovernmentNewItems() {
         return governmentNewItems;
@@ -168,7 +170,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
         educationServiceProvider = et;
     }
-
+    double latDouble, longDouble;
+    int i = 0;
     Date today = Calendar.getInstance().getTime();
     int subcategotyId;
     String subcategotyId2;
@@ -196,8 +199,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         LayoutInflater li = LayoutInflater.from(getActivity());
-        double latDouble, longDouble;
-        int i = 0;
+
 
         super.onCreate(savedInstanceState);
         SharedPreferences settings = MapFragmentOSM.this.getActivity().getSharedPreferences("prefs", 0);
@@ -489,8 +491,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
         //---
-        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
-        mapView.getOverlays().add(0, mapEventsOverlay);
+
         //Add Scale Bar
         ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);
@@ -510,9 +511,96 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
 
+
         return rootView;
     }
 
+public void eduicons()
+{
+    mapView.removeAllViewsInLayout();
+mapView.getOverlays().clear();
+    MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+    mapView.getOverlays().add(0, mapEventsOverlay);
+    mapView.invalidate();
+    items.clear();
+    items1.clear();
+    items2.clear();
+    items3.clear();
+    items4.clear();
+    items5.clear();
+    if (educationServiceProvider != null) {
+
+
+        for (EducationNewItem et : educationServiceProvider) {
+
+            //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+            subcategotyId2 = et.getRefnumm();
+            latDouble = Double.parseDouble(et.getLat());
+            ratingavg=et.getRating();
+
+
+            if((ratingavg.equals("null"))||(ratingavg.equals("")))
+            {
+                ratingavg="পাওয়া যায় নি";
+
+            }
+            else  {
+                ratingavgbn=EtoBconversion(ratingavg);
+
+                ratingavg=ratingavgbn.concat(datevalue);
+            }
+            longDouble = Double.parseDouble(et.getLon());
+            GeoPoint point = new GeoPoint(latDouble, longDouble);
+            drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
+        }
+    }
+
+
+}
+    public void healthicons()
+    {
+        mapView.removeAllViewsInLayout();
+        mapView.getOverlays().clear();
+
+        mapView.invalidate();
+        items.clear();
+        items1.clear();
+        items2.clear();
+        items3.clear();
+        items4.clear();
+        items5.clear();
+        items6.clear();
+        if (healthServiceProvider != null) {
+
+            for (HealthServiceProviderItemNew et : healthServiceProvider) {
+
+                //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                String subcategotyId = et.getReferences();
+                //Log.d("subcategotyId_Legal","=======");
+
+                ratingavg=et.getRating();
+
+
+
+
+                if((ratingavg.equals("null"))||(ratingavg.equals("")))
+                {
+                    ratingavg="পাওয়া যায় নি";
+                }
+                else  {
+                    ratingavgbn=EtoBconversion(ratingavg);
+
+                    ratingavg=ratingavgbn.concat(datevalue);
+                }
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                GeoPoint point = new GeoPoint(latDouble, longDouble);
+                drawMarkerHealth(point, et.getNode_bn(), ratingavg, et.getNode_contact(), et.getId(), subcategotyId);
+            }
+        }
+
+
+    }
 
 
 
@@ -530,37 +618,203 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
     private void drawMarkerEdu(GeoPoint point, String title, String add, String contact, int node, String subcategotyId2) {
 
+
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
+        Marker marker1 = new Marker(mapView);
+        Marker marker2 = new Marker(mapView);
+        Marker marker3 = new Marker(mapView);
+        Marker marker4 = new Marker(mapView);
+        Marker marker5 = new Marker(mapView);
 
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker3.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker4.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker5.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+
         for(int i=0;i<tokens.length;i++) {
-            if (tokens[i]=="")continue;
-            subcategotyId=Integer.parseInt(tokens[i]);
+            if (tokens[i] == "") continue;
+            subcategotyId = Integer.parseInt(tokens[i]);
 
-            if (subcategotyId ==179 ||subcategotyId ==163 ||subcategotyId ==161 ||subcategotyId ==123 ||subcategotyId ==145
-                    ||subcategotyId ==108 ||subcategotyId ==100 ||subcategotyId ==79 ||subcategotyId ==50 ||subcategotyId ==49
-                    ||subcategotyId ==44 ||subcategotyId ==43)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
-            else if (subcategotyId ==147 ||subcategotyId ==146 ||subcategotyId ==62 ||subcategotyId ==59|| subcategotyId ==52)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            else if (subcategotyId ==164 ||subcategotyId ==93)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
-            else if (subcategotyId ==150 ||subcategotyId ==149)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-            else if (subcategotyId ==128 ||subcategotyId ==94 ||subcategotyId ==64 ||subcategotyId ==63 ||subcategotyId ==7
-                    ||subcategotyId ==165|| subcategotyId ==104||subcategotyId ==91||subcategotyId ==32||subcategotyId ==26
-                    ||subcategotyId ==180 ||subcategotyId ==78||subcategotyId ==77)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            if (subcategotyId == 179 || subcategotyId == 163 || subcategotyId == 161 || subcategotyId == 123 || subcategotyId == 145
+                    || subcategotyId == 108 || subcategotyId == 100 || subcategotyId == 79 || subcategotyId == 50 || subcategotyId == 49
+                    || subcategotyId == 44 || subcategotyId == 43) {
 
-            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,add);
-            marker.setInfoWindow(infoWindow);
-
-            mapView.getOverlays().add(marker);
-            //marker.setTitle("Title of the marker");
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, add);
+                marker1.setInfoWindow(infoWindow);
+                marker1.setPosition(point);
+                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                items1.add(marker1);
+                items.add(marker1);
+            } else if (subcategotyId == 147 || subcategotyId == 146 || subcategotyId == 62 || subcategotyId == 59 || subcategotyId == 52) {
+                marker2.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+                marker2.setPosition(point);
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, add);
+                marker2.setInfoWindow(infoWindow);
+                items2.add(marker2);
+                items.add(marker2);
+            } else if (subcategotyId == 164 || subcategotyId == 93) {
+                marker3.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+                marker3.setPosition(point);
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, add);
+                marker3.setInfoWindow(infoWindow);
+                items3.add(marker3);
+                items.add(marker3);
+            } else if (subcategotyId == 150 || subcategotyId == 149) {
+                marker4.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+                marker4.setPosition(point);
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, add);
+                marker4.setInfoWindow(infoWindow);
+                items4.add(marker4);
+                items.add(marker4);
+            } else if (subcategotyId == 128 || subcategotyId == 94 || subcategotyId == 64 || subcategotyId == 63 || subcategotyId == 7
+                    || subcategotyId == 165 || subcategotyId == 104 || subcategotyId == 91 || subcategotyId == 32 || subcategotyId == 26
+                    || subcategotyId == 180 || subcategotyId == 78 || subcategotyId == 77) {
+                marker5.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+                marker5.setPosition(point);
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, add);
+                marker5.setInfoWindow(infoWindow);
+                items5.add(marker5);
+                items.add(marker5);
+            }
         }
+            mapView.getOverlays().clear();
+
+
+    }
+public void clear()
+{
+    mapView.getOverlays().clear();
+}
+    public void Drawedu(int edid)
+    {
+
+        mapView.invalidate();
+        if(edid==0) {
+            for (Marker m : items) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+       else if(edid==1) {
+            for (Marker m : items1) {
+
+
+                mapView.getOverlays().add(m);
+
+
+            }
+        }
+        else        if(edid==2) {
+        for (Marker m : items2) {
+
+
+            mapView.getOverlays().add(m);
+
+        }
+    }
+        else       if(edid==3) {
+            for (Marker m : items3) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else       if(edid==4) {
+            for (Marker m : items4) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else       if(edid==5) {
+            for (Marker m : items5) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+    }
+
+    public void Drawhel(int helid)
+    {
+
+        mapView.invalidate();
+        if(helid==0) {
+            for (Marker m : items) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else if(helid==1) {
+            for (Marker m : items1) {
+
+
+                mapView.getOverlays().add(m);
+
+
+            }
+        }
+        else        if(helid==2) {
+            for (Marker m : items2) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else       if(helid==3) {
+            for (Marker m : items3) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else       if(helid==4) {
+            for (Marker m : items4) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else       if(helid==5) {
+            for (Marker m : items5) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else       if(helid==6) {
+            for (Marker m : items6) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
     }
     private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
@@ -600,10 +854,23 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     }
     private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, String node, String subcategotyId2) {
 
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        Marker marker1 = new Marker(mapView);
+        Marker marker2 = new Marker(mapView);
+        Marker marker3 = new Marker(mapView);
+        Marker marker4 = new Marker(mapView);
+        Marker marker5 = new Marker(mapView);
+        Marker marker6 = new Marker(mapView);
 
+        marker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker3.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker4.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker5.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker6.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         String subcategory;
         subcategory=subcategotyId2.substring(1);
         String CurrentString = subcategory;
@@ -615,25 +882,65 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         {
             subcategotyId= Integer.parseInt(separated[i]);
             if (subcategotyId == 3||subcategotyId == 4||subcategotyId == 8||subcategotyId == 84||subcategotyId == 95||subcategotyId == 96||subcategotyId == 162)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+
+            {
+                marker1.setPosition(point);
+                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker1.setInfoWindow(infoWindow);
+                items1.add(marker1);
+                items.add(marker1);
+            }
             else if (subcategotyId == 81||subcategotyId == 88||subcategotyId == 109||subcategotyId == 10||subcategotyId == 127)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            {
+                marker2.setPosition(point);
+                marker2.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker2.setInfoWindow(infoWindow);
+                items2.add(marker2);
+                items.add(marker2);
+            }
             else if (subcategotyId == 90||subcategotyId == 142||subcategotyId == 176)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            {
+                marker3.setPosition(point);
+                marker3.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker3.setInfoWindow(infoWindow);
+                items3.add(marker3);
+                items.add(marker3);
+            }
             else if (subcategotyId == 26||subcategotyId == 32||subcategotyId == 91||subcategotyId == 104||subcategotyId == 165)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            {
+                marker4.setPosition(point);
+                marker4.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker4.setInfoWindow(infoWindow);
+                items4.add(marker4);
+                items.add(marker4);
+            }
             else if (subcategotyId == 134)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            {
+                marker5.setPosition(point);
+                marker5.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker5.setInfoWindow(infoWindow);
+                items5.add(marker5);
+                items.add(marker5);
+            }
             else if (subcategotyId == 21)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            {
+                marker6.setPosition(point);
+                marker6.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker6.setInfoWindow(infoWindow);
+                items6.add(marker6);
+                items.add(marker6);
+            }
 
-            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-            marker.setInfoWindow(infoWindow);
 
-            mapView.getOverlays().add(marker);
         }
 
-
+        mapView.getOverlays().clear();
 
 
     }
@@ -736,70 +1043,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             //marker.setTitle("Title of the marker");
         }
     }
-    public void DrawRoute(String lat, String lon)
-    {
-
-        Double servicelat=Double.parseDouble(lat);
-        Double servicelon=Double.parseDouble(lon);
-        GeoPoint servicepoint=new GeoPoint(servicelat,servicelon);
-
-        Double endlat=Double.parseDouble("23.791902");
-        Double endlon=Double.parseDouble("90.411343");
-        mapp=getMapView();
-        // double latt=mylocation.getMyLocation().getLatitude();
-
-        Marker destinationmarker=new Marker(mapp);
-        destinationmarker.setPosition(servicepoint);
-        mapp.getOverlays().add(destinationmarker);
-
-        GeoPoint my=new GeoPoint(endlat,endlon);
-
-        //   double latitude = my.getLatitudeE6() / 1E6;
-//
-        //   double longitude = my.getLongitudeE6() / 1E6;
-
-        //2. Playing with the RoadManager
-        //RoadManager roadManager = new MapQuestRoadManager("YOUR_API_KEY");
-        //roadManager.addRequestOption("routeType=bicycle");
-        ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
-        waypoints.add(my);
-        waypoints.add(servicepoint);
 
 
-        //GeoPoint endPoint = new GeoPoint(48.4, -1.9);
-
-
-        RoadManager roadManager = new OSRMRoadManager(getActivity());
-        Road road = roadManager.getRoad(waypoints);
-        if (road.mStatus != Road.STATUS_OK)
-            Toast.makeText(getActivity(), "Error when loading the road - status=" + road.mStatus, Toast.LENGTH_SHORT).show();
-
-        Polyline roadOverlay = RoadManager.buildRoadOverlay(road, getActivity());
-        mapp.getOverlays().add(roadOverlay);
-
-        //3. Showing the Route steps on the map
-        FolderOverlay roadMarkers = new FolderOverlay(getActivity());
-        mapp.getOverlays().add(roadMarkers);
-        Drawable nodeIcon = getResources().getDrawable(R.drawable.map_marker);
-        for (int i = 0; i < road.mNodes.size(); i++) {
-            RoadNode node = road.mNodes.get(i);
-            Marker nodeMarker = new Marker(mapp);
-            nodeMarker.setPosition(node.mLocation);
-            nodeMarker.setIcon(nodeIcon);
-
-            //4. Filling the bubbles
-            nodeMarker.setTitle("Step " + i);
-            nodeMarker.setSnippet(node.mInstructions);
-            nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
-            Drawable iconContinue = getResources().getDrawable(R.drawable.map_marker);
-            nodeMarker.setImage(iconContinue);
-            //4. end
-
-            roadMarkers.add(nodeMarker);
-        }
-
-
-    }
     @Override
     public void onClick(View v) {
 

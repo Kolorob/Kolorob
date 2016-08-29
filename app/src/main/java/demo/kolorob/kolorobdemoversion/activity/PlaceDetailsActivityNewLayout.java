@@ -112,6 +112,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     EducationServiceProviderTable educationServiceProviderTable;
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
+    boolean mainedcalled=false;
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
@@ -313,7 +314,7 @@ TextView uptext;
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
     String nodefromback;
-
+int index;
     public String getNodefromback() {
         return nodefromback;
     }
@@ -2199,7 +2200,7 @@ TextView uptext;
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             mapcalledstatus=true;
-                            callMapFragmentWithEducationInfo(ci.getCatName(),1, educationServiceProvider);
+                            callMapFragmentWithEducation(0, educationServiceProvider);
 
 
                         ivIcon.setImageResource(R.drawable.education_selected);
@@ -2238,7 +2239,7 @@ TextView uptext;
                             healthServiceProvider = constructHealthListItem(1);
                             mapcalledstatus=true;
 
-                            callMapFragmentWithHealthInfo("HEALTH", 2, healthServiceProvider);
+                            callMapFragmentWithHealth(0,healthServiceProvider);
 
 
 
@@ -2631,7 +2632,7 @@ TextView uptext;
             public void onClick(View v) {
 
 
-                int index = llSubCatListHolder.indexOfChild(v);
+                 index = llSubCatListHolder.indexOfChild(v);
                 clicked.add(String.valueOf(index));
                 for (int i = 0; i < llSubCatListHolder.getChildCount(); i++) {
                     if (i == index ) {
@@ -2805,7 +2806,7 @@ TextView uptext;
                         }
 
 
-                        callMapFragmentWithEducationInfo(si.getSubCatHeaderBn(), cat_id, EDD);
+                        callMapFragmentWithEducation(++index,null);
 
                         break;
                     case AppConstants.HEALTH:
@@ -2820,7 +2821,7 @@ TextView uptext;
                         {
                             HEL.add(healthItem.get(ss));
                         }
-                        callMapFragmentWithHealthInfo(si.getSubcatHeader(), cat_id, HEL);
+                        callMapFragmentWithHealth(++index,null);
 
                         break;
                     case AppConstants.ENTERTAINMENT:
@@ -3066,7 +3067,29 @@ TextView uptext;
         fragmentTransaction.commit();
         // EDD.clear();
     }
+    private void callMapFragmentWithEducation(int edid,ArrayList<EducationNewItem> educationServiceProviderItems)
+    {
 
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        if(edid==0)
+        {
+            fragment.setCategoryId(1);
+            fragment.setEducationServiceProvider(educationServiceProviderItems);
+            fragment.eduicons();
+            fragment.Drawedu(edid);
+            mainedcalled=true;
+        }
+
+else {
+            if(mainedcalled)
+            {
+                fragment.clear();
+                mainedcalled=false;
+            }
+            fragment.Drawedu(edid);
+        }
+        // EDD.clear();
+    }
     private void callMapFragment(int locationNameId) {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
         mapFragment.setLocationName(getPlaceChoice());
@@ -3171,6 +3194,29 @@ TextView uptext;
         return healthServiceProvider;
     }
 
+    private void callMapFragmentWithHealth(int helid,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews)
+    {
+
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        if(helid==0)
+        {
+            fragment.setCategoryId(2);
+            fragment.setHealthServiceProvider(healthServiceProviderItemNews);
+            fragment.healthicons();
+            fragment.Drawhel(helid);
+            mainedcalled=true;
+        }
+
+        else {
+            if(mainedcalled)
+            {
+                fragment.clear();
+                mainedcalled=false;
+            }
+            fragment.Drawhel(helid);
+        }
+        // EDD.clear();
+    }
     private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();
