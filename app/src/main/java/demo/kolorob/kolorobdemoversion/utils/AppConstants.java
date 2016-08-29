@@ -36,6 +36,10 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
     public static final int[] ALL_CAT_MARKER_ICONSBUTTON = {R.drawable.pin_1,R.drawable.pin_2,R.drawable.pin_3,
             R.drawable.pin_4,R.drawable.pin_5,R.drawable.pin_6,R.drawable.pin_7,R.drawable.pin_8,
             R.drawable.pin_9,R.drawable.pin_10};
+
+    public static final int[] ALL_CAT_MARKER_ICONSBUTTON2 = {R.drawable.pin_1_selected,R.drawable.pin_2_selected,R.drawable.pin_3_selected,
+            R.drawable.pin_4_selected,R.drawable.pin_5_selected,R.drawable.pin_6_selected,R.drawable.pin_7_selected,R.drawable.pin_8_selected,
+            R.drawable.pin_9_selected,R.drawable.pin_10_selected};
     public static final int[] ALL_CAT_MARKER_ICONS1 = {R.drawable.pin_map_1,R.drawable.pin_map_2,R.drawable.pin_map_3,
             R.drawable.pin_map_4,R.drawable.pin_map_5,R.drawable.pin_map_6,R.drawable.pin_map_7,R.drawable.pin_map_8,
             R.drawable.pin_map_9,R.drawable.pin_map_10};
