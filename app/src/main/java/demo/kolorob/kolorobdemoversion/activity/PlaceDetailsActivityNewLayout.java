@@ -2275,7 +2275,7 @@ int index;
                             ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
                             entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
                             mapcalledstatus=true;
-                            callMapFragmentWithEntertainmentInfo(ci.getCatName(), 3, entertainmentServiceProvider);
+                            callMapFragmentWithEntertainment(-1, entertainmentServiceProvider,true);
 
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
 
@@ -2654,6 +2654,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
                              callMapFragmentWithHealth(index, null, false);
                              break;
+                         case AppConstants.ENTERTAINMENT:
+
+                             callMapFragmentWithEntertainment(index, null, false);
+                             break;
                          default:
                              break;
                      }
@@ -2674,6 +2678,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                          case AppConstants.HEALTH:
 
                              callMapFragmentWithHealth(index, null, true);
+                             break;
+                         case AppConstants.ENTERTAINMENT:
+
+                             callMapFragmentWithEntertainment(index, null, true);
                              break;
                          default:
                              break;
@@ -2770,40 +2778,17 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         return educationServiceProvider;
     }
 
-    private ArrayList<EducationNewItem> constructEducationListItemForHeader(int cat_id, String header,String place)
-
-    {
 
 
-        ArrayList<EducationNewItem> educationNewItems;
-        EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        educationNewItems = educationNewTable.getAllEducationSubCategoriesInfoWithHead(header,place);
-        return educationNewItems;
-    }
 
-    private void callMapFragmentWithEducationInfo(String item_name,int cat_id,ArrayList<EducationNewItem> educationServiceProviderItems)
-    {
-
-
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        //   mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
-//
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setEducationServiceProvider(educationServiceProviderItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
-        // EDD.clear();
-    }
     private void callMapFragmentWithEducation(int edid,ArrayList<EducationNewItem> educationServiceProviderItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
         else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+
+
         if(edid==-1)
         {
             fragment.setCategoryId(1);
@@ -2933,6 +2918,7 @@ else {
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
       if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
         else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+
         if(helid==-1)
         {
             fragment.setCategoryId(2);
@@ -2952,35 +2938,7 @@ else {
         }
         // EDD.clear();
     }
-    private void callMapFragmentWithHealthInfo(String item_name,int cat_id,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(2);
 
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setHealthServiceProvider(healthServiceProviderItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
-    }
-    private ArrayList<HealthServiceProviderItemNew> constructHealthListItemForHeader(int cat_id, String header,String place)
-    {
-
-        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-        ArrayList<HealthServiceProviderItemNew> healthServiceProvider1;
-        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-        int refId=subCategoryTableNew.getSubcategoryId(header);
-
-        String refIds=String.valueOf(refId);
-
-
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfoWithHead( refIds,place);
-        return healthServiceProvider;
-    }
 
     /**********************************************************Methods for entertainment*******************************************/
 
@@ -2992,6 +2950,33 @@ else {
         return entertainmentServiceProviderItemNews;
     }
 
+    private void callMapFragmentWithEntertainment(int edid,ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews,boolean s)
+    {
+
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+
+
+        if(edid==-1)
+        {
+            fragment.setCategoryId(3);
+            fragment.setEntertainmentServiceProvider(entertainmentServiceProviderItemNews);
+            fragment.enticons();
+            fragment.Drawent(edid,s);
+            mainedcalled=true;
+        }
+
+        else {
+            if(mainedcalled)
+            {
+
+                mainedcalled=false;
+            }
+            fragment.Drawent(edid,s);
+        }
+        // EDD.clear();
+    }
     private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems)
     {
         MapFragmentOSM mapFragment = new MapFragmentOSM();

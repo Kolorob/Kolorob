@@ -308,59 +308,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         }
 
         switch (categoryId) {
-            case AppConstants.EDUCATION:
-                if (educationServiceProvider != null) {
-                    for (EducationNewItem et : educationServiceProvider) {
 
-                        //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId2 = et.getRefnumm();
-                        latDouble = Double.parseDouble(et.getLat());
-                        ratingavg=et.getRating();
-
-
-                        if((ratingavg.equals("null"))||(ratingavg.equals("")))
-                        {
-                            ratingavg="পাওয়া যায় নি";
-
-                        }
-                        else  {
-                            ratingavgbn=EtoBconversion(ratingavg);
-
-                            ratingavg=ratingavgbn.concat(datevalue);
-                        }
-                        longDouble = Double.parseDouble(et.getLon());
-                        GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
-                    }
-                }
-                break;
-            case AppConstants.HEALTH:
-                for (HealthServiceProviderItemNew et : healthServiceProvider) {
-
-                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getReferences();
-                    //Log.d("subcategotyId_Legal","=======");
-
-                    ratingavg=et.getRating();
-
-
-
-
-                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
-                    {
-                        ratingavg="পাওয়া যায় নি";
-                    }
-                    else  {
-                        ratingavgbn=EtoBconversion(ratingavg);
-
-                        ratingavg=ratingavgbn.concat(datevalue);
-                    }
-                    latDouble = Double.parseDouble(et.getLat());
-                    longDouble = Double.parseDouble(et.getLon());
-                    GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerHealth(point, et.getNode_bn(), ratingavg, et.getNode_contact(), et.getId(), subcategotyId);
-                }
-                break;
             case AppConstants.ENTERTAINMENT:
                 for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
                     //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
@@ -408,23 +356,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
                     }
                 }
-              /*  if (allitems != null) {
-                    for (AllHolder et : allitems) {
-                        //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                        subcategotyId2 = et.getRefnum();
-                        latDouble = Double.parseDouble(et.getLat());
-                        longDouble = Double.parseDouble(et.getLon());
-                        if(ratingavg.equals("null"))
-                        {
-                            ratingavg="পাওয়া যায় নি";
-                        }
-                        else  {
-                            ratingavgbn=EtoBconversion(ratingavg);
-                            ratingavg=ratingavgbn.concat(datevalue);
-                        }
-                        GeoPoint point = new GeoPoint(latDouble, longDouble);
-                        drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
-                    }*/
+
                 break;
             case AppConstants.LEGAL:
                 for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
@@ -596,7 +528,51 @@ mapView.getOverlays().clear();
 
     }
 
+    public void enticons()
+    {
+        mapView.removeAllViewsInLayout();
+        mapView.getOverlays().clear();
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+        mapView.invalidate();
+        items.clear();
+        items1.clear();
+        items2.clear();
+        items3.clear();
+        items4.clear();
+        items5.clear();
+        items6.clear();
+        items7.clear();
+        items8.clear();
 
+        if (entertainmentServiceProvider != null) {
+
+
+            for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
+                //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                String subcategotyId = et.getNodeAdditional();
+                latDouble = Double.parseDouble(et.getLatitude());
+                longDouble = Double.parseDouble(et.getLongitude());
+                ratingavg=et.getRating();
+
+
+                if((ratingavg.equals("null"))||(ratingavg.equals("")))
+                {
+                    ratingavg="পাওয়া যায় নি";
+
+                }
+                else  {
+                    ratingavgbn=EtoBconversion(ratingavg);
+
+                    ratingavg=ratingavgbn.concat(datevalue);
+                }
+                GeoPoint point = new GeoPoint(latDouble, longDouble);
+                drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
+            }
+        }
+
+
+    }
 
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
@@ -631,7 +607,7 @@ mapView.getOverlays().clear();
         marker4.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
         marker5.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-
+        mapView.getOverlays().clear();
 
         for(int i=0;i<tokens.length;i++) {
             if (tokens[i] == "") continue;
@@ -679,7 +655,7 @@ mapView.getOverlays().clear();
                 items.add(marker5);
             }
         }
-            mapView.getOverlays().clear();
+
 
 
     }
@@ -781,7 +757,7 @@ public void clear()
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
         mapView.getOverlays().add(0, mapEventsOverlay);
     }
-
+//for health
     public void Drawhel(int helid,boolean state)
     {
 
@@ -892,7 +868,149 @@ public void clear()
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
         mapView.getOverlays().add(0, mapEventsOverlay);
     }
+//for entertainment
+public void Drawent(int edid,boolean state)
+{
 
+    mapView.invalidate();
+    if(edid==-1) {
+        for (Marker m : items) {
+
+
+            mapView.getOverlays().add(m);
+
+        }
+    }
+    if (state==false)  {
+        if (edid == 0) {
+            for (Marker m : items1) {
+
+
+                mapView.getOverlays().remove(m);
+
+
+            }
+        } else if (edid == 1) {
+            for (Marker m : items2) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        } else if (edid == 2) {
+            for (Marker m : items3) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        } else if (edid == 3) {
+            for (Marker m : items4) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        } else if (edid == 4) {
+            for (Marker m : items5) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        }
+        else if (edid == 5) {
+            for (Marker m : items6) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        }
+        else if (edid == 6) {
+            for (Marker m : items7) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        }
+        else if (edid == 7) {
+            for (Marker m : items8) {
+
+
+                mapView.getOverlays().remove(m);
+
+            }
+        }
+    }
+    else {
+        if (edid == 0) {
+            for (Marker m : items1) {
+
+
+                mapView.getOverlays().add(m);
+
+
+            }
+        } else if (edid == 1) {
+            for (Marker m : items2) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        } else if (edid == 2) {
+            for (Marker m : items3) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        } else if (edid == 3) {
+            for (Marker m : items4) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        } else if (edid == 4) {
+            for (Marker m : items5) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else if (edid == 5) {
+            for (Marker m : items6) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else if (edid == 6) {
+            for (Marker m : items7) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        else if (edid == 7) {
+            for (Marker m : items8) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+    }
+
+    MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+    mapView.getOverlays().add(0, mapEventsOverlay);
+}
     private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
         String delims = "[,]";
@@ -937,7 +1055,7 @@ public void clear()
         Marker marker4 = new Marker(mapView);
         Marker marker5 = new Marker(mapView);
         Marker marker6 = new Marker(mapView);
-
+        mapView.getOverlays().clear();
         marker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
         marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
@@ -1017,7 +1135,7 @@ public void clear()
 
         }
 
-        mapView.getOverlays().clear();
+
 
 
     }
@@ -1051,37 +1169,110 @@ public void clear()
     private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, String node, String subcategotyId23) {
 
 
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        Marker marker1 = new Marker(mapView);
+        Marker marker2 = new Marker(mapView);
+        Marker marker3 = new Marker(mapView);
+        Marker marker4 = new Marker(mapView);
+        Marker marker5 = new Marker(mapView);
+        Marker marker6 = new Marker(mapView);
+        Marker marker7 = new Marker(mapView);
+        Marker marker8 = new Marker(mapView);
+        marker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker3.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker4.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker5.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker6.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker7.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker8.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+mapView.getOverlays().clear();
         String subcategory;
         subcategory=subcategotyId23.substring(1);
         String CurrentString = subcategory;
         String[] separated = CurrentString.split(",");
         for (int i=0;i<separated.length;i++) {
             subcategotyId= Integer.parseInt(separated[i]);
-            if (subcategotyId == 130)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            if (subcategotyId == 130) {
+                marker1.setPosition(point);
+                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker1.setInfoWindow(infoWindow);
+                items1.add(marker1);
+                items.add(marker1);
+            }
             else if (subcategotyId == 19||subcategotyId == 22||subcategotyId == 114)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            {
+                marker2.setPosition(point);
+                marker2.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker2.setInfoWindow(infoWindow);
+                items2.add(marker2);
+                items.add(marker2);
+            }
             else if (subcategotyId == 113)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            {
+                marker3.setPosition(point);
+                marker3.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker3.setInfoWindow(infoWindow);
+                items3.add(marker3);
+                items.add(marker3);
+            }
             else if (subcategotyId == 24||subcategotyId == 111||subcategotyId == 115||subcategotyId == 116||subcategotyId == 141)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            {
+                marker4.setPosition(point);
+                marker4.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker4.setInfoWindow(infoWindow);
+                items4.add(marker4);
+                items.add(marker4);
+            }
             else if (subcategotyId == 28||subcategotyId == 45||subcategotyId == 168)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            {
+                marker5.setPosition(point);
+                marker5.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker5.setInfoWindow(infoWindow);
+                items5.add(marker5);
+                items.add(marker5);
+            }
             else if (subcategotyId == 132||subcategotyId == 166||subcategotyId == 169)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            {
+                marker6.setPosition(point);
+                marker6.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker6.setInfoWindow(infoWindow);
+                items6.add(marker6);
+                items.add(marker6);
+            }
             else if (subcategotyId == 107)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_7));
+            {
+                marker7.setPosition(point);
+                marker7.setIcon(this.getResources().getDrawable(R.drawable.pin_map_7));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker7.setInfoWindow(infoWindow);
+                items7.add(marker7);
+                items.add(marker7);
+            }
             else if (subcategotyId == 16||subcategotyId == 17||subcategotyId == 110||subcategotyId == 167)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+
+            {
+                marker8.setPosition(point);
+                marker8.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker8.setInfoWindow(infoWindow);
+                items8.add(marker8);
+                items.add(marker8);
+            }
         }
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-        marker.setInfoWindow(infoWindow);
 
-        mapView.getOverlays().add(marker);
+
+
     }
 
 
