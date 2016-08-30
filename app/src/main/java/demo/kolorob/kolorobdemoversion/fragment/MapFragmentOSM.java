@@ -782,7 +782,7 @@ public void clear()
         mapView.getOverlays().add(0, mapEventsOverlay);
     }
 
-    public void Drawhel(int helid)
+    public void Drawhel(int helid,boolean state)
     {
 
         mapView.invalidate();
@@ -794,59 +794,105 @@ public void clear()
 
             }
         }
-        else if(helid==0) {
-            for (Marker m : items1) {
+        if (state==false)  {
+            if (helid == 0) {
+                for (Marker m : items1) {
 
 
-                mapView.getOverlays().add(m);
+                    mapView.getOverlays().remove(m);
 
 
+                }
+            } else if (helid == 1) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (helid == 2) {
+                for (Marker m : items3) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (helid == 3) {
+                for (Marker m : items4) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (helid == 4) {
+                for (Marker m : items5) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            }
+            else if (helid ==5 ) {
+                for (Marker m : items6) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
             }
         }
-        else        if(helid==1) {
-            for (Marker m : items2) {
+        else {
+            if (helid == 0) {
+                for (Marker m : items1) {
 
 
-                mapView.getOverlays().add(m);
+                    mapView.getOverlays().add(m);
 
+
+                }
+            } else if (helid == 1) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (helid == 2) {
+                for (Marker m : items3) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (helid == 3) {
+                for (Marker m : items4) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (helid == 4) {
+                for (Marker m : items5) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
             }
-        }
-        else       if(helid==2) {
-            for (Marker m : items3) {
+                else if (helid ==5 ) {
+                    for (Marker m : items6) {
 
 
-                mapView.getOverlays().add(m);
+                        mapView.getOverlays().add(m);
 
-            }
-        }
-        else       if(helid==3) {
-            for (Marker m : items4) {
-
-
-                mapView.getOverlays().add(m);
-
-            }
-        }
-        else       if(helid==4) {
-            for (Marker m : items5) {
-
-
-                mapView.getOverlays().add(m);
-
-            }
-        }
-        else       if(helid==5) {
-            for (Marker m : items6) {
-
-
-                mapView.getOverlays().add(m);
-
+                    }
             }
         }
 
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
         mapView.getOverlays().add(0, mapEventsOverlay);
     }
+
     private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
         String delims = "[,]";
