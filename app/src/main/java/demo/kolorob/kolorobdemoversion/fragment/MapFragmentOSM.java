@@ -691,7 +691,7 @@ public void clear()
     {
 
         mapView.invalidate();
-        if(edid==0) {
+        if(edid==-1) {
             for (Marker m : items) {
 
 
@@ -700,7 +700,7 @@ public void clear()
             }
         }
         if (state==false)  {
-            if (edid == 1) {
+            if (edid == 0) {
                 for (Marker m : items1) {
 
 
@@ -708,28 +708,28 @@ public void clear()
 
 
                 }
-            } else if (edid == 2) {
+            } else if (edid == 1) {
                 for (Marker m : items2) {
 
 
                     mapView.getOverlays().remove(m);
 
                 }
-            } else if (edid == 3) {
+            } else if (edid == 2) {
                 for (Marker m : items3) {
 
 
                     mapView.getOverlays().remove(m);
 
                 }
-            } else if (edid == 4) {
+            } else if (edid == 3) {
                 for (Marker m : items4) {
 
 
                     mapView.getOverlays().remove(m);
 
                 }
-            } else if (edid == 5) {
+            } else if (edid == 4) {
                 for (Marker m : items5) {
 
 
@@ -739,7 +739,7 @@ public void clear()
             }
         }
         else {
-            if (edid == 1) {
+            if (edid == 0) {
                 for (Marker m : items1) {
 
 
@@ -747,28 +747,28 @@ public void clear()
 
 
                 }
-            } else if (edid == 2) {
+            } else if (edid == 1) {
                 for (Marker m : items2) {
 
 
                     mapView.getOverlays().add(m);
 
                 }
-            } else if (edid == 3) {
+            } else if (edid == 2) {
                 for (Marker m : items3) {
 
 
                     mapView.getOverlays().add(m);
 
                 }
-            } else if (edid == 4) {
+            } else if (edid == 3) {
                 for (Marker m : items4) {
 
 
                     mapView.getOverlays().add(m);
 
                 }
-            } else if (edid == 5) {
+            } else if (edid == 4) {
                 for (Marker m : items5) {
 
 
@@ -786,7 +786,7 @@ public void clear()
     {
 
         mapView.invalidate();
-        if(helid==0) {
+        if(helid==-1) {
             for (Marker m : items) {
 
 
@@ -794,7 +794,7 @@ public void clear()
 
             }
         }
-        else if(helid==1) {
+        else if(helid==0) {
             for (Marker m : items1) {
 
 
@@ -803,7 +803,7 @@ public void clear()
 
             }
         }
-        else        if(helid==2) {
+        else        if(helid==1) {
             for (Marker m : items2) {
 
 
@@ -811,7 +811,7 @@ public void clear()
 
             }
         }
-        else       if(helid==3) {
+        else       if(helid==2) {
             for (Marker m : items3) {
 
 
@@ -819,7 +819,7 @@ public void clear()
 
             }
         }
-        else       if(helid==4) {
+        else       if(helid==3) {
             for (Marker m : items4) {
 
 
@@ -827,7 +827,7 @@ public void clear()
 
             }
         }
-        else       if(helid==5) {
+        else       if(helid==4) {
             for (Marker m : items5) {
 
 
@@ -835,7 +835,7 @@ public void clear()
 
             }
         }
-        else       if(helid==6) {
+        else       if(helid==5) {
             for (Marker m : items6) {
 
 
