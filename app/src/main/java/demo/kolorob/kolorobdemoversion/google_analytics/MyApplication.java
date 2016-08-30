@@ -4,11 +4,24 @@ package demo.kolorob.kolorobdemoversion.google_analytics;
  * Created by Mazharul.Islam1 on 6/7/2016.
  */
 import android.app.Application;
+import android.content.Context;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
+import org.acra.*;
+import org.acra.annotation.*;
+import org.acra.sender.HttpSender;
+
+
+@ReportsCrashes(
+        httpMethod = HttpSender.Method.PUT,
+        reportType = HttpSender.Type.JSON,
+        formUri = "http://119.148.6.221:5984/acra-myapp/_design/acra-storage/_update/report",
+        formUriBasicAuthLogin = "kolorob",
+        formUriBasicAuthPassword = "kolorob"
+)
 
 
 public class MyApplication extends Application {
@@ -84,5 +97,15 @@ public class MyApplication extends Application {
         // Build and send an Event.
         t.send(new HitBuilders.EventBuilder().setCategory(category).setAction(action).setLabel(label).build());
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        // The following line triggers the initialization of ACRA
+        ACRA.init(this);
+    }
+
+
 
 }
