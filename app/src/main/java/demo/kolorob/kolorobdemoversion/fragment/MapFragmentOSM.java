@@ -309,29 +309,6 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
         switch (categoryId) {
 
-            case AppConstants.ENTERTAINMENT:
-                for (EntertainmentServiceProviderItemNew et : entertainmentServiceProvider) {
-                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    String subcategotyId = et.getNodeAdditional();
-                    latDouble = Double.parseDouble(et.getLatitude());
-                    longDouble = Double.parseDouble(et.getLongitude());
-                    ratingavg=et.getRating();
-
-
-                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
-                    {
-                        ratingavg="পাওয়া যায় নি";
-
-                    }
-                    else  {
-                        ratingavgbn=EtoBconversion(ratingavg);
-
-                        ratingavg=ratingavgbn.concat(datevalue);
-                    }
-                    GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
-                }
-                break;
             case AppConstants.GOVERNMENT:
                 if (governmentNewItems != null) {
                     for (GovernmentNewItem et : governmentNewItems) {
@@ -573,7 +550,47 @@ mapView.getOverlays().clear();
 
 
     }
+//for government
+public void govicons()
+{
+    mapView.removeAllViewsInLayout();
+    mapView.getOverlays().clear();
 
+    mapView.invalidate();
+    items.clear();
+    items1.clear();
+    items2.clear();
+    items3.clear();
+    items4.clear();
+    items5.clear();
+    items6.clear();
+    if (governmentNewItems != null) {
+
+        for (GovernmentNewItem et : governmentNewItems) {
+
+            //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+            subcategotyId2 = et.getRefnumm();
+            latDouble = Double.parseDouble(et.getLat());
+            longDouble = Double.parseDouble(et.getLon());
+            ratingavg=et.getRating();
+
+            if((ratingavg.equals("null"))||(ratingavg.equals("")))
+            {
+                ratingavg="পাওয়া যায় নি";
+
+            }
+            else  {
+                ratingavgbn=EtoBconversion(ratingavg);
+
+                ratingavg=ratingavgbn.concat(datevalue);
+            }
+            GeoPoint point = new GeoPoint(latDouble, longDouble);
+            drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
+        }
+    }
+
+
+}
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
 
@@ -1011,6 +1028,119 @@ public void Drawent(int edid,boolean state)
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
     mapView.getOverlays().add(0, mapEventsOverlay);
 }
+
+
+    //for government
+    public void Drawgov(int helid,boolean state)
+    {
+
+        mapView.invalidate();
+        if(helid==-1) {
+            for (Marker m : items) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        if (state==false)  {
+            if (helid == 0) {
+                for (Marker m : items1) {
+
+
+                    mapView.getOverlays().remove(m);
+
+
+                }
+            } else if (helid == 1) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (helid == 2) {
+                for (Marker m : items3) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (helid == 3) {
+                for (Marker m : items4) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            } else if (helid == 4) {
+                for (Marker m : items5) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            }
+            else if (helid ==5 ) {
+                for (Marker m : items6) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            }
+        }
+        else {
+            if (helid == 0) {
+                for (Marker m : items1) {
+
+
+                    mapView.getOverlays().add(m);
+
+
+                }
+            } else if (helid == 1) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (helid == 2) {
+                for (Marker m : items3) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (helid == 3) {
+                for (Marker m : items4) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            } else if (helid == 4) {
+                for (Marker m : items5) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            }
+            else if (helid ==5 ) {
+                for (Marker m : items6) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            }
+        }
+
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+    }
     private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
         String delims = "[,]";

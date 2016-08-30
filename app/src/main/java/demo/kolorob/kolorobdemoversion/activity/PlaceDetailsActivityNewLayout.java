@@ -2321,7 +2321,7 @@ int index;
                             mapcalledstatus=true;
                             ArrayList<GovernmentNewItem> governmentNewItems;
                             governmentNewItems = constructgovListItem();
-                            callMapFragmentWithGovInfo(ci.getCatName(), 4, governmentNewItems);
+                            callMapFragmentWithGovernment(-1, governmentNewItems,true);
 
                         llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
@@ -2658,6 +2658,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
                              callMapFragmentWithEntertainment(index, null, false);
                              break;
+                         case AppConstants.GOVERNMENT:
+
+                             callMapFragmentWithGovernment(index, null, false);
+                             break;
                          default:
                              break;
                      }
@@ -2682,6 +2686,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                          case AppConstants.ENTERTAINMENT:
 
                              callMapFragmentWithEntertainment(index, null, true);
+                             break;
+                         case AppConstants.GOVERNMENT:
+
+                             callMapFragmentWithGovernment(index, null, true);
                              break;
                          default:
                              break;
@@ -2975,37 +2983,9 @@ else {
             }
             fragment.Drawent(edid,s);
         }
-        // EDD.clear();
-    }
-    private void callMapFragmentWithEntertainmentInfo(String item_name,int cat_id,ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(3);
-
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
 
     }
 
-    private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItemForHeader(int cat_id, String header,String place)
-    {
-        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
-        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider1;
-        EntertainmentServiceProviderTableNew entertainmentServiceProviderTable = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-        int refId=subCategoryTableNew.getSubcategoryId(header);
-        String refIds=String.valueOf(refId);
-
-
-        entertainmentServiceProvider = entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfoWithHead(refIds,place);
-        return entertainmentServiceProvider;
-    }
 
 
 
@@ -3019,26 +2999,32 @@ else {
         return governmentNewItems;
     }
 
-    private ArrayList<GovernmentNewItem> constructGovernmentListItemForHeader( String header,String place)
+    private void callMapFragmentWithGovernment(int edid,ArrayList<GovernmentNewItem> governmentNewItems,boolean s)
     {
-        ArrayList<GovernmentNewItem> governmentNewItems;
-        GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfoWithHead(header,place);
-        return governmentNewItems;
-    }
-    private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        //   mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
 
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setGovernmentNewItems(governmentNewItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+
+
+        if(edid==-1)
+        {
+            fragment.setCategoryId(4);
+            fragment.setGovernmentNewItems(governmentNewItems);
+            fragment.govicons();
+            fragment.Drawgov(edid,s);
+            mainedcalled=true;
+        }
+
+        else {
+            if(mainedcalled)
+            {
+
+                mainedcalled=false;
+            }
+            fragment.Drawgov(edid,s);
+        }
+
     }
 
    /* private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
