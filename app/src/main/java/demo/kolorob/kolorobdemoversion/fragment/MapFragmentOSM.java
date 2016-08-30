@@ -591,6 +591,50 @@ public void govicons()
 
 
 }
+
+    //method for legal
+    public void legicons()
+    {
+        mapView.removeAllViewsInLayout();
+        mapView.getOverlays().clear();
+
+        mapView.invalidate();
+        items.clear();
+        items1.clear();
+        items2.clear();
+        items3.clear();
+        items4.clear();
+        items5.clear();
+        items6.clear();
+        if (legalaidServiceProvider != null) {
+
+            for (LegalAidServiceProviderItemNew et : legalaidServiceProvider) {
+
+                //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                String subcategotyId = et.getCategoryId();
+
+                latDouble = Double.parseDouble(et.getLatitude());
+                longDouble = Double.parseDouble(et.getLongitude());
+                ratingavg=et.getRating();
+
+
+                if((ratingavg.equals("null"))||(ratingavg.equals("")))
+                {
+                    ratingavg="পাওয়া যায় নি";
+
+                }
+                else  {
+                    ratingavgbn=EtoBconversion(ratingavg);
+
+                    ratingavg=ratingavgbn.concat(datevalue);
+                }
+                GeoPoint point = new GeoPoint(latDouble, longDouble);
+                drawMarkerLeg(point, et.getLegalaidNameBan(), ratingavg, et.getContactNo(), et.getIdentifierId(), subcategotyId);
+            }
+        }
+
+
+    }
     @Override
     public boolean singleTapConfirmedHelper(GeoPoint p) {
 
@@ -676,10 +720,7 @@ public void govicons()
 
 
     }
-public void clear()
-{
-    mapView.getOverlays().clear();
-}
+
     public void Drawedu(int edid,boolean state)
     {
 
@@ -1141,6 +1182,60 @@ public void Drawent(int edid,boolean state)
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
         mapView.getOverlays().add(0, mapEventsOverlay);
     }
+
+    //method for legal
+    public void Drawleg(int helid,boolean state)
+    {
+
+        mapView.invalidate();
+        if(helid==-1) {
+            for (Marker m : items) {
+
+
+                mapView.getOverlays().add(m);
+
+            }
+        }
+        if (state==false)  {
+            if (helid == 0) {
+                for (Marker m : items1) {
+
+
+                    mapView.getOverlays().remove(m);
+
+
+                }
+            } else if (helid == 1) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().remove(m);
+
+                }
+            }
+        }
+        else {
+            if (helid == 0) {
+                for (Marker m : items1) {
+
+
+                    mapView.getOverlays().add(m);
+
+
+                }
+            } else if (helid == 1) {
+                for (Marker m : items2) {
+
+
+                    mapView.getOverlays().add(m);
+
+                }
+            }
+        }
+
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+    }
     private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
         String delims = "[,]";
@@ -1349,8 +1444,8 @@ mapView.getOverlays().clear();
 
             else if (subcategotyId ==36)
             {
-                marker1.setPosition(point);
-                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                marker2.setPosition(point);
+                marker2.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
                 InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
                 marker2.setInfoWindow(infoWindow);
                 items2.add(marker2);
