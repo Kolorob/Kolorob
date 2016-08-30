@@ -2417,7 +2417,7 @@ int index;
 
                             ArrayList<FinancialNewItem> financialNewItems;
                             financialNewItems = constructfinancialListItem();
-                            callMapFragmentWithFinancialInfo(ci.getCatName(), 6, financialNewItems);
+                            callMapFragmentWithFinancial(-1,financialNewItems,true);
                             mapcalledstatus=true;
 
 
@@ -2630,6 +2630,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
                              callMapFragmentWithLegal(index, null, false);
                              break;
+                         case AppConstants.FINANCIAL:
+
+                             callMapFragmentWithFinancial(index, null, false);
+                             break;
                          default:
                              break;
                      }
@@ -2662,6 +2666,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                          case AppConstants.LEGAL:
 
                              callMapFragmentWithLegal(index, null, true);
+                             break;
+                         case AppConstants.FINANCIAL:
+
+                             callMapFragmentWithFinancial(index, null, true);
                              break;
                          default:
                              break;
@@ -2789,47 +2797,42 @@ else {
         // EDD.clear();
     }
     private void callMapFragment(int locationNameId) {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        //   mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setLocationNameId(locationNameId);
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        fragment.setLocationName(getPlaceChoice());
+
+        fragment.setLocationNameId(locationNameId);
+        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        fragment.getMapViewController().setZoom(16);
         if (mapcalledstatus == true) {
             if(currentCategoryID==1){
                 educlicked=false;
-                mapFragment.setCategoryId(1);
+                fragment.setCategoryId(1);
                 ArrayList<EducationNewItem> educationServiceProviderItems;
                 educationServiceProviderItems = constructEducationListItem();
-                mapFragment.setEducationServiceProvider(educationServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
+                fragment.setEducationServiceProvider(educationServiceProviderItems);
+                fragment.eduicons();
+                fragment.Drawedu(-1,true);
             }
             else if(currentCategoryID==2){
                 helclicked=false;
-                mapFragment.setCategoryId(2);
+                fragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
                 healthServiceProviderItems = constructHealthListItem(2);
-                mapFragment.setHealthServiceProvider(healthServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
+                fragment.setHealthServiceProvider(healthServiceProviderItems);
+
             }
             else if(currentCategoryID==3){
                 entclicked=false;
-                mapFragment.setCategoryId(3);
+                fragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
-                mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
+                fragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+
             }
             else if(currentCategoryID==4) {
                 govclicked = false;
-                mapFragment.setCategoryId(4);
+                fragment.setCategoryId(4);
                 ArrayList<GovernmentNewItem> governmentNewItems;
                 governmentNewItems = constructgovListItem();
                 if (governmentNewItems.size() == 0) {
@@ -2845,39 +2848,29 @@ else {
                     alertDialog2.getWindow().setLayout(200, 300);
                     alertDialog2.show();
                 }
-                    mapFragment.setGovernmentNewItems(governmentNewItems);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.map_fragment, mapFragment);
-                    fragmentTransaction.commit();
+                    fragment.setGovernmentNewItems(governmentNewItems);
 
             }
             else if(currentCategoryID==5){
                 legclicked=false;
-                mapFragment.setCategoryId(5);
+                fragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
-                mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
+                fragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
+
             }
             else if(currentCategoryID==6){
                 finclicked=false;
-                mapFragment.setCategoryId(6);
+                fragment.setCategoryId(6);
                 ArrayList<FinancialNewItem> financialNewItems;
                 financialNewItems = constructfinancialListItem();
-                mapFragment.setFinancialServiceProvider(financialNewItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
+                fragment.setFinancialServiceProvider(financialNewItems);
+
             }
         } else {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+            fragmentTransaction.replace(R.id.map_fragment, fragment);
             fragmentTransaction.commit();
         }
     }
@@ -2999,19 +2992,6 @@ fragment.getMapViewController().setZoom(16);
 
     }
 
-   /* private void callMapFragmentWithGovInfo(String item_name,int cat_id,ArrayList<GovernmentNewItem> governmentNewItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setGovernmentNewItems(governmentNewItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
-    }*/
 
 
     /**********************************************************Methods for legal***************************************************/
@@ -3065,36 +3045,33 @@ fragment.getMapViewController().setZoom(16);
         financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo(getLocationNameEng());
         return financialNewItems;
     }
-    private ArrayList<FinancialNewItem> constructFinancialListItemForHeader(String header,String place)
+    private void callMapFragmentWithFinancial(int edid,ArrayList<FinancialNewItem> financialNewItems,boolean s)
     {
-        ArrayList<FinancialNewItem> financialNewItems;
-        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(header,place);
-        return financialNewItems;
+
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        fragment.getMapViewController().setZoom(16);
+
+        if(edid==-1)
+        {
+            fragment.setCategoryId(6);
+            fragment.setFinancialServiceProvider(financialNewItems);
+            fragment.finicons();
+            fragment.Drawfin(edid,s);
+            mainedcalled=true;
+        }
+
+        else {
+            if(mainedcalled)
+            {
+
+                mainedcalled=false;
+            }
+            fragment.Drawfin(edid,s);
+        }
+
     }
-    /*private ArrayList<FinancialNewItem> constructfinancialListItemForHeader(int cat_id, String header)
-    {
-        ArrayList<FinancialNewItem> financialServiceProvider;
-        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-      //  financialServiceProvider = financialServiceNewTable.getAllFinancialSubCategoriesInfoWithHead(cat_id, header);
-        return financialServiceProvider;
-    }*/
-
-    private void callMapFragmentWithFinancialInfo(String item_name,int cat_id,ArrayList<FinancialNewItem> financialNewItems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        //   mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(cat_id);
-
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setFinancialServiceProvider(financialNewItems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
-    }
-
 
 
 
