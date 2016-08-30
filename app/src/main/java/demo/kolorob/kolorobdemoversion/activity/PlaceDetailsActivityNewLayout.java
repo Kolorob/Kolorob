@@ -57,6 +57,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -112,6 +113,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
+    int count;
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
@@ -191,6 +193,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public CategoryItem getCi() {
         return ci;
     }
+    int[] flag2 =new int[15];
 
     public void setCi(CategoryItem ci) {
         this.ci = ci;
@@ -294,6 +297,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     boolean doubleBackToExitPressedOnce = false;
     int val;
     String checknum;
+    Boolean flag;
     boolean filterclicked=false;
     ArrayList<EducationNewItem> eduItem=new ArrayList<>();
     ArrayList<GovernmentNewItem> govItem=new ArrayList<>();
@@ -2142,7 +2146,7 @@ int index;
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Arrays.fill(flag2,1);
                 clicked.clear();
                 filterclicked=false;
                 fholder.setVisibility(View.GONE);
@@ -2199,7 +2203,7 @@ int index;
                             ArrayList<EducationNewItem> educationServiceProvider;
                             educationServiceProvider = constructEducationListItem();
                             mapcalledstatus=true;
-                            callMapFragmentWithEducation(0, educationServiceProvider);
+                            callMapFragmentWithEducation(-1, educationServiceProvider,true);
 
 
                         ivIcon.setImageResource(R.drawable.education_selected);
@@ -2238,7 +2242,7 @@ int index;
                             healthServiceProvider = constructHealthListItem(1);
                             mapcalledstatus=true;
 
-                            callMapFragmentWithHealth(0,healthServiceProvider);
+                            callMapFragmentWithHealth(-1,healthServiceProvider);
 
 
 
@@ -2599,8 +2603,9 @@ int index;
 
         final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconSCatList);
         tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
+ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]);
 
-        ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[ subcategory++]);
+
 
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
 
@@ -2611,7 +2616,7 @@ int index;
         tvName.setTextColor(Color.WHITE);
 
         tvName.setText(si.getSubCatHeaderBn());
-
+        flag=true;
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
 /**************************
@@ -2620,7 +2625,7 @@ int index;
  *
  *
  *
- *This OnClickListener will be called for clicking subcategory items from the top list
+ *This OnClickListener will be called for clicking subcategory items from the right list
  *
  *
  *
@@ -2632,283 +2637,47 @@ int index;
 
 
                  index = llSubCatListHolder.indexOfChild(v);
-                clicked.add(String.valueOf(index));
-                for (int i = 0; i < llSubCatListHolder.getChildCount(); i++) {
-                    if (i == index ) {
-                        if (i == 0) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin1_selected);
-                            continue;
-                        } else if (i == 1) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin2_selected);
-                            continue;
+                 if (flag2[index] == 1) {
+                     flag2[index] = 0; // 1 => Button ON
 
-                        } else if (i == 2) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin3_selected);
-                            continue;
-
-                        } else if (i == 3) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin4_selected);
-                            continue;
-
-                        } else if (i == 4) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin5_selected);
-                            continue;
-
-                        } else if (i == 5) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin6_selected);
-                            continue;
-
-                        } else if (i == 6) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin7_selected);
-                            continue;
-
-                        } else if (i == 7) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin8_selected);
-                            continue;
-
-                        } else if (i == 8) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin9_selected);
-                            continue;
-
-                        }
-
-                    } else {
-                        ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(i).findViewById(R.id.ivIconSCatList));
-                        // TextView tv=(TextView) ((ViewGroup)llSubCatListHolder.getChildAt(i)).getChildAt(1);
-                        // new background because something has changed
-                        // check if it's not the imageView you just clicked because you don't want to change its background
-                        // tv.setText("as");
+                     ivIcon.setImageResource(0);
+                     ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[index]);
+                     switch (currentCategoryID) {
 
 
-                    }
-                }
-                Collections.sort(clicked);
-                String cl = Collections.max(clicked);
-                int cll=Integer.parseInt(cl);
-                for (int ii = 0; ii < clicked.size(); ii++) {
-                    if(clicked.get(ii)==null)
-                        continue;
-                    else {
-                        int iit = Integer.parseInt(clicked.get(ii));
-
-                        if (iit == 0) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin1_selected);
-                            continue;
-                        } else if (iit == 1) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin2_selected);
-                            continue;
-
-                        } else if (iit == 2) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin3_selected);
-                            continue;
-
-                        } else if (iit == 3) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin4_selected);
-                            continue;
-
-                        } else if (iit == 4) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin5_selected);
-                            continue;
-
-                        } else if (iit == 5) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin6_selected);
-                            continue;
-
-                        } else if (iit == 6) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin7_selected);
-                            continue;
-
-                        } else if (iit== 7) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin8_selected);
-                            continue;
-
-                        } else if (iit == 8) {
-                            ImageView ivIcon = (ImageView) (llSubCatListHolder.getChildAt(iit).findViewById(R.id.ivIconSCatList));
-                            ivIcon.setImageResource(0);
-                            ivIcon.setImageResource(R.drawable.pin9_selected);
-                            continue;
-
-                        }
-
-                    }
-                }
+                         case AppConstants.EDUCATION:
 
 
+                             callMapFragmentWithEducation(index, null, false);
 
-//llSubCatListHolder.findViewById(R.id.f).findViewById(R.id.f2).findViewById(R.id.iv_sub_cat_icon).setBackground(R.drawable.off_button);
-                /*code for category*/
-                /*following code will be different for each category*/
-                /*category id 1 means education.
-                * category id 2 means health
-                * category id 3 means entertainment
-                * category id 4 means government
-                * category id 5 means legal
-                * category id 6 means financial
-                * category id 7 means job*/
 
-                if(nextChild!=null)
-                    nextChild.setBackgroundColor(Color.TRANSPARENT);
+                             break;
+                         default:
+                             break;
+                     }
 
-                switch (currentCategoryID) {
+                 } else {
+
+                     ivIcon.setImageResource(0);
+                     ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[index]);
+                     flag2[index] = 1; // 0 => Button OFF
+                     switch (currentCategoryID) {
+
+
+                         case AppConstants.EDUCATION:
+
+                             callMapFragmentWithEducation(index, null, true);
+
+
+                             break;
+                         default:
+                             break;
+                     }
+                 }
 
 
 
 
-
-                    case AppConstants.EDUCATION:
-
-                        Headerholder.add(si.getSubCatHeaderBn());
-
-                        for(int s=0;s<Headerholder.size();s++)
-                        {
-                            eduItem=constructEducationListItemForHeader(cat_id, Headerholder.get(s),getLocationNameEng());
-
-                        }
-
-                        for (int ss=0;ss<eduItem.size();ss++)
-                        {
-                            EDD.add(eduItem.get(ss));
-                        }
-
-
-                        callMapFragmentWithEducation(++index,null);
-
-                        break;
-                    case AppConstants.HEALTH:
-                        //TODO write necessary codes for health
-                        Headerholder.add(si.getSubCatHeaderBn());
-                        for(int s=0;s<Headerholder.size();s++)
-                        {
-
-                            healthItem = constructHealthListItemForHeader(cat_id,Headerholder.get(s),getLocationNameEng());
-                        }
-                        for (int ss=0;ss<healthItem.size();ss++)
-                        {
-                            HEL.add(healthItem.get(ss));
-                        }
-                        callMapFragmentWithHealth(++index,null);
-
-                        break;
-                    case AppConstants.ENTERTAINMENT:
-
-                        Headerholder.add(si.getSubCatHeaderBn());
-                        for(int s=0;s<Headerholder.size();s++)
-                        {
-
-                            entItem = constructEntertainmentListItemForHeader(cat_id, Headerholder.get(s),getLocationNameEng());
-
-                        }
-                        for (int ss=0;ss<entItem.size();ss++)
-                        {
-                            ENT.add(entItem.get(ss));
-                        }
-
-                        callMapFragmentWithEntertainmentInfo(si.getSubCatHeaderBn(), cat_id, ENT);
-                        break;
-                    //TODO write necessary codes for entertainment
-
-                    case AppConstants.GOVERNMENT:
-                        Headerholder.add(si.getSubCatHeaderBn());
-
-                        for(int s=0;s<Headerholder.size();s++)
-                        {
-                            govItem=constructGovernmentListItemForHeader(Headerholder.get(s),getLocationNameEng());
-
-                        }
-
-                        for (int ss=0;ss<govItem.size();ss++)
-                        {
-                            GOV.add(govItem.get(ss));
-                        }
-
-
-                        callMapFragmentWithGovInfo(si.getSubCatHeaderBn(), cat_id, GOV);
-                        break;
-                    case AppConstants.LEGAL:
-                        Headerholder.add(si.getSubCatHeaderBn());
-                        for(int s=0;s<Headerholder.size();s++)
-                        {
-                            legalItem = constructlegalaidListItemForHeader(Headerholder.get(s),getLocationNameEng());
-                        }
-                        for (int ss=0;ss<legalItem.size();ss++)
-                        {
-                            LEG.add(legalItem.get(ss));
-                        }
-                        callMapFragmentWithLegalAidInfo(si.getSubcatHeader(), cat_id, LEG);
-                        break;
-                    case AppConstants.FINANCIAL:
-                        Headerholder.add(si.getSubCatHeaderBn());
-
-                        for(int s=0;s<Headerholder.size();s++)
-                        {
-                            financialItem=constructFinancialListItemForHeader(Headerholder.get(s),getLocationNameEng());
-
-                        }
-
-                        for (int ss=0;ss<financialItem.size();ss++)
-                        {
-                            FIN.add(financialItem.get(ss));
-                        }
-
-
-                        callMapFragmentWithFinancialInfo(si.getSubCatHeaderBn(), cat_id, FIN);
-                        break;
-                    case AppConstants.JOB:
-//                        map.removeAllViews();
-//                        final AlertDialog alertDialog2 = new AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
-//
-//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-//                        alertDialog2.setButton(AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-//                                new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        alertDialog2.dismiss();
-//                                    }
-//                                });
-//                        alertDialog2.getWindow().setLayout(200, 300);
-//                        alertDialog2.show();
-                        break;
-
-
-                    default:
-                        break;
-                }
-                /*code for all*/
-
-                int p= getResources().getColor(R.color.subcategory_color);
 
 
                 // showSubCatListItem.setEnabled(true);
@@ -3024,26 +2793,26 @@ int index;
         fragmentTransaction.commit();
         // EDD.clear();
     }
-    private void callMapFragmentWithEducation(int edid,ArrayList<EducationNewItem> educationServiceProviderItems)
+    private void callMapFragmentWithEducation(int edid,ArrayList<EducationNewItem> educationServiceProviderItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(edid==0)
+        if(edid==-1)
         {
             fragment.setCategoryId(1);
             fragment.setEducationServiceProvider(educationServiceProviderItems);
             fragment.eduicons();
-            fragment.Drawedu(edid);
+            fragment.Drawedu(edid,s);
             mainedcalled=true;
         }
 
 else {
             if(mainedcalled)
             {
-                fragment.clear();
+
                 mainedcalled=false;
             }
-            fragment.Drawedu(edid);
+            fragment.Drawedu(edid,s);
         }
         // EDD.clear();
     }
@@ -3155,7 +2924,7 @@ else {
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(helid==0)
+        if(helid==-1)
         {
             fragment.setCategoryId(2);
             fragment.setHealthServiceProvider(healthServiceProviderItemNews);
@@ -3581,7 +3350,23 @@ else {
         return concatResult;
     }
 
+    public static boolean moreThanOnce(ArrayList<Integer> list, int searched) {
 
+        int numCount = 0;
+        boolean more = false;
+
+        for (int thisNum : list) {
+            if (thisNum == searched) {
+                numCount ++ ;
+            }
+        }
+
+        if (numCount > 1) {
+            more = true;
+        }
+
+        return more;
+    }
     private void calladapter(boolean status)
     {
         boolean instatus=status;
