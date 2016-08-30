@@ -307,39 +307,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
         }
 
-        switch (categoryId) {
-
-            case AppConstants.FINANCIAL:
-                for (FinancialNewItem et : financialServiceProvider) {
-
-                    //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                    subcategotyId2 = et.getRefnumm();
-                    latDouble = Double.parseDouble(et.getLat());
-                    longDouble = Double.parseDouble(et.getLon());
-                    ratingavg=et.getRating();
-
-                    if((ratingavg.equals("null"))||(ratingavg.equals("")))
-                    {
-                        ratingavg="পাওয়া যায় নি";
-
-                    }
-                    else  {
-                        ratingavgbn=EtoBconversion(ratingavg);
-
-                        ratingavg=ratingavgbn.concat(datevalue);
-                    }
-                    GeoPoint point = new GeoPoint(latDouble, longDouble);
-                    drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(), subcategotyId2);
-                }
-                break;
-            case AppConstants.JOB:
-
-                break;
-            default:
-                break;
-
-
-        }
+     
 
 
         //---
@@ -369,7 +337,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 public void eduicons()
 {
-    mapView.removeAllViewsInLayout();
+   mapView.removeAllViewsInLayout();
 mapView.getOverlays().clear();
     MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
     mapView.getOverlays().add(0, mapEventsOverlay);
