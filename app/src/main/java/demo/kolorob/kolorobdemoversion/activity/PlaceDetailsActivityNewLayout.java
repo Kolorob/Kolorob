@@ -2377,7 +2377,7 @@ int index;
                             ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
                             mapcalledstatus=true;
                             legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                            callMapFragmentWithLegalAidInfo(ci.getCatName(), 5, legalaidServiceProvider);
+                            callMapFragmentWithLegal(-1, legalaidServiceProvider,true);
 
 
 
@@ -2441,32 +2441,12 @@ int index;
 
                         Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
                         startActivity(intentJ);
-                        // JJOB.clear();
-                        //  jobclicked=true;
-                        // setFilcatid(currentCategoryID);
-                        //catstatus=true;
-                        //calladapter(catstatus);
-                        //filterholder.setVisibility(View.VISIBLE);
-                        //populatefilterwords(getFilcatid());
+
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.job_selected);
-                        // mapcalledstatus=false;
+
                         llSubCatListHolder.setVisibility(View.GONE);
-                        //   map.removeAllViews();
-//                        toolbar2.setVisibility(View.GONE);
-//                        listholder.setVisibility(View.GONE);
-//                        toolbar.setVisibility(View.VISIBLE);
-//                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNew.this).create();
-//
-//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-//                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-//                                new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        alertDialog2.dismiss();
-//                                    }
-//                                });
-//                        alertDialog2.getWindow().setLayout(200, 300);
-//                        alertDialog2.show();
+
                         break;
 
 
@@ -2477,18 +2457,10 @@ int index;
 
 
 
-                /**
-                 * code for all categories
-                 **/
-                //  showSubCatListItem.setEnabled(false);
-                //   showSubCatListItem.setVisibility(View.VISIBLE);
-                //  subCatItemList.setVisibility(View.GONE);
-                //   subCatItemListHeader.setVisibility(View.GONE);
-                //   insSubCat.setVisibility(View.VISIBLE);
-                // seeMap.setVisibility(View.VISIBLE);
+
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
 
-                // categoryHeader.setText(ci.getCatName());
+
 
                 if(SearchClicked==true)
                 {
@@ -2542,15 +2514,7 @@ int index;
         int i=0;
 
 
-        //    subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 
-//        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-//
-//        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
-//        subCatItemList.setAdapter(adapter);
-
-        //  MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groups, cat_id);
-        //   subCatItemList.setAdapter(adapter);
 
 
     }
@@ -2662,6 +2626,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
                              callMapFragmentWithGovernment(index, null, false);
                              break;
+                         case AppConstants.LEGAL:
+
+                             callMapFragmentWithLegal(index, null, false);
+                             break;
                          default:
                              break;
                      }
@@ -2690,6 +2658,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                          case AppConstants.GOVERNMENT:
 
                              callMapFragmentWithGovernment(index, null, true);
+                             break;
+                         case AppConstants.LEGAL:
+
+                             callMapFragmentWithLegal(index, null, true);
                              break;
                          default:
                              break;
@@ -3064,10 +3036,10 @@ fragment.getMapViewController().setZoom(16);
 
         if(edid==-1)
         {
-            fragment.setCategoryId(4);
-            fragment.setGovernmentNewItems(governmentNewItems);
-            fragment.govicons();
-            fragment.Drawgov(edid,s);
+            fragment.setCategoryId(5);
+            fragment.setLegalaidServiceProvider(legalAidServiceProviderItemNews);
+            fragment.legicons();
+            fragment.Drawleg(edid,s);
             mainedcalled=true;
         }
 
@@ -3077,7 +3049,7 @@ fragment.getMapViewController().setZoom(16);
 
                 mainedcalled=false;
             }
-            fragment.Drawgov(edid,s);
+            fragment.Drawleg(edid,s);
         }
 
     }
