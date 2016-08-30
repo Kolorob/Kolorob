@@ -1015,10 +1015,24 @@ public void Drawent(int edid,boolean state)
 
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
+mapView.getOverlays().clear();
+        Marker marker1 = new Marker(mapView);
+        Marker marker2 = new Marker(mapView);
+        Marker marker3 = new Marker(mapView);
+        Marker marker4 = new Marker(mapView);
+        Marker marker5 = new Marker(mapView);
+        Marker marker6 = new Marker(mapView);
+        mapView.getOverlays().clear();
+        marker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker3.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker4.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        marker5.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker6.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         for(int i=0;i<tokens.length;i++) {
             if (tokens[i]=="")continue;
             subcategotyId=Integer.parseInt(tokens[i]);
@@ -1026,24 +1040,64 @@ public void Drawent(int edid,boolean state)
             if (subcategotyId ==170 ||subcategotyId ==143 ||subcategotyId ==135 ||subcategotyId ==117 ||subcategotyId ==48
                     ||subcategotyId ==47 ||subcategotyId ==151 ||subcategotyId ==80 ||subcategotyId ==70 ||subcategotyId ==69
                     ||subcategotyId ==44 ||subcategotyId ==43)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            {
+                marker1.setPosition(point);
+                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker1.setInfoWindow(infoWindow);
+                items1.add(marker1);
+                items.add(marker1);
+            }
             else if (subcategotyId ==172 ||subcategotyId ==171 ||subcategotyId ==120 ||subcategotyId ==119
                     ||subcategotyId ==118 ||subcategotyId ==105 ||subcategotyId ==103 ||subcategotyId ==56 ||subcategotyId ==41
                     ||subcategotyId ==40 )
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+            {
+                marker2.setPosition(point);
+                marker2.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker2.setInfoWindow(infoWindow);
+                items2.add(marker2);
+                items.add(marker2);
+            }
             else if (subcategotyId ==99 ||subcategotyId ==98 )
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            {
+                marker3.setPosition(point);
+                marker3.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker3.setInfoWindow(infoWindow);
+                items3.add(marker3);
+                items.add(marker3);
+            }
             else if (subcategotyId ==122)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+            {
+                marker4.setPosition(point);
+                marker4.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker4.setInfoWindow(infoWindow);
+                items4.add(marker4);
+                items.add(marker4);
+            }
             else if (subcategotyId ==35)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            {
+                marker5.setPosition(point);
+                marker5.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker5.setInfoWindow(infoWindow);
+                items5.add(marker5);
+                items.add(marker5);
+            }
             else if (subcategotyId ==174)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            {
+                marker6.setPosition(point);
+                marker6.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker6.setInfoWindow(infoWindow);
+                items6.add(marker6);
+                items.add(marker6);
+            }
 
-            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-            marker.setInfoWindow(infoWindow);
 
-            mapView.getOverlays().add(marker);
+
             //marker.setTitle("Title of the marker");
         }
     }
