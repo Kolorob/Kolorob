@@ -1325,10 +1325,11 @@ mapView.getOverlays().clear();
     }
 
     private void drawMarkerLeg(GeoPoint point, String title, String address, String contact, String node, String subcategotyId2) {
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-
+        Marker marker1 = new Marker(mapView);
+        Marker marker2 = new Marker(mapView);
+        marker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().clear();
         String subcategory;
         subcategory=subcategotyId2.substring(1);
         String CurrentString = subcategory;
@@ -1337,14 +1338,25 @@ mapView.getOverlays().clear();
         {
             subcategotyId= Integer.parseInt(separated[i]);
             if (subcategotyId == 30)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+            {
+                marker1.setPosition(point);
+                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker1.setInfoWindow(infoWindow);
+                items1.add(marker1);
+                items.add(marker1);
+            }
 
             else if (subcategotyId ==36)
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
-            marker.setInfoWindow(infoWindow);
+            {
+                marker1.setPosition(point);
+                marker1.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+                marker2.setInfoWindow(infoWindow);
+                items2.add(marker2);
+                items.add(marker2);
+            }
 
-            mapView.getOverlays().add(marker);
         }
 
 
