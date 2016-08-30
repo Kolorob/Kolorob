@@ -2242,7 +2242,7 @@ int index;
                             healthServiceProvider = constructHealthListItem(1);
                             mapcalledstatus=true;
 
-                            callMapFragmentWithHealth(-1,healthServiceProvider);
+                            callMapFragmentWithHealth(-1,healthServiceProvider,true);
 
 
 
@@ -2649,8 +2649,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
 
                              callMapFragmentWithEducation(index, null, false);
+                             break;
+                         case AppConstants.HEALTH:
 
-
+                             callMapFragmentWithHealth(index, null, false);
                              break;
                          default:
                              break;
@@ -2667,8 +2669,11 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                          case AppConstants.EDUCATION:
 
                              callMapFragmentWithEducation(index, null, true);
+                             break;
 
+                         case AppConstants.HEALTH:
 
+                             callMapFragmentWithHealth(index, null, true);
                              break;
                          default:
                              break;
@@ -2797,6 +2802,8 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
         if(edid==-1)
         {
             fragment.setCategoryId(1);
@@ -2920,26 +2927,28 @@ else {
         return healthServiceProvider;
     }
 
-    private void callMapFragmentWithHealth(int helid,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews)
+    private void callMapFragmentWithHealth(int helid,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+      if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
         if(helid==-1)
         {
             fragment.setCategoryId(2);
             fragment.setHealthServiceProvider(healthServiceProviderItemNews);
             fragment.healthicons();
-            fragment.Drawhel(helid);
+            fragment.Drawhel(helid,s);
             mainedcalled=true;
         }
 
         else {
             if(mainedcalled)
             {
-                fragment.clear();
+
                 mainedcalled=false;
             }
-            fragment.Drawhel(helid);
+            fragment.Drawhel(helid,s);
         }
         // EDD.clear();
     }
