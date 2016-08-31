@@ -103,7 +103,7 @@
     <string name="canteen_facility">সরবরাহকৃত পানির অবস্থা </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="disclaimerhead"> মুখবন্ধা </string>
+    <string name="disclaimerhead"> মুখবন্ধ</string>
     <string name="abouthead"> কলরবের পরিচয় </string>
     <string name="interstitial_kolorob">ca-app-pub-9079587410696304/9489035875</string>
   <string name="disclaimertext">All content provided by Kolorob is provided for information purposes only. Kolorob is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the application. While the information contained within the application is periodically updated, Kolorob makes no guarantee of any kind and cannot be liable for any outdated or inaccurate information.

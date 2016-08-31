@@ -49,7 +49,7 @@
     <string name="feedback4">সন্তুষ্ট </string>
     <string name="feedback5">খুবই সন্তুষ্ট</string>
 
-    <string name="disclaimerhead"> মুখবন্ধা </string>
+    <string name="disclaimerhead"> মুখবন্ধ </string>
     <string name="abouthead"> কলরবের পরিচয় </string>
     <string name="title_activity_review">ReviewActivity</string>
     <string name="title_activity_feedback">FeedbackActivity</string>
