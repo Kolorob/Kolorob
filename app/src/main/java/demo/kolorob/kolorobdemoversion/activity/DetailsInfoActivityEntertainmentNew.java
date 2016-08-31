@@ -50,6 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
@@ -95,7 +96,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText,detailsEntertainment,other_detailsEnt;
-    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
+    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default,comments;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
@@ -105,6 +106,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     Float rating;
     RatingBar ratingBar;
     ListView alldata;
+    ArrayList<CommentItem> commentItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,16 +121,72 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        ArrayList<CommentItem> commentItems;
 
-        CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo();
+
 
 
         if (null != intent) {
             entertainmentServiceProviderItemNew = (EntertainmentServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
 
         }
+
+        comments = (ImageView)findViewById(R.id.comments);
+        CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
+
+        Log.d("Node Id","======="+entertainmentServiceProviderItemNew.getNodeId());
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(entertainmentServiceProviderItemNew.getNodeId());
+        int size= commentItems.size();
+        String[] phone = new String[size];
+        String[] date = new String[size];
+        String[] comment = new String[size];
+        int inc=0;
+
+        for (CommentItem commentItem:commentItems)
+        {
+            phone[inc]= commentItem.getService_id();
+            date[inc]=commentItem.getComment();
+            comment[inc]= commentItem.getDate();
+            inc++;
+        }
+
+        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
+
+
+        comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
+                final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
+                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                alertDialog.setContentView(promptView);
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+
+
+                final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
+
+                final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+
+                listView.setAdapter(comment_layout_adapter);
+                textView.setVisibility(View.GONE);
+
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+                alertDialog.setCancelable(false);
+
+
+                alertDialog.show();
+            }
+        });
 
 
 

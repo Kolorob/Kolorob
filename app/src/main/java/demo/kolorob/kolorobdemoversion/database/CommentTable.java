@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -166,11 +167,14 @@ public class CommentTable {
     }
 
 
-    public ArrayList<CommentItem> getAllFinancialSubCategoriesInfo() {
+    public ArrayList<CommentItem> getAllFinancialSubCategoriesInfo(String id) {
         ArrayList<CommentItem> subCatList = new ArrayList<>();
+        int ids=Integer.valueOf(id);
+        Log.d("id","======="+ids);
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+    //    Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + ids, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -206,9 +210,6 @@ public class CommentTable {
     }
 
     public String getdate(int id) {
-
-
-
         String olddate=null;
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + id, null);

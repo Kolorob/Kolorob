@@ -102,10 +102,46 @@ public class Comment_layout_adapter extends BaseAdapter
 
         holder.mobile.setText(mobile[position]);
         holder.comment.setText(comment[position]);
-        holder.date.setText(date[position]);
+        holder.date.setText(DateConverter(date[position]));
 
 
         return convertView;
+    }
+
+
+    public String DateConverter(String date)
+    {
+        String [] fff= date.split("-");
+
+        String year= fff[0];
+        String month =fff[1];
+        String day= fff [2];
+        if(month.equals("01"))
+            return English_to_bengali_number_conversion(day)+" "+"জানুয়ারী "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("02"))
+            return English_to_bengali_number_conversion(day)+" "+"ফেব্রুয়ারি "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("03"))
+            return English_to_bengali_number_conversion(day)+" "+"মার্চ"+ English_to_bengali_number_conversion(year);
+        else if(month.equals("04"))
+            return English_to_bengali_number_conversion(day)+" "+" এপ্রিল "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("05"))
+            return English_to_bengali_number_conversion(day)+" "+" মে "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("06"))
+            return English_to_bengali_number_conversion(day)+" "+"জুন "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("07"))
+            return English_to_bengali_number_conversion(day)+" "+"জুলাই "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("08"))
+            return English_to_bengali_number_conversion(day)+" "+"আগস্ট "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("09"))
+            return English_to_bengali_number_conversion(day)+" "+"সেপ্টেম্বর"+ English_to_bengali_number_conversion(year);
+        else if(month.equals("10"))
+            return English_to_bengali_number_conversion(day)+" "+" অক্টোবর"+ English_to_bengali_number_conversion(year);
+        else if(month.equals("11"))
+            return English_to_bengali_number_conversion(day)+" "+" নভেম্বর "+ English_to_bengali_number_conversion(year);
+        else if(month.equals("12"))
+            return English_to_bengali_number_conversion(day)+" "+" ডিসেম্বর "+ English_to_bengali_number_conversion(year);
+        else
+            return English_to_bengali_number_conversion(day)+" "+" ডিসেম্বর "+ English_to_bengali_number_conversion(year);
     }
 
     public String English_to_bengali_number_conversion(String english_number) {
