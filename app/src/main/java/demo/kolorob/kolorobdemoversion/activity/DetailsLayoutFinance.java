@@ -480,42 +480,48 @@ EditText feedback_comment;
 
     public void setRatingBar()
     {
-        getRequest(DetailsLayoutFinance.this, "http://kolorob.net/demo/api/get_sp_rating/financial?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            try {
-                                JSONArray jo = new JSONArray(apiContent);
-                                int size= jo.length();
-                                for(int i=0;i<size;i++)
-                                {
-                                    JSONObject ratingH=jo.getJSONObject(i);
-                                    String id= ratingH.getString("id");
+//        getRequest(DetailsLayoutFinance.this, "http://kolorob.net/demo/api/get_sp_rating/financial?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
+//                    @Override
+//                    public void onResponse(int status, String apiContent) {
+//                        if (status == AppConstants.SUCCESS_CODE) {
+//                            try {
+//                                JSONArray jo = new JSONArray(apiContent);
+//                                int size= jo.length();
+//                                for(int i=0;i<size;i++)
+//                                {
+//                                    JSONObject ratingH=jo.getJSONObject(i);
+//                                    String id= ratingH.getString("id");
+//
+//                                    if(id.equals(String.valueOf(financialNewItem.getFinId())))
+//                                    {
+//
+//
+//                                        rating=Float.parseFloat(ratingH.getString("avg"));
+                                        try {
+                                            ratingBar.setRating(Float.parseFloat(financialNewItem.getRating()));
+                                        }
+                                        catch (Exception e)
+                                        {
 
-                                    if(id.equals(String.valueOf(financialNewItem.getFinId())))
-                                    {
-
-
-                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        ratingBar.setRating(rating);
-                                        break;
-
-                                    }
-
-
-                                }
-
-
-
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-        );
+                                        }
+//                                        break;
+//
+//                                    }
+//
+//
+//                                }
+//
+//
+//
+//
+//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//        );
     }
 
 

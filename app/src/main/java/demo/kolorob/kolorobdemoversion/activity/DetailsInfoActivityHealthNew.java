@@ -568,42 +568,48 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            try {
-                                JSONArray jo = new JSONArray(apiContent);
-                                int size= jo.length();
+//        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
+//                    @Override
+//                    public void onResponse(int status, String apiContent) {
+//                        if (status == AppConstants.SUCCESS_CODE) {
+//                            try {
+//                                JSONArray jo = new JSONArray(apiContent);
+//                                int size= jo.length();
+//
+//                                for(int i=0;i<size;i++)
+//                                {
+//                                    JSONObject ratingH=jo.getJSONObject(i);
+//                                    String id= ratingH.getString("id");
+//                                    if(id.equals(healthServiceProviderItemNew.getId()))
+//                                    {
+//                                        Log.d("$$$$$$", "id " + id);
+//
+//                                        rating=Float.parseFloat(ratingH.getString("avg"));
+        try {
+            ratingBar.setRating(Float.parseFloat(healthServiceProviderItemNew.getRating()));
+        }
+        catch (Exception e)
+        {
 
-                                for(int i=0;i<size;i++)
-                                {
-                                    JSONObject ratingH=jo.getJSONObject(i);
-                                    String id= ratingH.getString("id");
-                                    if(id.equals(healthServiceProviderItemNew.getId()))
-                                    {
-                                        Log.d("$$$$$$", "id " + id);
-
-                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        ratingBar.setRating(rating);
-                                        break;
-
-                                    }
-
-
-                                }
-
-
-
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-        );
+        }
+//                                        break;
+//
+//                                    }
+//
+//
+//                                }
+//
+//
+//
+//
+//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//        );
     }
 
     public void verifyRegistration(View v) {
