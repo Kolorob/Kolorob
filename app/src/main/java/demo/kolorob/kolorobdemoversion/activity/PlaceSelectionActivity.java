@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Notification;
@@ -14,7 +15,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -76,11 +79,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Boolean doubleBackToExitPressedOnce;
     Toast t = null;
     Intent i;
+    String IMEINumber;
+
     private int height;
     private int width;
     Float  ratings;
     Boolean click=false;
-
+    private static final int REQUEST_PHONE_STATE = 0;
     InterstitialAd mInterstitialAd;
 
     float[][] mirpur10Coords = {
@@ -161,7 +166,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
-
+loadIMEI();
         // Load ads into Interstitial Ads
         mInterstitialAd.loadAd(adRequest);
 
@@ -525,7 +530,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         SharedPreferencesHelper.setFeedback(PlaceSelectionActivity.this, username);
         String phone = SharedPreferencesHelper.getNumber(PlaceSelectionActivity.this);
         TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-       if(phone.equals("")) phone=telephonyManager.getDeviceId();
+       if(phone.equals("")) phone=IMEINumber;
 
         if (phone.equals("")) {
             AlertMessage.showMessage(PlaceSelectionActivity.this, "ফোন নম্বরটি নিবন্ধন করা হয়নি",
@@ -684,4 +689,82 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         click=false;
         super.onResume();
     }
+    /**
+     * Called when the 'loadIMEI' function is triggered.
+     */
+    public void loadIMEI() {
+        // Check if the READ_PHONE_STATE permission is already available.
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // READ_PHONE_STATE permission has not been granted.
+            requestReadPhoneStatePermission();
+        } else {
+            // READ_PHONE_STATE permission is already been granted.
+            doPermissionGrantedStuffs();
+        }
+    }
+    /**
+     * Requests the READ_PHONE_STATE permission.
+     * If the permission has been denied previously, a dialog will prompt the user to grant the
+     * permission, otherwise it is requested directly.
+     */
+    private void requestReadPhoneStatePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_PHONE_STATE)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example if the user has previously denied the permission.
+            new AlertDialog.Builder(PlaceSelectionActivity.this)
+                    .setTitle("Permission Request")
+                    .setMessage(getString(R.string.givepermission))
+                    .setCancelable(false)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //re-request
+                            ActivityCompat.requestPermissions(PlaceSelectionActivity.this,
+                                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                                    REQUEST_PHONE_STATE);
+                        }
+                    });
+
+        } else {
+            // READ_PHONE_STATE permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
+                    REQUEST_PHONE_STATE);
+        }
+    }
+
+    /**
+     * Callback received when a permissions request has been completed.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+
+
+    }
+
+    private void alertAlert(String msg) {
+        new AlertDialog.Builder(PlaceSelectionActivity.this)
+                .setTitle("Permission Request")
+                .setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do somthing here
+                    }
+                });
+
+    }
+
+
+    public void doPermissionGrantedStuffs() {
+        //Have an  object of TelephonyManager
+        TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+        IMEINumber=tm.getDeviceId();
+
+
+    }
+
 }

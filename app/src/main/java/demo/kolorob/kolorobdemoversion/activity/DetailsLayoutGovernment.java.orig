@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,12 +49,16 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+<<<<<<< HEAD
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
+=======
+>>>>>>> 7516e37317f6724cf14829c5aab51123b051a5f6
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -62,41 +67,39 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 /**
  * Created by israt.jahan on 7/17/2016.
  */
-public class DetailsLayoutFinance extends AppCompatActivity {
+public class DetailsLayoutGovernment extends AppCompatActivity {
     Dialog dialog;
-    String username="kolorobapp";
-    String password="2Jm!4jFe3WgBZKEN";
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
     ImageView left_image, middle_image, right_image, email_btn;
     TextView address_text, phone_text, email_text;
     int width, height;
     TextView ups_text;
+    EditText feedback_comment;
     ListView courseListView, listView;
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
     Context con;
     String[] key;
     String[] value;
     int increment=0;
     ListView alldata;
-    FinancialNewItem financialNewItem;
-EditText feedback_comment;
-    ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
+    GovernmentNewItem governmentNewItem;
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
+
+    ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
+
+    String username="kolorobapp";
+    String password="2Jm!4jFe3WgBZKEN";
     private TextView ratingText;
-    private TextView serviceDetails, result, training, tuition;
+    private TextView result, training, tuition;
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1, rb2, rb3;
     String status = "", phone_num = "", registered = "";
     String result_concate = "";
+    private CheckBox checkBox;
     RatingBar ratingBar;
     Float rating;
+
     ArrayList<CommentItem> commentItems;
     ImageView comments;
 
@@ -104,25 +107,23 @@ EditText feedback_comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_layout_finance);
+        setContentView(R.layout.activity_details_layout_government);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
         con = this;
 
 
-
         Intent intent = getIntent();
 
 
         if (null != intent) {
-            financialNewItem = (FinancialNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIALNEW);
+            governmentNewItem = (GovernmentNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_GOV);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
-        FinancialServiceDetailsTable financialServiceDetailsTable = new FinancialServiceDetailsTable(DetailsLayoutFinance.this);
-        setRatingBar();
+        GovernmentServiceDetailsTable governmentServiceDetailsTable = new GovernmentServiceDetailsTable(DetailsLayoutGovernment.this);
 
 
         courseListView = (ListView) findViewById(R.id.courseListView);
@@ -140,26 +141,14 @@ EditText feedback_comment;
         address_text = (TextView) findViewById(R.id.address_text);
         phone_text = (TextView) findViewById(R.id.phone_text);
         email_text = (TextView) findViewById(R.id.email_text);
-        totalStudents = (TextView) findViewById(R.id.tv_total_students);
-        totalClasses = (TextView) findViewById(R.id.tv_total_class);
-        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-        playground = (TextView) findViewById(R.id.tv_playground);
-        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
-        transport = (TextView) findViewById(R.id.tv_transport_facility);
+
         ratingText = (TextView) findViewById(R.id.ratingText);
-        ratingBar=(RatingBar)findViewById(R.id.ratingBar);
 
         close_button = (ImageView) findViewById(R.id.close_buttonc);
 
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
-
-
-
-        distance_left = (ImageView) findViewById(R.id.distance_left);
-        email_btn = (ImageView) findViewById(R.id.right_side_email);
-        feedback = (ImageView) findViewById(R.id.feedback);
 
 
         key = new String[600];
@@ -172,48 +161,58 @@ EditText feedback_comment;
 
         mlp.setMargins(width/100,0,width/990,width/8);
 
-
-        CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
-        CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
-        CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
-        CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
-        CheckConcate("লাইন  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
-        CheckConcate("এভিনিউ  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
-        CheckConcate("পোস্ট অফিস  ", financialNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন ", financialNewItem.getPolicestation());
-
-        CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact2());
-        CheckConcate("ইমেইল  ", financialNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট  ", financialNewItem.getNode_website());
-        CheckConcate("ফেসবুক   ", financialNewItem.getNode_facebook());
-        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্ত ", financialNewItem.getNode_designation());
+        distance_left = (ImageView) findViewById(R.id.distance_left);
+        email_btn = (ImageView) findViewById(R.id.right_side_email);
+        feedback = (ImageView) findViewById(R.id.feedback);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        if(width<500)
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
 
 
-        timeProcessing("খোলার সময়  ", financialNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়  ", financialNewItem.getClosetime());
-        if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়  ", financialNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন  ", financialNewItem.getOffday());
+        setRatingBar();
 
-        CheckConcate("কাদের সাথে রেজিস্টার্ড   ", financialNewItem.getRegisteredwith());
+        CheckConcate("পরিচিত স্থান  ", governmentNewItem.getLandmark());
+        CheckConcate("ঠিকানা  ", governmentNewItem.getAddress());
+        CheckConcate("ফ্লোর  ", governmentNewItem.getFloor());
+        CheckConcate("বাড়ির নাম  ", governmentNewItem.getHousename());
+        CheckConcate("রাস্তা   ", governmentNewItem.getRoad());
+        CheckConcate("লাইন    ", governmentNewItem.getLine());
+        CheckConcate("এভিনিউ  ", governmentNewItem.getAvenue());
+        CheckConcate("পোস্ট অফিস  ", governmentNewItem.getPostoffice());
+        CheckConcate("পুলিশ স্টেশন ", governmentNewItem.getPolicestation());
 
-        financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
-        int tuition_size = financialServiceDetailsItems.size();
+        CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact2());
+        CheckConcate("ইমেইল  ", governmentNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট  ", governmentNewItem.getNode_website());
+        CheckConcate("ফেসবুক  ", governmentNewItem.getNode_facebook());
+        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি   ", governmentNewItem.getNode_designation());
+
+
+        timeProcessing("খোলার সময়  ", governmentNewItem.getOpeningtime());
+        timeProcessing("বন্ধে সময়  ", governmentNewItem.getClosetime());
+        if(!governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
+            breakTimeProcessing("বিরতির সময়  ", governmentNewItem.getBreaktime());
+        CheckConcate("বন্ধের দিন   ", governmentNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার ", governmentNewItem.getRegisterednumber());
+        CheckConcate("কাদের সাথে রেজিস্টার্ড   ", governmentNewItem.getRegisteredwith());
+
+        governmentServiceDetailsItems = governmentServiceDetailsTable.getgovinfo(governmentNewItem.getFinId());
+        int tuition_size = governmentServiceDetailsItems.size();
         if (tuition_size != 0) {
-            for (FinancialServiceDetailsItem financialServiceDetailsItem:   financialServiceDetailsItems) {
+            for (GovernmentServiceDetailsItem governmentServiceDetailsItem : governmentServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("সুবিধার ধরন  ", financialServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম  ", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", financialServiceDetailsItem.getServicecost()+" টাকা");
-                CheckConcate("মন্তব্য  ", financialServiceDetailsItem.getServiceremark());
+                CheckConcate("সুবিধার ধরন ", governmentServiceDetailsItem.getServicetype());
+                CheckConcate("সুবিধার নাম ", governmentServiceDetailsItem.getServicesubtype());
+                CheckConcate("খরচ  ", governmentServiceDetailsItem.getServicecost()+ "টাকা");
+                CheckConcate("মন্তব্য ", governmentServiceDetailsItem.getDetailstep());
             }
         }
 
 
 
-
+        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
+        alldata.setAdapter(defaultAdapter);
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,54 +224,20 @@ EditText feedback_comment;
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (financialNewItem.getNode_email().equals("")||financialNewItem.getNode_email().equals("null")) {
+                if (governmentNewItem.getNode_email().equals("")||governmentNewItem.getNode_email().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
-                    Helpes.sendEmail(DetailsLayoutFinance.this, financialNewItem.getNode_email());
+                    Helpes.sendEmail(DetailsLayoutGovernment.this, governmentNewItem.getNode_email());
                 }
             }
         });
-
-
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        //int upperhad_height=params2.height = height/6;
-
-        upperHand.setLayoutParams(params2);
-
-
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
-
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
-
-
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
-
-        middle_image.getLayoutParams().height = width / 8;
-        middle_image.getLayoutParams().width = width / 8;
-
-        close_button.getLayoutParams().height = width / 13;
-        close_button.getLayoutParams().width = width / 13;
-
-        right_image.getLayoutParams().height = width / 8;
-        right_image.getLayoutParams().width = width / 8;
-
-        left_image.getLayoutParams().height = width / 8;
-        left_image.getLayoutParams().width = width / 8;
-
         comments = (ImageView)findViewById(R.id.comments);
-        CommentTable commentTable = new CommentTable(DetailsLayoutFinance.this);
+        CommentTable commentTable = new CommentTable(DetailsLayoutGovernment.this);
 
 
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(financialNewItem.getFinId()));
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(governmentNewItem.getFinId()));
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
@@ -293,9 +258,9 @@ EditText feedback_comment;
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+                LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutGovernment.this);
                 final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
+                final Dialog alertDialog = new Dialog(DetailsLayoutGovernment.this);
                 alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 alertDialog.setContentView(promptView);
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -329,6 +294,41 @@ EditText feedback_comment;
 
 
 
+
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
+        //int upperhad_height=params2.height = height/6;
+
+        upperHand.setLayoutParams(params2);
+
+
+//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+//        // int  vd=params_upperText.height = height/24;
+//        // params_upperText.width = width;
+//        upperText.setLayoutParams(params_upperText);
+
+        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
+        int lett_img = params_left_way.height = (height * 3) / 24;
+        int right_img = params_left_way.width = width / 3;
+        left_way.setLayoutParams(params_left_way);
+
+        top_logo.getLayoutParams().height = width / 8;
+        top_logo.getLayoutParams().width = width / 8;
+
+        middle_image.getLayoutParams().height = width / 8;
+        middle_image.getLayoutParams().width = width / 8;
+
+        close_button.getLayoutParams().height = width / 13;
+        close_button.getLayoutParams().width = width / 13;
+
+        right_image.getLayoutParams().height = width / 8;
+        right_image.getLayoutParams().width = width / 8;
+
+        left_image.getLayoutParams().height = width / 8;
+        left_image.getLayoutParams().width = width / 8;
+
+
+
+
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int vx = params_middle_phone.height = (height * 3) / 24;
         params_middle_phone.width = width / 3;
@@ -344,21 +344,19 @@ EditText feedback_comment;
 
         ups_text.setTextSize(23);
         ratingText.setTextSize(23);
-        ups_text.setText(financialNewItem.getNamebn());
+        ups_text.setText(governmentNewItem.getNamebn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
-      //  feedbacks.setMargins(0, 0, width / 30, 0);
-        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
-        alldata.setAdapter(defaultAdapter);
+
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!financialNewItem.getNode_contact().equals("")) {
-                    callIntent1.setData(Uri.parse("tel:" + financialNewItem.getNode_contact()));
+                if (!governmentNewItem.getNode_contact().equals("")) {
+                    callIntent1.setData(Uri.parse("tel:" + governmentNewItem.getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
@@ -387,12 +385,12 @@ EditText feedback_comment;
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = financialNewItem.getLat().toString();
+                    String lat = governmentNewItem.getLat().toString();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = financialNewItem.getLon().toString();
+                    String lon = governmentNewItem.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
-                    String name= financialNewItem.getNamebn().toString();
-                    String node=String.valueOf(financialNewItem.getFinId());
+                    String name= governmentNewItem.getNamebn().toString();
+                    String node=String.valueOf(governmentNewItem.getFinId());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -415,7 +413,7 @@ EditText feedback_comment;
                     }
 
 
-                    Intent intentJ = new Intent(DetailsLayoutFinance.this,MapFragmentRouteOSM.class);
+                    Intent intentJ = new Intent(DetailsLayoutGovernment.this,MapFragmentRouteOSM.class);
                     startActivity(intentJ);
 
                 }
@@ -428,9 +426,12 @@ EditText feedback_comment;
 
                 else
                 {
+
+
                     AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutFinance.this, AlertDialog.THEME_HOLO_LIGHT).create();
+                                    "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+
+//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutGovernment.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
 //                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
 //                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -443,8 +444,8 @@ EditText feedback_comment;
 
                 }
 
-
             }
+
         });
     }
     private boolean checkPermission() {
@@ -472,7 +473,7 @@ EditText feedback_comment;
 
     public void verifyRegistration(View v){
 
-        String  register = SharedPreferencesHelper.getNumber(DetailsLayoutFinance.this);
+        String  register = SharedPreferencesHelper.getNumber(DetailsLayoutGovernment.this);
         phone_num=register;
 
         if (register.equals("")) {
@@ -490,17 +491,17 @@ EditText feedback_comment;
     public void feedBackAlert()
     {
 
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutGovernment.this);
         final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
+        final Dialog alertDialog = new Dialog(DetailsLayoutGovernment.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setContentView(promptView);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
 
 
-        final Button submit = (Button) promptView.findViewById(R.id.submit);
 
+        final Button submit = (Button) promptView.findViewById(R.id.submit);
         final Button close = (Button) promptView.findViewById(R.id.btnclose);
 
 
@@ -511,6 +512,7 @@ EditText feedback_comment;
                 alertDialog.dismiss();
             }
         });
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -534,55 +536,6 @@ EditText feedback_comment;
     }
 
 
-    public void setRatingBar()
-    {
-//        getRequest(DetailsLayoutFinance.this, "http://kolorob.net/demo/api/get_sp_rating/financial?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-//                    @Override
-//                    public void onResponse(int status, String apiContent) {
-//                        if (status == AppConstants.SUCCESS_CODE) {
-//                            try {
-//                                JSONArray jo = new JSONArray(apiContent);
-//                                int size= jo.length();
-//                                for(int i=0;i<size;i++)
-//                                {
-//                                    JSONObject ratingH=jo.getJSONObject(i);
-//                                    String id= ratingH.getString("id");
-//
-//                                    if(id.equals(String.valueOf(financialNewItem.getFinId())))
-//                                    {
-//
-//
-//                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        try {
-                                            ratingBar.setRating(Float.parseFloat(financialNewItem.getRating()));
-                                        }
-                                        catch (Exception e)
-                                        {
-
-                                        }
-//                                        break;
-//
-//                                    }
-//
-//
-//                                }
-//
-//
-//
-//
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                }
-//        );
-    }
-
-
-
-
     public void sendReviewToServer()
     {
         int rating;
@@ -598,13 +551,13 @@ EditText feedback_comment;
             rating=5;
         String comment="";
         comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutFinance.this,response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailsLayoutGovernment.this,response,Toast.LENGTH_SHORT).show();
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);
@@ -613,15 +566,15 @@ EditText feedback_comment;
                             Log.d(">>>>>","status "+forms);
                             //Log.d(">>>>>","status ");
 
-
                             if(forms.equals("true"))
                             {
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া হয়েছে",
+                                AlertMessage.showMessage(DetailsLayoutGovernment.this, "আপনার মতামত দেয়া হয়েছে",
                                         "আপনার মতামতের জন্য আপনাকে ধন্যবাদ!");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া  হয় নি",
+                                AlertMessage.showMessage(DetailsLayoutGovernment.this, "আপনার মতামত দেয়া  হয় নি",
                                         "দয়া করে আবার চেষ্টা করুন");
+
 
 
                         } catch (JSONException e) {
@@ -633,7 +586,7 @@ EditText feedback_comment;
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DetailsLayoutFinance.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailsLayoutGovernment.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }) {
 
@@ -647,19 +600,19 @@ EditText feedback_comment;
 
         };
 
- //Adding request to request queue
+        //Adding request to request queue
 
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutFinance.this);
-       requestQueue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutGovernment.this);
+        requestQueue.add(stringRequest);
     }
 
 
     public void requestToRegister() {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutGovernment.this);
         View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
 
 
-        final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
+        final Dialog alertDialog = new Dialog(DetailsLayoutGovernment.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setContentView(promptView);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -671,7 +624,7 @@ EditText feedback_comment;
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
         String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
         textAsk.setText(text);
-        if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutFinance.this))
+        if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutGovernment.this))
             textAsk.setTextSize(23);
         else
             textAsk.setTextSize(17);
@@ -682,7 +635,7 @@ EditText feedback_comment;
             @Override
             public void onClick(View v) {
 
-                Intent intentPhoneRegistration = new Intent(DetailsLayoutFinance.this, PhoneRegActivity.class);
+                Intent intentPhoneRegistration = new Intent(DetailsLayoutGovernment.this, PhoneRegActivity.class);
                 alertDialog.cancel();
                 startActivity(intentPhoneRegistration);
 
@@ -705,6 +658,52 @@ EditText feedback_comment;
     }
 //
 //
+public void setRatingBar()
+{
+//    getRequest(DetailsLayoutGovernment.this, "http://kolorob.net/demo/api/get_sp_rating/government?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
+//                @Override
+//                public void onResponse(int status, String apiContent) {
+//                    if (status == AppConstants.SUCCESS_CODE) {
+//                        try {
+//                            JSONArray jo = new JSONArray(apiContent);
+//                            int size= jo.length();
+//                            Log.d("$$$$$$", "size " + size);
+//                            for(int i=0;i<size;i++)
+//                            {
+//                                JSONObject ratingH=jo.getJSONObject(i);
+//                                String id= ratingH.getString("id");
+//                                Log.d("$$$$$$", "getFinId " + governmentNewItem.getFinId());
+//                                Log.d("$$$$$$", "id " + id);
+//                                if(id.equals(String.valueOf(governmentNewItem.getFinId())))
+//                                {
+//                                    Log.d("$$$$$$", "size ");
+                                    try {
+                                        ratingBar.setRating(Float.parseFloat(governmentNewItem.getRating()));
+                                    }
+                                    catch (Exception e)
+                                    {
+
+                                    }
+//                                    ratingBar.setRating(rating);
+//                                    break;
+//
+//                                }
+//
+//
+//                            }
+//
+//
+//
+//
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
+//    );
+}
 
 
 
@@ -746,18 +745,8 @@ EditText feedback_comment;
         return concatResult;
     }
 
-    public Boolean RegisteredOrNot() {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        // editor.putString("registered", lat);
-        registered = pref.getString("registered", null);
-        // phone_num = pref.getString("phone", null);
-        editor.commit();
-        if (registered.equals("yes"))
-            return true;
-        else
-            return true;
-    }
+
+
 
     private String timeConverter(String time) {
 
@@ -804,10 +793,9 @@ EditText feedback_comment;
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
             if (!value2.equals("null") || !value2.equals(", ")) {
-
-
+                String timeInBengali = "";
                 try {
-                    String timeInBengali = "";
+
                     value2 = value2 + ",";
 
                     String[] breakTIme = value2.split(",");
@@ -841,8 +829,7 @@ EditText feedback_comment;
 
 
 
-
-        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")) {
+        if (!value2.equals("null") && !value2.equals("") &&!value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;

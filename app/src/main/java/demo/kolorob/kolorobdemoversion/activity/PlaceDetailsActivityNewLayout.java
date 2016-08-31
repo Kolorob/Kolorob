@@ -340,7 +340,7 @@ int index;
         editor.putBoolean("Value", false);
         editor.putInt("ValueD", 23);
 
-        editor.commit();
+        editor.apply();
 
         NavigationCalled=false;
         NavigationCalledOnce=false;
@@ -3106,33 +3106,7 @@ fragment.getMapViewController().setZoom(16);
 
 
 
-   /* public void implementRouteDrawingFragmentOSM()
-    {
-        toolbar.setVisibility(View.GONE);
-        //listholder.setVisibility(View.GONE);
-        NavigationCalled=true;
-        MapFragmentRouteOSM mapFragmentOSM =new MapFragmentRouteOSM();
 
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment, mapFragmentOSM);
-        fragmentTransaction.commit();
-    }*/
-    //method for newmapfragment
-    private void callMapFragmentWithAll(int cat_id,ArrayList<AllHolder> allitems)
-    {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        // mapFragment.setMapIndicatorText(item_name);
-        mapFragment.setCategoryId(2);
-
-        mapFragment.setLocationNameId(locationNameId);
-        mapFragment.setAllitems(allitems);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-        fragmentTransaction.commit();
-    }
 
     public void Populateholder(String place)
     {

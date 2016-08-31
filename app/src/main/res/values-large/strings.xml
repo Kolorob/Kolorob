@@ -103,12 +103,11 @@
     <string name="canteen_facility">সরবরাহকৃত পানির অবস্থা </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="disclaimerhead"> পূর্ব ঘোষণা </string>
+    <string name="disclaimerhead"> মুখবন্ধ</string>
     <string name="abouthead"> কলরবের পরিচয় </string>
     <string name="interstitial_kolorob">ca-app-pub-9079587410696304/9489035875</string>
- <string name="disclaimertext"> Kolorob provides Kolorob Application as a service to the public.
-    Kolorob is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the application. While the information contained within the application is periodically updated, no guarantee is given that the information provided in this application is 100 % correct, complete, and up-to-date.
-    Although Kolorob Application may include links providing direct access to other Internet resources, including Web sites, Kolorob is not responsible for the accuracy or content of information contained in these sites.
-    Links from Kolorob Application to third-party sites do not constitute an endorsement by Kolorob of the parties or their products and services. The appearance on the Web site of advertisements and product or service information does not constitute an endorsement by Kolorob, and Kolorob has not investigated the claims made by any advertiser. Product and service information is based solely on the information collected from the service providers.
+  <string name="disclaimertext">All content provided by Kolorob is provided for information purposes only. Kolorob is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the application. While the information contained within the application is periodically updated, Kolorob makes no guarantee of any kind and cannot be liable for any outdated or inaccurate information.
+Any information and links to external third-party internet sources or websites are provided as a courtesy and should not construed as an endorsement by Kolorob. Kolorob is therefore, not responsible for the accuracy of the content of information contained in these sites. Product and service information is based solely on the information collected from the service providers.
+
  </string>
 </resources>

@@ -1,11 +1,8 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -41,10 +38,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +49,6 @@ import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
@@ -64,8 +56,6 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
-
-import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by arafat on 28/05/2016.
@@ -485,7 +475,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
-                    editor.commit();
+                    editor.apply();
 
 
                     String Longitude = pref.getString("Longitude", null);

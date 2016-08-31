@@ -51,7 +51,11 @@ import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+<<<<<<< HEAD
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+=======
+>>>>>>> 7516e37317f6724cf14829c5aab51123b051a5f6
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;

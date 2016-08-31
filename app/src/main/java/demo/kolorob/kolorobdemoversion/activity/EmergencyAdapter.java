@@ -141,7 +141,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 					editor.putString("Latitude", splitStr[0]);
 					editor.putString("Longitude", splitStr[1]);
 					editor.putString("Name", values[i]);
-					editor.commit();
+					editor.apply();
 					Intent intentJ = new Intent(EmergencyAdapter.this.getContext(), MapFragmentRouteOSM.class);
 					getContext().startActivity(intentJ);
 				}

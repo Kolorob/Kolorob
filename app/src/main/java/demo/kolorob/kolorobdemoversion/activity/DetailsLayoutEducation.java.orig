@@ -55,7 +55,11 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetai
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+<<<<<<< HEAD
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+=======
+>>>>>>> 7516e37317f6724cf14829c5aab51123b051a5f6
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
