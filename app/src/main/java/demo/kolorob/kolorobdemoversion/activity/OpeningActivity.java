@@ -1734,4 +1734,6 @@ public class OpeningActivity extends Activity {
         }
     }
 
-}
+
+    }
+
