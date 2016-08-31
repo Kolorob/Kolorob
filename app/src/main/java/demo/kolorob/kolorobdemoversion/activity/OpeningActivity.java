@@ -480,7 +480,7 @@ public class OpeningActivity extends Activity {
 
             {
 
-                settings.edit().putLong("time", System.currentTimeMillis()).commit();
+                settings.edit().putLong("time", System.currentTimeMillis()).apply();
 // get the time and make a date out of it
 
 //                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
@@ -538,10 +538,10 @@ public class OpeningActivity extends Activity {
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString("First", first);
-                        settings.edit().putLong("time", System.currentTimeMillis()).commit();
+                        settings.edit().putLong("time", System.currentTimeMillis()).apply();
 
                         editor.putInt("KValue", countofDb);
-                        editor.commit();
+                        editor.apply();
 //                                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
 //                                pd.setIndeterminate(true);
 //                                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
@@ -690,7 +690,7 @@ public class OpeningActivity extends Activity {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("First", first);
 
-                    editor.commit();
+                    editor.apply();
                     handler.removeCallbacks(this);
                     Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                     frameAnimation.stop();
@@ -1110,7 +1110,7 @@ public class OpeningActivity extends Activity {
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("KValue", countofDb);
-                editor.commit();
+                editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
                 makeToastWithShortbread("Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
             }
