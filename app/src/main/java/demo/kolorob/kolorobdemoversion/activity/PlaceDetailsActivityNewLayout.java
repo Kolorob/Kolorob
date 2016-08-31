@@ -2839,7 +2839,8 @@ else {
                     ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
                     healthServiceProviderItems = constructHealthListItem(2);
                     mapFragment.setHealthServiceProvider(healthServiceProviderItems);
-
+                    prev_fragment.healthicons();
+                    prev_fragment.Drawhel(-1,true);
                 }
                 else if(currentCategoryID==3){
                     entclicked=false;
