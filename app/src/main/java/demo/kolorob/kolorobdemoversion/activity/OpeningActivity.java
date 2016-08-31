@@ -329,13 +329,17 @@ public class OpeningActivity extends Activity {
             try {
                 try {
                     String body = app_ver + ",yes";
-                    stream.write(body.getBytes());
+                    if (stream!=null){
+                    stream.write(body.getBytes());}
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } finally {
                 try {
+                    if(stream!=null){
+
                     stream.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -352,13 +356,16 @@ public class OpeningActivity extends Activity {
             }
             try {
                 try {
-                    in.read(bytes);
+                    if(in!=null){
+                        int b= in.read(bytes);}
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } finally {
                 try {
-                    in.close();
+                    if(in!=null) {
+                        in.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -381,13 +388,16 @@ public class OpeningActivity extends Activity {
             }
             try {
                 try {
-                    in.read(bytes);
+                    if(in!=null){
+                      int b=  in.read(bytes);}
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } finally {
                 try {
-                    in.close();
+                    if(in!=null) {
+                        in.close();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -435,7 +445,7 @@ public class OpeningActivity extends Activity {
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putBoolean("firstRun", false);
-                        editor.commit();
+                        editor.apply();
                         finish();
                     }
                 });
