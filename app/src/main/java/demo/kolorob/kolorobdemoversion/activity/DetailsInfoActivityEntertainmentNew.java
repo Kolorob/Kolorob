@@ -51,10 +51,12 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
+import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -116,6 +118,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         Log.d("ccc","######"+width);
 
         Intent intent = getIntent();
+
+        ArrayList<CommentItem> commentItems;
+
+        CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo();
 
 
         if (null != intent) {
@@ -830,7 +837,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
                            }
 
-//                                        break;
+//                                  break;
 //
 //                                    }
 //

@@ -164,13 +164,33 @@ public class CommentTable {
         String date = cursor.getString(3);
         return new CommentItem(id, phone,comment, date);
     }
-    public String getavg(int id) {
+
+
+    public ArrayList<CommentItem> getAllFinancialSubCategoriesInfo() {
+        ArrayList<CommentItem> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(commentItem(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+
+    public String getavg() {
 
 
         String avg = null;
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
 
         if (cursor.moveToFirst()) {
             do {
