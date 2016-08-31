@@ -2801,7 +2801,8 @@ else {
         fragment.setLocationName(getPlaceChoice());
 
         fragment.setLocationNameId(locationNameId);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        if(locationNameId==1)
+            fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
         else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
         fragment.getMapViewController().setZoom(16);
         if (mapcalledstatus == true) {
