@@ -50,11 +50,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
+import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -99,6 +102,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     private CheckBox checkBox;
     RatingBar ratingBar;
     Float rating;
+
+    ArrayList<CommentItem> commentItems;
+    ImageView comments;
 
 
     @Override
@@ -230,6 +236,65 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 }
             }
         });
+        comments = (ImageView)findViewById(R.id.comments);
+        CommentTable commentTable = new CommentTable(DetailsLayoutGovernment.this);
+
+
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(governmentNewItem.getFinId()));
+        int size= commentItems.size();
+        String[] phone = new String[size];
+        String[] date = new String[size];
+        String[] comment = new String[size];
+        int inc=0;
+
+        for (CommentItem commentItem:commentItems)
+        {
+            phone[inc]= commentItem.getService_id();
+            date[inc]=commentItem.getComment();
+            comment[inc]= commentItem.getDate();
+            inc++;
+        }
+
+        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
+
+
+        comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutGovernment.this);
+                final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                final Dialog alertDialog = new Dialog(DetailsLayoutGovernment.this);
+                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                alertDialog.setContentView(promptView);
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+
+
+                final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
+
+                final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+
+                listView.setAdapter(comment_layout_adapter);
+                textView.setVisibility(View.GONE);
+
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+                alertDialog.setCancelable(false);
+
+
+                alertDialog.show();
+            }
+        });
+
+
 
 
 
