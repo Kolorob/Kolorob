@@ -806,40 +806,48 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
     public void setRatingBar()
     {
-        getRequest(DetailsInfoActivityEntertainmentNew.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            try {
-                                JSONArray jo = new JSONArray(apiContent);
-                                int size= jo.length();
-                                for(int i=0;i<size;i++)
-                                {
-                                    JSONObject ratingH=jo.getJSONObject(i);
-                                    String id= ratingH.getString("id");
-                                    if(id.equals(entertainmentServiceProviderItemNew.getNodeId()))
-                                    {
+//        getRequest(DetailsInfoActivityEntertainmentNew.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
+//                    @Override
+//                    public void onResponse(int status, String apiContent) {
+//                        if (status == AppConstants.SUCCESS_CODE) {
+//                            try {
+//                                JSONArray jo = new JSONArray(apiContent);
+//                                int size= jo.length();
+//                                for(int i=0;i<size;i++)
+//                                {
+//                                    JSONObject ratingH=jo.getJSONObject(i);
+//                                    String id= ratingH.getString("id");
+//                                    if(id.equals(entertainmentServiceProviderItemNew.getNodeId()))
+//                                    {
+//
+//                                        rating=Float.parseFloat(ratingH.getString("avg"));
 
-                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        ratingBar.setRating(rating);
-                                        break;
+                           try {
+                               ratingBar.setRating(Float.parseFloat(entertainmentServiceProviderItemNew.getRating()));
+                           }
+                           catch (Exception e)
+                           {
 
-                                    }
+                           }
 
-
-                                }
-
-
-
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-        );
+//                                        break;
+//
+//                                    }
+//
+//
+//                                }
+//
+//
+//
+//
+//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//        );
     }
 
     public void requestToRegister() {

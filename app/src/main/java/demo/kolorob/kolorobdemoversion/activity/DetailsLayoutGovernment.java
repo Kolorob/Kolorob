@@ -598,44 +598,49 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 //
 public void setRatingBar()
 {
-    getRequest(DetailsLayoutGovernment.this, "http://kolorob.net/demo/api/get_sp_rating/government?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-                @Override
-                public void onResponse(int status, String apiContent) {
-                    if (status == AppConstants.SUCCESS_CODE) {
-                        try {
-                            JSONArray jo = new JSONArray(apiContent);
-                            int size= jo.length();
-                            Log.d("$$$$$$", "size " + size);
-                            for(int i=0;i<size;i++)
-                            {
-                                JSONObject ratingH=jo.getJSONObject(i);
-                                String id= ratingH.getString("id");
-                                Log.d("$$$$$$", "getFinId " + governmentNewItem.getFinId());
-                                Log.d("$$$$$$", "id " + id);
-                                if(id.equals(String.valueOf(governmentNewItem.getFinId())))
-                                {
-                                    Log.d("$$$$$$", "size ");
-                                    rating=Float.parseFloat(ratingH.getString("avg"));
+//    getRequest(DetailsLayoutGovernment.this, "http://kolorob.net/demo/api/get_sp_rating/government?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
+//                @Override
+//                public void onResponse(int status, String apiContent) {
+//                    if (status == AppConstants.SUCCESS_CODE) {
+//                        try {
+//                            JSONArray jo = new JSONArray(apiContent);
+//                            int size= jo.length();
+//                            Log.d("$$$$$$", "size " + size);
+//                            for(int i=0;i<size;i++)
+//                            {
+//                                JSONObject ratingH=jo.getJSONObject(i);
+//                                String id= ratingH.getString("id");
+//                                Log.d("$$$$$$", "getFinId " + governmentNewItem.getFinId());
+//                                Log.d("$$$$$$", "id " + id);
+//                                if(id.equals(String.valueOf(governmentNewItem.getFinId())))
+//                                {
+//                                    Log.d("$$$$$$", "size ");
+                                    try {
+                                        ratingBar.setRating(Float.parseFloat(governmentNewItem.getRating()));
+                                    }
+                                    catch (Exception e)
+                                    {
 
-                                    ratingBar.setRating(rating);
-                                    break;
-
-                                }
-
-
-                            }
-
-
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-    );
+                                    }
+//                                    ratingBar.setRating(rating);
+//                                    break;
+//
+//                                }
+//
+//
+//                            }
+//
+//
+//
+//
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }
+//    );
 }
 
 
