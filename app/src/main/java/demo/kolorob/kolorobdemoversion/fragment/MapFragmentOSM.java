@@ -307,7 +307,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
         }
 
-     
+
 
 
         //---
