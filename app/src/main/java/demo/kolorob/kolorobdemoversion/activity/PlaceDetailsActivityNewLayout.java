@@ -2848,7 +2848,8 @@ else {
                     ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
                     entertainmentServiceProviderItems = constructEntertainmentListItem(3);
                     mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
-
+                    prev_fragment.enticons();
+                    prev_fragment.Drawent(-1,true);
                 }
                 else if(currentCategoryID==4) {
                     govclicked = false;
@@ -2869,7 +2870,8 @@ else {
                         alertDialog2.show();
                     }
                     mapFragment.setGovernmentNewItems(governmentNewItems);
-
+                    prev_fragment.govicons();
+                    prev_fragment.Drawgov(-1,true);
 
                 }
                 else if(currentCategoryID==5){
@@ -2878,7 +2880,8 @@ else {
                     ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                     legalAidServiceProviderItems = constructlegalaidListItem(5);
                     mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
-
+                    prev_fragment.legicons();
+                    prev_fragment.Drawleg(-1,true);
                 }
                 else if(currentCategoryID==6){
                     finclicked=false;
@@ -2886,7 +2889,8 @@ else {
                     ArrayList<FinancialNewItem> financialNewItems;
                     financialNewItems = constructfinancialListItem();
                     mapFragment.setFinancialServiceProvider(financialNewItems);
-
+                    prev_fragment.finicons();
+                    prev_fragment.Drawfin(-1,true);
                 }
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
                 showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
