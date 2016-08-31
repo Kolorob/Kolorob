@@ -2797,42 +2797,48 @@ else {
         // EDD.clear();
     }
     private void callMapFragment(int locationNameId) {
-        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        fragment.setLocationName(getPlaceChoice());
+        MapFragmentOSM mapFragment = new MapFragmentOSM();
+        mapFragment.setLocationName(getPlaceChoice());
+        mapFragment.setLocationNameId(locationNameId);
 
-        fragment.setLocationNameId(locationNameId);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        fragment.getMapViewController().setZoom(16);
         if (mapcalledstatus == true) {
             if(currentCategoryID==1){
                 educlicked=false;
-                fragment.setCategoryId(1);
+                mapFragment.setCategoryId(1);
                 ArrayList<EducationNewItem> educationServiceProviderItems;
                 educationServiceProviderItems = constructEducationListItem();
-                fragment.setEducationServiceProvider(educationServiceProviderItems);
-                fragment.eduicons();
-                fragment.Drawedu(-1,true);
+                mapFragment.setEducationServiceProvider(educationServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+                fragmentTransaction.commit();
+
             }
             else if(currentCategoryID==2){
                 helclicked=false;
-                fragment.setCategoryId(2);
+                mapFragment.setCategoryId(2);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
                 healthServiceProviderItems = constructHealthListItem(2);
-                fragment.setHealthServiceProvider(healthServiceProviderItems);
-
+                mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
             }
             else if(currentCategoryID==3){
                 entclicked=false;
-                fragment.setCategoryId(3);
+                mapFragment.setCategoryId(3);
                 ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
                 entertainmentServiceProviderItems = constructEntertainmentListItem(3);
-                fragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
-
+                mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
             }
             else if(currentCategoryID==4) {
                 govclicked = false;
-                fragment.setCategoryId(4);
+                mapFragment.setCategoryId(4);
                 ArrayList<GovernmentNewItem> governmentNewItems;
                 governmentNewItems = constructgovListItem();
                 if (governmentNewItems.size() == 0) {
@@ -2848,29 +2854,39 @@ else {
                     alertDialog2.getWindow().setLayout(200, 300);
                     alertDialog2.show();
                 }
-                    fragment.setGovernmentNewItems(governmentNewItems);
+                    mapFragment.setGovernmentNewItems(governmentNewItems);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+                    fragmentTransaction.commit();
 
             }
             else if(currentCategoryID==5){
                 legclicked=false;
-                fragment.setCategoryId(5);
+                mapFragment.setCategoryId(5);
                 ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
                 legalAidServiceProviderItems = constructlegalaidListItem(5);
-                fragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
-
+                mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
             }
             else if(currentCategoryID==6){
                 finclicked=false;
-                fragment.setCategoryId(6);
+                mapFragment.setCategoryId(6);
                 ArrayList<FinancialNewItem> financialNewItems;
                 financialNewItems = constructfinancialListItem();
-                fragment.setFinancialServiceProvider(financialNewItems);
-
+                mapFragment.setFinancialServiceProvider(financialNewItems);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
+                fragmentTransaction.commit();
             }
         } else {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.map_fragment, fragment);
+            fragmentTransaction.replace(R.id.map_fragment, mapFragment);
             fragmentTransaction.commit();
         }
     }
