@@ -52,12 +52,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
+import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
@@ -113,6 +116,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private String compare_Data="";
     int compareValue;
     private Double screenSize;
+    ArrayList<CommentItem> commentItems;
+    ImageView comments;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -186,6 +191,66 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         top_logo = (ImageView) findViewById(R.id.top_logo);
         //cross=(ImageView)findViewById(R.id.cross_jb);
 //        school_logo_default = (ImageView) findViewById(R.id.service_logo);
+
+
+
+        comments = (ImageView)findViewById(R.id.comments);
+        CommentTable commentTable = new CommentTable(DetailsInfoActivityHealthNew.this);
+
+        Log.d("Node Id","======="+healthServiceProviderItemNew.getId());
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(healthServiceProviderItemNew.getId());
+        int size= commentItems.size();
+        String[] phone = new String[size];
+        String[] date = new String[size];
+        String[] comment = new String[size];
+        int inc=0;
+
+        for (CommentItem commentItem:commentItems)
+        {
+            phone[inc]= commentItem.getService_id();
+            date[inc]=commentItem.getComment();
+            comment[inc]= commentItem.getDate();
+            inc++;
+        }
+
+        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
+
+
+        comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
+                final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
+                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                alertDialog.setContentView(promptView);
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+
+
+                final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
+
+                final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+
+                listView.setAdapter(comment_layout_adapter);
+                textView.setVisibility(View.GONE);
+
+
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+                alertDialog.setCancelable(false);
+
+
+                alertDialog.show();
+            }
+        });
 
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
