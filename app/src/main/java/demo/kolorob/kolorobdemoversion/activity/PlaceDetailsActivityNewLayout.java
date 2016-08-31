@@ -313,11 +313,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
 TextView uptext;
+    boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
     EducationServiceProviderItem nulledu;
     EducationNewItem nulledu2;
     String nodefromback;
 int index;
+    MapFragmentOSM mapFragment;
     public String getNodefromback() {
         return nodefromback;
     }
@@ -331,7 +333,7 @@ int index;
 
         super.onCreate(savedInstanceState);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
-        // Toast.makeText(getApplicationContext(), "Now I am in onResume ", Toast.LENGTH_SHORT).show();
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
@@ -589,7 +591,7 @@ int index;
         //subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         map.setVisibility(View.VISIBLE);
-        callMapFragment(locationNameId);
+
         //showsearch=(RelativeLayout)findViewById(R.id.show);
         // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
         //seeMap = (Button) findViewById(R.id.btn_see_map);
@@ -678,7 +680,6 @@ int index;
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
 
-        // callMapFragment();
         spItems = (KolorobSpinner) findViewById(R.id.areaitems);
         spItems.setVisibility(View.VISIBLE);
         arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
@@ -812,7 +813,7 @@ int index;
                 uptext.setVisibility(View.VISIBLE);
                 CompareClicked=false;
                 if(InCompare==false) {
-                    callMapFragment(locationNameId);
+                  //  callMapFragment(locationNameId);
 
                 }
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
@@ -2797,96 +2798,104 @@ else {
         // EDD.clear();
     }
     private void callMapFragment(int locationNameId) {
-        MapFragmentOSM mapFragment = new MapFragmentOSM();
-        mapFragment.setLocationName(getPlaceChoice());
-        mapFragment.setLocationNameId(locationNameId);
-        if (mapcalledstatus == true) {
-            if(currentCategoryID==1){
-                educlicked=false;
-                mapFragment.setCategoryId(1);
-                ArrayList<EducationNewItem> educationServiceProviderItems;
-                educationServiceProviderItems = constructEducationListItem();
-                mapFragment.setEducationServiceProvider(educationServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment, mapFragment);
-                fragmentTransaction.commit();
 
-            }
-            else if(currentCategoryID==2){
-                helclicked=false;
-                mapFragment.setCategoryId(2);
-                ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
-                healthServiceProviderItems = constructHealthListItem(2);
-                mapFragment.setHealthServiceProvider(healthServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
-            }
-            else if(currentCategoryID==3){
-                entclicked=false;
-                mapFragment.setCategoryId(3);
-                ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
-                entertainmentServiceProviderItems = constructEntertainmentListItem(3);
-                mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
-            }
-            else if(currentCategoryID==4) {
-                govclicked = false;
-                mapFragment.setCategoryId(4);
-                ArrayList<GovernmentNewItem> governmentNewItems;
-                governmentNewItems = constructgovListItem();
-                if (governmentNewItems.size() == 0) {
-                    final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+        FragmentManager fragmentManager = getFragmentManager();
+        if(mapfirst) {
 
-                    alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-                    alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    alertDialog2.dismiss();
-                                }
-                            });
-                    alertDialog2.getWindow().setLayout(200, 300);
-                    alertDialog2.show();
-                }
-                    mapFragment.setGovernmentNewItems(governmentNewItems);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.map_fragment, mapFragment);
-                    fragmentTransaction.commit();
 
-            }
-            else if(currentCategoryID==5){
-                legclicked=false;
-                mapFragment.setCategoryId(5);
-                ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
-                legalAidServiceProviderItems = constructlegalaidListItem(5);
-                mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
-            }
-            else if(currentCategoryID==6){
-                finclicked=false;
-                mapFragment.setCategoryId(6);
-                ArrayList<FinancialNewItem> financialNewItems;
-                financialNewItems = constructfinancialListItem();
-                mapFragment.setFinancialServiceProvider(financialNewItems);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.map_fragment,mapFragment);
-                fragmentTransaction.commit();
-            }
-        } else {
-            FragmentManager fragmentManager = getFragmentManager();
+            mapFragment = new MapFragmentOSM();
+            mapFragment.setLocationName(getPlaceChoice());
+            mapFragment.setLocationNameId(locationNameId);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.map_fragment, mapFragment);
+            fragmentTransaction.replace(R.id.map_fragment, mapFragment, "MAP");
+            fragmentTransaction.addToBackStack("MAP");
+            fragmentManager.executePendingTransactions();
             fragmentTransaction.commit();
+            mapfirst=false;
+        }
+
+
+        MapFragmentOSM prev_fragment = (MapFragmentOSM) getFragmentManager().findFragmentByTag("MAP");
+        if(prev_fragment!=null)
+        {
+            if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+            else prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+            prev_fragment.getMapViewController().setZoom(16);
+            if (mapcalledstatus == true) {
+                Arrays.fill(flag2,1);
+                if(currentCategoryID==1){
+                    educlicked=false;
+                    prev_fragment.setCategoryId(1);
+                    ArrayList<EducationNewItem> educationServiceProviderItems;
+                    educationServiceProviderItems = constructEducationListItem();
+                    prev_fragment.setEducationServiceProvider(educationServiceProviderItems);
+                    prev_fragment.eduicons();
+                    prev_fragment.Drawedu(-1,true);
+
+                }
+                else if(currentCategoryID==2){
+                    helclicked=false;
+                    mapFragment.setCategoryId(2);
+                    ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
+                    healthServiceProviderItems = constructHealthListItem(2);
+                    mapFragment.setHealthServiceProvider(healthServiceProviderItems);
+                    prev_fragment.healthicons();
+                    prev_fragment.Drawhel(-1,true);
+                }
+                else if(currentCategoryID==3){
+                    entclicked=false;
+                    mapFragment.setCategoryId(3);
+                    ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
+                    entertainmentServiceProviderItems = constructEntertainmentListItem(3);
+                    mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
+                    prev_fragment.enticons();
+                    prev_fragment.Drawent(-1,true);
+                }
+                else if(currentCategoryID==4) {
+                    govclicked = false;
+                    mapFragment.setCategoryId(4);
+                    ArrayList<GovernmentNewItem> governmentNewItems;
+                    governmentNewItems = constructgovListItem();
+                    if (governmentNewItems.size() == 0) {
+                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+
+                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
+                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        alertDialog2.dismiss();
+                                    }
+                                });
+                        alertDialog2.getWindow().setLayout(200, 300);
+                        alertDialog2.show();
+                    }
+                    mapFragment.setGovernmentNewItems(governmentNewItems);
+                    prev_fragment.govicons();
+                    prev_fragment.Drawgov(-1,true);
+
+                }
+                else if(currentCategoryID==5){
+                    legclicked=false;
+                    mapFragment.setCategoryId(5);
+                    ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItems;
+                    legalAidServiceProviderItems = constructlegalaidListItem(5);
+                    mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
+                    prev_fragment.legicons();
+                    prev_fragment.Drawleg(-1,true);
+                }
+                else if(currentCategoryID==6){
+                    finclicked=false;
+                    mapFragment.setCategoryId(6);
+                    ArrayList<FinancialNewItem> financialNewItems;
+                    financialNewItems = constructfinancialListItem();
+                    mapFragment.setFinancialServiceProvider(financialNewItems);
+                    prev_fragment.finicons();
+                    prev_fragment.Drawfin(-1,true);
+                }
+                ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
+                showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
+            }
+
         }
     }
 

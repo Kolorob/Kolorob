@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -254,7 +253,7 @@ public class OpeningActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         //=========================================Bazar Calling starts here============================================
-        //load the bazar
+       /* //load the bazar
         loadBazar();
         //save a bazar
         BazarItem b = new BazarItem();
@@ -265,7 +264,7 @@ public class OpeningActivity extends Activity {
         b.condition = "qwdadasd";
         b.contact_person = "ASDsdSDS";
         b.price = 50;
-        saveBazar(b);
+        saveBazar(b);*/
         //=========================================Bazar Calling Ends here============================================
 
         super.onCreate(savedInstanceState);
