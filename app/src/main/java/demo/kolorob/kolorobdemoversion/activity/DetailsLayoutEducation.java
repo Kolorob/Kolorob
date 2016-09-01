@@ -172,6 +172,10 @@ ArrayList<String>examname=new ArrayList<>();
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
         comments = (ImageView)findViewById(R.id.comments);
+
+
+        comments.getLayoutParams().height=width/8;
+        comments.getLayoutParams().width=width/8;
         CommentTable commentTable = new CommentTable(DetailsLayoutEducation.this);
 
         Log.d("Node Id","======="+educationNewItem.getEduId());

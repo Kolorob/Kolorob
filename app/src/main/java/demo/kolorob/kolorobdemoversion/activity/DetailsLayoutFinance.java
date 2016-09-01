@@ -272,6 +272,11 @@ EditText feedback_comment;
         CommentTable commentTable = new CommentTable(DetailsLayoutFinance.this);
 
 
+
+        comments.getLayoutParams().height=width/8;
+        comments.getLayoutParams().width=width/8;
+
+
         commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(financialNewItem.getFinId()));
         int size= commentItems.size();
         String[] phone = new String[size];

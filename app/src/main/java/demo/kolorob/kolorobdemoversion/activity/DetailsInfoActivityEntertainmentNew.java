@@ -123,6 +123,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         comments = (ImageView)findViewById(R.id.comments);
         CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
 
+        comments.getLayoutParams().height=width/8;
+        comments.getLayoutParams().width=width/8;
+
         Log.d("Node Id","======="+entertainmentServiceProviderItemNew.getNodeId());
         commentItems=commentTable.getAllFinancialSubCategoriesInfo(entertainmentServiceProviderItemNew.getNodeId());
         int size= commentItems.size();

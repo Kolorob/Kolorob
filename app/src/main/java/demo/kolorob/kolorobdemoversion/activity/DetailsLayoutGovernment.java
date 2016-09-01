@@ -323,6 +323,10 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         left_image.getLayoutParams().width = width / 8;
 
 
+        comments.getLayoutParams().height=width/8;
+        comments.getLayoutParams().width=width/8;
+
+
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();

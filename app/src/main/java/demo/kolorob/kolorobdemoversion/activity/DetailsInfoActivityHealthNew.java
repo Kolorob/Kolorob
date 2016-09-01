@@ -185,6 +185,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         comments = (ImageView)findViewById(R.id.comments);
+
+        comments.getLayoutParams().height=width/8;
+        comments.getLayoutParams().width=width/8;
         CommentTable commentTable = new CommentTable(DetailsInfoActivityHealthNew.this);
 
         Log.d("Node Id","======="+healthServiceProviderItemNew.getId());

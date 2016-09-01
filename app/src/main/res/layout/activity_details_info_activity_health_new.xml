@@ -346,11 +346,11 @@
 
 
                 android:id="@+id/feedback"/>
-
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/comments_icon"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/comment_icon"
                 android:onClick="verifyRegistration"
                 android:id="@+id/comments"/>
 
