@@ -41,8 +41,10 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
@@ -113,6 +115,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client2;
+    String datevalue,datevaluebn;
 
 
     @Override
@@ -395,7 +398,21 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 //        school_logo_default.getLayoutParams().height = width / 5;
 //        school_logo_default.getLayoutParams().width = width / 5;
+        SharedPreferences settings = DetailsInfoActivityHealthNew.this.getSharedPreferences("prefs", 0);
+        Date date2 = new Date(settings.getLong("time", 0));
+        Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
 
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        else
+        {
+            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
+            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+        }
+        Toast.makeText(getApplicationContext(),
+                datevalue, Toast.LENGTH_SHORT)
+                .show();
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int vx = params_middle_phone.height = (height * 3) / 24;

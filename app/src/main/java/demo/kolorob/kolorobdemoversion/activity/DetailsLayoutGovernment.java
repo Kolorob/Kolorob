@@ -42,8 +42,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
@@ -77,7 +79,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     GovernmentNewItem governmentNewItem;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
-
+    String datevalue,datevaluebn;
     ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
 
     String username="kolorobapp";
@@ -257,7 +259,21 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
+        SharedPreferences settings = DetailsLayoutGovernment.this.getSharedPreferences("prefs", 0);
+        Date date2 = new Date(settings.getLong("time", 0));
+        Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
 
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        else
+        {
+            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
+            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+        }
+        Toast.makeText(getApplicationContext(),
+                datevalue, Toast.LENGTH_SHORT)
+                .show();
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
