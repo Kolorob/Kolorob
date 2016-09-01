@@ -505,7 +505,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutGovernment.this,response,Toast.LENGTH_SHORT).show();
+                       
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);

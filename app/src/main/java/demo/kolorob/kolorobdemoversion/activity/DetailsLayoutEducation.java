@@ -115,7 +115,6 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
         con = this;
-        setRatingBar();
 
         Intent intent = getIntent();
 
@@ -124,6 +123,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
+
 
 
         EducationTuitionDetailsTable educationTuitionDetailsTable = new EducationTuitionDetailsTable(DetailsLayoutEducation.this);
@@ -157,7 +157,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         close_button = (ImageView) findViewById(R.id.cross_jb);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
         key = new String[600];
-
+        setRatingBar();
         value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
@@ -687,7 +687,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutEducation.this,response,Toast.LENGTH_SHORT).show();
+
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);

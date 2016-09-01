@@ -766,7 +766,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsInfoActivityEntertainmentNew.this, response, Toast.LENGTH_SHORT).show();
+
                         Log.d("========", "status " + response);
                         try {
 
@@ -827,7 +827,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
 
         try {
-            ratingBar.setRating(Float.parseFloat(entertainmentServiceProviderItemNew.getRating()));
+            float f= Float.parseFloat(entertainmentServiceProviderItemNew.getRating());
+
+            ratingBar.setRating(f);
+            ratingBar.setIsIndicator(true);
+
+
         }
         catch (Exception e)
         {

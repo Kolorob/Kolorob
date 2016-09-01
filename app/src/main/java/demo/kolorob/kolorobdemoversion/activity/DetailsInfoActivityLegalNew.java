@@ -594,7 +594,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsInfoActivityLegalNew.this, response, Toast.LENGTH_SHORT).show();
+
                         Log.d("========", "status " + response);
                         try {
 

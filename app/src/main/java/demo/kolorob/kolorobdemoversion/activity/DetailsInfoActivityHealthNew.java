@@ -704,7 +704,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsInfoActivityHealthNew.this, response, Toast.LENGTH_SHORT).show();
+
                         Log.d("========", "status " + response);
                         try {
 

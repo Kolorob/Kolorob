@@ -558,7 +558,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutFinance.this,response,Toast.LENGTH_SHORT).show();
+
                         // Log.d(">>>>>","status "+response);
                         try {
                             JSONObject jo = new JSONObject(response);
