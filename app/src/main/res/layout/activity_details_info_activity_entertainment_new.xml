@@ -9,7 +9,7 @@
     android:layout_marginBottom="8dp"
 
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew">
 
 
 
@@ -114,7 +114,6 @@
                         <RatingBar
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
-                            android:isIndicator="true"
 
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -241,34 +240,34 @@
 
 
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content">
 
 
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                        <!--android:text="Large Text"-->
-                        <!--android:visibility="gone"-->
-                        <!--android:id="@+id/other_detailsEnt" />-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="Large Text"-->
+                <!--android:visibility="gone"-->
+                <!--android:id="@+id/other_detailsEnt" />-->
 
 
-                    <ListView
-                        android:layout_width="wrap_content"
-                        android:gravity="left"
-                        android:fadeScrollbars="false"
-                        android:scrollbarStyle="outsideInset"
-                        android:paddingRight="5dp"
-                        style="@style/scrollbar_shape_style"
-                        android:layout_height="match_parent"
-                        android:id="@+id/allData" />
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:gravity="left"
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="outsideInset"
+                    android:paddingRight="5dp"
+                    style="@style/scrollbar_shape_style"
+                    android:layout_height="match_parent"
+                    android:id="@+id/allData" />
 
 
-                </LinearLayout>
+            </LinearLayout>
 
 
 
@@ -313,6 +312,8 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+
+
                 android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"
 
@@ -320,13 +321,6 @@
 
 
                 android:id="@+id/feedback"/>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/comment_icon"
-                android:onClick="verifyRegistration"
-                android:id="@+id/comments"/>
 
         </LinearLayout>
 

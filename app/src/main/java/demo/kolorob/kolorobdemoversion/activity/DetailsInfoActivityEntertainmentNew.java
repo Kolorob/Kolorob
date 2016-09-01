@@ -43,13 +43,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -86,7 +83,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private TextView hostel;
     private TextView transport;
     private TextView ratingText,detailsEntertainment,other_detailsEnt;
-    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default,comments;
+    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1,rb2,rb3;
     String status="",phone_num="",registered="";
@@ -96,8 +93,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     Float rating;
     RatingBar ratingBar;
     ListView alldata;
-    private int inc=0;
-    ArrayList<CommentItem> commentItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,88 +108,10 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-
-
-
         if (null != intent) {
             entertainmentServiceProviderItemNew = (EntertainmentServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
 
         }
-
-        comments = (ImageView)findViewById(R.id.comments);
-        CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
-
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
-
-        Log.d("Node Id","======="+entertainmentServiceProviderItemNew.getNodeId());
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(entertainmentServiceProviderItemNew.getNodeId());
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        String[] comment = new String[size];
-
-
-        for (CommentItem commentItem:commentItems)
-        {
-            if(!commentItem.getComment().equals(""))
-            {
-                phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
-                comment[inc]= commentItem.getDate();
-                inc++;
-            }
-
-        }
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
-
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(inc==0)
-                {
-                    AlertMessage.showMessage(DetailsInfoActivityEntertainmentNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
-
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-
-
-                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-
-                    listView.setAdapter(comment_layout_adapter);
-                    textView.setVisibility(View.GONE);
-
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-                }
-
-            }
-        });
 
 
 
@@ -222,7 +139,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         transport = (TextView) findViewById(R.id.tv_transport_facility);
         ratingText=(TextView)findViewById(R.id.ratingText);
 
-       // headerx=(TextView)findViewById(R.id.headerx);
+        // headerx=(TextView)findViewById(R.id.headerx);
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
@@ -283,7 +200,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
 
 
-      //  params_upperText.setMargins(width/3,0,0,0);
+        //  params_upperText.setMargins(width/3,0,0,0);
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
@@ -348,12 +265,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         value = new String[600];
 
 
-         //   other_detailsEnt.setVisibility(View.VISIBLE);
-            for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
-                CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-                CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
-                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
-                CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
+        //   other_detailsEnt.setVisibility(View.VISIBLE);
+        for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
+            CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
+            CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
+            CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
+            CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
 
@@ -373,13 +290,13 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
-        breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
+            breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
 
-         ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
+        ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
 
-       // detailsEntertainment.setText(result_concate);
+        // detailsEntertainment.setText(result_concate);
 
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
@@ -388,7 +305,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
 
-     //   other_detailsEnt.setText(result_concate);
+        //   other_detailsEnt.setText(result_concate);
 
         Log.d("Entertainment Parsing","###### "+entertainmentServiceProviderItemNew.getNodeWebsite());
 
@@ -493,7 +410,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
-                    editor.apply();
+                    editor.commit();
 
 
                     String Longitude = pref.getString("Longitude", null);
@@ -542,7 +459,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             }
         });
 
-  }
+    }
 //
 //    public void verifyRegistration(View v){
 //
@@ -895,15 +812,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 //
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
 
-                           try {
-                               ratingBar.setRating(Float.parseFloat(entertainmentServiceProviderItemNew.getRating()));
-                           }
-                           catch (Exception e)
-                           {
+        try {
+            ratingBar.setRating(Float.parseFloat(entertainmentServiceProviderItemNew.getRating()));
+        }
+        catch (Exception e)
+        {
 
-                           }
+        }
 
-//                                  break;
+//                                        break;
 //
 //                                    }
 //
@@ -941,7 +858,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityEntertainmentNew.this))
-        textAsk.setTextSize(23);
+            textAsk.setTextSize(23);
         else
             textAsk.setTextSize(17);
         alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -1064,7 +981,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         return timeInBengali;
 
     }
-//    public Boolean RegisteredOrNot()
+    //    public Boolean RegisteredOrNot()
 //    {
 //        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = pref.edit();
@@ -1090,7 +1007,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
 
 
-}
+    }
 
 
 
