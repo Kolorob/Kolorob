@@ -1112,7 +1112,7 @@ public class OpeningActivity extends Activity {
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                makeToastWithShortbread("Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
+                makeToastWithShortbread("তথ্য সংগ্রহ চলছে");
             }
         }
 
