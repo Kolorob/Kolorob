@@ -109,6 +109,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     ArrayList<CommentItem> commentItems;
     ImageView comments;
 ArrayList<String>examname=new ArrayList<>();
+    int inc=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,14 +185,17 @@ ArrayList<String>examname=new ArrayList<>();
         String[] phone = new String[size];
         String[] date = new String[size];
         String[] comment = new String[size];
-        int inc=0;
 
         for (CommentItem commentItem:commentItems)
         {
-            phone[inc]= commentItem.getService_id();
-            date[inc]=commentItem.getComment();
-            comment[inc]= commentItem.getDate();
-            inc++;
+            if(!commentItem.getComment().equals(""))
+            {
+                phone[inc]= commentItem.getService_id();
+                date[inc]=commentItem.getComment();
+                comment[inc]= commentItem.getDate();
+                inc++;
+            }
+
         }
 
         final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
@@ -200,36 +204,46 @@ ArrayList<String>examname=new ArrayList<>();
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
-                final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);
-                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                alertDialog.setContentView(promptView);
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                alertDialog.show();
+
+                if(inc==0)
+                {
+                    AlertMessage.showMessage(DetailsLayoutEducation.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
+                }
+
+                else
+                {
+                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
+                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                    final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);
+                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    alertDialog.setContentView(promptView);
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
 
 
-                final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
+                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
 
-                final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
 
-                listView.setAdapter(comment_layout_adapter);
-                textView.setVisibility(View.GONE);
-
-
-                close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
+                    listView.setAdapter(comment_layout_adapter);
+                    textView.setVisibility(View.GONE);
 
 
-                alertDialog.setCancelable(false);
+                    close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
 
 
-                alertDialog.show();
+                    alertDialog.setCancelable(false);
+
+
+                    alertDialog.show();
+                }
+
             }
         });
 

@@ -239,11 +239,16 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         for (CommentItem commentItem:commentItems)
         {
-            phone[inc]= commentItem.getService_id();
-            date[inc]=commentItem.getComment();
-            comment[inc]= commentItem.getDate();
-            inc++;
+            if(!commentItem.getComment().equals(""))
+            {
+                phone[inc]= commentItem.getService_id();
+                date[inc]=commentItem.getComment();
+                comment[inc]= commentItem.getDate();
+                inc++;
+            }
+
         }
+
 
         final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
 
