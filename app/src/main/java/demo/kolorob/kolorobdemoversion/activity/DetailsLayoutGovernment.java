@@ -470,19 +470,20 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     public void sendReviewToServer()
     {
         int rating;
-        if(status.equals(R.string.feedback1))
-            rating=1;
-        else if(status.equals(R.string.feedback2))
-            rating=2;
-        else if(status.equals(R.string.feedback3))
-            rating=3;
-        else if(status.equals(R.string.feedback4))
-            rating=4;
+        if(status.equals(getString(R.string.feedback1)))
+            rating= 1;
+        else if(status.equals(getString(R.string.feedback2)))
+            rating=  2;
+        else if(status.equals(getString(R.string.feedback3)))
+            rating= 3;
+        else if(status.equals(getString(R.string.feedback4)))
+            rating=  4;
         else
-            rating=5;
+            rating= 5;
+
         String comment="";
         comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
