@@ -316,6 +316,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/comment_icon"
                 android:onClick="verifyRegistration"
+                android:layout_marginRight="12dp"
                 android:id="@+id/comments"/>
             <ImageView
                 android:layout_width="50dp"

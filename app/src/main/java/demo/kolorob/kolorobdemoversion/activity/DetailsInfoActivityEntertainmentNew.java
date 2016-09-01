@@ -39,8 +39,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
@@ -67,6 +69,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     ImageView left_image,middle_image,right_image,email_btn;
     TextView address_text,phone_text,email_text;
     int width,height;
+    String datevalue,datevaluebn;
 
     TextView ups_text,headerx;
     ListView courseListView,listView;
@@ -235,6 +238,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         top_logo=(ImageView)findViewById(R.id.top_logo);
         cross=(ImageView)findViewById(R.id.cross_jb);
 //        school_logo_default=(ImageView)findViewById(R.id.service_logo);
+
+
 
 
 
