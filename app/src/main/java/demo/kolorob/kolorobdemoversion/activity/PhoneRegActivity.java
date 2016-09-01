@@ -110,7 +110,9 @@ public class PhoneRegActivity extends Activity {
                     public void onResponse(String response) {
                        // Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
                        // Log.d(">>>>>","status "+response);
+
                         String notvalid=response;
+
                         try {
 
                             //
@@ -124,7 +126,7 @@ public class PhoneRegActivity extends Activity {
 
                             }
 
-                            else if(response.equals(notvalid))
+                            else if(response.equals("\"Invalid Phone Number\""))
                             {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত", " আপনার দেয়া নাম্বারটি সঠিক নয়");
                             }
