@@ -644,6 +644,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 int selected = feedRadio.getCheckedRadioButtonId();
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
+
                 //  declareRadiobutton();
                 sendReviewToServer();
 
@@ -660,20 +661,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
     public void sendReviewToServer()
     {
-        int rating;
-        if(status.equals(R.string.feedback1))
-            rating=1;
-        else if(status.equals(R.string.feedback2))
-            rating=2;
-        else if(status.equals(R.string.feedback3))
-            rating=3;
-        else if(status.equals(R.string.feedback4))
-            rating=4;
-        else
-            rating=5;
+        int rating= getRating(status);;
+
         String comment="";
         comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -969,5 +961,19 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
 
+    }
+    public int getRating(String status)
+    {
+
+        if(status.equals(getString(R.string.feedback1)))
+           return 1;
+        else if(status.equals(getString(R.string.feedback2)))
+            return 2;
+        else if(status.equals(getString(R.string.feedback3)))
+            return 3;
+        else if(status.equals(getString(R.string.feedback4)))
+            return 4;
+        else
+            return 5;
     }
 }
