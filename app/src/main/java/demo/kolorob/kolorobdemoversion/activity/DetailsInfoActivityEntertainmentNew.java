@@ -39,8 +39,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
@@ -163,7 +165,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        if(width<500)
+        if(width<=400)
             ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         setRatingBar();
 
@@ -231,7 +233,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 //        school_logo_default.getLayoutParams().height =  width/5;
 //        school_logo_default.getLayoutParams().width =  width/5;
-
+        SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int vx = params_middle_phone.height = (height * 3) / 24;
@@ -239,8 +241,20 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         middle_phone.setLayoutParams(params_middle_phone);
 
 
+        Date date2 = new Date(settings.getLong("time", 0));
+        Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
 
-
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        else
+        {
+            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
+            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+        }
+        Toast.makeText(getApplicationContext(),
+                datevalue, Toast.LENGTH_SHORT)
+                .show();
 
         LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
         int vc = params_right_email.height = (height * 3) / 24;
