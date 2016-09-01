@@ -9,7 +9,7 @@
     android:layout_marginBottom="8dp"
 
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew">
 
 
 
@@ -117,7 +117,6 @@
                         <RatingBar
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
-                            android:isIndicator="true"
 
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -328,23 +327,15 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.3"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right">
-
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/comment_icon"
-                android:onClick="verifyRegistration"
-                android:id="@+id/comments"/>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="12dp"
 
 
                 android:background="@drawable/feedback_icon"
@@ -354,7 +345,6 @@
 
 
                 android:id="@+id/feedback"/>
-
 
         </LinearLayout>
 
