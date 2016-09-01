@@ -43,13 +43,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -94,10 +91,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     String status="",phone_num="",registered="";
     String result_concate="";
     private CheckBox checkBox;
-    ArrayList<CommentItem> commentItems;
-    ImageView comments;
     EditText feedback_comment;
-    int inc=0;
 
 
     @Override
@@ -222,82 +216,6 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         middle_phone.setLayoutParams(params_middle_phone);
 
 
-        comments = (ImageView)findViewById(R.id.comments);
-
-
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
-        CommentTable commentTable = new CommentTable(DetailsInfoActivityLegalNew.this);
-
-        Log.d("Node Id","======="+legalAidServiceProviderItemNew.getIdentifierId());
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        String[] comment = new String[size];
-
-
-        for (CommentItem commentItem:commentItems)
-        {
-            if(!commentItem.getComment().equals(""))
-            {
-                phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
-                comment[inc]= commentItem.getDate();
-                inc++;
-            }
-
-        }
-
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
-
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(inc==0)
-                {
-                    AlertMessage.showMessage(DetailsInfoActivityLegalNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
-
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsInfoActivityLegalNew.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-
-
-                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-
-                    listView.setAdapter(comment_layout_adapter);
-                    textView.setVisibility(View.GONE);
-
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-                }
-
-            }
-        });
 
 
 
@@ -338,13 +256,13 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
         CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
         CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
-         CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
+        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
         CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
 
         CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
         timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
         if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
-        breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
+            breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
         CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
         CheckConcate("রেজিস্ট্রেশনমাধ্যমে", legalAidServiceProviderItemNew.getRegisteredWith());
@@ -456,7 +374,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
 
-                    editor.apply();
+                    editor.commit();
 
 
                     String Longitude = pref.getString("Longitude", null);
@@ -525,13 +443,13 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 //
 //
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        try {
-                                            ratingBar.setRating(Float.parseFloat(legalAidServiceProviderItemNew.getRating()));
-                                        }
-                                        catch (Exception e)
-                                        {
+        try {
+            ratingBar.setRating(Float.parseFloat(legalAidServiceProviderItemNew.getRating()));
+        }
+        catch (Exception e)
+        {
 
-                                        }
+        }
 //                                        break;
 //
 //                                    }
@@ -618,22 +536,22 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         if (!value2.equals("null") || !value2.equals(", ")) {
             String timeInBengali = "";
 
-         try {
-             value2 = value2 + ",";
+            try {
+                value2 = value2 + ",";
 
-             String[] breakTIme = value2.split(",");
-
-
-             String[] realTIme = breakTIme[0].split("-");
+                String[] breakTIme = value2.split(",");
 
 
-             value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
-             CheckConcate(value1, value2);
-         }
-         catch (Exception e)
-         {
+                String[] realTIme = breakTIme[0].split("-");
 
-         }
+
+                value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
+                CheckConcate(value1, value2);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 
