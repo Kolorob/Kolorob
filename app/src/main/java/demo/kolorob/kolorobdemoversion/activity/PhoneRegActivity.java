@@ -2,22 +2,12 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -120,6 +110,7 @@ public class PhoneRegActivity extends Activity {
                     public void onResponse(String response) {
                        // Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
                        // Log.d(">>>>>","status "+response);
+                        String notvalid=response;
                         try {
 
                             //
@@ -127,96 +118,24 @@ public class PhoneRegActivity extends Activity {
                             if(response.equals("true"))
                             {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
-
-                                LayoutInflater layoutInflater = LayoutInflater.from(PhoneRegActivity.this);
-                                View promptView = layoutInflater.inflate(R.layout.default_alert, null);
-
-
-                                final Dialog alertDialog = new Dialog(PhoneRegActivity.this);
-                                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                alertDialog.setContentView(promptView);
-                                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                alertDialog.show();
-
-
-                                final TextView header = (TextView) promptView.findViewById(R.id.headers);
-                                final TextView bodys = (TextView) promptView.findViewById(R.id.body);
-                                final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
-
-                                header.setText("নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে");
-                                bodys.setText(" নিবন্ধন করার জন্য আপনাকে ধন্যবাদ ");
-
-                                okay.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        //alertDialog.cancel();
-
-                                        finish();
-                                    }
-                                });
-
-                                alertDialog.setCancelable(false);
-//		if(SharedPreferencesHelper.isTabletDevice(c))
-//			textAsk.setTextSize(23);
-                                WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
-                                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
-                                alertDialog.getWindow().setAttributes(lp);
-//		else
-//			textAsk.setTextSize(17);
-                                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
-
-
+                                AlertMessage.showMessage(PhoneRegActivity.this, "নিবন্ধনটি সফলভাবে সম্পন্ন হয়েছে",
+                                        " নিবন্ধন করার জন্য আপনাকে ধন্যবাদ");
 
 
                             }
+
+                            else if(response.equals(notvalid))
+                            {
+                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত", " আপনার দেয়া নাম্বারটি সঠিক নয়");
+                            }
                             else
                             {
-                                SharedPreferencesHelper.setNumber(con,phoneNumber);
-
-
-
-                                LayoutInflater layoutInflater = LayoutInflater.from(PhoneRegActivity.this);
-                                View promptView = layoutInflater.inflate(R.layout.default_alert, null);
-
-
-                                final Dialog alertDialog = new Dialog(PhoneRegActivity.this);
-                                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                alertDialog.setContentView(promptView);
-                                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                alertDialog.show();
-
-
-                                final TextView header = (TextView) promptView.findViewById(R.id.headers);
-                                final TextView bodys = (TextView) promptView.findViewById(R.id.body);
-                                final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
-
-                                header.setText("নিবন্ধনটি সফলভাবে সম্পন্ন হয়ে নি");
-                                bodys.setText(" আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
-
-                                okay.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        alertDialog.cancel();
-
-                                        finish();
-                                    }
-                                });
-
-                                alertDialog.setCancelable(false);
-//		if(SharedPreferencesHelper.isTabletDevice(c))
-//			textAsk.setTextSize(23);
-                                WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
-                                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
-                                alertDialog.getWindow().setAttributes(lp);
-//		else
-//			textAsk.setTextSize(17);
-                                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
 
 
 
-                                AlertMessage.showMessage(PhoneRegActivity.this, "নিবন্ধনটি সফলভাবে সম্পন্ন হয়ে নি",
+                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
                                         "আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
                             }
 
