@@ -139,7 +139,7 @@
                                 android:stepSize="0.1"
                                 android:scaleX="0.9"
                                 android:scaleY="0.9"
-
+                                android:isIndicator="true"
                                 android:rating="0" />
 
 

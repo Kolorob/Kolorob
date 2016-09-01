@@ -38,8 +38,8 @@
                 android:gravity="center"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/top_logo"
                     android:background="@drawable/entertainment_white"/>
 
@@ -114,7 +114,7 @@
                         <RatingBar
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
-
+                            android:isIndicator="true"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:numStars="5"
