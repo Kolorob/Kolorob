@@ -711,7 +711,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
                             if (response.equals("true")) {
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
-                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ করার জন্য আপনাকে ধন্যবাদ");
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             } else
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয় নি",
                                         "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
