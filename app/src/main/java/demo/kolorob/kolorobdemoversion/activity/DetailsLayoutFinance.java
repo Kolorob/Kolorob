@@ -45,13 +45,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -80,7 +77,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     int increment=0;
     ListView alldata;
     FinancialNewItem financialNewItem;
-EditText feedback_comment;
+    EditText feedback_comment;
     ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
     private TextView totalStudents;
     private TextView totalClasses;
@@ -97,9 +94,6 @@ EditText feedback_comment;
     String result_concate = "";
     RatingBar ratingBar;
     Float rating;
-    ArrayList<CommentItem> commentItems;
-    ImageView comments;
-    int inc=0;
 
 
     @Override
@@ -269,82 +263,7 @@ EditText feedback_comment;
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-        comments = (ImageView)findViewById(R.id.comments);
-        CommentTable commentTable = new CommentTable(DetailsLayoutFinance.this);
 
-
-
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
-
-
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(financialNewItem.getFinId()));
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        String[] comment = new String[size];
-
-
-        for (CommentItem commentItem:commentItems)
-        {
-            if(!commentItem.getComment().equals(""))
-            {
-                phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
-                comment[inc]= commentItem.getDate();
-                inc++;
-            }
-
-        }
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
-
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(inc==0)
-                {
-                    AlertMessage.showMessage(DetailsLayoutFinance.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
-
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-
-
-                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-
-                    listView.setAdapter(comment_layout_adapter);
-                    textView.setVisibility(View.GONE);
-
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-                }
-
-            }
-        });
 
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -368,7 +287,7 @@ EditText feedback_comment;
         feedbacks.height = width / 8;
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
-      //  feedbacks.setMargins(0, 0, width / 30, 0);
+        //  feedbacks.setMargins(0, 0, width / 30, 0);
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
         middle_image.setOnClickListener(new View.OnClickListener() {
@@ -399,7 +318,7 @@ EditText feedback_comment;
 
 
 
-       distance_left.setOnClickListener(new View.OnClickListener() {
+        distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
@@ -419,7 +338,7 @@ EditText feedback_comment;
                     editor.putString("Name", name);
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
-                    editor.apply();
+                    editor.commit();
 
 
                     String Longitude = pref.getString("Longitude", null);
@@ -571,13 +490,13 @@ EditText feedback_comment;
 //
 //
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        try {
-                                            ratingBar.setRating(Float.parseFloat(financialNewItem.getRating()));
-                                        }
-                                        catch (Exception e)
-                                        {
+        try {
+            ratingBar.setRating(Float.parseFloat(financialNewItem.getRating()));
+        }
+        catch (Exception e)
+        {
 
-                                        }
+        }
 //                                        break;
 //
 //                                    }
@@ -665,10 +584,10 @@ EditText feedback_comment;
 
         };
 
- //Adding request to request queue
+        //Adding request to request queue
 
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsLayoutFinance.this);
-       requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);
     }
 
 
@@ -873,4 +792,3 @@ EditText feedback_comment;
 
     }
 }
-
