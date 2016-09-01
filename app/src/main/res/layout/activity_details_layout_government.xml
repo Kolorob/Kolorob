@@ -319,20 +319,23 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_marginBottom="10dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/feedback_icon"
-                    android:onClick="verifyRegistration"
-                    android:id="@+id/feedback"/>
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="12dp"
                     android:background="@drawable/comment_icon"
                     android:onClick="verifyRegistration"
                     android:id="@+id/comments"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+
+                    android:background="@drawable/feedback_icon"
+                    android:onClick="verifyRegistration"
+                    android:id="@+id/feedback"/>
+
+
 
             </LinearLayout>
 
