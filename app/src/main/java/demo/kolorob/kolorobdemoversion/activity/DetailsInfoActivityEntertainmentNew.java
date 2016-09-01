@@ -39,10 +39,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
@@ -733,25 +731,22 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
     public void sendReviewToServer() {
-        int rating=0;
-        if (status.equals("খুবই অসন্তুষ্ট"))
-            rating = 1;
-        else if (status.equals("অসন্তুষ্ট"))
-            rating = 2;
-        else if (status.equals("বিশেষ অনুভূতি নেই"))
-
-            rating = 3;
-        else if (status.equals("সন্তুষ্ট "))
-
-            rating =4;
-        else if (status.equals("খুবই সন্তুষ্ট"))
-
-            rating = 5;
+        int rating;
+        if(status.equals(getString(R.string.feedback1)))
+            rating= 1;
+        else if(status.equals(getString(R.string.feedback2)))
+            rating=  2;
+        else if(status.equals(getString(R.string.feedback3)))
+            rating= 3;
+        else if(status.equals(getString(R.string.feedback4)))
+            rating=  4;
+        else
+            rating= 5;
 
         String comment="";
         comment=feedback_comment.getText().toString();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
