@@ -37,9 +37,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -559,26 +556,20 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        // Log.d(">>>>>","status "+response);
+                        Log.d("========", "status " + response);
                         try {
-                            JSONObject jo = new JSONObject(response);
-                            String forms;
-                            forms = jo.getString("status");
-                            Log.d(">>>>>","status "+forms);
-                            //Log.d(">>>>>","status ");
 
 
-                            if(forms.equals("true"))
-                            {
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া হয়েছে",
-                                        "আপনার মতামতের জন্য আপনাকে ধন্যবাদ!");
+                            if (response.equals("true")) {
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "মতামতটি গ্রহন করা হয়েছে",
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutFinance.this, "আপনার মতামত দেয়া  হয় নি",
-                                        "দয়া করে আবার চেষ্টা করুন");
+                                AlertMessage.showMessage(DetailsLayoutFinance.this, "মতামতটি গ্রহন করা হয় নি",
+                                        "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
 
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
