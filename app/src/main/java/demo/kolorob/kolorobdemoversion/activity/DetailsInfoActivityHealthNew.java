@@ -405,7 +405,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        if (diffInDays==0) datevalue=" আজকের তথ্য";
         else
         {
             datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
