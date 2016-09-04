@@ -86,8 +86,12 @@ public class PhoneRegActivity extends Activity {
         if (size != 11) {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
-        } else if (phoneNumber.charAt(1) == '0' && phoneNumber.charAt(1) == '2'&& phoneNumber.charAt(1) == '3'&& phoneNumber.charAt(1) == '4'
-                && phoneNumber.charAt(1) == '5'&& phoneNumber.charAt(1) == '6'&& phoneNumber.charAt(1) == '7'&& phoneNumber.charAt(1) == '8'&& phoneNumber.charAt(1) == '9') {
+        }
+        else if (phoneNumber.charAt(0) != '0') {
+            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
+                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+        }
+        else if (phoneNumber.charAt(1) != '1') {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
         } else if (phoneNumber.charAt(2) == '2' || phoneNumber.charAt(2) == '3' || phoneNumber.charAt(2) == '4') {
