@@ -141,6 +141,7 @@ public class PhoneRegActivity extends Activity {
 
 
 
+                                SharedPreferencesHelper.setNumber(con,phoneNumber);
 
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
                                         "আপনি ইতিপূর্বে  রেজিস্ট্রেশন করে ফেলেছেন");
