@@ -2787,7 +2787,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
             mainedcalled=true;
         }
 
-else {
+        else {
             if(mainedcalled)
             {
 
@@ -3054,7 +3054,6 @@ fragment.getMapViewController().setZoom(16);
         else {
             if(mainedcalled)
             {
-
                 mainedcalled=false;
             }
             fragment.Drawleg(edid,s);
