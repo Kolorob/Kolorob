@@ -260,7 +260,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         else
         {
             datevaluebn=EtoB(String.valueOf(diffInDays));
-            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
         LayoutInflater inflater = getLayoutInflater();
 
@@ -281,7 +281,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         toastMessage.setText(datevalue);
 
 
-        toastMessage.setTextColor(Color.BLACK);
+        toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
         //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
         // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 

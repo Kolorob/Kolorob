@@ -217,7 +217,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         else
         {
             datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
         LayoutInflater inflater = getLayoutInflater();
 
@@ -235,10 +235,10 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
+        toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setText(datevalue);
 
 
-        toastMessage.setTextColor(Color.BLACK);
         //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
         // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 
