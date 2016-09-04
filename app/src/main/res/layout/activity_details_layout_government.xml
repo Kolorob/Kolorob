@@ -19,163 +19,212 @@
         android:weightSum="10"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="10"
-        android:id="@+id/upper"
-        >
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/government_color"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="10"
+            android:id="@+id/upper"
+            >
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:layout_height="wrap_content"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.6"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/government_color"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/top_logo"
-                    android:background="@drawable/government_white"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/top_logo"
+                        android:background="@drawable/government_white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:gravity="right"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/close_buttonc"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/cross_jb"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        />
+                </LinearLayout>
+
+
+
+
+
+
+
+
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:gravity="right"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/close_buttonc"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/cross_jb"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    />
-            </LinearLayout>
-
-
-
-
-
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/government_color"
-            android:layout_height="wrap_content">
-
-
-
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-                android:id="@+id/upper_part"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
                 android:background="@color/government_color"
                 android:layout_height="wrap_content">
 
 
+
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/upperText"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginLeft="2dp"
-                    android:gravity="center"
                     android:orientation="vertical"
-                   >
+                    android:layout_width="0dp"
+                    android:layout_weight="0.75"
+                    android:id="@+id/upper_part"
+                    android:background="@color/government_color"
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18sp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
 
-                        android:id="@+id/ups_text"
-
-                        />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="4dp"
-                        android:gravity="center">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/upperText"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        >
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="ব্র্যাক ডেলিভারি সেন্টার"
+                            android:textSize="18sp"
+                            android:gravity="center"
                             android:textColor="@color/white"
-                            android:textSize="23sp"
-                            android:id="@+id/ratingText"
-                            android:text="রেটিং: "/>
 
-                        <RatingBar
-                            android:id="@+id/ratingBar"
-                            android:layout_width="wrap_content"
-                            android:isIndicator="true"
+                            android:id="@+id/ups_text"
+
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="23sp"
+                                android:id="@+id/ratingText"
+                                android:text="রেটিং: "/>
+
+                            <RatingBar
+                                android:id="@+id/ratingBar"
+                                style="?android:attr/ratingBarStyleIndicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignLeft="@+id/artist"
+                                android:layout_below="@+id/artist"
+                                android:numStars="5"
+                                android:rating="0.0"
+                                android:stepSize="0.1" />
+
+
+                        </LinearLayout>
+
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:id="@+id/left_go_process"
+                            android:layout_weight="0.3"
+                            android:orientation="vertical"
+                            android:gravity="center|right">
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/distance_left"
+                                android:background="@drawable/direction_icon"/>
+
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.2"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/middle_phone"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/phone_middl"
+                                android:background="@drawable/phone_icon"/>
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:orientation="vertical"
+                            android:id="@+id/right_email"
 
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:numStars="5"
-                            android:transformPivotX="0dp"
-                            android:transformPivotY="28dp"
-                            android:stepSize="0.1"
-                            android:scaleX="0.9"
-                            android:scaleY="0.9"
+                            android:gravity="center|left">
 
-                            android:rating="0" />
-
-
-                    </LinearLayout>
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/right_side_email"
+                                android:background="@drawable/email_icon"/>
 
 
 
 
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dp"
-                        android:id="@+id/left_go_process"
-                        android:layout_weight="0.3"
-                        android:orientation="vertical"
-                        android:gravity="center|right">
-
-                        <ImageView
-                            android:layout_width="55dp"
-                            android:layout_height="55dp"
-                            android:id="@+id/distance_left"
-                            android:background="@drawable/direction_icon"/>
+                        </LinearLayout>
 
 
 
@@ -184,52 +233,6 @@
 
                     </LinearLayout>
 
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="0.2"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/middle_phone"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="55dp"
-                            android:layout_height="55dp"
-                            android:id="@+id/phone_middl"
-                            android:background="@drawable/phone_icon"/>
-
-
-
-
-
-                    </LinearLayout>
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
-                        android:orientation="vertical"
-                        android:id="@+id/right_email"
-
-                        android:layout_height="wrap_content"
-                        android:gravity="center|left">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/right_side_email"
-                            android:background="@drawable/email_icon"/>
-
-
-
-
-                    </LinearLayout>
 
 
 
@@ -237,63 +240,55 @@
 
 
                 </LinearLayout>
-
-
-
 
 
 
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/middle"
+                android:background="@color/white"
+                >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                    <!--android:text="Large Text"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:id="@+id/other_detailsEnt" />-->
+
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:gravity="left"
+                        android:fadeScrollbars="false"
+                        android:scrollbarStyle="outsideInset"
+                        android:paddingRight="5dp"
+                        style="@style/scrollbar_shape_style"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/allData" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
 
 
 
 
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/middle"
-            android:background="@color/white"
-            >
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                <!--android:text="Large Text"-->
-                <!--android:visibility="gone"-->
-                <!--android:id="@+id/other_detailsEnt" />-->
-
-
-                <ListView
-                    android:layout_width="wrap_content"
-                    android:gravity="left"
-                    android:fadeScrollbars="false"
-                    android:scrollbarStyle="outsideInset"
-                    android:paddingRight="5dp"
-                    style="@style/scrollbar_shape_style"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/allData" />
-
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-
-
-
-
-
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_gravity="center"
@@ -319,23 +314,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_marginBottom="10dp">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/comment_icon"
-                    android:onClick="verifyRegistration"
-                    android:id="@+id/comments"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-
                     android:background="@drawable/feedback_icon"
                     android:onClick="verifyRegistration"
                     android:id="@+id/feedback"/>
-
-
 
             </LinearLayout>
 

@@ -211,7 +211,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
         mapView.setTilesScaledToDpi(true);
         first = settings.getString("First", null);
-        if (first.equals("yes"))//if running for first time
+        if (first!=null && first.equals("yes"))//if running for first time
         {   Log.d("ss","********"+first);
             File path = MapFragmentOSM.this.getActivity().getExternalFilesDir(null);
 
@@ -230,14 +230,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     e.printStackTrace();
                 }
                 try {
-                    try {
-                        in.read(bytes);
+                    try { if(in!=null){
+                        int b=in.read(bytes);}
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } finally {
                     try {
-                        in.close();
+                       if(in!=null) in.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -41,18 +41,17 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
@@ -106,9 +105,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private String compare_Data="";
     int compareValue;
     private Double screenSize;
-    ArrayList<CommentItem> commentItems;
-    ImageView comments;
-    int inc=0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -119,6 +115,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client2;
+    String datevalue,datevaluebn;
 
 
     @Override
@@ -137,7 +134,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-      //  declareRadiobutton();
+        //  declareRadiobutton();
 
         if (null != intent) {
             healthServiceProviderItemNew = (HealthServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
@@ -184,89 +181,13 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //        school_logo_default = (ImageView) findViewById(R.id.service_logo);
 
 
-
-        comments = (ImageView)findViewById(R.id.comments);
-
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
-        CommentTable commentTable = new CommentTable(DetailsInfoActivityHealthNew.this);
-
-        Log.d("Node Id","======="+healthServiceProviderItemNew.getId());
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(healthServiceProviderItemNew.getId());
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        String[] comment = new String[size];
-
-
-        for (CommentItem commentItem:commentItems)
-        {
-            if(!commentItem.getComment().equals(""))
-            {
-                phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
-                comment[inc]= commentItem.getDate();
-                inc++;
-            }
-
-        }
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
-
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(inc==0)
-                {
-                    AlertMessage.showMessage(DetailsInfoActivityHealthNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
-
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-
-
-                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-
-                    listView.setAdapter(comment_layout_adapter);
-                    textView.setVisibility(View.GONE);
-
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-                }
-
-            }
-        });
-
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<500)
-        ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         float k=ratingBar.getRating();
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
@@ -312,7 +233,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
         timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
         if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
-        breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
+            breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
         CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size = healthSpecialistItemDetailses.size();
@@ -320,8 +241,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         if (specialist_size != 0) {
             for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses) {
 
-             //   result_concate = "";
-            //    specialist.setVisibility(View.VISIBLE);
+                //   result_concate = "";
+                //    specialist.setVisibility(View.VISIBLE);
                 CheckConcate("বিশেষজ্ঞ ডাক্তারের ধরন ", healthSpecialistItemDetails.getSpecialisttype());
                 CheckConcate("ডাক্তারের সংখা", English_to_bengali_number_conversion(healthSpecialistItemDetails.getSpecialistId())+" জন");
                 CheckConcate("প্রথম ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getSpecialistfees())+ " টাকা");
@@ -340,8 +261,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         int healthVaccineSize = healthVaccineItemDetailses.size();
         if (healthVaccineSize != 0) {
             Log.d("It's Vaccine", "====" + healthVaccineSize);
-          //  health_vaccine.setVisibility(View.VISIBLE);
-           // result_concate = "";
+            //  health_vaccine.setVisibility(View.VISIBLE);
+            // result_concate = "";
 
             for (HealthVaccineItemDetails healthVaccineItemDetails : healthVaccineItemDetailses) {
                 CheckConcate("ভ্যাকসিনের নাম", healthVaccineItemDetails.getVaccinename());
@@ -449,7 +370,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         upperHand.setLayoutParams(params2);
 
 
-       LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
+        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
 //        // int  vd=params_upperText.height = height/24;
 //        // params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
@@ -477,7 +398,21 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 //        school_logo_default.getLayoutParams().height = width / 5;
 //        school_logo_default.getLayoutParams().width = width / 5;
+        SharedPreferences settings = DetailsInfoActivityHealthNew.this.getSharedPreferences("prefs", 0);
+        Date date2 = new Date(settings.getLong("time", 0));
+        Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
 
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        else
+        {
+            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
+            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+        }
+        Toast.makeText(getApplicationContext(),
+                datevalue, Toast.LENGTH_SHORT)
+                .show();
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         int vx = params_middle_phone.height = (height * 3) / 24;
@@ -585,7 +520,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
 
-                    editor.apply();
+                    editor.commit();
 
 
                     String Longitude = pref.getString("Longitude", null);
@@ -694,7 +629,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         } else {
 
             feedBackAlert();
-          //  sendReviewToServer();
+            //  sendReviewToServer();
         }
 
 
@@ -727,12 +662,12 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
                 feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
                 int selected = feedRadio.getCheckedRadioButtonId();
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
-              //  declareRadiobutton();
+                //  declareRadiobutton();
                 sendReviewToServer();
 
                 alertDialog.cancel();
@@ -747,38 +682,36 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
     public void sendReviewToServer() {
-        int rating=0;
-        if (status.equals("খুবই অসন্তুষ্ট"))
-            rating = 1;
-        else if (status.equals("অসন্তুষ্ট"))
-            rating = 2;
-        else if (status.equals("বিশেষ অনুভূতি নেই"))
+        int rating;
+        if(status.equals(getString(R.string.feedback1)))
+            rating= 1;
+        else if(status.equals(getString(R.string.feedback2)))
+            rating=  2;
+        else if(status.equals(getString(R.string.feedback3)))
+            rating= 3;
+        else if(status.equals(getString(R.string.feedback4)))
+            rating=  4;
+        else
+            rating= 5;
 
-            rating = 3;
-        else if (status.equals("সন্তুষ্ট "))
-
-            rating =4;
-        else if (status.equals("খুবই সন্তুষ্ট"))
-
-            rating = 5;
 
         String comment="";
         comment=feedback_comment.getText().toString();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsInfoActivityHealthNew.this, response, Toast.LENGTH_SHORT).show();
+
                         Log.d("========", "status " + response);
                         try {
 
 
                             if (response.equals("true")) {
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
-                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ করার জন্য আপনাকে ধন্যবাদ");
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             } else
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয় নি",
                                         "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
@@ -917,9 +850,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     public Boolean RegisteredOrNot() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-       // editor.putString("registered", lat);
+        // editor.putString("registered", lat);
         registered = pref.getString("registered", null);
-       // phone_num = pref.getString("phone", null);
+        // phone_num = pref.getString("phone", null);
         editor.commit();
         if (registered.equals("yes"))
             return true;
@@ -943,7 +876,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
             if (hour ==0 && times==0)
                 timeInBengali = "রাত ১২";
-           else if (hour >= 6 && hour < 12)
+            else if (hour >= 6 && hour < 12)
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour == 12)
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));

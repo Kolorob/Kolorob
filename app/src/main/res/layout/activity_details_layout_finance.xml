@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
 
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+
                         android:id="@+id/top_logo"
                         android:background="@drawable/finance_white"/>
 
@@ -67,7 +67,7 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                       />
+                        />
                 </LinearLayout>
 
 
@@ -135,19 +135,14 @@
 
                             <RatingBar
                                 android:id="@+id/ratingBar"
+                                style="?android:attr/ratingBarStyleIndicator"
                                 android:layout_width="wrap_content"
-                                android:isIndicator="true"
-
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
+                                android:layout_alignLeft="@+id/artist"
+                                android:layout_below="@+id/artist"
                                 android:numStars="5"
-                                android:transformPivotX="0dp"
-                                android:transformPivotY="28dp"
-                                android:stepSize="0.1"
-                                android:scaleX="0.9"
-                                android:scaleY="0.9"
-
-                                android:rating="0" />
+                                android:rating="0.0"
+                                android:stepSize="0.1" />
 
 
                         </LinearLayout>
@@ -317,23 +312,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_marginBottom="10dp">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/comment_icon"
-                    android:onClick="verifyRegistration"
-                    android:id="@+id/comments"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/feedback_icon"
                     android:onClick="verifyRegistration"
-                    android:layout_marginLeft="12dp"
 
                     android:id="@+id/feedback"/>
-
-
 
             </LinearLayout>
 

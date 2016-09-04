@@ -9,7 +9,7 @@
     android:layout_marginBottom="8dp"
 
 
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEducation">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew">
 
 
 
@@ -38,8 +38,8 @@
                 android:gravity="center"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/top_logo"
                     android:background="@drawable/entertainment_white"/>
 
@@ -113,19 +113,14 @@
 
                         <RatingBar
                             android:id="@+id/ratingBar"
+                            style="?android:attr/ratingBarStyleIndicator"
                             android:layout_width="wrap_content"
-                            android:isIndicator="true"
-
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_alignLeft="@+id/artist"
+                            android:layout_below="@+id/artist"
                             android:numStars="5"
-                            android:transformPivotX="0dp"
-                            android:transformPivotY="28dp"
-                            android:stepSize="0.1"
-                            android:scaleX="0.9"
-                            android:scaleY="0.9"
-
-                            android:rating="0" />
+                            android:rating="0.0"
+                            android:stepSize="0.1" />
 
 
                     </LinearLayout>
@@ -241,34 +236,34 @@
 
 
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content">
 
 
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                        <!--android:text="Large Text"-->
-                        <!--android:visibility="gone"-->
-                        <!--android:id="@+id/other_detailsEnt" />-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="Large Text"-->
+                <!--android:visibility="gone"-->
+                <!--android:id="@+id/other_detailsEnt" />-->
 
 
-                    <ListView
-                        android:layout_width="wrap_content"
-                        android:gravity="left"
-                        android:fadeScrollbars="false"
-                        android:scrollbarStyle="outsideInset"
-                        android:paddingRight="5dp"
-                        style="@style/scrollbar_shape_style"
-                        android:layout_height="match_parent"
-                        android:id="@+id/allData" />
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:gravity="left"
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="outsideInset"
+                    android:paddingRight="5dp"
+                    style="@style/scrollbar_shape_style"
+                    android:layout_height="match_parent"
+                    android:id="@+id/allData" />
 
 
-                </LinearLayout>
+            </LinearLayout>
 
 
 
@@ -310,26 +305,18 @@
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/comment_icon"
-                android:onClick="verifyRegistration"
-                android:layout_marginRight="12dp"
-                android:id="@+id/comments"/>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+
                 android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"
-                android:layout_marginLeft="12dp"
 
 
 
 
                 android:id="@+id/feedback"/>
-
 
         </LinearLayout>
 

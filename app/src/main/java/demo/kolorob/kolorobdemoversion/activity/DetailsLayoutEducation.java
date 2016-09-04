@@ -39,23 +39,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
@@ -106,11 +102,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     String result_concate = "";
     private CheckBox checkBox;
     EditText feedback_comment;
-    ArrayList<CommentItem> commentItems;
-    ImageView comments;
-ArrayList<String>examname=new ArrayList<>();
-    int inc=0;
-
+    ArrayList<String>examname=new ArrayList<>();
+    String datevalue,datevaluebn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +112,6 @@ ArrayList<String>examname=new ArrayList<>();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
         con = this;
-        setRatingBar();
 
         Intent intent = getIntent();
 
@@ -128,6 +120,7 @@ ArrayList<String>examname=new ArrayList<>();
             educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
+
 
 
         EducationTuitionDetailsTable educationTuitionDetailsTable = new EducationTuitionDetailsTable(DetailsLayoutEducation.this);
@@ -161,7 +154,7 @@ ArrayList<String>examname=new ArrayList<>();
         close_button = (ImageView) findViewById(R.id.cross_jb);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
         key = new String[600];
-
+        setRatingBar();
         value = new String[600];
         alldata=(ListView)findViewById(R.id.allData);
 
@@ -172,80 +165,7 @@ ArrayList<String>examname=new ArrayList<>();
 
         top_logo = (ImageView) findViewById(R.id.top_logo);
 
-        comments = (ImageView)findViewById(R.id.comments);
 
-
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
-        CommentTable commentTable = new CommentTable(DetailsLayoutEducation.this);
-
-        Log.d("Node Id","======="+educationNewItem.getEduId());
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(educationNewItem.getEduId()));
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        String[] comment = new String[size];
-
-        for (CommentItem commentItem:commentItems)
-        {
-            if(!commentItem.getComment().equals(""))
-            {
-                phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
-                comment[inc]= commentItem.getDate();
-                inc++;
-            }
-
-        }
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
-
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(inc==0)
-                {
-                    AlertMessage.showMessage(DetailsLayoutEducation.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
-
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-
-
-                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-
-                    listView.setAdapter(comment_layout_adapter);
-                    textView.setVisibility(View.GONE);
-
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-                }
-
-            }
-        });
 
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
@@ -293,7 +213,7 @@ ArrayList<String>examname=new ArrayList<>();
         timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
         timeProcessing("বন্ধের সময়", educationNewItem.getClosetime());
         if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
-        breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
+            breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
         CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
         CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
         CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
@@ -306,9 +226,7 @@ ArrayList<String>examname=new ArrayList<>();
                /* if (educationResultItemNew.getStudentno() != "") {
                     int student_number = Integer.parseInt(educationResultItemNew.getStudentno());
                     if (student_number > 0) {
-
                     } else examname.add(educationResultItemNew.getExamname());
-
                 } else examname.add(educationResultItemNew.getExamname());
 */              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
                 CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno()));
@@ -325,13 +243,27 @@ ArrayList<String>examname=new ArrayList<>();
             }
             else
             {
-               exams=examname.get(i);
+                exams=examname.get(i);
                 Exam.concat(exams+",");
             }
 
         }
 
+        SharedPreferences settings = DetailsLayoutEducation.this.getSharedPreferences("prefs", 0);
+        Date date2 = new Date(settings.getLong("time", 0));
+        Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
 
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        else
+        {
+            datevaluebn=EtoB(String.valueOf(diffInDays));
+            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+        }
+        Toast.makeText(getApplicationContext(),
+                datevalue, Toast.LENGTH_SHORT)
+                .show();
         //Exam.length();
 
 
@@ -358,7 +290,7 @@ ArrayList<String>examname=new ArrayList<>();
                 //result_concate="";
 
                 CheckConcate("কোন ক্লাস পড়ান হয়", educationTuitionDetailsItem.getTuitionlevel());
-               boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
+                boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
                 if (tuitioncost)
                 {
                     CheckConcate("বিনা বেতনে পড়ার সুযোগ", "আছে");
@@ -614,7 +546,7 @@ ArrayList<String>examname=new ArrayList<>();
                     editor.putBoolean("Value", fromornot);
                     editor.putString("nValue", node);
 
-                    editor.apply();
+                    editor.commit();
 
 
                     String Longitude = pref.getString("Longitude", null);
@@ -698,7 +630,7 @@ ArrayList<String>examname=new ArrayList<>();
     {
 
         LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
-         final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
+        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
         final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setContentView(promptView);
@@ -725,6 +657,7 @@ ArrayList<String>examname=new ArrayList<>();
                 int selected = feedRadio.getCheckedRadioButtonId();
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
+
                 //  declareRadiobutton();
                 sendReviewToServer();
 
@@ -741,46 +674,31 @@ ArrayList<String>examname=new ArrayList<>();
 
     public void sendReviewToServer()
     {
-        int rating;
-        if(status.equals(R.string.feedback1))
-            rating=1;
-        else if(status.equals(R.string.feedback2))
-            rating=2;
-        else if(status.equals(R.string.feedback3))
-            rating=3;
-        else if(status.equals(R.string.feedback4))
-            rating=4;
-        else
-            rating=5;
+        int rating= getRating(status);;
+
         String comment="";
         comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&review=" +comment+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(DetailsLayoutEducation.this,response,Toast.LENGTH_SHORT).show();
-                        // Log.d(">>>>>","status "+response);
+
+                        Log.d("========", "status " + response);
                         try {
-                            JSONObject jo = new JSONObject(response);
-                            String forms;
-                            forms = jo.getString("status");
-                            Log.d(">>>>>","status "+forms);
-                            //Log.d(">>>>>","status ");
 
 
-                            if(forms.equals("true"))
-                            {
-                                AlertMessage.showMessage(DetailsLayoutEducation.this, "আপনার মতামত দেয়া হয়েছে",
-                                        "আপনার মতামতের জন্য আপনাকে ধন্যবাদ!");
+                            if (response.equals("true")) {
+                                AlertMessage.showMessage(DetailsLayoutEducation.this, "মতামতটি গ্রহন করা হয়েছে",
+                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }
                             else
-                                AlertMessage.showMessage(DetailsLayoutEducation.this, "আপনার মতামত দেয়া  হয় নি",
-                                        "দয়া করে আবার চেষ্টা করুন");
+                                AlertMessage.showMessage(DetailsLayoutEducation.this, "মতামতটি গ্রহন করা হয় নি",
+                                        "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
 
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -917,13 +835,13 @@ ArrayList<String>examname=new ArrayList<>();
 //
 //                                        Float rating;
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
-                                        try {
-                                            ratingBar.setRating(Float.parseFloat(educationNewItem.getRating()));
-                                        }
-                                        catch (Exception e)
-                                        {
+        try {
+            ratingBar.setRating(Float.parseFloat(educationNewItem.getRating()));
+        }
+        catch (Exception e)
+        {
 
-                                        }
+        }
 //                                        break;
 //
 //                                    }
@@ -1051,5 +969,18 @@ ArrayList<String>examname=new ArrayList<>();
 
 
     }
-}
+    public int getRating(String status)
+    {
 
+        if(status.equals(getString(R.string.feedback1)))
+           return 1;
+        else if(status.equals(getString(R.string.feedback2)))
+            return 2;
+        else if(status.equals(getString(R.string.feedback3)))
+            return 3;
+        else if(status.equals(getString(R.string.feedback4)))
+            return 4;
+        else
+            return 5;
+    }
+}

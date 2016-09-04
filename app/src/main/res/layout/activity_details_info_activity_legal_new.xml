@@ -40,12 +40,12 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
                     android:id="@+id/top_logo"
                     android:background="@drawable/legal_white"/>
@@ -123,19 +123,14 @@
 
                         <RatingBar
                             android:id="@+id/ratingBar"
+                            style="?android:attr/ratingBarStyleIndicator"
                             android:layout_width="wrap_content"
-                            android:isIndicator="true"
-
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_alignLeft="@+id/artist"
+                            android:layout_below="@+id/artist"
                             android:numStars="5"
-                            android:transformPivotX="0dp"
-                            android:transformPivotY="28dp"
-                            android:stepSize="0.1"
-                            android:scaleX="0.9"
-                            android:scaleY="0.9"
-
-                            android:rating="0" />
+                            android:rating="0.0"
+                            android:stepSize="0.1" />
 
 
                     </LinearLayout>
@@ -320,17 +315,9 @@
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:gravity="center">
-
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/comment_icon"
-                android:onClick="verifyRegistration"
-                android:id="@+id/comments"/>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="12dp"
 
 
                 android:background="@drawable/feedback_icon"
@@ -340,7 +327,6 @@
 
 
                 android:id="@+id/feedback"/>
-
 
         </LinearLayout>
 
