@@ -133,8 +133,8 @@ public class PhoneRegActivity extends Activity {
 
                             else if(response.equals("\"Invalid Phone Number\""))
                             {
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত", " আপনার দেয়া নাম্বারটি সঠিক নয়");
-                            }
+                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
+                                        "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");                            }
                             else
                             {
 
@@ -143,7 +143,7 @@ public class PhoneRegActivity extends Activity {
 
 
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
-                                        "আপনি ইতিপূর্বে নিবন্ধন করে ফেলেছেন");
+                                        "আপনি ইতিপূর্বে  রেজিস্ট্রেশন করে ফেলেছেন");
                             }
 
                                         //  finish();
