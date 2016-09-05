@@ -27,6 +27,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -39,6 +40,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -213,6 +215,20 @@ loadIMEI();
                 boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
                 boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
                 boolean anyHit = false;
+                LayoutInflater inflater = getLayoutInflater();
+                View toastView = inflater.inflate(R.layout.toast_view,null);
+                Toast toast = new Toast(PlaceSelectionActivity.this);
+                toast.setView(toastView);
+                TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+                toastMessage.setTextSize(25);
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+
+
+
+
                 if (t != null)
                     t.cancel();
 //                if (y < ((float)height) / 2.0) {
@@ -226,7 +242,8 @@ loadIMEI();
                     }
 
                     Log.d("BAUNIABHAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "মিরপুর-১১ ", Toast.LENGTH_SHORT);
+                   toastMessage.setText("মিরপুর-১১ ");
+                  //  t = Toast.makeText(getApplicationContext(), "মিরপুর-১১ ", Toast.LENGTH_SHORT);
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
@@ -240,12 +257,14 @@ loadIMEI();
                     }
 
                     Log.d("PARIS ROAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "মিরপুর-১০", Toast.LENGTH_SHORT);
+                    toastMessage.setText("মিরপুর-১০");
+                   // t = Toast.makeText(getApplicationContext(), "মিরপুর-১০", Toast.LENGTH_SHORT);
                     anyHit = true;
 
                 }
                 if (anyHit)
-                    t.show();
+                    toast.show();
+                 //   t.show();
                 return true;
             }
         });
