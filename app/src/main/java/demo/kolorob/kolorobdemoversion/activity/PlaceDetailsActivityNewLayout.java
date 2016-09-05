@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -2821,7 +2820,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
             if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
             else prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);
             prev_fragment.getMapViewController().setZoom(16);
-            if (mapcalledstatus == true) {
+            if (mapcalledstatus) {
                 Arrays.fill(flag2,1);
                 if(currentCategoryID==1){
                     educlicked=false;
