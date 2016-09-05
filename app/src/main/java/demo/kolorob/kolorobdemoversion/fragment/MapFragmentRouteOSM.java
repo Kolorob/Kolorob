@@ -60,6 +60,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 /**
  * Created by israt.jahan on 5/5/2016.
@@ -228,10 +229,12 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
                     onLocationChanged(location);
                     Drawroute(userlocation, markerlocation);
                 } else
-                    Toast.makeText(this, "Location can't be retrieved", Toast.LENGTH_SHORT).show();
+                    ToastMessageDisplay.ShowToast(this,"Location can't be retrieved");
+
 
             } else {
-                Toast.makeText(this, "No Provider Found", Toast.LENGTH_SHORT).show();
+
+                ToastMessageDisplay.ShowToast(this,"No Provider Found");
             }
         }
         mapViewController.setZoom(18);
