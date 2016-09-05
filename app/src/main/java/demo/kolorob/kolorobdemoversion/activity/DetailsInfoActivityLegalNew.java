@@ -56,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 /**
  * Created by arafat on 28/05/2016.
@@ -176,19 +177,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
-        LayoutInflater inflater = getLayoutInflater();
-
-        View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
-        toast.setView(toastView);
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
-        toastMessage.setTextSize(25);
-        toastMessage.setText(datevalue);
-        toastMessage.setTextColor(getResources().getColor(R.color.orange));
-        toastMessage.setGravity(Gravity.CENTER);
-        toastMessage.setCompoundDrawablePadding(26);
-        toast.show();
-
+        ToastMessageDisplay.ShowToast(this,datevalue);
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);

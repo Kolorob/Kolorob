@@ -56,6 +56,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 /**
  * Created by israt.jahan on 7/17/2016.
@@ -271,34 +272,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         }
 
       //  Toast toast = Toast.makeText(this, datevalue, Toast.LENGTH_LONG);
-        LayoutInflater inflater = getLayoutInflater();
-
-        View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
-        // Set the Toast custom layout
-        toast.setView(toastView);
-
-
-     //   View toastView = toast.getView(); //This'll return the default View of the Toast.
-
-        /* And now you can get the TextView of the default View of the Toast. */
-
-
-
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
-        toastMessage.setTextSize(25);
-        toastMessage.setText(datevalue);
-
-
-        toastMessage.setTextColor(getResources().getColor(R.color.orange));
-      //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
-       // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-
-        toastMessage.setGravity(Gravity.CENTER);
-        toastMessage.setCompoundDrawablePadding(26);
-      //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
-        toast.show();
-
+        ToastMessageDisplay.ShowToast(this,datevalue);
 
 
 
