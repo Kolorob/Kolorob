@@ -100,6 +100,8 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
 /**
  * Created by touhid on 12/3/15.
  *
@@ -2021,8 +2023,9 @@ int index;
             return;
         }
 
-        Toast.makeText(this, "এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ",
-                Toast.LENGTH_LONG).show();
+        ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+
+
 
 
 //        toolbar.setVisibility(View.VISIBLE);

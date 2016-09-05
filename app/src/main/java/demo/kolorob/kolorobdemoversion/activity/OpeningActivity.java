@@ -1083,9 +1083,12 @@ public class OpeningActivity extends Activity {
         if (requestCode == INTERNET_PERMISSION) {
             if (grantResults.length == 1 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Internet permission granted", Toast.LENGTH_SHORT).show();
+                ToastMessageDisplay.ShowToast(this,"Internet permission granted");
+
             } else {
-                Toast.makeText(this, "Inter permission denied", Toast.LENGTH_SHORT).show();
+                ToastMessageDisplay.ShowToast(this,"Inter permission denied");
+
+
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);

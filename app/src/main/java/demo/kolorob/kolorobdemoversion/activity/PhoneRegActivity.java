@@ -28,6 +28,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 /**
  * Created by arafat on 1/11/2016.
@@ -163,7 +164,9 @@ public class PhoneRegActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(PhoneRegActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        ToastMessageDisplay.ShowToast(PhoneRegActivity.this,error.toString());
+
+
                     }
                 }) {
 
