@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.Spinner;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
@@ -27,10 +25,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 public class SplashActivityNew extends ActionBarActivity {
 
     Context context;
-    Spinner spinner2,spinner3,spinner4;
-    ImageView rotateImage;
-    private Handler handler;
-    int in = 0;
+
     View view=null;
 
     //user and pass
