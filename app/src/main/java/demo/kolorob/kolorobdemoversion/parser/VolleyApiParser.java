@@ -22,6 +22,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 /**
  * Created by touhid on 12/1/15.
@@ -81,8 +82,7 @@ public class VolleyApiParser {
         if (!AppUtils.isNetConnected(ctx)) {
 
 
-            Toast.makeText(ctx, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-                    Toast.LENGTH_LONG).show();
+            ToastMessageDisplay.ShowToast(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
             return;
         }
 
@@ -149,8 +149,9 @@ public class VolleyApiParser {
                                   final Request.Priority priority) {
         if (!AppUtils.isNetConnected(ctx)) {
 
-            Toast.makeText(ctx, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-                    Toast.LENGTH_LONG).show();
+            ToastMessageDisplay.ShowToast(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+
+
         return;
     }
 

@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,8 +8,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -101,25 +104,33 @@ public class DisplayAllJobsActivity extends Activity {
             public void onClick(View v) {
 
                 alertDialog.cancel();
-                progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
-                        "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
+                if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(DisplayAllJobsActivity.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
+                {
+                    progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
+                            "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
 
-                getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
-                            @Override
-                            public void onResponse(int status, String apiContent) {
-                                if (status == AppConstants.SUCCESS_CODE) {
-                                    try {
-                                        JSONObject jo = new JSONObject(apiContent);
-                                        String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                        if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                            SaveNewJobs(jo.getJSONArray(AppConstants.KEY_DATA));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                    getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
+                                @Override
+                                public void onResponse(int status, String apiContent) {
+                                    if (status == AppConstants.SUCCESS_CODE) {
+                                        try {
+                                            JSONObject jo = new JSONObject(apiContent);
+                                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                                SaveNewJobs(jo.getJSONArray(AppConstants.KEY_DATA));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
                             }
-                        }
-                );
+                    );
+                }
+
+                else {
+                    AlertMessage.showMessageClose(DisplayAllJobsActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                }
+
 
             }
         });
@@ -197,13 +208,13 @@ public class DisplayAllJobsActivity extends Activity {
         jobAdvertisementTable.dropTable();
         int joblistCount = joblistArray.length();
 
+        if(joblistCount!=0)
+        {
+            for (int i = 0; i < joblistCount; i++) {
+                try {
+                    JSONObject jo = joblistArray.getJSONObject(i);
 
-        for (int i = 0; i < joblistCount; i++) {
-            try {
-                JSONObject jo = joblistArray.getJSONObject(i);
 
-                if(!jo.equals(null))
-                {
                     JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(i+1,jo);
 
                     //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
@@ -212,19 +223,25 @@ public class DisplayAllJobsActivity extends Activity {
                     //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
                     progress.dismiss();
                     displayData();
+
+
+
+
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                else
-                    AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
-
-
-
-
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
+
+
+
+
+        else
+        AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
     }
 
 
@@ -236,53 +253,62 @@ public class DisplayAllJobsActivity extends Activity {
 
         int size= jobAdvertisementItems.size();
 
-        String[] tittle = new String[size];
-
-        String[] salary_range = new String[size];
-
-        String[] remaining_date = new String[size];
-
-        String[] address = new String[size];
-
-        String[] contact_number = new String[size];
-
-        String[] positions = new String[size];
-
-        int increment= 0;
-
-
-        for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
+        if(size==0)
         {
+            AlertMessage.showMessage(this,"চাকুরীর তালিকা সম্পূর্ণ খালি","অনুগ্রহ পূর্বক আপডেট করুন");
+        }
 
-            tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
-            salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
-            remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
-            address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
-            contact_number[increment] = jobAdvertisementItem.getMobile1();
-            positions[increment] = jobAdvertisementItem.getPosition();
-            increment++;
+        else {
+            String[] tittle = new String[size];
 
+            String[] salary_range = new String[size];
+
+            String[] remaining_date = new String[size];
+
+            String[] address = new String[size];
+
+            String[] contact_number = new String[size];
+
+            String[] positions = new String[size];
+
+            int increment= 0;
+
+
+            for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
+            {
+
+                tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
+                salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
+                remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
+                address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
+                contact_number[increment] = jobAdvertisementItem.getMobile1();
+                positions[increment] = jobAdvertisementItem.getPosition();
+                increment++;
+
+            }
+
+
+
+
+            joblist=(ListView)findViewById(R.id.jobList);
+
+            DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
+            joblist.setAdapter(displayAllJobList);
+
+
+
+            joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
+                    intent.putExtra("position",position);
+                    startActivity(intent);
+                }
+            });
         }
 
 
-
-
-        joblist=(ListView)findViewById(R.id.jobList);
-
-        DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
-        joblist.setAdapter(displayAllJobList);
-
-
-
-        joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
-                intent.putExtra("position",position);
-                startActivity(intent);
-            }
-        });
     }
 
 
