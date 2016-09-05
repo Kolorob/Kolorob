@@ -180,28 +180,13 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
         Toast toast = new Toast(this);
-        // Set the Toast custom layout
         toast.setView(toastView);
-
-
-        //   View toastView = toast.getView(); //This'll return the default View of the Toast.
-
-        /* And now you can get the TextView of the default View of the Toast. */
-
-
-
         TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setText(datevalue);
-
-
         toastMessage.setTextColor(getResources().getColor(R.color.orange));
-        //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
-        // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-
         toastMessage.setGravity(Gravity.CENTER);
         toastMessage.setCompoundDrawablePadding(26);
-        //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
         toast.show();
 
 
@@ -368,18 +353,14 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                     else{
                         AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                                 "ফোন নম্বর পাওয়া যায়নি");
-                        Toast.makeText(getApplicationContext(),
-                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                                .show();
+
                     }
                 }
                 else {
 
                     AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                             "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+
                 }
             }
         });
