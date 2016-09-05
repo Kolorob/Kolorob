@@ -6,6 +6,7 @@
     android:padding="15dp"
     android:textStyle="italic"
     android:id="@+id/toasts"
+    android:textColor="@color/orange"
     android:text="Custom Toast View"
     android:background="@drawable/rounded"
     android:elevation="5dp"
