@@ -76,7 +76,6 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
@@ -947,23 +946,23 @@ int index;
 
                     if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==0)
                     {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                        AlertMessage.showMessage(con, "Comparison isnt possible",
+                                "You have not selected any service to compare");
                     }
                     else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==0)
                     {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                        AlertMessage.showMessage(con, "Comparison isnt possible",
+                                "You have not selected any service to compare");
                     }
                     else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==1)
                     {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                        AlertMessage.showMessage(con, "Comparison isnt possible",
+                                "You've chosen one service only. Please choose another one to proceed");
                     }
                     else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==1)
                     {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                        AlertMessage.showMessage(con, "Comparison isnt possible",
+                                "You've chosen one service only. Please choose another one to proceed");
                     }
                     else {
 
@@ -1016,8 +1015,8 @@ int index;
                 }
 
                 else
-                    AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                            "বর্তমান ক্যাটাগরির জন্য তুলনা সম্ভব নয়");
+                    AlertMessage.showMessage(con, "Not possible to compare",
+                            "Comparison isn't available for this category");
 
 
 
@@ -1110,14 +1109,14 @@ int index;
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
 
 
-        opening_time1.setText("খোলার সময়");
-        language_spoken1.setText("প্রচলিত ভাষা");
-        service_type1.setText("সেবার ধরন");
-        specialist_available1.setText("বিশেষজ্ঞের ধরন");
-        clean_facilities1.setText("ফার্মেসি সেবা");
-        privacy1.setText("গোপনীয়তা");
-        quality_equipment1.setText("সেবার মান এবং যন্ত্রপাতি");
-        cost1.setText("সেবার খরচ");
+        opening_time1.setText("Opening Time");
+        language_spoken1.setText("Language");
+        service_type1.setText("Service Type");
+        specialist_available1.setText("Specialist Type");
+        clean_facilities1.setText("Pharmacy Service");
+        privacy1.setText("Privacy");
+        quality_equipment1.setText("Service details and Equipments");
+        cost1.setText("Service Cost");
         shift1_11.setVisibility(View.GONE);
         shift1_1.setVisibility(View.GONE);
         canteen_facility_1.setVisibility(View.GONE);
@@ -1228,48 +1227,48 @@ int index;
             if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
                 health_name3.setText(healthServiceProviderItemNew.getNode_bn());
             else
-                health_name3.setText("শীঘ্রই আসছে");
+                health_name3.setText("Data is being collected");
 
             String time2="";
             time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
             if(!time2.equals("")&&!time2.equals("null"))
                 opening_time3.setText(time2);
             else
-                opening_time3.setText("শীঘ্রই আসছে");
+                opening_time3.setText("Data is being collected");
 
             if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
             else
-                language_spoken3.setText("শীঘ্রই আসছে");
+                language_spoken3.setText("Data is being collected");
 
             if(!health_service_data1.equals("")&&!health_service_data1.equals("null"))
                 service_type3.setText(health_service_data1);
             else
-                service_type3.setText("শীঘ্রই আসছে");
+                service_type3.setText("Data is being collected");
             if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
                 specialist_available3.setText(firstSpecialistItem);
             else
-                specialist_available3.setText("শীঘ্রই আসছে");
+                specialist_available3.setText("Data is being collected");
 
             if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
                 clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
             else
-                clean_facilities3.setText("শীঘ্রই আসছে");
+                clean_facilities3.setText("Data is being collected");
 
             if(healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
-                privacy3.setText("শীঘ্রই আসছে");
+                privacy3.setText("Data is being collected");
 
             if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
                 quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
             else
-                quality_equipment3.setText("শীঘ্রই আসছে");
+                quality_equipment3.setText("Data is being collected");
 
             if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+ " টাকা");
+                cost3.setText(healthServiceProviderItemNew.getGeneral_cost()+ " BDT");
             else
-                cost3.setText("শীঘ্রই আসছে");
+                cost3.setText("Data is being collected");
         }
 
 
@@ -1360,48 +1359,48 @@ int index;
             if(!healthServiceProviderItemNewx.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getNode_bn().equals(""))
                 health_name2.setText(healthServiceProviderItemNewx.getNode_bn());
             else
-                health_name2.setText("শীঘ্রই আসছে");
+                health_name2.setText("Data is being collected");
 
             String time1="";
             time1=timeConverter(healthServiceProviderItemNewx.getOpening_time());
             if(!time1.equals("")&&!time1.equals("null"))
                 opening_time2.setText(time1);
             else
-                opening_time2.setText("শীঘ্রই আসছে");
+                opening_time2.setText("Data is being collected");
 
             if(!healthServiceProviderItemNewx.getSpoken_lang().equals("")&&!healthServiceProviderItemNewx.getSpoken_lang().equalsIgnoreCase("null"))
                 language_spoken2.setText(healthServiceProviderItemNewx.getSpoken_lang());
             else
-                language_spoken2.setText("শীঘ্রই আসছে");
+                language_spoken2.setText("Data is being collected");
 
             if(!health_service_data2.equals("")&&!health_service_data2.equals("null"))
                 service_type2.setText(health_service_data1);
             else
-                service_type2.setText("শীঘ্রই আসছে");
+                service_type2.setText("Data is being collected");
             if(!secondSpecialistItem.equals("")&&!secondSpecialistItem.equals("null"))
                 specialist_available2.setText(firstSpecialistItem);
             else
-                specialist_available2.setText("শীঘ্রই আসছে");
+                specialist_available2.setText("Data is being collected");
 
             if(!healthServiceProviderItemNewx.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNewx.getPharmacy_speciality().equals("null"))
                 clean_facilities2.setText(healthServiceProviderItemNewx.getPharmacy_speciality());
             else
-                clean_facilities2.setText("শীঘ্রই আসছে");
+                clean_facilities2.setText("Data is being collected");
 
             if(!healthServiceProviderItemNewx.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNewx.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy2.setText(String.valueOf(healthServiceProviderItemNewx.getPharmacy_privacy()));
             else
-                privacy2.setText("শীঘ্রই আসছে");
+                privacy2.setText("Data is being collected");
 
             if(!healthServiceProviderItemNewx.getQuality_equipments().equals("")&&!healthServiceProviderItemNewx.getQuality_equipments().equalsIgnoreCase("null"))
                 quality_equipment2.setText(healthServiceProviderItemNewx.getQuality_equipments());
             else
-                quality_equipment2.setText("শীঘ্রই আসছে");
+                quality_equipment2.setText("Data is being collected");
 
             if(!healthServiceProviderItemNewx.getGeneral_cost().equals("")&&!healthServiceProviderItemNewx.getGeneral_cost().equalsIgnoreCase("null"))
-                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNewx.getGeneral_cost())+ " টাকা");
+                cost2.setText(healthServiceProviderItemNewx.getGeneral_cost()+ " BDT");
             else
-                cost2.setText("শীঘ্রই আসছে");
+                cost2.setText("Data is being collected");
 
 
         }
@@ -1486,57 +1485,57 @@ int index;
 
 
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
-                edu_name_ban22.setText("শীঘ্রই আসছে ");
+                edu_name_ban22.setText("Data is being collected ");
             else
                 edu_name_ban22.setText(educationNewItem.getNamebn());
 
             if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
-                edtype.setText("শীঘ্রই আসছে ");
+                edtype.setText("Data is being collected ");
             else
                 edtype.setText(educationNewItem.getEdtype());
 
             if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
-                hostel_facility.setText("শীঘ্রই আসছে "); //center type
+                hostel_facility.setText("Data is being collected "); //center type
             else
-                hostel_facility.setText(English_to_bengali_number_conversion(educationNewItem.getFloor()));
+                hostel_facility.setText(educationNewItem.getFloor());
 
             if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
-                transport_facility.setText("শীঘ্রই আসছে");
+                transport_facility.setText("Data is being collected");
             else
                 transport_facility.setText(educationNewItem.getLandmark());//done
 
             if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null")|| educationNewItem.getAveragestudent().equals(""))
-                playground.setText("শীঘ্রই আসছে ");
+                playground.setText("Data is being collected");
             else
-                playground.setText(English_to_bengali_number_conversion(educationNewItem.getAveragestudent())+ " জন"); //done
+                playground.setText(educationNewItem.getAveragestudent()+ " Person"); //done
 
             if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
-                total_students.setText("শীঘ্রই আসছে ");
+                total_students.setText("Data is being collected");
             else
-                total_students.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno()))+" জন");
+                total_students.setText(String.valueOf(educationNewItem.getStudentno())+" person");
 
             if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
-                total_classes.setText("শীঘ্রই আসছে ");
+                total_classes.setText("Data is being collected");
             else
-                total_classes.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getClassno()))+ " টি");
+                total_classes.setText(String.valueOf(educationNewItem.getClassno()));
 
             if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null")|| educationNewItem.getTeachersno().equals(""))
-                total_teachers.setText("শীঘ্রই আসছে ");
+                total_teachers.setText("Data is being collected");
             else
-                total_teachers.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getTeachersno()))+ " জন");
+                total_teachers.setText(String.valueOf(educationNewItem.getTeachersno())+ " Person");
 
             if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null")|| educationNewItem.getWatercondition().equals(""))
-                course_provided.setText("শীঘ্রই আসছে ");
+                course_provided.setText("Data is being collected");
             else
                 course_provided.setText(educationNewItem.getWatercondition());
 
             if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null")|| educationNewItem.getShift().equals(""))
-                shift.setText("শীঘ্রই আসছে ");
+                shift.setText("Data is being collected");
             else
                 shift.setText(educationNewItem.getShift());
 
             if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
-                canteen_facility.setText("শীঘ্রই আসছে ");
+                canteen_facility.setText("Data is being collected");
             else
                 canteen_facility.setText(educationNewItem.getWatersource());
         }
@@ -1604,57 +1603,57 @@ int index;
 
 
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
-                edu_name_ban.setText("শীঘ্রই আসছে ");
+                edu_name_ban.setText("Data is being collected");
             else
                 edu_name_ban.setText(educationNewItem.getNamebn());
 
             if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
-                edtype1.setText("শীঘ্রই আসছে ");
+                edtype1.setText("Data is being collected");
             else
                 edtype1.setText(educationNewItem.getEdtype());
 
             if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
-                hostel_facility1.setText("শীঘ্রই আসছে ");
+                hostel_facility1.setText("Data is being collected");
             else
-                hostel_facility1.setText(English_to_bengali_number_conversion(educationNewItem.getFloor()));
+                hostel_facility1.setText(educationNewItem.getFloor());
 
             if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
-                transport_facility1.setText("শীঘ্রই আসছে ");
+                transport_facility1.setText("Data is being collected");
             else
                 transport_facility1.setText(educationNewItem.getLandmark());
 
             if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null")|| educationNewItem.getAveragestudent().equals(""))
-                playground1.setText("শীঘ্রই আসছে ");
+                playground1.setText("Data is being collected");
             else
-                playground1.setText(English_to_bengali_number_conversion(educationNewItem.getAveragestudent())+ " জন");
+                playground1.setText(educationNewItem.getAveragestudent()+ " Person");
 
             if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
-                total_students1.setText("শীঘ্রই আসছে ");
+                total_students1.setText("Data is being collected");
             else
-                total_students1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())));
+                total_students1.setText(String.valueOf(educationNewItem.getStudentno()));
 
             if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
-                total_classes1.setText("শীঘ্রই আসছে ");
+                total_classes1.setText("Data is being collected");
             else
-                total_classes1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getClassno()))+ " টি");
+                total_classes1.setText(String.valueOf(educationNewItem.getClassno()));
 
             if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null")|| educationNewItem.getTeachersno().equals(""))
-                total_teachers1.setText("শীঘ্রই আসছে ");
+                total_teachers1.setText("Data is being collected");
             else
-                total_teachers1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getTeachersno()))+ " জন");
+                total_teachers1.setText(String.valueOf(educationNewItem.getTeachersno())+ " Person");
 
             if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null")|| educationNewItem.getWatercondition().equals(""))
-                course_provided1.setText("শীঘ্রই আসছে ");
+                course_provided1.setText("Data is being collected");
             else
                 course_provided1.setText(educationNewItem.getWatercondition());
 
             if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null")|| educationNewItem.getShift().equals(""))
-                shift1.setText("শীঘ্রই আসছে ");
+                shift1.setText("Data is being collected");
             else
                 shift1.setText(educationNewItem.getShift());
 
             if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
-                canteen_facility1.setText("শীঘ্রই আসছে ");
+                canteen_facility1.setText("Data is being collected");
             else
                 canteen_facility1.setText(educationNewItem.getWatersource());
         }
@@ -1773,10 +1772,9 @@ int index;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
                 HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
 
-                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printhea = null;
+
                 ArrayList<String> RefHealth=null;
-                ArrayList<SubCategoryItemNew> RefHealthx=null;
+
                 groups.removeAllElements();
                 RefHealth=subCategoryTableNew.getSubnameedu(1);
                 ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews2;
@@ -2020,7 +2018,7 @@ int index;
             return;
         }
 
-        Toast.makeText(this, "এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ",
+        Toast.makeText(this, "Press once again to leave the screen ",
                 Toast.LENGTH_LONG).show();
 
 
@@ -2340,7 +2338,7 @@ int index;
                         toolbar.setVisibility(View.VISIBLE);
                         if (governmentNewItems.size()==0) {
 
-                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! There is no information","");
 //                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
 //
 //                            alertDialog2.setMessage("");
@@ -2579,7 +2577,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
 
-        tvName.setText(si.getSubCatHeaderBn());
+        tvName.setText(si.getSubcatHeader());
         flag=true;
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
@@ -2815,7 +2813,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
 
         MapFragmentOSM prev_fragment = (MapFragmentOSM) getFragmentManager().findFragmentByTag("MAP");
-        if(prev_fragment!=null)
+        if(prev_fragment!=null&&prev_fragment.getMapViewController() != null)
         {
             if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
             else prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);

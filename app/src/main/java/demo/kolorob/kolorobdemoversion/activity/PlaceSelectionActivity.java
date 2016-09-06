@@ -226,7 +226,7 @@ loadIMEI();
                     }
 
                     Log.d("BAUNIABHAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "মিরপুর-১১ ", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "Mirpur-11 ", Toast.LENGTH_SHORT);
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
@@ -240,7 +240,7 @@ loadIMEI();
                     }
 
                     Log.d("PARIS ROAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "মিরপুর-১০", Toast.LENGTH_SHORT);
+                    t = Toast.makeText(getApplicationContext(), "Mirpur-10", Toast.LENGTH_SHORT);
                     anyHit = true;
 
                 }
@@ -325,7 +325,7 @@ loadIMEI();
                             Double remote_version = jo.getDouble("version");
 
                             if (remote_version > current_version) {
-                                Toast.makeText(PlaceSelectionActivity.this, "কলরবের নতুন ভার্সন পাওয়া যাচ্ছে",
+                                Toast.makeText(PlaceSelectionActivity.this, "New version of Kolorob is available",
                                         Toast.LENGTH_LONG).show();
                                 generateNotification();
                             }
@@ -360,8 +360,8 @@ loadIMEI();
         Notification.Builder builder = new Notification.Builder(PlaceSelectionActivity.this);
 
         builder.setAutoCancel(true);
-        builder.setTicker("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে");
-        builder.setContentTitle("কলরব ভার্সন");
+        builder.setTicker("New version of kolorob is available");
+        builder.setContentTitle("Kolorob Version");
         //  builder.setContentText("To update click here.");
         builder.setSmallIcon(R.drawable.kolorob_logo);
         builder.setContentIntent(pendingIntent);
@@ -467,7 +467,7 @@ loadIMEI();
                 ratings = ratingBar.getRating();
                 comment=submit_review.getText().toString();
 
-                sendDataToserver(ratings, comment);
+               // sendDataToserver(ratings, comment);
                 alertDialog.cancel();
                 finish();
                 //   back();

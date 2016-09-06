@@ -1,18 +1,14 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,12 +32,10 @@ import java.util.Date;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DisplayAllJobList;
 import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
-import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
-import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
@@ -85,7 +79,7 @@ public class DisplayAllJobsActivity extends Activity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="আপনি কি নতুন চাকুরি খুজতে চান? ";
+        String text="Do you want to search new jobs?";
         textAsk.setText(text);
         WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
         lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
@@ -101,8 +95,8 @@ public class DisplayAllJobsActivity extends Activity {
             public void onClick(View v) {
 
                 alertDialog.cancel();
-                progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
-                        "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
+                progress = ProgressDialog.show(DisplayAllJobsActivity.this, "List is being updated",
+                        "Please wait for a while", true);
 
                 getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
                             @Override
@@ -214,7 +208,7 @@ public class DisplayAllJobsActivity extends Activity {
                     displayData();
                 }
                 else
-                    AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
+                    AlertMessage.showMessage(this,"No job found","Please try after sometimes!");
 
 
 

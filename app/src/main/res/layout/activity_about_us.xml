@@ -80,7 +80,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="আমাদের সাথে যোগ দিন "
+            android:text="Connect With Us! "
             android:id="@+id/connecttext"
 
             android:layout_gravity="center|top"
@@ -154,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="যোগাযোগ করুন"
+                android:text="Contact Us"
 
                 android:id="@+id/textView18"
                 android:layout_gravity="center_horizontal|top"

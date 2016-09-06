@@ -117,7 +117,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
      */
     private GoogleApiClient client2;
     String datevalue,datevaluebn;
-
+    long dateval;
+    TextView toastMessage;
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,48 +196,48 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         setRatingBar();
 
-        CheckConcate("প্রতিস্টানের ধরন", healthServiceProviderItemNew.getInstitute_type());
-        CheckConcate("ধারন ক্ষমতা", healthServiceProviderItemNew.getCapacity());
-        CheckConcate("পুরুষ ডাক্তার", healthServiceProviderItemNew.getMale_doctors());
-        CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
-        CheckConcate("রোগী এবং ডাক্তারের অনুপাত", healthServiceProviderItemNew.getPatient_doctor_ratio());
-        CheckConcate("পুরুষ ডাক্তার", healthServiceProviderItemNew.getMale_doctors());
-        CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
-        CheckConcate("রোগী নার্সের অনুপাত", healthServiceProviderItemNew.getPatient_nurse_ratio());
-        CheckConcate("পরিচিত স্থান", healthServiceProviderItemNew.getLandmark());
-        CheckConcate("ব্লক", healthServiceProviderItemNew.getBlock());
-        CheckConcate("ফ্লোর", healthServiceProviderItemNew.getFloor());
-        CheckConcate("বাড়ির নাম", healthServiceProviderItemNew.getHouse_name());
-        CheckConcate("রাস্তা", healthServiceProviderItemNew.getRoad());
-        CheckConcate("লাইন ", healthServiceProviderItemNew.getLine());
-        CheckConcate("এভিনিউ", healthServiceProviderItemNew.getAvenue());
-        CheckConcate("পোস্ট অফিস", healthServiceProviderItemNew.getPost_office());
-        CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolice_station());
-        CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_for());
-        CheckConcate("বিনামূল্যে সেবার ধরন", healthServiceProviderItemNew.getGeneral_free_services());
+        CheckConcate("Health Center Type", healthServiceProviderItemNew.getInstitute_type());
+        CheckConcate("Capacity", healthServiceProviderItemNew.getCapacity());
+        CheckConcate("Male Doctors", healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("Female Doctors", healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("Doctor-Patient Ratio", healthServiceProviderItemNew.getPatient_doctor_ratio());
+        CheckConcate("Male Doctor", healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("Female Doctor", healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("Patient-Nurse Ratio", healthServiceProviderItemNew.getPatient_nurse_ratio());
+        CheckConcate("Land Mark", healthServiceProviderItemNew.getLandmark());
+        CheckConcate("Block", healthServiceProviderItemNew.getBlock());
+        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
+        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("Road", healthServiceProviderItemNew.getRoad());
+        CheckConcate("Line ", healthServiceProviderItemNew.getLine());
+        CheckConcate("Avenue", healthServiceProviderItemNew.getAvenue());
+        CheckConcate("Post Office", healthServiceProviderItemNew.getPost_office());
+        CheckConcate("Police Station", healthServiceProviderItemNew.getPolice_station());
+        CheckConcate("Free Medical Service", healthServiceProviderItemNew.getGeneral_free_for());
+        CheckConcate("Free Medical Service Type", healthServiceProviderItemNew.getGeneral_free_services());
 
 
 
-        CheckConcate("ফার্মেসি চিকিৎসা সেবা", healthServiceProviderItemNew.getPharmacy_speciality());
-        CheckConcate("ফার্মেসি ফি", English_to_bengali_number_conversion(healthServiceProviderItemNew.getPharmacy_fee())+" টাকা");
+        CheckConcate("Pharmacy Speciality", healthServiceProviderItemNew.getPharmacy_speciality());
+        CheckConcate("Pharmacy Fee", healthServiceProviderItemNew.getPharmacy_fee()+" BDT");
 
-        CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_services());
-        CheckConcate("সাধারন খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+" টাকা");
-        CheckConcate("অনন্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
-        CheckConcate("এ্যাম্বুলেন্সের খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getAmbulance_cost())+" টাকা");
-        CheckConcate("অনন্য তথ্য", healthServiceProviderItemNew.getAmbulance_remark());
-        CheckConcate("মাতৃত্বজনিত সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getMaternity_cost())+" টাকা");
-        CheckConcate("মাতৃত্বজনিত অন্যন্য তথ্য", healthServiceProviderItemNew.getMaternity_remark());
-        CheckConcate("জরুরী সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_cost())+" টাকা");
-        CheckConcate("অনন্য খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getEmergency_remark())+" টাকা");
+        CheckConcate("Free Service", healthServiceProviderItemNew.getGeneral_free_services());
+        CheckConcate("General Cost", healthServiceProviderItemNew.getGeneral_cost()+" BDT");
+        CheckConcate("Other Information", healthServiceProviderItemNew.getGeneral_remark());
+        CheckConcate("Ambulance Cost", healthServiceProviderItemNew.getAmbulance_cost()+" BDT");
+        CheckConcate("Ambulance Remark", healthServiceProviderItemNew.getAmbulance_remark());
+        CheckConcate("Maternity Cost", healthServiceProviderItemNew.getMaternity_cost()+" BDT");
+        CheckConcate("Maternity Remarks", healthServiceProviderItemNew.getMaternity_remark());
+        CheckConcate("Emergency Cost", healthServiceProviderItemNew.getEmergency_cost()+" BDT");
+        CheckConcate("Emergency Remarks", healthServiceProviderItemNew.getEmergency_remark());
 
 
 
-        timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
-        timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
+        timeProcessing("Opening Time", healthServiceProviderItemNew.getOpening_time());
+        timeProcessing("Closing Time", healthServiceProviderItemNew.getClosing_time());
         if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
-            breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
-        CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
+            breakTimeProcessing("Break Time", healthServiceProviderItemNew.getBreak_time());
+        CheckConcate("Off Day", healthServiceProviderItemNew.getOff_day());
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size = healthSpecialistItemDetailses.size();
 
@@ -244,12 +246,12 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
                 //   result_concate = "";
                 //    specialist.setVisibility(View.VISIBLE);
-                CheckConcate("বিশেষজ্ঞ ডাক্তারের ধরন ", healthSpecialistItemDetails.getSpecialisttype());
-                CheckConcate("ডাক্তারের সংখা", English_to_bengali_number_conversion(healthSpecialistItemDetails.getSpecialistId())+" জন");
-                CheckConcate("প্রথম ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getSpecialistfees())+ " টাকা");
-                CheckConcate("এক সপ্তাহের মধ্যে ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getWeek_fee())+" টাকা");
-                CheckConcate("এক মাসের মধ্যে ভিজিট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getMonth_fee())+" টাকা");
-                CheckConcate("রিপোর্ট ফি", English_to_bengali_number_conversion(healthSpecialistItemDetails.getReport_fee())+" টাকা");
+                CheckConcate("Specialist Type", healthSpecialistItemDetails.getSpecialisttype());
+                CheckConcate("Doctor Number", healthSpecialistItemDetails.getSpecialistId());
+                CheckConcate("Specialist Fees",healthSpecialistItemDetails.getSpecialistfees()+ " BDT");
+                CheckConcate("Visit Fee(within first week)", healthSpecialistItemDetails.getWeek_fee()+" BDT");
+                CheckConcate("Visit Fee(within first month)", healthSpecialistItemDetails.getMonth_fee()+" BDT");
+                CheckConcate("Report Fee", healthSpecialistItemDetails.getReport_fee()+" BDT");
 
 
 
@@ -266,9 +268,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             // result_concate = "";
 
             for (HealthVaccineItemDetails healthVaccineItemDetails : healthVaccineItemDetailses) {
-                CheckConcate("ভ্যাকসিনের নাম", healthVaccineItemDetails.getVaccinename());
-                CheckConcate("ভ্যাকসিনের ফী", English_to_bengali_number_conversion(healthVaccineItemDetails.getVaccinefee())+" টাকা");
-                CheckConcate("ভ্যাকসিনের অন্যন্য তথ্য", healthVaccineItemDetails.getVaccineremarks());
+                CheckConcate("Vaccine Name", healthVaccineItemDetails.getVaccinename());
+                CheckConcate("Vaccine Cost", healthVaccineItemDetails.getVaccinefee()+" BDT");
+                CheckConcate("Vaccine Remarks", healthVaccineItemDetails.getVaccineremarks());
 
             }
 
@@ -405,16 +407,18 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য";
+        if (diffInDays==0) datevalue=" (Today's Information)";
         else
         {
-            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information)";
+            else
+                datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
+        toast = new Toast(this);
         // Set the Toast custom layout
         toast.setView(toastView);
 
@@ -425,7 +429,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
 
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+       toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setText(datevalue);
 
@@ -477,8 +481,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //        });
         alldata=(ListView)findViewById(R.id.allData);
 
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
-                .getLayoutParams();
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata.getLayoutParams();
 
         mlp.setMargins(width/100,0,width/990,width/8);
 
@@ -486,8 +489,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (healthServiceProviderItemNew.getNode_contact2().equals("")) {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Not possible to e-mail",
+                            "Email-id not found");
                 }
                 else{
                     Helpes.sendEmail(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getNode_contact2());
@@ -504,19 +507,16 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();
                     }
                 } else {
 
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con, "Sorry",
+                            "Phone call is not possible now");
+
                 }
             }
         });
@@ -565,16 +565,17 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(con, "GPS is off!",
+                            "Do you want to activate GPS?");
+
 
                 }
 
                 else
                 {
 
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                    AlertMessage.showMessage(con, "Sorry।",
+                            "Please activate your internet to see route");
 //
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
@@ -693,8 +694,19 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-                sendReviewToServer();
+                //sendReviewToServer();
+                toastMessage.setText("This is dummy feedback. This wont be submitted to server.Thanks!");
 
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
                 alertDialog.cancel();
 
             }
@@ -785,7 +797,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityHealthNew.this))
             textAsk.setTextSize(23);
@@ -900,23 +912,23 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             int times = Integer.valueOf(separated[1]);
 
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
+                timeInBengali = "12 AM";
             else if (hour >= 6 && hour < 12)
-                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" AM";
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" Noon";
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Noon)";
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12) + " PM (Afternoon)";
             else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Evening)";
             else if (hour > 20)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM(Night)";
             if (times != 0)
-                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+                timeInBengali = timeInBengali + " O clock and " + String.valueOf(times) + " Minutes";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

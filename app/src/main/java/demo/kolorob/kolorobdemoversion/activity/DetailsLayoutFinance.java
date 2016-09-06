@@ -95,7 +95,9 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     RatingBar ratingBar;
     Float rating;
     String datevalue,datevaluebn;
-
+    long dateval;
+    TextView toastMessage;
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,41 +170,41 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         mlp.setMargins(width/100,0,width/990,width/8);
 
 
-        CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
-        CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
-        CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
-        CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
-        CheckConcate("লাইন  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
-        CheckConcate("এভিনিউ  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
-        CheckConcate("পোস্ট অফিস  ", financialNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন ", financialNewItem.getPolicestation());
+        CheckConcate("Land mark  ", financialNewItem.getLandmark());
+        CheckConcate("Addreee  ", financialNewItem.getAddress());
+        CheckConcate("Floor  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
+        CheckConcate("House Name  ", financialNewItem.getHousename());
+        CheckConcate("Road  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
+        CheckConcate("Line  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
+        CheckConcate("Avenue  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
+        CheckConcate("Post Office  ", financialNewItem.getPostoffice());
+        CheckConcate("Police Station ", financialNewItem.getPolicestation());
 
-        CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact2());
-        CheckConcate("ইমেইল  ", financialNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট  ", financialNewItem.getNode_website());
-        CheckConcate("ফেসবুক   ", financialNewItem.getNode_facebook());
-        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্ত ", financialNewItem.getNode_designation());
+        CheckConcate("Contact ", financialNewItem.getNode_contact());
+        CheckConcate("Contact ", financialNewItem.getNode_contact2());
+        CheckConcate("E-mail  ", financialNewItem.getNode_email());
+        CheckConcate("Website  ", financialNewItem.getNode_website());
+        CheckConcate("Facebook   ", financialNewItem.getNode_facebook());
+        CheckConcate("Designation of Information Provider ", financialNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়  ", financialNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়  ", financialNewItem.getClosetime());
+        timeProcessing("Opening Time  ", financialNewItem.getOpeningtime());
+        timeProcessing("Closing Time  ", financialNewItem.getClosetime());
         if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়  ", financialNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন  ", financialNewItem.getOffday());
+            breakTimeProcessing("Break Time  ", financialNewItem.getBreaktime());
+        CheckConcate("Off Day  ", financialNewItem.getOffday());
 
-        CheckConcate("কাদের সাথে রেজিস্টার্ড   ", financialNewItem.getRegisteredwith());
-
+        CheckConcate("Registered With   ", financialNewItem.getRegisteredwith());
+        CheckConcate("Registration Number   ", financialNewItem.getRegisterednumber());
         financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
         int tuition_size = financialServiceDetailsItems.size();
         if (tuition_size != 0) {
             for (FinancialServiceDetailsItem financialServiceDetailsItem:   financialServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("সুবিধার ধরন  ", financialServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম  ", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", financialServiceDetailsItem.getServicecost()+" টাকা");
-                CheckConcate("মন্তব্য  ", financialServiceDetailsItem.getServiceremark());
+                CheckConcate("Service Type ", financialServiceDetailsItem.getServicetype());
+                CheckConcate("Service Sub-Type  ", financialServiceDetailsItem.getServicesubtype());
+                CheckConcate("Cost  ", financialServiceDetailsItem.getServicecost()+" BDT");
+                CheckConcate("Remarks  ", financialServiceDetailsItem.getServiceremark());
             }
         }
 
@@ -213,16 +215,18 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য";
+        if (diffInDays==0) datevalue=" (Today's Information)";
         else
         {
-            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information)";
+            else
+                datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
+       toast = new Toast(this);
         // Set the Toast custom layout
         toast.setView(toastView);
 
@@ -233,7 +237,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
 
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+       toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setText(datevalue);
@@ -260,8 +264,8 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (financialNewItem.getNode_email().equals("")||financialNewItem.getNode_email().equals("null")) {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Not possible to e-mail",
+                            "Email-id not found");
                 }
                 else{
                     Helpes.sendEmail(DetailsLayoutFinance.this, financialNewItem.getNode_email());
@@ -320,7 +324,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         ups_text.setTextSize(23);
         ratingText.setTextSize(23);
-        ups_text.setText(financialNewItem.getNamebn());
+        ups_text.setText(financialNewItem.getNameen());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -338,19 +342,14 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();
                     }
                 } else {
 
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con,  "Sorry"," Phone call is not possible now. ");
                 }
             }
         });
@@ -396,16 +395,14 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(con, "GPS is off!",
+                            "Do you want to activate GPS?");
 
                 }
 
                 else
-                {
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                {AlertMessage.showMessage(con, "Sorry।",
+                        "Please activate your internet to see route");
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutFinance.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
 //                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
@@ -497,7 +494,18 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-                sendReviewToServer();
+                toastMessage.setText("This is dummy feedback. This wont be submitted to server.Thanks!");
+
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
 
                 alertDialog.cancel();
 
@@ -640,7 +648,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutFinance.this))
             textAsk.setTextSize(23);
@@ -745,23 +753,23 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             int times = Integer.valueOf(separated[1]);
 
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
+                timeInBengali = "12 AM";
             else if (hour >= 6 && hour < 12)
-                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" AM";
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" Noon";
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Noon)";
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12) + " PM (Afternoon)";
             else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Evening)";
             else if (hour > 20)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM(Night)";
             if (times != 0)
-                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+                timeInBengali = timeInBengali + " O clock and " + String.valueOf(times) + " Minutes";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

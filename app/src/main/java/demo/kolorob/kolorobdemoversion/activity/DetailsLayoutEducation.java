@@ -76,6 +76,10 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     TextView ups_text;
     String[] key;
     String[] value;
+
+    TextView toastMessage;
+    Toast toast;
+    long dateval;
     int increment=0;
     ListView alldata;
     ListView courseListView, listView;
@@ -175,49 +179,49 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
-        CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno())+" জন");
-        CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno())+" জন");
-        CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno())+" টি");
-        CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
-        CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent())+" জন");
-        CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent())+" জন");
+        CheckConcate("Education Type ", educationNewItem.getEdtype());
+        CheckConcate("Shift", educationNewItem.getShift());
+        CheckConcate("Number of Students", educationNewItem.getStudentno());
+        CheckConcate("Number of Teachers",  educationNewItem.getTeachersno());
+        CheckConcate("Number of Classes",  educationNewItem.getClassno());
+        CheckConcate("Other Information", educationNewItem.getAdditional());
+        CheckConcate("Male Students",  educationNewItem.getMalestudent());
+        CheckConcate("Female Students",  educationNewItem.getFemalestudent());
 
-        CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no()))+" টি");
-        CheckConcate("ছেলেদের বাথরুম", EtoB( educationNewItem.getWashroom_male()));
-        CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
-        CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
-        CheckConcate("খাবার পানির উৎস", educationNewItem.getWatersource());
-        CheckConcate("গড় ছাত্রছাত্রী",  EtoB(educationNewItem.getAveragestudent()));
-        CheckConcate("মেয়েদের বাথরুম ",  EtoB(educationNewItem.getWashroomfemale()));
+        CheckConcate("Special Facility", educationNewItem.getSpecialneeds());
+        CheckConcate("Number of Washroom",  educationNewItem.getWashroom_no());
+        CheckConcate("Number of Washroom(Male)", educationNewItem.getWashroom_male());
+        CheckConcate("Washroom Cleanliness", educationNewItem.getWashroomcleanliness());
+        CheckConcate("Drinking Water Condition", educationNewItem.getWatercondition());
+        CheckConcate("Drinking Water Source", educationNewItem.getWatersource());
+        CheckConcate("Average Student Number",  educationNewItem.getAveragestudent());
+        CheckConcate("Number of Washroom(FeMale)",educationNewItem.getWashroomfemale());
 
-        CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
-        CheckConcate("ঠিকানা", educationNewItem.getAddress());
-        CheckConcate("ফ্লোর", EtoB(educationNewItem.getFloor()));
-        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHousename()));
-        CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));
-        CheckConcate("লাইন ", EtoB(educationNewItem.getLine()));
-        CheckConcate("এভিনিউ", EtoB(educationNewItem.getAvenue()));
-        CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
+        CheckConcate("Landmark", educationNewItem.getLandmark());
+        CheckConcate("Addreee", educationNewItem.getAddress());
+        CheckConcate("Floor", educationNewItem.getFloor());
+        CheckConcate("House Name", educationNewItem.getHousename());
+        CheckConcate("Road", educationNewItem.getRoad());
+        CheckConcate("Line ", educationNewItem.getLine());
+        CheckConcate("Avenue",educationNewItem.getAvenue());
+        CheckConcate("Post Office", educationNewItem.getPostoffice());
+        CheckConcate("Police Station", educationNewItem.getPolicestation());
 
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact2());
-        CheckConcate("ইমেইল", educationNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট", educationNewItem.getNode_website());
-        CheckConcate("ফেসবুক", educationNewItem.getNode_facebook());
-        CheckConcate("তথ্যপ্রদান কারীর পদবী", educationNewItem.getNode_designation());
+        CheckConcate("Contact", educationNewItem.getNode_contact());
+        CheckConcate("Contact", educationNewItem.getNode_contact2());
+        CheckConcate("Email", educationNewItem.getNode_email());
+        CheckConcate("Web site", educationNewItem.getNode_website());
+        CheckConcate("Facebook", educationNewItem.getNode_facebook());
+        CheckConcate("Designation of Information Provider", educationNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়", educationNewItem.getClosetime());
+        timeProcessing("Opening Time", educationNewItem.getOpeningtime());
+        timeProcessing("Closing Time", educationNewItem.getClosetime());
         if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
-        CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
+            breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
+        CheckConcate("Off Day", educationNewItem.getOffday());
+        CheckConcate("Registration Number", educationNewItem.getRegisterednumber());
+        CheckConcate("Registered With ", educationNewItem.getRegisteredwith());
         educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
         int result_size = educationResultItemNews.size();
 
@@ -229,11 +233,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                     if (student_number > 0) {
                     } else examname.add(educationResultItemNew.getExamname());
                 } else examname.add(educationResultItemNew.getExamname());
-*/              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno()));
-                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", EtoB(educationResultItemNew.getPassed()));
-                CheckConcate("গোল্ডেন এ", EtoB(educationResultItemNew.getGoldena()));
-                CheckConcate("জিপিএ ৫", EtoB(educationResultItemNew.getAplus()));
+*/              CheckConcate("Exam Name", educationResultItemNew.getExamname());
+                CheckConcate("Student Number", educationResultItemNew.getStudentno());
+                CheckConcate("Number of Students who passed", educationResultItemNew.getPassed());
+                CheckConcate("Golden A Holder", educationResultItemNew.getGoldena());
+                CheckConcate("GPA 5 Holder", educationResultItemNew.getAplus());
             }
         }
         for(int i=0;i<examname.size();i++)
@@ -256,16 +260,18 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য";
+        if (diffInDays==0) datevalue=" (Today's Information)";
         else
         {
-            datevaluebn=EtoB(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information)";
+            else
+                datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
+        toast = new Toast(this);
         // Set the Toast custom layout
         toast.setView(toastView);
 
@@ -276,7 +282,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
 
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+        toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setText(datevalue);
 
@@ -300,11 +306,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             for (EducationTrainingDetailsItem educationTrainingDetailsItem : educationTrainingDetailsItems) {
 
 
-                CheckConcate("কত মাসের কোর্স", EtoB(educationTrainingDetailsItem.getCourseduration()));
-                CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("খরচ", educationTrainingDetailsItem.getCost()+" টাকা");
-                CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
-                CheckConcate("ট্রেনিং এর নাম", educationTrainingDetailsItem.getTrainingnamesubtype());
+                CheckConcate("Course Duration", educationTrainingDetailsItem.getCourseduration());
+                CheckConcate("Admission(Month)", educationTrainingDetailsItem.getAdmissionmonth());
+                CheckConcate("Cpst", educationTrainingDetailsItem.getCost()+" BDT");
+                CheckConcate("Type", educationTrainingDetailsItem.getTrainingnametype());
+                CheckConcate("Training Name", educationTrainingDetailsItem.getTrainingnamesubtype());
 
 
             }
@@ -316,25 +322,25 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             for (EducationTuitionDetailsItem educationTuitionDetailsItem : educationTuitionDetailsItems) {
                 //result_concate="";
 
-                CheckConcate("কোন ক্লাস পড়ান হয়", educationTuitionDetailsItem.getTuitionlevel());
+                CheckConcate("Class Level", educationTuitionDetailsItem.getTuitionlevel());
                 boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
                 if (tuitioncost)
                 {
-                    CheckConcate("বিনা বেতনে পড়ার সুযোগ", "আছে");
+                    CheckConcate("Free Tuition Facilities", "Available");
                 }
                 else {
-                    CheckConcate("বিনা বেতনে পড়ার সুযোগ", "নাই");
+                    CheckConcate("Free Tuition Facilities", "Not Available");
                 }
 
-                CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
-                CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
-                CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionminfee()));
+                CheckConcate("Stipend Availability ", educationTuitionDetailsItem.getTuitionstipendfacility());
+                CheckConcate("Stipend Type", educationTuitionDetailsItem.getTuitionstipendtype());
+                CheckConcate("Course Related Information", educationTuitionDetailsItem.getTuitiondetails());
+                CheckConcate("Lowest Cost of Class", educationTuitionDetailsItem.getTuitionminfee());
 
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
-                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", EtoB(educationTuitionDetailsItem.getTuitionmincoaching()));
-                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", EtoB(educationTuitionDetailsItem.getTuitionmaxcoaching()));
-                CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
+                CheckConcate("Highest Cost of Class ", educationTuitionDetailsItem.getTuitionmaxfee());
+                CheckConcate("Lowest Cost of Coaching ", educationTuitionDetailsItem.getTuitionmincoaching());
+                CheckConcate("Highest Cost of Coaching", educationTuitionDetailsItem.getTuitionmaxcoaching());
+                CheckConcate("Additional Information", educationTuitionDetailsItem.getTuitionadditional());
 
 
             }
@@ -355,8 +361,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (educationNewItem.getNode_email().equals("")||educationNewItem.getNode_email().equals("null")) {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Not possible to e-mail",
+                            "Email-id not found");
                 }
                 else{
                     Helpes.sendEmail(DetailsLayoutEducation.this, educationNewItem.getNode_email());
@@ -514,7 +520,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         ups_text.setTextSize(23);
         ratingText.setTextSize(23);
-        ups_text.setText(educationNewItem.getNamebn());
+        ups_text.setText(educationNewItem.getNameen());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -533,16 +539,14 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();
                     }
                 } else {
 
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Sorry", "Phone call is not possible now. ");
                     Toast.makeText(getApplicationContext(),
                             "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                             .show();
@@ -592,8 +596,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(con, "GPS is off!",
+                            "Do you want to activate GPS?");
 
 
                 }
@@ -602,8 +606,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 {
 
 
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                    AlertMessage.showMessage(con, "Sorry।",
+                            "Please activate your internet to see route");
 
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
@@ -686,8 +690,20 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 status = rb1.getText().toString();
 
                 //  declareRadiobutton();
-                sendReviewToServer();
+               // sendReviewToServer();
 
+                toastMessage.setText("This is dummy feedback. This wont be submitted to server.Thanks!");
+
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
                 alertDialog.cancel();
 
             }
@@ -770,7 +786,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutEducation.this))
             textAsk.setTextSize(23);
@@ -918,23 +934,23 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             int times = Integer.valueOf(separated[1]);
 
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
+                timeInBengali = "12 AM";
             else if (hour >= 6 && hour < 12)
-                timeInBengali = "সকাল " + EtoB(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" AM";
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + EtoB(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" Noon";
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + EtoB(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Noon)";
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + EtoB(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12) + " PM (Afternoon)";
             else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + EtoB(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Evening)";
             else if (hour > 20)
-                timeInBengali = "রাত " + EtoB(String.valueOf(hour - 12));
-            if (times != 0)
-                timeInBengali = timeInBengali + " টা " + EtoB(String.valueOf(times)) + " মিনিট";
+                timeInBengali = String.valueOf(hour - 12)+" PM(Night)";
+             if (times != 0)
+                timeInBengali = timeInBengali + " O clock and " + String.valueOf(times) + " Minutes";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {
@@ -960,7 +976,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                     String[] realTIme = breakTIme[0].split("-");
 
 
-                    value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
+                    value2 = timeConverter(realTIme[0]) + " To " + timeConverter(realTIme[1]);
                     CheckConcate(value1, value2);
                 }
                 catch (Exception e)

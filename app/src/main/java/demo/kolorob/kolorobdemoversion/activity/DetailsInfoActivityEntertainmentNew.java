@@ -97,7 +97,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     Float rating;
     RatingBar ratingBar;
     ListView alldata;
-
+    long dateval;
+    TextView toastMessage;
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -247,16 +249,18 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য";
+        if (diffInDays==0) datevalue=" (Today's Information)";
         else
         {
-            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information)";
+            else
+                datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
+     toast = new Toast(this);
         // Set the Toast custom layout
         toast.setView(toastView);
 
@@ -267,7 +271,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
 
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+        toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setText(datevalue);
 
@@ -310,34 +314,34 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         //   other_detailsEnt.setVisibility(View.VISIBLE);
         for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
-            CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-            CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
-            CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
-            CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
+            CheckConcate("Center Type", entertainmentTypeItem.getType());
+            CheckConcate("Service Type", entertainmentTypeItem.getSub_type());
+            CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price()+" BDT");
+            CheckConcate("Additional Information ", entertainmentTypeItem.getRecreation_remarks());
 
 
 
         }
 
 
-        CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
-        CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
-        CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
-        CheckConcate("রাস্তার নাম", entertainmentServiceProviderItemNew.getRoad());
-        CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
-        CheckConcate("এভিনিউ", entertainmentServiceProviderItemNew.getAvenue());
-        CheckConcate("ব্লক", entertainmentServiceProviderItemNew.getBlock());
-        CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
-        CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
+        CheckConcate("Floor ", entertainmentServiceProviderItemNew.getFloor());
+        CheckConcate("House Name", entertainmentServiceProviderItemNew.getHouse_name());
+        CheckConcate("House Number", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("Road", entertainmentServiceProviderItemNew.getRoad());
+        CheckConcate("Line", entertainmentServiceProviderItemNew.getLine());
+        CheckConcate("Avenue", entertainmentServiceProviderItemNew.getAvenue());
+        CheckConcate("Block", entertainmentServiceProviderItemNew.getBlock());
+        CheckConcate("Land mark", entertainmentServiceProviderItemNew.getLandmark());
+        CheckConcate("Post Office", entertainmentServiceProviderItemNew.getPost_office());
 
-        CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
-        timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
+        CheckConcate("Address", entertainmentServiceProviderItemNew.getAddress());
+        timeProcessing("Opening Time", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
-        timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
-        CheckConcate("ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
+            breakTimeProcessing("Break Time", entertainmentServiceProviderItemNew.getBreaktime());
+        timeProcessing("Closing Time", entertainmentServiceProviderItemNew.getClosingtime());
+        CheckConcate("Off Day", entertainmentServiceProviderItemNew.getOff_day());
 
-        ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
+        ups_text.setText(entertainmentServiceProviderItemNew.getNodeName());
 
         // detailsEntertainment.setText(result_concate);
 
@@ -356,8 +360,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (entertainmentServiceProviderItemNew.getNodeWebsite().equals("null")||entertainmentServiceProviderItemNew.getNodeWebsite().equals("")) {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Not possible to e-mail",
+                            "Email-id not found");
                 }
                 else{
                     Helpes.sendEmail(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeEmail());
@@ -375,19 +379,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();
                     }
                 } else {
 
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con,  "Sorry"," Phone call is not possible now. ");
+
                 }
             }
         });
@@ -472,8 +472,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(con, "GPS is off!",
+                            "Do you want to activate GPS?");
 
                 }
 
@@ -481,8 +481,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 {
 
 
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                    AlertMessage.showMessage(con, "Sorry।",
+                            "Please activate your internet to see route");
 
 
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
@@ -698,7 +698,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 String[] realTIme = breakTIme[0].split("-");
 
 
-                value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
+                value2 = timeConverter(realTIme[0]) + " to " + timeConverter(realTIme[1]);
                 CheckConcate(value1, value2);
             }
             catch (Exception e)
@@ -757,8 +757,19 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-                sendReviewToServer();
+               // sendReviewToServer();
+                toastMessage.setText("This is dummy feedback. This wont be submitted to server.Thanks!");
 
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
                 alertDialog.cancel();
 
             }
@@ -900,7 +911,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityEntertainmentNew.this))
             textAsk.setTextSize(23);
@@ -1000,23 +1011,23 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             int times = Integer.valueOf(separated[1]);
 
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
+                timeInBengali = "12 AM";
             else if (hour >= 6 && hour < 12)
-                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" AM";
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" Noon";
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Noon)";
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12) + " PM (Afternoon)";
             else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Evening)";
             else if (hour > 20)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM(Night)";
             if (times != 0)
-                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+                timeInBengali = timeInBengali + " O clock and " + String.valueOf(times) + " Minutes";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

@@ -329,7 +329,7 @@ public class GovernmentNewTable {
         places=place;
         SQLiteDatabase db = openDB();
         int i=0;
-        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatnamebn = '"+subcatnames+"'" ,null);
+        Cursor cursor =db.rawQuery("SELECT * FROM " + DatabaseHelper.SUB_CATEGORY_NEW +  " WHERE _subcatname = '"+subcatnames+"'" ,null);
         if (cursor.moveToFirst()) {
             do {
 

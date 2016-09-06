@@ -24,13 +24,13 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
 
 
-	String[] values = new String[] { "Bangladesh Fire Service, \nবাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
-			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",
-			"Pallabi Police Station, পল্লবী থানা",
-			"RAB – 4, র্যাব - ৪",
-			"DESCO - Electricity, \nডেসকো – ইলেক্ট্রিসিটি ",
-			"Ministry of Disaster Management, \nদুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","Titas Gas, তিতাস গ্যাস ","Dhaka WASA, ঢাকা ওয়াসা",
-			"Blood Bank,  ব্লাড ব্যাংক ","Dhaka North City Corporation, \nঢাকা উত্তর সিটি কর্পোরেশন","Violence against Women & Children, \nনারী ও শিশু নির্যাতন প্রতিরোধ",""
+	String[] values = new String[] { "Bangladesh Fire Service,  ",
+			"Police Control Room, ",
+			"Pallabi Police Station, ",
+			"RAB – 4,",
+			"DESCO - Electricity, ",
+			"Ministry of Disaster Management,","Titas Gas, ","Dhaka WASA,",
+			"Blood Bank, ","Dhaka North City Corporation,","Violence against Women & Children, ",""
 	};
 
 	String[] address = new String[] { "Mirpur 10, Dhaka",
@@ -131,8 +131,8 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
              public void onClick(View v) {
 				if(location[i]=="not found")
 				{
-					AlertMessage.showMessage(context, " দুঃখিত!",
-							"পথ পাওয়া যায় নি ");
+					AlertMessage.showMessage(context, " Sorry!",
+							"Route could not be found");
 				}
 				 else {
 					splitStr = location[i].split("\\s+");
@@ -165,8 +165,8 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 //							 "Sorry, Phone call is not possible now.", Toast.LENGTH_LONG)
 //							 .show();
 
-					 AlertMessage.showMessage(context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-							 "ফোন নম্বর পাওয়া যায়নি");
+					 AlertMessage.showMessage(context, "Not possible to place calls",
+							 "Phone number not found");
 				 }
 
              }
@@ -181,8 +181,8 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 //					Toast.makeText(context,
 //							"Sorry, Email is not found! ", Toast.LENGTH_LONG)
 //							.show();
-				AlertMessage.showMessage(context, "ই মেইল করা সম্ভব হচ্ছে না",
-						"ই মেইল আই ডি পাওয়া যায়নি");
+				AlertMessage.showMessage(context, "Not possible to do email",
+						"Email id couldn't be found");
 
 
 			}

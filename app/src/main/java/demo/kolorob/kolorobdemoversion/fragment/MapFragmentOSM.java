@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +22,6 @@ import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -97,10 +90,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private  ArrayList<AllHolder>allitems=null;
     MapView mapView,mapp;
     String datevalue,datevaluebn;
+    long dateval;
     private int categoryId;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
-    String first;
+    boolean first;
     final ArrayList<Marker> items = new ArrayList<Marker>();
     final ArrayList<Marker> items1 = new ArrayList<Marker>();
     final ArrayList<Marker> items2 = new ArrayList<Marker>();
@@ -210,62 +204,22 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
         mapView.setTilesScaledToDpi(true);
-        first = settings.getString("First", null);
-        if (first!=null && first.equals("yes"))//if running for first time
-        {   Log.d("ss","********"+first);
-            File path = MapFragmentOSM.this.getActivity().getExternalFilesDir(null);
+        first = settings.getBoolean("firstRun", false);
+        if (first==false)//if running for first time
+        {
 
-            File file = new File(path, "kolorob.txt");
-
-            try
-            {
-                int length = (int) file.length();
-
-                bytes = new byte[length];
-
-                FileInputStream in = null;
-                try {
-                    in = new FileInputStream(file);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    try { if(in!=null){
-                        int b=in.read(bytes);}
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } finally {
-                    try {
-                       if(in!=null) in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                String contents = new String(bytes);
-                String delims = "[,]";
-                String[] tokens = contents.split(delims);
-                String text= tokens[0]+",no";
-
-                FileOutputStream fOut = new FileOutputStream(file);
-                OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                myOutWriter.write("");
-                myOutWriter.append(text);
-                myOutWriter.close();
-                fOut.close();
-            } catch(Exception e)
-            {
-
-            }
 
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
             mapView.setTileSource(TileSourceFactory.MAPNIK);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("firstRun", true);
+            editor.apply();
         }
         else {
-            //OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+            OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
             mapView.setUseDataConnection(false);
-            //mapView.setTileSource(TileSourceFactory.MAPNIK);
+            mapView.setTileSource(TileSourceFactory.MAPNIK);
         }
       /*  mapView.setTilesScaledToDpi(true);
         // Test code
@@ -295,11 +249,13 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (আজকের তথ্য)";
+        if (diffInDays==0) datevalue=" (Today's Information)";
         else
         {
-            datevaluebn=EtoBconversion(String.valueOf(diffInDays));
-            datevalue=" ( "+ datevaluebn + " দিন আগের তথ্য)";
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information)";
+            else
+            datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
 
 
@@ -356,17 +312,17 @@ mapView.getOverlays().clear();
 
             if((ratingavg.equals("null"))||(ratingavg.equals("")))
             {
-                ratingavg="পাওয়া যায় নি";
+                ratingavg="Not Found";
 
             }
             else  {
-                ratingavgbn=EtoBconversion(ratingavg);
+                ratingavgbn=ratingavg;
 
                 ratingavg=ratingavgbn.concat(datevalue);
             }
             longDouble = Double.parseDouble(et.getLon());
             GeoPoint point = new GeoPoint(latDouble, longDouble);
-            drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
+            drawMarkerEdu(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
         }
     }
 
@@ -400,17 +356,17 @@ mapView.getOverlays().clear();
 
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
-                    ratingavg="পাওয়া যায় নি";
+                    ratingavg="Not Found";
                 }
                 else  {
-                    ratingavgbn=EtoBconversion(ratingavg);
+                    ratingavgbn=ratingavg;
 
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 latDouble = Double.parseDouble(et.getLat());
                 longDouble = Double.parseDouble(et.getLon());
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerHealth(point, et.getNode_bn(), ratingavg, et.getNode_contact(), et.getId(), subcategotyId);
+                drawMarkerHealth(point, et.getNode_name(), ratingavg, et.getNode_contact(), et.getId(), subcategotyId);
             }
         }
 
@@ -447,16 +403,16 @@ mapView.getOverlays().clear();
 
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
-                    ratingavg="পাওয়া যায় নি";
+                    ratingavg="Not Found";
 
                 }
                 else  {
-                    ratingavgbn=EtoBconversion(ratingavg);
+                    ratingavgbn=ratingavg;
 
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerEnt(point, et.getNodeNameBn(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
+                drawMarkerEnt(point, et.getNodeName(), ratingavg, et.getNodeContact(), et.getNodeId(), subcategotyId);
             }
         }
 
@@ -488,16 +444,16 @@ public void govicons()
 
             if((ratingavg.equals("null"))||(ratingavg.equals("")))
             {
-                ratingavg="পাওয়া যায় নি";
+                ratingavg="Not Found";
 
             }
             else  {
-                ratingavgbn=EtoBconversion(ratingavg);
+                ratingavgbn=ratingavg;
 
                 ratingavg=ratingavgbn.concat(datevalue);
             }
             GeoPoint point = new GeoPoint(latDouble, longDouble);
-            drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
+            drawMarkerGov(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(),subcategotyId2);
         }
     }
 
@@ -529,16 +485,16 @@ public void govicons()
 
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
-                    ratingavg="পাওয়া যায় নি";
+                    ratingavg="Not Found";
 
                 }
                 else  {
-                    ratingavgbn=EtoBconversion(ratingavg);
+                    ratingavgbn=ratingavg;
 
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerLeg(point, et.getLegalaidNameBan(), ratingavg, et.getContactNo(), et.getIdentifierId(), subcategotyId);
+                drawMarkerLeg(point, et.getLegalaidNameEng(), ratingavg, et.getContactNo(), et.getIdentifierId(), subcategotyId);
             }
         }
 
@@ -571,16 +527,16 @@ public void govicons()
 
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
-                    ratingavg="পাওয়া যায় নি";
+                    ratingavg="Not Found";
 
                 }
                 else  {
-                    ratingavgbn=EtoBconversion(ratingavg);
+                    ratingavgbn=ratingavg;
 
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinId(), subcategotyId2);
+                drawMarkerFin(point, et.getNameen(), ratingavg, et.getNode_contact(), et.getFinId(), subcategotyId2);
             }
         }
 

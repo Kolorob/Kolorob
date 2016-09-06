@@ -84,19 +84,19 @@ public class PhoneRegActivity extends Activity {
         int size = phoneNumber.length();
 
         if (size != 11) {
-            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
-                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+            AlertMessage.showMessage(this, "Sorry!",
+                    "Please give your number in correct format");
         }
         else if (phoneNumber.charAt(0) != '0') {
-            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
-                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+            AlertMessage.showMessage(this, "Sorry!",
+                    "Please give your number in correct format");
         }
         else if (phoneNumber.charAt(1) != '1') {
-            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
-                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+            AlertMessage.showMessage(this, "Sorry!",
+                    "Please give your number in correct format");
         } else if (phoneNumber.charAt(2) == '2' || phoneNumber.charAt(2) == '3' || phoneNumber.charAt(2) == '4') {
-            AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
-                    "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
+            AlertMessage.showMessage(this, "Sorry!",
+                    "Please give your number in correct format");
         } else {
             sendPhoneNumberToServer(phoneNumber);
         }
@@ -125,26 +125,21 @@ public class PhoneRegActivity extends Activity {
                             if(response.equals("true"))
                             {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
-                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
-                                        " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ");
+                                AlertMessage.showMessage(PhoneRegActivity.this, "Successful!",
+                                        " Thanks for completing registration with Kolorob");
 
 
                             }
 
                             else if(response.equals("\"Invalid Phone Number\""))
                             {
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
-                                        "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");                            }
+                                AlertMessage.showMessage(PhoneRegActivity.this, "Sorry!",
+                                        "Please give your number in correct format");                        }
                             else
                             {
 
-
-
-
-                                SharedPreferencesHelper.setNumber(con,phoneNumber);
-
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
-                                        "আপনি ইতিপূর্বে  রেজিস্ট্রেশন করে ফেলেছেন");
+                                AlertMessage.showMessage(PhoneRegActivity.this, "Sorry",
+                                        "You've already completed your registration");
                             }
 
                                         //  finish();

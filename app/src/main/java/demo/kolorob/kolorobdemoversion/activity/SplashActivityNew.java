@@ -41,7 +41,7 @@ public class SplashActivityNew extends ActionBarActivity {
 
         //now make the early request just in case
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
-            getRequest(SplashActivityNew.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(SplashActivityNew.this, "http://kolorob.net/demo/api/getsqleng?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {

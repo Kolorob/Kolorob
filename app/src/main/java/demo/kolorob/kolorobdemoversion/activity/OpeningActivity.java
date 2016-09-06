@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -44,11 +43,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -78,7 +72,6 @@ import demo.kolorob.kolorobdemoversion.database.RatingTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
-import demo.kolorob.kolorobdemoversion.model.BazarItem;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
@@ -104,7 +97,7 @@ import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
-import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -173,251 +166,34 @@ public class OpeningActivity extends Activity {
     View view=null;
     Float currentVersion;
 
-    //==========================================================Code for Bazar Starts==========================================
-    //bazar items
-    ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
-    //loads the bazar items into arrays
-    private void loadBazar(){
-        getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getadvsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            //ge the db instance
-                            SQLiteDatabase db = DatabaseManager.getInstance(OpeningActivity.this).openDatabase();
-
-                            //split into single sql queries
-                            String[] sql = apiContent.split("~");
-
-                            //run the sqls one by one
-                            for (int i = 0; i<sql.length;i++)
-                            {
-                                db.execSQL(sql[i]);
-                            }
-
-                            //now reload the data taht has beed saved
-
-                            //get all data from db
-                            Cursor cursor =  db.rawQuery("select * from custom_advertisement", null);
-                            allBazar = new ArrayList<BazarItem>();
-                            while (cursor.moveToNext()) {
-                                allBazar.add(new BazarItem(cursor));
-                            }
-
-                            //tester. You may delete this portion
-                            Context context = getApplicationContext();
-                            CharSequence text = allBazar.get(0).toString();
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            //tester ends======
-
-                        }
-                    }
-                }
-        );
-    }
-    private void saveBazar(BazarItem b){
-        getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
-                +"&description=" + b.description +
-                "&type=" + b.type +
-                "&phone=" + b.phone +
-                "&contact=" + b.contact +
-                "&condition=" + b.condition +
-                "&contact_person=" + b.contact_person +
-                "&price=" + b.price,
-                new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            //tester. You may delete this portion
-                            Context context = getApplicationContext();
-                            CharSequence text = apiContent;
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            //tester ends======
-                        }
-                    }
-                }
-        );
-
-
-
-    }
-    //==========================================================Code for Bazar Ends==========================================
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //=========================================Bazar Calling starts here============================================
-       /* //load the bazar
-        loadBazar();
-        //save a bazar
-        BazarItem b = new BazarItem();
-        b.description="descriptions";
-        b.type = "Sell";
-        b.phone = "01711310912"; //MUST BE REGISTERED
-        b.contact = "2342352523";
-        b.condition = "qwdadasd";
-        b.contact_person = "ASDsdSDS";
-        b.price = 50;
-        saveBazar(b);*/
-        //=========================================Bazar Calling Ends here============================================
 
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_opening);
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
-        try
-        {
-            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-
-            Float currentVersion= Float.parseFloat(app_ver);
-            Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
-            if(currentVersion >previousVersion)
-            {
-                File path = OpeningActivity.this.getApplicationContext().getExternalFilesDir(null);
-
-                File file = new File(path, "kolorob.txt");
-                if(file.exists())
-                {
-                    file.delete();
-                }
-             /*  File dir = new File(Environment.getExternalStorageDirectory()+"/osmdroid");
-                if (dir.isDirectory())
-                {
-                    String[] children = dir.list();
-                    for (int i = 0; i < children.length; i++)
-                    {
-                        new File(dir, children[i]).delete();
-                    }
-                }*/
-            }
-            if(currentVersion>=previousVersion)
-                drop=true;
-            else
-                drop=false;
-
-        }
-        catch (Exception e)
-        {
-
-        }
 
 
         context = this;
-        mainLayout =(RelativeLayout)findViewById(R.id.mainLayout);
+        mainLayout = (RelativeLayout) findViewById(R.id.mainLayout);
         mainLayout.setBackgroundResource(R.drawable.bg);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        width=displayMetrics.widthPixels;
-        height=displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+        height = displayMetrics.heightPixels;
 
-        File path = context.getExternalFilesDir(null);
-
-        File file = new File(path, "kolorob.txt");
-        if(! new File(path, "kolorob.txt").exists()) {
-            FileOutputStream stream = null;
-            try {
-                stream = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-                    String body = app_ver + ",yes";
-                    if (stream!=null){
-                    stream.write(body.getBytes());}
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } finally {
-                try {
-                    if(stream!=null){
-
-                    stream.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            int length = (int) file.length();
-
-            bytes = new byte[length];
-
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-                    if(in!=null){
-                        int b= in.read(bytes);}
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } finally {
-                try {
-                    if(in!=null) {
-                        in.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String contents = new String(bytes);
-            String delims = "[,]";
-            String[] tokens = contents.split(delims);
-            first=tokens[1];
-        }
-        else {
-            int length = (int) file.length();
-
-            bytes = new byte[length];
-
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-                    if(in!=null){
-                      int b=  in.read(bytes);}
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } finally {
-                try {
-                    if(in!=null) {
-                        in.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String contents = new String(bytes);
-            String delims = "[,]";
-            String[] tokens = contents.split(delims);
-
-            first=tokens[1];
-        }
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         firstRun = settings.getBoolean("firstRun", false);
-        if (first.equals("yes"))//if running for first time
+        if (firstRun.equals(false))//if running for first time
         {
             SharedPreferences.Editor editor = settings.edit();
 
 
-
-            if(!AppUtils.isNetConnected(getApplicationContext())) {
+            if (!AppUtils.isNetConnected(getApplicationContext())) {
 
 
                 LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -433,10 +209,10 @@ public class OpeningActivity extends Activity {
 
                 final TextView header = (TextView) promptView.findViewById(R.id.headers);
                 final TextView bodys = (TextView) promptView.findViewById(R.id.body);
-                final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+                final ImageView okay = (ImageView) promptView.findViewById(R.id.okay);
 
-                header.setText("ইন্টারনেট সংযোগ সচল নয়");
-                bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+                header.setText("Internet is not activated");
+                bodys.setText(" Kolorob is going to run for the first time. Please activate your internet ");
 
                 okay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -451,52 +227,35 @@ public class OpeningActivity extends Activity {
                 });
 
                 alertDialog.setCancelable(false);
-//		if(SharedPreferencesHelper.isTabletDevice(c))
-//			textAsk.setTextSize(23);
+
                 WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
-                lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                lp.dimAmount = 0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
                 alertDialog.getWindow().setAttributes(lp);
-//		else
-//			textAsk.setTextSize(17);
-                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                alertDialog.getWindow().setLayout((width * 5) / 6, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
-
-
-//                alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-//                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
-//                alertDialog.setCanceledOnTouchOutside(false);
-//                alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
-//                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//
-//                            }
-//                        });
-//                alertDialog.show();
-            }
-            else
+            } else
 
             {
 
                 settings.edit().putLong("time", System.currentTimeMillis()).apply();
-// get the time and make a date out of it
 
-//                pd = new ProgressDialog(OpeningActivity.this, ProgressDialog.STYLE_SPINNER);
-//                pd.setIndeterminate(true);
-//                pd.show(OpeningActivity.this, AppConstants.WAITTAG, AppConstants.WAITDET);
                 LoadData();
 
                 //   pd.dismiss();
             }
-        } else
-        {
+        } else {
 
 
+            Intent i = new Intent(OpeningActivity.this, PlaceSelectionActivity.class);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            startActivity(i);
 
 
+            finish();
 
+/*
             LayoutInflater layoutInflater = LayoutInflater.from(OpeningActivity.this);
             View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
 
@@ -647,6 +406,7 @@ public class OpeningActivity extends Activity {
 //
 //            alertDialog.show();
 //            alertDialog.setCanceledOnTouchOutside(false);
+        } */
         }
     }
     public void LoadData()
@@ -880,7 +640,7 @@ public class OpeningActivity extends Activity {
                                         JSONArray allData = new JSONArray(apiContent);
                                         new SavenewEduTask(OpeningActivity.this).execute(allData);
 
-    //                                          frameAnimation.stop();
+                                        //                                          frameAnimation.stop();
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -973,8 +733,13 @@ public class OpeningActivity extends Activity {
                     this.finish();
                 }
                 else {
-                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-                            Toast.LENGTH_LONG).show();
+                    ToastMessageDisplay.ShowToast(OpeningActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+
+
+
+
                 }
 
             } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED )
@@ -1077,9 +842,12 @@ public class OpeningActivity extends Activity {
         if (requestCode == INTERNET_PERMISSION) {
             if (grantResults.length == 1 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Internet permission granted", Toast.LENGTH_SHORT).show();
+                ToastMessageDisplay.ShowToast(this,"Internet permission granted");
+
             } else {
-                Toast.makeText(this, "Inter permission denied", Toast.LENGTH_SHORT).show();
+                ToastMessageDisplay.ShowToast(this,"Inter permission denied");
+
+
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -1210,7 +978,7 @@ public class OpeningActivity extends Activity {
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray allData = jsonArrays[0];
             HealthServiceProviderTableNew healthServiceProviderTableNew = new HealthServiceProviderTableNew(OpeningActivity.this);
-                healthServiceProviderTableNew.dropTable();
+            healthServiceProviderTableNew.dropTable();
 
             HealthDatSize = allData.length();
 
@@ -1291,7 +1059,7 @@ public class OpeningActivity extends Activity {
             EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(OpeningActivity.this);
             EntertainmetTypeTable entertainmetTypeTable = new EntertainmetTypeTable(OpeningActivity.this);
             entertainmetTypeTable.dropTable();
-                entertainmentServiceProviderTableNew.dropTable();
+            entertainmentServiceProviderTableNew.dropTable();
 
             for (int i = 0; i < entDataSize; i++) {
                 try {
@@ -1414,7 +1182,7 @@ public class OpeningActivity extends Activity {
 
                 //if 10 msec passed make another attempt
                 if(tmr==10){
-                    getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                    getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getsqleng?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
                                 @Override
                                 public void onResponse(int status, String apiContent) {
                                     if (status == AppConstants.SUCCESS_CODE) {
@@ -1522,7 +1290,7 @@ public class OpeningActivity extends Activity {
             JSONArray legal_array = jsonArrays[0];
             int p = legal_array.length();
             LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(OpeningActivity.this);
-                legalAidServiceProviderTableNew.dropTable();
+            legalAidServiceProviderTableNew.dropTable();
 
             for (int i = 0; i < p; i++) {
                 try {
@@ -1735,5 +1503,5 @@ public class OpeningActivity extends Activity {
     }
 
 
-    }
+}
 

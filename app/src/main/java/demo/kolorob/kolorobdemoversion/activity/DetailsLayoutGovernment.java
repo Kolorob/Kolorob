@@ -40,10 +40,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
@@ -92,7 +90,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     private CheckBox checkBox;
     RatingBar ratingBar;
     Float rating;
-
+    long dateval;
+    TextView toastMessage;
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,41 +161,41 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         setRatingBar();
 
-        CheckConcate("পরিচিত স্থান  ", governmentNewItem.getLandmark());
-        CheckConcate("ঠিকানা  ", governmentNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", governmentNewItem.getFloor());
-        CheckConcate("বাড়ির নাম  ", governmentNewItem.getHousename());
-        CheckConcate("রাস্তা   ", governmentNewItem.getRoad());
-        CheckConcate("লাইন    ", governmentNewItem.getLine());
-        CheckConcate("এভিনিউ  ", governmentNewItem.getAvenue());
-        CheckConcate("পোস্ট অফিস  ", governmentNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন ", governmentNewItem.getPolicestation());
+        CheckConcate("Land mark  ", governmentNewItem.getLandmark());
+        CheckConcate("Address  ", governmentNewItem.getAddress());
+        CheckConcate("Floor  ", governmentNewItem.getFloor());
+        CheckConcate("House name  ", governmentNewItem.getHousename());
+        CheckConcate("Road   ", governmentNewItem.getRoad());
+        CheckConcate("Line    ", governmentNewItem.getLine());
+        CheckConcate("Avenue  ", governmentNewItem.getAvenue());
+        CheckConcate("Post Office  ", governmentNewItem.getPostoffice());
+        CheckConcate("Police Station ", governmentNewItem.getPolicestation());
 
-        CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact2());
-        CheckConcate("ইমেইল  ", governmentNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট  ", governmentNewItem.getNode_website());
-        CheckConcate("ফেসবুক  ", governmentNewItem.getNode_facebook());
-        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি   ", governmentNewItem.getNode_designation());
+        CheckConcate("Contact  ", governmentNewItem.getNode_contact());
+        CheckConcate("Contact  ", governmentNewItem.getNode_contact2());
+        CheckConcate("Email  ", governmentNewItem.getNode_email());
+        CheckConcate("Website  ", governmentNewItem.getNode_website());
+        CheckConcate("Facebook  ", governmentNewItem.getNode_facebook());
+        CheckConcate("Designation of Information Provider   ", governmentNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়  ", governmentNewItem.getOpeningtime());
-        timeProcessing("বন্ধে সময়  ", governmentNewItem.getClosetime());
+        timeProcessing("Opening Time ", governmentNewItem.getOpeningtime());
+        timeProcessing("Closing Time ", governmentNewItem.getClosetime());
         if(!governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়  ", governmentNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন   ", governmentNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার ", governmentNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড   ", governmentNewItem.getRegisteredwith());
+            breakTimeProcessing("Break Time ", governmentNewItem.getBreaktime());
+        CheckConcate("Off Day  ", governmentNewItem.getOffday());
+        CheckConcate("Registration Number ", governmentNewItem.getRegisterednumber());
+        CheckConcate("Registered With   ", governmentNewItem.getRegisteredwith());
 
         governmentServiceDetailsItems = governmentServiceDetailsTable.getgovinfo(governmentNewItem.getFinId());
         int tuition_size = governmentServiceDetailsItems.size();
         if (tuition_size != 0) {
             for (GovernmentServiceDetailsItem governmentServiceDetailsItem : governmentServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("সুবিধার ধরন ", governmentServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম ", governmentServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", governmentServiceDetailsItem.getServicecost()+ "টাকা");
-                CheckConcate("মন্তব্য ", governmentServiceDetailsItem.getDetailstep());
+                CheckConcate("Service Type ", governmentServiceDetailsItem.getServicetype());
+                CheckConcate("Service Name ", governmentServiceDetailsItem.getServicesubtype());
+                CheckConcate("Cost  ", governmentServiceDetailsItem.getServicecost()+ "BDT");
+                CheckConcate("Remarks ", governmentServiceDetailsItem.getDetailstep());
             }
         }
 
@@ -215,8 +215,8 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (governmentNewItem.getNode_email().equals("")||governmentNewItem.getNode_email().equals("")) {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Not possible to e-mail",
+                            "Email-id not found");
                 }
                 else{
                     Helpes.sendEmail(DetailsLayoutGovernment.this, governmentNewItem.getNode_email());
@@ -258,23 +258,13 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         left_image.getLayoutParams().width = width / 8;
 
         SharedPreferences settings = DetailsLayoutGovernment.this.getSharedPreferences("prefs", 0);
-        Date date2 = new Date(settings.getLong("time", 0));
-        Date today=new Date();
-        long diffInMillisec = today.getTime() - date2.getTime();
 
-        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য ";
-        else
-        {
-            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
-        }
 
       //  Toast toast = Toast.makeText(this, datevalue, Toast.LENGTH_LONG);
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
+        toast = new Toast(this);
         // Set the Toast custom layout
         toast.setView(toastView);
 
@@ -285,7 +275,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
 
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+        toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setText(datevalue);
 
@@ -318,7 +308,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         ups_text.setTextSize(23);
         ratingText.setTextSize(23);
-        ups_text.setText(governmentNewItem.getNamebn());
+        ups_text.setText(governmentNewItem.getNameen());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -334,19 +324,14 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();
                     }
                 } else {
 
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con,  "Sorry"," Phone call is not possible now. ");
                 }
             }
         });
@@ -392,9 +377,8 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(con, "GPS is off!",
+                            "Do you want to activate GPS?");
 
                 }
 
@@ -402,8 +386,8 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 {
 
 
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                    AlertMessage.showMessage(con, "Sorry।",
+                            "Please activate your internet to see route");
 
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutGovernment.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
@@ -497,7 +481,18 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-                sendReviewToServer();
+                toastMessage.setText("This is dummy feedback. This wont be submitted to server.Thanks!");
+
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
 
                 alertDialog.cancel();
 
@@ -591,7 +586,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutGovernment.this))
             textAsk.setTextSize(23);
@@ -732,23 +727,23 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             int times = Integer.valueOf(separated[1]);
 
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
+                timeInBengali = "12 AM";
             else if (hour >= 6 && hour < 12)
-                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" AM";
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" Noon";
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Noon)";
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12) + " PM (Afternoon)";
             else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Evening)";
             else if (hour > 20)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM(Night)";
             if (times != 0)
-                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+                timeInBengali = timeInBengali + " O clock and " + String.valueOf(times) + " Minutes";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

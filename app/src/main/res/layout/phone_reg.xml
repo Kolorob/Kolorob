@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
         android:textSize="28dp"
-        android:text="ফোন রেজিস্ট্রেশন করুন "
+        android:text="Phone Registration"
         />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_gravity="center_horizontal"
         android:phoneNumber="true"
         android:textSize="25dp"
-        android:text="ফোন নম্বর"
+        android:text="Give Phone number"
         />
 
     <EditText
@@ -61,7 +61,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="25dp"
         android:layout_marginTop="15dp"
-        android:text="দিয়েছি"
+        android:text="Submit"
         android:onClick="submit"
         />
 

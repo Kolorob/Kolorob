@@ -3,14 +3,12 @@ package demo.kolorob.kolorobdemoversion.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -20,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,7 +35,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.osmdroid.api.IMapController;
-import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.bonuspack.routing.RoadNode;
@@ -56,8 +54,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.helpers.KOLOROBRoadManager;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
-import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -95,7 +93,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
     private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
     GeoPoint markerlocation, userlocation;
-    Marker usermarker;
+
 
     MapView mapView;
     private int categoryId;
@@ -123,7 +121,8 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     LocationManager locationManager;
     String provider;
     boolean havePolyLine;
-
+    TextView toastMessage;
+    Toast toast;
     Marker curposition;
     boolean statusofservice = false;
     Location location;
@@ -131,13 +130,13 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     IMapController mapViewController;
 
     @Override
-     public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         dialog = new ProgressDialog(MapFragmentRouteOSM.this);
-        dialog.setMessage("দয়া করে অপেক্ষা করুন");
+        dialog.setMessage("Please wait for a while..");
         dialog.show();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
@@ -189,51 +188,23 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         curposition = new Marker(mapView);
         centermarker.setPosition(markerlocation);
         centermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
-        centermarker.setTitle("     গন্তব্য");
+        centermarker.setTitle("     Destination");
 
         mapView.getOverlays().add(centermarker);
 
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
         final int gpsVersion = getResources().getInteger(com.google.android.gms.R.integer.google_play_services_version);
 
-        // Showing status
-        if (gpsVersion >= 8400000) {
+        double lat2 = Double.parseDouble("23.791519");
+        double lon2 = Double.parseDouble("90.411485");
+        userlocation = new GeoPoint(lat2,lon2);
+        Marker usermarker = new Marker(mapView);
+        usermarker.setPosition(userlocation);
+        usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+        usermarker.setTitle("     Save the Children, Bangladesh");
+        mapView.getOverlays().add(usermarker);
+        Drawroute(userlocation, markerlocation);
 
-            statusofservice = true;
-            buildGoogleApiClient();
-        } else {
-
-            int requestCode = 10;
-            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
-            dialog.show();//dialog needs to be modified more of an alert dialog
-            locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-            // Creating an empty criteria object
-            Criteria criteria = new Criteria();
-
-            // Getting the name of the provider that meets the criteria
-            provider = locationManager.getBestProvider(criteria, false);
-
-
-            if (provider != null && !provider.equals("")) {
-
-                // Get the location from the given provider
-                location = locationManager.getLastKnownLocation(provider);
-
-
-                locationManager.requestLocationUpdates(provider, 60000, 0.0f, this);
-
-
-                if (location != null) {
-                    onLocationChanged(location);
-                    Drawroute(userlocation, markerlocation);
-                } else
-                    Toast.makeText(this, "Location can't be retrieved", Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(this, "No Provider Found", Toast.LENGTH_SHORT).show();
-            }
-        }
         mapViewController.setZoom(18);
         mapViewController.setCenter(markerlocation);
 
@@ -252,28 +223,41 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
             @Override
             public void onClick(View view) {
-                mapView.getOverlays().remove(curposition);
-                if (mLastLocation != null|| location!=null) {
-                    Location setloc;
-                    if (mLastLocation!=null) {
-                        setloc=mLastLocation;
-                        onLocationChanged(mLastLocation);
+                LayoutInflater inflater = getLayoutInflater();
+
+                View toastView = inflater.inflate(R.layout.toast_view,null);
+                toast = new Toast(MapFragmentRouteOSM.this);
+                // Set the Toast custom layout
+                toast.setView(toastView);
+
+
+                //   View toastView = toast.getView(); //This'll return the default View of the Toast.
+
+        /* And now you can get the TextView of the default View of the Toast. */
 
 
 
-                    }
-                    else {
-                        setloc=location;
-                        onLocationChanged(location);}
+                toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+                toastMessage.setTextSize(20);
+
+                toastMessage.setText("Current position won't work Since static location is used in this version!");
 
 
-                    curposition.setPosition(new GeoPoint(setloc));
-                    curposition.setIcon(getApplicationContext().getResources().getDrawable(R.drawable.my_location_2_icon));
-                    mapViewController.animateTo(new GeoPoint(setloc));
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                toast.setDuration(Toast.LENGTH_LONG);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
+                    mapViewController.animateTo(new GeoPoint(userlocation));
                     mapView.getOverlays().add(curposition);
-                    curposition.setTitle("আপনি এখন এখানে");
-                }
+                    curposition.setTitle("Your current position");
             }
+
         });
 
 
@@ -285,7 +269,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         TextView disttext,Bustext,Ricksawtext,Cngtext,Walkingtext,headtext;
         //trlayout=(RelativeLayout)rootView.findViewById(R.id.transportdetailslayout);
 
-      //  trlayout.setVisibility(View.VISIBLE);
+        //  trlayout.setVisibility(View.VISIBLE);
         headlayout=(RelativeLayout)findViewById(R.id.headerlayout);
         headlayout.setVisibility(View.VISIBLE);
         headtext=(TextView)findViewById(R.id.headtext);
@@ -297,37 +281,37 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         Bustext=(TextView)findViewById(R.id.bustext);
         Ricksawtext=(TextView)findViewById(R.id.ricksawtext);
         Walkingtext=(TextView)findViewById(R.id.walkingtext);
-      String bdistance= EtoBconversion(distance);
-        disttext.setText(getString(R.string.distance) +": " +bdistance+ " কি.মি" );
+        String bdistance= distance;
+        disttext.setText("Distance: " +bdistance+ " km" );
         disttext.setVisibility(View.VISIBLE);
-        String Busfare= EtoBconversion(String.valueOf((int) Math.round(roadlength*1.7)));
-        String Busfare2= EtoBconversion(String.valueOf((int) Math.round(roadlength*3.7)));
-        String bustime= EtoBconversion(String.valueOf((int) Math.round((roadlength/15)*60)));
-        if (Integer.parseInt(Busfare) <=7.00)Bustext.setText( "৭ "+ "টাকা এবং খুব কম সময় লাগার কথা");
+        String Busfare= String.valueOf((int) Math.round(roadlength*1.7));
+        String Busfare2= String.valueOf((int) Math.round(roadlength*3.7));
+        String bustime= String.valueOf((int) Math.round((roadlength/15)*60));
+        if (Integer.parseInt(Busfare) <=7.00)Bustext.setText( "7 "+ " BDT & should take minimal time");
         else {
 
-            Bustext.setText("আনুমানিক "+Busfare + "- "+Busfare2+" টাকা এবং "  + bustime+ " মিনিট সময় লাগতে পারে"  );
+            Bustext.setText("Approximately "+Busfare + "- "+Busfare2+" BDT & might take"  + bustime+ " minutes "  );
         }
-        String CNGfare= EtoBconversion(String.valueOf((int) Math.round((roadlength-2)*12+40)));
-        String CNGfare2= EtoBconversion(String.valueOf((int) Math.round((roadlength-2)*12+70)));
-        String CNGtime= EtoBconversion(String.valueOf((int) Math.round((roadlength/13)*60)));
-        if (Integer.parseInt(CNGfare) <=40.00)Cngtext.setText( "৪০ " + "টাকা এবং খুব কম সময় লাগার কথা");
+        String CNGfare= String.valueOf((int) Math.round((roadlength-2)*12+40));
+        String CNGfare2= String.valueOf((int) Math.round((roadlength-2)*12+70));
+        String CNGtime= String.valueOf((int) Math.round((roadlength/13)*60));
+        if (Integer.parseInt(CNGfare) <=40.00)Cngtext.setText( "40 " + " BDT & should take minimal time");
         else {
 
-            Cngtext.setText("আনুমানিক "+CNGfare + "- "+CNGfare2+" টাকা এবং " + CNGtime+ " মিনিট সময় লাগতে পারে"  );
+            Cngtext.setText("Approximately "+CNGfare + "- "+CNGfare2+" BDT & might take" + CNGtime+ " minutes"  );
         }
-        String rickfare= EtoBconversion(String.valueOf((int) Math.round((roadlength)*20)));
-        String ricktime=EtoBconversion( String.valueOf((int) Math.round((roadlength/10)*60)));
-        if (Integer.parseInt(rickfare) <=10.00)Ricksawtext.setText( "১০ " + "টাকা এবং খুব কম সময় লাগার কথা");
+        String rickfare= String.valueOf((int) Math.round((roadlength)*20));
+        String ricktime= String.valueOf((int) Math.round((roadlength/10)*60));
+        if (Integer.parseInt(rickfare) <=10.00)Ricksawtext.setText( "10 " + " BDT & should take minimal time");
         else {
 
-            Ricksawtext.setText("আনুমানিক "+rickfare + " টাকা এবং " + ricktime+ " মিনিট সময় লাগতে পারে"  );
+            Ricksawtext.setText("Approximately "+rickfare + " BDT & might take" + ricktime+ " minutes"  );
         }
 
-        String wtime=EtoBconversion( String.valueOf((int) Math.round((roadlength/8)*60)));
+        String wtime=String.valueOf((int) Math.round((roadlength/8)*60));
 
 
-        Walkingtext.setText( wtime+ " মিনিট সময় লাগতে পারে"  );
+        Walkingtext.setText("Might take "+ wtime+ " minutes"  );
 
     }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
@@ -339,24 +323,21 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         waypoints.add(userlocation);
         waypoints.add(markerlocation);
 
-        RoadManager roadManager=new OSRMRoadManager(this);
+        RoadManager roadManager=new KOLOROBRoadManager(this);
 
 
         Road road = roadManager.getRoad(waypoints);
         if (road.mStatus != Road.STATUS_OK) {
-
-            AlertMessage.showMessage(this,"দুঃখিত!"," যান্ত্রিক গোলযোগের কারনে পথ দেখানো সম্ভব  হচ্ছে না। দয়া করে কিছুক্ষণ পরে চেষ্টা করুন!");
-
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setMessage("দুঃখিত! যান্ত্রিক গোলযোগের কারনে পথ দেখানো সম্ভব  হচ্ছে না। দয়া করে কিছুক্ষণ পরে চেষ্টা করুন!")
-//                    .setCancelable(false)
-//                    .setPositiveButton("ঠিক আছে", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            //do things
-//                        }
-//                    });
-//            AlertDialog alert = builder.create();
-//            alert.show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Sorry! Its not possible to show routes this time.Please try again later")
+                    .setCancelable(false)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //do things
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
 
         }
         else {
@@ -423,31 +404,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     public void onLocationChanged(Location location) {
         dialog.dismiss();
         // Getting reference to TextView tv_longitude
-        if (statusofservice == false) {
-            mapView.getOverlays().remove(usermarker);
-          //  Toast.makeText(this, "Tap on locationmanager (" + location.getLatitude() + "," + location.getLongitude() + ")", Toast.LENGTH_SHORT).show();
-            usermarker = new Marker(mapView);
-            laat = location.getLatitude();
-            longg = location.getLongitude();
-            userlocation = new GeoPoint(laat,longg);
-            usermarker.setPosition(userlocation);
-            usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            usermarker.setTitle("     গন্তব্য");
-            mapView.getOverlays().add(usermarker);
-        } else {
-            mapView.getOverlays().remove(usermarker);
-            stlat = String.valueOf(location.getLatitude());
-            stlong = String.valueOf(location.getLongitude());
-            laat = location.getLatitude();
-            longg = location.getLongitude();
-            usermarker = new Marker(mapView);
-            userlocation = new GeoPoint(laat, longg);
-            usermarker.setPosition(userlocation);
-            usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            usermarker.setTitle("১ম অবস্থান");
-            mapView.getOverlays().add(usermarker);
-          //  Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
-        }
+
 
     }
 
@@ -488,19 +445,10 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
-            stlat = String.valueOf(mLastLocation.getLatitude());
-            stlong = String.valueOf(mLastLocation.getLongitude());
-            double laat = mLastLocation.getLatitude();
-            double longg = mLastLocation.getLongitude();
-            userlocation=new GeoPoint(laat,longg);
-            usermarker=new Marker(mapView);
-            usermarker.setPosition(userlocation);
-            usermarker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
-            mapView.getOverlays().add(usermarker);
-            Drawroute(userlocation, markerlocation);
+
 
         }
-       // Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Tap on (" + stlat + "," + stlong + ")", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -545,35 +493,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     }
 
 
-    public String EtoBconversion(String english_number) {
-        int v = english_number.length();
-        String concatResult = "";
-        for (int i = 0; i < v; i++) {
-            if (english_number.charAt(i) == '1')
-                concatResult = concatResult + "১";
-            else if (english_number.charAt(i) == '2')
-                concatResult = concatResult + "২";
-            else if (english_number.charAt(i) == '3')
-                concatResult = concatResult + "৩";
-            else if (english_number.charAt(i) == '4')
-                concatResult = concatResult + "৪";
-            else if (english_number.charAt(i) == '5')
-                concatResult = concatResult + "৫";
-            else if (english_number.charAt(i) == '6')
-                concatResult = concatResult + "৬";
-            else if (english_number.charAt(i) == '7')
-                concatResult = concatResult + "৭";
-            else if (english_number.charAt(i) == '8')
-                concatResult = concatResult + "৮";
-            else if (english_number.charAt(i) == '9')
-                concatResult = concatResult + "৯";
-            else if (english_number.charAt(i) == '0')
-                concatResult = concatResult + "০";
-            else if (english_number.charAt(i) == '.')
-                concatResult = concatResult + ".";
-        }
-        return concatResult;
-    }
+
 
    /* @Override
     public void onBackPressed() {

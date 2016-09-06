@@ -96,7 +96,9 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     private CheckBox checkBox;
     EditText feedback_comment;
     String datevalue,datevaluebn;
-
+    long dateval;
+    TextView toastMessage;
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,16 +172,18 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য";
+        if (diffInDays==0) datevalue=" (Today's Information)";
         else
         {
-            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information)";
+            else
+                datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
-        Toast toast = new Toast(this);
+        toast = new Toast(this);
         // Set the Toast custom layout
         toast.setView(toastView);
 
@@ -190,7 +194,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
 
-        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+       toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         toastMessage.setTextSize(25);
         toastMessage.setText(datevalue);
 
@@ -282,33 +286,33 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
             for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
             {
-                CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
+                CheckConcate("Service Type", leagalAidDetailsItem.getType());
 
-                CheckConcate("আইন পরামর্শ", leagalAidDetailsItem.getSub_type());
-                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" টাকা");
-                CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
+                CheckConcate("Service Sub-type", leagalAidDetailsItem.getSub_type());
+                CheckConcate("Service Cost", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" BDT");
+                CheckConcate("Responsible Person", leagalAidDetailsItem.getLegal_responsible_person());
             }
 
         }
 
-        CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
-        CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
-        CheckConcate("বাসার নম্বর", legalAidServiceProviderItemNew.getHouse_no());
-        CheckConcate("রাস্তার ", legalAidServiceProviderItemNew.getRoad());
-        CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
-        CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
-        CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
-        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
-        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
+        CheckConcate("Floor ", legalAidServiceProviderItemNew.getFloor());
+        CheckConcate("House Name", legalAidServiceProviderItemNew.getHouse_name());
+        CheckConcate("House Number", legalAidServiceProviderItemNew.getHouse_no());
+        CheckConcate("Road ", legalAidServiceProviderItemNew.getRoad());
+        CheckConcate("Line", legalAidServiceProviderItemNew.getLine());
+        CheckConcate("Avenue", legalAidServiceProviderItemNew.getAvenue());
+        CheckConcate("Block", legalAidServiceProviderItemNew.getBlock());
+        CheckConcate("Land mark", legalAidServiceProviderItemNew.getLandmark());
+        CheckConcate("Post Office", legalAidServiceProviderItemNew.getPolice_station());
 
-        CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
-        timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
+        CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
+        timeProcessing("Opening Time", legalAidServiceProviderItemNew.getOpeningtime());
         if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
-        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
-        CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
-        CheckConcate("রেজিস্ট্রেশনমাধ্যমে", legalAidServiceProviderItemNew.getRegisteredWith());
-        ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
+            breakTimeProcessing("Break Time", legalAidServiceProviderItemNew.getBreaktime());
+        timeProcessing("Closing Time", legalAidServiceProviderItemNew.getClosingtime());
+        CheckConcate("Off Day", legalAidServiceProviderItemNew.getOff_day());
+        CheckConcate("Registered With", legalAidServiceProviderItemNew.getRegisteredWith());
+        ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameEng());
 
 
         result_concate="";
@@ -346,8 +350,8 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             public void onClick(View v) {
                 if(legalAidServiceProviderItemNew.getEmailAddress().equals("null")||legalAidServiceProviderItemNew.getEmailAddress().equals(""))
                 {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
+                    AlertMessage.showMessage(con, "Not possible to e-mail",
+                            "Email-id not found");
                 }
                 else{
                     Helpes.sendEmail(DetailsInfoActivityLegalNew.this, legalAidServiceProviderItemNew.getEmailAddress());
@@ -366,8 +370,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                     if(checkPermission())
                         startActivity(callIntent1);
                     else{
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+
                         Toast.makeText(getApplicationContext(),
                                 "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
                                 .show();
@@ -375,11 +378,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 }
                 else {
 
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+                    AlertMessage.showMessage(con,  "Sorry"," Phone call is not possible now. ");
                 }
             }
         });
@@ -436,16 +435,16 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 }
                 else if(!AppUtils.displayGpsStatus(getApplicationContext())){
 
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
+                    AppUtils.showMessage(con, "GPS is off!",
+                            "Do you want to activate GPS?");
 
                 }
 
                 else
                 {
 
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
+                    AlertMessage.showMessage(con, "Sorry।",
+                            "Please activate your internet to see route");
 
 //                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityLegalNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
 //                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
@@ -561,7 +560,18 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-                sendReviewToServer();
+                toastMessage.setText("This is dummy feedback. This wont be submitted to server.Thanks!");
+
+
+                toastMessage.setTextColor(getResources().getColor(R.color.orange));
+
+                //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+                // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+                toastMessage.setGravity(Gravity.CENTER);
+                toastMessage.setCompoundDrawablePadding(26);
+                //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
+                toast.show();
 
                 alertDialog.cancel();
 
@@ -677,7 +687,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
+        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityLegalNew.this))
             textAsk.setTextSize(23);
@@ -775,24 +785,25 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
+
             if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
+                timeInBengali = "12 AM";
             else if (hour >= 6 && hour < 12)
-                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" AM";
             else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
+                timeInBengali = String.valueOf(hour)+" Noon";
             else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Noon)";
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12) + " PM (Afternoon)";
             else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM (Evening)";
             else if (hour > 20)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = String.valueOf(hour - 12)+" PM(Night)";
             if (times != 0)
-                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
+                timeInBengali = timeInBengali + " O clock and " + String.valueOf(times) + " Minutes";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

@@ -125,7 +125,7 @@
                                 android:textColor="@color/white"
                                 android:textSize="23sp"
                                 android:id="@+id/ratingText"
-                                android:text="রেটিং: "/>
+                                android:text="Rating: "/>
 
                             <RatingBar
                                 android:id="@+id/ratingBar"
@@ -329,7 +329,7 @@
                     android:layout_marginLeft="@dimen/margincheckbox"
                     android:textSize="29dp"
                     android:textColor="@color/white"
-                    android:text="@string/compare"/>
+                    android:text="Compare"/>
 
             </RelativeLayout>
 

@@ -131,7 +131,7 @@
                                 android:textColor="@color/white"
                                 android:textSize="23sp"
                                 android:id="@+id/ratingText"
-                                android:text="রেটিং: "/>
+                                android:text="Rating: "/>
 
                             <RatingBar
                                 android:id="@+id/ratingBar"
