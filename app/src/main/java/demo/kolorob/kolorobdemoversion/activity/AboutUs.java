@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class AboutUs extends AppCompatActivity implements View.OnClickListener {
     ImageButton fb, tw, wb, insta, phnus, emailus;
@@ -76,7 +77,8 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(AboutUs.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                    ToastMessageDisplay.ShowToast(AboutUs.this,"There are no email clients installed.");
+
                 }
                 break;
             case R.id.btnphn:
