@@ -66,6 +66,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
@@ -344,8 +345,8 @@ loadIMEI();
                             Double remote_version = jo.getDouble("version");
 
                             if (remote_version > current_version) {
-                                Toast.makeText(PlaceSelectionActivity.this, "কলরবের নতুন ভার্সন পাওয়া যাচ্ছে",
-                                        Toast.LENGTH_LONG).show();
+                                ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"কলরবের নতুন ভার্সন পাওয়া যাচ্ছে");
+
                                 generateNotification();
                             }
 
@@ -561,11 +562,11 @@ loadIMEI();
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(PlaceSelectionActivity.this, "ধন্যবাদ", Toast.LENGTH_SHORT).show();
+                            ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+
 
                             try {
-
-                                Toast.makeText(PlaceSelectionActivity.this, "ধন্যবাদ", Toast.LENGTH_LONG).show();
+                                ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 //                                if(response.toString().trim().equalsIgnoreCase("true"))
 //                                {
@@ -587,7 +588,7 @@ loadIMEI();
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(PlaceSelectionActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,error.toString());
                         }
                     }) {
 
