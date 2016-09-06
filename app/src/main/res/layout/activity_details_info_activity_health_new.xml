@@ -347,6 +347,7 @@
                            android:layout_height="50dp"
                            android:background="@drawable/comments_icon"
                           android:onClick="verifyRegistration"
+                          android:visibility="gone"
                           android:id="@+id/comments"/>
 
         </LinearLayout>
