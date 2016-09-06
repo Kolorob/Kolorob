@@ -173,8 +173,8 @@ public class CommentTable {
         Log.d("id","======="+ids);
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-     //   Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
-       Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + ids, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+     //  Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + ids, null);
 
         if (cursor.moveToFirst()) {
             do {

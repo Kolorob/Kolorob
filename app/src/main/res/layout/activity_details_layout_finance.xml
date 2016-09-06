@@ -132,7 +132,6 @@
                                 android:textSize="23sp"
                                 android:id="@+id/ratingText"
                                 android:text="রেটিং: "/>
-
                             <RatingBar
                                 android:id="@+id/ratingBar"
                                 style="?android:attr/ratingBarStyleIndicator"
