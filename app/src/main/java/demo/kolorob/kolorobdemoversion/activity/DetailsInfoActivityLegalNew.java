@@ -172,7 +172,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Today's Information)";
+        if (diffInDays==0) datevalue=" (Updated Today)";
         else
         {
             dateval=diffInDays;
@@ -278,22 +278,10 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
 
-        Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
+
         LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
-        if(!leagalAidDetailsItems.equals(""))
-        {
 
-            for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
-            {
-                CheckConcate("Service Type", leagalAidDetailsItem.getType());
-
-                CheckConcate("Service Sub-type", leagalAidDetailsItem.getSub_type());
-                CheckConcate("Service Cost", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" BDT");
-                CheckConcate("Responsible Person", leagalAidDetailsItem.getLegal_responsible_person());
-            }
-
-        }
 
         CheckConcate("Floor ", legalAidServiceProviderItemNew.getFloor());
         CheckConcate("House Name", legalAidServiceProviderItemNew.getHouse_name());
@@ -303,7 +291,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         CheckConcate("Avenue", legalAidServiceProviderItemNew.getAvenue());
         CheckConcate("Block", legalAidServiceProviderItemNew.getBlock());
         CheckConcate("Land mark", legalAidServiceProviderItemNew.getLandmark());
-        CheckConcate("Post Office", legalAidServiceProviderItemNew.getPolice_station());
+
 
         CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
         timeProcessing("Opening Time", legalAidServiceProviderItemNew.getOpeningtime());
@@ -317,7 +305,19 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         result_concate="";
 
+        if(!leagalAidDetailsItems.equals(""))
+        {
 
+            for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
+            {
+                CheckConcate("Service Type", leagalAidDetailsItem.getType());
+
+                CheckConcate("Service Sub-type", leagalAidDetailsItem.getSub_type());
+                CheckConcate("Service Cost", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" BDT");
+                CheckConcate("Responsible Person", leagalAidDetailsItem.getLegal_responsible_person());
+            }
+
+        }
 
 
 

@@ -110,9 +110,9 @@ public class DisplayAllJobList extends BaseAdapter
         holder.title.setText("" + positions[position]);
         holder.title.setTextSize(26);
         holder.salary_range.setText("Salary : " + salary_range[position]+" BDT");
-        holder.remaining_date.setText("Deadline " + remaing_date[position]);
-        holder.address.setText("Address: " + address[position]);
-        holder.contact_number.setText("Contact: " + contract_number[position]);
+        holder.remaining_date.setText("Deadline : " + remaing_date[position]);
+        holder.address.setText("Address : " + address[position]);
+        holder.contact_number.setText("Contact : " + contract_number[position]);
         holder.positions.setText("Company : " + title[position]);
 
         return convertView;

@@ -40,8 +40,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
@@ -259,7 +261,19 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         SharedPreferences settings = DetailsLayoutGovernment.this.getSharedPreferences("prefs", 0);
 
+        Date date2 = new Date(settings.getLong("time", 0));
+        Date today=new Date();
+        long diffInMillisec = today.getTime() - date2.getTime();
 
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
+        if (diffInDays==0) datevalue=" (Updated today)";
+        else
+        {
+            dateval=diffInDays;
+            if (dateval>30) datevalue=" ( Old information )";
+            else
+                datevalue=" ( Information of" + datevaluebn + " days ago)";
+        }
       //  Toast toast = Toast.makeText(this, datevalue, Toast.LENGTH_LONG);
         LayoutInflater inflater = getLayoutInflater();
 

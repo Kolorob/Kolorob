@@ -195,8 +195,20 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
         setRatingBar();
-
+        CheckConcate("Block", healthServiceProviderItemNew.getBlock());
+        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
+        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("Road", healthServiceProviderItemNew.getRoad());
+        CheckConcate("Line ", healthServiceProviderItemNew.getLine());
+        CheckConcate("Avenue", healthServiceProviderItemNew.getAvenue());
+        CheckConcate("Land Mark", healthServiceProviderItemNew.getLandmark());
         CheckConcate("Health Center Type", healthServiceProviderItemNew.getInstitute_type());
+        timeProcessing("Opening Time", healthServiceProviderItemNew.getOpening_time());
+        timeProcessing("Closing Time", healthServiceProviderItemNew.getClosing_time());
+        if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
+            breakTimeProcessing("Break Time", healthServiceProviderItemNew.getBreak_time());
+        CheckConcate("Off Day", healthServiceProviderItemNew.getOff_day());
+
         CheckConcate("Capacity", healthServiceProviderItemNew.getCapacity());
         CheckConcate("Male Doctors", healthServiceProviderItemNew.getMale_doctors());
         CheckConcate("Female Doctors", healthServiceProviderItemNew.getFemale_doctors());
@@ -204,15 +216,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("Male Doctor", healthServiceProviderItemNew.getMale_doctors());
         CheckConcate("Female Doctor", healthServiceProviderItemNew.getFemale_doctors());
         CheckConcate("Patient-Nurse Ratio", healthServiceProviderItemNew.getPatient_nurse_ratio());
-        CheckConcate("Land Mark", healthServiceProviderItemNew.getLandmark());
-        CheckConcate("Block", healthServiceProviderItemNew.getBlock());
-        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
-        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
-        CheckConcate("Road", healthServiceProviderItemNew.getRoad());
-        CheckConcate("Line ", healthServiceProviderItemNew.getLine());
-        CheckConcate("Avenue", healthServiceProviderItemNew.getAvenue());
-        CheckConcate("Post Office", healthServiceProviderItemNew.getPost_office());
-        CheckConcate("Police Station", healthServiceProviderItemNew.getPolice_station());
+
+
+
         CheckConcate("Free Medical Service", healthServiceProviderItemNew.getGeneral_free_for());
         CheckConcate("Free Medical Service Type", healthServiceProviderItemNew.getGeneral_free_services());
 
@@ -233,11 +239,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
 
-        timeProcessing("Opening Time", healthServiceProviderItemNew.getOpening_time());
-        timeProcessing("Closing Time", healthServiceProviderItemNew.getClosing_time());
-        if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
-            breakTimeProcessing("Break Time", healthServiceProviderItemNew.getBreak_time());
-        CheckConcate("Off Day", healthServiceProviderItemNew.getOff_day());
+
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size = healthSpecialistItemDetailses.size();
 
@@ -407,7 +409,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Today's Information)";
+        if (diffInDays==0) datevalue=" (Updated Today)";
         else
         {
             dateval=diffInDays;

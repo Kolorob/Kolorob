@@ -178,6 +178,25 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
 
+        CheckConcate("Address", educationNewItem.getAddress());
+        CheckConcate("Floor", educationNewItem.getFloor());
+        CheckConcate("House Name", educationNewItem.getHousename());
+        CheckConcate("Road", educationNewItem.getRoad());
+        CheckConcate("Line ", educationNewItem.getLine());
+        CheckConcate("Avenue",educationNewItem.getAvenue());
+        CheckConcate("Landmark", educationNewItem.getLandmark());
+
+        CheckConcate("Contact", educationNewItem.getNode_contact());
+        CheckConcate("Contact", educationNewItem.getNode_contact2());
+        CheckConcate("Email", educationNewItem.getNode_email());
+        CheckConcate("Web site", educationNewItem.getNode_website());
+        CheckConcate("Facebook", educationNewItem.getNode_facebook());
+
+        timeProcessing("Opening Time", educationNewItem.getOpeningtime());
+        timeProcessing("Closing Time", educationNewItem.getClosetime());
+        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
+            breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
+        CheckConcate("Off Day", educationNewItem.getOffday());
 
         CheckConcate("Education Type ", educationNewItem.getEdtype());
         CheckConcate("Shift", educationNewItem.getShift());
@@ -197,29 +216,12 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         CheckConcate("Average Student Number",  educationNewItem.getAveragestudent());
         CheckConcate("Number of Washroom(FeMale)",educationNewItem.getWashroomfemale());
 
-        CheckConcate("Landmark", educationNewItem.getLandmark());
-        CheckConcate("Addreee", educationNewItem.getAddress());
-        CheckConcate("Floor", educationNewItem.getFloor());
-        CheckConcate("House Name", educationNewItem.getHousename());
-        CheckConcate("Road", educationNewItem.getRoad());
-        CheckConcate("Line ", educationNewItem.getLine());
-        CheckConcate("Avenue",educationNewItem.getAvenue());
-        CheckConcate("Post Office", educationNewItem.getPostoffice());
-        CheckConcate("Police Station", educationNewItem.getPolicestation());
 
-        CheckConcate("Contact", educationNewItem.getNode_contact());
-        CheckConcate("Contact", educationNewItem.getNode_contact2());
-        CheckConcate("Email", educationNewItem.getNode_email());
-        CheckConcate("Web site", educationNewItem.getNode_website());
-        CheckConcate("Facebook", educationNewItem.getNode_facebook());
+
         CheckConcate("Designation of Information Provider", educationNewItem.getNode_designation());
 
 
-        timeProcessing("Opening Time", educationNewItem.getOpeningtime());
-        timeProcessing("Closing Time", educationNewItem.getClosetime());
-        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
-        CheckConcate("Off Day", educationNewItem.getOffday());
+
         CheckConcate("Registration Number", educationNewItem.getRegisterednumber());
         CheckConcate("Registered With ", educationNewItem.getRegisteredwith());
         educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
@@ -260,7 +262,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Today's Information)";
+        if (diffInDays==0) datevalue=" (Updated Today)";
         else
         {
             dateval=diffInDays;

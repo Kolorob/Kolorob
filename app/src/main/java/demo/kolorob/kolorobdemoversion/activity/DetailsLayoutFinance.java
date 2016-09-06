@@ -170,15 +170,14 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         mlp.setMargins(width/100,0,width/990,width/8);
 
 
-        CheckConcate("Land mark  ", financialNewItem.getLandmark());
-        CheckConcate("Addreee  ", financialNewItem.getAddress());
+
+        CheckConcate("Address  ", financialNewItem.getAddress());
         CheckConcate("Floor  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
         CheckConcate("House Name  ", financialNewItem.getHousename());
         CheckConcate("Road  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
         CheckConcate("Line  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
         CheckConcate("Avenue  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
-        CheckConcate("Post Office  ", financialNewItem.getPostoffice());
-        CheckConcate("Police Station ", financialNewItem.getPolicestation());
+        CheckConcate("Land mark  ", financialNewItem.getLandmark());
 
         CheckConcate("Contact ", financialNewItem.getNode_contact());
         CheckConcate("Contact ", financialNewItem.getNode_contact2());
@@ -215,7 +214,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Today's Information)";
+        if (diffInDays==0) datevalue=" (Updated Today)";
         else
         {
             dateval=diffInDays;

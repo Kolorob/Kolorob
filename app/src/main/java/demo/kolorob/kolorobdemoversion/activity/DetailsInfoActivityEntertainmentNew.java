@@ -249,11 +249,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Today's Information)";
+        if (diffInDays==0) datevalue=" (Updated today)";
         else
         {
             dateval=diffInDays;
-            if (dateval>30) datevalue=" ( Old information)";
+            if (dateval>30) datevalue=" ( Old information )";
             else
                 datevalue=" ( Information of" + datevaluebn + " days ago)";
         }
@@ -313,28 +313,20 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
         //   other_detailsEnt.setVisibility(View.VISIBLE);
-        for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
-            CheckConcate("Center Type", entertainmentTypeItem.getType());
-            CheckConcate("Service Type", entertainmentTypeItem.getSub_type());
-            CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price()+" BDT");
-            CheckConcate("Additional Information ", entertainmentTypeItem.getRecreation_remarks());
-
-
-
-        }
 
 
         CheckConcate("Floor ", entertainmentServiceProviderItemNew.getFloor());
         CheckConcate("House Name", entertainmentServiceProviderItemNew.getHouse_name());
         CheckConcate("House Number", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("Address", entertainmentServiceProviderItemNew.getAddress());
         CheckConcate("Road", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("Line", entertainmentServiceProviderItemNew.getLine());
         CheckConcate("Avenue", entertainmentServiceProviderItemNew.getAvenue());
         CheckConcate("Block", entertainmentServiceProviderItemNew.getBlock());
         CheckConcate("Land mark", entertainmentServiceProviderItemNew.getLandmark());
-        CheckConcate("Post Office", entertainmentServiceProviderItemNew.getPost_office());
 
-        CheckConcate("Address", entertainmentServiceProviderItemNew.getAddress());
+
+
         timeProcessing("Opening Time", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
             breakTimeProcessing("Break Time", entertainmentServiceProviderItemNew.getBreaktime());
@@ -344,6 +336,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         ups_text.setText(entertainmentServiceProviderItemNew.getNodeName());
 
         // detailsEntertainment.setText(result_concate);
+        for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
+            CheckConcate("Center Type", entertainmentTypeItem.getType());
+            CheckConcate("Service Type", entertainmentTypeItem.getSub_type());
+            CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price()+" BDT");
+            CheckConcate("Additional Information ", entertainmentTypeItem.getRecreation_remarks());
+
+
+
+        }
 
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);

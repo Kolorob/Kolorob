@@ -129,7 +129,7 @@ public class DetailsJobActivityNew extends Activity {
 
             if(!jobAdvertisementItem.getJob_type().equals(""))
             {
-                concateBasic("Job Type ", jobAdvertisementItem.getJob_type());
+                concateBasic("Job Type : ", jobAdvertisementItem.getJob_type());
             }
 
             if(!jobAdvertisementItem.getPost_type().equals(""))
@@ -138,36 +138,36 @@ public class DetailsJobActivityNew extends Activity {
             }
 
             if(!jobAdvertisementItem.getJob_responsibility().equals(""))
-                concateBasic("Job Details ",jobAdvertisementItem.getJob_responsibility());
+                concateBasic("Job Details : ",jobAdvertisementItem.getJob_responsibility());
 
             if(!jobAdvertisementItem.getRequired_experience().equals(""))
-                concateBasic("Required Experience ", jobAdvertisementItem.getRequired_experience());
+                concateBasic("Required Experience : ", jobAdvertisementItem.getRequired_experience());
 
             if(!jobAdvertisementItem.getApplication_medium().equals(""))
-                concateBasic("Application Medium ",jobAdvertisementItem.getApplication_medium());
+                concateBasic("Application Medium : ",jobAdvertisementItem.getApplication_medium());
 
             job_type.setText(result_concate);
             result_concate="";
 
 
             if(!jobAdvertisementItem.getOpening().equals("0 : 00"))
-                concateBasic("Opening Time ",jobAdvertisementItem.getOpening());
+                concateBasic("Opening Time : ",jobAdvertisementItem.getOpening());
             else
             timer++;
             Log.d("TImer1","%%%%%%"+timer);
 
             if(!jobAdvertisementItem.getClosing().equals("0 : 00"))
-                concateBasic("Closing Time ", jobAdvertisementItem.getClosing());
+                concateBasic("Closing Time : ", jobAdvertisementItem.getClosing());
             else
                 timer++;
             Log.d("TImer2","%%%%%%"+timer);
             if(!jobAdvertisementItem.getBreaks().equals("0 : 00"))
-                concateBasic("Break Time ",jobAdvertisementItem.getBreaks());
+                concateBasic("Break Time : ",jobAdvertisementItem.getBreaks());
             else
                 timer++;
             Log.d("TImer3","%%%%%%"+timer);
             if(!jobAdvertisementItem.getOff_day().equals(""))
-                concateBasic("Off Day: ", jobAdvertisementItem.getOff_day());
+                concateBasic("Off Day : ", jobAdvertisementItem.getOff_day());
             else
                 timer++;
 
@@ -181,25 +181,25 @@ public class DetailsJobActivityNew extends Activity {
             result_concate="";
 
             if(!jobAdvertisementItem.getPost_date().equals(""))
-                concateBasic("Job Posted On ", jobAdvertisementItem.getPost_date());
+                concateBasic("Job Posted On : ", jobAdvertisementItem.getPost_date());
 
             if(!jobAdvertisementItem.getApplication_last_date().equals(""))
-                concateBasic("Deadline for Application ", jobAdvertisementItem.getApplication_last_date());
+                concateBasic("Deadline for Application : ", jobAdvertisementItem.getApplication_last_date());
 
             application_post_date.setText(result_concate);
             result_concate="";
 
 
-            salary_range.setText("Salary Range " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
+            salary_range.setText("Salary Range : " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
 
 
            if(!jobAdvertisementItem.getReference_person().equals(""))
            {
-               concateBasic(" Contact :",jobAdvertisementItem.getReference_person());
+               concateBasic(" Contact : ",jobAdvertisementItem.getReference_person());
 
            }
            if(!jobAdvertisementItem.getCollector_name().equals(""))
-               concateBasic(" Collected By:  ",jobAdvertisementItem.getCollector_name());
+               concateBasic(" Collected By :  ",jobAdvertisementItem.getCollector_name());
             reference_person.setText(result_concate);
             result_concate="";
 
