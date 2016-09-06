@@ -503,8 +503,13 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 //
 //
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
+
+        Log.d("RatingBar","======"+financialNewItem.getRating());
         try {
             ratingBar.setRating(Float.parseFloat(financialNewItem.getRating()));
+            Log.d("RatingBar","======");
+
+            Log.d("RatingBar","======"+Float.parseFloat(financialNewItem.getRating()));
         }
         catch (Exception e)
         {
