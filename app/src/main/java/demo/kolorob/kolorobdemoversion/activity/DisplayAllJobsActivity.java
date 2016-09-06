@@ -1,13 +1,16 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +39,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
@@ -79,7 +83,7 @@ public class DisplayAllJobsActivity extends Activity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="Do you want to search new jobs?";
+        String text="Do you want to search for new jobs?";
         textAsk.setText(text);
         WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
         lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
@@ -95,25 +99,33 @@ public class DisplayAllJobsActivity extends Activity {
             public void onClick(View v) {
 
                 alertDialog.cancel();
-                progress = ProgressDialog.show(DisplayAllJobsActivity.this, "List is being updated",
-                        "Please wait for a while", true);
+                if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(DisplayAllJobsActivity.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
+                {
+                    progress = ProgressDialog.show(DisplayAllJobsActivity.this, "Job list is being updated",
+                            "please wait for a while!", true);
 
-                getRequest(DisplayAllJobsActivity.this, "job/all", new VolleyApiCallback() {
-                            @Override
-                            public void onResponse(int status, String apiContent) {
-                                if (status == AppConstants.SUCCESS_CODE) {
-                                    try {
-                                        JSONObject jo = new JSONObject(apiContent);
-                                        String apiSt = jo.getString(AppConstants.KEY_STATUS);
-                                        if (apiSt.equals(AppConstants.KEY_SUCCESS))
-                                            SaveNewJobs(jo.getJSONArray(AppConstants.KEY_DATA));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                    getRequest(DisplayAllJobsActivity.this, "job/eng", new VolleyApiCallback() {
+                                @Override
+                                public void onResponse(int status, String apiContent) {
+                                    if (status == AppConstants.SUCCESS_CODE) {
+                                        try {
+                                            JSONObject jo = new JSONObject(apiContent);
+                                            String apiSt = jo.getString(AppConstants.KEY_STATUS);
+                                            if (apiSt.equals(AppConstants.KEY_SUCCESS))
+                                                SaveNewJobs(jo.getJSONArray(AppConstants.KEY_DATA));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
                             }
-                        }
-                );
+                    );
+                }
+
+                else {
+                    AlertMessage.showMessageClose(DisplayAllJobsActivity.this,"Internet is de-activated!","Please activate your connection..");
+                }
+
 
             }
         });
@@ -191,13 +203,13 @@ public class DisplayAllJobsActivity extends Activity {
         jobAdvertisementTable.dropTable();
         int joblistCount = joblistArray.length();
 
+        if(joblistCount!=0)
+        {
+            for (int i = 0; i < joblistCount; i++) {
+                try {
+                    JSONObject jo = joblistArray.getJSONObject(i);
 
-        for (int i = 0; i < joblistCount; i++) {
-            try {
-                JSONObject jo = joblistArray.getJSONObject(i);
 
-                if(!jo.equals(null))
-                {
                     JobAdvertisementItem si = JobAdvertisementItem.parseJobServiceProviderItem(i+1,jo);
 
                     //   JobAdvertisementItem six = JobAdvertisementItem.parseJobServiceProviderItem(jo);
@@ -206,19 +218,25 @@ public class DisplayAllJobsActivity extends Activity {
                     //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
                     progress.dismiss();
                     displayData();
+
+
+
+
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                else
-                    AlertMessage.showMessage(this,"No job found","Please try after sometimes!");
-
-
-
-
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
+
+
+
+
+        else
+            AlertMessage.showMessage(this,"No job found","Please try again later");
     }
 
 
@@ -230,53 +248,62 @@ public class DisplayAllJobsActivity extends Activity {
 
         int size= jobAdvertisementItems.size();
 
-        String[] tittle = new String[size];
-
-        String[] salary_range = new String[size];
-
-        String[] remaining_date = new String[size];
-
-        String[] address = new String[size];
-
-        String[] contact_number = new String[size];
-
-        String[] positions = new String[size];
-
-        int increment= 0;
-
-
-        for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
+        if(size==0)
         {
+            AlertMessage.showMessage(this,"No Job found","Please update your data");
+        }
 
-            tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
-            salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
-            remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
-            address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
-            contact_number[increment] = jobAdvertisementItem.getMobile1();
-            positions[increment] = jobAdvertisementItem.getPosition();
-            increment++;
+        else {
+            String[] tittle = new String[size];
 
+            String[] salary_range = new String[size];
+
+            String[] remaining_date = new String[size];
+
+            String[] address = new String[size];
+
+            String[] contact_number = new String[size];
+
+            String[] positions = new String[size];
+
+            int increment= 0;
+
+
+            for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
+            {
+
+                tittle[increment]=jobAdvertisementItem.getInstitute_name();
+                salary_range[increment]=jobAdvertisementItem.getStart_salary()+" to "+jobAdvertisementItem.getEnd_salary();
+                remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
+                address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
+                contact_number[increment] = jobAdvertisementItem.getMobile1();
+                positions[increment] = jobAdvertisementItem.getPosition();
+                increment++;
+
+            }
+
+
+
+
+            joblist=(ListView)findViewById(R.id.jobList);
+
+            DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
+            joblist.setAdapter(displayAllJobList);
+
+
+
+            joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
+                    intent.putExtra("position",position);
+                    startActivity(intent);
+                }
+            });
         }
 
 
-
-
-        joblist=(ListView)findViewById(R.id.jobList);
-
-        DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
-        joblist.setAdapter(displayAllJobList);
-
-
-
-        joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
-                intent.putExtra("position",position);
-                startActivity(intent);
-            }
-        });
     }
 
 

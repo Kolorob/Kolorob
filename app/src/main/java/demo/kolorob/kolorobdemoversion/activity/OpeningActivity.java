@@ -733,9 +733,6 @@ public class OpeningActivity extends Activity {
                     this.finish();
                 }
                 else {
-                    ToastMessageDisplay.ShowToast(OpeningActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
-//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-//                            Toast.LENGTH_LONG).show();
 
 
 
@@ -880,7 +877,7 @@ public class OpeningActivity extends Activity {
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                makeToastWithShortbread("তথ্য সংগ্রহ চলছে");
+                makeToastWithShortbread("Data is updating");
             }
         }
 

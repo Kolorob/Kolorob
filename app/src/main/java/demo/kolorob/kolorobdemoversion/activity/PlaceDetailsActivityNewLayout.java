@@ -1230,7 +1230,7 @@ int index;
                 health_name3.setText("Data is being collected");
 
             String time2="";
-            time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
+            time2=healthServiceProviderItemNew.getOpening_time();
             if(!time2.equals("")&&!time2.equals("null"))
                 opening_time3.setText(time2);
             else
@@ -1362,7 +1362,7 @@ int index;
                 health_name2.setText("Data is being collected");
 
             String time1="";
-            time1=timeConverter(healthServiceProviderItemNewx.getOpening_time());
+            time1=healthServiceProviderItemNewx.getOpening_time();
             if(!time1.equals("")&&!time1.equals("null"))
                 opening_time2.setText(time1);
             else

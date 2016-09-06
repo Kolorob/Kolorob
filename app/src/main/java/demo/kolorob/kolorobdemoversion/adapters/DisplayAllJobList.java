@@ -1,13 +1,11 @@
 package demo.kolorob.kolorobdemoversion.adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -111,11 +109,11 @@ public class DisplayAllJobList extends BaseAdapter
 
         holder.title.setText("" + positions[position]);
         holder.title.setTextSize(26);
-        holder.salary_range.setText("স্যালারি : " + salary_range[position]+" টাকা");
-        holder.remaining_date.setText("শেষ সময়: " + English_to_bengali_number_conversion(remaing_date[position]));
-        holder.address.setText("ঠিকানা: " + address[position]);
-        holder.contact_number.setText("যোগাযোগের নম্বর: " + contract_number[position]);
-        holder.positions.setText("কোম্পানি: " + title[position]);
+        holder.salary_range.setText("Salary : " + salary_range[position]+" BDT");
+        holder.remaining_date.setText("Deadline " + remaing_date[position]);
+        holder.address.setText("Address: " + address[position]);
+        holder.contact_number.setText("Contact: " + contract_number[position]);
+        holder.positions.setText("Company : " + title[position]);
 
         return convertView;
     }

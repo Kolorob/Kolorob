@@ -1,10 +1,9 @@
 package demo.kolorob.kolorobdemoversion.utils;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
@@ -22,7 +21,7 @@ public class AlertMessage {
 	public static int height;
 
 	public static void showMessage(final Context c, final String title,
-			final String body) {
+								   final String body) {
 
 		DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
 		height = displayMetrics.heightPixels;
@@ -62,8 +61,52 @@ public class AlertMessage {
 
 	}
 
+
+	public static void showMessageClose(final Context c, final String title,
+										final String body) {
+
+		DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+		height = displayMetrics.heightPixels;
+		width = displayMetrics.widthPixels;
+
+		LayoutInflater layoutInflater = LayoutInflater.from(c);
+		View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+		final Dialog alertDialog = new Dialog(c);
+		alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		alertDialog.setContentView(promptView);
+		alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		alertDialog.show();
+
+
+		final TextView header = (TextView) promptView.findViewById(R.id.headers);
+		final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+		final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+		header.setText(title);
+		bodys.setText(body);
+
+		okay.setOnClickListener(new View.OnClickListener() {
+			@Override
+
+			public void onClick(View v) {
+				alertDialog.cancel();
+				((Activity)c).finish();
+			}
+		});
+
+		alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+		alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+	}
+
 	public static void showProgress(final Context c,
-			ProgressDialog progressDialog) {
+									ProgressDialog progressDialog) {
 		if (progressDialog == null) {
 			progressDialog = new ProgressDialog(c);
 		}
@@ -75,7 +118,7 @@ public class AlertMessage {
 	}
 
 	public static void cancelProgress(final Context c,
-			final ProgressDialog progressDialog) {
+									  final ProgressDialog progressDialog) {
 
 		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();

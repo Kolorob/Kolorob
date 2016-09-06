@@ -370,7 +370,7 @@ loadIMEI();
         builder.setNumber(100);
         //   builder.build();
 
-        builder.setContentTitle("কলরব আপডেট করুন").setContentText("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে")
+        builder.setContentTitle("New version of kolorob is available").setContentText("Kolorob Versionে")
                 .setSmallIcon(R.drawable.notify_logo_1).getNotification();
 
         myNotication = builder.getNotification();
