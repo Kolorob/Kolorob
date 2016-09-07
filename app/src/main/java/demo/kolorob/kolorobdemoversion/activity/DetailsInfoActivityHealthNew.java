@@ -565,17 +565,13 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     else {
                         AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                                 "ফোন নম্বর পাওয়া যায়নি");
-                        Toast.makeText(getApplicationContext(),
-                                "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                                .show();
+
                     }
                 } else {
 
                     AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                             "ফোন নম্বর পাওয়া যায়নি");
-                    Toast.makeText(getApplicationContext(),
-                            "Sorry, Phone call is not possible now. ", Toast.LENGTH_LONG)
-                            .show();
+
                 }
             }
         });
