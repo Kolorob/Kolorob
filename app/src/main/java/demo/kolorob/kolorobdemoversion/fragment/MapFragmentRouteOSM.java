@@ -56,6 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.helpers.KOLOROBRoadManager;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -342,7 +343,8 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         waypoints.add(userlocation);
         waypoints.add(markerlocation);
 
-        RoadManager roadManager=new OSRMRoadManager(this);
+        RoadManager roadManager =new KOLOROBRoadManager(this);
+
 
 
         Road road = roadManager.getRoad(waypoints);
