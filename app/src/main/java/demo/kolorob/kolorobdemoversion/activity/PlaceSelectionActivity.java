@@ -201,7 +201,7 @@ loadIMEI();
         });
 
         SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
-        Date date2 = new Date(settings.getLong("time", 0));
+        Date date2 = new Date(settings.getLong("timeinstall", 0));
         Date today=new Date();
         diffInMillisec = today.getTime() - date2.getTime();
 
@@ -411,10 +411,10 @@ loadIMEI();
     @Override
     public void onBackPressed() {
         SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
-       if(diffInDays>=30)
+       if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
        {
            SharedPreferences.Editor editor = settings.edit();
-           editor.putBoolean("Reviewsent", true);
+           editor.putBoolean("Reviewsent", false);
            editor.apply();
        }
          if(!settings.getBoolean("Reviewsent",false)) help();
@@ -493,7 +493,7 @@ else
 
                 ratings = ratingBar.getRating();
                 comment=submit_review.getText().toString();
-                if(ratings==0)ratings = (float) 1;
+                if(ratings==0)ratings = (float) 0.0001;
                 sendDataToserver(ratings, comment);
                 SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
