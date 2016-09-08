@@ -62,7 +62,6 @@ import org.json.JSONObject;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
@@ -91,6 +90,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     private int height;
     private int width;
     Float  ratings;
+    Boolean Reviewgiven=false;
     Boolean click=false;
     private static final int REQUEST_PHONE_STATE = 0;
     InterstitialAd mInterstitialAd;
@@ -200,12 +200,7 @@ loadIMEI();
             }
         });
 
-        SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
-        Date date2 = new Date(settings.getLong("timeinstall", 0));
-        Date today=new Date();
-        diffInMillisec = today.getTime() - date2.getTime();
 
-        diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         FrameLayout holder = (FrameLayout) findViewById(R.id.holder);
@@ -411,12 +406,14 @@ loadIMEI();
     @Override
     public void onBackPressed() {
         SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
-       if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
+
+   /*    if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
        {
            SharedPreferences.Editor editor = settings.edit();
            editor.putBoolean("Reviewsent", false);
+           Reviewgiven=false;
            editor.apply();
-       }
+       }*/
          if(!settings.getBoolean("Reviewsent",false)) help();
 
 else
@@ -499,6 +496,7 @@ else
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("Reviewsent", true);
                 editor.apply();
+                Reviewgiven=true;
                 alertDialog.cancel();
                 finish();
                 //   back();
