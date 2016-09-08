@@ -316,7 +316,8 @@ public class OpeningActivity extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
-
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        settings.edit().putLong("timeinstall", System.currentTimeMillis()).apply();
         File path = context.getExternalFilesDir(null);
 
         File file = new File(path, "kolorob.txt");
@@ -410,7 +411,7 @@ public class OpeningActivity extends Activity {
             first=tokens[1];
         }
 
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
+
         firstRun = settings.getBoolean("firstRun", false);
         if (first.equals("yes"))//if running for first time
         {
