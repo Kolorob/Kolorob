@@ -54,7 +54,7 @@ public class AlertMessage {
 			}
 		});
 
-		alertDialog.setCancelable(false);
+		alertDialog.setCancelable(true);
 //		if(SharedPreferencesHelper.isTabletDevice(c))
 //			textAsk.setTextSize(23);
 //		else
@@ -98,7 +98,7 @@ public class AlertMessage {
 			}
 		});
 
-		alertDialog.setCancelable(false);
+		alertDialog.setCancelable(true);
 //		if(SharedPreferencesHelper.isTabletDevice(c))
 //			textAsk.setTextSize(23);
 //		else
