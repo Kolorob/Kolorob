@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 import android.app.Activity;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,11 +115,18 @@ public class DisplayAllJobList extends BaseAdapter
 
         holder.title.setText("" + positions[position]);
         holder.title.setTextSize(26);
-        holder.salary_range.setText("স্যালারি : " + salary_range[position]+" টাকা");
-        holder.remaining_date.setText("শেষ সময়: " + English_to_bengali_number_conversion(remaing_date[position]));
-        holder.address.setText("ঠিকানা: " + address[position]);
-        holder.contact_number.setText("যোগাযোগের নম্বর: " + contract_number[position]);
-        holder.positions.setText("কোম্পানি: " + title[position]);
+
+        String salary="<b>" + "স্যালারি: "+ "</b> " + salary_range[position]+" টাকা";
+        String last_date="<b>" + "আবেদনের শেষ সময়: "+ "</b> " + English_to_bengali_number_conversion(remaing_date[position]);
+        String addres="<b>" + "ঠিকানা: "+ "</b> " + address[position];
+        String number="<b>" + "ফোন নম্বর: "+ "</b> " + contract_number[position];
+        String company="<b>" + "কোম্পানি: "+ "</b> " + title[position];
+
+        holder.salary_range.setText(Html.fromHtml(company));
+        holder.remaining_date.setText(Html.fromHtml(salary));
+        holder.address.setText(Html.fromHtml(last_date));
+        holder.contact_number.setText(Html.fromHtml(addres));
+        holder.positions.setText(Html.fromHtml(number));
 
         if(position%2==0)
         {
