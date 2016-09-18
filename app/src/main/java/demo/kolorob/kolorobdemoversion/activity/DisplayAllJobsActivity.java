@@ -178,9 +178,9 @@ public class DisplayAllJobsActivity extends Activity {
 
         close_button=(ImageView)findViewById(R.id.iv_close);
         iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
-        close_button.getLayoutParams().height=width/11;
-        close_button.getLayoutParams().width=width/11;
-        tv_button=(TextView)findViewById(R.id.tv_close);
+        close_button.getLayoutParams().height=width/13;
+        close_button.getLayoutParams().width=width/13;
+
         int p=iv_kolorob_logo.getLayoutParams().width=width/11;
         iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
 
@@ -192,12 +192,7 @@ public class DisplayAllJobsActivity extends Activity {
                 finish();
             }
         });
-        tv_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
 
     }
