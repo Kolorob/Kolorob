@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,6 +62,7 @@ public class DisplayAllJobsActivity extends Activity {
     JobAdvertisementTable jobAdvertisementTable =new JobAdvertisementTable(DisplayAllJobsActivity.this);
     Context context;
     ListView joblist;
+    private LinearLayout list_part;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class DisplayAllJobsActivity extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;
+        list_part=(LinearLayout)findViewById(R.id.list_part);
 
 
 
@@ -88,6 +91,7 @@ public class DisplayAllJobsActivity extends Activity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+
         String text="আপনি কি নতুন চাকুরি খুজতে চান? ";
         textAsk.setText(text);
         WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
@@ -281,6 +285,11 @@ public class DisplayAllJobsActivity extends Activity {
                 increment++;
 
             }
+
+            if(increment%2==0)
+                list_part.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+            else
+                list_part.setBackgroundColor(ContextCompat.getColor(context,R.color.job_portal));
 
 
 

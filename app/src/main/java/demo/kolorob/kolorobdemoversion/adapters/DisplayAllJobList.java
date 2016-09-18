@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,7 @@ public class DisplayAllJobList extends BaseAdapter
         TextView address;
         TextView contact_number;
         TextView positions;
+        LinearLayout job_item;
 
 
     }
@@ -87,6 +89,7 @@ public class DisplayAllJobList extends BaseAdapter
             holder.address = (TextView) convertView.findViewById(R.id.address);
             holder.contact_number = (TextView) convertView.findViewById(R.id.contact_number);
             holder.positions = (TextView) convertView.findViewById(R.id.positions);
+            holder.job_item = (LinearLayout)convertView.findViewById(R.id.job_item);
 
 
             convertView.setTag(holder);
@@ -116,6 +119,32 @@ public class DisplayAllJobList extends BaseAdapter
         holder.address.setText("ঠিকানা: " + address[position]);
         holder.contact_number.setText("যোগাযোগের নম্বর: " + contract_number[position]);
         holder.positions.setText("কোম্পানি: " + title[position]);
+
+        if(position%2==0)
+        {
+            holder.job_item.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+            holder.title.setTextColor(ContextCompat.getColor(context,R.color.job_portal));
+            holder.salary_range.setTextColor(ContextCompat.getColor(context,R.color.job_portal));
+            holder.remaining_date.setTextColor(ContextCompat.getColor(context,R.color.job_portal));
+            holder.address.setTextColor(ContextCompat.getColor(context,R.color.job_portal));
+            holder.contact_number.setTextColor(ContextCompat.getColor(context,R.color.job_portal));
+            holder.positions.setTextColor(ContextCompat.getColor(context,R.color.job_portal));
+        }
+
+        else
+        {
+            holder.job_item.setBackgroundColor(ContextCompat.getColor(context,R.color.job_portal));
+            holder.title.setTextColor(ContextCompat.getColor(context,R.color.white));
+            holder.salary_range.setTextColor(ContextCompat.getColor(context,R.color.white));
+            holder.remaining_date.setTextColor(ContextCompat.getColor(context,R.color.white));
+            holder.address.setTextColor(ContextCompat.getColor(context,R.color.white));
+            holder.contact_number.setTextColor(ContextCompat.getColor(context,R.color.white));
+            holder.positions.setTextColor(ContextCompat.getColor(context,R.color.white));
+        }
+
+
+
+
 
         return convertView;
     }

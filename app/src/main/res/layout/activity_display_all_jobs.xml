@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal|right">
+            android:gravity="center_horizontal|right|top">
 
 
 
@@ -93,15 +93,15 @@
         android:layout_alignStart="@+id/linearLayout2"
         android:orientation="vertical"
 
-        android:id="@+id/scrollView">
-        <View
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:id="@+id/bottom"
-            android:layout_marginTop="10dp"
-            android:layout_height="5dp">
+        android:id="@+id/list_part">
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@color/white"-->
+            <!--android:id="@+id/bottom"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_height="5dp">-->
 
-        </View>
+        <!--</View>-->
 
 
         <ListView
@@ -110,21 +110,20 @@
             android:id="@+id/jobList"
             android:divider="@color/white"
             android:dividerHeight="4px"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
+
             android:layout_gravity="center"
 
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:id="@+id/bottoms"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="5dp">
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@color/white"-->
+            <!--android:id="@+id/bottoms"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_height="5dp">-->
 
-        </View>
+        <!--</View>-->
 
 
     </LinearLayout>
