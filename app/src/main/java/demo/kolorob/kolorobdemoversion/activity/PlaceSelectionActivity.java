@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -58,6 +59,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,18 +81,21 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     String password = "2Jm!4jFe3WgBZKEN";
     NotificationManager manager;
     private Notification myNotication;
-    Boolean doubleBackToExitPressedOnce;
+
     Toast t = null;
     Intent i;
     String IMEINumber;
-
+    private  boolean Reviewsent=false;
+    boolean doubleBackToExitPressedOnce = false;
     private int height;
     private int width;
     Float  ratings;
+    Boolean Reviewgiven=false;
     Boolean click=false;
     private static final int REQUEST_PHONE_STATE = 0;
     InterstitialAd mInterstitialAd;
-
+    Date date2,today;
+    long diffInMillisec,diffInDays;
     float[][] mirpur10Coords = {
             {42, 267},
             {80, 420},
@@ -194,6 +199,7 @@ loadIMEI();
                 super.onAdClosed();
             }
         });
+
 
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -399,36 +405,34 @@ loadIMEI();
 
     @Override
     public void onBackPressed() {
+        SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
 
-        help();
+   /*    if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
+       {
+           SharedPreferences.Editor editor = settings.edit();
+           editor.putBoolean("Reviewsent", false);
+           Reviewgiven=false;
+           editor.apply();
+       }*/
+         if(!settings.getBoolean("Reviewsent",false)) help();
 
-//        if (doubleBackToExitPressedOnce) {
-//            new AlertDialog.Builder(this)
-//                    .setTitle("Close")
-//                    .setMessage("Are you sure you want to close Kolorob")
-//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-//                    {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            finish();
-//                        }
+else
+         {
+             if (doubleBackToExitPressedOnce) {
 //
-//                    })
-//                    .setNegativeButton("No", null)
-//                    .show();
-//        }
-//searchmain.setVisibility(View.GONE);
-//        placemain.setVisibility(View.VISIBLE);
-//        this.doubleBackToExitPressedOnce = true;
-//
-//
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                doubleBackToExitPressedOnce=false;
-//            }
-//        }, 2000);
+                 super.onBackPressed();
+
+                 //    finish();
+                 return;
+             }
+
+             ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+
+             this.doubleBackToExitPressedOnce = true;
+
+
+         }
+
     }
 
     public void help() {
@@ -486,8 +490,13 @@ loadIMEI();
 
                 ratings = ratingBar.getRating();
                 comment=submit_review.getText().toString();
-
+                if(ratings==0)ratings = (float) 0.0001;
                 sendDataToserver(ratings, comment);
+                SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("Reviewsent", true);
+                editor.apply();
+                Reviewgiven=true;
                 alertDialog.cancel();
                 finish();
                 //   back();

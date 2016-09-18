@@ -35,7 +35,7 @@ import java.util.HashMap;
  */
 public class KOLOROBRoadManager extends RoadManager {
 
-    static final String SERVICE = "http://router.project-osrm.org/viaroute?&loc=";
+    static final String SERVICE = "http://119.148.6.221:5000/route/v1/driving/";
     private final Context mContext;
     protected String mServiceUrl;
     protected String mUserAgent;
@@ -144,10 +144,11 @@ public class KOLOROBRoadManager extends RoadManager {
         for (int i=0; i<waypoints.size(); i++){
             GeoPoint p = waypoints.get(i);
             if (i>0)
-                urlString.append("&loc=");
+                urlString.append(';');
             urlString.append(Double.toString(p.getLongitude()) + "," + Double.toString(p.getLatitude()));
         }
-        urlString.append("&instructions=true&alt=false&z=14");
+        urlString.append("?alternatives="+(getAlternate?"true" : "false"));
+        urlString.append("&overview=full&steps=true");
         urlString.append(mOptions);
         return urlString.toString();
     }
@@ -203,8 +204,8 @@ public class KOLOROBRoadManager extends RoadManager {
 
         try {
             JSONObject jObject = new JSONObject(jString);
-            String jCode = jObject.getString("status");
-            if (!"200".equals(jCode)) {
+            String jCode = jObject.getString("code");
+            if (!"Ok".equals(jCode)) {
                 Log.e(BonusPackHelper.LOG_TAG, "OSRMRoadManager::getRoad: error code=" + jCode);
                 Road[] roads = defaultRoad(waypoints);
                 if ("NoRoute".equals(jCode)) {
@@ -212,7 +213,7 @@ public class KOLOROBRoadManager extends RoadManager {
                 }
                 return roads;
             } else {
-                JSONArray jRoutes = jObject.getJSONArray("route_instructions");
+                JSONArray jRoutes = jObject.getJSONArray("routes");
                 Road[] roads = new Road[jRoutes.length()];
                 for (int i=0; i<jRoutes.length(); i++){
                     Road road = new Road();

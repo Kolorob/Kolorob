@@ -316,7 +316,8 @@ public class OpeningActivity extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
-
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        settings.edit().putLong("timeinstall", System.currentTimeMillis()).apply();
         File path = context.getExternalFilesDir(null);
 
         File file = new File(path, "kolorob.txt");
@@ -410,7 +411,7 @@ public class OpeningActivity extends Activity {
             first=tokens[1];
         }
 
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
+
         firstRun = settings.getBoolean("firstRun", false);
         if (first.equals("yes"))//if running for first time
         {
@@ -584,10 +585,7 @@ public class OpeningActivity extends Activity {
                         });
 
                         alertDialog.setCancelable(false);
-//		if(SharedPreferencesHelper.isTabletDevice(c))
-//			textAsk.setTextSize(23);
-//		else
-//			textAsk.setTextSize(17);
+
                         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
                     }
@@ -619,67 +617,12 @@ public class OpeningActivity extends Activity {
 
             alertDialog.show();
 
-
-
-
-
-
-
-
-
-//
-//            AlertDialog alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-//            alertDialog.setTitle("আপনি কি তথ্য আপডেট করতে চান? ");
-//            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//            alertDialog.setCanceledOnTouchOutside(false);
-//            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "না",
-//                    new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//
-//                        }
-//                    });
-//            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "হ্যাঁ",
-//                    new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//
-//            alertDialog.show();
-//            alertDialog.setCanceledOnTouchOutside(false);
         }
     }
     public void LoadData()
     {
 
-        /*
-        @@@@ arafat, you have to control wheel from here
-        moving wheel while loading data into local database
-         */
 
-
-
-
-
-
-
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                                  /* start the activity */
-//
-////                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//                overridePendingTransition(0, 0);
-//                Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
-//                startActivity(a);
-//
-//                //  finish();
-//            }
-//        }, 60000);
-//        //setImage();
-//
         final Handler handler = new Handler();
         Runnable runner = new Runnable() {
             int timeCounter = 0;
@@ -1121,7 +1064,7 @@ public class OpeningActivity extends Activity {
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                makeToastWithShortbread("তথ্য সংগ্রহ চলছে");
+                ToastMessageDisplay.ShowToast(OpeningActivity.this,"তথ্য সংগ্রহ চলছে");
             }
         }
 

@@ -52,7 +52,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -2024,45 +2023,8 @@ int index;
 
        ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
 
-
-
-
-//        toolbar.setVisibility(View.VISIBLE);
-//        toggleButton.setVisibility(View.VISIBLE);
         this.doubleBackToExitPressedOnce = true;
 
-      /*  if(NavigationCalled)
-        {
-            toggleButton.setVisibility(View.VISIBLE);
-            toggleButton.setChecked(false);
-
-            if (currentCategoryID==1)
-            {
-              /*  NavigationCalledOnce=true;
-                String node=getNodefromback();
-                EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this.con);
-                nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
-                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsLayoutEducation.class);
-                iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
-                this.startActivity(iient);
-
-            }
-
-        }
-
-        else if (NavigationCalled==false)
-        {
-            callMapFragment(locationNameId);
-        }
-*/
-
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                doubleBackToExitPressedOnce=false;
-//            }
-//        }, 2000);
 
     }
 
