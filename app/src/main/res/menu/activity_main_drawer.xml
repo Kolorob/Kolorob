@@ -47,6 +47,10 @@
                 android:id="@+id/disclaimer"
                 android:icon="@drawable/emergency_icon"
                 android:title="@string/disclaimerhead" />
+            <item
+                android:id="@+id/tutorial"
+                android:icon="@drawable/emergency_icon"
+                android:title="Tutorial" />
             <!--<item-->
             <!--android:id="@+id/nav_share"-->
             <!--android:icon="@drawable/advertising_icon"-->

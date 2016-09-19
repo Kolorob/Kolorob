@@ -627,6 +627,16 @@ loadIMEI();
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.tutorial) {
+            int mapdetail=2;
+
+            Intent em = new Intent(this, ViewPagerDemo.class);
+            em.putExtra("YourValueKey", mapdetail);
+
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
 //         else if (id == R.id.local_representative) {
 //
 //           // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();

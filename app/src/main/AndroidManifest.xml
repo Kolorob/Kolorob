@@ -94,10 +94,13 @@
             android:name=".fragment.MapFragmentRouteOSM"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />
         <activity android:name=".activity.FeedBackActivityNew" />
-
+        <activity android:name=".activity.ViewPagerDemo"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
             android:enabled="true">

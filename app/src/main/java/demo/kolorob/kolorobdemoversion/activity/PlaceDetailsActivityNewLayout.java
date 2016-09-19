@@ -1964,6 +1964,16 @@ int index;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.tutorial) {
+
+            int mapdetail=1;
+
+            Intent em = new Intent(this, ViewPagerDemo.class);
+            em.putExtra("YourValueKey", mapdetail);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
 //        else if (id == R.id.info_change) {
 //
 //            Intent em = new Intent(this, Information_UpdateActivity.class);

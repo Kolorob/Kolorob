@@ -452,7 +452,10 @@ public class OpeningActivity extends Activity {
 
                     editor.apply();
                     handler.removeCallbacks(this);
-                    Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+
+                    int mapdetail=0;
+                    Intent a = new Intent(OpeningActivity.this, ViewPagerDemo.class); // Default Activity
+                    a.putExtra("YourValueKey", mapdetail);
                     frameAnimation.stop();
                     startActivity(a);
                     return;
