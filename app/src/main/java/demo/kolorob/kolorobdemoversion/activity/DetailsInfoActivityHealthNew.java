@@ -397,6 +397,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         }
 
+        Log.d("Value of Inc","======"+comment[0]);
+
         final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
 
 
@@ -418,16 +420,16 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     alertDialog.setContentView(promptView);
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     alertDialog.show();
+                    Log.d("Value of Inc1","======");
 
-
-                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
+//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
                     final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
 
                     final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
 
                     listView.setAdapter(comment_layout_adapter);
-                    textView.setVisibility(View.GONE);
-
+//                    textView.setVisibility(View.GONE);
+                    Log.d("Value of Inc2","======");
 
                     close.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -441,6 +443,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
                     alertDialog.show();
+                    Log.d("Value of Inc3","======");
                 }
 
             }

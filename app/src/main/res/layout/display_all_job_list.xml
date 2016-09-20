@@ -40,9 +40,6 @@
                 android:id="@+id/salary_range"
                 />
 
-
-
-
                  <TextView
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
@@ -59,12 +56,12 @@
                      android:id="@+id/contact_number"
                      />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contract Number"
-        android:textColor="@color/white"
-        android:id="@+id/positions"
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Contract Number"
+                     android:textColor="@color/white"
+                     android:id="@+id/positions"
         />
 
             <LinearLayout
