@@ -89,13 +89,17 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_group, null);
+            convertView = infalInflater.inflate(R.layout.job_parent_view, null);
         }
 
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
+        TextView job_company = (TextView) convertView
+                .findViewById(R.id.job_company);
+        TextView job_position = (TextView) convertView
+                .findViewById(R.id.job_position);
+        TextView job_salary = (TextView) convertView
+                .findViewById(R.id.job_salary);
+        job_company.setTypeface(null, Typeface.BOLD);
+        job_company.setText(headerTitle);
 
         return convertView;
     }
