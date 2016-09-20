@@ -78,7 +78,7 @@
                     android:layout_height="55dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/phone_icon_purple"
-                    android:id="@+id/imageView17" />
+                    android:id="@+id/phone_call_button" />
 
                 <ImageView
                     android:layout_width="55dp"
@@ -86,7 +86,7 @@
                     android:layout_marginLeft="5dp"
 
                     android:background="@drawable/email_icon_purple"
-                    android:id="@+id/imageView18" />
+                    android:id="@+id/email_button" />
             </LinearLayout>
 
 
