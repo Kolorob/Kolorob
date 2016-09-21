@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,9 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -65,7 +62,7 @@ public class DetailsJobActivityNew extends Activity {
 
         con = this;
 
-        linearLayout=(LinearLayout)findViewById(R.id.lll);
+
         //upperHand=(LinearLayout)findViewById(R.id.upper_part);
         upperText=(LinearLayout)findViewById(R.id.upperText);
 //        left_way=(LinearLayout)findViewById(R.id.left_go_process);
