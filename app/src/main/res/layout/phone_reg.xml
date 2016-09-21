@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-    tools:context="demo.kolorob.kolorobdemoversion.activity.Information_UpdateActivity">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity">
 
 
 

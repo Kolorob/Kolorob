@@ -96,7 +96,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />
-        <activity android:name=".activity.FeedBackActivityNew" />
 
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
