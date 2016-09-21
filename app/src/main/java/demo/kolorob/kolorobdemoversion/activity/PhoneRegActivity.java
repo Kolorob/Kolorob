@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -142,7 +141,8 @@ public class PhoneRegActivity extends Activity {
 
 
 
-                                SharedPreferencesHelper.setNumber(con,phoneNumber);
+                               // SharedPreferencesHelper.setNumber(con,phoneNumber); this has been commented to prevent
+                                // user using same number in multiple device
 
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
                                         "আপনি ইতিপূর্বে  রেজিস্ট্রেশন করে ফেলেছেন");
