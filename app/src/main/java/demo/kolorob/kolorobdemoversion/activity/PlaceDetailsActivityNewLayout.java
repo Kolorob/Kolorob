@@ -740,7 +740,7 @@ int index;
         });
 
         Populateholder(getPlaceChoice());
-        callMapFragment(locationNameId);
+       // callMapFragment(locationNameId);
         MapButton.setBackgroundResource(R.drawable.map_selected);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
@@ -1730,12 +1730,16 @@ int index;
 
                 for (int j = 0; j < RefEnt.size(); j++) {
                     Group group = new Group(RefEnt.get(j));
+                    Log.d("RefEnt.get(j)","******"+RefEnt.get(j));
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
                     printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
                   //  printnamesent = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
 
                     for (int i = 0; i < printnamesent.size(); i++) {
+
+                        Log.d("printnamesent.get(i)","******"+printnamesent.get(i));
+
                         group.childrenent.add(i, printnamesent.get(i));
                     }
                     groups.add(j, group);
