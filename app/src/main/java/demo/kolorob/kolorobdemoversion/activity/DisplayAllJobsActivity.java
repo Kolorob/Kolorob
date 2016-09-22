@@ -23,10 +23,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +38,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.DisplayAllJobList;
+import demo.kolorob.kolorobdemoversion.adapters.Job_expand_list_adapter;
 import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
 import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
@@ -63,6 +68,11 @@ public class DisplayAllJobsActivity extends Activity {
     Context context;
     ListView joblist;
     private LinearLayout list_part;
+    List<String> listDataHeader;
+    List<String> job_data;
+    HashMap<String, List<String>> listDataChild;
+    ExpandableListView expListView;
+    Job_expand_list_adapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,6 +268,12 @@ public class DisplayAllJobsActivity extends Activity {
         }
 
         else {
+
+            listDataHeader = new ArrayList<String>();
+            listDataChild = new HashMap<String, List<String>>();
+            job_data=new ArrayList<String>();
+
+
             String[] tittle = new String[size];
 
             String[] salary_range = new String[size];
@@ -276,40 +292,111 @@ public class DisplayAllJobsActivity extends Activity {
             for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
             {
 
-                tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
-                salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
-                remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
-                address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
-                contact_number[increment] = jobAdvertisementItem.getMobile1();
-                positions[increment] = jobAdvertisementItem.getPosition();
-                increment++;
+                String jobdata= "আবেদনের শেষ সময়: "+jobAdvertisementItem.getApplication_last_date()+"@"+
+                            "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
+                            "অভিজ্ঞতা: "+"নাই"+"@"+
+                            jobAdvertisementItem.getMobile1()+"@"+
+                            jobAdvertisementItem.getEmail()+"v";
+
+                String group_data= jobAdvertisementItem.getInstitute_name_bangla()+"@"+
+                        "পজিশন: "+jobAdvertisementItem.getPosition()+"@"+
+                    "বেতন: "+English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary())+"@"+"v";
+
+                job_data.add(jobdata);
+//                job_data.add(jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city());
+//
+//                job_data.add("নাই");
+//                job_data.add(jobAdvertisementItem.getMobile1());
+//                job_data.add(jobAdvertisementItem.getEmail());
+                listDataHeader.add(group_data);
+                listDataChild.put(group_data,job_data);
+               //  job_data.clear();
+
+//                tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
+//                salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
+//                remaining_date[increment]= jobAdvertisementItem.getApplication_last_date();
+//                address[increment]=jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city();
+//                contact_number[increment] = jobAdvertisementItem.getMobile1();
+//                positions[increment] = jobAdvertisementItem.getPosition();
+//                increment++;
 
             }
+            expListView = (ExpandableListView) findViewById(R.id.lvExp);
+            listAdapter = new Job_expand_list_adapter(this, listDataHeader, listDataChild);
 
-            if(increment%2==0)
-                list_part.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
-            else
-                list_part.setBackgroundColor(ContextCompat.getColor(context,R.color.job_portal));
+            // setting list adapter
+            expListView.setAdapter(listAdapter);
 
+            expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
-
-
-            joblist=(ListView)findViewById(R.id.jobList);
-
-            DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
-            joblist.setAdapter(displayAllJobList);
-
-
-
-            joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
-                    intent.putExtra("position",position);
-                    startActivity(intent);
+                public boolean onGroupClick(ExpandableListView parent, View v,
+                                            int groupPosition, long id) {
+                    // "Group Clicked " + listDataHeader.get(groupPosition),
+                    // Toast.LENGTH_SHORT).show();
+                    return false;
                 }
             });
+
+            // Listview Group expanded listener
+            expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+                @Override
+                public void onGroupExpand(int groupPosition) {
+
+                }
+            });
+
+            // Listview Group collasped listener
+            expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+                @Override
+                public void onGroupCollapse(int groupPosition) {
+
+
+                }
+            });
+
+            // Listview on child click listener
+            expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v,
+                                            int groupPosition, int childPosition, long id) {
+                    // TODO Auto-generated method stub
+
+                    return false;
+                }
+            });
+
+
+
+
+
+//            if(increment%2==0)
+//                list_part.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+//            else
+//                list_part.setBackgroundColor(ContextCompat.getColor(context,R.color.job_portal));
+
+
+
+
+//            joblist=(ListView)findViewById(R.id.jobList);
+//
+//            DisplayAllJobList displayAllJobList= new DisplayAllJobList(this, tittle, salary_range, remaining_date, address, contact_number,positions);
+//            joblist.setAdapter(displayAllJobList);
+//
+//
+//
+//            joblist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                    Intent intent = new Intent(DisplayAllJobsActivity.this,DetailsJobActivityNew.class);
+//                    intent.putExtra("position",position);
+//                    startActivity(intent);
+//                }
+//            });
         }
 
 
