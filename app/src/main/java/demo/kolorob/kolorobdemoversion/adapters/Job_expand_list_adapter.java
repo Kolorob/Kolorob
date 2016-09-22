@@ -88,17 +88,35 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         TextView required_experience = (TextView) convertView
                 .findViewById(R.id.required_experience);
 
+        ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
+        ImageView email = (ImageView)convertView.findViewById(R.id.email);
+
         if(groupPosition%2==0)
         {
+            job_item.setBackgroundColor(ContextCompat.getColor(_context,R.color.white));
+            remaining_date.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+            address.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+            required_experience.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+            phone_call.setBackgroundResource(R.drawable.phone_icon_purple);
+            email.setBackgroundResource(R.drawable.email_icon_purple);
 
         }
 
-            remaining_date.setText(Children[0]);
-        address.setText(Children[1]);
-        required_experience.setText(Children[2]);
+        else
+        {
+            job_item.setBackgroundColor(ContextCompat.getColor(_context,R.color.job_portal));
+            remaining_date.setTextColor(ContextCompat.getColor(_context,R.color.white));
+            address.setTextColor(ContextCompat.getColor(_context,R.color.white));
+            required_experience.setTextColor(ContextCompat.getColor(_context,R.color.white));
+            phone_call.setBackgroundResource(R.drawable.phone_icon);
+            email.setBackgroundResource(R.drawable.email_icon);
+        }
 
-        ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
-        ImageView email = (ImageView)convertView.findViewById(R.id.email);
+            remaining_date.setText(Children[0]);
+            address.setText(Children[1]);
+            required_experience.setText(Children[2]);
+
+
 
 
         phone_call.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +180,8 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.job_parent_view, null);
         }
 
+        LinearLayout parent_view=(LinearLayout)convertView.findViewById(R.id.parent_view);
+
         String[] groupElement= headerTitle.split("@");
 
 
@@ -176,6 +196,31 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         TextView job_salary = (TextView) convertView
                 .findViewById(R.id.job_salary);
         job_company.setTypeface(null, Typeface.BOLD);
+
+
+        if(groupPosition%2==0)
+        {
+            parent_view.setBackgroundColor(ContextCompat.getColor(_context,R.color.white));
+        //    parent_view.setBackgroundResource(ContextCompat.getColor(_context,R.color.white));
+            job_company.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+            job_position.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+            job_salary.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+
+
+        }
+
+        else
+        {
+            parent_view.setBackgroundColor(ContextCompat.getColor(_context,R.color.job_portal));
+            job_company.setTextColor(ContextCompat.getColor(_context,R.color.white));
+            job_position.setTextColor(ContextCompat.getColor(_context,R.color.white));
+            job_salary.setTextColor(ContextCompat.getColor(_context,R.color.white));
+
+        }
+
+
+
+
         job_company.setText(groupElement[0]);
         job_position.setText(groupElement[1]);
         job_salary.setText(groupElement[2]);

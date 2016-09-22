@@ -352,6 +352,16 @@ public class DisplayAllJobsActivity extends Activity {
                         expListView.collapseGroup(lastExpandedPosition);
                     }
                     lastExpandedPosition = groupPosition;
+
+                    if(groupPosition%2==0)
+                    {
+                        expListView.setChildDivider(ContextCompat.getDrawable(context,R.color.white));
+                        expListView.setDivider(ContextCompat.getDrawable(context,R.color.white));
+                    }
+                    else {
+                        expListView.setChildDivider(ContextCompat.getDrawable(context,R.color.job_portal));
+                        expListView.setDivider(ContextCompat.getDrawable(context,R.color.job_portal));
+                    }
                 }
             });
 
