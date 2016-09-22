@@ -14,7 +14,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,9 +155,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityHealthNew.this);
 
 
-//        courseListView = (ListView) findViewById(R.id.courseListView);
-//        listView = (ListView) findViewById(R.id.listView5);
-//        linearLayout = (LinearLayout) findViewById(R.id.lll);
         upperHand = (LinearLayout) findViewById(R.id.upper_part);
         upperText = (LinearLayout) findViewById(R.id.upperText);
         left_way = (LinearLayout) findViewById(R.id.left_go_process);
@@ -168,15 +164,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
         middle_image = (ImageView) findViewById(R.id.phone_middl);
         right_image = (ImageView) findViewById(R.id.right_side_email);
-//        address_text = (TextView) findViewById(R.id.address_text);
-//        phone_text = (TextView) findViewById(R.id.phone_text);
-//        email_text = (TextView) findViewById(R.id.email_text);
-//        totalStudents = (TextView) findViewById(R.id.tv_total_students);
-//        totalClasses = (TextView) findViewById(R.id.tv_total_class);
-//        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-//        playground = (TextView) findViewById(R.id.tv_playground);
-//        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
-//        transport = (TextView) findViewById(R.id.tv_transport_facility);
+
         ratingText = (TextView) findViewById(R.id.ratingText);
 
         close_button = (ImageView) findViewById(R.id.close_buttonc);

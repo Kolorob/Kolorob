@@ -52,10 +52,6 @@
             android:name=".activity.PhoneRegActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity
-            android:name=".activity.Information_UpdateActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
 
         <!-- <activity -->
         <!-- android:name=".activity.LocationInstructionActivity" -->
