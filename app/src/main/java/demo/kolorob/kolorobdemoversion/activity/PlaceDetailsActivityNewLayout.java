@@ -2020,8 +2020,8 @@ int index;
 //
             super.onBackPressed();
 
-        //    finish();
-            return;
+          this.finish();
+
         }
 
        ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
@@ -2783,7 +2783,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
 
         MapFragmentOSM prev_fragment = (MapFragmentOSM) getFragmentManager().findFragmentByTag("MAP");
-        if(prev_fragment!=null)
+        if(prev_fragment!=null&&prev_fragment.getMapViewController() != null)
         {
             if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
             else prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);

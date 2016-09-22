@@ -376,7 +376,7 @@ public class OpeningActivity extends Activity {
             String delims = "[,]";
             String[] tokens = contents.split(delims);
            first=tokens[1];
-            // first="yes";
+           //  first="yes";
         }
         else {
             int length = (int) file.length();
@@ -1688,6 +1688,10 @@ public class OpeningActivity extends Activity {
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
     }
 
