@@ -1968,8 +1968,7 @@ int index;
 
         }
 //        else if (id == R.id.info_change) {
-//
-//            Intent em = new Intent(this, Information_UpdateActivity.class);
+
 //            startActivity(em);
 //            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 //
@@ -2667,7 +2666,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
 
         // TODO Inflate the sub-category list from right
-        final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
+
         if(subCatShowFlag==1&&showList!=1)
         {
             svsholder.setVisibility(View.VISIBLE);
