@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -73,6 +74,10 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         Log.d("groupPosition","======");
         Log.d("childText","======");
         final String[] Children = childText.split("@");
+
+        LinearLayout job_item = (LinearLayout)convertView.findViewById(R.id.job_item);
+
+
         TextView remaining_date = (TextView) convertView
                 .findViewById(R.id.remaining_date);
 
@@ -83,7 +88,12 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         TextView required_experience = (TextView) convertView
                 .findViewById(R.id.required_experience);
 
-        remaining_date.setText(Children[0]);
+        if(groupPosition%2==0)
+        {
+
+        }
+
+            remaining_date.setText(Children[0]);
         address.setText(Children[1]);
         required_experience.setText(Children[2]);
 
