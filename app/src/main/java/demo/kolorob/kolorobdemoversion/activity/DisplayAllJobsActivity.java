@@ -74,6 +74,7 @@ public class DisplayAllJobsActivity extends Activity {
     ExpandableListView expListView;
     private int lastExpandedPosition = -1;
     Job_expand_list_adapter listAdapter;
+    private int job_counter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,6 +252,7 @@ public class DisplayAllJobsActivity extends Activity {
 
                 listDataHeader.add(group_data);
                 listDataChild.put(group_data,job_data);
+                job_counter++;
             }
             expListView = (ExpandableListView) findViewById(R.id.lvExp);
             listAdapter = new Job_expand_list_adapter(this, listDataHeader, listDataChild);
@@ -264,6 +266,15 @@ public class DisplayAllJobsActivity extends Activity {
                     return false;
                 }
             });
+
+            if(job_counter%2==0)
+            {
+                list_part.setBackgroundColor(ContextCompat.getColor(this,R.color.white));
+            }
+            else {
+                list_part.setBackgroundColor(ContextCompat.getColor(this,R.color.job_portal));
+
+            }
             expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
                 @Override
@@ -299,6 +310,7 @@ public class DisplayAllJobsActivity extends Activity {
                 public boolean onChildClick(ExpandableListView parent, View v,
                                             int groupPosition, int childPosition, long id) {
                     // TODO Auto-generated method stub
+                    expListView.collapseGroup(lastExpandedPosition);
 
                     return false;
                 }

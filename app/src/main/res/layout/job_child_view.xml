@@ -61,16 +61,16 @@
 
 
         <ImageView
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/phone_icon_purple"
             android:id="@+id/phone_call" />
 
         <ImageView
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
 
             android:background="@drawable/email_icon_purple"

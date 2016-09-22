@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
+    private int width;
+    private int height;
 
     public Job_expand_list_adapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
@@ -62,6 +65,10 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.job_child_view, null);
         }
 
+        DisplayMetrics displayMetrics = _context.getResources().getDisplayMetrics();
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+
         final String[] Children = childText.split("@");
         LinearLayout job_item = (LinearLayout)convertView.findViewById(R.id.job_item);
         TextView remaining_date = (TextView) convertView.findViewById(R.id.remaining_date);
@@ -88,6 +95,11 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             phone_call.setBackgroundResource(R.drawable.phone_icon);
             email.setBackgroundResource(R.drawable.email_icon);
         }
+
+            phone_call.getLayoutParams().height=width/11;
+            phone_call.getLayoutParams().width=width/11;
+            email.getLayoutParams().height=width/11;
+            email.getLayoutParams().width=width/11;
             remaining_date.setText(Children[0]);
             address.setText(Children[1]);
             required_experience.setText(Children[2]);
@@ -109,6 +121,14 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
                     AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                             "ফোন নম্বর পাওয়া যায়নি");
                 }
+            }
+        });
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertMessage.showMessage(_context, "ই মেইল করা সম্ভব হচ্ছে না",
+                        "ই মেইল আই ডি পাওয়া যায়নি");
             }
         });
 
