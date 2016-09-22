@@ -29,8 +29,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 public class Job_expand_list_adapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
+    private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
 
     public Job_expand_list_adapter(Context context, List<String> listDataHeader,
@@ -55,15 +54,7 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        Log.d("groupPosition","======");
-        Log.d("childText","======");
-
-
         final String childText = (String) getChild(groupPosition, childPosition);
-
-
-
-
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -71,26 +62,13 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.job_child_view, null);
         }
 
-        Log.d("groupPosition","======");
-        Log.d("childText","======");
         final String[] Children = childText.split("@");
-
         LinearLayout job_item = (LinearLayout)convertView.findViewById(R.id.job_item);
-
-
-        TextView remaining_date = (TextView) convertView
-                .findViewById(R.id.remaining_date);
-
-        TextView address = (TextView) convertView
-                .findViewById(R.id.address);
-
-
-        TextView required_experience = (TextView) convertView
-                .findViewById(R.id.required_experience);
-
+        TextView remaining_date = (TextView) convertView.findViewById(R.id.remaining_date);
+        TextView address = (TextView) convertView.findViewById(R.id.address);
+        TextView required_experience = (TextView) convertView.findViewById(R.id.required_experience);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
-
         if(groupPosition%2==0)
         {
             job_item.setBackgroundColor(ContextCompat.getColor(_context,R.color.white));
@@ -101,7 +79,6 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             email.setBackgroundResource(R.drawable.email_icon_purple);
 
         }
-
         else
         {
             job_item.setBackgroundColor(ContextCompat.getColor(_context,R.color.job_portal));
@@ -111,13 +88,9 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             phone_call.setBackgroundResource(R.drawable.phone_icon);
             email.setBackgroundResource(R.drawable.email_icon);
         }
-
             remaining_date.setText(Children[0]);
             address.setText(Children[1]);
             required_experience.setText(Children[2]);
-
-
-
 
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,26 +103,20 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
                     else {
                         AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                                 "ফোন নম্বর পাওয়া যায়নি");
-
                     }
                 } else {
 
                     AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
                             "ফোন নম্বর পাওয়া যায়নি");
-
                 }
             }
         });
 
-     //   txtListChild.setText(childText);
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        Log.d("Size","=====");
-        Log.d("Size","====="+this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .size());
         return this._listDataChild.get(this._listDataHeader.get(groupPosition))
                 .size();
     }
@@ -201,7 +168,6 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         if(groupPosition%2==0)
         {
             parent_view.setBackgroundColor(ContextCompat.getColor(_context,R.color.white));
-        //    parent_view.setBackgroundResource(ContextCompat.getColor(_context,R.color.white));
             job_company.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
             job_position.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
             job_salary.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
@@ -217,10 +183,6 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             job_salary.setTextColor(ContextCompat.getColor(_context,R.color.white));
 
         }
-
-
-
-
         job_company.setText(groupElement[0]);
         job_position.setText(groupElement[1]);
         job_salary.setText(groupElement[2]);
@@ -231,15 +193,10 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
     private boolean checkPermission(Context context) {
         int result = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
         if (result == PackageManager.PERMISSION_GRANTED) {
-
             return true;
-
         } else {
-
             return false;
-
         }
-
     }
 
     @Override
