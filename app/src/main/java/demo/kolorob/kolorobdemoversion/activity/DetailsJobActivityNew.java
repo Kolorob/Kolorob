@@ -65,7 +65,7 @@ public class DetailsJobActivityNew extends Activity {
 
         con = this;
 
-        linearLayout=(LinearLayout)findViewById(R.id.lll);
+//        linearLayout=(LinearLayout)findViewById(R.id.lll);
         //upperHand=(LinearLayout)findViewById(R.id.upper_part);
         upperText=(LinearLayout)findViewById(R.id.upperText);
 //        left_way=(LinearLayout)findViewById(R.id.left_go_process);

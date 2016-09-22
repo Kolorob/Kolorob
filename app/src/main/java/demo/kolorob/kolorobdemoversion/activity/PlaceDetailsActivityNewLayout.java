@@ -2671,7 +2671,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
 
         // TODO Inflate the sub-category list from right
-        final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
+//        final RelativeLayout rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         if(subCatShowFlag==1&&showList!=1)
         {
             svsholder.setVisibility(View.VISIBLE);

@@ -72,6 +72,7 @@ public class DisplayAllJobsActivity extends Activity {
     List<String> job_data;
     HashMap<String, List<String>> listDataChild;
     ExpandableListView expListView;
+    private int lastExpandedPosition = -1;
     Job_expand_list_adapter listAdapter;
 
     @Override
@@ -291,7 +292,7 @@ public class DisplayAllJobsActivity extends Activity {
 
             for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
             {
-
+                job_data.clear();
                 String jobdata= "আবেদনের শেষ সময়: "+jobAdvertisementItem.getApplication_last_date()+"@"+
                             "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
                             "অভিজ্ঞতা: "+"নাই"+"@"+
@@ -310,7 +311,7 @@ public class DisplayAllJobsActivity extends Activity {
 //                job_data.add(jobAdvertisementItem.getEmail());
                 listDataHeader.add(group_data);
                 listDataChild.put(group_data,job_data);
-               //  job_data.clear();
+
 
 //                tittle[increment]=jobAdvertisementItem.getInstitute_name_bangla();
 //                salary_range[increment]=English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary());
@@ -339,11 +340,18 @@ public class DisplayAllJobsActivity extends Activity {
             });
 
             // Listview Group expanded listener
+
+
+
             expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
                 @Override
                 public void onGroupExpand(int groupPosition) {
-
+                    if (lastExpandedPosition != -1
+                            && groupPosition != lastExpandedPosition) {
+                        expListView.collapseGroup(lastExpandedPosition);
+                    }
+                    lastExpandedPosition = groupPosition;
                 }
             });
 

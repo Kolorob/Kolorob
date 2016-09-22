@@ -117,9 +117,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         GovernmentServiceDetailsTable governmentServiceDetailsTable = new GovernmentServiceDetailsTable(DetailsLayoutGovernment.this);
 
 
-        courseListView = (ListView) findViewById(R.id.courseListView);
-        listView = (ListView) findViewById(R.id.listView5);
-        linearLayout = (LinearLayout) findViewById(R.id.lll);
+//        courseListView = (ListView) findViewById(R.id.courseListView);
+//        listView = (ListView) findViewById(R.id.listView5);
+//        linearLayout = (LinearLayout) findViewById(R.id.lll);
         upperHand = (LinearLayout) findViewById(R.id.upper_part);
         upperText = (LinearLayout) findViewById(R.id.upperText);
         left_way = (LinearLayout) findViewById(R.id.left_go_process);
@@ -129,9 +129,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
         middle_image = (ImageView) findViewById(R.id.phone_middl);
         right_image = (ImageView) findViewById(R.id.right_side_email);
-        address_text = (TextView) findViewById(R.id.address_text);
-        phone_text = (TextView) findViewById(R.id.phone_text);
-        email_text = (TextView) findViewById(R.id.email_text);
+//        address_text = (TextView) findViewById(R.id.address_text);
+//        phone_text = (TextView) findViewById(R.id.phone_text);
+//        email_text = (TextView) findViewById(R.id.email_text);
 
         ratingText = (TextView) findViewById(R.id.ratingText);
 
