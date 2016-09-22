@@ -740,7 +740,7 @@ int index;
         });
 
         Populateholder(getPlaceChoice());
-       // callMapFragment(locationNameId);
+        callMapFragment(locationNameId);
         MapButton.setBackgroundResource(R.drawable.map_selected);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
