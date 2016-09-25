@@ -382,7 +382,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
+                date[inc]='"'+commentItem.getComment()+'"';
                 comment[inc]= commentItem.getDate();
                 rating[inc]= commentItem.getRating();
                 inc++;
@@ -441,6 +441,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     listView.setAdapter(comment_layout_adapter);
 //                    textView.setVisibility(View.GONE);
 
+                    alertDialog.getWindow().setLayout((width*5)/6, (height*2)/3);
 
                     close.setOnClickListener(new View.OnClickListener() {
                         @Override
