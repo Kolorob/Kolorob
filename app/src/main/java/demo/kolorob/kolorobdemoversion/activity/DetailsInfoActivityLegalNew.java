@@ -313,7 +313,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 CheckConcate("Service Type", leagalAidDetailsItem.getType());
 
                 CheckConcate("Service Sub-type", leagalAidDetailsItem.getSub_type());
-                CheckConcate("Service Cost", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" BDT");
+                CheckConcate("Service Cost", leagalAidDetailsItem.getLagal_cost()+" BDT");
                 CheckConcate("Responsible Person", leagalAidDetailsItem.getLegal_responsible_person());
             }
 

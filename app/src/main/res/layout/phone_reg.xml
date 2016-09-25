@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
         android:textSize="28dp"
-        android:text=" রেজিস্ট্রেশন করুন "
+        android:text=" Registration "
           android:layout_marginBottom="5dp"
         />
 
@@ -38,7 +38,7 @@
         android:textSize="20dp"
         android:id="@+id/userid"
         android:layout_marginLeft="20dp"
-        android:hint="আপনার নাম লিখুন *"
+        android:hint="Name *"
         android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
 
@@ -51,7 +51,7 @@
         android:layout_marginLeft="20dp"
         android:inputType="textEmailAddress"
 
-        android:hint="ইমেইল আইডি"
+        android:hint="Email"
         android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
 
@@ -64,7 +64,7 @@
         android:id="@+id/phone_id"
         android:layout_marginLeft="20dp"
         android:inputType="number"
-        android:hint="ফোন নম্বর*"
+        android:hint="Contact No*"
         android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
 
@@ -78,7 +78,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="25dp"
         android:layout_marginTop="15dp"
-        android:text="দিয়েছি"
+        android:text="Done"
         android:onClick="submit"
         />
 

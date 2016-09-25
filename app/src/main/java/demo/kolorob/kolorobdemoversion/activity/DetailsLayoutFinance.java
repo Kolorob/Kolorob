@@ -172,11 +172,11 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
         CheckConcate("Address  ", financialNewItem.getAddress());
-        CheckConcate("Floor  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
+        CheckConcate("Floor  ", financialNewItem.getFloor());
         CheckConcate("House Name  ", financialNewItem.getHousename());
-        CheckConcate("Road  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
-        CheckConcate("Line  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
-        CheckConcate("Avenue  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
+        CheckConcate("Road  ", financialNewItem.getRoad());
+        CheckConcate("Line  ", financialNewItem.getLine());
+        CheckConcate("Avenue  ", financialNewItem.getAvenue());
         CheckConcate("Land mark  ", financialNewItem.getLandmark());
 
         CheckConcate("Contact ", financialNewItem.getNode_contact());
