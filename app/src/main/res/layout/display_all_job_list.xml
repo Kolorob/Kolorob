@@ -3,44 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
+    android:padding="10dp"
+    android:id="@+id/job_item"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="20dp"
     android:orientation="vertical">
 
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
+        android:visibility="gone"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-
+            android:textColor="@color/black"
             android:text="Title"
             android:id="@+id/title"
             />
 
-    </LinearLayout>
-
-
-
-
-
-
-
-
-
-
+        </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-
+                android:textColor="@color/black"
                 android:text="Remaining Date"
                 android:id="@+id/remaining_date"
                 />
@@ -50,56 +36,57 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salary Renge"
-                android:textColor="@color/white"
+                android:text="Job Description"
+                android:visibility="gone"
+                android:textColor="@color/black"
                 android:id="@+id/salary_range"
                 />
-
-
-
 
                  <TextView
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text="Address"
                      android:id="@+id/address"
-                     android:textColor="@color/white"
+                     android:textColor="@color/black"
 
                      />
-
-
-
-
-
-
-
-
-
                  <TextView
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text="Contract Number"
-                     android:textColor="@color/white"
-
-
+                     android:textColor="@color/black"
                      android:id="@+id/contact_number"
                      />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contract Number"
-        android:textColor="@color/white"
-
-
-        android:id="@+id/positions"
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Required Experience"
+                     android:visibility="visible"
+                     android:textColor="@color/black"
+                     android:id="@+id/positions"
         />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="15dp">
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
 
 
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/phone_icon_purple"
+                    android:id="@+id/phone_call_button" />
+
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="5dp"
+
+                    android:background="@drawable/email_icon_purple"
+                    android:id="@+id/email_button" />
             </LinearLayout>
 
 
