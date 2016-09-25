@@ -1,9 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,7 +55,6 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
@@ -66,7 +63,6 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
@@ -75,7 +71,6 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
@@ -85,7 +80,6 @@ import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -93,7 +87,6 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
-import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -1699,7 +1692,7 @@ int index;
 
                 for (int j = 0; j < RefEnt.size(); j++) {
                     Group group = new Group(RefEnt.get(j));
-                    Log.d("RefEnt.get(j)","******"+RefEnt.get(j));
+
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
                     printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
@@ -1707,7 +1700,7 @@ int index;
 
                     for (int i = 0; i < printnamesent.size(); i++) {
 
-                        Log.d("printnamesent.get(i)","******"+printnamesent.get(i));
+
 
                         group.childrenent.add(i, printnamesent.get(i));
                     }
@@ -2426,7 +2419,7 @@ int index;
 
 
         ArrayList<String> itemName = new ArrayList<String>();
-        currentSubCategoryItem = subCategoryItems;
+
         for(SubCategoryItem si : subCategoryItems)
         {
             itemName.add(si.getSubCatName());
@@ -2477,8 +2470,7 @@ int index;
     {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+
         View v;
         LayoutInflater li = LayoutInflater.from(this);
 
