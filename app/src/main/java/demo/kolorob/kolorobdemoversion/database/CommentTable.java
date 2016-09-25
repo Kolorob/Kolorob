@@ -158,13 +158,13 @@ public class CommentTable {
 //        return ciList;
 //    }
 
-    private CommentItem commentItem(Cursor cursor) {
+    /*private CommentItem commentItem(Cursor cursor) {
         String id = cursor.getString(0);
         String phone = cursor.getString(1);
         String comment = cursor.getString(2);
         String date = cursor.getString(3);
-        return new CommentItem(id, phone,comment, date);
-    }
+        return new CommentItem(id, phone,comment,rating, date);
+    }*/
 
 
     public ArrayList<CommentItem> getAllFinancialSubCategoriesInfo(String id) {
@@ -179,7 +179,7 @@ public class CommentTable {
         if (cursor.moveToFirst()) {
             do {
                 //System.out.println("abc="+cursor.getString(4));
-                subCatList.add(commentItem(cursor));
+                subCatList.add(new CommentItem(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();

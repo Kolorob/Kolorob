@@ -372,7 +372,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         String[] date = new String[size];
         String[] comment = new String[size];
 
-
         for (CommentItem commentItem:commentItems)
         {
             if(!commentItem.getComment().equals(""))
@@ -1013,11 +1012,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
-
         }
-
-
     }
-
 
 }
