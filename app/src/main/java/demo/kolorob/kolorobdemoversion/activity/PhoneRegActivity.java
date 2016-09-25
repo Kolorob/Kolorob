@@ -6,12 +6,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,9 +29,7 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
  * Created by arafat on 1/11/2016.
  */
 public class PhoneRegActivity extends Activity {
-    ImageView close,kivabejabejob;
-    TextView close_tv;
-    ImageButton Feedback;
+
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     /**
@@ -43,17 +37,11 @@ public class PhoneRegActivity extends Activity {
      * For other categories this components may vary
      * In that case design the layout for specific category and call them in  setContentView(R.layout.activity_details_info);
      * */
-    private TextView itemName;
-    private TextView itemAddress;
-    private TextView itemType;
-    private TextView itemContact;
-    private String phoneNumber;
-    private int width;
-    private int height;
 
-    private EditText phone;
-    private EditText name;
-    private TextView fb,openTime,close_Time,breakTIme,jobName,road,block,landmark;
+    private String phoneNumber,uname,emailaddress;
+
+
+    private EditText phone,email,name;
 
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     JobServiceProviderItem jobServiceProviderItem;
@@ -67,21 +55,29 @@ public class PhoneRegActivity extends Activity {
         setContentView(R.layout.phone_reg);
 
 
-        phone  = (EditText)findViewById(R.id.phone_id);
-        phoneNumber=phone.getText().toString();
-
 
         con = this;
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        height = displayMetrics.heightPixels;
-        width = displayMetrics.widthPixels;
+        phone  = (EditText)findViewById(R.id.phone_id);
+        name=(EditText)findViewById(R.id.userid) ;
+        email=(EditText)findViewById(R.id.emailid) ;
 
     }
 
     public void submit(View v) {
 
-        phoneNumber = phone.getText().toString();
+        phoneNumber=phone.getText().toString().trim();
+        uname=name.getText().toString().trim();
+        emailaddress=email.getText().toString().trim();
         int size = phoneNumber.length();
+        if( uname.equals("")){
+
+            /**
+             *   You can Toast a message here that the Username is Empty
+             **/
+
+            name.setError( "name is required!" );
+
+        }
 
         if (size != 11) {
             AlertMessage.showMessage(this, "Sorry!",
@@ -107,7 +103,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&username="+username+"&password="+password+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"email="+emailaddress+"name="+uname+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

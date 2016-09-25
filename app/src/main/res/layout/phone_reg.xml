@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-    tools:context="demo.kolorob.kolorobdemoversion.activity.Information_UpdateActivity">
+    tools:context="demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity">
 
 
 
@@ -28,17 +28,33 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center_horizontal"
         android:textSize="28dp"
-        android:text="Phone Registration"
+        android:text=" রেজিস্ট্রেশন করুন "
+          android:layout_marginBottom="5dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        android:id="@+id/userid"
+        android:layout_marginLeft="20dp"
+        android:hint="আপনার নাম লিখুন *"
+        android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
-        android:phoneNumber="true"
-        android:textSize="25dp"
-        android:text="Give Phone number"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:id="@+id/emailid"
+        android:layout_marginLeft="20dp"
+        android:inputType="textEmailAddress"
+
+        android:hint="ইমেইল আইডি"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_horizontal"
+
         />
 
     <EditText
@@ -48,6 +64,7 @@
         android:id="@+id/phone_id"
         android:layout_marginLeft="20dp"
         android:inputType="number"
+        android:hint="ফোন নম্বর*"
         android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
 
@@ -61,7 +78,7 @@
         android:layout_gravity="center_horizontal"
         android:textSize="25dp"
         android:layout_marginTop="15dp"
-        android:text="Submit"
+        android:text="দিয়েছি"
         android:onClick="submit"
         />
 
