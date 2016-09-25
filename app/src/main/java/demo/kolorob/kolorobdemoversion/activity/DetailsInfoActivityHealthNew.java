@@ -53,7 +53,6 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDeta
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
@@ -82,23 +81,17 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     String password="2Jm!4jFe3WgBZKEN";
     Float rating;
     HealthServiceProviderItemNew healthServiceProviderItemNew;
-    ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
-    ArrayList<HealthServiceProviderItem> healthServiceProviderItemsz;
+
     ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
     ArrayList<HealthVaccineItemDetails> healthVaccineItemDetailses;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
+
     private TextView ratingText;
-    private TextView serviceDetails, specialist, health_vaccine;
+
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     private RadioGroup feedRadio;
-    RadioButton rb1, rb2, rb3,rb4,rb5;
+    RadioButton rb1;
     String status = "", phone_num = "", registered = "";
-    String result_concate = "";
+
     private CheckBox checkBox;
     EditText feedback_comment;
     ListView alldata;
@@ -166,12 +159,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         address_text = (TextView) findViewById(R.id.address_text);
         phone_text = (TextView) findViewById(R.id.phone_text);
         email_text = (TextView) findViewById(R.id.email_text);
-        totalStudents = (TextView) findViewById(R.id.tv_total_students);
-        totalClasses = (TextView) findViewById(R.id.tv_total_class);
-        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-        playground = (TextView) findViewById(R.id.tv_playground);
-        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
-        transport = (TextView) findViewById(R.id.tv_transport_facility);
+
         ratingText = (TextView) findViewById(R.id.ratingText);
 
         close_button = (ImageView) findViewById(R.id.close_buttonc);
@@ -203,8 +191,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("Avenue", healthServiceProviderItemNew.getAvenue());
         CheckConcate("Land Mark", healthServiceProviderItemNew.getLandmark());
         CheckConcate("Health Center Type", healthServiceProviderItemNew.getInstitute_type());
-        timeProcessing("Opening Time", healthServiceProviderItemNew.getOpening_time());
-        timeProcessing("Closing Time", healthServiceProviderItemNew.getClosing_time());
+        CheckConcate("Opening Time", healthServiceProviderItemNew.getOpening_time());
+        CheckConcate("Closing Time", healthServiceProviderItemNew.getClosing_time());
         if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
             breakTimeProcessing("Break Time", healthServiceProviderItemNew.getBreak_time());
         CheckConcate("Off Day", healthServiceProviderItemNew.getOff_day());

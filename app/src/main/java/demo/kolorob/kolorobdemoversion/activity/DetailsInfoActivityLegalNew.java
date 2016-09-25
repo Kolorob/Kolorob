@@ -294,10 +294,10 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
         CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
-        timeProcessing("Opening Time", legalAidServiceProviderItemNew.getOpeningtime());
+        CheckConcate("Opening Time", legalAidServiceProviderItemNew.getOpeningtime());
         if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
             breakTimeProcessing("Break Time", legalAidServiceProviderItemNew.getBreaktime());
-        timeProcessing("Closing Time", legalAidServiceProviderItemNew.getClosingtime());
+        CheckConcate("Closing Time", legalAidServiceProviderItemNew.getClosingtime());
         CheckConcate("Off Day", legalAidServiceProviderItemNew.getOff_day());
         CheckConcate("Registered With", legalAidServiceProviderItemNew.getRegisteredWith());
         ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameEng());

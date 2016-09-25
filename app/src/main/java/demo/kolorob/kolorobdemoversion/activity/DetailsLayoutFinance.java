@@ -187,8 +187,8 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         CheckConcate("Designation of Information Provider ", financialNewItem.getNode_designation());
 
 
-        timeProcessing("Opening Time  ", financialNewItem.getOpeningtime());
-        timeProcessing("Closing Time  ", financialNewItem.getClosetime());
+        CheckConcate("Opening Time  ", financialNewItem.getOpeningtime());
+        CheckConcate("Closing Time  ", financialNewItem.getClosetime());
         if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
             breakTimeProcessing("Break Time  ", financialNewItem.getBreaktime());
         CheckConcate("Off Day  ", financialNewItem.getOffday());

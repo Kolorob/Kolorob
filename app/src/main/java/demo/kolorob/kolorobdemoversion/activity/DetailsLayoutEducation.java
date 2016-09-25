@@ -192,8 +192,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         CheckConcate("Web site", educationNewItem.getNode_website());
         CheckConcate("Facebook", educationNewItem.getNode_facebook());
 
-        timeProcessing("Opening Time", educationNewItem.getOpeningtime());
-        timeProcessing("Closing Time", educationNewItem.getClosetime());
+        CheckConcate("Opening Time", educationNewItem.getOpeningtime());
+        CheckConcate("Closing Time", educationNewItem.getClosetime());
         if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
             breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
         CheckConcate("Off Day", educationNewItem.getOffday());

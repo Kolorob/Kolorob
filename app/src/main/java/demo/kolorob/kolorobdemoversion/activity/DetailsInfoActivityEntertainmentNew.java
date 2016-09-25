@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -79,22 +78,16 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     int increment=0;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
-    ArrayList<EntertainmentServiceProviderItemNew>entertainmentServiceProviderItemNewsx;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
-    private TextView ratingText,detailsEntertainment,other_detailsEnt;
-    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
+
+    private TextView ratingText;
+    private ImageView distance_left,feedback,top_logo,cross;
     RadioGroup feedRadio;
-    RadioButton rb1,rb2,rb3;
-    String status="",phone_num="",registered="";
+    RadioButton rb1;
+    String status="",phone_num="";
     String result_concate="";
-    private CheckBox checkBox;
+
     EditText feedback_comment;
-    Float rating;
+
     RatingBar ratingBar;
     ListView alldata;
     long dateval;
@@ -137,12 +130,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         address_text = (TextView) findViewById(R.id.address_text);
         phone_text = (TextView) findViewById(R.id.phone_text);
         email_text = (TextView) findViewById(R.id.email_text);
-        totalStudents = (TextView) findViewById(R.id.tv_total_students);
-        totalClasses = (TextView) findViewById(R.id.tv_total_class);
-        totalTeachers = (TextView) findViewById(R.id.tv_total_teachers);
-        playground = (TextView) findViewById(R.id.tv_playground);
-        hostel = (TextView) findViewById(R.id.tv_hostel_fac);
-        transport = (TextView) findViewById(R.id.tv_transport_facility);
+
         ratingText=(TextView)findViewById(R.id.ratingText);
 
         // headerx=(TextView)findViewById(R.id.headerx);
@@ -166,37 +154,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
-        checkBox = (CheckBox) findViewById(R.id.compare);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+       ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<=400)
             ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         setRatingBar();
 
-//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                int compareValue;
-//                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
-//                if(compareValue>=2)
-//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-//                else if (compareValue==0)
-//                {
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
-//                }
-//
-//                else if(compareValue==1)
-//                {
-//                    String previous_node;
-//                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
-//                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
-//                }
-//
-//
-//            }
-//        });
-//
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -212,8 +174,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
+
         left_way.setLayoutParams(params_left_way);
 
 
@@ -234,8 +195,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         left_image.getLayoutParams().height =  width/8;
         left_image.getLayoutParams().width =  width/8;
 
-//        school_logo_default.getLayoutParams().height =  width/5;
-//        school_logo_default.getLayoutParams().width =  width/5;
+
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
@@ -325,12 +285,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         CheckConcate("Block", entertainmentServiceProviderItemNew.getBlock());
         CheckConcate("Land mark", entertainmentServiceProviderItemNew.getLandmark());
 
+        CheckConcate("Opening Time",  entertainmentServiceProviderItemNew.getOpeningtime());
 
 
-        timeProcessing("Opening Time", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
             breakTimeProcessing("Break Time", entertainmentServiceProviderItemNew.getBreaktime());
-        timeProcessing("Closing Time", entertainmentServiceProviderItemNew.getClosingtime());
+        CheckConcate("Closing Time", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("Off Day", entertainmentServiceProviderItemNew.getOff_day());
 
         ups_text.setText(entertainmentServiceProviderItemNew.getNodeName());

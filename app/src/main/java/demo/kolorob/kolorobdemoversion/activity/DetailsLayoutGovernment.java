@@ -181,8 +181,8 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         CheckConcate("Designation of Information Provider   ", governmentNewItem.getNode_designation());
 
 
-        timeProcessing("Opening Time ", governmentNewItem.getOpeningtime());
-        timeProcessing("Closing Time ", governmentNewItem.getClosetime());
+        CheckConcate("Opening Time ", governmentNewItem.getOpeningtime());
+        CheckConcate("Closing Time ", governmentNewItem.getClosetime());
         if(!governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
             breakTimeProcessing("Break Time ", governmentNewItem.getBreaktime());
         CheckConcate("Off Day  ", governmentNewItem.getOffday());
