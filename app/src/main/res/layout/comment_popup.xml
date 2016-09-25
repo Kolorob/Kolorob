@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="2 Reviews"
+        android:text="1 Review"
         android:layout_marginBottom="10dp"
         android:id="@+id/review" />
 

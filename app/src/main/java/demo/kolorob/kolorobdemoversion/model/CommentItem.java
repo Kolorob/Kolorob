@@ -46,6 +46,14 @@ public class CommentItem {
         this.date = date;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     public CommentItem(String mob_no, String service_id, String comment, String rating, String date) {
         this.mob_no = mob_no;
         this.service_id = service_id;

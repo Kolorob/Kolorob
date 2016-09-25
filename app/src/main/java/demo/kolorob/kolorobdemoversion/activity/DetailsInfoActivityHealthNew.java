@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -371,14 +372,19 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         String[] phone = new String[size];
         String[] date = new String[size];
         String[] comment = new String[size];
+        final String[] rating = new String[size];
+
 
         for (CommentItem commentItem:commentItems)
         {
-            if(!commentItem.getComment().equals(""))
+            Log.d("Rating","$$$$$$"+commentItem.getRating());
+
+            if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getService_id();
                 date[inc]=commentItem.getComment();
                 comment[inc]= commentItem.getDate();
+                rating[inc]= commentItem.getRating();
                 inc++;
             }
 
@@ -386,7 +392,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         Log.d("Value of Inc","======"+comment[0]);
 
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
+        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
 
 
         comments.setOnClickListener(new View.OnClickListener() {
@@ -415,11 +421,26 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
                     final RatingBar ratingBar = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
                     final TextView review = (TextView)promptView.findViewById(R.id.review);
+                    Log.d("Value of Inc2","======"+healthServiceProviderItemNew.getRating());
+                    try
+                    {
+                        ratingBar.setRating(Float.parseFloat(healthServiceProviderItemNew.getRating()));
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
+                    if(inc==1)
+                        review.setText(inc +" Review");
+                    else
+                       review.setText(inc+ " Reviews");
+
 
 
                     listView.setAdapter(comment_layout_adapter);
 //                    textView.setVisibility(View.GONE);
-                    Log.d("Value of Inc2","======");
+
 
                     close.setOnClickListener(new View.OnClickListener() {
                         @Override

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -22,17 +23,19 @@ public class Comment_layout_adapter extends BaseAdapter
     String mobile[];
     String comment[];
     String date[];
+    String rating[];
     int height;
     int width;
 
 
 
-    public Comment_layout_adapter(Activity context, String[] mobile,String[] comment,String[] date) {
+    public Comment_layout_adapter(Activity context, String[] mobile,String[] comment,String[] date, String[] rating) {
         super();
         this.context = context;
         this.mobile = mobile;
         this.comment = comment;
         this.date = date;
+        this.rating= rating;
 
 
 
@@ -59,6 +62,7 @@ public class Comment_layout_adapter extends BaseAdapter
         TextView mobile;
         TextView  comment;
         TextView date;
+        RatingBar ratingBar;
 
 
 
@@ -77,6 +81,7 @@ public class Comment_layout_adapter extends BaseAdapter
             holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
             holder.comment = (TextView) convertView.findViewById(R.id.comment);
             holder.date = (TextView) convertView.findViewById(R.id.date);
+            holder.ratingBar = (RatingBar)convertView.findViewById(R.id.ratingBar_k);
 
 
 
@@ -103,6 +108,7 @@ public class Comment_layout_adapter extends BaseAdapter
         holder.mobile.setText(mobile[position]);
         holder.comment.setText(comment[position]);
         holder.date.setText(date[position]);
+        holder.ratingBar.setRating(Float.parseFloat(rating[position]));
 
 
         return convertView;
