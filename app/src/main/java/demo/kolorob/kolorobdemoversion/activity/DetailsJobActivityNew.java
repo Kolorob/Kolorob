@@ -62,7 +62,7 @@ public class DetailsJobActivityNew extends Activity {
 
         con = this;
 
-        linearLayout=(LinearLayout)findViewById(R.id.lll);
+
         //upperHand=(LinearLayout)findViewById(R.id.upper_part);
         upperText=(LinearLayout)findViewById(R.id.upperText);
 //        left_way=(LinearLayout)findViewById(R.id.left_go_process);
@@ -124,50 +124,50 @@ public class DetailsJobActivityNew extends Activity {
         {
             ups_text=(TextView)findViewById(R.id.ups_text);
             ups_text.setTextSize(width/25);
-            ups_text.setText(jobAdvertisementItem.getInstitute_name());
+            ups_text.setText(jobAdvertisementItem.getInstitute_name_bangla());
 
 
             if(!jobAdvertisementItem.getJob_type().equals(""))
             {
-                concateBasic("Job Type : ", jobAdvertisementItem.getJob_type());
+                concateBasic("চাকরির ধরণ: ", jobAdvertisementItem.getJob_type());
             }
 
             if(!jobAdvertisementItem.getPost_type().equals(""))
             {
-                concateBasic("Postion Type : ", jobAdvertisementItem.getPost_type());
+                concateBasic("পদের ধরণ : ", jobAdvertisementItem.getPost_type());
             }
 
             if(!jobAdvertisementItem.getJob_responsibility().equals(""))
-                concateBasic("Job Details : ",jobAdvertisementItem.getJob_responsibility());
+                concateBasic("কাজের বিবরণ: ",jobAdvertisementItem.getJob_responsibility());
 
             if(!jobAdvertisementItem.getRequired_experience().equals(""))
-                concateBasic("Required Experience : ", jobAdvertisementItem.getRequired_experience());
+                concateBasic("প্রয়োজনীয় অভিজ্ঞতা: ", jobAdvertisementItem.getRequired_experience());
 
             if(!jobAdvertisementItem.getApplication_medium().equals(""))
-                concateBasic("Application Medium : ",jobAdvertisementItem.getApplication_medium());
+                concateBasic("আবেদনের মাধ্যম: ",jobAdvertisementItem.getApplication_medium());
 
             job_type.setText(result_concate);
             result_concate="";
 
 
             if(!jobAdvertisementItem.getOpening().equals("0 : 00"))
-                concateBasic("Opening Time : ",jobAdvertisementItem.getOpening());
+                concateBasic("খোলার সময় : ",jobAdvertisementItem.getOpening());
             else
             timer++;
             Log.d("TImer1","%%%%%%"+timer);
 
             if(!jobAdvertisementItem.getClosing().equals("0 : 00"))
-                concateBasic("Closing Time : ", jobAdvertisementItem.getClosing());
+                concateBasic("বন্ধের সময় : ", jobAdvertisementItem.getClosing());
             else
                 timer++;
             Log.d("TImer2","%%%%%%"+timer);
             if(!jobAdvertisementItem.getBreaks().equals("0 : 00"))
-                concateBasic("Break Time : ",jobAdvertisementItem.getBreaks());
+                concateBasic("বিরতির সময় : ",jobAdvertisementItem.getBreaks());
             else
                 timer++;
             Log.d("TImer3","%%%%%%"+timer);
             if(!jobAdvertisementItem.getOff_day().equals(""))
-                concateBasic("Off Day : ", jobAdvertisementItem.getOff_day());
+                concateBasic("বন্ধের দিন : ", jobAdvertisementItem.getOff_day());
             else
                 timer++;
 
@@ -181,25 +181,25 @@ public class DetailsJobActivityNew extends Activity {
             result_concate="";
 
             if(!jobAdvertisementItem.getPost_date().equals(""))
-                concateBasic("Job Posted On : ", jobAdvertisementItem.getPost_date());
+                concateBasic("আবেদন প্রকাশের সময় : ", jobAdvertisementItem.getPost_date());
 
             if(!jobAdvertisementItem.getApplication_last_date().equals(""))
-                concateBasic("Deadline for Application : ", jobAdvertisementItem.getApplication_last_date());
+                concateBasic("আবেদনের শেষ সময় : ", jobAdvertisementItem.getApplication_last_date());
 
             application_post_date.setText(result_concate);
             result_concate="";
 
 
-            salary_range.setText("Salary Range : " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
+            salary_range.setText("বেতন সীমা : " + jobAdvertisementItem.getStart_salary() + " - "+ jobAdvertisementItem.getEnd_salary());
 
 
            if(!jobAdvertisementItem.getReference_person().equals(""))
            {
-               concateBasic(" Contact : ",jobAdvertisementItem.getReference_person());
+               concateBasic(" যার সাথে যোগাযোগ করা হবে :",jobAdvertisementItem.getReference_person());
 
            }
            if(!jobAdvertisementItem.getCollector_name().equals(""))
-               concateBasic(" Collected By :  ",jobAdvertisementItem.getCollector_name());
+               concateBasic(" সংগ্রহকারীর নাম : ",jobAdvertisementItem.getCollector_name());
             reference_person.setText(result_concate);
             result_concate="";
 
@@ -254,13 +254,14 @@ public class DetailsJobActivityNew extends Activity {
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
-
+                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                "ফোন নম্বর পাওয়া যায়নি");
 
                     }
                 } else {
 
-                    AlertMessage.showMessage(con, "Sorry",
-                            "Phone number could not be found");
+                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
 
                 }
             }
@@ -287,15 +288,15 @@ public class DetailsJobActivityNew extends Activity {
 
 
     public void showdirection(View v){
-        AlertMessage.showMessage(con,"Sorry","Route not found");
+        AlertMessage.showMessage(con,"দুঃখিত","দিকনির্দেশনা পাওয়া যায়নি");
     }
 
     public void sendemail(View v){
-        AlertMessage.showMessage(con,"Sorry","Email could not be found");
+        AlertMessage.showMessage(con,"দুঃখিত","ইমেইল আইডি পাওয়া যায়নি");
     }
     public void phonecall(View v){
-        AlertMessage.showMessage(con, "Sorry",
-                "Phone number could not be found");
+        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                "ফোন নম্বর পাওয়া যায়নি");
     }
 
 //    public void closepage(View v){

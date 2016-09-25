@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_jp4"
-    tools:context="demo.kolorob.kolorobdemoversion.activity.DetailsJobActivity">
+    android:padding="5dp"
+    android:background="@color/white"
+    tools:context="demo.kolorob.kolorobdemoversion.activity.DisplayAllJobsActivity">
 
 
 
@@ -13,6 +14,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/job_portal"
 
 
         android:layout_alignParentTop="true"
@@ -26,20 +28,12 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.25"
-android:layout_marginTop="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
 
 
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/iv_kolorob_logo"
-                android:layout_marginLeft="35dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/job_topimge"
-                />
+
 
         </LinearLayout>
 
@@ -47,18 +41,20 @@ android:layout_marginTop="20dp"
             android:layout_width="0dp"
             android:layout_weight="0.50"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+
             android:gravity="center">
 
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Job List "
-                android:textSize="23dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/white"/>
+                android:id="@+id/iv_kolorob_logo"
+                android:background="@drawable/job_topimge"
+                />
+
+
 
 
         </LinearLayout>
@@ -68,28 +64,19 @@ android:layout_marginTop="20dp"
             android:layout_width="0dp"
             android:layout_weight="0.25"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:gravity="center">
+            android:gravity="center_horizontal|right|top">
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
 
-                android:id="@+id/tv_close"
-                android:textColor="#000000"
-                android:textSize="18sp"
-
-                android:focusable="true" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:minHeight="40dp"
+                android:minWidth="40dp"
+                android:layout_marginRight="5dp"
                 android:id="@+id/iv_close"
                 android:src="@drawable/cross_jb"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="3dp"
                 android:focusable="true" />
 
 
@@ -105,41 +92,50 @@ android:layout_marginTop="20dp"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignLeft="@+id/linearLayout2"
         android:layout_above="@+id/linearLayout4"
+        android:background="@color/white"
         android:layout_alignStart="@+id/linearLayout2"
         android:orientation="vertical"
 
-        android:id="@+id/scrollView">
-        <View
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:id="@+id/bottom"
-            android:layout_marginTop="10dp"
-            android:layout_height="5dp">
+        android:id="@+id/list_part">
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@color/white"-->
+            <!--android:id="@+id/bottom"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_height="5dp">-->
 
-        </View>
+        <!--</View>-->
+        <ExpandableListView
+            android:id="@+id/lvExp"
+            android:childDivider="#00000000"
+            android:cacheColorHint="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
+            android:layout_height="match_parent"
+            android:groupIndicator="@null"
+            android:layout_width="match_parent"/>
 
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/jobList"
-            android:divider="@color/white"
-            android:dividerHeight="4px"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_gravity="center"
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/jobList"-->
+            <!--android:visibility="gone"-->
+            <!--android:divider="@color/white"-->
+            <!--android:dividerHeight="4px"-->
 
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:id="@+id/bottoms"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="5dp">
+            <!--android:layout_gravity="center"-->
 
-        </View>
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_marginBottom="20dp"/>-->
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@color/white"-->
+            <!--android:id="@+id/bottoms"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_height="5dp">-->
+
+        <!--</View>-->
 
 
     </LinearLayout>
