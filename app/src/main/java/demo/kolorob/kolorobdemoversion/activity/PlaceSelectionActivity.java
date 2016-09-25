@@ -65,7 +65,6 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
-import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
@@ -562,10 +561,8 @@ else
         TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
        if(phone.equals("")) phone=IMEINumber;
 
-        if (phone.equals("")) {
-            AlertMessage.showMessage(PlaceSelectionActivity.this, "ফোন নম্বরটি নিবন্ধন করা হয়নি",
-                    "অনুগ্রহ পূর্বক ফোন নম্বরটি নিবন্ধন করুন");
-        } else {
+        if (phone.equals(""))phone.replace("","0");
+        else {
             String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

@@ -176,7 +176,7 @@ public class PhoneRegActivity extends Activity {
 
 
     }
-  
+
 
     @Override
     public void onBackPressed() {
