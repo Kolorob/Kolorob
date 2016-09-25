@@ -95,7 +95,7 @@ public class DisplayAllJobsActivity extends Activity {
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
 
-        String text="আপনি কি নতুন চাকুরি খুজতে চান? ";
+        String text="Do you want to search for new jobs? ";
         textAsk.setText(text);
         WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
         lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
@@ -113,8 +113,8 @@ public class DisplayAllJobsActivity extends Activity {
                 alertDialog.cancel();
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(DisplayAllJobsActivity.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
-                    progress = ProgressDialog.show(DisplayAllJobsActivity.this, "চাকুরীর তালিকা আপডেট হচ্ছে",
-                            "অনুগ্রহ পূর্বক অপেক্ষা করুন", true);
+                    progress = ProgressDialog.show(DisplayAllJobsActivity.this, "Job List is being Updated",
+                            "Please wait for a while..", true);
 
                     getRequest(DisplayAllJobsActivity.this, "job/eng", new VolleyApiCallback() {
                                 @Override
@@ -135,7 +135,7 @@ public class DisplayAllJobsActivity extends Activity {
                 }
 
                 else {
-                    AlertMessage.showMessageClose(DisplayAllJobsActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                    AlertMessage.showMessageClose(DisplayAllJobsActivity.this,"You don't have internet activated।","Please activate your internet connection to proceed ...");
                 }
 
 
@@ -205,7 +205,7 @@ public class DisplayAllJobsActivity extends Activity {
             }
         }
         else
-        AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
+        AlertMessage.showMessage(this,"No job found","Please try again later");
     }
 
 
@@ -219,7 +219,7 @@ public class DisplayAllJobsActivity extends Activity {
 
         if(size==0)
         {
-            AlertMessage.showMessage(this,"চাকুরীর তালিকা সম্পূর্ণ খালি","অনুগ্রহ পূর্বক আপডেট করুন");
+            AlertMessage.showMessage(this,"No job found","Please try again later");
         }
 
         else {
@@ -230,15 +230,15 @@ public class DisplayAllJobsActivity extends Activity {
             for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
             {
                 job_data.clear();
-                String jobdata= "আবেদনের শেষ সময়: "+jobAdvertisementItem.getApplication_last_date()+"@"+
-                            "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
-                            "অভিজ্ঞতা: "+"নাই"+"@"+
+                String jobdata= "Deadline: "+jobAdvertisementItem.getApplication_last_date()+"@"+
+                            "Address: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
+                            "Experience: "+"Not found"+"@"+
                             jobAdvertisementItem.getMobile1()+"@"+
                             jobAdvertisementItem.getEmail()+"v";
 
-                String group_data= jobAdvertisementItem.getInstitute_name_bangla()+"@"+
-                        "পজিশন: "+jobAdvertisementItem.getPosition()+"@"+
-                    "বেতন: "+English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary())+"@"+"v";
+                String group_data= jobAdvertisementItem.getInstitute_name()+"@"+
+                        "Position: "+jobAdvertisementItem.getPosition()+"@"+
+                    "Salary: "+jobAdvertisementItem.getStart_salary()+" to "+jobAdvertisementItem.getEnd_salary()+"@"+"v";
                 job_data.add(jobdata);
 
                 listDataHeader.add(group_data);

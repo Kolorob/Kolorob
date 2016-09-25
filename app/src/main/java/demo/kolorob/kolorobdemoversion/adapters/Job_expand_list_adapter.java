@@ -113,13 +113,13 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
                     if (checkPermission(_context))
                         _context.startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+                        AlertMessage.showMessage(_context, "Not Possible to call",
+                                "Permission not provided");
                     }
                 } else {
 
-                    AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
+                    AlertMessage.showMessage(_context, "Not Possible to call",
+                            "Phone number not found");
                 }
             }
         });
@@ -127,8 +127,8 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertMessage.showMessage(_context, "ই মেইল করা সম্ভব হচ্ছে না",
-                        "ই মেইল আই ডি পাওয়া যায়নি");
+                AlertMessage.showMessage(_context, "Not possible to Email",
+                        "Email id not found");
             }
         });
 
