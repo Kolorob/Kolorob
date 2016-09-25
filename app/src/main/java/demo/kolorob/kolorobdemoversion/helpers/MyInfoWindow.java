@@ -76,6 +76,7 @@ public class MyInfoWindow extends InfoWindow {
     }
 
     public void onOpen(Object arg0) {
+        MyInfoWindow.closeAllInfoWindowsOn(mMapView);
 
         final LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
         Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
