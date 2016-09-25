@@ -413,6 +413,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
 
                     final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                    final RatingBar ratingBar = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                    final TextView review = (TextView)promptView.findViewById(R.id.review);
+
 
                     listView.setAdapter(comment_layout_adapter);
 //                    textView.setVisibility(View.GONE);
