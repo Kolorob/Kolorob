@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,34 +63,33 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     Dialog dialog;
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
     ImageView left_image, middle_image, right_image, email_btn;
-    TextView address_text, phone_text, email_text;
+
     int width, height;
     TextView ups_text;
     EditText feedback_comment;
-    ListView courseListView, listView;
+
     Context con;
     String[] key;
     String[] value;
     int increment=0;
     ListView alldata;
     GovernmentNewItem governmentNewItem;
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
+
     String datevalue,datevaluebn;
     ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
 
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     private TextView ratingText;
-    private TextView result, training, tuition;
-    private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
+
+    private ImageView close_button, distance_left, feedback, top_logo;
     RadioGroup feedRadio;
-    RadioButton rb1, rb2, rb3;
-    String status = "", phone_num = "", registered = "";
-    String result_concate = "";
-    private CheckBox checkBox;
+    RadioButton rb1;
+    String status = "", phone_num = "";
+
+
     RatingBar ratingBar;
-    Float rating;
+
 
 
     @Override
@@ -265,7 +263,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
 
-      //  Toast toast = Toast.makeText(this, datevalue, Toast.LENGTH_LONG);
+
         ToastMessageDisplay.ShowToast(this,datevalue);
 
 

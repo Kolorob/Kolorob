@@ -71,14 +71,14 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     String password="2Jm!4jFe3WgBZKEN";
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
     ImageView left_image, middle_image, right_image, email_btn;
-    TextView address_text, phone_text, email_text;
+
     int width, height;
     TextView ups_text;
     String[] key;
     String[] value;
     int increment=0;
     ListView alldata;
-    ListView courseListView, listView;
+
     Context con;
     EducationNewItem educationNewItem;
     RatingBar ratingBar;
@@ -87,20 +87,15 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
     ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
     ArrayList<EducationResultItemNew> educationResultItemNews;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
+
     String exams,Exam=null;
     private TextView ratingText;
-    private TextView  result, training, tuition;
-    private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
+
+    private ImageView close_button, distance_left, feedback, top_logo;
     RadioGroup feedRadio;
-    RadioButton rb1, rb2, rb3;
+    RadioButton rb1;
     String status = "", phone_num = "", registered = "";
-    String result_concate = "";
+
     private CheckBox checkBox;
     EditText feedback_comment;
     ArrayList<String>examname=new ArrayList<>();

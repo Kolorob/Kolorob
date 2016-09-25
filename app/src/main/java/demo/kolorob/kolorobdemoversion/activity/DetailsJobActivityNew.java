@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,9 +25,9 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 
 public class DetailsJobActivityNew extends Activity {
     Dialog dialog;
-    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
+    LinearLayout upperText,middle_phone,right_email,bottom_bar;
     ImageView left_image,middle_image,right_image,school_logo_default;
-    TextView address_text,phone_text,email_text,itemopeningTime;
+
     int width,height;
     LinearLayout right_cross_button;
     ImageView left_job_icon;
@@ -36,11 +35,11 @@ public class DetailsJobActivityNew extends Activity {
     int timer=0;
     String result_concate="",phone_number="";
     private ImageView close_button;
-    ListView navlist,navlist1,navlist2;
-    private LinearLayout ll3,scrollingPart;
-    TextView opening_time,closing_time,break_time,off_day,job_type,post_type,
-             job_responsibility, required_experience, other_benefits,application_medium,
-             application_post_date,application_last_date,reference_person, collector_name,
+
+
+    TextView opening_time,break_time,job_type,
+
+             application_post_date,reference_person,
              salary_range;
     int position;
     ArrayList<JobAdvertisementItem> jobAdvertisementItems;
@@ -218,32 +217,6 @@ public class DetailsJobActivityNew extends Activity {
         params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
 
-//        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-//        int lett_img=params_left_way.height = (height*3)/24;
-//        int right_img=params_left_way.width = width/3;
-//        left_way.setLayoutParams(params_left_way);
-
-
-//        left_image.getLayoutParams().height= (lett_img*2)/3;
-//        left_image.getLayoutParams().width=right_img/2;
-
-
-//        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-//        int  vx=params_middle_phone.height = (height*3)/24;
-//        params_middle_phone.width = width/3;
-//        middle_phone.setLayoutParams(params_middle_phone);
-
-//
-//
-//        right_image.getLayoutParams().height= (lett_img*2)/3;
-//        right_image.getLayoutParams().width=right_img/2;
-
-
-          scrollingPart=(LinearLayout)findViewById(R.id.scrollingPart);
-//        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-//        int  vc=params_right_email.height = (height*3)/24;
-//        params_right_email.width = width/3;
-//        right_email.setLayoutParams(params_right_email);
 
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override

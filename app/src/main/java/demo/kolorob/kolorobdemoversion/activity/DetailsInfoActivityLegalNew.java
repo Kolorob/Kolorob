@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,14 +62,14 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     Dialog dialog;
-    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
+    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar;
     ImageView left_image,middle_image,right_image,email_btn;
-    TextView address_text,phone_text,email_text;
+
     int width,height;
     TextView ups_text;
-    ListView courseListView,listView;
+
     Context con;
-    Float rating;
+
     String[] key;
     String[] value;
     int increment=0;
@@ -80,20 +79,15 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     String password="2Jm!4jFe3WgBZKEN";
     LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
     ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
-    ArrayList<LegalAidServiceProviderItemNew>legalAidServiceProviderItemNewsv;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
-    private TextView ratingText,common_details,other_details,header;
-    private ImageView close_button,phone_middl,distance_left,feedback,top_logo,cross,school_logo_default;
+
+
+    private TextView ratingText;
+    private ImageView distance_left,feedback,top_logo,cross;
     RadioGroup feedRadio;
-    RadioButton rb1,rb2,rb3;
-    String status="",phone_num="",registered="";
+    RadioButton rb1;
+    String status="",phone_num="";
     String result_concate="";
-    private CheckBox checkBox;
+
     EditText feedback_comment;
     String datevalue,datevaluebn;
 
@@ -170,8 +164,6 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
-
-        checkBox = (CheckBox) findViewById(R.id.compare);
 
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         setRatingBar();
