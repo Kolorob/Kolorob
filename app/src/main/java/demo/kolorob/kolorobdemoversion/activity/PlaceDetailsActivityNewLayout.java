@@ -2452,7 +2452,7 @@ int index;
 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.job_selected);
-
+                        callMapFragmentWithFinancial(-1,null,true);//this is for removing other category marker from job
                         llSubCatListHolder.setVisibility(View.GONE);
 
                         break;
