@@ -375,7 +375,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
             if(!commentItem.getRating().equals(""))
             {
-                phone[inc]= commentItem.getService_id();
+                phone[inc]= commentItem.getMob_no();
                 date[inc]='"'+commentItem.getComment()+'"';
                 comment[inc]= commentItem.getDate();
                 rating[inc]= commentItem.getRating();
@@ -447,9 +447,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                      }
 
 
-
-
-
                     if(inc==1)
                         review.setText(inc +" Review");
                     else
@@ -458,7 +455,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     if(screenSize>6.5)
                     {
                         review.setTextSize(20);
-
                     }
                     else {
                         review.setTextSize(16);
