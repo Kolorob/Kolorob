@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -104,6 +106,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private Double screenSize;
     ArrayList<CommentItem> commentItems;
     ImageView comments;
+    RatingBar ratingBars;
     int inc=0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -363,23 +366,27 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         String[] phone = new String[size];
         String[] date = new String[size];
         String[] comment = new String[size];
+        final String[] rating = new String[size];
 
 
         for (CommentItem commentItem:commentItems)
         {
-            if(!commentItem.getComment().equals(""))
+            Log.d("Rating","$$$$$$"+commentItem.getRating());
+
+            if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getService_id();
-                date[inc]=commentItem.getComment();
+                date[inc]='"'+commentItem.getComment()+'"';
                 comment[inc]= commentItem.getDate();
+                rating[inc]= commentItem.getRating();
                 inc++;
             }
 
         }
 
-        Log.d("Value of Inc","======"+comment[0]);
 
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment);
+
+        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
 
 
         comments.setOnClickListener(new View.OnClickListener() {
@@ -402,14 +409,68 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     alertDialog.show();
                     Log.d("Value of Inc1","======");
 
+
+
 //                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
                     final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
 
                     final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                   // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                    final TextView review = (TextView)promptView.findViewById(R.id.review);
+
+                    final ImageView ratingbarz=(ImageView)promptView.findViewById(R.id.ratingBarz);
+
+                     try
+                     {
+                         int ratings= Integer.parseInt(healthServiceProviderItemNew.getRating());
+
+                         if(ratings==1)
+                         {
+                             ratingbarz.setBackgroundResource(R.drawable.one);
+                         }
+                         else if(ratings==2)
+                             ratingbarz.setBackgroundResource(R.drawable.two);
+
+                         else if(ratings==3)
+                             ratingbarz.setBackgroundResource(R.drawable.three);
+
+                         else if(ratings==4)
+                             ratingbarz.setBackgroundResource(R.drawable.four);
+
+                         else if(ratings==5)
+                             ratingbarz.setBackgroundResource(R.drawable.five);
+                     }
+
+                     catch (Exception e)
+                     {
+
+                     }
+
+
+
+
+
+                    if(inc==1)
+                        review.setText(inc +" Review");
+                    else
+                       review.setText(inc+ " Reviews");
+                    Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityHealthNew.this);
+                    if(screenSize>6.5)
+                    {
+                        review.setTextSize(20);
+
+                    }
+                    else {
+                        review.setTextSize(16);
+
+
+                    }
+
 
                     listView.setAdapter(comment_layout_adapter);
 //                    textView.setVisibility(View.GONE);
-                    Log.d("Value of Inc2","======");
+
+                    alertDialog.getWindow().setLayout((width*5)/6, (height*2)/3);
 
                     close.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -423,7 +484,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
                     alertDialog.show();
-                    Log.d("Value of Inc3","======");
+
                 }
 
             }
@@ -1005,11 +1066,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
-
         }
-
-
     }
-
 
 }
