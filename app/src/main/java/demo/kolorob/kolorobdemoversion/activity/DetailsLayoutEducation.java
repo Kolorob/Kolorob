@@ -181,9 +181,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         CheckConcate("Road", educationNewItem.getRoad());
-        CheckConcate("Address", educationNewItem.getAddress());
+
         CheckConcate("Line ", educationNewItem.getLine());
         CheckConcate("Avenue",educationNewItem.getAvenue());
+        CheckConcate("Address", educationNewItem.getAddress());
+
         CheckConcate("House Name", educationNewItem.getHousename());
         CheckConcate("Floor", educationNewItem.getFloor());
         CheckConcate("Closest Landmark", educationNewItem.getLandmark());
@@ -204,7 +206,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
         CheckConcate("Closing Time", educationNewItem.getClosetime());
 
-        CheckConcate("Off Day", educationNewItem.getOffday());
+        CheckConcate("Closed on", educationNewItem.getOffday());
         CheckConcate("Shift", educationNewItem.getShift());
         CheckConcate("Education Type ", educationNewItem.getEdtype());
 

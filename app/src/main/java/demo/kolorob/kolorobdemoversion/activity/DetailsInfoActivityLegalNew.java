@@ -281,10 +281,12 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
-        CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
+
         CheckConcate("Road ", legalAidServiceProviderItemNew.getRoad());
         CheckConcate("Line", legalAidServiceProviderItemNew.getLine());
+
         CheckConcate("Avenue", legalAidServiceProviderItemNew.getAvenue());
+        CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
         CheckConcate("Block", legalAidServiceProviderItemNew.getBlock());
         CheckConcate("House Name", legalAidServiceProviderItemNew.getHouse_name());
         CheckConcate("House Number", legalAidServiceProviderItemNew.getHouse_no());

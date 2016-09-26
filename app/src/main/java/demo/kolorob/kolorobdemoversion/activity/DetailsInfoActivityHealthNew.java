@@ -187,9 +187,10 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("Line ", healthServiceProviderItemNew.getLine());
         CheckConcate("Avenue", healthServiceProviderItemNew.getAvenue());
         CheckConcate("Block", healthServiceProviderItemNew.getBlock());
-        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
-        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("Address", healthServiceProviderItemNew.getAddress());
 
+        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
         CheckConcate("Closest Landmark ", healthServiceProviderItemNew.getLandmark());
         CheckConcate("Opening Time", healthServiceProviderItemNew.getOpening_time());
         CheckConcate("Break Time", healthServiceProviderItemNew.getBreak_time());

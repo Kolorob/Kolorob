@@ -273,14 +273,16 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         //   other_detailsEnt.setVisibility(View.VISIBLE);
 
-        CheckConcate("Address", entertainmentServiceProviderItemNew.getAddress());
+
         CheckConcate("Road", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("Line", entertainmentServiceProviderItemNew.getLine());
         CheckConcate("Avenue", entertainmentServiceProviderItemNew.getAvenue());
         CheckConcate("Block", entertainmentServiceProviderItemNew.getBlock());
-        CheckConcate("Floor ", entertainmentServiceProviderItemNew.getFloor());
+        CheckConcate("Address", entertainmentServiceProviderItemNew.getAddress());
+
         CheckConcate("House Name", entertainmentServiceProviderItemNew.getHouse_name());
         CheckConcate("House Number", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("Floor ", entertainmentServiceProviderItemNew.getFloor());
         CheckConcate("Closest Landmark", entertainmentServiceProviderItemNew.getLandmark());
 
         CheckConcate("Opening Time",  entertainmentServiceProviderItemNew.getOpeningtime());

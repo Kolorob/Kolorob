@@ -171,27 +171,27 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
 
-        CheckConcate("Address  ", financialNewItem.getAddress());
-        CheckConcate("Floor  ", financialNewItem.getFloor());
-        CheckConcate("House Name  ", financialNewItem.getHousename());
+
         CheckConcate("Road  ", financialNewItem.getRoad());
         CheckConcate("Line  ", financialNewItem.getLine());
-        CheckConcate("Avenue  ", financialNewItem.getAvenue());
-        CheckConcate("Land mark  ", financialNewItem.getLandmark());
 
-        CheckConcate("Contact ", financialNewItem.getNode_contact());
-        CheckConcate("Contact ", financialNewItem.getNode_contact2());
+        CheckConcate("Avenue  ", financialNewItem.getAvenue());
+        CheckConcate("Address  ", financialNewItem.getAddress());
+
+        CheckConcate("House Name  ", financialNewItem.getHousename());
+        CheckConcate("Floor  ", financialNewItem.getFloor());
+        CheckConcate("Closest Landmark ", financialNewItem.getLandmark());
         CheckConcate("E-mail  ", financialNewItem.getNode_email());
         CheckConcate("Website  ", financialNewItem.getNode_website());
         CheckConcate("Facebook   ", financialNewItem.getNode_facebook());
-        CheckConcate("Designation of Information Provider ", financialNewItem.getNode_designation());
+
 
 
         CheckConcate("Opening Time  ", financialNewItem.getOpeningtime());
+        CheckConcate("Break Time  ", financialNewItem.getBreaktime());
         CheckConcate("Closing Time  ", financialNewItem.getClosetime());
-        if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("Break Time  ", financialNewItem.getBreaktime());
-        CheckConcate("Off Day  ", financialNewItem.getOffday());
+
+        CheckConcate("Closed on  ", financialNewItem.getOffday());
 
         CheckConcate("Registered With   ", financialNewItem.getRegisteredwith());
         CheckConcate("Registration Number   ", financialNewItem.getRegisterednumber());
@@ -200,7 +200,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         if (tuition_size != 0) {
             for (FinancialServiceDetailsItem financialServiceDetailsItem:   financialServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("Service Type ", financialServiceDetailsItem.getServicetype());
+                CheckConcate("What services are available?  ", financialServiceDetailsItem.getServicetype());
                 CheckConcate("Service Sub-Type  ", financialServiceDetailsItem.getServicesubtype());
                 CheckConcate("Cost  ", financialServiceDetailsItem.getServicecost()+" BDT");
                 CheckConcate("Remarks  ", financialServiceDetailsItem.getServiceremark());

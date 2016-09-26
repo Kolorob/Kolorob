@@ -163,29 +163,29 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         setRatingBar();
 
-        CheckConcate("Land mark  ", governmentNewItem.getLandmark());
-        CheckConcate("Address  ", governmentNewItem.getAddress());
-        CheckConcate("Floor  ", governmentNewItem.getFloor());
-        CheckConcate("House name  ", governmentNewItem.getHousename());
+
+
         CheckConcate("Road   ", governmentNewItem.getRoad());
         CheckConcate("Line    ", governmentNewItem.getLine());
         CheckConcate("Avenue  ", governmentNewItem.getAvenue());
-        CheckConcate("Post Office  ", governmentNewItem.getPostoffice());
-        CheckConcate("Police Station ", governmentNewItem.getPolicestation());
+        CheckConcate("Address  ", governmentNewItem.getAddress());
 
+        CheckConcate("House name  ", governmentNewItem.getHousename());
+        CheckConcate("Floor  ", governmentNewItem.getFloor());
+        CheckConcate("Closest Landmark  ", governmentNewItem.getLandmark());
         CheckConcate("Contact  ", governmentNewItem.getNode_contact());
         CheckConcate("Contact  ", governmentNewItem.getNode_contact2());
         CheckConcate("Email  ", governmentNewItem.getNode_email());
         CheckConcate("Website  ", governmentNewItem.getNode_website());
         CheckConcate("Facebook  ", governmentNewItem.getNode_facebook());
-        CheckConcate("Designation of Information Provider   ", governmentNewItem.getNode_designation());
+
 
 
         CheckConcate("Opening Time ", governmentNewItem.getOpeningtime());
+        CheckConcate("Break Time ", governmentNewItem.getBreaktime());
         CheckConcate("Closing Time ", governmentNewItem.getClosetime());
-        if(!governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("Break Time ", governmentNewItem.getBreaktime());
-        CheckConcate("Off Day  ", governmentNewItem.getOffday());
+
+        CheckConcate("Closed on ", governmentNewItem.getOffday());
         CheckConcate("Registration Number ", governmentNewItem.getRegisterednumber());
         CheckConcate("Registered With   ", governmentNewItem.getRegisteredwith());
 
@@ -194,7 +194,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         if (tuition_size != 0) {
             for (GovernmentServiceDetailsItem governmentServiceDetailsItem : governmentServiceDetailsItems) {
                 //result_concate="";
-                CheckConcate("Service Type ", governmentServiceDetailsItem.getServicetype());
+                CheckConcate("What services are available?  ", governmentServiceDetailsItem.getServicetype());
                 CheckConcate("Service Name ", governmentServiceDetailsItem.getServicesubtype());
                 CheckConcate("Cost  ", governmentServiceDetailsItem.getServicecost()+ "BDT");
                 CheckConcate("Remarks ", governmentServiceDetailsItem.getDetailstep());
