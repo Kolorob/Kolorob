@@ -112,6 +112,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private Double screenSize;
     ArrayList<CommentItem> commentItems;
     ImageView comments;
+    RatingBar ratingBars;
     int inc=0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -415,16 +416,20 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     alertDialog.show();
                     Log.d("Value of Inc1","======");
 
+
+
 //                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
                     final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
 
                     final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                    final RatingBar ratingBar = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                    ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
                     final TextView review = (TextView)promptView.findViewById(R.id.review);
+
+
                     Log.d("Value of Inc2","======"+healthServiceProviderItemNew.getRating());
                     try
                     {
-                        ratingBar.setRating(Float.parseFloat(healthServiceProviderItemNew.getRating()));
+                        ratingBars.setRating(Float.parseFloat(healthServiceProviderItemNew.getRating()));
                     }
                     catch (Exception e)
                     {
@@ -435,7 +440,21 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                         review.setText(inc +" Review");
                     else
                        review.setText(inc+ " Reviews");
+                    Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityHealthNew.this);
+                    if(screenSize>6.5)
+                    {
+                        review.setTextSize(20);
 
+                    }
+                    else {
+                        review.setTextSize(16);
+                      //  ratingBars=new RatingBar(DetailsInfoActivityHealthNew.this, null, android.R.attr.ratingBarStyleSmall);
+                       // ratingBars.setScaleX(0.5f);
+                        //ratingBars.setScaleY(0.5f);
+
+                        Log.d("Small Device","======");
+
+                    }
 
 
                     listView.setAdapter(comment_layout_adapter);
@@ -455,7 +474,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
                     alertDialog.show();
-                    Log.d("Value of Inc3","======");
+
                 }
 
             }
