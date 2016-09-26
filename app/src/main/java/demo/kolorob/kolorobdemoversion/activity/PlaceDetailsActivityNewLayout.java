@@ -2597,7 +2597,8 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         ivIcon.setLayoutParams(lpIv);
         tvName.setTextColor(Color.WHITE);
 
-        tvName.setText(si.getSubcatHeader());
+    tvName.setText(si.getSubcatHeader());
+
         flag=true;
         tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;

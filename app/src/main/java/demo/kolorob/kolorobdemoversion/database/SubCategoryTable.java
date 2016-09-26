@@ -219,6 +219,10 @@ public class SubCategoryTable {
         int id = cursor.getInt(1);
         String name = cursor.getString(2);
         String head = cursor.getString(3);
+        if(head.equals("Lawers"))
+        {
+            head="Lawyers";
+        }
         String namebn = cursor.getString(4);
         String headbn = cursor.getString(5);
         return new SubCategoryItem(cat_id,id, name,head,namebn,headbn);

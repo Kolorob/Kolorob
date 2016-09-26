@@ -27,6 +27,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -39,6 +40,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -136,7 +138,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             {119, 575},
             {80, 421}
     };
-
+    TextView toastMessage;
+    Toast toast;
     private GoogleApiClient client;
 
     @Override
@@ -191,6 +194,32 @@ loadIMEI();
                 super.onAdClosed();
             }
         });
+        LayoutInflater inflater = getLayoutInflater();
+
+        View toastView = inflater.inflate(R.layout.toast_view,null);
+        toast = new Toast(this);
+        // Set the Toast custom layout
+        toast.setView(toastView);
+
+
+        //   View toastView = toast.getView(); //This'll return the default View of the Toast.
+
+        /* And now you can get the TextView of the default View of the Toast. */
+
+
+
+        toastMessage = (TextView) toastView.findViewById(R.id.toasts);
+        toastMessage.setTextSize(25);
+
+
+
+        toastMessage.setTextColor(getResources().getColor(R.color.orange));
+        //  toastMessage.setCompoundDrawablesWithIntrinsicBounds(R.drawable.kolorob_logo, 0, 0, 0);
+        // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+
+        toastMessage.setGravity(Gravity.CENTER);
+        toastMessage.setCompoundDrawablePadding(26);
+        //  toastView.setBackgroundColor(getResources().getColor(R.color.orange));
 
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -210,6 +239,7 @@ loadIMEI();
                 y = y * ((float) coordsHeight / (float) height);
                 y = y + 37;
                 t=Toast.makeText(getApplicationContext(),"value ", Toast.LENGTH_SHORT);
+
                 boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
                 boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
                 boolean anyHit = false;
@@ -226,7 +256,8 @@ loadIMEI();
                     }
 
                     Log.d("BAUNIABHAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "Mirpur-11 ", Toast.LENGTH_SHORT);
+                toastMessage.setText("Mirpur-11");
+                
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
@@ -240,12 +271,13 @@ loadIMEI();
                     }
 
                     Log.d("PARIS ROAD", "********" );
-                    t = Toast.makeText(getApplicationContext(), "Mirpur-10", Toast.LENGTH_SHORT);
+                toastMessage.setText("Mirpur-10");
+
                     anyHit = true;
 
                 }
                 if (anyHit)
-                    t.show();
+                    toast.show();
                 return true;
             }
         });
