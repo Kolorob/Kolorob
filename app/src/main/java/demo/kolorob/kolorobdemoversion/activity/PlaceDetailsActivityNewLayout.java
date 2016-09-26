@@ -2848,6 +2848,11 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     prev_fragment.setEducationServiceProvider(educationServiceProviderItems);
                     prev_fragment.eduicons();
                     prev_fragment.Drawedu(-1,true);
+                    if (educationServiceProviderItems.size()==0) {
+
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                    }
 
                 }
                 else if(currentCategoryID==2){
@@ -2857,6 +2862,11 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     healthServiceProviderItems = constructHealthListItem(2);
                     mapFragment.setHealthServiceProvider(healthServiceProviderItems);
                     prev_fragment.healthicons();
+                    if (healthServiceProviderItems.size()==0) {
+
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                    }
                     prev_fragment.Drawhel(-1,true);
                 }
                 else if(currentCategoryID==3){
@@ -2866,6 +2876,11 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     entertainmentServiceProviderItems = constructEntertainmentListItem(3);
                     mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
                     prev_fragment.enticons();
+                    if (entertainmentServiceProviderItems.size()==0) {
+
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                    }
                     prev_fragment.Drawent(-1,true);
                 }
                 else if(currentCategoryID==4) {
@@ -2873,22 +2888,10 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     mapFragment.setCategoryId(4);
                     ArrayList<GovernmentNewItem> governmentNewItems;
                     governmentNewItems = constructgovListItem();
-                    if (governmentNewItems.size() == 0) {
+                    if (governmentNewItems.size()==0) {
 
-                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information found","");
-
-
-//                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
 //
-//                        alertDialog2.setMessage("দুঃখিত! তথ্য পাওয়া যায় নি");
-//                        alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-//                                new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        alertDialog2.dismiss();
-//                                    }
-//                                });
-//                        alertDialog2.getWindow().setLayout(200, 300);
-//                        alertDialog2.show();
                     }
                     mapFragment.setGovernmentNewItems(governmentNewItems);
                     prev_fragment.govicons();
@@ -2903,6 +2906,11 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     mapFragment.setLegalaidServiceProvider(legalAidServiceProviderItems);
                     prev_fragment.legicons();
                     prev_fragment.Drawleg(-1,true);
+                    if (legalAidServiceProviderItems.size()==0) {
+
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                    }
                 }
                 else if(currentCategoryID==6){
                     finclicked=false;
@@ -2911,6 +2919,11 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     financialNewItems = constructfinancialListItem();
                     mapFragment.setFinancialServiceProvider(financialNewItems);
                     prev_fragment.finicons();
+                    if (financialNewItems.size()==0) {
+
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                    }
                     prev_fragment.Drawfin(-1,true);
                 }
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
