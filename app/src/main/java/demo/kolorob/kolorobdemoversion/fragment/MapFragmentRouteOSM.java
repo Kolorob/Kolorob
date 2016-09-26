@@ -240,7 +240,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
                 toastMessage = (TextView) toastView.findViewById(R.id.toasts);
                 toastMessage.setTextSize(20);
 
-                toastMessage.setText("Current position won't work Since static location is used in this version!");
+                toastMessage.setText("Current location does not function, as static location is activated in this version!");
 
 
                 toastMessage.setTextColor(getResources().getColor(R.color.orange));
@@ -290,7 +290,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         if (Integer.parseInt(Busfare) <=7.00)Bustext.setText( " 7 "+ " BDT & should take minimal time");
         else {
 
-            Bustext.setText("Approximately "+Busfare + "- "+Busfare2+" BDT & might take "  + bustime+ " minutes "  );
+            Bustext.setText("Approximately "+Busfare + "- "+Busfare2+" BDT , with estimated time of arrival in "  + bustime+ " minutes "  );
         }
         String CNGfare= String.valueOf((int) Math.round((roadlength-2)*12+40));
         String CNGfare2= String.valueOf((int) Math.round((roadlength-2)*12+70));
@@ -298,20 +298,20 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         if (Integer.parseInt(CNGfare) <=40.00)Cngtext.setText( " 40 " + " BDT & should take minimal time");
         else {
 
-            Cngtext.setText("Approximately "+CNGfare + "- "+CNGfare2+" BDT & might take " + CNGtime+ " minutes"  );
+            Cngtext.setText("Approximately "+CNGfare + "- "+CNGfare2+" BDT, with estimated time of arrival in " + CNGtime+ " minutes"  );
         }
         String rickfare= String.valueOf((int) Math.round((roadlength)*20));
         String ricktime= String.valueOf((int) Math.round((roadlength/10)*60));
         if (Integer.parseInt(rickfare) <=10.00)Ricksawtext.setText( " 10 " + " BDT & should take minimal time");
         else {
 
-            Ricksawtext.setText("Approximately "+rickfare + " BDT & might take " + ricktime+ " minutes"  );
+            Ricksawtext.setText("Approximately "+rickfare + " BDT , with estimated time of arrival in " + ricktime+ " minutes"  );
         }
 
         String wtime=String.valueOf((int) Math.round((roadlength/8)*60));
 
 
-        Walkingtext.setText("Might take "+ wtime+ " minutes"  );
+        Walkingtext.setText("Estimated time of arrival in "+ wtime+ " minutes"  );
 
     }
     public void Drawroute(GeoPoint Ulocation, GeoPoint Mlocation) {
