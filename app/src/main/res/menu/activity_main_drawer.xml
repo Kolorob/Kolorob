@@ -5,7 +5,7 @@
         <item
             android:id="@+id/phone_reg"
             android:icon="@drawable/advertising_icon"
-            android:title="@string/phone_registration" />
+            android:title="Registration" />
         <!--<item-->
             <!--android:id="@+id/info_change"-->
             <!--android:icon="@drawable/profile_icon"-->
@@ -38,19 +38,20 @@
                 <!--android:id="@+id/nav_help"-->
                 <!--android:icon="@drawable/help_icon"-->
                 <!--android:title="Help" />-->
-
             <item
-                android:id="@+id/about_us"
+                android:id="@+id/tutorial"
                 android:icon="@drawable/emergency_icon"
-                android:title="@string/abouthead" />
+                android:title="Tutorial" />
+
             <item
                 android:id="@+id/disclaimer"
                 android:icon="@drawable/emergency_icon"
                 android:title="@string/disclaimerhead" />
             <item
-                android:id="@+id/tutorial"
+                android:id="@+id/about_us"
                 android:icon="@drawable/emergency_icon"
-                android:title="Tutorial" />
+                android:title="@string/abouthead" />
+
             <!--<item-->
             <!--android:id="@+id/nav_share"-->
             <!--android:icon="@drawable/advertising_icon"-->

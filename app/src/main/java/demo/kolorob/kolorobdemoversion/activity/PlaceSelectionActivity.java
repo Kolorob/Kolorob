@@ -257,7 +257,7 @@ loadIMEI();
 
                     Log.d("BAUNIABHAD", "********" );
                 toastMessage.setText("Mirpur-11");
-                
+
                     anyHit = true;
                 }
                 else if (mirpur11Hit) {
@@ -740,7 +740,12 @@ loadIMEI();
                 != PackageManager.PERMISSION_GRANTED) {
             // READ_PHONE_STATE permission has not been granted.
             requestReadPhoneStatePermission();
-        } else {
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // READ_PHONE_STATE permission has not been granted.
+            requestReadPhoneStatePermission();
+        }else {
             // READ_PHONE_STATE permission is already been granted.
             doPermissionGrantedStuffs();
         }
@@ -797,6 +802,31 @@ loadIMEI();
                     }
                 });
 
+    }
+    private void requestWritetoSD() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_PHONE_STATE)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example if the user has previously denied the permission.
+            new AlertDialog.Builder(PlaceSelectionActivity.this)
+                    .setTitle("Permission Request")
+                    .setMessage(getString(R.string.givepermission))
+                    .setCancelable(false)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //re-request
+                            ActivityCompat.requestPermissions(PlaceSelectionActivity.this,
+                                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                                    REQUEST_PHONE_STATE);
+                        }
+                    });
+
+        } else {
+            // READ_PHONE_STATE permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
+                    REQUEST_PHONE_STATE);
+        }
     }
 
 
