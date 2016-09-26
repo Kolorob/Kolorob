@@ -342,7 +342,7 @@
                 android:id="@+id/feedback"/>
 
 
-            <ImageView
+                <ImageView
                          android:layout_width="50dp"
                            android:layout_height="50dp"
                            android:background="@drawable/comments_icon"

@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="User Name"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:id="@+id/mobile" />
         </LinearLayout>
@@ -49,7 +50,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
-        android:gravity="center"
+        android:gravity="center|left"
 
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"

@@ -89,15 +89,16 @@ public class Comment_layout_adapter extends BaseAdapter
             {
                 holder.mobile.setTextSize(20);
                 holder.comment.setTextSize(20);
-                holder.date.setTextSize(20);
+                holder.date.setTextSize(18);
             }
             else {
                 holder.mobile.setTextSize(16);
                 holder.comment.setTextSize(16);
-                holder.date.setTextSize(16);
+                holder.date.setTextSize(14);
 
 
             }
+
 
 
 
@@ -121,7 +122,7 @@ public class Comment_layout_adapter extends BaseAdapter
 
 
 
-        holder.mobile.setText(mobile[position]);
+        holder.mobile.setText("Kolorobian");
         holder.comment.setText(comment[position]);
         holder.date.setText(date[position]);
 
