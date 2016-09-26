@@ -19,14 +19,13 @@
             android:layout_weight="0.5"
             android:gravity="center|bottom"
             android:layout_height="wrap_content">
-
-            <RatingBar
-                android:id="@+id/ratingBar_dialogue"
-                style="?android:attr/ratingBarStyleSmall"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:numStars="5"
-                android:isIndicator="false" />
+                android:id="@+id/ratingBarz"
+                android:background="@drawable/five"/>
+
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"

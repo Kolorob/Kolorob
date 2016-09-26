@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -383,7 +384,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         }
 
-        Log.d("Value of Inc","======"+comment[0]);
+
 
         final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
 
@@ -414,19 +415,40 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
 
                     final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                    ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                   // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
                     final TextView review = (TextView)promptView.findViewById(R.id.review);
 
+                    final ImageView ratingbarz=(ImageView)promptView.findViewById(R.id.ratingBarz);
 
-                    Log.d("Value of Inc2","======"+healthServiceProviderItemNew.getRating());
-                    try
-                    {
-                        ratingBars.setRating(Float.parseFloat(healthServiceProviderItemNew.getRating()));
-                    }
-                    catch (Exception e)
-                    {
+                     try
+                     {
+                         int ratings= Integer.parseInt(healthServiceProviderItemNew.getRating());
 
-                    }
+                         if(ratings==1)
+                         {
+                             ratingbarz.setBackgroundResource(R.drawable.one);
+                         }
+                         else if(ratings==2)
+                             ratingbarz.setBackgroundResource(R.drawable.two);
+
+                         else if(ratings==3)
+                             ratingbarz.setBackgroundResource(R.drawable.three);
+
+                         else if(ratings==4)
+                             ratingbarz.setBackgroundResource(R.drawable.four);
+
+                         else if(ratings==5)
+                             ratingbarz.setBackgroundResource(R.drawable.five);
+                     }
+
+                     catch (Exception e)
+                     {
+
+                     }
+
+
+
+
 
                     if(inc==1)
                         review.setText(inc +" Review");
@@ -440,11 +462,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     }
                     else {
                         review.setTextSize(16);
-                      //  ratingBars=new RatingBar(DetailsInfoActivityHealthNew.this, null, android.R.attr.ratingBarStyleSmall);
-                       // ratingBars.setScaleX(0.5f);
-                        //ratingBars.setScaleY(0.5f);
 
-                        Log.d("Small Device","======");
 
                     }
 

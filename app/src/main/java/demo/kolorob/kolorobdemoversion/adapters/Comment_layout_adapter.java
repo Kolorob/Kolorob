@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 /**
  * Created by arafat 31 August.
@@ -23,7 +25,7 @@ public class Comment_layout_adapter extends BaseAdapter
     String mobile[];
     String comment[];
     String date[];
-    String rating[];
+    public String rating[];
     int height;
     int width;
 
@@ -62,7 +64,7 @@ public class Comment_layout_adapter extends BaseAdapter
         TextView mobile;
         TextView  comment;
         TextView date;
-        RatingBar ratingBar;
+        ImageView ratingBar;
 
 
 
@@ -81,7 +83,21 @@ public class Comment_layout_adapter extends BaseAdapter
             holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
             holder.comment = (TextView) convertView.findViewById(R.id.comment);
             holder.date = (TextView) convertView.findViewById(R.id.date);
-            holder.ratingBar = (RatingBar)convertView.findViewById(R.id.ratingBar_k);
+            holder.ratingBar = (ImageView) convertView.findViewById(R.id.ratingBarz);
+            Double screenSize = AppUtils.ScreenSize(context);
+            if(screenSize>6.5)
+            {
+                holder.mobile.setTextSize(20);
+                holder.comment.setTextSize(20);
+                holder.date.setTextSize(20);
+            }
+            else {
+                holder.mobile.setTextSize(16);
+                holder.comment.setTextSize(16);
+                holder.date.setTextSize(16);
+
+
+            }
 
 
 
@@ -97,7 +113,7 @@ public class Comment_layout_adapter extends BaseAdapter
         DisplayMetrics displayMetrics =  context.getResources().getDisplayMetrics();
         height= displayMetrics.heightPixels;
         width=displayMetrics.widthPixels;
-
+        int ratings= Integer.valueOf(rating[position]);
 
 
 
@@ -108,7 +124,25 @@ public class Comment_layout_adapter extends BaseAdapter
         holder.mobile.setText(mobile[position]);
         holder.comment.setText(comment[position]);
         holder.date.setText(date[position]);
-        holder.ratingBar.setRating(Float.parseFloat(rating[position]));
+
+        if(ratings==1)
+        {
+            holder.ratingBar.setBackgroundResource(R.drawable.one);
+        }
+        else if(ratings==2)
+            holder.ratingBar.setBackgroundResource(R.drawable.two);
+
+        else if(ratings==3)
+            holder.ratingBar.setBackgroundResource(R.drawable.three);
+
+        else if(ratings==4)
+            holder.ratingBar.setBackgroundResource(R.drawable.four);
+
+        else if(ratings==5)
+            holder.ratingBar.setBackgroundResource(R.drawable.five);
+
+
+        //holder.ratingBar.setRating(Float.parseFloat(rating[position]));
 
 
         return convertView;
