@@ -178,52 +178,90 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         feedback = (ImageView) findViewById(R.id.feedback);
         checkBox = (CheckBox) findViewById(R.id.compare);
 
-        CheckConcate("Address", educationNewItem.getAddress());
-        CheckConcate("Floor", educationNewItem.getFloor());
-        CheckConcate("House Name", educationNewItem.getHousename());
+
+
         CheckConcate("Road", educationNewItem.getRoad());
+        CheckConcate("Address", educationNewItem.getAddress());
         CheckConcate("Line ", educationNewItem.getLine());
         CheckConcate("Avenue",educationNewItem.getAvenue());
-        CheckConcate("Landmark", educationNewItem.getLandmark());
+        CheckConcate("House Name", educationNewItem.getHousename());
+        CheckConcate("Floor", educationNewItem.getFloor());
+        CheckConcate("Closest Landmark", educationNewItem.getLandmark());
 
-        CheckConcate("Contact", educationNewItem.getNode_contact());
-        CheckConcate("Contact", educationNewItem.getNode_contact2());
+
+
+
+
+
+        CheckConcate("Contact Number", educationNewItem.getNode_contact());
+        CheckConcate("Contact Number", educationNewItem.getNode_contact2());
         CheckConcate("Email", educationNewItem.getNode_email());
         CheckConcate("Web site", educationNewItem.getNode_website());
         CheckConcate("Facebook", educationNewItem.getNode_facebook());
 
         CheckConcate("Opening Time", educationNewItem.getOpeningtime());
-        CheckConcate("Closing Time", educationNewItem.getClosetime());
         if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
             breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
-        CheckConcate("Off Day", educationNewItem.getOffday());
+        CheckConcate("Closing Time", educationNewItem.getClosetime());
 
-        CheckConcate("Education Type ", educationNewItem.getEdtype());
+        CheckConcate("Off Day", educationNewItem.getOffday());
         CheckConcate("Shift", educationNewItem.getShift());
+        CheckConcate("Education Type ", educationNewItem.getEdtype());
+
         CheckConcate("Number of Students", educationNewItem.getStudentno());
         CheckConcate("Number of Teachers",  educationNewItem.getTeachersno());
         CheckConcate("Number of Classes",  educationNewItem.getClassno());
-        CheckConcate("Other Information", educationNewItem.getAdditional());
+        CheckConcate("Average Student Number",  educationNewItem.getAveragestudent());
         CheckConcate("Male Students",  educationNewItem.getMalestudent());
         CheckConcate("Female Students",  educationNewItem.getFemalestudent());
-
-        CheckConcate("Special Facility", educationNewItem.getSpecialneeds());
-        CheckConcate("Number of Washroom",  educationNewItem.getWashroom_no());
-        CheckConcate("Number of Washroom(Male)", educationNewItem.getWashroom_male());
-        CheckConcate("Washroom Cleanliness", educationNewItem.getWashroomcleanliness());
-        CheckConcate("Drinking Water Condition", educationNewItem.getWatercondition());
-        CheckConcate("Drinking Water Source", educationNewItem.getWatersource());
-        CheckConcate("Average Student Number",  educationNewItem.getAveragestudent());
-        CheckConcate("Number of Washroom(FeMale)",educationNewItem.getWashroomfemale());
-
-
-
-        CheckConcate("Designation of Information Provider", educationNewItem.getNode_designation());
+        CheckConcate("Other Information", educationNewItem.getAdditional());
 
 
 
         CheckConcate("Registration Number", educationNewItem.getRegisterednumber());
         CheckConcate("Registered With ", educationNewItem.getRegisteredwith());
+        CheckConcate("Are special facilities available?", educationNewItem.getSpecialneeds());
+        educationTuitionDetailsItems = educationTuitionDetailsTable.gettuitionInfo(educationNewItem.getEduId());
+        int tuition_size = educationTuitionDetailsItems.size();
+        if (tuition_size != 0) {
+            for (EducationTuitionDetailsItem educationTuitionDetailsItem : educationTuitionDetailsItems) {
+                //result_concate="";
+
+                CheckConcate("Class Levels", educationTuitionDetailsItem.getTuitionlevel());
+                boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
+                if (tuitioncost)
+                {
+                    CheckConcate("Free Tuition Facilities", "Available");
+                }
+                else {
+                    CheckConcate("Free Tuition Facilities", "Not Available");
+                }
+
+                CheckConcate("Stipend Availability ", educationTuitionDetailsItem.getTuitionstipendfacility());
+                CheckConcate("Stipend Type", educationTuitionDetailsItem.getTuitionstipendtype());
+                CheckConcate("Course Related Information", educationTuitionDetailsItem.getTuitiondetails());
+                CheckConcate("Lowest Cost of Class", educationTuitionDetailsItem.getTuitionminfee());
+
+                CheckConcate("Highest Cost of Class ", educationTuitionDetailsItem.getTuitionmaxfee());
+                CheckConcate("Lowest Cost of Coaching ", educationTuitionDetailsItem.getTuitionmincoaching());
+                CheckConcate("Highest Cost of Coaching", educationTuitionDetailsItem.getTuitionmaxcoaching());
+                CheckConcate("Additional Information", educationTuitionDetailsItem.getTuitionadditional());
+
+
+            }
+
+
+        }
+        CheckConcate("Number of Washroom",  educationNewItem.getWashroom_no());
+        CheckConcate("Number of Washroom(Male)", educationNewItem.getWashroom_male());
+        CheckConcate("Number of Washroom(Female)",educationNewItem.getWashroomfemale());
+        CheckConcate("Are the washrooms clean?", educationNewItem.getWashroomcleanliness());
+        CheckConcate("Is clean drinking water available?", educationNewItem.getWatercondition());
+        CheckConcate("What is the source of drinking water?", educationNewItem.getWatersource());
+
+
+
+
         educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
         int result_size = educationResultItemNews.size();
 
@@ -310,7 +348,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
                 CheckConcate("Course Duration", educationTrainingDetailsItem.getCourseduration());
                 CheckConcate("Admission(Month)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("Cpst", educationTrainingDetailsItem.getCost()+" BDT");
+                CheckConcate("Cost", educationTrainingDetailsItem.getCost()+" BDT");
                 CheckConcate("Type", educationTrainingDetailsItem.getTrainingnametype());
                 CheckConcate("Training Name", educationTrainingDetailsItem.getTrainingnamesubtype());
 
@@ -318,37 +356,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             }
         }
 
-        educationTuitionDetailsItems = educationTuitionDetailsTable.gettuitionInfo(educationNewItem.getEduId());
-        int tuition_size = educationTuitionDetailsItems.size();
-        if (tuition_size != 0) {
-            for (EducationTuitionDetailsItem educationTuitionDetailsItem : educationTuitionDetailsItems) {
-                //result_concate="";
 
-                CheckConcate("Class Level", educationTuitionDetailsItem.getTuitionlevel());
-                boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
-                if (tuitioncost)
-                {
-                    CheckConcate("Free Tuition Facilities", "Available");
-                }
-                else {
-                    CheckConcate("Free Tuition Facilities", "Not Available");
-                }
-
-                CheckConcate("Stipend Availability ", educationTuitionDetailsItem.getTuitionstipendfacility());
-                CheckConcate("Stipend Type", educationTuitionDetailsItem.getTuitionstipendtype());
-                CheckConcate("Course Related Information", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("Lowest Cost of Class", educationTuitionDetailsItem.getTuitionminfee());
-
-                CheckConcate("Highest Cost of Class ", educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("Lowest Cost of Coaching ", educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("Highest Cost of Coaching", educationTuitionDetailsItem.getTuitionmaxcoaching());
-                CheckConcate("Additional Information", educationTuitionDetailsItem.getTuitionadditional());
-
-
-            }
-
-
-        }
 
 
 
