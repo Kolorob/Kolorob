@@ -597,7 +597,7 @@ int index;
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
-
+        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"This information is only for display purposes","");
         fleft=(LinearLayout)findViewById(R.id.linearLayout1);
         fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
 
@@ -2226,7 +2226,11 @@ int index;
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.education_selected);
                         llSubCatListHolder.setVisibility(View.GONE);
+                        if (educationServiceProvider.size()==0) {
 
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                        }
                         break;
                     case AppConstants.HEALTH:
                         MediaPlayer mp_h = MediaPlayer.create(getApplicationContext(), R.raw.health);
@@ -2252,7 +2256,11 @@ int index;
 
                             callMapFragmentWithHealth(-1,healthServiceProvider,true);
 
+                        if (healthServiceProvider.size()==0) {
 
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                        }
 
 
                         llSubCatListHolder.setVisibility(View.GONE);
@@ -2298,7 +2306,11 @@ int index;
 
                         MediaPlayer mp_en = MediaPlayer.create(getApplicationContext(), R.raw.entertainment);
                         mp_en.start();
+                        if (entertainmentServiceProvider.size()==0) {
 
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                        }
 
 
 
@@ -2348,18 +2360,8 @@ int index;
                         toolbar.setVisibility(View.VISIBLE);
                         if (governmentNewItems.size()==0) {
 
-                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! There is no information","");
-//                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
 //
-//                            alertDialog2.setMessage("");
-//                            alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
-//                                    new DialogInterface.OnClickListener() {
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            alertDialog2.dismiss();
-//                                        }
-//                                    });
-//                            alertDialog2.getWindow().setLayout(200, 300);
-//                            alertDialog2.show();
                         }
                         break;
                     case AppConstants.LEGAL:
@@ -2401,7 +2403,11 @@ int index;
 
 
 
+                        if (legalaidServiceProvider.size()==0) {
 
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                        }
 
 
 
@@ -2435,7 +2441,11 @@ int index;
 
 
                         llSubCatListHolder.setVisibility(View.GONE);
+                        if (financialNewItems.size()==0) {
 
+                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information is available for this category item.","");
+//
+                        }
 
 
 
@@ -2865,7 +2875,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     governmentNewItems = constructgovListItem();
                     if (governmentNewItems.size() == 0) {
 
-                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"Sorry! No information found","");
 
 
 //                        final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
