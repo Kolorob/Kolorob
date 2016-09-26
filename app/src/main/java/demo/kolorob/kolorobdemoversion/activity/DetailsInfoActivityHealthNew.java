@@ -183,26 +183,25 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
         setRatingBar();
-        CheckConcate("Block", healthServiceProviderItemNew.getBlock());
-        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
-        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
         CheckConcate("Road", healthServiceProviderItemNew.getRoad());
         CheckConcate("Line ", healthServiceProviderItemNew.getLine());
         CheckConcate("Avenue", healthServiceProviderItemNew.getAvenue());
-        CheckConcate("Land Mark", healthServiceProviderItemNew.getLandmark());
-        CheckConcate("Health Center Type", healthServiceProviderItemNew.getInstitute_type());
-        CheckConcate("Opening Time", healthServiceProviderItemNew.getOpening_time());
-        CheckConcate("Closing Time", healthServiceProviderItemNew.getClosing_time());
-        if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
-            breakTimeProcessing("Break Time", healthServiceProviderItemNew.getBreak_time());
-        CheckConcate("Off Day", healthServiceProviderItemNew.getOff_day());
+        CheckConcate("Block", healthServiceProviderItemNew.getBlock());
+        CheckConcate("Floor", healthServiceProviderItemNew.getFloor());
+        CheckConcate("House Name", healthServiceProviderItemNew.getHouse_name());
 
-        CheckConcate("Capacity", healthServiceProviderItemNew.getCapacity());
-        CheckConcate("Male Doctors", healthServiceProviderItemNew.getMale_doctors());
-        CheckConcate("Female Doctors", healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("Closest Landmark ", healthServiceProviderItemNew.getLandmark());
+        CheckConcate("Opening Time", healthServiceProviderItemNew.getOpening_time());
+        CheckConcate("Break Time", healthServiceProviderItemNew.getBreak_time());
+
+        CheckConcate("Closing Time", healthServiceProviderItemNew.getClosing_time());
+
+        CheckConcate("Closed on", healthServiceProviderItemNew.getOff_day());
+        CheckConcate("Health Center Type", healthServiceProviderItemNew.getInstitute_type());
+        CheckConcate("Number of beds available", healthServiceProviderItemNew.getCapacity());
+        CheckConcate("Number of Male doctors", healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("Number of Female doctors", healthServiceProviderItemNew.getFemale_doctors());
         CheckConcate("Doctor-Patient Ratio", healthServiceProviderItemNew.getPatient_doctor_ratio());
-        CheckConcate("Male Doctor", healthServiceProviderItemNew.getMale_doctors());
-        CheckConcate("Female Doctor", healthServiceProviderItemNew.getFemale_doctors());
         CheckConcate("Patient-Nurse Ratio", healthServiceProviderItemNew.getPatient_nurse_ratio());
 
 
@@ -787,7 +786,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
         final ImageView no = (ImageView) promptView.findViewById(R.id.no);
         final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="    You need to    "+"\n"+"     Register first    "+"\n"+"   Do you want to?    ";
+        String text="    You need to      "+"\n"+"     Register first      "+"\n"+"   Do you want to?    ";
         textAsk.setText(text);
         if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityHealthNew.this))
             textAsk.setTextSize(23);
@@ -941,7 +940,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 String[] realTIme = breakTIme[0].split("-");
 
 
-                value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
+                value2 = timeConverter(realTIme[0]) + " to " + timeConverter(realTIme[1]);
                 CheckConcate(value1, value2);
             }
             catch (Exception e)

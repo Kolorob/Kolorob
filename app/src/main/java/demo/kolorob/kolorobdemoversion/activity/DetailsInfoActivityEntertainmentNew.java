@@ -144,7 +144,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         // close_button=(ImageView)findViewById(R.id.close_button);
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
-        cross=(ImageView)findViewById(R.id.cross_jb);
+        cross=(ImageView)findViewById(R.id.close_buttonc);
 //        school_logo_default=(ImageView)findViewById(R.id.service_logo);
 
 
@@ -174,26 +174,25 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-
+        int lett_img = params_left_way.height = (height * 3) / 24;
+        int right_img = params_left_way.width = width / 3;
         left_way.setLayoutParams(params_left_way);
-
-
 
 
         top_logo.getLayoutParams().height = width / 8;
         top_logo.getLayoutParams().width = width / 8;
 
-        middle_image.getLayoutParams().height=width/8;
-        middle_image.getLayoutParams().width=width/8;
+        middle_image.getLayoutParams().height = width / 8;
+        middle_image.getLayoutParams().width = width / 8;
 
-        cross.getLayoutParams().height=width/13;
-        cross.getLayoutParams().width=width/13;
+        cross.getLayoutParams().height = width / 13;
+        cross.getLayoutParams().width = width / 13;
 
-        right_image.getLayoutParams().height = width/8;
-        right_image.getLayoutParams().width = width/8;
+        right_image.getLayoutParams().height = width / 8;
+        right_image.getLayoutParams().width = width / 8;
 
-        left_image.getLayoutParams().height =  width/8;
-        left_image.getLayoutParams().width =  width/8;
+        left_image.getLayoutParams().height = width / 8;
+        left_image.getLayoutParams().width = width / 8;
 
 
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
@@ -274,24 +273,21 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         //   other_detailsEnt.setVisibility(View.VISIBLE);
 
-
-        CheckConcate("Floor ", entertainmentServiceProviderItemNew.getFloor());
-        CheckConcate("House Name", entertainmentServiceProviderItemNew.getHouse_name());
-        CheckConcate("House Number", entertainmentServiceProviderItemNew.getHouse_no());
         CheckConcate("Address", entertainmentServiceProviderItemNew.getAddress());
         CheckConcate("Road", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("Line", entertainmentServiceProviderItemNew.getLine());
         CheckConcate("Avenue", entertainmentServiceProviderItemNew.getAvenue());
         CheckConcate("Block", entertainmentServiceProviderItemNew.getBlock());
-        CheckConcate("Land mark", entertainmentServiceProviderItemNew.getLandmark());
+        CheckConcate("Floor ", entertainmentServiceProviderItemNew.getFloor());
+        CheckConcate("House Name", entertainmentServiceProviderItemNew.getHouse_name());
+        CheckConcate("House Number", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("Closest Landmark", entertainmentServiceProviderItemNew.getLandmark());
 
         CheckConcate("Opening Time",  entertainmentServiceProviderItemNew.getOpeningtime());
-
-
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
             breakTimeProcessing("Break Time", entertainmentServiceProviderItemNew.getBreaktime());
         CheckConcate("Closing Time", entertainmentServiceProviderItemNew.getClosingtime());
-        CheckConcate("Off Day", entertainmentServiceProviderItemNew.getOff_day());
+        CheckConcate("Closed on", entertainmentServiceProviderItemNew.getOff_day());
 
         ups_text.setText(entertainmentServiceProviderItemNew.getNodeName());
 

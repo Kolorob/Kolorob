@@ -281,24 +281,22 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
-
-
-        CheckConcate("Floor ", legalAidServiceProviderItemNew.getFloor());
-        CheckConcate("House Name", legalAidServiceProviderItemNew.getHouse_name());
-        CheckConcate("House Number", legalAidServiceProviderItemNew.getHouse_no());
+        CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
         CheckConcate("Road ", legalAidServiceProviderItemNew.getRoad());
         CheckConcate("Line", legalAidServiceProviderItemNew.getLine());
         CheckConcate("Avenue", legalAidServiceProviderItemNew.getAvenue());
         CheckConcate("Block", legalAidServiceProviderItemNew.getBlock());
-        CheckConcate("Land mark", legalAidServiceProviderItemNew.getLandmark());
+        CheckConcate("House Name", legalAidServiceProviderItemNew.getHouse_name());
+        CheckConcate("House Number", legalAidServiceProviderItemNew.getHouse_no());
+        CheckConcate("Floor ", legalAidServiceProviderItemNew.getFloor());
+        CheckConcate("Closest Landmark", legalAidServiceProviderItemNew.getLandmark());
 
 
-        CheckConcate("Address", legalAidServiceProviderItemNew.getAddress());
+
         CheckConcate("Opening Time", legalAidServiceProviderItemNew.getOpeningtime());
-        if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("Break Time", legalAidServiceProviderItemNew.getBreaktime());
+        CheckConcate("Break Time", legalAidServiceProviderItemNew.getBreaktime());
         CheckConcate("Closing Time", legalAidServiceProviderItemNew.getClosingtime());
-        CheckConcate("Off Day", legalAidServiceProviderItemNew.getOff_day());
+        CheckConcate("Closed On", legalAidServiceProviderItemNew.getOff_day());
         CheckConcate("Registered With", legalAidServiceProviderItemNew.getRegisteredWith());
         ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameEng());
 
@@ -310,7 +308,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
             for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
             {
-                CheckConcate("Service Type", leagalAidDetailsItem.getType());
+                CheckConcate("What services are available? ", leagalAidDetailsItem.getType());
 
                 CheckConcate("Service Sub-type", leagalAidDetailsItem.getSub_type());
                 CheckConcate("Service Cost", leagalAidDetailsItem.getLagal_cost()+" BDT");
