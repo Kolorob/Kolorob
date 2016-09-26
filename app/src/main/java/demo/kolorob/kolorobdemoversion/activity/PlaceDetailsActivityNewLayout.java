@@ -1935,6 +1935,16 @@ int index;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.tutorial) {
+
+            int mapdetail=1;
+
+            Intent em = new Intent(this, ViewPagerDemo.class);
+            em.putExtra("YourValueKey", mapdetail);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
 //        else if (id == R.id.info_change) {
 
 //            startActivity(em);
@@ -1987,7 +1997,6 @@ int index;
           this.finish();
 
         }
-
        ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
 
         this.doubleBackToExitPressedOnce = true;

@@ -375,8 +375,8 @@ public class OpeningActivity extends Activity {
             String contents = new String(bytes);
             String delims = "[,]";
             String[] tokens = contents.split(delims);
-           first=tokens[1];
-           //  first="yes";
+         first=tokens[1];
+           //first="yes";
         }
         else {
             int length = (int) file.length();
@@ -409,7 +409,7 @@ public class OpeningActivity extends Activity {
             String delims = "[,]";
             String[] tokens = contents.split(delims);
 
-              first=tokens[1];
+             first=tokens[1];
             // first="yes";
         }
 
@@ -638,10 +638,21 @@ public class OpeningActivity extends Activity {
 
                     editor.apply();
                     handler.removeCallbacks(this);
-                    Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+                    if (first.equals("yes")) {
+                        int mapdetail = 0;
+
+                    Intent a = new Intent(OpeningActivity.this, ViewPagerDemo.class); // Default Activity
+                    a.putExtra("YourValueKey", mapdetail);
                     frameAnimation.stop();
                     startActivity(a);
                     return;
+                } else {
+                    Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+
+                    frameAnimation.stop();
+                    startActivity(a);
+                    return;
+                }
                 }
                 //Create a loop
                 handler.postDelayed(this, 1000);

@@ -236,6 +236,7 @@ loadIMEI();
                 toastMessage.setTextColor(getResources().getColor(R.color.orange));
                 toastMessage.setGravity(Gravity.CENTER);
                 toastMessage.setCompoundDrawablePadding(26);
+                toast.setDuration(Toast.LENGTH_SHORT);
 
 
 
@@ -655,6 +656,16 @@ else
         else if (id == R.id.disclaimer) {
 
             Intent em = new Intent(this, Disclaimer.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
+        else if (id == R.id.tutorial) {
+            int mapdetail=2;
+
+            Intent em = new Intent(this, ViewPagerDemo.class);
+            em.putExtra("YourValueKey", mapdetail);
+
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 

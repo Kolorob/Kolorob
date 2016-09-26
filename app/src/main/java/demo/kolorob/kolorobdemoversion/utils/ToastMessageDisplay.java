@@ -29,6 +29,7 @@ public class ToastMessageDisplay {
         toastMessage.setText(message);
 //        toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setGravity(Gravity.CENTER);
+toast.setDuration(Toast.LENGTH_SHORT);
         toastMessage.setCompoundDrawablePadding(26);
         toast.show();
     }
