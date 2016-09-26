@@ -44,10 +44,13 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
+import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
+import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -65,7 +68,9 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     String password="2Jm!4jFe3WgBZKEN";
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar;
     ImageView left_image, middle_image, right_image, email_btn;
-
+    ArrayList<CommentItem> commentItems;
+    ImageView comments;
+    int inc;
     int width, height;
     TextView ups_text;
 
@@ -213,6 +218,141 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 finish();
             }
         });
+
+        comments = (ImageView)findViewById(R.id.comments);
+
+        comments.getLayoutParams().height=width/8;
+        comments.getLayoutParams().width=width/8;
+        CommentTable commentTable = new CommentTable(DetailsLayoutFinance.this);
+
+
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(financialNewItem.getFinId()));
+        int size= commentItems.size();
+        String[] phone = new String[size];
+        String[] date = new String[size];
+        String[] comment = new String[size];
+        final String[] rating = new String[size];
+
+
+        for (CommentItem commentItem:commentItems)
+        {
+            Log.d("Rating","$$$$$$"+commentItem.getRating());
+
+            if(!commentItem.getRating().equals(""))
+            {
+                phone[inc]= commentItem.getMob_no();
+                date[inc]='"'+commentItem.getComment()+'"';
+                comment[inc]= commentItem.getDate();
+                rating[inc]= commentItem.getRating();
+                inc++;
+            }
+
+        }
+
+
+
+        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
+
+
+        comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(inc==0)
+                {
+                    AlertMessage.showMessage(DetailsLayoutFinance.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
+                }
+
+                else
+                {
+                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                    final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
+                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    alertDialog.setContentView(promptView);
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
+                    Log.d("Value of Inc1","======");
+
+
+
+//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
+
+                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                    // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                    final TextView review = (TextView)promptView.findViewById(R.id.review);
+
+                    final ImageView ratingbarz=(ImageView)promptView.findViewById(R.id.ratingBarz);
+
+                    try
+                    {
+                        int ratings= Integer.parseInt(financialNewItem.getRating());
+
+                        if(ratings==1)
+                        {
+                            ratingbarz.setBackgroundResource(R.drawable.one);
+                        }
+                        else if(ratings==2)
+                            ratingbarz.setBackgroundResource(R.drawable.two);
+
+                        else if(ratings==3)
+                            ratingbarz.setBackgroundResource(R.drawable.three);
+
+                        else if(ratings==4)
+                            ratingbarz.setBackgroundResource(R.drawable.four);
+
+                        else if(ratings==5)
+                            ratingbarz.setBackgroundResource(R.drawable.five);
+                    }
+
+                    catch (Exception e)
+                    {
+
+                    }
+
+
+                    if(inc==1)
+                        review.setText(inc +" Review");
+                    else
+                        review.setText(inc+ " Reviews");
+                    Double screenSize = AppUtils.ScreenSize(DetailsLayoutFinance.this);
+                    if(screenSize>6.5)
+                    {
+                        review.setTextSize(20);
+                    }
+                    else {
+                        review.setTextSize(16);
+
+
+                    }
+
+
+                    listView.setAdapter(comment_layout_adapter);
+//                    textView.setVisibility(View.GONE);
+
+                    alertDialog.getWindow().setLayout((width*5)/6, (height*2)/3);
+
+                    close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+
+
+                    alertDialog.setCancelable(false);
+
+
+                    alertDialog.show();
+
+                }
+
+            }
+        });
+
+
+
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
