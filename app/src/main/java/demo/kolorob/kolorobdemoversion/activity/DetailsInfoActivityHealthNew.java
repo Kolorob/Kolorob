@@ -56,7 +56,6 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
@@ -72,12 +71,12 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     Dialog dialog;
-    LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
+    LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar;
     ImageView left_image, middle_image, right_image, email_btn;
-    TextView address_text, phone_text, email_text;
+
     int width, height;
     TextView ups_text;
-    ListView courseListView, listView;
+
     Context con;
     int increment=0;
     String[] key;
@@ -86,23 +85,17 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     String password="2Jm!4jFe3WgBZKEN";
     Float rating;
     HealthServiceProviderItemNew healthServiceProviderItemNew;
-    ArrayList<HealthServiceProviderItem> healthServiceProviderItems;
-    ArrayList<HealthServiceProviderItem> healthServiceProviderItemsz;
+
     ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
     ArrayList<HealthVaccineItemDetails> healthVaccineItemDetailses;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
+
     private TextView ratingText;
-    private TextView serviceDetails, specialist, health_vaccine;
-    private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
+
+    private ImageView close_button, distance_left, feedback, top_logo;
     private RadioGroup feedRadio;
-    RadioButton rb1, rb2, rb3,rb4,rb5;
+    RadioButton rb1;
     String status = "", phone_num = "", registered = "";
-    String result_concate = "";
+
     private CheckBox checkBox;
     EditText feedback_comment;
     ListView alldata;
@@ -134,7 +127,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
-        int densityDpi = (displayMetrics.densityDpi);
+
         con = this;
 
         screenSize = AppUtils.ScreenSize(this);
@@ -191,14 +184,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         setRatingBar();
 
-        CheckConcate("প্রতিস্টানের ধরন", healthServiceProviderItemNew.getInstitute_type());
-        CheckConcate("ধারন ক্ষমতা", healthServiceProviderItemNew.getCapacity());
-        CheckConcate("পুরুষ ডাক্তার", healthServiceProviderItemNew.getMale_doctors());
-        CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
-        CheckConcate("রোগী এবং ডাক্তারের অনুপাত", healthServiceProviderItemNew.getPatient_doctor_ratio());
-        CheckConcate("পুরুষ ডাক্তার", healthServiceProviderItemNew.getMale_doctors());
-        CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
-        CheckConcate("রোগী নার্সের অনুপাত", healthServiceProviderItemNew.getPatient_nurse_ratio());
+        CheckConcate("প্রতিষ্ঠানের ধরন", healthServiceProviderItemNew.getInstitute_type());
         CheckConcate("পরিচিত স্থান", healthServiceProviderItemNew.getLandmark());
         CheckConcate("ব্লক", healthServiceProviderItemNew.getBlock());
         CheckConcate("ফ্লোর", healthServiceProviderItemNew.getFloor());
@@ -210,7 +196,13 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolice_station());
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_for());
         CheckConcate("বিনামূল্যে সেবার ধরন", healthServiceProviderItemNew.getGeneral_free_services());
-
+        CheckConcate("ধারন ক্ষমতা", healthServiceProviderItemNew.getCapacity());
+        CheckConcate("পুরুষ ডাক্তার", healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("রোগী এবং ডাক্তারের অনুপাত", healthServiceProviderItemNew.getPatient_doctor_ratio());
+        CheckConcate("পুরুষ ডাক্তার", healthServiceProviderItemNew.getMale_doctors());
+        CheckConcate("মহিলা ডাক্তার", healthServiceProviderItemNew.getFemale_doctors());
+        CheckConcate("রোগী নার্সের অনুপাত", healthServiceProviderItemNew.getPatient_nurse_ratio());
 
 
         CheckConcate("ফার্মেসি চিকিৎসা সেবা", healthServiceProviderItemNew.getPharmacy_speciality());

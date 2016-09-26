@@ -1,2 +1,4 @@
-include ':volley', ':app'
+include ':volley', ':app',':ViewPagerIndicator-Library'
 project(':volley').projectDir = new File('libraries/volley')
+
+project(':ViewPagerIndicator-Library').projectDir = new File('libraries/ViewPagerIndicator-Library')

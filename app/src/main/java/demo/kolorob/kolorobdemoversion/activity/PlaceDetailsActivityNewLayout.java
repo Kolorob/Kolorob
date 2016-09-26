@@ -1,9 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,7 +55,6 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
@@ -66,7 +63,6 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-import demo.kolorob.kolorobdemoversion.adapters.SearchHolder;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
@@ -75,7 +71,6 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProvid
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
@@ -85,7 +80,6 @@ import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
@@ -93,7 +87,6 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
-import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -106,14 +99,12 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
  * @author israt,arafat
  */
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
-    public int getShowList() {
-        return showList;
-    }
+
     EducationServiceProviderTable educationServiceProviderTable;
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
-    int count;
+
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
@@ -121,29 +112,28 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.showList = showList;
     }
     ToggleButton toggleButton;
-    private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
+
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
-    private LinearLayout llCatListHolder,mapnother,listholder,explist,svholder,svsholder;
+    private LinearLayout llCatListHolder,explist,svholder,svsholder;
     CategoryItem ci;
     private LinearLayout llSubCatListHolder;
-    private HashMap<String, Integer> sections = new HashMap<String, Integer>();
+
     private static FrameLayout map;
     private KolorobSpinner spItems;
     ArrayAdapter arrayAdapter;
     ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
-    private View nextChild;
+
     private ExpandableListView subCatItemList;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
     private int subCatShowFlag=0;
     private int locationNameId,subcategory;
     private String locationName;
-    private ListView expandableListview;
-    private RelativeLayout wholeLayout;
+
     private int showList;
     private String locationNameEng;
     private String comapreData;
@@ -154,19 +144,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     Boolean InCompare=false;
     private Button prebutton;
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
-    private int sideIndexHeight;
+
     private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
-    private List<Object[]> alphabet = new ArrayList<Object[]>();
-    Activity act;
+
+
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
     RelativeLayout compare_layoutedu;
-    public int layoutstatus;
-    private Boolean list_expand=false;
-    private TextView listOrMapDisplayText;
+
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
     private Toolbar toolbar;
     TextView health_name2,opening_time2,language_spoken2,service_type2,specialist_available2,clean_facilities2,privacy2,quality_equipment2;
-    TextView health_name1,opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1,cost1,cost2,cost3;
+    TextView opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1,cost1,cost2,cost3;
     TextView health_name3,opening_time3,language_spoken3,service_type3,specialist_available3,clean_facilities3,privacy3,quality_equipment3;
 
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
@@ -181,48 +169,36 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
     ArrayList<HealthServiceProviderItemNew> printnameshea;
     ArrayList<FinancialNewItem> printnamesfin;
-    ArrayList<String> allData= new ArrayList<>();
+
     private DrawerLayout drawer;
-    ArrayList<SearchHolder> searchheads=new ArrayList<>();
+
     Context context;
     ArrayList <String>Headerholder=new ArrayList<>();
     ArrayList<EducationNewItem> printnames;
     ArrayList<GovernmentNewItem> printgovs;
-    //common for all categories
-    public LinearLayout sideIndex,searchLayout;
-    public CategoryItem getCi() {
-        return ci;
-    }
+
     int[] flag2 =new int[15];
 
     public void setCi(CategoryItem ci) {
         this.ci = ci;
     }
 
-    private ArrayList<SubCategoryItem> currentSubCategoryItem;
-    public static int currentCategoryID,currentCategoryIDconverted;
-    private  ViewGroup.LayoutParams kk;
+    public static int currentCategoryID;
+
 
     Vector<Group> groups = new Vector<Group>();
     TextView header;
     private String placeChoice;
-    private int indexListSize;
-    private ListActivity listView;
-    private ImageButton expandableListShowing,more,MapButton,ListButton,SearchButton,CompareButton;
-    private RelativeLayout mapholderr;
+
+    private ImageButton MapButton,ListButton,SearchButton,CompareButton;
+
     ArrayList<CategoryItem> categoryList;
     ArrayList<CategoryItem> categoryList2=new ArrayList<>();
     Boolean SearchClicked=false,MapClicked=true,ListClicked=false,CompareClicked=false;
     private Context con;
-    public RelativeLayout getRlSubCatHolder() {
-        return rlSubCatHolder;
-    }
 
-    public void setRlSubCatHolder(RelativeLayout rlSubCatHolder) {
-        this.rlSubCatHolder = rlSubCatHolder;
-    }
 
-    private ListView itemList;
+
     public    RelativeLayout rlSubCatHolder;
     public String getPlaceChoice() {
         return placeChoice;
@@ -231,13 +207,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public void setPlaceChoice(String placeChoice) {
         this.placeChoice = placeChoice;
     }
-    EditText Searchall,catsearch;
-    boolean catsearchclicked=false;
+    EditText Searchall;
+
     ListViewAdapterAllCategories adapter;
     EditText filterText;
     ListView allitemList;
     String filterword;
-    TextView searchtext;
+
     private int smal;
 
     int snumber=0;
@@ -258,9 +234,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.snumber = snumber;
     }
 
-    public String getFilterword() {
-        return filterword;
-    }
+
     TextView tvName;
     public void setFilterword(String filterword) {
         this.filterword = filterword;
@@ -269,9 +243,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     boolean catstatus=false;
     int filcatid;
     RelativeLayout catholder;
-    CheckBox check;
+
     Boolean NavigationCalled,NavigationCalledOnce;
-    LinearLayout fholder,fleft,fright,mbholder,lbholder,sbholder,cbholder;
+    LinearLayout fholder,fleft,fright;
     RelativeLayout searchviewholder,filterholder;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
@@ -283,14 +257,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private ArrayList<HealthServiceProviderItemNew>fetchedhel;
     public ArrayList<GovernmentNewItem>fetchedgov;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
-    RadioGroup catgroup,fgrp1,fgrp2;
+    RadioGroup fgrp1,fgrp2;
     int va;
     ArrayList<String>filter=new ArrayList<>();
     ArrayList<String>filter2=new ArrayList<>();
     public int getFilcatid() {
         return filcatid;
     }
-    ArrayList<SubCategoryItem> subCategoryList;
+
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
@@ -299,12 +273,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String checknum;
     Boolean flag;
     boolean filterclicked=false;
-    ArrayList<EducationNewItem> eduItem=new ArrayList<>();
-    ArrayList<GovernmentNewItem> govItem=new ArrayList<>();
-    ArrayList<HealthServiceProviderItemNew> healthItem=new ArrayList<>();
-    ArrayList<EntertainmentServiceProviderItemNew> entItem=new ArrayList<>();
-    ArrayList<LegalAidServiceProviderItemNew> legalItem=new ArrayList<>();
-    ArrayList<FinancialNewItem> financialItem=new ArrayList<>();
+
+
     String idx,idxx,idxxx,idxxxx;
     ArrayList<EducationNewItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
@@ -315,18 +285,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 TextView uptext;
     boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
-    EducationServiceProviderItem nulledu;
-    EducationNewItem nulledu2;
+
     String nodefromback;
 int index;
     MapFragmentOSM mapFragment;
-    public String getNodefromback() {
-        return nodefromback;
-    }
 
-    public void setNodefromback(String nodefromback) {
-        this.nodefromback = nodefromback;
-    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -348,8 +313,7 @@ int index;
         val = settings.getInt("KValue", 0);
         Log.e("ASinplaceDetails",String.valueOf(val));
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        int checkheight=  getApplicationContext().getResources().getConfiguration().screenHeightDp;
-        int checkwidth=  getApplicationContext().getResources().getConfiguration().screenWidthDp;
+
         dpi=displayMetrics.densityDpi;
         int width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
@@ -440,9 +404,7 @@ int index;
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
         ab.setDisplayHomeAsUpEnabled(true);
-        mapnother=(LinearLayout)findViewById(R.id.mapnothers);
-        mapholderr=(RelativeLayout)findViewById(R.id.mapholder);
-        listholder=(LinearLayout)findViewById(R.id.listholder);
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
@@ -919,7 +881,7 @@ int index;
                 setShowList(1);
                 toolbar.setVisibility(View.VISIBLE);
                 toggleButton.setVisibility(View.VISIBLE);
-                list_expand = true;
+
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
                 if(currentCategoryID<1)
@@ -1738,7 +1700,7 @@ int index;
 
                 for (int j = 0; j < RefEnt.size(); j++) {
                     Group group = new Group(RefEnt.get(j));
-                    Log.d("RefEnt.get(j)","******"+RefEnt.get(j));
+
                     printnamesent = null;
                     int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
                     printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
@@ -1746,7 +1708,7 @@ int index;
 
                     for (int i = 0; i < printnamesent.size(); i++) {
 
-                        Log.d("printnamesent.get(i)","******"+printnamesent.get(i));
+
 
                         group.childrenent.add(i, printnamesent.get(i));
                     }
@@ -1786,24 +1748,18 @@ int index;
                 subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
                 HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
 
-                HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printhea = null;
+
                 ArrayList<String> RefHealth=null;
-                ArrayList<SubCategoryItemNew> RefHealthx=null;
+
                 groups.removeAllElements();
                 RefHealth=subCategoryTableNew.getSubnameedu(1);
-                ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews2;
-                // printhea = subCategoryTable3.getSubnameedu(currentCategoryID, head);
+
                 Collections.sort(RefHealth);
                 for (int j = 0; j < RefHealth.size(); j++) {
                     Group group = new Group(RefHealth.get(j));
                     printnameshea = null;
                     int refId=subCategoryTableNew.getRefId(RefHealth.get(j));
-                    ArrayList<SubCategoryItemNew>subCategoryItemNews;
-                    // subCategoryItemNews=subCategoryTableNew.getAllSubCat();
-                    //ealthServiceProviderItemNews2=healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
 
-//                    printnameshea = healthServiceProviderTableNew.getAllHealthSubCategoriesInfo();
                     printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
                     for (int i = 0; i <  printnameshea .size(); i++) {
                         group.childrenhea.add(i,printnameshea .get(i));
@@ -2028,8 +1984,8 @@ int index;
 //
             super.onBackPressed();
 
-        //    finish();
-            return;
+          this.finish();
+
         }
 
        ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
@@ -2138,18 +2094,7 @@ int index;
 
                     iv.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[i]);
                 }
-               /* llCatListHolder.getChildAt(0).setBackgroundResource(R.drawable.turned_off_porashona);
-                llCatListHolder.getChildAt(1).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chikitsha));
-                llCatListHolder.getChildAt(2).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_anondo_furti));
-                llCatListHolder.getChildAt(3).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_shorkari_shubidha));
-                llCatListHolder.getChildAt(4).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_ain_kanun));
-                llCatListHolder.getChildAt(5).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_taka_poisha));
-                llCatListHolder.getChildAt(6).setBackgroundDrawable(getResources().getDrawable(R.drawable.turned_off_chakri_bakri));
-*/
 
-
-
-                //
                 /*code for category*/
                 /*following code will be different for each category*/
                 /*category id 1 means education.
@@ -2417,7 +2362,7 @@ int index;
 
                         Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
                         startActivity(intentJ);
-
+                        callMapFragmentWithFinancial(-1,null,true);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.job_selected);
 
@@ -2482,7 +2427,7 @@ int index;
 
 
         ArrayList<String> itemName = new ArrayList<String>();
-        currentSubCategoryItem = subCategoryItems;
+
         for(SubCategoryItem si : subCategoryItems)
         {
             itemName.add(si.getSubCatName());
@@ -2533,8 +2478,7 @@ int index;
     {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+
         View v;
         LayoutInflater li = LayoutInflater.from(this);
 
@@ -2791,7 +2735,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
 
         MapFragmentOSM prev_fragment = (MapFragmentOSM) getFragmentManager().findFragmentByTag("MAP");
-        if(prev_fragment!=null)
+        if(prev_fragment!=null&&prev_fragment.getMapViewController() != null)
         {
             if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
             else prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);

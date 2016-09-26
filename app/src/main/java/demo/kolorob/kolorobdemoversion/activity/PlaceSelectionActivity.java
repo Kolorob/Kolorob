@@ -257,6 +257,7 @@ loadIMEI();
                     if(click==false)
                     {
                         Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent .setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                         intent.putExtra(AppConstants.KEY_PLACE, 2);
                         startActivity(intent);
                         click=true;
@@ -560,6 +561,7 @@ else
         TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
        if(phone.equals("")) phone=IMEINumber;
 
+        if (phone.equals(""))phone.replace("","0");
         else {
             String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
 

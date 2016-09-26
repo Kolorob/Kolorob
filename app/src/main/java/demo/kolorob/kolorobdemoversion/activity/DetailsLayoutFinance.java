@@ -63,14 +63,12 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     Dialog dialog;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
-    LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
+    LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar;
     ImageView left_image, middle_image, right_image, email_btn;
-    TextView address_text, phone_text, email_text;
+
     int width, height;
     TextView ups_text;
-    ListView courseListView, listView;
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
+
     Context con;
     String[] key;
     String[] value;
@@ -79,21 +77,16 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     FinancialNewItem financialNewItem;
     EditText feedback_comment;
     ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
+
     private TextView ratingText;
-    private TextView serviceDetails, result, training, tuition;
+
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
-    RadioButton rb1, rb2, rb3;
+    RadioButton rb1;
     String status = "", phone_num = "", registered = "";
-    String result_concate = "";
+
     RatingBar ratingBar;
-    Float rating;
+
     String datevalue,datevaluebn;
 
     @Override

@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,14 +62,13 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     Dialog dialog;
-    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar,linearLayout;
+    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar;
     ImageView left_image,middle_image,right_image,email_btn;
-    TextView address_text,phone_text,email_text;
+
     int width,height;
     String datevalue,datevaluebn;
 
-    TextView ups_text,headerx;
-    ListView courseListView,listView;
+    TextView ups_text;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Context con;
@@ -79,22 +77,14 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     int increment=0;
     EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
-    ArrayList<EntertainmentServiceProviderItemNew>entertainmentServiceProviderItemNewsx;
-    private TextView totalStudents;
-    private TextView totalClasses;
-    private TextView totalTeachers;
-    private TextView playground;
-    private TextView hostel;
-    private TextView transport;
-    private TextView ratingText,detailsEntertainment,other_detailsEnt;
-    private ImageView close_button,phone_mid,distance_left,feedback,top_logo,cross,school_logo_default;
+
+    private TextView ratingText;
+    private ImageView distance_left,feedback,top_logo,cross;
     RadioGroup feedRadio;
-    RadioButton rb1,rb2,rb3;
-    String status="",phone_num="",registered="";
+    RadioButton rb1;
+    String status="",phone_num="";
     String result_concate="";
-    private CheckBox checkBox;
     EditText feedback_comment;
-    Float rating;
     RatingBar ratingBar;
     ListView alldata;
 
@@ -133,7 +123,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         ratingText=(TextView)findViewById(R.id.ratingText);
 
-        // headerx=(TextView)findViewById(R.id.headerx);
+
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
@@ -141,7 +131,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         mlp.setMargins(width/100,0,width/990,width/8);
 
-        // close_button=(ImageView)findViewById(R.id.close_button);
+
 
         top_logo=(ImageView)findViewById(R.id.top_logo);
         cross=(ImageView)findViewById(R.id.cross_jb);
@@ -154,37 +144,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
-        checkBox = (CheckBox) findViewById(R.id.compare);
+
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<=400)
             ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         setRatingBar();
-
-//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                int compareValue;
-//                compareValue= SharedPreferencesHelper.getComapreValue(DetailsInfoActivityHealthNew.this);
-//                if(compareValue>=2)
-//                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
-//                            "আপনি ইতিমধ্যে দুটি সেবা নির্বাচিত করেছেন তুলনার জন্য");
-//                else if (compareValue==0)
-//                {
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,educationServiceProviderItem.getIdentifierId(),1);
-//                }
-//
-//                else if(compareValue==1)
-//                {
-//                    String previous_node;
-//                    previous_node=SharedPreferencesHelper.getComapreData(DetailsInfoActivityEducation.this);
-//                    previous_node= previous_node+" "+educationServiceProviderItem.getIdentifierId();
-//                    SharedPreferencesHelper.setCompareData(DetailsInfoActivityEducation.this,previous_node,2);
-//                }
-//
-//
-//            }
-//        });
-//
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
@@ -196,7 +160,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
 
 
-        //  params_upperText.setMargins(width/3,0,0,0);
+
         upperText.setLayoutParams(params_upperText);
 
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
@@ -222,12 +186,10 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         left_image.getLayoutParams().height =  width/8;
         left_image.getLayoutParams().width =  width/8;
 
-//        school_logo_default.getLayoutParams().height =  width/5;
-//        school_logo_default.getLayoutParams().width =  width/5;
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int vx = params_middle_phone.height = (height * 3) / 24;
+
         params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
 
@@ -355,39 +317,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         });
 
 
-
-//        feedback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
-//                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
-//                feedIntent.putExtra("categoryId","1");
-//                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
-//
-//                startActivity(feedIntent);
-//
-//            }
-//        });
-
-
-//            right_image.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if(educationServiceProviderItem.getEmailAddress().equals(""))
-//                    {
-//                        AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-//                                "ই মেইল আই ডি পাওয়া যায়নি");
-//                    }
-//                }
-//            });
-//
-
-
-        // phermacy.setText(lat);
-
-
-//        }
-
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -422,8 +351,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                     String Latitude = pref.getString("Latitude", null);
 
                     if (Latitude != null && Longitude != null) {
-                        Double Lon = Double.parseDouble(Longitude);
-                        Double Lat = Double.parseDouble(Latitude);
+
                         // implementFragment();
                         //username and password are present, do your stuff
                     }
@@ -447,16 +375,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
 
 
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
+
 
                 }
 
@@ -465,187 +384,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         });
 
     }
-//
-//    public void verifyRegistration(View v){
-//
-//        Boolean register=RegisteredOrNot();
-//
-//        if(register.equals(false))
-//        {
-//            requestToRegister();
-//        }
-//
-//        else {
-//
-//            feedBackAlert();
-//            sendReviewToServer();
-//        }
-//
-//
-//    }
 
-//    public void feedBackAlert()
-//    {
-//
-//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
-//        View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//
-//        final Button submit= (Button) promptView.findViewById(R.id.submit);
-//
-//
-//        final AlertDialog alert = alertDialogBuilder.create();
-//
-//
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                declareRadiobutton();
-//
-//
-//                alert.cancel();
-//
-//            }
-//        });
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false);
-//
-//
-//
-//        alert.show();
-//    }
-
-
-//    public void sendReviewToServer()
-//    {
-//        int rating;
-//        if(status.equals("ভাল"))
-//            rating=1;
-//        else if(status.equals("মোটামোট"))
-//            rating=2;
-//        else
-//            rating=3;
-//        String url = "http://www.kolorob.net/KolorobApi/api/rating/save_feedback?phone="+phone_num+"&node="+educationServiceProviderItem.getIdentifierId()+"&service="+"1"+"&rating="+rating;
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(DetailsInfoActivityEducation.this,response,Toast.LENGTH_SHORT).show();
-//                        // Log.d(">>>>>","status "+response);
-//                        try {
-//                            JSONObject jo = new JSONObject(response);
-//                            String forms;
-//                            forms = jo.getString("status");
-//                            Log.d(">>>>>","status "+forms);
-//                            //Log.d(">>>>>","status ");
-//
-//                            if(forms.equals("true"))
-//                            {
-//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়েছে",
-//                                        "েজিস্টেশন করার জন্য আপনাকে ধন্যবাদ");
-//                            }
-//                            else
-//                                AlertMessage.showMessage(DetailsInfoActivityEducation.this, "রেজিস্টেশনটি সফলভাবে সম্পন্ন হয়ে নি",
-//                                        "আপনি ইতিপূর্বে রেজিস্ট্রেশন করে ফেলেছেন");
-//
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(DetailsInfoActivityEducation.this,error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                }) {
-//
-//            @Override
-//            protected Map<String, String> getParams() {
-//
-//                Map<String, String> params = new HashMap<>();
-//
-//                return params;
-//            }
-//
-//        };
-
-//// Adding request to request queue
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityEducation.this);
-//        requestQueue.add(stringRequest);
-//    }
-
-//    public void declareRadiobutton()
-//    {
-//        // int selected = feedRadio.getCheckedRadioButtonId();
-//        // RadioButton rb1 = (RadioButton) findViewById(selected);
-//        //  status = rb1.getText().toString();
-//
-//        // Arafat, i set it as static 1, pls change this codes;
-//
-//        status = "1";
-//    }
-
-//    public void requestToRegister()
-//    {
-//        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEducation.this);
-//        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailsInfoActivityEducation.this);
-//        alertDialogBuilder.setView(promptView);
-//
-//
-//        final ImageView yes= (ImageView)promptView.findViewById(R.id.yes);
-//        final ImageView no= (ImageView)promptView.findViewById(R.id.no);
-//
-//        final AlertDialog alert = alertDialogBuilder.create();
-//
-//
-//        yes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intentPhoneRegistration= new Intent(DetailsInfoActivityEducation.this,PhoneRegActivity.class);
-//                startActivity(intentPhoneRegistration);
-//
-//            }
-//        });
-//
-//
-//
-//        no.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alert.cancel();
-//
-//            }
-//        });
-//        // setup a dialog window
-//        alertDialogBuilder.setCancelable(false);
-//
-//
-//
-//        alert.show();
-//    }
-//
-//
-//    private boolean checkPermission(){
-//        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
-//        if (result == PackageManager.PERMISSION_GRANTED){
-//
-//            return true;
-//
-//        } else {
-//
-//            return false;
-//
-//        }
 
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
@@ -798,21 +537,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
     public void setRatingBar()
     {
-//        getRequest(DetailsInfoActivityEntertainmentNew.this, "http://kolorob.net/demo/api/get_sp_rating/entertainment?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-//                    @Override
-//                    public void onResponse(int status, String apiContent) {
-//                        if (status == AppConstants.SUCCESS_CODE) {
-//                            try {
-//                                JSONArray jo = new JSONArray(apiContent);
-//                                int size= jo.length();
-//                                for(int i=0;i<size;i++)
-//                                {
-//                                    JSONObject ratingH=jo.getJSONObject(i);
-//                                    String id= ratingH.getString("id");
-//                                    if(id.equals(entertainmentServiceProviderItemNew.getNodeId()))
-//                                    {
-//
-//                                        rating=Float.parseFloat(ratingH.getString("avg"));
 
         try {
             float f= Float.parseFloat(entertainmentServiceProviderItemNew.getRating());
@@ -827,24 +551,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         }
 
-//                                        break;
-//
-//                                    }
-//
-//
-//                                }
-//
-//
-//
-//
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                }
-//        );
+
     }
 
     public void requestToRegister() {
@@ -988,22 +695,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         return timeInBengali;
 
     }
-    //    public Boolean RegisteredOrNot()
-//    {
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        //  editor.putString("registered", lat);
-//        registered = pref.getString("registered", null);
-//        phone_num = pref.getString("phone",null);
-//        // editor.commit();
-//        //  if(registered.equals("yes"))
-//        return true;
-//        //  else
-//        //   return true;
-//
-//
-//
-//
+
     private void CheckConcate(String value1, String value2) {
 
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
