@@ -14,11 +14,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -59,8 +60,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -76,11 +79,12 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     ImageButton img;
     Toolbar toolbar;
     private String comment = "";
+
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
     NotificationManager manager;
     private Notification myNotication;
-
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     Toast t = null;
     Intent i;
     String IMEINumber;
@@ -174,6 +178,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
 loadIMEI();
+        checkPermissions();
         // Load ads into Interstitial Ads
         mInterstitialAd.loadAd(adRequest);
 
@@ -764,12 +769,7 @@ else
     /**
      * Callback received when a permissions request has been completed.
      */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
 
-
-    }
 
     private void alertAlert(String msg) {
         new AlertDialog.Builder(PlaceSelectionActivity.this)
@@ -784,7 +784,25 @@ else
 
     }
 
-
+    private void checkPermissions() {
+        List<String> permissions = new ArrayList<>();
+        String message = "osmdroid permissions:";
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            message += "\nLocation to show user location.";
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            message += "\nStorage access to store map tiles.";
+        }
+        if (!permissions.isEmpty()) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            String[] params = permissions.toArray(new String[permissions.size()]);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+            }
+        } // else: We already have permissions, so handle as normal
+    }
     public void doPermissionGrantedStuffs() {
         //Have an  object of TelephonyManager
         TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -792,6 +810,38 @@ else
         IMEINumber=tm.getDeviceId();
 
 
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+                Map<String, Integer> perms = new HashMap<>();
+                // Initial
+                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                // Fill with results
+                for (int i = 0; i < permissions.length; i++)
+                    perms.put(permissions[i], grantResults[i]);
+                // Check for ACCESS_FINE_LOCATION and WRITE_EXTERNAL_STORAGE
+                Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+                Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                if (location && storage) {
+                    // All Permissions Granted
+                    Toast.makeText(PlaceSelectionActivity.this, "All permissions granted", Toast.LENGTH_SHORT).show();
+                } else if (location) {
+                    Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
+                } else if (storage) {
+                    Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+                } else { // !location && !storage case
+                    // Permission Denied
+                    Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
+                            "\nLocation permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
 }
