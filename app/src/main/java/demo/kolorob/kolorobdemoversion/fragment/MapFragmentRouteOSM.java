@@ -2,11 +2,9 @@ package demo.kolorob.kolorobdemoversion.fragment;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -27,7 +25,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -36,7 +33,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.osmdroid.api.IMapController;
-import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.bonuspack.routing.RoadNode;
@@ -72,14 +68,15 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     Marker marker;
     MyLocationNewOverlay mylocation;
     private LinearLayout subcatlistholder;
-    String stlat, stlong,centername;
+    String stlat, stlong, centername;
     int ind = 0;
     Polyline roadOverlay;
     Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     List<String> listData = new ArrayList<String>();
-    double laat,longg;
+    double laat, longg;
+
     public String getLocationName() {
         return locationName;
     }
@@ -103,7 +100,6 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     private int categoryId;
 
 
-
     public int getCategoryId() {
         return categoryId;
     }
@@ -113,9 +109,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     }
 
 
-
-
-    int subcategotyId,height,width;
+    int subcategotyId, height, width;
     View rootView;
 
     public MapFragmentRouteOSM() {
@@ -133,7 +127,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     IMapController mapViewController;
 
     @Override
-     public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
@@ -157,7 +151,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
 
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
-        mapView = (MapView)findViewById(R.id.mapview);
+        mapView = (MapView) findViewById(R.id.mapview);
 
         havePolyLine = false;
         if (havePolyLine) {
@@ -186,7 +180,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         locationNameId = pref.getInt("LocationNameId", 0);
         double lat = Double.parseDouble(Latitude);
         double lon = Double.parseDouble(Longitude);
-        markerlocation = new GeoPoint(lat,lon);
+        markerlocation = new GeoPoint(lat, lon);
         Marker centermarker = new Marker(mapView);
         curposition = new Marker(mapView);
         centermarker.setPosition(markerlocation);
@@ -220,6 +214,16 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
             if (provider != null && !provider.equals("")) {
 
                 // Get the location from the given provider
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 location = locationManager.getLastKnownLocation(provider);
 
 
@@ -230,12 +234,13 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
                     onLocationChanged(location);
                     Drawroute(userlocation, markerlocation);
                 } else
-                    ToastMessageDisplay.ShowToast(this,"Location can't be retrieved");
-
+                    ToastMessageDisplay.setText(this,"Location can't be retrieved");
+                ToastMessageDisplay.showText(this);
 
             } else {
 
-                ToastMessageDisplay.ShowToast(this,"No Provider Found");
+                ToastMessageDisplay.setText(this,"No Provider Found");
+                ToastMessageDisplay.showText(this);
             }
         }
         mapViewController.setZoom(18);

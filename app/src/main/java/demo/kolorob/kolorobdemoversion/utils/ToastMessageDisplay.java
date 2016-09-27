@@ -13,7 +13,7 @@ import demo.kolorob.kolorobdemoversion.R;
  * Created by Mazharul.Islam1 on 9/5/2016.
  */
 public class ToastMessageDisplay {
-
+static String m;
 
     public static void setText(Context context,String message)
     {
@@ -25,8 +25,9 @@ public class ToastMessageDisplay {
         Toast toast = new Toast(context);
         toast.setView(toastView);
         TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
-        toastMessage.setTextSize(20);
-        toastMessage.setText(message);
+
+        m=message;
+       // toastMessage.setText(message);
 //        toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setGravity(Gravity.CENTER);
 
@@ -37,8 +38,14 @@ public class ToastMessageDisplay {
     {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View toastView = inflater.inflate(R.layout.toast_view,null);
+        TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
         Toast toast = new Toast(context);
+        toastMessage.setText(m);
         toast.setView(toastView);
+        if (SharedPreferencesHelper.isTabletDevice(context)){
+            toastMessage.setPadding(15,15,15,15);
+            toastMessage.setTextSize(30);}
+        else toastMessage.setTextSize(20);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }

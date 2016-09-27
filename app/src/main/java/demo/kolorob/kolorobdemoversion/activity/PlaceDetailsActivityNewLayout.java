@@ -1997,8 +1997,8 @@ int index;
           this.finish();
 
         }
-       ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
-
+       ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+        ToastMessageDisplay.showText(this);
         this.doubleBackToExitPressedOnce = true;
 
 

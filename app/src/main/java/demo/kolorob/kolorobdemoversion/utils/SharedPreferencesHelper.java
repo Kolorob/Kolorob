@@ -302,7 +302,7 @@ public final class SharedPreferencesHelper {
 		}
 
 		// No, this is not a tablet!
-		return false;
+		return true;
 	}
 
 	public static boolean isOnline(final Context ctx) {
