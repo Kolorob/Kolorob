@@ -297,7 +297,10 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
             CheckConcate("Center Type", entertainmentTypeItem.getType());
             CheckConcate("Service Type", entertainmentTypeItem.getSub_type());
-            CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price()+" BDT");
+            if(entertainmentTypeItem.getRecreation_price().equals("")||entertainmentTypeItem.getRecreation_price().equals("null"))
+                CheckConcate("Service Cost", "70 BDT");
+            else
+                CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price()+" BDT");
             CheckConcate("Additional Information ", entertainmentTypeItem.getRecreation_remarks());
 
 
@@ -313,7 +316,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         //   other_detailsEnt.setText(result_concate);
 
-        Log.d("Entertainment Parsing","###### "+entertainmentServiceProviderItemNew.getNodeWebsite());
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -333,7 +335,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
                 if (!entertainmentServiceProviderItemNew.getNodeContact().equals("null")&&!entertainmentServiceProviderItemNew.getNodeContact().equals("")) {
-                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeContact());
                     callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItemNew.getNodeContact()));
                     if (checkPermission())
                         startActivity(callIntent1);
@@ -444,16 +445,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             "Please activate your internet to see route");
 
 
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityEntertainmentNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
+
 
                 }
 
