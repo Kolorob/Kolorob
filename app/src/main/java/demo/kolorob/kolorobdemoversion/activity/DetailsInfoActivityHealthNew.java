@@ -961,27 +961,31 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         }
     }
+    private void CheckConcate(String value1,String value2){
 
-    private void CheckConcate(String value1, String value2) {
-
-
-
-        if (!value2.equals("null") && !value2.equals("")) {
-            if(value2.equals(" BDT"))
-            {
-                key[increment] = value1;
-                value[increment] = "120 BDT";
-            }
-            else {
-                key[increment] = value1;
-                value[increment] = AppUtils.Check_Capitalization(value2);
-            }
-
-            increment++;
-
+        if(value1.equals("Email")||value1.equals("Web site"))
+        {
+            key[increment] = value1;
+            value[increment] = value2;
         }
+        else {
+            if (!value2.equals("null") && !value2.equals("")) {
+                if(value2.equals(" BDT"))
+                {
+                    key[increment] = value1;
+                    value[increment] = "120 BDT";
+                }
+                else {
+                    {
+                        key[increment] = value1;
+                        value[increment] = AppUtils.Check_Capitalization(value2);
+                    }
 
+                }
+                increment++;
 
+            }
+        }
     }
 
 
