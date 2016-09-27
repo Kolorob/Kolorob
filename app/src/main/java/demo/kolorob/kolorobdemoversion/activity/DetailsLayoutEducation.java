@@ -351,7 +351,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("Course Duration", educationTrainingDetailsItem.getCourseduration());
                 CheckConcate("Admission(Month)", educationTrainingDetailsItem.getAdmissionmonth());
                 CheckConcate("Cost", educationTrainingDetailsItem.getCost()+" BDT");
-                CheckConcate("Type", educationTrainingDetailsItem.getTrainingnametype());
+                CheckConcate("Training Type", educationTrainingDetailsItem.getTrainingnametype());
                 CheckConcate("Training Name", educationTrainingDetailsItem.getTrainingnamesubtype());
 
 
