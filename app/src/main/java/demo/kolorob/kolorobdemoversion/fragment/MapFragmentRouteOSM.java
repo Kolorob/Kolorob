@@ -162,7 +162,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         mapView.setClickable(true);
 
 
-        mapView.setBuiltInZoomControls(true);
+        mapView.setBuiltInZoomControls(false);
         mapView.setMultiTouchControls(true);
         mapView.setUseDataConnection(true);
 

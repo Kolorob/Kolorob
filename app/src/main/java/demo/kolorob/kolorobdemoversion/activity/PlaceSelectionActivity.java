@@ -164,7 +164,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         //   int relativeWidthOfImage = (int)(width * 0.1);
         final int coordsHeight = 800;
-        final int coordsWidth = 480;
+        final int coordsWidth = 450;
         final String comment = "";
         String app_ver = "";
         NotificationManager manager;
@@ -219,7 +219,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
                 x = x * ((float) coordsWidth / (float) width);
                 y = y * ((float) coordsHeight / (float) height);
-                y = y + 37;
+                y = y +37;
                 t=Toast.makeText(getApplicationContext(),"value ", Toast.LENGTH_SHORT);
                 boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
                 boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
