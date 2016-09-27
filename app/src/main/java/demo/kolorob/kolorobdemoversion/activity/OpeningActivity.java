@@ -375,8 +375,8 @@ public class OpeningActivity extends Activity {
             String contents = new String(bytes);
             String delims = "[,]";
             String[] tokens = contents.split(delims);
-         first=tokens[1];
-           //first="yes";
+            first=tokens[1];
+            //first="yes";
         }
         else {
             int length = (int) file.length();
@@ -409,8 +409,8 @@ public class OpeningActivity extends Activity {
             String delims = "[,]";
             String[] tokens = contents.split(delims);
 
-             first=tokens[1];
-            // first="yes";
+           first=tokens[1];
+            //first="yes";
         }
 
 
