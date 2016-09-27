@@ -25,7 +25,7 @@ public class ToastMessageDisplay {
         Toast toast = new Toast(context);
         toast.setView(toastView);
         TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
-        toastMessage.setTextSize(25);
+        toastMessage.setTextSize(20);
         toastMessage.setText(message);
 //        toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setGravity(Gravity.CENTER);

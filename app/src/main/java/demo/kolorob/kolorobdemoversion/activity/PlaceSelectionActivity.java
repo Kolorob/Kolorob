@@ -843,8 +843,11 @@ else
                 Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
                 Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                 Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
-                if (location && storage) {
+                if (location && storage&& phonestate) {
                     // All Permissions Granted
+                    TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                    //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+                    IMEINumber=tm.getDeviceId();
                     Toast.makeText(PlaceSelectionActivity.this, "All permissions granted", Toast.LENGTH_SHORT).show();
                 } else if (location) {
                     Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
