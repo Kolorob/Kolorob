@@ -1006,14 +1006,30 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 //
     private void CheckConcate(String value1, String value2) {
 
-        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
+        if (!value2.equals("null") && !value2.equals("")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = Check_Capitalization(value2);
             increment++;
 
         }
 
 
+    }
+
+    private String Check_Capitalization(String s)
+    {
+        s=s.trim();
+        char c= s.charAt(0);
+        int values = (int) c;
+
+        if(values>=97&&values<=122) {
+            values = values - 32;
+            c = (char) values;
+            StringBuilder capitalized_string = new StringBuilder(s);
+            capitalized_string.setCharAt(0, c);
+        }
+
+        return s;
     }
 
 
