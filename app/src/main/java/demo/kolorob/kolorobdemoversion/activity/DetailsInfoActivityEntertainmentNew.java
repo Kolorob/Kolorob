@@ -828,8 +828,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private void CheckConcate(String value1, String value2) {
 
         if (!value2.equals("null") && !value2.equals("")) {
-            key[increment] = value1;
-            value[increment] = AppUtils.Check_Capitalization(value2);
+            if(value2.equals(" BDT"))
+            {
+                key[increment] = value1;
+                value[increment] = "120 BDT";
+            }
+            else {
+                key[increment] = value1;
+                value[increment] = AppUtils.Check_Capitalization(value2);
+            }
             increment++;
 
         }
