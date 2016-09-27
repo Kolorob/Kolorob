@@ -122,7 +122,7 @@ public class Comment_layout_adapter extends BaseAdapter
 
 
 
-        holder.mobile.setText("Kolorobian");
+        holder.mobile.setText(mobile[position]);
         holder.comment.setText(comment[position]);
         holder.date.setText(date[position]);
 

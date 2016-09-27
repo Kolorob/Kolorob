@@ -375,7 +375,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
             if(!commentItem.getRating().equals(""))
             {
-                phone[inc]= commentItem.getMob_no();
+                phone[inc]= commentItem.getUser_name();
                 date[inc]='"'+commentItem.getComment()+'"';
                 comment[inc]= commentItem.getDate();
                 rating[inc]= commentItem.getRating();
@@ -670,48 +670,21 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
                     AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
                             "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
-//
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsInfoActivityHealthNew.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
+
 
                 }
 
 
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
 
     }
 
 
     public void setRatingBar()
     {
-//        getRequest(DetailsInfoActivityHealthNew.this, "http://kolorob.net/demo/api/get_sp_rating/health?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-//                    @Override
-//                    public void onResponse(int status, String apiContent) {
-//                        if (status == AppConstants.SUCCESS_CODE) {
-//                            try {
-//                                JSONArray jo = new JSONArray(apiContent);
-//                                int size= jo.length();
-//
-//                                for(int i=0;i<size;i++)
-//                                {
-//                                    JSONObject ratingH=jo.getJSONObject(i);
-//                                    String id= ratingH.getString("id");
-//                                    if(id.equals(healthServiceProviderItemNew.getId()))
-//                                    {
-//                                        Log.d("$$$$$$", "id " + id);
-//
-//                                        rating=Float.parseFloat(ratingH.getString("avg"));
+
         try {
             ratingBar.setRating(Float.parseFloat(healthServiceProviderItemNew.getRating()));
         }
@@ -719,24 +692,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         {
 
         }
-//                                        break;
-//
-//                                    }
-//
-//
-//                                }
-//
-//
-//
-//
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                }
-//        );
+
     }
 
     public void verifyRegistration(View v) {
