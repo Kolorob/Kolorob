@@ -1008,7 +1008,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         if (!value2.equals("null") && !value2.equals("")) {
             key[increment] = value1;
-            value[increment] = Check_Capitalization(value2);
+            value[increment] = AppUtils.Check_Capitalization(value2);
             increment++;
 
         }
@@ -1016,21 +1016,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
     }
 
-    private String Check_Capitalization(String s)
-    {
-        s=s.trim();
-        char c= s.charAt(0);
-        int values = (int) c;
 
-        if(values>=97&&values<=122) {
-            values = values - 32;
-            c = (char) values;
-            StringBuilder capitalized_string = new StringBuilder(s);
-            capitalized_string.setCharAt(0, c);
-        }
-
-        return s;
-    }
 
 
 

@@ -255,6 +255,23 @@ public class AppUtils {
         return "";
     }
 
+    public static String Check_Capitalization(String s)
+    {
+        s=s.trim();
+        char c= s.charAt(0);
+        int values = (int) c;
+        if(values>=97&&values<=122) {
+            values = values - 32;
+            c = (char) values;
+            s= replaceCharAt(s,0,c);
+        }
+        return s;
+    }
+
+    public static String replaceCharAt(String s, int pos, char c) {
+        return s.substring(0, pos) + c + s.substring(pos + 1);
+    }
+
     public static String getDeviceMAC(Context context) {
         WifiManager wifiManager = (WifiManager) context
                 .getSystemService(Context.WIFI_SERVICE);
