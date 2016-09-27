@@ -29,7 +29,6 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -42,7 +41,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -226,17 +224,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
                 boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
                 boolean anyHit = false;
-                LayoutInflater inflater = getLayoutInflater();
-                View toastView = inflater.inflate(R.layout.toast_view,null);
-                Toast toast = new Toast(PlaceSelectionActivity.this);
-                toast.setView(toastView);
-                TextView toastMessage = (TextView) toastView.findViewById(R.id.toasts);
-                toastMessage.setTextSize(25);
 
-                toastMessage.setTextColor(getResources().getColor(R.color.orange));
-                toastMessage.setGravity(Gravity.CENTER);
-                toastMessage.setCompoundDrawablePadding(26);
-                toast.setDuration(Toast.LENGTH_SHORT);
 
 
 
@@ -254,7 +242,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     }
 
                     Log.d("BAUNIABHAD", "********" );
-                   toastMessage.setText("মিরপুর-১১ ");
+                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"মিরপুর-১১ ");
                   //  t = Toast.makeText(getApplicationContext(), "মিরপুর-১১ ", Toast.LENGTH_SHORT);
                     anyHit = true;
                 }
@@ -270,13 +258,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     }
 
                     Log.d("PARIS ROAD", "********" );
-                    toastMessage.setText("মিরপুর-১০");
+                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"মিরপুর-১০");
                    // t = Toast.makeText(getApplicationContext(), "মিরপুর-১০", Toast.LENGTH_SHORT);
                     anyHit = true;
 
                 }
                 if (anyHit)
-                    toast.show();
+                    ToastMessageDisplay.showText(PlaceSelectionActivity.this);
                  //   t.show();
                 return true;
             }
@@ -357,7 +345,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                             Double remote_version = jo.getDouble("version");
 
                             if (remote_version > current_version) {
-                                ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"কলরবের নতুন ভার্সন পাওয়া যাচ্ছে");
+                                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"কলরবের নতুন ভার্সন পাওয়া যাচ্ছে");
+                                ToastMessageDisplay.showText(PlaceSelectionActivity.this);
 
                                 generateNotification();
                             }
@@ -432,7 +421,8 @@ else
                  return;
              }
 
-             ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+             ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+
 
              this.doubleBackToExitPressedOnce = true;
 
@@ -575,12 +565,12 @@ else
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+                         //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 
                             try {
-                                ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
-
+                                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"ধন্যবাদ");
+                                ToastMessageDisplay.showText(PlaceSelectionActivity.this);
 //                                if(response.toString().trim().equalsIgnoreCase("true"))
 //                                {
 //
@@ -601,7 +591,8 @@ else
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,error.toString());
+                            ToastMessageDisplay.setText(PlaceSelectionActivity.this,error.toString());
+                            ToastMessageDisplay.showText(PlaceSelectionActivity.this);
                         }
                     }) {
 

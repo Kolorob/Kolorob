@@ -15,7 +15,7 @@ import demo.kolorob.kolorobdemoversion.R;
 public class ToastMessageDisplay {
 
 
-    public static void ShowToast(Context context,String message)
+    public static void setText(Context context,String message)
     {
       //  LayoutInflater inflater = context.getResources();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -29,8 +29,17 @@ public class ToastMessageDisplay {
         toastMessage.setText(message);
 //        toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setGravity(Gravity.CENTER);
-toast.setDuration(Toast.LENGTH_SHORT);
+
         toastMessage.setCompoundDrawablePadding(26);
+
+    }
+    public static  void showText(Context context)
+    {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View toastView = inflater.inflate(R.layout.toast_view,null);
+        Toast toast = new Toast(context);
+        toast.setView(toastView);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }
 }
