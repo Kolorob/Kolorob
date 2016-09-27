@@ -1012,9 +1012,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     private void CheckConcate(String value1,String value2){
 
 
-        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টি")&& !value2.equals(" জন")&& !value2.equals(" টাকা") && !value2.equals("No") && !value2.equals("0")&& !value2.equals("০")&& !value2.equals("০ টি")&& !value2.equals("০ জন")) {
+        if (!value2.equals("null") && !value2.equals("")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = AppUtils.Check_Capitalization(value2);
             increment++;
 
         }
