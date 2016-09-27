@@ -216,6 +216,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("Pharmacy Fee", healthServiceProviderItemNew.getPharmacy_fee()+" BDT");
 
         CheckConcate("Free Service", healthServiceProviderItemNew.getGeneral_free_services());
+
         CheckConcate("General Cost", healthServiceProviderItemNew.getGeneral_cost()+" BDT");
         CheckConcate("Other Information", healthServiceProviderItemNew.getGeneral_remark());
         CheckConcate("Ambulance Cost", healthServiceProviderItemNew.getAmbulance_cost()+" BDT");
@@ -965,9 +966,17 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
 
-        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")&&!value2.equals(" টা")) {
-            key[increment] = value1;
-            value[increment] = AppUtils.Check_Capitalization(value2);
+        if (!value2.equals("null") && !value2.equals("")) {
+            if(value2.equals(" BDT"))
+            {
+                key[increment] = value1;
+                value[increment] = "120 BDT";
+            }
+            else {
+                key[increment] = value1;
+                value[increment] = AppUtils.Check_Capitalization(value2);
+            }
+
             increment++;
 
         }
