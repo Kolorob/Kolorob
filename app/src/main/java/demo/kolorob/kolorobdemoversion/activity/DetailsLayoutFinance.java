@@ -822,7 +822,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = AppUtils.Check_Capitalization(value2);
             increment++;
 
         }
