@@ -327,6 +327,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/comments_icon"
                     android:visibility="visible"
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/comments"/>
 
             </LinearLayout>
