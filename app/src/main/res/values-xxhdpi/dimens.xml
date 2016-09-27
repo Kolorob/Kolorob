@@ -39,7 +39,7 @@
     <dimen name="feedbackalltext">25dp</dimen>
     <dimen name="bwidth">50dp</dimen>
     <dimen name="bheight">50dp</dimen>
-
+    <dimen name="icon_gaph">7dp</dimen>
     <dimen name="aboutusupheight">60dp</dimen>
     <dimen name="aboutuslowerheight">70dp</dimen>
     <dimen name="aboutuscenterheight">100dp</dimen>

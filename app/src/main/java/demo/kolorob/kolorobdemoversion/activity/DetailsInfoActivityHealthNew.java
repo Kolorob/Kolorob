@@ -743,16 +743,11 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 int selected = feedRadio.getCheckedRadioButtonId();
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
-                //  declareRadiobutton();
                 sendReviewToServer();
-
                 alertDialog.cancel();
-
             }
         });
         alertDialog.setCancelable(false);
-
-
         alertDialog.show();
     }
 

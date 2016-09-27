@@ -297,7 +297,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
 
             android:layout_height="match_parent"
             android:gravity="center_vertical|left">
@@ -331,23 +331,17 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-
-
                 android:background="@drawable/feedback_icon"
                 android:onClick="verifyRegistration"
-
-
-
-
                 android:id="@+id/feedback"/>
 
-
                 <ImageView
-                         android:layout_width="50dp"
-                           android:layout_height="50dp"
-                           android:background="@drawable/comments_icon"
-                          android:visibility="visible"
-                          android:id="@+id/comments"/>
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/icon_gaph"
+                    android:background="@drawable/comments_view_icon"
+                    android:visibility="visible"
+                    android:id="@+id/comments"/>
 
         </LinearLayout>
 
