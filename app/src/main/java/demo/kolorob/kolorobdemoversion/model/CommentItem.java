@@ -12,6 +12,8 @@ public class CommentItem {
     private String comment;
     private String rating;
     private String date;
+    private String user_name;
+    private String email;
 
 
     public String getMob_no() {
@@ -54,12 +56,30 @@ public class CommentItem {
         this.rating = rating;
     }
 
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public CommentItem(String mob_no, String service_id, String comment, String rating, String date) {
         this.mob_no = mob_no;
         this.service_id = service_id;
         this.comment = comment;
         this.rating = rating;
         this.date = date;
+        this.user_name=user_name;
+        this.email=email;
     }
 
 
@@ -71,6 +91,8 @@ public class CommentItem {
         mob_no = cur.getString(1);
         rating = cur.getString(3);
         service_id = cur.getString(0);
+        user_name=cur.getString(5);
+        email=cur.getString(6);
 
     }
 
