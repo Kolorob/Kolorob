@@ -808,8 +808,16 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
         if (!value2.equals("null") && !value2.equals("") &&!value2.equals(" টাকা")) {
-            key[increment] = value1;
-            value[increment] = AppUtils.Check_Capitalization(value2);
+
+            if(value2.equals(" BDT"))
+            {
+                key[increment] = value1;
+                value[increment] = "120 BDT";
+            }
+            else {
+                key[increment] = value1;
+                value[increment] = AppUtils.Check_Capitalization(value2);
+            }
             increment++;
 
         }
