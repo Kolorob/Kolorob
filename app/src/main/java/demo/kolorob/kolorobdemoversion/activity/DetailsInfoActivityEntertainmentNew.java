@@ -154,7 +154,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
         feedback = (ImageView) findViewById(R.id.feedback);
-       ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<=400)
             ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
         setRatingBar();
@@ -162,8 +162,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        //int upperhad_height=params2.height = height/6;
-
         upperHand.setLayoutParams(params2);
 
 

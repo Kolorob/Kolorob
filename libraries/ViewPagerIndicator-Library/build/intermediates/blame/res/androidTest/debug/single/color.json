@@ -4,12 +4,12 @@
         "source": "D:\\thekolorob\\31_08_16\\Kolorob\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
     },
     {
-        "merged": "C:\\Users\\israt.jahan\\AndroidStudioProjects\\KolorobAugustv2\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
-        "source": "C:\\Users\\israt.jahan\\AndroidStudioProjects\\KolorobAugustv2\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
-    },
-    {
         "merged": "C:\\Users\\israt.jahan\\AndroidStudioProjects\\KolorobAugustv2\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
         "source": "C:\\Users\\israt.jahan\\AndroidStudioProjects\\KolorobAugustv2\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
+    },
+    {
+        "merged": "C:\\Users\\israt.jahan\\AndroidStudioProjects\\KolorobAugustv2\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
+        "source": "C:\\Users\\israt.jahan\\AndroidStudioProjects\\KolorobAugustv2\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
     },
     {
         "merged": "D:\\thekolorob\\31_08_16\\Kolorob\\libraries\\ViewPagerIndicator-Library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
