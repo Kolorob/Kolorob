@@ -247,7 +247,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("Highest Cost of Class ", educationTuitionDetailsItem.getTuitionmaxfee());
                 CheckConcate("Lowest Cost of Coaching ", educationTuitionDetailsItem.getTuitionmincoaching());
                 CheckConcate("Highest Cost of Coaching", educationTuitionDetailsItem.getTuitionmaxcoaching());
-                CheckConcate("Additional Information", educationTuitionDetailsItem.getTuitionadditional());
+                CheckConcate("Tution Additional Information", educationTuitionDetailsItem.getTuitionadditional());
 
 
             }
