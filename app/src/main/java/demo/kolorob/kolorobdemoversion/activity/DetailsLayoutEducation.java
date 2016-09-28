@@ -242,12 +242,12 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("Stipend Availability ", educationTuitionDetailsItem.getTuitionstipendfacility());
                 CheckConcate("Stipend Type", educationTuitionDetailsItem.getTuitionstipendtype());
                 CheckConcate("Course Related Information", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("Lowest Cost of Class", educationTuitionDetailsItem.getTuitionminfee());
+                CheckConcate("Lowest Cost of Class", educationTuitionDetailsItem.getTuitionminfee()+" BDT");
 
-                CheckConcate("Highest Cost of Class ", educationTuitionDetailsItem.getTuitionmaxfee());
-                CheckConcate("Lowest Cost of Coaching ", educationTuitionDetailsItem.getTuitionmincoaching());
-                CheckConcate("Highest Cost of Coaching", educationTuitionDetailsItem.getTuitionmaxcoaching());
-                CheckConcate("Tution Additional Information", educationTuitionDetailsItem.getTuitionadditional());
+                CheckConcate("Highest Cost of Class ", educationTuitionDetailsItem.getTuitionmaxfee()+" BDT");
+                CheckConcate("Lowest Cost of Coaching ", educationTuitionDetailsItem.getTuitionmincoaching()+" BDT");
+                CheckConcate("Highest Cost of Coaching", educationTuitionDetailsItem.getTuitionmaxcoaching()+" BDT");
+                CheckConcate("Tution Additional Cost", educationTuitionDetailsItem.getTuitionadditional()+" BDT");
 
 
             }
@@ -1017,19 +1017,14 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             value[increment] = value2;
         }
         else {
-            if (!value2.equals("null") && !value2.equals("")) {
-                if(value2.equals(" BDT"))
-                {
-                    key[increment] = value1;
-                    value[increment] = "120 BDT";
-                }
-                else {
+            if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" BDT")) {
+
                     {
                         key[increment] = value1;
                         value[increment] = AppUtils.Check_Capitalization(value2);
                     }
 
-                }
+
                 increment++;
 
             }

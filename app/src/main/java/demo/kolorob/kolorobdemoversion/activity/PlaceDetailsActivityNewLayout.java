@@ -1248,14 +1248,14 @@ int index;
             if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
                 specialist_available3.setText(firstSpecialistItem);
             else
-                specialist_available3.setText("Data is being collected");
+                specialist_available3.setText("No Specialist is available");
 
             if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
                 clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
             else
                 clean_facilities3.setText("Data is being collected");
 
-            if(healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
+            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equals("null"))
                 privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
                 privacy3.setText("Data is being collected");
@@ -1378,16 +1378,16 @@ int index;
             else
                 service_type2.setText("Data is being collected");
             if(!secondSpecialistItem.equals("")&&!secondSpecialistItem.equals("null"))
-                specialist_available2.setText(firstSpecialistItem);
+                specialist_available2.setText(secondSpecialistItem);
             else
-                specialist_available2.setText("Data is being collected");
+                specialist_available2.setText("No Specialist is available");
 
             if(!healthServiceProviderItemNewx.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNewx.getPharmacy_speciality().equals("null"))
                 clean_facilities2.setText(healthServiceProviderItemNewx.getPharmacy_speciality());
             else
                 clean_facilities2.setText("Data is being collected");
 
-            if(!healthServiceProviderItemNewx.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNewx.getPharmacy_privacy().equalsIgnoreCase("null"))
+            if(!healthServiceProviderItemNewx.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNewx.getPharmacy_privacy().equals("null"))
                 privacy2.setText(String.valueOf(healthServiceProviderItemNewx.getPharmacy_privacy()));
             else
                 privacy2.setText("Data is being collected");

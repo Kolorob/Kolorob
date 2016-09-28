@@ -203,7 +203,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 //result_concate="";
                 CheckConcate("What services are available?  ", financialServiceDetailsItem.getServicetype());
                 CheckConcate("Service Sub-Type  ", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("Cost  ", financialServiceDetailsItem.getServicecost()+" BDT");
+                CheckConcate("Cost  ", financialServiceDetailsItem.getServicecost());
                 CheckConcate("Remarks  ", financialServiceDetailsItem.getServiceremark());
             }
         }
