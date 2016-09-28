@@ -187,7 +187,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         CheckConcate("Closed on ", governmentNewItem.getOffday());
         CheckConcate("Registration Number ", governmentNewItem.getRegisterednumber());
-        CheckConcate("Registered With   ", governmentNewItem.getRegisteredwith());
+//        CheckConcate("Registered With   ", governmentNewItem.getRegisteredwith());
 
         governmentServiceDetailsItems = governmentServiceDetailsTable.getgovinfo(governmentNewItem.getFinId());
         int tuition_size = governmentServiceDetailsItems.size();
@@ -196,7 +196,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 //result_concate="";
                 CheckConcate("What services are available?  ", governmentServiceDetailsItem.getServicetype());
                 CheckConcate("Service Name ", governmentServiceDetailsItem.getServicesubtype());
-                CheckConcate("Cost  ", governmentServiceDetailsItem.getServicecost()+ "BDT");
+                CheckConcate("Cost  ", governmentServiceDetailsItem.getServicecost()+ " BDT");
                 CheckConcate("Remarks ", governmentServiceDetailsItem.getDetailstep());
             }
         }
@@ -811,19 +811,14 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             value[increment] = value2;
         }
         else {
-            if (!value2.equals("null") && !value2.equals("")) {
-                if(value2.equals(" BDT"))
-                {
-                    key[increment] = value1;
-                    value[increment] = "120 BDT";
-                }
-                else {
+            if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" BDT")) {
+
                     {
                         key[increment] = value1;
                         value[increment] = AppUtils.Check_Capitalization(value2);
                     }
 
-                }
+
                 increment++;
 
             }

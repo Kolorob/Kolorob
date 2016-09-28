@@ -194,7 +194,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         CheckConcate("Closed on  ", financialNewItem.getOffday());
 
-        CheckConcate("Registered With   ", financialNewItem.getRegisteredwith());
+//        CheckConcate("Registered With   ", financialNewItem.getRegisteredwith());
         CheckConcate("Registration Number   ", financialNewItem.getRegisterednumber());
         financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
         int tuition_size = financialServiceDetailsItems.size();
