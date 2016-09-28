@@ -323,11 +323,10 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/comments_icon"
+                    android:layout_marginLeft="@dimen/icon_gaph"
+                    android:background="@drawable/comments_view_icon"
                     android:visibility="visible"
-                    android:layout_marginLeft="10dp"
                     android:id="@+id/comments"/>
-
             </LinearLayout>
 
         </LinearLayout>
