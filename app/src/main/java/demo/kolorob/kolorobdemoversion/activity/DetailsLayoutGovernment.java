@@ -270,8 +270,8 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         }
 
 
-        ToastMessageDisplay.ShowToast(this,datevalue);
-
+        ToastMessageDisplay.setText(this,datevalue);
+        ToastMessageDisplay.showText(this);
 
 
 

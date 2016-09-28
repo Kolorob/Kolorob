@@ -375,8 +375,8 @@ public class OpeningActivity extends Activity {
             String contents = new String(bytes);
             String delims = "[,]";
             String[] tokens = contents.split(delims);
-           first=tokens[1];
-           //  first="yes";
+            first=tokens[1];
+            //first="yes";
         }
         else {
             int length = (int) file.length();
@@ -409,8 +409,8 @@ public class OpeningActivity extends Activity {
             String delims = "[,]";
             String[] tokens = contents.split(delims);
 
-              first=tokens[1];
-            // first="yes";
+           first=tokens[1];
+            //first="yes";
         }
 
 
@@ -638,10 +638,21 @@ public class OpeningActivity extends Activity {
 
                     editor.apply();
                     handler.removeCallbacks(this);
-                    Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+                    if (first.equals("yes")) {
+                        int mapdetail = 0;
+
+                    Intent a = new Intent(OpeningActivity.this, ViewPagerDemo.class); // Default Activity
+                    a.putExtra("YourValueKey", mapdetail);
                     frameAnimation.stop();
                     startActivity(a);
                     return;
+                } else {
+                    Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+
+                    frameAnimation.stop();
+                    startActivity(a);
+                    return;
+                }
                 }
                 //Create a loop
                 handler.postDelayed(this, 1000);
@@ -919,10 +930,10 @@ public class OpeningActivity extends Activity {
                     this.finish();
                 }
                 else {
-                    ToastMessageDisplay.ShowToast(OpeningActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                    ToastMessageDisplay.setText(OpeningActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
-
+                    ToastMessageDisplay.showText(OpeningActivity.this);
 
 
 
@@ -1028,11 +1039,12 @@ public class OpeningActivity extends Activity {
         if (requestCode == INTERNET_PERMISSION) {
             if (grantResults.length == 1 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                ToastMessageDisplay.ShowToast(this,"Internet permission granted");
+                ToastMessageDisplay.setText(this,"Internet permission granted");
+                ToastMessageDisplay.showText(this);
 
             } else {
-                ToastMessageDisplay.ShowToast(this,"Inter permission denied");
-
+                ToastMessageDisplay.setText(this,"Inter permission denied");
+                ToastMessageDisplay.showText(this);
 
             }
         } else {
@@ -1066,7 +1078,8 @@ public class OpeningActivity extends Activity {
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                ToastMessageDisplay.ShowToast(OpeningActivity.this,"তথ্য সংগ্রহ চলছে");
+                ToastMessageDisplay.setText(OpeningActivity.this,"তথ্য সংগ্রহ চলছে");
+                ToastMessageDisplay.showText(OpeningActivity.this);
             }
         }
 

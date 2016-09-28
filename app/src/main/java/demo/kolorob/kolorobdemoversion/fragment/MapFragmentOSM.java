@@ -203,7 +203,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         mapView.setClickable(true);
 
 
-        mapView.setBuiltInZoomControls(true);
+        mapView.setBuiltInZoomControls(false);
         mapView.setMultiTouchControls(true);
 
 

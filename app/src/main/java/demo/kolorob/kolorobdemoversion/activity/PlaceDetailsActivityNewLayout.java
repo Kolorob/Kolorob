@@ -1935,6 +1935,16 @@ int index;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.tutorial) {
+
+            int mapdetail=1;
+
+            Intent em = new Intent(this, ViewPagerDemo.class);
+            em.putExtra("YourValueKey", mapdetail);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
 //        else if (id == R.id.info_change) {
 
 //            startActivity(em);
@@ -1987,9 +1997,8 @@ int index;
           this.finish();
 
         }
-
-       ToastMessageDisplay.ShowToast(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
-
+       ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+        ToastMessageDisplay.showText(this);
         this.doubleBackToExitPressedOnce = true;
 
 
@@ -2500,8 +2509,9 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         tvName.setTextColor(Color.WHITE);
 
         tvName.setText(si.getSubCatHeaderBn());
+        tvName.setTextSize(12);
         flag=true;
-        tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+       //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
 /**************************
  *

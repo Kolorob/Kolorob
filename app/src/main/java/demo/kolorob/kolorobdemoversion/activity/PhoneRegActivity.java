@@ -95,7 +95,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"email="+emailaddress+"name="+uname+"&username="+username+"&password="+password+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&email="+emailaddress+"&name="+uname+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -152,8 +152,8 @@ public class PhoneRegActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        ToastMessageDisplay.ShowToast(PhoneRegActivity.this,error.toString());
-
+                        ToastMessageDisplay.setText(PhoneRegActivity.this,error.toString());
+                        ToastMessageDisplay.showText(PhoneRegActivity.this);
 
                     }
                 }) {

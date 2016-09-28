@@ -209,8 +209,8 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
-        ToastMessageDisplay.ShowToast(this,datevalue);
-
+        ToastMessageDisplay.setText(this,datevalue);
+        ToastMessageDisplay.showText(this);
 
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override

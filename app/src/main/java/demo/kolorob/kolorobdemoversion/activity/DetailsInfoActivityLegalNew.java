@@ -166,8 +166,8 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
-        ToastMessageDisplay.ShowToast(this,datevalue);
-
+        ToastMessageDisplay.setText(this,datevalue);
+        ToastMessageDisplay.showText(this);
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
 

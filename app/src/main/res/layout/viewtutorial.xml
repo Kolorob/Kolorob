@@ -40,6 +40,6 @@
         android:textColor="#ffffff"
         android:layout_above="@+id/indicator"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp" />
+        />
 
 </RelativeLayout>

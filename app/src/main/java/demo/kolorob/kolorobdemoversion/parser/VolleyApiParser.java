@@ -3,7 +3,6 @@ package demo.kolorob.kolorobdemoversion.parser;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -82,7 +81,8 @@ public class VolleyApiParser {
         if (!AppUtils.isNetConnected(ctx)) {
 
 
-            ToastMessageDisplay.ShowToast(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+            ToastMessageDisplay.setText(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+            ToastMessageDisplay.showText(ctx);
             return;
         }
 
@@ -149,8 +149,8 @@ public class VolleyApiParser {
                                   final Request.Priority priority) {
         if (!AppUtils.isNetConnected(ctx)) {
 
-            ToastMessageDisplay.ShowToast(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
-
+            ToastMessageDisplay.setText(ctx,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+            ToastMessageDisplay.showText(ctx);
 
         return;
     }

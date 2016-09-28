@@ -211,7 +211,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
 
-        ToastMessageDisplay.ShowToast(this,datevalue);
+        ToastMessageDisplay.setText(this,datevalue);
+        ToastMessageDisplay.showText(this);
 
 
 

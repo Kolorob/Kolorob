@@ -252,8 +252,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             datevaluebn=EtoB(String.valueOf(diffInDays));
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
-        ToastMessageDisplay.ShowToast(this,datevalue);
-
+        ToastMessageDisplay.setText(this,datevalue);
+        ToastMessageDisplay.showText(this);
         //Exam.length();
 
 
