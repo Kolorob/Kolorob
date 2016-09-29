@@ -31,14 +31,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -66,7 +64,7 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
-import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.ImageMap;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
@@ -147,7 +145,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     };
 
     private GoogleApiClient client;
-
+    ImageMap mImageMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,9 +160,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         height = metrics.heightPixels;
         width = metrics.widthPixels;
 
-        //   int relativeWidthOfImage = (int)(width * 0.1);
-        final int coordsHeight = 800;
-        final int coordsWidth = 450;
+
         final String comment = "";
         String app_ver = "";
         NotificationManager manager;
@@ -204,73 +200,32 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
 
-        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        FrameLayout holder = (FrameLayout) findViewById(R.id.holder);
-        holder.setOnTouchListener(new View.OnTouchListener() {
+
+
+
+
+        // find the image map in the view
+        mImageMap = (ImageMap)findViewById(R.id.map);
+        mImageMap.setImageResource(R.drawable.place_choice_screen3);
+
+        // add a click handler to react when areas are tapped
+        mImageMap.addOnImageMapClickedHandler(new ImageMap.OnImageMapClickedHandler()
+        {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onImageMapClicked(int id, ImageMap imageMap)
+            {
+                // when the area is tapped, show the name in a
+                // text bubble
+                String getname=mImageMap.showBubble(id);
+                Toast.makeText(PlaceSelectionActivity.this,getname,Toast.LENGTH_SHORT).show();
+            }
 
-                width = v.getWidth();
-                height = v.getHeight();
-
-                float x = event.getX();
-                float y = event.getY();
-                // Hack to deal with issue in original image source
-
-                x = x * ((float) coordsWidth / (float) width);
-                y = y * ((float) coordsHeight / (float) height);
-                y = y +37;
-                t=Toast.makeText(getApplicationContext(),"value ", Toast.LENGTH_SHORT);
-                boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
-                boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
-                boolean anyHit = false;
-
-
-
-
-
-                if (t != null)
-                    t.cancel();
-//                if (y < ((float)height) / 2.0) {
-            if (mirpur10Hit) {
-                    if(click==false)
-                    {
-                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                        intent.putExtra(AppConstants.KEY_PLACE, 1);
-                        startActivity(intent);
-                        click=true;
-                    }
-
-                    Log.d("BAUNIABHAD", "********" );
-                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"মিরপুর-১১ ");
-                  //  t = Toast.makeText(getApplicationContext(), "মিরপুর-১১ ", Toast.LENGTH_SHORT);
-                    anyHit = true;
-                }
-                else if (mirpur11Hit) {
-
-                    if(click==false)
-                    {
-                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                        intent .setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        intent.putExtra(AppConstants.KEY_PLACE, 2);
-                        startActivity(intent);
-                        click=true;
-                    }
-
-                    Log.d("PARIS ROAD", "********" );
-                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"মিরপুর-১০");
-                   // t = Toast.makeText(getApplicationContext(), "মিরপুর-১০", Toast.LENGTH_SHORT);
-                    anyHit = true;
-
-                }
-                if (anyHit)
-                    ToastMessageDisplay.showText(PlaceSelectionActivity.this);
-                 //   t.show();
-                return true;
+            @Override
+            public void onBubbleClicked(int id)
+            {
+                // react to info bubble for area being tapped
             }
         });
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);

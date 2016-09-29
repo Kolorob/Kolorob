@@ -9,26 +9,24 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout
-        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ctc="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <include layout="@layout/toolbar" />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/holder"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/place_choice_screen"
-            android:layout_alignParentTop="true">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-
-        </FrameLayout>
-
-
+        <demo.kolorob.kolorobdemoversion.utils.ImageMap
+            android:id="@+id/map"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            ctc:map="usamap"
+            ctc:maxSizeFactor="1.5"
+            ctc:scaleFromOriginal="true"
+            ctc:fitImageToScreen="true"/>
 
     </LinearLayout>
-
 
 
     <android.support.design.widget.NavigationView
