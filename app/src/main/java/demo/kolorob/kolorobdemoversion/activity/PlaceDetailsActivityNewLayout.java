@@ -597,7 +597,7 @@ int index;
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
-        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"This information is only for display purposes","");
+        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"This information is for display purposes only ","");
         fleft=(LinearLayout)findViewById(R.id.linearLayout1);
         fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
 
