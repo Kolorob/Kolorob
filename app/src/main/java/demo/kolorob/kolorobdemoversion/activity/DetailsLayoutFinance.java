@@ -221,8 +221,13 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         comments = (ImageView)findViewById(R.id.comments);
 
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
+//        comments.getLayoutParams().height=width/8;
+//        comments.getLayoutParams().width=width/8;
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
+        lp.setMargins(width/24, 0, 0, 0);
+        comments.setLayoutParams(lp);
+
         CommentTable commentTable = new CommentTable(DetailsLayoutFinance.this);
 
 

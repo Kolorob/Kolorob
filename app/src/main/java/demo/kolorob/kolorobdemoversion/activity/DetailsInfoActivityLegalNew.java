@@ -141,7 +141,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         int fh=feedbacks.height = width / 8;
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
-        feedbacks.setMargins(0, 0, width / 30, 0);
+
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -303,8 +303,9 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         comments = (ImageView)findViewById(R.id.comments);
 
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
+        lp.setMargins(width/24, 0, 0, 0);
+        comments.setLayoutParams(lp);
         CommentTable commentTable = new CommentTable(DetailsInfoActivityLegalNew.this);
 
 
