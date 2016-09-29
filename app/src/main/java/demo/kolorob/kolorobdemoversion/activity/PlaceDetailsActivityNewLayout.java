@@ -946,23 +946,23 @@ int index;
 
                     if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==0)
                     {
-                        AlertMessage.showMessage(con, "Comparison isnt possible",
-                                "You have not selected any service to compare");
+                        AlertMessage.showMessage(con, "Comparison is not possible",
+                                "You have not yet selected any services to compare");
                     }
                     else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==0)
                     {
-                        AlertMessage.showMessage(con, "Comparison isnt possible",
-                                "You have not selected any service to compare");
+                        AlertMessage.showMessage(con, "Comparison is not possible",
+                                "You have not yet selected any services to compare");
                     }
                     else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==1)
                     {
-                        AlertMessage.showMessage(con, "Comparison isnt possible",
-                                "You've chosen one service only. Please choose another one to proceed");
+                        AlertMessage.showMessage(con, "Comparison is not possible",
+                                "You have chosen one service only. Please choose another one to proceed");
                     }
                     else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==1)
                     {
-                        AlertMessage.showMessage(con, "Comparison isnt possible",
-                                "You've chosen one service only. Please choose another one to proceed");
+                        AlertMessage.showMessage(con, "Comparison is not possible",
+                                "You have chosen one service only. Please choose another one to proceed");
                     }
                     else {
 
