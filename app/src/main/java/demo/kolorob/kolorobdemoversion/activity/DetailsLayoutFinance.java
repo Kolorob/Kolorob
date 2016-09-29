@@ -260,8 +260,51 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
                 if(inc==0)
                 {
-                    AlertMessage.showMessage(DetailsLayoutFinance.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
+                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+                    View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+                    final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
+                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    alertDialog.setContentView(promptView);
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
+                    final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+                    final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+                    final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+                    String text="এই সেবা সম্পর্কে কেউ এখনো মন্তব্য করেনি "+"\n"+"আপনি কি আপনার মতামত জানাতে চান?";
+                    textAsk.setText(text);
+                    alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                    if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutFinance.this))
+                        textAsk.setTextSize(23);
+                    else
+                        textAsk.setTextSize(17);
+                    //  alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.cancel();
+                            String  register = SharedPreferencesHelper.getNumber(DetailsLayoutFinance.this);
+                            phone_num=register;
+
+                            if (register.equals("")) {
+                                requestToRegister();
+                            } else {
+
+                                feedBackAlert();
+                                //  sendReviewToServer();
+                            }
+
+                        }
+                    });
+                    no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.cancel();
+                        }
+                    });
+                    //   setup a dialog window
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();                }
 
                 else
                 {
