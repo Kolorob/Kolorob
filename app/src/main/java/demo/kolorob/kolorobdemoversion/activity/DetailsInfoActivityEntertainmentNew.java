@@ -765,7 +765,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             textAsk.setTextSize(23);
         else
             textAsk.setTextSize(17);
-        alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
         yes.setOnClickListener(new View.OnClickListener() {
