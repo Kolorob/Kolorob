@@ -81,18 +81,18 @@ public class PhoneRegActivity extends Activity {
 
         if (size != 11) {
             AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in correct format");
+                    "Please give your number in the correct format");
         }
         else if (phoneNumber.charAt(0) != '0') {
             AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in correct format");
+                    "Please give your number in the correct format");
         }
         else if (phoneNumber.charAt(1) != '1') {
             AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in correct format");
+                    "Please give your number in the correct format");
         } else if (phoneNumber.charAt(2) == '2' || phoneNumber.charAt(2) == '3' || phoneNumber.charAt(2) == '4') {
             AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in correct format");
+                    "Please give your number in the correct format");
         } else {
             sendPhoneNumberToServer(phoneNumber);
         }
@@ -130,7 +130,7 @@ public class PhoneRegActivity extends Activity {
                             else if(response.equals("\"Invalid Phone Number\""))
                             {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "Sorry!",
-                                        "Please give your number in correct format");                        }
+                                        "Please give your number in the correct format");                        }
                             else
                             {
 
