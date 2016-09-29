@@ -345,9 +345,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         comments = (ImageView)findViewById(R.id.comments);
-
-        comments.getLayoutParams().height=width/8;
-        comments.getLayoutParams().width=width/8;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
+        lp.setMargins(width/24, 0, 0, 0);
+        comments.setLayoutParams(lp);
         CommentTable commentTable = new CommentTable(DetailsLayoutEducation.this);
 
 
@@ -385,8 +385,51 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
                 if(inc==0)
                 {
-                    AlertMessage.showMessage(DetailsLayoutEducation.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
+                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutEducation.this);
+                    View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
+                    final Dialog alertDialog = new Dialog(DetailsLayoutEducation.this);
+                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    alertDialog.setContentView(promptView);
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
+                    final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
+                    final ImageView no = (ImageView) promptView.findViewById(R.id.no);
+                    final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
+                    String text="এই সেবা সম্পর্কে কেউ এখনো মন্তব্য করেনি "+"\n"+"আপনি কি আপনার মতামত জানাতে চান?";
+                    textAsk.setText(text);
+                    alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                    if(SharedPreferencesHelper.isTabletDevice(DetailsLayoutEducation.this))
+                        textAsk.setTextSize(23);
+                    else
+                        textAsk.setTextSize(17);
+                    //  alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.cancel();
+                            String  register = SharedPreferencesHelper.getNumber(DetailsLayoutEducation.this);
+                            phone_num=register;
+
+                            if (register.equals("")) {
+                                requestToRegister();
+                            } else {
+
+                                feedBackAlert();
+                                //  sendReviewToServer();
+                            }
+
+                        }
+                    });
+                    no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.cancel();
+                        }
+                    });
+                    //   setup a dialog window
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();                }
 
                 else
                 {
@@ -618,7 +661,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         feedbacks.height = width / 8;
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
-        feedbacks.setMargins(0, 0, width / 30, 0);
+
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
@@ -870,7 +913,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             textAsk.setTextSize(23);
         else
             textAsk.setTextSize(17);
-        alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
         yes.setOnClickListener(new View.OnClickListener() {
