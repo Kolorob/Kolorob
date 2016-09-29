@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -245,6 +246,8 @@ public class DisplayAllJobsActivity extends Activity {
                 listDataChild.put(group_data,job_data);
                 job_counter++;
             }
+
+            Log.d("All Jobs","======"+job_counter);
             expListView = (ExpandableListView) findViewById(R.id.lvExp);
             listAdapter = new Job_expand_list_adapter(this, listDataHeader, listDataChild);
             expListView.setAdapter(listAdapter);
