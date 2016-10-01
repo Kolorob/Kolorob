@@ -218,19 +218,19 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 // when the area is tapped, show the name in a
                 // text bubble
                 String getname=mImageMap.showBubble(id);
-                if(getname=="area1")
+                if(getname=="Mirpur-11")
                 {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 1);
                     startActivity(intent);
                 }
-                else if(getname=="area2")
+                else if(getname=="Mirpur-10")
                 {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 2);
                     startActivity(intent);
                 }
-                else if(getname=="area3")
+                else if(getname=="Mirpur-12")
                 {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 3);
@@ -244,16 +244,16 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 // react to info bubble for area being tapped
             }
         });
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
         // toolbar.setBackgroundResource(android.R.color.transparent);
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-        ab.setDisplayHomeAsUpEnabled(true);
+       // ActionBar ab = getSupportActionBar();
+       // ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+       // ab.setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -273,10 +273,10 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        toggle.setDrawerIndicatorEnabled(true);
-        drawer.setDrawerListener(toggle);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setHomeButtonEnabled(true);
+       // toggle.setDrawerIndicatorEnabled(true);
+       // drawer.setDrawerListener(toggle);
         //toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
