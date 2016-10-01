@@ -57,6 +57,7 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
 
     public static final GeoPoint BAUNIA1 = new GeoPoint(23.8185747,90.3742368);
     public static final GeoPoint PARIS1 = new GeoPoint(23.8105392,90.371817);
+    public static final GeoPoint TWELVE = new GeoPoint(23.8254095,90.3710484);
     public static final LatLng BAUNIA = new LatLng(23.8185747,90.3742368);
     public static final LatLng PARIS = new LatLng(23.8105392,90.371817);
     public static final String[][] SUB_CATEGORIES = {SUB_CAT_EDU_BN, SUB_CAT_FUN_BN, SUB_CAT_GOVT_BN,
@@ -105,8 +106,10 @@ public static final int[] ALL_CAT_ICONS_NEW_OPEN = {R.drawable.ic_continue, R.dr
     public static final String WAITTAG = "একটু অপেক্ষা করুন";
     public static final String WAITDET = "তথ্য সংগ্রহ হচ্ছে.....";
     public static final String PARIS_ROAD = "মিরপুর ১০";
+    public static final String MIRPUR_TWELVE = "মিরপুর ১২";
     public static final int PLACE_BAUNIABADH = 1;
     public static final int PLACE_PARIS_ROAD = 2;
+    public static final int PLACE_MIRPUR_12 = 3;
     //endregion
 
     //region Server status codঁধ
