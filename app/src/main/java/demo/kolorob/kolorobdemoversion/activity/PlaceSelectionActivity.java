@@ -64,6 +64,7 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.ImageMap;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
@@ -217,7 +218,24 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 // when the area is tapped, show the name in a
                 // text bubble
                 String getname=mImageMap.showBubble(id);
-                Toast.makeText(PlaceSelectionActivity.this,getname,Toast.LENGTH_SHORT).show();
+                if(getname=="area1")
+                {
+                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 1);
+                    startActivity(intent);
+                }
+                else if(getname=="area2")
+                {
+                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 2);
+                    startActivity(intent);
+                }
+                else if(getname=="area3")
+                {
+                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 3);
+                    startActivity(intent);
+                }
             }
 
             @Override
