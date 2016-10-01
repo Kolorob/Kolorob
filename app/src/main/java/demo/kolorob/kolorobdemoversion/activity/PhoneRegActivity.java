@@ -62,15 +62,7 @@ public class PhoneRegActivity extends Activity {
         uname=name.getText().toString().trim();
         emailaddress=email.getText().toString().trim();
         int size = phoneNumber.length();
-        if( uname.equals("")){
 
-            /**
-             *   You can Toast a message here that the Username is Empty
-             **/
-
-            name.setError( "name is required!" );
-
-        }
         if (size != 11) {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
@@ -85,7 +77,14 @@ public class PhoneRegActivity extends Activity {
         } else if (phoneNumber.charAt(2) == '2' || phoneNumber.charAt(2) == '3' || phoneNumber.charAt(2) == '4') {
             AlertMessage.showMessage(this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                     "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");
-        } else {
+        }
+        if( uname.equals("")){
+
+
+            name.setError( "name is required!" );
+
+        }
+        else if (uname.length()<=15&&!uname.equals("")) {
             sendPhoneNumberToServer(phoneNumber);
         }
     }
