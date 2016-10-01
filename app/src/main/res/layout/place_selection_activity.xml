@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <?xml version="1.0" encoding="utf-8"?>
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:ctc="http://schemas.android.com/apk/res-auto"
