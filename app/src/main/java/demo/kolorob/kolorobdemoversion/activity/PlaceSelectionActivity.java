@@ -870,14 +870,14 @@ else
                     TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                     //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
                     IMEINumber=tm.getDeviceId();
-                    Toast.makeText(PlaceSelectionActivity.this, "All permissions granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlaceSelectionActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
                 } else if (location) {
                     Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
                 } else if (storage) {
                     Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
                 }
                 else if (phonestate) {
-                    Toast.makeText(this, "Phone state permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
                 }else { // !location && !storage case
                     // Permission Denied
                     Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
