@@ -341,8 +341,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             public void onClick(View v) {
                 if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname).equals("yes")||inc>0) {
                     if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeId(), uname).equals("yes")&&inc==0) {
-                        AlertMessage.showMessage(con, "দয়া করে তথ্য আপডেট করুন",
-                                "ই মেইল আই ডি পাওয়া যায়নি");
+                        AlertMessage.showMessage(con, "দুঃখিত",
+                                "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
