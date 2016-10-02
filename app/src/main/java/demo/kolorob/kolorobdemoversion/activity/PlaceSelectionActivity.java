@@ -22,6 +22,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -148,13 +150,13 @@ String areaname=null;
     };
 
     private GoogleApiClient client;
-    ImageButton mImageMap;
+    FrameLayout mImageMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
-        mImageMap=(ImageButton)findViewById(R.id.placeimage);
+        mImageMap=(FrameLayout)findViewById(R.id.holder);
         mImageMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                popup();
@@ -181,7 +183,9 @@ String areaname=null;
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
 
-        checkPermissions();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermissions();
+        }  else doPermissionGrantedStuffs();
         // Load ads into Interstitial Ads
         mInterstitialAd.loadAd(adRequest);
 
@@ -218,16 +222,16 @@ String areaname=null;
 
         // add a click handler to react when areas are tapped
 
-       // toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
-        // toolbar.setBackgroundResource(android.R.color.transparent);
-       // setSupportActionBar(toolbar);
+     
+        setSupportActionBar(toolbar);
 
-       // ActionBar ab = getSupportActionBar();
-       // ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-       // ab.setDisplayHomeAsUpEnabled(true);
+       ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+       ab.setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -247,11 +251,11 @@ String areaname=null;
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      //  getSupportActionBar().setHomeButtonEnabled(true);
-       // toggle.setDrawerIndicatorEnabled(true);
-       // drawer.setDrawerListener(toggle);
-        //toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       getSupportActionBar().setHomeButtonEnabled(true);
+        toggle.setDrawerIndicatorEnabled(true);
+       drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
