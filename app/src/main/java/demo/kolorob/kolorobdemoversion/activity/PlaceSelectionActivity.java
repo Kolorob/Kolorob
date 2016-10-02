@@ -90,6 +90,7 @@ String areaname=null;
     Intent i;
     String IMEINumber;
     private  boolean Reviewsent=false;
+    boolean radioclicked=false;
     boolean doubleBackToExitPressedOnce = false;
     private int height;
     private int width;
@@ -328,7 +329,10 @@ String areaname=null;
         for(int i=0;i<temp.size();i++){
             RadioButton rb=new RadioButton(this); // dynamically creating RadioButton and adding to RadioGroup.
             rb.setText(temp.get(i));
-            rb.setTextSize(15);
+            if (SharedPreferencesHelper.isTabletDevice(PlaceSelectionActivity.this)){
+
+                rb.setTextSize(25);}
+            else rb.setTextSize(15);
             rb.setTextColor(Color.parseColor("#FF8040"));
 
             rg.addView(rb);
@@ -345,6 +349,8 @@ String areaname=null;
                     RadioButton btn = (RadioButton) group.getChildAt(x);
                     if (btn.getId() == checkedId) {
                       areaname=btn.getText().toString();
+                        radioclicked=true;
+
 
                     }
                 }
@@ -355,28 +361,30 @@ String areaname=null;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(areaname.equals("মিরপুর ১০")) {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 2);
-                    startActivity(intent);
+                if (radioclicked) {
 
+
+                    if (areaname.equals("মিরপুর ১০")) {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 2);
+                        startActivity(intent);
+
+                    } else if (areaname.equals("মিরপুর ১১")) {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 1);
+                        startActivity(intent);
+
+                    } else if (areaname.equals("মিরপুর ১২")) {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 3);
+                        startActivity(intent);
+
+                    }
+                    alertDialog.cancel();
+                } else {
+                    ToastMessageDisplay.setText(PlaceSelectionActivity.this, "দয়া করে এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.showText(PlaceSelectionActivity.this);
                 }
-                else  if(areaname.equals("মিরপুর ১১")) {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 1);
-                    startActivity(intent);
-
-                }
-                else  if(areaname.equals("মিরপুর ১২")) {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 3);
-                    startActivity(intent);
-
-                }
-
-
-                alertDialog.cancel();
-
             }
         });
 
