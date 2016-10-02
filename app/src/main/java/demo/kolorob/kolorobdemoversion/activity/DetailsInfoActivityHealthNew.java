@@ -816,7 +816,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         String comment="";
-        comment=feedback_comment.getText().toString();
+        comment=feedback_comment.getText().toString().trim();
         Log.d("status ","======"+status);
         String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 

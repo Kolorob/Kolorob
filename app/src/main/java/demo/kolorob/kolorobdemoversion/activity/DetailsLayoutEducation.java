@@ -366,7 +366,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getUser_name();
-                date[inc]='"'+commentItem.getComment()+'"';
+                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি";
+                date[inc]= commentItem.getComment();
                 comment[inc]= commentItem.getDate();
                 rating[inc]= commentItem.getRating();
                 inc++;
@@ -842,8 +843,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         int rating= getRating(status);;
 
         String comment="";
-        comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        comment=feedback_comment.getText().toString().trim();
+        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

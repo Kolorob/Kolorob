@@ -23,7 +23,7 @@ public class Comment_layout_adapter extends BaseAdapter
 {
     Activity context;
     String mobile[];
-    String comment[];
+    String[] comment;
     String date[];
     public String rating[];
     int height;
@@ -35,6 +35,7 @@ public class Comment_layout_adapter extends BaseAdapter
         super();
         this.context = context;
         this.mobile = mobile;
+
         this.comment = comment;
         this.date = date;
         this.rating= rating;

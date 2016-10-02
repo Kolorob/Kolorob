@@ -672,7 +672,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             rating= 5;
 
         String comment="";
-        comment=feedback_comment.getText().toString();
+        comment=feedback_comment.getText().toString().trim();
         String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
