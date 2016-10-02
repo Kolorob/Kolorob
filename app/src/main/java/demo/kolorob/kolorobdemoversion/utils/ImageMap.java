@@ -343,17 +343,14 @@ public class ImageMap extends ImageView
         invalidate();
     }
 
-    public String showBubble(int areaId)
-    {String s=null;
-        Area a=null;
-        mBubbleMap.clear();
-        a = mIdToArea.get(areaId);
+    public void showBubble(int areaId)
+    {mBubbleMap.clear();
+        Area a = mIdToArea.get(areaId);
         if (a != null)
         {
-            s= a.getName();
+            addBubble(a.getName(),areaId);
         }
         invalidate();
-        return s;
     }
 
     public void centerArea( int areaId )

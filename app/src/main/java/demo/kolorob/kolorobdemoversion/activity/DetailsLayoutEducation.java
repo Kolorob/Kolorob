@@ -99,7 +99,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     private ImageView close_button, distance_left, feedback, top_logo;
     RadioGroup feedRadio;
     RadioButton rb1;
-    String status = "", phone_num = "", registered = "";
+    String status = "", phone_num = "", registered = "",uname="";
 
     private CheckBox checkBox;
     EditText feedback_comment;
@@ -365,7 +365,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
             if(!commentItem.getRating().equals(""))
             {
-                phone[inc]= commentItem.getMob_no();
+                phone[inc]= commentItem.getUser_name();
                 date[inc]='"'+commentItem.getComment()+'"';
                 comment[inc]= commentItem.getDate();
                 rating[inc]= commentItem.getRating();
@@ -777,7 +777,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         String  register = SharedPreferencesHelper.getNumber(DetailsLayoutEducation.this);
         phone_num=register;
-
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutEducation.this);
+        uname=uname2;
         if (register.equals("")) {
             requestToRegister();
         } else {
@@ -842,7 +843,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         String comment="";
         comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

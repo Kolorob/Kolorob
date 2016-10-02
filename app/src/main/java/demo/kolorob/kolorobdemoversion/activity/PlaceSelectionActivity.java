@@ -22,13 +22,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +38,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -57,6 +59,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +68,6 @@ import java.util.Map;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
-import demo.kolorob.kolorobdemoversion.utils.ImageMap;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
@@ -76,7 +78,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     ImageButton img;
     Toolbar toolbar;
     private String comment = "";
-
+String areaname=null;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
     NotificationManager manager;
@@ -146,12 +148,18 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     };
 
     private GoogleApiClient client;
-    ImageMap mImageMap;
+    ImageButton mImageMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
-
+        mImageMap=(ImageButton)findViewById(R.id.placeimage);
+        mImageMap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               popup();
+            }
+        });
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -206,43 +214,10 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
         // find the image map in the view
-        mImageMap = (ImageMap)findViewById(R.id.map);
+
 
         // add a click handler to react when areas are tapped
-        mImageMap.addOnImageMapClickedHandler(new ImageMap.OnImageMapClickedHandler()
-        {
-            @Override
-            public void onImageMapClicked(int id, ImageMap imageMap)
-            {
-                // when the area is tapped, show the name in a
-                // text bubble
-                String getname=mImageMap.showBubble(id);
-                if(getname.equals("Mirpur-11"))
-                {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 1);
-                    startActivity(intent);
-                }
-                else if(getname.equals("Mirpur-10"))
-                {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 2);
-                    startActivity(intent);
-                }
-                else if(getname.equals("Mirpur-12"))
-                {
-                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                    intent.putExtra(AppConstants.KEY_PLACE, 3);
-                    startActivity(intent);
-                }
-            }
 
-            @Override
-            public void onBubbleClicked(int id)
-            {
-                // react to info bubble for area being tapped
-            }
-        });
        // toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
@@ -332,6 +307,86 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         );
     }
 
+    public void popup() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.place_selection_popup, null);
+        final Dialog alertDialog = new Dialog(PlaceSelectionActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        List<String> temp = new ArrayList<String>(Arrays.asList("মিরপুর ১০", "মিরপুর ১১","মিরপুর ১২"));
+
+        RadioGroup rg = (RadioGroup) alertDialog.findViewById(R.id.radio_group);
+
+        for(int i=0;i<temp.size();i++){
+            RadioButton rb=new RadioButton(this); // dynamically creating RadioButton and adding to RadioGroup.
+            rb.setText(temp.get(i));
+            rb.setTextSize(15);
+            rb.setTextColor(Color.parseColor("#FF8040"));
+
+            rg.addView(rb);
+
+        }
+        rg.setGravity(Gravity.CENTER);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int childCount = group.getChildCount();
+                for (int x = 0; x < childCount; x++) {
+                    RadioButton btn = (RadioButton) group.getChildAt(x);
+                    if (btn.getId() == checkedId) {
+                      areaname=btn.getText().toString();
+
+                    }
+                }
+            }
+        });
+        final Button submit = (Button) promptView.findViewById(R.id.btnSubmit);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(areaname.equals("মিরপুর ১০")) {
+                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 2);
+                    startActivity(intent);
+
+                }
+                else  if(areaname.equals("মিরপুর ১১")) {
+                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 1);
+                    startActivity(intent);
+
+                }
+                else  if(areaname.equals("মিরপুর ১২")) {
+                    Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                    intent.putExtra(AppConstants.KEY_PLACE, 3);
+                    startActivity(intent);
+
+                }
+
+
+                alertDialog.cancel();
+
+            }
+        });
+
+
+
+        alertDialog.setCancelable(true);
+        WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+        lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+        alertDialog.getWindow().setAttributes(lp);
+//		else
+//			textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+    }
 
     public void generateNotification() {
         String url = "https://play.google.com/store/apps/details?id=demo.kolorob.kolorobdemoversion&hl=en";

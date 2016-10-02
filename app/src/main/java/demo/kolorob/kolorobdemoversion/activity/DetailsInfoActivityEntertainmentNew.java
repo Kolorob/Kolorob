@@ -322,7 +322,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
             if(!commentItem.getRating().equals(""))
             {
-                phone[inc]= commentItem.getMob_no();
+                phone[inc]= commentItem.getUser_name();
                 date[inc]='"'+commentItem.getComment()+'"';
                 comment[inc]= commentItem.getDate();
                 rating[inc]= commentItem.getRating();

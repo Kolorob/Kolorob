@@ -112,6 +112,8 @@ public class PhoneRegActivity extends Activity {
                             if(response.equals("true"))
                             {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
+
+                                SharedPreferencesHelper.setUname(con,uname);
                                 AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
                                         " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ");
 

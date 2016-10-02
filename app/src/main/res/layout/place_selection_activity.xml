@@ -15,17 +15,14 @@
         xmlns:ctc="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
 
-        <demo.kolorob.kolorobdemoversion.utils.ImageMap
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/place_choice_screen3"
-            ctc:map="usamap"
-            ctc:maxSizeFactor="1.5"
-            ctc:scaleFromOriginal="true"
-            ctc:fitImageToScreen="true"/>
+        android:layout_height="fill_parent">
+<ImageButton
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/placeimage"
+    android:background="@drawable/place_choice_screen3"/>
+
 
     </LinearLayout>
 

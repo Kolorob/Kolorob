@@ -39,6 +39,7 @@ public final class SharedPreferencesHelper {
 
 	private static final String USER = "user";
 	private static final String NUMBER = "number";
+	private static final String Uname = "username";
 	private static final String EMAIL = "email";
 	private static final String VERSION = "version";
 	private static final String FEEDBACK = "feedback";
@@ -203,7 +204,11 @@ public final class SharedPreferencesHelper {
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
 				.getString(SharedPreferencesHelper.NUMBER, "");
 	}
-
+	public static String getUname(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.Uname, "");
+	}
 	public static void setNumber(final Context ctx, final String pass) {
 		final SharedPreferences prefs = ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
@@ -212,7 +217,13 @@ public final class SharedPreferencesHelper {
 		editor.commit();
 	}
 
-
+	public static void setUname(final Context ctx, final String pass) {
+		final SharedPreferences prefs = ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor = prefs.edit();
+		editor.putString(SharedPreferencesHelper.Uname, pass);
+		editor.commit();
+	}
 
 	public static String getFlurryAnalyticsApiKey(final Context ctx) {
 		String flurryAnalyticsApiKey = null;
