@@ -43,6 +43,7 @@ public final class SharedPreferencesHelper {
 	private static final String EMAIL = "email";
 	private static final String VERSION = "version";
 	private static final String FEEDBACK = "feedback";
+	private static final String IFCOMMENTED = "commented";
 	private static final String COMAPARE_1 = "compare1";
 	private static final String COMPARE_2 = "compare";
 	private static final String COMAPARE_1H = "compare_health_1";
@@ -216,7 +217,18 @@ public final class SharedPreferencesHelper {
 		editor.putString(SharedPreferencesHelper.NUMBER, pass);
 		editor.commit();
 	}
-
+	public static void setifcommentedalready(final Context ctx, final String nodeid,final String username) {
+		final SharedPreferences prefs = ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor = prefs.edit();
+		editor.putString(SharedPreferencesHelper.IFCOMMENTED, "yes");
+		editor.commit();
+	}
+	public static String getifcommentedalready(final Context ctx, final String nodeid,final String username) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.IFCOMMENTED, "");
+	}
 	public static void setUname(final Context ctx, final String pass) {
 		final SharedPreferences prefs = ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);

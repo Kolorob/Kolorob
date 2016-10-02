@@ -226,7 +226,7 @@ String areaname=null;
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
-     
+
         setSupportActionBar(toolbar);
 
        ActionBar ab = getSupportActionBar();
