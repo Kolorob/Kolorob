@@ -366,9 +366,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getUser_name();
-                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি";
-                date[inc]= commentItem.getComment();
-                comment[inc]= commentItem.getDate();
+                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি ";
+                else {date[inc]= commentItem.getComment();}
+                comment[inc]= EtoB(commentItem.getDate());
                 rating[inc]= commentItem.getRating();
                 inc++;
             }
@@ -429,10 +429,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                         }
 
 
-                        if (inc == 1)
-                            review.setText(inc + " Review");
-                        else
-                            review.setText(inc + " Reviews");
+                            review.setText(EtoB(Integer.toString(inc)) + " রিভিউ");
+
                         Double screenSize = AppUtils.ScreenSize(DetailsLayoutEducation.this);
                         if (screenSize > 6.5) {
                             review.setTextSize(20);
@@ -971,6 +969,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 concatResult = concatResult + ".";
             else if(english_number.charAt(i) == '/')
                 concatResult = concatResult + "/";
+            else if (english_number.charAt(i) == '-')
+                concatResult = concatResult + "-";
             else {
                 return english_number;
             }

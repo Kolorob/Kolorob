@@ -375,8 +375,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getUser_name();
-                date[inc]='"'+commentItem.getComment()+'"';
-                comment[inc]= commentItem.getDate();
+                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি ";
+                else {date[inc]= commentItem.getComment();}
+                comment[inc]= English_to_bengali_number_conversion(commentItem.getDate());
                 rating[inc]= commentItem.getRating();
                 inc++;
             }
@@ -437,10 +438,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                         }
 
 
-                        if (inc == 1)
-                            review.setText(inc + " Review");
-                        else
-                            review.setText(inc + " Reviews");
+                        review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
                         Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityHealthNew.this);
                         if (screenSize > 6.5) {
                             review.setTextSize(20);
@@ -943,6 +941,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 concatResult = concatResult + ".";
             else if(english_number.charAt(i) == '/')
                 concatResult = concatResult + "/";
+            else if(english_number.charAt(i) == '-')
+                concatResult = concatResult + "-";
             else {
                 return english_number;
             }

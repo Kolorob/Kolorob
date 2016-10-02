@@ -151,13 +151,6 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         setContentView(R.layout.fragment_map1);
         super.onCreate(savedInstanceState);
 
-        final Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            public void run() {
-                dialog.dismiss(); // when the task active then close the dialog
-                t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
-            }
-        }, 100);
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
 
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.80);
