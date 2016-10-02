@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:id="@+id/userid"
+        android:maxLength="15"
         android:layout_marginLeft="20dp"
         android:hint="আপনার নাম লিখুন *"
         android:layout_marginRight="20dp"

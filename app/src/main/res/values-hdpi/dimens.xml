@@ -5,6 +5,7 @@
     <dimen name="sidebarheight">270dp</dimen>
     <dimen name="sidebarmargintop">10dp</dimen>
     <dimen name="siderighttop">43dp</dimen>
+    <dimen name="tutobottom">10dp</dimen>
     <dimen name="nav_header_heightcat2">5dp</dimen>
     <dimen name="leftpadding">28dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

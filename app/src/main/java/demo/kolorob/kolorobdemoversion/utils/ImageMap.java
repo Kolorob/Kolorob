@@ -345,8 +345,9 @@ public class ImageMap extends ImageView
 
     public String showBubble(int areaId)
     {String s=null;
+        Area a=null;
         mBubbleMap.clear();
-        Area a = mIdToArea.get(areaId);
+        a = mIdToArea.get(areaId);
         if (a != null)
         {
             s= a.getName();

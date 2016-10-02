@@ -207,7 +207,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         // find the image map in the view
         mImageMap = (ImageMap)findViewById(R.id.map);
-        mImageMap.setImageResource(R.drawable.place_choice_screen3);
 
         // add a click handler to react when areas are tapped
         mImageMap.addOnImageMapClickedHandler(new ImageMap.OnImageMapClickedHandler()
@@ -218,19 +217,19 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 // when the area is tapped, show the name in a
                 // text bubble
                 String getname=mImageMap.showBubble(id);
-                if(getname=="Mirpur-11")
+                if(getname.equals("Mirpur-11"))
                 {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 1);
                     startActivity(intent);
                 }
-                else if(getname=="Mirpur-10")
+                else if(getname.equals("Mirpur-10"))
                 {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 2);
                     startActivity(intent);
                 }
-                else if(getname=="Mirpur-12")
+                else if(getname.equals("Mirpur-12"))
                 {
                     Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
                     intent.putExtra(AppConstants.KEY_PLACE, 3);
