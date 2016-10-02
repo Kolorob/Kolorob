@@ -93,7 +93,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private ImageView close_button, distance_left, feedback, top_logo;
     private RadioGroup feedRadio;
     RadioButton rb1;
-    String status = "", phone_num = "", registered = "";
+    String status = "", phone_num = "", registered = "",uname="";
 
     private CheckBox checkBox;
     EditText feedback_comment;
@@ -802,6 +802,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
     public void sendReviewToServer() {
+
         int rating;
         if(status.equals(getString(R.string.feedback1)))
             rating= 1;
@@ -816,9 +817,11 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         String comment="";
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityHealthNew.this);
+        uname=uname2;
         comment=feedback_comment.getText().toString().trim();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

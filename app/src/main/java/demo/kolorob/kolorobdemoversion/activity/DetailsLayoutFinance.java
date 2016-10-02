@@ -88,7 +88,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1;
-    String status = "", phone_num = "", registered = "";
+    String status = "", phone_num = "", registered = "",uname="";
 
     RatingBar ratingBar;
 
@@ -719,7 +719,9 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         String comment="";
         comment=feedback_comment.getText().toString().trim();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutFinance.this);
+        uname=uname2;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

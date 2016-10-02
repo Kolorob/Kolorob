@@ -91,7 +91,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     private ImageView distance_left,feedback,top_logo,cross;
     RadioGroup feedRadio;
     RadioButton rb1;
-    String status="",phone_num="";
+    String status="",phone_num="",uname="";
     String result_concate="";
 
     EditText feedback_comment;
@@ -747,8 +747,10 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         String comment="";
         comment=feedback_comment.getText().toString().trim();
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityLegalNew.this);
+        uname=uname2;
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

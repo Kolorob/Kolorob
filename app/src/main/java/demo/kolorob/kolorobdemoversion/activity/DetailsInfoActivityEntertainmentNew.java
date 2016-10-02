@@ -87,7 +87,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private ImageView distance_left,feedback,top_logo,cross;
     RadioGroup feedRadio;
     RadioButton rb1;
-    String status="",phone_num="";
+    String status="",phone_num="",uname="";
     String result_concate="";
     EditText feedback_comment;
     RatingBar ratingBar;
@@ -603,6 +603,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
         phone_num=register;
+
         Log.d("Phone_num","------"+phone_num);
 
         if (register.equals("")) {
@@ -662,6 +663,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
     public void sendReviewToServer() {
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityEntertainmentNew.this);
+        uname=uname2;
         int rating;
         if(status.equals(getString(R.string.feedback1)))
             rating= 1;
@@ -677,7 +680,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         String comment="";
         comment=feedback_comment.getText().toString().trim();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

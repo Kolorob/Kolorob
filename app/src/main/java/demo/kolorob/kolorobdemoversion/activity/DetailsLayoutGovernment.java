@@ -91,7 +91,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     private ImageView close_button, distance_left, feedback, top_logo;
     RadioGroup feedRadio;
     RadioButton rb1;
-    String status = "", phone_num = "";
+    String status = "", phone_num = "",uname="";
 
 
     RatingBar ratingBar;
@@ -673,7 +673,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         String comment="";
         comment=feedback_comment.getText().toString().trim();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutGovernment.this);
+        uname=uname2;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
