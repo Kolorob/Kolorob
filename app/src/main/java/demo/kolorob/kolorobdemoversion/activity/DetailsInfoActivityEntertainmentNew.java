@@ -243,28 +243,23 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
         //   other_detailsEnt.setVisibility(View.VISIBLE);
-        for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
-            CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-            CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
-            CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
-            CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
 
 
-        }
-
-
-        CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
-        CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
-        CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         CheckConcate("রাস্তার নাম", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
         CheckConcate("এভিনিউ", entertainmentServiceProviderItemNew.getAvenue());
         CheckConcate("ব্লক", entertainmentServiceProviderItemNew.getBlock());
         CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
         CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
+        CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
+        CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
+        CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
 
-        CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
+
+
+
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
             breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
@@ -280,7 +275,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         alldata.setAdapter(defaultAdapter);
 
 
+        for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
+            CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
+            CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
+            CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
+            CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
 
+
+
+        }
 
         //   other_detailsEnt.setText(result_concate);
 

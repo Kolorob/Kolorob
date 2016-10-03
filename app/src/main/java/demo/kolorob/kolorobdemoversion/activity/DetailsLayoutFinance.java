@@ -158,15 +158,18 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         mlp.setMargins(width/100,0,width/990,width/8);
 
 
-        CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
+
         CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
-        CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
+
         CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
         CheckConcate("লাইন  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
         CheckConcate("এভিনিউ  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
         CheckConcate("পোস্ট অফিস  ", financialNewItem.getPostoffice());
         CheckConcate("পুলিশ স্টেশন ", financialNewItem.getPolicestation());
+
+        CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
+        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
+        CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
 
         CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact());
         CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact2());

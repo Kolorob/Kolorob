@@ -182,17 +182,24 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
         setRatingBar();
-
-        CheckConcate("প্রতিষ্ঠানের ধরন", healthServiceProviderItemNew.getInstitute_type());
-        CheckConcate("পরিচিত স্থান", healthServiceProviderItemNew.getLandmark());
-        CheckConcate("ব্লক", healthServiceProviderItemNew.getBlock());
-        CheckConcate("ফ্লোর", healthServiceProviderItemNew.getFloor());
-        CheckConcate("বাড়ির নাম", healthServiceProviderItemNew.getHouse_name());
         CheckConcate("রাস্তা", healthServiceProviderItemNew.getRoad());
         CheckConcate("লাইন ", healthServiceProviderItemNew.getLine());
         CheckConcate("এভিনিউ", healthServiceProviderItemNew.getAvenue());
         CheckConcate("পোস্ট অফিস", healthServiceProviderItemNew.getPost_office());
         CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolice_station());
+        CheckConcate("ব্লক", healthServiceProviderItemNew.getBlock());
+        CheckConcate("বাড়ির নাম", healthServiceProviderItemNew.getHouse_name());
+        CheckConcate("ফ্লোর", healthServiceProviderItemNew.getFloor());
+        CheckConcate("পরিচিত স্থান", healthServiceProviderItemNew.getLandmark());
+        CheckConcate("প্রতিষ্ঠানের ধরন", healthServiceProviderItemNew.getInstitute_type());
+        timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
+        timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
+        if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
+            breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
+        CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
+
+
+
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_for());
         CheckConcate("বিনামূল্যে সেবার ধরন", healthServiceProviderItemNew.getGeneral_free_services());
         CheckConcate("ধারন ক্ষমতা", healthServiceProviderItemNew.getCapacity());
@@ -219,11 +226,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
 
-        timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpening_time());
-        timeProcessing("বন্ধ করার সময়", healthServiceProviderItemNew.getClosing_time());
-        if(!healthServiceProviderItemNew.getBreak_time().equals("null")&&!healthServiceProviderItemNew.getBreak_time().equals(""))
-            breakTimeProcessing("বিরতির সময়", healthServiceProviderItemNew.getBreak_time());
-        CheckConcate("ছুটির দিন", healthServiceProviderItemNew.getOff_day());
+
         healthSpecialistItemDetailses = healthSpecialistTableDetails.getHealthSpecialistData(healthServiceProviderItemNew.getId());
         int specialist_size = healthSpecialistItemDetailses.size();
 
