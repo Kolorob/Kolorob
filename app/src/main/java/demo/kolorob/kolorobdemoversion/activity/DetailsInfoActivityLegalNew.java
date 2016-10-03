@@ -236,7 +236,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
         Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
-        LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
+        final LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
 
         CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
@@ -347,6 +347,11 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this, legalAidServiceProviderItemNew.getIdentifierId(), uname).equals("yes") ) {
+                            ToastMessageDisplay.setText(con,
+                                    "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
+                            ToastMessageDisplay.showText(con);
+                        }
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityLegalNew.this);
                         final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
                         final Dialog alertDialog = new Dialog(DetailsInfoActivityLegalNew.this);

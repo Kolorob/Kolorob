@@ -272,6 +272,11 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinId()), uname).equals("yes") ) {
+                            ToastMessageDisplay.setText(con,
+                                    "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
+                            ToastMessageDisplay.showText(con);
+                        }
                         LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
                         final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
                         final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
