@@ -194,7 +194,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
 
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-
+        params_middle_phone.height = (height * 3) / 24;
         params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
 
