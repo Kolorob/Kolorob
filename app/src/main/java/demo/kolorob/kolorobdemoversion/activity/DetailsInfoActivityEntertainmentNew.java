@@ -315,7 +315,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
-        String[] comment = new String[size];
+        final String[] comment = new String[size];
         final String[] rating = new String[size];
 
 
@@ -350,74 +350,80 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
-                        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
-                        final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                        final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
-                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        alertDialog.setContentView(promptView);
-                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        alertDialog.show();
-                        Log.d("Value of Inc1", "======");
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeId(), uname).equals("yes") ) {
+                           ToastMessageDisplay.setText(con,
+                                    "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
+                           ToastMessageDisplay.showText(con);
+                        }
+                            LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
+                            final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                            final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
+                            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            alertDialog.setContentView(promptView);
+                            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            alertDialog.show();
+                            Log.d("Value of Inc1", "======");
 
 
 //                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                        final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
+                            final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
 
-                        final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                        // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
-                        final TextView review = (TextView) promptView.findViewById(R.id.review);
+                            final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                            // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                            final TextView review = (TextView) promptView.findViewById(R.id.review);
 
-                        final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
+                            final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
-                        try {
-                            int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRating());
+                            try {
+                                int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRating());
 
-                            if (ratings == 1) {
-                                ratingbarz.setBackgroundResource(R.drawable.one);
-                            } else if (ratings == 2)
-                                ratingbarz.setBackgroundResource(R.drawable.two);
+                                if (ratings == 1) {
+                                    ratingbarz.setBackgroundResource(R.drawable.one);
+                                } else if (ratings == 2)
+                                    ratingbarz.setBackgroundResource(R.drawable.two);
 
-                            else if (ratings == 3)
-                                ratingbarz.setBackgroundResource(R.drawable.three);
+                                else if (ratings == 3)
+                                    ratingbarz.setBackgroundResource(R.drawable.three);
 
-                            else if (ratings == 4)
-                                ratingbarz.setBackgroundResource(R.drawable.four);
+                                else if (ratings == 4)
+                                    ratingbarz.setBackgroundResource(R.drawable.four);
 
-                            else if (ratings == 5)
-                                ratingbarz.setBackgroundResource(R.drawable.five);
-                        } catch (Exception e) {
+                                else if (ratings == 5)
+                                    ratingbarz.setBackgroundResource(R.drawable.five);
+                            } catch (Exception e) {
 
-                        }
-
-
-                        review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
-                        Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityEntertainmentNew.this);
-                        if (screenSize > 6.5) {
-                            review.setTextSize(20);
-                        } else {
-                            review.setTextSize(16);
+                            }
 
 
-                        }
+                            review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
+                            Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityEntertainmentNew.this);
+                            if (screenSize > 6.5) {
+                                review.setTextSize(20);
+                            } else {
+                                review.setTextSize(16);
 
 
-                        listView.setAdapter(comment_layout_adapter);
+                            }
+
+
+                            listView.setAdapter(comment_layout_adapter);
 //                    textView.setVisibility(View.GONE);
 
-                        alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
+                            alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
 
-                        close.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                            }
-                        });
-
-
-                        alertDialog.setCancelable(false);
+                            close.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    alertDialog.dismiss();
+                                }
+                            });
 
 
-                        alertDialog.show();
+                            alertDialog.setCancelable(false);
+
+
+                            alertDialog.show();
+
 
                     }
                 }
