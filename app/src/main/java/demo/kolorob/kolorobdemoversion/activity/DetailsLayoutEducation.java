@@ -851,6 +851,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.getEduId()) ,uname);
+
                                 AlertMessage.showMessage(DetailsLayoutEducation.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }

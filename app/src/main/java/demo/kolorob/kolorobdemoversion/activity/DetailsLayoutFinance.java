@@ -727,6 +727,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutFinance.this,String.valueOf(financialNewItem.getFinId()),uname);
                                 AlertMessage.showMessage(DetailsLayoutFinance.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }
