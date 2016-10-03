@@ -303,7 +303,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         comments = (ImageView)findViewById(R.id.comments);
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
-        lp.setMargins(width/24, 0, 0, 0);
+        lp.setMargins(width/26, 0, 0, 0);
         comments.setLayoutParams(lp);
         CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
 
@@ -314,6 +314,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         String[] date = new String[size];
         String[] comment = new String[size];
         final String[] rating = new String[size];
+
 
 
         for (CommentItem commentItem:commentItems)
