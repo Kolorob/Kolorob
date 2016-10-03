@@ -29,9 +29,9 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -40,6 +40,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -59,6 +61,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +80,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     ImageButton img;
     Toolbar toolbar;
     private String comment = "";
-
+String areaname=null;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
     NotificationManager manager;
@@ -87,6 +90,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Intent i;
     String IMEINumber;
     private  boolean Reviewsent=false;
+    boolean radioclicked=false;
     boolean doubleBackToExitPressedOnce = false;
     private int height;
     private int width;
@@ -147,12 +151,18 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     };
 
     private GoogleApiClient client;
+    FrameLayout mImageMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
-
+        mImageMap=(FrameLayout)findViewById(R.id.holder);
+        mImageMap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               popup();
+            }
+        });
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -162,9 +172,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         height = metrics.heightPixels;
         width = metrics.widthPixels;
 
-        //   int relativeWidthOfImage = (int)(width * 0.1);
-        final int coordsHeight = 800;
-        final int coordsWidth = 450;
+
         final String comment = "";
         String app_ver = "";
         NotificationManager manager;
@@ -176,7 +184,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
 
-        checkPermissions();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermissions();
+        }  else doPermissionGrantedStuffs();
         // Load ads into Interstitial Ads
         mInterstitialAd.loadAd(adRequest);
 
@@ -204,83 +214,25 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
 
-        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        FrameLayout holder = (FrameLayout) findViewById(R.id.holder);
-        holder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                width = v.getWidth();
-                height = v.getHeight();
-
-                float x = event.getX();
-                float y = event.getY();
-                // Hack to deal with issue in original image source
-
-                x = x * ((float) coordsWidth / (float) width);
-                y = y * ((float) coordsHeight / (float) height);
-                y = y +37;
-                t=Toast.makeText(getApplicationContext(),"value ", Toast.LENGTH_SHORT);
-                boolean mirpur10Hit = isPointInPolygon(x, y, mirpur10Coords);
-                boolean mirpur11Hit = isPointInPolygon(x, y, mirpur11Coords);
-                boolean anyHit = false;
 
 
 
 
+        // find the image map in the view
 
-                if (t != null)
-                    t.cancel();
-//                if (y < ((float)height) / 2.0) {
-            if (mirpur10Hit) {
-                    if(click==false)
-                    {
-                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                        intent.putExtra(AppConstants.KEY_PLACE, 1);
-                        startActivity(intent);
-                        click=true;
-                    }
 
-                    Log.d("BAUNIABHAD", "********" );
-                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"মিরপুর-১১ ");
-                  //  t = Toast.makeText(getApplicationContext(), "মিরপুর-১১ ", Toast.LENGTH_SHORT);
-                    anyHit = true;
-                }
-                else if (mirpur11Hit) {
-
-                    if(click==false)
-                    {
-                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
-                        intent .setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        intent.putExtra(AppConstants.KEY_PLACE, 2);
-                        startActivity(intent);
-                        click=true;
-                    }
-
-                    Log.d("PARIS ROAD", "********" );
-                ToastMessageDisplay.setText(PlaceSelectionActivity.this,"মিরপুর-১০");
-                   // t = Toast.makeText(getApplicationContext(), "মিরপুর-১০", Toast.LENGTH_SHORT);
-                    anyHit = true;
-
-                }
-                if (anyHit)
-                    ToastMessageDisplay.showText(PlaceSelectionActivity.this);
-                 //   t.show();
-                return true;
-            }
-        });
-
+        // add a click handler to react when areas are tapped
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        else
 //           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
-        // toolbar.setBackgroundResource(android.R.color.transparent);
+
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
+       ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-        ab.setDisplayHomeAsUpEnabled(true);
+       ab.setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -301,10 +253,10 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             }
         };
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+       getSupportActionBar().setHomeButtonEnabled(true);
         toggle.setDrawerIndicatorEnabled(true);
-        drawer.setDrawerListener(toggle);
-        //toggle.syncState();
+       drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -360,6 +312,93 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         );
     }
 
+    public void popup() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.place_selection_popup, null);
+        final Dialog alertDialog = new Dialog(PlaceSelectionActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        List<String> temp = new ArrayList<String>(Arrays.asList("মিরপুর ১০", "মিরপুর ১১","মিরপুর ১২"));
+
+        RadioGroup rg = (RadioGroup) alertDialog.findViewById(R.id.radio_group);
+
+        for(int i=0;i<temp.size();i++){
+            RadioButton rb=new RadioButton(this); // dynamically creating RadioButton and adding to RadioGroup.
+            rb.setText(temp.get(i));
+            if (SharedPreferencesHelper.isTabletDevice(PlaceSelectionActivity.this)){
+
+                rb.setTextSize(25);}
+            else rb.setTextSize(15);
+            rb.setTextColor(Color.parseColor("#FF8040"));
+
+            rg.addView(rb);
+
+        }
+        rg.setGravity(Gravity.CENTER);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int childCount = group.getChildCount();
+                for (int x = 0; x < childCount; x++) {
+                    RadioButton btn = (RadioButton) group.getChildAt(x);
+                    if (btn.getId() == checkedId) {
+                      areaname=btn.getText().toString();
+                        radioclicked=true;
+
+
+                    }
+                }
+            }
+        });
+        final Button submit = (Button) promptView.findViewById(R.id.btnSubmit);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (radioclicked) {
+
+
+                    if (areaname.equals("মিরপুর ১০")) {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 2);
+                        startActivity(intent);
+
+                    } else if (areaname.equals("মিরপুর ১১")) {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 1);
+                        startActivity(intent);
+
+                    } else if (areaname.equals("মিরপুর ১২")) {
+                        Intent intent = new Intent(PlaceSelectionActivity.this, PlaceDetailsActivityNewLayout.class);
+                        intent.putExtra(AppConstants.KEY_PLACE, 3);
+                        startActivity(intent);
+
+                    }
+                    alertDialog.cancel();
+                } else {
+                    ToastMessageDisplay.setText(PlaceSelectionActivity.this, "দয়া করে এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.showText(PlaceSelectionActivity.this);
+                }
+            }
+        });
+
+
+
+        alertDialog.setCancelable(true);
+        WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+        lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+        alertDialog.getWindow().setAttributes(lp);
+//		else
+//			textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+    }
 
     public void generateNotification() {
         String url = "https://play.google.com/store/apps/details?id=demo.kolorob.kolorobdemoversion&hl=en";
@@ -839,14 +878,14 @@ else
                     TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                     //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
                     IMEINumber=tm.getDeviceId();
-                    Toast.makeText(PlaceSelectionActivity.this, "All permissions granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlaceSelectionActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
                 } else if (location) {
                     Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
                 } else if (storage) {
                     Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
                 }
                 else if (phonestate) {
-                    Toast.makeText(this, "Phone state permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
                 }else { // !location && !storage case
                     // Permission Denied
                     Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +

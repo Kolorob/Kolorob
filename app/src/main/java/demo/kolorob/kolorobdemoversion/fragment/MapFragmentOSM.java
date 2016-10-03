@@ -80,7 +80,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         if (locationNameId == AppConstants.PLACE_BAUNIABADH) {
             listData.add(AppConstants.BAUNIABADH);
             listData.add(AppConstants.PARIS_ROAD);
-        } else {
+            listData.add(AppConstants.MIRPUR_TWELVE);
+        } else if (locationNameId == AppConstants.PLACE_PARIS_ROAD)  {
+            listData.add(AppConstants.PARIS_ROAD);
+            listData.add(AppConstants.BAUNIABADH);
+            listData.add(AppConstants.MIRPUR_TWELVE);
+        }
+        else {
+            listData.add(AppConstants.MIRPUR_TWELVE);
             listData.add(AppConstants.PARIS_ROAD);
             listData.add(AppConstants.BAUNIABADH);
         }
@@ -286,6 +293,10 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         } else if (locationNameId == 2) {
             mapViewController.setZoom(16);
             mapViewController.setCenter(AppConstants.PARIS1);
+        }
+        else if (locationNameId == 3) {
+            mapViewController.setZoom(16);
+            mapViewController.setCenter(AppConstants.TWELVE);
         }
 
 

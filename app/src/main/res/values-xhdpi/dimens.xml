@@ -6,6 +6,7 @@
     <dimen name="sidebarmargintop">10dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">0dp</dimen>
+    <dimen name="tutobottom">10dp</dimen>
     <dimen name="margincheckbox">10dp</dimen>
     <dimen name="leftpadding">25dp</dimen>
     <dimen name="transportscroll">100dp</dimen>

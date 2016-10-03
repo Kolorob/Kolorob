@@ -69,7 +69,7 @@
     <string name="place">
                     আপনার চিহ্নিত স্থান গুলো বাতিল হয়ে যাবে।  </string>
 
-    <string name="phone_registration">ফোন রেজিস্ট্রেশন করুন  </string>
+    <string name="phone_registration">রেজিস্ট্রেশন করুন  </string>
     <string name="information_change">আপনার তথ্য পরিবর্তন করুন  </string>
     <string name="area_member">এলাকার প্রতিনিধি হবার আবেদন করুন </string>
     <string name="advertisements">বিজ্ঞাপন বা তথ্যের জন্য আবেদন করুন  </string>
@@ -106,8 +106,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-  <string name="disclaimertext">All content provided by Kolorob is provided for information purposes only. Kolorob is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the application. While the information contained within the application is periodically updated, Kolorob makes no guarantee of any kind and cannot be liable for any outdated or inaccurate information.
-Any information and links to external third-party internet sources or websites are provided as a courtesy and should not construed as an endorsement by Kolorob. Kolorob is therefore, not responsible for the accuracy of the content of information contained in these sites. Product and service information is based solely on the information collected from the service providers.
+ <string name="disclaimertext">কলরব এ্যাপ্লিক্যাশনের সমস্ত কিছুই শুধুমাত্র তথ্য প্রদানে ব্যবহার করার জন্য। যেহেতু কলরবে ব্যবহৃত তথ্যসমূহ নির্দিষ্ট সময়ে (অধিকাংশ সময় পাক্ষিক কালে) হাল-নাগাদ হয় তাই নির্দিষ্ট কোনো সেবা / পন্য ব্যবহার উপযোগী না হলে বা যথাযথ মানসম্পন্ন না হলে বা মেয়াদোত্তীর্ণ হলে কলরব দায়ী নয় ও এসকল সেবার সর্বশেষ অবস্থা/অবস্থান সম্পর্কে ব্যাপারে কলরব নিশ্চয়তা দেয় না ।
+কলরবে যেসকল তথ্য বিভিন্ন সংস্থার ওয়েবসাইট ও ইন্টারনেট হতে নেয়া হয়েছে এবং ব্যবহারকারীর অধিকতর সুবিধার্থে কলরবে ব্যবহার করা হয়েছে, এসমস্ত তথ্য কলরবের তথ্য নয় বলে গণ্য হবে এবং তৃতীয় পক্ষ হতে সংগৃহীত এ তথ্যসমূহের দায়ও কলরবের নয়। পন্য এবং বিভিন্ন সেবা সম্পর্কিত তথ্যের জন্য নির্দিষ্ট সেবা প্রদানকারী দায়বদ্ধ, কলরব নয়।
+এটা প্রত্যাশিত যে, কলরবের ব্যবহারকারীরা অবশ্যই তথ্য প্রযুক্তি /ডিজিটাল আইন এবং এসম্পর্কিত অন্যান্য আইন মেনে তথ্য ব্যবহার করবে। কলরবে ব্যবহৃত সকল ছবি, চরিত্র ও তথ্য প্রতীকি অর্থে ব্যবহার করা হয়েছে এবং এর মাধ্যমে কোনো সংস্থা বা ব্যক্তিকে হেয় করা কোনো উদ্দ্যেশ্য নয়।
+কলরবের কপিরাইট সেভ দ্য চিলড্রেন কর্তৃক সংরক্ষিত। এই এ্যাপ্লিকেশনের কোনো অংশ কপি বা অনুমতি ছাড়া ব্যবহার করা যাবে না।
 
  </string>
 

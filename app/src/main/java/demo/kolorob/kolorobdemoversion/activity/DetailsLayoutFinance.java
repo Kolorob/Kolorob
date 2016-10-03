@@ -88,7 +88,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     private ImageView close_button, phone_mid, distance_left, feedback, top_logo, cross, school_logo_default;
     RadioGroup feedRadio;
     RadioButton rb1;
-    String status = "", phone_num = "", registered = "";
+    String status = "", phone_num = "", registered = "",uname="";
 
     RatingBar ratingBar;
 
@@ -245,9 +245,10 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
             if(!commentItem.getRating().equals(""))
             {
-                phone[inc]= commentItem.getMob_no();
-                date[inc]='"'+commentItem.getComment()+'"';
-                comment[inc]= commentItem.getDate();
+                phone[inc]= commentItem.getUser_name();
+                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি ";
+                else {date[inc]= commentItem.getComment();}
+                comment[inc]= English_to_bengali_number_conversion(commentItem.getDate());
                 rating[inc]= commentItem.getRating();
                 inc++;
             }
@@ -262,7 +263,84 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinId()),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinId()), uname).equals("yes")&&inc==0) {
+                        AlertMessage.showMessage(con, "দুঃখিত",
+                                "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
+                    } else {
+                        LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
+                        final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                        final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
+                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        alertDialog.setContentView(promptView);
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        alertDialog.show();
+                        Log.d("Value of Inc1", "======");
+
+
+//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                        final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
+
+                        final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                        // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                        final TextView review = (TextView) promptView.findViewById(R.id.review);
+
+                        final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
+
+                        try {
+                            int ratings = Integer.parseInt(financialNewItem.getRating());
+
+                            if (ratings == 1) {
+                                ratingbarz.setBackgroundResource(R.drawable.one);
+                            } else if (ratings == 2)
+                                ratingbarz.setBackgroundResource(R.drawable.two);
+
+                            else if (ratings == 3)
+                                ratingbarz.setBackgroundResource(R.drawable.three);
+
+                            else if (ratings == 4)
+                                ratingbarz.setBackgroundResource(R.drawable.four);
+
+                            else if (ratings == 5)
+                                ratingbarz.setBackgroundResource(R.drawable.five);
+                        } catch (Exception e) {
+
+                        }
+
+
+                        review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
+                        Double screenSize = AppUtils.ScreenSize(DetailsLayoutFinance.this);
+                        if (screenSize > 6.5) {
+                            review.setTextSize(20);
+                        } else {
+                            review.setTextSize(16);
+
+
+                        }
+
+
+                        listView.setAdapter(comment_layout_adapter);
+//                    textView.setVisibility(View.GONE);
+
+                        alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
+
+                        close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+
+
+                        alertDialog.setCancelable(false);
+
+
+                        alertDialog.show();
+
+                    }
+                }
+                else
                 if(inc==0)
                 {
                     LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
@@ -311,90 +389,6 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                     alertDialog.setCancelable(false);
                     alertDialog.show();                }
 
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsLayoutFinance.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsLayoutFinance.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-                    Log.d("Value of Inc1","======");
-
-
-
-//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                    // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
-                    final TextView review = (TextView)promptView.findViewById(R.id.review);
-
-                    final ImageView ratingbarz=(ImageView)promptView.findViewById(R.id.ratingBarz);
-
-                    try
-                    {
-                        int ratings= Integer.parseInt(financialNewItem.getRating());
-
-                        if(ratings==1)
-                        {
-                            ratingbarz.setBackgroundResource(R.drawable.one);
-                        }
-                        else if(ratings==2)
-                            ratingbarz.setBackgroundResource(R.drawable.two);
-
-                        else if(ratings==3)
-                            ratingbarz.setBackgroundResource(R.drawable.three);
-
-                        else if(ratings==4)
-                            ratingbarz.setBackgroundResource(R.drawable.four);
-
-                        else if(ratings==5)
-                            ratingbarz.setBackgroundResource(R.drawable.five);
-                    }
-
-                    catch (Exception e)
-                    {
-
-                    }
-
-
-                    if(inc==1)
-                        review.setText(inc +" Review");
-                    else
-                        review.setText(inc+ " Reviews");
-                    Double screenSize = AppUtils.ScreenSize(DetailsLayoutFinance.this);
-                    if(screenSize>6.5)
-                    {
-                        review.setTextSize(20);
-                    }
-                    else {
-                        review.setTextSize(16);
-
-
-                    }
-
-
-                    listView.setAdapter(comment_layout_adapter);
-//                    textView.setVisibility(View.GONE);
-
-                    alertDialog.getWindow().setLayout((width*5)/6, (height*2)/3);
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-
-                }
 
             }
         });
@@ -718,8 +712,10 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             rating= 5;
 
         String comment="";
-        comment=feedback_comment.getText().toString();
-        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        comment=feedback_comment.getText().toString().trim();
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutFinance.this);
+        uname=uname2;
+        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -853,6 +849,8 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 concatResult = concatResult + ".";
             else if(english_number.charAt(i) == '/')
                 concatResult = concatResult + "/";
+            else if(english_number.charAt(i) == '-')
+                concatResult = concatResult + "-";
             else {
                 return english_number;
             }

@@ -45,7 +45,7 @@ static String m;
         if (SharedPreferencesHelper.isTabletDevice(context)){
             toastMessage.setPadding(15,15,15,15);
             toastMessage.setTextSize(30);}
-        else toastMessage.setTextSize(20);
+        else toastMessage.setTextSize(15);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }

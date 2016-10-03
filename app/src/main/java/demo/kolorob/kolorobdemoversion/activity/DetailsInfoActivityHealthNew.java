@@ -93,7 +93,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private ImageView close_button, distance_left, feedback, top_logo;
     private RadioGroup feedRadio;
     RadioButton rb1;
-    String status = "", phone_num = "", registered = "";
+    String status = "", phone_num = "", registered = "",uname="";
 
     private CheckBox checkBox;
     EditText feedback_comment;
@@ -146,7 +146,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         key = new String[600];
 
         value = new String[600];
-        HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityHealthNew.this);
+        final HealthSpecialistTableDetails healthSpecialistTableDetails = new HealthSpecialistTableDetails(DetailsInfoActivityHealthNew.this);
 
 
         upperHand = (LinearLayout) findViewById(R.id.upper_part);
@@ -375,8 +375,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getUser_name();
-                date[inc]='"'+commentItem.getComment()+'"';
-                comment[inc]= commentItem.getDate();
+                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি ";
+                else {date[inc]= commentItem.getComment();}
+                comment[inc]= English_to_bengali_number_conversion(commentItem.getDate());
                 rating[inc]= commentItem.getRating();
                 inc++;
             }
@@ -391,8 +392,84 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getId(),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getId(), uname).equals("yes")&&inc==0) {
+                        AlertMessage.showMessage(con, "দুঃখিত",
+                                "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
-                if(inc==0)
+                    } else {
+                        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
+                        final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                        final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
+                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        alertDialog.setContentView(promptView);
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        alertDialog.show();
+                        Log.d("Value of Inc1", "======");
+
+
+//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                        final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
+
+                        final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
+                        // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                        final TextView review = (TextView) promptView.findViewById(R.id.review);
+
+                        final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
+
+                        try {
+                            int ratings = Integer.parseInt(healthServiceProviderItemNew.getRating());
+
+                            if (ratings == 1) {
+                                ratingbarz.setBackgroundResource(R.drawable.one);
+                            } else if (ratings == 2)
+                                ratingbarz.setBackgroundResource(R.drawable.two);
+
+                            else if (ratings == 3)
+                                ratingbarz.setBackgroundResource(R.drawable.three);
+
+                            else if (ratings == 4)
+                                ratingbarz.setBackgroundResource(R.drawable.four);
+
+                            else if (ratings == 5)
+                                ratingbarz.setBackgroundResource(R.drawable.five);
+                        } catch (Exception e) {
+
+                        }
+
+
+                        review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
+                        Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityHealthNew.this);
+                        if (screenSize > 6.5) {
+                            review.setTextSize(20);
+                        } else {
+                            review.setTextSize(16);
+
+
+                        }
+
+
+                        listView.setAdapter(comment_layout_adapter);
+//                    textView.setVisibility(View.GONE);
+
+                        alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
+
+                        close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+
+
+                        alertDialog.setCancelable(false);
+
+
+                        alertDialog.show();
+
+                    }
+                }
+                else if(inc==0)
                 {
                     LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
                     View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
@@ -446,90 +523,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                    // AlertMessage.showMessage(DetailsInfoActivityHealthNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
                 }
 
-                else
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-                    Log.d("Value of Inc1","======");
 
-
-
-//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                    final ListView listView=(ListView)promptView.findViewById(R.id.comment_list);
-
-                    final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                   // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
-                    final TextView review = (TextView)promptView.findViewById(R.id.review);
-
-                    final ImageView ratingbarz=(ImageView)promptView.findViewById(R.id.ratingBarz);
-
-                     try
-                     {
-                         int ratings= Integer.parseInt(healthServiceProviderItemNew.getRating());
-
-                         if(ratings==1)
-                         {
-                             ratingbarz.setBackgroundResource(R.drawable.one);
-                         }
-                         else if(ratings==2)
-                             ratingbarz.setBackgroundResource(R.drawable.two);
-
-                         else if(ratings==3)
-                             ratingbarz.setBackgroundResource(R.drawable.three);
-
-                         else if(ratings==4)
-                             ratingbarz.setBackgroundResource(R.drawable.four);
-
-                         else if(ratings==5)
-                             ratingbarz.setBackgroundResource(R.drawable.five);
-                     }
-
-                     catch (Exception e)
-                     {
-
-                     }
-
-
-                    if(inc==1)
-                        review.setText(inc +" Review");
-                    else
-                       review.setText(inc+ " Reviews");
-                    Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityHealthNew.this);
-                    if(screenSize>6.5)
-                    {
-                        review.setTextSize(20);
-                    }
-                    else {
-                        review.setTextSize(16);
-
-
-                    }
-
-
-                    listView.setAdapter(comment_layout_adapter);
-//                    textView.setVisibility(View.GONE);
-
-                    alertDialog.getWindow().setLayout((width*5)/6, (height*2)/3);
-
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-                    alertDialog.setCancelable(false);
-
-
-                    alertDialog.show();
-
-                }
 
             }
         });
@@ -802,6 +796,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
     public void sendReviewToServer() {
+
         int rating;
         if(status.equals(getString(R.string.feedback1)))
             rating= 1;
@@ -816,9 +811,11 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         String comment="";
-        comment=feedback_comment.getText().toString();
+        String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityHealthNew.this);
+        uname=uname2;
+        comment=feedback_comment.getText().toString().trim();
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+healthServiceProviderItemNew.getId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -944,6 +941,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 concatResult = concatResult + ".";
             else if(english_number.charAt(i) == '/')
                 concatResult = concatResult + "/";
+            else if(english_number.charAt(i) == '-')
+                concatResult = concatResult + "-";
             else {
                 return english_number;
             }

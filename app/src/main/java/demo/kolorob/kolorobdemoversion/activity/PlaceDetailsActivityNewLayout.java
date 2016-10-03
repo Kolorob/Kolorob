@@ -459,6 +459,7 @@ int index;
                 locationName = AppConstants.BAUNIABADH;
                 listData.add(AppConstants.BAUNIABADH);
                 listData.add(AppConstants.PARIS_ROAD);
+                listData.add(AppConstants.MIRPUR_TWELVE);
                 setLocationNameEng("Mirpur-11");
             }
             else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
@@ -467,7 +468,17 @@ int index;
                 locationName = AppConstants.PARIS_ROAD;
                 listData.add(AppConstants.PARIS_ROAD);
                 listData.add(AppConstants.BAUNIABADH);
+                listData.add(AppConstants.MIRPUR_TWELVE);
                 setLocationNameEng("Mirpur-10");
+            }
+            else if(locationNameId== AppConstants.PLACE_MIRPUR_12)
+            {
+                setPlaceChoice("Mirpur-12");
+                locationName = AppConstants.MIRPUR_TWELVE;
+                listData.add(AppConstants.MIRPUR_TWELVE);
+                listData.add(AppConstants.BAUNIABADH);
+                listData.add(AppConstants.PARIS_ROAD);
+                setLocationNameEng("Mirpur-12");
             }
         }
 
@@ -673,7 +684,8 @@ int index;
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);
                 }
-                else {locationNameId=AppConstants.PLACE_PARIS_ROAD;
+                else if(imc_met==AppConstants.PARIS_ROAD)
+                {locationNameId=AppConstants.PLACE_PARIS_ROAD;
                     setPlaceChoice("Mirpur-10");
                     setLocationNameEng("Mirpur-10");
 
@@ -688,6 +700,23 @@ int index;
                     createData(currentCategoryID,"","Mirpur-10");
                     ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
                     subCatItemList.setAdapter(adapter);}
+                else {
+                    locationNameId = AppConstants.PLACE_MIRPUR_12;
+                    setPlaceChoice("Mirpur-12");
+                    setLocationNameEng("Mirpur-12");
+
+                    allHolders.clear();
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
+                    {
+                        Populateholder("Mirpur-12");
+                        calladapter(true);
+                    }
+                    else Populateholder("Mirpur-12");
+                    callMapFragment(locationNameId);
+                    createData(currentCategoryID,"","Mirpur-12");
+                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+                    subCatItemList.setAdapter(adapter);
+                }
                 if(mapcalledstatus){
 
                 }
@@ -2704,7 +2733,9 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+
+        else if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
         fragment.getMapViewController().setZoom(16);
 
         if(edid==-1)
@@ -2748,7 +2779,9 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         if(prev_fragment!=null&&prev_fragment.getMapViewController() != null)
         {
             if(locationNameId==1)  prev_fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-            else prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+            else  if(locationNameId==2) prev_fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+            else prev_fragment.getMapViewController().setCenter(AppConstants.TWELVE);
+
             prev_fragment.getMapViewController().setZoom(16);
             if (mapcalledstatus) {
                 Arrays.fill(flag2,1);
@@ -2846,8 +2879,9 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-      if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
 fragment.getMapViewController().setZoom(16);
         if(helid==-1)
         {
@@ -2885,7 +2919,8 @@ fragment.getMapViewController().setZoom(16);
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
         fragment.getMapViewController().setZoom(16);
 
         if(edid==-1)
@@ -2926,7 +2961,8 @@ fragment.getMapViewController().setZoom(16);
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
         fragment.getMapViewController().setZoom(16);
 
         if(edid==-1)
@@ -2968,7 +3004,8 @@ fragment.getMapViewController().setZoom(16);
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
         fragment.getMapViewController().setZoom(16);
 
         if(edid==-1)
@@ -3006,7 +3043,8 @@ fragment.getMapViewController().setZoom(16);
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
         fragment.getMapViewController().setZoom(16);
 
         if(edid==-1)
@@ -3411,6 +3449,10 @@ fragment.getMapViewController().setZoom(16);
                     setPlaceChoice(locationName);
                 } else if (locationNameId == AppConstants.PLACE_PARIS_ROAD) {
                     locationName = AppConstants.PARIS_ROAD;
+                    setPlaceChoice(locationName);
+                }
+                else if (locationNameId == AppConstants.PLACE_MIRPUR_12) {
+                    locationName = AppConstants.MIRPUR_TWELVE;
                     setPlaceChoice(locationName);
                 }
                 if(!ListClicked.equals(true))

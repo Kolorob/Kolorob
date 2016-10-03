@@ -50,6 +50,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.helpers.KOLOROBRoadManager;
@@ -134,7 +136,9 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         Display display = wm.getDefaultDisplay();
         dialog = new ProgressDialog(MapFragmentRouteOSM.this);
         dialog.setMessage("দয়া করে অপেক্ষা করুন");
+        dialog.setCancelable(true);
         dialog.show();
+
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         width = metrics.widthPixels;
@@ -146,7 +150,6 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
         setContentView(R.layout.fragment_map1);
         super.onCreate(savedInstanceState);
-
 
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
 

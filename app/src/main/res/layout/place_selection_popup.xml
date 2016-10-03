@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    android:background="@drawable/rounded"
+    android:padding="10dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="এলাকা নির্বাচন করুন"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/feedback" />
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2" >
+
+        <RadioGroup
+
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
+
+
+        </RadioGroup>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/tick_icon_feedback"
+            android:layout_gravity="center_horizontal"
+            android:onClick="phonecall"
+            android:layout_marginRight="10dp"
+            />
+
+
+
+    </LinearLayout>
+</LinearLayout>

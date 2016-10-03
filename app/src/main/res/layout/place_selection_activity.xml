@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:id="@+id/holder"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/place_choice_screen"
+            android:background="@drawable/place_choice_screen3"
             android:layout_alignParentTop="true">
 
 
