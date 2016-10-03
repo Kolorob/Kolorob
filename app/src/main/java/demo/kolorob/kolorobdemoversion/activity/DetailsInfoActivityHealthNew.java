@@ -830,7 +830,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getId(),uname);
+                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityHealthNew.this,healthServiceProviderItemNew.getId(),uname,"yes");
                                 AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             } else

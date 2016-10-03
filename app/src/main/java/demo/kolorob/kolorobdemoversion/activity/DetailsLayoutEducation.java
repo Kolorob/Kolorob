@@ -284,9 +284,10 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
                 CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
                 CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
+                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
                 CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionminfee()));
 
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
+
                 CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", EtoB(educationTuitionDetailsItem.getTuitionmincoaching()));
                 CheckConcate("সর্বোচ্চ খরচ( কোচিং)", EtoB(educationTuitionDetailsItem.getTuitionmaxcoaching()));
                 CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
@@ -850,7 +851,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.getEduId()) ,uname);
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.getEduId()) ,uname,"yes");
 
                                 AlertMessage.showMessage(DetailsLayoutEducation.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");

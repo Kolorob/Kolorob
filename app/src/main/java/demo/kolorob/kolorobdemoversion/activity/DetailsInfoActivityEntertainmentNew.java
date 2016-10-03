@@ -691,7 +691,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname);
+                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname,"yes");
                                 AlertMessage.showMessage(DetailsInfoActivityEntertainmentNew.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }
