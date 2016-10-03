@@ -238,6 +238,29 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
         LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
+
+        CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
+        CheckConcate("রাস্তার নম্বর ", legalAidServiceProviderItemNew.getRoad());
+        CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
+        CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
+        CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
+        CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
+        CheckConcate("বাসার নম্বর", legalAidServiceProviderItemNew.getHouse_no());
+        CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
+
+        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
+        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
+
+
+        timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
+        if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
+            breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
+        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
+        CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
+        CheckConcate("রেজিস্ট্রেশনমাধ্যমে", legalAidServiceProviderItemNew.getRegisteredWith());
+        ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
+
+
         if(!leagalAidDetailsItems.equals(""))
         {
 
@@ -251,29 +274,6 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             }
 
         }
-
-        CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
-        CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
-        CheckConcate("বাসার নম্বর", legalAidServiceProviderItemNew.getHouse_no());
-        CheckConcate("রাস্তার ", legalAidServiceProviderItemNew.getRoad());
-        CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
-        CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
-        CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
-        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
-        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
-
-        CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
-        timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
-        if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
-        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
-        CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
-        CheckConcate("রেজিস্ট্রেশনমাধ্যমে", legalAidServiceProviderItemNew.getRegisteredWith());
-        ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
-
-
-        result_concate="";
-
 
 
 
@@ -755,7 +755,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityLegalNew.this,legalAidServiceProviderItemNew.getIdentifierId(),uname);
+                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityLegalNew.this,legalAidServiceProviderItemNew.getIdentifierId(),uname,"yes");
 
                                 AlertMessage.showMessage(DetailsInfoActivityLegalNew.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ ");

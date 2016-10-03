@@ -165,6 +165,29 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
+        CheckConcate("ঠিকানা", educationNewItem.getAddress());
+
+        CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));
+        CheckConcate("লাইন ", EtoB(educationNewItem.getLine()));
+        CheckConcate("এভিনিউ", EtoB(educationNewItem.getAvenue()));
+        CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
+        CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
+
+        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHousename()));
+        CheckConcate("ফ্লোর", EtoB(educationNewItem.getFloor()));
+        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact2());
+        CheckConcate("ইমেইল", educationNewItem.getNode_email());
+        CheckConcate("ওয়েব সাইট", educationNewItem.getNode_website());
+        CheckConcate("ফেসবুক", educationNewItem.getNode_facebook());
+        CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
+        timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
+        timeProcessing("বন্ধের সময়", educationNewItem.getClosetime());
+        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
+            breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
+        CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
+        CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
+        CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
         CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
         CheckConcate("শাখা", educationNewItem.getShift());
         CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno())+" জন");
@@ -174,40 +197,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent())+" জন");
         CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent())+" জন");
 
-        CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no()))+" টি");
-        CheckConcate("ছেলেদের বাথরুম", EtoB( educationNewItem.getWashroom_male()));
-        CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
-        CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
-        CheckConcate("খাবার পানির উৎস", educationNewItem.getWatersource());
-        CheckConcate("গড় ছাত্রছাত্রী",  EtoB(educationNewItem.getAveragestudent()));
-        CheckConcate("মেয়েদের বাথরুম ",  EtoB(educationNewItem.getWashroomfemale()));
-
-        CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
-        CheckConcate("ঠিকানা", educationNewItem.getAddress());
-        CheckConcate("ফ্লোর", EtoB(educationNewItem.getFloor()));
-        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHousename()));
-        CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));
-        CheckConcate("লাইন ", EtoB(educationNewItem.getLine()));
-        CheckConcate("এভিনিউ", EtoB(educationNewItem.getAvenue()));
-        CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
-
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact2());
-        CheckConcate("ইমেইল", educationNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট", educationNewItem.getNode_website());
-        CheckConcate("ফেসবুক", educationNewItem.getNode_facebook());
-        CheckConcate("তথ্যপ্রদান কারীর পদবী", educationNewItem.getNode_designation());
 
 
-        timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়", educationNewItem.getClosetime());
-        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
-        CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
+
         educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
         int result_size = educationResultItemNews.size();
 
@@ -292,9 +284,10 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
                 CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
                 CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
+                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
                 CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionminfee()));
 
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
+
                 CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", EtoB(educationTuitionDetailsItem.getTuitionmincoaching()));
                 CheckConcate("সর্বোচ্চ খরচ( কোচিং)", EtoB(educationTuitionDetailsItem.getTuitionmaxcoaching()));
                 CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
@@ -304,7 +297,14 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         }
-
+        CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
+        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no()))+" টি");
+        CheckConcate("ছেলেদের বাথরুম", EtoB( educationNewItem.getWashroom_male()));
+        CheckConcate("মেয়েদের বাথরুম ",  EtoB(educationNewItem.getWashroomfemale()));
+        CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
+        CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
+        CheckConcate("খাবার পানির উৎস", educationNewItem.getWatersource());
+        CheckConcate("গড় ছাত্রছাত্রী",  EtoB(educationNewItem.getAveragestudent()));
 
 
         close_button.setOnClickListener(new View.OnClickListener() {
@@ -851,7 +851,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.getEduId()) ,uname);
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.getEduId()) ,uname,"yes");
 
                                 AlertMessage.showMessage(DetailsLayoutEducation.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");

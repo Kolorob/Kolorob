@@ -217,11 +217,11 @@ public final class SharedPreferencesHelper {
 		editor.putString(SharedPreferencesHelper.NUMBER, pass);
 		editor.commit();
 	}
-	public static void setifcommentedalready(final Context ctx, final String nodeid,final String username) {
+	public static void setifcommentedalready(final Context ctx, final String nodeid,final String username,String status) {
 		final SharedPreferences prefs = ctx.getSharedPreferences(
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
 		final Editor editor = prefs.edit();
-		editor.putString(SharedPreferencesHelper.IFCOMMENTED, "yes");
+		editor.putString(SharedPreferencesHelper.IFCOMMENTED, status);
 		editor.commit();
 	}
 	public static String getifcommentedalready(final Context ctx, final String nodeid,final String username) {

@@ -647,6 +647,7 @@ public class OpeningActivity extends Activity {
                     startActivity(a);
                     return;
                 } else {
+                        SharedPreferencesHelper.setifcommentedalready(OpeningActivity.this,null,SharedPreferencesHelper.getUname(OpeningActivity.this),"no");
                     Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
 
                     frameAnimation.stop();

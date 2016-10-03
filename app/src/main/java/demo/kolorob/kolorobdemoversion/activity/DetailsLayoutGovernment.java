@@ -160,16 +160,18 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         setRatingBar();
 
-        CheckConcate("পরিচিত স্থান  ", governmentNewItem.getLandmark());
+
         CheckConcate("ঠিকানা  ", governmentNewItem.getAddress());
-        CheckConcate("ফ্লোর  ", governmentNewItem.getFloor());
-        CheckConcate("বাড়ির নাম  ", governmentNewItem.getHousename());
+
         CheckConcate("রাস্তা   ", governmentNewItem.getRoad());
         CheckConcate("লাইন    ", governmentNewItem.getLine());
         CheckConcate("এভিনিউ  ", governmentNewItem.getAvenue());
         CheckConcate("পোস্ট অফিস  ", governmentNewItem.getPostoffice());
         CheckConcate("পুলিশ স্টেশন ", governmentNewItem.getPolicestation());
+        CheckConcate("পরিচিত স্থান  ", governmentNewItem.getLandmark());
 
+        CheckConcate("বাড়ির নাম  ", governmentNewItem.getHousename());
+        CheckConcate("ফ্লোর  ", governmentNewItem.getFloor());
         CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact());
         CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact2());
         CheckConcate("ইমেইল  ", governmentNewItem.getNode_email());
@@ -682,7 +684,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutGovernment.this,String.valueOf(governmentNewItem.getFinId()),uname);
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutGovernment.this,String.valueOf(governmentNewItem.getFinId()),uname,"yes");
 
                                 AlertMessage.showMessage(DetailsLayoutGovernment.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
