@@ -395,7 +395,7 @@ int index;
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
         Searchall=(EditText)findViewById(R.id.searchall);
 
-        prebutton=(Button) findViewById(R.id.prebutton);
+
         filterholder=(RelativeLayout)findViewById(R.id.filterholder);
 
         header=(TextView)findViewById(R.id.textView15);
