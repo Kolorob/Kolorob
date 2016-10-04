@@ -23,14 +23,13 @@ public class ViewPagerDemo extends FragmentActivity {
     int data=0;
     int YourtransferredData;
     Button close;
-int Psition,Ps2;
+    int Psition,Ps2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewtutorial);
         Intent i1 = getIntent();
         if (i1 != null) {
-
            data = i1.getIntExtra("YourValueKey",0);
         }
 
@@ -41,19 +40,16 @@ int Psition,Ps2;
             public void onClick(View v) {
                 if(data==2) {
                     Intent a = new Intent(ViewPagerDemo.this, PlaceSelectionActivity.class); // Default Activity
-
                     startActivity(a);
                     finish();
                 }
                 else   if(data==0) {
                     Intent a = new Intent(ViewPagerDemo.this, PlaceSelectionActivity.class); // Default Activity
-
                     startActivity(a);
                     finish();
                 }
                 else if(data==1){
                     Intent a = new Intent(ViewPagerDemo.this, PlaceDetailsActivityNewLayout.class); // Default Activity
-
                     startActivity(a);
                     finish();
                 }
@@ -89,9 +85,9 @@ int Psition,Ps2;
             public void onPageSelected(int position)
             {
                 Log.d("p2",String.valueOf(position));
-               int k= mPager.getAdapter().getCount();
+                int k= mPager.getAdapter().getCount();
                 Psition=position;
-               if(position==mPager.getAdapter().getCount()-1 &&data==0){
+                if(position==mPager.getAdapter().getCount()-1 &&data==0){
                   close.setVisibility(View.VISIBLE);
                 }
                 else  close.setVisibility(View.GONE);

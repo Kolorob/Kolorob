@@ -23,6 +23,10 @@ import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 
+/**
+ * Created by Mazharul.Islam1 on 9/5/2016.
+ */
+
 public class DetailsJobActivityNew extends Activity {
     Dialog dialog;
     LinearLayout upperText,middle_phone,right_email,bottom_bar;
