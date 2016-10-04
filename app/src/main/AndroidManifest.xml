@@ -97,7 +97,6 @@
 
         <activity android:name=".activity.DetailsInfoActivityLegalNew" />
         <activity android:name=".activity.DetailsJobActivityNew" />
-        <activity android:name=".activity.FeedBackActivityNew" />
         <activity android:name=".activity.ViewPagerDemo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

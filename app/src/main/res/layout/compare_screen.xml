@@ -6,7 +6,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:visibility="gone"
+  android:visibility="gone"
     >
 
 
@@ -577,7 +577,7 @@
 
                 android:textColor="@color/white"
                 android:padding="5dp"
-                android:text="@string/total_teachers"
+                android:text="Number of Teachers"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
         </LinearLayout>
 
@@ -662,7 +662,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:padding="5dp"
-                android:text="@string/course_provided"
+                android:text="Is the service center registered?"
                 android:textAppearance="?android:attr/textAppearanceMedium">
 
 

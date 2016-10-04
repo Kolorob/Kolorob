@@ -458,18 +458,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         checkBox.setTextSize(width/25);
 
-//        feedback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
-//                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
-//                feedIntent.putExtra("categoryId","1");
-//                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
 //
-//                startActivity(feedIntent);
-//
-//            }
-//        });
         alldata=(ListView)findViewById(R.id.allData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata.getLayoutParams();

@@ -1015,8 +1015,8 @@ int index;
                 }
 
                 else
-                    AlertMessage.showMessage(con, "Not possible to compare",
-                            "Comparison isn't available for this category");
+                    AlertMessage.showMessage(con, "Comparison is not possible",
+                            "You have not yet selected any services to compare");
 
 
 
