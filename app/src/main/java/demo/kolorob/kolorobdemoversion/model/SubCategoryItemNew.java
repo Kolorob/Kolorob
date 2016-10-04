@@ -12,28 +12,23 @@ import java.io.Serializable;
 public class SubCategoryItemNew implements Serializable {
 
     private int catId;
-    private String CatName;
-    private int subCatHeaderId;
-    private String subCatHeaderNameEn;
-    private String subCatHeaderNameBn;
+    private String CatLabel;
     private int subCatId;
-    private String subCatNameEn;
-    private String subCatNameBn;
+    private String subCatLabel;
+    private String subCatLabelBn;
+    private int refId;
+    private String refLabel;
+    private String refLabelBn;
 
-    public SubCategoryItemNew(int catId, String catName, int subCatHeaderId, String subCatHeaderNameEn, String subCatHeaderNameBn, int subCatId, String subCatNameEn, String subCatNameBn) {
+    public SubCategoryItemNew(int catId, String catLabel, int subCatId, String subCatLabel, String subCatLabelBn, int refId, String refLabel, String refLabelBn) {
         this.catId = catId;
-        CatName = catName;
-        this.subCatHeaderId = subCatHeaderId;
-        this.subCatHeaderNameEn = subCatHeaderNameEn;
-        this.subCatHeaderNameBn = subCatHeaderNameBn;
+        CatLabel = catLabel;
         this.subCatId = subCatId;
-        this.subCatNameEn = subCatNameEn;
-        this.subCatNameBn = subCatNameBn;
-    }
-
-    public SubCategoryItemNew(int id, String subsubCatName) {
-        this.subCatId = id;
-        this.subCatNameEn = subsubCatName;
+        this.subCatLabel = subCatLabel;
+        this.subCatLabelBn = subCatLabelBn;
+        this.refId = refId;
+        this.refLabel = refLabel;
+        this.refLabelBn = refLabelBn;
     }
 
     public int getCatId() {
@@ -44,44 +39,12 @@ public class SubCategoryItemNew implements Serializable {
         this.catId = catId;
     }
 
-    public String getCatName() {
-        return CatName;
+    public String getCatLabel() {
+        return CatLabel;
     }
 
-    public void setCatName(String catName) {
-        CatName = catName;
-    }
-
-    public int getSubCatHeaderId() {
-        return subCatHeaderId;
-    }
-
-    public void setSubCatHeaderId(int subCatHeaderId) {
-        this.subCatHeaderId = subCatHeaderId;
-    }
-
-    public String getSubCatHeaderNameEn() {
-        return subCatHeaderNameEn;
-    }
-
-    public void setSubCatHeaderNameEn(String subCatHeaderNameEn) {
-        this.subCatHeaderNameEn = subCatHeaderNameEn;
-    }
-
-    public String getSubCatHeaderNameBn() {
-        return subCatHeaderNameBn;
-    }
-
-    public void setSubCatHeaderNameBn(String subCatHeaderNameBn) {
-        this.subCatHeaderNameBn = subCatHeaderNameBn;
-    }
-
-    public String getSubCatNameEn() {
-        return subCatNameEn;
-    }
-
-    public void setSubCatNameEn(String subCatNameEn) {
-        this.subCatNameEn = subCatNameEn;
+    public void setCatLabel(String catLabel) {
+        CatLabel = catLabel;
     }
 
     public int getSubCatId() {
@@ -92,33 +55,56 @@ public class SubCategoryItemNew implements Serializable {
         this.subCatId = subCatId;
     }
 
-    public String getSubCatNameBn() {
-        return subCatNameBn;
+    public String getSubCatLabel() {
+        return subCatLabel;
     }
 
-    public void setSubCatNameBn(String subCatNameBn) {
-        this.subCatNameBn = subCatNameBn;
+    public void setSubCatLabel(String subCatLabel) {
+        this.subCatLabel = subCatLabel;
     }
 
-    @Override
-    public String toString() {
-        return "SubCategoryItem{" +
-                "cat_id="+catId+
-                ",id=" + subCatId +
-                ",subCatName='" + subCatNameEn + '\'' +
-                '}';
+    public String getSubCatLabelBn() {
+        return subCatLabelBn;
+    }
+
+    public void setSubCatLabelBn(String subCatLabelBn) {
+        this.subCatLabelBn = subCatLabelBn;
+    }
+
+    public int getRefId() {
+        return refId;
+    }
+
+    public void setRefId(int refId) {
+        this.refId = refId;
+    }
+
+    public String getRefLabel() {
+        return refLabel;
+    }
+
+    public void setRefLabel(String refLabel) {
+        this.refLabel = refLabel;
+    }
+
+    public String getRefLabelBn() {
+        return refLabelBn;
+    }
+
+    public void setRefLabelBn(String refLabelBn) {
+        this.refLabelBn = refLabelBn;
     }
 
     public static SubCategoryItemNew parseSubCategoryItem(JSONObject jo) throws JSONException {
         int cat_id = jo.getInt("cat_id");
         String catname=jo.getString("cat_label");
 
-        int subcatheaderid = jo.getInt("sub_cat_id");
-        String headen = jo.getString("sub_cat_label");
-        String headbn = jo.getString("sub_cat_label_bn");
-        int subcatid = jo.getInt("ref_id");
-        String subcatname= jo.getString("ref_label");
-        String subcatnamebn = jo.getString("ref_label_bn");
-        return new SubCategoryItemNew(cat_id,catname, subcatheaderid,headen,headbn,subcatid,subcatname,subcatnamebn);
+        int subcatid = jo.getInt("sub_cat_id");
+        String subcatLabele = jo.getString("sub_cat_label");
+        String subcatLabelB = jo.getString("sub_cat_label_bn");
+        int refId = jo.getInt("ref_id");
+        String refname= jo.getString("ref_label");
+        String refnamebn = jo.getString("ref_label_bn");
+        return new SubCategoryItemNew(cat_id,catname,subcatid, subcatLabele,subcatLabelB,refId,refname,refnamebn);
     }
 }

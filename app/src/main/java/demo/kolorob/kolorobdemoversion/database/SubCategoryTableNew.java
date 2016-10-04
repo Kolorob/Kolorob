@@ -20,12 +20,12 @@ public class SubCategoryTableNew {
 
     private static final String KEY_CAT_ID = "_cat_id"; // 0 -integer
     private static final String KEY_CAT_NAME = "_catname"; // 0 -integer
-    private static final String KEY_SUB_CAT_ID = "_subcatheaderid"; //
-    private static final String KEY_SUB_CAT_HEADER_EN= "_headen";
-    private static final String KEY_SUB_CAT_HEADER_BN= "_headbn";
-    private static final String KEY_REF_ID = "_subcatid"; // 2 - text
-    private static final String KEY_REF_NAME_EN = "_subcatname"; // 2 - text
-    private static final String KEY_REF_NAME_BN = "_subcatnamebn"; // 2 - text
+    private static final String KEY_SUB_CAT_ID = "_subcatid"; //
+    private static final String KEY_SUB_CAT_LABEL_EN= "_subcatLabele";
+    private static final String KEY_SUB_CAT_LABEL_BN= "_subcatLabelB";
+    private static final String KEY_REF_ID = "_refId"; // 2 - text
+    private static final String KEY_REF_NAME_EN = "_refname"; // 2 - text
+    private static final String KEY_REF_NAME_BN = "_refnamebn"; // 2 - text
 
 
     private Context tContext;
@@ -46,8 +46,8 @@ public class SubCategoryTableNew {
                 + KEY_CAT_ID + " INTEGER, "
                 + KEY_CAT_NAME + " TEXT, "
                 + KEY_SUB_CAT_ID + " INTEGER, "
-                + KEY_SUB_CAT_HEADER_EN + " TEXT, "
-                + KEY_SUB_CAT_HEADER_BN + " TEXT, "
+                + KEY_SUB_CAT_LABEL_EN + " TEXT, "
+                + KEY_SUB_CAT_LABEL_BN + " TEXT, "
                 + KEY_REF_ID + " INTEGER, "
                 + KEY_REF_NAME_EN + " TEXT, "
                 + KEY_REF_NAME_BN + " TEXT, "
@@ -67,26 +67,26 @@ public class SubCategoryTableNew {
     public long insertItem(SubCategoryItemNew subCategoryItemNew){
         return insertItem(
                 subCategoryItemNew.getCatId(),
-                subCategoryItemNew.getCatName(),subCategoryItemNew.getSubCatHeaderId(),
-                subCategoryItemNew.getSubCatHeaderNameEn(),subCategoryItemNew.getSubCatHeaderNameBn(),
-                subCategoryItemNew.getSubCatId(),subCategoryItemNew.getSubCatNameEn(),subCategoryItemNew.getSubCatNameBn()
+                subCategoryItemNew.getCatLabel(),subCategoryItemNew.getSubCatId(),
+                subCategoryItemNew.getSubCatLabel(),subCategoryItemNew.getSubCatLabelBn(),
+                subCategoryItemNew.getRefId(),subCategoryItemNew.getRefLabel(),subCategoryItemNew.getRefLabelBn()
 
         );
     }
 
-    public long insertItem(int catId, String catName, int subCatHeaderId, String subCatHeaderNameEn, String subCatHeaderNameBn, int subCatId, String subCatNameEn, String subCatNameBn) {
-        if (isFieldExist(catId,subCatHeaderId,subCatId)) {
-            return updateItem(catId,catName,subCatHeaderId,subCatHeaderNameEn,subCatHeaderNameBn,subCatId,subCatNameEn,subCatNameBn);
+    public long insertItem(int catId, String catName, int subCatId, String subCatLabelNameEn, String subCatLabelNameBn, int refId, String refLabelEn, String refLabelBn) {
+        if (isFieldExist(catId,subCatId,refId)) {
+            return updateItem(catId,catName,subCatId,subCatLabelNameEn,subCatLabelNameBn,refId,subCatLabelNameEn,subCatLabelNameBn);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_CAT_ID, catId);
         rowValue.put(KEY_CAT_NAME, catName);
-        rowValue.put(KEY_SUB_CAT_ID, subCatHeaderId);
-        rowValue.put(KEY_SUB_CAT_HEADER_EN,subCatHeaderNameEn);
-        rowValue.put(KEY_SUB_CAT_HEADER_BN, subCatHeaderNameBn);
-        rowValue.put(KEY_REF_ID,subCatId);
-        rowValue.put(KEY_REF_NAME_EN,subCatNameEn);
-        rowValue.put(KEY_REF_NAME_BN,subCatNameBn);
+        rowValue.put(KEY_SUB_CAT_ID, subCatId);
+        rowValue.put(KEY_SUB_CAT_LABEL_EN,subCatLabelNameEn);
+        rowValue.put(KEY_SUB_CAT_LABEL_BN, subCatLabelNameBn);
+        rowValue.put(KEY_REF_ID,refId);
+        rowValue.put(KEY_REF_NAME_EN,refLabelEn);
+        rowValue.put(KEY_REF_NAME_BN,refLabelBn);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
 
@@ -112,19 +112,19 @@ public class SubCategoryTableNew {
         return false;
     }
 
-    private long updateItem( int catId, String catName, int subCatHeaderId, String subCatHeaderNameEn, String subCatHeaderNameBn, int subCatId, String subCatNameEn, String subCatNameBn) {
+    private long updateItem( int catId, String catName, int subCatId, String subCatLabelNameEn, String subCatLabelNameBn, int refId, String refLabelEn, String refLabelBn) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_CAT_ID, catId);
         rowValue.put(KEY_CAT_NAME, catName);
-        rowValue.put(KEY_SUB_CAT_ID, subCatHeaderId);
-        rowValue.put(KEY_SUB_CAT_HEADER_EN,subCatHeaderNameEn);
-        rowValue.put(KEY_SUB_CAT_HEADER_BN, subCatHeaderNameBn);
-        rowValue.put(KEY_REF_ID,subCatId);
-        rowValue.put(KEY_REF_NAME_EN,subCatNameEn);
-        rowValue.put(KEY_REF_NAME_BN,subCatNameBn);
+        rowValue.put(KEY_SUB_CAT_ID, subCatId);
+        rowValue.put(KEY_SUB_CAT_LABEL_EN,subCatLabelNameEn);
+        rowValue.put(KEY_SUB_CAT_LABEL_BN, subCatLabelNameBn);
+        rowValue.put(KEY_REF_ID,refId);
+        rowValue.put(KEY_REF_NAME_EN,refLabelEn);
+        rowValue.put(KEY_REF_NAME_BN,refLabelBn);
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, KEY_CAT_ID + " = ? AND "+KEY_SUB_CAT_ID+" = ?",
-                new String[]{catId + "",subCatHeaderId+""});
+                new String[]{catId + "",subCatId+""});
         closeDB();
         return ret;
     }
@@ -138,7 +138,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 =cursor.getString(6);
+                String catid2 =cursor.getString(7);
                 int subcatid=cursor.getInt(5);
                 siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());
@@ -203,7 +203,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(6);
+                String name = cursor.getString(7);
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());
@@ -215,16 +215,16 @@ public class SubCategoryTableNew {
 
     public int  getRefId(String name) {
         int ids=0;
-        Log.d("Ent Name","######"+name);
+
 
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_EN+" = '"+name+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_BN+" = '"+name+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
                 ids = cursor.getInt(5);
-                Log.d("cursor","######"+ids);
+
             } while (cursor.moveToNext());
         }
 
@@ -241,7 +241,7 @@ public class SubCategoryTableNew {
 
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_SUB_CAT_HEADER_BN+" = '"+name+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_SUB_CAT_LABEL_BN+" = '"+name+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -284,7 +284,7 @@ public class SubCategoryTableNew {
         ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER_EN+" = '"+head+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_LABEL_EN+" = '"+head+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -302,10 +302,10 @@ public class SubCategoryTableNew {
         int subcatheaderid = cursor.getInt(2);
         String headen = cursor.getString(3);
         String headbn = cursor.getString(4);
-        int subcatid = cursor.getInt(5);
-        String subcatname = cursor.getString(6);
-        String subcatnamebn = cursor.getString(7);
-        return new SubCategoryItemNew(cat_id,catname, subcatheaderid,headen,headbn,subcatid,subcatname,subcatnamebn);
+        int refid = cursor.getInt(5);
+        String refLabel = cursor.getString(6);
+        String refLabelBn = cursor.getString(7);
+        return new SubCategoryItemNew(cat_id,catname, subcatheaderid,headen,headbn,refid,refLabel,refLabelBn);
     }
 
     public void dropTable() {
@@ -315,4 +315,5 @@ public class SubCategoryTableNew {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
+
 }
