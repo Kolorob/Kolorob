@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
@@ -50,6 +52,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -66,6 +69,7 @@ import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
+import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
@@ -78,6 +82,8 @@ import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.BazarItem;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
@@ -92,6 +98,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  * Created by touhid on 12/3/15.
@@ -3074,6 +3082,48 @@ fragment.getMapViewController().setZoom(16);
     /**********************************************************Methods for job*****************************************************/
 
 
+    private void loadBazar(final Context context){
+        getRequest(PlaceDetailsActivityNewLayout.this, "http://kolorob.net/demo/api/getadvsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            //ge the db instance
+                            SQLiteDatabase db = DatabaseManager.getInstance(PlaceDetailsActivityNewLayout.this).openDatabase();
+
+                            //split into single sql queries
+                            String[] sql = apiContent.split("~");
+
+                            //run the sqls one by one
+                            for (int i = 0; i<sql.length;i++)
+                            {
+                                db.execSQL(sql[i]);
+                            }
+
+                            //now reload the data taht has beed saved
+
+                            //get all data from db
+                            Cursor cursor =  db.rawQuery("select * from custom_advertisement", null);
+                            allBazar = new ArrayList<BazarItem>();
+                            while (cursor.moveToNext()) {
+                                allBazar.add(new BazarItem(cursor));
+                            }
+
+                            //tester. You may delete this portion
+                            Context context = getApplicationContext();
+                            CharSequence text = allBazar.get(0).toString();
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            //tester ends======
+
+                        }
+
+
+                    }
+                }
+        );
+    }
 
 
 
