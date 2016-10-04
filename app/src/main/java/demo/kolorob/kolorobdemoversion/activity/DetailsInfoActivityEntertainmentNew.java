@@ -480,17 +480,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
     public void verifyRegistration(View v) {
 
-        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
-        phone_num=register;
-        Log.d("Phone_num","------"+phone_num);
 
-        if (register.equals("")) {
-            requestToRegister();
-        } else {
 
             feedBackAlert();
             //  sendReviewToServer();
-        }
+
 
 
     }

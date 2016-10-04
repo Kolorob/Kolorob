@@ -638,16 +638,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
     public void verifyRegistration(View v) {
 
-        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
-        phone_num=register;
-
-        if (register.equals("")) {
-            requestToRegister();
-        } else {
-
             feedBackAlert();
             //  sendReviewToServer();
-        }
+
 
 
     }

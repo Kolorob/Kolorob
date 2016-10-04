@@ -445,16 +445,11 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
     public void verifyRegistration(View v){
 
-        String  register = SharedPreferencesHelper.getNumber(DetailsLayoutFinance.this);
-        phone_num=register;
 
-        if (register.equals("")) {
-            requestToRegister();
-        } else {
 
             feedBackAlert();
             //  sendReviewToServer();
-        }
+
 
 
 

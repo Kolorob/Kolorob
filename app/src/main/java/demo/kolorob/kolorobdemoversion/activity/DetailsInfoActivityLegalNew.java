@@ -512,16 +512,11 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     }
     public void verifyRegistration(View v) {
 
-        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityLegalNew.this);
-        phone_num=register;
 
-        if (register.equals("")) {
-            requestToRegister();
-        } else {
 
             feedBackAlert();
             //  sendReviewToServer();
-        }
+
 
 
     }
