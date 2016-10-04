@@ -65,37 +65,7 @@ public class PhoneRegActivity extends Activity {
 
     public void submit(View v) {
 
-        phoneNumber=phone.getText().toString().trim();
-        uname=name.getText().toString().trim();
-        emailaddress=email.getText().toString().trim();
-        int size = phoneNumber.length();
-        if( uname.equals("")){
-
-            /**
-             *   You can Toast a message here that the Username is Empty
-             **/
-
-            name.setError( "name is required!" );
-
-        }
-
-        if (size != 11) {
-            AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in the correct format");
-        }
-        else if (phoneNumber.charAt(0) != '0') {
-            AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in the correct format");
-        }
-        else if (phoneNumber.charAt(1) != '1') {
-            AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in the correct format");
-        } else if (phoneNumber.charAt(2) == '2' || phoneNumber.charAt(2) == '3' || phoneNumber.charAt(2) == '4') {
-            AlertMessage.showMessage(this, "Sorry!",
-                    "Please give your number in the correct format");
-        } else {
-            sendPhoneNumberToServer(phoneNumber);
-        }
+       AlertMessage.showMessage(con,"Sorry","this page is for dummy purpose only");
     }
 
 
