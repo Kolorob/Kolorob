@@ -120,14 +120,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.showList = showList;
     }
     ToggleButton toggleButton;
-
+    ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,explist,svholder,svsholder;
     CategoryItem ci;
     private LinearLayout llSubCatListHolder;
-
+    String user="kolorobapp";
+    String pass="2Jm!4jFe3WgBZKEN";
     private static FrameLayout map;
     private KolorobSpinner spItems;
     ArrayAdapter arrayAdapter;
