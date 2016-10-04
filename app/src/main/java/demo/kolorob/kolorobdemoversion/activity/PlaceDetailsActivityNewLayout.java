@@ -3119,11 +3119,46 @@ fragment.getMapViewController().setZoom(16);
 
                         }
 
+                        int size= allBazar.size();
 
+                        String[] item_name = new String[size];
+
+                        String[] price = new String[size];
+
+                        String[] condition = new String[size];
+
+                        String[] description = new String[size];
+
+                        String[] contact = new String[size];
+
+                        String[] date = new String[size];
+
+                        String[] posted_by = new String[size];
+                        int increment= 0;
+
+                        for(BazarItem bazarItem: allBazar)
+                        {   item_name[increment]= bazarItem.type;
+                            price[increment]=String.valueOf(bazarItem.price);
+                            condition[increment]= bazarItem.condition;
+                            description[increment]=bazarItem.description;
+                            contact[increment]=bazarItem.contact;
+                            date[increment] = bazarItem.date;
+                            posted_by[increment]=bazarItem.contact_person;
+                            Log.d("bazarItem","===="+bazarItem.date);
+                            Log.d("increment","===="+increment);
+                            increment++;
+                        }
+
+                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
+                                contact,date,posted_by);
+
+                        listview.setAdapter(bazarListAdapter);
                     }
                 }
         );
     }
+
+
 
 
 
