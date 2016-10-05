@@ -64,6 +64,7 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
+import demo.kolorob.kolorobdemoversion.adapters.BazarListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
@@ -135,7 +136,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
-
+    ListView listview;
     private ExpandableListView subCatItemList;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
@@ -273,7 +274,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public int getFilcatid() {
         return filcatid;
     }
-
+    private RelativeLayout bazar_tool;
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
@@ -347,7 +348,7 @@ int index;
 
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
-
+        bazar_tool= (RelativeLayout)findViewById(R.id.bazar_tool);
         explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));

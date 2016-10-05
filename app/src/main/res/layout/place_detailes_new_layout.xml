@@ -37,6 +37,7 @@
 
 
             <include layout="@layout/compare_screen" />
+            <include layout="@layout/bazar_layout" />
 
             <LinearLayout
                 android:layout_width="match_parent"
