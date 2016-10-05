@@ -52,7 +52,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -98,6 +97,8 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
 /**
  * Created by touhid on 12/3/15.
  *
@@ -1494,10 +1495,10 @@ int index;
             else
                 edtype.setText(educationNewItem.getEdtype());
 
-            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
+            if(educationNewItem.getRating()==null || educationNewItem.getRating().equalsIgnoreCase("null")|| educationNewItem.getRating().equals(""))
                 hostel_facility.setText("Data is being collected "); //center type
             else
-                hostel_facility.setText(educationNewItem.getFloor());
+                hostel_facility.setText(educationNewItem.getRating());
 
             if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
                 transport_facility.setText("Data is being collected");
@@ -1612,10 +1613,10 @@ int index;
             else
                 edtype1.setText(educationNewItem.getEdtype());
 
-            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
+            if(educationNewItem.getRating()==null || educationNewItem.getRating().equalsIgnoreCase("null")|| educationNewItem.getRating().equals(""))
                 hostel_facility1.setText("Data is being collected");
             else
-                hostel_facility1.setText(educationNewItem.getFloor());
+                hostel_facility1.setText(educationNewItem.getRating());
 
             if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
                 transport_facility1.setText("Data is being collected");
@@ -2020,57 +2021,27 @@ int index;
 
     @Override
     public void onBackPressed() {
-       if (doubleBackToExitPressedOnce) {
+        if (CompareClicked) {
+
+        } else {
+            if (doubleBackToExitPressedOnce) {
 //
-            super.onBackPressed();
+                super.onBackPressed();
 
-        //    finish();
-            return;
-        }
+                //    finish();
+                return;
+            }
 
-        Toast.makeText(this, "Press once again to leave the screen ",
-                Toast.LENGTH_LONG).show();
+            ToastMessageDisplay.ShowToast(this, "Press once again to leave the screen ");
 
 
 //        toolbar.setVisibility(View.VISIBLE);
 //        toggleButton.setVisibility(View.VISIBLE);
-        this.doubleBackToExitPressedOnce = true;
+            this.doubleBackToExitPressedOnce = true;
 
-      /*  if(NavigationCalled)
-        {
-            toggleButton.setVisibility(View.VISIBLE);
-            toggleButton.setChecked(false);
-
-            if (currentCategoryID==1)
-            {
-              /*  NavigationCalledOnce=true;
-                String node=getNodefromback();
-                EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this.con);
-                nulledu2 = educationNewTable.geteduNode2(Integer.parseInt(node));
-                Intent iient = new Intent(PlaceDetailsActivityNewLayout.this.con, DetailsLayoutEducation.class);
-                iient.putExtra(AppConstants.KEY_DETAILS_EDU, nulledu2);
-                this.startActivity(iient);
-
-            }
 
         }
-
-        else if (NavigationCalled==false)
-        {
-            callMapFragment(locationNameId);
-        }
-*/
-
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                doubleBackToExitPressedOnce=false;
-//            }
-//        }, 2000);
-
     }
-
 
     @Override
     public void onClick(View v) {
