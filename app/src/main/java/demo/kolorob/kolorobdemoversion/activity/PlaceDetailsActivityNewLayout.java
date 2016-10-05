@@ -460,7 +460,7 @@ int index;
         sv.setVisibility(View.VISIBLE);
 
         svs.setVisibility(View.GONE);
-        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+//        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
 //        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
 
 
@@ -604,18 +604,18 @@ int index;
         lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
-
-        final ViewGroup.LayoutParams exlist= explist.getLayoutParams();
-        final RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
-
-        expnlist.setMargins((s*9)/10,40,5,40);
-
-        lp.height=100;
-
-        if(height<1000)
-            caTsList.setMargins(0, 60, 0, 0);
-        else
-            caTsList.setMargins(0, 10, 0, 0);
+//
+//        final ViewGroup.LayoutParams exlist= explist.getLayoutParams();
+//        final RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
+//
+//        expnlist.setMargins((s*9)/10,40,5,40);
+//
+//        lp.height=100;
+//
+//        if(height<1000)
+//            caTsList.setMargins(0, 60, 0, 0);
+//        else
+//            caTsList.setMargins(0, 10, 0, 0);
 
 
 
@@ -699,9 +699,9 @@ int index;
                     }
                     else Populateholder("Mirpur-11");
                     callMapFragment(locationNameId);
-                    createData(currentCategoryID,"","Mirpur-11");
-                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-                    subCatItemList.setAdapter(adapter);
+//                    createData(currentCategoryID,"","Mirpur-11");
+//                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+//                    subCatItemList.setAdapter(adapter);
                 }
                 else if(imc_met==AppConstants.PARIS_ROAD)
                 {locationNameId=AppConstants.PLACE_PARIS_ROAD;
@@ -716,9 +716,10 @@ int index;
                     }
                     else Populateholder("Mirpur-10");
                     callMapFragment(locationNameId);
-                    createData(currentCategoryID,"","Mirpur-10");
-                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-                    subCatItemList.setAdapter(adapter);}
+//                    createData(currentCategoryID,"","Mirpur-10");
+//                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+//                    subCatItemList.setAdapter(adapter);
+                }
                 else {
                     locationNameId = AppConstants.PLACE_MIRPUR_12;
                     setPlaceChoice("Mirpur-12");
@@ -732,9 +733,9 @@ int index;
                     }
                     else Populateholder("Mirpur-12");
                     callMapFragment(locationNameId);
-                    createData(currentCategoryID,"","Mirpur-12");
-                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-                    subCatItemList.setAdapter(adapter);
+//                    createData(currentCategoryID,"","Mirpur-12");
+//                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+//                    subCatItemList.setAdapter(adapter);
                 }
                 if(mapcalledstatus){
 
@@ -787,7 +788,7 @@ int index;
                     params4.height=smal;
                     CompareButton.setLayoutParams(params4);
                     SearchButton.setBackgroundResource(R.drawable.search_selected);
-                    ListButton.setBackgroundResource(R.drawable.list);
+                    ListButton.setBackgroundResource(R.drawable.bazaar);
                     MapButton.setBackgroundResource(R.drawable.map);
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     map.setVisibility(View.GONE);
@@ -865,7 +866,7 @@ int index;
                     ListButton.setBackgroundResource(R.drawable.bazaar);
                     MapButton.setBackgroundResource(R.drawable.map_selected);
                     CompareButton.setBackgroundResource(R.drawable.compare);
-                    subCatItemList.setVisibility(View.GONE);
+//                    subCatItemList.setVisibility(View.GONE);
 
                     bazar_tool.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
@@ -1707,172 +1708,172 @@ int index;
 
 
 
-    public void createData(int cat_id, String head,String placeChoice) {
-        switch (cat_id) {
-            case AppConstants.EDUCATION:
-                SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                //currentCategoryID = 5;
-                EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> print = null;
-                groups.removeAllElements();
-
-               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
-                // subCatItemList.setChildDivider(R.color.black);
-
-                print = subCategoryTable.getSubnameedu(5);
-                Collections.sort(print);
-                for (int j = 0; j < print.size(); j++) {
-                    Group group = new Group(print.get(j));
-                    printnames = null;
-
-                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
-
-
-
-                    //   printnames = educationServiceProviderTable.getAllSubCat();
-                    for (int i = 0; i < printnames.size(); i++) {
-                        group.children.add(i, printnames.get(i));
-                    }
-                    groups.add(j, group);
-                }
-                break;
-            case AppConstants.ENTERTAINMENT:
-
-                //SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                SubCategoryTableNew subCategoryTableNewEnt=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
-                currentCategoryID = cat_id;
-                EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> RefEnt = null;
-                groups.removeAllElements();
-                RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
-                Collections.sort(RefEnt);
-
-
-
-                for (int j = 0; j < RefEnt.size(); j++) {
-                    Group group = new Group(RefEnt.get(j));
-
-                    printnamesent = null;
-                    int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
-                  //  printnamesent = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
-
-                    for (int i = 0; i < printnamesent.size(); i++) {
-
-
-
-                        group.childrenent.add(i, printnamesent.get(i));
-                    }
-                    groups.add(j, group);
-                }
-                break;
-            case AppConstants.GOVERNMENT:
-                SubCategoryTableNew subCategoryTableg = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                // currentCategoryID = 33;
-                GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printgov = null;
-                groups.removeAllElements();
-
-                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
-                // subCatItemList.setChildDivider(R.color.black);
-
-                printgov = subCategoryTableg.getSubnameedu(33);
-                Collections.sort(printgov);
-                for (int j = 0; j < printgov.size(); j++) {
-                    Group group = new Group(printgov.get(j));
-                    printgovs = null;
-
-                    printgovs = governmentNewTable.Govnames(printgov.get(j),placeChoice);
-                    for (int i = 0; i < printgovs.size(); i++) {
-                        group.childrengov.add(i, printgovs.get(i));
-                    }
-                    groups.add(j, group);
-                }
-                break;
-            case AppConstants.HEALTH:
-
-                //SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                String p="Diagonostic Centre";
-
-                currentCategoryID = cat_id;
-                subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
-                HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-
-
-                ArrayList<String> RefHealth=null;
-
-                groups.removeAllElements();
-                RefHealth=subCategoryTableNew.getSubnameedu(1);
-
-                Collections.sort(RefHealth);
-                for (int j = 0; j < RefHealth.size(); j++) {
-                    Group group = new Group(RefHealth.get(j));
-                    printnameshea = null;
-                    int refId=subCategoryTableNew.getRefId(RefHealth.get(j));
-
-                    printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
-                    for (int i = 0; i <  printnameshea .size(); i++) {
-                        group.childrenhea.add(i,printnameshea .get(i));
-                    }
-                    groups.add(j, group);
-                }
-                break;
-            case AppConstants.FINANCIAL:
-
-                SubCategoryTableNew subCategoryTable4 = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                // currentCategoryID = 11;
-                FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-                ArrayList<String> printfin = null;
-
-                subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
-                groups.removeAllElements();
-                printfin= subCategoryTable4.getSubnameedu(11);
-                Collections.sort(printfin);
-                for (int j = 0; j <  printfin.size(); j++) {
-                    Group group = new Group(printfin.get(j));
-                    printnamesfin = null;
-                    printnamesfin= financialServiceProviderTable.Finnames(printfin.get(j),placeChoice);;
-                    for (int i = 0; i < printnamesfin.size(); i++) {
-                        group.childrenfin.add(i, printnamesfin.get(i));
-                    }
-                    groups.add(j, group);
-                }
-                break;
-            case AppConstants.LEGAL:
-                SubCategoryTableNew subCategoryTableNews=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-
-                //   SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-                currentCategoryID = cat_id;
-                subCatItemList.setChildDivider(getResources().getDrawable(R.color.legal_aid_color));
-                LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-                //ArrayList<String> printleg = null;
-                ArrayList<String> RefLegal = null;
-                RefLegal=subCategoryTableNews.getSubnameedu(29);
-                //("RefLegal","======"+RefLegal);
-                Collections.sort(RefLegal);
-
-                groups.removeAllElements();
-                // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
-                for (int j = 0; j < RefLegal.size(); j++) {
-                    Group group = new Group(RefLegal.get(j));
-                    int refId=subCategoryTableNews.getRefId(RefLegal.get(j));
-
-                    printnamesleg = null;
-                    printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
-                    //  printnamesleg = legalAidServiceProviderTableNew.getAllLegalAidSubCategoriesInfo(3);
-
-                    for (int i = 0; i < printnamesleg.size(); i++) {
-                        group.childrenleg.add(i, printnamesleg.get(i));
-                    }
-                    groups.add(j, group);
-                }
-                break;
-
-
-        }
-    }
+//    public void createData(int cat_id, String head,String placeChoice) {
+//        switch (cat_id) {
+//            case AppConstants.EDUCATION:
+//                SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+//                //currentCategoryID = 5;
+//                EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+//                ArrayList<String> print = null;
+//                groups.removeAllElements();
+//
+//               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
+//                // subCatItemList.setChildDivider(R.color.black);
+//
+//                print = subCategoryTable.getSubnameedu(5);
+//                Collections.sort(print);
+//                for (int j = 0; j < print.size(); j++) {
+//                    Group group = new Group(print.get(j));
+//                    printnames = null;
+//
+//                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
+//
+//
+//
+//                    //   printnames = educationServiceProviderTable.getAllSubCat();
+//                    for (int i = 0; i < printnames.size(); i++) {
+//                        group.children.add(i, printnames.get(i));
+//                    }
+//                    groups.add(j, group);
+//                }
+//                break;
+//            case AppConstants.ENTERTAINMENT:
+//
+//                //SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+//                SubCategoryTableNew subCategoryTableNewEnt=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+//               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
+//                currentCategoryID = cat_id;
+//                EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+//                ArrayList<String> RefEnt = null;
+//                groups.removeAllElements();
+//                RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
+//                Collections.sort(RefEnt);
+//
+//
+//
+//                for (int j = 0; j < RefEnt.size(); j++) {
+//                    Group group = new Group(RefEnt.get(j));
+//
+//                    printnamesent = null;
+//                    int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
+//                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
+//                  //  printnamesent = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
+//
+//                    for (int i = 0; i < printnamesent.size(); i++) {
+//
+//
+//
+//                        group.childrenent.add(i, printnamesent.get(i));
+//                    }
+//                    groups.add(j, group);
+//                }
+//                break;
+//            case AppConstants.GOVERNMENT:
+//                SubCategoryTableNew subCategoryTableg = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+//                // currentCategoryID = 33;
+//                GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
+//                ArrayList<String> printgov = null;
+//                groups.removeAllElements();
+//
+//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
+//                // subCatItemList.setChildDivider(R.color.black);
+//
+//                printgov = subCategoryTableg.getSubnameedu(33);
+//                Collections.sort(printgov);
+//                for (int j = 0; j < printgov.size(); j++) {
+//                    Group group = new Group(printgov.get(j));
+//                    printgovs = null;
+//
+//                    printgovs = governmentNewTable.Govnames(printgov.get(j),placeChoice);
+//                    for (int i = 0; i < printgovs.size(); i++) {
+//                        group.childrengov.add(i, printgovs.get(i));
+//                    }
+//                    groups.add(j, group);
+//                }
+//                break;
+//            case AppConstants.HEALTH:
+//
+//                //SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+//                SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+//                String p="Diagonostic Centre";
+//
+//                currentCategoryID = cat_id;
+//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
+//                HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+//
+//
+//                ArrayList<String> RefHealth=null;
+//
+//                groups.removeAllElements();
+//                RefHealth=subCategoryTableNew.getSubnameedu(1);
+//
+//                Collections.sort(RefHealth);
+//                for (int j = 0; j < RefHealth.size(); j++) {
+//                    Group group = new Group(RefHealth.get(j));
+//                    printnameshea = null;
+//                    int refId=subCategoryTableNew.getRefId(RefHealth.get(j));
+//
+//                    printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
+//                    for (int i = 0; i <  printnameshea .size(); i++) {
+//                        group.childrenhea.add(i,printnameshea .get(i));
+//                    }
+//                    groups.add(j, group);
+//                }
+//                break;
+//            case AppConstants.FINANCIAL:
+//
+//                SubCategoryTableNew subCategoryTable4 = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+//                // currentCategoryID = 11;
+//                FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
+//                ArrayList<String> printfin = null;
+//
+//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
+//                groups.removeAllElements();
+//                printfin= subCategoryTable4.getSubnameedu(11);
+//                Collections.sort(printfin);
+//                for (int j = 0; j <  printfin.size(); j++) {
+//                    Group group = new Group(printfin.get(j));
+//                    printnamesfin = null;
+//                    printnamesfin= financialServiceProviderTable.Finnames(printfin.get(j),placeChoice);;
+//                    for (int i = 0; i < printnamesfin.size(); i++) {
+//                        group.childrenfin.add(i, printnamesfin.get(i));
+//                    }
+//                    groups.add(j, group);
+//                }
+//                break;
+//            case AppConstants.LEGAL:
+//                SubCategoryTableNew subCategoryTableNews=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
+//
+//                //   SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
+//                currentCategoryID = cat_id;
+//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.legal_aid_color));
+//                LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
+//                //ArrayList<String> printleg = null;
+//                ArrayList<String> RefLegal = null;
+//                RefLegal=subCategoryTableNews.getSubnameedu(29);
+//                //("RefLegal","======"+RefLegal);
+//                Collections.sort(RefLegal);
+//
+//                groups.removeAllElements();
+//                // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
+//                for (int j = 0; j < RefLegal.size(); j++) {
+//                    Group group = new Group(RefLegal.get(j));
+//                    int refId=subCategoryTableNews.getRefId(RefLegal.get(j));
+//
+//                    printnamesleg = null;
+//                    printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
+//                    //  printnamesleg = legalAidServiceProviderTableNew.getAllLegalAidSubCategoriesInfo(3);
+//
+//                    for (int i = 0; i < printnamesleg.size(); i++) {
+//                        group.childrenleg.add(i, printnamesleg.get(i));
+//                    }
+//                    groups.add(j, group);
+//                }
+//                break;
+//
+//
+//        }
+//    }
 
 
     public void populatefilterwords(int filcatid)
@@ -2529,10 +2530,10 @@ int index;
     {
 
 
-        createData(currentCategoryID,"",getLocationNameEng());
-        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
-        subCatItemList.setAdapter(adapter);
+//        createData(currentCategoryID,"",getLocationNameEng());
+//        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
+//        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
+//        subCatItemList.setAdapter(adapter);
 
     }
     private View getSubCategoryListItemView(final SubCategoryItem si, double dwPercentage, final int cat_id)
@@ -3568,12 +3569,12 @@ fragment.getMapViewController().setZoom(16);
 
 //
 //            map.setVisibility(View.GONE);
-        if(showList==1)
-        {
-
-            ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
-            subCatItemList.setAdapter(adapter);
-        }
+//        if(showList==1)
+//        {
+//
+//            ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
+//            subCatItemList.setAdapter(adapter);
+//        }
 
 
 

@@ -787,27 +787,27 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
 
-                android:id="@+id/explist"
+                <!--android:id="@+id/explist"-->
 
-                android:layout_height="wrap_content">
-                <ExpandableListView
-                    android:id="@+id/listView"
-                    android:visibility="gone"
-                    android:layout_marginBottom="50dp"
-                    android:childDivider="#00000000"
-
-
-                    android:background="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </ExpandableListView>
+                <!--android:layout_height="wrap_content">-->
+                <!--<ExpandableListView-->
+                    <!--android:id="@+id/listView"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_marginBottom="50dp"-->
+                    <!--android:childDivider="#00000000"-->
 
 
+                    <!--android:background="@color/white"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" >-->
+                <!--</ExpandableListView>-->
 
-            </LinearLayout>
+
+
+            <!--</LinearLayout>-->
 
 
             <RelativeLayout
