@@ -2571,7 +2571,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
     tvName.setText(si.getSubcatHeader());
         tvName.setTextSize(12);
         flag=true;
-    
+
         va=0;
 /**************************
  *

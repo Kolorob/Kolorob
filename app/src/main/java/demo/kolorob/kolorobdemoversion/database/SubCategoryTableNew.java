@@ -204,6 +204,48 @@ public class SubCategoryTableNew {
         if (cursor.moveToFirst()) {
             do {
                 String name = cursor.getString(6);
+                if(name.equals("Lawers"))
+                {
+                    name="Lawyers";
+                }
+                else  if(name.equals("Grave-yard"))
+                {
+                    name="Graveyard";
+                }
+                else  if(name.equals("SIM Registration Cenre"))
+                {
+                    name="SIM Registration Center";
+                }
+                else  if(name.equals("Harbal"))
+                {
+                    name="Herbal";
+                }
+                else  if(name.equals("Vetenary"))
+                {
+                    name="Veterinary";
+                }
+                else if (name.contains("Centres")||name.contains("centre")||name.contains("Centre")||name.contains("centres")||name.contains("Cenre"))
+                {  if(name.contains("Centres")) {
+                    name = name.replace("Centres", "Center");
+
+                }
+                   else if(name.contains("Centre")) {
+                    name = name.replace("Centre", "Center");
+
+                }
+                else if(name.contains("centre")) {
+                    name = name.replace("centre", "Center");
+
+                }
+                else  if(name.contains("centres")) {
+                    name = name.replace("centres", "Center");
+
+                }
+                    else if (name.contains("Cenre")) {
+                        name = name.replace("Cenre", "Center");
+
+                    }
+                }
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());

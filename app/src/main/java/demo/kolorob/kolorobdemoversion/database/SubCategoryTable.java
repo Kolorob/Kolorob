@@ -223,6 +223,45 @@ public class SubCategoryTable {
         {
             head="Lawyers";
         }
+        else  if(head.equals("Grave-yard"))
+        {
+            head="Graveyard";
+        }
+        else  if(head.equals("SIM Registration Cenre"))
+        {
+            head="SIM Registration Center";
+        }
+        else  if(head.equals("Harbal"))
+        {
+            head="Herbal";
+        }
+        else  if(head.equals("Vetenary"))
+        {
+            head="Veterinary";
+        }
+        else if (head.contains("Centres")||head.contains("centre")||head.contains("Centre")||head.contains("centres")||head.contains("Cenre"))
+        {   if(head.contains("Centres")) {
+            head = head.replace("Centres", "Center");
+
+        }
+        else if(head.contains("Centre")) {
+            head = head.replace("Centre", "Center");
+
+        }
+        else if(head.contains("centre")) {
+            head = head.replace("centre", "Center");
+
+        }
+        else  if(head.contains("centres")) {
+            head = head.replace("centres", "Center");
+
+        }
+        else if (head.contains("Cenre")) {
+            head = head.replace("Cenre", "Center");
+
+        }
+
+        }
         String namebn = cursor.getString(4);
         String headbn = cursor.getString(5);
         return new SubCategoryItem(cat_id,id, name,head,namebn,headbn);
