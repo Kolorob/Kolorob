@@ -962,9 +962,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:layout_above="@+id/toggle"
-                    android:layout_marginTop="@dimen/nav_header_heightcat2"
+                android:layout_marginTop="@dimen/nav_header_heightcat2"
                 android:layout_marginBottom="@dimen/nav_header_heightcat"
-                    android:layout_gravity="center|top">
+                android:layout_gravity="center|top">
 
                 <LinearLayout
                     android:id="@+id/llCategoryListHolder"

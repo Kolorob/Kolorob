@@ -796,10 +796,7 @@ int index;
                     svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     bazar_tool.setVisibility(View.GONE);
-                    bazar_tool.setVisibility(View.VISIBLE);
-                    init();
-                    loadBazar(PlaceDetailsActivityNewLayout.this);
-                    panelListener();
+
                     toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
                     compare_layoutedu.setVisibility(View.GONE);
@@ -921,18 +918,21 @@ int index;
                 compare_layoutedu.setVisibility(View.GONE);
 
 
-                svs.setVisibility(View.VISIBLE);
-                svholder.setVisibility(View.VISIBLE);
+                svs.setVisibility(View.GONE);
+                svholder.setVisibility(View.GONE);
                 svsholder.setVisibility(View.GONE);
-                sv.setVisibility(View.VISIBLE);
+                sv.setVisibility(View.GONE);
                 llSubCatListHolder.setVisibility(View.GONE);
               //  subCatItemList.setVisibility(View.VISIBLE);
                 bazar_tool.setVisibility(View.VISIBLE);
+                init();
+                loadBazar(PlaceDetailsActivityNewLayout.this);
+                panelListener();
                 //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                 setShowList(1);
-                toolbar.setVisibility(View.VISIBLE);
-                toggleButton.setVisibility(View.VISIBLE);
+                toolbar.setVisibility(View.GONE);
+                toggleButton.setVisibility(View.GONE);
 
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 //
