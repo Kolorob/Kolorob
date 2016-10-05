@@ -663,6 +663,9 @@ int index;
 
 
         }
+
+
+
         categoryList2.size();
         constructCategoryList(categoryList2);
         //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
@@ -864,7 +867,7 @@ int index;
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     subCatItemList.setVisibility(View.GONE);
 
-                    explist.setVisibility(View.GONE);
+                    bazar_tool.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                     compare_layoutedu.setVisibility(View.GONE);
@@ -911,8 +914,8 @@ int index;
                     CompareButton.setBackgroundResource(R.drawable.compare);
                     map.setVisibility(View.GONE);
                 }
-                subCatItemList.setVisibility(View.VISIBLE);
-                explist.setVisibility(View.VISIBLE);
+              //  subCatItemList.setVisibility(View.VISIBLE);
+                bazar_tool.setVisibility(View.VISIBLE);
                 searchviewholder.setVisibility(View.GONE);
                 compare_layout.setVisibility(View.GONE);
                 compare_layoutedu.setVisibility(View.GONE);
@@ -923,8 +926,8 @@ int index;
                 svsholder.setVisibility(View.GONE);
                 sv.setVisibility(View.VISIBLE);
                 llSubCatListHolder.setVisibility(View.GONE);
-                subCatItemList.setVisibility(View.VISIBLE);
-                explist.setVisibility(View.VISIBLE);
+              //  subCatItemList.setVisibility(View.VISIBLE);
+                bazar_tool.setVisibility(View.VISIBLE);
                 //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                 setShowList(1);
@@ -932,11 +935,11 @@ int index;
                 toggleButton.setVisibility(View.VISIBLE);
 
                 //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
-
-                if(currentCategoryID<1)
-                    categoryListBuildUp(1);
-                else
-                    categoryListBuildUp(currentCategoryID);
+//
+//                if(currentCategoryID<1)
+//                    categoryListBuildUp(1);
+//                else
+//                    categoryListBuildUp(currentCategoryID);
 
 //                else
 //                {
@@ -1023,8 +1026,8 @@ int index;
                         CompareButton.setBackgroundResource(R.drawable.compare_selected);
                         map.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.GONE);
-                        subCatItemList.setVisibility(View.GONE);
-                        explist.setVisibility(View.GONE);
+                     //   subCatItemList.setVisibility(View.GONE);
+                        bazar_tool.setVisibility(View.GONE);
                         searchviewholder.setVisibility(View.GONE);
                         svs.setVisibility(View.GONE);
                         sv.setVisibility(View.GONE);
@@ -1713,7 +1716,7 @@ int index;
                 ArrayList<String> print = null;
                 groups.removeAllElements();
 
-                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
+               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
                 // subCatItemList.setChildDivider(R.color.black);
 
                 print = subCategoryTable.getSubnameedu(5);
@@ -1737,7 +1740,7 @@ int index;
 
                 //SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
                 SubCategoryTableNew subCategoryTableNewEnt=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-                subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
+               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
                 currentCategoryID = cat_id;
                 EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
                 ArrayList<String> RefEnt = null;
@@ -2174,7 +2177,7 @@ int index;
                         catstatus=true;
                         calladapter(catstatus);
                         if(ListClicked.equals(true))
-                            explist.setVisibility(View.VISIBLE);
+                            bazar_tool.setVisibility(View.VISIBLE);
 
                         llSubCatListHolder.setVisibility(View.GONE);
 
@@ -2228,7 +2231,7 @@ int index;
 
                         llSubCatListHolder.setVisibility(View.GONE);
                             if(ListClicked.equals(true))
-                            explist.setVisibility(View.VISIBLE);
+                                bazar_tool.setVisibility(View.VISIBLE);
 
 
                         break;
@@ -2259,7 +2262,7 @@ int index;
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
 
                         if(ListClicked.equals(true))
-                            explist.setVisibility(View.VISIBLE);
+                            bazar_tool.setVisibility(View.VISIBLE);
 
 
 
@@ -2304,7 +2307,7 @@ int index;
 
                         llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
-                            explist.setVisibility(View.VISIBLE);
+                            bazar_tool.setVisibility(View.VISIBLE);
 
 
 
@@ -2361,7 +2364,7 @@ int index;
 
 
                         if(ListClicked.equals(true))
-                            explist.setVisibility(View.VISIBLE);
+                            bazar_tool.setVisibility(View.VISIBLE);
 
 
 
@@ -2402,7 +2405,7 @@ int index;
 
 
                         if(ListClicked.equals(true))
-                            explist.setVisibility(View.VISIBLE);
+                            bazar_tool.setVisibility(View.VISIBLE);
 
 
                         llSubCatListHolder.setVisibility(View.GONE);
@@ -2416,7 +2419,7 @@ int index;
                     case AppConstants.JOB:
                         MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
                         mp_j.start();
-                        explist.setVisibility(View.GONE);
+                        bazar_tool.setVisibility(View.GONE);
 
                         Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
                         startActivity(intentJ);
@@ -2462,9 +2465,9 @@ int index;
                         showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
                     else
                         showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
-
-                    if(ListClicked)
-                        categoryListBuildUp(currentCategoryID);
+//
+//                    if(ListClicked)
+//                        categoryListBuildUp(currentCategoryID);
                 }
 
 
