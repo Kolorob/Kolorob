@@ -6,7 +6,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-  android:visibility="gone"
+android:visibility="gone"
     >
 
 
@@ -291,7 +291,7 @@
 
 
                 android:textColor="@color/white"
-                android:text="@string/hostel_facility"
+                android:text="Rating"
                 android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
         </LinearLayout>
 

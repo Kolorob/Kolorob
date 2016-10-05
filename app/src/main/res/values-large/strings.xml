@@ -39,11 +39,11 @@
     <string name="enter_text_here"> এখানে লিখুন </string>
     <string name="feed_back_done">Feedback has been given</string>
     <string name="feed_back_phone">Give us Call</string>
-    <string name="feedback1">Highly unsatisfied </string>
-    <string name="feedback2">unsatisfied </string>
-    <string name="feedback3">No comment  </string>
+    <string name="feedback1">Highly Unsatisfied </string>
+    <string name="feedback2">Unsatisfied </string>
+    <string name="feedback3">No Comment  </string>
     <string name="feedback4">Satisfied </string>
-    <string name="feedback5">Highly satisfied</string>
+    <string name="feedback5">Highly Satisfied</string>
     <string name="feedbacktext">আপনি কি ধরনের তথ্য জানতে চান?
                         অথবা কোন মতামত থাকলে আমাদের জানাতে পারেন।
                            বিস্তারিত জানতে ফোনও করতে পারেন।
