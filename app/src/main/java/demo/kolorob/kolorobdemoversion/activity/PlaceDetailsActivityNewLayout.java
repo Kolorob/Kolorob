@@ -172,7 +172,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     TextView health_name2,opening_time2,language_spoken2,service_type2,specialist_available2,clean_facilities2,privacy2,quality_equipment2;
     TextView opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1,cost1,cost2,cost3;
     TextView health_name3,opening_time3,language_spoken3,service_type3,specialist_available3,clean_facilities3,privacy3,quality_equipment3;
-
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
     TextView edu_name_ban22,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
@@ -355,7 +354,7 @@ int index;
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
         bazar_tool= (RelativeLayout)findViewById(R.id.bazar_tool);
-        explist=(LinearLayout)findViewById(R.id.explist);
+       // explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
         //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -796,7 +795,7 @@ int index;
                     svholder.setVisibility(View.GONE);
                     svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
-                    explist.setVisibility(View.GONE);
+                    bazar_tool.setVisibility(View.GONE);
                     bazar_tool.setVisibility(View.VISIBLE);
                     init();
                     loadBazar(PlaceDetailsActivityNewLayout.this);
