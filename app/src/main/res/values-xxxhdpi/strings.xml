@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="Education">Education</string>
+    <string name="Entertainment">Entertainment </string>
+    <string name="Financial">Financial Services</string>
+    <string name="Government">Government Services </string>
+    <string name="Head">Search by Name </string>
+    <string name="Headen">Write Name Here!</string>
+    <string name="Health">Medical Service </string>
+    <string name="Legal">Legal Aid </string>
+    <string name="MiddleSearch">আপনি ঠিক কোন ধরনের সাহায্য খুজছেন? এখান থেকে পছন্দ করুন</string>
+    <string name="MiddleSearchen">Search for efficiently!</string>
+    <string name="abouthead"> About Us </string>
+    <string name="action_settings">Settings</string>
+    <string name="address">Address : </string>
+    <string name="advertisements">বিজ্ঞাপন বা তথ্যের জন্য আবেদন করুন  </string>
+    <string name="app_name">Kolorob</string>
+    <string name="application_time"> Application Time </string>
+    <string name="area_member">এলাকার প্রতিনিধি হবার আবেদন করুন </string>
+    <string name="canteen_facility">Condition of Drinking Water</string>
+    <string name="clickable">Clickable</string>
+    <string name="close">Close down</string>
+    <string name="compare">তুলনা করুন </string>
+    <string name="course_provided">Registered With</string>
+    <string name="csearch">Search </string>
+    <string name="disclaimerhead"> Disclaimer </string>
+      <string name="disclaimertext"> All content provided by Kolorob is provided for information purposes only. Kolorob is not responsible for, and expressly disclaims all liability for, damages of any kind arising out of use, reference to, or reliance on any information contained within the application. While the information contained within the application is periodically updated, Kolorob makes no guarantee of any kind and cannot be liable for any outdated or inaccurate information. Any information and links to external third-party internet sources or websites are provided as a courtesy and should not construed as an endorsement by Kolorob. Kolorob is therefore, not responsible for the accuracy of the content of information contained in these sites. Product and service information is based solely on the information collected from the service providers. The users of Kolorob MUST ensure compliance of local ICT Act and other applicable relevant laws and regulations. Characters, information or pictures uses in the app are symbolic and have no relation to disrespect with any person organizations or any communities. All rights of this App, Kolorob is reserved by Save the Children only. Any unauthorized modification or misuse of the app is strictly prohibited.
+ </string>
+    <string name="distance">Distance </string>
+    <string name="easily_see_map">আরো সহজে ম্যাপ দেখতে চাইলে এখানে চাপ দিন</string>
+    <string name="edtype"> Education Type </string>
+    <string name="edu_name_ban">তুলনা করুন </string>
+    <string name="email">Email:</string>
+    <string name="email_text">Email </string>
+    <string name="emergencyemailtext">Sorry..Email could not be found   </string>
+    <string name="emergencylocationtext"> Sorry.. Direction could not be found </string>
+    <string name="emergencytext"> Emergency Service </string>
+    <string name="enter_text_here"> এখানে লিখুন </string>
+    <string name="feed_back_done">Feedback has been given</string>
+    <string name="feed_back_phone">Give us Call</string>
+    <string name="feedback1">Highly Unsatisfied </string>
+    <string name="feedback2">Unsatisfied </string>
+    <string name="feedback3">No Comment  </string>
+    <string name="feedback4">Satisfied </string>
+    <string name="feedback5">Highly Satisfied</string>
+    <string name="feedbacktext">আপনি কি ধরনের তথ্য জানতে চান?
+                        অথবা কোন মতামত থাকলে আমাদের জানাতে পারেন।
+                           বিস্তারিত জানতে ফোনও করতে পারেন।
+                                     </string>
+    <string name="fsearch">Search Services </string>
+    <string name="gas_facility">গ্যাস বিদ্যুৎ ও সুবিধা সমূহ</string>
+    <string name="givepermission">Give permission to get device id</string>
+
+    <string name="govt_facility">সরকারী অফিস</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hostel_facility"> Service Center Type </string>
+    <string name="info_collector">Information Collector  </string>
+    <string name="information_change">Change information  </string>
+    <string name="interstitial_kolorob">ca-app-pub-9079587410696304/9489035875</string>
+    <string name="job_advertizement"> Job Advertisement </string>
+    <string name="job_description"> Job Description </string>
+    <string name="know_adv">বিজ্ঞাপন বা তথ্য জানুন  </string>
+    <string name="know_kolorob">What you want to know about Kolorob? </string>
+    <string name="list_show"> লিস্ট দেখতে এখানে চাপ দিন  </string>
+    <string name="loading">Please wait a while \n কলরব তৈরি হচ্ছে </string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="organization_time">Organization Time </string>
+    <string name="others">অন্যন্য </string>
+    <string name="phone">Phone: </string>
+    <string name="phone_registration">Phone Registration  </string>
+    <string name="phone_text">phone </string>
+    <string name="place">
+                    আপনার চিহ্নিত স্থান গুলো বাতিল হয়ে যাবে।  </string>
+    <string name="playground"> Average Studens  </string>
+    <string name="plice_firebrigate">পুলিশ দমকল  জরুরি সুবিধা</string>
+    <string name="rating">Rating : </string>
+    <string name="roam"> আর লাট্টুর মত ঘুরতে হবে না </string>
+    <string name="salary_range">Salary Range </string>
+    <string name="search"> Type here to search </string>
+    <string name="searchtext">Where you want to search</string>
+    <string name="shift">Shift</string>
+    <string name="switch_image">Switch Image</string>
+    <string name="time">Time </string>
+    <string name="time2">And Time</string>
+    <string name="title_activity_button_click_baunia">ButtonClickBaunia</string>
+    <string name="title_activity_details_info_activity_entertainment">
+        DetailsInfoActivityEntertainment
+    </string>
+        <string name="aboutus"> "          "Kolorob is an innovative project implemented by Save the Children in Bangladesh and supported by Save the Children Australia.
+Feel free to come visit us anytime at our Kiosk Centre: Road No. 02, House No. 09, Block A, Bauniabadh area, Mirpur, Dhaka.
+    </string>
+    <string name="title_activity_display_all_jobs">DisplayAllJobsActivity</string>
+    <string name="title_activity_feedback">FeedbackActivity</string>
+    <string name="title_activity_location_ask">LocationAskActivity</string>
+    <string name="title_activity_place_choice2">PlaceChoiceActivity2</string>
+    <string name="title_activity_review">ReviewActivity</string>
+    <string name="total_classes"> Number of Classrooms  </string>
+    <string name="total_students">Number of Students</string>
+    <string name="total_teachers">NUmber of Teachers </string>
+    <string name="transparency">Transparency</string>
+    <string name="transport_facility">Landmark </string>
+    <string name="txt_cd_header_icon_ofcat_subcatlist">header icon of the category</string>
+    <string name="txt_cd_icon_cat">Icon of the category</string>
+    <string name="txt_inst_sub_cat_choose">Press here to see list </string>
+    <string name="txt_sub_cat_inst">যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর টিপ দেন</string>
+    <string name="uptext">Where do you\nwant to search?</string>
+    <string name="verify_registration">You have to register before giving feedback. Do you want to? </string>
+    <string name="way_to_go">যাবার উপায়</string>
+
+</resources>

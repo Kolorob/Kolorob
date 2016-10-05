@@ -14,17 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
+
         />
 
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/indicator"
         android:padding="10dip"
-        android:paddingBottom="50dip"
+        android:paddingBottom="@dimen/tutobottom"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="@dimen/tutobottom" />
 
     <Button
 
@@ -34,12 +35,12 @@
         android:background="@color/orange"
         android:padding="2dp"
         android:paddingBottom="50dp"
-        android:text=" Continue To Kolorob "
+        android:text="Browse Kolorob"
         android:id="@+id/button_next"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:layout_above="@+id/indicator"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp" />
+        />
 
 </RelativeLayout>
