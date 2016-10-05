@@ -55,6 +55,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -136,14 +138,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
-    ListView listview;
+
     private ExpandableListView subCatItemList;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
     private int subCatShowFlag=0;
     private int locationNameId,subcategory;
     private String locationName;
-
+    private SlidingUpPanelLayout mLayout;
+    List<String> array_list;
+    TextView textView ;
+    ListView listview;
     private int showList;
     private String locationNameEng;
     private String comapreData;
@@ -787,6 +792,8 @@ int index;
                     svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
+                    bazar_tool.setVisibility(View.VISIBLE);
+
                     toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
                     compare_layoutedu.setVisibility(View.GONE);
@@ -3445,6 +3452,15 @@ fragment.getMapViewController().setZoom(16);
                 Log.v("Inside fun1",String.valueOf(num));
             }
         });
+    }
+
+
+
+    public void init(){
+
+        mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        textView = (TextView) findViewById(R.id.list_main);
+        listview = (ListView) findViewById(R.id.list);
     }
 
     public void fun2() {
