@@ -129,6 +129,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,explist,svholder,svsholder;
     CategoryItem ci;
+    private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
     private LinearLayout llSubCatListHolder;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
@@ -793,7 +794,9 @@ int index;
                     sv.setVisibility(View.GONE);
                     explist.setVisibility(View.GONE);
                     bazar_tool.setVisibility(View.VISIBLE);
-
+                    init();
+                    loadBazar(PlaceDetailsActivityNewLayout.this);
+                    panelListener();
                     toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
                     compare_layoutedu.setVisibility(View.GONE);
@@ -3461,6 +3464,46 @@ fragment.getMapViewController().setZoom(16);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         textView = (TextView) findViewById(R.id.list_main);
         listview = (ListView) findViewById(R.id.list);
+    }
+
+    public void panelListener(){
+
+        mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+
+            // During the transition of expand and collapse onPanelSlide function will be called.
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+
+                Log.d(">>>>","Slide Up");
+
+            }
+
+            // This method will be call after slide up layout
+            @Override
+            public void onPanelExpanded(View panel) {
+                Log.d(">>>>","onPanelExpanded");
+
+            }
+
+            // This method will be call after slide down layout.
+            @Override
+            public void onPanelCollapsed(View panel) {
+
+                Log.d(">>>>","onPanelCollapsed");
+
+
+            }
+
+            @Override
+            public void onPanelAnchored(View panel) {
+                Log.e(TAG, "onPanelAnchored");
+            }
+
+            @Override
+            public void onPanelHidden(View panel) {
+                Log.e(TAG, "onPanelHidden");
+            }
+        });
     }
 
     public void fun2() {
