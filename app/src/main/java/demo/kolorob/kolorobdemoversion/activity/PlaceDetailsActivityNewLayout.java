@@ -140,14 +140,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private String locationNameEng;
     private String comapreData;
     ScrollView sv,svs,scrolling_part;
-
+    ImageView compare_logo_image;
     String firstData="",SecondData="";
     int checker=0;
     Boolean InCompare=false;
     private Button prebutton;
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
 
-    private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11;
+    private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11,school_name;
 
 
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
@@ -357,7 +357,7 @@ int index;
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
 
         scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
-
+        compare_logo_image=(ImageView)findViewById(R.id.compare_logo_images);
         LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
         scrolling_partc.setMargins(0,0,0,smal);
 
@@ -495,6 +495,7 @@ int index;
         sixthLayout = (LinearLayout)findViewById(R.id.sixthLayout);
         seventhLayout = (LinearLayout)findViewById(R.id.seventhLayout);
         eighthLayout = (LinearLayout)findViewById(R.id.eighthLayout);
+        school_name=(LinearLayout)findViewById(R.id.school_name);
 
 
         int gaph= height/17;
@@ -531,6 +532,12 @@ int index;
         firstL.height=gaph;
         firstLayout.setLayoutParams(firstL);
 
+        LinearLayout.LayoutParams ninetL= (LinearLayout.LayoutParams) school_name.getLayoutParams();
+        ninetL.height=gaph;
+        school_name.setLayoutParams(ninetL);
+
+
+
 
 
         health_name2=(TextView)findViewById(R.id.health_name2);
@@ -561,6 +568,10 @@ int index;
         privacy1=(TextView)findViewById(R.id.privacy1);
         quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
         cost1=(TextView)findViewById(R.id.cost1);
+
+
+        compare_logo_image.getLayoutParams().width=width/15;
+        compare_logo_image.getLayoutParams().height=height/15;
 
         if (screenSize > 6.5) {
             health_name2.setTextSize(20);
