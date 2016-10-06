@@ -112,6 +112,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.showList = showList;
     }
     ToggleButton toggleButton;
+    Double screenSize;
 
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
@@ -442,6 +443,7 @@ int index;
         sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
         svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
         sv.setVisibility(View.VISIBLE);
+        Double screenSize = AppUtils.ScreenSize(PlaceDetailsActivityNewLayout.this);
 
         svs.setVisibility(View.GONE);
         subCatItemList = (ExpandableListView) findViewById(R.id.listView);
@@ -512,6 +514,69 @@ int index;
         privacy1=(TextView)findViewById(R.id.privacy1);
         quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
         cost1=(TextView)findViewById(R.id.cost1);
+
+        if (screenSize > 6.5) {
+            health_name2.setTextSize(20);
+            opening_time2.setTextSize(20);
+            language_spoken2.setTextSize(20);
+            service_type2.setTextSize(20);
+            specialist_available2.setTextSize(20);
+            clean_facilities2.setTextSize(20);
+            privacy2.setTextSize(20);
+            quality_equipment2.setTextSize(20);
+            cost2.setTextSize(20);
+            health_name3.setTextSize(20);
+            opening_time3.setTextSize(20);
+            language_spoken3.setTextSize(20);
+            service_type3.setTextSize(20);
+            specialist_available3.setTextSize(20);
+            clean_facilities3.setTextSize(20);
+            privacy3.setTextSize(20);
+            quality_equipment3.setTextSize(20);
+            cost3.setTextSize(20);
+            opening_time1.setTextSize(20);
+            language_spoken1.setTextSize(20);
+            service_type1.setTextSize(20);
+            specialist_available1.setTextSize(20);
+            clean_facilities1.setTextSize(20);
+            privacy1.setTextSize(20);
+            quality_equipment1.setTextSize(20);
+            cost1.setTextSize(20);
+
+        } else {
+
+            health_name2.setTextSize(16);
+            opening_time2.setTextSize(16);
+            language_spoken2.setTextSize(16);
+            service_type2.setTextSize(16);
+            specialist_available2.setTextSize(16);
+            clean_facilities2.setTextSize(16);
+            privacy2.setTextSize(16);
+            quality_equipment2.setTextSize(16);
+            cost2.setTextSize(16);
+            health_name3.setTextSize(16);
+            opening_time3.setTextSize(16);
+            language_spoken3.setTextSize(16);
+            service_type3.setTextSize(16);
+            specialist_available3.setTextSize(16);
+            clean_facilities3.setTextSize(16);
+            privacy3.setTextSize(16);
+            quality_equipment3.setTextSize(16);
+            cost3.setTextSize(16);
+            opening_time1.setTextSize(16);
+            language_spoken1.setTextSize(16);
+            service_type1.setTextSize(16);
+            specialist_available1.setTextSize(16);
+            clean_facilities1.setTextSize(16);
+            privacy1.setTextSize(16);
+            quality_equipment1.setTextSize(16);
+            cost1.setTextSize(16);
+
+
+
+        }
+
+
 
 
 

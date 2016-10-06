@@ -401,8 +401,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                                 review.setTextSize(20);
                             } else {
                                 review.setTextSize(16);
-
-
                             }
 
 

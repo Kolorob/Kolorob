@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/health_color"
                 android:id="@+id/compare_layout"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="vertical"
 
                 android:layout_height="match_parent">
@@ -165,16 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-
-
                         >
-
-
-
-
-
-
-
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
@@ -186,6 +177,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
+                                android:text="পরিষ্কার পরিচ্ছন্নতা"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:id="@+id/clean_facilities1" />
 
