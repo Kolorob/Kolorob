@@ -186,6 +186,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
+                            android:id="@+id/firstLayout"
                             android:layout_height="60dp">
 
                             <LinearLayout
@@ -258,6 +259,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_marginTop="12dp"
+                            android:id="@+id/secondLayout"
 
                             android:layout_height="60dp">
 
@@ -331,6 +333,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_marginTop="12dp"
+                            android:id="@+id/thirdLayout"
 
                             android:layout_height="60dp">
 
@@ -401,6 +404,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="12dp"
+                            android:id="@+id/fourthLayout"
 
                             android:layout_width="match_parent"
                             android:layout_height="60dp">
@@ -474,6 +478,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_marginTop="12dp"
+                            android:id="@+id/fifthtLayout"
 
                             android:layout_height="60dp">
 
@@ -549,6 +554,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_marginTop="12dp"
+                            android:id="@+id/sixthLayout"
 
                             android:layout_height="60dp">
 
@@ -618,6 +624,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_marginTop="12dp"
+                            android:id="@+id/seventhLayout"
 
                             android:layout_height="60dp">
 
@@ -706,6 +713,8 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
+                            android:id="@+id/eighthLayout"
+
                             android:layout_marginTop="12dp"
                             android:layout_marginBottom="34dp"
                             android:layout_height="60dp">

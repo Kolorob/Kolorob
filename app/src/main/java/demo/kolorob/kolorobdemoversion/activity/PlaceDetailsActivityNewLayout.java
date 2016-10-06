@@ -104,6 +104,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
+    private int compareHeight;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -161,6 +162,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
     TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
     TextView edu_name_ban22,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
+    private LinearLayout firstLayout,secondLayout,thirdLayout, fourthLayout, fifthLayout, sixthLayout, seventhLayout, eighthLayout;
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
@@ -483,6 +485,51 @@ int index;
                 setLocationNameEng("Mirpur-12");
             }
         }
+
+
+        firstLayout = (LinearLayout)findViewById(R.id.firstLayout);
+        secondLayout = (LinearLayout)findViewById(R.id.secondLayout);
+        thirdLayout = (LinearLayout)findViewById(R.id.thirdLayout);
+        fourthLayout = (LinearLayout)findViewById(R.id.fourthLayout);
+        fifthLayout = (LinearLayout)findViewById(R.id.fifthtLayout);
+        sixthLayout = (LinearLayout)findViewById(R.id.sixthLayout);
+        seventhLayout = (LinearLayout)findViewById(R.id.seventhLayout);
+        eighthLayout = (LinearLayout)findViewById(R.id.eighthLayout);
+
+
+        int gaph= height/17;
+        LinearLayout.LayoutParams fifthL= (LinearLayout.LayoutParams) fifthLayout.getLayoutParams();
+        fifthL.height=gaph;
+        fifthLayout.setLayoutParams(fifthL);
+
+        LinearLayout.LayoutParams secondL= (LinearLayout.LayoutParams) secondLayout.getLayoutParams();
+        secondL.height=gaph;
+        secondLayout.setLayoutParams(secondL);
+
+        LinearLayout.LayoutParams thirdL= (LinearLayout.LayoutParams) thirdLayout.getLayoutParams();
+        thirdL.height=gaph;
+        thirdLayout.setLayoutParams(thirdL);
+
+        LinearLayout.LayoutParams fourthL= (LinearLayout.LayoutParams) fourthLayout.getLayoutParams();
+        fourthL.height=gaph;
+        fourthLayout.setLayoutParams(fourthL);
+
+        LinearLayout.LayoutParams sixthL= (LinearLayout.LayoutParams) sixthLayout.getLayoutParams();
+        sixthL.height=gaph;
+        sixthLayout.setLayoutParams(sixthL);
+
+
+        LinearLayout.LayoutParams seventhL= (LinearLayout.LayoutParams) seventhLayout.getLayoutParams();
+        seventhL.height=gaph;
+        seventhLayout.setLayoutParams(seventhL);
+
+        LinearLayout.LayoutParams eightL= (LinearLayout.LayoutParams) eighthLayout.getLayoutParams();
+        eightL.height=gaph;
+        eighthLayout.setLayoutParams(eightL);
+
+        LinearLayout.LayoutParams firstL= (LinearLayout.LayoutParams) firstLayout.getLayoutParams();
+        firstL.height=gaph;
+        firstLayout.setLayoutParams(firstL);
 
 
 
