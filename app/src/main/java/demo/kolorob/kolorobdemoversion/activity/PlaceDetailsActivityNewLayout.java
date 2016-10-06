@@ -572,63 +572,66 @@ int index;
 
         compare_logo_image.getLayoutParams().width=width/15;
         compare_logo_image.getLayoutParams().height=height/15;
+        int size_b=20;
+        int size_s=14;
 
         if (screenSize > 6.5) {
-            health_name2.setTextSize(20);
-            opening_time2.setTextSize(20);
-            language_spoken2.setTextSize(20);
-            service_type2.setTextSize(20);
-            specialist_available2.setTextSize(20);
-            clean_facilities2.setTextSize(20);
-            privacy2.setTextSize(20);
-            quality_equipment2.setTextSize(20);
-            cost2.setTextSize(20);
-            health_name3.setTextSize(20);
-            opening_time3.setTextSize(20);
-            language_spoken3.setTextSize(20);
-            service_type3.setTextSize(20);
-            specialist_available3.setTextSize(20);
-            clean_facilities3.setTextSize(20);
-            privacy3.setTextSize(20);
-            quality_equipment3.setTextSize(20);
-            cost3.setTextSize(20);
-            opening_time1.setTextSize(20);
-            language_spoken1.setTextSize(20);
-            service_type1.setTextSize(20);
-            specialist_available1.setTextSize(20);
-            clean_facilities1.setTextSize(20);
-            privacy1.setTextSize(20);
-            quality_equipment1.setTextSize(20);
-            cost1.setTextSize(20);
+            health_name2.setTextSize(size_b);
+            opening_time2.setTextSize(size_b);
+            language_spoken2.setTextSize(size_b);
+            service_type2.setTextSize(size_b);
+            specialist_available2.setTextSize(size_b);
+            clean_facilities2.setTextSize(size_b);
+            privacy2.setTextSize(size_b);
+            quality_equipment2.setTextSize(size_b);
+            cost2.setTextSize(size_b);
+            health_name3.setTextSize(size_b);
+            opening_time3.setTextSize(size_b);
+            language_spoken3.setTextSize(size_b);
+            service_type3.setTextSize(size_b);
+            specialist_available3.setTextSize(size_b);
+            clean_facilities3.setTextSize(size_b);
+            privacy3.setTextSize(size_b);
+            quality_equipment3.setTextSize(size_b);
+            cost3.setTextSize(size_b);
+            opening_time1.setTextSize(size_b);
+            language_spoken1.setTextSize(size_b);
+            service_type1.setTextSize(size_b);
+            specialist_available1.setTextSize(size_b);
+            clean_facilities1.setTextSize(size_b);
+            privacy1.setTextSize(size_b);
+            quality_equipment1.setTextSize(size_b);
+            cost1.setTextSize(size_b);
+
 
         } else {
+            health_name2.setTextSize(size_s);
+            opening_time2.setTextSize(size_s);
+            language_spoken2.setTextSize(size_s);
+            service_type2.setTextSize(size_s);
+            specialist_available2.setTextSize(size_s);
+            clean_facilities2.setTextSize(size_s);
+            privacy2.setTextSize(size_s);
+            quality_equipment2.setTextSize(size_s);
+            cost2.setTextSize(size_s);
+            health_name3.setTextSize(size_s);
+            opening_time3.setTextSize(size_s);
+            language_spoken3.setTextSize(size_s);
+            service_type3.setTextSize(size_s);
+            specialist_available3.setTextSize(size_s);
+            clean_facilities3.setTextSize(size_s);
+            privacy3.setTextSize(size_s);
+            quality_equipment3.setTextSize(size_s);
+            cost3.setTextSize(size_s);
+            opening_time1.setTextSize(size_s);
+            language_spoken1.setTextSize(size_s);
+            service_type1.setTextSize(size_s);
+            specialist_available1.setTextSize(size_s);
+            clean_facilities1.setTextSize(size_s);
+            privacy1.setTextSize(size_s);
+            quality_equipment1.setTextSize(size_s);
+            cost1.setTextSize(size_s);
 
-            health_name2.setTextSize(16);
-            opening_time2.setTextSize(16);
-            language_spoken2.setTextSize(16);
-            service_type2.setTextSize(16);
-            specialist_available2.setTextSize(16);
-            clean_facilities2.setTextSize(16);
-            privacy2.setTextSize(16);
-            quality_equipment2.setTextSize(16);
-            cost2.setTextSize(16);
-            health_name3.setTextSize(16);
-            opening_time3.setTextSize(16);
-            language_spoken3.setTextSize(16);
-            service_type3.setTextSize(16);
-            specialist_available3.setTextSize(16);
-            clean_facilities3.setTextSize(16);
-            privacy3.setTextSize(16);
-            quality_equipment3.setTextSize(16);
-            cost3.setTextSize(16);
-            opening_time1.setTextSize(16);
-            language_spoken1.setTextSize(16);
-            service_type1.setTextSize(16);
-            specialist_available1.setTextSize(16);
-            clean_facilities1.setTextSize(16);
-            privacy1.setTextSize(16);
-            quality_equipment1.setTextSize(16);
-            cost1.setTextSize(16);
 
 
 
@@ -1370,7 +1373,7 @@ int index;
             else
                 service_type3.setText("শীঘ্রই আসছে");
             if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
-                specialist_available3.setText(firstSpecialistItem);
+                specialist_available3.setText(AppUtils.removeLastChar(firstSpecialistItem));
             else
                 specialist_available3.setText("শীঘ্রই আসছে");
 
@@ -1379,7 +1382,7 @@ int index;
             else
                 clean_facilities3.setText("শীঘ্রই আসছে");
 
-            if(healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
+            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
                 privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
             else
                 privacy3.setText("শীঘ্রই আসছে");
@@ -1502,7 +1505,7 @@ int index;
             else
                 service_type2.setText("শীঘ্রই আসছে");
             if(!secondSpecialistItem.equals("")&&!secondSpecialistItem.equals("null"))
-                specialist_available2.setText(firstSpecialistItem);
+                specialist_available2.setText(AppUtils.removeLastChar(secondSpecialistItem));
             else
                 specialist_available2.setText("শীঘ্রই আসছে");
 
