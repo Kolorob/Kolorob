@@ -62,7 +62,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.job_child_view, null);
+            convertView = infalInflater.inflate(R.layout.bazar_child_view, null);
         }
 
         DisplayMetrics displayMetrics = _context.getResources().getDisplayMetrics();
@@ -71,45 +71,31 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         final String[] Children = childText.split("@");
         LinearLayout job_item = (LinearLayout)convertView.findViewById(R.id.job_item);
-        TextView remaining_date = (TextView) convertView.findViewById(R.id.remaining_date);
-        TextView address = (TextView) convertView.findViewById(R.id.address);
-        TextView required_experience = (TextView) convertView.findViewById(R.id.required_experience);
+        TextView desctiption = (TextView) convertView.findViewById(R.id.description);
+        TextView price = (TextView) convertView.findViewById(R.id.price);
+        TextView type = (TextView) convertView.findViewById(R.id.type);
+        TextView condition = (TextView) convertView.findViewById(R.id.condition);
+        TextView area = (TextView) convertView.findViewById(R.id.area);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
-        if(groupPosition%2==0)
-        {
-            job_item.setBackgroundColor(ContextCompat.getColor(_context,R.color.white));
-            remaining_date.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
-            address.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
-            required_experience.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
-            phone_call.setBackgroundResource(R.drawable.phone_icon_purple);
-            email.setBackgroundResource(R.drawable.email_icon_purple);
 
-        }
-        else
-        {
-            job_item.setBackgroundColor(ContextCompat.getColor(_context,R.color.job_portal));
-            remaining_date.setTextColor(ContextCompat.getColor(_context,R.color.white));
-            address.setTextColor(ContextCompat.getColor(_context,R.color.white));
-            required_experience.setTextColor(ContextCompat.getColor(_context,R.color.white));
-            phone_call.setBackgroundResource(R.drawable.phone_icon);
-            email.setBackgroundResource(R.drawable.email_icon);
-        }
 
         phone_call.getLayoutParams().height=width/11;
         phone_call.getLayoutParams().width=width/11;
         email.getLayoutParams().height=width/11;
         email.getLayoutParams().width=width/11;
-        remaining_date.setText(Children[0]);
-        address.setText(Children[1]);
-        required_experience.setText(Children[2]);
+        desctiption.setText(Children[0]);
+        price.setText(Children[1]);
+        type.setText(Children[2]);
+        condition.setText(Children[3]);
+        area.setText(Children[4]);
 
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!Children[3].equals("")) {
-                    callIntent1.setData(Uri.parse("tel:" + Children[3]));
+                if (!Children[5].equals("")) {
+                    callIntent1.setData(Uri.parse("tel:" + Children[5]));
                     if (checkPermission(_context))
                         _context.startActivity(callIntent1);
                     else {
