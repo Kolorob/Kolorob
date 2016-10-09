@@ -22,14 +22,15 @@
         sothree:umanoScrollableView="@+id/main">
 
         <!-- MAIN CONTENT -->
-        <ListView
-            android:id="@+id/list"
-            android:background="@color/yellow"
-            android:layout_width="match_parent"
-            android:foregroundGravity="center"
+        <ExpandableListView
+            android:id="@+id/bazar_list"
+            android:childDivider="@color/blue"
+
+            android:cacheColorHint="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-        </ListView>
+            android:groupIndicator="@null"
+            android:layout_width="match_parent"/>
 
         <!-- SLIDING LAYOUT -->
         <LinearLayout

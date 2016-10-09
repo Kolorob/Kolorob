@@ -236,6 +236,13 @@ public class DisplayAllJobsActivity extends Activity {
             listDataHeader = new ArrayList<String>();
             listDataChild = new HashMap<String, List<String>>();
             job_data=new ArrayList<String>();
+
+            for (int i=0;i<jobAdvertisementItems.size();i++)
+            {
+
+            }
+
+
             for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
             {
                 job_data.clear();

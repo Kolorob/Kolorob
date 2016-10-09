@@ -4,6 +4,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 /**
  * Created by arafat on 19 September 2016.
  */
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,12 +32,12 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private List<String> _listDataHeader;
-    private HashMap<String, List<String>> _listDataChild;
+    private HashMap<String, ArrayList<String>> _listDataChild;
     private int width;
     private int height;
 
     public BazarToolAdapter(Context context, List<String> listDataHeader,
-                                   HashMap<String, List<String>> listChildData) {
+                            HashMap<String, ArrayList<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -69,11 +70,12 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
 
+
         final String[] Children = childText.split("@");
-        LinearLayout job_item = (LinearLayout)convertView.findViewById(R.id.job_item);
+
         TextView desctiption = (TextView) convertView.findViewById(R.id.description);
         TextView price = (TextView) convertView.findViewById(R.id.price);
-        TextView type = (TextView) convertView.findViewById(R.id.type);
+        TextView date = (TextView) convertView.findViewById(R.id.date);
         TextView condition = (TextView) convertView.findViewById(R.id.condition);
         TextView area = (TextView) convertView.findViewById(R.id.area);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
@@ -86,7 +88,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         email.getLayoutParams().width=width/11;
         desctiption.setText(Children[0]);
         price.setText(Children[1]);
-        type.setText(Children[2]);
+        date.setText(Children[2]);
         condition.setText(Children[3]);
         area.setText(Children[4]);
 

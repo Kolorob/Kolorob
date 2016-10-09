@@ -60,6 +60,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
@@ -67,6 +68,7 @@ import java.util.Vector;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.BazarListAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.BazarToolAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
@@ -139,7 +141,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
     List<String>listData=new ArrayList<String>();
     private int height,dpi;
-
+    ArrayList<ArrayList<String>> myList;
     private ExpandableListView subCatItemList;
     private boolean isCatExpandedOnce = false;
     private int primaryIconWidth;
@@ -154,6 +156,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private String locationNameEng;
     private String comapreData;
     ScrollView sv,svs,scrolling_part;
+
+    List<String> listDataHeader;
+    ArrayList<String> bazar_data;
+    HashMap<String, ArrayList<String>> listDataChild;
+    ExpandableListView expListView;
+    private int lastExpandedPosition = -1;
+    BazarToolAdapter bazarToolAdapter;
+    private int bazar_counter=0;
 
     String firstData="",SecondData="";
     int checker=0;
@@ -3132,42 +3142,62 @@ fragment.getMapViewController().setZoom(16);
                             //tester ends======
                         }
 
+
+                        listDataHeader = new ArrayList<String>();
+                        listDataChild = new HashMap<String, ArrayList<String>>();
+                        bazar_data=new ArrayList<String>();
+                        myList = new ArrayList<ArrayList<String>>(allBazar.size());
                         int size= allBazar.size();
-
-
-
-                        String[] item_name = new String[size];
-
-                        String[] price = new String[size];
-
-                        String[] condition = new String[size];
-
-                        String[] description = new String[size];
-
-                        String[] contact = new String[size];
-
-                        String[] date = new String[size];
-
-                        String[] posted_by = new String[size];
-                        int increment= 0;
-
                         for(BazarItem bazarItem: allBazar)
-                        {   item_name[increment]= bazarItem.type;
-                            price[increment]=String.valueOf(bazarItem.price);
-                            condition[increment]= bazarItem.condition;
-                            description[increment]=bazarItem.description;
-                            contact[increment]=bazarItem.contact;
-                            date[increment] = bazarItem.date;
-                            posted_by[increment]=bazarItem.contact_person;
-                            Log.d("bazarItem","===="+bazarItem.date);
-                            Log.d("increment","===="+increment);
-                            increment++;
+                        {
+
+                            bazar_data.clear();
+
+                            String bazarData= "বিবরন: "+bazarItem.description+"@"+
+                                    "মূল্য: "+bazarItem.price+"@"+
+                                    "কন্ডিশন: "+bazarItem.condition+"@"+
+                                    "এলাকা: "+"Mirpur 12"+"@"+
+                                    "তারিখ: "+bazarItem.date+"@"+
+                                    bazarItem.contact+"v";
+
+                            String group_data= bazarItem.contact_person+"@"+
+                                    bazarItem.type+"@"+"v";
+
+                            bazar_data.add(bazarData);
+
+
+
+
+                            listDataHeader.add(group_data);
+                            Log.d("bazar_data","######"+bazar_data);
+                           // myList.add(bazar_counter,bazar_data);
+                           // myList.get(bazar_counter).add(bazarData);
+                            myList.add(bazar_data);
+
+                            Log.d("myList","######"+myList);
+
+
+
+
+
+                            bazar_counter++;
+
+
                         }
 
-                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
-                                contact,date,posted_by);
+                        for(int i=0;i<bazar_counter;i++)
+                        {
+                            listDataChild.put(listDataHeader.get(i),myList.get(i));
+                        }
 
-                        listview.setAdapter(bazarListAdapter);
+                        expListView = (ExpandableListView) findViewById(R.id.bazar_list);
+                        bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
+                        expListView.setAdapter(bazarToolAdapter);
+//
+//                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
+//                                contact,date,posted_by);
+//
+//                        listview.setAdapter(bazarListAdapter);
                     }
                 }
         );
@@ -3466,7 +3496,7 @@ fragment.getMapViewController().setZoom(16);
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         textView = (TextView) findViewById(R.id.list_main);
-        listview = (ListView) findViewById(R.id.list);
+
     }
 
     public void panelListener(){
