@@ -178,7 +178,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             dateval=diffInDays;
             if (dateval>30) datevalue=" ( Old information )";
             else
-                datevalue=" ( Information of " + dateval + " days ago )";
+                datevalue=" ( Information updated " + dateval + " days ago )";
         }
         LayoutInflater inflater = getLayoutInflater();
 

@@ -272,7 +272,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             dateval=diffInDays;
             if (dateval>30) datevalue=" ( Old information )";
             else
-                datevalue=" ( Information of " + dateval + " days ago )";
+                datevalue=" ( Information updated " + dateval + " days ago )";
         }
       //  Toast toast = Toast.makeText(this, datevalue, Toast.LENGTH_LONG);
         LayoutInflater inflater = getLayoutInflater();

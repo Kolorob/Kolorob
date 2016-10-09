@@ -221,7 +221,7 @@ public class SubCategoryTable {
         String head = cursor.getString(3);
         if(head.equals("Lawers"))
         {
-            head="Lawyers";
+            head="Lawyer";
         }
         else  if(head.equals("Grave-yard"))
         {
@@ -261,6 +261,11 @@ public class SubCategoryTable {
 
         }
 
+
+        }
+        else     if(head.endsWith("s"))
+        {
+            head = head.substring(0,head.length() - 1);
         }
         String namebn = cursor.getString(4);
         String headbn = cursor.getString(5);

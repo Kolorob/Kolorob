@@ -98,6 +98,11 @@ public class DefaultAdapter extends BaseAdapter
             holder.key.setText("");
             holder.value.setText("");
         }
+        else if (p.endsWith("?"))
+        {
+            holder.key.setText(key[position] + ":");
+            holder.value.setText(value[position]);
+        }
         else
         {
             holder.key.setText(key[position] + ":");

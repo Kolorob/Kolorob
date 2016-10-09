@@ -255,7 +255,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             dateval=diffInDays;
             if (dateval>30) datevalue=" ( Old information)";
             else
-            datevalue=" ( Information of " + dateval + " days ago )";
+            datevalue=" ( Information updated " + dateval + " days ago )";
         }
 
 

@@ -246,6 +246,27 @@ public class SubCategoryTableNew {
 
                     }
                 }
+                else     if(name.endsWith("s"))
+                {
+                    name = name.substring(0,name.length() - 1);
+                }
+                else if (name.equals("Beauty Parlour(Gents)")) {
+                    name="Beauty Parlour (Gents)";;
+
+                }
+                else if (name.equals("Beauty Parlour(Ladies)")) {
+                    name="Beauty Parlour (Ladies)";;
+
+                }
+                else if (name.equals("Pharmacy(MBBS)")) {
+                    name="Pharmacy (MBBS)";;
+
+                }
+                else if (name.equals("Pharmacy(Medicine Only)")) {
+                    name="Pharmacy (Medicine Only)";;
+
+                }
+
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());

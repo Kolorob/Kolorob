@@ -212,7 +212,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             dateval=diffInDays;
             if (dateval>30) datevalue=" ( Old information )";
             else
-                datevalue=" ( Information of " + dateval + " days ago)";
+                datevalue=" ( Information updated " + dateval + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
@@ -823,6 +823,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             key[increment] = value1;
             value[increment] = value2;
         }
+
         else {
             if (!value2.equals("null") && !value2.equals("")) {
                 if(value2.equals(" BDT"))
