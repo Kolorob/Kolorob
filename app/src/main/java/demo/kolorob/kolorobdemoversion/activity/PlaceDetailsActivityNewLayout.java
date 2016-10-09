@@ -3151,7 +3151,7 @@ fragment.getMapViewController().setZoom(16);
                         for(BazarItem bazarItem: allBazar)
                         {
 
-                            bazar_data.clear();
+                          //  bazar_data.clear();
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     "মূল্য: "+bazarItem.price+"@"+
@@ -3163,13 +3163,13 @@ fragment.getMapViewController().setZoom(16);
                             String group_data= bazarItem.contact_person+"@"+
                                     bazarItem.type+"@"+"v";
 
-                            bazar_data.add(bazarData);
+                            bazar_data.add(bazar_counter,bazarData);
 
 
 
 
                             listDataHeader.add(group_data);
-                            Log.d("bazar_data","######"+bazar_data);
+
                            // myList.add(bazar_counter,bazar_data);
                            // myList.get(bazar_counter).add(bazarData);
                             myList.add(bazar_data);
@@ -3184,6 +3184,21 @@ fragment.getMapViewController().setZoom(16);
 
 
                         }
+                        ArrayList<String > temp= new ArrayList<String>();
+
+
+                        for(int k=0;k<bazar_counter;k++)
+                        {
+
+                            myList.add(k,bazar_data);
+                           // myList.get(0).set(k,bazar_data.get(k));
+      //                      myList.add(k,temp);
+                            Log.d("MyList","######"+myList);
+                            temp.clear();
+                        }
+
+
+
 
                         for(int i=0;i<bazar_counter;i++)
                         {
