@@ -262,7 +262,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
         //---
-
+        mapView.setBuiltInZoomControls(false);
         //Add Scale Bar
         ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mapView);
         mapView.getOverlays().add(myScaleBarOverlay);

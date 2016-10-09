@@ -803,6 +803,7 @@ int index;
                 SearchClicked=false;
                 MapClicked=true;
                 ListClicked=false;
+                CompareClicked=false;
                 if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
                     svsholder.setVisibility(View.VISIBLE);
@@ -811,11 +812,8 @@ int index;
                 }
                 spItems.setVisibility(View.VISIBLE);
                 uptext.setVisibility(View.VISIBLE);
-                CompareClicked=false;
-                if(InCompare==false) {
-                  //  callMapFragment(locationNameId);
 
-                }
+
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
 
@@ -1514,7 +1512,7 @@ int index;
             if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
                 total_students.setText("Data is being collected");
             else
-                total_students.setText(String.valueOf(educationNewItem.getStudentno())+" person");
+                total_students.setText(String.valueOf(educationNewItem.getStudentno())+" Person");
 
             if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
                 total_classes.setText("Data is being collected");
@@ -1538,8 +1536,10 @@ int index;
 
             if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
                 canteen_facility.setText("Data is being collected");
-            else
-                canteen_facility.setText(educationNewItem.getWatersource());
+            else {
+                String w=AppUtils.Check_Capitalization(educationNewItem.getWatersource());
+                canteen_facility.setText(w);
+            }
         }
         for ( final EducationNewItem educationNewItem: secondDataSet)
         {
@@ -1632,7 +1632,7 @@ int index;
             if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
                 total_students1.setText("Data is being collected");
             else
-                total_students1.setText(String.valueOf(educationNewItem.getStudentno()));
+                total_students1.setText(String.valueOf(educationNewItem.getStudentno())+ " Person");
 
             if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
                 total_classes1.setText("Data is being collected");
@@ -1656,9 +1656,10 @@ int index;
 
             if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
                 canteen_facility1.setText("Data is being collected");
-            else
-                canteen_facility1.setText(educationNewItem.getWatersource());
-        }
+            else {
+                String s=AppUtils.Check_Capitalization(educationNewItem.getWatersource());
+            canteen_facility1.setText(s);
+        }}
 
 //        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
     }

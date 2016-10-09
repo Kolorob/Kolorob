@@ -31,7 +31,7 @@
     //feedbackstars
     <dimen name="firststarspace">63dp</dimen>
     <dimen name="secondstarspace">135dp</dimen>
-    <dimen name="thirdstarspace">120dp</dimen>
+    <dimen name="thirdstarspace">180dp</dimen>
     <dimen name="fourthstarspace">160dp</dimen>
     <dimen name="fifthstarspace">87dp</dimen>
     <dimen name="feedbacktextsize">25dp</dimen>
