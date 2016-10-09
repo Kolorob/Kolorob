@@ -3650,6 +3650,14 @@ fragment.getMapViewController().setZoom(16);
         close_button.getLayoutParams().height=width/13;
         close_button.getLayoutParams().width=width/13;
 
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 
     public void panelListener(){
