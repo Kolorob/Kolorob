@@ -119,6 +119,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     boolean mainedcalled=false;
     private int compareHeight;
     private ImageView close_button;
+    int buttonHeights;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -401,6 +402,7 @@ int index;
         params2.weight = 1;
         params2.width=buttonWidth;
         params2.height=(int)Math.round(d);
+        buttonHeights=(int)Math.round(d);
         SearchButton.setLayoutParams(params2);
         final   LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
         params3.weight = 1;
@@ -3338,7 +3340,15 @@ fragment.getMapViewController().setZoom(16);
                         expListView = (ExpandableListView) findViewById(R.id.bazar_list);
                         bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
                         expListView.setAdapter(bazarToolAdapter);
-//
+
+                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
+                                .getLayoutParams();
+                        layoutParams.setMargins(0, 0, 0, buttonHeights*2);//
+                        Log.d("Button Heights","%%%%%%"+buttonHeights);
+                        SlidingUpPanelLayout slidingUpPanelLayout;
+                        slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
+                        RelativeLayout.LayoutParams slidingp= (RelativeLayout.LayoutParams) slidingUpPanelLayout.getLayoutParams();
+
 //                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
 //                                contact,date,posted_by);
 //
