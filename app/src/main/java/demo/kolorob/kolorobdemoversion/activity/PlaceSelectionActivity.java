@@ -50,8 +50,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -168,38 +166,10 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
         }  else doPermissionGrantedStuffs();
-        mInterstitialAd = new InterstitialAd(this);
 
-        // set the ad unit ID
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_kolorob));
-
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
 loadIMEI();
         // Load ads into Interstitial Ads
-        mInterstitialAd.loadAd(adRequest);
 
-        mInterstitialAd.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                showInterstitial();
-            }
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-        });
         LayoutInflater inflater = getLayoutInflater();
 
         View toastView = inflater.inflate(R.layout.toast_view,null);
