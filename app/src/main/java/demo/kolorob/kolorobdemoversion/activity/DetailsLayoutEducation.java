@@ -202,8 +202,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         CheckConcate("Facebook", educationNewItem.getNode_facebook());
 
         CheckConcate("Opening Time", educationNewItem.getOpeningtime());
-        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("Break Time", educationNewItem.getBreaktime());
+        CheckConcate("Break Time", educationNewItem.getBreaktime());
         CheckConcate("Closing Time", educationNewItem.getClosetime());
 
         CheckConcate("Closed on", educationNewItem.getOffday());
@@ -302,13 +301,13 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Updated Today)";
+        if (diffInDays==0) datevalue=" ( Updated Today )";
         else
         {
             dateval=diffInDays;
-            if (dateval>30) datevalue=" ( Old information)";
+            if (dateval>30) datevalue=" ( Old information )";
             else
-                datevalue=" ( Information of" + datevaluebn + " days ago)";
+                datevalue=" ( Information of " + dateval + " days ago )";
         }
         LayoutInflater inflater = getLayoutInflater();
 

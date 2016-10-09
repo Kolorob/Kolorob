@@ -206,13 +206,13 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Updated today)";
+        if (diffInDays==0) datevalue=" ( Updated today )";
         else
         {
             dateval=diffInDays;
             if (dateval>30) datevalue=" ( Old information )";
             else
-                datevalue=" ( Information of" + datevaluebn + " days ago)";
+                datevalue=" ( Information of " + dateval + " days ago)";
         }
         LayoutInflater inflater = getLayoutInflater();
 
@@ -284,8 +284,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         CheckConcate("Closest Landmark", entertainmentServiceProviderItemNew.getLandmark());
 
         CheckConcate("Opening Time",  entertainmentServiceProviderItemNew.getOpeningtime());
-        if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("Break Time", entertainmentServiceProviderItemNew.getBreaktime());
+        CheckConcate("Break Time",  entertainmentServiceProviderItemNew.getBreaktime());
         CheckConcate("Closing Time", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("Closed on", entertainmentServiceProviderItemNew.getOff_day());
 
@@ -298,7 +297,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             if(entertainmentTypeItem.getRecreation_price().equals("")||entertainmentTypeItem.getRecreation_price().equals("null"))
                 CheckConcate("Service Cost", "70 BDT");
             else
-                CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price()+" BDT");
+                CheckConcate("Service Cost", entertainmentTypeItem.getRecreation_price());
             CheckConcate("Additional Information ", entertainmentTypeItem.getRecreation_remarks());
 
 

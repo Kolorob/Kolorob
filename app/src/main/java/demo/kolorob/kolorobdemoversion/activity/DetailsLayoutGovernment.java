@@ -266,13 +266,13 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Updated today)";
+        if (diffInDays==0) datevalue=" ( Updated today )";
         else
         {
             dateval=diffInDays;
             if (dateval>30) datevalue=" ( Old information )";
             else
-                datevalue=" ( Information of" + datevaluebn + " days ago)";
+                datevalue=" ( Information of " + dateval + " days ago )";
         }
       //  Toast toast = Toast.makeText(this, datevalue, Toast.LENGTH_LONG);
         LayoutInflater inflater = getLayoutInflater();
