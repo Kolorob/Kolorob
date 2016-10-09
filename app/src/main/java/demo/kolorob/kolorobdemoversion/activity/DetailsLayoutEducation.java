@@ -255,8 +255,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         }
         CheckConcate("Number of Washroom",  educationNewItem.getWashroom_no());
-        CheckConcate("Number of Washroom(Male)", educationNewItem.getWashroom_male());
-        CheckConcate("Number of Washroom(Female)",educationNewItem.getWashroomfemale());
+        CheckConcate("Number of Washroom (Male)", educationNewItem.getWashroom_male());
+        CheckConcate("Number of Washroom (Female)",educationNewItem.getWashroomfemale());
         CheckConcate("Are the washrooms clean?", educationNewItem.getWashroomcleanliness());
         CheckConcate("Is clean drinking water available?", educationNewItem.getWatercondition());
         CheckConcate("What is the source of drinking water?", educationNewItem.getWatersource());
@@ -352,7 +352,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("Training Type", educationTrainingDetailsItem.getTrainingnametype());
                 CheckConcate("Training Name", educationTrainingDetailsItem.getTrainingnamesubtype());
                 CheckConcate("Course Duration", educationTrainingDetailsItem.getCourseduration());
-                CheckConcate("Admission(Month)", educationTrainingDetailsItem.getAdmissionmonth());
+                CheckConcate("Admission (Month)", educationTrainingDetailsItem.getAdmissionmonth());
                 CheckConcate("Training Cost", educationTrainingDetailsItem.getCost()+" BDT");
 
             }
