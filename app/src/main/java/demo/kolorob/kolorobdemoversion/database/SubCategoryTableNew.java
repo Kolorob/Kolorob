@@ -95,7 +95,7 @@ public class SubCategoryTableNew {
     }
 
     public boolean isFieldExist(int id,int cat_id,int refid) {
-       // Lg.d(TAG, "isFieldExist : inside, id=" + id);
+        // Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
@@ -138,7 +138,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 =cursor.getString(7);
+                String catid2 =cursor.getString(6);
                 int subcatid=cursor.getInt(5);
                 siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());
@@ -203,7 +203,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(7);
+                String name = cursor.getString(6);
                 siList.add(i,name);
                 i++;
             } while (cursor.moveToNext());
@@ -219,7 +219,7 @@ public class SubCategoryTableNew {
 
         SQLiteDatabase db = openDB();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_BN+" = '"+name+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_EN+" = '"+name+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -260,26 +260,26 @@ public class SubCategoryTableNew {
 
 
 
-   /* public ArrayList<Integer> getSubid(int id,String head) {
-        ArrayList<Integer> siList2=new ArrayList<>();
+    /* public ArrayList<Integer> getSubid(int id,String head) {
+         ArrayList<Integer> siList2=new ArrayList<>();
 
-        SQLiteDatabase db = openDB();
-        int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
+         SQLiteDatabase db = openDB();
+         int i=0;
+         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
 
 
-        if (cursor.moveToFirst()) {
-            do {
-               ;
-                int subid=cursor.getInt(1);
-                siList2.add(i,subid);
-                i++;
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList2;
-    }*/
+         if (cursor.moveToFirst()) {
+             do {
+                ;
+                 int subid=cursor.getInt(1);
+                 siList2.add(i,subid);
+                 i++;
+             } while (cursor.moveToNext());
+         }
+         cursor.close();
+         closeDB();
+         return siList2;
+     }*/
     public ArrayList<SubCategoryItemNew> getAllSubCategoriesHeader(int id,String head) {
         ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
 

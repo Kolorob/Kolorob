@@ -64,7 +64,7 @@
                         android:layout_height="80dp"
                         android:background="@drawable/compare_logo_default"
 
-                        android:id="@+id/compare_logo_image"
+                        android:id="@+id/compare_logo_images"
                         />
 
 
@@ -166,16 +166,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-
-
                         >
-
-
-
-
-
-
-
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
@@ -187,6 +178,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
+                                android:text="পরিষ্কার পরিচ্ছন্নতা"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:id="@+id/clean_facilities1" />
 
@@ -195,6 +187,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
+                            android:id="@+id/firstLayout"
                             android:layout_height="60dp">
 
                             <LinearLayout
@@ -247,7 +240,6 @@
                             android:layout_width="match_parent"
                             android:gravity="center"
                             android:id="@+id/edtype1"
-                            android:layout_marginTop="15dp"
                             android:layout_height="wrap_content">
 
                             <TextView
@@ -266,7 +258,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/secondLayout"
 
                             android:layout_height="60dp">
 
@@ -319,7 +311,6 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:gravity="center"
-                            android:layout_marginTop="15dp"
                             android:id="@+id/hostel_facility_l"
                             android:layout_height="wrap_content">
 
@@ -339,7 +330,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/thirdLayout"
 
                             android:layout_height="60dp">
 
@@ -390,7 +381,6 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:gravity="center"
-                            android:layout_marginTop="15dp"
 
                             android:id="@+id/service_type1_l"
                             android:layout_height="wrap_content">
@@ -409,7 +399,7 @@
 
                         <LinearLayout
                             android:orientation="horizontal"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/fourthLayout"
 
                             android:layout_width="match_parent"
                             android:layout_height="60dp">
@@ -462,7 +452,6 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:gravity="center"
-                            android:layout_marginTop="15dp"
                             android:id="@+id/specialist_available1_l"
                             android:layout_height="wrap_content">
 
@@ -482,7 +471,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/fifthtLayout"
 
                             android:layout_height="60dp">
 
@@ -540,7 +529,6 @@
                             android:layout_width="match_parent"
                             android:gravity="center"
                             android:id="@+id/privacy_l"
-                            android:layout_marginTop="15dp"
 
                             android:layout_height="wrap_content">
 
@@ -557,7 +545,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/sixthLayout"
 
                             android:layout_height="60dp">
 
@@ -607,7 +595,6 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:gravity="center"
-                            android:layout_marginTop="15dp"
 
                             android:id="@+id/quality_equipment1_1"
                             android:layout_height="wrap_content">
@@ -626,7 +613,7 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/seventhLayout"
 
                             android:layout_height="60dp">
 
@@ -694,7 +681,6 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:gravity="center"
-                            android:layout_marginTop="15dp"
 
                             android:id="@+id/cost111_1"
                             android:layout_height="wrap_content">
@@ -715,7 +701,8 @@
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="12dp"
+                            android:id="@+id/eighthLayout"
+
                             android:layout_marginBottom="34dp"
                             android:layout_height="60dp">
 

@@ -126,8 +126,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.showList = showList;
     }
     ToggleButton toggleButton;
+<<<<<<< HEAD
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
+=======
     Double screenSize;
+
+>>>>>>> f76efae7c6736354ac2ce58c6fc910fd598d87cd
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
@@ -158,7 +162,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private String locationNameEng;
     private String comapreData;
     ScrollView sv,svs,scrolling_part;
-    ImageView compare_logo_image;
+<<<<<<< HEAD
+
     List<String> listDataHeader;
     ArrayList<String> bazar_data;
     HashMap<String, ArrayList<String>> listDataChild;
@@ -167,6 +172,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     BazarToolAdapter bazarToolAdapter;
     private int bazar_counter=0;
 
+=======
+    ImageView compare_logo_image;
+>>>>>>> f76efae7c6736354ac2ce58c6fc910fd598d87cd
     String firstData="",SecondData="";
     int checker=0;
     Boolean InCompare=false;

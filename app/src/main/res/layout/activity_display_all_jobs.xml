@@ -91,7 +91,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignLeft="@+id/linearLayout2"
-        android:layout_above="@+id/linearLayout4"
+
         android:background="@color/white"
         android:layout_alignStart="@+id/linearLayout2"
         android:orientation="vertical"
