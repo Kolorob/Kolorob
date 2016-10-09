@@ -249,11 +249,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         long diffInMillisec = today.getTime() - date2.getTime();
 
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" (Updated Today)";
+        if (diffInDays==0) datevalue=" ( Updated Today )";
         else
         {
             dateval=diffInDays;
-            if (dateval>30) datevalue=" ( Old information)";
+            if (dateval>30) datevalue=" ( Old information )";
             else
             datevalue=" ( Information updated " + dateval + " days ago )";
         }

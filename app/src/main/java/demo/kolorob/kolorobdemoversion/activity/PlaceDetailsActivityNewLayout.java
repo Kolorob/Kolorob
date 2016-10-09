@@ -1116,7 +1116,7 @@ int index;
         specialist_available1.setText("Specialist Type");
         clean_facilities1.setText("Pharmacy Service");
         privacy1.setText("Privacy");
-        quality_equipment1.setText("Service details and Equipments");
+        quality_equipment1.setText("Service Details and Equipments");
         cost1.setText("Service Cost");
         shift1_11.setVisibility(View.GONE);
         shift1_1.setVisibility(View.GONE);
