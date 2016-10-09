@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Nokia"
-            android:id="@+id/textView2" />
+            android:id="@+id/p_name" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,6 +29,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Sell"
-            android:id="@+id/textView3" />
+            android:id="@+id/sell" />
     </LinearLayout>
 </LinearLayout>

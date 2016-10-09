@@ -150,43 +150,23 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.job_parent_view, null);
+            convertView = infalInflater.inflate(R.layout.bazar_parent_view, null);
         }
 
-        LinearLayout parent_view=(LinearLayout)convertView.findViewById(R.id.parent_view);
+
 
         String[] groupElement= headerTitle.split("@");
 
-        TextView job_company = (TextView) convertView
-                .findViewById(R.id.job_company);
-        TextView job_position = (TextView) convertView
-                .findViewById(R.id.job_position);
-        TextView job_salary = (TextView) convertView
-                .findViewById(R.id.job_salary);
-        job_company.setTypeface(null, Typeface.BOLD);
+        TextView product_name = (TextView) convertView
+                .findViewById(R.id.p_name);
+        TextView sell = (TextView) convertView
+                .findViewById(R.id.sell);
 
+        product_name.setTypeface(null, Typeface.BOLD);
 
-        if(groupPosition%2==0)
-        {
-            parent_view.setBackgroundColor(ContextCompat.getColor(_context,R.color.white));
-            job_company.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
-            job_position.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
-            job_salary.setTextColor(ContextCompat.getColor(_context,R.color.job_portal));
+        product_name.setText(groupElement[0]);
+        sell.setText(groupElement[1]);
 
-
-        }
-
-        else
-        {
-            parent_view.setBackgroundColor(ContextCompat.getColor(_context,R.color.job_portal));
-            job_company.setTextColor(ContextCompat.getColor(_context,R.color.white));
-            job_position.setTextColor(ContextCompat.getColor(_context,R.color.white));
-            job_salary.setTextColor(ContextCompat.getColor(_context,R.color.white));
-
-        }
-        job_company.setText(groupElement[0]);
-        job_position.setText(groupElement[1]);
-        job_salary.setText(groupElement[2]);
 
         return convertView;
     }
