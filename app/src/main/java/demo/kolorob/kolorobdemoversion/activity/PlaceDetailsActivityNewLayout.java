@@ -118,6 +118,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
     private int compareHeight;
+    private ImageView close_button;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -128,6 +129,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ToggleButton toggleButton;
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     Double screenSize;
+    private ImageView iv_kolorob_logo;
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
@@ -301,6 +303,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String checknum;
     Boolean flag;
     boolean filterclicked=false;
+    int width;
 
 
     String idx,idxx,idxxx,idxxxx;
@@ -343,7 +346,7 @@ int index;
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
         dpi=displayMetrics.densityDpi;
-        int width = displayMetrics.widthPixels;
+        width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
         fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
@@ -3298,7 +3301,7 @@ fragment.getMapViewController().setZoom(16);
 
                            // myList.add(bazar_counter,bazar_data);
                            // myList.get(bazar_counter).add(bazarData);
-                            myList.add(bazar_data);
+               //             myList.add(bazar_data);
 
                             Log.d("myList","######"+myList);
 
@@ -3319,7 +3322,7 @@ fragment.getMapViewController().setZoom(16);
                             myList.add(k,bazar_data);
                            // myList.get(0).set(k,bazar_data.get(k));
       //                      myList.add(k,temp);
-                            Log.d("MyList","######"+myList);
+
                             temp.clear();
                         }
 
@@ -3329,6 +3332,7 @@ fragment.getMapViewController().setZoom(16);
                         for(int i=0;i<bazar_counter;i++)
                         {
                             listDataChild.put(listDataHeader.get(i),myList.get(i));
+
                         }
 
                         expListView = (ExpandableListView) findViewById(R.id.bazar_list);
@@ -3637,6 +3641,14 @@ fragment.getMapViewController().setZoom(16);
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         textView = (TextView) findViewById(R.id.list_main);
+        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+        int p=iv_kolorob_logo.getLayoutParams().width=width/11;
+        iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
+
+        close_button=(ImageView)findViewById(R.id.iv_close);
+
+        close_button.getLayoutParams().height=width/13;
+        close_button.getLayoutParams().width=width/13;
 
     }
 
