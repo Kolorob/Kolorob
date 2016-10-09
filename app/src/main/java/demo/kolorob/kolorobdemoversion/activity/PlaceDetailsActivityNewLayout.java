@@ -3105,25 +3105,24 @@ fragment.getMapViewController().setZoom(16);
                         if (status == AppConstants.SUCCESS_CODE) {
                             //ge the db instance
                             SQLiteDatabase db = DatabaseManager.getInstance(PlaceDetailsActivityNewLayout.this).openDatabase();
-
                             //split into single sql queries
                             String[] sql = apiContent.split("~");
-
                             //run the sqls one by one
                             for (int i = 0; i<sql.length;i++)
                             {
+                                Log.d("SQL[i]","%%%%%%"+sql[i]);
                                 db.execSQL(sql[i]);
                             }
-
                             //now reload the data taht has beed saved
-
                             //get all data from db
                             Cursor cursor =  db.rawQuery("select * from custom_advertisement", null);
                             allBazar = new ArrayList<BazarItem>();
+                            int vf=0;
                             while (cursor.moveToNext()) {
                                 allBazar.add(new BazarItem(cursor));
+                                vf++;
                             }
-
+                            Log.d("vvff","%%%%%%"+vf);
                             //tester. You may delete this portion
                             Context context = getApplicationContext();
                             CharSequence text = allBazar.get(0).toString();
@@ -3131,10 +3130,11 @@ fragment.getMapViewController().setZoom(16);
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
                             //tester ends======
-
                         }
 
                         int size= allBazar.size();
+
+
 
                         String[] item_name = new String[size];
 

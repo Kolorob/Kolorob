@@ -171,11 +171,6 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
 
         String[] groupElement= headerTitle.split("@");
 
-
-
-
-
-
         TextView job_company = (TextView) convertView
                 .findViewById(R.id.job_company);
         TextView job_position = (TextView) convertView
