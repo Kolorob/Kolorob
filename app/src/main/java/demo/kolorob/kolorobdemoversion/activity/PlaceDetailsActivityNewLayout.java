@@ -693,38 +693,39 @@ int index;
                                        int arg2, long arg3) {
                 String imc_met=spItems.getSelectedItem().toString();
                 setPlaceChoice(imc_met);
-                if(imc_met==AppConstants.BAUNIABADH) {
-                    locationNameId = AppConstants.PLACE_BAUNIABADH;
-                    setPlaceChoice("Mirpur-11");
-                    setLocationNameEng("Mirpur-11");
 
-                    allHolders.clear();
-                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
-                    {
-                        Populateholder("Mirpur-11");
-                        calladapter(true);
-                    }
-                    else Populateholder("Mirpur-11");
-                    callMapFragment(locationNameId);
-                    createData(currentCategoryID,"","Mirpur-11");
-                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-                    subCatItemList.setAdapter(adapter);
-                }
-                else {locationNameId=AppConstants.PLACE_PARIS_ROAD;
-                    setPlaceChoice("Mirpur-10");
-                    setLocationNameEng("Mirpur-10");
 
-                    allHolders.clear();
-                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
-                    {
-                        Populateholder("Mirpur-10");
-                        calladapter(true);
+
+                    if (imc_met == AppConstants.BAUNIABADH) {
+                        locationNameId = AppConstants.PLACE_BAUNIABADH;
+                        setPlaceChoice("Mirpur-11");
+                        setLocationNameEng("Mirpur-11");
+
+                        allHolders.clear();
+                        if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true) {
+                            Populateholder("Mirpur-11");
+                            calladapter(true);
+                        } else Populateholder("Mirpur-11");
+                        callMapFragment(locationNameId);
+                        createData(currentCategoryID, "", "Mirpur-11");
+                        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+                        subCatItemList.setAdapter(adapter);
+                    } else {
+                        locationNameId = AppConstants.PLACE_PARIS_ROAD;
+                        setPlaceChoice("Mirpur-10");
+                        setLocationNameEng("Mirpur-10");
+
+                        allHolders.clear();
+                        if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true) {
+                            Populateholder("Mirpur-10");
+                            calladapter(true);
+                        } else Populateholder("Mirpur-10");
+                        callMapFragment(locationNameId);
+                        createData(currentCategoryID, "", "Mirpur-10");
+                        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
+                        subCatItemList.setAdapter(adapter);
                     }
-                    else Populateholder("Mirpur-10");
-                    callMapFragment(locationNameId);
-                    createData(currentCategoryID,"","Mirpur-10");
-                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-                    subCatItemList.setAdapter(adapter);}
+
                 if(mapcalledstatus){
 
                 }
@@ -784,7 +785,7 @@ int index;
                 }
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
-
+                    map.setVisibility(View.GONE);
                     filterholder.setVisibility(View.VISIBLE);
                     toggleButton.setVisibility(View.VISIBLE);
                 }
@@ -793,7 +794,7 @@ int index;
                 sv.setVisibility(View.VISIBLE);
                 llCatListHolder.setVisibility(View.VISIBLE);
                 toggleButton.setVisibility(View.VISIBLE);
-
+                toolbar.setVisibility(View.VISIBLE);
             }
         });
         MapButton.setOnClickListener(new View.OnClickListener() {
@@ -2899,7 +2900,8 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     prev_fragment.Drawfin(-1,true);
                 }
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
-                showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
+                if(SearchClicked!=true) {
+                showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());}
             }
 
         }
