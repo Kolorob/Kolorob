@@ -22,15 +22,105 @@
         sothree:umanoScrollableView="@+id/main">
 
         <!-- MAIN CONTENT -->
-        <ExpandableListView
-            android:id="@+id/bazar_list"
-            android:childDivider="@color/blue"
 
-            android:cacheColorHint="@android:color/transparent"
-            android:listSelector="@android:color/transparent"
-            android:layout_height="match_parent"
-            android:groupIndicator="@null"
-            android:layout_width="match_parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
+
+
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/linearLayout2"
+                android:gravity="center_vertical|center_horizontal">
+
+
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.50"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+
+
+                        android:id="@+id/iv_kolorob_logo"
+                        android:background="@drawable/bazaar"
+                        />
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|right|top">
+
+
+
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:minHeight="40dp"
+                        android:minWidth="40dp"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/iv_close"
+                        android:src="@drawable/cross_jb"
+                        android:focusable="true" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/white">
+
+            </View>
+            <ExpandableListView
+                android:id="@+id/bazar_list"
+                android:childDivider="@color/blue"
+                android:background="@color/orange"
+
+                android:cacheColorHint="@android:color/transparent"
+                android:listSelector="@android:color/transparent"
+                android:layout_height="match_parent"
+                android:groupIndicator="@null"
+                android:layout_marginBottom="70dp"
+                android:layout_width="match_parent"/>
+
+        </LinearLayout>
+
 
         <!-- SLIDING LAYOUT -->
         <LinearLayout
