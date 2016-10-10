@@ -166,7 +166,7 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.show();
 
 
-        close_button=(ImageView)findViewById(R.id.iv_close);
+
 
         close_button.getLayoutParams().height=width/13;
         close_button.getLayoutParams().width=width/13;
@@ -175,7 +175,7 @@ public class DisplayAllJobsActivity extends Activity {
         iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
 
         context=this;
-
+        close_button=(ImageView)findViewById(R.id.iv_close);
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

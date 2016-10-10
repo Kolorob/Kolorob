@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,9 +112,29 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("you Clicked","==="+childText);
+                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
+                if (!split[0].equals("")) {
+
+                    callIntent1.setData(Uri.parse("tel:" + split[0]));
+                    if (checkPermission(_context))
+                        _context.startActivity(callIntent1);
+                    else {
+                        AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                                "ফোন নম্বর পাওয়া যায়নি");
+
+                    }
+                } else {
+
+                    AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
+                            "ফোন নম্বর পাওয়া যায়নি");
+
+                }
             }
         });
+
+
+
+
 
        // txtListChild.setText(childText);
         return convertView;
@@ -154,6 +178,20 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+
+    private boolean checkPermission(Context context) {
+        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
     @Override
     public boolean hasStableIds() {
         return false;

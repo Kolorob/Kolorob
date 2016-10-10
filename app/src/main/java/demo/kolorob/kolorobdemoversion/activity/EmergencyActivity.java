@@ -1,11 +1,14 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,13 +27,20 @@ public class EmergencyActivity extends AppCompatActivity {
     String[] address_bangla;
     String[] location;
     Context context;
+    ImageView close_button;
     private int lastExpandedPosition = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
         expListView = (ExpandableListView)findViewById(R.id.lvExp);
-
+        close_button=(ImageView)findViewById(R.id.iv_close);
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         context =this;
         name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
@@ -135,6 +145,21 @@ public class EmergencyActivity extends AppCompatActivity {
         EmergencyListAdapter emergencyAdapter = new EmergencyListAdapter(context,listDataHeader,listDataChild);
         expListView.setAdapter(emergencyAdapter);
 
+
+    }
+
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
 
     }
 }
