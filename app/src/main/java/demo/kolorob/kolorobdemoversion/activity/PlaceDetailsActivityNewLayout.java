@@ -180,7 +180,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
-    RelativeLayout compare_layoutedu;
+    LinearLayout compare_layoutedu;
 
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
     private Toolbar toolbar;
@@ -580,7 +580,7 @@ int index;
         quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
         cost2=(TextView)findViewById(R.id.cost2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
+        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
         health_name3=(TextView)findViewById(R.id.health_name3);
         opening_time3=(TextView)findViewById(R.id.opening_time3);
         language_spoken3=(TextView)findViewById(R.id.language_spoken3);
@@ -684,7 +684,7 @@ int index;
         shift=(TextView)findViewById(R.id.shift2);
         canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(RelativeLayout)findViewById(R.id.compare_layoutedu);
+        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
         edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
         edtype1=(TextView)findViewById(R.id.eduType3);
         hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);

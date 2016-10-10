@@ -4,9 +4,9 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/health_color"
-        android:id="@+id/compare_layout"
-        android:visibility="visible"
+        android:background="@color/education_color"
+        android:id="@+id/compare_layoutedu"
+        android:visibility="gone"
         android:orientation="vertical"
 
         android:layout_height="match_parent">
@@ -40,9 +40,9 @@
             android:layout_marginTop="5dp"
 
 
-            android:background="@drawable/border"
+            android:background="@drawable/border_health"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:id="@+id/school_name">
 
 
@@ -57,7 +57,7 @@
                 <android.support.v7.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/compared"
+                    android:id="@+id/checkLeft"
                     android:buttonTint="@color/white"
                     android:layout_marginLeft="5dp"
                     android:textSize="30dp"
@@ -69,7 +69,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/health_name2"
+                    android:id="@+id/edu_name_ban22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -93,7 +93,7 @@
                 <android.support.v7.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/compared2"
+                    android:id="@+id/checkRight"
 
 
 
@@ -108,7 +108,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/health_name3"
+                    android:id="@+id/edu_name_ban3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -124,6 +124,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
+            android:id="@+id/scrolling_part"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,6 +135,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
+                    android:visibility="visible"
                     android:id="@+id/number_of_students"
                     android:layout_height="40dp">
 
@@ -143,7 +145,7 @@
                         android:textColor="@color/white"
                         android:text="পরিষ্কার পরিচ্ছন্নতা"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/clean_facilities1" />
+                        android:id="@+id/total_students1" />
 
                 </LinearLayout>
 
@@ -151,18 +153,19 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:id="@+id/firstLayout"
+                    android:visibility="visible"
                     android:layout_height="60dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/clean_facilities2"
+                            android:id="@+id/ttl_students"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -177,12 +180,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/clean_facilities3"
+                            android:id="@+id/total_students3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -203,10 +206,11 @@
                     android:layout_width="match_parent"
                     android:gravity="center"
                     android:id="@+id/edtype1"
+                    android:visibility="visible"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/opening_time1"
+                        android:id="@+id/eduType1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -222,19 +226,20 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:id="@+id/secondLayout"
+                    android:visibility="visible"
 
                     android:layout_height="60dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/opening_time2"
+                            android:id="@+id/eduType2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -249,12 +254,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/opening_time3"
+                            android:id="@+id/eduType3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -274,11 +279,12 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
+                    android:visibility="visible"
                     android:id="@+id/hostel_facility_l"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/language_spoken1"
+                        android:id="@+id/hostel_facility1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -294,19 +300,20 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:id="@+id/thirdLayout"
+                    android:visibility="visible"
 
                     android:layout_height="60dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/language_spoken2"
+                            android:id="@+id/hostel_facility2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -320,12 +327,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/language_spoken3"
+                            android:id="@+id/hostel_facility3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -344,12 +351,13 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
+                    android:visibility="visible"
 
                     android:id="@+id/service_type1_l"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/service_type1"
+                        android:id="@+id/transport_facility1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -363,6 +371,8 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:id="@+id/fourthLayout"
+                    android:visibility="visible"
+
 
                     android:layout_width="match_parent"
                     android:layout_height="60dp">
@@ -370,13 +380,13 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/service_type2"
+                            android:id="@+id/transport_facility2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -391,12 +401,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/service_type3"
+                            android:id="@+id/transport_facility3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -415,11 +425,12 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
+                    android:visibility="visible"
                     android:id="@+id/specialist_available1_l"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/specialist_available1"
+                        android:id="@+id/playground1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -435,19 +446,20 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:id="@+id/fifthtLayout"
+                    android:visibility="visible"
 
                     android:layout_height="60dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/specialist_available2"
+                            android:id="@+id/playground2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -462,12 +474,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/specialist_available3"
+                            android:id="@+id/playground3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -491,12 +503,12 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:id="@+id/privacy_l"
-
+                    android:visibility="visible"
+                    android:id="@+id/total_teachers1s"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/privacy1"
+                        android:id="@+id/total_classesl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -509,19 +521,20 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:id="@+id/sixthLayout"
+                    android:visibility="visible"
 
                     android:layout_height="60dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/privacy2"
+                            android:id="@+id/total_classes2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -536,12 +549,13 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/privacy3"
+                            android:id="@+id/total_classes3"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -554,10 +568,14 @@
                 </LinearLayout>
 
 
+
+
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
+                    android:visibility="visible"
 
                     android:id="@+id/quality_equipment1_1"
                     android:layout_height="wrap_content">
@@ -577,19 +595,20 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:id="@+id/seventhLayout"
+                    android:visibility="visible"
 
                     android:layout_height="60dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/quality_equipment2"
+                            android:id="@+id/total_teachers2"
                             android:layout_width="wrap_content"
                             android:textColor="@color/white"
 
@@ -605,12 +624,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/quality_equipment3"
+                            android:id="@+id/total_teachers3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -644,11 +663,169 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
+                    android:visibility="visible"
 
                     android:id="@+id/cost111_1"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/cost1"
+                        android:id="@+id/course_provided1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="5dp"
+                        android:text="@string/course_provided"
+                        android:textAppearance="?android:attr/textAppearanceMedium">
+
+
+                    </TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/eighthLayoutcs"
+                    android:visibility="visible"
+
+                    android:layout_height="60dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border_health"
+                        android:gravity="center"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/course_provided2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border2_health"
+                        android:gravity="center"
+
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/course_provided3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:visibility="visible"
+
+                    android:id="@+id/shift11"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/shift1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="5dp"
+                        android:text="@string/course_provided"
+                        android:textAppearance="?android:attr/textAppearanceMedium">
+
+
+                    </TextView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/eighthLayouts"
+                    android:visibility="visible"
+                    android:layout_height="60dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:background="@drawable/custom_border_health"
+                        android:gravity="center"
+
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/shift2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/custom_border2_health"
+                        android:gravity="center"
+
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/shift3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:padding="5dp"
+                            android:text="TextView"
+                            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+
+                    android:id="@+id/canteen_facility11"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/canteen_facility1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -672,13 +849,13 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:background="@drawable/custom_border"
+                        android:background="@drawable/custom_border_health"
                         android:gravity="center"
 
                         android:layout_weight="0.5"
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/cost2"
+                            android:id="@+id/canteen_facility2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -692,12 +869,12 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/custom_border2"
+                        android:background="@drawable/custom_border2_health"
                         android:gravity="center"
 
                         android:layout_height="match_parent">
                         <TextView
-                            android:id="@+id/cost3"
+                            android:id="@+id/canteen_facility3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -715,7 +892,6 @@
 
 
                 </LinearLayout>
-
 
 
 

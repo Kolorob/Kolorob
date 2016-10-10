@@ -36,7 +36,7 @@
             </FrameLayout>
 
 
-            <include layout="@layout/compare_screen" />
+            <include layout="@layout/compare_screen_education" />
             <include layout="@layout/bazar_layout" />
 
             <LinearLayout
