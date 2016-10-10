@@ -25,7 +25,7 @@ public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
 	List<String> listDataHeader;
 	HashMap<String, String> listDataChild;
-
+	private int lastExpandedPosition = -1;
 	String[] values = new String[] { "Bangladesh Fire Service, \nবাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
 			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",
 			"Pallabi Police Station, পল্লবী থানা",

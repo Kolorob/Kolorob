@@ -1,8 +1,10 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class EmergencyActivity extends AppCompatActivity {
     String[] address_bangla;
     String[] location;
     Context context;
-
+    private int lastExpandedPosition = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,45 @@ public class EmergencyActivity extends AppCompatActivity {
         };
 
         prepareListData(this);
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (lastExpandedPosition != -1
+                        && groupPosition != lastExpandedPosition) {
+                    expListView.collapseGroup(lastExpandedPosition);
+                }
+                lastExpandedPosition = groupPosition;
+
+
+                    expListView.setChildDivider(ContextCompat.getDrawable(context,R.color.white));
+//                    expListView.setDivider(ContextCompat.getDrawable(context,R.color.white));
+//                }
+//                else {
+//                    expListView.setChildDivider(ContextCompat.getDrawable(context,R.color.job_portal));
+//                    expListView.setDivider(ContextCompat.getDrawable(context,R.color.job_portal));
+//                }
+            }
+        });
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+
+
+            }
+        });
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                // TODO Auto-generated method stub
+                expListView.collapseGroup(lastExpandedPosition);
+
+                return false;
+            }
+        });
 
 
     }
@@ -83,7 +123,7 @@ public class EmergencyActivity extends AppCompatActivity {
         {
             for(int j=0;j<1;j++)
             {
-                String temp="ফোন নম্বর"+phone_no[i]+"#"+"ঠিকানা "+address_bangla[i]+"#"+location[i]+"#"+"v";
+                String temp="ফোন নম্বর: "+phone_no[i]+"#"+"ঠিকানা: "+address_bangla[i]+"#"+location[i]+"#"+"v";
                 temps.add(i,temp);
             }
             listDataChild.put(name_bangla[i], temps);
