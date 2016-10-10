@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 
 public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
@@ -58,7 +62,7 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.emergency_child, null);
         }
 
-        String[] split= childText.split("#");
+        final String[] split= childText.split("#");
 
         Log.d("childText","======"+childText);
 //        Log.d("k","======"+k++);
@@ -66,12 +70,39 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
 //        Log.d("isLastChild","======"+isLastChild);
 
 
+        final String longLat= split[2];
+
         TextView phone = (TextView) convertView
                 .findViewById(R.id.phone);
         phone.setText(split[0]);
         TextView address = (TextView) convertView
                 .findViewById(R.id.address);
         address.setText(split[1]);
+
+        ImageView distance_left=(ImageView)convertView.findViewById(R.id.distance_left);
+
+        distance_left.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(longLat.equals("not found"))
+                {
+                    AlertMessage.showMessage(_context, " দুঃখিত!",
+                            "পথ পাওয়া যায় নি ");
+                }
+                else {
+                    String [] splitStr;
+                    splitStr = longLat.split(" ");
+                    SharedPreferences pref = _context.getSharedPreferences("MyPref", _context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("Latitude", splitStr[0]);
+                    editor.putString("Longitude", splitStr[1]);
+                    editor.putString("Name", split[0]);
+                    editor.apply();
+                    Intent intentJ = new Intent(_context, MapFragmentRouteOSM.class);
+                    _context.startActivity(intentJ);
+                }
+                //  PresentActivity.this.startActivity(activityChangeIntent);
+            }
+        });
 
         ImageView phone_call =(ImageView)convertView.findViewById(R.id.phone_call);
         phone_call.setOnClickListener(new View.OnClickListener() {
