@@ -37,7 +37,7 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosititon)
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(groupPosition)
                 ;
     }
 
@@ -58,6 +58,8 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.emergency_child, null);
         }
 
+        String[] split= childText.split("#");
+
         Log.d("childText","======"+childText);
 //        Log.d("k","======"+k++);
 //        Log.d("groupPosition","======"+groupPosition);
@@ -66,8 +68,10 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
         TextView phone = (TextView) convertView
                 .findViewById(R.id.phone);
+        phone.setText(split[0]);
         TextView address = (TextView) convertView
                 .findViewById(R.id.address);
+        address.setText(split[1]);
 
         ImageView phone_call =(ImageView)convertView.findViewById(R.id.phone_call);
         phone_call.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +87,7 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 3;
+        return 1;
     }
 
     @Override

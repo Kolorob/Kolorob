@@ -62,7 +62,7 @@
             <ImageView
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:id="@+id/phone_middl"
+                android:id="@+id/phone_call"
                 android:background="@drawable/phone_icon"/>
 
 

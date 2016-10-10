@@ -83,7 +83,7 @@ public class EmergencyActivity extends AppCompatActivity {
         {
             for(int j=0;j<1;j++)
             {
-                String temp=phone_no[i]+"$"+address_bangla[i]+"$"+location[i]+"$"+"v";
+                String temp=phone_no[i]+"#"+address_bangla[i]+"#"+location[i]+"#"+"v";
                 temps.add(i,temp);
             }
             listDataChild.put(name_bangla[i], temps);

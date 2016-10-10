@@ -10,6 +10,7 @@
     tools:context="demo.kolorob.kolorobdemoversion.activity.EmergencyActivity">
     <ExpandableListView
         android:id="@+id/lvExp"
+        android:background="@color/orange"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 </RelativeLayout>
