@@ -91,6 +91,7 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:minHeight="40dp"
+                        android:visibility="gone"
                         android:minWidth="40dp"
                         android:layout_marginRight="5dp"
                         android:id="@+id/iv_close"
