@@ -167,10 +167,10 @@ public class DisplayAllJobsActivity extends Activity {
 
 
         close_button=(ImageView)findViewById(R.id.iv_close);
-        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+
         close_button.getLayoutParams().height=width/13;
         close_button.getLayoutParams().width=width/13;
-
+        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
         int p=iv_kolorob_logo.getLayoutParams().width=width/11;
         iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
 

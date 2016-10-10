@@ -118,6 +118,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
     private int compareHeight;
+    private ImageView close_button;
+    int buttonHeights;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -128,6 +130,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ToggleButton toggleButton;
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     Double screenSize;
+    private ImageView iv_kolorob_logo;
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
@@ -301,6 +304,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String checknum;
     Boolean flag;
     boolean filterclicked=false;
+    int width;
 
 
     String idx,idxx,idxxx,idxxxx;
@@ -343,7 +347,7 @@ int index;
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
         dpi=displayMetrics.densityDpi;
-        int width = displayMetrics.widthPixels;
+        width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
         fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
@@ -398,6 +402,7 @@ int index;
         params2.weight = 1;
         params2.width=buttonWidth;
         params2.height=(int)Math.round(d);
+        buttonHeights=(int)Math.round(d);
         SearchButton.setLayoutParams(params2);
         final   LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
         params3.weight = 1;
@@ -3298,7 +3303,7 @@ fragment.getMapViewController().setZoom(16);
 
                            // myList.add(bazar_counter,bazar_data);
                            // myList.get(bazar_counter).add(bazarData);
-                            myList.add(bazar_data);
+               //             myList.add(bazar_data);
 
                             Log.d("myList","######"+myList);
 
@@ -3319,7 +3324,7 @@ fragment.getMapViewController().setZoom(16);
                             myList.add(k,bazar_data);
                            // myList.get(0).set(k,bazar_data.get(k));
       //                      myList.add(k,temp);
-                            Log.d("MyList","######"+myList);
+
                             temp.clear();
                         }
 
@@ -3329,12 +3334,21 @@ fragment.getMapViewController().setZoom(16);
                         for(int i=0;i<bazar_counter;i++)
                         {
                             listDataChild.put(listDataHeader.get(i),myList.get(i));
+
                         }
 
                         expListView = (ExpandableListView) findViewById(R.id.bazar_list);
                         bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
                         expListView.setAdapter(bazarToolAdapter);
-//
+
+                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
+                                .getLayoutParams();
+                        layoutParams.setMargins(0, 0, 0, buttonHeights*2);//
+                        Log.d("Button Heights","%%%%%%"+buttonHeights);
+                        SlidingUpPanelLayout slidingUpPanelLayout;
+                        slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
+                        RelativeLayout.LayoutParams slidingp= (RelativeLayout.LayoutParams) slidingUpPanelLayout.getLayoutParams();
+
 //                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
 //                                contact,date,posted_by);
 //
@@ -3637,6 +3651,22 @@ fragment.getMapViewController().setZoom(16);
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         textView = (TextView) findViewById(R.id.list_main);
+        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+        int p=iv_kolorob_logo.getLayoutParams().width=width/11;
+        iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
+
+        close_button=(ImageView)findViewById(R.id.iv_close);
+
+        close_button.getLayoutParams().height=width/13;
+        close_button.getLayoutParams().width=width/13;
+
+        close_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
     }
 

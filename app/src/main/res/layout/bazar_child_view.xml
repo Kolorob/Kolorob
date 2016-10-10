@@ -54,19 +54,19 @@
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/phone_icon_purple"
+            android:background="@drawable/phone_icon"
             android:id="@+id/phone_call" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="5dp"
 
-            android:background="@drawable/email_icon_purple"
+            android:background="@drawable/email_icon"
             android:id="@+id/email" />
     </LinearLayout>
 </LinearLayout>
