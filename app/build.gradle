@@ -41,4 +41,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.sothree.slidinguppanel:library:3.2.1'
     compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.facebook.android:account-kit-sdk:4.11.0'
 }
