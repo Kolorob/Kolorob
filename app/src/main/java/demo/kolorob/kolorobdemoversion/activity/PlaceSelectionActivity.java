@@ -51,6 +51,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.accountkit.AccessToken;
+import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitError;
+import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.ui.AccountKitActivity;
+import com.facebook.accountkit.ui.AccountKitConfiguration;
+import com.facebook.accountkit.ui.LoginType;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -152,10 +159,11 @@ String areaname=null;
 
     private GoogleApiClient client;
     FrameLayout mImageMap;
-
+    public static int APP_REQUEST_CODE = 99;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AccountKit.initialize(getApplicationContext());
         setContentView(R.layout.place_selection_activity);
         mImageMap=(FrameLayout)findViewById(R.id.holder);
         mImageMap.setOnClickListener(new View.OnClickListener() {
@@ -213,6 +221,15 @@ String areaname=null;
         });
 
 
+
+        AccessToken accessToken = AccountKit.getCurrentAccessToken();
+
+        if(accessToken != null){
+
+        }
+        else {
+            goToLogin(true);
+        }
 
 
 
@@ -284,6 +301,56 @@ String areaname=null;
             mInterstitialAd.show();
         }
     }
+    public void goToLogin(boolean isSMSLogin) {
+
+        LoginType loginType = isSMSLogin ? LoginType.PHONE : LoginType.EMAIL;
+
+        final Intent intent = new Intent(this, AccountKitActivity.class);
+        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
+                new AccountKitConfiguration.AccountKitConfigurationBuilder(
+                        loginType,
+                        AccountKitActivity.ResponseType.TOKEN);
+        // ... perform additional configuration ...
+        intent.putExtra(
+                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
+                configurationBuilder.build());
+        this.startActivityForResult(intent, APP_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
+            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+            String toastMessage;
+            if (loginResult.getError() != null) {
+                toastMessage = loginResult.getError().getErrorType().getMessage();
+                showErrorActivity(loginResult.getError());
+            } else if (loginResult.wasCancelled()) {
+                toastMessage = "Login Cancelled";
+            } else {
+                if (loginResult.getAccessToken() != null) {
+                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
+                } else {
+                    toastMessage = String.format(
+                            "Success:%s...",
+                            loginResult.getAuthorizationCode().substring(0,10));
+                }
+
+                // If you have an authorization code, retrieve it from
+                // loginResult.getAuthorizationCode()
+                // and pass it to your server and exchange it for an access token.
+
+                // Success! Start your next activity...
+               return;
+            }
+        }
+    }
+
+    private void showErrorActivity(final AccountKitError error) {
+        Log.println(Log.ASSERT, "AccountKit", error.toString());
+    }
+
 
 
     public void checkVersion(final double current_version) {
@@ -832,13 +899,23 @@ else
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             message += "\nLocation to show user location.";
         }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+       else if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             message += "\nStorage access to store map tiles.";
         }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+       else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.READ_PHONE_STATE);
             message += "\n access to read phone state.";
+            //requestReadPhoneStatePermission();
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.READ_SMS);
+            message += "\n access to read sms.";
+            //requestReadPhoneStatePermission();
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.GET_ACCOUNTS);
+            message += "\n access to read sms.";
             //requestReadPhoneStatePermission();
         }
         if (!permissions.isEmpty()) {
@@ -866,6 +943,8 @@ else
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
                 // Fill with results
                 for (int i = 0; i < permissions.length; i++)
                     perms.put(permissions[i], grantResults[i]);
@@ -873,6 +952,8 @@ else
                 Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
                 Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                 Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
+                Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+                Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
                 if (location && storage&& phonestate) {
                     // All Permissions Granted
                     TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -886,6 +967,12 @@ else
                 }
                 else if (phonestate) {
                     Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
+                }
+                else if (smsstate) {
+                    Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
+                }
+                else if (accountstate) {
+                    Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
                 }else { // !location && !storage case
                     // Permission Denied
                     Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
