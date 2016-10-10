@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -22,7 +23,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class EmergencyAdapter extends ArrayAdapter<Emergency> {
 
-
+	List<String> listDataHeader;
+	HashMap<String, String> listDataChild;
 
 	String[] values = new String[] { "Bangladesh Fire Service, \nবাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
 			"Police Control Room, \nপুলিশ কন্ট্রোল রুম",

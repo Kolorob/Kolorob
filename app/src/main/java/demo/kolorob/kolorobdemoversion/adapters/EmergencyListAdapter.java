@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 /**
  * Created by Mazharul.Islam1 on 9/19/2016.
  */
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,13 +22,14 @@ import demo.kolorob.kolorobdemoversion.R;
 public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
-    private HashMap<String, String> _listDataChild;
+    private List<String> _listDataHeader;
+    private HashMap<String, ArrayList<String>> _listDataChild;
+    private int width;
+    private int height;
     int k=0;
 
     public EmergencyListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, String> listChildData) {
+                                HashMap<String, ArrayList<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -35,7 +37,7 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosititon)
                 ;
     }
 

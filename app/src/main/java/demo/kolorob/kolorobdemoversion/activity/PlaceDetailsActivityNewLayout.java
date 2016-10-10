@@ -2110,7 +2110,7 @@ int index;
         }  else if (id == R.id.emergency_info) {
 
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
-            Intent em = new Intent(this, NewEmergency.class);
+            Intent em = new Intent(this, EmergencyActivity.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
