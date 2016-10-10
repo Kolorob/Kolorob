@@ -3343,7 +3343,7 @@ fragment.getMapViewController().setZoom(16);
 
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights*2);//
+                        layoutParams.setMargins(0, 0, 0, buttonHeights/2);//
                         Log.d("Button Heights","%%%%%%"+buttonHeights);
                         SlidingUpPanelLayout slidingUpPanelLayout;
                         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
@@ -3650,6 +3650,10 @@ fragment.getMapViewController().setZoom(16);
     public void init(){
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout.getLayoutParams();
+        layoutParams.setMargins(0,0,0,smal);
+        mLayout.setLayoutParams(layoutParams);
         textView = (TextView) findViewById(R.id.list_main);
         iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
         int p=iv_kolorob_logo.getLayoutParams().width=width/11;
