@@ -1273,6 +1273,8 @@ int index;
         firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
 
+        
+
 
         opening_time1.setText("খোলার সময়");
         language_spoken1.setText("প্রচলিত ভাষা");
