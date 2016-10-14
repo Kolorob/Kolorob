@@ -392,7 +392,7 @@ int index;
 
 
 
-        RelativeLayout.LayoutParams com_layout = (RelativeLayout.LayoutParams) compare_layout.getLayoutParams();
+        LinearLayout.LayoutParams com_layout = (LinearLayout.LayoutParams) compare_layout.getLayoutParams();
         com_layout.setMargins(0,0,0,smal);
 
         compare_layout.setLayoutParams(com_layout);
@@ -1282,10 +1282,10 @@ int index;
         privacy1.setText("গোপনীয়তা");
         quality_equipment1.setText("সেবার মান এবং যন্ত্রপাতি");
         cost1.setText("সেবার খরচ");
-        shift1_11.setVisibility(View.GONE);
-        shift1_1.setVisibility(View.GONE);
-        canteen_facility_1.setVisibility(View.GONE);
-        canteen_facility_11.setVisibility(View.GONE);
+//        shift1_11.setVisibility(View.GONE);
+//        shift1_1.setVisibility(View.GONE);
+//        canteen_facility_1.setVisibility(View.GONE);
+//        canteen_facility_11.setVisibility(View.GONE);
         HealthSpecialistTableDetails healthSpecialistTable = new HealthSpecialistTableDetails(PlaceDetailsActivityNewLayout.this);
         ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
         ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses2;
@@ -2707,9 +2707,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
        //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
 /**************************
- *
- *
- *
+ **
  *
  *
  *This OnClickListener will be called for clicking subcategory items from the right list
