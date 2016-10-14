@@ -120,6 +120,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
+    String[] left_part;
+    String[] right_part;
+    String[] health_header;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -1273,7 +1276,7 @@ int index;
         firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
 
-        
+        health_header=new String[]{"খোলার সময়","প্রচলিত ভাষা","সেবার ধরন","বিশেষজ্ঞের ধরন","ফার্মেসি সেবা","গোপনীয়তা","সেবার মান এবং যন্ত্রপাতি","সেবার খরচ"};
 
 
         opening_time1.setText("খোলার সময়");
