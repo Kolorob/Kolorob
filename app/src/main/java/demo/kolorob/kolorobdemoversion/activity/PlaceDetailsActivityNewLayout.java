@@ -1277,6 +1277,8 @@ int index;
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
 
         health_header=new String[]{"খোলার সময়","প্রচলিত ভাষা","সেবার ধরন","বিশেষজ্ঞের ধরন","ফার্মেসি সেবা","গোপনীয়তা","সেবার মান এবং যন্ত্রপাতি","সেবার খরচ"};
+//        left_part=new String[8];
+        right_part=new String[8];
 
 
         opening_time1.setText("খোলার সময়");
@@ -1401,44 +1403,49 @@ int index;
 
             String time2="";
             time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
-            if(!time2.equals("")&&!time2.equals("null"))
-                opening_time3.setText(time2);
-            else
-                opening_time3.setText("শীঘ্রই আসছে");
+//            if(!time2.equals("")&&!time2.equals("null"))
+//                opening_time3.setText(time2);
+//            else
+//                opening_time3.setText("শীঘ্রই আসছে");
+            left_part=new String[]{time2,healthServiceProviderItemNew.getSpoken_lang(),
+                    health_service_data1,firstSpecialistItem,healthServiceProviderItemNew.getPharmacy_speciality(),
+                    String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()),healthServiceProviderItemNew.getQuality_equipments(),
+                            healthServiceProviderItemNew.getGeneral_cost()};
 
-            if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
-                language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
-            else
-                language_spoken3.setText("শীঘ্রই আসছে");
+//            if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
+//                language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
+//            else
+//                language_spoken3.setText("শীঘ্রই আসছে");
+//            left_part[1]=healthServiceProviderItemNew.getSpoken_lang();
 
-            if(!health_service_data1.equals("")&&!health_service_data1.equals("null"))
-                service_type3.setText(health_service_data1);
-            else
-                service_type3.setText("শীঘ্রই আসছে");
-            if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
-                specialist_available3.setText(AppUtils.removeLastChar(firstSpecialistItem));
-            else
-                specialist_available3.setText("শীঘ্রই আসছে");
+//            if(!health_service_data1.equals("")&&!health_service_data1.equals("null"))
+//                service_type3.setText(health_service_data1);
+//            else
+//                service_type3.setText("শীঘ্রই আসছে");
+//            if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
+//                specialist_available3.setText(AppUtils.removeLastChar(firstSpecialistItem));
+//            else
+//                specialist_available3.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
-                clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
-            else
-                clean_facilities3.setText("শীঘ্রই আসছে");
+//            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
+//                clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
+//            else
+//                clean_facilities3.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
-                privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
-            else
-                privacy3.setText("শীঘ্রই আসছে");
+//            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
+//                privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
+//            else
+//                privacy3.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
-                quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
-            else
-                quality_equipment3.setText("শীঘ্রই আসছে");
+//            if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
+//                quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
+//            else
+//                quality_equipment3.setText("শীঘ্রই আসছে");
 
-            if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+ " টাকা");
-            else
-                cost3.setText("শীঘ্রই আসছে");
+//            if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
+//                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+ " টাকা");
+//            else
+//                cost3.setText("শীঘ্রই আসছে");
         }
 
 
