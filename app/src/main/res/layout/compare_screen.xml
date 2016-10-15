@@ -135,7 +135,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/number_of_students"
                     android:layout_height="wrap_content">
 
@@ -154,7 +154,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
 
                     android:background="@drawable/divider_all"
                     android:layout_height="wrap_content">
@@ -210,7 +210,7 @@
                     android:gravity="center"
                     android:id="@+id/edtype1"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content">
 
@@ -230,7 +230,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:background="@drawable/divider_all"
                     android:layout_height="wrap_content">
 
@@ -284,7 +284,7 @@
                     android:layout_width="match_parent"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/hostel_facility_l"
                     android:layout_height="wrap_content">
@@ -304,7 +304,7 @@
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:background="@drawable/divider_all"
                     android:layout_height="wrap_content">
@@ -356,7 +356,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/transport_facility1_l"
@@ -377,7 +377,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:background="@drawable/divider_all"
                     android:layout_height="wrap_content">
 
@@ -430,7 +430,7 @@
                     android:layout_width="match_parent"
                     android:gravity="center"
                     android:id="@+id/playground1_l"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content">
@@ -452,7 +452,7 @@
                     android:orientation="horizontal"
                     android:background="@drawable/divider_all"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
 
                     android:layout_height="wrap_content">
 
@@ -509,7 +509,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/total_classes_l"
@@ -529,7 +529,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:background="@drawable/divider_all"
                     android:layout_height="wrap_content">
 
@@ -579,7 +579,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/total_teachers1_1"
@@ -600,7 +600,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:background="@drawable/divider_all"
                     android:layout_height="wrap_content">
 
@@ -668,7 +668,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:id="@+id/course_provided1_1"
@@ -691,7 +691,7 @@
                     android:orientation="horizontal"
                     android:background="@drawable/divider_all"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:visibility="visible"
 
                     android:layout_height="wrap_content">
 
