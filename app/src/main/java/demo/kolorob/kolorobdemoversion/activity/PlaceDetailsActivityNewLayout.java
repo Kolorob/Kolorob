@@ -69,6 +69,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.BazarListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.BazarToolAdapter;
+import demo.kolorob.kolorobdemoversion.adapters.CompareAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
@@ -123,6 +124,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] left_part;
     String[] right_part;
     String[] health_header;
+    private ListView health_compare_list;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -370,6 +372,7 @@ int index;
         allitemList=(ListView)findViewById(R.id.allitem);
         checkBox=(CheckBox)findViewById(R.id.compared);
         checkBox2=(CheckBox)findViewById(R.id.compared2);
+        health_compare_list = (ListView)findViewById(R.id.health_compare_list);
 
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
@@ -390,6 +393,9 @@ int index;
 
         scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
         compare_logo_image=(ImageView)findViewById(R.id.compare_logo_images);
+        compare_logo_image.getLayoutParams().width=width/50;
+        Log.d("Test width Height","=======");
+        compare_logo_image.getLayoutParams().height=height/30;
         LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
         scrolling_partc.setMargins(0,0,0,smal);
 
@@ -573,97 +579,96 @@ int index;
 
 
 
-        health_name2=(TextView)findViewById(R.id.health_name2);
-        opening_time2=(TextView)findViewById(R.id.opening_time2);
-        language_spoken2=(TextView)findViewById(R.id.language_spoken2);
-        service_type2=(TextView)findViewById(R.id.service_type2);
-        specialist_available2=(TextView)findViewById(R.id.specialist_available2);
-        clean_facilities2=(TextView)findViewById(R.id.clean_facilities2);
-        privacy2=(TextView)findViewById(R.id.privacy2);
-        quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
-        cost2=(TextView)findViewById(R.id.cost2);
-        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
-        health_name3=(TextView)findViewById(R.id.health_name3);
-        opening_time3=(TextView)findViewById(R.id.opening_time3);
-        language_spoken3=(TextView)findViewById(R.id.language_spoken3);
-        service_type3=(TextView)findViewById(R.id.service_type3);
-        specialist_available3=(TextView)findViewById(R.id.specialist_available3);
-        clean_facilities3=(TextView)findViewById(R.id.clean_facilities3);
-        privacy3=(TextView)findViewById(R.id.privacy3);
-        quality_equipment3=(TextView)findViewById(R.id.quality_equipment3);
-        cost3=(TextView)findViewById(R.id.cost3);
-        opening_time1=(TextView)findViewById(R.id.opening_time1);
-        language_spoken1=(TextView)findViewById(R.id.language_spoken1);
-        service_type1=(TextView)findViewById(R.id.service_type1);
-        specialist_available1=(TextView)findViewById(R.id.specialist_available1);
-        clean_facilities1=(TextView)findViewById(R.id.clean_facilities1);
-        privacy1=(TextView)findViewById(R.id.privacy1);
-        quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
-        cost1=(TextView)findViewById(R.id.cost1);
+        health_name2=(TextView)findViewById(R.id.health_name3);
+//        opening_time2=(TextView)findViewById(R.id.opening_time2);
+//        language_spoken2=(TextView)findViewById(R.id.language_spoken2);
+//        service_type2=(TextView)findViewById(R.id.service_type2);
+//        specialist_available2=(TextView)findViewById(R.id.specialist_available2);
+//        clean_facilities2=(TextView)findViewById(R.id.clean_facilities2);
+//        privacy2=(TextView)findViewById(R.id.privacy2);
+//        quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
+//        cost2=(TextView)findViewById(R.id.cost2);
+//        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
+//        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
+        health_name3=(TextView)findViewById(R.id.health_name2);
+//        opening_time3=(TextView)findViewById(R.id.opening_time3);
+//        language_spoken3=(TextView)findViewById(R.id.language_spoken3);
+//        service_type3=(TextView)findViewById(R.id.service_type3);
+//        specialist_available3=(TextView)findViewById(R.id.specialist_available3);
+//        clean_facilities3=(TextView)findViewById(R.id.clean_facilities3);
+//        privacy3=(TextView)findViewById(R.id.privacy3);
+//        quality_equipment3=(TextView)findViewById(R.id.quality_equipment3);
+//        cost3=(TextView)findViewById(R.id.cost3);
+//        opening_time1=(TextView)findViewById(R.id.opening_time1);
+//        language_spoken1=(TextView)findViewById(R.id.language_spoken1);
+//        service_type1=(TextView)findViewById(R.id.service_type1);
+//        specialist_available1=(TextView)findViewById(R.id.specialist_available1);
+//        clean_facilities1=(TextView)findViewById(R.id.clean_facilities1);
+//        privacy1=(TextView)findViewById(R.id.privacy1);
+//        quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
+//        cost1=(TextView)findViewById(R.id.cost1);
 
 
-        compare_logo_image.getLayoutParams().width=width/15;
-        compare_logo_image.getLayoutParams().height=height/15;
+
         int size_b=20;
         int size_s=14;
 
         if (screenSize > 6.5) {
             health_name2.setTextSize(size_b);
-            opening_time2.setTextSize(size_b);
-            language_spoken2.setTextSize(size_b);
-            service_type2.setTextSize(size_b);
-            specialist_available2.setTextSize(size_b);
-            clean_facilities2.setTextSize(size_b);
-            privacy2.setTextSize(size_b);
-            quality_equipment2.setTextSize(size_b);
-            cost2.setTextSize(size_b);
+//            opening_time2.setTextSize(size_b);
+//            language_spoken2.setTextSize(size_b);
+//            service_type2.setTextSize(size_b);
+//            specialist_available2.setTextSize(size_b);
+//            clean_facilities2.setTextSize(size_b);
+//            privacy2.setTextSize(size_b);
+//            quality_equipment2.setTextSize(size_b);
+//            cost2.setTextSize(size_b);
             health_name3.setTextSize(size_b);
-            opening_time3.setTextSize(size_b);
-            language_spoken3.setTextSize(size_b);
-            service_type3.setTextSize(size_b);
-            specialist_available3.setTextSize(size_b);
-            clean_facilities3.setTextSize(size_b);
-            privacy3.setTextSize(size_b);
-            quality_equipment3.setTextSize(size_b);
-            cost3.setTextSize(size_b);
-            opening_time1.setTextSize(size_b);
-            language_spoken1.setTextSize(size_b);
-            service_type1.setTextSize(size_b);
-            specialist_available1.setTextSize(size_b);
-            clean_facilities1.setTextSize(size_b);
-            privacy1.setTextSize(size_b);
-            quality_equipment1.setTextSize(size_b);
-            cost1.setTextSize(size_b);
+//            opening_time3.setTextSize(size_b);
+//            language_spoken3.setTextSize(size_b);
+//            service_type3.setTextSize(size_b);
+//            specialist_available3.setTextSize(size_b);
+//            clean_facilities3.setTextSize(size_b);
+//            privacy3.setTextSize(size_b);
+//            quality_equipment3.setTextSize(size_b);
+//            cost3.setTextSize(size_b);
+//            opening_time1.setTextSize(size_b);
+//            language_spoken1.setTextSize(size_b);
+//            service_type1.setTextSize(size_b);
+//            specialist_available1.setTextSize(size_b);
+//            clean_facilities1.setTextSize(size_b);
+//            privacy1.setTextSize(size_b);
+//            quality_equipment1.setTextSize(size_b);
+//            cost1.setTextSize(size_b);
 
 
         } else {
             health_name2.setTextSize(size_s);
-            opening_time2.setTextSize(size_s);
-            language_spoken2.setTextSize(size_s);
-            service_type2.setTextSize(size_s);
-            specialist_available2.setTextSize(size_s);
-            clean_facilities2.setTextSize(size_s);
-            privacy2.setTextSize(size_s);
-            quality_equipment2.setTextSize(size_s);
-            cost2.setTextSize(size_s);
+//            opening_time2.setTextSize(size_s);
+//            language_spoken2.setTextSize(size_s);
+//            service_type2.setTextSize(size_s);
+//            specialist_available2.setTextSize(size_s);
+//            clean_facilities2.setTextSize(size_s);
+//            privacy2.setTextSize(size_s);
+//            quality_equipment2.setTextSize(size_s);
+//            cost2.setTextSize(size_s);
             health_name3.setTextSize(size_s);
-            opening_time3.setTextSize(size_s);
-            language_spoken3.setTextSize(size_s);
-            service_type3.setTextSize(size_s);
-            specialist_available3.setTextSize(size_s);
-            clean_facilities3.setTextSize(size_s);
-            privacy3.setTextSize(size_s);
-            quality_equipment3.setTextSize(size_s);
-            cost3.setTextSize(size_s);
-            opening_time1.setTextSize(size_s);
-            language_spoken1.setTextSize(size_s);
-            service_type1.setTextSize(size_s);
-            specialist_available1.setTextSize(size_s);
-            clean_facilities1.setTextSize(size_s);
-            privacy1.setTextSize(size_s);
-            quality_equipment1.setTextSize(size_s);
-            cost1.setTextSize(size_s);
+//            opening_time3.setTextSize(size_s);
+//            language_spoken3.setTextSize(size_s);
+//            service_type3.setTextSize(size_s);
+//            specialist_available3.setTextSize(size_s);
+//            clean_facilities3.setTextSize(size_s);
+//            privacy3.setTextSize(size_s);
+//            quality_equipment3.setTextSize(size_s);
+//            cost3.setTextSize(size_s);
+//            opening_time1.setTextSize(size_s);
+//            language_spoken1.setTextSize(size_s);
+//            service_type1.setTextSize(size_s);
+//            specialist_available1.setTextSize(size_s);
+//            clean_facilities1.setTextSize(size_s);
+//            privacy1.setTextSize(size_s);
+//            quality_equipment1.setTextSize(size_s);
+//            cost1.setTextSize(size_s);
 
 
 
@@ -1278,17 +1283,18 @@ int index;
 
         health_header=new String[]{"খোলার সময়","প্রচলিত ভাষা","সেবার ধরন","বিশেষজ্ঞের ধরন","ফার্মেসি সেবা","গোপনীয়তা","সেবার মান এবং যন্ত্রপাতি","সেবার খরচ"};
 //        left_part=new String[8];
-        right_part=new String[8];
 
 
-        opening_time1.setText("খোলার সময়");
-        language_spoken1.setText("প্রচলিত ভাষা");
-        service_type1.setText("সেবার ধরন");
-        specialist_available1.setText("বিশেষজ্ঞের ধরন");
-        clean_facilities1.setText("ফার্মেসি সেবা");
-        privacy1.setText("গোপনীয়তা");
-        quality_equipment1.setText("সেবার মান এবং যন্ত্রপাতি");
-        cost1.setText("সেবার খরচ");
+
+
+//        opening_time1.setText("খোলার সময়");
+//        language_spoken1.setText("প্রচলিত ভাষা");
+//        service_type1.setText("সেবার ধরন");
+//        specialist_available1.setText("বিশেষজ্ঞের ধরন");
+//        clean_facilities1.setText("ফার্মেসি সেবা");
+//        privacy1.setText("গোপনীয়তা");
+//        quality_equipment1.setText("সেবার মান এবং যন্ত্রপাতি");
+//        cost1.setText("সেবার খরচ");
 //        shift1_11.setVisibility(View.GONE);
 //        shift1_1.setVisibility(View.GONE);
 //        canteen_facility_1.setVisibility(View.GONE);
@@ -1337,9 +1343,9 @@ int index;
 
                              compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                              String multipule[]= compare_Datas.split(",");
-                             compare_Datas = multipule[0];
+                             compare_Datas = multipule[1];
 
-                             idx=multipule[1];
+                             idx=multipule[0];
                              SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
                          }
 
@@ -1473,8 +1479,8 @@ int index;
                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Datas.split(",");
 
-                            compare_Datas = multipule[1];
-                            idxx=multipule[0];
+                            compare_Datas = multipule[0];
+                            idxx=multipule[1];
 
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
                         }
@@ -1493,7 +1499,7 @@ int index;
                             compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
 
                             // String multipule[]= compare_Data.split(",");
-                            compare_Data = compare_Data+","+idxx;
+                            compare_Data =idxx+","+ compare_Data;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
 
                         }
@@ -1551,6 +1557,15 @@ int index;
                     healthServiceProviderItemNewx.getPharmacy_privacy(),healthServiceProviderItemNewx.getQuality_equipments(),
                     healthServiceProviderItemNewx.getGeneral_cost()
             };
+
+            Log.d("Left_part","########"+left_part);
+            Log.d("Right_part","########"+right_part);
+            Log.d("Head","########"+health_header);
+
+            CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
+            health_compare_list.setAdapter(compareAdapter);
+
+
 
 
 
