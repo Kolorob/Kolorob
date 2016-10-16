@@ -63,6 +63,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -166,7 +167,11 @@ String areaname=null;
         AccountKit.initialize(getApplicationContext());
         setContentView(R.layout.place_selection_activity);
         mImageMap=(FrameLayout)findViewById(R.id.holder);
-        mImageMap.setOnClickListener(new View.OnClickListener() {
+        ImageButton placeimage=(ImageButton)findViewById(R.id.placeselectionholder);
+        Picasso.with(this)
+                .load(R.drawable.place_choice_screen3)
+                .into(placeimage);
+        placeimage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                popup();
             }
@@ -230,7 +235,6 @@ String areaname=null;
         else {
             goToLogin(true);
         }
-
 
 
 
