@@ -69,12 +69,13 @@ public class DisplayAllJobsActivity extends Activity {
     ListView joblist;
     private LinearLayout list_part;
     List<String> listDataHeader;
-    List<String> job_data;
+    ArrayList<String> job_data;
     HashMap<String, List<String>> listDataChild;
     ExpandableListView expListView;
     private int lastExpandedPosition = -1;
     Job_expand_list_adapter listAdapter;
     private int job_counter=0;
+    ArrayList<ArrayList<String>> job_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,16 +167,16 @@ public class DisplayAllJobsActivity extends Activity {
         alertDialog.show();
 
 
-
-
+        close_button=(ImageView)findViewById(R.id.iv_close);
+        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
         close_button.getLayoutParams().height=width/13;
         close_button.getLayoutParams().width=width/13;
-        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+
         int p=iv_kolorob_logo.getLayoutParams().width=width/11;
         iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
 
         context=this;
-        close_button=(ImageView)findViewById(R.id.iv_close);
+
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,7 +215,7 @@ public class DisplayAllJobsActivity extends Activity {
             }
         }
         else
-        AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
+            AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
     }
 
 
@@ -232,35 +233,47 @@ public class DisplayAllJobsActivity extends Activity {
         }
 
         else {
-
+            job_list = new ArrayList<ArrayList<String>>(size);
             listDataHeader = new ArrayList<String>();
             listDataChild = new HashMap<String, List<String>>();
             job_data=new ArrayList<String>();
-
-            for (int i=0;i<jobAdvertisementItems.size();i++)
-            {
-
-            }
-
-
             for(JobAdvertisementItem jobAdvertisementItem: jobAdvertisementItems)
             {
-                job_data.clear();
+                //job_data.clear();
                 String jobdata= "আবেদনের শেষ সময়: "+jobAdvertisementItem.getApplication_last_date()+"@"+
-                            "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
-                            "অভিজ্ঞতা: "+"নাই"+"@"+
-                            jobAdvertisementItem.getMobile1()+"@"+
-                            jobAdvertisementItem.getEmail()+"v";
+                        "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
+                        "অভিজ্ঞতা: "+"নাই"+"@"+
+                        jobAdvertisementItem.getMobile1()+"@"+
+                        jobAdvertisementItem.getEmail()+"v";
 
                 String group_data= jobAdvertisementItem.getInstitute_name_bangla()+"@"+
                         "পজিশন: "+jobAdvertisementItem.getPosition()+"@"+
-                    "বেতন: "+English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary())+"@"+"v";
+                        "বেতন: "+English_to_bengali_number_conversion(jobAdvertisementItem.getStart_salary())+" থেকে "+English_to_bengali_number_conversion(jobAdvertisementItem.getEnd_salary())+"@"+"v";
                 job_data.add(jobdata);
 
                 listDataHeader.add(group_data);
-                listDataChild.put(group_data,job_data);
+            //    listDataChild.put(group_data,job_data);
                 job_counter++;
             }
+
+            for(int k=0;k<size;k++)
+            {
+
+                job_list.add(k,job_data);
+                // myList.get(0).set(k,bazar_data.get(k));
+                //                      myList.add(k,temp);
+
+
+            }
+
+
+            for(int i=0;i<size;i++)
+            {
+                listDataChild.put(listDataHeader.get(i),job_list.get(i));
+
+            }
+
+
             expListView = (ExpandableListView) findViewById(R.id.lvExp);
             listAdapter = new Job_expand_list_adapter(this, listDataHeader, listDataChild);
             expListView.setAdapter(listAdapter);

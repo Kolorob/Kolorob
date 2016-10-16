@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/health_color"
+        android:id="@+id/compare_layout"
+        android:visibility="visible"
+        android:orientation="vertical"
+
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/header_compare"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/compare_logo_default"
+
+                android:id="@+id/compare_logo_images"
+                />
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+
+
+            android:background="@drawable/border"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/school_name">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:id="@+id/left_school_name"
+
+                android:layout_height="match_parent">
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/compared"
+                    android:buttonTint="@color/white"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="30dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:paddingLeft="7dp"
+
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/health_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:padding="5dp"
+                    android:text="@string/edu_name_ban"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+
+                android:id="@+id/right_school_name"
+
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/compared2"
+
+
+
+                    android:buttonTint="@color/white"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="30dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:paddingLeft="7dp"
+
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/health_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+
+                    android:padding="5dp"
+                    android:text="@string/edu_name_ban"
+                    android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/health_compare_list" />
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

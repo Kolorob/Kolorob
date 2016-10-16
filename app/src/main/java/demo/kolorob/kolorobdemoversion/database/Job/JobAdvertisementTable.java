@@ -388,7 +388,7 @@ public class JobAdvertisementTable {
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
-        Log.d(">>>","Success  "+ ret);
+        Log.d("insert_check_job ","&&&&&&&&"+ret);
         return ret;
 
 
