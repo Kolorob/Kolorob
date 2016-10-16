@@ -19,6 +19,7 @@
                android:padding="10dp"
                android:textAppearance="?android:attr/textAppearanceLarge"
                android:text="Nokia"
+               android:textColor="@color/white"
                android:id="@+id/p_name" />
        </LinearLayout>
 
@@ -35,14 +36,15 @@
                android:textAppearance="?android:attr/textAppearanceLarge"
                android:text="Sell"
                android:padding="10dp"
+               android:textColor="@color/white"
 
                android:id="@+id/sell" />
        </LinearLayout>
 
    </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white"></View>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="@color/white"></View>-->
 </LinearLayout>

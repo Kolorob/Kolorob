@@ -17,7 +17,6 @@
         sothree:umanoPanelHeight="60dp"
         android:background="@color/orange"
         sothree:umanoShadowHeight="4dp"
-        sothree:umanoParallaxOffset="100dp"
         sothree:umanoDragView="@+id/dragView"
         sothree:umanoOverlay="true"
         sothree:umanoScrollableView="@+id/main">
@@ -68,8 +67,8 @@
                         android:layout_height="55dp"
 
 
-                        android:id="@+id/iv_kolorob_logo"
-                        android:background="@drawable/bazaar"
+                        android:id="@+id/bazar_logo"
+                        android:background="@drawable/bazzar_icon_white"
                         />
 
 
@@ -111,9 +110,10 @@
             </View>
             <ExpandableListView
                 android:id="@+id/bazar_list"
-                android:childDivider="@color/white"
+                android:childDivider="@color/orange"
                 android:background="@color/orange"
-                android:divider="@color/black"
+                android:divider="@color/white"
+                android:dividerHeight="4dp"
 
 
                 android:layout_height="match_parent"
@@ -126,7 +126,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
+            android:background="@color/orange"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="false"
@@ -145,7 +145,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:padding="10dp"
                     android:background="@drawable/rounded"
                     android:textStyle="bold"
@@ -167,7 +167,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="?attr/actionBarSize"
                     android:gravity="center"
-                    android:text="Main Content"
+                    android:textColor="@color/white"
+                    android:text="শিগ্রই আসছে"
+
                     android:clickable="true"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
