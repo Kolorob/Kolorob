@@ -89,9 +89,9 @@ public class CompareAdapter extends BaseAdapter
                 holder.header.setTextSize(20);
             }
             else {
-                holder.left.setTextSize(16);
-                holder.right.setTextSize(16);
-                holder.header.setTextSize(16);
+                holder.left.setTextSize(14);
+                holder.right.setTextSize(14);
+                holder.header.setTextSize(14);
             }
             convertView.setTag(holder);
         }
