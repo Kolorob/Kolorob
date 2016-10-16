@@ -127,7 +127,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] left_part;
     String[] right_part;
     String[] health_header;
-    private ListView health_compare_list;
+    private ListView health_compare_list, education_compare_list;
 
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
@@ -376,6 +376,8 @@ int index;
         checkBox=(CheckBox)findViewById(R.id.compared);
         checkBox2=(CheckBox)findViewById(R.id.compared2);
         health_compare_list = (ListView)findViewById(R.id.health_compare_list);
+        education_compare_list = (ListView)findViewById(R.id.education_compare_list);
+
 
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
@@ -395,8 +397,12 @@ int index;
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
 
 //        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
+        ImageView compare_logo_imagex=(ImageView)findViewById(R.id.compare_logo_imagex);
+        compare_logo_imagex.getLayoutParams().width=width/30;
+        Log.d("Test width Height","=======");
+        compare_logo_imagex.getLayoutParams().height=height/30;
         compare_logo_image=(ImageView)findViewById(R.id.compare_logo_images);
-        compare_logo_image.getLayoutParams().width=width/50;
+        compare_logo_image.getLayoutParams().width=width/30;
         Log.d("Test width Height","=======");
         compare_logo_image.getLayoutParams().height=height/30;
 //        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
@@ -1621,6 +1627,10 @@ int index;
 
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
         health_compare_list.setAdapter(compareAdapter);
+
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) health_compare_list
+                .getLayoutParams();
+        layoutParams.setMargins(0, 0, 0, smal);//
          //  SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
     }
 
@@ -1893,7 +1903,15 @@ int index;
 
 
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
-        health_compare_list.setAdapter(compareAdapter);
+        education_compare_list.setAdapter(compareAdapter);
+
+
+
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) education_compare_list
+                .getLayoutParams();
+        layoutParams.setMargins(0, 0, 0, smal);//
+
+        education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.education_color));
 
 //        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
     }

@@ -27,7 +27,7 @@
                 android:layout_height="80dp"
                 android:background="@drawable/compare_logo_default"
 
-                android:id="@+id/compare_logo_images"
+                android:id="@+id/compare_logo_imagex"
                 />
 
 
@@ -125,7 +125,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/health_compare_list" />
+            android:background="@color/education_color"
+            android:id="@+id/education_compare_list" />
 
 
 
