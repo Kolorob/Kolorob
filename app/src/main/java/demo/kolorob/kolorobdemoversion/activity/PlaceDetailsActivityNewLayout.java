@@ -3333,12 +3333,14 @@ fragment.getMapViewController().setZoom(16);
                         listDataHeader = new ArrayList<String>();
                         listDataChild = new HashMap<String, ArrayList<String>>();
                         bazar_data=new ArrayList<String>();
+                        bazar_data.clear();
+                        bazar_counter=0;
                         myList = new ArrayList<ArrayList<String>>(allBazar.size());
                         int size= allBazar.size();
                         for(BazarItem bazarItem: allBazar)
                         {
 
-                          //  bazar_data.clear();
+                          //
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     "মূল্য: "+bazarItem.price+"@"+
