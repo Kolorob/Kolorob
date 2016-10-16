@@ -3749,9 +3749,12 @@ fragment.getMapViewController().setZoom(16);
         layoutParams.setMargins(0,0,0,smal);
         mLayout.setLayoutParams(layoutParams);
         textView = (TextView) findViewById(R.id.list_main);
-        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
-        int p=iv_kolorob_logo.getLayoutParams().width=width/11;
-        iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
+        ImageView bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
+         int q= bazar_logo.getLayoutParams().width=width/9;
+        bazar_logo.getLayoutParams().height=width/9;
+//        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
+//        int p=iv_kolorob_logo.getLayoutParams().width=width/11;
+//        iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
 
         close_button=(ImageView)findViewById(R.id.iv_close);
 

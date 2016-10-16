@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:visibility="gone"
+    android:visibility="visible"
     android:id="@+id/bazar_tool"
     android:layout_height="match_parent"
 
@@ -68,8 +68,8 @@
                         android:layout_height="55dp"
 
 
-                        android:id="@+id/iv_kolorob_logo"
-                        android:background="@drawable/bazaar"
+                        android:id="@+id/bazar_logo"
+                        android:background="@drawable/bazzar_icon_white"
                         />
 
 
