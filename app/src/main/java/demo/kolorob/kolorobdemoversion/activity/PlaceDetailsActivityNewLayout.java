@@ -3814,6 +3814,8 @@ fragment.getMapViewController().setZoom(16);
     public void panelListener(){
 
         mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            TextView footer= (TextView)findViewById(R.id.footer);
+
 
             // During the transition of expand and collapse onPanelSlide function will be called.
             @Override
@@ -3827,6 +3829,7 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
+                footer.setText("বিজ্ঞাপন দেখুন");
 
             }
 
@@ -3836,6 +3839,7 @@ fragment.getMapViewController().setZoom(16);
 
                 Log.d(">>>>","onPanelCollapsed");
 
+                footer.setText("বিজ্ঞাপন দিন");
 
             }
 
