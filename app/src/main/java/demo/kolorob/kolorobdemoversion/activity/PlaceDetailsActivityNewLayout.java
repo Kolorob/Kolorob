@@ -59,6 +59,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,12 +71,10 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
-import demo.kolorob.kolorobdemoversion.adapters.BazarListAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.BazarToolAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.CompareAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
-import demo.kolorob.kolorobdemoversion.adapters.ServiceListDisplayAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
@@ -370,7 +369,7 @@ int index;
         shift1_11=(LinearLayout)findViewById(R.id.shift1_11);
         canteen_facility_1=(LinearLayout)findViewById(R.id.canteen_facility_1);
         canteen_facility_11=(LinearLayout)findViewById(R.id.canteen_facility_11);
-        int buttonWidth = width/4;
+        final int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
         checkBox=(CheckBox)findViewById(R.id.compared);
@@ -415,28 +414,43 @@ int index;
 
         compare_layout.setLayoutParams(com_layout);
 
+
+
         MapButton.setLayoutParams(params);
+        Picasso.with(this)
+                .load(R.drawable.map)
+                .into(MapButton);
         final LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
         params2.weight = 1;
         params2.width=buttonWidth;
         params2.height=(int)Math.round(d);
         buttonHeights=(int)Math.round(d);
         SearchButton.setLayoutParams(params2);
+        Picasso.with(this)
+                .load(R.drawable.search)
+                .resize(buttonWidth,smal)
+                .into(SearchButton);
         final   LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
         params3.weight = 1;
         params3.width=buttonWidth;
         params3.height=(int)Math.round(d);
         ListButton.setLayoutParams(params3);
+
+        Picasso.with(this)
+                .load(R.drawable.bazaar)
+                .resize(buttonWidth,smal)
+                .into(ListButton);
         ListButton.getHeight();
         final LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
         params4.weight = 1;
         params4.width=buttonWidth;
         params4.height=(int)Math.round(d);
         CompareButton.setLayoutParams(params4);
-        // SearchButton.setMinimumWidth(buttonWidth);
-        //ListButton.setLayoutParams(layoutParams);
-        // SearchButton.setLayoutParams(layoutParams);
-        // CompareButton.setLayoutParams(layoutParams);
+        Picasso.with(this)
+                .load(R.drawable.compare)
+                .resize(buttonWidth,smal)
+                .into(CompareButton);
+
 
         mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
@@ -701,7 +715,7 @@ int index;
 //        shift=(TextView)findViewById(R.id.shift2);
 //        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
+        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu2);
         edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
 //        edtype1=(TextView)findViewById(R.id.eduType3);
 //        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
@@ -917,7 +931,10 @@ int index;
 
         }
 
-        MapButton.setBackgroundResource(R.drawable.map_selected);
+        Picasso.with(getApplicationContext())
+                .load(R.drawable.map_selected)
+                .resize(buttonWidth,larg)
+                .into(MapButton);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -944,10 +961,20 @@ int index;
                     ListButton.setLayoutParams(params3);
                     params4.height=smal;
                     CompareButton.setLayoutParams(params4);
-                    SearchButton.setBackgroundResource(R.drawable.search_selected);
-                    ListButton.setBackgroundResource(R.drawable.bazaar);
-                    MapButton.setBackgroundResource(R.drawable.map);
-                    CompareButton.setBackgroundResource(R.drawable.compare);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.compare)
+
+                            .into(CompareButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.search_selected)
+                            .into(SearchButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.bazaar)
+                            .into(ListButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.map)
+                            .into(MapButton);
+
                     map.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
@@ -1003,10 +1030,26 @@ int index;
                 }
                 if (CompareClicked==false||SearchClicked==false||ListClicked==false)
                 {
-                    SearchButton.setImageResource(0);
-                    MapButton.setImageResource(0);
-                    CompareButton.setImageResource(0);
-                    ListButton.setImageResource(0);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.compare)
+                            .resize(buttonWidth,smal)
+
+                            .into(CompareButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.search)
+                            .resize(buttonWidth,smal)
+
+                            .into(SearchButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.bazaar)
+                            .resize(buttonWidth,smal)
+
+                            .into(ListButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.map_selected)
+                            .resize(buttonWidth,larg)
+                            .into(MapButton);
+
                     params.height=larg;
                     MapButton.setLayoutParams(params);
 
@@ -1016,10 +1059,8 @@ int index;
                     ListButton.setLayoutParams(params3);
                     params4.height=smal;
                     CompareButton.setLayoutParams(params4);
-                    SearchButton.setBackgroundResource(R.drawable.search);
-                    ListButton.setBackgroundResource(R.drawable.bazaar);
-                    MapButton.setBackgroundResource(R.drawable.map_selected);
-                    CompareButton.setBackgroundResource(R.drawable.compare);
+
+
 //                    subCatItemList.setVisibility(View.GONE);
 
                     bazar_tool.setVisibility(View.GONE);
@@ -1041,6 +1082,7 @@ int index;
             public void onClick(View v) {
 
 
+<<<<<<< Updated upstream
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
                     spItems.setVisibility(View.VISIBLE);
@@ -1096,6 +1138,52 @@ int index;
                     toggleButton.setVisibility(View.GONE);
 
                     //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
+=======
+                    params2.height=smal;
+                    SearchButton.setLayoutParams(params2);
+                    params.height=smal;
+                    MapButton.setLayoutParams(params);
+                    params4.height=smal;
+                    CompareButton.setLayoutParams(params4);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.compare)
+                            .into(CompareButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.search)
+                            .into(SearchButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.bazaar_selected)
+                            .into(ListButton);
+                    Picasso.with(getApplicationContext())
+                            .load(R.drawable.map)
+                            .into(MapButton);
+                    map.setVisibility(View.GONE);
+                }
+              //  subCatItemList.setVisibility(View.VISIBLE);
+                bazar_tool.setVisibility(View.VISIBLE);
+                searchviewholder.setVisibility(View.GONE);
+                compare_layout.setVisibility(View.GONE);
+                compare_layoutedu.setVisibility(View.GONE);
+
+
+                svs.setVisibility(View.GONE);
+                svholder.setVisibility(View.GONE);
+                svsholder.setVisibility(View.GONE);
+                sv.setVisibility(View.GONE);
+                llSubCatListHolder.setVisibility(View.GONE);
+              //  subCatItemList.setVisibility(View.VISIBLE);
+                bazar_tool.setVisibility(View.VISIBLE);
+                init();
+                loadBazar(PlaceDetailsActivityNewLayout.this);
+                panelListener();
+                //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
+
+                setShowList(1);
+                toolbar.setVisibility(View.GONE);
+                toggleButton.setVisibility(View.GONE);
+
+                //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
+>>>>>>> Stashed changes
 //
 //                if(currentCategoryID<1)
 //                    categoryListBuildUp(1);
@@ -1189,10 +1277,18 @@ int index;
                         // need to add condition for health and add color code for health,
                         // else educaton color code is okay
                         toggleButton.setVisibility(View.GONE);
-                        SearchButton.setBackgroundResource(R.drawable.search);
-                        ListButton.setBackgroundResource(R.drawable.bazaar);
-                        MapButton.setBackgroundResource(R.drawable.map);
-                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.compare_selected)
+                                .into(CompareButton);
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.search)
+                                .into(SearchButton);
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.bazaar)
+                                .into(ListButton);
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.map)
+                                .into(MapButton);
                         map.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.GONE);
                      //   subCatItemList.setVisibility(View.GONE);

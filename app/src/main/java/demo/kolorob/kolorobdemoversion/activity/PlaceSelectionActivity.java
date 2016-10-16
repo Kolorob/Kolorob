@@ -170,6 +170,7 @@ String areaname=null;
         ImageButton placeimage=(ImageButton)findViewById(R.id.placeselectionholder);
         Picasso.with(this)
                 .load(R.drawable.place_choice_screen3)
+                .fit()
                 .into(placeimage);
         placeimage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
