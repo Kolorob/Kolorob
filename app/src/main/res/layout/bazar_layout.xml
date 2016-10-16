@@ -111,9 +111,10 @@
             </View>
             <ExpandableListView
                 android:id="@+id/bazar_list"
-                android:childDivider="@color/white"
+                android:childDivider="@color/orange"
                 android:background="@color/orange"
-                android:divider="@color/black"
+                android:divider="@color/white"
+                android:dividerHeight="4dp"
 
 
                 android:layout_height="match_parent"
