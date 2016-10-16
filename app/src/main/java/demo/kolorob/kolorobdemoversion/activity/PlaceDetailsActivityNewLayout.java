@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -3402,6 +3403,41 @@ fragment.getMapViewController().setZoom(16);
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
                         layoutParams.setMargins(0, 0, 0, buttonHeights/2);//
+
+                        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+                            @Override
+                            public void onGroupExpand(int groupPosition) {
+                                if (lastExpandedPosition != -1
+                                        && groupPosition != lastExpandedPosition) {
+                                    expListView.collapseGroup(lastExpandedPosition);
+                                }
+                                lastExpandedPosition = groupPosition;
+
+
+                            }
+                        });
+                        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+                            @Override
+                            public void onGroupCollapse(int groupPosition) {
+
+
+                            }
+                        });
+                        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+                            @Override
+                            public boolean onChildClick(ExpandableListView parent, View v,
+                                                        int groupPosition, int childPosition, long id) {
+                                // TODO Auto-generated method stub
+                                expListView.collapseGroup(lastExpandedPosition);
+
+                                return false;
+                            }
+                        });
+
+
                         Log.d("Button Heights","%%%%%%"+buttonHeights);
                         SlidingUpPanelLayout slidingUpPanelLayout;
                         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
