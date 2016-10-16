@@ -59,7 +59,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -397,13 +396,13 @@ int index;
 
 //        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
         ImageView compare_logo_imagex=(ImageView)findViewById(R.id.compare_logo_imagex);
-        compare_logo_imagex.getLayoutParams().width=width/30;
+        compare_logo_imagex.getLayoutParams().width=width/20;
         Log.d("Test width Height","=======");
-        compare_logo_imagex.getLayoutParams().height=height/30;
+        compare_logo_imagex.getLayoutParams().height=height/20;
         compare_logo_image=(ImageView)findViewById(R.id.compare_logo_images);
-        compare_logo_image.getLayoutParams().width=width/30;
+        compare_logo_image.getLayoutParams().width=width/20;
         Log.d("Test width Height","=======");
-        compare_logo_image.getLayoutParams().height=height/30;
+        compare_logo_image.getLayoutParams().height=height/20;
 //        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
 //        scrolling_partc.setMargins(0,0,0,smal);
 
@@ -631,6 +630,8 @@ int index;
 //        quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
 //        cost1=(TextView)findViewById(R.id.cost1);
 
+        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
+        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
 
 
         int size_b=20;
@@ -638,6 +639,11 @@ int index;
 
         if (screenSize > 6.5) {
             health_name2.setTextSize(size_b);
+            edu_name_ban.setTextSize(size_b);
+            edu_name_ban22.setTextSize(size_b);
+
+
+
 //            opening_time2.setTextSize(size_b);
 //            language_spoken2.setTextSize(size_b);
 //            service_type2.setTextSize(size_b);
@@ -667,6 +673,8 @@ int index;
 
         } else {
             health_name2.setTextSize(size_s);
+            edu_name_ban.setTextSize(size_s);
+            edu_name_ban22.setTextSize(size_s);
 //            opening_time2.setTextSize(size_s);
 //            language_spoken2.setTextSize(size_s);
 //            service_type2.setTextSize(size_s);
@@ -702,8 +710,6 @@ int index;
 
 
 
-        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
-        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
 //        edtype=(TextView)findViewById(R.id.eduType2);
 //        hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
 //        transport_facility=(TextView)findViewById(R.id.transport_facility2);
@@ -715,8 +721,8 @@ int index;
 //        shift=(TextView)findViewById(R.id.shift2);
 //        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu2);
-        edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
+        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
+      //  edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
 //        edtype1=(TextView)findViewById(R.id.eduType3);
 //        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
 //        transport_facility1=(TextView)findViewById(R.id.transport_facility3);
@@ -931,10 +937,7 @@ int index;
 
         }
 
-        Picasso.with(getApplicationContext())
-                .load(R.drawable.map_selected)
-                .resize(buttonWidth,larg)
-                .into(MapButton);
+        MapButton.setBackgroundResource(R.drawable.map_selected);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -961,20 +964,10 @@ int index;
                     ListButton.setLayoutParams(params3);
                     params4.height=smal;
                     CompareButton.setLayoutParams(params4);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.compare)
-
-                            .into(CompareButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.search_selected)
-                            .into(SearchButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.bazaar)
-                            .into(ListButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.map)
-                            .into(MapButton);
-
+                    SearchButton.setBackgroundResource(R.drawable.search_selected);
+                    ListButton.setBackgroundResource(R.drawable.bazaar);
+                    MapButton.setBackgroundResource(R.drawable.map);
+                    CompareButton.setBackgroundResource(R.drawable.compare);
                     map.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
@@ -1030,26 +1023,10 @@ int index;
                 }
                 if (CompareClicked==false||SearchClicked==false||ListClicked==false)
                 {
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.compare)
-                            .resize(buttonWidth,smal)
-
-                            .into(CompareButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.search)
-                            .resize(buttonWidth,smal)
-
-                            .into(SearchButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.bazaar)
-                            .resize(buttonWidth,smal)
-
-                            .into(ListButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.map_selected)
-                            .resize(buttonWidth,larg)
-                            .into(MapButton);
-
+                    SearchButton.setImageResource(0);
+                    MapButton.setImageResource(0);
+                    CompareButton.setImageResource(0);
+                    ListButton.setImageResource(0);
                     params.height=larg;
                     MapButton.setLayoutParams(params);
 
@@ -1059,8 +1036,10 @@ int index;
                     ListButton.setLayoutParams(params3);
                     params4.height=smal;
                     CompareButton.setLayoutParams(params4);
-
-
+                    SearchButton.setBackgroundResource(R.drawable.search);
+                    ListButton.setBackgroundResource(R.drawable.bazaar);
+                    MapButton.setBackgroundResource(R.drawable.map_selected);
+                    CompareButton.setBackgroundResource(R.drawable.compare);
 //                    subCatItemList.setVisibility(View.GONE);
 
                     bazar_tool.setVisibility(View.GONE);
@@ -1082,7 +1061,6 @@ int index;
             public void onClick(View v) {
 
 
-<<<<<<< Updated upstream
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
                     spItems.setVisibility(View.VISIBLE);
@@ -1138,52 +1116,6 @@ int index;
                     toggleButton.setVisibility(View.GONE);
 
                     //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
-=======
-                    params2.height=smal;
-                    SearchButton.setLayoutParams(params2);
-                    params.height=smal;
-                    MapButton.setLayoutParams(params);
-                    params4.height=smal;
-                    CompareButton.setLayoutParams(params4);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.compare)
-                            .into(CompareButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.search)
-                            .into(SearchButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.bazaar_selected)
-                            .into(ListButton);
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.map)
-                            .into(MapButton);
-                    map.setVisibility(View.GONE);
-                }
-              //  subCatItemList.setVisibility(View.VISIBLE);
-                bazar_tool.setVisibility(View.VISIBLE);
-                searchviewholder.setVisibility(View.GONE);
-                compare_layout.setVisibility(View.GONE);
-                compare_layoutedu.setVisibility(View.GONE);
-
-
-                svs.setVisibility(View.GONE);
-                svholder.setVisibility(View.GONE);
-                svsholder.setVisibility(View.GONE);
-                sv.setVisibility(View.GONE);
-                llSubCatListHolder.setVisibility(View.GONE);
-              //  subCatItemList.setVisibility(View.VISIBLE);
-                bazar_tool.setVisibility(View.VISIBLE);
-                init();
-                loadBazar(PlaceDetailsActivityNewLayout.this);
-                panelListener();
-                //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
-
-                setShowList(1);
-                toolbar.setVisibility(View.GONE);
-                toggleButton.setVisibility(View.GONE);
-
-                //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
->>>>>>> Stashed changes
 //
 //                if(currentCategoryID<1)
 //                    categoryListBuildUp(1);
@@ -1277,18 +1209,10 @@ int index;
                         // need to add condition for health and add color code for health,
                         // else educaton color code is okay
                         toggleButton.setVisibility(View.GONE);
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.compare_selected)
-                                .into(CompareButton);
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.search)
-                                .into(SearchButton);
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.bazaar)
-                                .into(ListButton);
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.map)
-                                .into(MapButton);
+                        SearchButton.setBackgroundResource(R.drawable.search);
+                        ListButton.setBackgroundResource(R.drawable.bazaar);
+                        MapButton.setBackgroundResource(R.drawable.map);
+                        CompareButton.setBackgroundResource(R.drawable.compare_selected);
                         map.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.GONE);
                      //   subCatItemList.setVisibility(View.GONE);
@@ -1818,7 +1742,7 @@ int index;
             left_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
                     educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    educationNewItem.getClassno(),educationNewItem.getTeachersno(),educationNewItem.getWatercondition(),
+                    English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
                     educationNewItem.getShift(),educationNewItem.getWatersource()};
 
 //            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
@@ -1935,16 +1859,16 @@ int index;
             right_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
                     educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    educationNewItem.getClassno(),educationNewItem.getTeachersno(),educationNewItem.getWatercondition(),
+                    English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
                     educationNewItem.getShift(),educationNewItem.getWatersource()};
 
 
 
 //
-//            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
-//                edu_name_ban.setText("শীঘ্রই আসছে ");
-//            else
-//                edu_name_ban.setText(educationNewItem.getNamebn());
+            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
+                edu_name_ban.setText("শীঘ্রই আসছে ");
+            else
+                edu_name_ban.setText(educationNewItem.getNamebn());
 //
 //            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
 //                edtype1.setText("শীঘ্রই আসছে ");

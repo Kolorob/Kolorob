@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         sothree:umanoPanelHeight="60dp"
-        android:background="@color/orange"
+        android:background="@color/kolorob_color"
         sothree:umanoShadowHeight="4dp"
         sothree:umanoDragView="@+id/dragView"
         sothree:umanoOverlay="true"
@@ -31,7 +31,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/orange"
+                android:background="@color/kolorob_color"
 
 
                 android:layout_alignParentTop="true"
@@ -110,8 +110,8 @@
             </View>
             <ExpandableListView
                 android:id="@+id/bazar_list"
-                android:childDivider="@color/orange"
-                android:background="@color/orange"
+                android:childDivider="@color/kolorob_color"
+                android:background="@color/kolorob_color"
                 android:divider="@color/white"
                 android:dividerHeight="4dp"
 
@@ -126,7 +126,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/orange"
+            android:background="@color/kolorob_color"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="false"
@@ -135,7 +135,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/orange"
+                android:background="@color/kolorob_color"
                 android:padding="5dp"
                 android:gravity="center_vertical|right"
                 android:orientation="horizontal">
