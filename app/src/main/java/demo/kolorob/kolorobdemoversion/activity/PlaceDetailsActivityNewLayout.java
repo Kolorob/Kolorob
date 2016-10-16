@@ -1729,7 +1729,7 @@ int index;
             left_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
                     educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    educationNewItem.getClassno(),educationNewItem.getTeachersno(),educationNewItem.getWatercondition(),
+                    English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
                     educationNewItem.getShift(),educationNewItem.getWatersource()};
 
 //            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
@@ -1846,7 +1846,7 @@ int index;
             right_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
                     educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    educationNewItem.getClassno(),educationNewItem.getTeachersno(),educationNewItem.getWatercondition(),
+                    English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
                     educationNewItem.getShift(),educationNewItem.getWatersource()};
 
 
