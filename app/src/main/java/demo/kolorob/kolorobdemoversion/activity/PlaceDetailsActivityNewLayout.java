@@ -398,13 +398,13 @@ int index;
 
 //        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
         ImageView compare_logo_imagex=(ImageView)findViewById(R.id.compare_logo_imagex);
-        compare_logo_imagex.getLayoutParams().width=width/30;
+        compare_logo_imagex.getLayoutParams().width=width/20;
         Log.d("Test width Height","=======");
-        compare_logo_imagex.getLayoutParams().height=height/30;
+        compare_logo_imagex.getLayoutParams().height=height/20;
         compare_logo_image=(ImageView)findViewById(R.id.compare_logo_images);
-        compare_logo_image.getLayoutParams().width=width/30;
+        compare_logo_image.getLayoutParams().width=width/20;
         Log.d("Test width Height","=======");
-        compare_logo_image.getLayoutParams().height=height/30;
+        compare_logo_image.getLayoutParams().height=height/20;
 //        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
 //        scrolling_partc.setMargins(0,0,0,smal);
 
