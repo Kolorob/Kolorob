@@ -617,6 +617,8 @@ int index;
 //        quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
 //        cost1=(TextView)findViewById(R.id.cost1);
 
+        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
+        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
 
 
         int size_b=20;
@@ -624,6 +626,11 @@ int index;
 
         if (screenSize > 6.5) {
             health_name2.setTextSize(size_b);
+            edu_name_ban.setTextSize(size_b);
+            edu_name_ban22.setTextSize(size_b);
+
+
+
 //            opening_time2.setTextSize(size_b);
 //            language_spoken2.setTextSize(size_b);
 //            service_type2.setTextSize(size_b);
@@ -653,6 +660,8 @@ int index;
 
         } else {
             health_name2.setTextSize(size_s);
+            edu_name_ban.setTextSize(size_s);
+            edu_name_ban22.setTextSize(size_s);
 //            opening_time2.setTextSize(size_s);
 //            language_spoken2.setTextSize(size_s);
 //            service_type2.setTextSize(size_s);
@@ -688,8 +697,6 @@ int index;
 
 
 
-        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
-        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
 //        edtype=(TextView)findViewById(R.id.eduType2);
 //        hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
 //        transport_facility=(TextView)findViewById(R.id.transport_facility2);
@@ -702,7 +709,7 @@ int index;
 //        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
         compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
-        edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
+      //  edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
 //        edtype1=(TextView)findViewById(R.id.eduType3);
 //        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
 //        transport_facility1=(TextView)findViewById(R.id.transport_facility3);
@@ -1845,10 +1852,10 @@ int index;
 
 
 //
-//            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
-//                edu_name_ban.setText("শীঘ্রই আসছে ");
-//            else
-//                edu_name_ban.setText(educationNewItem.getNamebn());
+            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
+                edu_name_ban.setText("শীঘ্রই আসছে ");
+            else
+                edu_name_ban.setText(educationNewItem.getNamebn());
 //
 //            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
 //                edtype1.setText("শীঘ্রই আসছে ");
