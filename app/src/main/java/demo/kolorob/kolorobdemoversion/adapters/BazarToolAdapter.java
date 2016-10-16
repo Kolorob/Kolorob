@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
 public class BazarToolAdapter extends BaseExpandableListAdapter {
 
@@ -81,6 +82,24 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         TextView area = (TextView) convertView.findViewById(R.id.area);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
+
+        Double screenSize= AppUtils.ScreenSize(_context);
+
+        if(screenSize>6.5)
+        {
+            desctiption.setTextSize(20);
+            price.setTextSize(20);
+            date.setTextSize(20);
+            condition.setTextSize(20);
+            area.setTextSize(20);
+        }
+        else {
+            desctiption.setTextSize(15);
+            price.setTextSize(15);
+            date.setTextSize(15);
+            condition.setTextSize(15);
+            area.setTextSize(15);
+        }
 
 
         phone_call.getLayoutParams().height=width/11;
@@ -168,7 +187,18 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         product_name.setText(groupElement[0]);
         sell.setText(groupElement[1]);
+        Double screenSize= AppUtils.ScreenSize(_context);
 
+        if(screenSize>6.5)
+        {
+            product_name.setTextSize(22);
+            sell.setTextSize(16);
+
+        }
+        else {
+            product_name.setTextSize(18);
+            sell.setTextSize(12);
+        }
 
         return convertView;
     }

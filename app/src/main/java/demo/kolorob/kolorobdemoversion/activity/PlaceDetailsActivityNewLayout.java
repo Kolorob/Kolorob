@@ -1,10 +1,12 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -1032,59 +1034,62 @@ int index;
             @Override
             public void onClick(View v) {
 
-                spItems.setVisibility(View.VISIBLE);
-                uptext.setVisibility(View.VISIBLE);
-                SearchClicked=false;
-                MapClicked=false;
-                InCompare=false;
-                ListClicked=true;
-                CompareClicked=false;
-                searchviewholder.setVisibility(View.GONE);
-                llCatListHolder.setVisibility(View.VISIBLE);
-                if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
-                    SearchButton.setImageResource(0);
-                    MapButton.setImageResource(0);
-                    CompareButton.setImageResource(0);
-                    ListButton.setImageResource(0);
-                    params3.height=larg;
-                    ListButton.setLayoutParams(params3);
 
-                    params2.height=smal;
-                    SearchButton.setLayoutParams(params2);
-                    params.height=smal;
-                    MapButton.setLayoutParams(params);
-                    params4.height=smal;
-                    CompareButton.setLayoutParams(params4);
-                    SearchButton.setBackgroundResource(R.drawable.search);
-                    ListButton.setBackgroundResource(R.drawable.bazaar_selected);
-                    MapButton.setBackgroundResource(R.drawable.map);
-                    CompareButton.setBackgroundResource(R.drawable.compare);
-                    map.setVisibility(View.GONE);
-                }
-              //  subCatItemList.setVisibility(View.VISIBLE);
-                bazar_tool.setVisibility(View.VISIBLE);
-                searchviewholder.setVisibility(View.GONE);
-                compare_layout.setVisibility(View.GONE);
-                compare_layoutedu.setVisibility(View.GONE);
+                if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
+                {
+                    spItems.setVisibility(View.VISIBLE);
+                    uptext.setVisibility(View.VISIBLE);
+                    SearchClicked=false;
+                    MapClicked=false;
+                    InCompare=false;
+                    ListClicked=true;
+                    CompareClicked=false;
+                    searchviewholder.setVisibility(View.GONE);
+                    llCatListHolder.setVisibility(View.VISIBLE);
+                    if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
+                        SearchButton.setImageResource(0);
+                        MapButton.setImageResource(0);
+                        CompareButton.setImageResource(0);
+                        ListButton.setImageResource(0);
+                        params3.height=larg;
+                        ListButton.setLayoutParams(params3);
+                        toggleButton.setVisibility(View.GONE);
+                        params2.height=smal;
+                        SearchButton.setLayoutParams(params2);
+                        params.height=smal;
+                        MapButton.setLayoutParams(params);
+                        params4.height=smal;
+                        CompareButton.setLayoutParams(params4);
+                        SearchButton.setBackgroundResource(R.drawable.search);
+                        ListButton.setBackgroundResource(R.drawable.bazaar_selected);
+                        MapButton.setBackgroundResource(R.drawable.map);
+                        CompareButton.setBackgroundResource(R.drawable.compare);
+                        map.setVisibility(View.GONE);
+                    }
+                    //  subCatItemList.setVisibility(View.VISIBLE);
+                    bazar_tool.setVisibility(View.VISIBLE);
+                    searchviewholder.setVisibility(View.GONE);
+                    compare_layout.setVisibility(View.GONE);
+                    compare_layoutedu.setVisibility(View.GONE);
 
 
-                svs.setVisibility(View.GONE);
-                svholder.setVisibility(View.GONE);
-                svsholder.setVisibility(View.GONE);
-                sv.setVisibility(View.GONE);
-                llSubCatListHolder.setVisibility(View.GONE);
-              //  subCatItemList.setVisibility(View.VISIBLE);
-                bazar_tool.setVisibility(View.VISIBLE);
-                init();
-                loadBazar(PlaceDetailsActivityNewLayout.this);
-                panelListener();
-                //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
+                    svs.setVisibility(View.GONE);
+                    svholder.setVisibility(View.GONE);
+                    svsholder.setVisibility(View.GONE);
+                    sv.setVisibility(View.GONE);
+                    llSubCatListHolder.setVisibility(View.GONE);
+                    //  subCatItemList.setVisibility(View.VISIBLE);
+                    bazar_tool.setVisibility(View.VISIBLE);
+                    init();
+                    loadBazar(PlaceDetailsActivityNewLayout.this);
+                    panelListener();
+                    //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
-                setShowList(1);
-                toolbar.setVisibility(View.GONE);
-                toggleButton.setVisibility(View.GONE);
+                    setShowList(1);
+                    toolbar.setVisibility(View.GONE);
+                    toggleButton.setVisibility(View.GONE);
 
-                //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
+                    //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 //
 //                if(currentCategoryID<1)
 //                    categoryListBuildUp(1);
@@ -1102,6 +1107,14 @@ int index;
 //                    //constructCategoryList(categoryList);
 //
 //                }
+                }
+
+                else {
+                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+
+                }
+
+
 
             }
 
@@ -3400,9 +3413,10 @@ fragment.getMapViewController().setZoom(16);
                         bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
                         expListView.setAdapter(bazarToolAdapter);
 
+
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights/2);//
+                        layoutParams.setMargins(0, 0, 0, buttonHeights*2);//
 
                         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -3745,9 +3759,10 @@ fragment.getMapViewController().setZoom(16);
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
 
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout.getLayoutParams();
-        layoutParams.setMargins(0,0,0,smal);
-        mLayout.setLayoutParams(layoutParams);
+
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
+        layoutParams.setMargins(0,0,0,smal-6);
+        bazar_tool.setLayoutParams(layoutParams);
         textView = (TextView) findViewById(R.id.list_main);
         ImageView bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
          int q= bazar_logo.getLayoutParams().width=width/9;
@@ -3798,6 +3813,8 @@ fragment.getMapViewController().setZoom(16);
 
 
             }
+
+
 
             @Override
             public void onPanelAnchored(View panel) {

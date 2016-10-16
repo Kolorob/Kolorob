@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:visibility="visible"
+    android:visibility="gone"
     android:id="@+id/bazar_tool"
     android:layout_height="match_parent"
 
@@ -17,7 +17,6 @@
         sothree:umanoPanelHeight="60dp"
         android:background="@color/orange"
         sothree:umanoShadowHeight="4dp"
-        sothree:umanoParallaxOffset="100dp"
         sothree:umanoDragView="@+id/dragView"
         sothree:umanoOverlay="true"
         sothree:umanoScrollableView="@+id/main">
@@ -127,7 +126,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
+            android:background="@color/orange"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="false"
@@ -146,7 +145,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:padding="10dp"
                     android:background="@drawable/rounded"
                     android:textStyle="bold"
@@ -168,7 +167,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="?attr/actionBarSize"
                     android:gravity="center"
-                    android:text="Main Content"
+                    android:textColor="@color/white"
+                    android:text="শিগ্রই আসছে"
+
                     android:clickable="true"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
