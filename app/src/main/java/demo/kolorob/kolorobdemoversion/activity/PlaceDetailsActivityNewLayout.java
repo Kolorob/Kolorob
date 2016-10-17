@@ -27,6 +27,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -380,6 +381,10 @@ int index;
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
         bazar_tool= (RelativeLayout)findViewById(R.id.bazar_tool);
+
+       // frameLayout.setClickable(false);
+       // frameLayouts.setEnabled(false);
+
        // explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -1343,7 +1348,7 @@ int index;
            b.condition = spinner.getSelectedItem().toString();
            b.contact_person = contact_person.getText().toString();
            b.price = price.getText().toString();
-           Log.d("Text","%%%%%%"+product_name.getText().toString());
+
            saveBazar(b,context);
        }
        catch (Exception e)
@@ -3376,6 +3381,12 @@ fragment.getMapViewController().setZoom(16);
     public void init(){
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
+
+
+       mLayout.setTouchEnabled(false);
+        bazarPosting.setEnabled(true);
+        bazarPosting.setClickable(true);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
@@ -3417,6 +3428,8 @@ fragment.getMapViewController().setZoom(16);
                 Log.d(">>>>","Slide Up");
 
             }
+
+
 
             // This method will be call after slide up layout
             @Override
