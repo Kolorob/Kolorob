@@ -3282,7 +3282,7 @@ fragment.getMapViewController().setZoom(16);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
         layoutParams.setMargins(0,0,0,smal-6);
         bazar_tool.setLayoutParams(layoutParams);
-        textView = (TextView) findViewById(R.id.list_main);
+//        textView = (TextView) findViewById(R.id.list_main);
         ImageView bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
          int q= bazar_logo.getLayoutParams().width=width/9;
         bazar_logo.getLayoutParams().height=width/9;

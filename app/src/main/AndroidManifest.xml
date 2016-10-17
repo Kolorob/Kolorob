@@ -48,10 +48,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.NewEmergency"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
-        <activity
             android:name=".activity.PhoneRegActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
