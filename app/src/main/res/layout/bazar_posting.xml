@@ -44,7 +44,7 @@
         android:lines="2"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/editText" />
+        android:id="@+id/product_name" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
-        android:id="@+id/description" />
+        android:id="@+id/phone_no" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,7 +87,29 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
-        android:id="@+id/editTexts" />
+        android:id="@+id/address" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Contact Person"
+        android:textColor="@color/white"
+
+        android:id="@+id/contact_persons" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
+        android:hint="Write Here"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lines="2"
+        android:id="@+id/contact_person" />
 
 
 
@@ -126,7 +148,7 @@
             android:theme="@style/checkBoxStyle"
             android:textColor="@color/white"
 
-            android:id="@+id/checkBox" />
+            android:id="@+id/negotiable" />
 
 
     </LinearLayout>

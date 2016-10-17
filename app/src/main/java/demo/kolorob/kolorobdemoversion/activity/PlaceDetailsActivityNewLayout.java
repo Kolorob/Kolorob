@@ -1297,7 +1297,7 @@ int index;
     public void postbazar(final Context context)
     {
         // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
+        final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
 
         // Spinner click listener
 //        spinner.setOnItemSelectedListener(context);
@@ -1319,18 +1319,38 @@ int index;
         spinner.setAdapter(dataAdapter);
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
-        final BazarItem b = new BazarItem();
-        b.description="descriptions";
-        b.type = "Sell";
-        b.phone = "01711310912"; //MUST BE REGISTERED
-        b.contact = "2342352523";
-        b.condition = "qwdadasd";
-        b.contact_person = "ASDsdSDS";
-        b.price = 50;
+        final EditText product_name= (EditText)findViewById(R.id.product_name);
+        final EditText phone= (EditText)findViewById(R.id.phone_no);
+        final EditText address= (EditText)findViewById(R.id.address);
+        final EditText price= (EditText)findViewById(R.id.price);
+        final EditText description= (EditText)findViewById(R.id.descriptions);
+        final EditText contact_person= (EditText)findViewById(R.id.contact_person);
+
+
+
+
         submit_bazar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveBazar(b,context);
+       try
+       {
+
+           final BazarItem b = new BazarItem();
+           b.description=description.getText().toString();
+           b.type = product_name.getText().toString();
+           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+           b.contact = address.getText().toString();
+           b.condition = spinner.getSelectedItem().toString();
+           b.contact_person = contact_person.getText().toString();
+           b.price = price.getText().toString();
+           Log.d("Text","%%%%%%"+product_name.getText().toString());
+           saveBazar(b,context);
+       }
+       catch (Exception e)
+       {
+
+       }
+
             }
         });
 
