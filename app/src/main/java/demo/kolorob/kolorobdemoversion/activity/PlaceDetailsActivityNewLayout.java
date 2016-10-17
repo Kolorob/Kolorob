@@ -366,10 +366,7 @@ int index;
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
-        shift1_1=(LinearLayout)findViewById(R.id.shift1_1);
-        shift1_11=(LinearLayout)findViewById(R.id.shift1_11);
-        canteen_facility_1=(LinearLayout)findViewById(R.id.canteen_facility_1);
-        canteen_facility_11=(LinearLayout)findViewById(R.id.canteen_facility_11);
+
         int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
