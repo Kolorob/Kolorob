@@ -54,6 +54,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -898,7 +899,7 @@ int index;
                     bazar_tool.setVisibility(View.VISIBLE);
                     init();
                     loadBazar(PlaceDetailsActivityNewLayout.this);
-                    panelListener();
+                    panelListener(PlaceDetailsActivityNewLayout.this);
                     //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                     setShowList(1);
@@ -1290,6 +1291,84 @@ int index;
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) health_compare_list
                 .getLayoutParams();
         layoutParams.setMargins(0, 0, 0, smal);//
+    }
+
+
+    public void postbazar(final Context context)
+    {
+        // Spinner element
+        Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
+
+        // Spinner click listener
+//        spinner.setOnItemSelectedListener(context);
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("New");
+        categories.add("Used");
+        categories.add("Refarbished");
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
+
+        // Drop down layout style - list view with radio button
+      //  dataAdapter.setDropDownViewResource(R.layout.bazar_spinner);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+        Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
+
+        final BazarItem b = new BazarItem();
+        b.description="descriptions";
+        b.type = "Sell";
+        b.phone = "01711310912"; //MUST BE REGISTERED
+        b.contact = "2342352523";
+        b.condition = "qwdadasd";
+        b.contact_person = "ASDsdSDS";
+        b.price = 50;
+        submit_bazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBazar(b,context);
+            }
+        });
+
+
+
+
+
+    }
+
+
+    private void saveBazar(BazarItem b, Context contexts){
+        getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
+                        +"&description=" + b.description +
+                        "&type=" + b.type +
+                        "&phone=" + b.phone +
+                        "&contact=" + b.contact +
+                        "&condition=" + b.condition +
+                        "&contact_person=" + b.contact_person +
+                        "&price=" + b.price,
+                new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            //tester. You may delete this portion
+                            Context context = getApplicationContext();
+                            CharSequence text = apiContent;
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            //tester ends======
+                        }
+                    }
+                }
+        );
+
+
+
     }
 
 
@@ -3305,7 +3384,7 @@ fragment.getMapViewController().setZoom(16);
 
     }
 
-    public void panelListener(){
+    public void panelListener(final Context context){
 
         mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             TextView footer= (TextView)findViewById(R.id.footer);
@@ -3323,7 +3402,9 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
+
                 footer.setText("বিজ্ঞাপন দেখুন");
+                postbazar(context);
 
             }
 
