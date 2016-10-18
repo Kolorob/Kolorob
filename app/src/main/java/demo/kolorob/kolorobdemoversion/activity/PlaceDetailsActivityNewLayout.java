@@ -27,6 +27,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,6 +55,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -364,11 +366,8 @@ int index;
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
 
-        shift1_1=(LinearLayout)findViewById(R.id.shift1_1);
-        shift1_11=(LinearLayout)findViewById(R.id.shift1_11);
-        canteen_facility_1=(LinearLayout)findViewById(R.id.canteen_facility_1);
-        canteen_facility_11=(LinearLayout)findViewById(R.id.canteen_facility_11);
-        final int buttonWidth = width/4;
+
+        int buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
         checkBox=(CheckBox)findViewById(R.id.compared);
@@ -380,6 +379,10 @@ int index;
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
         bazar_tool= (RelativeLayout)findViewById(R.id.bazar_tool);
+
+       // frameLayout.setClickable(false);
+       // frameLayouts.setEnabled(false);
+
        // explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -546,222 +549,28 @@ int index;
                 setLocationNameEng("Mirpur-12");
             }
         }
-
-
-//        firstLayout = (LinearLayout)findViewById(R.id.firstLayout);
-//        secondLayout = (LinearLayout)findViewById(R.id.secondLayout);
-//        thirdLayout = (LinearLayout)findViewById(R.id.thirdLayout);
-//        fourthLayout = (LinearLayout)findViewById(R.id.fourthLayout);
-//        fifthLayout = (LinearLayout)findViewById(R.id.fifthtLayout);
-//        sixthLayout = (LinearLayout)findViewById(R.id.sixthLayout);
-//        seventhLayout = (LinearLayout)findViewById(R.id.seventhLayout);
-//        eighthLayout = (LinearLayout)findViewById(R.id.eighthLayout);
         school_name=(LinearLayout)findViewById(R.id.school_name);
-
-
-        int gaph= height/17;
-//        LinearLayout.LayoutParams fifthL= (LinearLayout.LayoutParams) fifthLayout.getLayoutParams();
-//        fifthL.height=gaph;
-//        fifthLayout.setLayoutParams(fifthL);
-//
-//        LinearLayout.LayoutParams secondL= (LinearLayout.LayoutParams) secondLayout.getLayoutParams();
-//        secondL.height=gaph;
-//        secondLayout.setLayoutParams(secondL);
-//
-//        LinearLayout.LayoutParams thirdL= (LinearLayout.LayoutParams) thirdLayout.getLayoutParams();
-//        thirdL.height=gaph;
-//        thirdLayout.setLayoutParams(thirdL);
-//
-//        LinearLayout.LayoutParams fourthL= (LinearLayout.LayoutParams) fourthLayout.getLayoutParams();
-//        fourthL.height=gaph;
-//        fourthLayout.setLayoutParams(fourthL);
-//
-//        LinearLayout.LayoutParams sixthL= (LinearLayout.LayoutParams) sixthLayout.getLayoutParams();
-//        sixthL.height=gaph;
-//        sixthLayout.setLayoutParams(sixthL);
-//
-//
-//        LinearLayout.LayoutParams seventhL= (LinearLayout.LayoutParams) seventhLayout.getLayoutParams();
-//        seventhL.height=gaph;
-//        seventhLayout.setLayoutParams(seventhL);
-//
-//        LinearLayout.LayoutParams eightL= (LinearLayout.LayoutParams) eighthLayout.getLayoutParams();
-//        eightL.height=gaph;
-//        eighthLayout.setLayoutParams(eightL);
-//
-//        LinearLayout.LayoutParams firstL= (LinearLayout.LayoutParams) firstLayout.getLayoutParams();
-//        firstL.height=gaph;
-//        firstLayout.setLayoutParams(firstL);
-//
-//        LinearLayout.LayoutParams ninetL= (LinearLayout.LayoutParams) school_name.getLayoutParams();
-//        ninetL.height=gaph;
-//        school_name.setLayoutParams(ninetL);
-
-
-
-
-
         health_name2=(TextView)findViewById(R.id.health_name3);
-//        opening_time2=(TextView)findViewById(R.id.opening_time2);
-//        language_spoken2=(TextView)findViewById(R.id.language_spoken2);
-//        service_type2=(TextView)findViewById(R.id.service_type2);
-//        specialist_available2=(TextView)findViewById(R.id.specialist_available2);
-//        clean_facilities2=(TextView)findViewById(R.id.clean_facilities2);
-//        privacy2=(TextView)findViewById(R.id.privacy2);
-//        quality_equipment2=(TextView)findViewById(R.id.quality_equipment2);
-//        cost2=(TextView)findViewById(R.id.cost2);
-//        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-//        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
         health_name3=(TextView)findViewById(R.id.health_name2);
-//        opening_time3=(TextView)findViewById(R.id.opening_time3);
-//        language_spoken3=(TextView)findViewById(R.id.language_spoken3);
-//        service_type3=(TextView)findViewById(R.id.service_type3);
-//        specialist_available3=(TextView)findViewById(R.id.specialist_available3);
-//        clean_facilities3=(TextView)findViewById(R.id.clean_facilities3);
-//        privacy3=(TextView)findViewById(R.id.privacy3);
-//        quality_equipment3=(TextView)findViewById(R.id.quality_equipment3);
-//        cost3=(TextView)findViewById(R.id.cost3);
-//        opening_time1=(TextView)findViewById(R.id.opening_time1);
-//        language_spoken1=(TextView)findViewById(R.id.language_spoken1);
-//        service_type1=(TextView)findViewById(R.id.service_type1);
-//        specialist_available1=(TextView)findViewById(R.id.specialist_available1);
-//        clean_facilities1=(TextView)findViewById(R.id.clean_facilities1);
-//        privacy1=(TextView)findViewById(R.id.privacy1);
-//        quality_equipment1=(TextView)findViewById(R.id.quality_equipment1);
-//        cost1=(TextView)findViewById(R.id.cost1);
-
         edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
         edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
-
-
         int size_b=20;
         int size_s=14;
-
         if (screenSize > 6.5) {
             health_name2.setTextSize(size_b);
             edu_name_ban.setTextSize(size_b);
             edu_name_ban22.setTextSize(size_b);
-
-
-
-//            opening_time2.setTextSize(size_b);
-//            language_spoken2.setTextSize(size_b);
-//            service_type2.setTextSize(size_b);
-//            specialist_available2.setTextSize(size_b);
-//            clean_facilities2.setTextSize(size_b);
-//            privacy2.setTextSize(size_b);
-//            quality_equipment2.setTextSize(size_b);
-//            cost2.setTextSize(size_b);
             health_name3.setTextSize(size_b);
-//            opening_time3.setTextSize(size_b);
-//            language_spoken3.setTextSize(size_b);
-//            service_type3.setTextSize(size_b);
-//            specialist_available3.setTextSize(size_b);
-//            clean_facilities3.setTextSize(size_b);
-//            privacy3.setTextSize(size_b);
-//            quality_equipment3.setTextSize(size_b);
-//            cost3.setTextSize(size_b);
-//            opening_time1.setTextSize(size_b);
-//            language_spoken1.setTextSize(size_b);
-//            service_type1.setTextSize(size_b);
-//            specialist_available1.setTextSize(size_b);
-//            clean_facilities1.setTextSize(size_b);
-//            privacy1.setTextSize(size_b);
-//            quality_equipment1.setTextSize(size_b);
-//            cost1.setTextSize(size_b);
-
-
         } else {
             health_name2.setTextSize(size_s);
             edu_name_ban.setTextSize(size_s);
             edu_name_ban22.setTextSize(size_s);
-//            opening_time2.setTextSize(size_s);
-//            language_spoken2.setTextSize(size_s);
-//            service_type2.setTextSize(size_s);
-//            specialist_available2.setTextSize(size_s);
-//            clean_facilities2.setTextSize(size_s);
-//            privacy2.setTextSize(size_s);
-//            quality_equipment2.setTextSize(size_s);
-//            cost2.setTextSize(size_s);
             health_name3.setTextSize(size_s);
-//            opening_time3.setTextSize(size_s);
-//            language_spoken3.setTextSize(size_s);
-//            service_type3.setTextSize(size_s);
-//            specialist_available3.setTextSize(size_s);
-//            clean_facilities3.setTextSize(size_s);
-//            privacy3.setTextSize(size_s);
-//            quality_equipment3.setTextSize(size_s);
-//            cost3.setTextSize(size_s);
-//            opening_time1.setTextSize(size_s);
-//            language_spoken1.setTextSize(size_s);
-//            service_type1.setTextSize(size_s);
-//            specialist_available1.setTextSize(size_s);
-//            clean_facilities1.setTextSize(size_s);
-//            privacy1.setTextSize(size_s);
-//            quality_equipment1.setTextSize(size_s);
-//            cost1.setTextSize(size_s);
-
-
-
-
         }
-
-
-
-
-
-//        edtype=(TextView)findViewById(R.id.eduType2);
-//        hostel_facility=(TextView)findViewById(R.id.hostel_facility2);
-//        transport_facility=(TextView)findViewById(R.id.transport_facility2);
-//        playground=(TextView)findViewById(R.id.playground2);
-//        total_students=(TextView)findViewById(R.id.ttl_students);
-//        total_classes=(TextView)findViewById(R.id.total_classes2);
-//        total_teachers=(TextView)findViewById(R.id.total_teachers2);
-//        course_provided=(TextView)findViewById(R.id.course_provided2);
-//        shift=(TextView)findViewById(R.id.shift2);
-//        canteen_facility=(TextView)findViewById(R.id.canteen_facility2);
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
         compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
-      //  edu_name_ban1=(TextView)findViewById(R.id.edu_name_ban3);
-//        edtype1=(TextView)findViewById(R.id.eduType3);
-//        hostel_facility1=(TextView)findViewById(R.id.hostel_facility3);
-//        transport_facility1=(TextView)findViewById(R.id.transport_facility3);
-//        playground1=(TextView)findViewById(R.id.playground3);
-//        total_students1=(TextView)findViewById(R.id.total_students3);
-//        total_classes1=(TextView)findViewById(R.id.total_classes3);
-//        total_teachers1=(TextView)findViewById(R.id.total_teachers3);
-//        course_provided1=(TextView)findViewById(R.id.course_provided3);
-//        shift1=(TextView)findViewById(R.id.shift3);
-//        canteen_facility1=(TextView)findViewById(R.id.canteen_facility3);
-
-        //    edu_name_ban2=(TextView)findViewById(R.id.edu_name_ban1);
-//        edtype2=(TextView)findViewById(R.id.eduType1);
-//        hostel_facility2=(TextView)findViewById(R.id.hostel_facility1);
-//        transport_facility2=(TextView)findViewById(R.id.transport_facility1);
-//        playground2=(TextView)findViewById(R.id.playground1);
-//        total_students2=(TextView)findViewById(R.id.total_students1);
-//        total_classes2=(TextView)findViewById(R.id.total_classes1);
-//        total_teachers2=(TextView)findViewById(R.id.total_teachers1);
-//        course_provided2=(TextView)findViewById(R.id.course_provided1);
-//        shift2=(TextView)findViewById(R.id.shift1);
-//        canteen_facility2=(TextView)findViewById(R.id.canteen_facility1);
-        //categoryHeader = (TextView) findViewById(R.id.tv_cat_name);
-        //categoryHeaderIcon = (ImageView) findViewById(R.id.ivHeadCatIconSubCatList);
-        //placeDetailsLayout = (FrameLayout) findViewById(R.id.place_details_layout);
-        ///this code will change the background of the layout for two places.
-
-
-        // itemList = (ListView)findViewById(R.id.listViewSearch);
-        //subCatItemListHeader = (TextView) findViewById(R.id.tv_sub_cat_item_list_head);
-
-        //subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         map.setVisibility(View.VISIBLE);
-
-        //showsearch=(RelativeLayout)findViewById(R.id.show);
-        // insSubCat = (TextView) findViewById(R.id.tvInstructionSubCat);
-        //seeMap = (Button) findViewById(R.id.btn_see_map);
-        // showSubCatListItem = (Button) findViewById(R.id.btn_show_sub_cat_list_item);
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
         isCatExpandedOnce = false;
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
@@ -1108,7 +917,7 @@ int index;
                     bazar_tool.setVisibility(View.VISIBLE);
                     init();
                     loadBazar(PlaceDetailsActivityNewLayout.this);
-                    panelListener();
+                    panelListener(PlaceDetailsActivityNewLayout.this);
                     //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                     setShowList(1);
@@ -1281,15 +1090,11 @@ int index;
 
     public void compareTool()
     {
-        // compare_layout.setBackgroundColor(Color.parseColor("#F7931E"));
-
         if(currentCategoryID==1)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
-
             String delims = "[,]";
             String[] tokens = comapreData.split(delims);
-
             firstData=tokens[0];
             SecondData=tokens[1];
             compare_layout.setVisibility(View.GONE);
@@ -1299,13 +1104,11 @@ int index;
 
         else {
             compare_layout.setVisibility(View.VISIBLE);
-
             comapreData = SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
             int size=comapreData.length();
             String DataSet[]= comapreData.split(",");
             firstData=DataSet[0];
             SecondData=DataSet[1];
-
             compareHealth();
         }
     }
@@ -1320,25 +1123,7 @@ int index;
         healthServiceProviderTableNew = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
         firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
         secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
-
         health_header=new String[]{"খোলার সময়","প্রচলিত ভাষা","সেবার ধরন","বিশেষজ্ঞের ধরন","ফার্মেসি সেবা","গোপনীয়তা","সেবার মান এবং যন্ত্রপাতি","সেবার খরচ"};
-//        left_part=new String[8];
-
-
-
-
-//        opening_time1.setText("খোলার সময়");
-//        language_spoken1.setText("প্রচলিত ভাষা");
-//        service_type1.setText("সেবার ধরন");
-//        specialist_available1.setText("বিশেষজ্ঞের ধরন");
-//        clean_facilities1.setText("ফার্মেসি সেবা");
-//        privacy1.setText("গোপনীয়তা");
-//        quality_equipment1.setText("সেবার মান এবং যন্ত্রপাতি");
-//        cost1.setText("সেবার খরচ");
-//        shift1_11.setVisibility(View.GONE);
-//        shift1_1.setVisibility(View.GONE);
-//        canteen_facility_1.setVisibility(View.GONE);
-//        canteen_facility_11.setVisibility(View.GONE);
         HealthSpecialistTableDetails healthSpecialistTable = new HealthSpecialistTableDetails(PlaceDetailsActivityNewLayout.this);
         ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
         ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses2;
@@ -1370,52 +1155,37 @@ int index;
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
-
-
-
-
                     if(compareValue==2)
                      {
                          if(!isChecked)
                          {
-
                              String compare_Datas="";
-
                              compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                              String multipule[]= compare_Datas.split(",");
                              compare_Datas = multipule[1];
-
                              idx=multipule[0];
                              SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
                          }
-
-
                      }
 
                     else if(compareValue==1)
                     {
                         if(!isChecked)
                         {
-
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
                         }
 
                         else {
-
                             String compare_Datac="";
                             compare_Datac=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-
                             compare_Datac = compare_Datac+","+idx;
-
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datac, 2);
-
                         }
                     }
 
                     else if (compareValue == 0) {
                         if(isChecked)
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNew.getId(), 1);
-
                     }
 
 
@@ -1449,49 +1219,10 @@ int index;
 
             String time2="";
             time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
-//            if(!time2.equals("")&&!time2.equals("null"))
-//                opening_time3.setText(time2);
-//            else
-//                opening_time3.setText("শীঘ্রই আসছে");
             left_part=new String[]{time2,healthServiceProviderItemNew.getSpoken_lang(),
                     health_service_data1,firstSpecialistItem,healthServiceProviderItemNew.getPharmacy_speciality(),
                     String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()),healthServiceProviderItemNew.getQuality_equipments(),
                             healthServiceProviderItemNew.getGeneral_cost()};
-
-//            if(!healthServiceProviderItemNew.getSpoken_lang().equals("")&&!healthServiceProviderItemNew.getSpoken_lang().equalsIgnoreCase("null"))
-//                language_spoken3.setText(healthServiceProviderItemNew.getSpoken_lang());
-//            else
-//                language_spoken3.setText("শীঘ্রই আসছে");
-//            left_part[1]=healthServiceProviderItemNew.getSpoken_lang();
-
-//            if(!health_service_data1.equals("")&&!health_service_data1.equals("null"))
-//                service_type3.setText(health_service_data1);
-//            else
-//                service_type3.setText("শীঘ্রই আসছে");
-//            if(!firstSpecialistItem.equals("")&&!firstSpecialistItem.equals("null"))
-//                specialist_available3.setText(AppUtils.removeLastChar(firstSpecialistItem));
-//            else
-//                specialist_available3.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNew.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNew.getPharmacy_speciality().equalsIgnoreCase("null"))
-//                clean_facilities3.setText(healthServiceProviderItemNew.getPharmacy_speciality());
-//            else
-//                clean_facilities3.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNew.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNew.getPharmacy_privacy().equalsIgnoreCase("null"))
-//                privacy3.setText(String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()));
-//            else
-//                privacy3.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNew.getQuality_equipments().equals("")&&!healthServiceProviderItemNew.getQuality_equipments().equalsIgnoreCase("null"))
-//                quality_equipment3.setText(healthServiceProviderItemNew.getQuality_equipments());
-//            else
-//                quality_equipment3.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNew.getGeneral_cost().equals("")&&!healthServiceProviderItemNew.getGeneral_cost().equalsIgnoreCase("null"))
-//                cost3.setText(English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+ " টাকা");
-//            else
-//                cost3.setText("শীঘ্রই আসছে");
         }
 
 
@@ -1502,26 +1233,16 @@ int index;
             checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
-
-
-
-
-
                     if(compareValue==2)
                     {
                         if(!isChecked)
                         {
-
                             String compare_Datas="";
-
                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
                             String multipule[]= compare_Datas.split(",");
-
                             compare_Datas = multipule[0];
                             idxx=multipule[1];
-
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
                         }
 
@@ -1530,32 +1251,21 @@ int index;
                     {
                         if(!isChecked)
                         {
-
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
                         }
                         else {
 
                             String compare_Data="";
                             compare_Data=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-
-                            // String multipule[]= compare_Data.split(",");
                             compare_Data =idxx+","+ compare_Data;
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
-
                         }
                     }
 
                     else if (compareValue == 0) {
                         if(isChecked)
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNewx.getId(), 1);
-
                     }
-
-
-
-
-
-
                 }
             });
 
@@ -1588,94 +1298,131 @@ int index;
 
             String time1="";
             time1=timeConverter(healthServiceProviderItemNewx.getOpening_time());
-//            if(!time1.equals("")&&!time1.equals("null"))
-//                opening_time2.setText(time1);
-//            else
-//                opening_time2.setText("শীঘ্রই আসছে");
             right_part=new String[]{time1,healthServiceProviderItemNewx.getSpoken_lang(),
                     health_service_data1,secondSpecialistItem,healthServiceProviderItemNewx.getPharmacy_speciality(),
                     healthServiceProviderItemNewx.getPharmacy_privacy(),healthServiceProviderItemNewx.getQuality_equipments(),
                     healthServiceProviderItemNewx.getGeneral_cost()
             };
-
-            Log.d("Left_part","########"+left_part);
-            Log.d("Right_part","########"+right_part);
-            Log.d("Head","########"+health_header);
-
-
-
-
-
-
-
-//            if(!healthServiceProviderItemNewx.getSpoken_lang().equals("")&&!healthServiceProviderItemNewx.getSpoken_lang().equalsIgnoreCase("null"))
-//                language_spoken2.setText(healthServiceProviderItemNewx.getSpoken_lang());
-//            else
-//                language_spoken2.setText("শীঘ্রই আসছে");
-
-//            if(!health_service_data2.equals("")&&!health_service_data2.equals("null"))
-//                service_type2.setText(health_service_data1);
-//            else
-//                service_type2.setText("শীঘ্রই আসছে");
-//            if(!secondSpecialistItem.equals("")&&!secondSpecialistItem.equals("null"))
-//                specialist_available2.setText(AppUtils.removeLastChar(secondSpecialistItem));
-//            else
-//                specialist_available2.setText("শীঘ্রই আসছে");
-//
-//            if(!healthServiceProviderItemNewx.getPharmacy_speciality().equals("")&&!healthServiceProviderItemNewx.getPharmacy_speciality().equals("null"))
-//                clean_facilities2.setText(healthServiceProviderItemNewx.getPharmacy_speciality());
-//            else
-//                clean_facilities2.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNewx.getPharmacy_privacy().equals("")&&!healthServiceProviderItemNewx.getPharmacy_privacy().equalsIgnoreCase("null"))
-//                privacy2.setText(String.valueOf(healthServiceProviderItemNewx.getPharmacy_privacy()));
-//            else
-//                privacy2.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNewx.getQuality_equipments().equals("")&&!healthServiceProviderItemNewx.getQuality_equipments().equalsIgnoreCase("null"))
-//                quality_equipment2.setText(healthServiceProviderItemNewx.getQuality_equipments());
-//            else
-//                quality_equipment2.setText("শীঘ্রই আসছে");
-
-//            if(!healthServiceProviderItemNewx.getGeneral_cost().equals("")&&!healthServiceProviderItemNewx.getGeneral_cost().equalsIgnoreCase("null"))
-//                cost2.setText(English_to_bengali_number_conversion(healthServiceProviderItemNewx.getGeneral_cost())+ " টাকা");
-//            else
-//                cost2.setText("শীঘ্রই আসছে");
-
-
         }
-
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
         health_compare_list.setAdapter(compareAdapter);
-
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) health_compare_list
                 .getLayoutParams();
         layoutParams.setMargins(0, 0, 0, smal);//
-         //  SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this,"",0);
+    }
+
+
+    public void postbazar(final Context context)
+    {
+        // Spinner element
+        final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
+
+        // Spinner click listener
+//        spinner.setOnItemSelectedListener(context);
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("New");
+        categories.add("Used");
+        categories.add("Refarbished");
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
+
+        // Drop down layout style - list view with radio button
+      //  dataAdapter.setDropDownViewResource(R.layout.bazar_spinner);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+        Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
+
+        final EditText product_name= (EditText)findViewById(R.id.product_name);
+        final EditText phone= (EditText)findViewById(R.id.phone_no);
+        final EditText address= (EditText)findViewById(R.id.address);
+        final EditText price= (EditText)findViewById(R.id.price);
+        final EditText description= (EditText)findViewById(R.id.descriptions);
+        final EditText contact_person= (EditText)findViewById(R.id.contact_person);
+
+
+
+
+        submit_bazar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+       try
+       {
+
+           final BazarItem b = new BazarItem();
+           b.description=description.getText().toString();
+           b.type = product_name.getText().toString();
+           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+           b.contact = address.getText().toString();
+           b.condition = spinner.getSelectedItem().toString();
+           b.contact_person = contact_person.getText().toString();
+           b.price = price.getText().toString();
+
+           saveBazar(b,context);
+       }
+       catch (Exception e)
+       {
+
+       }
+
+            }
+        });
+
+
+
+
+
+    }
+
+
+    private void saveBazar(BazarItem b, Context contexts){
+        getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
+                        +"&description=" + b.description +
+                        "&type=" + b.type +
+                        "&phone=" + b.phone +
+                        "&contact=" + b.contact +
+                        "&condition=" + b.condition +
+                        "&contact_person=" + b.contact_person +
+                        "&price=" + b.price,
+                new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            //tester. You may delete this portion
+                            Context context = getApplicationContext();
+                            CharSequence text = apiContent;
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            //tester ends======
+                        }
+                    }
+                }
+        );
+
+
+
     }
 
 
     public void compareEducation()
     {
-
         checkLeft.setChecked(true);
         checkRight.setChecked(true);
-
-
         educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
         educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-
         firstDataSet=educationNewTable.getEducationData(String.valueOf(firstData));
         secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
-
-
         for (final EducationNewItem educationNewItem: firstDataSet)
         {
-
             checkLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                     int compareValue=0;
                     compareValue = SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this);
                     if(compareValue==2)
@@ -1688,9 +1435,6 @@ int index;
                             compare_Data = multipule[1];
                             idxxx=multipule[0];
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 1);
-
-
-
                         }
 
                     }
@@ -1707,10 +1451,6 @@ int index;
 
                             compare_Data = compare_Data+","+idxxx;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
-
-
-
-
                         }
                     }
 
@@ -1719,21 +1459,11 @@ int index;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getEduId()), 1);
 
                     }
-
-
-
-
-
-
                 }
             });
 
             health_header=new String []{"পড়াশুনার ধরণ", "প্রতিষ্ঠানের ধরন", "আশে পাশের পরিচিত স্থান", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখা", "কয়টি ক্লাস রুম রয়েছে" ,"শিক্ষক সংখা ","কাদের সাথে রেজিস্টার্ড","শাখা","সরবরাহকৃত পানির অবস্থা  "
             };
-
-
-
-
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
                 edu_name_ban22.setText("শীঘ্রই আসছে ");
             else
@@ -1744,65 +1474,12 @@ int index;
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
                     English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
                     educationNewItem.getShift(),educationNewItem.getWatersource()};
-
-//            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
-//                edtype.setText("শীঘ্রই আসছে ");
-//            else
-//                edtype.setText(educationNewItem.getEdtype());
-
-//            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
-//                hostel_facility.setText("শীঘ্রই আসছে "); //center type
-//            else
-//                hostel_facility.setText(English_to_bengali_number_conversion(educationNewItem.getFloor()));
-//
-//            if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
-//                transport_facility.setText("শীঘ্রই আসছে");
-//            else
-//                transport_facility.setText(educationNewItem.getLandmark());//done
-//
-//            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null")|| educationNewItem.getAveragestudent().equals(""))
-//                playground.setText("শীঘ্রই আসছে ");
-//            else
-//                playground.setText(English_to_bengali_number_conversion(educationNewItem.getAveragestudent())+ " জন"); //done
-
-//            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
-//                total_students.setText("শীঘ্রই আসছে ");
-//            else
-//                total_students.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno()))+" জন");
-
-//            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
-//                total_classes.setText("শীঘ্রই আসছে ");
-//            else
-//                total_classes.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getClassno()))+ " টি");
-
-//            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null")|| educationNewItem.getTeachersno().equals(""))
-//                total_teachers.setText("শীঘ্রই আসছে ");
-//            else
-//                total_teachers.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getTeachersno()))+ " জন");
-
-//            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null")|| educationNewItem.getWatercondition().equals(""))
-//                course_provided.setText("শীঘ্রই আসছে ");
-//            else
-//                course_provided.setText(educationNewItem.getWatercondition());
-//
-//            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null")|| educationNewItem.getShift().equals(""))
-//                shift.setText("শীঘ্রই আসছে ");
-//            else
-//                shift.setText(educationNewItem.getShift());
-
-//            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
-//                canteen_facility.setText("শীঘ্রই আসছে ");
-//            else
-//                canteen_facility.setText(educationNewItem.getWatersource());
         }
         for ( final EducationNewItem educationNewItem: secondDataSet)
         {
-
-
             checkRight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                     int compareValue=0;
                     compareValue = SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this);
                     if(compareValue==2)
@@ -1815,9 +1492,6 @@ int index;
                             compare_Data = multipule[0];
                             idxxxx=multipule[1];
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 1);
-
-
-
                         }
 
                     }
@@ -1828,112 +1502,36 @@ int index;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this,"",0);
                         }
                         else {
-
                             String compare_Data="";
                             compare_Data = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
-
                             compare_Data = compare_Data+","+idxxxx;
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, compare_Data, 2);
-
-
-
-
                         }
                     }
 
                     else if (compareValue == 0) {
                         if(isChecked)
                             SharedPreferencesHelper.setComapareEdu(PlaceDetailsActivityNewLayout.this, String.valueOf(educationNewItem.getEduId()), 1);
-
                     }
-
-
-
-
-
-
                 }
             });
-
-
             right_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
                     educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
                     English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
                     educationNewItem.getShift(),educationNewItem.getWatersource()};
-
-
-
-//
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
                 edu_name_ban.setText("শীঘ্রই আসছে ");
             else
                 edu_name_ban.setText(educationNewItem.getNamebn());
-//
-//            if(educationNewItem.getEdtype()==null || educationNewItem.getEdtype().equalsIgnoreCase("null")|| educationNewItem.getEdtype().equals(""))
-//                edtype1.setText("শীঘ্রই আসছে ");
-//            else
-//                edtype1.setText(educationNewItem.getEdtype());
-//
-//            if(educationNewItem.getFloor()==null || educationNewItem.getFloor().equalsIgnoreCase("null")|| educationNewItem.getFloor().equals(""))
-//                hostel_facility1.setText("শীঘ্রই আসছে ");
-//            else
-//                hostel_facility1.setText(English_to_bengali_number_conversion(educationNewItem.getFloor()));
-//
-//            if(educationNewItem.getLandmark()==null || educationNewItem.getLandmark().equalsIgnoreCase("null")|| educationNewItem.getLandmark().equals(""))
-//                transport_facility1.setText("শীঘ্রই আসছে ");
-//            else
-//                transport_facility1.setText(educationNewItem.getLandmark());
-//
-//            if(educationNewItem.getAveragestudent()==null || educationNewItem.getAveragestudent().equalsIgnoreCase("null")|| educationNewItem.getAveragestudent().equals(""))
-//                playground1.setText("শীঘ্রই আসছে ");
-//            else
-//                playground1.setText(English_to_bengali_number_conversion(educationNewItem.getAveragestudent())+ " জন");
-//
-//            if(educationNewItem.getStudentno()==null || educationNewItem.getStudentno().equalsIgnoreCase("null")|| educationNewItem.getStudentno().equals(""))
-//                total_students1.setText("শীঘ্রই আসছে ");
-//            else
-//                total_students1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())));
-//
-//            if(educationNewItem.getClassno()==null || educationNewItem.getClassno().equalsIgnoreCase("null")|| educationNewItem.getClassno().equals(""))
-//                total_classes1.setText("শীঘ্রই আসছে ");
-//            else
-//                total_classes1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getClassno()))+ " টি");
-//
-//            if(educationNewItem.getTeachersno()==null || educationNewItem.getTeachersno().equalsIgnoreCase("null")|| educationNewItem.getTeachersno().equals(""))
-//                total_teachers1.setText("শীঘ্রই আসছে ");
-//            else
-//                total_teachers1.setText(English_to_bengali_number_conversion(String.valueOf(educationNewItem.getTeachersno()))+ " জন");
-//
-//            if(educationNewItem.getWatercondition()==null || educationNewItem.getWatercondition().equalsIgnoreCase("null")|| educationNewItem.getWatercondition().equals(""))
-//                course_provided1.setText("শীঘ্রই আসছে ");
-//            else
-//                course_provided1.setText(educationNewItem.getWatercondition());
-//
-//            if(educationNewItem.getShift()==null || educationNewItem.getShift().equalsIgnoreCase("null")|| educationNewItem.getShift().equals(""))
-//                shift1.setText("শীঘ্রই আসছে ");
-//            else
-//                shift1.setText(educationNewItem.getShift());
-//
-//            if(educationNewItem.getWatersource()==null || educationNewItem.getWatersource().equalsIgnoreCase("null")|| educationNewItem.getWatersource().equals(""))
-//                canteen_facility1.setText("শীঘ্রই আসছে ");
-//            else
-//                canteen_facility1.setText(educationNewItem.getWatersource());
         }
-
 
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
         education_compare_list.setAdapter(compareAdapter);
-
-
-
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) education_compare_list
                 .getLayoutParams();
         layoutParams.setMargins(0, 0, 0, smal);//
-
         education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.education_color));
-
-//        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
     }
 
     public void populateSearch()
@@ -3796,12 +3394,18 @@ fragment.getMapViewController().setZoom(16);
     public void init(){
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
+
+
+       mLayout.setTouchEnabled(false);
+        bazarPosting.setEnabled(true);
+        bazarPosting.setClickable(true);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
         layoutParams.setMargins(0,0,0,smal-6);
         bazar_tool.setLayoutParams(layoutParams);
-        textView = (TextView) findViewById(R.id.list_main);
+//        textView = (TextView) findViewById(R.id.list_main);
         ImageView bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
          int q= bazar_logo.getLayoutParams().width=width/9;
         bazar_logo.getLayoutParams().height=width/9;
@@ -3824,9 +3428,11 @@ fragment.getMapViewController().setZoom(16);
 
     }
 
-    public void panelListener(){
+    public void panelListener(final Context context){
 
         mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            TextView footer= (TextView)findViewById(R.id.footer);
+
 
             // During the transition of expand and collapse onPanelSlide function will be called.
             @Override
@@ -3836,10 +3442,15 @@ fragment.getMapViewController().setZoom(16);
 
             }
 
+
+
             // This method will be call after slide up layout
             @Override
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
+
+                footer.setText("বিজ্ঞাপন দেখুন");
+                postbazar(context);
 
             }
 
@@ -3849,6 +3460,7 @@ fragment.getMapViewController().setZoom(16);
 
                 Log.d(">>>>","onPanelCollapsed");
 
+                footer.setText("বিজ্ঞাপন দিন");
 
             }
 

@@ -19,7 +19,7 @@ public class BazarItem {
     public String date;
     public String expiry_date;
     public String phone;  //this has to come from shared preference
-    public int price;
+    public String price;
     public String condition;
     public String contact;
     public String contact_person;
@@ -34,7 +34,7 @@ public class BazarItem {
         date = cur.getString(4);
         expiry_date = cur.getString(5);
         phone = cur.getString(6);
-        price = cur.getInt(7);
+        price = cur.getString(7);
         condition = cur.getString(8);
         contact = cur.getString(9);
         contact_person = cur.getString(10);

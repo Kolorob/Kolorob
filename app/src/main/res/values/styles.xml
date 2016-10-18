@@ -22,7 +22,10 @@
         <item name="com_accountkit_input_border_color">?attr/com_accountkit_primary_color</item>
     </style>
 
-
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">#ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
 
 
     <style name="scrollbar_shape_style">

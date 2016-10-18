@@ -15,7 +15,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/job_portal"
+            android:background="@color/kolorob_color"
 
 
             android:layout_alignParentTop="true"
@@ -85,10 +85,14 @@
 
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/white"/>
 
         <ExpandableListView
             android:id="@+id/lvExp"
-            android:background="@color/orange"
+            android:background="@color/kolorob_color"
             android:divider="@color/white"
             android:dividerHeight="3dp"
             android:childDivider="@color/orange"
