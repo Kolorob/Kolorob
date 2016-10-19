@@ -53,7 +53,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.50"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
 
                     android:gravity="center">
 
@@ -141,13 +140,14 @@
                     android:id="@+id/footer"
                     android:layout_marginLeft="10dp"
 
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:padding="10dp"
                     android:background="@drawable/rounded"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/kolorob_color"
                     android:text="বিজ্ঞাপন দিন"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/bazar_post_layout"
     android:background="@color/kolorob_color"
     android:layout_height="match_parent">
 
@@ -16,9 +17,10 @@
         android:id="@+id/textView2" />
 
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
+
         android:layout_marginRight="10dp"
 
         android:background="@color/white"
@@ -27,7 +29,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
+        android:visibility="gone"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Product Name"
@@ -39,8 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/kolorob_color"
+        android:textColorHint="@color/kolorob_color"
+        android:layout_marginTop="@dimen/bazar_distance"
         android:background="@color/white"
-        android:hint="Write Here"
+        android:hint="Product Name"
         android:lines="2"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -51,6 +58,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Phone"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/white"
@@ -60,8 +68,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/kolorob_color"
+
         android:background="@color/white"
-        android:hint="Write Here"
+        android:textColorHint="@color/kolorob_color"
+
+        android:layout_marginTop="@dimen/bazar_distance"
+        android:hint="Phone Number"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
@@ -71,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:visibility="gone"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Address"
@@ -82,8 +96,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/kolorob_color"
+
         android:background="@color/white"
-        android:hint="Write Here"
+        android:layout_marginTop="@dimen/bazar_distance"
+        android:textColorHint="@color/kolorob_color"
+
+        android:hint="Address"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
@@ -92,6 +111,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -105,7 +125,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="@color/white"
-        android:hint="Write Here"
+        android:hint="Contact Person"
+        android:textColor="@color/kolorob_color"
+
+        android:textColorHint="@color/kolorob_color"
+
+        android:layout_marginTop="@dimen/bazar_distance"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
@@ -118,6 +144,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Price"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/bazar_distance"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/white"
@@ -126,29 +155,50 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/white"
+                android:hint="Price"
+                android:textColor="@color/kolorob_color"
+
+                android:textColorHint="@color/kolorob_color"
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:lines="2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/costs" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:gravity="center"
-            android:background="@color/white"
-            android:hint="Write Here"
-            android:inputType="number"
-            android:lines="4"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/costs" />
+            android:layout_height="match_parent">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Negotiable"
-            android:theme="@style/checkBoxStyle"
-            android:textColor="@color/white"
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Negotiable"
+                android:layout_marginTop="@dimen/bazar_distance"
 
-            android:id="@+id/negotiable" />
+                android:theme="@style/checkBoxStyle"
+                android:textColor="@color/white"
+
+                android:id="@+id/negotiable" />
+        </LinearLayout>
+
+
+
+
 
 
     </LinearLayout>
@@ -158,6 +208,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Description"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/white"
@@ -167,19 +218,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/kolorob_color"
+
+
+        android:layout_marginTop="@dimen/bazar_distance"
+        android:textColorHint="@color/kolorob_color"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/white"
-        android:hint="Write Here"
+        android:hint="Description"
         android:lines="4"
         android:id="@+id/descriptions" />
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:gravity="center"
-        android:id="@+id/submit_bazar" />
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:textColor="@color/kolorob_color"
+            android:layout_marginTop="@dimen/bazar_distance"
+
+            android:background="@drawable/rounded"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:gravity="center"
+            android:id="@+id/submit_bazar" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

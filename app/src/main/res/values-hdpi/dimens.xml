@@ -53,4 +53,5 @@
     <dimen name="aboutusallpadding">5dp</dimen>
     <dimen name="aboutustoppadding">5dp</dimen>
     <dimen name="aboutusbottompadding">5dp</dimen>
+    <dimen name="bazar_distance">8dp</dimen>
 </resources>

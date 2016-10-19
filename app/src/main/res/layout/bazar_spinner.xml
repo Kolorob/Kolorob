@@ -4,6 +4,7 @@
     android:singleLine="true"
     android:layout_width="match_parent"
     android:layout_height="35dp"
+    android:gravity="center"
     android:ellipsize="marquee"
-    android:textColor="@color/black"
+    android:textColor="@color/kolorob_color"
     android:textSize="20dp" />

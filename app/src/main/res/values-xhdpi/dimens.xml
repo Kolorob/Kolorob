@@ -49,6 +49,7 @@
     <dimen name="aboutusallpadding">5dp</dimen>
     <dimen name="aboutustoppadding">10dp</dimen>
     <dimen name="aboutusbottompadding">10dp</dimen>
+    <dimen name="bazar_distance">10dp</dimen>
 
     <dimen name="abttext">15dp</dimen>
 </resources>
