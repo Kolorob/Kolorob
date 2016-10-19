@@ -910,6 +910,9 @@ int index;
                     llSubCatListHolder.setVisibility(View.GONE);
                     //  subCatItemList.setVisibility(View.VISIBLE);
                     bazar_tool.setVisibility(View.VISIBLE);
+                    width=AppUtils.getScreenWidth(PlaceDetailsActivityNewLayout.this);
+//                    bazar_logo.getLayoutParams().width=50;
+//                    bazar_logo.getLayoutParams().height=50;
                     init();
 
                     Log.d("Panel States","******"+panelStates);
@@ -3395,6 +3398,7 @@ fragment.getMapViewController().setZoom(16);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
+        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
         mLayout.setTouchEnabled(false);
         slider_part.setEnabled(true);
         bazarPosting.setEnabled(true);
@@ -3444,10 +3448,8 @@ fragment.getMapViewController().setZoom(16);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
         layoutParams.setMargins(0,0,0,smal-6);
         bazar_tool.setLayoutParams(layoutParams);
-        bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
-        width=AppUtils.getScreenWidth(this);
-          bazar_logo.getLayoutParams().width=50;
-        bazar_logo.getLayoutParams().height=50;
+
+
 
 
 
