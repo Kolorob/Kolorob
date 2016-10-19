@@ -130,7 +130,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
-
+    LinearLayout slider_part;
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
@@ -140,6 +140,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ToggleButton toggleButton;
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     Double screenSize;
+    Boolean panelStates= true;
     private ImageView iv_kolorob_logo;
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
@@ -903,6 +904,9 @@ int index;
                     //  subCatItemList.setVisibility(View.VISIBLE);
                     bazar_tool.setVisibility(View.VISIBLE);
                     init();
+
+                    Log.d("Panel States","******"+panelStates);
+
                     loadBazar(PlaceDetailsActivityNewLayout.this);
                     panelListener(PlaceDetailsActivityNewLayout.this);
                     //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
@@ -1327,7 +1331,7 @@ int index;
         final EditText product_name= (EditText)findViewById(R.id.product_name);
         final EditText phone= (EditText)findViewById(R.id.phone_no);
         final EditText address= (EditText)findViewById(R.id.address);
-        final EditText price= (EditText)findViewById(R.id.price);
+        final EditText price= (EditText)findViewById(R.id.costs);
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
 
@@ -3382,11 +3386,51 @@ fragment.getMapViewController().setZoom(16);
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
-
-
-       mLayout.setTouchEnabled(false);
+        slider_part = (LinearLayout)findViewById(R.id.slider_part);
+        mLayout.setTouchEnabled(false);
+        slider_part.setEnabled(true);
         bazarPosting.setEnabled(true);
-        bazarPosting.setClickable(true);
+
+        Log.d("Panel States","******"+panelStates);
+
+        slider_part.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Panel works or not","*********");
+                Log.d("Panel States","******"+panelStates);
+                if(panelStates)
+                {
+                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+                    panelStates= false;
+                }
+                else
+                {
+                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+
+                    panelStates= true;
+                }
+            }
+        });
+//
+//        slider_part.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//
+////                if(mLayout.getPanelState().equals("EXPANDED"))
+////                {
+////
+////                }
+////                else
+////                mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+//                return true;
+//            }
+//        });
+
+
+       // mLayout.setTouchEnabled(false);
+     //   bazarPosting.setEnabled(true);
+       // bazarPosting.setClickable(true);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
@@ -3435,7 +3479,7 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
-
+                slider_part.setEnabled(true);
                 footer.setText("বিজ্ঞাপন দেখুন");
                 postbazar(context);
 

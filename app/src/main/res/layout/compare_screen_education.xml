@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:background="@color/education_color"
         android:id="@+id/compare_layoutedu"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical"
 
         android:layout_height="match_parent">
