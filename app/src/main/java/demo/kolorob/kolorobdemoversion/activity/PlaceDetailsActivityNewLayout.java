@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -138,8 +139,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.showList = showList;
     }
     ToggleButton toggleButton;
+    ProgressDialog dialog;
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     Double screenSize;
+    ImageView bazar_logo;
     Boolean panelStates= true;
     private ImageView iv_kolorob_logo;
     private static final int ANIM_INTERVAL = 150;
@@ -860,6 +863,10 @@ int index;
 
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
+                    dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
+                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setCancelable(true);
+                    dialog.show();
                     spItems.setVisibility(View.VISIBLE);
                     uptext.setVisibility(View.VISIBLE);
                     SearchClicked=false;
@@ -3035,6 +3042,7 @@ fragment.getMapViewController().setZoom(16);
                             listDataChild.put(listDataHeader.get(i),myList.get(i));
 
                         }
+                        dialog.cancel();
 
                         expListView = (ExpandableListView) findViewById(R.id.bazar_list);
                         bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
@@ -3436,25 +3444,11 @@ fragment.getMapViewController().setZoom(16);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
         layoutParams.setMargins(0,0,0,smal-6);
         bazar_tool.setLayoutParams(layoutParams);
-//        textView = (TextView) findViewById(R.id.list_main);
-        ImageView bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
-         int q= bazar_logo.getLayoutParams().width=width/9;
-        bazar_logo.getLayoutParams().height=width/9;
-//        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
-//        int p=iv_kolorob_logo.getLayoutParams().width=width/11;
-//        iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
+        bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
+        width=AppUtils.getScreenWidth(this);
+          bazar_logo.getLayoutParams().width=50;
+        bazar_logo.getLayoutParams().height=50;
 
-        close_button=(ImageView)findViewById(R.id.iv_close);
-
-        close_button.getLayoutParams().height=width/13;
-        close_button.getLayoutParams().width=width/13;
-
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
 
     }
