@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -38,6 +39,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -913,7 +915,7 @@ int index;
                     width=AppUtils.getScreenWidth(PlaceDetailsActivityNewLayout.this);
 //                    bazar_logo.getLayoutParams().width=50;
 //                    bazar_logo.getLayoutParams().height=50;
-                    init();
+                    init(PlaceDetailsActivityNewLayout.this);
 
                     Log.d("Panel States","******"+panelStates);
 
@@ -3393,21 +3395,30 @@ fragment.getMapViewController().setZoom(16);
 
 
 
-    public void init(){
+    public void init(final Activity activity){
 
+        LinearLayout bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
         bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
-        mLayout.setTouchEnabled(false);
-        slider_part.setEnabled(true);
+        mLayout.setTouchEnabled(true);
+
         bazarPosting.setEnabled(true);
+        bazar_post_layout.setFocusableInTouchMode(true);
+        bazar_post_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         Log.d("Panel States","******"+panelStates);
 
         slider_part.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AppUtils.hideKeyboard(activity);
                 Log.d("Panel works or not","*********");
                 Log.d("Panel States","******"+panelStates);
                 if(panelStates)
@@ -3475,7 +3486,7 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
-                slider_part.setEnabled(true);
+                slider_part.setVisibility(View.VISIBLE);
                 footer.setText("বিজ্ঞাপন দেখুন");
                 postbazar(context);
 
@@ -3484,7 +3495,7 @@ fragment.getMapViewController().setZoom(16);
             // This method will be call after slide down layout.
             @Override
             public void onPanelCollapsed(View panel) {
-
+                slider_part.setVisibility(View.VISIBLE);
                 Log.d(">>>>","onPanelCollapsed");
 
                 footer.setText("বিজ্ঞাপন দিন");
@@ -3500,6 +3511,9 @@ fragment.getMapViewController().setZoom(16);
 
             @Override
             public void onPanelHidden(View panel) {
+
+                Log.d("OnPanelHidden","$$$$$$");
+           //     mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                 Log.e(TAG, "onPanelHidden");
             }
         });
