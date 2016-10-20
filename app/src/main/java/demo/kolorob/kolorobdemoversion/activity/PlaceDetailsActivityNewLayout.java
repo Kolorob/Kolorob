@@ -1329,9 +1329,9 @@ int index;
 
         final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
         List<String> types = new ArrayList<String>();
-        types.add("New");
+        types.add("Exchange");
         types.add("Used");
-        types.add("Refarbished");
+        types.add("Tution");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
 
@@ -1361,6 +1361,7 @@ int index;
            b.condition = spinner.getSelectedItem().toString();
            b.contact_person = contact_person.getText().toString();
            b.price = price.getText().toString();
+           b.product_name= product_name.getText().toString();
 
            saveBazar(b,context);
        }
@@ -1387,7 +1388,8 @@ int index;
                         "&contact=" + b.contact +
                         "&condition=" + b.condition +
                         "&contact_person=" + b.contact_person +
-                        "&price=" + b.price,
+                        "&product_name=" + b.product_name+
+                "&price=" + b.price,
                 new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
