@@ -1,8 +1,10 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,6 +39,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -128,7 +131,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
-
+    LinearLayout slider_part;
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
@@ -136,8 +139,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         this.showList = showList;
     }
     ToggleButton toggleButton;
+    ProgressDialog dialog;
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     Double screenSize;
+    ImageView bazar_logo;
+    Boolean panelStates= true;
     private ImageView iv_kolorob_logo;
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
@@ -872,6 +878,10 @@ int index;
 
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
+                    dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
+                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setCancelable(true);
+                    dialog.show();
                     spItems.setVisibility(View.VISIBLE);
                     uptext.setVisibility(View.VISIBLE);
                     SearchClicked=false;
@@ -915,7 +925,13 @@ int index;
                     llSubCatListHolder.setVisibility(View.GONE);
                     //  subCatItemList.setVisibility(View.VISIBLE);
                     bazar_tool.setVisibility(View.VISIBLE);
-                    init();
+                    width=AppUtils.getScreenWidth(PlaceDetailsActivityNewLayout.this);
+//                    bazar_logo.getLayoutParams().width=50;
+//                    bazar_logo.getLayoutParams().height=50;
+                    init(PlaceDetailsActivityNewLayout.this);
+
+                    Log.d("Panel States","******"+panelStates);
+
                     loadBazar(PlaceDetailsActivityNewLayout.this);
                     panelListener(PlaceDetailsActivityNewLayout.this);
                     //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
@@ -1340,7 +1356,7 @@ int index;
         final EditText product_name= (EditText)findViewById(R.id.product_name);
         final EditText phone= (EditText)findViewById(R.id.phone_no);
         final EditText address= (EditText)findViewById(R.id.address);
-        final EditText price= (EditText)findViewById(R.id.price);
+        final EditText price= (EditText)findViewById(R.id.costs);
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
 
@@ -3044,6 +3060,7 @@ fragment.getMapViewController().setZoom(16);
                             listDataChild.put(listDataHeader.get(i),myList.get(i));
 
                         }
+                        dialog.cancel();
 
                         expListView = (ExpandableListView) findViewById(R.id.bazar_list);
                         bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
@@ -3391,39 +3408,73 @@ fragment.getMapViewController().setZoom(16);
 
 
 
-    public void init(){
+    public void init(final Activity activity){
 
+        LinearLayout bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
+        slider_part = (LinearLayout)findViewById(R.id.slider_part);
+        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
+        mLayout.setTouchEnabled(true);
 
-
-       mLayout.setTouchEnabled(false);
         bazarPosting.setEnabled(true);
-        bazarPosting.setClickable(true);
+        bazar_post_layout.setFocusableInTouchMode(true);
+        bazar_post_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+        Log.d("Panel States","******"+panelStates);
+
+        slider_part.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppUtils.hideKeyboard(activity);
+                Log.d("Panel works or not","*********");
+                Log.d("Panel States","******"+panelStates);
+                if(panelStates)
+                {
+                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+                    panelStates= false;
+                }
+                else
+                {
+                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+
+                    panelStates= true;
+                }
+            }
+        });
+//
+//        slider_part.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//
+////                if(mLayout.getPanelState().equals("EXPANDED"))
+////                {
+////
+////                }
+////                else
+////                mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+//                return true;
+//            }
+//        });
+
+
+       // mLayout.setTouchEnabled(false);
+     //   bazarPosting.setEnabled(true);
+       // bazarPosting.setClickable(true);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
         layoutParams.setMargins(0,0,0,smal-6);
         bazar_tool.setLayoutParams(layoutParams);
-//        textView = (TextView) findViewById(R.id.list_main);
-        ImageView bazar_logo=(ImageView)findViewById(R.id.bazar_logo);
-         int q= bazar_logo.getLayoutParams().width=width/9;
-        bazar_logo.getLayoutParams().height=width/9;
-//        iv_kolorob_logo=(ImageView)findViewById(R.id.iv_kolorob_logo);
-//        int p=iv_kolorob_logo.getLayoutParams().width=width/11;
-//        iv_kolorob_logo.getLayoutParams().height=(p*5)/6;
 
-        close_button=(ImageView)findViewById(R.id.iv_close);
 
-        close_button.getLayoutParams().height=width/13;
-        close_button.getLayoutParams().width=width/13;
 
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
 
     }
@@ -3448,7 +3499,7 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
-
+                slider_part.setVisibility(View.VISIBLE);
                 footer.setText("বিজ্ঞাপন দেখুন");
                 postbazar(context);
 
@@ -3457,7 +3508,7 @@ fragment.getMapViewController().setZoom(16);
             // This method will be call after slide down layout.
             @Override
             public void onPanelCollapsed(View panel) {
-
+                slider_part.setVisibility(View.VISIBLE);
                 Log.d(">>>>","onPanelCollapsed");
 
                 footer.setText("বিজ্ঞাপন দিন");
@@ -3473,6 +3524,9 @@ fragment.getMapViewController().setZoom(16);
 
             @Override
             public void onPanelHidden(View panel) {
+
+                Log.d("OnPanelHidden","$$$$$$");
+           //     mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                 Log.e(TAG, "onPanelHidden");
             }
         });
