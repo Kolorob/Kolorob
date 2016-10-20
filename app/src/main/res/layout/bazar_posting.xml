@@ -26,6 +26,28 @@
         android:background="@color/white"
         android:id="@+id/bazar_spinner" />
 
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Advertizement Type"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+        android:id="@+id/advertizement_type" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+
+        android:layout_marginRight="10dp"
+
+        android:background="@color/white"
+        android:id="@+id/type_spinner" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

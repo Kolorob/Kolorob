@@ -1319,25 +1319,22 @@ int index;
     {
         // Spinner element
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
-
-        // Spinner click listener
-//        spinner.setOnItemSelectedListener(context);
-
-        // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
         categories.add("New");
         categories.add("Used");
         categories.add("Refarbished");
-
-
-        // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
-
-        // Drop down layout style - list view with radio button
-      //  dataAdapter.setDropDownViewResource(R.layout.bazar_spinner);
-
-        // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+
+
+        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
+        List<String> types = new ArrayList<String>();
+        types.add("New");
+        types.add("Used");
+        types.add("Refarbished");
+        ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
+        type_spinner.setAdapter(type_adapter);
+
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
         final EditText product_name= (EditText)findViewById(R.id.product_name);
@@ -1358,7 +1355,7 @@ int index;
 
            final BazarItem b = new BazarItem();
            b.description=description.getText().toString();
-           b.type = product_name.getText().toString();
+           b.type = type_spinner.getSelectedItem().toString();
            b.phone = phone.getText().toString(); //MUST BE REGISTERED
            b.contact = address.getText().toString();
            b.condition = spinner.getSelectedItem().toString();
