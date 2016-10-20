@@ -24,6 +24,7 @@ public class BazarItem {
     public String contact;
     public String contact_person;
     public String product_name;
+    public String address;
 
 
 
@@ -40,12 +41,13 @@ public class BazarItem {
         contact = cur.getString(9);
         contact_person = cur.getString(10);
         product_name = cur.getString(11);
+        address = cur.getString(12);
    }
 
     public BazarItem(){}
 
     @Override
     public String toString() {
-        return id + type + _customer + description + date + expiry_date + phone + price + condition + contact + contact_person + product_name;
+        return id + type + _customer + description + date + expiry_date + phone + price + condition + contact + contact_person + product_name + address;
     }
 }

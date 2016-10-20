@@ -3017,7 +3017,7 @@ fragment.getMapViewController().setZoom(16);
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     "মূল্য: "+bazarItem.price+"@"+
                                     "কন্ডিশন: "+bazarItem.condition+"@"+
-                                    "এলাকা: "+"Mirpur 12"+"@"+
+                                    "এলাকা: "+"address"+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
                                     bazarItem.contact+"v";
 
