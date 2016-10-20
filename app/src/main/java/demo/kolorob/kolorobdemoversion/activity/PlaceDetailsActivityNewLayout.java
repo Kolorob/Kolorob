@@ -129,6 +129,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
+    Boolean negotiable_check;
     String[] left_part;
     String[] right_part;
     String[] health_header;
@@ -337,6 +338,7 @@ TextView uptext;
     String nodefromback;
 int index;
     MapFragmentOSM mapFragment;
+    CheckBox negotiable;
 
 
 
@@ -373,6 +375,7 @@ int index;
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
+        negotiable= (CheckBox)findViewById(R.id.negotiable);
 
 
         int buttonWidth = width/4;
@@ -1327,10 +1330,12 @@ int index;
         spinner.setAdapter(dataAdapter);
 
 
+
+
         final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
         List<String> types = new ArrayList<String>();
         types.add("Exchange");
-        types.add("Used");
+        types.add("Sell");
         types.add("Tution");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
@@ -1352,16 +1357,30 @@ int index;
             public void onClick(View v) {
        try
        {
+           negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+               @Override
+               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   negotiable_check=isChecked;
+               }
+           });
 
            final BazarItem b = new BazarItem();
            b.description=description.getText().toString();
+           Log.d("type Spinner","$$$$$$"+type_spinner.getSelectedItem().toString());
            b.type = type_spinner.getSelectedItem().toString();
            b.phone = phone.getText().toString(); //MUST BE REGISTERED
            b.contact = address.getText().toString();
            b.condition = spinner.getSelectedItem().toString();
            b.contact_person = contact_person.getText().toString();
-           b.price = price.getText().toString();
-           b.product_name= product_name.getText().toString();
+           if(negotiable_check)
+           {
+               b.price = price.getText().toString()+ " (Negotiable)";
+           }
+           else {
+               b.price = price.getText().toString();
+           }
+
+           b.product_name= "product";
 
            saveBazar(b,context);
        }
@@ -1388,8 +1407,9 @@ int index;
                         "&contact=" + b.contact +
                         "&condition=" + b.condition +
                         "&contact_person=" + b.contact_person +
-                        "&product_name=" + b.product_name+
-                "&price=" + b.price,
+                        "&price=" + b.price+
+                        "&name=" + b.product_name,
+
                 new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
