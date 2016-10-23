@@ -382,8 +382,14 @@ int index;
         footer = (TextView)findViewById(R.id.footer);
         footer.getLayoutParams().width=width/4;
         refresh_button=(ImageView) findViewById(R.id.refresh_button);
-        refresh_button.getLayoutParams().height=width/11;
-        refresh_button.getLayoutParams().width=width/11;
+        refresh_button.getLayoutParams().height=width/14;
+        refresh_button.getLayoutParams().width=width/14;
+
+        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
+
+        bazar_logo.getLayoutParams().height = width/11;
+        bazar_logo.getLayoutParams().width = width/11;
+
 
         int buttonWidth = width/4;
         int buttonHeight = height/20;
@@ -3472,7 +3478,7 @@ fragment.getMapViewController().setZoom(16);
 //        LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
 //        sliding_parts.height=120;
 //        slider_part.setLayoutParams(sliding_parts);
-        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
+
         mLayout.setTouchEnabled(true);
 
         bazarPosting.setEnabled(true);
@@ -3645,7 +3651,7 @@ fragment.getMapViewController().setZoom(16);
     protected void onResume() {
         super.onResume();
 
-        toggleButton.setVisibility(View.VISIBLE);
+     //   toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
 //
