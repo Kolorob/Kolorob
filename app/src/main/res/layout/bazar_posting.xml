@@ -65,8 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/kolorob_color"
-        android:textColorHint="@color/kolorob_color"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
         android:layout_marginTop="@dimen/bazar_distance"
         android:background="@color/white"
         android:hint="Product Name"
@@ -90,10 +90,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/kolorob_color"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
 
         android:background="@color/white"
-        android:textColorHint="@color/kolorob_color"
 
         android:layout_marginTop="@dimen/bazar_distance"
         android:hint="Phone Number"
@@ -106,10 +106,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/kolorob_color"
-
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
         android:background="@color/white"
-        android:textColorHint="@color/kolorob_color"
 
         android:layout_marginTop="@dimen/bazar_distance"
         android:hint="Contact"
@@ -134,11 +133,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/kolorob_color"
-
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
         android:background="@color/white"
         android:layout_marginTop="@dimen/bazar_distance"
-        android:textColorHint="@color/kolorob_color"
 
         android:hint="Address"
         android:layout_marginLeft="10dp"
@@ -164,9 +162,8 @@
         android:gravity="center"
         android:background="@color/white"
         android:hint="Contact Person"
-        android:textColor="@color/kolorob_color"
-
-        android:textColorHint="@color/kolorob_color"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
 
         android:layout_marginTop="@dimen/bazar_distance"
 
@@ -207,9 +204,8 @@
                 android:gravity="center"
                 android:background="@color/white"
                 android:hint="Price"
-                android:textColor="@color/kolorob_color"
-
-                android:textColorHint="@color/kolorob_color"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
                 android:layout_marginTop="@dimen/bazar_distance"
                 android:lines="2"
                 android:layout_marginLeft="10dp"
@@ -256,11 +252,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/kolorob_color"
+        android:textColor="@color/black"
 
 
         android:layout_marginTop="@dimen/bazar_distance"
-        android:textColorHint="@color/kolorob_color"
+        android:textColorHint="@color/gray"
 
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
