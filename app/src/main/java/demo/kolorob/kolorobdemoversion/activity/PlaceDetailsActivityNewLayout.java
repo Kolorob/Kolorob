@@ -183,6 +183,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ImageView compare_logo_image;
     List<String> listDataHeader;
     ArrayList<String> bazar_data;
+    private ImageView refresh_button;
     HashMap<String, ArrayList<String>> listDataChild;
     ExpandableListView expListView;
     private int lastExpandedPosition = -1;
@@ -380,6 +381,9 @@ int index;
         negotiable= (CheckBox)findViewById(R.id.negotiable);
         footer = (TextView)findViewById(R.id.footer);
         footer.getLayoutParams().width=width/4;
+        refresh_button=(ImageView) findViewById(R.id.refresh_button);
+        refresh_button.getLayoutParams().height=width/11;
+        refresh_button.getLayoutParams().width=width/11;
 
         int buttonWidth = width/4;
         int buttonHeight = height/20;
@@ -745,6 +749,17 @@ int index;
 
         }
 
+        refresh_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
+                dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                dialog.setCancelable(false);
+                dialog.show();
+                loadBazar(PlaceDetailsActivityNewLayout.this);
+
+            }
+        });
         MapButton.setBackgroundResource(R.drawable.map_selected);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
