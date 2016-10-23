@@ -19,9 +19,13 @@
             android:layout_height="match_parent"
             android:id="@+id/holder"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/place_choice_screen3"
-            android:layout_alignParentTop="true">
 
+            android:layout_alignParentTop="true">
+<ImageButton
+    android:layout_width="match_parent"
+    android:id="@+id/placeselectionholder"
+    android:background="@null"
+    android:layout_height="match_parent" />
 
         </FrameLayout>
 

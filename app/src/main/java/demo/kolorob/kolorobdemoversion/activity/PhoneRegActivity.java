@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
 
@@ -40,6 +41,7 @@ public class PhoneRegActivity extends Activity {
 
 
     private Context con;
+    String IMEINumber;
 
 
     @Override
@@ -51,16 +53,24 @@ public class PhoneRegActivity extends Activity {
         phone  = (EditText)findViewById(R.id.phone_id);
         name=(EditText)findViewById(R.id.userid) ;
         email=(EditText)findViewById(R.id.emailid) ;
-
+        doPermissionGrantedStuffs();
 
         con = this;
     }
+    public void doPermissionGrantedStuffs() {
+        //Have an  object of TelephonyManager
+        TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+        IMEINumber=tm.getDeviceId();
 
+
+    }
     public void submit(View v) {
 
         phoneNumber=phone.getText().toString().trim();
         uname=name.getText().toString().trim();
         emailaddress=email.getText().toString().trim();
+
         int size = phoneNumber.length();
 
         if (size != 11) {
@@ -94,7 +104,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&email="+emailaddress+"&name="+uname+"&username="+username+"&password="+password+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&email="+emailaddress+"&name="+uname+"&deviceid="+IMEINumber+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -124,6 +134,10 @@ public class PhoneRegActivity extends Activity {
                             {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                                         "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");                            }
+                            else if(response.equals("\"already registered device\""))
+                            {
+                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
+                                        "আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে");                            }
                             else
                             {
 
