@@ -160,6 +160,7 @@ String areaname=null;
 
     private GoogleApiClient client;
     FrameLayout mImageMap;
+    AccessToken accessToken;
     public static int APP_REQUEST_CODE = 99;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,7 +229,7 @@ String areaname=null;
 
 
 
-        AccessToken accessToken = AccountKit.getCurrentAccessToken();
+ accessToken = AccountKit.getCurrentAccessToken();
 
         if(accessToken != null){
 
@@ -511,7 +512,12 @@ String areaname=null;
 
     @Override
     public void onBackPressed() {
-        SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
+        if(accessToken==null)
+        {
+
+        }
+        else {
+            SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
 
    /*    if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
        {
@@ -520,26 +526,25 @@ String areaname=null;
            Reviewgiven=false;
            editor.apply();
        }*/
-         if(!settings.getBoolean("Reviewsent",false)) help();
+            if (!settings.getBoolean("Reviewsent", false)) help();
 
-else
-         {
-             if (doubleBackToExitPressedOnce) {
+            else {
+                if (doubleBackToExitPressedOnce) {
 //
-                 super.onBackPressed();
+                    super.onBackPressed();
 
-                 //    finish();
-                 return;
-             }
+                    //    finish();
+                    return;
+                }
 
-             ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
-
-
-             this.doubleBackToExitPressedOnce = true;
+                ToastMessageDisplay.setText(this, "এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
 
 
-         }
+                this.doubleBackToExitPressedOnce = true;
 
+
+            }
+        }
     }
 
     public void help() {
