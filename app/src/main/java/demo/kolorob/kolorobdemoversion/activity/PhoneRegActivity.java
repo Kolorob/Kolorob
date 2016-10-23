@@ -14,7 +14,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -134,10 +136,16 @@ public class PhoneRegActivity extends Activity {
                             {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                                         "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");                            }
-                            else if(response.equals("\"already registered device\""))
+                            else if(response.contains("EXISTING"))
                             {
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
-                                        "আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে");                            }
+                                List<String> responses = Arrays.asList(response.split(","));
+                                String serverusername=responses.get(1);
+                                String serverphonenumber=responses.get(2);
+                                SharedPreferencesHelper.setNumber(con,serverphonenumber);
+
+                                SharedPreferencesHelper.setUname(con,serverusername);
+                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
+                                        "আপনার ইউজার নেম = " +serverusername +" এবং ফোন নাম্বার= "+serverphonenumber);                            }
                             else
                             {
 
@@ -148,7 +156,7 @@ public class PhoneRegActivity extends Activity {
                                 // user using same number in multiple device
 
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
-                                        "আপনি ইতিপূর্বে  রেজিস্ট্রেশন করে ফেলেছেন");
+                                        "এই নাম্বার টি আগেই নিবন্ধিত হয়েছে");
                             }
 
                                         //  finish();
