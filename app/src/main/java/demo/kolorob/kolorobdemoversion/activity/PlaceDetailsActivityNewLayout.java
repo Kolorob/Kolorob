@@ -1348,6 +1348,7 @@ int index;
         final EditText price= (EditText)findViewById(R.id.costs);
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
+        final EditText contact= (EditText)findViewById(R.id.contact);
 
 
 
@@ -1364,23 +1365,48 @@ int index;
                }
            });
 
+//           final BazarItem b = new BazarItem();
+//           b.description=description.getText().toString();
+//
+//           b.type = type_spinner.getSelectedItem().toString();
+//           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+//           b.contact = contact.getText().toString();
+//           b.condition = spinner.getSelectedItem().toString();
+//           b.contact_person = contact_person.getText().toString();
+//           b.address= "address";
+//           Log.d("type Spinner","$$$$$$"+address.getText().toString());
+//           if(negotiable_check)
+//           {
+//               b.price = price.getText().toString()+ " (Negotiable)";
+//           }
+//           else {
+//               b.price = price.getText().toString();
+//           }
+//
+//           b.product_name= "product";
+
+
+
+
            final BazarItem b = new BazarItem();
-           b.description=description.getText().toString();
-           Log.d("type Spinner","$$$$$$"+type_spinner.getSelectedItem().toString());
-           b.type = type_spinner.getSelectedItem().toString();
-           b.phone = phone.getText().toString(); //MUST BE REGISTERED
-           b.contact = address.getText().toString();
-           b.condition = spinner.getSelectedItem().toString();
-           b.contact_person = contact_person.getText().toString();
-           if(negotiable_check)
-           {
-               b.price = price.getText().toString()+ " (Negotiable)";
-           }
-           else {
-               b.price = price.getText().toString();
-           }
+           b.description="Description";
+           b.type = "Exchange";
+           b.phone = "01988009755"; //MUST BE REGISTERED
+           b.contact = "01988009755";
+           b.condition = "New";
+           b.contact_person = "01988009755";
+           b.address= "the Arafat";
+           Log.d("type Spinner","$$$$$$"+address.getText().toString());
+
+               b.price = "18";
+
 
            b.product_name= "product";
+
+
+
+
+
 
            saveBazar(b,context);
        }
@@ -1408,7 +1434,9 @@ int index;
                         "&condition=" + b.condition +
                         "&contact_person=" + b.contact_person +
                         "&price=" + b.price+
-                        "&name=" + b.product_name,
+                        "&name=" + b.product_name+
+                        "&adress=" + b.address,
+
 
                 new VolleyApiCallback() {
                     @Override
@@ -3075,7 +3103,7 @@ fragment.getMapViewController().setZoom(16);
 
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights*2);//
+                        layoutParams.setMargins(0, 0, 0, buttonHeights);//
 
                         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -3418,6 +3446,7 @@ fragment.getMapViewController().setZoom(16);
 
         LinearLayout bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        mLayout.setPanelHeight(60);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
         bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
