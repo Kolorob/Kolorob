@@ -1347,12 +1347,29 @@ int index;
     {
         // Spinner element
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
+
         List<String> categories = new ArrayList<String>();
         categories.add("New");
         categories.add("Used");
         categories.add("Refarbished");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
+
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                TextView text1 = (TextView)parent.getChildAt(0);
+                text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
 
 

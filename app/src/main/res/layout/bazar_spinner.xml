@@ -7,5 +7,5 @@
     android:gravity="center"
     android:background="@drawable/border_spinner_adapter"
     android:ellipsize="marquee"
-    android:textColor="@color/kolorob_color"
+    android:textColor="@color/gray"
     android:textSize="20dp" />
