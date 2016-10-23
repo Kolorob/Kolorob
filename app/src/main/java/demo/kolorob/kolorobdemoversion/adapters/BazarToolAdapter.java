@@ -191,7 +191,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         if(screenSize>6.5)
         {
-            product_name.setTextSize(22);
+            product_name.setTextSize(25);
             sell.setTextSize(16);
 
         }

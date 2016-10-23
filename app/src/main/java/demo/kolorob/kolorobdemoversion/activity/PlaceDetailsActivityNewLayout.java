@@ -131,6 +131,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     int buttonHeights;
     Boolean negotiable_check;
     String[] left_part;
+    TextView footer;
+    LinearLayout wholeLayout;
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
@@ -376,7 +378,8 @@ int index;
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         negotiable= (CheckBox)findViewById(R.id.negotiable);
-
+        footer = (TextView)findViewById(R.id.footer);
+        footer.getLayoutParams().width=width/4;
 
         int buttonWidth = width/4;
         int buttonHeight = height/20;
@@ -509,7 +512,7 @@ int index;
 
         svs.setVisibility(View.GONE);
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-//        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
+        wholeLayout=(LinearLayout)findViewById(R.id.wholeLayout);
 
 
         final Intent intent;
@@ -752,6 +755,7 @@ int index;
                 ListClicked=false;
                 CompareClicked=false;
                 InCompare=false;
+                wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
 
 
                 populateSearch();
@@ -924,7 +928,7 @@ int index;
 
                     loadBazar(PlaceDetailsActivityNewLayout.this);
                     panelListener(PlaceDetailsActivityNewLayout.this);
-                    //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
+                    wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.kolorob_color));
 
                     setShowList(1);
                     toolbar.setVisibility(View.GONE);
@@ -3103,7 +3107,7 @@ fragment.getMapViewController().setZoom(16);
 
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights);//
+                        layoutParams.setMargins(0, 0, 0, buttonHeights/2);//
 
                         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -3449,6 +3453,10 @@ fragment.getMapViewController().setZoom(16);
         mLayout.setPanelHeight(60);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
+//
+//        LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
+//        sliding_parts.height=120;
+//        slider_part.setLayoutParams(sliding_parts);
         bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
         mLayout.setTouchEnabled(true);
 
@@ -3505,7 +3513,7 @@ fragment.getMapViewController().setZoom(16);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
-        layoutParams.setMargins(0,0,0,smal-6);
+        layoutParams.setMargins(0,0,0,(smal*5)/4);
         bazar_tool.setLayoutParams(layoutParams);
 
 
@@ -3517,7 +3525,7 @@ fragment.getMapViewController().setZoom(16);
     public void panelListener(final Context context){
 
         mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            TextView footer= (TextView)findViewById(R.id.footer);
+
 
 
             // During the transition of expand and collapse onPanelSlide function will be called.
@@ -3536,6 +3544,7 @@ fragment.getMapViewController().setZoom(16);
                 Log.d(">>>>","onPanelExpanded");
                 slider_part.setVisibility(View.VISIBLE);
                 footer.setText("বিজ্ঞাপন দেখুন");
+
                 postbazar(context);
 
             }
