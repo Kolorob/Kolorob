@@ -102,6 +102,8 @@
                 android:background="@color/kolorob_color"
                 android:divider="@color/white"
                 android:dividerHeight="4dp"
+                android:groupIndicator="@null"
+
 
 
                 android:layout_height="match_parent"
