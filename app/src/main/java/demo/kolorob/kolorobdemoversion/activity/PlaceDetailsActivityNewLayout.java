@@ -1674,21 +1674,26 @@ int index;
 
 
            final BazarItem b = new BazarItem();
-           b.description="Description";
-           b.type = "Exchange";
-           b.phone = "01988009755"; //MUST BE REGISTERED
-           b.contact = "01988009755";
-           b.condition = "New";
-           b.contact_person = "01988009755";
-           b.address= "the Arafat";
-           Log.d("type Spinner","$$$$$$"+address.getText().toString());
+           b.description=description.getText().toString();
+           Log.d("Description","==========="+description.getText().toString());
+           b.type = "Tution";
+           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+           Log.d("phone","==========="+phone.getText().toString());
+           b.contact = contact.getText().toString();
+           Log.d("contact","==========="+contact.getText().toString());
+           b.condition = spinner.getSelectedItem().toString();
+           Log.d("condition","==========="+spinner.getSelectedItem().toString());
+           b.contact_person = contact_person.getText().toString();
+           Log.d("contact_person","==========="+contact_person.getText().toString());
+           b.address= address.getText().toString();
+           Log.d("address","$$$$$$"+address.getText().toString());
 
-               b.price = "18";
+               b.price = price.getText().toString();
+           Log.d("price","==========="+price.getText().toString());
 
+           b.product_name= product_name.getText().toString();
 
-           b.product_name= "product";
-
-
+           Log.d("product_name","==========="+product_name.getText().toString());
 
 
 
@@ -1711,6 +1716,7 @@ int index;
 
 
     private void saveBazar(BazarItem b, Context contexts){
+        Log.d("Advertizement Type","=========="+b.type);
         getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
                         +"&description=" + b.description +
                         "&type=" + b.type +
