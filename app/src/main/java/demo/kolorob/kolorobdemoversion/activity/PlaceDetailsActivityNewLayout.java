@@ -133,6 +133,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] left_part;
     TextView footer;
     LinearLayout wholeLayout;
+    private int spinCounter=0,spinCounter1=0;
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
@@ -830,6 +831,7 @@ int index;
                 SearchClicked=false;
                 MapClicked=true;
                 ListClicked=false;
+
                 if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
                     svsholder.setVisibility(View.VISIBLE);
@@ -906,6 +908,7 @@ int index;
                     CompareClicked=false;
                     searchviewholder.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.VISIBLE);
+
                     if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                         SearchButton.setImageResource(0);
                         MapButton.setImageResource(0);
@@ -1063,6 +1066,8 @@ int index;
                         svholder.setVisibility(View.GONE);
                         svsholder.setVisibility(View.GONE);
                         llSubCatListHolder.setVisibility(View.GONE);
+                        spinCounter=0;
+                        spinCounter1=0;
                         compareTool();
                     }
                 }
@@ -1358,15 +1363,22 @@ int index;
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinCounter>0)
+                {
+                    Log.d("Spinner Item Selected","=========="+spinCounter);
+                    TextView text1 = (TextView)parent.getChildAt(0);
+                    text1.setTextColor(ContextCompat.getColor(context,R.color.black));
 
+                }
 
-                TextView text1 = (TextView)parent.getChildAt(0);
-                text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+                spinCounter++;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                Log.d("No Item Selected","==========");
+                TextView text1 = (TextView)parent.getChildAt(0);
+                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
             }
         });
 
@@ -1382,6 +1394,29 @@ int index;
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
 
+        type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinCounter1>0)
+                {
+                    Log.d("Spinner Item Selected","=========="+spinCounter1);
+                    TextView text2 = (TextView)parent.getChildAt(0);
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+
+                }
+
+                spinCounter1++;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("No Item Selected","==========");
+                TextView text2 = (TextView)parent.getChildAt(0);
+                text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+            }
+        });
+
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
         final EditText product_name= (EditText)findViewById(R.id.product_name);
@@ -1391,6 +1426,166 @@ int index;
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
         final EditText contact= (EditText)findViewById(R.id.contact);
+
+
+
+        product_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        contact_person.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        contact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
 
 
@@ -3582,6 +3777,7 @@ fragment.getMapViewController().setZoom(16);
                 Log.d(">>>>","onPanelExpanded");
                 slider_part.setVisibility(View.VISIBLE);
                 footer.setText("বিজ্ঞাপন দেখুন");
+
 
                 postbazar(context);
 
