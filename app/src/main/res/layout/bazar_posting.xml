@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Condition"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/white"
@@ -23,7 +24,8 @@
 
         android:layout_marginRight="10dp"
 
-        android:background="@color/white"
+        android:background="@color/drak_yellow"
+        android:popupBackground="@color/green"
         android:id="@+id/bazar_spinner" />
 
 
@@ -34,6 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Advertizement Type"
         android:layout_marginLeft="10dp"
+        android:visibility="gone"
         android:layout_marginRight="10dp"
         android:textColor="@color/white"
         android:id="@+id/advertizement_type" />
@@ -42,10 +45,12 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
 
         android:layout_marginRight="10dp"
+        android:popupBackground="@color/white"
 
-        android:background="@color/white"
+        android:background="@color/drak_yellow"
         android:id="@+id/type_spinner" />
 
     <TextView
@@ -68,8 +73,8 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:layout_marginTop="@dimen/bazar_distance"
-        android:background="@color/light_gray"
-        android:hint="Product Name"
+        android:background="@color/drak_yellow"
+        android:hint="যে পন্য বিক্রয় করবেন"
         android:lines="2"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -93,10 +98,10 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
 
-        android:background="@color/light_gray"
+        android:background="@color/drak_yellow"
 
         android:layout_marginTop="@dimen/bazar_distance"
-        android:hint="Phone Number"
+        android:hint="মোবাইল নম্বর"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
@@ -108,10 +113,10 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
-        android:background="@color/light_gray"
+        android:background="@color/drak_yellow"
 
         android:layout_marginTop="@dimen/bazar_distance"
-        android:hint="Contact"
+        android:hint="অন্য মোবাইল নম্বর"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
@@ -135,10 +140,10 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
-        android:background="@color/light_gray"
+        android:background="@color/drak_yellow"
         android:layout_marginTop="@dimen/bazar_distance"
 
-        android:hint="Address"
+        android:hint="ঠিকানা"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:lines="2"
@@ -160,8 +165,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/light_gray"
-        android:hint="Contact Person"
+        android:background="@color/drak_yellow"
+        android:hint="যোগাযোগকারী ব্যক্তির নাম"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
 
@@ -202,8 +207,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:background="@color/light_gray"
-                android:hint="Price"
+                android:background="@color/drak_yellow"
+                android:hint="মূল্য"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:layout_marginTop="@dimen/bazar_distance"
@@ -221,7 +226,7 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Negotiable"
+                android:text="আলোচনাসাপেক্ষ্যে"
                 android:layout_marginTop="@dimen/bazar_distance"
 
                 android:theme="@style/checkBoxStyle"
@@ -260,8 +265,8 @@
 
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/light_gray"
-        android:hint="Description"
+        android:background="@color/drak_yellow"
+        android:hint="পন্যের বিবরন"
         android:lines="4"
         android:id="@+id/descriptions" />
     <LinearLayout
@@ -271,8 +276,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"
-            android:textColor="@color/kolorob_color"
+            android:text="বিজ্ঞাপন দিন"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/bazar_distance"
 
             android:background="@drawable/rounded"
@@ -280,6 +285,16 @@
             android:layout_marginRight="40dp"
             android:gravity="center"
             android:id="@+id/submit_bazar" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/bazar_distance"
+            android:background="@drawable/rounded"
+
+            android:text="বাতিল করুন"
+
+            android:id="@+id/button" />
 
     </LinearLayout>
 

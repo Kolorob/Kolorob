@@ -132,6 +132,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     Boolean negotiable_check;
     String[] left_part;
     TextView footer;
+    int position_type_spinner=0;
     LinearLayout wholeLayout;
     private int spinCounter=0,spinCounter1=0;
     String[] right_part;
@@ -1354,29 +1355,64 @@ int index;
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("New");
-        categories.add("Used");
-        categories.add("Refarbished");
+        categories.add("কন্ডিশন");
+        categories.add("নতুন");
+        categories.add("ব্যবহৃত");
+        categories.add("রিফারবিশড");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
+
+//        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(spinCounter>0)
+//                {
+//                    Log.d("Spinner Item Selected","=========="+spinCounter);
+//                    TextView text1 = (TextView)parent.getChildAt(0);
+//                    text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+//
+//                }
+//
+//                spinCounter++;
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                Log.d("No Item Selected","==========");
+//                TextView text1 = (TextView)parent.getChildAt(0);
+//                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+//            }
+//        });
+
+
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(spinCounter>0)
+
+                if((position>=1&&position<=3)&&spinCounter>0)
                 {
-                    Log.d("Spinner Item Selected","=========="+spinCounter);
                     TextView text1 = (TextView)parent.getChildAt(0);
+
                     text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    text1.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+//                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
+//                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
 
                 }
+                else
+                {
+                    TextView text1 = (TextView)parent.getChildAt(0);
+                    text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text1.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
+                }
+
 
                 spinCounter++;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("No Item Selected","==========");
                 TextView text1 = (TextView)parent.getChildAt(0);
                 text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
             }
@@ -1384,27 +1420,37 @@ int index;
 
 
 
-
-
         final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
         List<String> types = new ArrayList<String>();
-        types.add("Exchange");
-        types.add("Sell");
-        types.add("Tution");
+        types.add("বিজ্ঞাপনের ধরন");
+        types.add("বিনিময়");
+        types.add("বিক্রয়");
+        types.add("টিউশনি");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
+
 
         type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(spinCounter1>0)
+
+                if((position>=1&&position<=3)&&spinCounter1>0)
                 {
-                    Log.d("Spinner Item Selected","=========="+spinCounter1);
                     TextView text2 = (TextView)parent.getChildAt(0);
+
                     text2.setTextColor(ContextCompat.getColor(context,R.color.black));
-                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+//                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
+//                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
 
                 }
+                else
+                {
+                    TextView text2 = (TextView)parent.getChildAt(0);
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
+                }
+                Log.d("Spinner Item Selected","=========="+spinCounter1);
 
                 spinCounter1++;
             }
@@ -1442,7 +1488,7 @@ int index;
                 }
                 else
                 {
-                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
@@ -1464,7 +1510,7 @@ int index;
                 }
                 else
                 {
-                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
@@ -1487,7 +1533,7 @@ int index;
                 }
                 else
                 {
-                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
@@ -1510,7 +1556,7 @@ int index;
                 }
                 else
                 {
-                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
@@ -1533,7 +1579,7 @@ int index;
                 }
                 else
                 {
-                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
@@ -1555,7 +1601,7 @@ int index;
                 }
                 else
                 {
-                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
@@ -1578,7 +1624,7 @@ int index;
                 }
                 else
                 {
-                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.light_gray));
+                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
                 }
             }
 
