@@ -127,7 +127,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
+    Boolean negotiable_check;
     String[] left_part;
+    TextView footer;
+    LinearLayout wholeLayout;
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
@@ -176,6 +179,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ImageView compare_logo_image;
     List<String> listDataHeader;
     ArrayList<String> bazar_data;
+    private ImageView refresh_button;
     HashMap<String, ArrayList<String>> listDataChild;
     ExpandableListView expListView;
     private int lastExpandedPosition = -1;
@@ -333,6 +337,7 @@ TextView uptext;
     String nodefromback;
 int index;
     MapFragmentOSM mapFragment;
+    CheckBox negotiable;
 
 
 
@@ -369,6 +374,17 @@ int index;
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
+        negotiable= (CheckBox)findViewById(R.id.negotiable);
+        footer = (TextView)findViewById(R.id.footer);
+        footer.getLayoutParams().width=width/4;
+        refresh_button=(ImageView) findViewById(R.id.refresh_button);
+        refresh_button.getLayoutParams().height=width/14;
+        refresh_button.getLayoutParams().width=width/14;
+
+        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
+
+        bazar_logo.getLayoutParams().height = width/11;
+        bazar_logo.getLayoutParams().width = width/11;
 
 
        buttonWidth = width/4;
@@ -516,7 +532,7 @@ int index;
 
         svs.setVisibility(View.GONE);
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-//        wholeLayout=(RelativeLayout)findViewById(R.id.wholeLayout);
+        wholeLayout=(LinearLayout)findViewById(R.id.wholeLayout);
 
 
         final Intent intent;
@@ -749,10 +765,25 @@ int index;
 
         }
 
+<<<<<<< HEAD
+        refresh_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
+                dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                dialog.setCancelable(false);
+                dialog.show();
+                loadBazar(PlaceDetailsActivityNewLayout.this);
+
+            }
+        });
+        MapButton.setBackgroundResource(R.drawable.map_selected);
+=======
         Picasso.with(this)
                 .load(R.drawable.map_selected)
                 .resize(buttonWidth,larg)
                 .into(MapButton);
+>>>>>>> 07abbf12c1e1f153ce49faa09b6a2c988c78583b
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -762,6 +793,7 @@ int index;
                 ListClicked=false;
                 CompareClicked=false;
                 InCompare=false;
+                wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
 
 
                 populateSearch();
@@ -981,7 +1013,7 @@ int index;
 
                     loadBazar(PlaceDetailsActivityNewLayout.this);
                     panelListener(PlaceDetailsActivityNewLayout.this);
-                    //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
+                    wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.kolorob_color));
 
                     setShowList(1);
                     toolbar.setVisibility(View.GONE);
@@ -1395,24 +1427,44 @@ int index;
         // Spinner element
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
 
-        // Spinner click listener
-//        spinner.setOnItemSelectedListener(context);
-
-        // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
         categories.add("New");
         categories.add("Used");
-        categories.add("Refurbished");
-
-
-        // Creating adapter for spinner
+<<<<<<< HEAD
+        categories.add("Refarbished");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
-
-        // Drop down layout style - list view with radio button
-      //  dataAdapter.setDropDownViewResource(R.layout.bazar_spinner);
-
-        // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+=======
+        categories.add("Refurbished");
+>>>>>>> 07abbf12c1e1f153ce49faa09b6a2c988c78583b
+
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                TextView text1 = (TextView)parent.getChildAt(0);
+                text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
+        List<String> types = new ArrayList<String>();
+        types.add("Exchange");
+        types.add("Sell");
+        types.add("Tution");
+        ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
+        type_spinner.setAdapter(type_adapter);
+
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
         final EditText product_name= (EditText)findViewById(R.id.product_name);
@@ -1421,6 +1473,7 @@ int index;
         final EditText price= (EditText)findViewById(R.id.costs);
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
+        final EditText contact= (EditText)findViewById(R.id.contact);
 
 
 
@@ -1430,15 +1483,55 @@ int index;
             public void onClick(View v) {
        try
        {
+           negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+               @Override
+               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   negotiable_check=isChecked;
+               }
+           });
+
+//           final BazarItem b = new BazarItem();
+//           b.description=description.getText().toString();
+//
+//           b.type = type_spinner.getSelectedItem().toString();
+//           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+//           b.contact = contact.getText().toString();
+//           b.condition = spinner.getSelectedItem().toString();
+//           b.contact_person = contact_person.getText().toString();
+//           b.address= "address";
+//           Log.d("type Spinner","$$$$$$"+address.getText().toString());
+//           if(negotiable_check)
+//           {
+//               b.price = price.getText().toString()+ " (Negotiable)";
+//           }
+//           else {
+//               b.price = price.getText().toString();
+//           }
+//
+//           b.product_name= "product";
+
+
+
 
            final BazarItem b = new BazarItem();
-           b.description=description.getText().toString();
-           b.type = product_name.getText().toString();
-           b.phone = phone.getText().toString(); //MUST BE REGISTERED
-           b.contact = address.getText().toString();
-           b.condition = spinner.getSelectedItem().toString();
-           b.contact_person = contact_person.getText().toString();
-           b.price = price.getText().toString();
+           b.description="Description";
+           b.type = "Exchange";
+           b.phone = "01988009755"; //MUST BE REGISTERED
+           b.contact = "01988009755";
+           b.condition = "New";
+           b.contact_person = "01988009755";
+           b.address= "the Arafat";
+           Log.d("type Spinner","$$$$$$"+address.getText().toString());
+
+               b.price = "18";
+
+
+           b.product_name= "product";
+
+
+
+
+
 
            saveBazar(b,context);
        }
@@ -1465,7 +1558,11 @@ int index;
                         "&contact=" + b.contact +
                         "&condition=" + b.condition +
                         "&contact_person=" + b.contact_person +
-                        "&price=" + b.price,
+                        "&price=" + b.price+
+                        "&name=" + b.product_name+
+                        "&adress=" + b.address,
+
+
                 new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
@@ -3073,7 +3170,7 @@ fragment.getMapViewController().setZoom(16);
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     "মূল্য: "+bazarItem.price+"@"+
                                     "কন্ডিশন: "+bazarItem.condition+"@"+
-                                    "এলাকা: "+"Mirpur 12"+"@"+
+                                    "এলাকা: "+"address"+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
                                     bazarItem.contact+"v";
 
@@ -3131,7 +3228,7 @@ fragment.getMapViewController().setZoom(16);
 
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights*2);//
+                        layoutParams.setMargins(0, 0, 0, buttonHeights/2);//
 
                         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -3474,9 +3571,14 @@ fragment.getMapViewController().setZoom(16);
 
         LinearLayout bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        mLayout.setPanelHeight(60);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
-        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
+//
+//        LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
+//        sliding_parts.height=120;
+//        slider_part.setLayoutParams(sliding_parts);
+
         mLayout.setTouchEnabled(true);
 
         bazarPosting.setEnabled(true);
@@ -3532,7 +3634,7 @@ fragment.getMapViewController().setZoom(16);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
-        layoutParams.setMargins(0,0,0,smal-6);
+        layoutParams.setMargins(0,0,0,(smal*5)/4);
         bazar_tool.setLayoutParams(layoutParams);
 
 
@@ -3544,7 +3646,7 @@ fragment.getMapViewController().setZoom(16);
     public void panelListener(final Context context){
 
         mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            TextView footer= (TextView)findViewById(R.id.footer);
+
 
 
             // During the transition of expand and collapse onPanelSlide function will be called.
@@ -3563,6 +3665,7 @@ fragment.getMapViewController().setZoom(16);
                 Log.d(">>>>","onPanelExpanded");
                 slider_part.setVisibility(View.VISIBLE);
                 footer.setText("বিজ্ঞাপন দেখুন");
+
                 postbazar(context);
 
             }
@@ -3648,7 +3751,7 @@ fragment.getMapViewController().setZoom(16);
     protected void onResume() {
         super.onResume();
 
-        toggleButton.setVisibility(View.VISIBLE);
+     //   toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
 //
