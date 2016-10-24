@@ -382,7 +382,7 @@ int index;
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         negotiable= (CheckBox)findViewById(R.id.negotiable);
         footer = (TextView)findViewById(R.id.footer);
-        footer.getLayoutParams().width=width/4;
+        //footer.getLayoutParams().width=width/4;
         refresh_button=(ImageView) findViewById(R.id.refresh_button);
         refresh_button.getLayoutParams().height=width/14;
         refresh_button.getLayoutParams().width=width/14;
@@ -391,6 +391,8 @@ int index;
 
         bazar_logo.getLayoutParams().height = width/11;
         bazar_logo.getLayoutParams().width = width/11;
+        bazar_logo.setMinimumHeight(50);
+        bazar_logo.setMinimumWidth(50);
 
 
         int buttonWidth = width/4;
