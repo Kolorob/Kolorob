@@ -104,14 +104,18 @@
 
             </View>
             <ExpandableListView
+
+
+
                 android:id="@+id/bazar_list"
                 android:visibility="visible"
                 android:cacheColorHint="@android:color/transparent"
                 android:listSelector="@android:color/transparent"
                 android:childDivider="@color/kolorob_color"
+                android:dividerHeight="4dp"
+
                 android:background="@color/kolorob_color"
                 android:divider="@color/white"
-                android:dividerHeight="4dp"
                 android:groupIndicator="@null"
 
 

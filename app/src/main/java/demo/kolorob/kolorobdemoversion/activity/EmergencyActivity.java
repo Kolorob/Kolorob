@@ -46,7 +46,7 @@ public class EmergencyActivity extends AppCompatActivity {
         name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
                 "পুলিশ কন্ট্রোল রুম",
                 "পল্লবী থানা",
-                "র্যাব - ৪",
+                "র‍্যাব - ৪",
                 "ডেসকো – ইলেক্ট্রিসিটি ",
                 "দুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়","তিতাস গ্যাস ","ঢাকা ওয়াসা","ব্লাড ব্যাংক ","ঢাকা উত্তর সিটি কর্পোরেশন","নারী ও শিশু নির্যাতন প্রতিরোধ",""
         };
@@ -87,7 +87,7 @@ public class EmergencyActivity extends AppCompatActivity {
                 lastExpandedPosition = groupPosition;
 
 
-                    expListView.setChildDivider(ContextCompat.getDrawable(context,R.color.white));
+//                    expListView.setChildDivider(ContextCompat.getDrawable(context,R.color.white));
 //                    expListView.setDivider(ContextCompat.getDrawable(context,R.color.white));
 //                }
 //                else {
