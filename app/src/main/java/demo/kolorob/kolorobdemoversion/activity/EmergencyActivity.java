@@ -26,6 +26,7 @@ public class EmergencyActivity extends AppCompatActivity {
     String[] phone_no;
     String[] address_bangla;
     String[] location;
+    String[] email;
     Context context;
     ImageView close_button;
     private int lastExpandedPosition = -1;
@@ -57,6 +58,14 @@ public class EmergencyActivity extends AppCompatActivity {
                 "02-9015922",
                 "029015922",
                 "01777910499","02-9014291","16162","029139940","16364","10921","1098","10921","01766678888",""
+        };
+
+        email = new String[] { "",
+                "",
+                "",
+                "",
+                "",
+                "","","","","","","","","info@cybernirapotta.net",
         };
 
         address_bangla = new String[] { "ঢাকা",
@@ -133,7 +142,7 @@ public class EmergencyActivity extends AppCompatActivity {
         {
             for(int j=0;j<1;j++)
             {
-                String temp="ফোন নম্বর: "+phone_no[i]+"#"+"ঠিকানা: "+address_bangla[i]+"#"+location[i]+"#"+"v";
+                String temp="ফোন নম্বর: "+phone_no[i]+"#"+"ঠিকানা: "+address_bangla[i]+"#"+location[i]+"#"+email[i]+"#"+"v";
                 temps.add(i,temp);
             }
             listDataChild.put(name_bangla[i], temps);
