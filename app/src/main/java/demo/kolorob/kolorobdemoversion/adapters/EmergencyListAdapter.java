@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 /**
  * Created by Mazharul.Islam1 on 9/19/2016.
  */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,15 +66,7 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.emergency_child, null);
         }
-
         final String[] split= childText.split("#");
-
-        Log.d("childText","======"+childText);
-//        Log.d("k","======"+k++);
-//        Log.d("groupPosition","======"+groupPosition);
-//        Log.d("isLastChild","======"+isLastChild);
-
-
         final String longLat= split[2];
 
         TextView phone = (TextView) convertView
