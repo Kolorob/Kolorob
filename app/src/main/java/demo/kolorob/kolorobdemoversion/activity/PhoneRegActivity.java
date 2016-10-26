@@ -139,7 +139,7 @@ public class PhoneRegActivity extends Activity {
                             else if(response.contains("EXISTING"))
                             {
                                 List<String> responses = Arrays.asList(response.split(","));
-                                String serverusername=responses.get(1);
+                                String serverusername=responses.get(3);
                                 String serverphonenumber=responses.get(2);
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
