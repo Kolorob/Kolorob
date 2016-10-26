@@ -641,7 +641,7 @@ public class OpeningActivity extends Activity {
                     if (first.equals("yes")) {
                         int mapdetail = 0;
 
-                    Intent a = new Intent(OpeningActivity.this, ViewPagerDemo.class); // Default Activity
+                    Intent a = new Intent(OpeningActivity.this, AccountKit.class); // Default Activity
                     a.putExtra("YourValueKey", mapdetail);
                     frameAnimation.stop();
                     startActivity(a);
