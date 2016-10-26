@@ -94,8 +94,12 @@
             android:id="@+id/lvExp"
             android:background="@color/kolorob_color"
             android:divider="@color/white"
-            android:dividerHeight="3dp"
-            android:childDivider="@color/orange"
+            android:groupIndicator="@null"
+
+            android:cacheColorHint="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
+            android:childDivider="@color/kolorob_color"
+            android:dividerHeight="4dp"
             android:layout_height="match_parent"
             android:layout_width="match_parent"/>
 

@@ -129,7 +129,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     Boolean negotiable_check;
     String[] left_part;
     TextView footer;
+    int position_type_spinner=0;
     LinearLayout wholeLayout;
+    private int spinCounter=0,spinCounter1=0;
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
@@ -375,7 +377,7 @@ int index;
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
         negotiable= (CheckBox)findViewById(R.id.negotiable);
         footer = (TextView)findViewById(R.id.footer);
-        footer.getLayoutParams().width=width/4;
+        //footer.getLayoutParams().width=width/4;
         refresh_button=(ImageView) findViewById(R.id.refresh_button);
         refresh_button.getLayoutParams().height=width/14;
         refresh_button.getLayoutParams().width=width/14;
@@ -384,6 +386,8 @@ int index;
 
         bazar_logo.getLayoutParams().height = width/11;
         bazar_logo.getLayoutParams().width = width/11;
+        bazar_logo.setMinimumHeight(50);
+        bazar_logo.setMinimumWidth(50);
 
 
        buttonWidth = width/4;
@@ -792,6 +796,7 @@ int index;
                 CompareClicked=false;
                 InCompare=false;
                 wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                toolbar.setVisibility(View.VISIBLE);
 
 
                 populateSearch();
@@ -851,6 +856,7 @@ int index;
                 else{ filterholder.setVisibility(View.GONE);}
                 svholder.setVisibility(View.VISIBLE);
                 sv.setVisibility(View.VISIBLE);
+
                 llCatListHolder.setVisibility(View.VISIBLE);
                 toggleButton.setVisibility(View.VISIBLE);
 
@@ -862,6 +868,7 @@ int index;
                 SearchClicked=false;
                 MapClicked=true;
                 ListClicked=false;
+
                 if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
                     svsholder.setVisibility(View.VISIBLE);
@@ -953,6 +960,7 @@ int index;
                     CompareClicked=false;
                     searchviewholder.setVisibility(View.GONE);
                     llCatListHolder.setVisibility(View.VISIBLE);
+
                     if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.map)
@@ -1140,6 +1148,8 @@ int index;
                         svholder.setVisibility(View.GONE);
                         svsholder.setVisibility(View.GONE);
                         llSubCatListHolder.setVisibility(View.GONE);
+                        spinCounter=0;
+                        spinCounter1=0;
                         compareTool();
                     }
                 }
@@ -1426,13 +1436,37 @@ int index;
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("New");
-        categories.add("Used");
+        categories.add("কন্ডিশন");
+        categories.add("নতুন");
 
-        categories.add("Refarbished");
+        categories.add("রিফারবিশড");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
 
+
+
+
+//        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(spinCounter>0)
+//                {
+//                    Log.d("Spinner Item Selected","=========="+spinCounter);
+//                    TextView text1 = (TextView)parent.getChildAt(0);
+//                    text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+//
+//                }
+//
+//                spinCounter++;
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                Log.d("No Item Selected","==========");
+//                TextView text1 = (TextView)parent.getChildAt(0);
+//                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+//            }
+//        });
 
 
 
@@ -1440,28 +1474,78 @@ int index;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                if((position>=1&&position<=3)&&spinCounter>0)
+                {
+                    TextView text1 = (TextView)parent.getChildAt(0);
 
-                TextView text1 = (TextView)parent.getChildAt(0);
-                text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    text1.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    text1.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+//                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
+//                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+
+                }
+                else
+                {
+                    TextView text1 = (TextView)parent.getChildAt(0);
+                    text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text1.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
+                }
+
+
+                spinCounter++;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                TextView text1 = (TextView)parent.getChildAt(0);
+                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
             }
         });
 
 
 
-
-
         final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
         List<String> types = new ArrayList<String>();
-        types.add("Exchange");
-        types.add("Sell");
-        types.add("Tution");
+        types.add("বিজ্ঞাপনের ধরন");
+        types.add("বিনিময়");
+        types.add("বিক্রয়");
+        types.add("টিউশনি");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
+
+
+        type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if((position>=1&&position<=3)&&spinCounter1>0)
+                {
+                    TextView text2 = (TextView)parent.getChildAt(0);
+
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+//                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
+//                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+
+                }
+                else
+                {
+                    TextView text2 = (TextView)parent.getChildAt(0);
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
+                }
+                Log.d("Spinner Item Selected","=========="+spinCounter1);
+
+                spinCounter1++;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("No Item Selected","==========");
+                TextView text2 = (TextView)parent.getChildAt(0);
+                text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+            }
+        });
 
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
@@ -1472,6 +1556,166 @@ int index;
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
         final EditText contact= (EditText)findViewById(R.id.contact);
+
+
+
+        product_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        price.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        contact_person.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        contact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(count>0)
+                {
+                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                }
+                else
+                {
+                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
 
 
@@ -1512,21 +1756,26 @@ int index;
 
 
            final BazarItem b = new BazarItem();
-           b.description="Description";
-           b.type = "Exchange";
-           b.phone = "01988009755"; //MUST BE REGISTERED
-           b.contact = "01988009755";
-           b.condition = "New";
-           b.contact_person = "01988009755";
-           b.address= "the Arafat";
-           Log.d("type Spinner","$$$$$$"+address.getText().toString());
+           b.description=description.getText().toString();
+           Log.d("Description","==========="+description.getText().toString());
+           b.type = "Tution";
+           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+           Log.d("phone","==========="+phone.getText().toString());
+           b.contact = contact.getText().toString();
+           Log.d("contact","==========="+contact.getText().toString());
+           b.condition = spinner.getSelectedItem().toString();
+           Log.d("condition","==========="+spinner.getSelectedItem().toString());
+           b.contact_person = contact_person.getText().toString();
+           Log.d("contact_person","==========="+contact_person.getText().toString());
+           b.address= address.getText().toString();
+           Log.d("address","$$$$$$"+address.getText().toString());
 
-               b.price = "18";
+               b.price = price.getText().toString();
+           Log.d("price","==========="+price.getText().toString());
 
+           b.product_name= product_name.getText().toString();
 
-           b.product_name= "product";
-
-
+           Log.d("product_name","==========="+product_name.getText().toString());
 
 
 
@@ -1549,6 +1798,7 @@ int index;
 
 
     private void saveBazar(BazarItem b, Context contexts){
+        Log.d("Advertizement Type","=========="+b.type);
         getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
                         +"&description=" + b.description +
                         "&type=" + b.type +
@@ -2341,7 +2591,7 @@ int index;
 
 
 
-                        toolbar.setVisibility(View.VISIBLE);
+//                        toolbar.setVisibility(View.VISIBLE);
                         if (governmentNewItems.size()==0) {
 
                             AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
@@ -3663,6 +3913,7 @@ fragment.getMapViewController().setZoom(16);
                 Log.d(">>>>","onPanelExpanded");
                 slider_part.setVisibility(View.VISIBLE);
                 footer.setText("বিজ্ঞাপন দেখুন");
+
 
                 postbazar(context);
 

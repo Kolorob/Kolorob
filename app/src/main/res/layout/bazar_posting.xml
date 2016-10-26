@@ -5,283 +5,300 @@
     android:background="@color/kolorob_color"
     android:layout_height="match_parent">
 
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Condition"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-        android:id="@+id/textView2" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-
-        android:layout_marginRight="10dp"
-
-        android:background="@color/white"
-        android:id="@+id/bazar_spinner" />
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Advertizement Type"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-        android:id="@+id/advertizement_type" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-
-        android:layout_marginRight="10dp"
-
-        android:background="@color/white"
-        android:id="@+id/type_spinner" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:visibility="gone"
-        android:layout_marginRight="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Product Name"
-        android:textColor="@color/white"
-
-        android:id="@+id/textView3" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:layout_marginTop="@dimen/bazar_distance"
-        android:background="@color/white"
-        android:hint="Product Name"
-        android:lines="2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/product_name" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Phone"
-        android:visibility="gone"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-
-        android:id="@+id/textView4" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-
-        android:background="@color/white"
-
-        android:layout_marginTop="@dimen/bazar_distance"
-        android:hint="Phone Number"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:lines="2"
-        android:id="@+id/phone_no" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:background="@color/white"
-
-        android:layout_marginTop="@dimen/bazar_distance"
-        android:hint="Contact"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:lines="2"
-        android:id="@+id/contact" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:visibility="gone"
-        android:layout_marginRight="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Address"
-        android:textColor="@color/white"
-
-        android:id="@+id/textView5" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/bazar_distance"
-
-        android:hint="Address"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:lines="2"
-        android:id="@+id/address" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Contact Person"
-        android:textColor="@color/white"
-
-        android:id="@+id/contact_persons" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@color/white"
-        android:hint="Contact Person"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-
-        android:layout_marginTop="@dimen/bazar_distance"
-
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:lines="2"
-        android:id="@+id/contact_person" />
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Price"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/bazar_distance"
-
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-
-        android:id="@+id/textView6" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Condition"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:id="@+id/textView2" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+
+                android:layout_marginRight="10dp"
+
+                android:background="@color/drak_yellow"
+                android:popupBackground="@color/green"
+                android:id="@+id/bazar_spinner" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Advertizement Type"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:id="@+id/advertizement_type" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+
+                android:layout_marginRight="10dp"
+                android:popupBackground="@color/white"
+
+                android:background="@color/drak_yellow"
+                android:id="@+id/type_spinner" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Product Name"
+                android:textColor="@color/white"
+
+                android:id="@+id/textView3" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:background="@color/white"
-                android:hint="Price"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:layout_marginTop="@dimen/bazar_distance"
+                android:background="@color/drak_yellow"
+                android:hint="যে পন্য বিক্রয় করবেন"
                 android:lines="2"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:id="@+id/costs" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:layout_height="match_parent">
+                android:id="@+id/product_name" />
 
-            <CheckBox
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Negotiable"
-                android:layout_marginTop="@dimen/bazar_distance"
-
-                android:theme="@style/checkBoxStyle"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Phone"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textColor="@color/white"
 
-                android:id="@+id/negotiable" />
+                android:id="@+id/textView4" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+
+                android:background="@color/drak_yellow"
+
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:hint="মোবাইল নম্বর"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/phone_no" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:background="@color/drak_yellow"
+
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:hint="অন্য মোবাইল নম্বর"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/contact" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Address"
+                android:textColor="@color/white"
+
+                android:id="@+id/textView5" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:background="@color/drak_yellow"
+                android:layout_marginTop="@dimen/bazar_distance"
+
+                android:hint="ঠিকানা"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/address" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Contact Person"
+                android:textColor="@color/white"
+
+                android:id="@+id/contact_persons" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/drak_yellow"
+                android:hint="যোগাযোগকারী ব্যক্তির নাম"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+
+                android:layout_marginTop="@dimen/bazar_distance"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/contact_person" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Price"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/bazar_distance"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+
+                android:id="@+id/textView6" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@color/drak_yellow"
+                        android:hint="মূল্য"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray"
+                        android:layout_marginTop="@dimen/bazar_distance"
+                        android:lines="2"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/costs" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="আলোচনাসাপেক্ষ্যে"
+                        android:layout_marginTop="@dimen/bazar_distance"
+
+                        android:theme="@style/checkBoxStyle"
+                        android:textColor="@color/white"
+
+                        android:id="@+id/negotiable" />
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Description"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+
+                android:id="@+id/textView7" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+
+
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:textColorHint="@color/gray"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/drak_yellow"
+                android:hint="পন্যের বিবরন"
+                android:lines="4"
+                android:id="@+id/descriptions" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="90dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="বিজ্ঞাপন দিন"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/bazar_distance"
+                    android:padding="10dp"
+
+                    android:background="@drawable/button_shape"
+                    android:gravity="center"
+                    android:id="@+id/submit_bazar" />
+
+
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
 
 
-
-
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Description"
-        android:visibility="gone"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-
-        android:id="@+id/textView7" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-
-
-        android:layout_marginTop="@dimen/bazar_distance"
-        android:textColorHint="@color/gray"
-
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/white"
-        android:hint="Description"
-        android:lines="4"
-        android:id="@+id/descriptions" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:textColor="@color/kolorob_color"
-            android:layout_marginTop="@dimen/bazar_distance"
-
-            android:background="@drawable/rounded"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:gravity="center"
-            android:id="@+id/submit_bazar" />
-
-    </LinearLayout>
 
 
 </LinearLayout>

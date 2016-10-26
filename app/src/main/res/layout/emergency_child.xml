@@ -58,7 +58,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.13"
             android:layout_height="wrap_content"
             android:id="@+id/middle_phone"
             android:orientation="vertical"
@@ -99,4 +99,8 @@
         </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="4dp"/>
 </LinearLayout>

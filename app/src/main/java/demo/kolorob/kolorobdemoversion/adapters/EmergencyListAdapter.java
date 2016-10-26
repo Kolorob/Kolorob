@@ -3,6 +3,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 /**
  * Created by Mazharul.Islam1 on 9/19/2016.
  */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class EmergencyListAdapter extends BaseExpandableListAdapter {
 
@@ -65,15 +68,7 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.emergency_child, null);
         }
-
         final String[] split= childText.split("#");
-
-        Log.d("childText","======"+childText);
-//        Log.d("k","======"+k++);
-//        Log.d("groupPosition","======"+groupPosition);
-//        Log.d("isLastChild","======"+isLastChild);
-
-
         final String longLat= split[2];
 
         TextView phone = (TextView) convertView
@@ -81,9 +76,53 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
         phone.setText(split[0]);
         TextView address = (TextView) convertView
                 .findViewById(R.id.address);
+
+        ImageView email = (ImageView)convertView.findViewById(R.id.right_side_email);
         address.setText(split[1]);
 
         ImageView distance_left=(ImageView)convertView.findViewById(R.id.distance_left);
+        ImageView phone_call =(ImageView)convertView.findViewById(R.id.phone_call);
+
+        width= AppUtils.getScreenWidth(_context)/10;
+
+        phone_call.getLayoutParams().height=width;
+        phone_call.getLayoutParams().width=width;
+
+
+
+        distance_left.getLayoutParams().height = width;
+        distance_left.getLayoutParams().width = width;
+
+        email.getLayoutParams().height =  width;
+        email.getLayoutParams().width =  width;
+
+
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!split[3].equals(""))
+                {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("message/rfc822");
+                    i.putExtra(Intent.EXTRA_EMAIL  , new String[]{split[3]});
+                    i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+                    i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+                    try {
+                        _context.startActivity(Intent.createChooser(i, "Send mail..."));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        ToastMessageDisplay.setText(_context,"দুঃখিত! ইমেইল করা যাচ্ছে না");
+                        ToastMessageDisplay.showText(_context);
+
+                    }
+                }
+
+                else {
+                    AlertMessage.showMessage(_context,"দুঃখিত!","ইমেইল করা যাচ্ছে না");
+                }
+
+            }
+        });
 
         distance_left.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -108,7 +147,8 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
             }
         });
 
-        ImageView phone_call =(ImageView)convertView.findViewById(R.id.phone_call);
+
+
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
