@@ -229,7 +229,7 @@ String areaname=null;
 
 
 
- accessToken = AccountKit.getCurrentAccessToken();
+ /*accessToken = AccountKit.getCurrentAccessToken();
 
         if(accessToken != null){
 
@@ -237,7 +237,7 @@ String areaname=null;
         else {
             goToLogin(true);
         }
-
+*/
 
 
 
