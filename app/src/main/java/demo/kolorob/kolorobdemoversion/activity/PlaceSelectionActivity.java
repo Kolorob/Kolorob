@@ -160,7 +160,7 @@ String areaname=null;
 
     private GoogleApiClient client;
     FrameLayout mImageMap;
-    AccessToken accessToken;
+    AccessToken accessToken=null;
     public static int APP_REQUEST_CODE = 99;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

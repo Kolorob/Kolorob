@@ -38,7 +38,6 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -765,7 +764,6 @@ int index;
 
         }
 
-<<<<<<< HEAD
         refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -778,12 +776,12 @@ int index;
             }
         });
         MapButton.setBackgroundResource(R.drawable.map_selected);
-=======
+
         Picasso.with(this)
                 .load(R.drawable.map_selected)
                 .resize(buttonWidth,larg)
                 .into(MapButton);
->>>>>>> 07abbf12c1e1f153ce49faa09b6a2c988c78583b
+
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1430,13 +1428,13 @@ int index;
         List<String> categories = new ArrayList<String>();
         categories.add("New");
         categories.add("Used");
-<<<<<<< HEAD
+
         categories.add("Refarbished");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
-=======
+
         categories.add("Refurbished");
->>>>>>> 07abbf12c1e1f153ce49faa09b6a2c988c78583b
+
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
