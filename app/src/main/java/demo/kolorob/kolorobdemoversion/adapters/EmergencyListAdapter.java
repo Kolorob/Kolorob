@@ -27,6 +27,7 @@ import android.widget.TextView;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class EmergencyListAdapter extends BaseExpandableListAdapter {
@@ -80,6 +81,21 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
         address.setText(split[1]);
 
         ImageView distance_left=(ImageView)convertView.findViewById(R.id.distance_left);
+        ImageView phone_call =(ImageView)convertView.findViewById(R.id.phone_call);
+
+        width= AppUtils.getScreenWidth(_context)/10;
+
+        phone_call.getLayoutParams().height=width;
+        phone_call.getLayoutParams().width=width;
+
+
+
+        distance_left.getLayoutParams().height = width;
+        distance_left.getLayoutParams().width = width;
+
+        email.getLayoutParams().height =  width;
+        email.getLayoutParams().width =  width;
+
 
 
         email.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +147,8 @@ public class EmergencyListAdapter extends BaseExpandableListAdapter {
             }
         });
 
-        ImageView phone_call =(ImageView)convertView.findViewById(R.id.phone_call);
+
+
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

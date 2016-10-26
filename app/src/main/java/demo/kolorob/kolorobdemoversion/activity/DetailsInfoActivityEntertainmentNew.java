@@ -121,10 +121,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         left_way = (LinearLayout) findViewById(R.id.left_go_process);
         middle_phone = (LinearLayout) findViewById(R.id.middle_phone);
         right_email = (LinearLayout) findViewById(R.id.right_email);
-        left_image = (ImageView) findViewById(R.id.distance_left);
+
         bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
         middle_image = (ImageView) findViewById(R.id.phone_middl);
         right_image = (ImageView) findViewById(R.id.right_side_email);
+        left_image = (ImageView) findViewById(R.id.distance_left);
 
         ratingText=(TextView)findViewById(R.id.ratingText);
 
@@ -178,12 +179,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         top_logo.getLayoutParams().height = width / 8;
         top_logo.getLayoutParams().width = width / 8;
-
+        cross.getLayoutParams().height=width/13;
+        cross.getLayoutParams().width=width/13;
         middle_image.getLayoutParams().height=width/8;
         middle_image.getLayoutParams().width=width/8;
 
-        cross.getLayoutParams().height=width/13;
-        cross.getLayoutParams().width=width/13;
+
 
         right_image.getLayoutParams().height = width/8;
         right_image.getLayoutParams().width = width/8;

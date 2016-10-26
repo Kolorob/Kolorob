@@ -781,6 +781,7 @@ int index;
                 CompareClicked=false;
                 InCompare=false;
                 wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
+                toolbar.setVisibility(View.VISIBLE);
 
 
                 populateSearch();
@@ -823,6 +824,7 @@ int index;
                 else{ filterholder.setVisibility(View.GONE);}
                 svholder.setVisibility(View.VISIBLE);
                 sv.setVisibility(View.VISIBLE);
+
                 llCatListHolder.setVisibility(View.VISIBLE);
                 toggleButton.setVisibility(View.VISIBLE);
 
@@ -2509,7 +2511,7 @@ int index;
 
 
 
-                        toolbar.setVisibility(View.VISIBLE);
+//                        toolbar.setVisibility(View.VISIBLE);
                         if (governmentNewItems.size()==0) {
 
                             AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
