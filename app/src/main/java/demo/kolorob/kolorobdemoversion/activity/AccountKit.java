@@ -29,7 +29,9 @@ public class AccountKit extends AppCompatActivity {
         accessToken = com.facebook.accountkit.AccountKit.getCurrentAccessToken();
 
         if (accessToken != null) {
-
+Intent intent=new Intent(this,PlaceSelectionActivity.class);
+            startActivity(intent);
+            finish();
         } else {
             goToLogin(true);
         }
