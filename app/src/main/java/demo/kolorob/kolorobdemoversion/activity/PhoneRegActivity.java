@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,6 +45,7 @@ public class PhoneRegActivity extends Activity {
 
     private Context con;
     String IMEINumber;
+    TextView phoneheader;
 
 
     @Override
@@ -51,13 +53,18 @@ public class PhoneRegActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone_reg);
 
-
+phoneheader=(TextView)findViewById(R.id.phoneheader);
         phone  = (EditText)findViewById(R.id.phone_id);
         name=(EditText)findViewById(R.id.userid) ;
-        email=(EditText)findViewById(R.id.emailid) ;
+       // email=(EditText)findViewById(R.id.emailid) ;
         doPermissionGrantedStuffs();
 
         con = this;
+        if(SharedPreferencesHelper.isTabletDevice(con))
+        {
+            phoneheader.setTextSize(45);
+        }
+        else  phoneheader.setTextSize(10);
     }
     public void doPermissionGrantedStuffs() {
         //Have an  object of TelephonyManager
@@ -71,7 +78,7 @@ public class PhoneRegActivity extends Activity {
 
         phoneNumber=phone.getText().toString().trim();
         uname=name.getText().toString().trim();
-        emailaddress=email.getText().toString().trim();
+      //  emailaddress=email.getText().toString().trim();
 
         int size = phoneNumber.length();
 
@@ -106,7 +113,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&email="+emailaddress+"&name="+uname+"&deviceid="+IMEINumber+"&username="+username+"&password="+password+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&name="+uname+"&deviceid="+IMEINumber+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
