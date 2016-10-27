@@ -3416,12 +3416,19 @@ fragment.getMapViewController().setZoom(16);
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     "মূল্য: "+bazarItem.price+"@"+
-                                    "কন্ডিশন: "+bazarItem.condition+"@"+
-                                    "এলাকা: "+"address"+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
-                                    bazarItem.contact+"v";
 
-                            String group_data= bazarItem.contact_person+"@"+
+                                    "কন্ডিশন: "+bazarItem.condition+"@"+
+                                    "এলাকা: "+bazarItem.address+"@"+
+                                       bazarItem.phone+"@"+
+                                    "যোগাযোগ নম্বর: "+bazarItem.contact+"@"+
+                                    "পোস্ট দিয়েছেন: "+bazarItem.contact_person+"@"+ "v"
+                                   ;
+
+
+                            Log.d("Bazar Data","============="+bazarData);
+
+                            String group_data= bazarItem.product_name+"@"+
                                     bazarItem.type+"@"+"v";
 
                             bazar_data.add(bazar_counter,bazarData);

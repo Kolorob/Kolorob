@@ -52,6 +52,25 @@
         android:text="Area"
         android:id="@+id/area" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="post_person"
+        android:id="@+id/post_person" />
+    <TextView
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="post_person"
+        android:id="@+id/another_num" />
+
 
 
 

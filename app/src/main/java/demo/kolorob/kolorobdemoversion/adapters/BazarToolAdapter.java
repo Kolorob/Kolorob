@@ -80,6 +80,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         TextView date = (TextView) convertView.findViewById(R.id.date);
         TextView condition = (TextView) convertView.findViewById(R.id.condition);
         TextView area = (TextView) convertView.findViewById(R.id.area);
+        TextView post_person = (TextView) convertView.findViewById(R.id.post_person);
+        TextView another_num = (TextView) convertView.findViewById(R.id.another_num);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
 
@@ -111,6 +113,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         date.setText(Children[2]);
         condition.setText(Children[3]);
         area.setText(Children[4]);
+        another_num.setText(Children[6]);
+        post_person.setText(Children[7]);
 
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
