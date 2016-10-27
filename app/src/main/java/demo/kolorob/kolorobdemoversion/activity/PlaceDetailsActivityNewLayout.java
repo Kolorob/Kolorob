@@ -1534,14 +1534,13 @@ int index;
                     text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
-                Log.d("Spinner Item Selected","=========="+spinCounter1);
+
 
                 spinCounter1++;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("No Item Selected","==========");
                 TextView text2 = (TextView)parent.getChildAt(0);
                 text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
             }
@@ -3417,12 +3416,19 @@ fragment.getMapViewController().setZoom(16);
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     "মূল্য: "+bazarItem.price+"@"+
-                                    "কন্ডিশন: "+bazarItem.condition+"@"+
-                                    "এলাকা: "+"address"+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
-                                    bazarItem.contact+"v";
 
-                            String group_data= bazarItem.contact_person+"@"+
+                                    "কন্ডিশন: "+bazarItem.condition+"@"+
+                                    "এলাকা: "+bazarItem.address+"@"+
+                                       bazarItem.phone+"@"+
+                                    "যোগাযোগ নম্বর: "+bazarItem.contact+"@"+
+                                    "পোস্ট দিয়েছেন: "+bazarItem.contact_person+"@"+ "v"
+                                   ;
+
+
+                            Log.d("Bazar Data","============="+bazarData);
+
+                            String group_data= bazarItem.product_name+"@"+
                                     bazarItem.type+"@"+"v";
 
                             bazar_data.add(bazar_counter,bazarData);
@@ -3517,10 +3523,7 @@ fragment.getMapViewController().setZoom(16);
                         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
                         RelativeLayout.LayoutParams slidingp= (RelativeLayout.LayoutParams) slidingUpPanelLayout.getLayoutParams();
 
-//                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
-//                                contact,date,posted_by);
-//
-//                        listview.setAdapter(bazarListAdapter);
+
                     }
                 }
         );
