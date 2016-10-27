@@ -133,10 +133,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.AccountKit"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.Disclaimer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

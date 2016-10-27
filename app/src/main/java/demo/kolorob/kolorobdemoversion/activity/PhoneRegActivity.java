@@ -1,12 +1,19 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,7 +21,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.accountkit.AccessToken;
+import com.facebook.accountkit.Account;
+import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitCallback;
+import com.facebook.accountkit.AccountKitError;
+import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.PhoneNumber;
+import com.facebook.accountkit.ui.AccountKitActivity;
+import com.facebook.accountkit.ui.AccountKitConfiguration;
+import com.facebook.accountkit.ui.LoginType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +43,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
-/**
- * Created by arafat on 1/11/2016.
- */
+
 public class PhoneRegActivity extends Activity {
 
     String username="kolorobapp";
@@ -35,27 +51,41 @@ public class PhoneRegActivity extends Activity {
 
     private String phoneNumber,uname,emailaddress;
 
-
+    String phoneNumberString = "";
     private EditText phone,email,name;
 
 
-
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
 
 
     private Context con;
     String IMEINumber;
     TextView phoneheader;
-
+    AccessToken accessToken=null;
+    public static int APP_REQUEST_CODE = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        com.facebook.accountkit.AccountKit.initialize(getApplicationContext());
         setContentView(R.layout.phone_reg);
-
-phoneheader=(TextView)findViewById(R.id.phoneheader);
+ accessToken = AccountKit.getCurrentAccessToken();
+        phoneheader=(TextView)findViewById(R.id.phoneheader);
         phone  = (EditText)findViewById(R.id.phone_id);
+        phone.setEnabled(false);
         name=(EditText)findViewById(R.id.userid) ;
+
+        if(accessToken != null){
+            setUserInformation();
+        }
+        else {
+            goToLogin(true);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermissions();
+        }  else doPermissionGrantedStuffs();
+
        // email=(EditText)findViewById(R.id.emailid) ;
         doPermissionGrantedStuffs();
 
@@ -66,6 +96,40 @@ phoneheader=(TextView)findViewById(R.id.phoneheader);
         }
         else  phoneheader.setTextSize(10);
     }
+    private void checkPermissions() {
+        List<String> permissions = new ArrayList<>();
+        String message = "osmdroid permissions:";
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            message += "\nLocation to show user location.";
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            message += "\nStorage access to store map tiles.";
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.READ_PHONE_STATE);
+            message += "\n access to read phone state.";
+            //requestReadPhoneStatePermission();
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.READ_SMS);
+            message += "\n access to read sms.";
+            //requestReadPhoneStatePermission();
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.GET_ACCOUNTS);
+            message += "\n access to read sms.";
+            //requestReadPhoneStatePermission();
+        }
+        if (!permissions.isEmpty()) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            String[] params = permissions.toArray(new String[permissions.size()]);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+            }
+        } // else: We already have permissions, so handle as normal
+    }
     public void doPermissionGrantedStuffs() {
         //Have an  object of TelephonyManager
         TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -73,6 +137,71 @@ phoneheader=(TextView)findViewById(R.id.phoneheader);
         IMEINumber=tm.getDeviceId();
 
 
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+                Map<String, Integer> perms = new HashMap<>();
+                // Initial
+                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
+                // Fill with results
+                for (int i = 0; i < permissions.length; i++)
+                    perms.put(permissions[i], grantResults[i]);
+                // Check for ACCESS_FINE_LOCATION and WRITE_EXTERNAL_STORAGE
+                Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+                Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
+                Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+                Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
+                if (location && storage&& phonestate) {
+                    // All Permissions Granted
+                    TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                    //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+                    IMEINumber=tm.getDeviceId();
+                    Toast.makeText(PhoneRegActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
+                } else if (location) {
+                    Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
+                } else if (storage) {
+                    Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+                }
+                else if (phonestate) {
+                    Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
+                }
+                else if (smsstate) {
+                    Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
+                }
+                else if (accountstate) {
+                    Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
+                }else { // !location && !storage case
+                    // Permission Denied
+                    Toast.makeText(PhoneRegActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
+                            "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+    public void goToLogin(boolean isSMSLogin) {
+
+        LoginType loginType = isSMSLogin ? LoginType.PHONE : LoginType.EMAIL;
+
+        final Intent intent = new Intent(this, AccountKitActivity.class);
+        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
+                new AccountKitConfiguration.AccountKitConfigurationBuilder(
+                        loginType,
+                        AccountKitActivity.ResponseType.TOKEN);
+        // ... perform additional configuration ...
+        intent.putExtra(
+                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
+                configurationBuilder.build());
+        this.startActivityForResult(intent, APP_REQUEST_CODE);
     }
     public void submit(View v) {
 
@@ -212,5 +341,69 @@ phoneheader=(TextView)findViewById(R.id.phoneheader);
     public void onBackPressed() {
         finish();
         super.onBackPressed();
+    }
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
+            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+            String toastMessage;
+            if (loginResult.getError() != null) {
+                toastMessage = loginResult.getError().getErrorType().getMessage();
+                showErrorActivity(loginResult.getError());
+            } else if (loginResult.wasCancelled()) {
+                toastMessage = "Login Cancelled";
+            } else {
+                if (loginResult.getAccessToken() != null) {
+                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
+                } else {
+                    toastMessage = String.format(
+                            "Success:%s...",
+                            loginResult.getAuthorizationCode().substring(0,10));
+                }
+
+                // If you have an authorization code, retrieve it from
+                // loginResult.getAuthorizationCode()
+                // and pass it to your server and exchange it for an access token.
+
+                // Success! Start your next activity...
+
+                return;
+            }
+        }
+    }
+
+    private void showErrorActivity(final AccountKitError error) {
+        Log.println(Log.ASSERT, "AccountKit", error.toString());
+    }
+    public void setUserInformation(){
+        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+            @Override
+            public void onSuccess(final Account account) {
+                // Get Account Kit ID
+                String accountKitId = account.getId();
+                Log.println(Log.ASSERT, "AccountKit", "ID: " + accountKitId);
+
+                boolean SMSLoginMode = false;
+
+                // Get phone number
+                PhoneNumber phoneNumber = account.getPhoneNumber();
+
+                if (phoneNumber != null) {
+                    phoneNumberString = phoneNumber.toString();
+                    phone.setText(phoneNumberString.toString());
+                    Log.println(Log.ASSERT, "AccountKit", "Phone: " + phoneNumberString);
+                    SMSLoginMode = true;
+                }
+
+
+
+            }
+
+            @Override
+            public void onError(final AccountKitError error) {
+                Log.println(Log.ASSERT, "AccountKit", "Error: " + error.toString());
+            }
+        });
     }
 }

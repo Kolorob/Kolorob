@@ -14,12 +14,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -51,13 +49,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.accountkit.AccessToken;
-import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitError;
-import com.facebook.accountkit.AccountKitLoginResult;
-import com.facebook.accountkit.ui.AccountKitActivity;
-import com.facebook.accountkit.ui.AccountKitConfiguration;
-import com.facebook.accountkit.ui.LoginType;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -160,12 +151,11 @@ String areaname=null;
 
     private GoogleApiClient client;
     FrameLayout mImageMap;
-    AccessToken accessToken=null;
-    public static int APP_REQUEST_CODE = 99;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AccountKit.initialize(getApplicationContext());
+
         setContentView(R.layout.place_selection_activity);
         mImageMap=(FrameLayout)findViewById(R.id.holder);
         ImageButton placeimage=(ImageButton)findViewById(R.id.placeselectionholder);
@@ -199,9 +189,7 @@ String areaname=null;
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermissions();
-        }  else doPermissionGrantedStuffs();
+
         // Load ads into Interstitial Ads
         mInterstitialAd.loadAd(adRequest);
 
@@ -229,15 +217,7 @@ String areaname=null;
 
 
 
- /*accessToken = AccountKit.getCurrentAccessToken();
 
-        if(accessToken != null){
-
-        }
-        else {
-            goToLogin(true);
-        }
-*/
 
 
 
@@ -307,55 +287,9 @@ String areaname=null;
             mInterstitialAd.show();
         }
     }
-    public void goToLogin(boolean isSMSLogin) {
 
-        LoginType loginType = isSMSLogin ? LoginType.PHONE : LoginType.EMAIL;
 
-        final Intent intent = new Intent(this, AccountKitActivity.class);
-        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
-                new AccountKitConfiguration.AccountKitConfigurationBuilder(
-                        loginType,
-                        AccountKitActivity.ResponseType.TOKEN);
-        // ... perform additional configuration ...
-        intent.putExtra(
-                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
-                configurationBuilder.build());
-        this.startActivityForResult(intent, APP_REQUEST_CODE);
-    }
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
-            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
-            String toastMessage;
-            if (loginResult.getError() != null) {
-                toastMessage = loginResult.getError().getErrorType().getMessage();
-                showErrorActivity(loginResult.getError());
-            } else if (loginResult.wasCancelled()) {
-                toastMessage = "Login Cancelled";
-            } else {
-                if (loginResult.getAccessToken() != null) {
-                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
-                } else {
-                    toastMessage = String.format(
-                            "Success:%s...",
-                            loginResult.getAuthorizationCode().substring(0,10));
-                }
-
-                // If you have an authorization code, retrieve it from
-                // loginResult.getAuthorizationCode()
-                // and pass it to your server and exchange it for an access token.
-
-                // Success! Start your next activity...
-               return;
-            }
-        }
-    }
-
-    private void showErrorActivity(final AccountKitError error) {
-        Log.println(Log.ASSERT, "AccountKit", error.toString());
-    }
 
 
 
@@ -512,11 +446,8 @@ String areaname=null;
 
     @Override
     public void onBackPressed() {
-        if(accessToken==null)
-        {
 
-        }
-        else {
+
             SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
 
    /*    if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
@@ -545,7 +476,7 @@ String areaname=null;
 
             }
         }
-    }
+
 
     public void help() {
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
@@ -842,17 +773,7 @@ String areaname=null;
     /**
      * Called when the 'loadIMEI' function is triggered.
      */
-    public void loadIMEI() {
-        // Check if the READ_PHONE_STATE permission is already available.
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            // READ_PHONE_STATE permission has not been granted.
-            requestReadPhoneStatePermission();
-        } else {
-            // READ_PHONE_STATE permission is already been granted.
-            doPermissionGrantedStuffs();
-        }
-    }
+
     /**
      * Requests the READ_PHONE_STATE permission.
      * If the permission has been denied previously, a dialog will prompt the user to grant the
@@ -902,97 +823,6 @@ String areaname=null;
 
     }
 
-    private void checkPermissions() {
-        List<String> permissions = new ArrayList<>();
-        String message = "osmdroid permissions:";
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            message += "\nLocation to show user location.";
-        }
-       else if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            message += "\nStorage access to store map tiles.";
-        }
-       else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.READ_PHONE_STATE);
-            message += "\n access to read phone state.";
-            //requestReadPhoneStatePermission();
-        }
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.READ_SMS);
-            message += "\n access to read sms.";
-            //requestReadPhoneStatePermission();
-        }
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.GET_ACCOUNTS);
-            message += "\n access to read sms.";
-            //requestReadPhoneStatePermission();
-        }
-        if (!permissions.isEmpty()) {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            String[] params = permissions.toArray(new String[permissions.size()]);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
-            }
-        } // else: We already have permissions, so handle as normal
-    }
-    public void doPermissionGrantedStuffs() {
-        //Have an  object of TelephonyManager
-        TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
-        IMEINumber=tm.getDeviceId();
 
-
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
-                Map<String, Integer> perms = new HashMap<>();
-                // Initial
-                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
-                // Fill with results
-                for (int i = 0; i < permissions.length; i++)
-                    perms.put(permissions[i], grantResults[i]);
-                // Check for ACCESS_FINE_LOCATION and WRITE_EXTERNAL_STORAGE
-                Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-                Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
-                Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
-                Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
-                if (location && storage&& phonestate) {
-                    // All Permissions Granted
-                    TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                    //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
-                    IMEINumber=tm.getDeviceId();
-                    Toast.makeText(PlaceSelectionActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
-                } else if (location) {
-                    Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
-                } else if (storage) {
-                    Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
-                }
-                else if (phonestate) {
-                    Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
-                }
-                else if (smsstate) {
-                    Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
-                }
-                else if (accountstate) {
-                    Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
-                }else { // !location && !storage case
-                    // Permission Denied
-                    Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
-                            "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
-                }
-            }
-            break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
 
 }
