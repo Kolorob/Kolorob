@@ -42,4 +42,8 @@ dependencies {
     compile 'com.sothree.slidinguppanel:library:3.2.1'
     compile 'org.jetbrains:annotations-java5:15.0'
     compile 'com.facebook.android:account-kit-sdk:4.11.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'info.hoang8f:fbutton:1.0.5'
+
 }
