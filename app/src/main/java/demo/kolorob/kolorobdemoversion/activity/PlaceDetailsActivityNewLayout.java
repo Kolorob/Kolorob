@@ -3516,10 +3516,7 @@ fragment.getMapViewController().setZoom(16);
                         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
                         RelativeLayout.LayoutParams slidingp= (RelativeLayout.LayoutParams) slidingUpPanelLayout.getLayoutParams();
 
-//                        BazarListAdapter bazarListAdapter = new BazarListAdapter(PlaceDetailsActivityNewLayout.this,item_name,price,condition,description,
-//                                contact,date,posted_by);
-//
-//                        listview.setAdapter(bazarListAdapter);
+
                     }
                 }
         );
