@@ -6,19 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:layout_gravity="center_horizontal"
     tools:context="demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu_image_2"
+        android:background="@color/white"/>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:background="@drawable/menu_image_2"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
 
 <LinearLayout
     android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
     android:layout_gravity="center"
 
     android:padding="30dp"
-    android:gravity="top|center"
+    android:gravity="center_horizontal|center_vertical"
     android:layout_height="match_parent">
 
         <TextView
@@ -45,10 +45,12 @@ android:id="@+id/phoneheader"
         android:layout_width="match_parent"
         android:id="@+id/userid"
         android:layout_height="wrap_content"
-        app:met_floatingLabel="normal"
+        app:met_floatingLabel="highlight"
         android:drawableLeft="@drawable/user"
         android:drawablePadding="10dp"
-        android:hint="Write Username"/>
+        app:met_textColorHint="@color/white"
+        app:met_baseColor="@color/white"
+        android:hint="আপনার নাম লিখুন"/>
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -56,19 +58,31 @@ android:id="@+id/phoneheader"
         android:id="@+id/phone_id"
         android:layout_height="wrap_content"
         app:met_floatingLabel="normal"
+        android:drawableLeft="@drawable/phone"
+        android:drawablePadding="10dp"
+        app:met_textColorHint="@color/white"
+        app:met_baseColor="@color/white"
+        android:padding="5dp"
         android:hint="Write Phone Number"/>
 
 
-    <Button
-        android:layout_width="wrap_content"
+    <info.hoang8f.widget.FButton
+
+    fbutton:buttonColor="@color/colorAccent"
+    fbutton:shadowColor="@color/colorPrimaryDark"
+    fbutton:shadowEnabled="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+    fbutton:shadowHeight="5dp"
+    fbutton:cornerRadius="5dp"
+        android:text=" জমা দিয়েছি "
+
+        android:textColor="@color/colorSecondaryText"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:layout_gravity="center_horizontal"
-        android:textSize="25dp"
-        android:layout_marginTop="15dp"
-        android:text="দিয়েছি"
-        android:onClick="submit"
-        />
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content" />
 
 </LinearLayout>
 </LinearLayout>
