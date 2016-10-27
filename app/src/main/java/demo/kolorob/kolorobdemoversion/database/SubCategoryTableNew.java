@@ -138,7 +138,7 @@ public class SubCategoryTableNew {
 
         if (cursor.moveToFirst()) {
             do {
-                String catid2 =cursor.getString(6);
+                String catid2 =cursor.getString(7);
                 int subcatid=cursor.getInt(5);
                 siList.add(new Subcatholder(subcatid,catid2));
             } while (cursor.moveToNext());

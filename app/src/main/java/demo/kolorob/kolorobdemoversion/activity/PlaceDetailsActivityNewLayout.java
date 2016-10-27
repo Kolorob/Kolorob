@@ -1534,14 +1534,13 @@ int index;
                     text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
-                Log.d("Spinner Item Selected","=========="+spinCounter1);
+
 
                 spinCounter1++;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("No Item Selected","==========");
                 TextView text2 = (TextView)parent.getChildAt(0);
                 text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
             }
