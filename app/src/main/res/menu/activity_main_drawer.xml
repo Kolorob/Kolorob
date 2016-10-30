@@ -51,6 +51,10 @@
                 android:id="@+id/about_us"
                 android:icon="@drawable/emergency_icon"
                 android:title="@string/abouthead" />
+            <item
+                android:id="@+id/about_offer"
+                android:icon="@drawable/emergency_icon"
+                android:title="Kolorob Offers!" />
             <!--<item-->
             <!--android:id="@+id/nav_share"-->
             <!--android:icon="@drawable/advertising_icon"-->
