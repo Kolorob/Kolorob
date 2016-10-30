@@ -79,7 +79,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     ImageButton img;
     Toolbar toolbar;
     private String comment = "";
-    String areaname=null;
+String areaname=null;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
     NotificationManager manager;
@@ -165,7 +165,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 .into(placeimage);
         placeimage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                popup();
+               popup();
             }
         });
 
@@ -233,9 +233,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         setSupportActionBar(toolbar);
 
-        ActionBar ab = getSupportActionBar();
+       ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-        ab.setDisplayHomeAsUpEnabled(true);
+       ab.setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -256,9 +256,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             }
         };
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+       getSupportActionBar().setHomeButtonEnabled(true);
         toggle.setDrawerIndicatorEnabled(true);
-        drawer.setDrawerListener(toggle);
+       drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -355,7 +355,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 for (int x = 0; x < childCount; x++) {
                     RadioButton btn = (RadioButton) group.getChildAt(x);
                     if (btn.getId() == checkedId) {
-                        areaname=btn.getText().toString();
+                      areaname=btn.getText().toString();
                         radioclicked=true;
 
 
@@ -416,7 +416,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
 
-        //  startActivity(i);
+      //  startActivity(i);
         // i.setData(Uri.parse("package:demo.kolorob.kolorobdemoversion"));
 
         //Intent intent = new Intent(this,NotificationView.class);
@@ -448,7 +448,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     public void onBackPressed() {
 
 
-        SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
+            SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
 
    /*    if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
        {
@@ -457,34 +457,34 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
            Reviewgiven=false;
            editor.apply();
        }*/
-        if (!settings.getBoolean("Reviewsent", false)) help();
+            if (!settings.getBoolean("Reviewsent", false)) help();
 
-        else {
-            if (doubleBackToExitPressedOnce) {
+            else {
+                if (doubleBackToExitPressedOnce) {
 //
-                super.onBackPressed();
+                    super.onBackPressed();
 
-                //    finish();
-                return;
+                    //    finish();
+                    return;
+                }
+
+                ToastMessageDisplay.setText(this, "এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+
+
+                this.doubleBackToExitPressedOnce = true;
+
+
             }
-
-            ToastMessageDisplay.setText(this, "এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
-
-
-            this.doubleBackToExitPressedOnce = true;
-
-
         }
-    }
 
 
     public void help() {
         LayoutInflater layoutInflater = LayoutInflater.from(PlaceSelectionActivity.this);
         View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
-        //   final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
-        //  final AlertDialog alert = alertDialogBuilder.create();
+     //   final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
+      //  final AlertDialog alert = alertDialogBuilder.create();
 
-        //   alertDialogBuilder.setView(promptView);
+     //   alertDialogBuilder.setView(promptView);
 
         final Dialog alertDialog = new Dialog(PlaceSelectionActivity.this);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -570,7 +570,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         // create an alert dialog
         alertDialog.show();
-        //   alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+     //   alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
 //        alerts.getWindow().setLayout((height*3/7), (height*4/7));
 
 
@@ -602,7 +602,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         SharedPreferencesHelper.setFeedback(PlaceSelectionActivity.this, username);
         String phone = SharedPreferencesHelper.getNumber(PlaceSelectionActivity.this);
         TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        if(phone.equals("")) phone=IMEINumber;
+       if(phone.equals("")) phone=IMEINumber;
 
         if (phone.equals(""))phone.replace("","0");
         else {
@@ -612,7 +612,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+                         //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 
                             try {
@@ -684,13 +684,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
-        else if (id == R.id.about_us) {
+     else if (id == R.id.about_us) {
 
             Intent em = new Intent(this, AboutUs.class);
-            startActivity(em);
+           startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        }
+       }
         else if (id == R.id.disclaimer) {
 
             Intent em = new Intent(this, Disclaimer.class);
@@ -825,4 +825,67 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
 
+<<<<<<< HEAD
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+      try
+      {
+          Map<String, Integer> perms = new HashMap<>();
+          // Initial
+          perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
+          // Fill with results
+          for (int i = 0; i < permissions.length; i++)
+              perms.put(permissions[i], grantResults[i]);
+          // Check for ACCESS_FINE_LOCATION and WRITE_EXTERNAL_STORAGE
+          Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+          Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+          Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
+          Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+          Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
+          if (location && storage&& phonestate) {
+              // All Permissions Granted
+              TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+              //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+              IMEINumber=tm.getDeviceId();
+              Toast.makeText(PlaceSelectionActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
+          } else if (location) {
+              Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
+          } else if (storage) {
+              Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+          }
+          else if (phonestate) {
+              Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
+          }
+          else if (smsstate) {
+              Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
+          }
+          else if (accountstate) {
+              Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
+          }else { // !location && !storage case
+              // Permission Denied
+              Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
+                      "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
+          }
+
+      }
+      catch (Exception e)
+      {
+
+      }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+=======
+>>>>>>> 1081c47c729b2768c2efb4130b360bc2889f5154
 }
