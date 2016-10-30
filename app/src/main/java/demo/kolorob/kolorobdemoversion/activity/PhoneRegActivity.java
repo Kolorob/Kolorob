@@ -260,6 +260,7 @@ public class PhoneRegActivity extends Activity {
                                         " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ",1);
 
 
+
                             }
 
 
