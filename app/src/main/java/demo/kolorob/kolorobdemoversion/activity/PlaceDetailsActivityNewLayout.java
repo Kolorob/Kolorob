@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -13,6 +14,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -35,6 +37,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -1904,7 +1908,7 @@ int index;
     }
 
 
-    private void saveBazar(BazarItem b, Context contexts){
+    private void saveBazar(BazarItem b,final Context contexts){
         Log.d("Advertizement Type","=========="+b.type);
         getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
                         +"&description=" + b.description +
@@ -1920,20 +1924,55 @@ int index;
 
                 new VolleyApiCallback() {
                     @Override
-                    public void onResponse(int status, String apiContent) {
+                    public void onResponse(int status,final String apiContent) {
 
                         if (status == AppConstants.SUCCESS_CODE) {
                             //tester. You may delete this portion
-                            Context context = getApplicationContext();
+                            final Context context = getApplicationContext();
                             CharSequence text = apiContent;
                             int duration = Toast.LENGTH_SHORT;
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
-                            if(toast.equals("Please register first"))
-                            {
-                                Intent intentx = new Intent(PlaceDetailsActivityNewLayout.this,PhoneRegActivity.class);
-                                startActivity(intentx);
-                            }
+                          if(apiContent.equals("true"))
+                          {
+                              DisplayMetrics displayMetrics = contexts.getResources().getDisplayMetrics();
+                              height = displayMetrics.heightPixels;
+                              width = displayMetrics.widthPixels;
+
+                              LayoutInflater layoutInflater = LayoutInflater.from(contexts);
+                              View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+                              final Dialog alertDialog = new Dialog(contexts);
+                              alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                              alertDialog.setContentView(promptView);
+                              alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                              alertDialog.show();
+
+
+                              final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                              final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                              final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+                              header.setText("আপনার বিজ্ঞাপন টি পাঠানো হয়েছে");
+                              bodys.setText("কল্রব থেকে বিজ্ঞাপন দেয়ার জন্য আপনাকে ধন্যবাদ");
+
+                              okay.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View v) {
+                                      alertDialog.cancel();
+                                      mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                                      loadBazar(context);
+                                  }
+                              });
+
+                              alertDialog.setCancelable(true);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+                              alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+                          }
                             //tester ends======
                         }
                     }

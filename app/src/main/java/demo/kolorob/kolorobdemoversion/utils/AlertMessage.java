@@ -123,6 +123,9 @@ public class AlertMessage {
 //			textAsk.setTextSize(17);
 		alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
+
+
+
 	}
 
 
