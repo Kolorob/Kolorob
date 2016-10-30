@@ -20,9 +20,10 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
-        fb = (ImageButton) findViewById(R.id.btnfb);
         tw = (ImageButton) findViewById(R.id.btntwt);
         wb = (ImageButton) findViewById(R.id.btnweb);
+        fb = (ImageButton) findViewById(R.id.btnfb);
+
         insta = (ImageButton) findViewById(R.id.btninsta);
         phnus = (ImageButton) findViewById(R.id.btnphn);
         emailus = (ImageButton) findViewById(R.id.btnemail);
