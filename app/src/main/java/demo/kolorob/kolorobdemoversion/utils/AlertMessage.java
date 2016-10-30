@@ -6,11 +6,9 @@ package demo.kolorob.kolorobdemoversion.utils;
  */
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
@@ -26,7 +24,7 @@ import demo.kolorob.kolorobdemoversion.R;
 public class AlertMessage {
 	public static int width;
 	public static int height;
-
+	static int i;
 
 	public static void ShowMsgCommentView(final Context c, final String title,
 										final String body) {
@@ -42,6 +40,7 @@ public class AlertMessage {
 		final Dialog alertDialog = new Dialog(c);
 		alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		alertDialog.setContentView(promptView);
+
 		alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		alertDialog.show();
 
@@ -112,7 +111,88 @@ public class AlertMessage {
 		alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
 	}
+	public static int showMessage2(final Context c, final String title,
+								   final String body) {
 
+		DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+		height = displayMetrics.heightPixels;
+		width = displayMetrics.widthPixels;
+
+		LayoutInflater layoutInflater = LayoutInflater.from(c);
+		View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+		final Dialog alertDialog = new Dialog(c);
+		alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		alertDialog.setContentView(promptView);
+		alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		alertDialog.show();
+
+
+		final TextView header = (TextView) promptView.findViewById(R.id.headers);
+		final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+		final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+		header.setText(title);
+		bodys.setText(body);
+
+		okay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				i=0;
+				alertDialog.cancel();
+			}
+		});
+
+		alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+		alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+return i;
+	}
+	public static int showMessageExisting(final Context c, final String title,
+								   final String body) {
+
+		DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+		height = displayMetrics.heightPixels;
+		width = displayMetrics.widthPixels;
+
+		LayoutInflater layoutInflater = LayoutInflater.from(c);
+		View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+		final Dialog alertDialog = new Dialog(c);
+		alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		alertDialog.setContentView(promptView);
+		alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		alertDialog.show();
+
+
+		final TextView header = (TextView) promptView.findViewById(R.id.headers);
+		final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+		final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+		header.setText(title);
+		bodys.setText(body);
+
+		okay.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				i=2;
+				alertDialog.cancel();
+			}
+		});
+
+		alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+		alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+		return i;
+	}
 
 	public static void showMessageClose(final Context c, final String title,
 								   final String body) {
@@ -177,4 +257,5 @@ public class AlertMessage {
 
 		}
 	}
+
 }

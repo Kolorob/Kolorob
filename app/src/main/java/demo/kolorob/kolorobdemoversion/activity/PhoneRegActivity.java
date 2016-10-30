@@ -2,16 +2,24 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +56,8 @@ public class PhoneRegActivity extends Activity {
 
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
-
+    public static int width;
+    public static int height;
     private String phoneNumber,uname,emailaddress;
 
     String phoneNumberString = "";
@@ -247,11 +256,14 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
 
                                 SharedPreferencesHelper.setUname(con,uname);
-                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
-                                        " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ");
+                              showMessageExisting(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
+                                        " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ",1);
 
 
                             }
+
+
+
 
                             else if(response.equals("\"Invalid Phone Number\""))
                             {
@@ -265,8 +277,10 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
                                 SharedPreferencesHelper.setUname(con,serverusername);
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
-                                        "আপনার ইউজার নেম = " +serverusername +" এবং ফোন নাম্বার= "+serverphonenumber);                            }
+                                showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
+                                        "আপনার ইউজার নেম = " +serverusername +" এবং ফোন নাম্বার= "+serverphonenumber,2);
+
+                            }
                             else
                             {
 
@@ -352,7 +366,7 @@ public class PhoneRegActivity extends Activity {
                 // and pass it to your server and exchange it for an access token.
 
                 // Success! Start your next activity...
-
+                setUserInformation();
                 return;
             }
         }
@@ -390,5 +404,61 @@ public class PhoneRegActivity extends Activity {
                 Log.println(Log.ASSERT, "AccountKit", "Error: " + error.toString());
             }
         });
+    }
+    public void showMessageExisting(final Context c, final String title,
+                                    final String body, final int from) {
+
+        DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+
+        LayoutInflater layoutInflater = LayoutInflater.from(c);
+        View promptView = layoutInflater.inflate(R.layout.default_alert, null);
+
+
+        final Dialog alertDialog = new Dialog(c);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+
+        final TextView header = (TextView) promptView.findViewById(R.id.headers);
+        final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+        final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+        header.setText(title);
+        bodys.setText(body);
+
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(from==1)
+                {
+                    Intent newIntent = new Intent(PhoneRegActivity.this, ViewPagerDemo.class);
+                    newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(newIntent);
+                    finish();
+                }
+                else
+                {
+                    Intent newIntent = new Intent(PhoneRegActivity.this, PlaceSelectionActivity.class);
+                    newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(newIntent);
+                    finish();
+                }
+                alertDialog.cancel();
+            }
+        });
+
+        alertDialog.setCancelable(false);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
     }
 }
