@@ -698,6 +698,13 @@ String areaname=null;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.about_offer) {
+
+            Intent em = new Intent(this, OfferActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
         else if (id == R.id.tutorial) {
             int mapdetail=2;
 
