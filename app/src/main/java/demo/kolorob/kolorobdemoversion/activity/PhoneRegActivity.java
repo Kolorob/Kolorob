@@ -70,7 +70,11 @@ public class PhoneRegActivity extends Activity {
         super.onCreate(savedInstanceState);
         com.facebook.accountkit.AccountKit.initialize(getApplicationContext());
         setContentView(R.layout.phone_reg);
- accessToken = AccountKit.getCurrentAccessToken();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermissions();
+        }  else doPermissionGrantedStuffs();
+
+        accessToken = AccountKit.getCurrentAccessToken();
         phoneheader=(TextView)findViewById(R.id.phoneheader);
         phone  = (EditText)findViewById(R.id.phone_id);
         phone.setEnabled(false);
@@ -82,12 +86,7 @@ public class PhoneRegActivity extends Activity {
         else {
             goToLogin(true);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermissions();
-        }  else doPermissionGrantedStuffs();
 
-       // email=(EditText)findViewById(R.id.emailid) ;
-        doPermissionGrantedStuffs();
 
         con = this;
         if(SharedPreferencesHelper.isTabletDevice(con))
