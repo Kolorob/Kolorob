@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import info.hoang8f.widget.FButton;
@@ -42,6 +43,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     ImageButton fb,wb;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
+    boolean c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -66,7 +68,8 @@ fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
-        if (remaining<=0)
+      c=settings.getBoolean("MBRequest",false);
+        if (remaining<=0 &&c==false)
         {
             claim.setOnClickListener(this);
             time.setText("0");
@@ -75,6 +78,10 @@ fb.setOnClickListener(this);
             claim.setShadowHeight(5);
             claim.setShadowColor(getResources().getColor(R.color.colorAccent));
             claim.setTextColor(getResources().getColor(R.color.white));
+        }
+        if(c)
+        {
+            claim.setText("দয়া করে অপেক্ষা করুন");
         }
         else
         {
@@ -187,18 +194,26 @@ fb.setOnClickListener(this);
                             //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 
-                            try {
-                                ToastMessageDisplay.setText(OfferActivity.this,"ধন্যবাদ");
-                                ToastMessageDisplay.showText(OfferActivity.this);
-//                                if(response.toString().trim().equalsIgnoreCase("true"))
-//                                {
-//
-//                                    AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্যটি পাঠানো হয়ছে",
-//                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-//                                }
-//                                else
-//                                    AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্য পাঠানো সফল হয়নি",
-//                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+                            try{
+                             if(response.toString().trim().equalsIgnoreCase("true"))
+                               {
+                                   SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
+                                   settings.edit().putBoolean("MBRequest",true).apply();
+                                   c=settings.getBoolean("MBRequest",false);
+                                   claim.setShadowEnabled(false);
+                                   claim.setButtonColor(getResources().getColor(R.color.gray));
+                                   claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
+                                   claim.setText("দয়া করে অপেক্ষা করুন");
+                                   AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
+                                            "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
+                                                    "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
+                                }
+                                else
+                             {
+                                 AlertMessage.showMessage(OfferActivity.this, "দুঃখিত","কলরব সার্ভারে বর্তমানে কাজ চলচে।দয়া করে কিছুক্ষণ" +
+                                         "পর আবার চেষ্টা করুন");
+                             }
+
 
 
                             } catch (Exception e) {
