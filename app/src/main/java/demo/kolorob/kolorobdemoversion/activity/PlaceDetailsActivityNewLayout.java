@@ -1915,7 +1915,8 @@ int index;
                             toast.show();
                             if(toast.equals("Please register first"))
                             {
-                                Intent intent 
+                                Intent intentx = new Intent(PlaceDetailsActivityNewLayout.this,PhoneRegActivity.class);
+                                startActivity(intentx);
                             }
                             //tester ends======
                         }

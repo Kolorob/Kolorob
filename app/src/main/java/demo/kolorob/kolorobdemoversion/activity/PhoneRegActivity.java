@@ -248,8 +248,9 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
 
                                 SharedPreferencesHelper.setUname(con,uname);
-                                AlertMessage.showMessage(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
+                                AlertMessage.showMessageClose(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
                                         " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ");
+
 
 
                             }
@@ -266,8 +267,9 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
                                 SharedPreferencesHelper.setUname(con,serverusername);
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
-                                        "আপনার ইউজার নেম = " +serverusername +" এবং ফোন নাম্বার= "+serverphonenumber);                            }
+                                AlertMessage.showMessageClose(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
+                                        "আপনার ইউজার নেম = " +serverusername +" এবং ফোন নাম্বার= "+serverphonenumber);
+                                }
                             else
                             {
 
@@ -277,7 +279,7 @@ public class PhoneRegActivity extends Activity {
                                // SharedPreferencesHelper.setNumber(con,phoneNumber); this has been commented to prevent
                                 // user using same number in multiple device
 
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
+                                AlertMessage.showMessageClose(PhoneRegActivity.this, "দুঃখিত",
                                         "এই নাম্বার টি আগেই নিবন্ধিত হয়েছে");
                             }
 
