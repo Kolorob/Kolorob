@@ -2251,6 +2251,13 @@ int index;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.about_offer) {
+
+            Intent em = new Intent(this, OfferActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
         else if (id == R.id.disclaimer) {
 
             Intent em = new Intent(this, Disclaimer.class);

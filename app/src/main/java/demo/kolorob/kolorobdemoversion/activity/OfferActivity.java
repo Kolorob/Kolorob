@@ -72,22 +72,23 @@ fb.setOnClickListener(this);
         if (remaining<=0 &&c==false)
         {
             claim.setOnClickListener(this);
-            time.setText("0");
+
             claim.setButtonColor(getResources().getColor(R.color.orange));
             claim.setShadowEnabled(true);
             claim.setShadowHeight(5);
             claim.setShadowColor(getResources().getColor(R.color.colorAccent));
             claim.setTextColor(getResources().getColor(R.color.white));
         }
-        if(c)
+         else if (c)
         {
             claim.setText("দয়া করে অপেক্ষা করুন");
+            claim.setOnClickListener(null);
         }
-        else
-        {
+
+
                String remaininginbn= EtoB(Long.toString(remaining));
            time.setText(remaininginbn);
-        }
+
 
         if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this))
         {
@@ -110,7 +111,9 @@ fb.setOnClickListener(this);
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
-            if (english_number.charAt(i) == '1')
+             if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '1')
                 concatResult = concatResult + "১";
             else if (english_number.charAt(i) == '2')
                 concatResult = concatResult + "২";
@@ -128,8 +131,7 @@ fb.setOnClickListener(this);
                 concatResult = concatResult + "৮";
             else if (english_number.charAt(i) == '9')
                 concatResult = concatResult + "৯";
-            else if (english_number.charAt(i) == '0')
-                concatResult = concatResult + "০";
+
             else if (english_number.charAt(i) == '.')
                 concatResult = concatResult + ".";
             else if(english_number.charAt(i) == '/')
@@ -204,6 +206,7 @@ fb.setOnClickListener(this);
                                    claim.setButtonColor(getResources().getColor(R.color.gray));
                                    claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
                                    claim.setText("দয়া করে অপেক্ষা করুন");
+                                   claim.setOnClickListener(null);
                                    AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
                                             "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
                                                     "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
