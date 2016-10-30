@@ -776,11 +776,20 @@ int index;
         refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
-                dialog.setMessage("দয়া করে অপেক্ষা করুন");
-                dialog.setCancelable(false);
-                dialog.show();
-                loadBazar(PlaceDetailsActivityNewLayout.this);
+
+                if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
+                {
+                    dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
+                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setCancelable(false);
+                    dialog.show();
+                    loadBazar(PlaceDetailsActivityNewLayout.this);
+                }
+                else {
+                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+
+                }
+
 
             }
         });
