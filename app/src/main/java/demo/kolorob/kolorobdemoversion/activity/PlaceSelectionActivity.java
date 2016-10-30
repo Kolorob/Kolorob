@@ -948,46 +948,54 @@ String areaname=null;
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
-                Map<String, Integer> perms = new HashMap<>();
-                // Initial
-                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
-                // Fill with results
-                for (int i = 0; i < permissions.length; i++)
-                    perms.put(permissions[i], grantResults[i]);
-                // Check for ACCESS_FINE_LOCATION and WRITE_EXTERNAL_STORAGE
-                Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-                Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
-                Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
-                Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
-                if (location && storage&& phonestate) {
-                    // All Permissions Granted
-                    TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                    //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
-                    IMEINumber=tm.getDeviceId();
-                    Toast.makeText(PlaceSelectionActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
-                } else if (location) {
-                    Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
-                } else if (storage) {
-                    Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
-                }
-                else if (phonestate) {
-                    Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
-                }
-                else if (smsstate) {
-                    Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
-                }
-                else if (accountstate) {
-                    Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
-                }else { // !location && !storage case
-                    // Permission Denied
-                    Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
-                            "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
-                }
+      try
+      {
+          Map<String, Integer> perms = new HashMap<>();
+          // Initial
+          perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
+          perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
+          // Fill with results
+          for (int i = 0; i < permissions.length; i++)
+              perms.put(permissions[i], grantResults[i]);
+          // Check for ACCESS_FINE_LOCATION and WRITE_EXTERNAL_STORAGE
+          Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+          Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+          Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
+          Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+          Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
+          if (location && storage&& phonestate) {
+              // All Permissions Granted
+              TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+              //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
+              IMEINumber=tm.getDeviceId();
+              Toast.makeText(PlaceSelectionActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
+          } else if (location) {
+              Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
+          } else if (storage) {
+              Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+          }
+          else if (phonestate) {
+              Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
+          }
+          else if (smsstate) {
+              Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
+          }
+          else if (accountstate) {
+              Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
+          }else { // !location && !storage case
+              // Permission Denied
+              Toast.makeText(PlaceSelectionActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
+                      "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
+          }
+
+      }
+      catch (Exception e)
+      {
+
+      }
             }
             break;
             default:

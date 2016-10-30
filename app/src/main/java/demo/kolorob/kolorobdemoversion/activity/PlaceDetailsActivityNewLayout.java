@@ -384,8 +384,8 @@ int index;
 
         bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
 
-        bazar_logo.getLayoutParams().height = width/11;
-        bazar_logo.getLayoutParams().width = width/11;
+        bazar_logo.getLayoutParams().height = width/8;
+        bazar_logo.getLayoutParams().width = width/8;
         bazar_logo.setMinimumHeight(50);
         bazar_logo.setMinimumWidth(50);
 
