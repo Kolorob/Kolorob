@@ -155,7 +155,7 @@ public class OpeningActivity extends Activity {
     static int countOfDBLocal = 0;
     byte[] bytes;
     RelativeLayout mainLayout;
-
+    long oldinstalltime;
 
     public int getCountofDb() {
         return countofDb;
@@ -173,7 +173,7 @@ public class OpeningActivity extends Activity {
     int in = 0;
     View view=null;
     Float currentVersion;
-
+    long install=0;
     //==========================================================Code for Bazar Starts==========================================
     //bazar items
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
@@ -271,6 +271,8 @@ public class OpeningActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_opening);
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
         try
@@ -282,10 +284,10 @@ public class OpeningActivity extends Activity {
             if(currentVersion >previousVersion)
             {
                 File path = OpeningActivity.this.getApplicationContext().getExternalFilesDir(null);
-
                 File file = new File(path, "kolorob.txt");
                 if(file.exists())
                 {
+
                     file.delete();
                 }
              /*  File dir = new File(Environment.getExternalStorageDirectory()+"/osmdroid");
@@ -316,8 +318,8 @@ public class OpeningActivity extends Activity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
-        settings.edit().putLong("timeinstall", System.currentTimeMillis()).apply();
+
+
         File path = context.getExternalFilesDir(null);
 
         File file = new File(path, "kolorob.txt");
@@ -330,6 +332,7 @@ public class OpeningActivity extends Activity {
             }
             try {
                 try {
+
                     String body = app_ver + ",yes";
                     if (stream!=null){
                     stream.write(body.getBytes());}
@@ -482,8 +485,11 @@ public class OpeningActivity extends Activity {
             }
             else
 
-            {
-
+            {   install=System.currentTimeMillis();
+                long check=settings.getLong("timefirstinstall",Long.valueOf(2));
+if(check==2) {
+    settings.edit().putLong("timefirstinstall", install).apply();
+}
                 settings.edit().putLong("time", System.currentTimeMillis()).apply();
 // get the time and make a date out of it
 
@@ -641,7 +647,7 @@ public class OpeningActivity extends Activity {
                     if (first.equals("yes")) {
                         int mapdetail = 0;
 
-                    Intent a = new Intent(OpeningActivity.this, PhoneRegActivity.class); // Default Activity
+                    Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                     a.putExtra("YourValueKey", mapdetail);
                     frameAnimation.stop();
                     startActivity(a);
