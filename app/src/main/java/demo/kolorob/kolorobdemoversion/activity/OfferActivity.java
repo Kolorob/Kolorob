@@ -11,9 +11,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -29,9 +37,11 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     TextView time,claimtext,offertext;
     FButton claim;
     LinearLayout offer;
-    long counthead=30;
+    long counthead=0;
     ImageView backpack;
     ImageButton fb,wb;
+    String usernames = "kolorobapp";
+    String password = "2Jm!4jFe3WgBZKEN";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -138,7 +148,7 @@ fb.setOnClickListener(this);
                 startActivity(intent);
                 break;
             case R.id.claim:
-                Toast.makeText(OfferActivity.this,"asd",Toast.LENGTH_SHORT).show();
+                sendRequest();
                 break;
 
 
@@ -161,4 +171,68 @@ fb.setOnClickListener(this);
         }
 
     }
+
+    public void sendRequest() {
+        String username = SharedPreferencesHelper.getUser(OfferActivity.this);
+
+        String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
+
+
+            String url = "http://kolorob.net/demo/api/mb_request?phone=" + phone +  "&username=" + this.usernames + "&password=" + this.password;
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+
+
+                            try {
+                                ToastMessageDisplay.setText(OfferActivity.this,"ধন্যবাদ");
+                                ToastMessageDisplay.showText(OfferActivity.this);
+//                                if(response.toString().trim().equalsIgnoreCase("true"))
+//                                {
+//
+//                                    AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্যটি পাঠানো হয়ছে",
+//                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+//                                }
+//                                else
+//                                    AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্য পাঠানো সফল হয়নি",
+//                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            ToastMessageDisplay.setText(OfferActivity.this,error.toString());
+                            ToastMessageDisplay.showText(OfferActivity.this);
+                        }
+                    }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+
+                    return params;
+                }
+
+            };
+
+// Adding request to request queue
+
+            RequestQueue requestQueue = Volley.newRequestQueue(OfferActivity.this);
+            requestQueue.add(stringRequest);
+
+
+        }
+
+
+
 }
