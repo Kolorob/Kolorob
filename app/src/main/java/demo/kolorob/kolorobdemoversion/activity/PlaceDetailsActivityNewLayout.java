@@ -4031,7 +4031,14 @@ fragment.getMapViewController().setZoom(16);
             public void onPanelExpanded(View panel) {
                 Log.d(">>>>","onPanelExpanded");
                 slider_part.setVisibility(View.VISIBLE);
+
+                 LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
+                 sliding_parts.setMargins(0,height/25,0,height/21);
+                 slider_part.setLayoutParams(sliding_parts);
+
+
                 footer.setText("বিজ্ঞাপন দেখুন");
+
                 String number =SharedPreferencesHelper.getNumber(context);
                 if(number.equals(""))
                 {
@@ -4053,6 +4060,10 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelCollapsed(View panel) {
                 slider_part.setVisibility(View.VISIBLE);
+                LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
+                sliding_parts.setMargins(0,0,0,0);
+                slider_part.setLayoutParams(sliding_parts);
+
                 Log.d(">>>>","onPanelCollapsed");
 
                 footer.setText("বিজ্ঞাপন দিন");
