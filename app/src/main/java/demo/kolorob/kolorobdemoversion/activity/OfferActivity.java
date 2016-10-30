@@ -3,12 +3,16 @@ package demo.kolorob.kolorobdemoversion.activity;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import info.hoang8f.widget.FButton;
 
 /**
@@ -16,8 +20,10 @@ import info.hoang8f.widget.FButton;
  */
 
 public class OfferActivity extends Activity {
-    TextView time;
+    TextView time,claimtext,offertext;
     FButton claim;
+    LinearLayout offer;
+    ImageView backpack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -25,6 +31,10 @@ public class OfferActivity extends Activity {
     setContentView(R.layout.activity_offer);
         SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
         time=(TextView)findViewById(R.id.counter);
+        claimtext=(TextView)findViewById(R.id.countertext);
+        offer=(LinearLayout)findViewById(R.id.loweroffer);
+        offertext=(TextView)findViewById(R.id.offertext);
+        backpack=(ImageView)findViewById(R.id.backpack);
         claim=(FButton) findViewById(R.id.claim);
         claim.setShadowEnabled(false);
         claim.setButtonColor(getResources().getColor(R.color.gray));
@@ -47,5 +57,17 @@ if(diffInDays>1)
     claim.setShadowHeight(5);
     claim.setShadowColor(getResources().getColor(R.color.colorPrimaryDark));
 }
+        if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this))
+        {
+            offer.setGravity(Gravity.BOTTOM);
+            offer.requestLayout();
+            time.setTextSize(150);
+            claim.setTextSize(30);
+            claimtext.setTextSize(50);
+            offertext.setTextSize(25);
+            backpack.getLayoutParams().height = 300;
+            backpack.getLayoutParams().width = 300;
+            backpack.requestLayout();
+        }
     }
 }
