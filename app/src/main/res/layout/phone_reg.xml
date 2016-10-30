@@ -1,92 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-<LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     android:layout_gravity="center_horizontal"
     tools:context="demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu_image_2"
+        android:background="@color/white"/>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/menu_image_2"
-            android:layout_height="wrap_content">
 
-        </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
 
-
+    android:padding="30dp"
+    android:gravity="center_horizontal|center_vertical"
+    android:layout_height="match_parent">
 
         <TextView
+            android:padding="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:textSize="28dp"
-        android:text=" রেজিস্ট্রেশন করুন "
-          android:layout_marginBottom="5dp"
-        />
+android:id="@+id/phoneheader"
+        android:layout_gravity="center"
+            android:text=" রেজিস্ট্রেশন করুন "
+            android:textColor="@color/white"
 
-    <EditText
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
         android:id="@+id/userid"
-        android:maxLength="15"
-        android:layout_marginLeft="20dp"
-        android:hint="আপনার নাম লিখুন *"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="center_horizontal"
-
-        />
-    <EditText
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:id="@+id/emailid"
-        android:layout_marginLeft="20dp"
-        android:inputType="textEmailAddress"
+        app:met_floatingLabel="highlight"
+        android:drawableLeft="@drawable/user"
+        android:drawablePadding="10dp"
+        app:met_textColorHint="@color/white"
+        app:met_baseColor="@color/white"
+        android:hint="আপনার নাম লিখুন"/>
 
-        android:hint="ইমেইল আইডি"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="center_horizontal"
 
-        />
-
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
         android:id="@+id/phone_id"
-        android:layout_marginLeft="20dp"
-        android:inputType="number"
-        android:hint="ফোন নম্বর*"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="center_horizontal"
-
-        />
-
-
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/submit_btn"
-        android:layout_gravity="center_horizontal"
-        android:textSize="25dp"
-        android:layout_marginTop="15dp"
-        android:text="দিয়েছি"
+        app:met_floatingLabel="normal"
+        android:drawableLeft="@drawable/phone"
+        android:drawablePadding="10dp"
+        app:met_textColorHint="@color/white"
+        android:inputType="none"
+        app:met_baseColor="@color/white"
+        android:padding="5dp"
+        android:hint="Write Phone Number"/>
+
+
+    <info.hoang8f.widget.FButton
+
+    fbutton:buttonColor="@color/colorAccent"
+    fbutton:shadowColor="@color/colorPrimaryDark"
+    fbutton:shadowEnabled="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+    fbutton:shadowHeight="5dp"
+    fbutton:cornerRadius="5dp"
+        android:text=" জমা দিয়েছি "
         android:onClick="submit"
-        />
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content" />
 
-
+</LinearLayout>
 </LinearLayout>
 
 
-</ScrollView>
+
 
 
