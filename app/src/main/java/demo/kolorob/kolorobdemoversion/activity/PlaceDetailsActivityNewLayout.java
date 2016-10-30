@@ -1555,7 +1555,9 @@ int index;
         final EditText description= (EditText)findViewById(R.id.descriptions);
         final EditText contact_person= (EditText)findViewById(R.id.contact_person);
         final EditText contact= (EditText)findViewById(R.id.contact);
-
+        String number =SharedPreferencesHelper.getNumber(context);
+        phone.setText(number);
+        phone.setEnabled(false);
 
 
         product_name.addTextChangedListener(new TextWatcher() {
@@ -1750,6 +1752,9 @@ int index;
 //           }
 //
 //           b.product_name= "product";
+
+
+
 
 
 
