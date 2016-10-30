@@ -166,7 +166,7 @@ public class PhoneRegActivity extends Activity {
                 Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
                 Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
                 Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
-                if (location && storage&& phonestate) {
+                if (location && storage&& phonestate &&smsstate&&accountstate) {
                     // All Permissions Granted
                     TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                     //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
