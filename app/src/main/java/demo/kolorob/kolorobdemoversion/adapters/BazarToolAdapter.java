@@ -36,6 +36,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
     private HashMap<String, ArrayList<String>> _listDataChild;
     private int width;
     private int height;
+    private String type;
 
     public BazarToolAdapter(Context context, List<String> listDataHeader,
                             HashMap<String, ArrayList<String>> listChildData) {
@@ -84,6 +85,19 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         TextView another_num = (TextView) convertView.findViewById(R.id.another_num);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
+
+        Log.d("Tutionn","============"+type);
+
+        if(type.equals("Tution")||type.equals("টিউশন"))
+        {
+            price.setVisibility(View.GONE);
+            condition.setVisibility(View.GONE);
+        }
+        else
+        {
+            price.setVisibility(View.VISIBLE);
+            condition.setVisibility(View.VISIBLE);
+        }
 
         Double screenSize= AppUtils.ScreenSize(_context);
 
@@ -191,6 +205,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         product_name.setText(groupElement[0]);
         sell.setText(groupElement[1]);
+        type = groupElement[1];
         Double screenSize= AppUtils.ScreenSize(_context);
 
         if(screenSize>6.5)

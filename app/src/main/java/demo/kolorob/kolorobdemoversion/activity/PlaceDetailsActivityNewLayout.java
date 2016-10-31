@@ -159,6 +159,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,svholder,svsholder;
     CategoryItem ci;
+    int tution_detector=0;
     private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
     private LinearLayout llSubCatListHolder;
     String user="kolorobapp";
@@ -1463,6 +1464,16 @@ int index;
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
 
+
+
+        product_name= (EditText)findViewById(R.id.product_name);
+        phone= (EditText)findViewById(R.id.phone_no);
+        address= (EditText)findViewById(R.id.address);
+        price= (EditText)findViewById(R.id.costs);
+        description= (EditText)findViewById(R.id.descriptions);
+        contact_person= (EditText)findViewById(R.id.contact_person);
+        contact= (EditText)findViewById(R.id.contact);
+
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1528,10 +1539,26 @@ int index;
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
 
+                final LinearLayout pricing= (LinearLayout)findViewById(R.id.pricing);
+
                 if(position==3)
+                {
                     spinner.setVisibility(View.GONE);
+                    pricing.setVisibility(View.GONE);
+                    tution_detector =1;
+                    product_name.setHint("কি ধরনের টিউশনি চান?");
+                    description.setHint("টিউশনির বিবরন");
+                }
+
                 else
+                {
                     spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    tution_detector = 0;
+                    product_name.setHint("কি পন্য বিক্রয় করবেন?");
+                    description.setHint("পণ্যের বিবরন");
+                }
+
 
 
                 spinCounter1++;
@@ -1546,13 +1573,6 @@ int index;
 
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
-        product_name= (EditText)findViewById(R.id.product_name);
-        phone= (EditText)findViewById(R.id.phone_no);
-        address= (EditText)findViewById(R.id.address);
-        price= (EditText)findViewById(R.id.costs);
-        description= (EditText)findViewById(R.id.descriptions);
-        contact_person= (EditText)findViewById(R.id.contact_person);
-        contact= (EditText)findViewById(R.id.contact);
         String number =SharedPreferencesHelper.getNumber(context);
         String name = SharedPreferencesHelper.getUname(context);
         phone.setText(number);
@@ -1756,6 +1776,15 @@ int index;
 
 
 
+           if(tution_detector==1)
+           {
+               spinner.setSelection(2);
+               price.setText("1111");
+           }
+           else
+           {
+
+           }
 
 
 
