@@ -1773,14 +1773,14 @@ int index;
                }
                else
                {
-                   b.condition = spinner.getSelectedItem().toString();
+                   b.condition = spinner.getSelectedItem().toString().replace(' ','+');
                    if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
                    {
                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন","");
 //                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন");
                    }
                    else {
-                       b.type = type_spinner.getSelectedItem().toString();
+                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
                        if(product_name.getText().toString().equals(""))
                        {
 //                       AlertMessage.showMessage(context,"","");
@@ -1788,7 +1788,7 @@ int index;
 //                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন");
                        }
                        else {
-                           b.product_name= product_name.getText().toString();
+                           b.product_name= product_name.getText().toString().replace(' ','+');
                            if(phone.getText().toString().equals(""))
                            {
                                AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন","");
@@ -1796,20 +1796,20 @@ int index;
                            }
                            else
                            {
-                               b.phone = phone.getText().toString(); //MUST BE REGISTERED
+                               b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
                                if(contact.getText().toString().equals("")) {
                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
                                }
                                else {
-                                   b.contact = contact.getText().toString();
+                                   b.contact = contact.getText().toString().replace(' ','+');
                                    if(address.getText().toString().equals(""))
                                    {
                                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন","");
 //                                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন");
                                    }
                                    else {
-                                       b.address= address.getText().toString();
+                                       b.address= address.getText().toString().replace(' ','+');
                                        if(contact_person.getText().toString().equals(""))
                                        {
 //                                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন");
@@ -1817,7 +1817,7 @@ int index;
                                        }
                                        else
                                        {
-                                           b.contact_person = contact_person.getText().toString();
+                                           b.contact_person = contact_person.getText().toString().replace(' ','+');
                                            if(price.getText().toString().equals(""))
                                            {
 //                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
@@ -1825,14 +1825,14 @@ int index;
                                            }
                                            else
                                            {
-                                               b.price = price.getText().toString();
+                                               b.price = price.getText().toString().replace(' ','+');
                                                if(description.getText().toString().equals(""))
                                                {
 //                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
                                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন","");
                                                }
                                                else {
-                                                   b.description=description.getText().toString();
+                                                   b.description=description.getText().toString().replace(' ','+');
                                                    saveBazar(b,context);
                                                }
                                            }
