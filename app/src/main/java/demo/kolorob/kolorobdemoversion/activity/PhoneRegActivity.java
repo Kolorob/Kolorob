@@ -64,7 +64,7 @@ public class PhoneRegActivity extends Activity {
     private EditText phone,email,name;
 
 
-    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 125;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
 
 

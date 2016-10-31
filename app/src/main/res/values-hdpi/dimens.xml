@@ -33,10 +33,10 @@
     <dimen name="nav_header_height3">80dp</dimen>
     <dimen name="offercounter">50dp</dimen>
     <dimen name="offercountertext">18dp</dimen>
-    <dimen name="offercounterbtn">15dp</dimen>
+    <dimen name="offercounterbtn">14dp</dimen>
     <dimen name="offerbagw">150dp</dimen>
-    <dimen name="offerbagtext">12dp</dimen>
-    <dimen name="offerpadding">8dp</dimen>
+    <dimen name="offerbagtext">14dp</dimen>
+    <dimen name="offerpadding">3dp</dimen>
     <dimen name="offerpaddinglow">5dp</dimen>
     <dimen name="offerpaddingbtn">10dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
