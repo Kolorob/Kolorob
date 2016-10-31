@@ -106,7 +106,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
 
-                android:background="@color/drak_yellow"
+                android:background="@color/white"
 
                 android:layout_marginTop="@dimen/bazar_distance"
                 android:hint="মোবাইল নম্বর"
@@ -173,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:background="@color/drak_yellow"
+                android:background="@color/white"
                 android:hint="যোগাযোগকারী ব্যক্তির নাম"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
@@ -204,7 +204,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="40dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -213,7 +213,7 @@
 
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@color/drak_yellow"
                         android:hint="মূল্য"
@@ -221,7 +221,7 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray"
                         android:layout_marginTop="@dimen/bazar_distance"
-                        android:lines="2"
+                        android:lines="6"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:id="@+id/costs" />

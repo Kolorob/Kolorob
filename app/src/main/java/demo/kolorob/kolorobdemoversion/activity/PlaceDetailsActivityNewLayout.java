@@ -1549,8 +1549,11 @@ int index;
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
         String number =SharedPreferencesHelper.getNumber(context);
+        String name = SharedPreferencesHelper.getUname(context);
         phone.setText(number);
         phone.setEnabled(false);
+        contact_person.setText(name);
+        contact_person.setEnabled(false);
 
 
         product_name.addTextChangedListener(new TextWatcher() {
