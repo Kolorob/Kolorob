@@ -86,6 +86,8 @@ public class PhoneRegActivity extends Activity {
         accessToken = AccountKit.getCurrentAccessToken();
         phoneheader=(TextView)findViewById(R.id.phoneheader);
         phone  = (EditText)findViewById(R.id.phone_id);
+        phone.setHintTextColor(getResources().getColor(R.color.blue));
+        phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
         name=(EditText)findViewById(R.id.userid) ;
 
@@ -102,7 +104,7 @@ public class PhoneRegActivity extends Activity {
         {
             phoneheader.setTextSize(45);
         }
-        else  phoneheader.setTextSize(10);
+
     }
     private void checkPermissions() {
         List<String> permissions = new ArrayList<>();
@@ -279,7 +281,7 @@ public class PhoneRegActivity extends Activity {
 
                                 SharedPreferencesHelper.setUname(con,serverusername);
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
-                                        "আপনার ইউজার নেম = " +serverusername +" এবং ফোন নাম্বার= "+serverphonenumber,2);
+                                        "আপনার ইউজার নেম  " +serverusername +" এবং ফোন নাম্বার  "+serverphonenumber,2);
 
                             }
                             else

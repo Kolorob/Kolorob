@@ -2,11 +2,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="offercounter">50dp</dimen>
     <dimen name="offercountertext">20dp</dimen>
-    <dimen name="offercounterbtn">20dp</dimen>
+    <dimen name="offercounterbtn">18dp</dimen>
     <dimen name="offerbagw">200dp</dimen>
     <dimen name="offerbagtext">18dp</dimen>
-    <dimen name="offerpadding">8dp</dimen>
-    <dimen name="offerpaddingbtn">5dp</dimen>
+    <dimen name="offerpadding">14dp</dimen>
+    <dimen name="offerpaddinglow">5dp</dimen>
+    <dimen name="offerpaddingbtn">25dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="sidebarwidth">55dp</dimen>
     <dimen name="sidebarheight">350dp</dimen>
@@ -17,6 +18,7 @@
     <dimen name="tutobottom">15dp</dimen>
     <dimen name="leftpadding">25dp</dimen>
     <dimen name="transportscroll">100dp</dimen>
+    <dimen name="regpadding">15dp</dimen>
     <dimen name="comparelogoleft">30dp</dimen>
     <dimen name="search_margin">15dp</dimen>
     <dimen name="catimagetop">10dp</dimen>

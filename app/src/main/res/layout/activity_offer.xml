@@ -38,9 +38,10 @@
             android:layout_gravity="center"
             android:id="@+id/claim"
 
-            android:paddingLeft="@dimen/offerpadding"
-            android:paddingRight="@dimen/offerpadding"
+            android:paddingLeft="@dimen/offerpaddingbtn"
+            android:paddingRight="@dimen/offerpaddingbtn"
             android:paddingTop="@dimen/offerpadding"
+            android:layout_marginBottom="@dimen/offerpaddinglow"
             android:paddingBottom="@dimen/offerpadding"
             android:textSize="@dimen/offercounterbtn"
             android:text="ফ্রি ৫০ এমবি বুঝে নিন"/>

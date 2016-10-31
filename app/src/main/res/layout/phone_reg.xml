@@ -31,10 +31,10 @@
 
         <TextView
             android:padding="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-android:id="@+id/phoneheader"
-        android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneheader"
+            android:layout_gravity="center"
             android:text=" রেজিস্ট্রেশন করুন "
             android:textColor="@color/white"
 
@@ -59,7 +59,6 @@ android:id="@+id/phoneheader"
         android:layout_height="wrap_content"
         app:met_floatingLabel="normal"
         android:drawableLeft="@drawable/phonereceiver"
-
         android:drawablePadding="10dp"
         app:met_textColorHint="@color/white"
         android:inputType="none"
@@ -84,6 +83,7 @@ android:id="@+id/phoneheader"
         android:textColor="@color/colorSecondaryText"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:textSize="@dimen/offercounterbtn"
         android:layout_width="wrap_content" />
 
 </LinearLayout>

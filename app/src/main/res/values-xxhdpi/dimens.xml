@@ -1,5 +1,13 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="offercounter">50dp</dimen>
+    <dimen name="offercountertext">20dp</dimen>
+    <dimen name="offercounterbtn">18dp</dimen>
+    <dimen name="offerbagw">180dp</dimen>
+    <dimen name="offerbagtext">15dp</dimen>
+    <dimen name="offerpadding">15dp</dimen>
+    <dimen name="offerpaddinglow">10dp</dimen>
+    <dimen name="offerpaddingbtn">30dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="sidebarwidth">55dp</dimen>
     <dimen name="sidebarheight">350dp</dimen>
@@ -52,4 +60,6 @@
     <dimen name="bazar_distance">12dp</dimen>
 
     <dimen name="abttext">19dp</dimen>
+    <dimen name="regtext">25dp</dimen>
+    <dimen name="regpadding">10dp</dimen>
 </resources>
