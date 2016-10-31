@@ -238,7 +238,7 @@ public class PhoneRegActivity extends Activity {
     {
 
        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&name="+uname+"&deviceid="+IMEINumber+"&username="+username+"&password="+password+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&name="+uname.replace(' ','+')+"&deviceid="+IMEINumber+"&username="+username+"&password="+password+"" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
