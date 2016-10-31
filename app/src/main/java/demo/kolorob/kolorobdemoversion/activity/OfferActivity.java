@@ -73,10 +73,10 @@ fb.setOnClickListener(this);
         {
             claim.setOnClickListener(this);
 
-            claim.setButtonColor(getResources().getColor(R.color.orange));
+            claim.setButtonColor(getResources().getColor(R.color.colorAccent));
             claim.setShadowEnabled(true);
-            claim.setShadowHeight(5);
-            claim.setShadowColor(getResources().getColor(R.color.colorAccent));
+            claim.setShadowHeight(8);
+            claim.setShadowColor(getResources().getColor(R.color.gray));
             claim.setTextColor(getResources().getColor(R.color.white));
         }
          else if (c)
