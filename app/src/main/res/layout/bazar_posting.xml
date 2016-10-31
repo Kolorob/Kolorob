@@ -213,11 +213,11 @@
 
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:gravity="center"
                         android:background="@color/drak_yellow"
                         android:hint="মূল্য"
-                        android:inputType=""
+                        android:inputType="number"
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray"
                         android:layout_marginTop="@dimen/bazar_distance"
