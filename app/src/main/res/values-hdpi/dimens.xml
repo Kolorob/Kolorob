@@ -1,6 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="regpadding">15dp</dimen>
     <dimen name="sidebarwidth">55dp</dimen>
     <dimen name="sidebarheight">270dp</dimen>
     <dimen name="sidebarmargintop">10dp</dimen>
@@ -30,6 +31,14 @@
     <dimen name="nav_header_height2">50dp</dimen>
     <dimen name="search_top">20dp</dimen>
     <dimen name="nav_header_height3">80dp</dimen>
+    <dimen name="offercounter">50dp</dimen>
+    <dimen name="offercountertext">15dp</dimen>
+    <dimen name="offercounterbtn">14dp</dimen>
+    <dimen name="offerbagw">150dp</dimen>
+    <dimen name="offerbagtext">14dp</dimen>
+    <dimen name="offerpadding">3dp</dimen>
+    <dimen name="offerpaddinglow">5dp</dimen>
+    <dimen name="offerpaddingbtn">10dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     //feedbackstars
 

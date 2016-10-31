@@ -35,7 +35,7 @@ import info.hoang8f.widget.FButton;
  */
 
 public class OfferActivity extends Activity implements View.OnClickListener {
-    TextView time,claimtext,offertext;
+    TextView time,claimtext,offertext,lowdisclaimertext;
     FButton claim;
     LinearLayout offer;
     long counthead=0;
@@ -54,6 +54,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claimtext=(TextView)findViewById(R.id.countertext);
         offer=(LinearLayout)findViewById(R.id.loweroffer);
         offertext=(TextView)findViewById(R.id.offertext);
+        lowdisclaimertext=(TextView)findViewById(R.id.distext);
         backpack=(ImageView)findViewById(R.id.backpack);
         claim=(FButton) findViewById(R.id.claim);
         wb = (ImageButton) findViewById(R.id.btnw);
@@ -72,23 +73,24 @@ fb.setOnClickListener(this);
         if (remaining<=0 &&c==false)
         {
             claim.setOnClickListener(this);
-
-            claim.setButtonColor(getResources().getColor(R.color.orange));
+            time.setText("0");
+            claim.setButtonColor(getResources().getColor(R.color.colorAccent));
             claim.setShadowEnabled(true);
-            claim.setShadowHeight(5);
-            claim.setShadowColor(getResources().getColor(R.color.colorAccent));
+            claim.setShadowHeight(8);
+            claim.setShadowColor(getResources().getColor(R.color.gray));
             claim.setTextColor(getResources().getColor(R.color.white));
         }
          else if (c)
         {
+            time.setText("0");
             claim.setText("দয়া করে অপেক্ষা করুন");
             claim.setOnClickListener(null);
         }
+else {
 
-
-               String remaininginbn= EtoB(Long.toString(remaining));
-           time.setText(remaininginbn);
-
+            String remaininginbn = EtoB(Long.toString(remaining));
+            time.setText(remaininginbn);
+        }
 
         if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this))
         {
@@ -103,6 +105,7 @@ fb.setOnClickListener(this);
             backpack.requestLayout();
             offer.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
             offer.requestLayout();
+            lowdisclaimertext.setTextSize(13);
         }
     }
     public String EtoB(String english_number) {

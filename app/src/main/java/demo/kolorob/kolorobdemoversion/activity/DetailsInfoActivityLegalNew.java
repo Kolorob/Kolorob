@@ -746,7 +746,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         String comment="";
         comment=feedback_comment.getText().toString().trim();
         String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityLegalNew.this);
-        uname=uname2;
+        uname=uname2.replace(' ','+');;
         Log.d("status ","======"+status);
         String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 

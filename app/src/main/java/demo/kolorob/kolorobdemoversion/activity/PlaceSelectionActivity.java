@@ -606,7 +606,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         if (phone.equals(""))phone.replace("","0");
         else {
-            String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
+            String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment.replace(' ','+') + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
