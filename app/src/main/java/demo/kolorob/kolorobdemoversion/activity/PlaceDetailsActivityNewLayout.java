@@ -152,6 +152,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     Double screenSize;
     ImageView bazar_logo;
+    LinearLayout post_holder;
     Boolean panelStates= true;
     private ImageView iv_kolorob_logo;
     private static final int ANIM_INTERVAL = 150;
@@ -393,6 +394,11 @@ int index;
         refresh_button=(ImageView) findViewById(R.id.refresh_button);
         refresh_button.getLayoutParams().height=width/14;
         refresh_button.getLayoutParams().width=width/14;
+        post_holder = (LinearLayout)findViewById(R.id.post_holder);
+
+        FrameLayout.LayoutParams post_holders= (FrameLayout.LayoutParams) post_holder.getLayoutParams();
+        post_holders.setMargins(width/30,0,width/30,0);
+        post_holder.setLayoutParams(post_holders);
 
         bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
 
