@@ -397,6 +397,7 @@ int index;
         post_holder = (LinearLayout)findViewById(R.id.post_holder);
 
         FrameLayout.LayoutParams post_holders= (FrameLayout.LayoutParams) post_holder.getLayoutParams();
+
         post_holders.setMargins(width/30,0,width/30,0);
         post_holder.setLayoutParams(post_holders);
 
@@ -4118,7 +4119,7 @@ fragment.getMapViewController().setZoom(16);
                 slider_part.setVisibility(View.VISIBLE);
 
                  LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                 sliding_parts.setMargins(0,height/25,0,height/21);
+                 sliding_parts.setMargins(0,height/25,0,height/29);
                  slider_part.setLayoutParams(sliding_parts);
 
 
