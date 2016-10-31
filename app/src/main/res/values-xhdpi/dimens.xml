@@ -54,7 +54,7 @@
     <dimen name="regpadding">15dp</dimen>
     <dimen name="abttext">15dp</dimen>
     <dimen name="offercounter">50dp</dimen>
-    <dimen name="offercountertext">20dp</dimen>
+    <dimen name="offercountertext">15dp</dimen>
     <dimen name="offercounterbtn">18dp</dimen>
     <dimen name="offerbagw">180dp</dimen>
     <dimen name="offerbagtext">15dp</dimen>

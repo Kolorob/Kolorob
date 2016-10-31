@@ -30,8 +30,9 @@
             android:id="@+id/countertext"
             android:padding="@dimen/offerpadding"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:text="দিন বাকি আছে!"
+            android:text="দিন বাকি আছে!*"
             android:textSize="@dimen/offercountertext"/>
+
         <info.hoang8f.widget.FButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_weight="2"
         android:id="@+id/loweroffer"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:layout_marginLeft="8dp"
         android:gravity="top|center"
@@ -81,17 +82,17 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+android:layout_marginBottom="@dimen/offerpadding"
                 android:layout_gravity="center"
                 android:gravity="center"
 
-                >
+                android:weightSum="1">
 
 
                 <ImageButton
@@ -116,10 +117,19 @@
                     android:background="@drawable/email_icon"
                     android:layout_gravity="center"
 
-                    />
+                    android:layout_weight="0.00" />
 
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/distext"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#f2f2f2"
+                android:textSize="9dp"
+                android:text="*আপনি আগে কলরব ডাউনলোড করে থাকলে এই অফারটি প্রযোজ্য হবে না" />
+
         </LinearLayout>
-    </LinearLayout>
+       </LinearLayout>
 
 </LinearLayout>

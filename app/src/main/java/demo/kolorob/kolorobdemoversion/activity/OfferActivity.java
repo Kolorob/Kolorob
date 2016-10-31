@@ -35,7 +35,7 @@ import info.hoang8f.widget.FButton;
  */
 
 public class OfferActivity extends Activity implements View.OnClickListener {
-    TextView time,claimtext,offertext;
+    TextView time,claimtext,offertext,lowdisclaimertext;
     FButton claim;
     LinearLayout offer;
     long counthead=0;
@@ -54,6 +54,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claimtext=(TextView)findViewById(R.id.countertext);
         offer=(LinearLayout)findViewById(R.id.loweroffer);
         offertext=(TextView)findViewById(R.id.offertext);
+        lowdisclaimertext=(TextView)findViewById(R.id.distext);
         backpack=(ImageView)findViewById(R.id.backpack);
         claim=(FButton) findViewById(R.id.claim);
         wb = (ImageButton) findViewById(R.id.btnw);
@@ -104,6 +105,7 @@ else {
             backpack.requestLayout();
             offer.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
             offer.requestLayout();
+            lowdisclaimertext.setTextSize(13);
         }
     }
     public String EtoB(String english_number) {
