@@ -14,21 +14,24 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Condition"
-                android:visibility="gone"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/white"
-                android:id="@+id/textView2" />
+
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
+
+                android:layout_marginRight="10dp"
+                android:popupBackground="@color/white"
+
+                android:background="@color/drak_yellow"
+                android:id="@+id/type_spinner" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
 
                 android:layout_marginRight="10dp"
 
@@ -38,28 +41,9 @@
 
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Advertizement Type"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/white"
-                android:id="@+id/advertizement_type" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
 
-                android:layout_marginRight="10dp"
-                android:popupBackground="@color/white"
 
-                android:background="@color/drak_yellow"
-                android:id="@+id/type_spinner" />
 
             <TextView
                 android:layout_width="wrap_content"

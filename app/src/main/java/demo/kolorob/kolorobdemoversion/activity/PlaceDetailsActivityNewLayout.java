@@ -1528,6 +1528,11 @@ int index;
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
 
+                if(position==3)
+                    spinner.setVisibility(View.GONE);
+                else
+                    spinner.setVisibility(View.VISIBLE);
+
 
                 spinCounter1++;
             }
