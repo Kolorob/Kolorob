@@ -177,7 +177,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int locationNameId,subcategory;
     private String locationName;
     private SlidingUpPanelLayout mLayout;
-
+    EditText product_name;
+    EditText phone;
+    EditText address;
+    EditText price;
+    EditText description;
+    EditText contact_person;
+    EditText contact;
     private int showList;
     private String locationNameEng;
     private String comapreData;
@@ -1457,33 +1463,6 @@ int index;
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
 
-
-
-
-//        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                if(spinCounter>0)
-//                {
-//                    Log.d("Spinner Item Selected","=========="+spinCounter);
-//                    TextView text1 = (TextView)parent.getChildAt(0);
-//                    text1.setTextColor(ContextCompat.getColor(context,R.color.black));
-//
-//                }
-//
-//                spinCounter++;
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                Log.d("No Item Selected","==========");
-//                TextView text1 = (TextView)parent.getChildAt(0);
-//                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
-//            }
-//        });
-
-
-
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1562,13 +1541,13 @@ int index;
 
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
-        final EditText product_name= (EditText)findViewById(R.id.product_name);
-        final EditText phone= (EditText)findViewById(R.id.phone_no);
-        final EditText address= (EditText)findViewById(R.id.address);
-        final EditText price= (EditText)findViewById(R.id.costs);
-        final EditText description= (EditText)findViewById(R.id.descriptions);
-        final EditText contact_person= (EditText)findViewById(R.id.contact_person);
-        final EditText contact= (EditText)findViewById(R.id.contact);
+        product_name= (EditText)findViewById(R.id.product_name);
+        phone= (EditText)findViewById(R.id.phone_no);
+        address= (EditText)findViewById(R.id.address);
+        price= (EditText)findViewById(R.id.costs);
+        description= (EditText)findViewById(R.id.descriptions);
+        contact_person= (EditText)findViewById(R.id.contact_person);
+        contact= (EditText)findViewById(R.id.contact);
         String number =SharedPreferencesHelper.getNumber(context);
         phone.setText(number);
         phone.setEnabled(false);
@@ -1965,6 +1944,14 @@ int index;
 
                               header.setText("আপনার বিজ্ঞাপন টি পাঠানো হয়েছে");
                               bodys.setText("কল্রব থেকে বিজ্ঞাপন দেয়ার জন্য আপনাকে ধন্যবাদ");
+
+                               product_name.setText("");
+                               phone.setText("");
+                               address.setText("");
+                               price.setText("");
+                               description.setText("");
+                               contact_person.setText("");
+                               contact.setText("");
 
                               okay.setOnClickListener(new View.OnClickListener() {
                                   @Override
