@@ -5,9 +5,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:layout_gravity="center_horizontal"
     tools:context="demo.kolorob.kolorobdemoversion.activity.PhoneRegActivity">
@@ -25,7 +25,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
 
-    android:padding="30dp"
+    android:padding="@dimen/regpadding"
     android:gravity="center_horizontal|center_vertical"
     android:layout_height="match_parent">
 
@@ -39,7 +39,7 @@ android:id="@+id/phoneheader"
             android:textColor="@color/white"
 
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="@dimen/regtext" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@ android:id="@+id/phoneheader"
         android:drawablePadding="10dp"
         app:met_textColorHint="@color/white"
         app:met_baseColor="@color/white"
-        android:hint="আপনার নাম লিখুন"/>
+        android:hint="নাম লিখুন"/>
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -58,13 +58,14 @@ android:id="@+id/phoneheader"
         android:id="@+id/phone_id"
         android:layout_height="wrap_content"
         app:met_floatingLabel="normal"
-        android:drawableLeft="@drawable/phone"
+        android:drawableLeft="@drawable/phonereceiver"
+
         android:drawablePadding="10dp"
         app:met_textColorHint="@color/white"
         android:inputType="none"
         app:met_baseColor="@color/white"
         android:padding="5dp"
-        android:hint="Write Phone Number"/>
+        android:hint="ফোন নাম্বার"/>
 
 
     <info.hoang8f.widget.FButton
