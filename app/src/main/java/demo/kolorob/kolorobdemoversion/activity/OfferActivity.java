@@ -72,7 +72,7 @@ fb.setOnClickListener(this);
         if (remaining<=0 &&c==false)
         {
             claim.setOnClickListener(this);
-
+            time.setText("0");
             claim.setButtonColor(getResources().getColor(R.color.colorAccent));
             claim.setShadowEnabled(true);
             claim.setShadowHeight(8);
