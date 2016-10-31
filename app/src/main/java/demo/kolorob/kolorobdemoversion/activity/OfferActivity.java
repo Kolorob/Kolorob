@@ -81,14 +81,15 @@ fb.setOnClickListener(this);
         }
          else if (c)
         {
+            time.setText("0");
             claim.setText("দয়া করে অপেক্ষা করুন");
             claim.setOnClickListener(null);
         }
+else {
 
-
-               String remaininginbn= EtoB(Long.toString(remaining));
-           time.setText(remaininginbn);
-
+            String remaininginbn = EtoB(Long.toString(remaining));
+            time.setText(remaininginbn);
+        }
 
         if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this))
         {
