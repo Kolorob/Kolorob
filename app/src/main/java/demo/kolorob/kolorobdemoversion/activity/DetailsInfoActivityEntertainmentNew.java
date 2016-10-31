@@ -668,7 +668,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
     public void sendReviewToServer() {
         String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityEntertainmentNew.this);
-        uname=uname2;
+        uname=uname2.replace(' ','+');;
         int rating;
         if(status.equals(getString(R.string.feedback1)))
             rating= 1;

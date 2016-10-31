@@ -676,7 +676,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         String comment="";
         comment=feedback_comment.getText().toString().trim();
         String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutGovernment.this);
-        uname=uname2;
+        uname=uname2.replace(' ','+');;
         String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

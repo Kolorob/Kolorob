@@ -779,7 +779,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         String  register = SharedPreferencesHelper.getNumber(DetailsLayoutEducation.this);
         phone_num=register;
         String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutEducation.this);
-        uname=uname2;
+        uname=uname2.replace(' ','+');;
         if (register.equals("")) {
             requestToRegister();
         } else {
