@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:weightSum="3">
@@ -48,6 +51,7 @@
             android:text="ফ্রি ৫০ এমবি বুঝে নিন"/>
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="2"
@@ -60,12 +64,33 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:layout_height="0dp">
-        <ImageView
-            android:layout_width="@dimen/offerbagw"
-            android:layout_height="@dimen/offerbagw"
-            android:layout_margin="10dp"
-            android:id="@+id/backpack"
-            android:background="@drawable/backpack_1"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/offerpaddingcredit"
+            android:layout_marginTop="@dimen/offerpaddingcredit"
+            android:layout_marginRight="@dimen/offerpaddingcredit"
+            android:layout_height="wrap_content">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/creditbutton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                fab:fab_icon="@drawable/smile"
+                fab:fab_colorNormal="@color/black"
+                fab:fab_colorPressed="@color/gray"
+                android:layout_alignParentTop="true"
+
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+            <ImageView
+                android:layout_width="@dimen/offerbagw"
+                android:layout_height="@dimen/offerbagw"
+                android:id="@+id/backpack"
+                android:background="@drawable/backpack"
+                android:layout_alignParentTop="true"
+                android:padding="@dimen/offerpadding"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +113,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-android:layout_marginBottom="@dimen/offerpadding"
+                android:layout_marginBottom="@dimen/offerpadding"
                 android:layout_gravity="center"
                 android:gravity="center"
 
@@ -123,13 +148,13 @@ android:layout_marginBottom="@dimen/offerpadding"
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/distext"
+                android:layout_margin="@dimen/offerpadding"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="#f2f2f2"
-                android:textSize="9dp"
+                android:textSize="10dp"
                 android:text="*আপনি আগে কলরব ডাউনলোড করে থাকলে এই অফারটি প্রযোজ্য হবে না" />
 
         </LinearLayout>
        </LinearLayout>
-
 </LinearLayout>

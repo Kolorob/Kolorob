@@ -30,7 +30,7 @@
     <dimen name="nav_header_height2">230dp</dimen>
     <dimen name="nav_header_height3">300dp</dimen>
     <dimen name="offerpadding">15dp</dimen>
-
+    <dimen name="offerpaddingcredit">30dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     //feedbackstars
     <dimen name="firststarspace">63dp</dimen>

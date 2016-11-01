@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -39,8 +40,10 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     FButton claim;
     LinearLayout offer;
     long counthead=0;
+    long credithead=15;
     ImageView backpack;
     ImageButton fb,wb;
+    FloatingActionButton credit;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
     boolean c;
@@ -59,6 +62,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claim=(FButton) findViewById(R.id.claim);
         wb = (ImageButton) findViewById(R.id.btnw);
         fb = (ImageButton) findViewById(R.id.btnf);
+        credit=(FloatingActionButton)findViewById(R.id.creditbutton);
+
         claim.setShadowEnabled(false);
         claim.setButtonColor(getResources().getColor(R.color.gray));
         claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
@@ -69,6 +74,19 @@ fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
+        long remaincredit=credithead-diffInDays;
+        if(remaincredit<=0)
+        {
+            credit.setColorNormalResId(R.color.line_draw);
+            credit.setIcon(R.drawable.smile);
+            credit.setOnClickListener(this);
+        }
+        else
+        {
+            credit.setColorNormalResId(R.color.gray);
+            credit.setIcon(R.drawable.smile2);
+            credit.setOnClickListener(null);
+        }
       c=settings.getBoolean("MBRequest",false);
         if (remaining<=0 &&c==false)
         {
@@ -83,6 +101,7 @@ fb.setOnClickListener(this);
          else if (c)
         {
             time.setText("0");
+            claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
             claim.setText("দয়া করে অপেক্ষা করুন");
             claim.setOnClickListener(null);
         }
@@ -100,12 +119,12 @@ else {
             claimtext.setTextSize(40);
             offertext.setTextSize(25);
             offertext.setPadding(50,20,30,30);
-            backpack.getLayoutParams().height = 400;
-            backpack.getLayoutParams().width = 400;
+            backpack.getLayoutParams().height = 300;
+            backpack.getLayoutParams().width = 300;
             backpack.requestLayout();
             offer.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
             offer.requestLayout();
-            lowdisclaimertext.setTextSize(13);
+            lowdisclaimertext.setTextSize(14);
         }
     }
     public String EtoB(String english_number) {

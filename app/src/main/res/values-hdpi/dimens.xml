@@ -36,7 +36,8 @@
     <dimen name="offercounterbtn">14dp</dimen>
     <dimen name="offerbagw">150dp</dimen>
     <dimen name="offerbagtext">14dp</dimen>
-    <dimen name="offerpadding">3dp</dimen>
+    <dimen name="offerpadding">6dp</dimen>
+    <dimen name="offerpaddingcredit">8dp</dimen>
     <dimen name="offerpaddinglow">5dp</dimen>
     <dimen name="offerpaddingbtn">10dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
