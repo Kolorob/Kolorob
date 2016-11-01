@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -270,8 +271,16 @@ public class OpeningActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_opening);
+      setContentView(R.layout.activity_opening);
+        mainLayout =(RelativeLayout)findViewById(R.id.mainLayout);
+        mainLayout.setBackgroundResource(R.drawable.bg);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Snackbar snackbar = Snackbar.make(mainLayout,"Please allow all the permission so that app works smoothly",Snackbar.LENGTH_LONG);
+
+
+            snackbar.show();
+        }
 
 
         ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
@@ -313,8 +322,7 @@ public class OpeningActivity extends Activity {
 
 
         context = this;
-        mainLayout =(RelativeLayout)findViewById(R.id.mainLayout);
-        mainLayout.setBackgroundResource(R.drawable.bg);
+
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
@@ -378,8 +386,8 @@ public class OpeningActivity extends Activity {
             String contents = new String(bytes);
             String delims = "[,]";
             String[] tokens = contents.split(delims);
-            first=tokens[1];
-            // first="yes";
+            //    first=tokens[1];
+            first="yes";
         }
         else {
             int length = (int) file.length();
@@ -412,8 +420,8 @@ public class OpeningActivity extends Activity {
             String delims = "[,]";
             String[] tokens = contents.split(delims);
 
-           first=tokens[1];
-            //  first="yes";
+            // first=tokens[1];
+              first="yes";
         }
 
 
