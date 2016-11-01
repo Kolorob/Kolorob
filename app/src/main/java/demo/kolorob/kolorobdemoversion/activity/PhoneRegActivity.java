@@ -55,7 +55,7 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 public class PhoneRegActivity extends Activity {
 
     String username="kolorobapp";
-    String password="2Jm!4jFe3WgBZKEN";
+    String password="!2Jm4jFe3WgBZKEN";
     public static int width;
     public static int height;
     private String phoneNumber,uname,emailaddress;
@@ -64,7 +64,7 @@ public class PhoneRegActivity extends Activity {
     private EditText phone,email,name;
 
 
-    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 125;
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
 
 
@@ -113,21 +113,21 @@ public class PhoneRegActivity extends Activity {
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             message += "\nLocation to show user location.";
         }
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             message += "\nStorage access to store map tiles.";
         }
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.READ_PHONE_STATE);
             message += "\n access to read phone state.";
             //requestReadPhoneStatePermission();
         }
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.READ_SMS);
-            message += "\n access to read sms.";
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.RECEIVE_SMS);
+            message += "\n access to receive sms.";
             //requestReadPhoneStatePermission();
         }
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+         if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.GET_ACCOUNTS);
             message += "\n access to read sms.";
             //requestReadPhoneStatePermission();
@@ -157,7 +157,7 @@ public class PhoneRegActivity extends Activity {
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.RECEIVE_SMS, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.GET_ACCOUNTS, PackageManager.PERMISSION_GRANTED);
                 // Fill with results
                 for (int i = 0; i < permissions.length; i++)
@@ -166,7 +166,7 @@ public class PhoneRegActivity extends Activity {
                 Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
                 Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                 Boolean phonestate = perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
-                Boolean smsstate = perms.get(Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+                Boolean smsstate = perms.get(Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED;
                 Boolean accountstate = perms.get(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED;
                 if (location && storage&& phonestate &&smsstate&&accountstate) {
                     // All Permissions Granted
@@ -180,7 +180,7 @@ public class PhoneRegActivity extends Activity {
                     Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
                 }
                 else if (phonestate) {
-                    Toast.makeText(this, "Phone state permission is required to get device information.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "App requires device information to proceed further.", Toast.LENGTH_LONG).show();
                 }
                 else if (smsstate) {
                     Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
