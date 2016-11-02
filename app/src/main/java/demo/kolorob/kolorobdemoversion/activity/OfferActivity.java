@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import info.hoang8f.widget.FButton;
@@ -196,7 +197,17 @@ else {
                 startActivity(intent);
                 break;
             case R.id.claim:
-                sendRequest();
+
+                if (AppUtils.isNetConnected(getApplicationContext()))
+                {
+                    sendRequest();
+                }
+                else {
+                    ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+                    ToastMessageDisplay.showText(OfferActivity.this);
+                }
                 break;
             case R.id.creditbutton:
 
@@ -256,8 +267,19 @@ else {
                 refno=refernumber.getText().toString().trim();
 if (!refno.equals(""))
 {
-    sendRequesttocredit();
-    alertDialog.cancel();
+    if (AppUtils.isNetConnected(getApplicationContext()))
+    {
+        sendRequesttocredit();
+        alertDialog.cancel();
+    }
+    else {
+        ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+        ToastMessageDisplay.showText(OfferActivity.this);
+    }
+
+
 }
              else
 {

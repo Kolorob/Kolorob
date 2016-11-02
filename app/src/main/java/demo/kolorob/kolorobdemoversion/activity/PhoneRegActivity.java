@@ -48,6 +48,7 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
@@ -228,8 +229,14 @@ public class PhoneRegActivity extends Activity {
             name.setError( "নাম লিখুন" );
 
         }
-        else if (uname.length()<=50&&!uname.equals("")) {
+        else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
             sendPhoneNumberToServer(phoneNumber);
+        }
+        else {
+            ToastMessageDisplay.setText(PhoneRegActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+            ToastMessageDisplay.showText(PhoneRegActivity.this);
         }
     }
 
