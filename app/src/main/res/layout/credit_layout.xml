@@ -35,22 +35,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Credit your friend!"
-            android:id="@+id/body" />
+            android:padding="@dimen/offerpadding"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/offerbagtext"
+            android:text="কলরবের সাথে পরিচয় করানোর জন্য কাউকে থ্যাংকস দিতে চাইলে তার মোবাইল নাম্বার টি আমাদের কে পাঠিয়ে দিন "
+            android:id="@+id/bodyofcredit" />
 
 
     </LinearLayout>
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/offerbagw"
         android:id="@+id/creditno"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/offerpadding"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         app:met_floatingLabel="highlight"
-        android:drawableLeft="@drawable/user"
+
         android:drawablePadding="10dp"
         android:inputType="number"
-        app:met_textColorHint="@color/white"
-        app:met_baseColor="@color/white"
+        app:met_textColorHint="@color/colorPrimary"
+        app:met_baseColor="@color/black"
         android:hint="01*********"/>
 
 
