@@ -228,7 +228,7 @@ public class PhoneRegActivity extends Activity {
             name.setError( "নাম লিখুন" );
 
         }
-        else if (uname.length()<=15&&!uname.equals("")) {
+        else if (uname.length()<=50&&!uname.equals("")) {
             sendPhoneNumberToServer(phoneNumber);
         }
     }

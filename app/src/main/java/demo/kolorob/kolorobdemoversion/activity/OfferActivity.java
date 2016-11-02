@@ -51,7 +51,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     TextView time,claimtext,offertext,lowdisclaimertext;
     FButton claim;
     LinearLayout offer;
-    long counthead=30;
+    long counthead=0;
     long credithead=0;
     String refno="a";
     ImageView backpack;
@@ -109,6 +109,7 @@ fb.setOnClickListener(this);
             claim.setOnClickListener(this);
             time.setText("0");
             claim.setButtonColor(getResources().getColor(R.color.colorAccent));
+            claim.setTextSize(25);
             claim.setShadowEnabled(true);
             claim.setShadowHeight(8);
             claim.setShadowColor(getResources().getColor(R.color.gray));
@@ -131,12 +132,12 @@ else {
         {
 
             time.setTextSize(150);
-            claim.setTextSize(30);
+            claim.setTextSize(25);
             claimtext.setTextSize(40);
             offertext.setTextSize(25);
             offertext.setPadding(50,20,30,30);
-            backpack.getLayoutParams().height = 300;
-            backpack.getLayoutParams().width = 300;
+            backpack.getLayoutParams().height = 250;
+            backpack.getLayoutParams().width = 250;
             backpack.requestLayout();
             offer.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
             offer.requestLayout();
@@ -196,8 +197,6 @@ else {
                 break;
             case R.id.claim:
                 sendRequest();
-
-                sendRequest();
                 break;
             case R.id.creditbutton:
 
@@ -242,10 +241,10 @@ else {
         alertDialog.show();
 
 
-        final TextView header=(TextView)findViewById(R.id.bodyofcredit);
+        final TextView header=(TextView)promptView.findViewById(R.id.bodyofcredit);
         final MaterialEditText refernumber = (MaterialEditText) promptView.findViewById(R.id.creditno);
         final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
-        if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this)) {
+        if(SharedPreferencesHelper.isTabletDevice(c)) {
        header.setTextSize(25);
         }
 
