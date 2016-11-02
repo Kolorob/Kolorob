@@ -56,9 +56,13 @@
     <dimen name="offercounter">50dp</dimen>
     <dimen name="offercountertext">15dp</dimen>
     <dimen name="offerpaddingcredit">8dp</dimen>
+    <dimen name="offerpaddingcredittop">20dp</dimen>
+    <dimen name="offerpaddingcreditlr">10dp</dimen>
+    <dimen name="offerbagw">115dp</dimen>
+    <dimen name="offerbagh">150dp</dimen>
     <dimen name="offercounterbtn">18dp</dimen>
+    <dimen name="creditbtnsize">30dp</dimen>
     <dimen name="offerpaddingbtntop">14dp</dimen>
-    <dimen name="offerbagw">180dp</dimen>
     <dimen name="offerbagtext">15dp</dimen>
     <dimen name="offerpadding">10dp</dimen>
     <dimen name="offerpaddinglow">5dp</dimen>
