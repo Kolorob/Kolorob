@@ -34,7 +34,7 @@
             android:padding="@dimen/offerpadding"
             android:layout_gravity="center_horizontal|center_vertical"
             android:text="দিন বাকি আছে!*"
-            android:textSize="@dimen/offercountertext"/>
+            android:textSize="@dimen/offerbagtext"/>
 
         <info.hoang8f.widget.FButton
             android:layout_width="wrap_content"
@@ -66,9 +66,9 @@
         android:layout_height="0dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/offerpaddingcredit"
-            android:layout_marginTop="@dimen/offerpaddingcredit"
-            android:layout_marginRight="@dimen/offerpaddingcredit"
+            android:layout_marginLeft="@dimen/offerpaddingcreditlr"
+            android:layout_marginTop="@dimen/offerpaddingcredittop"
+            android:layout_marginRight="@dimen/offerpaddingcreditlr"
             android:layout_height="wrap_content">
 
             <com.getbase.floatingactionbutton.FloatingActionButton
@@ -84,7 +84,7 @@
                 android:layout_alignParentEnd="true"/>
             <ImageView
                 android:layout_width="@dimen/offerbagw"
-                android:layout_height="@dimen/offerbagw"
+                android:layout_height="@dimen/offerbagh"
                 android:id="@+id/backpack"
                 android:background="@drawable/backpack"
                 android:layout_alignParentTop="true"
@@ -153,7 +153,7 @@
                 android:layout_gravity="center"
                 android:textColor="#f2f2f2"
                 android:textSize="10dp"
-                android:text="*আপনি আগে কলরব ডাউনলোড করে থাকলে এই অফারটি প্রযোজ্য হবে না" />
+                android:text="*আগে কলরব ডাউনলোড করে থাকলে এই অফারটি প্রযোজ্য হবে না" />
 
         </LinearLayout>
        </LinearLayout>
