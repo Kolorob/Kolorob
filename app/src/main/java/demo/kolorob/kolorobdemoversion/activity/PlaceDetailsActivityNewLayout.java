@@ -4024,7 +4024,7 @@ fragment.getMapViewController().setZoom(16);
 
          bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        mLayout.setPanelHeight(60);
+        mLayout.setPanelHeight(68);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
 //
@@ -4166,8 +4166,10 @@ fragment.getMapViewController().setZoom(16);
             @Override
             public void onPanelHidden(View panel) {
 
-                Log.d("OnPanelHidden","$$$$$$");
-           //     mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                Log.d("OnPanelHidden","============");
+                mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+
+
                 Log.e(TAG, "onPanelHidden");
             }
         });
