@@ -225,7 +225,7 @@ public class PhoneRegActivity extends Activity {
         if( uname.equals("")){
 
 
-            name.setError( "name is required!" );
+            name.setError( "নাম লিখুন" );
 
         }
         else if (uname.length()<=15&&!uname.equals("")) {
