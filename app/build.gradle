@@ -45,5 +45,5 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'info.hoang8f:fbutton:1.0.5'
-
+    compile 'com.getbase:floatingactionbutton:1.10.1'
 }
