@@ -1,12 +1,20 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -26,9 +36,12 @@ import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import info.hoang8f.widget.FButton;
+
+
 
 /**
  * Created by israt.jahan on 10/30/2016.
@@ -38,12 +51,17 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     TextView time,claimtext,offertext,lowdisclaimertext;
     FButton claim;
     LinearLayout offer;
-    long counthead=0;
+    long counthead=30;
+    long credithead=15;
+    String refno="a";
     ImageView backpack;
+    public static int width;
+    public static int height;
     ImageButton fb,wb;
+    FloatingActionButton credit;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
-    boolean c;
+    boolean c,cred;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -59,6 +77,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claim=(FButton) findViewById(R.id.claim);
         wb = (ImageButton) findViewById(R.id.btnw);
         fb = (ImageButton) findViewById(R.id.btnf);
+        credit=(FloatingActionButton)findViewById(R.id.creditbutton);
+
         claim.setShadowEnabled(false);
         claim.setButtonColor(getResources().getColor(R.color.gray));
         claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
@@ -69,6 +89,20 @@ fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
+        long remaincredit=credithead-diffInDays;
+        cred=settings.getBoolean("RefProvided",false);
+        if(remaincredit<=0 &&cred==false)
+        {
+            credit.setColorNormalResId(R.color.line_draw);
+            credit.setIcon(R.drawable.smile);
+            credit.setOnClickListener(this);
+        }
+        else
+        {
+            credit.setColorNormalResId(R.color.gray);
+            credit.setIcon(R.drawable.smile2);
+            credit.setOnClickListener(null);
+        }
       c=settings.getBoolean("MBRequest",false);
         if (remaining<=0 &&c==false)
         {
@@ -83,6 +117,7 @@ fb.setOnClickListener(this);
          else if (c)
         {
             time.setText("0");
+            claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
             claim.setText("দয়া করে অপেক্ষা করুন");
             claim.setOnClickListener(null);
         }
@@ -96,17 +131,19 @@ else {
         {
 
             time.setTextSize(150);
-            claim.setTextSize(30);
+            claim.setTextSize(23);
             claimtext.setTextSize(40);
             offertext.setTextSize(25);
             offertext.setPadding(50,20,30,30);
             backpack.getLayoutParams().height = 400;
-            backpack.getLayoutParams().width = 400;
+            backpack.getLayoutParams().width = 308;
             backpack.requestLayout();
-            offer.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
+            offer.setGravity(Gravity.CENTER);
             offer.requestLayout();
-            lowdisclaimertext.setTextSize(13);
+            credit.setSize(FloatingActionButton.SIZE_NORMAL);
+            lowdisclaimertext.setTextSize(14);
         }
+        else credit.setSize(FloatingActionButton.SIZE_MINI);
     }
     public String EtoB(String english_number) {
         if(english_number.equals("null")||english_number.equals(""))
@@ -160,7 +197,22 @@ else {
                 startActivity(intent);
                 break;
             case R.id.claim:
-                sendRequest();
+
+                if (AppUtils.isNetConnected(getApplicationContext()))
+                {
+                    sendRequest();
+                }
+                else {
+                    ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+                    ToastMessageDisplay.showText(OfferActivity.this);
+                }
+                break;
+            case R.id.creditbutton:
+
+                showbox(OfferActivity.this);
+
                 break;
 
 
@@ -184,13 +236,146 @@ else {
 
     }
 
+    public void showbox(Context c) {
+
+        DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+        LayoutInflater layoutInflater = LayoutInflater.from(c);
+        View promptView = layoutInflater.inflate(R.layout.credit_layout, null);
+
+
+        final Dialog alertDialog = new Dialog(c);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+
+        final TextView header=(TextView)promptView.findViewById(R.id.bodyofcredit);
+        final MaterialEditText refernumber = (MaterialEditText) promptView.findViewById(R.id.creditno);
+        final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+        if(SharedPreferencesHelper.isTabletDevice(c)) {
+       header.setTextSize(25);
+        }
+
+
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                refno=refernumber.getText().toString().trim();
+if (!refno.equals(""))
+{
+    if (AppUtils.isNetConnected(getApplicationContext()))
+    {
+        sendRequesttocredit();
+        alertDialog.cancel();
+    }
+    else {
+        ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+        ToastMessageDisplay.showText(OfferActivity.this);
+    }
+
+
+}
+             else
+{
+
+    ToastMessageDisplay.setText(OfferActivity.this,"মোবাইল নাম্বার লিখুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+    ToastMessageDisplay.showText(OfferActivity.this);
+}
+
+            }
+        });
+
+        alertDialog.setCancelable(true);
+//		if(SharedPreferencesHelper.isTabletDevice(c))
+//			textAsk.setTextSize(23);
+//		else
+//			textAsk.setTextSize(17);
+        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
     public void sendRequest() {
-        String username = SharedPreferencesHelper.getUser(OfferActivity.this);
-
-        String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
 
 
-            String url = "http://kolorob.net/demo/api/mb_request?phone=" + phone +  "&username=" + this.usernames + "&password=" + this.password;
+    String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
+
+
+    String url = "http://kolorob.net/demo/api/mb_request?phone=" + phone + "&username=" + this.usernames + "&password=" + this.password;
+
+    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+
+
+                    try {
+                        if (response.toString().trim().equalsIgnoreCase("true")) {
+                            SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
+                            settings.edit().putBoolean("MBRequest", true).apply();
+                            c = settings.getBoolean("MBRequest", false);
+                            claim.setShadowEnabled(false);
+                            claim.setButtonColor(getResources().getColor(R.color.gray));
+                            claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
+                            claim.setText("দয়া করে অপেক্ষা করুন");
+                            claim.setOnClickListener(null);
+                            AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
+                                    "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
+                                            "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
+                        } else {
+                            AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
+                                    "পর আবার চেষ্টা করুন");
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    ToastMessageDisplay.setText(OfferActivity.this, error.toString());
+                    ToastMessageDisplay.showText(OfferActivity.this);
+                }
+            }) {
+
+        @Override
+        protected Map<String, String> getParams() {
+
+            Map<String, String> params = new HashMap<>();
+
+            return params;
+        }
+
+    };
+
+// Adding request to request queue
+
+    RequestQueue requestQueue = Volley.newRequestQueue(OfferActivity.this);
+    requestQueue.add(stringRequest);
+
+
+
+        }
+
+    public void sendRequesttocredit() {
+
+
+
+            String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
+
+
+            String url = "http://kolorob.net/demo/api/give_credit?phone=" + phone +"&reffno=" + refno +"&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
@@ -199,27 +384,20 @@ else {
                             //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 
-                            try{
-                             if(response.toString().trim().equalsIgnoreCase("true"))
-                               {
-                                   SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
-                                   settings.edit().putBoolean("MBRequest",true).apply();
-                                   c=settings.getBoolean("MBRequest",false);
-                                   claim.setShadowEnabled(false);
-                                   claim.setButtonColor(getResources().getColor(R.color.gray));
-                                   claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
-                                   claim.setText("দয়া করে অপেক্ষা করুন");
-                                   claim.setOnClickListener(null);
-                                   AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
-                                            "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
-                                                    "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
+                            try {
+                                if (response.toString().trim().equalsIgnoreCase("true")) {
+                                    SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
+                                    settings.edit().putBoolean("RefProvided", true).apply();
+                                    cred = settings.getBoolean("RefProvided", false);
+                                    credit.setColorNormalResId(R.color.gray);
+                                    credit.setIcon(R.drawable.smile2);
+                                    credit.setOnClickListener(null);
+                                    AlertMessage.showMessage(OfferActivity.this, "ধন্যবাদ!","কলরব ও আপনার বন্ধুর পক্ষ থেকে আপনার প্রতি শুভেচ্ছা।" +
+                                            "কলরবের সাথেই থাকুন");
+                                } else {
+                                    AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
+                                            "পর আবার চেষ্টা করুন");
                                 }
-                                else
-                             {
-                                 AlertMessage.showMessage(OfferActivity.this, "দুঃখিত","কলরব সার্ভারে বর্তমানে কাজ চলচে।দয়া করে কিছুক্ষণ" +
-                                         "পর আবার চেষ্টা করুন");
-                             }
-
 
 
                             } catch (Exception e) {
@@ -231,7 +409,7 @@ else {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            ToastMessageDisplay.setText(OfferActivity.this,error.toString());
+                            ToastMessageDisplay.setText(OfferActivity.this, error.toString());
                             ToastMessageDisplay.showText(OfferActivity.this);
                         }
                     }) {
@@ -252,8 +430,7 @@ else {
             requestQueue.add(stringRequest);
 
 
-        }
 
-
+    }
 
 }

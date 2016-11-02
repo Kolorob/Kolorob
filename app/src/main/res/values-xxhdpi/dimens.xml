@@ -1,13 +1,18 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="offercounter">50dp</dimen>
-    <dimen name="offercountertext">17dp</dimen>
-    <dimen name="offercounterbtn">18dp</dimen>
-    <dimen name="offerbagw">180dp</dimen>
-    <dimen name="offerbagtext">15dp</dimen>
-    <dimen name="offerpadding">15dp</dimen>
-    <dimen name="offerpaddinglow">10dp</dimen>
-    <dimen name="offerpaddingbtn">30dp</dimen>
+    <dimen name="offercountertext">20dp</dimen>
+    <dimen name="offercounterbtn">13dp</dimen>
+    <dimen name="offerpaddingcredittop">20dp</dimen>
+    <dimen name="offerpaddingcreditlr">10dp</dimen>
+    <dimen name="offerbagw">115dp</dimen>
+    <dimen name="offerbagh">150dp</dimen>
+    <dimen name="offerbagtext">13dp</dimen>
+    <dimen name="offerpadding">10dp</dimen>
+    <dimen name="offerpaddinglow">5dp</dimen>
+    <dimen name="offerpaddingcredit">8dp</dimen>
+    <dimen name="offerpaddingbtn">15dp</dimen>
+    <dimen name="offerpaddingbtntop">3dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="sidebarwidth">55dp</dimen>
     <dimen name="sidebarheight">350dp</dimen>

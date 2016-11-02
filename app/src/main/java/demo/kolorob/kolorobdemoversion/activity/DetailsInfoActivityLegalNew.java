@@ -693,9 +693,17 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-                sendReviewToServer();
-
-                alertDialog.cancel();
+                if(AppUtils.isNetConnected(getApplicationContext()))
+                {
+                    sendReviewToServer();
+                    alertDialog.cancel();
+                }
+                else {
+                    ToastMessageDisplay.setText(DetailsInfoActivityLegalNew.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+                    ToastMessageDisplay.showText(DetailsInfoActivityLegalNew.this);
+                }
 
             }
         });

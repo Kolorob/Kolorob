@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:background="@drawable/rounded">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/offerpadding"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/offerbagtext"
+            android:text="কলরবের সাথে পরিচয় করানোর জন্য কাউকে থ্যাংকস দিতে চাইলে তার মোবাইল নাম্বার টি আমাদের কে পাঠিয়ে দিন "
+            android:id="@+id/bodyofcredit" />
+
+
+    </LinearLayout>
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="@dimen/offerbagw"
+        android:id="@+id/creditno"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/offerpadding"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:met_floatingLabel="highlight"
+
+        android:drawablePadding="10dp"
+        android:inputType="number"
+        app:met_textColorHint="@color/colorPrimary"
+        app:met_baseColor="@color/black"
+        android:hint="01*********"/>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+
+
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/tick_icon_feedback"
+            android:id="@+id/okay" />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>
