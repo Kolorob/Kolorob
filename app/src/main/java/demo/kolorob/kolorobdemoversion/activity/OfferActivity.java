@@ -196,10 +196,12 @@ else {
                 startActivity(intent);
                 break;
             case R.id.claim:
+                sendRequest();
 
                 sendRequest();
                 break;
             case R.id.creditbutton:
+
                 showbox(OfferActivity.this);
 
                 break;
@@ -353,7 +355,7 @@ if (!refno.equals(""))
             String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
 
 
-            String url = "http://kolorob.net/demo/api/give_credit?phone=" + phone +" reffno=" + refno +"&username=" + this.usernames + "&password=" + this.password;
+            String url = "http://kolorob.net/demo/api/give_credit?phone=" + phone +"&reffno=" + refno +"&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
