@@ -1814,7 +1814,14 @@ int index;
                }
                else
                {
-                   b.condition = spinner.getSelectedItem().toString().replace(' ','+');
+                   String condition_selector = spinner.getSelectedItem().toString();
+                   if(condition_selector.equals("বিনিময়"))
+                       condition_selector = "Exchange";
+                       else if(condition_selector.equals("বিক্রয়"))
+                       condition_selector = "Sell";
+                       else if(condition_selector.equals("টিউশন"))
+                       condition_selector = "Tution";
+                   b.condition = condition_selector.replace(' ','+');
                    if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
                    {
                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন","");
@@ -3305,6 +3312,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     entertainmentServiceProviderItems = constructEntertainmentListItem(3);
                     mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
                     prev_fragment.enticons();
+                    prev_fragment.enticons();
                     prev_fragment.Drawent(-1,true);
                 }
                 else if(currentCategoryID==4) {
@@ -4024,7 +4032,7 @@ fragment.getMapViewController().setZoom(16);
 
          bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        mLayout.setPanelHeight(height/18);
+        mLayout.setPanelHeight(height/17);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
 //
@@ -4147,7 +4155,7 @@ fragment.getMapViewController().setZoom(16);
             public void onPanelCollapsed(View panel) {
                 slider_part.setVisibility(View.VISIBLE);
                 LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                sliding_parts.setMargins(0,0,0,0);
+                sliding_parts.setMargins(0,0,0,height/140);
                 slider_part.setLayoutParams(sliding_parts);
 
                 Log.d(">>>>","onPanelCollapsed");
