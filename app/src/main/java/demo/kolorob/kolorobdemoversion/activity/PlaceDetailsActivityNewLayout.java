@@ -1585,7 +1585,7 @@ int index;
         phone.setText(number);
         phone.setEnabled(false);
         contact_person.setText(name);
-        contact_person.setEnabled(false);
+        contact_person.setEnabled(true);
 
 
         product_name.addTextChangedListener(new TextWatcher() {
@@ -1955,83 +1955,91 @@ int index;
 
 
     private void saveBazar(BazarItem b,final Context contexts){
-        Log.d("Advertizement Type","=========="+b.type);
-        getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
-                        +"&description=" + b.description +
-                        "&type=" + b.type +
-                        "&phone=" + b.phone +
-                        "&contact=" + b.contact +
-                        "&condition=" + b.condition +
-                        "&contact_person=" + b.contact_person +
-                        "&price=" + b.price+
-                        "&name=" + b.product_name+
-                        "&adress=" + b.address,
+        if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
+        {
+            getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
+                            +"&description=" + b.description +
+                            "&type=" + b.type +
+                            "&phone=" + b.phone +
+                            "&contact=" + b.contact +
+                            "&condition=" + b.condition +
+                            "&contact_person=" + b.contact_person +
+                            "&price=" + b.price+
+                            "&name=" + b.product_name+
+                            "&adress=" + b.address,
 
 
-                new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status,final String apiContent) {
+                    new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status,final String apiContent) {
 
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            //tester. You may delete this portion
-                            final Context context = getApplicationContext();
-                            CharSequence text = apiContent;
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                          if(apiContent.equals("true"))
-                          {
-                              DisplayMetrics displayMetrics = contexts.getResources().getDisplayMetrics();
-                              height = displayMetrics.heightPixels;
-                              width = displayMetrics.widthPixels;
+                            if (status == AppConstants.SUCCESS_CODE) {
+                                //tester. You may delete this portion
+                                final Context context = getApplicationContext();
+                                CharSequence text = apiContent;
+                                int duration = Toast.LENGTH_SHORT;
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                                if(apiContent.equals("true"))
+                                {
+                                    DisplayMetrics displayMetrics = contexts.getResources().getDisplayMetrics();
+                                    height = displayMetrics.heightPixels;
+                                    width = displayMetrics.widthPixels;
 
-                              LayoutInflater layoutInflater = LayoutInflater.from(contexts);
-                              View promptView = layoutInflater.inflate(R.layout.default_alert, null);
-
-
-                              final Dialog alertDialog = new Dialog(contexts);
-                              alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                              alertDialog.setContentView(promptView);
-                              alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                              alertDialog.show();
+                                    LayoutInflater layoutInflater = LayoutInflater.from(contexts);
+                                    View promptView = layoutInflater.inflate(R.layout.default_alert, null);
 
 
-                              final TextView header = (TextView) promptView.findViewById(R.id.headers);
-                              final TextView bodys = (TextView) promptView.findViewById(R.id.body);
-                              final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+                                    final Dialog alertDialog = new Dialog(contexts);
+                                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                    alertDialog.setContentView(promptView);
+                                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    alertDialog.show();
 
-                              header.setText("আপনার বিজ্ঞাপন টি পাঠানো হয়েছে");
-                              bodys.setText("কল্রব থেকে বিজ্ঞাপন দেয়ার জন্য আপনাকে ধন্যবাদ");
 
-                               product_name.setText("");
-                               phone.setText("");
-                               address.setText("");
-                               price.setText("");
-                               description.setText("");
-                               contact_person.setText("");
-                               contact.setText("");
+                                    final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                                    final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                                    final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
 
-                              okay.setOnClickListener(new View.OnClickListener() {
-                                  @Override
-                                  public void onClick(View v) {
-                                      alertDialog.cancel();
-                                      mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                                      loadBazar(context);
-                                  }
-                              });
+                                    header.setText("আপনার বিজ্ঞাপন টি পাঠানো হয়েছে");
+                                    bodys.setText("কলরব থেকে বিজ্ঞাপন দেয়ার জন্য আপনাকে ধন্যবাদ");
 
-                              alertDialog.setCancelable(true);
+                                    product_name.setText("");
+                                    phone.setText("");
+                                    address.setText("");
+                                    price.setText("");
+                                    description.setText("");
+                                    contact_person.setText("");
+                                    contact.setText("");
+
+                                    okay.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            alertDialog.cancel();
+                                            mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                                            loadBazar(context);
+                                        }
+                                    });
+
+                                    alertDialog.setCancelable(true);
 //		if(SharedPreferencesHelper.isTabletDevice(c))
 //			textAsk.setTextSize(23);
 //		else
 //			textAsk.setTextSize(17);
-                              alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
-                          }
-                            //tester ends======
+                                    alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+                                }
+                                //tester ends======
+                            }
                         }
                     }
-                }
-        );
+            );
+        }
+        else {
+            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+
+        }
+            Log.d("Advertizement Type","=========="+b.type);
+
 
 
 
