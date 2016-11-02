@@ -140,11 +140,11 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
            {
                Log.d("price_s","==============");
 
-               price.setText(Children[1].replace("0","")+ " আলোচনা সাপেক্ষ্যে");
+               price.setText("মূল্য: "+English_to_bengali_number_conversion(Children[1].replace("0",""))+ " টাকা (আলোচনা সাপেক্ষ্যে)");
 
            }
         else
-               price.setText(Children[1].replace("1",""));
+               price.setText("মূল্য: "+English_to_bengali_number_conversion(Children[1].replace("0",""))+ " টাকা");
         Log.d("price_s","=============="+Children[1].replace("1",""));
         Log.d("price_s","=============="+Children[1].replace("0",""));
      //   price.setText(Children[1].replace("%",""));
@@ -266,6 +266,34 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         } else {
             return false;
         }
+    }
+
+    public String English_to_bengali_number_conversion(String english_number) {
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+        }
+        return concatResult;
     }
 
     @Override
