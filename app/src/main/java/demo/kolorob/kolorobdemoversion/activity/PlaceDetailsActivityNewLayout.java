@@ -1518,9 +1518,9 @@ int index;
         final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
         List<String> types = new ArrayList<String>();
         types.add("বিজ্ঞাপনের ধরন");
-        types.add("Exchange");
-        types.add("Sell");
-        types.add("Tution");
+        types.add("বিনিময়");
+        types.add("বিক্রয়");
+        types.add("টিউশন");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
 
@@ -4024,7 +4024,7 @@ fragment.getMapViewController().setZoom(16);
 
          bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        mLayout.setPanelHeight(68);
+        mLayout.setPanelHeight(height/18);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
 //
@@ -4119,20 +4119,20 @@ fragment.getMapViewController().setZoom(16);
                 slider_part.setVisibility(View.VISIBLE);
 
                  LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                 sliding_parts.setMargins(0,height/25,0,height/29);
+                 sliding_parts.setMargins(0,height/25,0,height/140);
                  slider_part.setLayoutParams(sliding_parts);
 
 
                 footer.setText("বিজ্ঞাপন দেখুন");
 
                 String number =SharedPreferencesHelper.getNumber(context);
-                if(number.equals(""))
-                {
-                    AlertMessage.showAskToRegister(context,"অনুগ্রহ পূর্বক রেজিস্ট্রাতিওন করুন","");
-                }
-                else {
+//                if(number.equals(""))
+//                {
+//                    AlertMessage.showAskToRegister(context,"অনুগ্রহ পূর্বক রেজিস্ট্রাতিওন করুন","");
+//                }
+//                else {
                     bazar_post_layout.setVisibility(View.VISIBLE);
-                }
+//                }
 
 
 
