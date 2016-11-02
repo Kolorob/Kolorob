@@ -44,9 +44,9 @@
 
             android:paddingLeft="@dimen/offerpaddingbtn"
             android:paddingRight="@dimen/offerpaddingbtn"
-            android:paddingTop="@dimen/offerpadding"
+            android:paddingTop="@dimen/offerpaddingbtntop"
             android:layout_marginBottom="@dimen/offerpaddinglow"
-            android:paddingBottom="@dimen/offerpadding"
+            android:paddingBottom="@dimen/offerpaddingbtntop"
             android:textSize="@dimen/offercounterbtn"
             android:text="ফ্রি ৫০ এমবি বুঝে নিন"/>
     </LinearLayout>
