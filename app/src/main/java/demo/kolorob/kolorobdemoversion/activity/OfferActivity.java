@@ -1,7 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,7 +61,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     FloatingActionButton credit;
     String usernames = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
-    boolean c;
+    boolean c,cred;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -92,7 +90,8 @@ fb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
         long remaincredit=credithead-diffInDays;
-        if(remaincredit<=0)
+        cred=settings.getBoolean("RefProvided",false);
+        if(remaincredit<=0 &&cred==false)
         {
             credit.setColorNormalResId(R.color.line_draw);
             credit.setIcon(R.drawable.smile);
@@ -226,17 +225,7 @@ else {
         }
 
     }
-    public void showMessageExisting( Context c,  String title,
-                                     String body) {
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        final EditText input = new EditText(this);
-        input.setHint("hint");
-        alertDialog.setTitle("title");
-        alertDialog.setMessage("as");
-        alertDialog.setView(input);
-
-    }
     public void showbox(Context c) {
 
         DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
@@ -253,9 +242,12 @@ else {
         alertDialog.show();
 
 
-
+        final TextView header=(TextView)findViewById(R.id.bodyofcredit);
         final MaterialEditText refernumber = (MaterialEditText) promptView.findViewById(R.id.creditno);
         final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+        if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this)) {
+       header.setTextSize(25);
+        }
 
 
         okay.setOnClickListener(new View.OnClickListener() {
@@ -310,7 +302,7 @@ if (!refno.equals(""))
                                     "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
                                             "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
                         } else {
-                            AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলচে।দয়া করে কিছুক্ষণ" +
+                            AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
                                     "পর আবার চেষ্টা করুন");
                         }
 
@@ -368,14 +360,14 @@ if (!refno.equals(""))
                                 if (response.toString().trim().equalsIgnoreCase("true")) {
                                     SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
                                     settings.edit().putBoolean("RefProvided", true).apply();
-                                    c = settings.getBoolean("RefProvided", false);
-
-                                    claim.setOnClickListener(null);
-                                    AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
-                                            "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
-                                                    "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
+                                    cred = settings.getBoolean("RefProvided", false);
+                                    credit.setColorNormalResId(R.color.gray);
+                                    credit.setIcon(R.drawable.smile2);
+                                    credit.setOnClickListener(null);
+                                    AlertMessage.showMessage(OfferActivity.this, "ধন্যবাদ!","কলরব ও আপনার বন্ধুর পক্ষ থেকে আপনার প্রতি শুভেচ্ছা।" +
+                                            "কলরবের সাথেই থাকুন");
                                 } else {
-                                    AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলচে।দয়া করে কিছুক্ষণ" +
+                                    AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
                                             "পর আবার চেষ্টা করুন");
                                 }
 
