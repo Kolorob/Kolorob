@@ -108,6 +108,9 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
             date.setTextSize(20);
             condition.setTextSize(20);
             area.setTextSize(20);
+            post_person.setTextSize(20);
+            another_num.setTextSize(20);
+
         }
         else {
             desctiption.setTextSize(15);
@@ -115,6 +118,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
             date.setTextSize(15);
             condition.setTextSize(15);
             area.setTextSize(15);
+            post_person.setTextSize(15);
+            another_num.setTextSize(15);
         }
 
 
@@ -123,7 +128,26 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         email.getLayoutParams().height=width/11;
         email.getLayoutParams().width=width/11;
         desctiption.setText(Children[0]);
-        price.setText(Children[1]);
+
+        Character ZERO= '0';
+        Character one = '1';
+
+        Character price_s = Children[1].charAt(Children[1].length()-1);
+        int p= Integer.valueOf(price_s);
+        Log.d("price_s","=============="+p);
+
+           if(price_s==ZERO)
+           {
+               Log.d("price_s","==============");
+
+               price.setText(Children[1].replace("0","")+ " আলোচনা সাপেক্ষ্যে");
+
+           }
+        else
+               price.setText(Children[1].replace("1",""));
+        Log.d("price_s","=============="+Children[1].replace("1",""));
+        Log.d("price_s","=============="+Children[1].replace("0",""));
+     //   price.setText(Children[1].replace("%",""));
         date.setText(Children[2]);
         condition.setText(Children[3]);
         area.setText(Children[4]);
@@ -204,7 +228,20 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         product_name.setTypeface(null, Typeface.BOLD);
 
         product_name.setText(groupElement[0]);
-        sell.setText(groupElement[1]);
+        if(groupElement[1].equals("Exchange"))
+        {
+            sell.setText("বিনিময়");
+        }
+       else if(groupElement[1].equals("Sell"))
+        {
+            sell.setText("বিক্রয়");
+        }
+
+       else if(groupElement[1].equals("Tution"))
+        {
+            sell.setText("টিউশন");
+        }
+   //     sell.setText(groupElement[1]);
         type = groupElement[1];
         Double screenSize= AppUtils.ScreenSize(_context);
 

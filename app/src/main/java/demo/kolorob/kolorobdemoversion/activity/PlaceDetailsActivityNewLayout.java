@@ -130,7 +130,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
-    Boolean negotiable_check;
+    int negotiable_check;
     String[] left_part;
     TextView footer;
     int position_type_spinner=0;
@@ -1757,7 +1757,10 @@ int index;
            negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                @Override
                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                   negotiable_check=isChecked;
+                   if(isChecked)
+                   negotiable_check=1;
+                   else
+                       negotiable_check=0;
                }
            });
 
@@ -1814,21 +1817,24 @@ int index;
                }
                else
                {
-                   String condition_selector = spinner.getSelectedItem().toString();
-                   if(condition_selector.equals("বিনিময়"))
-                       condition_selector = "Exchange";
-                       else if(condition_selector.equals("বিক্রয়"))
-                       condition_selector = "Sell";
-                       else if(condition_selector.equals("টিউশন"))
-                       condition_selector = "Tution";
-                   b.condition = condition_selector.replace(' ','+');
+
+                   b.condition = spinner.getSelectedItem().toString();
+
+
                    if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
                    {
                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন","");
 //                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন");
                    }
                    else {
-                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
+                       String condition_selector = type_spinner.getSelectedItem().toString();
+                       if(condition_selector.equals("বিনিময়"))
+                           b.type = "Exchange";
+                       else if(condition_selector.equals("বিক্রয়"))
+                           b.type = "Sell";
+                       else if(condition_selector.equals("টিউশন"))
+                           b.type = "Tution";
+//                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
                        if(product_name.getText().toString().equals(""))
                        {
 //                       AlertMessage.showMessage(context,"","");
@@ -1836,6 +1842,7 @@ int index;
 //                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন");
                        }
                        else {
+
                            b.product_name= product_name.getText().toString().replace(' ','+');
                            if(phone.getText().toString().equals(""))
                            {
@@ -1873,7 +1880,7 @@ int index;
                                            }
                                            else
                                            {
-                                               b.price = price.getText().toString().replace(' ','+');
+                                               b.price = price.getText().toString().replace(' ','+') + negotiable_check;
                                                if(description.getText().toString().equals(""))
                                                {
 //                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
@@ -3692,7 +3699,7 @@ fragment.getMapViewController().setZoom(16);
 
                         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
                                 .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights/2);//
+                        layoutParams.setMargins(0, 0, 0, buttonHeights);//
 
                         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -4032,7 +4039,10 @@ fragment.getMapViewController().setZoom(16);
 
          bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        mLayout.setPanelHeight(height/17);
+        int pannl_height = height/17;
+        if(pannl_height<70)
+            pannl_height=70;
+        mLayout.setPanelHeight(pannl_height);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
 //
