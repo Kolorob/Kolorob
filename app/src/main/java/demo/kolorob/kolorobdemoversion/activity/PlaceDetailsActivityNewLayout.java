@@ -1887,12 +1887,17 @@ int index;
                    }
                    else {
                        String condition_selector = type_spinner.getSelectedItem().toString();
+
                        if(condition_selector.equals("বিনিময়"))
                            b.type = "Exchange";
                        else if(condition_selector.equals("বিক্রয়"))
                            b.type = "Sell";
                        else if(condition_selector.equals("টিউশন"))
                            b.type = "Tution";
+                       else if(condition_selector.equals("ক্রয়"))
+                           b.type = "Buy";
+                       else if(condition_selector.equals("টু লেট"))
+                           b.type = "To_Let";
 //                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
                        if(product_name.getText().toString().equals(""))
                        {

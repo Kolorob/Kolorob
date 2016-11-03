@@ -253,6 +253,17 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         {
             sell.setText("টিউশন");
         }
+
+        else if(groupElement[1].equals("Buy"))
+        {
+            sell.setText("ক্রয়");
+        }
+
+        else if(groupElement[1].equals("To_Let"))
+        {
+            sell.setText("টু লেট");
+        }
+
    //     sell.setText(groupElement[1]);
         type = groupElement[1];
         Double screenSize= AppUtils.ScreenSize(_context);
