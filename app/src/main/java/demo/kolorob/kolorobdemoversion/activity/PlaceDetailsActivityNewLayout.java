@@ -130,7 +130,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
-    int negotiable_check=1;
+    int negotiable_check;
     String[] left_part;
     TextView footer;
     int position_type_spinner=0;
@@ -336,7 +336,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     boolean filterclicked=false;
     int width;
 
-int buttonWidth=0;
+    int buttonWidth=0;
     String idx,idxx,idxxx,idxxxx;
     ArrayList<EducationNewItem> EDD=new ArrayList<>();
     ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
@@ -344,12 +344,12 @@ int buttonWidth=0;
     ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
     ArrayList<FinancialNewItem>FIN=new ArrayList<>();
     ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
-TextView uptext;
+    TextView uptext;
     boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
 
     String nodefromback;
-int index;
+    int index;
     MapFragmentOSM mapFragment;
     CheckBox negotiable;
 
@@ -409,7 +409,7 @@ int index;
         bazar_logo.setMinimumWidth(50);
 
 
-       buttonWidth = width/4;
+        buttonWidth = width/4;
         int buttonHeight = height/20;
         allitemList=(ListView)findViewById(R.id.allitem);
         checkBox=(CheckBox)findViewById(R.id.compared);
@@ -422,10 +422,10 @@ int index;
         checkRight=(CheckBox)findViewById(R.id.checkRight);
         bazar_tool= (RelativeLayout)findViewById(R.id.bazar_tool);
 
-       // frameLayout.setClickable(false);
-       // frameLayouts.setEnabled(false);
+        // frameLayout.setClickable(false);
+        // frameLayouts.setEnabled(false);
 
-       // explist=(LinearLayout)findViewById(R.id.explist);
+        // explist=(LinearLayout)findViewById(R.id.explist);
         catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
         // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
         //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -726,9 +726,7 @@ int index;
                     }
                     else Populateholder("Mirpur-11");
                     callMapFragment(locationNameId);
-//                    createData(currentCategoryID,"","Mirpur-11");
-//                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-//                    subCatItemList.setAdapter(adapter);
+
                 }
                 else if(imc_met==AppConstants.PARIS_ROAD)
                 {locationNameId=AppConstants.PLACE_PARIS_ROAD;
@@ -786,20 +784,6 @@ int index;
         {
 
         }
-
-        negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("Negotiable Check","================");
-                if(isChecked)
-                    negotiable_check=0;
-                else
-                    negotiable_check=1;
-
-                Log.d("Negotiable Check","================"+isChecked);
-                Log.d("Negotiable Check2","================"+negotiable_check);
-            }
-        });
 
         refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -921,7 +905,7 @@ int index;
                 uptext.setVisibility(View.VISIBLE);
                 CompareClicked=false;
                 if(InCompare==false) {
-                  //  callMapFragment(locationNameId);
+                    //  callMapFragment(locationNameId);
 
                 }
                 if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
@@ -1182,7 +1166,7 @@ int index;
                                 .into(SearchButton);
                         map.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.GONE);
-                     //   subCatItemList.setVisibility(View.GONE);
+                        //   subCatItemList.setVisibility(View.GONE);
                         bazar_tool.setVisibility(View.GONE);
                         searchviewholder.setVisibility(View.GONE);
                         svs.setVisibility(View.GONE);
@@ -1316,17 +1300,17 @@ int index;
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
                     if(compareValue==2)
-                     {
-                         if(!isChecked)
-                         {
-                             String compare_Datas="";
-                             compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
-                             String multipule[]= compare_Datas.split(",");
-                             compare_Datas = multipule[1];
-                             idx=multipule[0];
-                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
-                         }
-                     }
+                    {
+                        if(!isChecked)
+                        {
+                            String compare_Datas="";
+                            compare_Datas=SharedPreferencesHelper.getComapreDataHealth(PlaceDetailsActivityNewLayout.this);
+                            String multipule[]= compare_Datas.split(",");
+                            compare_Datas = multipule[1];
+                            idx=multipule[0];
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, compare_Datas, 1);
+                        }
+                    }
 
                     else if(compareValue==1)
                     {
@@ -1382,7 +1366,7 @@ int index;
             left_part=new String[]{time2,healthServiceProviderItemNew.getSpoken_lang(),
                     health_service_data1,firstSpecialistItem,healthServiceProviderItemNew.getPharmacy_speciality(),
                     String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()),healthServiceProviderItemNew.getQuality_equipments(),
-                            healthServiceProviderItemNew.getGeneral_cost()};
+                    healthServiceProviderItemNew.getGeneral_cost()};
         }
 
 
@@ -1494,8 +1478,8 @@ int index;
         description= (EditText)findViewById(R.id.descriptions);
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
-int heightconsiderforcost=contact_person.getHeight();
-        price.setHeight(heightconsiderforcost);
+        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
+
 
         int text_field_height = height/25;
 
@@ -1808,9 +1792,17 @@ int heightconsiderforcost=contact_person.getHeight();
         submit_bazar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-       try
-       {
-
+                try
+                {
+                    negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if(isChecked)
+                                negotiable_check=1;
+                            else
+                                negotiable_check=0;
+                        }
+                    });
 
 //           final BazarItem b = new BazarItem();
 //           b.description=description.getText().toString();
@@ -1834,163 +1826,163 @@ int heightconsiderforcost=contact_person.getHeight();
 
 
 
-           if(tution_detector==1)
-           {
-               spinner.setSelection(2);
-               price.setText("1111");
-           }
-           else
-           {
+                    if(tution_detector==1)
+                    {
+                        spinner.setSelection(2);
+                        price.setText("1111");
+                    }
+                    else
+                    {
 
-           }
-
-
+                    }
 
 
-           final BazarItem b = new BazarItem();
 
-           String number =SharedPreferencesHelper.getNumber(context);
-           if(number.equals(""))
-           {
 
-           }
-           else
-           {
-               if(spinner.getSelectedItem().toString().equals("কন্ডিশন"))
-               {
-                   Log.d("condition","==========="+spinner.getSelectedItem().toString()+"v");
-                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন","");
+                    final BazarItem b = new BazarItem();
+
+                    String number =SharedPreferencesHelper.getNumber(context);
+                    if(number.equals(""))
+                    {
+
+                    }
+                    else
+                    {
+                        if(spinner.getSelectedItem().toString().equals("কন্ডিশন"))
+                        {
+                            Log.d("condition","==========="+spinner.getSelectedItem().toString()+"v");
+                            AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন","");
 //               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন");
 
-               }
-               else
-               {
+                        }
+                        else
+                        {
 
-                   b.condition = spinner.getSelectedItem().toString();
+                            b.condition = spinner.getSelectedItem().toString();
 
 
-                   if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
-                   {
-                       AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন","");
+                            if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
+                            {
+                                AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন","");
 //                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন");
-                   }
-                   else {
-                       String condition_selector = type_spinner.getSelectedItem().toString();
-                       if(condition_selector.equals("বিনিময়"))
-                           b.type = "Exchange";
-                       else if(condition_selector.equals("বিক্রয়"))
-                           b.type = "Sell";
-                       else if(condition_selector.equals("টিউশন"))
-                           b.type = "Tution";
+                            }
+                            else {
+                                String condition_selector = type_spinner.getSelectedItem().toString();
+                                if(condition_selector.equals("বিনিময়"))
+                                    b.type = "Exchange";
+                                else if(condition_selector.equals("বিক্রয়"))
+                                    b.type = "Sell";
+                                else if(condition_selector.equals("টিউশন"))
+                                    b.type = "Tution";
 //                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
-                       if(product_name.getText().toString().equals(""))
-                       {
+                                if(product_name.getText().toString().equals(""))
+                                {
 //                       AlertMessage.showMessage(context,"","");
-                           AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন","");
+                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন","");
 //                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন");
-                       }
-                       else {
+                                }
+                                else {
 
-                           b.product_name= product_name.getText().toString().replace(' ','+');
-                           if(phone.getText().toString().equals(""))
-                           {
-                               AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন","");
+                                    b.product_name= product_name.getText().toString().replace(' ','+');
+                                    if(phone.getText().toString().equals(""))
+                                    {
+                                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন","");
 //                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন");
-                           }
-                           else
-                           {
-                               b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
-                               if(contact.getText().toString().equals("asdfgh")) {
-                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন","");
+                                    }
+                                    else
+                                    {
+                                        b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
+                                        if(contact.getText().toString().equals("")) {
+                                            AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
-                               }
-                               else {
-                                   b.contact = contact.getText().toString().replace(' ','+');
-                                   if(address.getText().toString().equals(""))
-                                   {
-                                       AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন","");
+                                        }
+                                        else {
+                                            b.contact = contact.getText().toString().replace(' ','+');
+                                            if(address.getText().toString().equals(""))
+                                            {
+                                                AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন","");
 //                                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন");
-                                   }
-                                   else {
-                                       b.address= address.getText().toString().replace(' ','+');
-                                       if(contact_person.getText().toString().equals(""))
-                                       {
+                                            }
+                                            else {
+                                                b.address= address.getText().toString().replace(' ','+');
+                                                if(contact_person.getText().toString().equals(""))
+                                                {
 //                                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন");
-                                           AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন","");
-                                       }
-                                       else
-                                       {
-                                           b.contact_person = contact_person.getText().toString().replace(' ','+');
-                                           if(price.getText().toString().equals("")&&negotiable_check==1)
-                                           {
+                                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন","");
+                                                }
+                                                else
+                                                {
+                                                    b.contact_person = contact_person.getText().toString().replace(' ','+');
+                                                    if(price.getText().toString().equals(""))
+                                                    {
 //                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
-                                               AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন","");
-                                           }
-                                           else
-                                           {
-                                               b.price = price.getText().toString().replace(' ','+') + negotiable_check;
-                                               if(description.getText().toString().equals(""))
-                                               {
+                                                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন","");
+                                                    }
+                                                    else
+                                                    {
+                                                        b.price = price.getText().toString().replace(' ','+') + negotiable_check;
+                                                        if(description.getText().toString().equals(""))
+                                                        {
 //                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
-                                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তথ্য ইনপুট দিন","");
-                                               }
-                                               else {
-                                                   b.description=description.getText().toString().replace(' ','+');
-                                                   saveBazar(b,context);
-                                               }
-                                           }
-                                       }
-                                   }
+                                                            AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তথ্য ইনপুট দিন","");
+                                                        }
+                                                        else {
+                                                            b.description=description.getText().toString().replace(' ','+');
+                                                            saveBazar(b,context);
+                                                        }
+                                                    }
+                                                }
+                                            }
 
-                               }
+                                        }
 
-                           }
-                       }
+                                    }
+                                }
 
-                   }
-               }
-           }
-
-
+                            }
+                        }
+                    }
 
 
 
 
-           if(b.equals(""))
-           {
-               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক তথ্য ইনপুট দিন");
-           }
+
+
+                    if(b.equals(""))
+                    {
+                        ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক তথ্য ইনপুট দিন");
+                    }
 
 //           if()
-           Log.d("Description","==========="+description.getText().toString());
+                    Log.d("Description","==========="+description.getText().toString());
 
-           Log.d("phone","==========="+phone.getText().toString());
+                    Log.d("phone","==========="+phone.getText().toString());
 
-           Log.d("contact","==========="+contact.getText().toString());
-
-
-
-
-           Log.d("contact_person","==========="+contact_person.getText().toString());
-
-           Log.d("address","$$$$$$"+address.getText().toString());
-
-
-           Log.d("price","==========="+price.getText().toString());
-
-
-
-           Log.d("product_name","==========="+product_name.getText().toString());
+                    Log.d("contact","==========="+contact.getText().toString());
 
 
 
 
+                    Log.d("contact_person","==========="+contact_person.getText().toString());
 
-       }
-       catch (Exception e)
-       {
+                    Log.d("address","$$$$$$"+address.getText().toString());
 
-       }
+
+                    Log.d("price","==========="+price.getText().toString());
+
+
+
+                    Log.d("product_name","==========="+product_name.getText().toString());
+
+
+
+
+
+                }
+                catch (Exception e)
+                {
+
+                }
 
             }
         });
@@ -2059,7 +2051,6 @@ int heightconsiderforcost=contact_person.getHeight();
                                     description.setText("");
                                     contact_person.setText("");
                                     contact.setText("");
-                                    negotiable_check = 0;
 
                                     okay.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -2087,7 +2078,7 @@ int heightconsiderforcost=contact_person.getHeight();
             AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
 
         }
-            Log.d("Advertizement Type","=========="+b.type);
+        Log.d("Advertizement Type","=========="+b.type);
 
 
 
@@ -2586,14 +2577,14 @@ int heightconsiderforcost=contact_person.getHeight();
 
     @Override
     public void onBackPressed() {
-       if (doubleBackToExitPressedOnce) {
+        if (doubleBackToExitPressedOnce) {
 //
             super.onBackPressed();
 
-          this.finish();
+            this.finish();
 
         }
-       ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
+        ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
         ToastMessageDisplay.showText(this);
         this.doubleBackToExitPressedOnce = true;
 
@@ -2726,10 +2717,10 @@ int heightconsiderforcost=contact_person.getHeight();
                         llSubCatListHolder.setVisibility(View.GONE);
 
 
-                            ArrayList<EducationNewItem> educationServiceProvider;
-                            educationServiceProvider = constructEducationListItem();
-                            mapcalledstatus=true;
-                            callMapFragmentWithEducation(-1, educationServiceProvider,true);
+                        ArrayList<EducationNewItem> educationServiceProvider;
+                        educationServiceProvider = constructEducationListItem();
+                        mapcalledstatus=true;
+                        callMapFragmentWithEducation(-1, educationServiceProvider,true);
 
 
                         ivIcon.setImageResource(R.drawable.education_selected);
@@ -2764,18 +2755,18 @@ int heightconsiderforcost=contact_person.getHeight();
                         ivIcon.setImageResource(R.drawable.health_selected);
 
 
-                            ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                            healthServiceProvider = constructHealthListItem(1);
-                            mapcalledstatus=true;
+                        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
+                        healthServiceProvider = constructHealthListItem(1);
+                        mapcalledstatus=true;
 
-                            callMapFragmentWithHealth(-1,healthServiceProvider,true);
+                        callMapFragmentWithHealth(-1,healthServiceProvider,true);
 
 
 
 
                         llSubCatListHolder.setVisibility(View.GONE);
-                            if(ListClicked.equals(true))
-                                bazar_tool.setVisibility(View.VISIBLE);
+                        if(ListClicked.equals(true))
+                            bazar_tool.setVisibility(View.VISIBLE);
 
 
                         break;
@@ -2798,10 +2789,10 @@ int heightconsiderforcost=contact_person.getHeight();
 
                         ivIcon.setImageResource(0);
 
-                            ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
-                            entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
-                            mapcalledstatus=true;
-                            callMapFragmentWithEntertainment(-1, entertainmentServiceProvider,true);
+                        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
+                        entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
+                        mapcalledstatus=true;
+                        callMapFragmentWithEntertainment(-1, entertainmentServiceProvider,true);
 
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
 
@@ -2844,10 +2835,10 @@ int heightconsiderforcost=contact_person.getHeight();
                         ivIcon.setImageResource(R.drawable.government_selected);
 
 
-                            mapcalledstatus=true;
-                            ArrayList<GovernmentNewItem> governmentNewItems;
-                            governmentNewItems = constructgovListItem();
-                            callMapFragmentWithGovernment(-1, governmentNewItems,true);
+                        mapcalledstatus=true;
+                        ArrayList<GovernmentNewItem> governmentNewItems;
+                        governmentNewItems = constructgovListItem();
+                        callMapFragmentWithGovernment(-1, governmentNewItems,true);
 
                         llSubCatListHolder.setVisibility(View.GONE);
                         if(ListClicked.equals(true))
@@ -2900,10 +2891,10 @@ int heightconsiderforcost=contact_person.getHeight();
 
 
 
-                            ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
-                            mapcalledstatus=true;
-                            legalaidServiceProvider = constructlegalaidListItem(ci.getId());
-                            callMapFragmentWithLegal(-1, legalaidServiceProvider,true);
+                        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+                        mapcalledstatus=true;
+                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                        callMapFragmentWithLegal(-1, legalaidServiceProvider,true);
 
 
 
@@ -2941,10 +2932,10 @@ int heightconsiderforcost=contact_person.getHeight();
                         ivIcon.setImageResource(R.drawable.finance_selected);
 
 
-                            ArrayList<FinancialNewItem> financialNewItems;
-                            financialNewItems = constructfinancialListItem();
-                            callMapFragmentWithFinancial(-1,financialNewItems,true);
-                            mapcalledstatus=true;
+                        ArrayList<FinancialNewItem> financialNewItems;
+                        financialNewItems = constructfinancialListItem();
+                        callMapFragmentWithFinancial(-1,financialNewItems,true);
+                        mapcalledstatus=true;
 
 
 
@@ -3092,7 +3083,7 @@ int heightconsiderforcost=contact_person.getHeight();
 
         final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconSCatList);
         tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
-ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]);
+        ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]);
 
 
 
@@ -3107,7 +3098,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         tvName.setText(si.getSubCatHeaderBn());
         tvName.setTextSize(12);
         flag=true;
-       //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+        //tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
         va=0;
 /**************************
  **
@@ -3124,81 +3115,81 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
             public void onClick(View v) {
 
 
-                 index = llSubCatListHolder.indexOfChild(v);
-                 if (flag2[index] == 1) {
-                     flag2[index] = 0; // 1 => Button ON
+                index = llSubCatListHolder.indexOfChild(v);
+                if (flag2[index] == 1) {
+                    flag2[index] = 0; // 1 => Button ON
 
-                     ivIcon.setImageResource(0);
-                     ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[index]);
-                     switch (currentCategoryID) {
-
-
-                         case AppConstants.EDUCATION:
+                    ivIcon.setImageResource(0);
+                    ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[index]);
+                    switch (currentCategoryID) {
 
 
-                             callMapFragmentWithEducation(index, null, false);
-                             break;
-                         case AppConstants.HEALTH:
-
-                             callMapFragmentWithHealth(index, null, false);
-                             break;
-                         case AppConstants.ENTERTAINMENT:
-
-                             callMapFragmentWithEntertainment(index, null, false);
-                             break;
-                         case AppConstants.GOVERNMENT:
-
-                             callMapFragmentWithGovernment(index, null, false);
-                             break;
-                         case AppConstants.LEGAL:
-
-                             callMapFragmentWithLegal(index, null, false);
-                             break;
-                         case AppConstants.FINANCIAL:
-
-                             callMapFragmentWithFinancial(index, null, false);
-                             break;
-                         default:
-                             break;
-                     }
-
-                 } else {
-
-                     ivIcon.setImageResource(0);
-                     ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[index]);
-                     flag2[index] = 1; // 0 => Button OFF
-                     switch (currentCategoryID) {
+                        case AppConstants.EDUCATION:
 
 
-                         case AppConstants.EDUCATION:
+                            callMapFragmentWithEducation(index, null, false);
+                            break;
+                        case AppConstants.HEALTH:
 
-                             callMapFragmentWithEducation(index, null, true);
-                             break;
+                            callMapFragmentWithHealth(index, null, false);
+                            break;
+                        case AppConstants.ENTERTAINMENT:
 
-                         case AppConstants.HEALTH:
+                            callMapFragmentWithEntertainment(index, null, false);
+                            break;
+                        case AppConstants.GOVERNMENT:
 
-                             callMapFragmentWithHealth(index, null, true);
-                             break;
-                         case AppConstants.ENTERTAINMENT:
+                            callMapFragmentWithGovernment(index, null, false);
+                            break;
+                        case AppConstants.LEGAL:
 
-                             callMapFragmentWithEntertainment(index, null, true);
-                             break;
-                         case AppConstants.GOVERNMENT:
+                            callMapFragmentWithLegal(index, null, false);
+                            break;
+                        case AppConstants.FINANCIAL:
 
-                             callMapFragmentWithGovernment(index, null, true);
-                             break;
-                         case AppConstants.LEGAL:
+                            callMapFragmentWithFinancial(index, null, false);
+                            break;
+                        default:
+                            break;
+                    }
 
-                             callMapFragmentWithLegal(index, null, true);
-                             break;
-                         case AppConstants.FINANCIAL:
+                } else {
 
-                             callMapFragmentWithFinancial(index, null, true);
-                             break;
-                         default:
-                             break;
-                     }
-                 }
+                    ivIcon.setImageResource(0);
+                    ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[index]);
+                    flag2[index] = 1; // 0 => Button OFF
+                    switch (currentCategoryID) {
+
+
+                        case AppConstants.EDUCATION:
+
+                            callMapFragmentWithEducation(index, null, true);
+                            break;
+
+                        case AppConstants.HEALTH:
+
+                            callMapFragmentWithHealth(index, null, true);
+                            break;
+                        case AppConstants.ENTERTAINMENT:
+
+                            callMapFragmentWithEntertainment(index, null, true);
+                            break;
+                        case AppConstants.GOVERNMENT:
+
+                            callMapFragmentWithGovernment(index, null, true);
+                            break;
+                        case AppConstants.LEGAL:
+
+                            callMapFragmentWithLegal(index, null, true);
+                            break;
+                        case AppConstants.FINANCIAL:
+
+                            callMapFragmentWithFinancial(index, null, true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
 
 
@@ -3425,7 +3416,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
                     prev_fragment.Drawfin(-1,true);
                 }
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
-                showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
+               if(!SearchClicked) showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
             }
 
         }
@@ -3448,7 +3439,7 @@ ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[ subcategory++]
         if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
         else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
         else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
-fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(16);
         if(helid==-1)
         {
             fragment.setCategoryId(2);
@@ -3686,18 +3677,18 @@ fragment.getMapViewController().setZoom(16);
                         for(BazarItem bazarItem: allBazar)
                         {
 
-                          //
+                            //
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
-                                    bazarItem.price+"@"+
+                                    "মূল্য: "+bazarItem.price+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
 
                                     "কন্ডিশন: "+bazarItem.condition+"@"+
                                     "এলাকা: "+bazarItem.address+"@"+
-                                       bazarItem.phone+"@"+
+                                    bazarItem.phone+"@"+
                                     "যোগাযোগ নম্বর: "+bazarItem.contact+"@"+
                                     "পোস্ট দিয়েছেন: "+bazarItem.contact_person+"@"+ "v"
-                                   ;
+                                    ;
 
 
                             Log.d("Bazar Data","============="+bazarData);
@@ -3712,9 +3703,9 @@ fragment.getMapViewController().setZoom(16);
 
                             listDataHeader.add(group_data);
 
-                           // myList.add(bazar_counter,bazar_data);
-                           // myList.get(bazar_counter).add(bazarData);
-               //             myList.add(bazar_data);
+                            // myList.add(bazar_counter,bazar_data);
+                            // myList.get(bazar_counter).add(bazarData);
+                            //             myList.add(bazar_data);
 
                             Log.d("myList","######"+myList);
 
@@ -3733,8 +3724,8 @@ fragment.getMapViewController().setZoom(16);
                         {
 
                             myList.add(k,bazar_data);
-                           // myList.get(0).set(k,bazar_data.get(k));
-      //                      myList.add(k,temp);
+                            // myList.get(0).set(k,bazar_data.get(k));
+                            //                      myList.add(k,temp);
 
                             temp.clear();
                         }
@@ -4094,7 +4085,7 @@ fragment.getMapViewController().setZoom(16);
 
     public void init(final Activity activity){
 
-         bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
+        bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         int pannl_height = height/17;
         if(pannl_height<70)
@@ -4156,9 +4147,9 @@ fragment.getMapViewController().setZoom(16);
 //        });
 
 
-       // mLayout.setTouchEnabled(false);
-     //   bazarPosting.setEnabled(true);
-       // bazarPosting.setClickable(true);
+        // mLayout.setTouchEnabled(false);
+        //   bazarPosting.setEnabled(true);
+        // bazarPosting.setClickable(true);
 
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
@@ -4193,9 +4184,9 @@ fragment.getMapViewController().setZoom(16);
                 Log.d(">>>>","onPanelExpanded");
                 slider_part.setVisibility(View.VISIBLE);
 
-                 LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                 sliding_parts.setMargins(0,height/25,0,height/140);
-                 slider_part.setLayoutParams(sliding_parts);
+                LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
+                sliding_parts.setMargins(0,height/25,0,height/140);
+                slider_part.setLayoutParams(sliding_parts);
 
 
                 footer.setText("বিজ্ঞাপন দেখুন");
@@ -4206,7 +4197,7 @@ fragment.getMapViewController().setZoom(16);
 //                    AlertMessage.showAskToRegister(context,"অনুগ্রহ পূর্বক রেজিস্ট্রাতিওন করুন","");
 //                }
 //                else {
-                    bazar_post_layout.setVisibility(View.VISIBLE);
+                bazar_post_layout.setVisibility(View.VISIBLE);
 //                }
 
 
@@ -4304,7 +4295,7 @@ fragment.getMapViewController().setZoom(16);
     protected void onResume() {
         super.onResume();
 
-     //   toggleButton.setVisibility(View.VISIBLE);
+        //   toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
 //
@@ -4355,8 +4346,8 @@ fragment.getMapViewController().setZoom(16);
 
 
 
-            }
         }
+    }
 
 
 
