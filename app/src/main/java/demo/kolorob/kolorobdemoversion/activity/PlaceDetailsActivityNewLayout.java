@@ -1583,8 +1583,10 @@ int index;
 
         List<String> types = new ArrayList<String>();
         types.add("বিজ্ঞাপনের ধরন");
-        types.add("বিনিময়");
+        types.add("ক্রয়");
         types.add("বিক্রয়");
+        types.add("বিনিময়");
+        types.add("টু লেট");
         types.add("টিউশন");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
@@ -1594,7 +1596,7 @@ int index;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if((position>=1&&position<=3)&&spinCounter1>0)
+                if((position>=1&&position<=5)&&spinCounter1>0)
                 {
                     TextView text2 = (TextView)parent.getChildAt(0);
 
@@ -1613,7 +1615,7 @@ int index;
 
                 final LinearLayout pricing= (LinearLayout)findViewById(R.id.pricing);
 
-                if(position==3)
+                if(position==5)
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.GONE);
