@@ -609,7 +609,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             health_name3.setTextSize(size_s);
         }
         compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layout);
+        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
         map = (FrameLayout) findViewById(R.id.map_fragment);
         map.setVisibility(View.VISIBLE);
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
