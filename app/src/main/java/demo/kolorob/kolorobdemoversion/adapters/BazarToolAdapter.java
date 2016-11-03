@@ -151,7 +151,13 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
      //   price.setText(Children[1].replace("%",""));
         date.setText(Children[2]);
-        condition.setText(Children[3]);
+        Log.d("condition","############"+Children[3]);
+        if(Children[3].equals("New"))
+            condition.setText("কন্ডিশন: নতুন");
+        else if(Children[3].equals("Refurbished"))
+            condition.setText("কন্ডিশন: রিফারবিশড");
+        else
+            condition.setText("রিফারবিশড");
         area.setText(Children[4]);
         if(Children[6].equals(""))
         {

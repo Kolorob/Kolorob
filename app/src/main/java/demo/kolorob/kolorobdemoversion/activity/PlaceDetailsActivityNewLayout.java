@@ -1623,16 +1623,17 @@ int index;
                     tution_detector =1;
                     product_name.setHint("টিউশনির ধরন");
                     description.setHint("টিউশনির বিবরন");
-                    tution_detector = 0;
+                    tution_detector = position;
                 }
                 else if (position==4)
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.VISIBLE);
-                    product_name.setVisibility(View.GONE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setText("কি ভাড়া দিতে চান?");
                     price.setHint("বাসাভাড়া");
                     description.setHint("বাসার বিবরন");
-                    tution_detector = 0;
+                    tution_detector = position;
                 }
                 else if(position==3)
                 {
@@ -1888,13 +1889,14 @@ int index;
 
 
 
-           if(tution_detector==1)
+           if(tution_detector==5)
            {
                spinner.setSelection(2);
                price.setText("1111");
            }
-           else
+           else if(tution_detector==4)
            {
+                spinner.setSelection(2);
 
            }
 
@@ -1912,7 +1914,8 @@ int index;
            {
                if(spinner.getSelectedItem().toString().equals("কন্ডিশন"))
                {
-                   Log.d("condition","==========="+spinner.getSelectedItem().toString()+"v");
+
+
                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন","");
 //               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন");
 
@@ -1920,7 +1923,14 @@ int index;
                else
                {
 
-                   b.condition = spinner.getSelectedItem().toString();
+                   String conditions = spinner.getSelectedItem().toString();
+
+                   if(conditions.equals("নতুন"))
+                       b.condition = "New";
+                    else if(conditions.equals("রিফারবিশড"))
+                       b.condition = "Refurbished";
+
+
 
 
                    if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
@@ -3751,7 +3761,7 @@ fragment.getMapViewController().setZoom(16);
                                     bazarItem.price+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
 
-                                    "কন্ডিশন: "+bazarItem.condition+"@"+
+                                    bazarItem.condition+"@"+
                                     "এলাকা: "+bazarItem.address+"@"+
                                        bazarItem.phone+"@"+
                                     "যোগাযোগ নম্বর: "+bazarItem.contact+"@"+
