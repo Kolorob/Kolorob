@@ -136,9 +136,12 @@
                 android:orientation="horizontal"
                 android:id="@+id/pricing"
                 android:layout_width="match_parent"
+<<<<<<< HEAD
+=======
                 android:layout_marginTop="@dimen/bazar_distance"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+>>>>>>> 1f5ccf9b6ec161b7c00c86d49d0d9440c07ef53f
                 android:layout_height="wrap_content">
 
                 <LinearLayout
@@ -146,20 +149,25 @@
                     android:layout_weight="0.5"
 
                     android:layout_height="wrap_content">
-
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@color/drak_yellow"
                         android:hint="মূল্য"
-                        android:inputType="number"
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray"
+<<<<<<< HEAD
+                        android:layout_marginTop="@dimen/bazar_distance"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+=======
 
-                        android:lines="7"
+                        android:lines="6"
 
+>>>>>>> 1f5ccf9b6ec161b7c00c86d49d0d9440c07ef53f
                         android:id="@+id/costs" />
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"

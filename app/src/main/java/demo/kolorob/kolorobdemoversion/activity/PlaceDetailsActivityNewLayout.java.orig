@@ -1494,8 +1494,13 @@ int index;
         description= (EditText)findViewById(R.id.descriptions);
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
+<<<<<<< HEAD
+        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
+
+=======
 int heightconsiderforcost=contact_person.getHeight();
         price.setHeight(heightconsiderforcost);
+>>>>>>> 1f5ccf9b6ec161b7c00c86d49d0d9440c07ef53f
 
         int text_field_height = height/25;
 

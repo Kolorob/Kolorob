@@ -134,19 +134,21 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         Character price_s = Children[1].charAt(Children[1].length()-1);
         int p= Integer.valueOf(price_s);
-        Log.d("price_s","=============="+p);
+        Log.d("price_s","=============="+Children[1]);
+        Log.d("price_s2","=============="+price_s);
 
-           if(price_s==ZERO)
+        if(Children[1].length()==1&& price_s==ZERO)
+        {
+            price.setText("মূল্য: আলোচনা সাপেক্ষ্যে");
+        }
+          else if(price_s==ZERO)
            {
-               Log.d("price_s","==============");
-
-               price.setText("মূল্য: "+English_to_bengali_number_conversion(Children[1].replace("0",""))+ " টাকা (আলোচনা সাপেক্ষ্যে)");
+               price.setText("মূল্য: "+English_to_bengali_number_conversion(AppUtils.removeLastChar(Children[1]))+ " টাকা (আলোচনা সাপেক্ষ্যে)");
 
            }
-        else
-               price.setText("মূল্য: "+English_to_bengali_number_conversion(Children[1].replace("0",""))+ " টাকা");
-        Log.d("price_s","=============="+Children[1].replace("1",""));
-        Log.d("price_s","=============="+Children[1].replace("0",""));
+        else if(price_s == one)
+               price.setText("মূল্য: "+English_to_bengali_number_conversion(AppUtils.removeLastChar(Children[1]))+ " টাকা");
+
      //   price.setText(Children[1].replace("%",""));
         date.setText(Children[2]);
         condition.setText(Children[3]);
@@ -160,6 +162,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
                 if (!Children[5].equals("")) {
                     callIntent1.setData(Uri.parse("tel:" + Children[5]));
+                    callIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     if (checkPermission(_context))
                         _context.startActivity(callIntent1);
                     else {
