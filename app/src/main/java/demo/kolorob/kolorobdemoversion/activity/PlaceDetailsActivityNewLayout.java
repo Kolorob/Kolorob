@@ -1909,8 +1909,8 @@ int index;
                            else
                            {
                                b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
-                               if(contact.getText().toString().equals("asdfgh")) {
-                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন","");
+                               if(AppUtils.mobile_number_verification(contact.getText().toString())) {
+                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক সঠিক ফোন নম্বর ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
                                }
                                else {

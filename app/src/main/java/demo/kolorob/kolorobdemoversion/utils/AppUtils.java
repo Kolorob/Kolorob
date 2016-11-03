@@ -170,20 +170,22 @@ public class AppUtils {
 
     public static boolean mobile_number_verification(String number)
     {
-        if(number.length()!=11)
+        if(number.equals(""))
             return false;
+        else if(number.length()!=11)
+            return true;
         else if(number.charAt(0)!='0')
         {
-            return false;
+            return true;
         }
         else if(number.charAt(1)!='1')
         {
-            return false;
+            return true;
         }
         else if(number.charAt(2)=='2'||number.charAt(2)=='3'||number.charAt(2)=='4')
-            return false;
-        else
             return true;
+        else
+            return false;
 
 
     }
