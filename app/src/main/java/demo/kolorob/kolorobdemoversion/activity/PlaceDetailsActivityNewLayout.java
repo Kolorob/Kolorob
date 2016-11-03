@@ -1460,6 +1460,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     {
         // Spinner element
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
+        final Spinner type_spinner = (Spinner) findViewById(R.id.type_spinner);
 
         List<String> categories = new ArrayList<String>();
         categories.add("কন্ডিশন");
@@ -1478,23 +1479,31 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         description= (EditText)findViewById(R.id.descriptions);
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
-        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
+        int heightconsiderforcost=contact_person.getHeight();
 
 
-        int text_field_height = height/25;
+        int text_field_height = height/30;
 
         LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
         spinnners.height= text_field_height;
         spinner.setLayoutParams(spinnners);
 
 
+
         LinearLayout.LayoutParams type_spinners = (LinearLayout.LayoutParams) type_spinner.getLayoutParams();
         type_spinners.height= text_field_height;
         spinner.setLayoutParams(spinnners);
 
-        product_name.getLayoutParams().height=25;
 
-        price.getLayoutParams().height=text_field_height;
+        product_name.setHeight(text_field_height);
+        price.setHeight(text_field_height);
+        description.setHeight(text_field_height);
+        contact_person.setHeight(text_field_height);
+        contact.setHeight(text_field_height);
+        phone.setHeight(text_field_height);
+        address.setHeight(text_field_height);
+
+
 
 //        LinearLayout.LayoutParams phones = (LinearLayout.LayoutParams) phone.getLayoutParams();
 //        phones.height= text_field_height;
@@ -1538,7 +1547,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 else
                 {
                     TextView text1 = (TextView)parent.getChildAt(0);
-                    text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text1.setTextColor(ContextCompat.getColor(context,R.color.white));
                     text1.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
 
@@ -1549,7 +1558,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 TextView text1 = (TextView)parent.getChildAt(0);
-                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                text1.setTextColor(ContextCompat.getColor(context,R.color.white));
             }
         });
 
@@ -1558,8 +1567,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         List<String> types = new ArrayList<String>();
         types.add("বিজ্ঞাপনের ধরন");
-        types.add("বিনিময়");
+        types.add("ক্রয়");
         types.add("বিক্রয়");
+        types.add("বিনিময়");
+        types.add("টু লেট");
         types.add("টিউশন");
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
@@ -1569,7 +1580,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if((position>=1&&position<=3)&&spinCounter1>0)
+                if((position>=1&&position<=5)&&spinCounter1>0)
                 {
                     TextView text2 = (TextView)parent.getChildAt(0);
 
@@ -1582,25 +1593,69 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 else
                 {
                     TextView text2 = (TextView)parent.getChildAt(0);
-                    text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.white));
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
 
                 final LinearLayout pricing= (LinearLayout)findViewById(R.id.pricing);
 
-                if(position==3)
+                if(position==5)
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.GONE);
+                    product_name.setVisibility(View.VISIBLE);
                     tution_detector =1;
-                    product_name.setHint("কি ধরনের টিউশনি চান?");
+                    product_name.setHint("টিউশনির ধরন");
                     description.setHint("টিউশনির বিবরন");
+                    tution_detector = position;
+                }
+                else if (position==4)
+                {
+                    spinner.setVisibility(View.GONE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setText("কি ভাড়া দিতে চান?");
+                    price.setHint("বাসাভাড়া");
+                    description.setHint("বাসার বিবরন");
+                    tution_detector = position;
+                }
+                else if(position==3)
+                {
+                    spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setHint("কি বিনিময় করবেন?");
+                    price.setHint("মূল্য");
+                    description.setHint("বিবরন");
+                    tution_detector = 0;
+                }
+
+                else if(position==2)
+                {
+                    spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setHint("কি বিক্রয় করবেন?");
+                    price.setHint("মূল্য");
+                    tution_detector = 0;
+                    description.setHint("বিবরন");
+                }
+                else if(position==1)
+                {
+                    spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setHint("কি ক্রয় করবেন?");
+                    price.setHint("মূল্য");
+                    description.setHint("বিবরন");
+                    tution_detector = 0;
                 }
 
                 else
                 {
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
                     tution_detector = 0;
                     product_name.setHint("কি পন্য বিক্রয় করবেন?");
                     description.setHint("পণ্যের বিবরন");
@@ -1614,7 +1669,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 TextView text2 = (TextView)parent.getChildAt(0);
-                text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                text2.setTextColor(ContextCompat.getColor(context,R.color.white));
             }
         });
 
@@ -1826,13 +1881,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
 
-                    if(tution_detector==1)
+           if(tution_detector==5)
                     {
                         spinner.setSelection(2);
                         price.setText("1111");
                     }
-                    else
+           else if(tution_detector==4)
                     {
+                spinner.setSelection(2);
 
                     }
 
@@ -1850,7 +1906,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     {
                         if(spinner.getSelectedItem().toString().equals("কন্ডিশন"))
                         {
-                            Log.d("condition","==========="+spinner.getSelectedItem().toString()+"v");
+
+
                             AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন","");
 //               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন");
 
@@ -1858,7 +1915,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                         else
                         {
 
-                            b.condition = spinner.getSelectedItem().toString();
+                   String conditions = spinner.getSelectedItem().toString();
+
+                   if(conditions.equals("নতুন"))
+                       b.condition = "New";
+                    else if(conditions.equals("রিফারবিশড"))
+                       b.condition = "Refurbished";
+
+
 
 
                             if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
@@ -1868,12 +1932,17 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                             }
                             else {
                                 String condition_selector = type_spinner.getSelectedItem().toString();
+
                                 if(condition_selector.equals("বিনিময়"))
                                     b.type = "Exchange";
                                 else if(condition_selector.equals("বিক্রয়"))
                                     b.type = "Sell";
                                 else if(condition_selector.equals("টিউশন"))
                                     b.type = "Tution";
+                       else if(condition_selector.equals("ক্রয়"))
+                           b.type = "Buy";
+                       else if(condition_selector.equals("টু লেট"))
+                           b.type = "To_Let";
 //                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
                                 if(product_name.getText().toString().equals(""))
                                 {
@@ -1892,8 +1961,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                     else
                                     {
                                         b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
-                                        if(contact.getText().toString().equals("")) {
-                                            AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন","");
+                               if(AppUtils.mobile_number_verification(contact.getText().toString())) {
+                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক সঠিক ফোন নম্বর ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
                                         }
                                         else {
@@ -3683,7 +3752,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                     "মূল্য: "+bazarItem.price+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
 
-                                    "কন্ডিশন: "+bazarItem.condition+"@"+
+                                    bazarItem.condition+"@"+
                                     "এলাকা: "+bazarItem.address+"@"+
                                     bazarItem.phone+"@"+
                                     "যোগাযোগ নম্বর: "+bazarItem.contact+"@"+

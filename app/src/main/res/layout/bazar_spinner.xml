@@ -8,4 +8,4 @@
     android:background="@color/light_orange"
     android:ellipsize="marquee"
     android:textColor="@color/black"
-    android:textSize="20dp" />
+    android:textSize="17dp" />

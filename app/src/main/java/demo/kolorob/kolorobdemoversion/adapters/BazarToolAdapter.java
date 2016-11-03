@@ -151,9 +151,25 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
      //   price.setText(Children[1].replace("%",""));
         date.setText(Children[2]);
-        condition.setText(Children[3]);
+
+        if(Children[3].equals("New"))
+            condition.setText("কন্ডিশন: নতুন");
+        else if(Children[3].equals("Refurbished"))
+            condition.setText("কন্ডিশন: রিফারবিশড");
+        else
+            condition.setText("রিফারবিশড");
         area.setText(Children[4]);
-        another_num.setText(Children[6]);
+
+        Log.d("condition","############"+Children[6]);
+        if(Children[6].equals("যোগাযোগ নম্বর: "))
+        {
+            another_num.setVisibility(View.GONE);
+        }
+        else {
+            another_num.setVisibility(View.VISIBLE);
+            another_num.setText(Children[6]);
+        }
+
         post_person.setText(Children[7]);
 
         phone_call.setOnClickListener(new View.OnClickListener() {
@@ -245,6 +261,17 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         {
             sell.setText("টিউশন");
         }
+
+        else if(groupElement[1].equals("Buy"))
+        {
+            sell.setText("ক্রয়");
+        }
+
+        else if(groupElement[1].equals("To_Let"))
+        {
+            sell.setText("টু লেট");
+        }
+
    //     sell.setText(groupElement[1]);
         type = groupElement[1];
         Double screenSize= AppUtils.ScreenSize(_context);

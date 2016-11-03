@@ -20,7 +20,9 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
+
 
                 android:layout_marginRight="10dp"
                 android:popupBackground="@color/white"
@@ -53,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
                 android:layout_marginTop="@dimen/bazar_distance"
                 android:background="@color/drak_yellow"
                 android:hint="যে পন্য বিক্রয় করবেন"
@@ -67,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
 
                 android:background="@color/white"
 
@@ -83,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
                 android:background="@color/drak_yellow"
 
                 android:layout_marginTop="@dimen/bazar_distance"
@@ -100,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
                 android:background="@color/drak_yellow"
                 android:layout_marginTop="@dimen/bazar_distance"
 
@@ -119,7 +121,7 @@
                 android:background="@color/white"
                 android:hint="যোগাযোগকারী ব্যক্তির নাম"
                 android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
 
                 android:layout_marginTop="@dimen/bazar_distance"
 
@@ -155,7 +157,7 @@
                         android:hint="মূল্য"
                         android:inputType="number"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/gray"
+                        android:textColorHint="@color/white"
 
                         android:lines="7"
 
@@ -194,7 +196,7 @@
 
 
                 android:layout_marginTop="@dimen/bazar_distance"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
 
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
