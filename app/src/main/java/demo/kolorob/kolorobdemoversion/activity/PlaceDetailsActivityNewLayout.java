@@ -1900,7 +1900,7 @@ int index;
                            else
                            {
                                b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
-                               if(contact.getText().toString().equals("")) {
+                               if(contact.getText().toString().equals("asdfgh")) {
                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
                                }
