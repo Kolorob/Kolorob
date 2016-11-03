@@ -119,8 +119,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="@dimen/search_margin">
                     <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/bwidth"
+                        android:layout_height="@dimen/bwidth"
                         android:id="@+id/morebutton"
                         android:background="@drawable/filter"
                         android:layout_alignParentTop="true"
