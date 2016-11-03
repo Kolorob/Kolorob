@@ -146,18 +146,20 @@
                     android:layout_weight="0.5"
 
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@color/drak_yellow"
                         android:hint="মূল্য"
+                        android:inputType="number"
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray"
 
+                        android:lines="7"
 
                         android:id="@+id/costs" />
-
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"

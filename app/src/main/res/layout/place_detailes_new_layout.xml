@@ -96,6 +96,7 @@
                     android:maxHeight="80dp"
                     android:minHeight="80dp"
                     android:background="#F7941E"
+
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_below="@+id/searchall"
@@ -111,7 +112,7 @@
                     android:layout_marginTop="@dimen/fab_marginforsearch2"
                     android:layout_marginLeft="@dimen/nav_header_height2"
 
-                    android:layout_height="450dp"
+                    android:layout_height="@dimen/filterheight"
                     android:layout_gravity="center_horizontal"
                     android:layout_below="@+id/allitem"
                     android:layout_alignParentRight="true"
