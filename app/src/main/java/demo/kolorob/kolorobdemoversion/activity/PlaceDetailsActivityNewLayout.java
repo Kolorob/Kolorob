@@ -1619,23 +1619,58 @@ int index;
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.GONE);
+                    product_name.setVisibility(View.VISIBLE);
                     tution_detector =1;
                     product_name.setHint("টিউশনির ধরন");
                     description.setHint("টিউশনির বিবরন");
+                    tution_detector = 0;
                 }
                 else if (position==4)
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.VISIBLE);
                     product_name.setVisibility(View.GONE);
-                    price.setText("বাসাভাড়া");
-                    description.setText("বাসার বিবরন");
+                    price.setHint("বাসাভাড়া");
+                    description.setHint("বাসার বিবরন");
+                    tution_detector = 0;
+                }
+                else if(position==3)
+                {
+                    spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setHint("কি বিনিময় করবেন?");
+                    price.setHint("মূল্য");
+                    description.setHint("বিবরন");
+                    tution_detector = 0;
+                }
+
+                else if(position==2)
+                {
+                    spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setHint("কি বিক্রয় করবেন?");
+                    price.setHint("মূল্য");
+                    tution_detector = 0;
+                    description.setHint("বিবরন");
+                }
+                else if(position==1)
+                {
+                    spinner.setVisibility(View.VISIBLE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
+                    product_name.setHint("কি ক্রয় করবেন?");
+                    price.setHint("মূল্য");
+                    description.setHint("বিবরন");
+                    tution_detector = 0;
                 }
 
                 else
                 {
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.VISIBLE);
                     tution_detector = 0;
                     product_name.setHint("কি পন্য বিক্রয় করবেন?");
                     description.setHint("পণ্যের বিবরন");
