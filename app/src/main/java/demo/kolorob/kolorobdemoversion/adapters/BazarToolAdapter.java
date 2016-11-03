@@ -140,11 +140,11 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
            {
                Log.d("price_s","==============");
 
-               price.setText("মূল্য: "+English_to_bengali_number_conversion(Children[1].replace("0",""))+ " টাকা (আলোচনা সাপেক্ষ্যে)");
+               price.setText("মূল্য: "+English_to_bengali_number_conversion(AppUtils.removeLastChar(Children[1]))+ " টাকা (আলোচনা সাপেক্ষ্যে)");
 
            }
         else
-               price.setText("মূল্য: "+English_to_bengali_number_conversion(Children[1].replace("0",""))+ " টাকা");
+               price.setText("মূল্য: "+English_to_bengali_number_conversion(AppUtils.removeLastChar(Children[1]))+ " টাকা");
         Log.d("price_s","=============="+Children[1].replace("1",""));
         Log.d("price_s","=============="+Children[1].replace("0",""));
      //   price.setText(Children[1].replace("%",""));

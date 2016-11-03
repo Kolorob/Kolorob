@@ -1480,13 +1480,48 @@ int index;
         description= (EditText)findViewById(R.id.descriptions);
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
+        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
 
 
-
+        int text_field_height = height/25;
 
         LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
-        spinnners.height= height/15;
+        spinnners.height= text_field_height;
         spinner.setLayoutParams(spinnners);
+
+
+        LinearLayout.LayoutParams type_spinners = (LinearLayout.LayoutParams) type_spinner.getLayoutParams();
+        type_spinners.height= text_field_height;
+        spinner.setLayoutParams(spinnners);
+
+        product_name.getLayoutParams().height=25;
+
+        price.getLayoutParams().height=text_field_height;
+
+//        LinearLayout.LayoutParams phones = (LinearLayout.LayoutParams) phone.getLayoutParams();
+//        phones.height= text_field_height;
+//        phone.setLayoutParams(phones);
+//
+//        LinearLayout.LayoutParams addresss = (LinearLayout.LayoutParams) address.getLayoutParams();
+//        addresss.height= text_field_height;
+//        address.setLayoutParams(addresss);
+//
+//
+//
+//        LinearLayout.LayoutParams descriptions = (LinearLayout.LayoutParams) description.getLayoutParams();
+//        descriptions.height= text_field_height;
+//        description.setLayoutParams(descriptions);
+//
+//        LinearLayout.LayoutParams contact_persons = (LinearLayout.LayoutParams) contact_person.getLayoutParams();
+//        contact_persons.height= text_field_height;
+//        contact_person.setLayoutParams(contact_persons);
+//
+//        LinearLayout.LayoutParams contacts = (LinearLayout.LayoutParams) contact.getLayoutParams();
+//        contacts.height= text_field_height;
+//        contact.setLayoutParams(contacts);
+
+
+
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -1522,7 +1557,7 @@ int index;
 
 
 
-        final Spinner type_spinner= (Spinner)findViewById(R.id.type_spinner);
+
         List<String> types = new ArrayList<String>();
         types.add("বিজ্ঞাপনের ধরন");
         types.add("বিনিময়");
