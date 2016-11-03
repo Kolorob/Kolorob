@@ -475,21 +475,6 @@ public class OpeningActivity extends Activity {
 //			textAsk.setTextSize(17);
                 alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
-
-
-
-//                alertDialog = new AlertDialog.Builder(OpeningActivity.this).create();
-//                alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্ছিন্ন");
-//                alertDialog.setCanceledOnTouchOutside(false);
-//                alertDialog.setMessage(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
-//                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//
-//                            }
-//                        });
-//                alertDialog.show();
             }
             else
 

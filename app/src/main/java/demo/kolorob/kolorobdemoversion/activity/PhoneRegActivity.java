@@ -51,6 +51,7 @@ import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+import info.hoang8f.widget.FButton;
 
 
 public class PhoneRegActivity extends Activity {
@@ -71,6 +72,7 @@ public class PhoneRegActivity extends Activity {
 
     private Context con;
     String IMEINumber;
+    FButton Submit;
     TextView phoneheader;
     AccessToken accessToken=null;
     public static int APP_REQUEST_CODE = 99;
@@ -91,6 +93,7 @@ public class PhoneRegActivity extends Activity {
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
         name=(EditText)findViewById(R.id.userid) ;
+        Submit=(FButton)findViewById(R.id.submittoserver);
 
         if(accessToken != null){
             setUserInformation();
@@ -105,7 +108,33 @@ public class PhoneRegActivity extends Activity {
         {
             phoneheader.setTextSize(45);
         }
+Submit.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(accessToken != null){
+            phoneNumber=phone.getText().toString().trim();
+            uname=name.getText().toString().trim();
+            if( uname.equals("")){
 
+
+                name.setError( "নাম লিখুন" );
+
+            }
+            else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
+                sendPhoneNumberToServer(phoneNumber);
+            }
+            else {
+                ToastMessageDisplay.setText(PhoneRegActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+                ToastMessageDisplay.showText(PhoneRegActivity.this);
+            }
+        }
+        else {
+            goToLogin(true);
+        }
+    }
+});
     }
     private void checkPermissions() {
         List<String> permissions = new ArrayList<>();
@@ -214,31 +243,7 @@ public class PhoneRegActivity extends Activity {
                 configurationBuilder.build());
         this.startActivityForResult(intent, APP_REQUEST_CODE);
     }
-    public void submit(View v) {
 
-        phoneNumber=phone.getText().toString().trim();
-        uname=name.getText().toString().trim();
-      //  emailaddress=email.getText().toString().trim();
-
-        int size = phoneNumber.length();
-
-
-        if( uname.equals("")){
-
-
-            name.setError( "নাম লিখুন" );
-
-        }
-        else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
-            sendPhoneNumberToServer(phoneNumber);
-        }
-        else {
-            ToastMessageDisplay.setText(PhoneRegActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
-//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-//                            Toast.LENGTH_LONG).show();
-            ToastMessageDisplay.showText(PhoneRegActivity.this);
-        }
-    }
 
 
     public void sendPhoneNumberToServer(final String phone)
@@ -291,20 +296,21 @@ public class PhoneRegActivity extends Activity {
                                         "আপনার ইউজার নেম  " +serverusername +" এবং ফোন নাম্বার  "+serverphonenumber,2);
 
                             }
-                            else
+                             else if(response.equals("\"already registered\""))
+
                             {
+                                showMessageExisting(PhoneRegActivity.this, "দুঃখিত",
+                                        " এই নাম্বার টি আগেই নিবন্ধিত হয়েছে",3);
 
 
-
-
-                               // SharedPreferencesHelper.setNumber(con,phoneNumber); this has been commented to prevent
-                                // user using same number in multiple device
-
-                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
-                                        "এই নাম্বার টি আগেই নিবন্ধিত হয়েছে");
                             }
 
-                                        //  finish();
+                            else
+
+                            {
+                                AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
+                                        "দয়া করে পরে চেষ্টা করুন");
+                            }
 
 
 
@@ -451,7 +457,7 @@ public class PhoneRegActivity extends Activity {
                     startActivity(newIntent);
                     finish();
                 }
-                else
+                else if (from==2)
                 {
                     Intent newIntent = new Intent(PhoneRegActivity.this, PlaceSelectionActivity.class);
                     newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -459,6 +465,10 @@ public class PhoneRegActivity extends Activity {
                     startActivity(newIntent);
                     finish();
                 }
+                else {
+                    goToLogin(true);
+                }
+
                 alertDialog.cancel();
             }
         });
