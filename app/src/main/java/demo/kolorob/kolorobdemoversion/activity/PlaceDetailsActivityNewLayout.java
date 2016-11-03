@@ -1481,6 +1481,13 @@ int index;
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
 
+
+
+
+        LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
+        spinnners.height= height/15;
+        spinner.setLayoutParams(spinnners);
+
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1884,7 +1891,7 @@ int index;
                                                if(description.getText().toString().equals(""))
                                                {
 //                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
-                                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন","");
+                                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তথ্য ইনপুট দিন","");
                                                }
                                                else {
                                                    b.description=description.getText().toString().replace(' ','+');
