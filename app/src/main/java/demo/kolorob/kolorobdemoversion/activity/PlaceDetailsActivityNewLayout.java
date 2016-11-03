@@ -1620,8 +1620,16 @@ int index;
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.GONE);
                     tution_detector =1;
-                    product_name.setHint("কি ধরনের টিউশনি চান?");
+                    product_name.setHint("টিউশনির ধরন");
                     description.setHint("টিউশনির বিবরন");
+                }
+                else if (position==4)
+                {
+                    spinner.setVisibility(View.GONE);
+                    pricing.setVisibility(View.VISIBLE);
+                    product_name.setVisibility(View.GONE);
+                    price.setText("বাসাভাড়া");
+                    description.setText("বাসার বিবরন");
                 }
 
                 else
