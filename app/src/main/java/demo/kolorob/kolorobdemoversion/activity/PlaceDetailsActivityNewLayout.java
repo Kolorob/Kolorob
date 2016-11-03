@@ -1480,7 +1480,8 @@ int index;
         description= (EditText)findViewById(R.id.descriptions);
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
-
+int heightconsiderforcost=contact_person.getHeight();
+        price.setHeight(heightconsiderforcost);
 
 
 

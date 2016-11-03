@@ -46,18 +46,7 @@
 
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginRight="10dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Product Name"
-                android:textColor="@color/white"
 
-                android:id="@+id/textView3" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -73,17 +62,7 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/product_name" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Phone"
-                android:visibility="gone"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/white"
 
-                android:id="@+id/textView4" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,17 +94,7 @@
                 android:lines="2"
                 android:id="@+id/contact" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"
-                android:layout_marginRight="10dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Address"
-                android:textColor="@color/white"
 
-                android:id="@+id/textView5" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -142,17 +111,7 @@
                 android:lines="2"
                 android:id="@+id/address" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Contact Person"
-                android:textColor="@color/white"
 
-                android:id="@+id/contact_persons" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -172,29 +131,21 @@
 
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Price"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/bazar_distance"
 
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/white"
-
-                android:id="@+id/textView6" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:id="@+id/pricing"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="0.5"
+
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -206,10 +157,9 @@
                         android:inputType="number"
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray"
-                        android:layout_marginTop="@dimen/bazar_distance"
+
                         android:lines="6"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+
                         android:id="@+id/costs" />
                 </LinearLayout>
                 <LinearLayout
@@ -222,8 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="আলোচনাসাপেক্ষ্যে"
-                        android:layout_marginTop="@dimen/bazar_distance"
-
+                        android:layout_gravity="center"
                         android:theme="@style/checkBoxStyle"
                         android:textColor="@color/white"
 
@@ -237,17 +186,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Description"
-                android:visibility="gone"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/white"
 
-                android:id="@+id/textView7" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
