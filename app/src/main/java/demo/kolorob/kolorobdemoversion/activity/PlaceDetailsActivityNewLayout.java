@@ -1495,10 +1495,10 @@ int index;
         description= (EditText)findViewById(R.id.descriptions);
         contact_person= (EditText)findViewById(R.id.contact_person);
         contact= (EditText)findViewById(R.id.contact);
-int heightconsiderforcost=contact_person.getHeight();
+        int heightconsiderforcost=contact_person.getHeight();
         price.setHeight(heightconsiderforcost);
 
-        int text_field_height = height/25;
+        int text_field_height = height/30;
 
         LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
         spinnners.height= text_field_height;
@@ -1510,7 +1510,9 @@ int heightconsiderforcost=contact_person.getHeight();
         type_spinners.height= text_field_height;
         spinner.setLayoutParams(spinnners);
 
-        product_name.getLayoutParams().height=25;
+
+        product_name.setHeight(text_field_height);
+
 
         price.getLayoutParams().height=text_field_height;
 
