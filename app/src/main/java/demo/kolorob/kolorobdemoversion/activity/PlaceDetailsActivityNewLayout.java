@@ -132,6 +132,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     int buttonHeights;
     int negotiable_check;
     String[] left_part;
+    boolean doubleBackToExitPressedOnce = false;
     TextView footer;
     int position_type_spinner=0;
     LinearLayout wholeLayout;
@@ -329,7 +330,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
-    boolean doubleBackToExitPressedOnce = false;
+
     int val;
     String checknum;
     Boolean flag;
@@ -2647,17 +2648,20 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-//
             super.onBackPressed();
-
-            this.finish();
-
+            return;
         }
-        ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন ");
-        ToastMessageDisplay.showText(this);
+
         this.doubleBackToExitPressedOnce = true;
+        ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
 
+        new Handler().postDelayed(new Runnable() {
 
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 
