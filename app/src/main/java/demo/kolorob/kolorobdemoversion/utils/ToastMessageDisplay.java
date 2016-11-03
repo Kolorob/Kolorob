@@ -31,7 +31,7 @@ static String m;
 //        toastMessage.setTextColor(getResources().getColor(R.color.orange));
         toastMessage.setGravity(Gravity.CENTER);
 
-        toastMessage.setCompoundDrawablePadding(26);
+       // toastMessage.setCompoundDrawablePadding(26);
 
     }
     public static  void showText(Context context)
@@ -43,8 +43,8 @@ static String m;
         toastMessage.setText(m);
         toast.setView(toastView);
         if (SharedPreferencesHelper.isTabletDevice(context)){
-            toastMessage.setPadding(15,15,15,15);
-            toastMessage.setTextSize(30);}
+            toastMessage.setPadding(18,15,15,15);
+            toastMessage.setTextSize(25);}
         else toastMessage.setTextSize(15);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
