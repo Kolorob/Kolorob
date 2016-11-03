@@ -20,9 +20,9 @@
     <dimen name="catlayouttop">10dp</dimen>
     <dimen name="transportlayout">120dp</dimen>
     <dimen name="subcatlayouttop">00dp</dimen>
-    <dimen name="searchbar">230dp</dimen>
+
     <dimen name="catbuttonheight">55dp</dimen>
-    <dimen name="listheight">120dp</dimen>
+
     <dimen name="fab_marginforsearch">20dp</dimen>
     <dimen name="fab_marginforsearch2">20dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
@@ -58,7 +58,11 @@
     <dimen name="bwidth">40dp</dimen>
     <dimen name="bheight">40dp</dimen>
     <dimen name="icon_gaph">5dp</dimen>
-
+    <dimen name="searchbar">230dp</dimen>
+    <dimen name="listheight">120dp</dimen>
+    <dimen name="filterheight">150dp</dimen>
+    <dimen name="searchlisttextsize">14dp</dimen>
+    <dimen name="searchlisttextpadding">13dp</dimen>
     <dimen name="abttext">15dp</dimen>
     <dimen name="aboutusupheight">65dp</dimen>
     <dimen name="aboutuslowerheight">80dp</dimen>

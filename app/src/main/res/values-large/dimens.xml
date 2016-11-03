@@ -18,6 +18,9 @@
     <dimen name="offerpaddingbtntop">15dp</dimen>
     <dimen name="regpadding">30dp</dimen>
     <dimen name="listheight">420dp</dimen>
+    <dimen name="filterheight">450dp</dimen>
+    <dimen name="searchlisttextsize">18dp</dimen>
+    <dimen name="searchlisttextpadding">25dp</dimen>
     <dimen name="searchbar">600dp</dimen>
     <dimen name="fab_marginforsearch2">50dp</dimen>
     <dimen name="fab_marginforsearch">100dp</dimen>
