@@ -162,6 +162,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
                 if (!Children[5].equals("")) {
                     callIntent1.setData(Uri.parse("tel:" + Children[5]));
+                    callIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     if (checkPermission(_context))
                         _context.startActivity(callIntent1);
                     else {
