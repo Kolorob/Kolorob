@@ -1563,7 +1563,7 @@ int index;
                 else
                 {
                     TextView text1 = (TextView)parent.getChildAt(0);
-                    text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text1.setTextColor(ContextCompat.getColor(context,R.color.white));
                     text1.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
 
@@ -1574,7 +1574,7 @@ int index;
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 TextView text1 = (TextView)parent.getChildAt(0);
-                text1.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                text1.setTextColor(ContextCompat.getColor(context,R.color.white));
             }
         });
 
@@ -1607,7 +1607,7 @@ int index;
                 else
                 {
                     TextView text2 = (TextView)parent.getChildAt(0);
-                    text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.white));
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
                 }
 
@@ -1639,7 +1639,7 @@ int index;
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 TextView text2 = (TextView)parent.getChildAt(0);
-                text2.setTextColor(ContextCompat.getColor(context,R.color.gray));
+                text2.setTextColor(ContextCompat.getColor(context,R.color.white));
             }
         });
 
