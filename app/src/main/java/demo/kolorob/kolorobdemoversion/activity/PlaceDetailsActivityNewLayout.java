@@ -1512,9 +1512,14 @@ int index;
 
 
         product_name.setHeight(text_field_height);
+        price.setHeight(text_field_height);
+        description.setHeight(text_field_height);
+        contact_person.setHeight(text_field_height);
+        contact.setHeight(text_field_height);
+        phone.setHeight(text_field_height);
+        address.setHeight(text_field_height);
 
 
-        price.getLayoutParams().height=text_field_height;
 
 //        LinearLayout.LayoutParams phones = (LinearLayout.LayoutParams) phone.getLayoutParams();
 //        phones.height= text_field_height;
