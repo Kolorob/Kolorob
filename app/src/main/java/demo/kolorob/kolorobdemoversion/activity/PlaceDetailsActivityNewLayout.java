@@ -130,7 +130,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
-    int negotiable_check;
+    int negotiable_check=1;
     String[] left_part;
     TextView footer;
     int position_type_spinner=0;
@@ -786,6 +786,20 @@ int index;
         {
 
         }
+
+        negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("Negotiable Check","================");
+                if(isChecked)
+                    negotiable_check=0;
+                else
+                    negotiable_check=1;
+
+                Log.d("Negotiable Check","================"+isChecked);
+                Log.d("Negotiable Check2","================"+negotiable_check);
+            }
+        });
 
         refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1796,15 +1810,7 @@ int index;
             public void onClick(View v) {
        try
        {
-           negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-               @Override
-               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                   if(isChecked)
-                   negotiable_check=1;
-                   else
-                       negotiable_check=0;
-               }
-           });
+
 
 //           final BazarItem b = new BazarItem();
 //           b.description=description.getText().toString();
@@ -2053,6 +2059,7 @@ int index;
                                     description.setText("");
                                     contact_person.setText("");
                                     contact.setText("");
+                                    negotiable_check = 0;
 
                                     okay.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -3682,7 +3689,7 @@ fragment.getMapViewController().setZoom(16);
                           //
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
-                                    "মূল্য: "+bazarItem.price+"@"+
+                                    bazarItem.price+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
 
                                     "কন্ডিশন: "+bazarItem.condition+"@"+
