@@ -153,7 +153,15 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         date.setText(Children[2]);
         condition.setText(Children[3]);
         area.setText(Children[4]);
-        another_num.setText(Children[6]);
+        if(Children[6].equals(""))
+        {
+            another_num.setVisibility(View.GONE);
+        }
+        else {
+            another_num.setVisibility(View.VISIBLE);
+            another_num.setText(Children[6]);
+        }
+
         post_person.setText(Children[7]);
 
         phone_call.setOnClickListener(new View.OnClickListener() {
