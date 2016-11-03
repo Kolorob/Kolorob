@@ -1476,6 +1476,7 @@ int index;
     {
         // Spinner element
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
+        final Spinner type_spinner = (Spinner) findViewById(R.id.type_spinner);
 
         List<String> categories = new ArrayList<String>();
         categories.add("কন্ডিশন");
@@ -1502,6 +1503,7 @@ int heightconsiderforcost=contact_person.getHeight();
         LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
         spinnners.height= text_field_height;
         spinner.setLayoutParams(spinnners);
+
 
 
         LinearLayout.LayoutParams type_spinners = (LinearLayout.LayoutParams) type_spinner.getLayoutParams();
