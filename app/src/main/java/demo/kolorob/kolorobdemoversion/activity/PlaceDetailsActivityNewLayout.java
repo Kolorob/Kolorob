@@ -68,6 +68,8 @@ import android.widget.ToggleButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -134,7 +136,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
     TextView footer;
-
+String pname,paddress,powner,pdescription;
     int position_type_spinner=0;
     LinearLayout wholeLayout;
     private int spinCounter=0,spinCounter1=0;
@@ -1970,7 +1972,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                 }
                                 else {
 
-                                    b.product_name= product_name.getText().toString().replace(' ','+');
+                                    b.product_name= product_name.getText().toString();
+                                    try {
+                                       pname=   URLEncoder.encode(b.product_name.replace(" ", "%20"), "utf-8");
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
                                     if(phone.getText().toString().equals(""))
                                     {
                                         AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন","");
@@ -1978,28 +1985,38 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                     }
                                     else
                                     {
-                                        b.phone = phone.getText().toString().replace(' ','+'); //MUST BE REGISTERED
+                                        b.phone = phone.getText().toString(); //MUST BE REGISTERED
                                if(AppUtils.mobile_number_verification(contact.getText().toString())) {
                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক সঠিক ফোন নম্বর ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
                                         }
                                         else {
-                                            b.contact = contact.getText().toString().replace(' ','+');
+                                            b.contact = contact.getText().toString();
                                             if(address.getText().toString().equals(""))
                                             {
                                                 AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন","");
-//                                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন");
+//
                                             }
                                             else {
-                                                b.address= address.getText().toString().replace(' ','+');
+                                                b.address= address.getText().toString();
+                                                try {
+                                                    paddress=   URLEncoder.encode( b.address.replace(" ", "%20"), "utf-8");
+                                                } catch (UnsupportedEncodingException e) {
+                                                    e.printStackTrace();
+                                                }
                                                 if(contact_person.getText().toString().equals(""))
                                                 {
-//                                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন");
+//
                                                     AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন","");
                                                 }
                                                 else
                                                 {
-                                                    b.contact_person = contact_person.getText().toString().replace(' ','+');
+                                                    b.contact_person = contact_person.getText().toString();
+                                                    try {
+                                                        powner=   URLEncoder.encode( b.contact_person.replace(" ", "%20"), "utf-8");
+                                                    } catch (UnsupportedEncodingException e) {
+                                                        e.printStackTrace();
+                                                    }
                                                     if(price.getText().toString().equals("")&&negotiable_check==0)
                                                     {
 //                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
@@ -2017,6 +2034,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                                         }
                                                         else {
                                                             b.description=description.getText().toString().replace(' ','+');
+                                                            try {
+                                                                pdescription=   URLEncoder.encode( b.description.replace(" ", "%20"), "utf-8");
+                                                            } catch (UnsupportedEncodingException e) {
+                                                                e.printStackTrace();
+                                                            }
                                                             saveBazar(b,context);
                                                         }
                                                     }
@@ -2043,25 +2065,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     }
 
 //           if()
-                    Log.d("Description","==========="+description.getText().toString());
-
-                    Log.d("phone","==========="+phone.getText().toString());
-
-                    Log.d("contact","==========="+contact.getText().toString());
-
-
-
-
-                    Log.d("contact_person","==========="+contact_person.getText().toString());
-
-                    Log.d("address","$$$$$$"+address.getText().toString());
-
-
-                    Log.d("price","==========="+price.getText().toString());
-
-
-
-                    Log.d("product_name","==========="+product_name.getText().toString());
+                  
 
 
 
@@ -2087,15 +2091,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
         {
             getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
-                            +"&description=" + b.description +
+                            +"&description=" + pdescription +
                             "&type=" + b.type +
                             "&phone=" + b.phone +
                             "&contact=" + b.contact +
                             "&condition=" + b.condition +
-                            "&contact_person=" + b.contact_person +
+                            "&contact_person=" + powner +
                             "&price=" + b.price+
-                            "&name=" + b.product_name+
-                            "&adress=" + b.address,
+                            "&name=" + pname+
+                            "&adress=" + paddress,
 
 
                     new VolleyApiCallback() {
