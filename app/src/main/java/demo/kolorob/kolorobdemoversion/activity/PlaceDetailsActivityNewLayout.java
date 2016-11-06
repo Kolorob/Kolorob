@@ -1983,7 +1983,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                                 else
                                                 {
                                                     b.contact_person = contact_person.getText().toString().replace(' ','+');
-                                                    if(price.getText().toString().equals(""))
+                                                    if(price.getText().toString().equals("")&&negotiable_check==1)
                                                     {
 //                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
                                                         AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন","");
@@ -3753,7 +3753,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                             //
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
-                                    "মূল্য: "+bazarItem.price+"@"+
+                                    bazarItem.price+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
 
                                     bazarItem.condition+"@"+
