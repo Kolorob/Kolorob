@@ -130,7 +130,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int compareHeight;
     private ImageView close_button;
     int buttonHeights;
-    int negotiable_check;
+    int negotiable_check=0;
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
     TextView footer;
@@ -1674,6 +1674,16 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             }
         });
 
+        negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    negotiable_check=1;
+                else
+                    negotiable_check=0;
+            }
+        });
+
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
         String number =SharedPreferencesHelper.getNumber(context);
@@ -1850,15 +1860,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             public void onClick(View v) {
                 try
                 {
-                    negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if(isChecked)
-                                negotiable_check=1;
-                            else
-                                negotiable_check=0;
-                        }
-                    });
+
 
 //           final BazarItem b = new BazarItem();
 //           b.description=description.getText().toString();
@@ -1983,13 +1985,15 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                                 else
                                                 {
                                                     b.contact_person = contact_person.getText().toString().replace(' ','+');
-                                                    if(price.getText().toString().equals("")&&negotiable_check==1)
+                                                    if(price.getText().toString().equals("")&&negotiable_check==0)
                                                     {
 //                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
                                                         AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন","");
                                                     }
                                                     else
                                                     {
+                                                        Log.d("negotiable_check","=============="+negotiable_check);
+
                                                         b.price = price.getText().toString().replace(' ','+') + negotiable_check;
                                                         if(description.getText().toString().equals(""))
                                                         {
@@ -2121,6 +2125,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                     description.setText("");
                                     contact_person.setText("");
                                     contact.setText("");
+                                    negotiable.setChecked(false);
+
 
                                     okay.setOnClickListener(new View.OnClickListener() {
                                         @Override
