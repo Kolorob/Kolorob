@@ -1684,6 +1684,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             }
         });
 
+        Double screenSize= AppUtils.ScreenSize(this);
+
+        if(screenSize>6.5)
+            negotiable.setTextSize(20);
+        else
+            negotiable.setTextSize(14);
+
+
         Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
 
         String number =SharedPreferencesHelper.getNumber(context);
@@ -2126,7 +2134,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                     contact_person.setText("");
                                     contact.setText("");
                                     negotiable.setChecked(false);
-
+                                    negotiable_check=0;
 
                                     okay.setOnClickListener(new View.OnClickListener() {
                                         @Override
