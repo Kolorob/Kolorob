@@ -40,6 +40,10 @@ import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -68,12 +72,13 @@ public class PhoneRegActivity extends Activity {
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
-
+    String gotname;
 
     private Context con;
     String IMEINumber;
     FButton Submit;
     TextView phoneheader;
+    String s;
     AccessToken accessToken=null;
     public static int APP_REQUEST_CODE = 99;
 
@@ -92,6 +97,7 @@ public class PhoneRegActivity extends Activity {
         phone.setHintTextColor(getResources().getColor(R.color.blue));
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
+        s = String.valueOf(phone.getText().toString().trim());
         name=(EditText)findViewById(R.id.userid) ;
         Submit=(FButton)findViewById(R.id.submittoserver);
 
@@ -111,7 +117,9 @@ public class PhoneRegActivity extends Activity {
 Submit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        if(accessToken != null){
+
+        if(!phoneNumberString.equals("")){
+
             phoneNumber=phone.getText().toString().trim();
             uname=name.getText().toString().trim();
             if( uname.equals("")){
@@ -131,6 +139,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
             }
         }
         else {
+            
             goToLogin(true);
         }
     }
@@ -248,16 +257,22 @@ Submit.setOnClickListener(new View.OnClickListener() {
 
     public void sendPhoneNumberToServer(final String phone)
     {
+        try {
+ gotname=   URLEncoder.encode(uname.replace(" ", "%20"), "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
+        // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
+       String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
+        //  String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/" ;
 
-       // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg?phone="+phone+"&name="+uname.replace(' ','+')+"&deviceid="+IMEINumber+"&username="+username+"&password="+password+"" ;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                       // Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
-                       // Log.d(">>>>>","status "+response);
+                        // Toast.makeText(PhoneRegActivity.this,response,Toast.LENGTH_SHORT).show();
+                        // Log.d(">>>>>","status "+response);
 
                         String notvalid=response;
 
@@ -270,7 +285,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
 
                                 SharedPreferencesHelper.setUname(con,uname);
-                              showMessageExisting(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
+                                showMessageExisting(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
                                         " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ",1);
 
 
@@ -287,16 +302,19 @@ Submit.setOnClickListener(new View.OnClickListener() {
                             else if(response.contains("EXISTING"))
                             {
                                 List<String> responses = Arrays.asList(response.split(","));
-                                String serverusername=responses.get(3);
+
+                                String serverusername= responses.get(3);
+                                String serverusernamechanged = StringEscapeUtils.unescapeJava(serverusername);
+
                                 String serverphonenumber=responses.get(2);
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
-                                SharedPreferencesHelper.setUname(con,serverusername);
+                               SharedPreferencesHelper.setUname(con,serverusernamechanged);
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
-                                        "আপনার ইউজার নেম  " +serverusername +" এবং ফোন নাম্বার  "+serverphonenumber,2);
+                                        "আপনার ইউজার নেম  " +serverusernamechanged +" এবং ফোন নাম্বার  "+serverphonenumber,2);
 
                             }
-                             else if(response.equals("\"already registered\""))
+                            else if(response.equals("\"already registered\""))
 
                             {
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত",
@@ -337,6 +355,13 @@ Submit.setOnClickListener(new View.OnClickListener() {
 
                 Map<String, String> params = new HashMap<>();
 
+
+                params.put("phone",phone);
+
+                params.put("deviceid",IMEINumber);
+
+                params.put("name", uname.replace(' ','+'));
+
                 return params;
             }
 
@@ -344,7 +369,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
 
 // Adding request to request queue
 
-        RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
+
         requestQueue.add(stringRequest);
 
 
@@ -420,6 +445,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
                 Log.println(Log.ASSERT, "AccountKit", "Error: " + error.toString());
             }
         });
+
     }
     public void showMessageExisting(final Context c, final String title,
                                     final String body, final int from) {
