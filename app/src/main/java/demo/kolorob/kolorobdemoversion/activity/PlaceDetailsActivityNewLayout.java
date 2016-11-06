@@ -2243,7 +2243,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 }
             });
 
-            health_header=new String []{"পড়াশুনার ধরণ", "প্রতিষ্ঠানের ধরন", "আশে পাশের পরিচিত স্থান", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখা", "কয়টি ক্লাস রুম রয়েছে" ,"শিক্ষক সংখা ","কাদের সাথে রেজিস্টার্ড","শাখা","সরবরাহকৃত পানির অবস্থা  "
+            health_header=new String []{"পড়াশুনার ধরণ", "প্রতিষ্ঠানের ধরন", "আশে পাশের পরিচিত স্থান", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখ্যা", "কয়টি ক্লাস রুম রয়েছে" ,"শিক্ষক সংখ্যা ","কাদের সাথে রেজিস্টার্ড","শাখা","সরবরাহকৃত পানির অবস্থা  "
             };
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
                 edu_name_ban22.setText("শীঘ্রই আসছে ");
@@ -2683,7 +2683,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             super.onBackPressed();
             return;
         }
-        ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
+        ToastMessageDisplay.showText(this);
+        ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
+        Log.d("In on Back Pressed","==========");
         this.doubleBackToExitPressedOnce = true;
 
 
