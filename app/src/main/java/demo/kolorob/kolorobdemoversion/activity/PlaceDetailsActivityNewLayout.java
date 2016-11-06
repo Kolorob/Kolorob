@@ -1615,7 +1615,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.VISIBLE);
                     product_name.setVisibility(View.VISIBLE);
-                    product_name.setText("কি ভাড়া দিতে চান?");
+                    product_name.setHint("কি ভাড়া দিতে চান?");
                     price.setHint("বাসাভাড়া");
                     description.setHint("বাসার বিবরন");
                     tution_detector = position;
