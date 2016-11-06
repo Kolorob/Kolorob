@@ -221,7 +221,8 @@
                     android:textColor="@color/black"
                     android:paddingRight="20dp"
                     android:paddingLeft="20dp"
-
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
 
@@ -229,6 +230,8 @@
                     android:background="@drawable/button_shape"
                     android:gravity="center"
                     android:id="@+id/submit_bazar" />
+
+
 
 
             </LinearLayout>

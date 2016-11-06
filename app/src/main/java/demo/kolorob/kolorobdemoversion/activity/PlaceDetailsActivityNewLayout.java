@@ -4292,7 +4292,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                 int heights = footer.getHeight();
                 Log.d("footer height","================"+heights);
-                submit_bazar.setHeight((heights*5)/4);
+                submit_bazar.setHeight(heights);
                 if(pannl_height<70)
                     pannl_height=70;
                 //submit_bazar.getLayoutParams.(pannl_height);
