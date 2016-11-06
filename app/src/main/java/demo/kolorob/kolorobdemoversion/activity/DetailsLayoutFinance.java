@@ -37,6 +37,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -727,11 +729,16 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         else
             rating= 5;
 
-        String comment="";
+        String comment="",comment2="";
         comment=feedback_comment.getText().toString().trim();
         String  uname2 = SharedPreferencesHelper.getUname(DetailsLayoutFinance.this);
         uname=uname2.replace(' ','+');;
-        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment.replace(' ','+')+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        try {
+            comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

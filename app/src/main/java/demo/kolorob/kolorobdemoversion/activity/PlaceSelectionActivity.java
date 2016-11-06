@@ -59,6 +59,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -606,7 +608,13 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
         if (phone.equals(""))phone.replace("","0");
         else {
-            String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment.replace(' ','+') + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
+            String comment2="";
+            try {
+                comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            String url = "http://kolorob.net/demo/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
