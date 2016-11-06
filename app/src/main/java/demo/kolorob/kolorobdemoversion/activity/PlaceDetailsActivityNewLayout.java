@@ -134,6 +134,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
     TextView footer;
+
     int position_type_spinner=0;
     LinearLayout wholeLayout;
     private int spinCounter=0,spinCounter1=0;
@@ -551,7 +552,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
         svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
         sv.setVisibility(View.VISIBLE);
-        Double screenSize = AppUtils.ScreenSize(PlaceDetailsActivityNewLayout.this);
+        screenSize = AppUtils.ScreenSize(PlaceDetailsActivityNewLayout.this);
 
         svs.setVisibility(View.GONE);
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
@@ -1483,8 +1484,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         int heightconsiderforcost=contact_person.getHeight();
 
 
-        int text_field_height = height/30;
 
+        screenSize= AppUtils.ScreenSize(this);
+
+        int text_field_height;
+        if(screenSize>6.5)
+            text_field_height = height/30;
+        else
+            text_field_height = height/24;
         LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
         spinnners.height= text_field_height;
         spinner.setLayoutParams(spinnners);
@@ -1684,7 +1691,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             }
         });
 
-        Double screenSize= AppUtils.ScreenSize(this);
+        screenSize= AppUtils.ScreenSize(this);
 
         if(screenSize>6.5)
             negotiable.setTextSize(20);
@@ -2665,9 +2672,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             super.onBackPressed();
             return;
         }
-
-        this.doubleBackToExitPressedOnce = true;
         ToastMessageDisplay.setText(this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
+        this.doubleBackToExitPressedOnce = true;
+
 
         new Handler().postDelayed(new Runnable() {
 
