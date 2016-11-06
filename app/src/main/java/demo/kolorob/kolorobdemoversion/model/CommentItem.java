@@ -2,6 +2,8 @@ package demo.kolorob.kolorobdemoversion.model;
 
 import android.database.Cursor;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 
 /**
  * Created by Mazharul.Islam1 on 31 August.
@@ -86,12 +88,12 @@ public class CommentItem {
     public CommentItem(Cursor cur){
 
 
-        comment = cur.getString(2);
+        comment = StringEscapeUtils.unescapeJava(cur.getString(2)).replace("%20"," " );
         date = cur.getString(4);
         mob_no = cur.getString(1);
         rating = cur.getString(3);
         service_id = cur.getString(0);
-        user_name=cur.getString(5);
+        user_name= StringEscapeUtils.unescapeJava(cur.getString(5)).replace("%20"," " );
         email=cur.getString(6);
 
     }
