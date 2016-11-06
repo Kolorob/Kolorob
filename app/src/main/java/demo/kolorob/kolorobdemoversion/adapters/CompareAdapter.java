@@ -107,8 +107,7 @@ public class CompareAdapter extends BaseAdapter
             holder.left.setText(left[position]);
         }
         else
-        {
-            holder.left.setText("শিগ্রই আসছে");
+        {holder.left.setText("শীঘ্রই আসছে");
         }
 
         if(!right[position].equals("null")&&!right[position].equals(""))
@@ -117,7 +116,7 @@ public class CompareAdapter extends BaseAdapter
         }
         else
         {
-            holder.right.setText("শিগ্রই আসছে");
+            holder.right.setText("শীঘ্রই আসছে");
         }
 
 

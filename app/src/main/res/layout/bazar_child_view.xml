@@ -17,6 +17,16 @@
         android:gravity="center"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Condition"
+        android:textColor="@color/white"
+
+        android:id="@+id/condition" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Asking Price"
         android:textColor="@color/white"
 
@@ -32,15 +42,7 @@
 
         android:id="@+id/date" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Condition"
-        android:textColor="@color/white"
 
-        android:id="@+id/condition" />
 
     <TextView
         android:layout_width="match_parent"
