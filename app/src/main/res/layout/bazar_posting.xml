@@ -209,17 +209,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:gravity="center"
+                android:layout_marginTop="@dimen/bazar_distance"
+
                 android:layout_height="90dp">
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="বিজ্ঞাপন দিন"
                     android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/bazar_distance"
                     android:paddingRight="20dp"
                     android:paddingLeft="20dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
+
                     android:textSize="18sp"
                     android:textStyle="bold"
 

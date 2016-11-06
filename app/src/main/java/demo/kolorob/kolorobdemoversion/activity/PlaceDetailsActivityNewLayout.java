@@ -134,11 +134,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
     TextView footer;
-
+    int pannl_height;
     int position_type_spinner=0;
     LinearLayout wholeLayout;
     private int spinCounter=0,spinCounter1=0;
     String[] right_part;
+    TextView submit_bazar;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
     LinearLayout slider_part;
@@ -183,6 +184,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private SlidingUpPanelLayout mLayout;
     EditText product_name;
     EditText phone;
+    int buttonh;
     EditText address;
     EditText price;
     EditText description;
@@ -633,6 +635,13 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         lp_sub.width=s;
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
+        pannl_height = height/17;
+        if(pannl_height<70)
+            pannl_height=70;
+        submit_bazar= (TextView)findViewById(R.id.submit_bazar);
+
+//        submit_bazar.getLayoutParams().height=pannl_height;
+
 //
 //        final ViewGroup.LayoutParams exlist= explist.getLayoutParams();
 //        final RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
@@ -1024,6 +1033,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                         map.setVisibility(View.GONE);
                     }
+
+
                     //  subCatItemList.setVisibility(View.VISIBLE);
                     bazar_tool.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
@@ -1699,7 +1710,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             negotiable.setTextSize(14);
 
 
-        Button submit_bazar= (Button)findViewById(R.id.submit_bazar);
+
 
         String number =SharedPreferencesHelper.getNumber(context);
         String name = SharedPreferencesHelper.getUname(context);
@@ -4181,9 +4192,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        int pannl_height = height/17;
-        if(pannl_height<70)
-            pannl_height=70;
+
         mLayout.setPanelHeight(pannl_height);
         FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
         slider_part = (LinearLayout)findViewById(R.id.slider_part);
@@ -4260,8 +4269,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
 
-
-
             // During the transition of expand and collapse onPanelSlide function will be called.
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
@@ -4275,12 +4282,22 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
             // This method will be call after slide up layout
             @Override
             public void onPanelExpanded(View panel) {
-                Log.d(">>>>","onPanelExpanded");
+
                 slider_part.setVisibility(View.VISIBLE);
 
                 LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
                 sliding_parts.setMargins(0,height/25,0,height/140);
                 slider_part.setLayoutParams(sliding_parts);
+                pannl_height = height/17;
+
+                int heights = footer.getHeight();
+                Log.d("footer height","================"+heights);
+                submit_bazar.setHeight((heights*5)/4);
+                if(pannl_height<70)
+                    pannl_height=70;
+                //submit_bazar.getLayoutParams.(pannl_height);
+             //   submit_bazar.getLayoutParams().height=pannl_height;
+
 
 
                 footer.setText("বিজ্ঞাপন দেখুন");
@@ -4309,7 +4326,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
                 sliding_parts.setMargins(0,0,0,height/140);
                 slider_part.setLayoutParams(sliding_parts);
-
+                buttonh= footer.getHeight();
+                pannl_height = height/17;
+                if(pannl_height<70)
+                    pannl_height=70;
+               // submit_bazar.setHeight(pannl_height);
                 Log.d(">>>>","onPanelCollapsed");
 
                 footer.setText("বিজ্ঞাপন দিন");
