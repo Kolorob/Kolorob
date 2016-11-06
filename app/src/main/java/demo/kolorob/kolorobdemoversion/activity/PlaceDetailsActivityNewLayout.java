@@ -45,7 +45,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -2038,14 +2037,14 @@ String pname,paddress,powner,pdescription;
                                                     {
                                                         Log.d("negotiable_check","=============="+negotiable_check);
 
-                                                        b.price = price.getText().toString().replace(' ','+') + negotiable_check;
+                                                        b.price = price.getText().toString() + negotiable_check;
                                                         if(description.getText().toString().equals(""))
                                                         {
 //                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
                                                             AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তথ্য ইনপুট দিন","");
                                                         }
                                                         else {
-                                                            b.description=description.getText().toString().replace(' ','+');
+                                                            b.description=description.getText().toString();
                                                             try {
                                                                 pdescription=   URLEncoder.encode( b.description.replace(" ", "%20"), "utf-8");
                                                             } catch (UnsupportedEncodingException e) {
