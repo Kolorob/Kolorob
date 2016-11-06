@@ -139,7 +139,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
             }
         }
         else {
-            
+
             goToLogin(true);
         }
     }
@@ -304,7 +304,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
                                 List<String> responses = Arrays.asList(response.split(","));
 
                                 String serverusername= responses.get(3);
-                                String serverusernamechanged = StringEscapeUtils.unescapeJava(serverusername);
+                                String serverusernamechanged = StringEscapeUtils.unescapeJava(serverusername).replace("%20"," " );
 
                                 String serverphonenumber=responses.get(2);
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
@@ -354,14 +354,14 @@ Submit.setOnClickListener(new View.OnClickListener() {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<>();
-
+/*
 
                 params.put("phone",phone);
 
                 params.put("deviceid",IMEINumber);
 
                 params.put("name", uname.replace(' ','+'));
-
+*/
                 return params;
             }
 
