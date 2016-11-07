@@ -218,7 +218,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         CheckConcate("বিনামূল্যে সেবা", healthServiceProviderItemNew.getGeneral_free_services());
         CheckConcate("সাধারন খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getGeneral_cost())+" টাকা");
-        CheckConcate("অনন্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
+        CheckConcate("অন্যান্য তথ্য", healthServiceProviderItemNew.getGeneral_remark());
         CheckConcate("এ্যাম্বুলেন্সের খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getAmbulance_cost())+" টাকা");
         CheckConcate("অনন্য তথ্য", healthServiceProviderItemNew.getAmbulance_remark());
         CheckConcate("মাতৃত্বজনিত সেবার খরচ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getMaternity_cost())+" টাকা");

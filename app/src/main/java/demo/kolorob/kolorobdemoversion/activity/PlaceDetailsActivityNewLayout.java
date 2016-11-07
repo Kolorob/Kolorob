@@ -1481,7 +1481,7 @@ String pname,paddress,powner,pdescription;
         categories.add("কন্ডিশন");
         categories.add("নতুন");
 
-        categories.add("রিফারবিশড");
+        categories.add("ব্যবহৃত");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
         spinner.setAdapter(dataAdapter);
 
@@ -1950,7 +1950,7 @@ String pname,paddress,powner,pdescription;
 
                    if(conditions.equals("নতুন"))
                        b.condition = "New";
-                    else if(conditions.equals("রিফারবিশড"))
+                    else if(conditions.equals("ব্যবহৃত"))
                        b.condition = "Refurbished";
 
 
@@ -2826,7 +2826,7 @@ String pname,paddress,powner,pdescription;
                         if(ListClicked.equals(true))
                             bazar_tool.setVisibility(View.VISIBLE);
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
                         ArrayList<EducationNewItem> educationServiceProvider;
@@ -2846,7 +2846,7 @@ String pname,paddress,powner,pdescription;
 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.education_selected);
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
                         break;
                     case AppConstants.HEALTH:
@@ -2876,7 +2876,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
                         if(ListClicked.equals(true))
                             bazar_tool.setVisibility(View.VISIBLE);
 
@@ -2914,7 +2914,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
                         MediaPlayer mp_en = MediaPlayer.create(getApplicationContext(), R.raw.entertainment);
@@ -2952,7 +2952,7 @@ String pname,paddress,powner,pdescription;
                         governmentNewItems = constructgovListItem();
                         callMapFragmentWithGovernment(-1, governmentNewItems,true);
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
                         if(ListClicked.equals(true))
                             bazar_tool.setVisibility(View.VISIBLE);
 
@@ -3017,7 +3017,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
 
@@ -3055,7 +3055,7 @@ String pname,paddress,powner,pdescription;
                             bazar_tool.setVisibility(View.VISIBLE);
 
 
-                        llSubCatListHolder.setVisibility(View.GONE);
+                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
 
@@ -3093,6 +3093,7 @@ String pname,paddress,powner,pdescription;
 
                 if(SearchClicked==true)
                 {
+                    llSubCatListHolder.setVisibility(View.GONE);
                     svsholder.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                 }

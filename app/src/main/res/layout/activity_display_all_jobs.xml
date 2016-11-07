@@ -51,7 +51,7 @@
 
 
                 android:id="@+id/iv_kolorob_logo"
-                android:background="@drawable/job_topimge"
+                android:background="@drawable/job_icon"
                 />
 
 
@@ -76,7 +76,7 @@
                 android:minWidth="40dp"
                 android:layout_marginRight="5dp"
                 android:id="@+id/iv_close"
-                android:src="@drawable/cross_jb"
+                android:src="@drawable/cross_icon"
                 android:focusable="true" />
 
 

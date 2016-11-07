@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/phone_reg"
-            android:icon="@drawable/advertising_icon"
+            android:icon="@drawable/profile_icon"
             android:title="@string/phone_registration" />
         <!--<item-->
             <!--android:id="@+id/info_change"-->
@@ -40,20 +40,20 @@
                 <!--android:title="Help" />-->
             <item
                 android:id="@+id/tutorial"
-                android:icon="@drawable/emergency_icon"
+                android:icon="@drawable/advertisement"
                 android:title="টিউটোরিয়াল" />
 
             <item
                 android:id="@+id/disclaimer"
-                android:icon="@drawable/emergency_icon"
+                android:icon="@drawable/advertisement"
                 android:title="@string/disclaimerhead" />
             <item
                 android:id="@+id/about_us"
-                android:icon="@drawable/emergency_icon"
+                android:icon="@drawable/advertisement"
                 android:title="@string/abouthead" />
             <item
                 android:id="@+id/about_offer"
-                android:icon="@drawable/emergency_icon"
+                android:icon="@drawable/advertising_icon"
                 android:title="কলরব অফার!" />
             <!--<item-->
             <!--android:id="@+id/nav_share"-->
