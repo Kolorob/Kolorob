@@ -4,10 +4,6 @@ package demo.kolorob.kolorobdemoversion.adapters;
 /**
  * Created by arafat on 19 September 2016.
  */
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -22,8 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -155,9 +154,9 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         if(Children[3].equals("New"))
             condition.setText("কন্ডিশন: নতুন");
         else if(Children[3].equals("Refurbished"))
-            condition.setText("কন্ডিশন: রিফারবিশড");
+            condition.setText("কন্ডিশন: ব্যবহৃত");
         else
-            condition.setText("রিফারবিশড");
+            condition.setText("ব্যবহৃত");
         area.setText(Children[4]);
 
         Log.d("condition","############"+Children[6]);
