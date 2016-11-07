@@ -2687,8 +2687,9 @@ String pname,paddress,powner,pdescription;
             super.onBackPressed();
             return;
         }
-        ToastMessageDisplay.showText(this);
+
         ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
+        ToastMessageDisplay.showText(this);
         Log.d("In on Back Pressed","==========");
         this.doubleBackToExitPressedOnce = true;
 
