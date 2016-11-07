@@ -51,8 +51,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     TextView time,claimtext,offertext,lowdisclaimertext;
     FButton claim;
     LinearLayout offer;
-    long counthead=0;
-    long credithead=0;
+    long counthead=30;
+    long credithead=15;
     String refno="a";
     ImageView backpack;
     public static int width;
