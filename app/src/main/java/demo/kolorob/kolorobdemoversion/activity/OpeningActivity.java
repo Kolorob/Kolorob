@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -179,95 +178,13 @@ public class OpeningActivity extends Activity {
     //bazar items
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
     //loads the bazar items into arrays
-    private void loadBazar(){
-        getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/getadvsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
 
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            //ge the db instance
-                            SQLiteDatabase db = DatabaseManager.getInstance(OpeningActivity.this).openDatabase();
-
-                            //split into single sql queries
-                            String[] sql = apiContent.split("~");
-
-                            //run the sqls one by one
-                            for (int i = 0; i<sql.length;i++)
-                            {
-                                db.execSQL(sql[i]);
-                            }
-
-                            //now reload the data taht has beed saved
-
-                            //get all data from db
-                            Cursor cursor =  db.rawQuery("select * from custom_advertisement", null);
-                            allBazar = new ArrayList<BazarItem>();
-                            while (cursor.moveToNext()) {
-                                allBazar.add(new BazarItem(cursor));
-                            }
-
-                            //tester. You may delete this portion
-                            Context context = getApplicationContext();
-                            CharSequence text = allBazar.get(0).toString();
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            //tester ends======
-
-                        }
-                    }
-                }
-        );
-    }
-    private void saveBazar(BazarItem b){
-        getRequest(OpeningActivity.this, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
-                +"&description=" + b.description +
-                "&type=" + b.type +
-                "&phone=" + b.phone +
-                "&contact=" + b.contact +
-                "&condition=" + b.condition +
-                "&contact_person=" + b.contact_person +
-                "&price=" + b.price,
-                new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            //tester. You may delete this portion
-                            Context context = getApplicationContext();
-                            CharSequence text = apiContent;
-                            int duration = Toast.LENGTH_SHORT;
-                            Toast toast = Toast.makeText(context, text, duration);
-                            toast.show();
-                            //tester ends======
-                        }
-                    }
-                }
-        );
-
-
-
-    }
     //==========================================================Code for Bazar Ends==========================================
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //=========================================Bazar Calling starts here============================================
-       /* //load the bazar
-        loadBazar();
-        //save a bazar
-        BazarItem b = new BazarItem();
-        b.description="descriptions";
-        b.type = "Sell";
-        b.phone = "01711310912"; //MUST BE REGISTERED
-        b.contact = "2342352523";
-        b.condition = "qwdadasd";
-        b.contact_person = "ASDsdSDS";
-        b.price = 50;
-        saveBazar(b);*/
-        //=========================================Bazar Calling Ends here============================================
 
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -299,15 +216,7 @@ public class OpeningActivity extends Activity {
 
                     file.delete();
                 }
-             /*  File dir = new File(Environment.getExternalStorageDirectory()+"/osmdroid");
-                if (dir.isDirectory())
-                {
-                    String[] children = dir.list();
-                    for (int i = 0; i < children.length; i++)
-                    {
-                        new File(dir, children[i]).delete();
-                    }
-                }*/
+
             }
             if(currentVersion>=previousVersion)
                 drop=true;
