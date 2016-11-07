@@ -438,6 +438,8 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         //  builder.setSubText("Click here to update");   //API level 16
         builder.setNumber(100);
         //   builder.build();
+        builder.setAutoCancel(true);
+        builder.setOngoing(false);
 
         builder.setContentTitle("কলরব আপডেট করুন").setContentText("কলরবের নতুন ভার্সন পাওয়া যাচ্ছে")
                 .setSmallIcon(R.drawable.notify_logo_1).getNotification();
