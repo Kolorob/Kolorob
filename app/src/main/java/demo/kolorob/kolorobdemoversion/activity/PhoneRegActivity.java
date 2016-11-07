@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -75,7 +76,7 @@ public class PhoneRegActivity extends Activity {
     String gotname;
 
     private Context con;
-    String IMEINumber;
+    String IMEINumber,IMEI=null,PHN=null;
     FButton Submit;
     TextView phoneheader;
     String s;
@@ -88,16 +89,35 @@ public class PhoneRegActivity extends Activity {
         com.facebook.accountkit.AccountKit.initialize(getApplicationContext());
         setContentView(R.layout.phone_reg);
         accessToken = AccountKit.getCurrentAccessToken();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        IMEI=settings.getString("IMEI",null);
+        PHN=settings.getString("PHN",null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&IMEI==null) {
+
             checkPermissions();
-        }  else doPermissionGrantedStuffs();
 
+        }  else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M &&IMEI==null) {
 
-        phoneheader=(TextView)findViewById(R.id.phoneheader);
+            doPermissionGrantedStuffs();
+
+        }
         phone  = (EditText)findViewById(R.id.phone_id);
         phone.setHintTextColor(getResources().getColor(R.color.blue));
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
+        if(accessToken != null &&PHN!=null){
+
+            phone.setText(PHN.toString());
+
+        }
+
+
+
+
+
+
+        phoneheader=(TextView)findViewById(R.id.phoneheader);
+
         s = String.valueOf(phone.getText().toString().trim());
         name=(EditText)findViewById(R.id.userid) ;
         Submit=(FButton)findViewById(R.id.submittoserver);
@@ -106,20 +126,17 @@ public class PhoneRegActivity extends Activity {
 
         con = this;
 
+
         if(SharedPreferencesHelper.isTabletDevice(con))
         {
             phoneheader.setTextSize(45);
         }
-        if(accessToken != null){
 
-
-            setUserInformation();
-        }
 Submit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
 
-        if(!phoneNumberString.equals("")){
+        if(PHN!=null){
 
             phoneNumber=phone.getText().toString().trim();
             uname=name.getText().toString().trim();
@@ -185,7 +202,10 @@ Submit.setOnClickListener(new View.OnClickListener() {
         TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
         IMEINumber=tm.getDeviceId();
-
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("IMEI", IMEINumber);
+        editor.apply();
         if(accessToken == null){
 
 
@@ -218,6 +238,10 @@ Submit.setOnClickListener(new View.OnClickListener() {
                     TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                     //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
                     IMEINumber=tm.getDeviceId();
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("IMEI", IMEINumber);
+                    editor.apply();
                     if(accessToken == null){
                         goToLogin(true);
                     }
@@ -270,6 +294,13 @@ Submit.setOnClickListener(new View.OnClickListener() {
  gotname=   URLEncoder.encode(uname.replace(" ", "%20"), "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }
+        if(IMEINumber==null)
+        {
+            SharedPreferences settings = getSharedPreferences("prefs", 0);
+
+            IMEINumber=    settings.getString("IMEI", null);
+
         }
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
@@ -443,6 +474,10 @@ Submit.setOnClickListener(new View.OnClickListener() {
                     phone.setText(phoneNumberString.toString());
                     Log.println(Log.ASSERT, "AccountKit", "Phone: " + phoneNumberString);
                     SMSLoginMode = true;
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("PHN", phoneNumberString);
+                    editor.apply();
                 }
 
 
