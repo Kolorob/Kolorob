@@ -51,8 +51,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     TextView time,claimtext,offertext,lowdisclaimertext;
     FButton claim;
     LinearLayout offer;
-    long counthead=30;
-    long credithead=15;
+    long counthead=0;
+    long credithead=0;
     String refno="a";
     ImageView backpack;
     public static int width;
@@ -60,6 +60,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     ImageButton fb,wb;
     FloatingActionButton credit;
     String usernames = "kolorobapp";
+    long remaincredit;
     String password = "2Jm!4jFe3WgBZKEN";
     boolean c,cred;
     @Override
@@ -90,20 +91,21 @@ fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
-        long remaincredit=credithead-diffInDays;
+      remaincredit=credithead-diffInDays;
         cred=settings.getBoolean("RefProvided",false);
         if(remaincredit<=0 &&cred==false)
         {
             credit.setColorNormalResId(R.color.line_draw);
             credit.setIcon(R.drawable.smile);
-            credit.setOnClickListener(this);
+
         }
         else
         {
             credit.setColorNormalResId(R.color.gray);
             credit.setIcon(R.drawable.smile2);
-            credit.setOnClickListener(null);
+
         }
+        credit.setOnClickListener(this);
       c=settings.getBoolean("MBRequest",false);
         if (remaining<=0 &&c==false)
         {
@@ -211,8 +213,17 @@ else {
                 }
                 break;
             case R.id.creditbutton:
+ if(remaincredit<=0 &&cred==false)
+ {
+     showbox(OfferActivity.this);
+ }
+            else if (!cred)
+ {
+     String bnremain=EtoB(Long.toString(remaincredit));
+     ToastMessageDisplay.setText(OfferActivity.this,bnremain+" দিন পর চেষ্টা করুন");
 
-                showbox(OfferActivity.this);
+     ToastMessageDisplay.showText(OfferActivity.this);
+ }
 
                 break;
 
