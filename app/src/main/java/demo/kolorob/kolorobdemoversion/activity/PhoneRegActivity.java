@@ -87,11 +87,12 @@ public class PhoneRegActivity extends Activity {
         super.onCreate(savedInstanceState);
         com.facebook.accountkit.AccountKit.initialize(getApplicationContext());
         setContentView(R.layout.phone_reg);
+        accessToken = AccountKit.getCurrentAccessToken();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
         }  else doPermissionGrantedStuffs();
 
-        accessToken = AccountKit.getCurrentAccessToken();
+
         phoneheader=(TextView)findViewById(R.id.phoneheader);
         phone  = (EditText)findViewById(R.id.phone_id);
         phone.setHintTextColor(getResources().getColor(R.color.blue));
@@ -101,18 +102,18 @@ public class PhoneRegActivity extends Activity {
         name=(EditText)findViewById(R.id.userid) ;
         Submit=(FButton)findViewById(R.id.submittoserver);
 
-        if(accessToken != null){
-            setUserInformation();
-        }
-        else {
-            goToLogin(true);
-        }
 
 
         con = this;
+
         if(SharedPreferencesHelper.isTabletDevice(con))
         {
             phoneheader.setTextSize(45);
+        }
+        if(accessToken != null){
+
+
+            setUserInformation();
         }
 Submit.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -185,6 +186,11 @@ Submit.setOnClickListener(new View.OnClickListener() {
         //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
         IMEINumber=tm.getDeviceId();
 
+        if(accessToken == null){
+
+
+            goToLogin(true);
+        }
 
     }
     @Override
@@ -212,6 +218,9 @@ Submit.setOnClickListener(new View.OnClickListener() {
                     TelephonyManager tm =(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                     //Get IMEI Number of Phone  //////////////// for this example i only need the IMEI
                     IMEINumber=tm.getDeviceId();
+                    if(accessToken == null){
+                        goToLogin(true);
+                    }
                     Toast.makeText(PhoneRegActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
                 } else if (location) {
                     Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
