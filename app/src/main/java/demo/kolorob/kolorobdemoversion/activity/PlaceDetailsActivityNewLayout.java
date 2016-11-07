@@ -61,7 +61,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -1526,27 +1525,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-//        LinearLayout.LayoutParams phones = (LinearLayout.LayoutParams) phone.getLayoutParams();
-//        phones.height= text_field_height;
-//        phone.setLayoutParams(phones);
-//
-//        LinearLayout.LayoutParams addresss = (LinearLayout.LayoutParams) address.getLayoutParams();
-//        addresss.height= text_field_height;
-//        address.setLayoutParams(addresss);
-//
-//
-//
-//        LinearLayout.LayoutParams descriptions = (LinearLayout.LayoutParams) description.getLayoutParams();
-//        descriptions.height= text_field_height;
-//        description.setLayoutParams(descriptions);
-//
-//        LinearLayout.LayoutParams contact_persons = (LinearLayout.LayoutParams) contact_person.getLayoutParams();
-//        contact_persons.height= text_field_height;
-//        contact_person.setLayoutParams(contact_persons);
-//
-//        LinearLayout.LayoutParams contacts = (LinearLayout.LayoutParams) contact.getLayoutParams();
-//        contacts.height= text_field_height;
-//        contact.setLayoutParams(contacts);
+
 
 
 
@@ -2119,11 +2098,7 @@ String pname,paddress,powner,pdescription;
 
                             if (status == AppConstants.SUCCESS_CODE) {
                                 //tester. You may delete this portion
-                                final Context context = getApplicationContext();
-                                CharSequence text = apiContent;
-                                int duration = Toast.LENGTH_SHORT;
-                                Toast toast = Toast.makeText(context, text, duration);
-                                toast.show();
+
                                 if(apiContent.equals("true"))
                                 {
                                     DisplayMetrics displayMetrics = contexts.getResources().getDisplayMetrics();
@@ -2163,7 +2138,7 @@ String pname,paddress,powner,pdescription;
                                         public void onClick(View v) {
                                             alertDialog.cancel();
                                             mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                                            loadBazar(context);
+                                            loadBazar(PlaceDetailsActivityNewLayout.this);
                                         }
                                     });
 
