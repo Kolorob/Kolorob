@@ -96,19 +96,35 @@ public class PhoneRegActivity extends Activity {
 
             checkPermissions();
 
-        }  else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M &&IMEI==null) {
+        }
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
+
+            if(accessToken==null)goToLogin(true);
+
+        }
+        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 
             doPermissionGrantedStuffs();
 
         }
+
+        con = this;
         phone  = (EditText)findViewById(R.id.phone_id);
         phone.setHintTextColor(getResources().getColor(R.color.blue));
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
-        if(accessToken != null &&PHN!=null){
+        if(accessToken != null ){
+            String pnumber=SharedPreferencesHelper.getNumber(con);
+            if(pnumber.length()>0)
+            {
+                phone.setText(pnumber.toString());
+            } else {
+                PHN = settings.getString("PHN", null);
+                if (PHN != null) {
+                    phone.setText(PHN.toString());
+                }
 
-            phone.setText(PHN.toString());
-
+            }
         }
 
 
@@ -124,7 +140,6 @@ public class PhoneRegActivity extends Activity {
 
 
 
-        con = this;
 
 
         if(SharedPreferencesHelper.isTabletDevice(con))
@@ -132,36 +147,37 @@ public class PhoneRegActivity extends Activity {
             phoneheader.setTextSize(45);
         }
 
-Submit.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                PHN=settings.getString("PHN",null);
+                if(PHN!=null||!phoneNumberString.equals("")){
 
-        if(PHN!=null){
-
-            phoneNumber=phone.getText().toString().trim();
-            uname=name.getText().toString().trim();
-            if( uname.equals("")){
+                    phoneNumber=phone.getText().toString().trim();
+                    uname=name.getText().toString().trim();
+                    if( uname.equals("")){
 
 
-                name.setError( "নাম লিখুন" );
+                        name.setError( "নাম লিখুন" );
 
-            }
-            else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
-                sendPhoneNumberToServer(phoneNumber);
-            }
-            else {
-                ToastMessageDisplay.setText(PhoneRegActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+                    }
+                    else if (uname.length()<=50&&!uname.equals("")&& (AppUtils.isNetConnected(getApplicationContext()))) {
+                        sendPhoneNumberToServer(phoneNumber);
+                    }
+                    else {
+                        ToastMessageDisplay.setText(PhoneRegActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
-                ToastMessageDisplay.showText(PhoneRegActivity.this);
-            }
-        }
-        else {
+                        ToastMessageDisplay.showText(PhoneRegActivity.this);
+                    }
+                }
+                else {
 
-            goToLogin(true);
-        }
-    }
-});
+                    goToLogin(true);
+                }
+            }
+        });
     }
     private void checkPermissions() {
         List<String> permissions = new ArrayList<>();
@@ -170,21 +186,21 @@ Submit.setOnClickListener(new View.OnClickListener() {
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             message += "\nLocation to show user location.";
         }
-         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             message += "\nStorage access to store map tiles.";
         }
-         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.READ_PHONE_STATE);
             message += "\n access to read phone state.";
             //requestReadPhoneStatePermission();
         }
-         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.RECEIVE_SMS);
             message += "\n access to receive sms.";
             //requestReadPhoneStatePermission();
         }
-         if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.GET_ACCOUNTS);
             message += "\n access to read sms.";
             //requestReadPhoneStatePermission();
@@ -206,6 +222,8 @@ Submit.setOnClickListener(new View.OnClickListener() {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("IMEI", IMEINumber);
         editor.apply();
+
+        IMEI=settings.getString("IMEI",null);
         if(accessToken == null){
 
 
@@ -242,6 +260,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("IMEI", IMEINumber);
                     editor.apply();
+                    IMEI=settings.getString("IMEI",null);
                     if(accessToken == null){
                         goToLogin(true);
                     }
@@ -291,7 +310,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
     public void sendPhoneNumberToServer(final String phone)
     {
         try {
- gotname=   URLEncoder.encode(uname.replace(" ", "%20"), "utf-8");
+            gotname=   URLEncoder.encode(uname.replace(" ", "%20"), "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -304,7 +323,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
         }
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-       String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg2?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
         //  String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -339,6 +358,14 @@ Submit.setOnClickListener(new View.OnClickListener() {
                             {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
                                         "অনুগ্রহ পূর্বক সঠিক ফোন নম্বরটি ইনপুট দিন");                            }
+                            else if(response.equals("\"deviceid not found\""))
+                            {
+                                showMessageExisting(PhoneRegActivity.this, "দুঃখিত",
+                                        " আপনার ডিভাইস আইডি সংগ্রহের অনুমতি দিন",4);
+
+
+
+                            }
                             else if(response.contains("EXISTING"))
                             {
                                 List<String> responses = Arrays.asList(response.split(","));
@@ -349,7 +376,7 @@ Submit.setOnClickListener(new View.OnClickListener() {
                                 String serverphonenumber=responses.get(2);
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
-                               SharedPreferencesHelper.setUname(con,serverusernamechanged);
+                                SharedPreferencesHelper.setUname(con,serverusernamechanged);
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
                                         "আপনার ইউজার নেম  " +serverusernamechanged +" এবং ফোন নাম্বার  "+serverphonenumber,2);
 
@@ -535,9 +562,25 @@ Submit.setOnClickListener(new View.OnClickListener() {
                     startActivity(newIntent);
                     finish();
                 }
-                else {
+
+                else if (from==3)
+                {
                     goToLogin(true);
                 }
+                else if (from==4)
+                {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&IMEI==null) {
+
+                        checkPermissions();
+
+                    }
+                    else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+
+                        doPermissionGrantedStuffs();
+
+                    }
+                }
+
 
                 alertDialog.cancel();
             }

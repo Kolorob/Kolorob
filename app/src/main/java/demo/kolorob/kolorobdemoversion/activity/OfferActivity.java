@@ -66,8 +66,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_offer);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_offer);
         SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
         time=(TextView)findViewById(R.id.counter);
         claimtext=(TextView)findViewById(R.id.countertext);
@@ -87,11 +87,11 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         Date date2 = new Date(settings.getLong("timefirstinstall", 0));
         Date today=new Date();
         long diffInMillisec = today.getTime() - date2.getTime();
-fb.setOnClickListener(this);
+        fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
-      remaincredit=credithead-diffInDays;
+        remaincredit=credithead-diffInDays;
         cred=settings.getBoolean("RefProvided",false);
         if(remaincredit<=0 &&cred==false)
         {
@@ -106,7 +106,7 @@ fb.setOnClickListener(this);
 
         }
         credit.setOnClickListener(this);
-      c=settings.getBoolean("MBRequest",false);
+        c=settings.getBoolean("MBRequest",false);
         if (remaining<=0 &&c==false)
         {
             claim.setOnClickListener(this);
@@ -117,14 +117,14 @@ fb.setOnClickListener(this);
             claim.setShadowColor(getResources().getColor(R.color.gray));
             claim.setTextColor(getResources().getColor(R.color.white));
         }
-         else if (c)
+        else if (c)
         {
             time.setText("0");
             claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
             claim.setText("দয়া করে অপেক্ষা করুন");
             claim.setOnClickListener(null);
         }
-else {
+        else {
 
             String remaininginbn = EtoB(Long.toString(remaining));
             time.setText(remaininginbn);
@@ -154,7 +154,7 @@ else {
         int v = english_number.length();
         String concatResult = "";
         for (int i = 0; i < v; i++) {
-             if (english_number.charAt(i) == '0')
+            if (english_number.charAt(i) == '0')
                 concatResult = concatResult + "০";
             else if (english_number.charAt(i) == '1')
                 concatResult = concatResult + "১";
@@ -213,17 +213,17 @@ else {
                 }
                 break;
             case R.id.creditbutton:
- if(remaincredit<=0 &&cred==false)
- {
-     showbox(OfferActivity.this);
- }
-            else if (!cred)
- {
-     String bnremain=EtoB(Long.toString(remaincredit));
-     ToastMessageDisplay.setText(OfferActivity.this,bnremain+" দিন পর চেষ্টা করুন");
+                if(remaincredit<=0 &&cred==false)
+                {
+                    showbox(OfferActivity.this);
+                }
+                else if (!cred)
+                {
+                    String bnremain=EtoB(Long.toString(remaincredit));
+                    ToastMessageDisplay.setText(OfferActivity.this,bnremain+" দিন পর চেষ্টা করুন");
 
-     ToastMessageDisplay.showText(OfferActivity.this);
- }
+                    ToastMessageDisplay.showText(OfferActivity.this);
+                }
 
                 break;
 
@@ -268,7 +268,7 @@ else {
         final MaterialEditText refernumber = (MaterialEditText) promptView.findViewById(R.id.creditno);
         final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
         if(SharedPreferencesHelper.isTabletDevice(c)) {
-       header.setTextSize(25);
+            header.setTextSize(25);
         }
 
 
@@ -277,30 +277,30 @@ else {
 
             public void onClick(View v) {
                 refno=refernumber.getText().toString().trim();
-if (!refno.equals(""))
-{
-    if (AppUtils.isNetConnected(getApplicationContext()))
-    {
-        sendRequesttocredit();
-        alertDialog.cancel();
-    }
-    else {
-        ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+                if (!refno.equals(""))
+                {
+                    if (AppUtils.isNetConnected(getApplicationContext()))
+                    {
+                        sendRequesttocredit();
+                        alertDialog.cancel();
+                    }
+                    else {
+                        ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
-        ToastMessageDisplay.showText(OfferActivity.this);
-    }
+                        ToastMessageDisplay.showText(OfferActivity.this);
+                    }
 
 
-}
-             else
-{
+                }
+                else
+                {
 
-    ToastMessageDisplay.setText(OfferActivity.this,"মোবাইল নাম্বার লিখুন।");
+                    ToastMessageDisplay.setText(OfferActivity.this,"মোবাইল নাম্বার লিখুন।");
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
-    ToastMessageDisplay.showText(OfferActivity.this);
-}
+                    ToastMessageDisplay.showText(OfferActivity.this);
+                }
 
             }
         });
@@ -316,130 +316,130 @@ if (!refno.equals(""))
     public void sendRequest() {
 
 
-    String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
+        String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
 
 
-    String url = "http://kolorob.net/demo/api/mb_request?phone=" + phone + "&username=" + this.usernames + "&password=" + this.password;
+        String url = "http://kolorob.net/demo/api/mb_request?phone=" + phone + "&username=" + this.usernames + "&password=" + this.password;
 
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 
-                    try {
-                        if (response.toString().trim().equalsIgnoreCase("true")) {
-                            SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
-                            settings.edit().putBoolean("MBRequest", true).apply();
-                            c = settings.getBoolean("MBRequest", false);
-                            claim.setShadowEnabled(false);
-                            claim.setButtonColor(getResources().getColor(R.color.gray));
-                            claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
-                            claim.setText("দয়া করে অপেক্ষা করুন");
-                            claim.setOnClickListener(null);
-                            AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
-                                    "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
-                                            "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
-                        } else {
-                            AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
-                                    "পর আবার চেষ্টা করুন");
+                        try {
+                            if (response.toString().trim().equalsIgnoreCase("true")) {
+                                SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
+                                settings.edit().putBoolean("MBRequest", true).apply();
+                                c = settings.getBoolean("MBRequest", false);
+                                claim.setShadowEnabled(false);
+                                claim.setButtonColor(getResources().getColor(R.color.gray));
+                                claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
+                                claim.setText("দয়া করে অপেক্ষা করুন");
+                                claim.setOnClickListener(null);
+                                AlertMessage.showMessage(OfferActivity.this, "অভিনন্দন!",
+                                        "কিছুদিনের মাঝেই আপনার রেজিস্টার করা মোবাইল নাম্বারে আপনি ফ্রি ইন্টারনেট পেয়ে যাবেন।" +
+                                                "পরবর্তী অফারের জন্য কলরবের সাথেই থাকুন!");
+                            } else {
+                                AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
+                                        "পর আবার চেষ্টা করুন");
+                            }
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
 
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ToastMessageDisplay.setText(OfferActivity.this, error.toString());
+                        ToastMessageDisplay.showText(OfferActivity.this);
+                    }
+                }) {
 
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    ToastMessageDisplay.setText(OfferActivity.this, error.toString());
-                    ToastMessageDisplay.showText(OfferActivity.this);
-                }
-            }) {
+            @Override
+            protected Map<String, String> getParams() {
 
-        @Override
-        protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
 
-            Map<String, String> params = new HashMap<>();
+                return params;
+            }
 
-            return params;
-        }
-
-    };
+        };
 
 // Adding request to request queue
 
-    RequestQueue requestQueue = Volley.newRequestQueue(OfferActivity.this);
-    requestQueue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(OfferActivity.this);
+        requestQueue.add(stringRequest);
 
 
 
-        }
+    }
 
     public void sendRequesttocredit() {
 
 
 
-            String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
+        String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
 
 
-            String url = "http://kolorob.net/demo/api/give_credit?phone=" + phone +"&reffno=" + refno +"&username=" + this.usernames + "&password=" + this.password;
+        String url = "http://kolorob.net/demo/api/give_credit?phone=" + phone +"&reffno=" + refno +"&username=" + this.usernames + "&password=" + this.password;
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
-
-
-                            try {
-                                if (response.toString().trim().equalsIgnoreCase("true")) {
-                                    SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
-                                    settings.edit().putBoolean("RefProvided", true).apply();
-                                    cred = settings.getBoolean("RefProvided", false);
-                                    credit.setColorNormalResId(R.color.gray);
-                                    credit.setIcon(R.drawable.smile2);
-                                    credit.setOnClickListener(null);
-                                    AlertMessage.showMessage(OfferActivity.this, "ধন্যবাদ!","কলরব ও আপনার বন্ধুর পক্ষ থেকে আপনার প্রতি শুভেচ্ছা।" +
-                                            "কলরবের সাথেই থাকুন");
-                                } else {
-                                    AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
-                                            "পর আবার চেষ্টা করুন");
-                                }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
 
 
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        try {
+                            if (response.toString().trim().equalsIgnoreCase("true")) {
+                                SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
+                                settings.edit().putBoolean("RefProvided", true).apply();
+                                cred = settings.getBoolean("RefProvided", false);
+                                credit.setColorNormalResId(R.color.gray);
+                                credit.setIcon(R.drawable.smile2);
+                                credit.setOnClickListener(null);
+                                AlertMessage.showMessage(OfferActivity.this, "ধন্যবাদ!","কলরব ও আপনার বন্ধুর পক্ষ থেকে আপনার প্রতি শুভেচ্ছা।" +
+                                        "কলরবের সাথেই থাকুন");
+                            } else {
+                                AlertMessage.showMessage(OfferActivity.this, "দুঃখিত", "কলরব সার্ভারে বর্তমানে কাজ চলছে। দয়া করে কিছুক্ষণ" +
+                                        "পর আবার চেষ্টা করুন");
                             }
 
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            ToastMessageDisplay.setText(OfferActivity.this, error.toString());
-                            ToastMessageDisplay.showText(OfferActivity.this);
-                        }
-                    }) {
 
-                @Override
-                protected Map<String, String> getParams() {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ToastMessageDisplay.setText(OfferActivity.this, error.toString());
+                        ToastMessageDisplay.showText(OfferActivity.this);
+                    }
+                }) {
 
-                    Map<String, String> params = new HashMap<>();
+            @Override
+            protected Map<String, String> getParams() {
 
-                    return params;
-                }
+                Map<String, String> params = new HashMap<>();
 
-            };
+                return params;
+            }
+
+        };
 
 // Adding request to request queue
 
-            RequestQueue requestQueue = Volley.newRequestQueue(OfferActivity.this);
-            requestQueue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(OfferActivity.this);
+        requestQueue.add(stringRequest);
 
 
 

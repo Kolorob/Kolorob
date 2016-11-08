@@ -330,7 +330,7 @@ public class OpeningActivity extends Activity {
             String[] tokens = contents.split(delims);
 
              first=tokens[1];
-            //  first="yes";
+            //      first="yes";
         }
 
 
