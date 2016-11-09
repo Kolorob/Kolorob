@@ -48,7 +48,7 @@ import info.hoang8f.widget.FButton;
  */
 
 public class OfferActivity extends Activity implements View.OnClickListener {
-    TextView time,claimtext,offertext,lowdisclaimertext;
+    TextView time,claimtext,offertext,lowdisclaimertext,updisclaimer,lowdis2;
     FButton claim;
     LinearLayout offer;
     long counthead=30;
@@ -73,11 +73,13 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claimtext=(TextView)findViewById(R.id.countertext);
         offer=(LinearLayout)findViewById(R.id.loweroffer);
         offertext=(TextView)findViewById(R.id.offertext);
+        lowdis2=(TextView)findViewById(R.id.distext2);
         lowdisclaimertext=(TextView)findViewById(R.id.distext);
         backpack=(ImageView)findViewById(R.id.backpack);
         claim=(FButton) findViewById(R.id.claim);
         wb = (ImageButton) findViewById(R.id.btnw);
         fb = (ImageButton) findViewById(R.id.btnf);
+        updisclaimer=(TextView)findViewById(R.id.offerdisclaimer);
         credit=(FloatingActionButton)findViewById(R.id.creditbutton);
 
         claim.setShadowEnabled(false);
@@ -133,7 +135,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this))
         {
 
-            time.setTextSize(150);
+            time.setTextSize(130);
             claim.setTextSize(23);
             claimtext.setTextSize(40);
             offertext.setTextSize(25);
@@ -145,6 +147,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
             offer.requestLayout();
             credit.setSize(FloatingActionButton.SIZE_NORMAL);
             lowdisclaimertext.setTextSize(14);
+            updisclaimer.setTextSize(14);
+            lowdis2.setTextSize(14);
         }
         else credit.setSize(FloatingActionButton.SIZE_MINI);
     }

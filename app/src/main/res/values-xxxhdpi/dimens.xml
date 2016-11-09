@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="offercounter">50dp</dimen>
     <dimen name="offercountertext">20dp</dimen>
+    <dimen name="getmbbuttontop">0dp</dimen>
     <dimen name="offercounterbtn">18dp</dimen>
     <dimen name="offerpaddingbtntop">15dp</dimen>
     <dimen name="offerpaddingcredit">8dp</dimen>

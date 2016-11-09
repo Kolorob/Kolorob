@@ -38,6 +38,7 @@
     <dimen name="offerpaddingcredittop">70dp</dimen>
     <dimen name="offerpaddingcreditlr">70dp</dimen>
     <dimen name="offerpaddinglow">18dp</dimen>
+    <dimen name="getmbbuttontop">8dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     //feedbackstars
     <dimen name="firststarspace">63dp</dimen>

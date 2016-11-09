@@ -345,6 +345,10 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
 
                                 SharedPreferencesHelper.setUname(con,uname);
+                                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("IFREGISTERED", true);
+                                editor.apply();
                                 showMessageExisting(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
                                         " রেজিস্ট্রেশন করার জন্য আপনাকে ধন্যবাদ",1);
 
@@ -378,6 +382,10 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
                                 SharedPreferencesHelper.setUname(con,serverusernamechanged);
+                                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("IFREGISTERED", true);
+                                editor.apply();
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
                                         "আপনার ইউজার নেম  " +serverusernamechanged +" এবং ফোন নাম্বার  "+serverphonenumber,2);
 

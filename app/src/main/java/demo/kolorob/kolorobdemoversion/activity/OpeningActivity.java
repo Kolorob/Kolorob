@@ -126,6 +126,7 @@ public class OpeningActivity extends Activity {
     String app_ver="";
     Boolean drop=false;
     String first=null;
+    Boolean REG=false;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -548,13 +549,22 @@ if(check==2) {
                     handler.removeCallbacks(this);
                     if (first.equals("yes")) {
                         int mapdetail = 0;
+                        REG = settings.getBoolean("IFREGISTERED", false);
+                        if (REG) {
+                            Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+                            a.putExtra("YourValueKey", mapdetail);
+                            frameAnimation.stop();
+                            startActivity(a);
+                            return;
 
-                    Intent a = new Intent(OpeningActivity.this, PhoneRegActivity.class); // Default Activity
-                    a.putExtra("YourValueKey", mapdetail);
-                    frameAnimation.stop();
-                    startActivity(a);
-                    return;
-                } else {
+                        } else {
+                            Intent a = new Intent(OpeningActivity.this, PhoneRegActivity.class); // Default Activity
+                            a.putExtra("YourValueKey", mapdetail);
+                            frameAnimation.stop();
+                            startActivity(a);
+                            return;
+                        }
+                    }else {
                         SharedPreferencesHelper.setifcommentedalready(OpeningActivity.this,null,SharedPreferencesHelper.getUname(OpeningActivity.this),"no");
                     Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
 

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/counter"
-            android:padding="@dimen/offerpadding"
+
             android:layout_gravity="center_horizontal|center_vertical"
             android:text="1"
             android:textSize="@dimen/offercounter"/>
@@ -45,10 +45,19 @@
             android:paddingLeft="@dimen/offerpaddingbtn"
             android:paddingRight="@dimen/offerpaddingbtn"
             android:paddingTop="@dimen/offerpaddingbtntop"
+            android:layout_marginTop="@dimen/offerpaddinglow"
             android:layout_marginBottom="@dimen/offerpaddinglow"
             android:paddingBottom="@dimen/offerpaddingbtntop"
             android:textSize="@dimen/offercounterbtn"
-            android:text="ফ্রি ৫০ এমবি বুঝে নিন"/>
+            android:text="ফ্রি ৫০ এমবি বুঝে নিন**"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/offerdisclaimer"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#f2f2f2"
+            android:textSize="10dp"
+            android:text="**প্রতি মাসের প্রথম ২৫০ জনের জন্য প্রযোজ্য"/>
     </LinearLayout>
 
 
@@ -106,7 +115,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:padding="5dp"
+            android:padding="2dp"
             android:layout_height="0dp">
 
             <LinearLayout
@@ -148,12 +157,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/distext"
-                android:layout_margin="@dimen/offerpadding"
+
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="#f2f2f2"
                 android:textSize="10dp"
                 android:text="*আগে কলরব ডাউনলোড করে থাকলে এই অফারটি প্রযোজ্য হবে না" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/distext2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#f2f2f2"
+                android:textSize="10dp"
+                android:text="***প্রথম ৪০০ জনের জন্য প্রযোজ্য" />
 
         </LinearLayout>
        </LinearLayout>
