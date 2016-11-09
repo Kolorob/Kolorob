@@ -85,8 +85,9 @@ public class PhoneRegActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.facebook.accountkit.AccountKit.initialize(this.getApplicationContext());
         super.onCreate(savedInstanceState);
-        com.facebook.accountkit.AccountKit.initialize(getApplicationContext());
+
         setContentView(R.layout.phone_reg);
         accessToken = AccountKit.getCurrentAccessToken();
         SharedPreferences settings = getSharedPreferences("prefs", 0);
