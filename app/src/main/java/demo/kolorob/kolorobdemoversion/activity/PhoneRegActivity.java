@@ -85,10 +85,10 @@ public class PhoneRegActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        com.facebook.accountkit.AccountKit.initialize(this.getApplicationContext());
         super.onCreate(savedInstanceState);
-
+        com.facebook.accountkit.AccountKit.initialize(this.getApplicationContext());
         setContentView(R.layout.phone_reg);
+        con = this;
         accessToken = AccountKit.getCurrentAccessToken();
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         IMEI=settings.getString("IMEI",null);
@@ -109,7 +109,7 @@ public class PhoneRegActivity extends Activity {
 
         }
 
-        con = this;
+
         phone  = (EditText)findViewById(R.id.phone_id);
         phone.setHintTextColor(getResources().getColor(R.color.blue));
         phone.setTextColor(getResources().getColor(R.color.gray));
