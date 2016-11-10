@@ -17,6 +17,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -175,6 +176,7 @@ public class OpeningActivity extends Activity {
     View view=null;
     Float currentVersion;
     long install=0;
+    File filesDir;
     //==========================================================Code for Bazar Starts==========================================
     //bazar items
     ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
@@ -200,8 +202,18 @@ public class OpeningActivity extends Activity {
             snackbar.show();
         }
 
+        String state = Environment.getExternalStorageState();
 
-        ImageView kolorobLogo = (ImageView) findViewById(R.id.iv_kolorob_logo);//need to add bengali
+
+// Make sure it's available
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            // We can read and write the media
+            filesDir = getExternalFilesDir(null);
+        } else {
+            // Load another directory, probably local memory
+            filesDir = getFilesDir();
+        }
+
         try
         {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
@@ -210,7 +222,8 @@ public class OpeningActivity extends Activity {
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
             if(currentVersion >previousVersion)
             {
-                File path = OpeningActivity.this.getApplicationContext().getExternalFilesDir(null);
+
+                File path = filesDir;
                 File file = new File(path, "kolorob.txt");
                 if(file.exists())
                 {
@@ -238,7 +251,7 @@ public class OpeningActivity extends Activity {
         height=displayMetrics.heightPixels;
 
 
-        File path = context.getExternalFilesDir(null);
+        File path = filesDir;
 
         File file = new File(path, "kolorob.txt");
         if(! new File(path, "kolorob.txt").exists()) {
