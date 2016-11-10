@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:textColor="#f2f2f2"
             android:textSize="10dp"
-            android:text="**প্রতি মাসের প্রথম ২৫০ জনের জন্য প্রযোজ্য"/>
+            android:text="**প্রতি মাসের প্রথম ৫০০ জনের জন্য প্রযোজ্য"/>
     </LinearLayout>
 
 
