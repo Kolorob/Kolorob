@@ -217,10 +217,10 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
         mapView.setTilesScaledToDpi(true);
-        first = settings.getString("First", null);
-        if (first!=null && first.equals("yes"))//if running for first time
+        firstRun = settings.getBoolean("firstRun", false);
+        if (firstRun==false)//if running for first time
         {   Log.d("ss","********"+first);
-            File path = MapFragmentOSM.this.getActivity().getExternalFilesDir(null);
+           /* File path = MapFragmentOSM.this.getActivity().getExternalFilesDir(null);
 
             File file = new File(path, "kolorob.txt");
 
@@ -264,10 +264,13 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             {
 
             }
-
+*/
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
             mapView.setTileSource(TileSourceFactory.MAPNIK);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("firstRun", true);
+            editor.apply();
         }
         else {
             //OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);

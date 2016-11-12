@@ -222,14 +222,10 @@ public class OpeningActivity extends Activity {
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
             if(currentVersion >previousVersion)
             {
+                SharedPreferences.Editor editor = settings.edit();
 
-                File path = filesDir;
-                File file = new File(path, "kolorob.txt");
-                if(file.exists())
-                {
-
-                    file.delete();
-                }
+                editor.putBoolean("firstRun", false);
+                editor.apply();
 
             }
             if(currentVersion>=previousVersion)
@@ -251,7 +247,7 @@ public class OpeningActivity extends Activity {
         height=displayMetrics.heightPixels;
 
 
-        File path = filesDir;
+   /*     File path = filesDir;
 
         File file = new File(path, "kolorob.txt");
         if(! new File(path, "kolorob.txt").exists()) {
@@ -347,9 +343,9 @@ public class OpeningActivity extends Activity {
             //      first="yes";
         }
 
-
+*/
         firstRun = settings.getBoolean("firstRun", false);
-        if (first.equals("yes"))//if running for first time
+        if (firstRun==false)//if running for first time
         {
             SharedPreferences.Editor editor = settings.edit();
 
@@ -560,7 +556,7 @@ if(check==2) {
 
                     editor.apply();
                     handler.removeCallbacks(this);
-                    if (first.equals("yes")) {
+                    if (firstRun==false) {
                         int mapdetail = 0;
                         REG = settings.getBoolean("IFREGISTERED", false);
                         if (REG) {
