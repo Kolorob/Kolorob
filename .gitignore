@@ -1,12 +1,12 @@
 .gradle
 /local.properties
-.idea/*
+#.idea/*
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
 /build
 /captures
 /*.orig
-libraries/**/*.class
-libraries/**/generated/source/*
-libraries/ViewPagerIndicator-Library/*
+#libraries/**/*.class
+#libraries/**/generated/source/*
+#libraries/ViewPagerIndicator-Library/*

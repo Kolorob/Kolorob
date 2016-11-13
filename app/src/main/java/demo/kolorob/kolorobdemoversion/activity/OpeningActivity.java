@@ -10,7 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -46,10 +48,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -1350,7 +1348,16 @@ if(check==2) {
             //run the sqls one by one
             for (int i = 0; i<sql.length;i++)
             {
-                db.execSQL(sql[i]);
+                try {
+                    SQLiteStatement stmt = db.compileStatement(sql[i]);
+                    long result = stmt.executeInsert();
+                    // db.execSQL(sql[i]);
+                }
+                catch (SQLException sqle ) {
+                    // Fail silently, or
+                    //sqle.printStackTrace(err);
+                }
+
             }
 
             //unblock db

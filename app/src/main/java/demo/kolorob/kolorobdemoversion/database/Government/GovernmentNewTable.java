@@ -205,7 +205,8 @@ public class GovernmentNewTable {
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
         closeDB();
-        return ret;}
+        return ret;
+    }
 
 
     private long updateItem(int finId, String nameen, String namebn, String lat, String lon,

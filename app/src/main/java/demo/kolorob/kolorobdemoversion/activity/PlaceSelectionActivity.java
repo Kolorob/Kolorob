@@ -538,6 +538,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 ratings = ratingBar.getRating();
                 comment=submit_review.getText().toString();
                 if(ratings==0)ratings = (float) 0.0001;
+
                 sendDataToserver(ratings, comment);
                 SharedPreferences settings = PlaceSelectionActivity.this.getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
