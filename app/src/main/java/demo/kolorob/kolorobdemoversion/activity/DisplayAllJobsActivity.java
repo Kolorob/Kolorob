@@ -76,6 +76,7 @@ public class DisplayAllJobsActivity extends Activity {
     Job_expand_list_adapter listAdapter;
     private int job_counter=0;
     ArrayList<ArrayList<String>> job_list;
+    private int loaded =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +194,7 @@ public class DisplayAllJobsActivity extends Activity {
         JobAdvertisementTable jobAdvertisementTable = new JobAdvertisementTable(DisplayAllJobsActivity.this);
         jobAdvertisementTable.dropTable();
         int joblistCount = joblistArray.length();
-
+        loaded=1;
         if(joblistCount!=0)
         {
             for (int i = 0; i < joblistCount; i++) {
@@ -208,11 +209,12 @@ public class DisplayAllJobsActivity extends Activity {
                     // Log.d(">>>","Insert Item  "+jo.getString("institute_name"));
                     //  Log.d(">>>","start_salary  "+jo.getString("start_salary"));
                     progress.dismiss();
-                    displayData();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+            displayData();
         }
         else
             AlertMessage.showMessage(this,"নতুন জব পাওয়া যায়নি","কিছুক্ষন পরে পুনরায় চেস্টা করুন");
@@ -255,6 +257,10 @@ public class DisplayAllJobsActivity extends Activity {
             //    listDataChild.put(group_data,job_data);
                 job_counter++;
             }
+//            if(loaded==1)
+//                job_counter=job_counter-1;
+
+            Log.d("Job Counter","================="+job_counter);
 
             for(int k=0;k<size;k++)
             {
