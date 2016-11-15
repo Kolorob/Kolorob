@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/bazar_post_layout"
+    android:visibility="visible"
+    android:background="@color/kolorob_color"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/post_holder"
+            android:layout_height="match_parent">
+
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+
+
+                android:layout_marginRight="10dp"
+                android:popupBackground="@color/white"
+
+                android:background="@color/drak_yellow"
+                android:id="@+id/type_spinner" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+
+                android:layout_marginRight="10dp"
+
+                android:background="@color/drak_yellow"
+                android:popupBackground="@color/green"
+                android:id="@+id/bazar_spinner" />
+
+
+
+
+
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:background="@color/drak_yellow"
+                android:hint="যে পন্য বিক্রয় করবেন"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/product_name" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+
+                android:background="@color/white"
+
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:hint="মোবাইল নম্বর"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/phone_no" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:background="@color/drak_yellow"
+
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:hint="অন্য মোবাইল নম্বর"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/contact" />
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:background="@color/drak_yellow"
+                android:layout_marginTop="@dimen/bazar_distance"
+
+                android:hint="ঠিকানা"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/address" />
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/white"
+                android:hint="যোগাযোগকারী ব্যক্তির নাম"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+
+                android:layout_marginTop="@dimen/bazar_distance"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lines="2"
+                android:id="@+id/contact_person" />
+
+
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/pricing"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@color/drak_yellow"
+                        android:hint="মূল্য"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/white"
+
+                        android:lines="7"
+
+                        android:id="@+id/costs" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="আলোচনা সাপেক্ষে"
+                        android:paddingLeft="8dp"
+
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:theme="@style/checkBoxStyle"
+                        android:textColor="@color/white"
+
+                        android:id="@+id/negotiable" />
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+
+
+                android:layout_marginTop="@dimen/bazar_distance"
+                android:textColorHint="@color/white"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/drak_yellow"
+                android:hint="পন্যের বিবরন"
+                android:lines="4"
+                android:id="@+id/descriptions" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/bazar_distance"
+
+                android:layout_height="90dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="বিজ্ঞাপন দিন"
+                    android:textColor="@color/black"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+
+                    android:background="@drawable/button_shape"
+                    android:gravity="center"
+                    android:id="@+id/submit_bazar" />
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>
