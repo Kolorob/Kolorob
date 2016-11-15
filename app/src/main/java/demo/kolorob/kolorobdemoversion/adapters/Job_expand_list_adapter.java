@@ -199,6 +199,10 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
         }
         job_company.setText(groupElement[0]);
         job_position.setText(groupElement[1]);
+        Log.d("beton","=============="+groupElement[2]);
+        if(groupElement[2].equals("বেতন: ১০০০ থেকে ২০০০"))
+        job_salary.setText("বেতন:  আলোচনা সাপেক্ষ্য");
+        else
         job_salary.setText(groupElement[2]);
 
         return convertView;

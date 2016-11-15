@@ -242,7 +242,7 @@ public class DisplayAllJobsActivity extends Activity {
                 //job_data.clear();
                 String jobdata= "আবেদনের শেষ সময়: "+jobAdvertisementItem.getApplication_last_date()+"@"+
                         "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
-                        "অভিজ্ঞতা: "+"নাই"+"@"+
+                        "অভিজ্ঞতা: "+"দরকার নেই"+"@"+
                         jobAdvertisementItem.getMobile1()+"@"+
                         jobAdvertisementItem.getEmail()+"v";
 
