@@ -425,6 +425,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         NavigationCalled = false;
         NavigationCalledOnce = false;
+        setContentView(R.layout.activity_place_detailnew);
         bazar_tool = (RelativeLayout) findViewById(R.id.bazar_tools);
         val = settings.getInt("KValue", 0);
         Log.e("ASinplaceDetails", String.valueOf(val));
@@ -434,7 +435,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         dpi = displayMetrics.densityDpi;
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
-        setContentView(R.layout.activity_place_detailnew);
         fholder = (LinearLayout) findViewById(R.id.LinearLayoutfilter);
         con = this;
         MapButton = (ImageButton) findViewById(R.id.mapbutton);
