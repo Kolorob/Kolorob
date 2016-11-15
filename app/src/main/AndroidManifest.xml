@@ -14,8 +14,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS" />
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".google_analytics.MyApplication"
         android:allowBackup="true"
@@ -145,7 +147,7 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".activity.EmergencyActivity"></activity>
+        <activity android:name=".activity.EmergencyActivity" />
         <activity
             android:name="com.facebook.accountkit.ui.AccountKitActivity"
             android:theme="@style/AppLoginTheme"
@@ -159,6 +161,7 @@
                 <data android:scheme="@string/ak_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
@@ -168,6 +171,8 @@
         <meta-data
             android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
+
+        <activity android:name=".activity.UsersPostActivity"></activity>
     </application>
 
 </manifest>
