@@ -162,7 +162,7 @@
                     android:layout_marginRight="25dp"
 
                     android:textColor="@color/black"
-                    android:text="বিজ্ঞাপন দিন"
+                    android:text="Post Advertizement"
                     android:gravity="center"
            />
 

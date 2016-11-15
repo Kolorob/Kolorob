@@ -249,26 +249,26 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         product_name.setText(groupElement[0]);
         if(groupElement[1].equals("Exchange"))
         {
-            sell.setText("বিনিময়");
+            sell.setText("Exchange");
         }
        else if(groupElement[1].equals("Sell"))
         {
-            sell.setText("বিক্রয়");
+            sell.setText("Sell");
         }
 
        else if(groupElement[1].equals("Tution"))
         {
-            sell.setText("টিউশন");
+            sell.setText("Tution");
         }
 
         else if(groupElement[1].equals("Buy"))
         {
-            sell.setText("ক্রয়");
+            sell.setText("Buy");
         }
 
         else if(groupElement[1].equals("To_Let"))
         {
-            sell.setText("টু লেট");
+            sell.setText("To-Let");
         }
 
    //     sell.setText(groupElement[1]);

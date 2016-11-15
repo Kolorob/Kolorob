@@ -864,16 +864,11 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 svholder.setVisibility(View.VISIBLE);
                 sv.setVisibility(View.VISIBLE);
                 llCatListHolder.setVisibility(View.VISIBLE);
-                init(PlaceDetailsActivityNewLayout.this);
 
+                wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this, R.color.white));
 
-                loadBazar(PlaceDetailsActivityNewLayout.this);
-                panelListener(PlaceDetailsActivityNewLayout.this);
-                wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this, R.color.kolorob_color));
-
-
-                toolbar.setVisibility(View.GONE);
-                toggleButton.setVisibility(View.GONE);
+                toolbar.setVisibility(View.VISIBLE);
+                toggleButton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -884,12 +879,12 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                 if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
                     dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
-                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setMessage("Please Wait for a While");
                     dialog.setCancelable(false);
                     dialog.show();
                     loadBazar(PlaceDetailsActivityNewLayout.this);
                 } else {
-                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই।", "অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "Your Phone has no Internet Connection", "Please Activate your Internet Connection ...");
 
                 }
 
@@ -958,7 +953,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
                 if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
                     dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
-                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setMessage("Please Wait for a While");
                     dialog.setCancelable(true);
                     dialog.show();
 
@@ -998,19 +993,27 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     compare_layoutedu.setVisibility(View.GONE);
 
 
-                    svs.setVisibility(View.VISIBLE);
-                    svholder.setVisibility(View.VISIBLE);
+                    svs.setVisibility(View.GONE);
+                    svholder.setVisibility(View.GONE);
                     svsholder.setVisibility(View.GONE);
-                    sv.setVisibility(View.VISIBLE);
+                    sv.setVisibility(View.GONE);
                     llSubCatListHolder.setVisibility(View.GONE);
                     //   subCatItemList.setVisibility(View.VISIBLE);
 //                    bazar_tool.setVisibility(View.VISIBLE);
                     //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                     setShowList(1);
-                    toolbar.setVisibility(View.VISIBLE);
-                    toggleButton.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.GONE);
+                    toggleButton.setVisibility(View.GONE);
                     list_expand = true;
+
+                    init(PlaceDetailsActivityNewLayout.this);
+
+
+                    loadBazar(PlaceDetailsActivityNewLayout.this);
+                    panelListener(PlaceDetailsActivityNewLayout.this);
+                    wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this, R.color.kolorob_color));
+
                     //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
 
                     if (currentCategoryID < 1)
@@ -3084,7 +3087,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 //   submit_bazar.getLayoutParams().height=pannl_height;
 
 
-                footer.setText("বিজ্ঞাপন দেখুন");
+                footer.setText("View Advertizement");
 
                 String number = SharedPreferencesHelper.getNumber(context);
 //                if(number.equals(""))
@@ -3114,7 +3117,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 // submit_bazar.setHeight(pannl_height);
                 Log.d(">>>>", "onPanelCollapsed");
 
-                footer.setText("বিজ্ঞাপন দিন");
+                footer.setText("Post Advertizement");
 
             }
 
@@ -3369,7 +3372,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
                     product_name.setVisibility(View.VISIBLE);
-                    product_name.setHint("What do you want to Exchange");
+                    product_name.setHint("What do you want to Sell");
                     price.setHint("Price");
                     tution_detector = 0;
                     description.setHint("Description");
@@ -3377,7 +3380,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
                     product_name.setVisibility(View.VISIBLE);
-                    product_name.setHint("What do you want to buy");
+                    product_name.setHint("What do you want to Buy");
                     price.setHint("Price");
                     description.setHint("Description");
                     tution_detector = 0;
@@ -3386,7 +3389,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     pricing.setVisibility(View.VISIBLE);
                     product_name.setVisibility(View.VISIBLE);
                     tution_detector = 0;
-                    product_name.setHint("What ");
+                    product_name.setHint("Product Name ");
                     description.setHint("Description");
                 }
 
@@ -3604,7 +3607,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     final BazarItem b = new BazarItem();
 
                     String number = SharedPreferencesHelper.getNumber(context);
-                    if (number.equals("")) {
+                    if (number.equals("01232")) {
 
                     } else {
                         if (spinner.getSelectedItem().toString().equals("Condition")) {

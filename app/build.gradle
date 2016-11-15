@@ -24,6 +24,9 @@ android {
 }
 
 dependencies {
+
+
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':volley')
     compile project(':ViewPagerIndicator-Library')
@@ -39,6 +42,7 @@ dependencies {
     compile 'org.slf4j:slf4j-android:1.7.12'
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
-
+    compile 'com.sothree.slidinguppanel:library:3.2.1'
+    compile 'org.jetbrains:annotations-java5:15.0'
 
 }
