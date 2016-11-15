@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:visibility="gone"
-    android:id="@+id/bazar_tool"
+    android:id="@+id/bazar_tools"
     android:layout_height="match_parent"
 
     tools:context="demo.kolorob.kolorobdemoversion.activity.PlaceDetailsActivityNewLayout">

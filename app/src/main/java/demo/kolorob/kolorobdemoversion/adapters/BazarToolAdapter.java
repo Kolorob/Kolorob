@@ -138,25 +138,25 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         if(Children[1].length()==1&& price_s==one)
         {
-            price.setText("মূল্য: আলোচনা সাপেক্ষে");
+            price.setText("Price: Negotiable");
         }
           else if(price_s==one)
            {
-               price.setText("মূল্য: "+English_to_bengali_number_conversion(AppUtils.removeLastChar(Children[1]))+ " টাকা (আলোচনা সাপেক্ষে)");
+               price.setText("Price: "+AppUtils.removeLastChar(Children[1])+ " Taka (Negotiable)");
 
            }
         else if(price_s == ZERO)
-               price.setText("মূল্য: "+English_to_bengali_number_conversion(AppUtils.removeLastChar(Children[1]))+ " টাকা");
+               price.setText("Price: "+AppUtils.removeLastChar(Children[1])+ " Taka");
 
      //   price.setText(Children[1].replace("%",""));
         date.setText(Children[2]);
 
         if(Children[3].equals("New"))
-            condition.setText("কন্ডিশন: নতুন");
+            condition.setText("Condition: New");
         else if(Children[3].equals("Refurbished"))
-            condition.setText("কন্ডিশন: ব্যবহৃত");
+            condition.setText("Condition: Used");
         else
-            condition.setText("ব্যবহৃত");
+            condition.setText("Used");
         area.setText(Children[4]);
 
         Log.d("condition","############"+Children[6]);
