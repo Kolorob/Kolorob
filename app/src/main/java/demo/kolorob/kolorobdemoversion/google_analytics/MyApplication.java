@@ -3,15 +3,20 @@ package demo.kolorob.kolorobdemoversion.google_analytics;
 /**
  * Created by Mazharul.Islam1 on 6/7/2016.
  */
+
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
+import android.os.StrictMode;
 
+import com.facebook.accountkit.AccountKit;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
-import org.acra.*;
-import org.acra.annotation.*;
+
+import org.acra.ACRA;
+import org.acra.annotation.ReportsCrashes;
 import org.acra.sender.HttpSender;
 
 
@@ -37,8 +42,27 @@ public class MyApplication extends Application {
 
         AnalyticsTrackers.initialize(this);
         AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Kitkat and lower has a bug that can cause in correct strict mode
+            // warnings about expected activity counts
+            enableStrictMode();
+        }
+
+        AccountKit.initialize(getApplicationContext());
     }
 
+    public void enableStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDeath()
+                .build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDeath()
+                .build());
+    }
     public static synchronized MyApplication getInstance() {
         return mInstance;
     }

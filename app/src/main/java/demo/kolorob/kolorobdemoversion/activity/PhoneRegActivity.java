@@ -86,7 +86,7 @@ public class PhoneRegActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.facebook.accountkit.AccountKit.initialize(this.getApplicationContext());
+
         setContentView(R.layout.phone_reg);
         con = this;
         accessToken = AccountKit.getCurrentAccessToken();
