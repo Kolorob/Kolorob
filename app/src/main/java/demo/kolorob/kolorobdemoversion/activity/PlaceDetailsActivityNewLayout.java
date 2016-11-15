@@ -191,7 +191,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     private int locationNameId, subcategory;
     private String locationName;
     private ListView expandableListview;
-    private RelativeLayout wholeLayout;
+    private LinearLayout  wholeLayout;
 
     private String locationNameEng;
     private String comapreData;
@@ -425,7 +425,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
         NavigationCalled = false;
         NavigationCalledOnce = false;
-        bazar_tool = (RelativeLayout) findViewById(R.id.bazar_tools);
+      //  bazar_tool = (RelativeLayout) findViewById(R.id.bazz);
         val = settings.getInt("KValue", 0);
         Log.e("ASinplaceDetails", String.valueOf(val));
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -455,7 +455,10 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         negotiable = (CheckBox) findViewById(R.id.negotiable);
         checkLeft = (CheckBox) findViewById(R.id.checkLeft);
         checkRight = (CheckBox) findViewById(R.id.checkRight);
-
+        bazar_tool = (RelativeLayout) findViewById(R.id.bazz);
+        bazar_tool = (RelativeLayout) findViewById(R.id.bazar_too);
+        wholeLayout= (LinearLayout)findViewById(R.id.wholeLayout);
+        Log.d("Touch Bazar","=====================");
         // explist=(LinearLayout)findViewById(R.id.explist);
         catholder = (RelativeLayout) findViewById(R.id.categoryfilterholder);
         // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
@@ -1001,7 +1004,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                     sv.setVisibility(View.VISIBLE);
                     llSubCatListHolder.setVisibility(View.GONE);
                     //   subCatItemList.setVisibility(View.VISIBLE);
-                    bazar_tool.setVisibility(View.VISIBLE);
+//                    bazar_tool.setVisibility(View.VISIBLE);
                     //  wholeLayout.setBackgroundDrawable( getResources().getDrawable(R.drawable.splash) );
 
                     setShowList(1);
@@ -4059,26 +4062,6 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         super.supportNavigateUpTo(upIntent);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "PlaceDetailsActivityNewLayout Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://demo.kolorob.kolorobdemoversion.activity/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.disconnect();
-    }
 
     @Override
     protected void onPostResume() {
