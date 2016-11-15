@@ -106,6 +106,11 @@ public class AppUtils {
         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
+
+
+    public static String removeLastChar(String str) {
+        return str.substring(0,str.length()-1);
+    }
     public static void showSettingsAlert(Context con) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(con);
         final Context cont;
