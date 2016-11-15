@@ -219,7 +219,17 @@ public class OfferActivity extends Activity implements View.OnClickListener {
             case R.id.creditbutton:
                 if(remaincredit<=0 &&cred==false)
                 {
-                    showbox(OfferActivity.this);
+                    if (AppUtils.isNetConnected(getApplicationContext()))
+                    {
+                        sendRequesttocredit();
+                    }
+                    else {
+                        ToastMessageDisplay.setText(OfferActivity.this,"দয়া করে ইন্টারনেট চালু করুন।");
+//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
+//                            Toast.LENGTH_LONG).show();
+                        ToastMessageDisplay.showText(OfferActivity.this);
+                    }
+
                 }
                 else if (!cred)
                 {
@@ -389,7 +399,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
 
 
         String phone = SharedPreferencesHelper.getNumber(OfferActivity.this);
-
+        refno="1";
 
         String url = "http://kolorob.net/demo/api/give_credit?phone=" + phone +"&reffno=" + refno +"&username=" + this.usernames + "&password=" + this.password;
 
