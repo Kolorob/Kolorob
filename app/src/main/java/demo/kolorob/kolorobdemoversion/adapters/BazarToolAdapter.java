@@ -238,7 +238,6 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
 
         String[] groupElement= headerTitle.split("@");
-
         TextView product_name = (TextView) convertView
                 .findViewById(R.id.p_name);
         TextView sell = (TextView) convertView
