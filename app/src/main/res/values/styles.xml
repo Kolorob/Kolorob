@@ -13,7 +13,10 @@
     </style>
 
 
-
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">#ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
 
 
     <style name="scrollbar_shape_style">

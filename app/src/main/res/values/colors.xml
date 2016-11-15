@@ -27,8 +27,10 @@
     <color name="financial_color">#5F621C </color>
     <color name="legal_aid_color">#895E3D </color>
     <color name="listView_color">#FBF3D3 </color>
-
+    <color name="kolorob_color">#F7941E </color>
     <color name="government_color">#FF135402 </color>
-
+    <color name="light_gray">#d3d3d3</color>
+    <color name="light_orange">#ffdb99</color>
+    <color name="drak_yellow">#666666</color>
 
 </resources>

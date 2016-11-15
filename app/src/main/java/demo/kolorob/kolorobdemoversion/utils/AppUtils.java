@@ -2,6 +2,7 @@ package demo.kolorob.kolorobdemoversion.utils;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -106,6 +108,11 @@ public class AppUtils {
         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
+
+
+    public static String removeLastChar(String str) {
+        return str.substring(0,str.length()-1);
+    }
     public static void showSettingsAlert(Context con) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(con);
         final Context cont;
@@ -137,6 +144,38 @@ public class AppUtils {
 
         // Showing Alert Message
         alertDialog.show();
+    }
+
+
+    public static void hideKeyboard(Activity activity) {
+        // Check if no view has focus:
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    public static boolean mobile_number_verification(String number)
+    {
+        if(number.equals(""))
+            return false;
+        else if(number.length()!=11)
+            return true;
+        else if(number.charAt(0)!='0')
+        {
+            return true;
+        }
+        else if(number.charAt(1)!='1')
+        {
+            return true;
+        }
+        else if(number.charAt(2)=='2'||number.charAt(2)=='3'||number.charAt(2)=='4')
+            return true;
+        else
+            return false;
+
+
     }
 
     public static boolean checkPermission(Context con){

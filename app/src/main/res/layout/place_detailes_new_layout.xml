@@ -35,8 +35,9 @@
 
             </FrameLayout>
 
-
+            <include layout="@layout/bazar_layout" />
             <include layout="@layout/compare_screen" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -786,27 +787,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
 
-                android:id="@+id/explist"
-
-                android:layout_height="wrap_content">
-                <ExpandableListView
-                    android:id="@+id/listView"
-                    android:visibility="gone"
-                    android:layout_marginBottom="50dp"
-                    android:childDivider="#00000000"
-
-
-                    android:background="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </ExpandableListView>
-
-
-
-            </LinearLayout>
 
 
             <RelativeLayout
@@ -1070,7 +1051,7 @@
                     android:adjustViewBounds="true"
                     android:layout_alignParentBottom="true"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/list"
+                    android:background="@drawable/bazaar"
 
 
                     android:layout_toRightOf="@+id/mapbutton"

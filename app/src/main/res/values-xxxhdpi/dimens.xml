@@ -41,6 +41,7 @@
     <dimen name="feedbackalltext">25dp</dimen>
     <dimen name="bwidth">50dp</dimen>
     <dimen name="bheight">50dp</dimen>
+    <dimen name="bazar_distance">16dp</dimen>
 
     <dimen name="aboutusupheight">60dp</dimen>
     <dimen name="aboutuslowerheight">70dp</dimen>
