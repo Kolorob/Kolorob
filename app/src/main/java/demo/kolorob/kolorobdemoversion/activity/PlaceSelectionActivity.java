@@ -49,9 +49,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
@@ -99,7 +97,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Boolean Reviewgiven=false;
     Boolean click=false;
     private static final int REQUEST_PHONE_STATE = 0;
-    InterstitialAd mInterstitialAd;
+
     Date date2,today;
     long diffInMillisec,diffInDays;
     float[][] mirpur10Coords = {
@@ -183,7 +181,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         final String comment = "";
         String app_ver = "";
         NotificationManager manager;
-        mInterstitialAd = new InterstitialAd(this);
+       /* mInterstitialAd = new InterstitialAd(this);
 
         // set the ad unit ID
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_kolorob));
@@ -216,7 +214,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                 super.onAdClosed();
             }
         });
-
+*/
 
 
 
@@ -284,11 +282,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-    private void showInterstitial() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
-    }
+
 
 
 
