@@ -93,12 +93,8 @@ public class PhoneRegActivity extends Activity {
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         IMEI=settings.getString("IMEI",null);
         PHN=settings.getString("PHN",null);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&IMEI==null) {
 
-            checkPermissions();
-
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
 
             if(accessToken==null)goToLogin(true);
 

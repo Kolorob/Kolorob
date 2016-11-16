@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -123,6 +122,7 @@ public class OpeningActivity extends Activity {
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
     String app_ver="";
+
     Boolean drop=false;
     String first=null;
     Boolean REG=false;
@@ -195,9 +195,12 @@ public class OpeningActivity extends Activity {
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Snackbar snackbar = Snackbar.make(mainLayout,"Please allow all the permission so that app works smoothly",Snackbar.LENGTH_LONG);
-
-
             snackbar.show();
+
+
+              //  checkPermissions();
+
+
         }
 
         String state = Environment.getExternalStorageState();
@@ -869,8 +872,7 @@ if(check==2) {
             {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
-                            INTERNET_PERMISSION);
+
                 }
             }
 
@@ -957,26 +959,8 @@ if(check==2) {
     }
 
     // Callback with the request from calling requestPermissions(...)
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        // Make sure it's our original READ_CONTACTS request
-        if (requestCode == INTERNET_PERMISSION) {
-            if (grantResults.length == 1 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                ToastMessageDisplay.setText(this,"Internet permission granted");
-                ToastMessageDisplay.showText(this);
 
-            } else {
-                ToastMessageDisplay.setText(this,"Inter permission denied");
-                ToastMessageDisplay.showText(this);
 
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
     public void makeToastWithShortbread(String message) {
         if (t != null) {
             t.cancel();
