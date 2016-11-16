@@ -172,7 +172,8 @@
             android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
 
-        <activity android:name=".activity.UsersPostActivity"></activity>
+        <activity android:name=".activity.UsersPostActivity" />
+        <activity android:name=".activity.EditBazarActivity"></activity>
     </application>
 
 </manifest>

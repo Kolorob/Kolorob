@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.activity.EditBazarActivity;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -37,12 +38,14 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
     private int width;
     private int height;
     private String type;
+    private int detector;
 
     public BazarToolAdapter(Context context, List<String> listDataHeader,
                             HashMap<String, ArrayList<String>> listChildData,int detector) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+        this.detector = detector;
     }
 
     @Override
@@ -89,6 +92,10 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         TextView delete = (TextView) convertView.findViewById(R.id.delete);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
+        if(detector==1)
+            common_section.setVisibility(View.VISIBLE);
+        else
+            ownSection.setVisibility(View.VISIBLE);
 
         Log.d("Tutionn","============"+type);
 
@@ -125,6 +132,22 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
             post_person.setTextSize(15);
             another_num.setTextSize(15);
         }
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(_context, EditBazarActivity.class);
+                intent.putExtra("text",childText);
+                _context.startActivity(intent);
+            }
+        });
 
 
         phone_call.getLayoutParams().height=width/11;
