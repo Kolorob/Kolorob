@@ -182,13 +182,13 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
                     if (checkPermission(_context))
                         _context.startActivity(callIntent1);
                     else {
-                        AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
+                        AlertMessage.showMessage(_context, "Phone Calling is not Possible",
+                                "Phone Number has not been found");
                     }
                 } else {
 
-                    AlertMessage.showMessage(_context, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
+                    AlertMessage.showMessage(_context, "Phone Calling is not Possible",
+                            "Phone Number has not been found");
                 }
             }
         });
@@ -196,8 +196,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertMessage.showMessage(_context, "ই মেইল করা সম্ভব হচ্ছে না",
-                        "ই মেইল আই ডি পাওয়া যায়নি");
+                AlertMessage.showMessage(_context, "Sending Email is not possible",
+                        "Email Id has not been found");
             }
         });
 

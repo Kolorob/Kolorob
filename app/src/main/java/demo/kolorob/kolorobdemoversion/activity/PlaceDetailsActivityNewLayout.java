@@ -147,6 +147,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     TextView footer;
     ArrayList<ArrayList<String>> myList;
     int count;
+    ImageView bazar_logo;
     private int spinCounter = 0, spinCounter1 = 0;
     String pname, paddress, powner, pdescription;
 
@@ -413,6 +414,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_place_detailnew);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -457,6 +459,14 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         bazar_tool = (RelativeLayout) findViewById(R.id.bazz);
         bazar_tool = (RelativeLayout) findViewById(R.id.bazar_too);
         wholeLayout= (LinearLayout)findViewById(R.id.wholeLayout);
+
+
+        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
+
+        bazar_logo.getLayoutParams().height = width/8;
+        bazar_logo.getLayoutParams().width = width/8;
+        bazar_logo.setMinimumHeight(50);
+        bazar_logo.setMinimumWidth(50);
         Log.d("Touch Bazar","=====================");
         // explist=(LinearLayout)findViewById(R.id.explist);
         catholder = (RelativeLayout) findViewById(R.id.categoryfilterholder);
@@ -3086,7 +3096,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 //   submit_bazar.getLayoutParams().height=pannl_height;
 
 
-                footer.setText("View Advertizement");
+                footer.setText("View Advertisement");
 
                 String number = SharedPreferencesHelper.getNumber(context);
 //                if(number.equals(""))
@@ -3116,7 +3126,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                 // submit_bazar.setHeight(pannl_height);
                 Log.d(">>>>", "onPanelCollapsed");
 
-                footer.setText("Post Advertizement");
+                footer.setText("Post Advertisement");
 
             }
 
@@ -3313,7 +3323,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 
 
         List<String> types = new ArrayList<String>();
-        types.add("Advertizement Type");
+        types.add("Advertisement Type");
         types.add("Buy");
         types.add("Sell");
         types.add("Exchange");
@@ -3570,137 +3580,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
         submit_bazar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
 
-
-//           final BazarItem b = new BazarItem();
-//           b.description=description.getText().toString();
-//
-//           b.type = type_spinner.getSelectedItem().toString();
-//           b.phone = phone.getText().toString(); //MUST BE REGISTERED
-//           b.contact = contact.getText().toString();
-//           b.condition = spinner.getSelectedItem().toString();
-//           b.contact_person = contact_person.getText().toString();
-//           b.address= "address";
-//           Log.d("type Spinner","$$$$$$"+address.getText().toString());
-//           if(negotiable_check)
-//           {
-//               b.price = price.getText().toString()+ " (Negotiable)";
-//           }
-//           else {
-//               b.price = price.getText().toString();
-//           }
-//
-//           b.product_name= "product";
-
-
-                    if (tution_detector == 5) {
-                        spinner.setSelection(2);
-                        price.setText("1111");
-                    } else if (tution_detector == 4) {
-                        spinner.setSelection(2);
-
-                    }
-
-
-                    final BazarItem b = new BazarItem();
-
-                    String number = SharedPreferencesHelper.getNumber(context);
-                    if (number.equals("01232")) {
-
-                    } else {
-                        if (spinner.getSelectedItem().toString().equals("Condition")) {
-
-
-                            AlertMessage.showMessage(context, "Please Insert Condition", "");
-//               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন");
-
-                        } else {
-
-                            String conditions = spinner.getSelectedItem().toString();
-
-                            if (conditions.equals("New"))
-                                b.condition = "New";
-                            else if (conditions.equals("Refurbished"))
-                                b.condition = "Refurbished";
-
-
-                            if (type_spinner.getSelectedItem().toString().equals("Specialist Type")) {
-                                AlertMessage.showMessage(context, "Please Insert Advertizement Type", "");
-//                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন");
-                            } else {
-                                String condition_selector = type_spinner.getSelectedItem().toString();
-
-                                if (condition_selector.equals("Exchange"))
-                                    b.type = "Exchange";
-                                else if (condition_selector.equals("Sell"))
-                                    b.type = "Sell";
-                                else if (condition_selector.equals("Tution"))
-                                    b.type = "Tution";
-                                else if (condition_selector.equals("Buy"))
-                                    b.type = "Buy";
-                                else if (condition_selector.equals("To_Let"))
-                                    b.type = "To_Let";
-//                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
-                                if (product_name.getText().toString().equals("")) {
-//                       AlertMessage.showMessage(context,"","");
-                                    AlertMessage.showMessage(context, "Please Insert Product Name", "");
-//                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন");
-                                } else {
-
-                                    b.product_name = product_name.getText().toString();
-                                    try {
-                                        pname = URLEncoder.encode(b.product_name.replace(" ", "%20"), "utf-8");
-                                    } catch (UnsupportedEncodingException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (phone.getText().toString().equals("")) {
-                                        AlertMessage.showMessage(context, "Please Insert Phone Number", "");
-//                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন");
-                                    } else {
-                                        b.phone = phone.getText().toString(); //MUST BE REGISTERED
-                                        if (AppUtils.mobile_number_verification(contact.getText().toString())) {
-                                            AlertMessage.showMessage(context, "Please Insert Correct Phone Number", "");
-//                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
-                                        } else {
-                                            b.contact = contact.getText().toString();
-                                            if (address.getText().toString().equals("")) {
-                                                AlertMessage.showMessage(context, "Please Insert your address", "");
-//
-                                            } else {
-                                                b.address = address.getText().toString();
-                                                try {
-                                                    paddress = URLEncoder.encode(b.address.replace(" ", "%20"), "utf-8");
-                                                } catch (UnsupportedEncodingException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                if (contact_person.getText().toString().equals("")) {
-//
-                                                    AlertMessage.showMessage(context, "Please Insert your Name", "");
-                                                } else {
-                                                    b.contact_person = contact_person.getText().toString();
-                                                    try {
-                                                        powner = URLEncoder.encode(b.contact_person.replace(" ", "%20"), "utf-8");
-                                                    } catch (UnsupportedEncodingException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (price.getText().toString().equals("") && negotiable_check == 0) {
-//                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
-                                                        AlertMessage.showMessage(context, "Please Insert price", "");
-                                                    } else {
-                                                        Log.d("negotiable_check", "==============" + negotiable_check);
-
-                                                        b.price = price.getText().toString() + negotiable_check;
-                                                        if (description.getText().toString().equals("")) {
-//                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
-                                                            AlertMessage.showMessage(context, "Please insert details information", "");
-                                                        } else {
-                                                            b.description = description.getText().toString();
-                                                            try {
-                                                                pdescription = URLEncoder.encode(b.description.replace(" ", "%20"), "utf-8");
-                                                            } catch (UnsupportedEncodingException e) {
-                                                                e.printStackTrace();
-                                                            }
                                                             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                                                             height = displayMetrics.heightPixels;
                                                             final int width = displayMetrics.widthPixels;
@@ -3720,8 +3600,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
                                                             final TextView bodys = (TextView) promptView.findViewById(R.id.body);
                                                             final ImageView okay = (ImageView) promptView.findViewById(R.id.okay);
 
-                                                            header.setText("Your Advertizement has been sent");
-                                                            bodys.setText("Thank you for advertizement through kolorob");
+                                                            header.setText("This is a dummy version. This information is for display purposes only");
+                                                            bodys.setText("");
 
                                                             product_name.setText("");
                                                             phone.setText("");
@@ -3748,32 +3628,9 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 //		else
 //			textAsk.setTextSize(17);
                                                             alertDialog.getWindow().setLayout((width * 5) / 6, WindowManager.LayoutParams.WRAP_CONTENT);
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                        }
-
-                                    }
-                                }
-
-                            }
-                        }
-                    }
 
 
-//                    if(b.equals(""))
-//                    {
-//                        ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক তথ্য ইনপুট দিন");
-//                    }
 
-//           if()
-
-
-                } catch (Exception e) {
-
-                }
 
             }
         });
@@ -4005,7 +3862,7 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
     protected void onResume() {
         super.onResume();
 
-        toggleButton.setVisibility(View.VISIBLE);
+    //    toggleButton.setVisibility(View.VISIBLE);
         spItems.setVisibility(View.VISIBLE);
 
 //

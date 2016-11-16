@@ -162,7 +162,7 @@
                     android:layout_marginRight="25dp"
 
                     android:textColor="@color/black"
-                    android:text="Post Advertizement"
+                    android:text="Post Advertisement"
                     android:gravity="center"
            />
 
