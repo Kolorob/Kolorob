@@ -133,7 +133,7 @@ public class UsersPostActivity extends AppCompatActivity {
                             dialog.cancel();
 
                             expListView = (ExpandableListView) findViewById(R.id.lvExp);
-                            bazarToolAdapter = new BazarToolAdapter(UsersPostActivity.this, listDataHeader, listDataChild);
+                            bazarToolAdapter = new BazarToolAdapter(UsersPostActivity.this, listDataHeader, listDataChild,0);
                             expListView.setAdapter(bazarToolAdapter);
 
                             expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {

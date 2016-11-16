@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
     private String type;
 
     public BazarToolAdapter(Context context, List<String> listDataHeader,
-                            HashMap<String, ArrayList<String>> listChildData) {
+                            HashMap<String, ArrayList<String>> listChildData,int detector) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -82,6 +83,10 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         TextView area = (TextView) convertView.findViewById(R.id.area);
         TextView post_person = (TextView) convertView.findViewById(R.id.post_person);
         TextView another_num = (TextView) convertView.findViewById(R.id.another_num);
+        LinearLayout common_section = (LinearLayout)convertView.findViewById(R.id.common_section);
+        LinearLayout ownSection = (LinearLayout)convertView.findViewById(R.id.ownSection);
+        TextView edit = (TextView) convertView.findViewById(R.id.edit);
+        TextView delete = (TextView) convertView.findViewById(R.id.delete);
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
 
