@@ -163,6 +163,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         int p= Integer.valueOf(price_s);
         Log.d("price_s","=============="+Children[1]);
         Log.d("price_s2","=============="+price_s);
+        
 
         if(Children[1].length()==1&& price_s==one)
         {
