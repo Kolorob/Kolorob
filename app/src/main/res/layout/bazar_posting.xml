@@ -6,6 +6,9 @@
     android:background="@color/kolorob_color"
     android:layout_height="match_parent">
 
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_marginTop="25dp"
@@ -17,18 +20,7 @@
             android:layout_height="match_parent">
 
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"
 
-
-                android:layout_marginRight="10dp"
-                android:popupBackground="@color/white"
-
-                android:background="@color/drak_yellow"
-                android:id="@+id/type_spinner" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -41,7 +33,18 @@
                 android:background="@color/drak_yellow"
                 android:popupBackground="@color/green"
                 android:id="@+id/bazar_spinner" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
 
+
+                android:layout_marginRight="10dp"
+                android:popupBackground="@color/white"
+
+                android:background="@color/drak_yellow"
+                android:id="@+id/type_spinner" />
 
 
 

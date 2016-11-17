@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.location.internal.LocationRequestUpdateData;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.io.UnsupportedEncodingException;
@@ -58,24 +59,52 @@ public class EditBazarActivity extends AppCompatActivity {
     Double screenSize;
     int height,width;
     int tution_detector=0;
-    private int spinCounter=0,spinCounter1=0;
+    private int spinCounter=1,spinCounter1=1;
     CheckBox negotiable;
     int negotiable_check=0;
     TextView submit_bazar;
     String pname,paddress,powner,pdescription;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
+    String bazar_data;
+    String[] bazar_data_splitter;
+    String descriptionx,pricex,datex,area, Phone_number, additional_phone_number, posted_by, product_namex;
+    int adv_type,condition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_bazar);
 
         Intent intent=getIntent();
+        bazar_data=intent.getStringExtra("text");
+        bazar_data_splitter = bazar_data.split("@");
+
+        Log.d("Bazar Data","========"+bazar_data);
+
+        descriptionx=datasplitter(bazar_data_splitter[0]);
+        pricex=bazar_data_splitter[1];
+
+        datex=datasplitter(bazar_data_splitter[2]);
+        Log.d("Check Crush","==========2");
+        condition=getcondition(bazar_data_splitter[3]);
+        Log.d("Check Crush","==========3");
+        area=datasplitter(bazar_data_splitter[4]);
+        Log.d("Check Crush","==========4");
+        Phone_number=bazar_data_splitter[5];
+        Log.d("Check Crush","==========5");
+        additional_phone_number=datasplitter(bazar_data_splitter[6]);
+        Log.d("Check Crush","==========6");
+        posted_by=datasplitter(bazar_data_splitter[7]);
+        Log.d("Check Crush","==========7");
+        product_namex=bazar_data_splitter[8];
+
+        adv_type=getposition(bazar_data_splitter[9]);
+        Log.d("adv_type","========== "+adv_type);
 
 
 
         final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
-        final Spinner type_spinner = (Spinner) findViewById(R.id.type_spinner);
+        final Spinner type_spinner = (Spinner) findViewById(R.id.type_spinners);
 
         List<String> categories = new ArrayList<String>();
         categories.add("কন্ডিশন");
@@ -92,30 +121,35 @@ public class EditBazarActivity extends AppCompatActivity {
         address= (EditText)findViewById(R.id.address);
         price= (EditText)findViewById(R.id.costs);
         description= (EditText)findViewById(R.id.descriptions);
-        contact_person= (EditText)findViewById(R.id.contact_person);
-        contact= (EditText)findViewById(R.id.contact);
-        int heightconsiderforcost=contact_person.getHeight();
+       contact_person= (EditText)findViewById(R.id.contact_person);
+       contact= (EditText)findViewById(R.id.contact);
+       int heightconsiderforcost=contact_person.getHeight();
+       negotiable= (CheckBox)findViewById(R.id.negotiable);
 
 
+       screenSize= AppUtils.ScreenSize(this);
 
-        screenSize= AppUtils.ScreenSize(this);
+        height = AppUtils.getScreenHeight(EditBazarActivity.this);
 
-        int text_field_height;
+       int text_field_height;
         if(screenSize>6.5)
-            text_field_height = height/30;
-        else
+           text_field_height = height/30;
+      else
             text_field_height = height/24;
-        LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
-        spinnners.height= text_field_height;
-        spinner.setLayoutParams(spinnners);
+
+        Log.d("Check Crush","==========1"+text_field_height);
+      LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
+      spinnners.height= text_field_height;
+
+//
+//
 
 
-
-        LinearLayout.LayoutParams type_spinners = (LinearLayout.LayoutParams) type_spinner.getLayoutParams();
-        type_spinners.height= text_field_height;
-        spinner.setLayoutParams(spinnners);
-
-
+       LinearLayout.LayoutParams type_spinners = (LinearLayout.LayoutParams) type_spinner.getLayoutParams();
+       type_spinners.height= text_field_height;
+       spinner.setLayoutParams(spinnners);
+//
+//
         product_name.setHeight(text_field_height);
         price.setHeight(text_field_height);
         description.setHeight(text_field_height);
@@ -124,8 +158,29 @@ public class EditBazarActivity extends AppCompatActivity {
         phone.setHeight(text_field_height);
         address.setHeight(text_field_height);
 
+        product_name.setText(product_namex);
+        price.setText(pricex);
+        description.setText(descriptionx);
+        contact_person.setText(posted_by);
+        phone.setText(Phone_number);
+        address.setText(area);
+        if(!additional_phone_number.equals(""))
+        {
+            contact.setText(additional_phone_number);
+            contact.setBackgroundColor(ContextCompat.getColor(EditBazarActivity.this,R.color.white));
+        }
 
 
+
+
+
+
+
+
+
+
+
+        spinner.setSelection(condition);
 
 
 
@@ -176,7 +231,7 @@ public class EditBazarActivity extends AppCompatActivity {
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
 
-
+        type_spinner.setSelection(adv_type);
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -200,7 +255,7 @@ public class EditBazarActivity extends AppCompatActivity {
 
                 final LinearLayout pricing= (LinearLayout)findViewById(R.id.pricing);
 
-                if(position==5)
+                if(adv_type==5)
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.GONE);
@@ -208,9 +263,9 @@ public class EditBazarActivity extends AppCompatActivity {
                     tution_detector =1;
                     product_name.setHint("টিউশনির ধরন");
                     description.setHint("টিউশনির বিবরন");
-                    tution_detector = position;
+                    tution_detector = adv_type;
                 }
-                else if (position==4)
+                else if (adv_type==4)
                 {
                     spinner.setVisibility(View.GONE);
                     pricing.setVisibility(View.VISIBLE);
@@ -218,9 +273,9 @@ public class EditBazarActivity extends AppCompatActivity {
                     product_name.setHint("কি ভাড়া দিতে চান?");
                     price.setHint("বাসাভাড়া");
                     description.setHint("বাসার বিবরন");
-                    tution_detector = position;
+                    tution_detector = adv_type;
                 }
-                else if(position==3)
+                else if(adv_type==3)
                 {
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
@@ -231,7 +286,7 @@ public class EditBazarActivity extends AppCompatActivity {
                     tution_detector = 0;
                 }
 
-                else if(position==2)
+                else if(adv_type==2)
                 {
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
@@ -241,7 +296,7 @@ public class EditBazarActivity extends AppCompatActivity {
                     tution_detector = 0;
                     description.setHint("বিবরন");
                 }
-                else if(position==1)
+                else if(adv_type==1)
                 {
                     spinner.setVisibility(View.VISIBLE);
                     pricing.setVisibility(View.VISIBLE);
@@ -294,11 +349,12 @@ public class EditBazarActivity extends AppCompatActivity {
 
 
 
-        String number = SharedPreferencesHelper.getNumber(EditBazarActivity.this);
-        String name = SharedPreferencesHelper.getUname(EditBazarActivity.this);
-        phone.setText(number);
+//        String number = SharedPreferencesHelper.getNumber(EditBazarActivity.this);
+//        String name = SharedPreferencesHelper.getUname(EditBazarActivity.this);
+//        phone.setText(number);
         phone.setEnabled(false);
-        contact_person.setText(name);
+        type_spinner.setEnabled(false);
+//        contact_person.setText(name);
         contact_person.setEnabled(true);
 
 
@@ -474,7 +530,7 @@ public class EditBazarActivity extends AppCompatActivity {
 //           b.description=description.getText().toString();
 //
 //           b.type = type_spinner.getSelectedItem().toString();
-//           b.phone = phone.getText().toString(); //MUST BE REGISTERED
+//           b.phone = phone.getText().toString(); MUST BE REGISTERED
 //           b.contact = contact.getText().toString();
 //           b.condition = spinner.getSelectedItem().toString();
 //           b.contact_person = contact_person.getText().toString();
@@ -509,7 +565,7 @@ public class EditBazarActivity extends AppCompatActivity {
                     final BazarItem b = new BazarItem();
 
                     String number =SharedPreferencesHelper.getNumber(EditBazarActivity.this);
-                    if(number.equals(""))
+                    if(Phone_number.equals(""))
                     {
 
                     }
@@ -576,8 +632,10 @@ public class EditBazarActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
+
+                                        Log.d("phone.getText","=============="+contact.getText().toString());
                                         b.phone = phone.getText().toString(); //MUST BE REGISTERED
-                                        if(AppUtils.mobile_number_verification(contact.getText().toString())) {
+                                        if(AppUtils.mobile_number_verification(contact.getText().toString().trim())) {
                                             AlertMessage.showMessage(EditBazarActivity.this,"অনুগ্রহ পূর্বক সঠিক ফোন নম্বর ইনপুট দিন","");
 //                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
                                         }
@@ -615,7 +673,7 @@ public class EditBazarActivity extends AppCompatActivity {
                                                     }
                                                     else
                                                     {
-                                                        Log.d("negotiable_check","=============="+negotiable_check);
+
 
                                                         b.price = price.getText().toString() + negotiable_check;
                                                         if(description.getText().toString().equals(""))
@@ -677,6 +735,16 @@ public class EditBazarActivity extends AppCompatActivity {
     private void saveBazar(BazarItem b,final Context contexts){
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(EditBazarActivity.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
         {
+
+            Log.d("pdes","############"+pdescription);
+            Log.d("type","############"+b.type);
+            Log.d("b.phone","############"+b.phone);
+            Log.d("b.contact","############"+b.contact);
+            Log.d("b.condition","############"+b.condition);
+            Log.d("powner","############"+powner);
+            Log.d("b.price","############"+b.price);
+            Log.d("pname","############"+pname);
+            Log.d("paddress","############"+paddress);
             getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
                             +"&description=" + pdescription +
                             "&type=" + b.type +
@@ -760,5 +828,36 @@ public class EditBazarActivity extends AppCompatActivity {
 
 
 
+    }
+    private int getcondition(String s)
+    {
+        if(s.equals("New"))
+            return 1;
+        else if(s.equals("Refurbished"))
+            return 2;
+        else
+            return 0;
+    }
+
+    private int getposition(String s)
+    {
+        if(s.equals("Buy"))
+            return 1;
+        else if(s.equals("Sell"))
+            return 2;
+        else if(s.equals("Exchange"))
+            return 3;
+        else if(s.equals("To_Let"))
+            return 4;
+        else if(s.equals("Tution"))
+            return 5;
+        else
+            return 0;
+    }
+
+    public String datasplitter(String s)
+    {
+        String[] splitter = s.split(":");
+        return splitter[1];
     }
 }

@@ -565,7 +565,7 @@ if(check==2) {
                             return;
 
                         } else {
-                            Intent a = new Intent(OpeningActivity.this, PhoneRegActivity.class); // Default Activity
+                            Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                             a.putExtra("YourValueKey", mapdetail);
                             frameAnimation.stop();
                             startActivity(a);

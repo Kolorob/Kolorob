@@ -64,7 +64,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final String childText = (String) getChild(groupPosition, groupPosition);
+        final String childText = (String) getChild(groupPosition, groupPosition)+(String) getGroup(groupPosition);
         Log.d("MyList","%%%%%%"+childText);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context

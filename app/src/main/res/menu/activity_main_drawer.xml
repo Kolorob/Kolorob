@@ -55,6 +55,11 @@
                 android:id="@+id/about_offer"
                 android:icon="@drawable/advertising_icon"
                 android:title="কলরব অফার!" />
+
+            <item
+                android:id="@+id/users_post"
+                android:icon="@drawable/advertising_icon"
+                android:title="আমার বাজার পোস্ট" />
             <!--<item-->
             <!--android:id="@+id/nav_share"-->
             <!--android:icon="@drawable/advertising_icon"-->

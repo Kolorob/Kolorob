@@ -2589,6 +2589,13 @@ String pname,paddress,powner,pdescription;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
+        else if (id == R.id.users_post) {
+
+            Intent up = new Intent(this, UsersPostActivity.class);
+            startActivity(up);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
         else if (id == R.id.about_offer) {
 
             Intent em = new Intent(this, OfferActivity.class);

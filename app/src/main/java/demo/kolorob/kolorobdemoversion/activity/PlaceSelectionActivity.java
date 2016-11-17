@@ -184,6 +184,10 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         String app_ver = "";
         NotificationManager manager;
         mInterstitialAd = new InterstitialAd(this);
+        SharedPreferencesHelper.setUname(PlaceSelectionActivity.this,"Arafat");
+        SharedPreferencesHelper.setNumber(PlaceSelectionActivity.this,"01790615263");
+
+
 
         // set the ad unit ID
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_kolorob));
@@ -713,6 +717,14 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
             Intent em = new Intent(this, OfferActivity.class);
             startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
+
+        else if (id == R.id.users_post) {
+
+            Intent up = new Intent(this, UsersPostActivity.class);
+            startActivity(up);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
