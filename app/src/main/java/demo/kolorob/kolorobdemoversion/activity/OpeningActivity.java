@@ -399,10 +399,10 @@ public class OpeningActivity extends Activity {
             else
 
             {   install=System.currentTimeMillis();
-                long check=settings.getLong("timefirstinstall",Long.valueOf(2));
+                /*long check=settings.getLong("timefirstinstall",Long.valueOf(2));
 if(check==2) {
     settings.edit().putLong("timefirstinstall", install).apply();
-}
+}*/
                 settings.edit().putLong("time", System.currentTimeMillis()).apply();
 // get the time and make a date out of it
 

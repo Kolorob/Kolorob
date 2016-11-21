@@ -84,7 +84,7 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnphn:
 
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:+8801915974786"));
+                callIntent.setData(Uri.parse("tel:+8801818537541"));
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions

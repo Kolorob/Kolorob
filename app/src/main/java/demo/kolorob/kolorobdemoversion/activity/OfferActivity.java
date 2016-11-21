@@ -29,9 +29,11 @@ import com.android.volley.toolbox.Volley;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
@@ -85,10 +87,10 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claim.setShadowEnabled(false);
         claim.setButtonColor(getResources().getColor(R.color.gray));
         claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
-
-        Date date2 = new Date(settings.getLong("timefirstinstall", 0));
+        String times= settings.getString("timefirstinstall", null);
+        Date date2 = getDate(times);
         Date today=new Date();
-        long diffInMillisec = today.getTime() - date2.getTime();
+        Long diffInMillisec=today.getTime()-date2.getTime();
         fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
@@ -192,7 +194,24 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         }
         return concatResult;
     }
+    private Date getDate(String OurDate)
+    {
+        Date value=null;
+        try
+        {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+            value = formatter.parse(OurDate);
 
+
+
+        }
+        catch (Exception e)
+        {
+            value = null;
+        }
+        return value;
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

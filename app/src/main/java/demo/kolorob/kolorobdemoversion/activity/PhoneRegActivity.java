@@ -45,11 +45,14 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -95,8 +98,8 @@ public class PhoneRegActivity extends Activity {
         PHN=settings.getString("PHN",null);
 
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
-
-            if(accessToken==null)goToLogin(true);
+            if(IMEI==null)checkPermissions();
+            else if(accessToken==null)goToLogin(true);
 
         }
         else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -286,6 +289,7 @@ public class PhoneRegActivity extends Activity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
     public void goToLogin(boolean isSMSLogin) {
 
         LoginType loginType = isSMSLogin ? LoginType.PHONE : LoginType.EMAIL;
@@ -311,16 +315,15 @@ public class PhoneRegActivity extends Activity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        if(IMEINumber==null)
-        {
+
             SharedPreferences settings = getSharedPreferences("prefs", 0);
 
             IMEINumber=    settings.getString("IMEI", null);
 
-        }
+
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/demo/api/customer_reg2?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
+        String url = "http://kolorob.net/demo/api/customer_reg3?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
         //  String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -336,13 +339,21 @@ public class PhoneRegActivity extends Activity {
 
                             //
 
-                            if(response.equals("true"))
+                            if(response.contains("true"))
                             {
+                                List<String> responses = Arrays.asList(response.split(","));
+                                String dateserver=responses.get(1);
+
+                                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                String check=settings.getString("timefirstinstall","2");
+                                if(check.equals("2")) {
+                                    settings.edit().putString("timefirstinstall", dateserver).apply();
+                                }
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
 
                                 SharedPreferencesHelper.setUname(con,uname);
-                                SharedPreferences settings = getSharedPreferences("prefs", 0);
-                                SharedPreferences.Editor editor = settings.edit();
+
                                 editor.putBoolean("IFREGISTERED", true);
                                 editor.apply();
                                 showMessageExisting(PhoneRegActivity.this, "রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে",
@@ -372,6 +383,7 @@ public class PhoneRegActivity extends Activity {
                                 List<String> responses = Arrays.asList(response.split(","));
 
                                 String serverusername= responses.get(3);
+                                String thisdate=responses.get(10);
                                 String serverusernamechanged = StringEscapeUtils.unescapeJava(serverusername).replace("%20"," " );
 
                                 String serverphonenumber=responses.get(2);
@@ -380,6 +392,10 @@ public class PhoneRegActivity extends Activity {
                                 SharedPreferencesHelper.setUname(con,serverusernamechanged);
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
+                                String check=settings.getString("timefirstinstall","2");
+                                if(check.equals("2")) {
+                                    settings.edit().putString("timefirstinstall", thisdate).apply();
+                                }
                                 editor.putBoolean("IFREGISTERED", true);
                                 editor.apply();
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
