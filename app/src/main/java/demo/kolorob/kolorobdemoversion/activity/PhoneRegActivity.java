@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,7 +78,8 @@ public class PhoneRegActivity extends Activity {
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     String gotname;
-
+    TextView helname;
+Boolean registered;
     private Context con;
     String IMEINumber,IMEI=null,PHN=null;
     FButton Submit;
@@ -91,12 +93,14 @@ public class PhoneRegActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.phone_reg);
+        LinearLayout first=(LinearLayout)findViewById(R.id.firstreg);
+        LinearLayout second=(LinearLayout)findViewById(R.id.secondreg);
         con = this;
         accessToken = AccountKit.getCurrentAccessToken();
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         IMEI=settings.getString("IMEI",null);
         PHN=settings.getString("PHN",null);
-
+registered=settings.getBoolean("IFREGISTERED",false);
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             if(IMEI==null)checkPermissions();
             else if(accessToken==null)goToLogin(true);
@@ -107,9 +111,16 @@ public class PhoneRegActivity extends Activity {
             doPermissionGrantedStuffs();
 
         }
-
+        if(registered)
+        {
+            first.setVisibility(View.GONE);
+            second.setVisibility(View.VISIBLE);
+            helname  = (TextView)findViewById(R.id.hellonaame);
+            helname.setText(SharedPreferencesHelper.getUname(PhoneRegActivity.this));
+        }
 
         phone  = (EditText)findViewById(R.id.phone_id);
+
         phone.setHintTextColor(getResources().getColor(R.color.blue));
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);

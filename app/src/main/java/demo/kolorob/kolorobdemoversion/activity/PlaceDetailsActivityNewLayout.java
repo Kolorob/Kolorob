@@ -3732,7 +3732,7 @@ String pname,paddress,powner,pdescription;
                             //run the sqls one by one
                             for (int i = 0; i<sql.length;i++)
                             {
-                                Log.d("SQL[i]","%%%%%%"+sql[i]);
+                               // Log.d("SQL[i]","%%%%%%"+sql[i]);
                                 db.execSQL(sql[i]);
                             }
                             //now reload the data taht has beed saved
@@ -3744,14 +3744,8 @@ String pname,paddress,powner,pdescription;
                                 allBazar.add(new BazarItem(cursor));
                                 vf++;
                             }
-                            Log.d("vvff","%%%%%%"+vf);
-                            //tester. You may delete this portion
-                            Context context = getApplicationContext();
-//                            CharSequence text = allBazar.get(0).toString();
-//                            int duration = Toast.LENGTH_SHORT;
-//                            Toast toast = Toast.makeText(context, text, duration);
-//                            toast.show();
-                            //tester ends======
+                           // Log.d("vvff","%%%%%%"+vf);
+                          cursor.close();
                         }
 
 
@@ -3779,7 +3773,7 @@ String pname,paddress,powner,pdescription;
                                     ;
 
 
-                            Log.d("Bazar Data","============="+bazarData);
+                           // Log.d("Bazar Data","============="+bazarData);
 
                             String group_data= bazarItem.product_name+"@"+
                                     bazarItem.type+"@"+"v";
@@ -3795,7 +3789,7 @@ String pname,paddress,powner,pdescription;
                             // myList.get(bazar_counter).add(bazarData);
                             //             myList.add(bazar_data);
 
-                            Log.d("myList","######"+myList);
+                        //    Log.d("myList","######"+myList);
 
 
 
@@ -4195,14 +4189,14 @@ String pname,paddress,powner,pdescription;
             }
         });
 
-        Log.d("Panel States","******"+panelStates);
+       // Log.d("Panel States","******"+panelStates);
 
         slider_part.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AppUtils.hideKeyboard(activity);
-                Log.d("Panel works or not","*********");
-                Log.d("Panel States","******"+panelStates);
+              //  Log.d("Panel works or not","*********");
+              //  Log.d("Panel States","******"+panelStates);
                 if(panelStates)
                 {
                     mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
@@ -4256,7 +4250,7 @@ String pname,paddress,powner,pdescription;
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
 
-                Log.d(">>>>","Slide Up");
+               // Log.d(">>>>","Slide Up");
 
             }
 
@@ -4274,7 +4268,7 @@ String pname,paddress,powner,pdescription;
                 pannl_height = height/17;
 
                 int heights = footer.getHeight();
-                Log.d("footer height","================"+heights);
+            //    Log.d("footer height","================"+heights);
                 submit_bazar.setHeight(heights);
                 if(pannl_height<70)
                     pannl_height=70;
@@ -4314,7 +4308,7 @@ String pname,paddress,powner,pdescription;
                 if(pannl_height<70)
                     pannl_height=70;
                // submit_bazar.setHeight(pannl_height);
-                Log.d(">>>>","onPanelCollapsed");
+              //  Log.d(">>>>","onPanelCollapsed");
 
                 footer.setText("বিজ্ঞাপন দিন");
 
