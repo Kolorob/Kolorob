@@ -2143,10 +2143,7 @@ String pname,paddress,powner,pdescription;
                                     });
 
                                     alertDialog.setCancelable(true);
-//		if(SharedPreferencesHelper.isTabletDevice(c))
-//			textAsk.setTextSize(23);
-//		else
-//			textAsk.setTextSize(17);
+
                                     alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
                                 }
                                 //tester ends======
@@ -3066,14 +3063,18 @@ String pname,paddress,powner,pdescription;
 
 
 
-                if(SearchClicked==true)
+                if(SearchClicked==true||ListClicked==true)
                 {
                     llSubCatListHolder.setVisibility(View.GONE);
                     svsholder.setVisibility(View.GONE);
                     svs.setVisibility(View.GONE);
                 }
-                else if(showList!=1 && SearchClicked==false)
+
+                else if(showList!=1 && SearchClicked==false||ListClicked==false)
                 {
+                    llSubCatListHolder.setVisibility(View.VISIBLE);
+                    svsholder.setVisibility(View.VISIBLE);
+                    svs.setVisibility(View.VISIBLE);
 
                     if (isCatExpandedOnce)
                         showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
