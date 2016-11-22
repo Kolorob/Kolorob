@@ -859,10 +859,10 @@ if(check==2) {
                     this.finish();
                 }
                 else {
-                    ToastMessageDisplay.setText(OpeningActivity.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                    ToastMessageDisplay.setText(OpeningActivity.this.getApplicationContext(),"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
-                    ToastMessageDisplay.showText(OpeningActivity.this);
+                    ToastMessageDisplay.showText(OpeningActivity.this.getApplicationContext());
 
 
 
@@ -988,8 +988,8 @@ if(check==2) {
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                ToastMessageDisplay.setText(OpeningActivity.this,"তথ্য সংগ্রহ চলছে");
-                ToastMessageDisplay.showText(OpeningActivity.this);
+                ToastMessageDisplay.setText(OpeningActivity.this.getApplicationContext(),"তথ্য সংগ্রহ চলছে");
+                ToastMessageDisplay.showText(OpeningActivity.this.getApplicationContext());
             }
         }
 
