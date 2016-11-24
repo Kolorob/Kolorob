@@ -87,7 +87,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         claim.setShadowEnabled(false);
         claim.setButtonColor(getResources().getColor(R.color.gray));
         claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
-        String times= settings.getString("timefirstinstall", null);
+        String times= settings.getString("timesfirstinstall", null);
         Date date2 = getDate(times);
         Date today=new Date();
         Long diffInMillisec=today.getTime()-date2.getTime();

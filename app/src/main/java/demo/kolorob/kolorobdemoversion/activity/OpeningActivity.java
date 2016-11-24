@@ -225,6 +225,20 @@ public class OpeningActivity extends Activity {
             {
                 SharedPreferences.Editor editor = settings.edit();
 
+                if(previousVersion.floatValue() < Float.parseFloat("2.03")) {
+  long check=settings.getLong("timefirstinstall",Long.valueOf(2));
+if(check!=2) {
+    settings.edit().putString("timesfirstinstall", String.valueOf(check)).apply();
+}
+}
+                else if(previousVersion==Float.parseFloat("2.03"))
+                {
+                    String check2=settings.getString("timefirstinstall","2");
+                    if(!check2.equals("2")) {
+                        settings.edit().putString("timesfirstinstall", check2).apply();
+                    }
+
+                }
                 editor.putBoolean("firstRun", false);
                 editor.apply();
 

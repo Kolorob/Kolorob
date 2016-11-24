@@ -8,8 +8,8 @@ android {
         applicationId "demo.kolorob.kolorobdemoversion"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 22
-        versionName "2.03"
+        versionCode 23
+        versionName "2.04"
 
     }
     buildTypes {
@@ -38,7 +38,6 @@ dependencies {
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.7.12'
     compile 'com.android.support:support-v4:23.3.0'
-
     compile 'com.sothree.slidinguppanel:library:3.2.1'
     compile 'org.jetbrains:annotations-java5:15.0'
     compile 'com.facebook.android:account-kit-sdk:4.11.0'

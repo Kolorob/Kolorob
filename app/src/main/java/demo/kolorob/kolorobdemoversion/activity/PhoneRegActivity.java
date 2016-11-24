@@ -46,14 +46,11 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -96,11 +93,12 @@ Boolean registered;
         LinearLayout first=(LinearLayout)findViewById(R.id.firstreg);
         LinearLayout second=(LinearLayout)findViewById(R.id.secondreg);
         con = this;
-        accessToken = AccountKit.getCurrentAccessToken();
+
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         IMEI=settings.getString("IMEI",null);
         PHN=settings.getString("PHN",null);
 registered=settings.getBoolean("IFREGISTERED",false);
+        accessToken = AccountKit.getCurrentAccessToken();
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             if(IMEI==null)checkPermissions();
             else if(accessToken==null)goToLogin(true);
@@ -357,9 +355,9 @@ registered=settings.getBoolean("IFREGISTERED",false);
 
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
-                                String check=settings.getString("timefirstinstall","2");
+                                String check=settings.getString("timesfirstinstall","2");
                                 if(check.equals("2")) {
-                                    settings.edit().putString("timefirstinstall", dateserver).apply();
+                                    settings.edit().putString("timesfirstinstall", dateserver).apply();
                                 }
                                 SharedPreferencesHelper.setNumber(con,phoneNumber);
 
@@ -403,9 +401,9 @@ registered=settings.getBoolean("IFREGISTERED",false);
                                 SharedPreferencesHelper.setUname(con,serverusernamechanged);
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
-                                String check=settings.getString("timefirstinstall","2");
+                                String check=settings.getString("timesfirstinstall","2");
                                 if(check.equals("2")) {
-                                    settings.edit().putString("timefirstinstall", thisdate).apply();
+                                    settings.edit().putString("timesfirstinstall", thisdate).apply();
                                 }
                                 editor.putBoolean("IFREGISTERED", true);
                                 editor.apply();
