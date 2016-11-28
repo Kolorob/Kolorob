@@ -219,8 +219,9 @@ public class OpeningActivity extends Activity {
         {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
 
-            Float currentVersion= Float.parseFloat(app_ver);
+            Float currentVersion= Float.parseFloat("2.05");
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
+            //Float previousVersion=Float.parseFloat("2.03");
             if(currentVersion >previousVersion)
             {
                 SharedPreferences.Editor editor = settings.edit();
@@ -231,7 +232,7 @@ if(check!=2) {
     settings.edit().putString("timesfirstinstall", String.valueOf(check)).apply();
 }
 }
-                else if(previousVersion==Float.parseFloat("2.03"))
+                else if(previousVersion.floatValue()==Float.parseFloat("2.03"))
                 {
                     String check2=settings.getString("timefirstinstall","2");
                     if(!check2.equals("2")) {
@@ -459,7 +460,7 @@ if(check==2) {
             final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
             String text="আপনি কি তথ্য আপডেট করতে চান? ";
             textAsk.setText(text);
-            if(SharedPreferencesHelper.isTabletDevice(OpeningActivity.this))
+            if(SharedPreferencesHelper.isTabletDevice(OpeningActivity.this.context))
                 textAsk.setTextSize(23);
             else
                 textAsk.setTextSize(17);
@@ -873,10 +874,10 @@ if(check==2) {
                     this.finish();
                 }
                 else {
-                    ToastMessageDisplay.setText(OpeningActivity.this.getApplicationContext(),"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                    ToastMessageDisplay.setText(OpeningActivity.this.context,"আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
 //                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
 //                            Toast.LENGTH_LONG).show();
-                    ToastMessageDisplay.showText(OpeningActivity.this.getApplicationContext());
+                    ToastMessageDisplay.showText(OpeningActivity.this.context);
 
 
 
@@ -1002,8 +1003,8 @@ if(check==2) {
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                ToastMessageDisplay.setText(OpeningActivity.this.getApplicationContext(),"তথ্য সংগ্রহ চলছে");
-                ToastMessageDisplay.showText(OpeningActivity.this.getApplicationContext());
+                ToastMessageDisplay.setText(OpeningActivity.this.context,"তথ্য সংগ্রহ চলছে");
+                ToastMessageDisplay.showText(OpeningActivity.this.context);
             }
         }
 

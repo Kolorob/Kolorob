@@ -197,14 +197,20 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     private Date getDate(String OurDate)
     {
         Date value=null;
-        try
-        {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-            value = formatter.parse(OurDate);
+        try {
+            if (OurDate.contains(":"))
+            {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+                value = formatter.parse(OurDate);
 
-
-
+            } else {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date resultdate = new Date(Long.parseLong(OurDate));
+                value=resultdate;
+         /*
+            Log.e("AS",s.toString());*/
+            }
         }
         catch (Exception e)
         {
