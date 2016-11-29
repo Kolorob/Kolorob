@@ -219,7 +219,7 @@ public class OpeningActivity extends Activity {
         {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
 
-            Float currentVersion= Float.parseFloat("2.05");
+            Float currentVersion= Float.parseFloat(app_ver);
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(OpeningActivity.this));
             //Float previousVersion=Float.parseFloat("2.03");
             if(currentVersion >previousVersion)
