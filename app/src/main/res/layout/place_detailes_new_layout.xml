@@ -69,7 +69,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/searchholder"
-               android:visibility="gone"
+               android:visibility="visible"
                 android:layout_height="match_parent">
 
                 <EditText
@@ -148,7 +148,7 @@
                             android:background="@color/semi_transparent">
                             <LinearLayout
                                 android:id="@+id/LinearLayoutfilter"
-                                android:visibility="gone"
+                                android:visibility="visible"
                                 android:layout_width="@dimen/searchbar"
                                 android:layout_height="wrap_content"
 
@@ -208,8 +208,6 @@
                 android:layout_alignParentRight="false"
                 android:layout_alignParentLeft="true"
                 >
-
-
 
                 <ScrollView
                 android:id="@+id/svCategoryListHolder"
