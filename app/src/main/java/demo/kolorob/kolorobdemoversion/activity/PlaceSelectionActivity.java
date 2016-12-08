@@ -552,24 +552,140 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
         areaItems = new ArrayList<AreaItem>();
-        areaItem = new AreaItem("Mirpur 6");
+        areaItem = new AreaItem("Mirpur 1");
         areaItems.add(areaItem);
-        areaItem = new AreaItem("Mirpur 7");
+        areaItem = new AreaItem("North Bishil");
         areaItems.add(areaItem);
-        areaItem = new AreaItem("Eastern Housing");
+        areaItem = new AreaItem("Baksnagar");
         areaItems.add(areaItem);
-        areaItem = new AreaItem("Albodi");
+        areaItem = new AreaItem("Nobabaer Bag");
         areaItems.add(areaItem);
-        areaItem = new AreaItem("Pallabi");
+        areaItem = new AreaItem("BISF Staff Quarter");
         areaItems.add(areaItem);
-        areaItem = new AreaItem("Albodi Rupnagar Tinshed");
+        areaItem = new AreaItem("Botanical Garden Residential Area");
         areaItems.add(areaItem);
-        areaItem = new AreaItem("Duaripara");
-        areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 06",areaItems);
+        wardItem = new WardItem("Ward 08",areaItems);
         wardItems.add(wardItem);
 
 
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Bagbari");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Harirampur");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Jahurabad");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Bazarpara");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Bordhonbari");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Golartek");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Choto Diabari");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Coat Bari");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Anandanagar");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 09",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Gabtoli Jamidarbari");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Gabtoli 1st Colony");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Gabtoli 2nd Colony");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Gabtoli 3rd Colony");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Goidartek");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Darus Salam");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 10",areaItems);
+        wardItems.add(wardItem);
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Kallyanpur");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Paikpara");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 11",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Admmed Nagar");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("South Bishil");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Shah Ali Bag");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Kalwala Para");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Paikpara Staff Quarter");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Educatiob Board Staff Quarter");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Tolarbag");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("BADC Staff Quarter");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 12",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Borobag");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Pirer Bag");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Monipur");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 13",areaItems);
+        wardItems.add(wardItem);
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Kazi para");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Shewrapara");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Senpara Parbata");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 14",areaItems);
+        wardItems.add(wardItem);
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Vashantek");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Albodortek");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Damalkot");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Lalasorai");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Matikata");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Manikdi");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Balughat");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Baigertek");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Barontek\n");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 15",areaItems);
+        wardItems.add(wardItem);
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Ibrahimpur");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Kafrul");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 16",areaItems);
+        wardItems.add(wardItem);
 
     }
 

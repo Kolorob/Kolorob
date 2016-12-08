@@ -19,6 +19,23 @@ public class WardItem {
         this.name = name;
         this.arealist = arealist;
     }
- ;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<AreaItem> getArealist() {
+        return arealist;
+    }
+
+    public void setArealist(ArrayList<AreaItem> arealist) {
+        this.arealist = arealist;
+    }
+
+    ;
 }
 
