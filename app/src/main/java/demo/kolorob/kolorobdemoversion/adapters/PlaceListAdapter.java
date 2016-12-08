@@ -84,19 +84,19 @@ public class PlaceListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
 
-        ArrayList<Country> countryList = continentList.get(groupPosition).getCountryList();
-        return countryList.size();
+        ArrayList<AreaItem> arealist = wardList.get(groupPosition).getArealist();
+        return arealist.size();
 
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return continentList.get(groupPosition);
+        return wardList.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return continentList.size();
+        return wardList.size();
     }
 
     @Override
@@ -108,14 +108,14 @@ public class PlaceListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isLastChild, View view,
                              ViewGroup parent) {
 
-        Continent continent = (Continent) getGroup(groupPosition);
+        WardItem wardItem = (WardItem) getGroup(groupPosition);
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.group_row, null);
+            view = layoutInflater.inflate(R.layout.ward_row, null);
         }
 
         TextView heading = (TextView) view.findViewById(R.id.heading);
-        heading.setText(continent.getName().trim());
+        heading.setText(wardItem.getName().trim());
 
         return view;
     }
@@ -133,11 +133,11 @@ public class PlaceListAdapter extends BaseExpandableListAdapter {
     public void filterData(String query){
 
         query = query.toLowerCase();
-        Log.v("MyListAdapter", String.valueOf(continentList.size()));
-        continentList.clear();
+        Log.v("MyListAdapter", String.valueOf(wardList.size()));
+        wardList.clear();
 
         if(query.isEmpty()){
-            continentList.addAll(originalList);
+            wardList.addAll(originalList);
         }
         else {
 
