@@ -16,7 +16,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-package onmobile.app.test.expandablelistviewwithsearchfilter;
+
 
 /**
  * Created by Mazharul.Islam1 on 12/8/2016.
@@ -141,24 +141,23 @@ public class PlaceListAdapter extends BaseExpandableListAdapter {
         }
         else {
 
-            for(Continent continent: originalList){
+            for(WardItem wardItem: originalList){
 
-                ArrayList<Country> countryList = continent.getCountryList();
-                ArrayList<Country> newList = new ArrayList<Country>();
-                for(Country country: countryList){
-                    if(country.getCode().toLowerCase().contains(query) ||
-                            country.getName().toLowerCase().contains(query)){
-                        newList.add(country);
+                ArrayList<AreaItem> areaItems = wardItem.getArealist();
+                ArrayList<AreaItem> newList = new ArrayList<AreaItem>();
+                for(AreaItem areaItem: areaItems){
+                    if(areaItem.getName().toLowerCase().contains(query)){
+                        newList.add(areaItem);
                     }
                 }
                 if(newList.size() > 0){
-                    Continent nContinent = new Continent(continent.getName(),newList);
-                    continentList.add(nContinent);
+                    WardItem wardItem1 = new WardItem(wardItem.getName(),newList);
+                    wardList.add(wardItem1);
                 }
             }
         }
 
-        Log.v("MyListAdapter", String.valueOf(continentList.size()));
+        Log.v("MyListAdapter", String.valueOf(wardList.size()));
         notifyDataSetChanged();
 
     }
