@@ -41,6 +41,7 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -77,7 +78,7 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 
-public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
+public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener,SearchView.OnQueryTextListener, SearchView.OnCloseListener {
     ImageButton img;
     Toolbar toolbar;
     private String comment = "";
@@ -1050,5 +1051,18 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     }
 
 
+    @Override
+    public boolean onClose() {
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }
