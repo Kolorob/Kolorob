@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +37,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -68,6 +70,7 @@ import java.util.List;
 import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.adapters.PlaceListAdapter;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.AreaItem;
 import demo.kolorob.kolorobdemoversion.model.WardItem;
@@ -100,6 +103,9 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
     Boolean Reviewgiven=false;
     Boolean click=false;
     private static final int REQUEST_PHONE_STATE = 0;
+    private SearchView search;
+    private PlaceListAdapter placeListAdapter;
+    private ExpandableListView myList;
 
     Date date2,today;
     long diffInMillisec,diffInDays;
@@ -185,6 +191,17 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         final String comment = "";
         String app_ver = "";
         NotificationManager manager;
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        search = (SearchView) findViewById(R.id.search);
+        search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        search.setIconifiedByDefault(false);
+        search.setOnQueryTextListener(this);
+        search.setOnCloseListener(this);
+        displayList();
+        expandAll();
+
+
        /* mInterstitialAd = new InterstitialAd(this);
 
         // set the ad unit ID
@@ -1036,6 +1053,28 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
      * Callback received when a permissions request has been completed.
      */
 
+
+    private void expandAll() {
+        int count = placeListAdapter.getGroupCount();
+        for (int i = 0; i < count; i++){
+            myList.expandGroup(i);
+        }
+    }
+
+
+    private void displayList() {
+
+        //display the list
+        loadSomeData();
+
+        //get reference to the ExpandableListView
+        myList = (ExpandableListView) findViewById(R.id.expandableList);
+        //create the adapter by passing your ArrayList data
+        placeListAdapter = new PlaceListAdapter(PlaceSelectionActivity.this,wardItems );
+        //attach the adapter to the list
+        myList.setAdapter(placeListAdapter);
+
+    }
 
     private void alertAlert(String msg) {
         new AlertDialog.Builder(PlaceSelectionActivity.this)
