@@ -1092,16 +1092,22 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean onClose() {
+        placeListAdapter.filterData("");
+        expandAll();
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        placeListAdapter.filterData(query);
+        expandAll();
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        placeListAdapter.filterData(newText);
+        expandAll();
         return false;
     }
 }
