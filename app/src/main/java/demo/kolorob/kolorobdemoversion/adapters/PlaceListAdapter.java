@@ -18,20 +18,6 @@ import java.util.Locale;
 
 
 
-/**
- * Created by Mazharul.Islam1 on 12/8/2016.
- */
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.TextView;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.model.AreaItem;

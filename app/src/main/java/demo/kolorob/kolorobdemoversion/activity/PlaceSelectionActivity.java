@@ -68,6 +68,8 @@ import java.util.Map;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.AreaItem;
+import demo.kolorob.kolorobdemoversion.model.WardItem;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
@@ -151,6 +153,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
     private GoogleApiClient client;
     FrameLayout mImageMap;
+    private ArrayList<WardItem> wardItems = new ArrayList<WardItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -473,6 +476,101 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
 
         }
+    }
+
+
+    private void loadSomeData() {
+
+        ArrayList<AreaItem> areaItems = new ArrayList<AreaItem>();
+        AreaItem areaItem = new AreaItem("Mirpur 12");
+        areaItems.add(areaItem);
+        areaItem= new AreaItem("Mirpur DOHS");
+        areaItems.add(areaItem);
+        WardItem wardItem = new WardItem("Ward 02",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Mirpur 10");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Mirpur 11");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 03",areaItems);
+        wardItems.add(wardItem);
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Mirpur 13");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Mirpur 14");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Baishteki");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 04",areaItems);
+        wardItems.add(wardItem);
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Mirpur 11");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Bauniabadh");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Palashnagar");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 05",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Mirpur 6");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Mirpur 7");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Eastern Housing");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Albodi");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Pallabi");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Albodi Rupnagar Tinshed");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Duaripara");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 06",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Mirpur 2");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Mirpur 6");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Rupnagar");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Government Housing Estate");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 07",areaItems);
+        wardItems.add(wardItem);
+
+
+        areaItems = new ArrayList<AreaItem>();
+        areaItem = new AreaItem("Mirpur 6");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Mirpur 7");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Eastern Housing");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Albodi");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Pallabi");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Albodi Rupnagar Tinshed");
+        areaItems.add(areaItem);
+        areaItem = new AreaItem("Duaripara");
+        areaItems.add(areaItem);
+        wardItem = new WardItem("Ward 06",areaItems);
+        wardItems.add(wardItem);
+
+
+
     }
 
 
