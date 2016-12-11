@@ -109,7 +109,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 
     Date date2,today;
     long diffInMillisec,diffInDays;
-    
+
 
     private GoogleApiClient client;
     FrameLayout mImageMap;

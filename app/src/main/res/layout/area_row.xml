@@ -9,6 +9,7 @@
         android:layout_alignParentTop="true"
         android:paddingLeft="35sp"
         android:paddingRight="10dp"
+        android:textColor="@color/white"
         android:text="USA"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
