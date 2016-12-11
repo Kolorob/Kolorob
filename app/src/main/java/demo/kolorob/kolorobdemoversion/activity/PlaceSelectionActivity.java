@@ -464,7 +464,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem= new AreaItem("Mirpur DOHS","মিরপুর ডিওএইচএস");
         areaItems.add(areaItem);
-        WardItem wardItem = new WardItem("Ward 02",areaItems);
+        WardItem wardItem = new WardItem("ওয়ার্ড ০২",areaItems);
         wardItems.add(wardItem);
 
 
@@ -473,7 +473,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Mirpur 11","মিরপুর ১১");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 03",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৩",areaItems);
         wardItems.add(wardItem);
 
         areaItems = new ArrayList<AreaItem>();
@@ -483,7 +483,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Baishteki","বাইশটেকি");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 04",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৪",areaItems);
         wardItems.add(wardItem);
 
         areaItems = new ArrayList<AreaItem>();
@@ -493,7 +493,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Palashnagar","পলাশনগর");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 05",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৫",areaItems);
         wardItems.add(wardItem);
 
 
@@ -512,7 +512,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Duaripara","দুয়ারীপাড়া");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 06",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৬",areaItems);
         wardItems.add(wardItem);
 
 
@@ -525,7 +525,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Government Housing Estate","গভর্নমেন্ট হাউজিং স্টেট");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 07",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৭",areaItems);
         wardItems.add(wardItem);
 
 
@@ -542,7 +542,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Botanical Garden Residential Area","বোটানিক্যাল গার্ডেন রেসিডেন্সিয়াল এরিয়া");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 08",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৮",areaItems);
         wardItems.add(wardItem);
 
 
@@ -565,7 +565,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Anandanagar","আনন্দনগর");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 09",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ০৯",areaItems);
         wardItems.add(wardItem);
 
 
@@ -582,7 +582,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Darus Salam","দারুস সালাম");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 10",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১০",areaItems);
         wardItems.add(wardItem);
 
         areaItems = new ArrayList<AreaItem>();
@@ -590,7 +590,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Paikpara","পাইকপাড়া");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 11",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১১",areaItems);
         wardItems.add(wardItem);
 
 
@@ -611,7 +611,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("BADC Staff Quarter","বিএডিসি স্ট্যাফ কোয়ার্টার");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 12",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১২",areaItems);
         wardItems.add(wardItem);
 
 
@@ -622,7 +622,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Monipur","মনিপূর");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 13",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১৩",areaItems);
         wardItems.add(wardItem);
 
         areaItems = new ArrayList<AreaItem>();
@@ -632,7 +632,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Senpara Parbata","সেনপাড়া পর্বতা");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 14",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১৪",areaItems);
         wardItems.add(wardItem);
 
         areaItems = new ArrayList<AreaItem>();
@@ -654,7 +654,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Barontek","বারনটেক");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 15",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১৫",areaItems);
         wardItems.add(wardItem);
 
         areaItems = new ArrayList<AreaItem>();
@@ -662,7 +662,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         areaItems.add(areaItem);
         areaItem = new AreaItem("Kafrul","কাফরুল");
         areaItems.add(areaItem);
-        wardItem = new WardItem("Ward 16",areaItems);
+        wardItem = new WardItem("ওয়ার্ড ১৬",areaItems);
         wardItems.add(wardItem);
 
     }
