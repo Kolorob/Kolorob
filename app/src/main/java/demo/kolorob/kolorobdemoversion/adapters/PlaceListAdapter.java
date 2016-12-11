@@ -62,7 +62,7 @@ public class PlaceListAdapter extends BaseExpandableListAdapter {
         TextView name = (TextView) view.findViewById(R.id.name);
 
 
-        name.setText(areaItem.getName().trim());
+        name.setText(areaItem.getBname().trim());
 
         return view;
     }
@@ -133,6 +133,9 @@ public class PlaceListAdapter extends BaseExpandableListAdapter {
                 ArrayList<AreaItem> newList = new ArrayList<AreaItem>();
                 for(AreaItem areaItem: areaItems){
                     if(areaItem.getName().toLowerCase().contains(query)){
+                        newList.add(areaItem);
+                    }
+                    else if(areaItem.getBname().toLowerCase().contains(query)){
                         newList.add(areaItem);
                     }
                 }

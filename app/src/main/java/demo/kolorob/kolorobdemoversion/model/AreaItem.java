@@ -6,12 +6,21 @@ package demo.kolorob.kolorobdemoversion.model;
 public class AreaItem {
 
     private String name = "";
+    private String bname = "";
 
-    public AreaItem(String name) {
+    public AreaItem(String name,String bname) {
         super();
         this.name = name;
+        this.bname=bname;
     }
 
+    public String getBname() {
+        return bname;
+    }
+
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
 
     public String getName() {
         return name;
