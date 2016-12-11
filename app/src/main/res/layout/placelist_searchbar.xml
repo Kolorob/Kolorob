@@ -10,7 +10,7 @@
         android:layout_marginRight="10dp"
         android:paddingLeft="10dp"
 
-        android:queryHint="Search Here"
+        android:queryHint="আপনার এলাকা খুজুন"
 
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

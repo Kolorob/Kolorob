@@ -45,6 +45,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -152,12 +153,20 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         search.setIconifiedByDefault(false);
         search.setOnQueryTextListener(this);
         search.setOnCloseListener(this);
+        //search.setHintTextColor(getResources().getColor(R.color.white));
+
         int searchPlateId = search.getContext().getResources()
                 .getIdentifier("android:id/search_plate", null, null);
         View searchPlateView = search.findViewById(searchPlateId);
+        int id =  search.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+
+        TextView searchView =(TextView)findViewById(id);
+        searchView.setHintTextColor(ContextCompat.getColor(PlaceSelectionActivity.this,R.color.kolorob_color));
+        searchView.setTextColor(ContextCompat.getColor(PlaceSelectionActivity.this,R.color.kolorob_color));
         if (searchPlateView != null) {
             searchPlateView.setBackgroundColor(ContextCompat.getColor(PlaceSelectionActivity.this,R.color.white));
         }
+
         displayList();
         expandAll();
 
