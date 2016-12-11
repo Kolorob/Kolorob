@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -151,6 +152,12 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         search.setIconifiedByDefault(false);
         search.setOnQueryTextListener(this);
         search.setOnCloseListener(this);
+        int searchPlateId = search.getContext().getResources()
+                .getIdentifier("android:id/search_plate", null, null);
+        View searchPlateView = search.findViewById(searchPlateId);
+        if (searchPlateView != null) {
+            searchPlateView.setBackgroundColor(ContextCompat.getColor(PlaceSelectionActivity.this,R.color.white));
+        }
         displayList();
         expandAll();
 
