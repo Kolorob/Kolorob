@@ -102,7 +102,12 @@ public class Job_expand_list_adapter extends BaseExpandableListAdapter {
             email.getLayoutParams().width=width/11;
             remaining_date.setText(Children[0]);
             address.setText(Children[1]);
-            required_experience.setText(Children[2]);
+            if(!Children[2].equals("অভিজ্ঞতা: "))
+            {
+                required_experience.setVisibility(View.VISIBLE);
+                required_experience.setText(Children[2]);
+            }
+
 
         phone_call.setOnClickListener(new View.OnClickListener() {
             @Override
