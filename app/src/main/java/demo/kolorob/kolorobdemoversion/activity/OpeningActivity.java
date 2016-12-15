@@ -174,6 +174,7 @@ public class OpeningActivity extends Activity {
     View view=null;
     Float currentVersion;
     long install=0;
+    long install2=0;
     File filesDir;
     //==========================================================Code for Bazar Starts==========================================
     //bazar items
@@ -230,6 +231,13 @@ public class OpeningActivity extends Activity {
   long check=settings.getLong("timefirstinstall",Long.valueOf(2));
 if(check!=2) {
     settings.edit().putString("timesfirstinstall", String.valueOf(check)).apply();
+}
+                    else
+{
+    install2=System.currentTimeMillis();
+
+    settings.edit().putString("timesfirstinstall",  String.valueOf(install)).apply();
+
 }
 }
                 else if(previousVersion.floatValue()==Float.parseFloat("2.03"))
