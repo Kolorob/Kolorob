@@ -68,14 +68,14 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     Dialog dialog;
     LinearLayout upperHand,service_center_name,left_way,middle_phone,right_email,bottom_bar;
-    ImageView left_image,middle_image,right_image,email_btn;
-    ImageView comments;
+    ImageView route_icon,phone_icon,email_icon,email_btn;
+    ImageView comment_icon;
     ArrayList<CommentItem> commentItems;
     int inc;
     int width,height;
     String datevalue,datevaluebn;
 
-    TextView ups_text;
+    TextView service_name;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Context con;
@@ -86,14 +86,14 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
 
     private TextView ratingText;
-    private ImageView distance_left,feedback,top_logo,cross;
+    private ImageView routing_icon,feedback,service_logo,cross;
     RadioGroup feedRadio;
     RadioButton rb1;
     String status="",phone_num="",uname="";
     String result_concate="";
     EditText feedback_comment;
     RatingBar ratingBar;
-    ListView alldata;
+    ListView service_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,17 +119,17 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         middle_phone = (LinearLayout) findViewById(R.id.middle_phone);
         right_email = (LinearLayout) findViewById(R.id.right_email);
         bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
-        middle_image = (ImageView) findViewById(R.id.phone_middl);
-        right_image = (ImageView) findViewById(R.id.right_side_email);
-        left_image = (ImageView) findViewById(R.id.distance_left);
+        phone_icon = (ImageView) findViewById(R.id.phone_middl);
+        email_icon = (ImageView) findViewById(R.id.right_side_email);
+        route_icon = (ImageView) findViewById(R.id.distance_left);
         ratingText=(TextView)findViewById(R.id.ratingText);
-        alldata=(ListView)findViewById(R.id.allData); //alldata will hold the main information of a service center
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
+        service_data=(ListView)findViewById(R.id.allData); //service_data will hold the main information of a service center
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data
                 .getLayoutParams();
         mlp.setMargins(width/100,0,width/990,width/8); //set margin in main info block
-        top_logo=(ImageView)findViewById(R.id.top_logo);
+        service_logo=(ImageView)findViewById(R.id.top_logo);
         cross=(ImageView)findViewById(R.id.cross_jb); // cross icon in the right-top section
-        distance_left = (ImageView) findViewById(R.id.distance_left); //routing icon
+        routing_icon = (ImageView) findViewById(R.id.distance_left); //routing icon
         email_btn = (ImageView) findViewById(R.id.right_side_email);  //email icon
         feedback = (ImageView) findViewById(R.id.feedback);          //feedback icon
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
@@ -138,7 +138,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         setRatingBar();
 
 
-        // set width and height of the LinearLayout which holds routhing, email and phone icon
+            // set width and height of the LinearLayouts programetically
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
         upperHand.setLayoutParams(params2);
         LinearLayout.LayoutParams params_service_center_name = (LinearLayout.LayoutParams) service_center_name.getLayoutParams();
@@ -147,27 +147,37 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         int lett_img = params_left_way.height = (height * 3) / 24;
         int right_img = params_left_way.width = width / 3;
         left_way.setLayoutParams(params_left_way);
-
-            // set height and width of the icons
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
-        cross.getLayoutParams().height=width/13;
-        cross.getLayoutParams().width=width/13;
-        middle_image.getLayoutParams().height=width/8;
-        middle_image.getLayoutParams().width=width/8;
-        right_image.getLayoutParams().height = width/8;
-        right_image.getLayoutParams().width = width/8;
-        left_image.getLayoutParams().height =  width/8;
-        left_image.getLayoutParams().width =  width/8;
-
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         params_middle_phone.height = (height * 3) / 24;
         params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
+        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
+        int vc = params_right_email.height = (height * 3) / 24;
+        params_right_email.width = width / 3;
+        right_email.setLayoutParams(params_right_email);
+        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
+        feedbacks.height = width / 8;
+        feedbacks.width = width / 8;
+        feedback.setLayoutParams(feedbacks);
 
 
-        // Here Last updating date will be displayed via toast message
+            // set height and width of the icons
+        service_logo.getLayoutParams().height = width / 8;
+        service_logo.getLayoutParams().width = width / 8;
+        cross.getLayoutParams().height=width/13;
+        cross.getLayoutParams().width=width/13;
+        phone_icon.getLayoutParams().height=width/8;
+        phone_icon.getLayoutParams().width=width/8;
+        email_icon.getLayoutParams().height = width/8;
+        email_icon.getLayoutParams().width = width/8;
+        route_icon.getLayoutParams().height =  width/8;
+        route_icon.getLayoutParams().width =  width/8;
+
+
+
+
+            // Last date of updating data will be displayed here via toast message
         Date date2 = new Date(settings.getLong("time", 0));
         Date today=new Date();
         long diffInMillisec = today.getTime() - date2.getTime();
@@ -181,38 +191,21 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         ToastMessageDisplay.setText(this,datevalue);
         ToastMessageDisplay.showText(this);
 
-
-
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
-
-        ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(27);
+              //set properties of service center name
+        service_name = (TextView) findViewById(R.id.ups_text);
+        service_name.setTextSize(27);
         ratingText.setTextSize(23);
 
 
-        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 8;
-        feedbacks.width = width / 8;
-        feedback.setLayoutParams(feedbacks);
-
-        Log.d("width", "====" + width);
-
+              //build a Arraylist with a service display
         EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
         entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
         result_concate ="";
-
         key = new String[600];
-
         value = new String[600];
 
 
-        //   other_detailsEnt.setVisibility(View.VISIBLE);
-
-
-
+               //checkConcate method will check null data and concat
         CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         CheckConcate("রাস্তার নাম", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
@@ -223,40 +216,29 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
         CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
         CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
-
-
-
-
+              //timeprocessing method will convert time to details time formatt in bangla
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
         if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
             breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
         CheckConcate("ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
-
-        ups_text.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
-
-        // detailsEntertainment.setText(result_concate);
-
-
+        service_name.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
+             // Default Adapter will show the details info of a service
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
-        alldata.setAdapter(defaultAdapter);
+        service_data.setAdapter(defaultAdapter);
 
 
+                //retrieve corresponding service type data from database
         for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
             CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
             CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
             CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
             CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
-
-
-
         }
 
-        //   other_detailsEnt.setText(result_concate);
-
-        Log.d("Entertainment Parsing","###### "+entertainmentServiceProviderItemNew.getNodeWebsite());
-
-        right_image.setOnClickListener(new View.OnClickListener() {
+        
+                
+        email_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (entertainmentServiceProviderItemNew.getNodeWebsite().equals("null")||entertainmentServiceProviderItemNew.getNodeWebsite().equals("")) {
@@ -264,17 +246,17 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
+                     //Helpes method will be used to send Email
                     Helpes.sendEmail(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeEmail());
                 }
             }
         });
 
 
-        comments = (ImageView)findViewById(R.id.comments);
-
+        comment_icon = (ImageView)findViewById(R.id.comments); //this icon will be used to show comment_icon
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
         lp.setMargins(width/26, 0, 0, 0);
-        comments.setLayoutParams(lp);
+        comment_icon.setLayoutParams(lp);
         CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
 
 
@@ -289,8 +271,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         for (CommentItem commentItem:commentItems)
         {
-            Log.d("Rating","$$$$$$"+commentItem.getRating());
-
             if(!commentItem.getRating().equals(""))
             {
                 phone[inc]= commentItem.getUser_name();
@@ -308,7 +288,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
 
 
-        comments.setOnClickListener(new View.OnClickListener() {
+        comment_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname).equals("yes")||inc>0) {
@@ -329,21 +309,14 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             alertDialog.setContentView(promptView);
                             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             alertDialog.show();
-                            Log.d("Value of Inc1", "======");
-
-
-//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
+                        
                             final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
-
-                            final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                            // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
+                            final ImageView close_icon = (ImageView) promptView.findViewById(R.id.closex);
                             final TextView review = (TextView) promptView.findViewById(R.id.review);
-
                             final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                             try {
                                 int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRating());
-
                                 if (ratings == 1) {
                                     ratingbarz.setBackgroundResource(R.drawable.one);
                                 } else if (ratings == 2)
@@ -364,6 +337,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
                             review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
                             Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityEntertainmentNew.this);
+                        //Check ScreenSize
                             if (screenSize > 6.5) {
                                 review.setTextSize(20);
                             } else {
@@ -372,11 +346,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
                             listView.setAdapter(comment_layout_adapter);
-//                    textView.setVisibility(View.GONE);
-
                             alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
 
-                            close.setOnClickListener(new View.OnClickListener() {
+                            close_icon.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     alertDialog.dismiss();
@@ -385,14 +357,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
                             alertDialog.setCancelable(false);
-
-
                             alertDialog.show();
 
 
                     }
                 }
-               else if(inc==0)
+               else if(inc==0)  //if inc= o means no one commented
                 {
                     LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
                     View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
@@ -419,13 +389,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             alertDialog.cancel();
                             String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
                             phone_num=register;
-
+                            //if no number is set it will request to register
                             if (register.equals("")) {
                                 requestToRegister();
                             } else {
 
                                 feedBackAlert();
-                                //  sendReviewToServer();
                             }
 
                         }
@@ -436,7 +405,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             alertDialog.cancel();
                         }
                     });
-                    //   setup a dialog window
                     alertDialog.setCancelable(false);
                     alertDialog.show();
 
@@ -453,7 +421,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
 
-        middle_image.setOnClickListener(new View.OnClickListener() {
+        phone_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
@@ -484,7 +452,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             }
         });
 
-        distance_left.setOnClickListener(new View.OnClickListener() {
+        routing_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
@@ -524,28 +492,18 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
                     AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
                             "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
-
                 }
 
                 else
                 {
-
-
                     AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
                             "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
-
-
-
-
                 }
-
-
             }
         });
 
     }
-
-
+             //encode breaktime in details format
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
             String timeInBengali = "";
@@ -554,11 +512,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 value2 = value2 + ",";
 
                 String[] breakTIme = value2.split(",");
-
-
                 String[] realTIme = breakTIme[0].split("-");
-
-
                 value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
                 CheckConcate(value1, value2);
             }
@@ -569,22 +523,17 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
     }
 
+            //clicked from xml
     public void verifyRegistration(View v) {
 
         String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
         phone_num=register;
-
-        Log.d("Phone_num","------"+phone_num);
-
         if (register.equals("")) {
             requestToRegister();
         } else {
 
             feedBackAlert();
-            //  sendReviewToServer();
         }
-
-
     }
 
     public void feedBackAlert() {
@@ -599,11 +548,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
         final Button submit = (Button) promptView.findViewById(R.id.submit);
-
-        final Button close = (Button) promptView.findViewById(R.id.btnclose);
-
-
-        close.setOnClickListener(new View.OnClickListener() {
+        final Button close_icon = (Button) promptView.findViewById(R.id.btnclose);
+        close_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
@@ -626,8 +572,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                }
                 else {
                    ToastMessageDisplay.setText(DetailsInfoActivityEntertainmentNew.this,"দয়া করে ইন্টারনেট চালু করুন।");
-//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-//                            Toast.LENGTH_LONG).show();
                    ToastMessageDisplay.showText(DetailsInfoActivityEntertainmentNew.this);
                }
 
@@ -636,8 +580,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             }
         });
         alertDialog.setCancelable(false);
-
-
         alertDialog.show();
     }
 
@@ -671,11 +613,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        Log.d("========", "status " + response);
+                        // Response is true or false
                         try {
-
-
                             if (response.equals("true")) {
                                 SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname,"yes");
                                 AlertMessage.showMessage(DetailsInfoActivityEntertainmentNew.this, "মতামতটি গ্রহন করা হয়েছে",
@@ -716,14 +655,10 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
     public void setRatingBar()
     {
-
         try {
             float f= Float.parseFloat(entertainmentServiceProviderItemNew.getRating());
-
             ratingBar.setRating(f);
             ratingBar.setIsIndicator(true);
-
-
         }
         catch (Exception e)
         {
@@ -776,17 +711,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
             }
         });
+
         //   setup a dialog window
         alertDialog.setCancelable(false);
-
-
         alertDialog.show();
     }
 
 
     private void timeProcessing(String value1, String value2) {
         if (!value2.equals("null") || value2.equals("")) {
-
             String GetTime = timeConverter(value2);
             CheckConcate(value1, GetTime);
 
@@ -836,16 +769,10 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     }
 
     private String timeConverter(String time) {
-
-
         String timeInBengali = "";
-
         try
         {
-
             String[] separated = time.split(":");
-
-
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
 
@@ -870,39 +797,26 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
         catch (Exception e)
         {
-
         }
 
         return timeInBengali;
 
     }
-
+            // check null and concat
     private void CheckConcate(String value1, String value2) {
-
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
             key[increment] = value1;
             value[increment] = value2;
             increment++;
-
         }
-
-
     }
-
-
-
-
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         if (result == PackageManager.PERMISSION_GRANTED) {
-
             return true;
-
         } else {
-
             return false;
-
         }
 
     }
