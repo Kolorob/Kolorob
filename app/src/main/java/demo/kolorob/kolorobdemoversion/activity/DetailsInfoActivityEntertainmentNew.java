@@ -67,7 +67,7 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     Dialog dialog;
-    LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar;
+    LinearLayout upperHand,service_center_name,left_way,middle_phone,right_email,bottom_bar;
     ImageView left_image,middle_image,right_image,email_btn;
     ImageView comments;
     ArrayList<CommentItem> commentItems;
@@ -103,109 +103,74 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
         con = this;
-
-        Log.d("ccc","######"+width);
-
         Intent intent = getIntent();
 
 
         if (null != intent) {
+            //Receive an arrayList of (EntertainmentServiceProviderItemNew) type from previous activity.
             entertainmentServiceProviderItemNew = (EntertainmentServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
 
         }
 
 
-
-
-
-        upperHand = (LinearLayout) findViewById(R.id.upper_part);
-        upperText = (LinearLayout) findViewById(R.id.upperText);
+        upperHand = (LinearLayout) findViewById(R.id.upper_part); //service center name and icon set will be here
+        service_center_name = (LinearLayout) findViewById(R.id.upperText);// service center name will be here
         left_way = (LinearLayout) findViewById(R.id.left_go_process);
         middle_phone = (LinearLayout) findViewById(R.id.middle_phone);
         right_email = (LinearLayout) findViewById(R.id.right_email);
-
         bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
         middle_image = (ImageView) findViewById(R.id.phone_middl);
         right_image = (ImageView) findViewById(R.id.right_side_email);
         left_image = (ImageView) findViewById(R.id.distance_left);
-
         ratingText=(TextView)findViewById(R.id.ratingText);
-
-
-        alldata=(ListView)findViewById(R.id.allData);
-
+        alldata=(ListView)findViewById(R.id.allData); //alldata will hold the main information of a service center
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
-
-        mlp.setMargins(width/100,0,width/990,width/8);
-
-
-
+        mlp.setMargins(width/100,0,width/990,width/8); //set margin in main info block
         top_logo=(ImageView)findViewById(R.id.top_logo);
-        cross=(ImageView)findViewById(R.id.cross_jb);
-//        school_logo_default=(ImageView)findViewById(R.id.service_logo);
-
-
-
-
-
-        distance_left = (ImageView) findViewById(R.id.distance_left);
-        email_btn = (ImageView) findViewById(R.id.right_side_email);
-        feedback = (ImageView) findViewById(R.id.feedback);
-
+        cross=(ImageView)findViewById(R.id.cross_jb); // cross icon in the right-top section
+        distance_left = (ImageView) findViewById(R.id.distance_left); //routing icon
+        email_btn = (ImageView) findViewById(R.id.right_side_email);  //email icon
+        feedback = (ImageView) findViewById(R.id.feedback);          //feedback icon
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         if(width<=400)
-            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);// if ratingBar's height less than 400 then style will be different
         setRatingBar();
 
 
+        // set width and height of the LinearLayout which holds routhing, email and phone icon
         LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        //int upperhad_height=params2.height = height/6;
-
         upperHand.setLayoutParams(params2);
-
-
-        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-
-
-
-        upperText.setLayoutParams(params_upperText);
-
+        LinearLayout.LayoutParams params_service_center_name = (LinearLayout.LayoutParams) service_center_name.getLayoutParams();
+        service_center_name.setLayoutParams(params_service_center_name);
         LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
         int lett_img = params_left_way.height = (height * 3) / 24;
         int right_img = params_left_way.width = width / 3;
         left_way.setLayoutParams(params_left_way);
 
-
-
-
+            // set height and width of the icons
         top_logo.getLayoutParams().height = width / 8;
         top_logo.getLayoutParams().width = width / 8;
         cross.getLayoutParams().height=width/13;
         cross.getLayoutParams().width=width/13;
         middle_image.getLayoutParams().height=width/8;
         middle_image.getLayoutParams().width=width/8;
-
-
-
         right_image.getLayoutParams().height = width/8;
         right_image.getLayoutParams().width = width/8;
-
         left_image.getLayoutParams().height =  width/8;
         left_image.getLayoutParams().width =  width/8;
 
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
-
         LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         params_middle_phone.height = (height * 3) / 24;
         params_middle_phone.width = width / 3;
         middle_phone.setLayoutParams(params_middle_phone);
 
 
+        // Here Last updating date will be displayed via toast message
         Date date2 = new Date(settings.getLong("time", 0));
         Date today=new Date();
         long diffInMillisec = today.getTime() - date2.getTime();
-
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         if (diffInDays==0) datevalue=" আজকের তথ্য";
         else
@@ -213,7 +178,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
             datevalue=""+ datevaluebn + " দিন আগের তথ্য";
         }
-
         ToastMessageDisplay.setText(this,datevalue);
         ToastMessageDisplay.showText(this);
 
