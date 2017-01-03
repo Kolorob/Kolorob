@@ -1273,6 +1273,8 @@ String pname,paddress,powner,pdescription;
 
 
     public void compareHealth() {
+
+        //compare will be selected from detailspage and displayed here
         compare_layout.setVisibility(View.VISIBLE);
         compare_layoutedu.setVisibility(View.GONE);
         checkBox.setChecked(true);
@@ -1313,7 +1315,7 @@ String pname,paddress,powner,pdescription;
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int compareValue = SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this);
-                    if(compareValue==2)
+                    if(compareValue==2) // if their is two value for compare
                     {
                         if(!isChecked)
                         {
@@ -1575,7 +1577,7 @@ String pname,paddress,powner,pdescription;
         ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
         type_spinner.setAdapter(type_adapter);
 
-
+             //bazar type spinner will work here
         type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1584,14 +1586,15 @@ String pname,paddress,powner,pdescription;
                 {
                     TextView text2 = (TextView)parent.getChildAt(0);
 
-                    text2.setTextColor(ContextCompat.getColor(context,R.color.black));
-                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+                    text2.setTextColor(ContextCompat.getColor(context,R.color.black));//change spinner text color
+                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.white)); //change spinner background color
 //                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
 //                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
 
                 }
                 else
                 {
+                    //works if their is default spinner selected
                     TextView text2 = (TextView)parent.getChildAt(0);
                     text2.setTextColor(ContextCompat.getColor(context,R.color.white));
                     text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
@@ -1599,6 +1602,8 @@ String pname,paddress,powner,pdescription;
 
                 final LinearLayout pricing= (LinearLayout)findViewById(R.id.pricing);
 
+
+                //change the text when different type is selected
                 if(position==5)
                 {
                     spinner.setVisibility(View.GONE);
@@ -1701,6 +1706,7 @@ String pname,paddress,powner,pdescription;
         contact_person.setEnabled(true);
 
 
+        //EditText change Listener
         product_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1890,15 +1896,16 @@ String pname,paddress,powner,pdescription;
 //           b.product_name= "product";
 
 
+                    //set default text in case of tution
 
-           if(tution_detector==5)
+                 if(tution_detector==5)
                     {
                         spinner.setSelection(2);
                         price.setText("1111");
                     }
-           else if(tution_detector==4)
+                 else if(tution_detector==4)
                     {
-                spinner.setSelection(2);
+                 spinner.setSelection(2);
 
                     }
 
@@ -1917,7 +1924,6 @@ String pname,paddress,powner,pdescription;
                         if(spinner.getSelectedItem().toString().equals("কন্ডিশন"))
                         {
 
-
                             AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন","");
 //               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন");
 
@@ -1926,6 +1932,7 @@ String pname,paddress,powner,pdescription;
                         {
 
                    String conditions = spinner.getSelectedItem().toString();
+                            //convert bangla to English
 
                    if(conditions.equals("নতুন"))
                        b.condition = "New";
@@ -1941,6 +1948,7 @@ String pname,paddress,powner,pdescription;
 //                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন");
                             }
                             else {
+                                // Get data from condition spinner
                                 String condition_selector = type_spinner.getSelectedItem().toString();
 
                                 if(condition_selector.equals("বিনিময়"))
@@ -1949,10 +1957,10 @@ String pname,paddress,powner,pdescription;
                                     b.type = "Sell";
                                 else if(condition_selector.equals("টিউশন"))
                                     b.type = "Tution";
-                       else if(condition_selector.equals("ক্রয়"))
-                           b.type = "Buy";
-                       else if(condition_selector.equals("টু লেট"))
-                           b.type = "To_Let";
+                                else if(condition_selector.equals("ক্রয়"))
+                                    b.type = "Buy";
+                                else if(condition_selector.equals("টু লেট"))
+                                    b.type = "To_Let";
 //                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
                                 if(product_name.getText().toString().equals(""))
                                 {
@@ -2077,7 +2085,9 @@ String pname,paddress,powner,pdescription;
     }
 
 
+                 //sendind bazar data to server
     private void saveBazar(BazarItem b,final Context contexts){
+                 //check internet connection
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
         {
             getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
@@ -2101,6 +2111,8 @@ String pname,paddress,powner,pdescription;
 
                                 if(apiContent.equals("true"))
                                 {
+
+                                    //if true then request has confirmed and sliding panel will be collapsed
                                     DisplayMetrics displayMetrics = contexts.getResources().getDisplayMetrics();
                                     height = displayMetrics.heightPixels;
                                     width = displayMetrics.widthPixels;
@@ -3717,7 +3729,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-    /**********************************************************Methods for job*****************************************************/
+    /**********************************************************Methods for Bazar Loading*****************************************************/
 
 
     private void loadBazar(final Context context){
@@ -3755,17 +3767,16 @@ String pname,paddress,powner,pdescription;
                         bazar_data=new ArrayList<String>();
                         bazar_data.clear();
                         bazar_counter=0;
-                        myList = new ArrayList<ArrayList<String>>(allBazar.size());
+                        myList = new ArrayList<ArrayList<String>>(allBazar.size()); //Hold all the bazar data
                         int size= allBazar.size();
                         for(BazarItem bazarItem: allBazar)
                         {
 
-                            //
+                            //concat all the bazar data in a single string
 
                             String bazarData= "বিবরন: "+bazarItem.description+"@"+
                                     bazarItem.price+"@"+
                                     "তারিখ: "+bazarItem.date+"@"+
-
                                     bazarItem.condition+"@"+
                                     "এলাকা: "+bazarItem.address+"@"+
                                     bazarItem.phone+"@"+
@@ -3773,17 +3784,11 @@ String pname,paddress,powner,pdescription;
                                     "পোস্ট দিয়েছেন: "+bazarItem.contact_person+"@"+ "v"
                                     ;
 
-
-                           // Log.d("Bazar Data","============="+bazarData);
-
                             String group_data= bazarItem.product_name+"@"+
                                     bazarItem.type+"@"+"v";
 
-                            bazar_data.add(bazar_counter,bazarData);
 
-
-
-
+                            bazar_data.add(bazar_counter,bazarData); //insert all bazar data in arrayList
                             listDataHeader.add(group_data);
 
                             // myList.add(bazar_counter,bazar_data);
@@ -3791,31 +3796,19 @@ String pname,paddress,powner,pdescription;
                             //             myList.add(bazar_data);
 
                         //    Log.d("myList","######"+myList);
-
-
-
-
-
                             bazar_counter++;
-
-
                         }
                         ArrayList<String > temp= new ArrayList<String>();
 
 
+                        //insert all bazar data in multidimensional arrayList
                         for(int k=0;k<bazar_counter;k++)
                         {
-
                             myList.add(k,bazar_data);
                             // myList.get(0).set(k,bazar_data.get(k));
                             //                      myList.add(k,temp);
-
                             temp.clear();
                         }
-
-
-
-
                         for(int i=0;i<bazar_counter;i++)
                         {
                             listDataChild.put(listDataHeader.get(i),myList.get(i));
@@ -3823,6 +3816,7 @@ String pname,paddress,powner,pdescription;
                         }
                         dialog.cancel();
 
+                        //insert data in expandable listview
                         expListView = (ExpandableListView) findViewById(R.id.bazar_list);
                         bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
                         expListView.setAdapter(bazarToolAdapter);
@@ -3832,6 +3826,7 @@ String pname,paddress,powner,pdescription;
                                 .getLayoutParams();
                         layoutParams.setMargins(0, 0, 0, buttonHeights);//
 
+                        //if one item collapse then other's will be expanded
                         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
                             @Override
@@ -3853,6 +3848,8 @@ String pname,paddress,powner,pdescription;
 
                             }
                         });
+
+                        //works if child is clicked
                         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
                             @Override
@@ -3866,7 +3863,6 @@ String pname,paddress,powner,pdescription;
                         });
 
 
-                        Log.d("Button Heights","%%%%%%"+buttonHeights);
                         SlidingUpPanelLayout slidingUpPanelLayout;
                         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
                         RelativeLayout.LayoutParams slidingp= (RelativeLayout.LayoutParams) slidingUpPanelLayout.getLayoutParams();
@@ -4260,6 +4256,7 @@ String pname,paddress,powner,pdescription;
             // This method will be call after slide up layout
             @Override
             public void onPanelExpanded(View panel) {
+                //calls when panel is expanded
 
                 slider_part.setVisibility(View.VISIBLE);
 
@@ -4271,6 +4268,7 @@ String pname,paddress,powner,pdescription;
                 int heights = footer.getHeight();
             //    Log.d("footer height","================"+heights);
                 submit_bazar.setHeight(heights);
+                //set an ideal panel heights
                 if(pannl_height<70)
                     pannl_height=70;
                 //submit_bazar.getLayoutParams.(pannl_height);
@@ -4297,7 +4295,7 @@ String pname,paddress,powner,pdescription;
 
             }
 
-            // This method will be call after slide down layout.
+            // This method will be called after slide down layout.
             @Override
             public void onPanelCollapsed(View panel) {
                 slider_part.setVisibility(View.VISIBLE);
@@ -4325,7 +4323,7 @@ String pname,paddress,powner,pdescription;
             @Override
             public void onPanelHidden(View panel) {
 
-                Log.d("OnPanelHidden","============");
+
                 mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
 
 
