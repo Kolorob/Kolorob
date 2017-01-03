@@ -61,7 +61,6 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, groupPosition);
-        Log.d("MyList","%%%%%%"+childText);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -85,9 +84,8 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         ImageView phone_call=(ImageView)convertView.findViewById(R.id.phone_call);
         ImageView email = (ImageView)convertView.findViewById(R.id.email);
 
-        Log.d("Tutionn","============"+type);
 
-        if(type.equals("Tution")||type.equals("টিউশন"))
+        if(type.equals("Tution")||type.equals("টিউশন")) //if only key exists
         {
             price.setVisibility(View.GONE);
             condition.setVisibility(View.GONE);
@@ -100,7 +98,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         Double screenSize= AppUtils.ScreenSize(_context);
 
-        if(screenSize>6.5)
+        if(screenSize>6.5) //for big screen size textsize will be bigger.
         {
             desctiption.setTextSize(20);
             price.setTextSize(20);
@@ -133,8 +131,6 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
         Character price_s = Children[1].charAt(Children[1].length()-1);
         int p= Integer.valueOf(price_s);
-        Log.d("price_s","=============="+Children[1]);
-        Log.d("price_s2","=============="+price_s);
 
         if(Children[1].length()==1&& price_s==one)
         {
@@ -151,7 +147,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
      //   price.setText(Children[1].replace("%",""));
         date.setText(Children[2]);
 
-        if(Children[3].equals("New"))
+        if(Children[3].equals("New"))          //convert condition to bangla
             condition.setText("কন্ডিশন: নতুন");
         else if(Children[3].equals("Refurbished"))
             condition.setText("কন্ডিশন: ব্যবহৃত");
@@ -237,7 +233,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
 
 
 
-        String[] groupElement= headerTitle.split("@");
+        String[] groupElement= headerTitle.split("@"); // split the big string
 
         TextView product_name = (TextView) convertView
                 .findViewById(R.id.p_name);
@@ -247,7 +243,7 @@ public class BazarToolAdapter extends BaseExpandableListAdapter {
         product_name.setTypeface(null, Typeface.BOLD);
 
         product_name.setText(groupElement[0]);
-        if(groupElement[1].equals("Exchange"))
+        if(groupElement[1].equals("Exchange"))   // Decode English Texts into bangla
         {
             sell.setText("বিনিময়");
         }

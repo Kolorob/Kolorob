@@ -1053,12 +1053,10 @@ String pname,paddress,powner,pdescription;
                     width=AppUtils.getScreenWidth(PlaceDetailsActivityNewLayout.this);
 //                    bazar_logo.getLayoutParams().width=50;
 //                    bazar_logo.getLayoutParams().height=50;
-                    init(PlaceDetailsActivityNewLayout.this);
+                    init(PlaceDetailsActivityNewLayout.this); // initialize variables
 
-                    Log.d("Panel States","******"+panelStates);
-
-                    loadBazar(PlaceDetailsActivityNewLayout.this);
-                    panelListener(PlaceDetailsActivityNewLayout.this);
+                    loadBazar(PlaceDetailsActivityNewLayout.this);  //load the bazar tool data
+                    panelListener(PlaceDetailsActivityNewLayout.this);  //call sliding panel listener
                     wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.kolorob_color));
 
                     setShowList(1);
