@@ -4175,7 +4175,7 @@ String pname,paddress,powner,pdescription;
 //        sliding_parts.height=120;
 //        slider_part.setLayoutParams(sliding_parts);
 
-        mLayout.setTouchEnabled(true);
+        mLayout.setTouchEnabled(true);  //only sliding panel will be touchable
 
         bazarPosting.setEnabled(true);
         bazar_post_layout.setFocusableInTouchMode(true);
@@ -4276,7 +4276,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-                footer.setText("বিজ্ঞাপন দেখুন");
+                footer.setText("বিজ্ঞাপন দেখুন");  //sliding pannel texts
 
                 String number =SharedPreferencesHelper.getNumber(context);
 //                if(number.equals(""))
@@ -4300,7 +4300,7 @@ String pname,paddress,powner,pdescription;
             public void onPanelCollapsed(View panel) {
                 slider_part.setVisibility(View.VISIBLE);
                 LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                sliding_parts.setMargins(0,0,0,height/140);
+                sliding_parts.setMargins(0,0,0,height/140); //set properties for sliding panel
                 slider_part.setLayoutParams(sliding_parts);
                 buttonh= footer.getHeight();
                 pannl_height = height/17;
