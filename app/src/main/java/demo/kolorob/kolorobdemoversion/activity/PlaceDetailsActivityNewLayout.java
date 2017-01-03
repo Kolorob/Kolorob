@@ -1328,7 +1328,7 @@ String pname,paddress,powner,pdescription;
                         }
                     }
 
-                    else if(compareValue==1)
+                    else if(compareValue==1) /// if their is one value for compare
                     {
                         if(!isChecked)
                         {
@@ -1343,7 +1343,7 @@ String pname,paddress,powner,pdescription;
                         }
                     }
 
-                    else if (compareValue == 0) {
+                    else if (compareValue == 0) { /// if their no item for compare
                         if(isChecked)
                             SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNew.getId(), 1);
                     }
@@ -1386,6 +1386,8 @@ String pname,paddress,powner,pdescription;
         }
 
 
+
+                               //this is for right side item
         String healthService2="";
         String health_service_data2="";
         for (final HealthServiceProviderItemNew healthServiceProviderItemNewx: secondDataSetHealth)
@@ -1457,7 +1459,7 @@ String pname,paddress,powner,pdescription;
 
 
             String time1="";
-            time1=timeConverter(healthServiceProviderItemNewx.getOpening_time());
+            time1=timeConverter(healthServiceProviderItemNewx.getOpening_time()); //convert the time
             right_part=new String[]{time1,healthServiceProviderItemNewx.getSpoken_lang(),
                     health_service_data1,secondSpecialistItem,healthServiceProviderItemNewx.getPharmacy_speciality(),
                     healthServiceProviderItemNewx.getPharmacy_privacy(),healthServiceProviderItemNewx.getQuality_equipments(),
