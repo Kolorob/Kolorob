@@ -68,7 +68,7 @@
     <dimen name="creditbtnsize">30dp</dimen>
     <dimen name="offerpaddingbtntop">14dp</dimen>
     <dimen name="offerbagtext">15dp</dimen>
-    <dimen name="offerpadding">10dp</dimen>
+    <dimen name="offerpadding">20dp</dimen>
     <dimen name="offerpaddinglow">5dp</dimen>
     <dimen name="offerpaddingbtn">15dp</dimen>
 </resources>

@@ -37,7 +37,7 @@
     <dimen name="offerbagw">103dp</dimen>
     <dimen name="offerbagh">130dp</dimen>
     <dimen name="offerbagtext">14dp</dimen>
-    <dimen name="offerpadding">10dp</dimen>
+    <dimen name="offerpadding">20dp</dimen>
     <dimen name="offerpaddingcredit">8dp</dimen>
     <dimen name="offerpaddinglow">6dp</dimen>
     <dimen name="offerpaddingbtn">10dp</dimen>

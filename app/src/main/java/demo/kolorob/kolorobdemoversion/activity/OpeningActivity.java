@@ -143,7 +143,7 @@ public class OpeningActivity extends Activity {
     private int EntDataSize,HealthDatSize;
     private static final int ANIM_INTERVAL = 200;
     int countofDb;
-    String checkversion;
+
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
     ArrayList<RatingModel>si22=new ArrayList<>();
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
@@ -271,103 +271,7 @@ if(check!=2) {
         height=displayMetrics.heightPixels;
 
 
-   /*     File path = filesDir;
 
-        File file = new File(path, "kolorob.txt");
-        if(! new File(path, "kolorob.txt").exists()) {
-            FileOutputStream stream = null;
-            try {
-                stream = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-
-                    String body = app_ver + ",yes";
-                    if (stream!=null){
-                    stream.write(body.getBytes());}
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } finally {
-                try {
-                    if(stream!=null){
-
-                    stream.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            int length = (int) file.length();
-
-            bytes = new byte[length];
-
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-                    if(in!=null){
-                        int b= in.read(bytes);}
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } finally {
-                try {
-                    if(in!=null) {
-                        in.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String contents = new String(bytes);
-            String delims = "[,]";
-            String[] tokens = contents.split(delims);
-             first=tokens[1];
-            //    first="yes";
-        }
-        else {
-            int length = (int) file.length();
-
-            bytes = new byte[length];
-
-            FileInputStream in = null;
-            try {
-                in = new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-                    if(in!=null){
-                      int b=  in.read(bytes);}
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } finally {
-                try {
-                    if(in!=null) {
-                        in.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String contents = new String(bytes);
-            String delims = "[,]";
-            String[] tokens = contents.split(delims);
-
-             first=tokens[1];
-            //      first="yes";
-        }
-
-*/
         firstRun = settings.getBoolean("firstRun", false);
         if (firstRun==false)//if running for first time
         {
@@ -591,7 +495,7 @@ if(check==2) {
                             return;
 
                         } else {
-                            Intent a = new Intent(OpeningActivity.this, PhoneRegActivity.class); // Default Activity
+                            Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
                             a.putExtra("YourValueKey", mapdetail);
                             frameAnimation.stop();
                             startActivity(a);

@@ -623,16 +623,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
                             try {
                                 ToastMessageDisplay.setText(PlaceSelectionActivity.this,"ধন্যবাদ");
                                 ToastMessageDisplay.showText(PlaceSelectionActivity.this);
-//                                if(response.toString().trim().equalsIgnoreCase("true"))
-//                                {
-//
-//                                    AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্যটি পাঠানো হয়ছে",
-//                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-//                                }
-//                                else
-//                                    AlertMessage.showMessage(PlaceSelectionActivity.this, "মন্তব্য পাঠানো সফল হয়নি",
-//                                            "মন্তব্য করার জন্য আপনাকে ধন্যবাদ");
-
 
                             } catch (Exception e) {
                                 e.printStackTrace();

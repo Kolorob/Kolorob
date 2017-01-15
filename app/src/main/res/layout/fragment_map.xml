@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:id="@+id/headerlayout"
-android:visibility="gone"
-        android:layout_marginTop="20dp"
+       android:visibility="gone"
+        android:layout_marginTop="10dp"
         android:background="#F7941E">
 
 
@@ -51,7 +51,7 @@ android:visibility="gone"
             android:layout_toEndOf="@+id/imageView12"
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="13dp" />
+            android:layout_marginTop="5dp" />
 
         <RelativeLayout
             android:orientation="vertical"

@@ -8,89 +8,41 @@
     android:background="@color/white"
     android:weightSum="3">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_height="0dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/counter"
 
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:text="1"
-            android:textSize="@dimen/offercounter"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/countertext"
-            android:padding="@dimen/offerpadding"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:text="দিন বাকি আছে!*"
-            android:textSize="@dimen/offerbagtext"/>
-
-        <info.hoang8f.widget.FButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/claim"
-
-            android:paddingLeft="@dimen/offerpaddingbtn"
-            android:paddingRight="@dimen/offerpaddingbtn"
-            android:paddingTop="@dimen/offerpaddingbtntop"
-            android:layout_marginTop="@dimen/offerpaddinglow"
-            android:layout_marginBottom="@dimen/offerpaddinglow"
-            android:paddingBottom="@dimen/offerpaddingbtntop"
-            android:textSize="@dimen/offercounterbtn"
-            android:text="ফ্রি ৫০ এমবি বুঝে নিন**"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/offerdisclaimer"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#f2f2f2"
-            android:textSize="10dp"
-            android:text="**প্রতি মাসের প্রথম ৫০০ জনের জন্য প্রযোজ্য"/>
-    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:id="@+id/loweroffer"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:layout_marginLeft="8dp"
         android:gravity="top|center"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_height="0dp">
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/creditbutton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            fab:fab_icon="@drawable/smile"
+            fab:fab_colorNormal="@color/black"
+            fab:fab_colorPressed="@color/gray"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/offerpaddingcreditlr"
+
             android:layout_marginTop="@dimen/offerpaddingcredittop"
             android:layout_marginRight="@dimen/offerpaddingcreditlr"
             android:layout_height="wrap_content">
 
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/creditbutton"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                fab:fab_icon="@drawable/smile"
-                fab:fab_colorNormal="@color/black"
-                fab:fab_colorPressed="@color/gray"
-                android:layout_alignParentTop="true"
 
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
             <ImageView
                 android:layout_width="@dimen/offerbagw"
                 android:layout_height="@dimen/offerbagh"
@@ -115,7 +67,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:padding="2dp"
+            android:padding="8dp"
             android:layout_height="0dp">
 
             <LinearLayout

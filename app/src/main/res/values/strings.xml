@@ -3,7 +3,8 @@
     আমাদের ফেসবুকে ইনবক্স করুন অথবা ওয়েবসাইটে দেখুন!***</string>
     <string name="app_id">696685267147178</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">1b5cd2884253af0674285d8e0448bd4d</string>
-
+ <string name="jobsave">কলরবে দেয়া চাকরির বিজ্ঞপ্তিসমুহ মিরপুর এলাকার নানাবিধ উৎস থেকে সংগ্রহীত। এখানে উল্লেখ্য যে, সেভ দি চিলড্রেন বাংলাদেশ কখনই শিশু শ্রমকে উৎসাহিত করে না এবং সংগ্রহিত চাকরির তথ্যের সত্যতা যাচাই এর দায়ভার বহন করবে না।
+</string>
     <string name="ak_login_protocol_scheme">ak696685267147178</string>
     <string name="title_activity_second">SecondActivity</string>
     <string name="uptext">কোথায়\nখুঁজতে চান?</string>

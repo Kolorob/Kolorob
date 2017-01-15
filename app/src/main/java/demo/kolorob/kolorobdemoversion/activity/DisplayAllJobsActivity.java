@@ -2,18 +2,14 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,13 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,10 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.DisplayAllJobList;
 import demo.kolorob.kolorobdemoversion.adapters.Job_expand_list_adapter;
 import demo.kolorob.kolorobdemoversion.database.Job.JobAdvertisementTable;
-import demo.kolorob.kolorobdemoversion.database.Job.JobServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Job.JobAdvertisementItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -243,9 +235,9 @@ public class DisplayAllJobsActivity extends Activity {
             {
                 //job_data.clear();
                 String jobdata= "আবেদনের শেষ সময়: "+jobAdvertisementItem.getApplication_last_date()+"@"+
-                        "ঠিকানা: "+jobAdvertisementItem.getAddress_area()+" "+jobAdvertisementItem.getAddress_city()+"@"+
+                        "ঠিকানা: "+jobAdvertisementItem.getLocation()+" "+jobAdvertisementItem.getAddress_city()+"@"+
                         "অভিজ্ঞতা: "+jobAdvertisementItem.getRequired_experience()+"@"+
-                        jobAdvertisementItem.getMobile1()+"@"+
+                        jobAdvertisementItem.getApplication_medium()+"@"+
                         jobAdvertisementItem.getEmail()+"v";
 
                 String group_data= jobAdvertisementItem.getInstitute_name_bangla()+"@"+

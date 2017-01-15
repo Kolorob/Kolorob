@@ -8,8 +8,8 @@
     <dimen name="offerpaddingcreditlr">10dp</dimen>
     <dimen name="offerbagw">115dp</dimen>
     <dimen name="offerbagh">150dp</dimen>
-    <dimen name="offerbagtext">13dp</dimen>
-    <dimen name="offerpadding">10dp</dimen>
+    <dimen name="offerbagtext">16dp</dimen>
+    <dimen name="offerpadding">22dp</dimen>
     <dimen name="offerpaddinglow">5dp</dimen>
     <dimen name="offerpaddingcredit">8dp</dimen>
     <dimen name="offerpaddingbtn">15dp</dimen>

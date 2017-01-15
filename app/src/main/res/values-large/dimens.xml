@@ -35,7 +35,7 @@
     <dimen name="nav_header_height2">230dp</dimen>
     <dimen name="nav_header_height3">300dp</dimen>
     <dimen name="offerpadding">15dp</dimen>
-    <dimen name="offerpaddingcredittop">70dp</dimen>
+    <dimen name="offerpaddingcredittop">200dp</dimen>
     <dimen name="offerpaddingcreditlr">70dp</dimen>
     <dimen name="offerpaddinglow">18dp</dimen>
     <dimen name="getmbbuttontop">8dp</dimen>

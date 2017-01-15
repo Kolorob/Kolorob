@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/job_portal"
-
+android:padding="10dp"
 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -25,30 +25,22 @@
 
 
 
+
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.25"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.50"
             android:layout_height="wrap_content"
-            android:padding="10dp"
 
-            android:gravity="center">
+
+            android:gravity="center|left">
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-
+                android:layout_width="50dp"
+                android:layout_height="65dp"
+                android:minHeight="50dp"
+                android:minWidth="50dp"
+                android:layout_marginLeft="20dp"
 
                 android:id="@+id/iv_kolorob_logo"
                 android:background="@drawable/job_icon"
@@ -74,7 +66,7 @@
                 android:layout_height="55dp"
                 android:minHeight="40dp"
                 android:minWidth="40dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/iv_close"
                 android:src="@drawable/cross_icon"
                 android:focusable="true" />
@@ -97,6 +89,15 @@
         android:orientation="vertical"
 
         android:id="@+id/list_part">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/red"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:text="@string/jobsave"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="@dimen/abttext" />
         <!--<View-->
             <!--android:layout_width="match_parent"-->
             <!--android:background="@color/white"-->

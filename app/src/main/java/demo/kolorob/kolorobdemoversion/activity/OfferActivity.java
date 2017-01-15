@@ -71,22 +71,22 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer);
         SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
-        time=(TextView)findViewById(R.id.counter);
-        claimtext=(TextView)findViewById(R.id.countertext);
+      //  time=(TextView)findViewById(R.id.counter);
+        //claimtext=(TextView)findViewById(R.id.countertext);
         offer=(LinearLayout)findViewById(R.id.loweroffer);
         offertext=(TextView)findViewById(R.id.offertext);
         lowdis2=(TextView)findViewById(R.id.distext2);
         lowdisclaimertext=(TextView)findViewById(R.id.distext);
         backpack=(ImageView)findViewById(R.id.backpack);
-        claim=(FButton) findViewById(R.id.claim);
+        //claim=(FButton) findViewById(R.id.claim);
         wb = (ImageButton) findViewById(R.id.btnw);
         fb = (ImageButton) findViewById(R.id.btnf);
-        updisclaimer=(TextView)findViewById(R.id.offerdisclaimer);
+       // updisclaimer=(TextView)findViewById(R.id.offerdisclaimer);
         credit=(FloatingActionButton)findViewById(R.id.creditbutton);
 
-        claim.setShadowEnabled(false);
-        claim.setButtonColor(getResources().getColor(R.color.gray));
-        claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
+//        claim.setShadowEnabled(false);
+       // claim.setButtonColor(getResources().getColor(R.color.gray));
+       // claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
         String times= settings.getString("timesfirstinstall", null);
         Date date2 = getDate(times);
         Date today=new Date();
@@ -111,7 +111,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         }
         credit.setOnClickListener(this);
         c=settings.getBoolean("MBRequest",false);
-        if (remaining<=0 &&c==false)
+       /* if (remaining<=0 &&c==false)
         {
             claim.setOnClickListener(this);
             time.setText("0");
@@ -133,13 +133,13 @@ public class OfferActivity extends Activity implements View.OnClickListener {
             String remaininginbn = EtoB(Long.toString(remaining));
             time.setText(remaininginbn);
         }
-
+*/
         if(SharedPreferencesHelper.isTabletDevice(OfferActivity.this))
         {
 
-            time.setTextSize(130);
-            claim.setTextSize(23);
-            claimtext.setTextSize(40);
+            //time.setTextSize(130);
+          //  claim.setTextSize(23);
+           // claimtext.setTextSize(40);
             offertext.setTextSize(25);
             offertext.setPadding(50,20,30,30);
             backpack.getLayoutParams().height = 400;
@@ -149,7 +149,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
             offer.requestLayout();
             credit.setSize(FloatingActionButton.SIZE_NORMAL);
             lowdisclaimertext.setTextSize(14);
-            updisclaimer.setTextSize(14);
+           // updisclaimer.setTextSize(14);
             lowdis2.setTextSize(14);
         }
         else credit.setSize(FloatingActionButton.SIZE_MINI);
@@ -228,7 +228,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
                 intent.setData(Uri.parse("http://www.facebook.com/scib.kolorob"));
                 startActivity(intent);
                 break;
-            case R.id.claim:
+          /*  case R.id.claim:
 
                 if (AppUtils.isNetConnected(getApplicationContext()))
                 {
@@ -240,7 +240,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
 //                            Toast.LENGTH_LONG).show();
                     ToastMessageDisplay.showText(OfferActivity.this);
                 }
-                break;
+                break;*/
             case R.id.creditbutton:
                 if(remaincredit<=0 &&cred==false)
                 {
