@@ -12,7 +12,9 @@ import android.widget.ImageButton;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
-
+/*
+this activity for showing kolorob details in app.Basically it has 4 buttons and different kind of actions ( check switch case)
+* */
 public class AboutUs extends AppCompatActivity implements View.OnClickListener {
     ImageButton fb, tw, wb, insta, phnus, emailus;
 

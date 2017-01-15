@@ -75,7 +75,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar, linearLayout;
-    ImageView left_image, middle_image, right_image, email_btn;
+    ImageView left_image, middle_image, right_image, email_btn; // better check associate xml layouts to understand which imageview are being named
     ArrayList<CommentItem> commentItems;
     ImageView comments;
     int inc;
@@ -120,7 +120,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         if (null != intent) {
-            educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU);
+            educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU); //here all the regarding information is being stored from intent
+
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
@@ -214,13 +215,13 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                     } else examname.add(educationResultItemNew.getExamname());
                 } else examname.add(educationResultItemNew.getExamname());
 */              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno()));
+                CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno())); //EtoB is for english to Bengali
                 CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", EtoB(educationResultItemNew.getPassed()));
                 CheckConcate("গোল্ডেন এ", EtoB(educationResultItemNew.getGoldena()));
                 CheckConcate("জিপিএ ৫", EtoB(educationResultItemNew.getAplus()));
             }
         }
-        for(int i=0;i<examname.size();i++)
+        for(int i=0;i<examname.size();i++) // Not used)
         {
             if(examname.size()==0)
             {
@@ -233,7 +234,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             }
 
         }
-
+/*here date is being collected from shared preference and comparing with current date to check how many days before information got updated
+* and being shown in customized ToastMessageDisplay. Check activity if you want to modify text appearance*/
         SharedPreferences settings = DetailsLayoutEducation.this.getSharedPreferences("prefs", 0);
         Date date2 = new Date(settings.getLong("time", 0));
         Date today=new Date();
@@ -329,8 +331,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             }
         });
 
-        compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
-        previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
+        /*if user selected this service center earlier for compare it will check the checkbox selected*/
+        compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this); //check function
+        previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this); //check function
         String multipule[]= previous_node.split(",");
 
         if(compareValue==1&&previous_node.equals(String.valueOf(educationNewItem.getEduId())))
@@ -377,7 +380,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         }
 
-
+/*for comment adapter. Check Function*/
 
         final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
 
@@ -714,7 +717,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                     editor.putString("nValue", node);
 
                     editor.commit();
-
+/*pass value to shared pref so that routing can be done*/
 
                     String Longitude = pref.getString("Longitude", null);
                     String Latitude = pref.getString("Latitude", null);
@@ -727,7 +730,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                     }
 
 
-                    Intent intentJ = new Intent(DetailsLayoutEducation.this,MapFragmentRouteOSM.class);
+                    Intent intentJ = new Intent(DetailsLayoutEducation.this,MapFragmentRouteOSM.class);//routing
                     startActivity(intentJ);
 
                 }
@@ -777,6 +780,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     }
 
     public void verifyRegistration(View v){
+        /*first check if user is registered; if not ask to register*/
 
         String  register = SharedPreferencesHelper.getNumber(DetailsLayoutEducation.this);
         phone_num=register;
@@ -829,7 +833,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 //  declareRadiobutton();
                 if(AppUtils.isNetConnected(getApplicationContext()))
                 {
-                    sendReviewToServer();
+                    sendReviewToServer(); /*if internet is connected send feedback to server*/
                     alertDialog.cancel();
                 }
                 else {
@@ -853,7 +857,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         int rating= getRating(status);;
 
         String comment="",comment2="";
-        comment=feedback_comment.getText().toString().trim();
+        comment=feedback_comment.getText().toString().trim(); /*encoding been done for bangla input*/
         try {
             comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
         } catch (UnsupportedEncodingException e) {
