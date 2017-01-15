@@ -117,10 +117,15 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
- * Created by touhid on 12/3/15.
+ *
  *
  * @author israt,arafat
  */
+
+
+/*
+* Debug to understand this activity. It has all the codes no fragment been used for search/bazar or compare or map.Since earlier structure
+* got changed multiple times so it would be wise to check which part is doing what using debug*/
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
     EducationServiceProviderTable educationServiceProviderTable;
@@ -564,6 +569,7 @@ String pname,paddress,powner,pdescription;
 
         final Intent intent;
         intent = getIntent();
+        /*according to intent value we are setting area location and populating data accordingly*/
         if (null != intent)
         {
             locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
@@ -665,6 +671,7 @@ String pname,paddress,powner,pdescription;
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNewLayout.this);
         categoryList=categoryTable.getAllCategories();
         categoryList2=categoryList;
+        /*to map with previous category id with later changed id of categories.*/
         for(int i=0;i<categoryList2.size();i++)
         {
 
@@ -817,6 +824,9 @@ String pname,paddress,powner,pdescription;
 
             }
         });
+        /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
+        * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
+        * shown if compare/bazar clicked(ListClicked)*/
         MapButton.setBackgroundResource(R.drawable.map_selected);
 
         Picasso.with(this)
@@ -2323,7 +2333,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-
+//this was for list.Now we are not showing service center list in app
 
 //    public void createData(int cat_id, String head,String placeChoice) {
 //        switch (cat_id) {
@@ -2492,7 +2502,8 @@ String pname,paddress,powner,pdescription;
 //        }
 //    }
 
-
+/*
+* this populate filter keywords based on category id from db*/
     public void populatefilterwords(int filcatid)
     {
         SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
@@ -2796,7 +2807,8 @@ String pname,paddress,powner,pdescription;
                 * category id 5 means legal
                 * category id 6 means financial
                 * category id 7 means job*/
-                switch (currentCategoryID) {
+                switch (currentCategoryID) {/*
+                for clicking in category panel of left*/
 
                     case AppConstants.EDUCATION:
                         MediaPlayer mp_e = MediaPlayer.create(getApplicationContext(), R.raw.education);
@@ -3215,7 +3227,8 @@ String pname,paddress,powner,pdescription;
             @Override
             public void onClick(View v) {
 
-
+ /*
+ * to show on/off part of subcategories so that user can toggle sub category*/
                 index = llSubCatListHolder.indexOfChild(v);
                 if (flag2[index] == 1) {
                     flag2[index] = 0; // 1 => Button ON
@@ -3384,7 +3397,8 @@ String pname,paddress,powner,pdescription;
 
 
 
-
+/*
+* call mapfragment functions load fragments of map. based on location */
     private void callMapFragmentWithEducation(int edid,ArrayList<EducationNewItem> educationServiceProviderItems,boolean s)
     {
 
@@ -3414,6 +3428,8 @@ String pname,paddress,powner,pdescription;
         }
         // EDD.clear();
     }
+    /*
+    * this is the default map view based on intent location name.If user change from spinner; this is also called*/
     private void callMapFragment(int locationNameId) {
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -3875,7 +3891,9 @@ String pname,paddress,powner,pdescription;
 
 
 
-
+/*
+* load all the data in arraylist; then store all info in another adapter. This adapter is then set in search
+* so that when user taps on education; it can just sort in arraylist rather than querying in database all the time*/
 
 
     public void Populateholder(String place)
@@ -4065,6 +4083,8 @@ String pname,paddress,powner,pdescription;
 
         return more;
     }
+
+    /*if user has already selected any category; then allHolders been filtered using the category id/sub cat id*/
     private void calladapter(boolean status)
     {
         boolean instatus=status;
@@ -4141,6 +4161,7 @@ String pname,paddress,powner,pdescription;
         allitemList.setFastScrollEnabled(false);
         allitemList.setFastScrollEnabled(true);
     }
+    /*fun1 and fun2 is for selecting only one item from two radiogroup to get the filter id.*/
     public void fun1() {
         fgrp2.setOnCheckedChangeListener(null);
         fgrp2.clearCheck();
