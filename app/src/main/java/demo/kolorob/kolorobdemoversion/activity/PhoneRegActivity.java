@@ -59,7 +59,16 @@ import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import info.hoang8f.widget.FButton;
 
+/**
+ * Created by israt.jahan on 09/30/2016.
+ */
 
+/*
+* In this activity user registration been done. To make sure each user is using individual device we are storing IMEI number
+* so for marshmallow device permission needs to be given by user to get IMEI number.*/
+    /*accesstoken been initialized in application class. So if user already registered or used facebook account kit it does not appear second
+    * time; if not we are validating number using account kit. Here the activities are in control of facebook. So sometimes it takes
+    * time to receive the code but unfortunately it could not be traced.*/
 public class PhoneRegActivity extends Activity {
 
     String username="kolorobapp";
@@ -101,7 +110,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
         accessToken = AccountKit.getCurrentAccessToken();
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             if(IMEI==null)checkPermissions();
-            else if(accessToken==null)goToLogin(true);
+            else if(accessToken==null)goToLogin(true); //user is using app for the first time
 
         }
         else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -109,7 +118,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
             doPermissionGrantedStuffs();
 
         }
-        if(registered)
+        if(registered) /* so that if user taps on registration page while using he/she can see an welcome page only*/
         {
             first.setVisibility(View.GONE);
             second.setVisibility(View.VISIBLE);
@@ -123,7 +132,8 @@ registered=settings.getBoolean("IFREGISTERED",false);
         phone.setTextColor(getResources().getColor(R.color.gray));
         phone.setEnabled(false);
         if(accessToken != null ){
-            String pnumber=SharedPreferencesHelper.getNumber(con);
+            String pnumber=SharedPreferencesHelper.getNumber(con); //get number from sharedpref and set that value in phone edittext.
+            //we are not giving option to user to write down number second time once thats been validated via account kit.
             if(pnumber.length()>0)
             {
                 phone.setText(pnumber.toString());
@@ -188,6 +198,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
             }
         });
     }
+    /*marshmallow permission check. These permissions are very important to make app work perfectly*/
     private void checkPermissions() {
         List<String> permissions = new ArrayList<>();
         String message = "osmdroid permissions:";
@@ -348,7 +359,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
 
                             //
 
-                            if(response.contains("true"))
+                            if(response.contains("true")) /* by parsing server response we are storing the registration time of user*/
                             {
                                 List<String> responses = Arrays.asList(response.split(","));
                                 String dateserver=responses.get(1);
@@ -387,7 +398,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
 
 
                             }
-                            else if(response.contains("EXISTING"))
+                            else if(response.contains("EXISTING")) /*if user is already in our db; then we are replacing new number and user name in application*/
                             {
                                 List<String> responses = Arrays.asList(response.split(","));
 
