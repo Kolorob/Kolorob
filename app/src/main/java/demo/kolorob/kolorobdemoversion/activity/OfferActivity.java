@@ -71,6 +71,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer);
         SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
+        /*
+        * Since we removed scratch card offer so previously used code been commented. If this need to be added then uncomment */
       //  time=(TextView)findViewById(R.id.counter);
         //claimtext=(TextView)findViewById(R.id.countertext);
         offer=(LinearLayout)findViewById(R.id.loweroffer);
@@ -97,6 +99,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         long remaining=counthead-diffInDays;
         remaincredit=credithead-diffInDays;
         cred=settings.getBoolean("RefProvided",false);
+        /*
+        * credit button is that smiley button which will be anable after 15 days according to our bag offer*/
         if(remaincredit<=0 &&cred==false)
         {
             credit.setColorNormalResId(R.color.line_draw);
@@ -194,6 +198,9 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         }
         return concatResult;
     }
+    /*
+    * In few version date got stored from device but if device's time is backward that creates problem.So in later version we
+    * stored date from server. getDate function here makes sure no matter in which format date was stored; resulted format is same*/
     private Date getDate(String OurDate)
     {
         Date value=null;
@@ -286,7 +293,10 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         }
 
     }
-
+/*
+* Earlier give credit option was after clicking the enabled smiley button; user will have to provide number who made them
+* download application.Later we added option that only tapping enabled button will send request to server. so previously shown/number input
+* box is disabled*/
     public void showbox(Context c) {
 
         DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
@@ -352,6 +362,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
+    /*
+    * since scratch card offer is invalid this function is not in use anymore*/
     public void sendRequest() {
 
 
@@ -418,7 +430,8 @@ public class OfferActivity extends Activity implements View.OnClickListener {
 
 
     }
-
+/*
+* to give response to server that someone made the user download the app*/
     public void sendRequesttocredit() {
 
 
