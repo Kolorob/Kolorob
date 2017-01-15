@@ -216,7 +216,8 @@ public class OpeningActivity extends Activity {
             filesDir = getFilesDir();
         }
 
-        try
+        try /*
+        to fix issue with backward date device time in some version*/
         {
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
 
@@ -488,14 +489,14 @@ if(check==2) {
                         int mapdetail = 0;
                         REG = settings.getBoolean("IFREGISTERED", false);
                         if (REG) {
-                            Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+                            Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // User is registered already
                             a.putExtra("YourValueKey", mapdetail);
                             frameAnimation.stop();
                             startActivity(a);
                             return;
 
                         } else {
-                            Intent a = new Intent(OpeningActivity.this, PlaceSelectionActivity.class); // Default Activity
+                            Intent a = new Intent(OpeningActivity.this, PhoneRegActivity.class); // User is using app for the first time
                             a.putExtra("YourValueKey", mapdetail);
                             frameAnimation.stop();
                             startActivity(a);
