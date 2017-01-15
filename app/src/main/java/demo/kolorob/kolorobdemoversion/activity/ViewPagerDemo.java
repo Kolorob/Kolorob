@@ -15,6 +15,12 @@ import com.viewpagerindicator.PageIndicator;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.TestFragmentAdapter;
 
+/**
+ * Created by israt.jahan on 09/25/2016.
+ */
+/*
+* this activity is the tutorial page. if user needs to directed to place selection page or place details page it gets decided based on intent result
+* */
 public class ViewPagerDemo extends FragmentActivity {
 
     TestFragmentAdapter mAdapter;

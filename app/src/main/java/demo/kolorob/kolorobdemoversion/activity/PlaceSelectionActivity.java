@@ -74,7 +74,11 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
-
+/*
+*
+* first approach been done so that click on image to go through that area using area co-ordinates. later for this version we popped up
+* dialog box so that user can choose his area. This page needs to merged from new branch named placeselection when backend is ready or
+* designed newly so that all area can be incorporated in app*/
 public class PlaceSelectionActivity extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     ImageButton img;
     Toolbar toolbar;
