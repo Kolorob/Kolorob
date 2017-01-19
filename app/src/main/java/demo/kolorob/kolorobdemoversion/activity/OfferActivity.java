@@ -89,15 +89,24 @@ public class OfferActivity extends Activity implements View.OnClickListener {
 //        claim.setShadowEnabled(false);
        // claim.setButtonColor(getResources().getColor(R.color.gray));
        // claim.setTextColor(getResources().getColor(R.color.fbutton_color_silver));
-        String times= settings.getString("timesfirstinstall", null);
-        Date date2 = getDate(times);
-        Date today=new Date();
-        Long diffInMillisec=today.getTime()-date2.getTime();
+       try {
+           String times = settings.getString("timesfirstinstall", null);
+           //  Date date2 = getDate(times);
+           Date date2 = null;
+           Date today = new Date();
+           Long diffInMillisec = today.getTime() - date2.getTime();
+
+
         fb.setOnClickListener(this);
         wb.setOnClickListener(this);
         long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
         long remaining=counthead-diffInDays;
         remaincredit=credithead-diffInDays;
+       }catch ( Exception e)
+       {
+
+
+       }
         cred=settings.getBoolean("RefProvided",false);
         /*
         * credit button is that smiley button which will be anable after 15 days according to our bag offer*/
