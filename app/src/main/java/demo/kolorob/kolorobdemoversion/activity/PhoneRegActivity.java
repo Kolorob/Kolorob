@@ -51,6 +51,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -340,6 +341,10 @@ registered=settings.getBoolean("IFREGISTERED",false);
 
             IMEINumber=    settings.getString("IMEI", null);
 
+            if(IMEINumber==null||IMEINumber.equals("0"))
+            {
+                IMEINumber=gotname.concat(String.valueOf(randomBox()));
+            }
 
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
@@ -633,6 +638,13 @@ registered=settings.getBoolean("IFREGISTERED",false);
 //		else
 //			textAsk.setTextSize(17);
         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
+    public static int randomBox() {
+
+        Random rand = new Random();
+        int pickedNumber = rand.nextInt(100);
+        return pickedNumber;
 
     }
 }
