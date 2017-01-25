@@ -8,8 +8,8 @@ android {
         applicationId "demo.kolorob.kolorobdemoversion"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 26
-        versionName "2.065"
+        versionCode 27
+        versionName "2.066"
 
     }
     buildTypes {
