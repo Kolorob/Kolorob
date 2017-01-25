@@ -23,9 +23,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="10"
-            android:id="@+id/upper"
-            >
+            android:layout_weight="10">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -249,7 +247,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/middle"
                 android:background="@color/white"
                 >
 

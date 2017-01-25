@@ -58,8 +58,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:visibility="gone"
-        android:id="@+id/header" />
+        android:visibility="gone" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

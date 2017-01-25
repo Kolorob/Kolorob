@@ -4,41 +4,9 @@
     <string name="uptext">কোথায় খুঁজতে চান?</string>
 
 
-    <string name="title_activity_location_ask">LocationAskActivity</string>
-    <string name="title_activity_button_click_baunia">ButtonClickBaunia</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="searchtext">কোথায় খুঁজতে চান?</string>
     <string name="search"> এখানে লিখে খুঁজুন</string>
-    <string name="csearch">খুঁজুন</string>
-    <string name="emergencylocationtext"> দুঃখিত! ডিরেকশন খুজে পাওয়া যায় নি </string>
-    <string name="emergencyemailtext">দুঃখিত!ইমেইল খুজে পাওয়া যায় নি  </string>
-    <string name="emergencytext">জরুরী সেবা ূ</string>
-    <string name="fsearch">সেবা খুজুন</string>
-    <string name="switch_image">Switch Image</string>
-    <string name="transparency">Transparency</string>
-    <string name="clickable">Clickable</string>
-    <string name="Education">পড়াশুনা</string>
-    <string name="Health">চিকিৎসা </string>
-    <string name="Legal">আইন কানুন </string>
-    <string name="Financial">টাকা-পয়সা </string>
-    <string name="Entertainment">আনন্দ ফুর্তি</string>
-    <string name="Government">সরকারী সুবিধা </string>
     <string name="txt_cd_icon_cat">Icon of the category</string>
-    <string name="txt_cd_header_icon_ofcat_subcatlist">header icon of the category</string>
-    <string name="txt_inst_sub_cat_choose">লিস্ট দেখতে চাইলে এখানে চাপ দেন</string>
-    <string name="txt_sub_cat_inst">যে ধরনের পড়াশুনা সম্বন্ধে জানতে চান,\nতার উপর টিপ দেন</string>
     <string name="distance">দূরত্ব</string>
-    <string name="time2">And Time</string>
-    <string name="Head">নাম লিখে খুঁজুন</string>
-    <string name="MiddleSearch">আপনি ঠিক কোন ধরনের সাহায্য খুজছেন? এখান থেকে পছন্দ করুন</string>
-    <string name="Headen">Write Name Here!</string>
-    <string name="MiddleSearchen">Search for efficiently!</string>
-    <string name="time">সময়</string>
-    <string name="loading">একটু অপেক্ষা করেন \n কলরব তৈরি হচ্ছে </string>
-    <string name="roam"> আর লাট্টুর মত ঘুরতে হবে না </string>
-    <string name="title_activity_details_info_activity_entertainment">
-        DetailsInfoActivityEntertainment
-    </string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -51,64 +19,15 @@
     <string name="feedback5">খুবই সন্তুষ্ট  </string>
 
 
-    <string name="title_activity_review">ReviewActivity</string>
-    <string name="title_activity_feedback">FeedbackActivity</string>
-    <string name="title_activity_place_choice2">PlaceChoiceActivity2</string>
-    <string name="title_activity_display_all_jobs">DisplayAllJobsActivity</string>
-    <string name="feedbacktext">আপনি কি ধরনের তথ্য জানতে চান?
-                        অথবা কোন মতামত থাকলে আমাদের জানাতে পারেন।
-                           বিস্তারিত জানতে ফোনও করতে পারেন।
-                                     </string>
-    <string name="feed_back_done">মতামত দেয়া হয়েছে</string>
-    <string name="feed_back_phone">ফোন করুন</string>
-    <string name="easily_see_map">আরো সহজে ম্যাপ দেখতে চাইলে এখানে চাপ দিন</string>
-    <string name="gas_facility">গ্যাস বিদ্যুৎ ও সুবিধা সমূহ</string>
-    <string name="govt_facility">সরকারী অফিস</string>
-    <string name="plice_firebrigate">পুলিশ দমকল  জরুরি সুবিধা</string>
-    <string name="others">অন্যন্য </string>
-    <string name="place">
-                    আপনার চিহ্নিত স্থান গুলো বাতিল হয়ে যাবে।  </string>
-
     <string name="phone_registration">রেজিস্ট্রেশন করুন  </string>
-    <string name="information_change">আপনার তথ্য পরিবর্তন করুন  </string>
-    <string name="area_member">এলাকার প্রতিনিধি হবার আবেদন করুন </string>
-    <string name="advertisements">বিজ্ঞাপন বা তথ্যের জন্য আবেদন করুন  </string>
-    <string name="know_adv">বিজ্ঞাপন বা তথ্য জানুন  </string>
-    <string name="list_show"> লিস্ট দেখতে এখানে চাপ দিন  </string>
-    <string name="way_to_go">যাবার উপায়</string>
-    <string name="phone">ফোন করুন:</string>
-    <string name="email">ইমেইল করুন:</string>
-    <string name="close">বন্ধ করুন</string>
-    <string name="address">ঠিকানা : </string>
-    <string name="phone_text">ফোন </string>
-    <string name="email_text">ইমেইল </string>
-    <string name="organization_time">প্রতিষ্ঠানের সময়সূচী </string>
-    <string name="job_advertizement"> চাকরির বিবরণ </string>
-    <string name="job_description"> চাকরির বিবরণ </string>
-    <string name="application_time"> আবেদনের সময় </string>
-    <string name="info_collector">তথ্য সংগ্রহ কারী  </string>
-    <string name="salary_range">বেতন সীমা </string>
-    <string name="know_kolorob">কলরব সম্পর্কে আপনি কি জানতে চান?</string>
-    <string name="enter_text_here"> এখানে লিখুন </string>
     <string name="verify_registration">মতামত দেয়ার আগে আপনাকে রেজিস্ট্রেশন করতে হবে আপনি কি রেজিস্ট্রেশন করবেন? </string>
     <string name="compare">তুলনা করুন </string>
     <string name="edu_name_ban">তুলনা করুন </string>
-    <string name="edtype"> পড়াশুনার ধরণ </string>
-    <string name="hostel_facility"> প্রতিষ্ঠানের ধরন </string>
-    <string name="transport_facility">আশে পাশের পরিচিত স্থান </string>
-    <string name="playground"> গড় ছাত্র ছাত্রী সংখ্যা  </string>
-    <string name="total_students">ছাত্র ছাত্রী সংখা</string>
-    <string name="total_classes"> কয়টি ক্লাস রুম রয়েছে  </string>
-    <string name="total_teachers">শিক্ষক সংখা </string>
-    <string name="course_provided">কাদের সাথে রেজিস্টার্ড</string>
-    <string name="shift">শাখা</string>
-    <string name="canteen_facility">সরবরাহকৃত পানির অবস্থা </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="disclaimerhead"> মুখবন্ধ</string>
     <string name="abouthead"> কলরবের পরিচয় </string>
-    <string name="interstitial_kolorob">ca-app-pub-9079587410696304/9489035875</string>
- <string name="disclaimertext">কলরব এ্যাপ্লিক্যাশনের সমস্ত কিছুই শুধুমাত্র তথ্য প্রদানে ব্যবহার করার জন্য। যেহেতু কলরবে ব্যবহৃত তথ্যসমূহ নির্দিষ্ট সময়ে (অধিকাংশ সময় পাক্ষিক কালে) হাল-নাগাদ হয় তাই নির্দিষ্ট কোনো সেবা / পন্য ব্যবহার উপযোগী না হলে বা যথাযথ মানসম্পন্ন না হলে বা মেয়াদোত্তীর্ণ হলে কলরব দায়ী নয় ও এসকল সেবার সর্বশেষ অবস্থা/অবস্থান সম্পর্কে ব্যাপারে কলরব নিশ্চয়তা দেয় না ।
+    <string name="disclaimertext">কলরব এ্যাপ্লিক্যাশনের সমস্ত কিছুই শুধুমাত্র তথ্য প্রদানে ব্যবহার করার জন্য। যেহেতু কলরবে ব্যবহৃত তথ্যসমূহ নির্দিষ্ট সময়ে (অধিকাংশ সময় পাক্ষিক কালে) হাল-নাগাদ হয় তাই নির্দিষ্ট কোনো সেবা / পন্য ব্যবহার উপযোগী না হলে বা যথাযথ মানসম্পন্ন না হলে বা মেয়াদোত্তীর্ণ হলে কলরব দায়ী নয় ও এসকল সেবার সর্বশেষ অবস্থা/অবস্থান সম্পর্কে ব্যাপারে কলরব নিশ্চয়তা দেয় না ।
 কলরবে যেসকল তথ্য বিভিন্ন সংস্থার ওয়েবসাইট ও ইন্টারনেট হতে নেয়া হয়েছে এবং ব্যবহারকারীর অধিকতর সুবিধার্থে কলরবে ব্যবহার করা হয়েছে, এসমস্ত তথ্য কলরবের তথ্য নয় বলে গণ্য হবে এবং তৃতীয় পক্ষ হতে সংগৃহীত এ তথ্যসমূহের দায়ও কলরবের নয়। পন্য এবং বিভিন্ন সেবা সম্পর্কিত তথ্যের জন্য নির্দিষ্ট সেবা প্রদানকারী দায়বদ্ধ, কলরব নয়।
 এটা প্রত্যাশিত যে, কলরবের ব্যবহারকারীরা অবশ্যই তথ্য প্রযুক্তি /ডিজিটাল আইন এবং এসম্পর্কিত অন্যান্য আইন মেনে তথ্য ব্যবহার করবে। কলরবে ব্যবহৃত সকল ছবি, চরিত্র ও তথ্য প্রতীকি অর্থে ব্যবহার করা হয়েছে এবং এর মাধ্যমে কোনো সংস্থা বা ব্যক্তিকে হেয় করা কোনো উদ্দ্যেশ্য নয়।
 কলরবের কপিরাইট সেভ দ্য চিলড্রেন কর্তৃক সংরক্ষিত। এই এ্যাপ্লিকেশনের কোনো অংশ কপি বা অনুমতি ছাড়া ব্যবহার করা যাবে না।

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:id="@+id/headerlayout"
-       android:visibility="gone"
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:background="#F7941E">
 
@@ -58,7 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#29ABE2"
-            android:id="@+id/linearLayout6"
             android:layout_below="@+id/imageView12"
             android:layout_centerHorizontal="true">
 

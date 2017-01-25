@@ -30,7 +30,6 @@
             android:fadeScrollbars="false"
             android:scrollbarStyle="insideInset"
 
-            android:id="@+id/scrollView4"
             android:scrollIndicators="right">
 
             <LinearLayout
@@ -45,7 +44,6 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/aboutus"
                     android:textSize="@dimen/abttext"
-                    android:id="@+id/aboutus"
                     android:textColor="#ffffff"
 
                     android:layout_marginLeft="15dp" />
@@ -56,7 +54,6 @@
                     android:textSize="@dimen/abttext"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/abouttext"
-                    android:id="@+id/textView20"
                     android:textColor="#ffffff"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
@@ -81,7 +78,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="আমাদের সাথে যোগ দিন "
-            android:id="@+id/connecttext"
 
             android:layout_gravity="center|top"
             android:textSize="@dimen/abttext"
@@ -156,7 +152,6 @@
                 android:layout_height="wrap_content"
                 android:text="যোগাযোগ করুন"
 
-                android:id="@+id/textView18"
                 android:layout_gravity="center_horizontal|top"
                 android:textSize="@dimen/abttext"
                 android:layout_marginBottom="@dimen/aboutusbottompadding"

@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="regpadding">15dp</dimen>
     <dimen name="sidebarwidth">55dp</dimen>
-    <dimen name="sidebarheight">270dp</dimen>
+    <dimen name="sidebarheight">220dp</dimen>
     <dimen name="siderighttop">43dp</dimen>
     <dimen name="tutobottom">10dp</dimen>
     <dimen name="nav_header_heightcat2">5dp</dimen>
@@ -15,10 +15,12 @@
 
     <dimen name="fab_marginforsearch2">20dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
-    <dimen name="nav_header_heightcat">25dp</dimen>
+    <dimen name="nav_header_heightcat">15dp</dimen>
     <dimen name="nav_header_height2">50dp</dimen>
     <dimen name="search_top">20dp</dimen>
-    <dimen name="offercounterbtn">15dp</dimen>
+    <dimen name="offercounterbtn">12dp</dimen>
+    <dimen name="regsubbtnsize">0dp</dimen>
+    <dimen name="regsubbtn">2dp</dimen>
     <dimen name="offerbagw">103dp</dimen>
     <dimen name="offerbagh">130dp</dimen>
     <dimen name="offerbagtext">14dp</dimen>

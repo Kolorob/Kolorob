@@ -3,19 +3,10 @@
     <dimen name="activity_horizontal_margin">80dp</dimen>
     <dimen name="sidebarwidth">115dp</dimen>
     <dimen name="sidebarheight">800dp</dimen>
-    <dimen name="sidebarmargintop">80dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">5dp</dimen>
     <dimen name="margincheckbox">30dp</dimen>
-    <dimen name="comparelogoleft">80dp</dimen>
     <dimen name="tutobottom">50dp</dimen>
     <dimen name="transportscroll">200dp</dimen>
-    <dimen name="leftpadding">33dp</dimen>
-    <dimen name="transportlayout">100dp</dimen>
-    <dimen name="bottomtransport">80dp</dimen>
     <dimen name="search_margin">15dp</dimen>
-    <dimen name="offerpaddingbtn">30dp</dimen>
-    <dimen name="offerpaddingbtntop">15dp</dimen>
     <dimen name="regpadding">30dp</dimen>
     <dimen name="listheight">420dp</dimen>
     <dimen name="filterheight">450dp</dimen>
@@ -23,22 +14,15 @@
     <dimen name="searchlisttextpadding">25dp</dimen>
     <dimen name="searchbar">600dp</dimen>
     <dimen name="fab_marginforsearch2">50dp</dimen>
-    <dimen name="fab_marginforsearch">100dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_heightcat">16dp</dimen>
     <dimen name="siderighttop">80dp</dimen>
     <dimen name="nav_header_heightcat2">70dp</dimen>
     <dimen name="catbuttonheight">90dp</dimen>
-    <dimen name="catlayouttop">100dp</dimen>
-    <dimen name="subcatlayouttop">100dp</dimen>
-    <dimen name="nav_header_height">160dp</dimen>
     <dimen name="nav_header_height2">230dp</dimen>
-    <dimen name="nav_header_height3">300dp</dimen>
     <dimen name="offerpadding">15dp</dimen>
     <dimen name="offerpaddingcredittop">200dp</dimen>
     <dimen name="offerpaddingcreditlr">70dp</dimen>
-    <dimen name="offerpaddinglow">18dp</dimen>
-    <dimen name="getmbbuttontop">8dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     //feedbackstars
     <dimen name="firststarspace">63dp</dimen>

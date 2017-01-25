@@ -37,8 +37,7 @@
             android:layout_marginLeft="1dp"
             android:drawablePadding="@dimen/fifthstarspace"
             android:textColor="@color/orange"
-            android:textSize="@dimen/feedbacktextsize"
-            android:id="@+id/best" />
+            android:textSize="@dimen/feedbacktextsize" />
 
 
 
@@ -50,8 +49,7 @@
             android:drawablePadding="@dimen/fourthstarspace"
             android:textColor="@color/orange"
             android:text="@string/feedback4"
-            android:textSize="@dimen/feedbacktextsize"
-            android:id="@+id/good" />
+            android:textSize="@dimen/feedbacktextsize" />
 
 
 
@@ -63,8 +61,7 @@
             android:textColor="@color/orange"
             android:checked="true"
             android:drawablePadding="@dimen/thirdstarspace"
-            android:text="@string/feedback3"
-            android:id="@+id/medium" />
+            android:text="@string/feedback3" />
 
 
         <RadioButton
@@ -74,8 +71,7 @@
             android:textSize="@dimen/feedbacktextsize"
             android:drawablePadding="@dimen/secondstarspace"
             android:textColor="@color/orange"
-            android:text="@string/feedback2"
-            android:id="@+id/bad" />
+            android:text="@string/feedback2" />
 
 
         <RadioButton
@@ -85,8 +81,7 @@
             android:textSize="@dimen/feedbacktextsize"
             android:drawablePadding="@dimen/firststarspace"
             android:textColor="@color/orange"
-            android:text="@string/feedback1"
-            android:id="@+id/worst" />
+            android:text="@string/feedback1" />
 
 
 

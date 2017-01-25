@@ -28,7 +28,6 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
-            android:id="@+id/left_compare"
             android:layout_weight="0.5"
             android:gravity="center"
             android:layout_height="match_parent">
@@ -46,7 +45,6 @@
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_weight="0.01"
-            android:id="@+id/compare_dividor"
             android:background="@color/white"
             android:layout_height="match_parent"></LinearLayout>
 
@@ -54,7 +52,6 @@
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_weight="0.5"
-            android:id="@+id/right_compare"
             android:gravity="center"
 
             android:layout_height="match_parent">
