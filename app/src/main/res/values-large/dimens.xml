@@ -26,6 +26,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     //feedbackstars
     <dimen name="firststarspace">63dp</dimen>
+    <dimen name="offercounterbtn">20dp</dimen>
+    <dimen name="regsubbtnsize">50dp</dimen>
     <dimen name="icon_gaph">8dp</dimen>
     <dimen name="secondstarspace">127dp</dimen>
     <dimen name="thirdstarspace">100dp</dimen>
