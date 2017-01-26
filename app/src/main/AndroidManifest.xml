@@ -49,6 +49,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activity.DataLoadingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".activity.PhoneRegActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
