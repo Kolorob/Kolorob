@@ -21,7 +21,7 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:id="@+id/feedRadio"
-
+        android:checkedButton="@+id/button_1"
         android:layout_height="wrap_content"
       android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -58,8 +58,9 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/three"
             android:textSize="@dimen/feedbacktextsize"
+            android:id="@+id/button_1"
             android:textColor="@color/orange"
-            android:checked="true"
+
             android:drawablePadding="@dimen/thirdstarspace"
             android:text="@string/feedback3" />
 
