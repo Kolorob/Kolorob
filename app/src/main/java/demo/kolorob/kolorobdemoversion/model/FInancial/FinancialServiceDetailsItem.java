@@ -1,4 +1,4 @@
-package demo.kolorob.kolorobdemoversion.model.FInancial;
+package demo.kolorob.kolorobdemoversion.model.Financial;
 
 import org.json.JSONException;
 import org.json.JSONObject;

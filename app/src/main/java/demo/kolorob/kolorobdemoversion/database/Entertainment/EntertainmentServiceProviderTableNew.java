@@ -18,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class EntertainmentServiceProviderTableNew {
 
-    private static final String TAG = EntertainmentServiceProviderTable.class.getSimpleName();
+    private static final String TAG = EntertainmentServiceProviderTableNew.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.ENT_PROVIDER_TABLE_NEW;
     public static final String KEY_NODE_ID = "node_id";
     public static final String KEY_SUB_CATEGORY_ID = "_ent_sub_category_id";

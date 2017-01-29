@@ -53,8 +53,8 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetail
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;

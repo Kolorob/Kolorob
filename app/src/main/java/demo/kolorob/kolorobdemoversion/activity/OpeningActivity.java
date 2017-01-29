@@ -84,8 +84,8 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsI
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialNewItem;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;

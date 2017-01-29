@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**

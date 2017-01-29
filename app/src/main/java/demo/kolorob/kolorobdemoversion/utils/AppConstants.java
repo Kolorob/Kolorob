@@ -53,6 +53,7 @@ public class AppConstants {
 
     public static final String PARIS_ROAD = "মিরপুর ১০";
     public static final String MIRPUR_TWELVE = "মিরপুর ১২";
+
     public static final int PLACE_BAUNIABADH = 1;
     public static final int PLACE_PARIS_ROAD = 2;
     public static final int PLACE_MIRPUR_12 = 3;

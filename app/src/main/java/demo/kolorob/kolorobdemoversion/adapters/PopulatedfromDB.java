@@ -2,7 +2,7 @@ package demo.kolorob.kolorobdemoversion.adapters;
 
 import java.util.ArrayList;
 
-import demo.kolorob.kolorobdemoversion.model.FInancial.FinancialServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialServiceProviderItem;
 
 public class PopulatedfromDB {
 	private String rank;

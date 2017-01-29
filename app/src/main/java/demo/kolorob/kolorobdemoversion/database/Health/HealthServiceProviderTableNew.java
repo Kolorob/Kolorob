@@ -18,7 +18,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  */
 public class HealthServiceProviderTableNew {
 
-    private static final String TAG = HealthServiceProviderTable.class.getSimpleName();
+    private static final String TAG = HealthServiceProviderTableNew.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_PROVIDER_TABLE_NEW;
 
     private static final String KEY_ID= "id";
