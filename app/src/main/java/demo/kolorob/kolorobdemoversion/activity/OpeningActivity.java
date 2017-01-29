@@ -64,11 +64,9 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTab
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthPharmacyTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccineTableDetails;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthVaccinesTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
@@ -147,7 +145,7 @@ public class OpeningActivity extends Activity {
     ArrayList<SubCategoryItem>si2=new ArrayList<>();
     ArrayList<RatingModel>si22=new ArrayList<>();
     ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
-    HealthVaccineTableDetails healthVaccineTableDetails;
+    //HealthVaccineTableDetails healthVaccineTableDetails;
     HealthSpecialistTableDetails healthVaccineTableDetails1;
     LegalAidDetailsTable legalAidDetailsTable;
     // LM's variables
@@ -591,8 +589,8 @@ if(check==2) {
                             try {
 
                                 JSONArray allData = new JSONArray(apiContent);
-                                healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
-                                healthVaccineTableDetails.dropTable();
+                             //   healthVaccineTableDetails= new HealthVaccineTableDetails(OpeningActivity.this);
+                           //     healthVaccineTableDetails.dropTable();
                                 healthVaccineTableDetails1 = new HealthSpecialistTableDetails(OpeningActivity.this);
                                 healthVaccineTableDetails1.dropTable();
                                 new SaveHealthtDataTask(OpeningActivity.this).execute(allData);
@@ -1073,7 +1071,7 @@ if(check==2) {
 
             try {
                 HealthVaccineItemDetails healthVaccineItemDetails = HealthVaccineItemDetails.parseHealthVaccinesItem(jsonObject, foreign_key);
-                healthVaccineTableDetails.insertItemHealth(healthVaccineItemDetails);
+             //   healthVaccineTableDetails.insertItemHealth(healthVaccineItemDetails);
 
 
             } catch (JSONException e) {
@@ -1388,8 +1386,8 @@ if(check==2) {
 
         protected Long doInBackground(JSONArray... jsonObjects) {
             JSONArray healthServiceProvider = jsonObjects[0];
-            HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
-            healthServiceProviderTable.dropTable();
+           // HealthServiceProviderTable healthServiceProviderTable = new HealthServiceProviderTable(OpeningActivity.this);
+           // healthServiceProviderTable.dropTable();
             HealthVaccinesTable healthVaccinesTable = new HealthVaccinesTable(OpeningActivity.this);
             healthVaccinesTable.dropTable();
             HealthSpecialistTable healthSpecialistTable = new HealthSpecialistTable(OpeningActivity.this);
