@@ -89,7 +89,6 @@ import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetails
 import demo.kolorob.kolorobdemoversion.model.Health.HealthPharmacyItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccineItemDetails;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthVaccinesItem;
@@ -1407,8 +1406,8 @@ if(check==2) {
                         for (int m = 0; m < specialist.length(); m++) {
                             JSONObject joes = specialist.getJSONObject(m);
 
-                            HealthSpecialistItem ets = HealthSpecialistItem.parseHealthSpecialistItem(joes);
-                            healthSpecialistTable.insertItemHealth(ets);
+                            //HealthSpecialistItem ets = HealthSpecialistItem.parseHealthSpecialistItem(joes);
+                            //healthSpecialistTable.insertItemHealth(ets);
 
                         }
 
