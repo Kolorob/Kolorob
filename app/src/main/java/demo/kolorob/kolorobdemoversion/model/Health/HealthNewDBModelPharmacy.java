@@ -51,8 +51,8 @@ public class HealthNewDBModelPharmacy {
     public void setVaccineavailability(String vaccineavailability) {
         this.vaccineavailability = vaccineavailability;
     }
-    public static HealthNewDBModelPharmacy parseHealthNewDBModelPharmacy(JSONObject jo) throws JSONException {
-        int _servicecenterid = jo.getInt("id");
+    public static HealthNewDBModelPharmacy parseHealthNewDBModelPharmacy(JSONObject jo,int sproviderkey) throws JSONException {
+       int _servicecenterid=sproviderkey;
         String _davailable = jo.getString("doctor_available");
         String _speciality = jo.getString("speciality");
 
