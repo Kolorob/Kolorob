@@ -86,7 +86,7 @@ import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationServiceProviderTable;
+
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
@@ -128,7 +128,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 * got changed multiple times so it would be wise to check which part is doing what using debug*/
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
-    EducationServiceProviderTable educationServiceProviderTable;
+
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
@@ -2193,7 +2193,7 @@ String pname,paddress,powner,pdescription;
     {
         checkLeft.setChecked(true);
         checkRight.setChecked(true);
-        educationServiceProviderTable=new EducationServiceProviderTable(PlaceDetailsActivityNewLayout.this);
+
         educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
         firstDataSet=educationNewTable.getEducationData(String.valueOf(firstData));
         secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
