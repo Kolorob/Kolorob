@@ -26,7 +26,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.text.SimpleDateFormat;
@@ -60,7 +59,6 @@ public class OfferActivity extends Activity implements View.OnClickListener {
     public static int width;
     public static int height;
     ImageButton fb,wb;
-    FloatingActionButton credit;
     String usernames = "kolorobapp";
     long remaincredit;
     String password = "2Jm!4jFe3WgBZKEN";
@@ -84,7 +82,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         wb = (ImageButton) findViewById(R.id.btnw);
         fb = (ImageButton) findViewById(R.id.btnf);
        // updisclaimer=(TextView)findViewById(R.id.offerdisclaimer);
-        credit=(FloatingActionButton)findViewById(R.id.creditbutton);
+
 
 //        claim.setShadowEnabled(false);
        // claim.setButtonColor(getResources().getColor(R.color.gray));
@@ -110,7 +108,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
         cred=settings.getBoolean("RefProvided",false);
         /*
         * credit button is that smiley button which will be anable after 15 days according to our bag offer*/
-        if(remaincredit<=0 &&cred==false)
+      /*  if(remaincredit<=0 &&cred==false)
         {
             credit.setColorNormalResId(R.color.line_draw);
             credit.setIcon(R.drawable.smile);
@@ -122,7 +120,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
             credit.setIcon(R.drawable.smile2);
 
         }
-        credit.setOnClickListener(this);
+        credit.setOnClickListener(this);*/
         c=settings.getBoolean("MBRequest",false);
        /* if (remaining<=0 &&c==false)
         {
@@ -160,12 +158,12 @@ public class OfferActivity extends Activity implements View.OnClickListener {
             backpack.requestLayout();
             offer.setGravity(Gravity.CENTER);
             offer.requestLayout();
-            credit.setSize(FloatingActionButton.SIZE_NORMAL);
+           // credit.setSize(FloatingActionButton.SIZE_NORMAL);
             lowdisclaimertext.setTextSize(14);
            // updisclaimer.setTextSize(14);
             lowdis2.setTextSize(14);
         }
-        else credit.setSize(FloatingActionButton.SIZE_MINI);
+
     }
     public String EtoB(String english_number) {
         if(english_number.equals("null")||english_number.equals(""))
@@ -257,7 +255,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
                     ToastMessageDisplay.showText(OfferActivity.this);
                 }
                 break;*/
-            case R.id.creditbutton:
+           /* case R.id.creditbutton:
                 if(remaincredit<=0 &&cred==false)
                 {
                     if (AppUtils.isNetConnected(getApplicationContext()))
@@ -281,7 +279,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
                 }
 
                 break;
-
+*/
 
             case R.id.btnw:
                 Intent i = new Intent(Intent.ACTION_SEND);
@@ -462,9 +460,9 @@ public class OfferActivity extends Activity implements View.OnClickListener {
                                 SharedPreferences settings = OfferActivity.this.getSharedPreferences("prefs", 0);
                                 settings.edit().putBoolean("RefProvided", true).apply();
                                 cred = settings.getBoolean("RefProvided", false);
-                                credit.setColorNormalResId(R.color.gray);
-                                credit.setIcon(R.drawable.smile2);
-                                credit.setOnClickListener(null);
+                            //    credit.setColorNormalResId(R.color.gray);
+                            //    credit.setIcon(R.drawable.smile2);
+                            //    credit.setOnClickListener(null);
                                 AlertMessage.showMessage(OfferActivity.this, "ধন্যবাদ!","কলরব ও আপনার বন্ধুর পক্ষ থেকে আপনার প্রতি শুভেচ্ছা।" +
                                         "কলরবের সাথেই থাকুন");
                             } else {

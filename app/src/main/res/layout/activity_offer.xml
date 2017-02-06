@@ -24,17 +24,7 @@
         android:layout_marginBottom="8dp"
         android:layout_height="0dp">
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/creditbutton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            fab:fab_icon="@drawable/smile"
-            fab:fab_colorNormal="@color/black"
-            fab:fab_colorPressed="@color/gray"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="right"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
