@@ -9,29 +9,30 @@
     card_view:cardElevation="4dp"
     card_view:cardMaxElevation="2dp"
     card_view:contentPadding="6dp"
-    android:layout_gravity="center"
+
     >
 
     <!--   Recycler View Item Row   -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content">
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_height="fill_parent">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/warditemheight"
-            android:textSize="40sp"
+            android:textSize="@dimen/carditemcontent"
             android:textColor="#ffffff"
-            android:background="@drawable/selector"
-            android:state_pressed="true"
+            android:background="@drawable/itembackgroundarea"
+
             android:paddingBottom="8dp"
             android:padding="20dp"
             android:paddingTop="8dp"
             android:gravity="center"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

@@ -38,6 +38,8 @@
     <dimen name="bwidth">70dp</dimen>
     <dimen name="bheight">70dp</dimen>
 <dimen name="warditemheight">150dp</dimen>
+    <dimen name="carditemcontent">40sp</dimen>
+    <dimen name="regsubbtn">25dp</dimen>
     <dimen name="carditemsize">40sp</dimen>
     <dimen name="areaitemheight">120dp</dimen>
     <dimen name="aboutusupheight">180dp</dimen>

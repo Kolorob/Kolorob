@@ -72,9 +72,16 @@
             android:textSize="@dimen/offercounterbtn"
             android:text="2) Choose Area:"/>
         <View
+            android:background="#FF9800"
+
+            android:layout_width="match_parent"
+            android:layout_height="3dp"/>
+        <View
             android:background="#787878"
+            android:padding="2dp"
             android:layout_width="match_parent"
             android:layout_height="6dp"/>
+
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recycler_view2"
@@ -83,20 +90,28 @@
             android:scrollbars="none" />
         <View
             android:background="#787878"
+            android:padding="2dp"
             android:layout_width="match_parent"
-            android:layout_height="6dp"/>
+            android:layout_height="6dp"
+           />
+        <View
+            android:background="#FF9800"
+
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+        />
 
         <info.hoang8f.widget.FButton
 
-            fbutton:buttonColor="@color/black"
-            fbutton:shadowColor="@color/colorPrimaryDark"
+            fbutton:buttonColor="@color/colorPrimaryDark"
+            fbutton:shadowColor="@color/black"
             fbutton:shadowEnabled="true"
             android:layout_gravity="center"
             android:paddingTop="@dimen/regsubbtn"
             android:paddingBottom="@dimen/regsubbtn"
             android:paddingRight="@dimen/regsubbtn"
             android:paddingLeft="@dimen/regsubbtn"
-            fbutton:shadowHeight="5dp"
+            fbutton:shadowHeight="8dp"
             fbutton:cornerRadius="5dp"
             android:id="@+id/submittoserver"
             android:text=" জমা দিয়েছি "

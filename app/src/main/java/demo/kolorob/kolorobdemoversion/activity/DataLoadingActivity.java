@@ -1,17 +1,23 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +26,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import demo.kolorob.kolorobdemoversion.BuildConfig;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AreaHolder;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_Adapter;
@@ -30,13 +35,18 @@ import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetails
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
+import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.model.DataModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
-
+import tourguide.tourguide.ChainTourGuide;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.ToolTip;
+import tourguide.tourguide.TourGuide;
 
 public class DataLoadingActivity extends AppCompatActivity {
 
@@ -52,7 +62,10 @@ public class DataLoadingActivity extends AppCompatActivity {
     JSONObject allData;
     private static RecyclerView recyclerView,recyclerViewarea;
     AreaHolder areaHolder;
-
+    public TourGuide mTourGuideHandler;
+    public Activity mActivity;
+    private Button mButton1, mButton2, mButton3;
+    private Animation mEnterAnimation, mExitAnimation;
     //String and Integer array for Recycler View Items
     public static final String[] TITLES= {"Ward 2","Ward 3","Ward 4","Ward 5","Ward 6","Ward 7","Ward 8","Ward 9","Ward 10","Ward 11","Ward 12","Ward 13","Ward 14","Ward 15",
             "Ward 16"};
@@ -76,11 +89,11 @@ public static final int[] wardid={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
             "মিরপুর ১০: মিরপুর ১১",
             "মিরপুর ১৩:  মিরপুর ১৪: বাইশটেকি",
             "মিরপুর ১১: বাউনিয়াবাঁধ: পলাশ নগর",
-            "মিরপুর ৬: মিরপুর ৭:  পল্লবী:  আলবদী: আলবদী রূপনগর টিনশেড: দুয়ারী পাড়া:  ইস্টার্ন হাউজিং",
+            "মিরপুর ৬: মিরপুর ৭:  পল্লবী:  আলবদী: দুয়ারী পাড়া: ইস্টার্ন হাউজিং:আলবদী রূপনগর টিনশেড",
             "মিরপুর ২: মিরপুর ৬: রূপনগর: সরকারী হাউজিং এষ্টেট",
-            "মিরপুর ১: উত্তর বিশিল: বকস নগর: বোটনিক্যাল গার্ডেন আবাসিক এলাকা: নবাবের বাগ: বি: আই: এস: এফ ষ্টাফ কোয়ার্টার ",
+            "মিরপুর ১: উত্তর বিশিল: বকস নগর:নবাবের বাগ : বোটনিক্যাল গার্ডেন আবাসিক এলাকা: বিআইএসএফ ষ্টাফ কোয়ার্টার ",
             "বাগবাড়ী: হরিরামপুর: জহরাবাদ: বাজার পাড়া: বর্ধনবাড়ী: গোলারটেক: ছোটদিয়াবাড়ী: কোটবাড়ী: আনন্দ নগর",
-            "গাবতলী জমিদারবাড়ী : গাবতলী ১ম: ২য় ও ৩য় কলোনী: গাবতলী ২য় কলোনী: গাবতলী ৩য় কলোনী: গৈদারটেক: দারুস সালাম",
+            "গাবতলী জমিদারবাড়ী : গাবতলী ১ম কলোনী: গাবতলী ২য় কলোনী: গাবতলী ৩য় কলোনী: গৈদারটেক: দারুস সালাম",
             "কল্যাণপুর: পাইক পাড়া",
             "আহম্মেদ নগর: দক্ষিণ বিশিল: শাহআলী বাগ: কালওয়ালা পাড়া: পাইকপাড়া ষ্টাফ কোয়ার্টার: শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার: টোলারবাগ: বিএডিসি ষ্টাফ কোয়ার্টার",
             "বড় বাগ: পীরের বাগ: মনীপুর",
@@ -88,7 +101,8 @@ public static final int[] wardid={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
             ,"ভাসান টেক: আলবদিরটেক: দামালকোট: লালাসরাই: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
             "ইব্রাহীমপুর: কাফরুল"};
 int Pos;
-
+TextView ward,area;
+    RecyclerViewHolder  holder2;
     public int getPos() {
         return Pos;
     }
@@ -96,7 +110,7 @@ int Pos;
     public void setPos(int pos) {
         Pos = pos;
     }
-
+    private GridLayoutManager lLayout,lLayout2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -106,15 +120,26 @@ int Pos;
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_loading);
+        ward=(TextView)findViewById(R.id.chooseward);
+        area=(TextView)findViewById(R.id.choosearea);
         initViews();
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
         populatRecyclerView();
         populatRecyclerView2();
+        runOverlay_ContinueMethod();
         Pos=0;
         ItemClickSupport.addTo(recyclerView)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         setPos(position);
+
                         populatRecyclerView2();
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
@@ -166,31 +191,57 @@ int Pos;
                 findViewById(R.id.recycler_view);
         recyclerViewarea = (RecyclerView)
                 findViewById(R.id.recycler_view2);
-        recyclerView.setHasFixedSize(true);
-        recyclerViewarea.setHasFixedSize(true);
+
 
         //Set RecyclerView type according to intent value
+        lLayout = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(lLayout);
 
-            recyclerView.setLayoutManager(new LinearLayoutManager(DataLoadingActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewarea.setLayoutManager(new LinearLayoutManager(DataLoadingActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
-        recyclerView.smoothScrollToPosition(14);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (BuildConfig.DEBUG) {
-                    System.gc();
-                }
-                recyclerView.smoothScrollToPosition(0);
-            }
-        }, 3000);
+
 
 
 
 
     }
+    private void runOverlay_ContinueMethod(){
+        // the return handler is used to manipulate the cleanup of all the tutorial elements
 
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("১ম ধাপ")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("১ম লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুজে নিন")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                // note that there is no Overlay here, so the default one will be used
+                .playLater(ward);
+
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("২য় ধাপ")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("ওয়ার্ড অনুযায়ী এলাকার লিস্ট থেকে এলাকা খুজে নিচের 'জমা দিন' বাটনটি ক্লিক করুন।")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .playLater(area);
+
+
+
+        Sequence sequence = new Sequence.SequenceBuilder()
+                .add(tourGuide1, tourGuide2)
+                .setDefaultOverlay(new Overlay()
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                .build();
+
+
+        ChainTourGuide.init(this).playInSequence(sequence);
+    }
 
 
     // populate the list view by adding data to arraylist
@@ -217,6 +268,15 @@ int Pos;
             DataModel areaHolder1=new DataModel(list.get(i));
             arrayList2.add(areaHolder1);
         }
+        if(arrayList2.size()>=4)
+        {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+        }
+        else {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+        }
+        recyclerViewarea.setHasFixedSize(false);
+        recyclerViewarea.setLayoutManager(lLayout2);
         RecyclerView_AdapterArea  adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this,arrayList2);
         recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
 

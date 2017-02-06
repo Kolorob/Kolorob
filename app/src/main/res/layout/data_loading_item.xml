@@ -27,7 +27,7 @@ card_view:cardBackgroundColor="@color/colorPrimaryDark"
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/warditemheight"
-            android:textSize="40sp"
+            android:textSize="@dimen/carditemcontent"
             android:textColor="#787878"
             android:background="@drawable/itembackground"
 
