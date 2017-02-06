@@ -19,7 +19,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  * Created by arafat 24/06/16.
  */
 public class LegalAidServiceProviderTableNew {
-    private static final String TAG = LegalAidServiceProviderTable.class.getSimpleName();
+    private static final String TAG = LegalAidServiceProviderTableNew.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.LEGAL_AID_SERVICE_PROVIDER_TABLE;
     private static final String KEY_IDENTIFIER_ID = "_identifier_id"; // 0 -integer
     private static final String KEY_POST_OFFICE = "post_office"; // 1 - text
