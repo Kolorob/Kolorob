@@ -1,20 +1,12 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
-import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import info.hoang8f.widget.FButton;
@@ -303,7 +293,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
 /*
 * Earlier give credit option was after clicking the enabled smiley button; user will have to provide number who made them
 * download application.Later we added option that only tapping enabled button will send request to server. so previously shown/number input
-* box is disabled*/
+* box is disabled
     public void showbox(Context c) {
 
         DisplayMetrics displayMetrics = c.getResources().getDisplayMetrics();
@@ -368,7 +358,7 @@ public class OfferActivity extends Activity implements View.OnClickListener {
 //			textAsk.setTextSize(17);
         alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
-    }
+    }*/
     /*
     * since scratch card offer is invalid this function is not in use anymore*/
     public void sendRequest() {

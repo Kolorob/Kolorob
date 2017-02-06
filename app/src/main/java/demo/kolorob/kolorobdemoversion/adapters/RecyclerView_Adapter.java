@@ -48,6 +48,7 @@ public class RecyclerView_Adapter extends
         // bitmap
         RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
         // setting title
+
         mainHolder.title.setText(model.getWardname());
     /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override

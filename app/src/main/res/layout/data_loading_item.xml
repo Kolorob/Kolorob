@@ -5,12 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="4dp"
+    card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
-    card_view:cardMaxElevation="6dp"
-    card_view:contentPadding="15dp"
-    android:layout_margin="5dp"
-    card_view:cardBackgroundColor="#c4dcdf"
+    card_view:cardMaxElevation="3dp"
+    card_view:contentPadding="8dp"
+
+    android:foreground="?android:attr/selectableItemBackground"
+card_view:cardBackgroundColor="@color/colorPrimaryDark"
+
     >
 
     <!--   Recycler View Item Row   -->
@@ -24,10 +26,10 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/warditemheight"
             android:textSize="40sp"
-            android:textColor="#ffffff"
-            android:background="@color/semi_transparent"
+            android:textColor="#787878"
+            android:background="@drawable/itembackground"
 
             android:paddingBottom="8dp"
             android:padding="20dp"
