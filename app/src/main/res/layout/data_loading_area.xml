@@ -7,6 +7,7 @@
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
+    android:foreground="?android:attr/selectableItemBackground"
     card_view:cardMaxElevation="2dp"
     card_view:contentPadding="6dp"
 
@@ -22,7 +23,7 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/warditemheight"
+            android:layout_height="@dimen/areaitemheight"
             android:textSize="@dimen/carditemcontent"
             android:textColor="#ffffff"
             android:background="@drawable/itembackgroundarea"

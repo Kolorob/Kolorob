@@ -26,7 +26,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     //feedbackstars
     <dimen name="firststarspace">63dp</dimen>
-    <dimen name="offercounterbtn">40dp</dimen>
+    <dimen name="offercounterbtn">30dp</dimen>
     <dimen name="regsubbtnsize">50dp</dimen>
     <dimen name="icon_gaph">8dp</dimen>
     <dimen name="secondstarspace">127dp</dimen>
@@ -37,9 +37,12 @@
     <dimen name="feedbackalltext">35dp</dimen>
     <dimen name="bwidth">70dp</dimen>
     <dimen name="bheight">70dp</dimen>
-<dimen name="warditemheight">150dp</dimen>
+<dimen name="warditemheight">130dp</dimen>
+    <dimen name="areatemheight">110dp</dimen>
+    <dimen name="logoforplace">220dp</dimen>
+    <dimen name="paddingforplacetext">20dp</dimen>
     <dimen name="carditemcontent">40sp</dimen>
-    <dimen name="regsubbtn">25dp</dimen>
+    <dimen name="regsubbtn">15dp</dimen>
     <dimen name="carditemsize">40sp</dimen>
     <dimen name="areaitemheight">120dp</dimen>
     <dimen name="aboutusupheight">180dp</dimen>

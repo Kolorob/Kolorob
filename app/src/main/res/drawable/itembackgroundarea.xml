@@ -4,8 +4,8 @@
     <stroke android:width="5dp"
         android:color="#000000" />
     <gradient
-        android:startColor="@color/colorPrimary"
-        android:endColor="@color/WhiteSmoke"
+        android:startColor="@color/semi_transparent"
+        android:endColor="@color/semi_transparent"
         android:angle="90"/>
 
     <padding android:left="5dp"

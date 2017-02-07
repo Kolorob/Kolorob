@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.interfaces.ChildItemClickListener;
+
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.model.DataModel;
 
@@ -22,7 +22,7 @@ public class RecyclerView_AdapterArea extends
 
     private ArrayList<DataModel> arrayList2;
     private Context context;
-    private ChildItemClickListener listener;
+  //  private ChildItemClickListener listener;
     public RecyclerView_AdapterArea(Context context,
                                     ArrayList<DataModel> arrayList) {
         this.context = context;

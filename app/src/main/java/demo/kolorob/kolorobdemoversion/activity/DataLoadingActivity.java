@@ -6,9 +6,15 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -18,6 +24,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,8 +55,8 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 
-public class DataLoadingActivity extends AppCompatActivity {
-
+public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    Toolbar toolbar;
     Context context;
     private static int NUMBER_OF_TASKS = 10;
     View view=null;
@@ -60,6 +67,16 @@ public class DataLoadingActivity extends AppCompatActivity {
     Boolean location=false,storage=false,smsstate=false,phonestate=false,accountstate=false,permission=false;
     int countofDb=0;
     JSONObject allData;
+
+    public View getAreaview() {
+        return areaview;
+    }
+
+    public void setAreaview(View areaview) {
+        this.areaview = areaview;
+    }
+
+    View areaview;
     private static RecyclerView recyclerView,recyclerViewarea;
     AreaHolder areaHolder;
     public TourGuide mTourGuideHandler;
@@ -100,8 +117,19 @@ public static final int[] wardid={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
             "কাজী পাড়া: শেওড়া পাড়া: সেনপাড়া পর্বতা"
             ,"ভাসান টেক: আলবদিরটেক: দামালকোট: লালাসরাই: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
             "ইব্রাহীমপুর: কাফরুল"};
-int Pos;
+int Pos,Posa=0;
+
+    public int getPosa() {
+        return Posa;
+    }
+
+    public void setPosa(int posa) {
+        Posa = posa;
+    }
+
+    String posArea=null;
 TextView ward,area;
+    ArrayList<DataModel> arrayList2 = new ArrayList<>();
     RecyclerViewHolder  holder2;
     public int getPos() {
         return Pos;
@@ -110,16 +138,21 @@ TextView ward,area;
     public void setPos(int pos) {
         Pos = pos;
     }
+    public String getPosArea() {
+        return posArea;
+    }public void setPosArea(String posArea) {
+        this.posArea = posArea;
+    }
     private GridLayoutManager lLayout,lLayout2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         //start download now
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+      requestWindowFeature(Window.FEATURE_NO_TITLE);
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_loading);
+        setContentView(R.layout.place_selection_activity);
         ward=(TextView)findViewById(R.id.chooseward);
         area=(TextView)findViewById(R.id.choosearea);
         initViews();
@@ -134,6 +167,7 @@ TextView ward,area;
         populatRecyclerView2();
         runOverlay_ContinueMethod();
         Pos=0;
+
         ItemClickSupport.addTo(recyclerView)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -144,7 +178,42 @@ TextView ward,area;
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+      ItemClickSupport.addTo(recyclerViewarea)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        ((CardView)v).setCardBackgroundColor(Color.WHITE);
+                        if( getAreaview()==null ){setAreaview(v);
+                            ((CardView)v).setCardBackgroundColor(Color.parseColor("#ff8800"));}
+                        else if(getAreaview()!=v)
+                        {
+                            ((CardView)  getAreaview()).setCardBackgroundColor(Color.WHITE);
+
+                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#ff8800"));
+                            setAreaview(v);
+                        }
+                        else
+                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#ff8800"));
+                        Toast.makeText(getApplicationContext(), arrayList2.get(position).getTitle().toString() + " is selected!", Toast.LENGTH_SHORT).show();
+
+
+
+
+                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
+                    }
+                });
         /*
+         ItemClickSupport.addTo(recyclerView)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        setPos(position);
+
+                        populatRecyclerView2();
+                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
+                    }
+                });
         //now make the early request just in case
         if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/NewStructure.json" , new VolleyApiCallback() {
@@ -198,7 +267,43 @@ TextView ward,area;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(lLayout);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        else
+//           toolbar = (Toolbar) findViewById(R.id.toolbars);
 
+
+        setSupportActionBar(toolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                //  getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                // getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toggle.setDrawerIndicatorEnabled(true);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
 
@@ -260,8 +365,8 @@ TextView ward,area;
 
     }
     private void populatRecyclerView2() {
-        ArrayList<DataModel> arrayList2 = new ArrayList<>();
 
+            arrayList2.clear();
 
             ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
         for (int i = 0; i < list.size(); i++) {
@@ -295,6 +400,14 @@ TextView ward,area;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return false;
+    }
+
+
+
     class SaveDataArrayFinance extends GenericSaveDBTask<JSONObject, Integer, Long> {
         public SaveDataArrayFinance(Context ctx) {
             super(ctx);
@@ -395,6 +508,7 @@ TextView ward,area;
         }
 
     }
+
 }
 
 
