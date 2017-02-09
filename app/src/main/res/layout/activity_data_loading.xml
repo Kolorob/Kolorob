@@ -98,7 +98,7 @@
         <Button
 
             android:background="@color/colorPrimary"
-           android:padding="@dimen/regsubbtn"
+            android:padding="@dimen/regsubbtn"
             android:id="@+id/submittoserver"
             android:text=" জমা দিন "
             android:textColor="@color/White"
