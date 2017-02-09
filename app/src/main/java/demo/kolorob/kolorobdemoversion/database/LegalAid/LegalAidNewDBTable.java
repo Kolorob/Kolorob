@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
@@ -38,14 +39,14 @@ public class LegalAidNewDBTable {
     private static final String KEY_OTHER_INFO = "_other"; //
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
-    private static final String KEY_0FF_DAY = "_offday";
+    private static final String KEY_OFF_DAY = "_offday";
     private static final String KEY_CATEGORY_ID = "_catid";
     private static final String KEY_LEGAL_REFERENCE = "_refnumm"; // 2 - text*/
     private static final String KEY_LEGAL_RATINGS = "_rating"; // 2 - text*/
     private static final String KEY_LEGAL_AID_SUBCATEGORY_ID = "_sref"; // 2 - text*/
 
 
-   
+
 
     private Context tContext;
 
@@ -60,38 +61,27 @@ public class LegalAidNewDBTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_IDENTIFIER_ID + "  INTEGER , " // 0 - int
-                + KEY_POST_OFFICE + "  INTEGER, "              // 1 - text
-                + KEY_LEGAL_AID_SUBCATEGORY_ID + " INTEGER, "
-                + KEY_CATEGORY_ID + " TEXT, "// 2 - text
-                + KEY_LEGAL_AID_NAME_ENG + " TEXT, "
+                + KEY_LEGAL_AID_NAME_ENG + "  TEXT, "              // 1 - text
                 + KEY_LEGAL_AID_NAME_BAN + " TEXT, "
-                + KEY_CONTACT_PERSON_DESIGNATION + " TEXT, "
-                + KEY_CONTACT_NO + " TEXT, "
-                + KEY_EMAIL_ADDRESS + " TEXT, "
-                + KEY_WEBSITE_LINK + " TEXT, "
-                + KEY_FB_LINK + " TEXT, "
-                + KEY_REGISTERED_WITH + " TEXT, "
-                + KEY_REGISTRATION_NO + " TEXT, "
-                + KEY_ADDITIONAL_INFO + " TEXT, "
-                + KEY_AREA + " TEXT, "
-                + KEY_ADDRESS + " TEXT, "
+                + KEY_SERVICE_TYPE + " TEXT, "// 2 - text
                 + KEY_LATITUDE + " TEXT, "
-                + KEY_LONGITUDE + " TEXT,"
-                + KEY_OPENTIME + " TEXT, "
-                + KEY_BREAKTIME + " TEXT, "
-                + KEY_CLOSEATIME + " TEXT, "
-                + KEY_LANDMARK + " TEXT, "
-                + KEY_ROAD+ " TEXT, "
+                + KEY_LONGITUDE + " TEXT, "
+                + KEY_HOUSE_NO + " TEXT, "
                 + KEY_BLOCK + " TEXT, "
-                + KEY_BREAKTIME2 + " TEXT, "
-                + KEY_0FF_DAY+ " TEXT, "
-                + KEY_FLOOR + " TEXT, "
-                + KEY_HOUSE_NAME + " TEXT, "
-                + KEY_HOUSE_NO+ " TEXT, "
-                + KEY_LINE + " TEXT, "
-                + KEY_AVENUE + " TEXT, "
+                + KEY_AREA + " TEXT, "
                 + KEY_POLICE_STATION + " TEXT, "
-                + KEY_RATING + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
+                + KEY_EMAIL_ADDRESS + " TEXT, "
+                + KEY_WARD + " TEXT, "
+                + KEY_ROAD + " TEXT, "
+                + KEY_CONTACT_NO + " TEXT, "
+                + KEY_OTHER_INFO + " TEXT, "
+                + KEY_OPENTIME + " TEXT, "
+                + KEY_CLOSEATIME + " TEXT, "
+                + KEY_OFF_DAY + " TEXT, "
+                + KEY_CATEGORY_ID + " INTEGER, "
+                + KEY_LEGAL_REFERENCE+ " TEXT, "
+                + KEY_LEGAL_RATINGS + " TEXT, "
+                + KEY_LEGAL_AID_SUBCATEGORY_ID + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
@@ -104,137 +94,75 @@ public class LegalAidNewDBTable {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
-    public long insertItem(LegalAidServiceProviderItemNew legalAidServiceProviderItem) {
-        return insertItem(legalAidServiceProviderItem.getIdentifierId(), legalAidServiceProviderItem.getPost_office(),
-                legalAidServiceProviderItem.getLegalaidSubCategoryId(), legalAidServiceProviderItem.getCategoryId(),
-                legalAidServiceProviderItem.getLegalaidNameEng(), legalAidServiceProviderItem.getLegalaidNameBan(),
-                legalAidServiceProviderItem.getContactPersonDesignation(), legalAidServiceProviderItem.getContactNo(),
-                legalAidServiceProviderItem.getEmailAddress(), legalAidServiceProviderItem.getWebsiteLink(), legalAidServiceProviderItem.getFbLink(),
-                legalAidServiceProviderItem.getRegisteredWith(), legalAidServiceProviderItem.getRegistrationNo(),
-                legalAidServiceProviderItem.getAdditionalInfo(), legalAidServiceProviderItem.getArea(), legalAidServiceProviderItem.getAddress(),
-                legalAidServiceProviderItem.getLatitude(), legalAidServiceProviderItem.getLongitude(),
-                legalAidServiceProviderItem.getOpeningtime(),
-                legalAidServiceProviderItem.getBreaktime(),
-                legalAidServiceProviderItem.getClosingtime(),
-                legalAidServiceProviderItem.getLandmark(),
-                legalAidServiceProviderItem.getRoad(),
-                legalAidServiceProviderItem.getBlock(),
-                legalAidServiceProviderItem.getBreaktime2(),
-                legalAidServiceProviderItem.getOff_day(),
-                legalAidServiceProviderItem.getFloor(),
-                legalAidServiceProviderItem.getHouse_name(),
-                legalAidServiceProviderItem.getHouse_no(),
-                legalAidServiceProviderItem.getLine(),
-                legalAidServiceProviderItem.getAvenue(),
-                legalAidServiceProviderItem.getPolice_station(),legalAidServiceProviderItem.getRating()
+    public long insertItem(LegalAidNewDBModel legalAidNewDBModel) {
+        return insertItem(legalAidNewDBModel.getLegalid(),legalAidNewDBModel.getNameen(),legalAidNewDBModel.getNamebn(),
+                legalAidNewDBModel.getServicetype(),legalAidNewDBModel.getLat(),legalAidNewDBModel.getLon(),legalAidNewDBModel.getHouseno(),
+                legalAidNewDBModel.getBlock(),legalAidNewDBModel.getArea(),legalAidNewDBModel.getPolicestation(),legalAidNewDBModel.getNode_email(),
+                legalAidNewDBModel.getWard(),legalAidNewDBModel.getRoad(),legalAidNewDBModel.getNode_contact(),legalAidNewDBModel.getOtherinfo(),
+                legalAidNewDBModel.getOpeningtime(),legalAidNewDBModel.getClosetime(),legalAidNewDBModel.getOffday(),legalAidNewDBModel.getCategoryId(),
+                legalAidNewDBModel.getRefnumm(),legalAidNewDBModel.getRatings(),legalAidNewDBModel.getSubcat()
         );
     }
 
 
-    public long insertItem(String identifierId,
-                           String post_office,
-                           int legalaidSubCategoryId,
-                           String categoryId,
-                           String legalaidNameEng,
-                           String legalaidNameBan,
-                           String contactPersonDesignation,
-                           String contactNo,
-                           String emailAddress,
-                           String websiteLink,
-                           String fbLink,
-                           String registeredWith,
-                           String registrationNo,
-                           String additionalInfo,
-                           String area,
-                           String address,
-                           String latitude,
-                           String longitude
-                         , String openingtime,
-                           String breaktime,
-                           String closingtime,
-                           String landmark,
-                           String road,
-                           String block,
-                           String breaktime2,
-                           String off_day,
-                           String floor,
-                           String house_name,
-                           String house_no,
-                           String line,
-                           String avenue,
-                           String police_station,String rating
+
+
+    public long insertItem(int legalid, String nameen, String namebn, String servicetype, String lat,
+                           String lon, String houseno, String block, String area, String policestation,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,
+                           String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
+                           String subcat
     ) {
-        if (isFieldExist(identifierId)) {
+        if (isFieldExist(legalid)) {
             return updateItem(
-                    identifierId,
-                    post_office,
-                    legalaidSubCategoryId,
-                    categoryId,
-                    legalaidNameEng,
-                    legalaidNameBan,
-                    contactPersonDesignation,
-                    contactNo,
-                    emailAddress,
-                    websiteLink,
-                    fbLink,
-                    registeredWith,
-                    registrationNo,
-                    additionalInfo,
-                    area,
-                    address,
-                    latitude,
-                    longitude,openingtime,
-                    breaktime,
-                    closingtime,
-                    landmark,
-                    road,
+                    legalid,
+                    nameen,
+                    namebn,
+                    servicetype,
+                    lat,
+                    lon,
+                    houseno,
                     block,
-                    breaktime2,
-                    off_day,
-                    floor,
-                    house_name,
-                    house_no,
-                    line,
-                    avenue,
-                    police_station,rating
+                    area,
+                    policestation,
+                    node_email,
+                    ward,
+                    road,
+                    node_contact,
+                    otherinfo,
+                    openingtime,
+                    closetime,
+                    offday,categoryId,
+                    refnumm,
+                    ratings,
+                    subcat
                     );
         }
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_IDENTIFIER_ID, identifierId);
-        rowValue.put(KEY_POST_OFFICE, post_office);
-        rowValue.put(KEY_LEGAL_AID_SUBCATEGORY_ID, legalaidSubCategoryId);
-        rowValue.put(KEY_CATEGORY_ID, categoryId);
-        rowValue.put(KEY_LEGAL_AID_NAME_ENG, legalaidNameEng);
-        rowValue.put(KEY_LEGAL_AID_NAME_BAN, legalaidNameBan);
-        rowValue.put(KEY_CONTACT_PERSON_DESIGNATION, contactPersonDesignation);
-        rowValue.put(KEY_CONTACT_NO, contactNo);
-        rowValue.put(KEY_EMAIL_ADDRESS, emailAddress);
-        rowValue.put(KEY_WEBSITE_LINK, websiteLink);
-        rowValue.put(KEY_FB_LINK, fbLink);
-        rowValue.put(KEY_REGISTERED_WITH, registeredWith);
-        rowValue.put(KEY_REGISTRATION_NO, registrationNo);
-        rowValue.put(KEY_ADDITIONAL_INFO, additionalInfo);
+        rowValue.put(KEY_IDENTIFIER_ID, legalid);
+        rowValue.put(KEY_LEGAL_AID_NAME_ENG, nameen);
+        rowValue.put(KEY_LEGAL_AID_NAME_BAN, namebn);
+        rowValue.put(KEY_SERVICE_TYPE, servicetype);
+        rowValue.put(KEY_LATITUDE, lat);
+        rowValue.put(KEY_LONGITUDE, lon);
+
+        rowValue.put(KEY_HOUSE_NO, houseno);
+        rowValue.put(KEY_BLOCK, block);
         rowValue.put(KEY_AREA, area);
-        rowValue.put(KEY_ADDRESS, address);
-        rowValue.put(KEY_LATITUDE, latitude);
-        rowValue.put(KEY_LONGITUDE, longitude);
+        rowValue.put(KEY_POLICE_STATION, policestation);
+        rowValue.put(KEY_EMAIL_ADDRESS, node_email);
+        rowValue.put(KEY_WARD, ward);
+        rowValue.put(KEY_ROAD, road);
+        rowValue.put(KEY_CONTACT_NO, node_contact);
+        rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_OPENTIME, openingtime);
+        rowValue.put(KEY_CLOSEATIME, closetime);
+        rowValue.put(KEY_OFF_DAY, offday);
+        rowValue.put(KEY_CATEGORY_ID  , categoryId);
+        rowValue.put(KEY_LEGAL_REFERENCE  , refnumm);
+        rowValue.put(KEY_LEGAL_RATINGS  , ratings);
+        rowValue.put(KEY_LEGAL_AID_SUBCATEGORY_ID  , subcat );
 
-        rowValue.put(KEY_OPENTIME , openingtime);
-        rowValue.put(KEY_BREAKTIME  , breaktime);
-        rowValue.put(KEY_CLOSEATIME  , closingtime);
-        rowValue.put(KEY_LANDMARK  , landmark);
-        rowValue.put(KEY_ROAD  , road );
-        rowValue.put(KEY_BLOCK   , block );
-        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
-        rowValue.put(KEY_0FF_DAY  , off_day );
-        rowValue.put(KEY_FLOOR,floor);
-        rowValue.put(KEY_HOUSE_NAME,house_name);
-        rowValue.put(KEY_HOUSE_NO,house_no);
-        rowValue.put(KEY_LINE,line);
-        rowValue.put(KEY_AVENUE,avenue);
-        rowValue.put(KEY_POLICE_STATION,police_station);
-
-        rowValue.put(KEY_RATING,rating);
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
 
@@ -242,7 +170,44 @@ public class LegalAidNewDBTable {
         closeDB();
         return ret;
     }
+    private long updateItem(
+            int legalid, String nameen, String namebn, String servicetype, String lat,
+            String lon, String houseno, String block, String area, String policestation,
+            String node_email, String ward, String road, String node_contact, String otherinfo,
+            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
+            String subcat
+    ) {
 
+        ContentValues rowValue = new ContentValues();
+        rowValue.put(KEY_IDENTIFIER_ID, legalid);
+        rowValue.put(KEY_LEGAL_AID_NAME_ENG, nameen);
+        rowValue.put(KEY_LEGAL_AID_NAME_BAN, namebn);
+        rowValue.put(KEY_SERVICE_TYPE, servicetype);
+        rowValue.put(KEY_LATITUDE, lat);
+        rowValue.put(KEY_LONGITUDE, lon);
+
+        rowValue.put(KEY_HOUSE_NO, houseno);
+        rowValue.put(KEY_BLOCK, block);
+        rowValue.put(KEY_AREA, area);
+        rowValue.put(KEY_POLICE_STATION, policestation);
+        rowValue.put(KEY_EMAIL_ADDRESS, node_email);
+        rowValue.put(KEY_WARD, ward);
+        rowValue.put(KEY_ROAD, road);
+        rowValue.put(KEY_CONTACT_NO, node_contact);
+        rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_OPENTIME, openingtime);
+        rowValue.put(KEY_CLOSEATIME, closetime);
+        rowValue.put(KEY_OFF_DAY, offday);
+        rowValue.put(KEY_CATEGORY_ID  , categoryId);
+        rowValue.put(KEY_LEGAL_REFERENCE  , refnumm);
+        rowValue.put(KEY_LEGAL_RATINGS  , ratings);
+        rowValue.put(KEY_LEGAL_AID_SUBCATEGORY_ID  , subcat );
+        SQLiteDatabase db = openDB();
+        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
+                new String[]{legalid + ""});
+        closeDB();
+        return ret;
+    }
     public ArrayList<LegalAidServiceProviderItemNew> getAllLegalSubCategoriesInfosearch() {
         ArrayList<LegalAidServiceProviderItemNew> subCatList = new ArrayList<>();
 
@@ -284,7 +249,7 @@ public class LegalAidNewDBTable {
         closeDB();
         return legalAidServiceProviderItem;
     }
-
+/*
     public ArrayList<LegalAidServiceProviderItemNew> LegalInfo(int cat_id,int refId,String a,String place) {
         String subcatnames=null;
         subcatnames=a;
@@ -322,7 +287,7 @@ public class LegalAidNewDBTable {
         closeDB();
         return  nameslist;
     }
-
+*/
     public ArrayList<LegalAidServiceProviderItemNew> Legnames(int cat_id,String head,String a,String place) {
         String subcatnames=null;
         subcatnames=a;
@@ -348,13 +313,13 @@ public class LegalAidNewDBTable {
         return  nameslist;
     }
 
-    public boolean isFieldExist(String id) {
+    public boolean isFieldExist(int id) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (cursor.moveToFirst()) {
             do {
-                if (id.equals(cursor.getString(0))) {
+                if (id==cursor.getInt(0)) {
                     cursor.close();
                     closeDB();
                     return true;
@@ -366,80 +331,7 @@ public class LegalAidNewDBTable {
         return false;
     }
 
-    private long updateItem(
-            String identifierId,
-            String post_office,
-            int legalaidSubCategoryId,
-            String categoryId,
-            String legalaidNameEng,
-            String legalaidNameBan,
-            String contactPersonDesignation,
-            String contactNo,
-            String emailAddress,
-            String websiteLink,
-            String fbLink,
-            String registeredWith,
-            String registrationNo,
-            String additionalInfo,
-            String area,
-            String address,
-            String latitude,
-            String longitude,
-            String openingtime,
-            String breaktime,
-            String closingtime,
-            String landmark,
-            String road,
-            String block,
-            String breaktime2,
-            String off_day,
-            String floor,
-            String house_name,
-            String house_no,
-            String line,
-            String avenue,
-            String police_station,String rating) {
 
-        ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_IDENTIFIER_ID, identifierId);
-        rowValue.put(KEY_POST_OFFICE, post_office);
-        rowValue.put(KEY_LEGAL_AID_SUBCATEGORY_ID, legalaidSubCategoryId);
-        rowValue.put(KEY_CATEGORY_ID, categoryId);
-        rowValue.put(KEY_LEGAL_AID_NAME_ENG, legalaidNameEng);
-        rowValue.put(KEY_LEGAL_AID_NAME_BAN, legalaidNameBan);
-        rowValue.put(KEY_CONTACT_PERSON_DESIGNATION, contactPersonDesignation);
-        rowValue.put(KEY_CONTACT_NO, contactNo);
-        rowValue.put(KEY_EMAIL_ADDRESS, emailAddress);
-        rowValue.put(KEY_WEBSITE_LINK, websiteLink);
-        rowValue.put(KEY_FB_LINK, fbLink);
-        rowValue.put(KEY_REGISTERED_WITH, registeredWith);
-        rowValue.put(KEY_REGISTRATION_NO, registrationNo);
-        rowValue.put(KEY_ADDITIONAL_INFO, additionalInfo);
-        rowValue.put(KEY_AREA, area);
-        rowValue.put(KEY_ADDRESS, address);
-        rowValue.put(KEY_LATITUDE, latitude);
-        rowValue.put(KEY_LONGITUDE, longitude);
-        rowValue.put(KEY_OPENTIME , openingtime);
-        rowValue.put(KEY_BREAKTIME  , breaktime);
-        rowValue.put(KEY_CLOSEATIME  , closingtime);
-        rowValue.put(KEY_LANDMARK  , landmark);
-        rowValue.put(KEY_ROAD  , road );
-        rowValue.put(KEY_BLOCK   , block );
-        rowValue.put(KEY_BREAKTIME2  , breaktime2 );
-        rowValue.put(KEY_0FF_DAY  , off_day );
-        rowValue.put(KEY_FLOOR,floor);
-        rowValue.put(KEY_HOUSE_NAME,house_name);
-        rowValue.put(KEY_HOUSE_NO,house_no);
-        rowValue.put(KEY_LINE,line);
-        rowValue.put(KEY_AVENUE,avenue);
-        rowValue.put(KEY_POLICE_STATION,police_station);
-        rowValue.put(KEY_RATING,rating);
-        SQLiteDatabase db = openDB();
-        long ret = db.update(TABLE_NAME, rowValue, KEY_IDENTIFIER_ID + " = ?",
-                new String[]{identifierId + ""});
-        closeDB();
-        return ret;
-    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public ArrayList<LegalAidServiceProviderItemNew> getAllLegalAidSubCategoriesInfo(int cat_id, int sub_cat_id) {
