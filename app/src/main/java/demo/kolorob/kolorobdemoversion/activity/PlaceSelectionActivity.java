@@ -49,10 +49,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -161,17 +159,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.place_selection_activity);
-        mImageMap=(FrameLayout)findViewById(R.id.holder);
-        ImageButton placeimage=(ImageButton)findViewById(R.id.placeselectionholder);
-        Picasso.with(this)
-                .load(R.drawable.place_choice_screen3)
-                .fit()
-                .into(placeimage);
-        placeimage.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                popup();
-            }
-        });
+
 
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 

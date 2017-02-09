@@ -76,7 +76,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         this.areaview = areaview;
     }
 
-    View areaview;
+    public View getWardview() {
+        return wardview;
+    }
+
+    public void setWardview(View wardview) {
+        this.wardview = wardview;
+    }
+
+    View areaview,wardview;
     private static RecyclerView recyclerView,recyclerViewarea;
     AreaHolder areaHolder;
     public TourGuide mTourGuideHandler;
@@ -125,6 +133,15 @@ int Pos,Posa=0;
 
     public void setPosa(int posa) {
         Posa = posa;
+    }
+String posWard=null;
+
+    public String getPosWard() {
+        return posWard;
+    }
+
+    public void setPosWard(String posWard) {
+        this.posWard = posWard;
     }
 
     String posArea=null;
@@ -175,6 +192,19 @@ TextView ward,area;
                         setPos(position);
 
                         populatRecyclerView2();
+                       // ((CardView)v).setCardBackgroundColor(Color.WHITE);
+                       // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
+                        if( getWardview()==null ){setWardview(v);
+                            ((CardView)v).setCardBackgroundColor(Color.parseColor("#FF9800"));}
+                        else if(getWardview()!=v)
+                        {
+                            ((CardView)  getWardview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+
+                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            setWardview(v);
+                        }
+                        else
+                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -185,16 +215,16 @@ TextView ward,area;
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         ((CardView)v).setCardBackgroundColor(Color.WHITE);
                         if( getAreaview()==null ){setAreaview(v);
-                            ((CardView)v).setCardBackgroundColor(Color.parseColor("#ff8800"));}
+                            ((CardView)v).setCardBackgroundColor(Color.parseColor("#FF9800"));}
                         else if(getAreaview()!=v)
                         {
                             ((CardView)  getAreaview()).setCardBackgroundColor(Color.WHITE);
 
-                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#ff8800"));
+                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                             setAreaview(v);
                         }
                         else
-                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#ff8800"));
+                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                         Toast.makeText(getApplicationContext(), arrayList2.get(position).getTitle().toString() + " is selected!", Toast.LENGTH_SHORT).show();
 
 
