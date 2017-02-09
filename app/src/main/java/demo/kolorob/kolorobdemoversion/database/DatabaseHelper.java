@@ -15,7 +15,7 @@ import java.io.File;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String DB_NAME = "kolorob.db";
-
+    public static final String DB_NAMEnew = "kolorobupdated.db";
     public static  String DB_PATH ;
     public static final int DB_VERSION = 1;
     public static final String RATING = "rating_table";
@@ -39,24 +39,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String HEALTH_VACCINES_TABLE = "hel_vaccine";
     public static final String HEALTH_VACCINES_TABLE_DETAILS = "hel_vaccine_details";
 
-    public static final String ENT_BOOKSHOP_TABLE = "ent_bookshop";
-    public static final String ENT_FIELD = "ent_field";
-    public static final String ENT_FIT_BEAUTY = "ent_fit_beauty";
-    public static final String ENT_MUSIC_GRP = "ent_music_grp";
-    public static final String ENT_NGO = "ent_ngo";
-    public static final String ENT_PARK = "ent_park";
-    public static final String ENT_SERV_PROVIDER = "ent_service_provider";
-    public static final String ENT_SHISHU_PARK = "ent_shishu_park";
-    public static final String ENT_SUB_CATEGORY = "ent_sub_category";
-    public static final String ENT_THEATRE = "ent_theatre";
+
     public static final String ENT_DETAILS_INFO = "details_info";
     public static final String Legal_Aid_Details_Table= "legal_details";
-    public static final String ENT_TRAINING_CENTER = "ent_training_center";
+
 
     public static final String LEGAL_AID_SERVICE_PROVIDER_TABLE="legal_aid_provider";
     public static final String LEGAL_AID_LEGAL_ADVICE_TABLE="legal_aid_legal_advice";
     public static final String LEGAL_AID_SALISHI_TABLE="legal_aid_salishi";
-
+    public static final String LEGALAIDNEWDBTABLE="legal_aid_main";
     //sqls
     public static String sql=null;
 
@@ -70,19 +61,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String JOB_SERVICE_PROVIDER_TYPE="job_provider_type";
     //tables for financial services
     public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";
-    public static final String FINANCIAL_SERVICE_BILLS="financial_bills";
+
     public static final String FINANCIAL_SERVICE_DETAILS="financial_details";
-    public static final String FINANCIAL_SERVICE_INSURANCE="financial_insurance";
-    public static final String FINANCIAL_SERVICE_LOAN="financial_loan";
-    public static final String FINANCIAL_SERVICE_PAYMENT="financial_payment";
-    public static final String FINANCIAL_SERVICE_SOCIAL="financial_social";
-    public static final String FINANCIAL_SERVICE_TAX="financial_tax";
-    public static final String FINANCIAL_SERVICE_TRANSACTION="financial_transaction";
-    public static final String FINANCIAL_SERVICE_TUITION="financial_tuition";
-    public static final String FINANCIAL_SERVICE_MAP="financial_mapinfo";
-    public static final String FINANCIAL_SERVICE_CONTACT="financial_contactinfo";
-    public static final String FINANCIAL_SERVICE_REGISTRATION="financial_registrationinfo";
-    public static final String FINANCIAL_SERVICE_TIMING="financial_timinginfo";
+
     public static final String FINANCIAL_SERVICE_NEW="financial_new";
     public static final String GOVERNMENT_SERVICE_DETAILS="gov_details";
     public static final String GOV_MAIN="gov_main";
