@@ -92,8 +92,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private Button mButton1, mButton2, mButton3;
     private Animation mEnterAnimation, mExitAnimation;
     //String and Integer array for Recycler View Items
-    public static final String[] TITLES= {"Ward 2","Ward 3","Ward 4","Ward 5","Ward 6","Ward 7","Ward 8","Ward 9","Ward 10","Ward 11","Ward 12","Ward 13","Ward 14","Ward 15",
-            "Ward 16"};
+    public static final String[] TITLES= {"ওয়ার্ড ২","ওয়ার্ড ৩","ওয়ার্ড ৪","ওয়ার্ড ৫","ওয়ার্ড ৬","ওয়ার্ড ৭","ওয়ার্ড ৮","ওয়ার্ড ৯","ওয়ার্ড ১০","ওয়ার্ড ১১","ওয়ার্ড ১২","ওয়ার্ড ১৩","ওয়ার্ড ১৪","ওয়ার্ড ১৫",
+            "ওয়ার্ড ১৬"};
 public static final int[] wardid={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
     public static final String[] AREANAMES={"Mirpur 12:Mirpur DOHS",
             "Mirpur 10:Mirpur 11",
