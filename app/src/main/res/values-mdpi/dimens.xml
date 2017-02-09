@@ -10,7 +10,13 @@
     <dimen name="margincheckbox">10dp</dimen>
     <dimen name="transportscroll">100dp</dimen>
     <dimen name="search_margin">15dp</dimen>
-
+    <dimen name="paddingforplacetext">10dp</dimen>
+    <dimen name="warditemheight">30dp</dimen>
+    <dimen name="carditemcontent">10sp</dimen>
+    <dimen name="areaitemheight">30dp</dimen>
+    <dimen name="logoforplace">70dp</dimen>
+    <dimen name="defaultpadding">10dp</dimen>
+    <dimen name="cardpadding">6dp</dimen>
     <dimen name="catbuttonheight">55dp</dimen>
 
     <dimen name="fab_marginforsearch2">20dp</dimen>
