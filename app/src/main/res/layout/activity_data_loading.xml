@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    android:padding="5dp"
+    android:padding="2dp"
     android:layout_height="match_parent"
 
     >
@@ -42,34 +42,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:padding="@dimen/paddingforplacetext"
+            android:layout_gravity="left|top"
+            android:paddingBottom="@dimen/paddingforplacetext"
             android:id="@+id/chooseward"
             android:textSize="@dimen/offercounterbtn"
-            android:text="১) ওয়ার্ড নির্বাচন করুন"/>
+            android:text=" ওয়ার্ড নির্বাচন করুন"/>
         <View
-            android:background="#787878"
+            android:background="#000000"
+            android:padding="3dp"
             android:layout_width="match_parent"
             android:layout_height="6dp"/>
-        <View
-            android:background="#FF9800"
-            android:padding="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"/>
+
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recycler_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none" />
+
         <View
-            android:background="#FF9800"
-            android:padding="2dp"
+            android:background="#000000"
             android:layout_width="match_parent"
-            android:layout_height="3dp"/>
-        <View
-            android:background="#787878"
-            android:layout_width="match_parent"
+            android:padding="3dp"
             android:layout_height="6dp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -78,15 +72,10 @@
             android:layout_gravity="left"
             android:padding="@dimen/paddingforplacetext"
             android:textSize="@dimen/offercounterbtn"
-            android:text="২) এলাকা নির্বাচন করুন"/>
+            android:text=" এলাকা নির্বাচন করুন"/>
         <View
-            android:background="#FF9800"
-
-            android:layout_width="match_parent"
-            android:layout_height="3dp"/>
-        <View
-            android:background="#787878"
-            android:padding="2dp"
+            android:background="#000000"
+            android:padding="3dp"
             android:layout_width="match_parent"
             android:layout_height="6dp"/>
 
@@ -97,37 +86,29 @@
             android:layout_height="wrap_content"
             android:scrollbars="none" />
         <View
-            android:background="#787878"
-            android:padding="2dp"
+            android:background="#000000"
+            android:padding="3dp"
             android:layout_width="match_parent"
-            android:layout_height="6dp"
-           />
-        <View
-            android:background="#FF9800"
+            android:layout_height="6dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:gravity="bottom"
+            android:padding="@dimen/defaultpadding"
+            android:layout_height="wrap_content">
+        <Button
 
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-        />
-
-        <info.hoang8f.widget.FButton
-
-            fbutton:buttonColor="@color/colorPrimaryDark"
-            fbutton:shadowColor="@color/black"
-            fbutton:shadowEnabled="true"
-            android:layout_gravity="center"
-            android:paddingTop="@dimen/regsubbtn"
-            android:paddingBottom="@dimen/regsubbtn"
-            android:paddingRight="@dimen/regsubbtn"
-            android:paddingLeft="@dimen/regsubbtn"
-            fbutton:shadowHeight="8dp"
-            fbutton:cornerRadius="5dp"
+            android:background="@color/colorPrimary"
+           android:padding="@dimen/regsubbtn"
             android:id="@+id/submittoserver"
             android:text=" জমা দিন "
             android:textColor="@color/White"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/regsubbtnsize"
+
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
             android:textSize="@dimen/offercounterbtn"
             android:layout_width="wrap_content" />
+        </RelativeLayout>
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>

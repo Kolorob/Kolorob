@@ -28,9 +28,8 @@
             android:textColor="#ffffff"
             android:background="@drawable/itembackgroundarea"
 
-            android:paddingBottom="8dp"
-            android:padding="20dp"
-            android:paddingTop="8dp"
+
+            android:padding="@dimen/cardpadding"
             android:gravity="center"
             />
 

@@ -7,11 +7,11 @@
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
-    card_view:cardMaxElevation="3dp"
-    card_view:contentPadding="8dp"
+    card_view:cardMaxElevation="2dp"
+    card_view:contentPadding="6dp"
 
     android:foreground="?android:attr/selectableItemBackground"
-card_view:cardBackgroundColor="@color/colorPrimaryDark"
+card_view:cardBackgroundColor="@color/semi_transparent"
 
     >
 
@@ -27,13 +27,11 @@ card_view:cardBackgroundColor="@color/colorPrimaryDark"
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/warditemheight"
-            android:textSize="@dimen/carditemcontent"
+            android:textSize="@dimen/offercounterbtn"
             android:textColor="#787878"
             android:background="@drawable/itembackground"
+            android:padding="@dimen/cardpadding"
 
-            android:paddingBottom="8dp"
-            android:padding="20dp"
-            android:paddingTop="8dp"
             android:gravity="center"
             />
 
