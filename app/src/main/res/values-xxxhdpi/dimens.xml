@@ -14,7 +14,13 @@
     <dimen name="regpadding">15dp</dimen>
     <dimen name="search_margin">15dp</dimen>
     <dimen name="nav_header_heightcat2">40dp</dimen>
-
+    <dimen name="paddingforplacetext">15dp</dimen>
+    <dimen name="warditemheight">60dp</dimen>
+    <dimen name="carditemcontent">16sp</dimen>
+    <dimen name="areaitemheight">60dp</dimen>
+    <dimen name="logoforplace">130dp</dimen>
+    <dimen name="defaultpadding">10dp</dimen>
+    <dimen name="cardpadding">10dp</dimen>
     <dimen name="catbuttonheight">55dp</dimen>
 
     <dimen name="fab_marginforsearch2">20dp</dimen>
