@@ -42,6 +42,7 @@
     <dimen name="logoforplace">220dp</dimen>
     <dimen name="paddingforplacetext">20dp</dimen>
     <dimen name="carditemcontent">40sp</dimen>
+    <dimen name="cardpadding">20dp</dimen>
     <dimen name="regsubbtn">15dp</dimen>
     <dimen name="carditemsize">40sp</dimen>
     <dimen name="areaitemheight">120dp</dimen>
