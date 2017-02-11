@@ -357,9 +357,9 @@ public class LegalAidNewDBTable {
         String _road = cursor.getString(12);
         String _node_contact = cursor.getString(13);
         String _other = cursor.getString(14);
-        String _opentime = cursor.getString(15);
+        String _offday = cursor.getString(15);
         String _closetime = cursor.getString(16);
-        String _offday = cursor.getString(17);
+        String _opentime = cursor.getString(17);
         int _catid=cursor.getInt(18);
         String _refnumm=cursor.getString(19);
         String _rating=cursor.getString(20);

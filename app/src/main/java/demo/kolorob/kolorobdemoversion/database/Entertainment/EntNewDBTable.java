@@ -251,9 +251,9 @@ public class EntNewDBTable {
         String _road = cursor.getString(13);
         String _node_contact = cursor.getString(14);
         String _other = cursor.getString(15);
-        String _opentime = cursor.getString(16);
+        String _offday  = cursor.getString(16);
         String _closetime = cursor.getString(17);
-        String _offday = cursor.getString(18);
+        String  _opentime= cursor.getString(18);
         int _catid=cursor.getInt(19);
         String _refnumm=cursor.getString(20);
         String _rating=cursor.getString(21);

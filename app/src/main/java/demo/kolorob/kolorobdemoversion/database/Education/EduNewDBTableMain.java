@@ -280,9 +280,9 @@ public class EduNewDBTableMain {
         String _road = cursor.getString(17);
         String _node_contact = cursor.getString(18);
         String _other = cursor.getString(19);
-        String _opentime = cursor.getString(20);
+        String _offday  = cursor.getString(20);
         String _closetime = cursor.getString(21);
-        String _offday = cursor.getString(22);
+        String  _opentime= cursor.getString(22);
         int _catid=cursor.getInt(23);
         String _refnumm=cursor.getString(24);
         String _rating=cursor.getString(25);
