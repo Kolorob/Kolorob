@@ -208,7 +208,7 @@ public class LegalAidNewDBTable {
         closeDB();
         return ret;
     }
-  
+
     public LegalAidServiceProviderItemNew getlegNode2(String Node) {
 
         SQLiteDatabase db = openDB();

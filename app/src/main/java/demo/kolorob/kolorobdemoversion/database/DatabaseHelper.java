@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String JOB_SERVICE_ADVERTISEMENT_TABLE="job_advertisement_table";
     public static final String JOB_SERVICE_PROVIDER_TYPE="job_provider_type";
     //tables for financial services
-    public static final String FINANCIAL_SERVICE_PROVIDER_TABLE="financial_provider";
+    public static final String FINANCIAL_NEWDB="financial_providerr";
 
     public static final String FINANCIAL_SERVICE_DETAILS="financial_details";
 
@@ -101,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_LEGAL_ADVICE_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + LEGAL_AID_SALISHI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_SERVICE_PROVIDER_TABLE);
+      //  db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_SERVICE_PROVIDER_TABLE);
         // TODO Write drop commands for all the available tables
 
         onCreate(db);
