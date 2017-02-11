@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String GOV_NEW="gov_main_new";
     public static final String ENT_PROVIDER_TABLE_DBNEW= "ent_provider_newdb";
     public static final String EDU_NEW_DB_MAIN= "edu_ndb_main";
+    public static final String EDU_NEW_DB_TRAINING= "edu_ndb_train";
     public static final String HEALTH_NEW_DB_MAIN= "hel_ndb_main";
 
 
