@@ -18,6 +18,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DB_NAMEnew = "kolorobupdated.db";
     public static  String DB_PATH ;
     public static final int DB_VERSION = 1;
+
+    public static final String LEGALAIDNEWDBTABLE="legal_aid_main";
+    public static final String FINANCIAL_NEWDB="financial_providerr";
+    public static final String GOV_NEW="gov_main_new";
+    public static final String ENT_PROVIDER_TABLE_DBNEW= "ent_provider_newdb";
+    public static final String EDU_NEW_DB_MAIN= "edu_ndb_main";
+    public static final String HEALTH_NEW_DB_MAIN= "hel_ndb_main";
+
+
     public static final String RATING = "rating_table";
     public static final String COMMENT = "comment_table";
     public static final String SERVICE_CATEGORY = "service_category";
@@ -30,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String EDU_PROVIDER_RESULT_TABLE = "edu_provider_result";
     public static final String EDU_TRAINING_TABLE = "edu_training_table";
     public static final String EDU_TUITION_TABLE = "edu_tuition_table";
-    public static final String ENT_PROVIDER_TABLE = "ent_provider";
+
     public static final String ENT_PROVIDER_TABLE_NEW = "ent_provider_new";
     public static final String HEALTH_PROVIDER_TABLE = "hel_provider";
     public static final String HEALTH_PROVIDER_TABLE_NEW = "hel_provider_new";
@@ -47,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String LEGAL_AID_SERVICE_PROVIDER_TABLE="legal_aid_provider";
     public static final String LEGAL_AID_LEGAL_ADVICE_TABLE="legal_aid_legal_advice";
     public static final String LEGAL_AID_SALISHI_TABLE="legal_aid_salishi";
-    public static final String LEGALAIDNEWDBTABLE="legal_aid_main";
+
     //sqls
     public static String sql=null;
 
@@ -60,14 +69,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String JOB_SERVICE_ADVERTISEMENT_TABLE="job_advertisement_table";
     public static final String JOB_SERVICE_PROVIDER_TYPE="job_provider_type";
     //tables for financial services
-    public static final String FINANCIAL_NEWDB="financial_providerr";
+
 
     public static final String FINANCIAL_SERVICE_DETAILS="financial_details";
 
     public static final String FINANCIAL_SERVICE_NEW="financial_new";
     public static final String GOVERNMENT_SERVICE_DETAILS="gov_details";
     public static final String GOV_MAIN="gov_main";
-    public static final String GOV_NEW="gov_main_new";
+
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
