@@ -283,6 +283,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
                 });
+
         //now make the early request just in case
        if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/NewStructure.json" , new VolleyApiCallback() {
@@ -567,24 +568,42 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
     void Servercall() {
-        getRequest(DataLoadingActivity.this, "http://kolorob.net/demo_new/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward=6&area=Mirpur_6", new VolleyApiCallback() {
                     @Override
-                    public void onResponse(int status, String apiContent) {
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            try {
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
 
-                                JSONArray jo = new JSONArray(apiContent);
-                                SavenewEdu(jo);
-                                Log.d("done","as");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                try {
+
+                                    allData = new JSONObject(apiContent);
+                                    int p= allData.length();
+
+                                    if(allData.has("Education"))
+                                            SavenewEdu(allData.getJSONArray("Education"));
+                                    if(allData.has("Finance"))
+                                        SavenewFin(allData.getJSONArray("Finance"));
+                                    if(allData.has("Health"))
+                                        SavenewHealth(allData.getJSONArray("Health"));
+
+                                    if(allData.has("Legal"))
+                                        SavenewLegal(allData.getJSONArray("Legal"));
+
+                                    if(allData.has("Government"))
+                                        SavenewGov(allData.getJSONArray("Government"));
+
+                                    if(allData.has("Entertainment"))
+                                        SavenewEntertainment(allData.getJSONArray("Entertainment"));
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
                         }
-                    }
-                }
-        );
-    }
 
+    });
+    }
     void SavenewEdu(JSONArray jo) {
         JSONArray Edu = jo;
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
@@ -594,24 +613,24 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         for (int i = 0; i < Govcount; i++) {
             try {
+                if(!Edu.isNull(i)) {
+                    JSONObject jsonObject2 = Edu.getJSONObject(i);
+                    EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
+                    eduNewDBTableMain.insertItem(eduNewModel);
+                    if (jsonObject2.has("training_details")) {
+                        JSONArray edutrain = jsonObject2.getJSONArray("training_details");
+                        int lenoftrain = edutrain.length();
+                        for (int ii = 0; ii < lenoftrain; ii++) {
+                            JSONObject train = edutrain.getJSONObject(ii);
 
-                JSONObject jsonObject2 = Edu.getJSONObject(i);
-                EduNewModel eduNewModel =EduNewModel.parseEduNewModel(jsonObject2);
-                eduNewDBTableMain.insertItem(eduNewModel);
-                if (jsonObject2.has("training_details")) {
-                    JSONArray edutrain=jsonObject2.getJSONArray("training_details");
-                    int lenoftrain=edutrain.length();
-                    for (int ii=0;ii<lenoftrain;ii++) {
-                        JSONObject train = edutrain.getJSONObject(ii);
 
+                            EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
+                            eduNewDBTableTraining.insertItem(eduTrainingModel);
+                        }
 
-                        EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
-                        eduNewDBTableTraining.insertItem(eduTrainingModel);
                     }
 
                 }
-
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -620,44 +639,129 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             Log.d("count", String.valueOf(i));
         }
     }
-    void SavenewHealth(JSONArray jo) {
-        JSONArray Gov = jo;
-        HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
-        HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
-        HealthNewDBTableHospital healthNewDBTableHospital=new HealthNewDBTableHospital(DataLoadingActivity.this);
-        int Govcount = Gov.length();
+    void SavenewEntertainment(JSONArray jo) {
+        JSONArray Ent = jo;
+        EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
 
-        for (int i = 0; i < Govcount; i++) {
+
+        int Entcount = Ent.length();
+
+        for (int i = 0; i < Entcount; i++) {
             try {
-
-                JSONObject jsonObject2 = Gov.getJSONObject(i);
-                HealthNewDBModelMain healthNewDBModelMain =HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
-                govNewDBTable.insertItem(healthNewDBModelMain);
-                if (jsonObject2.has("health_pharmacy")) {
-                    JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
-
-
-                    HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
-                    healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
+                if(!Ent.isNull(i)) {
+                    JSONObject jsonObject2 = Ent.getJSONObject(i);
+                    EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
+                    entNewDBTable.insertItem(entertainmentNewDBModel);
 
 
                 }
-                else  if (jsonObject2.has("health_hospital")) {
-                    JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
-
-
-                    HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
-                    healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
-
-
-                }
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
 
             }
             Log.d("count", String.valueOf(i));
+        }
+    }
+    void SavenewGov(JSONArray jo) {
+        JSONArray Gov = jo;
+        GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
+
+
+        int Govcount = Gov.length();
+
+        for (int i = 0; i < Govcount; i++) {
+            try {
+                if(!Gov.isNull(i)) {
+                    JSONObject jsonObject2 = Gov.getJSONObject(i);
+                    GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
+                    govNewDBTable.insertItem(governmentNewDBModel);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+            Log.d("govcount", String.valueOf(i));
+        }
+    }
+    void SavenewLegal(JSONArray jo) {
+        JSONArray Legal = jo;
+        LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
+
+
+        int Legalcount = Legal.length();
+
+        for (int i = 0; i < Legalcount; i++) {
+            try {
+                if(!Legal.isNull(i)) {
+                    JSONObject jsonObject2 = Legal.getJSONObject(i);
+                    LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
+                    legalAidNewDBTable.insertItem(legalAidNewDBModel);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+            Log.d("legalcount", String.valueOf(i));
+        }
+    }
+    void SavenewFin(JSONArray jo) {
+        JSONArray Fin = jo;
+        FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
+
+
+        int Fincount = Fin.length();
+
+        for (int i = 0; i < Fincount; i++) {
+            try {
+                if(!Fin.isNull(i)) {
+                    JSONObject jsonObject2 = Fin.getJSONObject(i);
+                    FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
+                    finNewDBTable.insertItem(financialNewDBModel);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+            Log.d("fcount", String.valueOf(i));
+        }
+    }
+    void SavenewHealth(JSONArray jo) {
+        JSONArray Hel = jo;
+        HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
+        HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
+        HealthNewDBTableHospital healthNewDBTableHospital=new HealthNewDBTableHospital(DataLoadingActivity.this);
+        int Helcount = Hel.length();
+
+        for (int i = 0; i < Helcount; i++) {
+            try {
+                if(!Hel.isNull(i)) {
+                    JSONObject jsonObject2 = Hel.getJSONObject(i);
+                    HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
+                    govNewDBTable.insertItem(healthNewDBModelMain);
+                    if (jsonObject2.has("health_pharmacy")) {
+                        JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
+
+
+                        HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
+                        healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
+
+
+                    } else if (jsonObject2.has("health_hospital")) {
+                        JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
+
+
+                        HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
+                        healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
+
+
+                    }
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+            Log.d("hcount", String.valueOf(i));
         }
     }
 }
