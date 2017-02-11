@@ -235,7 +235,7 @@ public class HealthNewDBModelMain {
     public void setRatings(String ratings) {
         this.ratings = ratings;
     }
-    public static HealthNewDBModelMain parseLegalAidNewDBModel (JSONObject jo) throws JSONException {
+    public static HealthNewDBModelMain parseHealthNewDBModelMain (JSONObject jo) throws JSONException {
         int _healthid = jo.getInt("id");
 
         String _nameen = jo.getString("node_name");

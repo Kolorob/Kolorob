@@ -1,12 +1,15 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -37,35 +40,60 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AreaHolder;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_Adapter;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.DataModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+import info.hoang8f.widget.FButton;
 import tourguide.tourguide.ChainTourGuide;
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
+
 public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     Context context;
     private static int NUMBER_OF_TASKS = 10;
-    View view=null;
-    String IMEINumber=null;
+    View view = null;
+    Button submit;
+    String IMEINumber = null;
     //user and pass
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
-    Boolean location=false,storage=false,smsstate=false,phonestate=false,accountstate=false,permission=false;
-    int countofDb=0;
+    String user = "kolorobapp";
+    String pass = "2Jm!4jFe3WgBZKEN";
+    Boolean location = false, storage = false, smsstate = false, phonestate = false, accountstate = false, permission = false;
+    int countofDb = 0;
     JSONObject allData;
 
     public View getAreaview() {
@@ -84,33 +112,33 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         this.wardview = wardview;
     }
 
-    View areaview,wardview;
-    private static RecyclerView recyclerView,recyclerViewarea;
+    View areaview, wardview;
+    private static RecyclerView recyclerView, recyclerViewarea;
     AreaHolder areaHolder;
     public TourGuide mTourGuideHandler;
     public Activity mActivity;
     private Button mButton1, mButton2, mButton3;
     private Animation mEnterAnimation, mExitAnimation;
     //String and Integer array for Recycler View Items
-    public static final String[] TITLES= {"ওয়ার্ড ২","ওয়ার্ড ৩","ওয়ার্ড ৪","ওয়ার্ড ৫","ওয়ার্ড ৬","ওয়ার্ড ৭","ওয়ার্ড ৮","ওয়ার্ড ৯","ওয়ার্ড ১০","ওয়ার্ড ১১","ওয়ার্ড ১২","ওয়ার্ড ১৩","ওয়ার্ড ১৪","ওয়ার্ড ১৫",
+    public static final String[] TITLES = {"ওয়ার্ড ২", "ওয়ার্ড ৩", "ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬", "ওয়ার্ড ৭", "ওয়ার্ড ৮", "ওয়ার্ড ৯", "ওয়ার্ড ১০", "ওয়ার্ড ১১", "ওয়ার্ড ১২", "ওয়ার্ড ১৩", "ওয়ার্ড ১৪", "ওয়ার্ড ১৫",
             "ওয়ার্ড ১৬"};
-public static final int[] wardid={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-    public static final String[] AREANAMES={"Mirpur 12:Mirpur DOHS",
+    public static final int[] wardid = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    public static final String[] AREANAMES = {"Mirpur 12:Mirpur DOHS",
             "Mirpur 10:Mirpur 11",
             "Mirpur 13:Mirpur 14:Baishteki",
             "Mirpur 11:Bauniabadh:Palashnagar",
-    "Mirpur 6:Mirpur 7:Eastern Housing:Albodi:Pallabi:Albodi Rupnagar Tinshed:Duaripara",
+            "Mirpur 6:Mirpur 7:Eastern Housing:Albodi:Pallabi:Albodi Rupnagar Tinshed:Duaripara",
             "Mirpur 2:Mirpur 6:Rupnagar:Government Housing Estate",
             "Mirpur 1:North Bishil:Baksnagar:Nobabaer Bag:BISF Staff Quarter:Botanical Garden Residential Area",
             "Bagbari:Harirampur:Jahurabad:Bazarpara:Bordhonbari:Golartek:Choto Diabari:Coat Bari:Anandanagar",
             "Gabtoli Jamidarbari:Gabtoli 1st Colony:Gabtoli 2nd Colony:Gabtoli 3rd Colony:Goidartek:Darus Salam",
             "Kallyanpur:Paikpara",
-    "Ahammed Nagar:South Bishil:Shah Ali Bag:Kalwala Para:Paikpara Staff Quarter:Educatiob Board Staff Quarter:Tolarbag:BADC Staff Quarter",
+            "Ahammed Nagar:South Bishil:Shah Ali Bag:Kalwala Para:Paikpara Staff Quarter:Educatiob Board Staff Quarter:Tolarbag:BADC Staff Quarter",
             "Borobag:Pirer Bag:Monipur",
             "Kazi para:Shewrapara:Senpara Parbata"
-    ,"Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
+            , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
             "Ibrahimpur:Kafrul"};
-    public static final String[] AREANAMESBN={"মিরপুর ১২: মিরপুর ডিওএইচএস",
+    public static final String[] AREANAMESBN = {"মিরপুর ১২: মিরপুর ডিওএইচএস",
             "মিরপুর ১০: মিরপুর ১১",
             "মিরপুর ১৩:  মিরপুর ১৪: বাইশটেকি",
             "মিরপুর ১১: বাউনিয়াবাঁধ: পলাশ নগর",
@@ -123,9 +151,9 @@ public static final int[] wardid={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
             "আহম্মেদ নগর: দক্ষিণ বিশিল: শাহআলী বাগ: কালওয়ালা পাড়া: পাইকপাড়া ষ্টাফ কোয়ার্টার: শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার: টোলারবাগ: বিএডিসি ষ্টাফ কোয়ার্টার",
             "বড় বাগ: পীরের বাগ: মনীপুর",
             "কাজী পাড়া: শেওড়া পাড়া: সেনপাড়া পর্বতা"
-            ,"ভাসান টেক: আলবদিরটেক: দামালকোট: লালাসরাই: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
+            , "ভাসান টেক: আলবদিরটেক: দামালকোট: লালাসরাই: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
             "ইব্রাহীমপুর: কাফরুল"};
-int Pos,Posa=0;
+    int Pos, Posa = 0;
 
     public int getPosa() {
         return Posa;
@@ -134,7 +162,8 @@ int Pos,Posa=0;
     public void setPosa(int posa) {
         Posa = posa;
     }
-String posWard=null;
+
+    String posWard = null;
 
     public String getPosWard() {
         return posWard;
@@ -144,10 +173,11 @@ String posWard=null;
         this.posWard = posWard;
     }
 
-    String posArea=null;
-TextView ward,area;
+    String posArea = null;
+    TextView ward, area;
     ArrayList<DataModel> arrayList2 = new ArrayList<>();
-    RecyclerViewHolder  holder2;
+    RecyclerViewHolder holder2;
+
     public int getPos() {
         return Pos;
     }
@@ -155,23 +185,36 @@ TextView ward,area;
     public void setPos(int pos) {
         Pos = pos;
     }
+
     public String getPosArea() {
         return posArea;
-    }public void setPosArea(String posArea) {
+    }
+
+    public void setPosArea(String posArea) {
         this.posArea = posArea;
     }
-    private GridLayoutManager lLayout,lLayout2;
+
+    private GridLayoutManager lLayout, lLayout2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         //start download now
 
-      requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
-        ward=(TextView)findViewById(R.id.chooseward);
-        area=(TextView)findViewById(R.id.choosearea);
+        ward = (TextView) findViewById(R.id.chooseward);
+        area = (TextView) findViewById(R.id.choosearea);
+        submit = (Button) findViewById(R.id.submittoserverarea);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Servercall();
+            }
+        });
+
         initViews();
         mEnterAnimation = new AlphaAnimation(0f, 1f);
         mEnterAnimation.setDuration(600);
@@ -183,7 +226,7 @@ TextView ward,area;
         populatRecyclerView();
         populatRecyclerView2();
         runOverlay_ContinueMethod();
-        Pos=0;
+        Pos = 0;
 
         ItemClickSupport.addTo(recyclerView)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -192,42 +235,38 @@ TextView ward,area;
                         setPos(position);
 
                         populatRecyclerView2();
-                       // ((CardView)v).setCardBackgroundColor(Color.WHITE);
-                       // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
-                        if( getWardview()==null ){setWardview(v);
-                            ((CardView)v).setCardBackgroundColor(Color.parseColor("#FF9800"));}
-                        else if(getWardview()!=v)
-                        {
-                            ((CardView)  getWardview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
-
-                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        // ((CardView)v).setCardBackgroundColor(Color.WHITE);
+                        // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
+                        if (getWardview() == null) {
                             setWardview(v);
-                        }
-                        else
-                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        } else if (getWardview() != v) {
+                            ((CardView) getWardview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            setWardview(v);
+                        } else
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-      ItemClickSupport.addTo(recyclerViewarea)
+        ItemClickSupport.addTo(recyclerViewarea)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        ((CardView)v).setCardBackgroundColor(Color.WHITE);
-                        if( getAreaview()==null ){setAreaview(v);
-                            ((CardView)v).setCardBackgroundColor(Color.parseColor("#FF9800"));}
-                        else if(getAreaview()!=v)
-                        {
-                            ((CardView)  getAreaview()).setCardBackgroundColor(Color.WHITE);
-
-                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        ((CardView) v).setCardBackgroundColor(Color.WHITE);
+                        if (getAreaview() == null) {
                             setAreaview(v);
-                        }
-                        else
-                            ((CardView)  v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        } else if (getAreaview() != v) {
+                            ((CardView) getAreaview()).setCardBackgroundColor(Color.WHITE);
+
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            setAreaview(v);
+                        } else
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                         Toast.makeText(getApplicationContext(), arrayList2.get(position).getTitle().toString() + " is selected!", Toast.LENGTH_SHORT).show();
-
-
 
 
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
@@ -245,7 +284,7 @@ TextView ward,area;
                     }
                 });
         //now make the early request just in case
-        if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
+       if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/NewStructure.json" , new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -271,18 +310,12 @@ TextView ward,area;
 */
 
 
-
-
-
         context = this;
-
-
-
-
 
 
         //  setsongName();
     }
+
     private void initViews() {
 
 
@@ -310,7 +343,7 @@ TextView ward,area;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
@@ -336,11 +369,9 @@ TextView ward,area;
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-
     }
-    private void runOverlay_ContinueMethod(){
+
+    private void runOverlay_ContinueMethod() {
         // the return handler is used to manipulate the cleanup of all the tutorial elements
 
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
@@ -363,7 +394,6 @@ TextView ward,area;
                 .playLater(area);
 
 
-
         Sequence sequence = new Sequence.SequenceBuilder()
                 .add(tourGuide1, tourGuide2)
                 .setDefaultOverlay(new Overlay()
@@ -383,10 +413,10 @@ TextView ward,area;
     private void populatRecyclerView() {
         ArrayList<AreaHolder> arrayList = new ArrayList<>();
         for (int i = 0; i < TITLES.length; i++) {
-            AreaHolder areaHolder1=new AreaHolder(wardid[i],TITLES[i],AREANAMES[i],AREANAMESBN[i]);
+            AreaHolder areaHolder1 = new AreaHolder(wardid[i], TITLES[i], AREANAMES[i], AREANAMESBN[i]);
             arrayList.add(areaHolder1);
         }
-        RecyclerView_Adapter  adapter = new RecyclerView_Adapter(DataLoadingActivity.this, arrayList);
+        RecyclerView_Adapter adapter = new RecyclerView_Adapter(DataLoadingActivity.this, arrayList);
         recyclerView.setAdapter(adapter);// set adapter on recyclerview
 
 
@@ -394,27 +424,25 @@ TextView ward,area;
 
 
     }
+
     private void populatRecyclerView2() {
 
-            arrayList2.clear();
+        arrayList2.clear();
 
-            ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
         for (int i = 0; i < list.size(); i++) {
-            DataModel areaHolder1=new DataModel(list.get(i));
+            DataModel areaHolder1 = new DataModel(list.get(i));
             arrayList2.add(areaHolder1);
         }
-        if(arrayList2.size()>=4)
-        {
+        if (arrayList2.size() >= 4) {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
-        }
-        else {
+        } else {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
         }
         recyclerViewarea.setHasFixedSize(false);
         recyclerViewarea.setLayoutManager(lLayout2);
-        RecyclerView_AdapterArea  adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this,arrayList2);
+        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
         recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
-
 
 
         adapter2.notifyDataSetChanged();// Notify the adapter
@@ -423,7 +451,7 @@ TextView ward,area;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
@@ -435,7 +463,6 @@ TextView ward,area;
     public boolean onNavigationItemSelected(MenuItem item) {
         return false;
     }
-
 
 
     class SaveDataArrayFinance extends GenericSaveDBTask<JSONObject, Integer, Long> {
@@ -525,20 +552,114 @@ TextView ward,area;
 
         @Override
         protected void onPostExecute(Result result) {
-            if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS)  { // Means the task is successful
+            if (((Long) result).longValue() == 0.0 && countofDb < NUMBER_OF_TASKS) { // Means the task is successful
                 countofDb++;
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("KValue", countofDb);
                 editor.apply();
                 Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
-                ToastMessageDisplay.setText(DataLoadingActivity.this.context,"তথ্য সংগ্রহ চলছে");
+                ToastMessageDisplay.setText(DataLoadingActivity.this.context, "তথ্য সংগ্রহ চলছে");
                 ToastMessageDisplay.showText(DataLoadingActivity.this.context);
             }
         }
 
     }
 
+    void Servercall() {
+        getRequest(DataLoadingActivity.this, "http://kolorob.net/demo_new/api/sp/education?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+                        if (status == AppConstants.SUCCESS_CODE) {
+                            try {
+
+                                JSONArray jo = new JSONArray(apiContent);
+                                SavenewEdu(jo);
+                                Log.d("done","as");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        );
+    }
+
+    void SavenewEdu(JSONArray jo) {
+        JSONArray Edu = jo;
+        EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
+        EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
+
+        int Govcount = Edu.length();
+
+        for (int i = 0; i < Govcount; i++) {
+            try {
+
+                JSONObject jsonObject2 = Edu.getJSONObject(i);
+                EduNewModel eduNewModel =EduNewModel.parseEduNewModel(jsonObject2);
+                eduNewDBTableMain.insertItem(eduNewModel);
+                if (jsonObject2.has("training_details")) {
+                    JSONArray edutrain=jsonObject2.getJSONArray("training_details");
+                    int lenoftrain=edutrain.length();
+                    for (int ii=0;ii<lenoftrain;ii++) {
+                        JSONObject train = edutrain.getJSONObject(ii);
+
+
+                        EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
+                        eduNewDBTableTraining.insertItem(eduTrainingModel);
+                    }
+
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+            Log.d("count", String.valueOf(i));
+        }
+    }
+    void SavenewHealth(JSONArray jo) {
+        JSONArray Gov = jo;
+        HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
+        HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
+        HealthNewDBTableHospital healthNewDBTableHospital=new HealthNewDBTableHospital(DataLoadingActivity.this);
+        int Govcount = Gov.length();
+
+        for (int i = 0; i < Govcount; i++) {
+            try {
+
+                JSONObject jsonObject2 = Gov.getJSONObject(i);
+                HealthNewDBModelMain healthNewDBModelMain =HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
+                govNewDBTable.insertItem(healthNewDBModelMain);
+                if (jsonObject2.has("health_pharmacy")) {
+                    JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
+
+
+                    HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
+                    healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
+
+
+                }
+                else  if (jsonObject2.has("health_hospital")) {
+                    JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
+
+
+                    HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
+                    healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
+
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
+            Log.d("count", String.valueOf(i));
+        }
+    }
 }
 
 

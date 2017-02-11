@@ -234,7 +234,7 @@ public class GovernmentNewDBModel {
     public void setRatings(String ratings) {
         this.ratings = ratings;
     }
-    public static GovernmentNewDBModel parseLegalAidNewDBModel (JSONObject jo) throws JSONException {
+    public static GovernmentNewDBModel parseGovernmentNewDBModel (JSONObject jo) throws JSONException {
         int _govid = jo.getInt("id");
 
         String _nameen = jo.getString("node_name");

@@ -230,19 +230,6 @@ public class HealthNewDBTableMain {
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     private HealthNewDBModelMain cursorToSubCatList(Cursor cursor) {
         int _healthid = cursor.getInt(0);
         String _nameen = cursor.getString(1);

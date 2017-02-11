@@ -92,7 +92,7 @@ public class HealthNewDBModelHospital {
         this.maternityprivacy = maternityprivacy;
     }
 
-    public static HealthNewDBModelHospital parseHealthNewDBModelPharmacy(JSONObject jo, int sproviderkey) throws JSONException {
+    public static HealthNewDBModelHospital parseHealthNewDBModelHospital(JSONObject jo, int sproviderkey) throws JSONException {
        int _servicecenterid=sproviderkey;
         String _eavailable = jo.getString("emergency_availabe");
         String _enumber = jo.getString("emergency_num");
