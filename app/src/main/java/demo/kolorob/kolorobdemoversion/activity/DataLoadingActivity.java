@@ -153,6 +153,21 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             "কাজী পাড়া: শেওড়া পাড়া: সেনপাড়া পর্বতা"
             , "ভাসান টেক: আলবদিরটেক: দামালকোট: লালাসরাই: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
             "ইব্রাহীমপুর: কাফরুল"};
+    public static final String[] AREAKEYWORDS = {"Mirpur_12:Mirpur_DOHS",
+            "Mirpur_10:Mirpur_11",
+            "Mirpur_13:Mirpur_14:Baishteki",
+            "Mirpur_11: Bauniabadh:Palashnagar",
+            "Mirpur_6:Mirpur_7:Pallabi:Albodi:Duaripara:Eastern_Housing:Albodi_Rupnagar_Tinshed",
+            "Mirpur_2:Mirpur_6:_Rupnagar: সরকারী হাউজিং এষ্টেট",
+            "Mirpur_1:North_Bishil:Baksnagar:নবাবের বাগ :Botanical_Garden_Residential_Area:BISF_Staff_Quarter",
+            "বাগবাড়ী: হরিরামপুর: জহরাবাদ: বাজার পাড়া: বর্ধনবাড়ী: গোলারটেক: ছোটদিয়াবাড়ী: কোটবাড়ী: আনন্দ নগর",
+            "Gabtoli_Jamidarbari :Gabtoli_1st_Colony:Gabtoli_2nd_Colony:Gabtoli_3rd_Colony:Goidartek :Darus_Salam",
+            "কল্যাণপুর: পাইক পাড়া",
+            "Admmed_Nagar: দক্ষিণ বিশিল: Shah_Ali_Bag: কালওয়ালা পাড়া: পাইকপাড়া ষ্টাফ কোয়ার্টার: শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার: টোলারবাগ: বিএডিসি ষ্টাফ কোয়ার্টার",
+            "বড় বাগ: পীরের বাগ: মনীপুর",
+            "কাজী পাড়া: শেওড়া পাড়া: সেনপাড়া পর্বতা"
+            , "Vashantek: আলবদিরটেক: দামালকোট:Lalasorai: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
+            "Ibrahimpur: Kafrul"};
     int Pos, Posa = 0;
 
     public int getPosa() {
@@ -192,6 +207,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     public void setPosArea(String posArea) {
         this.posArea = posArea;
+    }
+int PosAreaint;
+
+    public int getPosAreaint() {
+        return PosAreaint;
+    }
+
+    public void setPosAreaint(int posAreaint) {
+        PosAreaint = posAreaint;
     }
 
     private GridLayoutManager lLayout, lLayout2;
@@ -255,7 +279,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
                         ((CardView) v).setCardBackgroundColor(Color.WHITE);
+                        setPosAreaint(position);
                         if (getAreaview() == null) {
                             setAreaview(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
@@ -568,7 +594,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
     void Servercall() {
-        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward=6&area=Mirpur_6", new VolleyApiCallback() {
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
+        String keyword= list.get(getPosAreaint());
+
+        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward="+wardid[getPos()]+"&area="+keyword, new VolleyApiCallback() {
                     @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -576,7 +605,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 try {
 
                                     allData = new JSONObject(apiContent);
-                                    int p= allData.length();
+
 
                                     if(allData.has("Education"))
                                             SavenewEdu(allData.getJSONArray("Education"));
@@ -594,7 +623,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                     if(allData.has("Entertainment"))
                                         SavenewEntertainment(allData.getJSONArray("Entertainment"));
 
-
+                                    int p= allData.length();
+                                    Log.d("Doneall",String.valueOf(p));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -636,7 +666,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 e.printStackTrace();
 
             }
-            Log.d("count", String.valueOf(i));
+            Log.d("educount", String.valueOf(i));
         }
     }
     void SavenewEntertainment(JSONArray jo) {
@@ -659,7 +689,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 e.printStackTrace();
 
             }
-            Log.d("count", String.valueOf(i));
+            Log.d("entcount", String.valueOf(i));
         }
     }
     void SavenewGov(JSONArray jo) {
