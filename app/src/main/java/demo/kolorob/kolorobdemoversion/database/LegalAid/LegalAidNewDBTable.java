@@ -379,4 +379,11 @@ public class LegalAidNewDBTable {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
+    public void delete(String ward,String area)
+    {
+        DatabaseHelper databaseHelper=new DatabaseHelper(LegalAidNewDBTable.this.tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
+        database.close();
+    }
 }

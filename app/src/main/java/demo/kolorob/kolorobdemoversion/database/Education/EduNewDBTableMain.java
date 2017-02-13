@@ -234,7 +234,13 @@ public class EduNewDBTableMain {
         return ret;
     }
 
-
+    public void delete(String ward,String area)
+    {
+        DatabaseHelper databaseHelper=new DatabaseHelper(EduNewDBTableMain.this.tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
+        database.close();
+    }
     public boolean isFieldExist(int id) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();

@@ -120,7 +120,21 @@ public class StoredAreaTable {
         closeDB();
         return ret;
     }
+    public ArrayList<StoredArea> getAllstored() {
+        ArrayList<StoredArea> siList = new ArrayList<>();
 
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCategory(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
    /* public ArrayList<CategoryItem> getAllCategories() {
         ArrayList<CategoryItem> ciList = new ArrayList<>();
 
@@ -139,6 +153,12 @@ public class StoredAreaTable {
     }
 
     */
+   private StoredArea cursorToSubCategory(Cursor cursor) {
+
+       String wardid = cursor.getString(0);
+       String areaname = cursor.getString(1);
+       return new StoredArea(wardid,areaname);
+   }
     public void dropTable() {
         SQLiteDatabase db = openDB();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);

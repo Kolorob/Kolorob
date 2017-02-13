@@ -229,7 +229,36 @@ public class HealthNewDBTableMain {
         closeDB();
         return false;
     }
+    public ArrayList<HealthNewDBModelMain> getAllstored() {
+        ArrayList<HealthNewDBModelMain> siList = new ArrayList<>();
 
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
+    public ArrayList<HealthNewDBModelMain> getAllstoredb() {
+        ArrayList<HealthNewDBModelMain> siList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +"WHERE ", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
     private HealthNewDBModelMain cursorToSubCatList(Cursor cursor) {
         int _healthid = cursor.getInt(0);
         String _nameen = cursor.getString(1);
@@ -261,6 +290,13 @@ public class HealthNewDBTableMain {
 
     }
 
+    public void delete(String ward,String area)
+    {
+        DatabaseHelper databaseHelper=new DatabaseHelper(HealthNewDBTableMain.this.tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
+        database.close();
+    }
     public void dropTable() {
         SQLiteDatabase db = openDB();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
