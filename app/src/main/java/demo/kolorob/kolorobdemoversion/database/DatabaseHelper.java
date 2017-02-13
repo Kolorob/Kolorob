@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String HEALTH_NEW_DB_MAIN= "hel_ndb_main";
     public static final String HEALTH_NEW_DB_PHARMA= "hel_ndb_pharma";
     public static final String HEALTH_NEW_DB_HOS= "hel_ndb_hos";
-
+    public static final String AREASTORED= "areas";
 
     public static final String RATING = "rating_table";
     public static final String COMMENT = "comment_table";
