@@ -1,5 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,7 @@ ArrayList<StoredArea>storedAreas=new ArrayList<>();
     Button update,delete;
     int selectedId=-1;
     Context context;
+    ProgressDialog dialog;
     ArrayList<HealthNewDBModelMain>healthNewDBModelMains=new ArrayList<>();
     JSONObject allData;
     @Override
@@ -103,6 +105,10 @@ delete.setOnClickListener(new View.OnClickListener() {
                     ToastMessageDisplay.showText(AreaUpgrade.this);
                 }
                 else {
+                    dialog = new ProgressDialog(AreaUpgrade.this);
+                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog.setCancelable(true);
+                    dialog.show();
 
                     Servercall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
                 }
@@ -110,6 +116,18 @@ delete.setOnClickListener(new View.OnClickListener() {
         );
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        selectedId=-1;
+    }
+    @Override
+    protected void onResume() {
+        super.onRestart();
+        selectedId=-1;
+    }
+
     void Servercall(String ward, String area) {
 
 
@@ -142,9 +160,11 @@ delete.setOnClickListener(new View.OnClickListener() {
 
                         int p= allData.length();
                         Log.d("Doneall",String.valueOf(p));
-
+                        dialog.dismiss();
                         ToastMessageDisplay.setText(AreaUpgrade.this,"Data Updated");
                         ToastMessageDisplay.showText(AreaUpgrade.this);
+                        selectedId=-1;
+                        rg.clearCheck();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -322,11 +342,18 @@ delete.setOnClickListener(new View.OnClickListener() {
         GovNewDBTable govNewDBTable = new GovNewDBTable(AreaUpgrade.this);
         EntNewDBTable entNewDBTable = new EntNewDBTable(AreaUpgrade.this);
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
-       healthNewDBModelMains= healthNewDBTableMain.getAllstored();
-        int sizeone=healthNewDBModelMains.size();
+        StoredAreaTable storedAreaTable=new StoredAreaTable(AreaUpgrade.this);
+
         healthNewDBTableMain.delete(ward,area);
-        healthNewDBModelMains= healthNewDBTableMain.getAllstored();
-        int sizetwo=healthNewDBModelMains.size();
-        healthNewDBTableMain.isFieldExist(Integer.parseInt(ward));
+        eduNewDBTableMain.delete(ward,area);
+        entNewDBTable.delete(ward,area);
+        legalAidNewDBTable.delete(ward,area);
+        finNewDBTable.delete(ward,area);
+        govNewDBTable.delete(ward,area);
+        storedAreaTable.delete(ward,area);
+        rg.clearCheck();
+        selectedId=-1;
+
+
     }
 }
