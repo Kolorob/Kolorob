@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 
 /**
@@ -134,6 +135,13 @@ public class StoredAreaTable {
         cursor.close();
         closeDB();
         return siList;
+    }
+    public void delete(String ward,String area)
+    {
+        DatabaseHelper databaseHelper=new DatabaseHelper(StoredAreaTable.this.tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.delete(TABLE_NAME, WARDID + "=" + ward + " and " + AREANAME + "= '"+ area +"'", null);
+        database.close();
     }
    /* public ArrayList<CategoryItem> getAllCategories() {
         ArrayList<CategoryItem> ciList = new ArrayList<>();

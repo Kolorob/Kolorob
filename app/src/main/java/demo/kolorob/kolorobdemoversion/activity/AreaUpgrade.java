@@ -55,7 +55,7 @@ ArrayList<StoredArea>storedAreas=new ArrayList<>();
     Button update,delete;
     int selectedId=-1;
     Context context;
-    ProgressDialog dialog;
+    ProgressDialog dialog,dialog2;
     ArrayList<HealthNewDBModelMain>healthNewDBModelMains=new ArrayList<>();
     JSONObject allData;
     @Override
@@ -88,7 +88,10 @@ delete.setOnClickListener(new View.OnClickListener() {
             ToastMessageDisplay.showText(AreaUpgrade.this);
         }
         else {
-
+            dialog2 = new ProgressDialog(AreaUpgrade.this);
+            dialog2.setMessage("দয়া করে অপেক্ষা করুন");
+            dialog2.setCancelable(true);
+            dialog2.show();
            deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
         }
     }}
@@ -353,7 +356,9 @@ delete.setOnClickListener(new View.OnClickListener() {
         storedAreaTable.delete(ward,area);
         rg.clearCheck();
         selectedId=-1;
-
+        dialog2.dismiss();
+        ToastMessageDisplay.setText(AreaUpgrade.this,"Data Deleted");
+        ToastMessageDisplay.showText(AreaUpgrade.this);
 
     }
 }

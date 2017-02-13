@@ -2,10 +2,12 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -18,14 +20,24 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +65,7 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
@@ -70,8 +83,10 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
+import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import info.hoang8f.widget.FButton;
 import tourguide.tourguide.ChainTourGuide;
@@ -156,23 +171,26 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     public static final String[] AREAKEYWORDS = {"Mirpur_12:Mirpur_DOHS",
             "Mirpur_10:Mirpur_11",
             "Mirpur_13:Mirpur_14:Baishteki",
-            "Mirpur_11: Bauniabadh:Palashnagar",
+            "Mirpur_11:Bauniabadh:Palashnagar",
             "Mirpur_6:Mirpur_7:Pallabi:Albodi:Duaripara:Eastern_Housing:Albodi_Rupnagar_Tinshed",
             "Mirpur_2:Mirpur_6:_Rupnagar: সরকারী হাউজিং এষ্টেট",
             "Mirpur_1:North_Bishil:Baksnagar:নবাবের বাগ :Botanical_Garden_Residential_Area:BISF_Staff_Quarter",
             "বাগবাড়ী: হরিরামপুর: জহরাবাদ: বাজার পাড়া: বর্ধনবাড়ী: গোলারটেক: ছোটদিয়াবাড়ী: কোটবাড়ী: আনন্দ নগর",
             "Gabtoli_Jamidarbari :Gabtoli_1st_Colony:Gabtoli_2nd_Colony:Gabtoli_3rd_Colony:Goidartek :Darus_Salam",
             "কল্যাণপুর: পাইক পাড়া",
-            "Admmed_Nagar: দক্ষিণ বিশিল: Shah_Ali_Bag: কালওয়ালা পাড়া: পাইকপাড়া ষ্টাফ কোয়ার্টার: শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার: টোলারবাগ: বিএডিসি ষ্টাফ কোয়ার্টার",
+            "Admmed_Nagar: দক্ষিণ বিশিল:Shah_Ali_Bag: কালওয়ালা পাড়া: পাইকপাড়া ষ্টাফ কোয়ার্টার: শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার: টোলারবাগ: বিএডিসি ষ্টাফ কোয়ার্টার",
             "বড় বাগ: পীরের বাগ: মনীপুর",
             "কাজী পাড়া: শেওড়া পাড়া: সেনপাড়া পর্বতা"
             , "Vashantek: আলবদিরটেক: দামালকোট:Lalasorai: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
-            "Ibrahimpur: Kafrul"};
+            "Ibrahimpur:Kafrul"};
     int Pos, Posa = 0;
+    ArrayList<StoredArea> storedAreas = new ArrayList<>();
 
     public int getPosa() {
         return Posa;
     }
+
+    RadioButton radioButton;
 
     public void setPosa(int posa) {
         Posa = posa;
@@ -208,11 +226,16 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     public void setPosArea(String posArea) {
         this.posArea = posArea;
     }
-int PosAreaint;
+
+    int PosAreaint = -1;
+    private int height;
+    private int width;
 
     public int getPosAreaint() {
         return PosAreaint;
     }
+
+    String keyword;
 
     public void setPosAreaint(int posAreaint) {
         PosAreaint = posAreaint;
@@ -232,10 +255,24 @@ int PosAreaint;
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
         submit = (Button) findViewById(R.id.submittoserverarea);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        height = metrics.heightPixels;
+        width = metrics.widthPixels;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Servercall();
+                if (getPosAreaint() == -1) {
+                    ToastMessageDisplay.setText(DataLoadingActivity.this, "please choose area first");
+                    ToastMessageDisplay.showText(DataLoadingActivity.this);
+                } else {
+                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
+                    keyword = list2.get(getPosAreaint());
+                    Servercall();
+                }
+
+
             }
         });
 
@@ -594,46 +631,50 @@ int PosAreaint;
     }
 
     void Servercall() {
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
-        String keyword= list.get(getPosAreaint());
-
-        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward="+wardid[getPos()]+"&area="+keyword, new VolleyApiCallback() {
-                    @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-                                try {
-
-                                    allData = new JSONObject(apiContent);
 
 
-                                    if(allData.has("Education"))
-                                            SavenewEdu(allData.getJSONArray("Education"));
-                                    if(allData.has("Finance"))
-                                        SavenewFin(allData.getJSONArray("Finance"));
-                                    if(allData.has("Health"))
-                                        SavenewHealth(allData.getJSONArray("Health"));
+        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward=" + wardid[getPos()] + "&area=" + keyword, new VolleyApiCallback() {
+            @Override
+            public void onResponse(int status, String apiContent) {
+                if (status == AppConstants.SUCCESS_CODE) {
 
-                                    if(allData.has("Legal"))
-                                        SavenewLegal(allData.getJSONArray("Legal"));
+                    try {
 
-                                    if(allData.has("Government"))
-                                        SavenewGov(allData.getJSONArray("Government"));
+                        allData = new JSONObject(apiContent);
 
-                                    if(allData.has("Entertainment"))
-                                        SavenewEntertainment(allData.getJSONArray("Entertainment"));
 
-                                    int p= allData.length();
-                                    Log.d("Doneall",String.valueOf(p));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                        if (allData.has("Education"))
+                            SavenewEdu(allData.getJSONArray("Education"));
+                        if (allData.has("Finance"))
+                            SavenewFin(allData.getJSONArray("Finance"));
+                        if (allData.has("Health"))
+                            SavenewHealth(allData.getJSONArray("Health"));
 
-                            }
-                        }
+                        if (allData.has("Legal"))
+                            SavenewLegal(allData.getJSONArray("Legal"));
 
-    });
+                        if (allData.has("Government"))
+                            SavenewGov(allData.getJSONArray("Government"));
+
+                        if (allData.has("Entertainment"))
+                            SavenewEntertainment(allData.getJSONArray("Entertainment"));
+
+                        int p = allData.length();
+                        Log.d("Doneall", String.valueOf(p));
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+                        storedAreaTable.insertItem(String.valueOf(wardid[getPos()]), keyword);
+                        Log.e("ward area ", String.valueOf(wardid[getPos()]));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+        });
     }
+
     void SavenewEdu(JSONArray jo) {
         JSONArray Edu = jo;
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
@@ -643,7 +684,7 @@ int PosAreaint;
 
         for (int i = 0; i < Govcount; i++) {
             try {
-                if(!Edu.isNull(i)) {
+                if (!Edu.isNull(i)) {
                     JSONObject jsonObject2 = Edu.getJSONObject(i);
                     EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
                     eduNewDBTableMain.insertItem(eduNewModel);
@@ -669,6 +710,7 @@ int PosAreaint;
             Log.d("educount", String.valueOf(i));
         }
     }
+
     void SavenewEntertainment(JSONArray jo) {
         JSONArray Ent = jo;
         EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
@@ -678,7 +720,7 @@ int PosAreaint;
 
         for (int i = 0; i < Entcount; i++) {
             try {
-                if(!Ent.isNull(i)) {
+                if (!Ent.isNull(i)) {
                     JSONObject jsonObject2 = Ent.getJSONObject(i);
                     EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
                     entNewDBTable.insertItem(entertainmentNewDBModel);
@@ -692,6 +734,7 @@ int PosAreaint;
             Log.d("entcount", String.valueOf(i));
         }
     }
+
     void SavenewGov(JSONArray jo) {
         JSONArray Gov = jo;
         GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
@@ -701,7 +744,7 @@ int PosAreaint;
 
         for (int i = 0; i < Govcount; i++) {
             try {
-                if(!Gov.isNull(i)) {
+                if (!Gov.isNull(i)) {
                     JSONObject jsonObject2 = Gov.getJSONObject(i);
                     GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
                     govNewDBTable.insertItem(governmentNewDBModel);
@@ -713,6 +756,7 @@ int PosAreaint;
             Log.d("govcount", String.valueOf(i));
         }
     }
+
     void SavenewLegal(JSONArray jo) {
         JSONArray Legal = jo;
         LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
@@ -722,7 +766,7 @@ int PosAreaint;
 
         for (int i = 0; i < Legalcount; i++) {
             try {
-                if(!Legal.isNull(i)) {
+                if (!Legal.isNull(i)) {
                     JSONObject jsonObject2 = Legal.getJSONObject(i);
                     LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
                     legalAidNewDBTable.insertItem(legalAidNewDBModel);
@@ -734,6 +778,7 @@ int PosAreaint;
             Log.d("legalcount", String.valueOf(i));
         }
     }
+
     void SavenewFin(JSONArray jo) {
         JSONArray Fin = jo;
         FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
@@ -743,7 +788,7 @@ int PosAreaint;
 
         for (int i = 0; i < Fincount; i++) {
             try {
-                if(!Fin.isNull(i)) {
+                if (!Fin.isNull(i)) {
                     JSONObject jsonObject2 = Fin.getJSONObject(i);
                     FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
                     finNewDBTable.insertItem(financialNewDBModel);
@@ -755,16 +800,17 @@ int PosAreaint;
             Log.d("fcount", String.valueOf(i));
         }
     }
+
     void SavenewHealth(JSONArray jo) {
         JSONArray Hel = jo;
         HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
         HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
-        HealthNewDBTableHospital healthNewDBTableHospital=new HealthNewDBTableHospital(DataLoadingActivity.this);
+        HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
         int Helcount = Hel.length();
 
         for (int i = 0; i < Helcount; i++) {
             try {
-                if(!Hel.isNull(i)) {
+                if (!Hel.isNull(i)) {
                     JSONObject jsonObject2 = Hel.getJSONObject(i);
                     HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
                     govNewDBTable.insertItem(healthNewDBModelMain);

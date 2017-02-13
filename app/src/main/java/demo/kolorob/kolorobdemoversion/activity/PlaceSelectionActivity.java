@@ -164,6 +164,7 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Get Display Metrics
+
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         height = metrics.heightPixels;
@@ -506,12 +507,6 @@ public class PlaceSelectionActivity extends AppCompatActivity implements View.On
 //        params1.width=width/9;
         btnclose.setLayoutParams(params1);
 
-
-
-//       final EditText userfeedback = (EditText) promptView.findViewById(R.id.edittext);
-//        final Button submit= (Button)promptView.findViewById(R.id.submit_btn);
-//        final Button button= (Button)promptView.findViewById(R.id.phone_call);
-//        final ImageView imageView7= (ImageView)promptView.findViewById(R.id.imageView7);
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
