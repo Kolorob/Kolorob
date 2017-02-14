@@ -175,13 +175,13 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             "Mirpur_6:Mirpur_7:Pallabi:Albodi:Duaripara:Eastern_Housing:Albodi_Rupnagar_Tinshed",
             "Mirpur_2:Mirpur_6:_Rupnagar: সরকারী হাউজিং এষ্টেট",
             "Mirpur_1:North_Bishil:Baksnagar:নবাবের বাগ :Botanical_Garden_Residential_Area:BISF_Staff_Quarter",
-            "বাগবাড়ী: হরিরামপুর: জহরাবাদ: বাজার পাড়া: বর্ধনবাড়ী: গোলারটেক: ছোটদিয়াবাড়ী: কোটবাড়ী: আনন্দ নগর",
+            "Bagbari:Harirampur:Jahurabad:Bazarpara:Bordhonbari:Golartek:Choto_Diabari:Coat_Bari:Anandanagar",
             "Gabtoli_Jamidarbari :Gabtoli_1st_Colony:Gabtoli_2nd_Colony:Gabtoli_3rd_Colony:Goidartek :Darus_Salam",
-            "কল্যাণপুর: পাইক পাড়া",
-            "Admmed_Nagar: দক্ষিণ বিশিল:Shah_Ali_Bag: কালওয়ালা পাড়া: পাইকপাড়া ষ্টাফ কোয়ার্টার: শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার: টোলারবাগ: বিএডিসি ষ্টাফ কোয়ার্টার",
-            "বড় বাগ: পীরের বাগ: মনীপুর",
-            "কাজী পাড়া: শেওড়া পাড়া: সেনপাড়া পর্বতা"
-            , "Vashantek: আলবদিরটেক: দামালকোট:Lalasorai: মাটি কাটা: মানিকদি: বালুঘাট: বাইগারটেক: বারনটেক",
+            "Kallyanpur:Paikpara",
+            "Admmed_Nagar:South_Bishil:Shah_Ali_Bag:Kalwala_Para:Paikpara_Staff_Quarter:Education_Board_Staff_Quarter:Tolarbag:BADC_Staff_Quarter",
+            "Borobag:Pirer_Bag:Monipur",
+            "Kazi_para:Shewrapara:Senpara_Parbata"
+            , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
             "Ibrahimpur:Kafrul"};
     public static final String[] AREALATLONG = {"23.8251885:90.3706654+23.8366512:90.3700301",
             "23.8109961:90.3732765+23.8157519:90.3727312",
