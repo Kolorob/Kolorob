@@ -618,7 +618,7 @@ ImageView rotateImage;
                   //  editor.apply();
                     handler.removeCallbacks(this);
                         SharedPreferencesHelper.setifcommentedalready(DataLoadingActivity.this,null,SharedPreferencesHelper.getUname(DataLoadingActivity.this),"no");
-                        Intent a = new Intent(DataLoadingActivity.this, AboutUs.class); // Default Activity
+                        Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
 
                         frameAnimation.stop();
                     alertDialog.cancel();
@@ -659,7 +659,7 @@ ImageView rotateImage;
                         }
                     }
             );
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/demo/api/refs?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/refs? ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
