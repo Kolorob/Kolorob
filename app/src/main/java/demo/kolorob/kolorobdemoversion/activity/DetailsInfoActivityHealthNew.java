@@ -184,6 +184,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
 
         setRatingBar();
+        CheckConcate("Node Id", healthServiceProviderItemNew.getNode_id());
         CheckConcate("রাস্তা", healthServiceProviderItemNew.getRoad());
         CheckConcate("লাইন ", healthServiceProviderItemNew.getLine());
         CheckConcate("এভিনিউ", healthServiceProviderItemNew.getAvenue());

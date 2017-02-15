@@ -161,6 +161,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
 
+        CheckConcate("Node Id", String.valueOf(financialNewItem.getFinId()));
         CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
 
         CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));

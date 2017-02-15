@@ -168,6 +168,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
+        CheckConcate("Node Id", String.valueOf(educationNewItem.getEduId()));
         CheckConcate("ঠিকানা", educationNewItem.getAddress());
 
         CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));

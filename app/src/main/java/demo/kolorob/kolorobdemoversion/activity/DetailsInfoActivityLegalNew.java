@@ -240,7 +240,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
         final LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
         leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
-
+        CheckConcate("Node Id", legalAidServiceProviderItemNew.getIdentifierId());
         CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
         CheckConcate("রাস্তার নম্বর ", legalAidServiceProviderItemNew.getRoad());
         CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());

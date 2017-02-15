@@ -162,7 +162,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         setRatingBar();
 
-
+        CheckConcate("Node Id", String.valueOf(governmentNewItem.getFinId()));
         CheckConcate("ঠিকানা  ", governmentNewItem.getAddress());
 
         CheckConcate("রাস্তা   ", governmentNewItem.getRoad());

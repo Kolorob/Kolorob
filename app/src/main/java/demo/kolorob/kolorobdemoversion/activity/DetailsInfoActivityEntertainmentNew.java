@@ -206,6 +206,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
                //checkConcate method will check null data and concat
+        CheckConcate("Node Id", entertainmentServiceProviderItemNew.getNodeId());
         CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
         CheckConcate("রাস্তার নাম", entertainmentServiceProviderItemNew.getRoad());
         CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
