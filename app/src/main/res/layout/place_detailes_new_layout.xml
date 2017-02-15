@@ -37,7 +37,7 @@
 
             <include layout="@layout/compare_screen_education" />
             <include layout="@layout/health_compare_tool"/>
-            <include layout="@layout/bazar_layout" />
+
 
 
 
