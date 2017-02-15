@@ -273,6 +273,26 @@ public class GovNewDBTable {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
+    public ArrayList<GovernmentNewDBModel> getAllGov(int id, String place) {
+        ArrayList<GovernmentNewDBModel> subCatList = new ArrayList<>();
+
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_WARD+ " = "+id+ " AND "+ KEY_AREA+" = '"+place+"'  ORDER BY " +KEY_NAME_ENG,null);;
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public void delete(String ward,String area)
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(GovNewDBTable.this.tContext);

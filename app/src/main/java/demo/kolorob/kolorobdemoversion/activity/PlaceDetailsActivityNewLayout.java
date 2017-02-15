@@ -461,8 +461,6 @@ String pname,paddress,powner,pdescription;
         mapcalledstatus=false;
         toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
         uptext=(TextView)findViewById(R.id.textView15);
-        healthServiceProvider = constructHealthListItem(1);
-
         SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
         Searchall=(EditText)findViewById(R.id.searchall);
 
@@ -1718,8 +1716,8 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        setFilcatid(currentCategoryID);
                         catstatus=true;
+                        setFilcatid(currentCategoryID);
                         calladapter(catstatus);
 
 
@@ -1755,8 +1753,8 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        setFilcatid(1);
                         catstatus=true;
+                        setFilcatid(currentCategoryID);
                         calladapter(catstatus);
                         if(SearchClicked)
                         {
@@ -1768,8 +1766,8 @@ String pname,paddress,powner,pdescription;
                         ivIcon.setImageResource(R.drawable.health_selected);
 
 
-                        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-                        healthServiceProvider = constructHealthListItem(1);
+                        ArrayList<HealthNewDBModelMain> healthServiceProvider;
+                        healthServiceProvider = constructHealthListItem();
                         mapcalledstatus=true;
 
                         callMapFragmentWithHealth(-1,healthServiceProvider,true);
@@ -2246,8 +2244,8 @@ String pname,paddress,powner,pdescription;
                 else if(currentCategoryID==2){
                     helclicked=false;
                     mapFragment.setCategoryId(2);
-                    ArrayList<HealthServiceProviderItemNew> healthServiceProviderItems;
-                    healthServiceProviderItems = constructHealthListItem(2);
+                    ArrayList<HealthNewDBModelMain> healthServiceProviderItems;
+                    healthServiceProviderItems = constructHealthListItem();
                     mapFragment.setHealthServiceProvider(healthServiceProviderItems);
                     prev_fragment.healthicons();
                     prev_fragment.Drawhel(-1,true);
@@ -2315,15 +2313,15 @@ String pname,paddress,powner,pdescription;
 
     /***********************************************************Methods for Health*************************************************/
 
-    private ArrayList<HealthServiceProviderItemNew> constructHealthListItem(int cat_id)
+    private ArrayList<HealthNewDBModelMain> constructHealthListItem()
     {
-        ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        healthServiceProvider = healthServiceProviderTable.getAllHealthSubCategoriesInfosearch(getLocationNameEng());
+        ArrayList<HealthNewDBModelMain> healthServiceProvider;
+        HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
+        healthServiceProvider = healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
         return healthServiceProvider;
     }
 
-    private void callMapFragmentWithHealth(int helid,ArrayList<HealthServiceProviderItemNew> healthServiceProviderItemNews,boolean s)
+    private void callMapFragmentWithHealth(int helid,ArrayList<HealthNewDBModelMain> healthServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);

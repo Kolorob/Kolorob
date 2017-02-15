@@ -297,6 +297,26 @@ public class HealthNewDBTableMain {
         database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
         database.close();
     }
+    public ArrayList<HealthNewDBModelMain> getAllHealth(int id, String place) {
+        ArrayList<HealthNewDBModelMain> subCatList = new ArrayList<>();
+
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_WARD+ " = "+id+ " AND "+ KEY_AREA+" = '"+place+"'  ORDER BY " +KEY_NAME_ENG,null);;
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     public void dropTable() {
         SQLiteDatabase db = openDB();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
