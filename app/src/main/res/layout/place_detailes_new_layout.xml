@@ -240,51 +240,7 @@
 
             </ScrollView>
                 </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llSubCategoryListHolderback"
-                android:layout_width="@dimen/sidebarwidth"
-                android:background="@drawable/sidebar_subcategory"
-                android:layout_height="@dimen/sidebarheight"
 
-                android:layout_marginBottom="@dimen/nav_header_heightcat"
-                android:layout_above="@+id/toggle"
-                android:orientation="vertical"
-
-                android:focusableInTouchMode="true"
-                android:weightSum="1"
-                android:layout_gravity="right|center_vertical"
-                android:layout_alignParentRight="true">
-                <ScrollView
-                    android:id="@+id/svSubCategoryListHolder"
-                    android:layout_width="@dimen/sidebarwidth"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/siderighttop"
-
-                    android:layout_marginBottom="@dimen/nav_header_heightcat"
-                    android:layout_above="@+id/toggle"
-                    android:layout_gravity="top"
-
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/svCategoryListHolder">
-
-                    <LinearLayout
-
-                        android:id="@+id/llSubCatListHolder"
-                        android:layout_width="wrap_content"
-
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-
-                        android:focusableInTouchMode="true"
-                        >
-
-
-                    </LinearLayout>
-
-                </ScrollView>
-            </LinearLayout>
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -167,11 +167,11 @@ String pname,paddress,powner,pdescription;
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
-    private LinearLayout llCatListHolder,svholder,svsholder;
+    private LinearLayout llCatListHolder,svholder;
     CategoryItem ci;
     int tution_detector=0;
     private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
-    private LinearLayout llSubCatListHolder;
+
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
     private static FrameLayout map;
@@ -199,7 +199,7 @@ String pname,paddress,powner,pdescription;
     private int showList;
     private String locationNameEng;
     private String comapreData;
-    ScrollView sv,svs;
+    ScrollView sv;
     ImageView compare_logo_image;
     List<String> listDataHeader;
     ArrayList<String> bazar_data;
@@ -550,19 +550,17 @@ String pname,paddress,powner,pdescription;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // svSubCategoryListHolder=(HorizontalScrollView)findViewById(R.id.svSubCategoryListHolder);
 
-        HorizontalScrollView svSubCategoryListHolder = new HorizontalScrollView(this);
         svholder=(LinearLayout)findViewById(R.id.llCategoryListHolderback);
-        svsholder=(LinearLayout)findViewById(R.id.llSubCategoryListHolderback);
+
         svholder.setVisibility(View.VISIBLE);
-        svsholder.setVisibility(View.GONE);
+
         sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
-        svs= (ScrollView)findViewById(R.id.svSubCategoryListHolder);
+
         sv.setVisibility(View.VISIBLE);
         screenSize = AppUtils.ScreenSize(PlaceDetailsActivityNewLayout.this);
 
-        svs.setVisibility(View.GONE);
+
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
         wholeLayout=(LinearLayout)findViewById(R.id.wholeLayout);
 
@@ -632,14 +630,14 @@ String pname,paddress,powner,pdescription;
 
         //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
         llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
-        llSubCatListHolder = (LinearLayout) findViewById(R.id.llSubCatListHolder);
+
         llCatListHolder.setVisibility(View.VISIBLE);
         //rlSubCatHolder.setVisibility(View.VISIBLE);
-        llSubCatListHolder.setVisibility(View.GONE);
+
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
-        ViewGroup.LayoutParams lp_sub= llSubCatListHolder.getLayoutParams();
+
         final int s=lp.width = (int) (VIEW_WIDTH);
-        lp_sub.width=s;
+
         FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
 
         pannl_height = height/17;
@@ -884,9 +882,7 @@ String pname,paddress,powner,pdescription;
                     CompareButton.setLayoutParams(params4);
 
                     map.setVisibility(View.GONE);
-                    svs.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
                     bazar_tool.setVisibility(View.GONE);
 
@@ -919,9 +915,7 @@ String pname,paddress,powner,pdescription;
 
                 if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
                 {
-                    svsholder.setVisibility(View.VISIBLE);
-                    svs.setVisibility(View.VISIBLE);
-                    llSubCatListHolder.setVisibility(View.VISIBLE);
+
                 }
                 spItems.setVisibility(View.VISIBLE);
                 uptext.setVisibility(View.VISIBLE);
@@ -930,14 +924,7 @@ String pname,paddress,powner,pdescription;
                     //  callMapFragment(locationNameId);
 
                 }
-                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
-                {
 
-                    svsholder.setVisibility(View.VISIBLE);
-
-                    svs.setVisibility(View.VISIBLE);
-                    llSubCatListHolder.setVisibility(View.VISIBLE);
-                }
                 if (CompareClicked==false||SearchClicked==false||ListClicked==false)
                 {
                     Picasso.with(getApplicationContext())
@@ -1053,11 +1040,8 @@ String pname,paddress,powner,pdescription;
                     compare_layoutedu.setVisibility(View.GONE);
 
 
-                    svs.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
-                    llSubCatListHolder.setVisibility(View.GONE);
                     //  subCatItemList.setVisibility(View.VISIBLE);
                     bazar_tool.setVisibility(View.VISIBLE);
                     width=AppUtils.getScreenWidth(PlaceDetailsActivityNewLayout.this);
@@ -1191,11 +1175,9 @@ String pname,paddress,powner,pdescription;
                         //   subCatItemList.setVisibility(View.GONE);
                         bazar_tool.setVisibility(View.GONE);
                         searchviewholder.setVisibility(View.GONE);
-                        svs.setVisibility(View.GONE);
+
                         sv.setVisibility(View.GONE);
                         svholder.setVisibility(View.GONE);
-                        svsholder.setVisibility(View.GONE);
-                        llSubCatListHolder.setVisibility(View.GONE);
                         spinCounter=0;
                         spinCounter1=0;
                         compareTool();
@@ -1220,30 +1202,20 @@ String pname,paddress,powner,pdescription;
                 if(toggleButton.isChecked()){
 
                     sv.setVisibility(View.GONE);
-                    svs.setVisibility(View.GONE);
+
                     svholder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
+
                     llCatListHolder.setVisibility(View.GONE);
-                    llSubCatListHolder.setVisibility(View.GONE);
+
                 }
                 else {
-                    if(ListClicked.equals(true)||SearchClicked.equals(true))
-                    {
 
-                        svsholder.setVisibility(View.GONE);
-                        svs.setVisibility(View.GONE);
-                    }
                     sv.setVisibility(View.VISIBLE);
                     svholder.setVisibility(View.VISIBLE);
                     llCatListHolder.setVisibility(View.VISIBLE);
                     if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
                     {
-                        if (!ListClicked.equals(true)&&!SearchClicked.equals(true))
-                        {
-                            svsholder.setVisibility(View.VISIBLE);
-                            svs.setVisibility(View.VISIBLE);
-                            llSubCatListHolder.setVisibility(View.VISIBLE);
-                        }
+
                     }
                 }
 
@@ -2757,7 +2729,8 @@ String pname,paddress,powner,pdescription;
 
         // BE CAREFUL :: Category ID is being mapped as to the icon serial no.
         // in the AppConstants.ALL_CAT_ICONS array
-        ivIcon.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1]);
+        int modded_id=ci.getId()/10000;
+        ivIcon.setImageResource(AppConstants.ALL_CAT_ICONS_NEW[modded_id - 1]);
         ViewGroup.LayoutParams lpIv = ivIcon.getLayoutParams();
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
@@ -2825,10 +2798,7 @@ String pname,paddress,powner,pdescription;
                         setFilcatid(5);
                         catstatus=true;
                         calladapter(catstatus);
-                        if(ListClicked.equals(true))
-                            bazar_tool.setVisibility(View.VISIBLE);
 
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
                         ArrayList<EducationNewItem> educationServiceProvider;
@@ -2848,7 +2818,7 @@ String pname,paddress,powner,pdescription;
 
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.education_selected);
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
+
 
                         break;
                     case AppConstants.HEALTH:
@@ -2884,9 +2854,6 @@ String pname,paddress,powner,pdescription;
 
 
 
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
-                        if(ListClicked.equals(true))
-                            bazar_tool.setVisibility(View.VISIBLE);
 
 
                         break;
@@ -2922,13 +2889,7 @@ String pname,paddress,powner,pdescription;
 
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
 
-                        if(ListClicked.equals(true))
-                            bazar_tool.setVisibility(View.VISIBLE);
 
-
-
-
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
 
 
                         MediaPlayer mp_en = MediaPlayer.create(getApplicationContext(), R.raw.entertainment);
@@ -2974,9 +2935,7 @@ String pname,paddress,powner,pdescription;
                         governmentNewItems = constructgovListItem();
                         callMapFragmentWithGovernment(-1, governmentNewItems,true);
 
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
-                        if(ListClicked.equals(true))
-                            bazar_tool.setVisibility(View.VISIBLE);
+
 
 
 
@@ -3035,25 +2994,6 @@ String pname,paddress,powner,pdescription;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem(ci.getId());
                         callMapFragmentWithLegal(-1, legalaidServiceProvider,true);
-
-
-
-                        if(ListClicked.equals(true))
-                            bazar_tool.setVisibility(View.VISIBLE);
-
-
-
-
-
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
-
-
-
-
-
-
-
-
                         break;
                     case AppConstants.FINANCIAL:
                         MediaPlayer mp_f = MediaPlayer.create(getApplicationContext(), R.raw.finance);
@@ -3082,20 +3022,6 @@ String pname,paddress,powner,pdescription;
                         financialNewItems = constructfinancialListItem();
                         callMapFragmentWithFinancial(-1,financialNewItems,true);
                         mapcalledstatus=true;
-
-
-
-                        if(ListClicked.equals(true))
-                            bazar_tool.setVisibility(View.VISIBLE);
-
-
-                        llSubCatListHolder.setVisibility(View.VISIBLE);
-
-
-
-
-
-
                         break;
                     case AppConstants.JOB:
                         MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
@@ -3114,9 +3040,6 @@ String pname,paddress,powner,pdescription;
                         callMapFragmentWithFinancial(-1,null,true);
                         ivIcon.setImageResource(0);
                         ivIcon.setImageResource(R.drawable.job_selected);
-
-                        llSubCatListHolder.setVisibility(View.GONE);
-
                         break;
 
 
@@ -3128,40 +3051,16 @@ String pname,paddress,powner,pdescription;
 
 
 
-                ArrayList<SubCategoryItem> subCatList = getSubCategoryList(ci.getId());
 
 
 
-                if(SearchClicked==true||ListClicked==true)
-                {
-                    llSubCatListHolder.setVisibility(View.GONE);
-                    svsholder.setVisibility(View.GONE);
-                    svs.setVisibility(View.GONE);
-                }
-
-                else if(showList!=1 && SearchClicked==false||ListClicked==false)
-                {
-                    llSubCatListHolder.setVisibility(View.VISIBLE);
-                    svsholder.setVisibility(View.VISIBLE);
-                    svs.setVisibility(View.VISIBLE);
-
-                    if (isCatExpandedOnce)
-                        showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
-                    else
-                        showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
-                }
 
 
-                else
-                {
-                    if (isCatExpandedOnce)
-                        showAnimatedSubcategories(subCatList, 0.5, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId()); // AppConstants.CAT_LIST_SM_WIDTH_PERC);
-                    else
-                        showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
-//
-//                    if(ListClicked)
-//                        categoryListBuildUp(currentCategoryID);
-                }
+
+
+
+
+
 
 
 
@@ -3204,7 +3103,7 @@ String pname,paddress,powner,pdescription;
     }
 
 
-    private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
+    /*private void constructSubCategoryList(ArrayList<SubCategoryItem> subCategoryList, double dwPercentage, int cat_id) {
         llSubCatListHolder.removeAllViews();
         ArrayList<String> header = new ArrayList<>();
         subcategory=0;
@@ -3217,7 +3116,7 @@ String pname,paddress,powner,pdescription;
             }
         }
     }
-
+*/
     private void categoryListBuildUp(int currentCategoryID)
     {
 
@@ -3228,6 +3127,7 @@ String pname,paddress,powner,pdescription;
 //        subCatItemList.setAdapter(adapter);
 
     }
+
     private View getSubCategoryListItemView(final SubCategoryItem si, double dwPercentage, final int cat_id)
     {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -3237,7 +3137,7 @@ String pname,paddress,powner,pdescription;
         LayoutInflater li = LayoutInflater.from(this);
 
 
-        v = li.inflate(R.layout.subcatholderlist, llSubCatListHolder, false);
+        v = li.inflate(R.layout.subcatholderlist, null, false);
 
         final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconSCatList);
         tvName = (TextView) v.findViewById(R.id.tv_sub_cat_name);
@@ -3268,98 +3168,7 @@ String pname,paddress,powner,pdescription;
  *
  *
  * ************************/
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
- /*
- * to show on/off part of subcategories so that user can toggle sub category*/
-                index = llSubCatListHolder.indexOfChild(v);
-                if (flag2[index] == 1) {
-                    flag2[index] = 0; // 1 => Button ON
-
-                    ivIcon.setImageResource(0);
-                    ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON[index]);
-                    switch (currentCategoryID) {
-
-
-                        case AppConstants.EDUCATION:
-
-
-                            callMapFragmentWithEducation(index, null, false);
-                            break;
-                        case AppConstants.HEALTH:
-
-                            callMapFragmentWithHealth(index, null, false);
-                            break;
-                        case AppConstants.ENTERTAINMENT:
-
-                            callMapFragmentWithEntertainment(index, null, false);
-                            break;
-                        case AppConstants.GOVERNMENT:
-
-                            callMapFragmentWithGovernment(index, null, false);
-                            break;
-                        case AppConstants.LEGAL:
-
-                            callMapFragmentWithLegal(index, null, false);
-                            break;
-                        case AppConstants.FINANCIAL:
-
-                            callMapFragmentWithFinancial(index, null, false);
-                            break;
-                        default:
-                            break;
-                    }
-
-                } else {
-
-                    ivIcon.setImageResource(0);
-                    ivIcon.setImageResource(AppConstants.ALL_CAT_MARKER_ICONSBUTTON2[index]);
-                    flag2[index] = 1; // 0 => Button OFF
-                    switch (currentCategoryID) {
-
-
-                        case AppConstants.EDUCATION:
-
-                            callMapFragmentWithEducation(index, null, true);
-                            break;
-
-                        case AppConstants.HEALTH:
-
-                            callMapFragmentWithHealth(index, null, true);
-                            break;
-                        case AppConstants.ENTERTAINMENT:
-
-                            callMapFragmentWithEntertainment(index, null, true);
-                            break;
-                        case AppConstants.GOVERNMENT:
-
-                            callMapFragmentWithGovernment(index, null, true);
-                            break;
-                        case AppConstants.LEGAL:
-
-                            callMapFragmentWithLegal(index, null, true);
-                            break;
-                        case AppConstants.FINANCIAL:
-
-                            callMapFragmentWithFinancial(index, null, true);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-
-
-
-
-
-                // showSubCatListItem.setEnabled(true);
-                // subCatItemListHeader.setText(si.getSubcatHeader());
-                constructSubCategoryItemList(cat_id, si.getSubcatHeader());
-            }
-        });
 
         return v;
     }
@@ -3370,7 +3179,7 @@ String pname,paddress,powner,pdescription;
         return subCategoryTable.getAllSubCategories(id);
     }
 
-
+/*
     private void showAnimatedSubcategories(final ArrayList<SubCategoryItem> subCatList, double dwPerc, int iconId, final int cat_id) {
         isCatExpandedOnce = true;
 
@@ -3406,7 +3215,7 @@ String pname,paddress,powner,pdescription;
     }
 
 
-
+*/
 
 
     private Animation slideInFromRightAnim() {
@@ -3578,8 +3387,7 @@ String pname,paddress,powner,pdescription;
                     prev_fragment.Drawfin(-1,true);
                 }
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
-               if(!SearchClicked) showAnimatedSubcategories(subCatList, 1.0, AppConstants.ALL_CAT_ICONS_NEW[ci.getId() - 1], ci.getId());
-            }
+              }
 
         }
     }
