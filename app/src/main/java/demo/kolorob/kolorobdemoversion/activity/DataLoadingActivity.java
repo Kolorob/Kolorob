@@ -1,17 +1,16 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,18 +25,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,12 +45,9 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AreaHolder;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_Adapter;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
+import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
@@ -66,16 +56,14 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.DataModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationTuitionDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
@@ -84,32 +72,31 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
-import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
-import info.hoang8f.widget.FButton;
 import tourguide.tourguide.ChainTourGuide;
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
-import tourguide.tourguide.TourGuide;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 public class DataLoadingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
     Context context;
-    private static int NUMBER_OF_TASKS = 10;
+    private static int NUMBER_OF_TASKS = 6;
     View view = null;
     Button submit;
-    String IMEINumber = null;
+    Boolean  firstRun;
     //user and pass
     String user = "kolorobapp";
     String pass = "2Jm!4jFe3WgBZKEN";
     Boolean location = false, storage = false, smsstate = false, phonestate = false, accountstate = false, permission = false;
     int countofDb = 0;
     JSONObject allData;
+    String AreaNameBn;
 
     public View getAreaview() {
         return areaview;
@@ -129,10 +116,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     View areaview, wardview;
     private static RecyclerView recyclerView, recyclerViewarea;
-    AreaHolder areaHolder;
-    public TourGuide mTourGuideHandler;
-    public Activity mActivity;
-    private Button mButton1, mButton2, mButton3;
+
     private Animation mEnterAnimation, mExitAnimation;
     //String and Integer array for Recycler View Items
     public static final String[] TITLES = {"ওয়ার্ড ২", "ওয়ার্ড ৩", "ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬", "ওয়ার্ড ৭", "ওয়ার্ড ৮", "ওয়ার্ড ৯", "ওয়ার্ড ১০", "ওয়ার্ড ১১", "ওয়ার্ড ১২", "ওয়ার্ড ১৩", "ওয়ার্ড ১৪", "ওয়ার্ড ১৫",
@@ -153,6 +137,24 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             "Kazi para:Shewrapara:Senpara Parbata"
             , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
             "Ibrahimpur:Kafrul"};
+
+    public String getAreaNameBn() {
+        return AreaNameBn;
+    }
+
+    public void setAreaNameBn(String areaNameBn) {
+        AreaNameBn = areaNameBn;
+    }
+String Location;
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
+ImageView rotateImage;
     public static final String[] AREANAMESBN = {"মিরপুর ১২: মিরপুর ডিওএইচএস",
             "মিরপুর ১০: মিরপুর ১১",
             "মিরপুর ১৩:  মিরপুর ১৪: বাইশটেকি",
@@ -206,7 +208,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     public int getPosa() {
         return Posa;
     }
-
+    ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
     RadioButton radioButton;
 
     public void setPosa(int posa) {
@@ -253,7 +255,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
     String keyword;
-
+    private AnimationDrawable frameAnimation;
     public void setPosAreaint(int posAreaint) {
         PosAreaint = posAreaint;
     }
@@ -277,6 +279,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         height = metrics.heightPixels;
         width = metrics.widthPixels;
+
+        SharedPreferences settings = getSharedPreferences("prefs", 0);
+        firstRun = settings.getBoolean("firstRun", false);
+
+
+
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -285,7 +295,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     ToastMessageDisplay.showText(DataLoadingActivity.this);
                 } else {
                     ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
+                    ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
                     keyword = list2.get(getPosAreaint());
+                    setLocation(listloc.get(getPosAreaint()));;
                     Servercall();
                 }
 
@@ -303,7 +315,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         mExitAnimation.setFillAfter(true);
         populatRecyclerView();
         populatRecyclerView2();
-        runOverlay_ContinueMethod();
+        if(firstRun==false)  runOverlay_ContinueMethod();
+
         Pos = 0;
 
         ItemClickSupport.addTo(recyclerView)
@@ -346,7 +359,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             setAreaview(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        Toast.makeText(getApplicationContext(), arrayList2.get(position).getTitle().toString() + " is selected!", Toast.LENGTH_SHORT).show();
+                        setAreaNameBn(arrayList2.get(position).getTitle());
+
+                        Toast.makeText(getApplicationContext(), arrayList2.get(position).getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
 
 
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
@@ -546,83 +561,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
 
-    class SaveDataArrayFinance extends GenericSaveDBTask<JSONObject, Integer, Long> {
-        public SaveDataArrayFinance(Context ctx) {
-            super(ctx);
-        }
-
-        protected Long doInBackground(JSONArray... jsonObjects) {
-            JSONArray edu = jsonObjects[0];
-            EducationNewTable educationNewTable = new EducationNewTable(DataLoadingActivity.this);
-            EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(DataLoadingActivity.this);
-            EducationTrainingDetailsTable educationTrainingDetailsTable = new EducationTrainingDetailsTable(DataLoadingActivity.this);
-            EducationTuitionDetailsTable educationTuitionDetailsTable = new EducationTuitionDetailsTable(DataLoadingActivity.this);
-            educationNewTable.dropTable();
-            educationResultDetailsTable.dropTable();
-            educationTrainingDetailsTable.dropTable();
-            educationTuitionDetailsTable.dropTable();
-
-
-            int eduServiceProviderCount = edu.length();
-
-            for (int i = 0; i < eduServiceProviderCount; i++) {
-                try {
-                    JSONObject jo = edu.getJSONObject(i);
-                    EducationNewItem et = EducationNewItem.parseEducationNewItem(jo);
-                    educationNewTable.insertItem(et);
-
-
-                    if (jo.has("tution_details"))//
-                    {
-                        JSONArray service_details = jo.getJSONArray("tution_details");
-                        for (int j = 0; j < service_details.length(); j++) {
-                            JSONObject joes = service_details.getJSONObject(j);
-                            EducationTuitionDetailsItem educationTuitionDetailsItem = EducationTuitionDetailsItem.parseEducationTuitionDetailsItem(joes);
-                            educationTuitionDetailsTable.insertItem(educationTuitionDetailsItem);
-
-                        }
-
-                        countofDb++;
-
-                    }
-
-
-                    if (jo.has("result_details"))//
-                    {
-                        JSONArray service_details = jo.getJSONArray("result_details");
-                        for (int j = 0; j < service_details.length(); j++) {
-                            JSONObject joes = service_details.getJSONObject(j);
-                            EducationResultItemNew educationResultItemNew = EducationResultItemNew.parseEducationResultItemNew(joes);
-                            educationResultDetailsTable.insertItem(educationResultItemNew);
-
-                        }
-
-                    }
-                    if (jo.has("training_details"))//
-                    {
-                        JSONArray service_details = jo.getJSONArray("training_details");
-                        for (int j = 0; j < service_details.length(); j++) {
-                            JSONObject joes = service_details.getJSONObject(j);
-                            EducationTrainingDetailsItem educationTrainingDetailsItem = EducationTrainingDetailsItem.parseEducationTrainingDetailsItem(joes);
-                            educationTrainingDetailsTable.insertItem(educationTrainingDetailsItem);
-                        }
-
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return new Long(-1);
-                }
-            }
-            return new Long(0);
-        }
-
-        @Override
-        protected Long doInBackground(JSONObject... params) {
-            return null;
-        }
-    }
 
     abstract class GenericSaveDBTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
         private Context ctx;
@@ -649,7 +587,98 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     void Servercall() {
 
+        if ( firstRun==false)
+        {
+            NUMBER_OF_TASKS=8;
+        }
+        LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
+        final Dialog alertDialog = new Dialog(DataLoadingActivity.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
 
+
+        final Handler handler = new Handler();
+        Runnable runner = new Runnable() {
+            int timeCounter = 0;
+            @Override
+            public void run() {
+
+
+
+
+                if (DataLoadingActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
+                    overridePendingTransition(0, 0);
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                  //  editor.putString("First", first);
+
+                  //  editor.apply();
+                    handler.removeCallbacks(this);
+                        SharedPreferencesHelper.setifcommentedalready(DataLoadingActivity.this,null,SharedPreferencesHelper.getUname(DataLoadingActivity.this),"no");
+                        Intent a = new Intent(DataLoadingActivity.this, AboutUs.class); // Default Activity
+
+                        frameAnimation.stop();
+                    alertDialog.cancel();
+                        startActivity(a);
+                        return;
+
+                }
+                //Create a loop
+                handler.postDelayed(this, 1000);
+                timeCounter += 1000;
+
+            }
+
+        };
+        handler.postDelayed(runner, 1000);
+
+        rotateImage = (ImageView) promptView.findViewById(R.id.rotate_image);
+        rotateImage.setBackgroundResource(R.drawable.frame_animation_list);
+        frameAnimation = (AnimationDrawable) rotateImage.getBackground();
+        frameAnimation.setOneShot(false);
+        frameAnimation.start();
+        if ( firstRun==false)   {
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/categories?", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+                                try {
+
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    new SaveCategoryListTask(DataLoadingActivity.this).execute(jo);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/demo/api/refs?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
+                        @Override
+                        public void onResponse(int status, String apiContent) {
+                            if (status == AppConstants.SUCCESS_CODE) {
+
+
+                                try {
+                                    JSONArray jo = new JSONArray(apiContent);
+
+                                    new SaveSubCategoryNewListTask(DataLoadingActivity.this).execute(jo);
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+            );
+        }
         getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward=" + wardid[getPos()] + "&area=" + keyword, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
@@ -658,29 +687,65 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                     try {
 
                         allData = new JSONObject(apiContent);
+                        if (allData.length()==0)
+                        {
+                            ToastMessageDisplay.setText(DataLoadingActivity.this,"No data found. Please select another area");
+                            ToastMessageDisplay.showText(DataLoadingActivity.this);
+                        }
+                    else {
+                            if (allData.has("Education"))
+                            {
+                                new SavenewEduTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
+                                //   SavenewEdu(allData.getJSONArray("Education"));
+                            }
+
+                            if (allData.has("Finance"))
+                            {
+                                new SavenewFinanceTask(DataLoadingActivity.this).execute(allData.getJSONArray("Finance"));
+                                //SavenewFin(allData.getJSONArray("Finance"));
+
+                            }
+
+                            if (allData.has("Health"))
+                            {
+                                new  SaveHealthtDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Health"));
+                                //SavenewHealth(allData.getJSONArray("Health"));
+
+                            }
+
+                            if (allData.has("Legal"))
+                            {
+                                new SaveLegalDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Legal"));
+                                // SavenewLegal(allData.getJSONArray("Legal"));
+                            }
 
 
-                        if (allData.has("Education"))
-                            SavenewEdu(allData.getJSONArray("Education"));
-                        if (allData.has("Finance"))
-                            SavenewFin(allData.getJSONArray("Finance"));
-                        if (allData.has("Health"))
-                            SavenewHealth(allData.getJSONArray("Health"));
+                            if (allData.has("Government"))
+                            {
+                                new SavenewGovTask(DataLoadingActivity.this).execute(allData.getJSONArray("Government"));
+                                // SavenewGov(allData.getJSONArray("Government"));
+                            }
 
-                        if (allData.has("Legal"))
-                            SavenewLegal(allData.getJSONArray("Legal"));
 
-                        if (allData.has("Government"))
-                            SavenewGov(allData.getJSONArray("Government"));
+                            if (allData.has("Entertainment"))
+                            {
+                               // SavenewEntertainment(allData.getJSONArray("Entertainment"));
+                                new SaveEntertainmentDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
+                            }
 
-                        if (allData.has("Entertainment"))
-                            SavenewEntertainment(allData.getJSONArray("Entertainment"));
-
-                        int p = allData.length();
-                        Log.d("Doneall", String.valueOf(p));
-                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
-                        storedAreaTable.insertItem(String.valueOf(wardid[getPos()]), keyword);
-                        Log.e("ward area ", String.valueOf(wardid[getPos()]));
+                        }
+                            int p = allData.length();
+                            Log.d("Doneall", String.valueOf(p));
+                            StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+                            String A = getAreaNameBn();
+                            String LOC = getLocation();
+                            storedAreaTable.insertItem(String.valueOf(wardid[getPos()]), keyword, A, LOC);
+                            Log.e("ward area ", String.valueOf(wardid[getPos()]));
+                            SharedPreferences settings = getSharedPreferences("prefs", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putInt("ward", wardid[getPos()]);
+                            editor.putString("areakeyword", keyword);
+                            editor.apply();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -690,6 +755,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             }
 
         });
+
+
     }
 
     void SavenewEdu(JSONArray jo) {
@@ -710,14 +777,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         int lenoftrain = edutrain.length();
                         for (int ii = 0; ii < lenoftrain; ii++) {
                             JSONObject train = edutrain.getJSONObject(ii);
-
-
                             EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
                             eduNewDBTableTraining.insertItem(eduTrainingModel);
                         }
-
                     }
-
                 }
 
             } catch (JSONException e) {
@@ -727,8 +790,78 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             Log.d("educount", String.valueOf(i));
         }
     }
+    class SavenewEduTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SavenewEduTask(Context ctx) {
+            super(ctx);
+        }
 
-    void SavenewEntertainment(JSONArray jo) {
+        protected Long doInBackground(JSONArray... jsonObjects) {
+            JSONArray Edu = jsonObjects[0];
+            EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
+            EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
+
+            int Govcount = Edu.length();;
+
+            for (int i = 0; i < Govcount; i++) {
+                try {
+                    if (!Edu.isNull(i)) {
+                        JSONObject jsonObject2 = Edu.getJSONObject(i);
+                        EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
+                        eduNewDBTableMain.insertItem(eduNewModel);
+                        if (jsonObject2.has("training_details")) {
+                            JSONArray edutrain = jsonObject2.getJSONArray("training_details");
+                            int lenoftrain = edutrain.length();
+                            for (int ii = 0; ii < lenoftrain; ii++) {
+                                JSONObject train = edutrain.getJSONObject(ii);
+                                EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
+                                eduNewDBTableTraining.insertItem(eduTrainingModel);
+                            }
+                        }
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+    class SaveEntertainmentDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveEntertainmentDataTask(Context ctx) {
+            super(ctx);
+        }
+
+
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Ent = jsonArrays[0];
+            EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
+
+
+            int Entcount = Ent.length();
+
+            for (int i = 0; i < Entcount; i++) {
+                try {
+                    if (!Ent.isNull(i)) {
+                        JSONObject jsonObject2 = Ent.getJSONObject(i);
+                        EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
+                        entNewDBTable.insertItem(entertainmentNewDBModel);
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+
+
+    }
+    /*void SavenewEntertainment(JSONArray jo) {
         JSONArray Ent = jo;
         EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
 
@@ -750,8 +883,36 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             }
             Log.d("entcount", String.valueOf(i));
         }
-    }
+    }*/
+    class SavenewGovTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SavenewGovTask(Context ctx) {
+            super(ctx);
+        }
 
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Gov = jsonArrays[0];
+            GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
+
+
+            int Govcount = Gov.length();
+
+            for (int i = 0; i < Govcount; i++) {
+                try {
+                    if (!Gov.isNull(i)) {
+                        JSONObject jsonObject2 = Gov.getJSONObject(i);
+                        GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
+                        govNewDBTable.insertItem(governmentNewDBModel);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+    /*
     void SavenewGov(JSONArray jo) {
         JSONArray Gov = jo;
         GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
@@ -795,7 +956,71 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             Log.d("legalcount", String.valueOf(i));
         }
     }
+*/
+    class SaveLegalDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveLegalDataTask(Context ctx) {
+            super(ctx);
+        }
 
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Legal = jsonArrays[0];
+            LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
+
+
+            int Legalcount = Legal.length();
+
+            for (int i = 0; i < Legalcount; i++) {
+                try {
+                    if (!Legal.isNull(i)) {
+                        JSONObject jsonObject2 = Legal.getJSONObject(i);
+                        LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
+                        legalAidNewDBTable.insertItem(legalAidNewDBModel);
+                    }
+
+
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+
+
+    }
+
+    class SavenewFinanceTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SavenewFinanceTask(Context ctx) {
+            super(ctx);
+        }
+
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Fin = jsonArrays[0];
+            FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
+
+
+            int Fincount = Fin.length();
+
+
+
+            for (int i = 0; i < Fincount; i++) {
+                try {
+                    if (!Fin.isNull(i)) {
+                        JSONObject jsonObject2 = Fin.getJSONObject(i);
+                        FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
+                        finNewDBTable.insertItem(financialNewDBModel);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+    /*
     void SavenewFin(JSONArray jo) {
         JSONArray Fin = jo;
         FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
@@ -818,7 +1043,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    void SavenewHealth(JSONArray jo) {
+    /*void SavenewHealth(JSONArray jo) {
         JSONArray Hel = jo;
         HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
         HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
@@ -855,6 +1080,98 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
             }
             Log.d("hcount", String.valueOf(i));
+        }
+    }*/
+    class SaveHealthtDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveHealthtDataTask(Context ctx) {
+            super(ctx);
+        }
+
+
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Hel = jsonArrays[0];
+            HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
+            HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
+            HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
+            int Helcount = Hel.length();
+            Log.d("HealthData","********"+Helcount);
+
+            for (int i = 0; i < Helcount; i++) {
+                try {
+                    if (!Hel.isNull(i)) {
+                        JSONObject jsonObject2 = Hel.getJSONObject(i);
+                        HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
+                        govNewDBTable.insertItem(healthNewDBModelMain);
+                        if (jsonObject2.has("health_pharmacy")) {
+                            JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
+                            HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
+                            healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
+                        } else if (jsonObject2.has("health_hospital")) {
+                            JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
+                            HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
+                            healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+
+    class SaveCategoryListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveCategoryListTask(Context ctx) {
+            super(ctx);
+        }
+
+        @Override
+        protected Long doInBackground(JSONArray... categoryArrays) {
+            JSONArray categoryArray = categoryArrays[0];
+            CategoryTable catTable = new CategoryTable(DataLoadingActivity.this);
+            catTable.dropTable();
+            int catCount = categoryArray.length();
+            for (int i = 0; i < catCount; i++) {
+                try {
+                    JSONObject jo = categoryArray.getJSONObject(i);
+                    CategoryItem ci = CategoryItem.parseCategoryItem(jo);
+                    catTable.insertItem(ci);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+    class SaveSubCategoryNewListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveSubCategoryNewListTask(Context ctx) {
+            super(ctx);
+        }
+
+        protected Long doInBackground(JSONArray... categoryArrays) {
+            JSONArray subcat = categoryArrays[0];
+            SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(DataLoadingActivity.this);
+            subCategoryTableNew.dropTable();
+
+            int legalaidServiceProviderCount = subcat.length();
+
+            for (int i = 0; i < legalaidServiceProviderCount; i++) {
+                try {
+                    JSONObject jo = subcat.getJSONObject(i);
+                    SubCategoryItemNew et = SubCategoryItemNew.parseSubCategoryItem(jo);
+                    subCategoryTableNew.insertItem(et);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+
+            si3 = subCategoryTableNew.getAllSubCat();
+            si3.size();
+
+            return new Long(0);
         }
     }
 }
