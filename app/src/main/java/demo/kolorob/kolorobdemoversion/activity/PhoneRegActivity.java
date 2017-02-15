@@ -602,7 +602,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
                 }
                 else if (from==2)
                 {
-                    Intent newIntent = new Intent(PhoneRegActivity.this, PlaceSelectionActivity.class);
+                    Intent newIntent = new Intent(PhoneRegActivity.this, DataLoadingActivity.class);
                     newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                     startActivity(newIntent);
