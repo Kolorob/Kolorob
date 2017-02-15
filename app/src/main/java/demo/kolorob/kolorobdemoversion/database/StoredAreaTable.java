@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 
 /**
@@ -21,6 +20,8 @@ public class StoredAreaTable {
 
     private static final String WARDID = "_ward_id"; // 0 -integer
     private static final String AREANAME = "_area_name"; // 1 - text
+    private static final String AREANAMEBN = "_area_nameBn"; // 1 - text
+    private static final String LOCATION = "_location"; // 1 - text
 
     // : But boolean value,
     // for simplicity of the local table
@@ -38,7 +39,9 @@ public class StoredAreaTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + WARDID + " TEXT, " // 0 - int
-                + AREANAME + " TEXT, "              // 1 - tex// 2 - text
+                + AREANAME + " TEXT, "
+                + AREANAMEBN + " TEXT, "
+                + LOCATION + " TEXT, " // 1 - tex// 2 - text
                 + " PRIMARY KEY("+WARDID+","+AREANAME+"))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -55,19 +58,20 @@ public class StoredAreaTable {
     public long insertItem(StoredArea categoryItem){
         return insertItem(
                 categoryItem.getWardid(),
-                categoryItem.getAreaid()
+                categoryItem.getAreaid(),categoryItem.getAreaBn(),categoryItem.getLoc()
 
         );
     }
 
-    public long insertItem(String id, String name) {
+    public long insertItem(String id, String name,String areabn,String loc) {
         if (isFieldExist(id,name)) {
-            return updateItem(id, name);
+            return updateItem(id, name,areabn,loc);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(WARDID, id);
         rowValue.put(AREANAME, name);
-
+        rowValue.put(AREANAMEBN, areabn);
+        rowValue.put(LOCATION, loc);
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
@@ -110,10 +114,12 @@ public class StoredAreaTable {
         return false;
     }
 
-    private long updateItem(String id, String name) {
+    private long updateItem(String id, String name,String areabn,String loc) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(WARDID, id);
         rowValue.put(AREANAME, name);
+        rowValue.put(AREANAMEBN, areabn);
+        rowValue.put(LOCATION, loc);
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, WARDID + " = ? AND "+AREANAME+ " =?",
@@ -165,7 +171,9 @@ public class StoredAreaTable {
 
        String wardid = cursor.getString(0);
        String areaname = cursor.getString(1);
-       return new StoredArea(wardid,areaname);
+       String areanamebn = cursor.getString(0);
+       String loc = cursor.getString(1);
+       return new StoredArea(wardid,areaname,areanamebn,loc);
    }
     public void dropTable() {
         SQLiteDatabase db = openDB();

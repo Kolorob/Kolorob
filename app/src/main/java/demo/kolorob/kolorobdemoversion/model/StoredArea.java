@@ -7,6 +7,24 @@ package demo.kolorob.kolorobdemoversion.model;
 public class StoredArea {
     String wardid;
     String areaid;
+    String areaBn;
+    String Loc;
+
+    public String getAreaBn() {
+        return areaBn;
+    }
+
+    public void setAreaBn(String areaBn) {
+        this.areaBn = areaBn;
+    }
+
+    public String getLoc() {
+        return Loc;
+    }
+
+    public void setLoc(String loc) {
+        Loc = loc;
+    }
 
     public String getWardid() {
         return wardid;
@@ -24,8 +42,10 @@ public class StoredArea {
         this.areaid = areaid;
     }
 
-    public StoredArea(String wardid, String areaid) {
+    public StoredArea(String wardid, String areaid, String areaBn, String loc) {
         this.wardid = wardid;
         this.areaid = areaid;
+        this.areaBn = areaBn;
+        Loc = loc;
     }
 }

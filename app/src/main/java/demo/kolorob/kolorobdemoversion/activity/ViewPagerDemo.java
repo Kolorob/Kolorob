@@ -45,12 +45,12 @@ public class ViewPagerDemo extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if(data==2) {
-                    Intent a = new Intent(ViewPagerDemo.this, PlaceSelectionActivity.class); // Default Activity
+                    Intent a = new Intent(ViewPagerDemo.this, DataLoadingActivity.class); // Default Activity
                     startActivity(a);
                     finish();
                 }
                 else   if(data==0) {
-                    Intent a = new Intent(ViewPagerDemo.this, PlaceSelectionActivity.class); // Default Activity
+                    Intent a = new Intent(ViewPagerDemo.this, DataLoadingActivity.class); // Default Activity
                     startActivity(a);
                     finish();
                 }

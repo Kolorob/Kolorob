@@ -14,7 +14,7 @@ import java.io.File;
  */
 public class DatabaseHelper extends SQLiteOpenHelper{
 
-    public static final String DB_NAME = "kolorob.db";
+    public static final String DB_NAME = "kolorobupdated.db";
     public static final String DB_NAMEnew = "kolorobupdated.db";
     public static  String DB_PATH ;
     public static final int DB_VERSION = 1;
