@@ -489,7 +489,7 @@ String pname,paddress,powner,pdescription;
         ListButton.setLayoutParams(params3);
 
         Picasso.with(this)
-                .load(R.drawable.bazaar)
+                .load(R.drawable.job_unselectedtab)
                 .resize(buttonWidth,smal)
                 .into(ListButton);
         ListButton.getHeight();
@@ -668,50 +668,7 @@ String pname,paddress,powner,pdescription;
          **/
         CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNewLayout.this);
         categoryList=categoryTable.getAllCategories();
-        categoryList2=categoryList;
-        /*to map with previous category id with later changed id of categories.*/
-        for(int i=0;i<categoryList2.size();i++)
-        {
-
-            int cid=categoryList2.get(i).getId();
-
-            if (cid==1)
-            {
-                categoryList2.get(i).setId(2);
-            }
-            else   if (cid==53)
-            {
-                categoryList2.get(i).setId(7);
-            }
-            else   if (cid==5)
-            {
-                categoryList2.get(i).setId(1);
-            }
-            else   if (cid==14)
-            {
-                categoryList2.get(i).setId(3);
-            }
-            else  if (cid==29)
-            {
-                categoryList2.get(i).setId(5);
-            }
-            else  if (cid==11)
-            {
-                categoryList2.get(i).setId(6);
-            }
-            else  if (cid==33)
-            {
-                categoryList2.get(i).setId(4);
-            }
-
-
-
-        }
-
-
-
-        categoryList2.size();
-        constructCategoryList(categoryList2);
+        constructCategoryList(categoryList);
         //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
@@ -862,7 +819,7 @@ String pname,paddress,powner,pdescription;
 
 
                     Picasso.with(getApplicationContext())
-                            .load(R.drawable.bazaar)
+                            .load(R.drawable.job_unselectedtab)
                             .resize(buttonWidth,smal)
                             .into(ListButton);
 
@@ -940,7 +897,7 @@ String pname,paddress,powner,pdescription;
 
 
                     Picasso.with(getApplicationContext())
-                            .load(R.drawable.bazaar)
+                            .load(R.drawable.job_unselectedtab)
                             .resize(buttonWidth,smal)
                             .into(ListButton);
 
@@ -1010,7 +967,7 @@ String pname,paddress,powner,pdescription;
 
 
                         Picasso.with(getApplicationContext())
-                                .load(R.drawable.bazaar_selected)
+                                .load(R.drawable.job_selectedtab)
                                 .resize(buttonWidth,larg)
                                 .into(ListButton);
 
@@ -1161,7 +1118,7 @@ String pname,paddress,powner,pdescription;
 
 
                         Picasso.with(getApplicationContext())
-                                .load(R.drawable.bazaar)
+                                .load(R.drawable.job_unselectedtab)
                                 .resize(buttonWidth,smal)
                                 .into(ListButton);
 
