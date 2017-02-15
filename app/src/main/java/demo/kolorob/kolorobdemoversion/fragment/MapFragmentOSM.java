@@ -38,6 +38,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
@@ -88,7 +89,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         }
     }
 
-    private ArrayList<HealthServiceProviderItemNew> healthServiceProvider = null;
+    private ArrayList<HealthNewDBModelMain> healthServiceProvider = null;
     IMapController mapViewController;
     private ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider = null;
     private ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider = null;
@@ -177,11 +178,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
     LocationManager locationManager;
 
-    public ArrayList<HealthServiceProviderItemNew> getHealthServiceProvider() {
-        return healthServiceProvider;
-    }
+
     String ratingavg,ratingavgbn;
-    public void setHealthServiceProvider(ArrayList<HealthServiceProviderItemNew> et) {
+    public void setHealthServiceProvider(ArrayList<HealthNewDBModelMain> et) {
         this.healthServiceProvider = et;
     }
     SimpleDateFormat simpleDateFormat =
@@ -396,13 +395,13 @@ mapView.getOverlays().clear();
         items6.clear();
         if (healthServiceProvider != null) {
 
-            for (HealthServiceProviderItemNew et : healthServiceProvider) {
+            for (HealthNewDBModelMain et : healthServiceProvider) {
 
                 //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
-                String subcategotyId = et.getReferences();
+                String subcategotyId = et.getSubcat();
                 //Log.d("subcategotyId_Legal","=======");
 
-                ratingavg=et.getRating();
+                ratingavg=et.getRatings();
 
 
 
@@ -419,7 +418,7 @@ mapView.getOverlays().clear();
                 latDouble = Double.parseDouble(et.getLat());
                 longDouble = Double.parseDouble(et.getLon());
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerHealth(point, et.getNode_bn(), ratingavg, et.getNode_contact(), et.getId(), subcategotyId);
+                drawMarkerHealth(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getHealthid(), subcategotyId);
             }
         }
 
@@ -1398,7 +1397,7 @@ mapView.getOverlays().clear();
             //marker.setTitle("Title of the marker");
         }
     }
-    private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, String node, String subcategotyId2) {
+    private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
 
         Marker marker1 = new Marker(mapView);
         Marker marker2 = new Marker(mapView);
