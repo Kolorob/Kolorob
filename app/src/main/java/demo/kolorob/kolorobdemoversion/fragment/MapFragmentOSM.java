@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
@@ -93,7 +94,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider = null;
     private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialNewItem> financialServiceProvider = null;
-    private ArrayList<EducationNewItem> educationServiceProvider = null;
+    private ArrayList<EduNewModel> educationServiceProvider = null;
     private ArrayList<GovernmentNewItem> governmentNewItems = null;
     private  ArrayList<AllHolder>allitems=null;
     MapView mapView,mapp;
@@ -158,7 +159,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.financialServiceProvider = et;
     }
 
-    public void setEducationServiceProvider(ArrayList<EducationNewItem> et) {
+    public void setEducationServiceProvider(ArrayList<EduNewModel> et) {
 
 
         educationServiceProvider = et;
@@ -354,12 +355,12 @@ mapView.getOverlays().clear();
     if (educationServiceProvider != null) {
 
 
-        for (EducationNewItem et : educationServiceProvider) {
+        for (EduNewModel et : educationServiceProvider) {
 
             //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
             subcategotyId2 = et.getRefnumm();
             latDouble = Double.parseDouble(et.getLat());
-            ratingavg=et.getRating();
+            ratingavg=et.getRatings();
 
 
             if((ratingavg.equals("null"))||(ratingavg.equals("")))

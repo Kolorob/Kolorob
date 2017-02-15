@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -33,6 +34,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.KOLOROBRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.bonuspack.routing.RoadNode;
@@ -54,7 +56,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.helpers.KOLOROBRoadManager;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -117,7 +118,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     public MapFragmentRouteOSM() {
 
     }
-
+    KOLOROBRoadManager roadManager;
     LocationManager locationManager;
     String provider;
     boolean havePolyLine;
@@ -139,6 +140,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         dialog.setCancelable(true);
         dialog.show();
 
+ roadManager =new KOLOROBRoadManager(this);
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         width = metrics.widthPixels;
@@ -351,7 +353,6 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
         waypoints.add(userlocation);
         waypoints.add(markerlocation);
 
-        RoadManager roadManager =new KOLOROBRoadManager(this);
 
 
 
@@ -373,8 +374,8 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
         }
         else {
-            roadOverlay = roadManager.buildRoadOverlay(road, this);
-            roadOverlay.setColor(getResources().getColor(R.color.orange));
+            roadOverlay = roadManager.buildRoadOverlay(road, Color.parseColor("FF9800"),5);
+
             roadlength = road.mLength;
             mapView.getOverlays().add(roadOverlay);
             havePolyLine = true;
