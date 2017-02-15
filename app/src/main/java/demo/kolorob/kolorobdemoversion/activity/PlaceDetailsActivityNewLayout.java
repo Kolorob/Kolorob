@@ -1,8 +1,6 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -11,10 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -37,8 +32,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -50,7 +43,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,15 +51,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Picasso;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -78,36 +66,46 @@ import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
-import demo.kolorob.kolorobdemoversion.adapters.BazarToolAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.CompareAdapter;
 import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
-import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.BazarItem;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -152,18 +150,12 @@ String pname,paddress,powner,pdescription;
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
-    public void setShowList(int showList) {
-        this.showList = showList;
-    }
     ToggleButton toggleButton;
-    LinearLayout bazar_post_layout;
+
     ProgressDialog dialog;
-    ArrayList<BazarItem> allBazar = new ArrayList<BazarItem>();
+
     Double screenSize;
-    ImageView bazar_logo;
-    LinearLayout post_holder;
-    Boolean panelStates= true;
-    private ImageView iv_kolorob_logo;
+
     private static final int ANIM_INTERVAL = 150;
     private static double VIEW_WIDTH;
     private static boolean mapcalledstatus;
@@ -179,36 +171,16 @@ String pname,paddress,powner,pdescription;
     ArrayAdapter arrayAdapter;
     ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
     List<String>listData=new ArrayList<String>();
-    private int height,dpi;
-    ArrayList<ArrayList<String>> myList;
-
-    private boolean isCatExpandedOnce = false;
+    private int height;
     private int primaryIconWidth;
-    private int subCatShowFlag=0;
     private int locationNameId,subcategory;
     private String locationName;
-    private SlidingUpPanelLayout mLayout;
-    EditText product_name;
-    EditText phone;
-    int buttonh;
-    EditText address;
-    EditText price;
-    EditText description;
-    EditText contact_person;
-    EditText contact;
-    private int showList;
+
     private String locationNameEng;
     private String comapreData;
     ScrollView sv;
     ImageView compare_logo_image;
-    List<String> listDataHeader;
-    ArrayList<String> bazar_data;
-    private ImageView refresh_button;
-    HashMap<String, ArrayList<String>> listDataChild;
-    ExpandableListView expListView;
-    private int lastExpandedPosition = -1;
-    BazarToolAdapter bazarToolAdapter;
-    private int bazar_counter=0;
+
 
     String firstData="",SecondData="";
     int checker=0;
@@ -216,7 +188,7 @@ String pname,paddress,powner,pdescription;
 
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
 
-    private LinearLayout compare_layout,shift1_1,shift1_11,canteen_facility_1,canteen_facility_11,school_name;
+    private LinearLayout compare_layout;
 
 
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
@@ -321,12 +293,12 @@ String pname,paddress,powner,pdescription;
     ArrayList<AllHolder>allHolders=new ArrayList<>();
     ArrayList<AllHolder>catHolders=new ArrayList<>();
     ArrayList<AllHolder>subcatHolders=new ArrayList<>();
-    private ArrayList<FinancialNewItem>fetchedfin;
-    private ArrayList<EducationNewItem>fetchededu;
-    private ArrayList<LegalAidServiceProviderItemNew>fetchedleg;
-    private ArrayList<EntertainmentServiceProviderItemNew>fetchedent;
-    private ArrayList<HealthServiceProviderItemNew>fetchedhel;
-    public ArrayList<GovernmentNewItem>fetchedgov;
+    private ArrayList<FinancialNewDBModel>fetchedfin;
+    private ArrayList<EduNewModel>fetchededu;
+    private ArrayList<LegalAidNewDBModel>fetchedleg;
+    private ArrayList<EntertainmentNewDBModel>fetchedent;
+    private ArrayList<HealthNewDBModelMain>fetchedhel;
+    public ArrayList<GovernmentNewDBModel>fetchedgov;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
     RadioGroup fgrp1,fgrp2;
     int va;
@@ -335,7 +307,7 @@ String pname,paddress,powner,pdescription;
     public int getFilcatid() {
         return filcatid;
     }
-    private RelativeLayout bazar_tool;
+
     public void setFilcatid(int filcatid) {
         this.filcatid = filcatid;
     }
@@ -348,12 +320,11 @@ String pname,paddress,powner,pdescription;
 
     int buttonWidth=0;
     String idx,idxx,idxxx,idxxxx;
-    ArrayList<EducationNewItem> EDD=new ArrayList<>();
-    ArrayList<HealthServiceProviderItemNew> HEL=new ArrayList<>();
-    ArrayList<LegalAidServiceProviderItemNew>LEG=new ArrayList<>();
-    ArrayList<EntertainmentServiceProviderItemNew>ENT =new ArrayList<>();
-    ArrayList<FinancialNewItem>FIN=new ArrayList<>();
-    ArrayList<GovernmentNewItem>GOV=new ArrayList<>();
+    ArrayList<HealthNewDBModelMain> HEL=new ArrayList<>();
+    ArrayList<LegalAidNewDBModel>LEG=new ArrayList<>();
+    ArrayList<EntertainmentNewDBModel>ENT =new ArrayList<>();
+    ArrayList<FinancialNewDBModel>FIN=new ArrayList<>();
+    ArrayList<GovernmentNewDBModel>GOV=new ArrayList<>();
     TextView uptext;
     boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
@@ -362,7 +333,8 @@ String pname,paddress,powner,pdescription;
     int index;
     MapFragmentOSM mapFragment;
     CheckBox negotiable;
-
+    int wardId;
+    String Areakeyword;
 
 
 
@@ -379,7 +351,8 @@ String pname,paddress,powner,pdescription;
         editor.putInt("ValueD", 23);
 
         editor.apply();
-
+        wardId=settings.getInt("ward",0);
+        Areakeyword=settings.getString("areakeyword","Mirpur_12");
         NavigationCalled=false;
         NavigationCalledOnce=false;
 
@@ -387,7 +360,6 @@ String pname,paddress,powner,pdescription;
         Log.e("ASinplaceDetails",String.valueOf(val));
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
 
-        dpi=displayMetrics.densityDpi;
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         setContentView(R.layout.activity_place_detailnew);
@@ -398,25 +370,7 @@ String pname,paddress,powner,pdescription;
         SearchButton=(ImageButton)findViewById(R.id.searchbutton);
         CompareButton=(ImageButton)findViewById(R.id.compare);
         searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
-        negotiable= (CheckBox)findViewById(R.id.negotiable);
-        footer = (TextView)findViewById(R.id.footer);
-        //footer.getLayoutParams().width=width/4;
-        refresh_button=(ImageView) findViewById(R.id.refresh_button);
-        refresh_button.getLayoutParams().height=width/14;
-        refresh_button.getLayoutParams().width=width/14;
-        post_holder = (LinearLayout)findViewById(R.id.post_holder);
 
-        FrameLayout.LayoutParams post_holders= (FrameLayout.LayoutParams) post_holder.getLayoutParams();
-
-        post_holders.setMargins(width/30,0,width/30,0);
-        post_holder.setLayoutParams(post_holders);
-
-        bazar_logo=(ImageView)findViewById(R.id.bazar_icon);
-
-        bazar_logo.getLayoutParams().height = width/8;
-        bazar_logo.getLayoutParams().width = width/8;
-        bazar_logo.setMinimumHeight(50);
-        bazar_logo.setMinimumWidth(50);
 
 
         buttonWidth = width/4;
@@ -430,7 +384,6 @@ String pname,paddress,powner,pdescription;
 
         checkLeft=(CheckBox)findViewById(R.id.checkLeft);
         checkRight=(CheckBox)findViewById(R.id.checkRight);
-        bazar_tool= (RelativeLayout)findViewById(R.id.bazar_tool);
 
         // frameLayout.setClickable(false);
         // frameLayouts.setEnabled(false);
@@ -622,7 +575,7 @@ String pname,paddress,powner,pdescription;
         map = (FrameLayout) findViewById(R.id.map_fragment);
         map.setVisibility(View.VISIBLE);
         VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
-        isCatExpandedOnce = false;
+
         primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
 
         fleft=(LinearLayout)findViewById(R.id.linearLayout1);
@@ -637,29 +590,6 @@ String pname,paddress,powner,pdescription;
         ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
 
         final int s=lp.width = (int) (VIEW_WIDTH);
-
-        FrameLayout.LayoutParams caTsList = (FrameLayout.LayoutParams) llCatListHolder.getLayoutParams();
-
-        pannl_height = height/17;
-        if(pannl_height<70)
-            pannl_height=70;
-        submit_bazar= (TextView)findViewById(R.id.submit_bazar);
-
-//        submit_bazar.getLayoutParams().height=pannl_height;
-
-//
-//        final ViewGroup.LayoutParams exlist= explist.getLayoutParams();
-//        final RelativeLayout.LayoutParams expnlist = (RelativeLayout.LayoutParams) explist.getLayoutParams();
-//
-//        expnlist.setMargins((s*9)/10,40,5,40);
-//
-//        lp.height=100;
-//
-//        if(height<1000)
-//            caTsList.setMargins(0, 60, 0, 0);
-//        else
-//            caTsList.setMargins(0, 10, 0, 0);
-
 
 
 
@@ -759,26 +689,7 @@ String pname,paddress,powner,pdescription;
 
         }
 
-        refresh_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
-                {
-                    dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
-                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
-                    dialog.setCancelable(false);
-                    dialog.show();
-                    loadBazar(PlaceDetailsActivityNewLayout.this);
-                }
-                else {
-                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
-
-                }
-
-
-            }
-        });
         /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
         * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
         * shown if compare/bazar clicked(ListClicked)*/
@@ -841,7 +752,6 @@ String pname,paddress,powner,pdescription;
                     map.setVisibility(View.GONE);
                     svholder.setVisibility(View.GONE);
                     sv.setVisibility(View.GONE);
-                    bazar_tool.setVisibility(View.GONE);
 
                     toggleButton.setVisibility(View.VISIBLE);
                     compare_layout.setVisibility(View.GONE);
@@ -918,7 +828,6 @@ String pname,paddress,powner,pdescription;
 
 //                    subCatItemList.setVisibility(View.GONE);
 
-                    bazar_tool.setVisibility(View.GONE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                     compare_layoutedu.setVisibility(View.GONE);
@@ -1091,8 +1000,6 @@ String pname,paddress,powner,pdescription;
                                 .into(SearchButton);
                         map.setVisibility(View.GONE);
                         llCatListHolder.setVisibility(View.GONE);
-                        //   subCatItemList.setVisibility(View.GONE);
-                        bazar_tool.setVisibility(View.GONE);
                         searchviewholder.setVisibility(View.GONE);
 
                         sv.setVisibility(View.GONE);
@@ -1132,10 +1039,7 @@ String pname,paddress,powner,pdescription;
                     sv.setVisibility(View.VISIBLE);
                     svholder.setVisibility(View.VISIBLE);
                     llCatListHolder.setVisibility(View.VISIBLE);
-                    if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true)
-                    {
 
-                    }
                 }
 
                 //Button is OFF
@@ -1373,708 +1277,8 @@ String pname,paddress,powner,pdescription;
     }
 
 
-    public void postbazar(final Context context)
-    {
-        // Spinner element
-        final Spinner spinner = (Spinner) findViewById(R.id.bazar_spinner);
-        final Spinner type_spinner = (Spinner) findViewById(R.id.type_spinner);
 
-        List<String> categories = new ArrayList<String>();
-        categories.add("কন্ডিশন");
-        categories.add("নতুন");
 
-        categories.add("ব্যবহৃত");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, categories);
-        spinner.setAdapter(dataAdapter);
-
-
-
-        product_name= (EditText)findViewById(R.id.product_name);
-        phone= (EditText)findViewById(R.id.phone_no);
-        address= (EditText)findViewById(R.id.address);
-        price= (EditText)findViewById(R.id.costs);
-        description= (EditText)findViewById(R.id.descriptions);
-        contact_person= (EditText)findViewById(R.id.contact_person);
-        contact= (EditText)findViewById(R.id.contact);
-        int heightconsiderforcost=contact_person.getHeight();
-
-
-
-        screenSize= AppUtils.ScreenSize(this);
-
-        int text_field_height;
-        if(screenSize>6.5)
-            text_field_height = height/30;
-        else
-            text_field_height = height/24;
-        LinearLayout.LayoutParams spinnners = (LinearLayout.LayoutParams) spinner.getLayoutParams();
-        spinnners.height= text_field_height;
-        spinner.setLayoutParams(spinnners);
-
-
-
-        LinearLayout.LayoutParams type_spinners = (LinearLayout.LayoutParams) type_spinner.getLayoutParams();
-        type_spinners.height= text_field_height;
-        spinner.setLayoutParams(spinnners);
-
-
-        product_name.setHeight(text_field_height);
-        price.setHeight(text_field_height);
-        description.setHeight(text_field_height);
-        contact_person.setHeight(text_field_height);
-        contact.setHeight(text_field_height);
-        phone.setHeight(text_field_height);
-        address.setHeight(text_field_height);
-
-
-
-
-
-
-
-
-        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if((position>=1&&position<=3)&&spinCounter>0)
-                {
-                    TextView text1 = (TextView)parent.getChildAt(0);
-
-                    text1.setTextColor(ContextCompat.getColor(context,R.color.black));
-                    text1.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
-//                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
-//                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-
-                }
-                else
-                {
-                    TextView text1 = (TextView)parent.getChildAt(0);
-                    text1.setTextColor(ContextCompat.getColor(context,R.color.white));
-                    text1.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
-                }
-
-
-                spinCounter++;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                TextView text1 = (TextView)parent.getChildAt(0);
-                text1.setTextColor(ContextCompat.getColor(context,R.color.white));
-            }
-        });
-
-
-
-
-        List<String> types = new ArrayList<String>();
-        types.add("বিজ্ঞাপনের ধরন");
-        types.add("ক্রয়");
-        types.add("বিক্রয়");
-        types.add("বিনিময়");
-        types.add("টু লেট");
-        types.add("টিউশন");
-        ArrayAdapter<String> type_adapter = new ArrayAdapter<String>(this, R.layout.bazar_spinner, types);
-        type_spinner.setAdapter(type_adapter);
-
-             //bazar type spinner will work here
-        type_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if((position>=1&&position<=5)&&spinCounter1>0)
-                {
-                    TextView text2 = (TextView)parent.getChildAt(0);
-
-                    text2.setTextColor(ContextCompat.getColor(context,R.color.black));//change spinner text color
-                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.white)); //change spinner background color
-//                    spinner.setBackgroundResource(R.drawable.border_spinner_adapter);
-//                    spinner.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-
-                }
-                else
-                {
-                    //works if their is default spinner selected
-                    TextView text2 = (TextView)parent.getChildAt(0);
-                    text2.setTextColor(ContextCompat.getColor(context,R.color.white));
-                    text2.setBackgroundColor(ContextCompat.getColor(context,R.color.drak_yellow));
-                }
-
-                final LinearLayout pricing= (LinearLayout)findViewById(R.id.pricing);
-
-
-                //change the text when different type is selected
-                if(position==5)
-                {
-                    spinner.setVisibility(View.GONE);
-                    pricing.setVisibility(View.GONE);
-                    product_name.setVisibility(View.VISIBLE);
-                    tution_detector =1;
-                    product_name.setHint("টিউশনির ধরন");
-                    description.setHint("টিউশনির বিবরন");
-                    tution_detector = position;
-                }
-                else if (position==4)
-                {
-                    spinner.setVisibility(View.GONE);
-                    pricing.setVisibility(View.VISIBLE);
-                    product_name.setVisibility(View.VISIBLE);
-                    product_name.setHint("কি ভাড়া দিতে চান?");
-                    price.setHint("বাসাভাড়া");
-                    description.setHint("বাসার বিবরন");
-                    tution_detector = position;
-                }
-                else if(position==3)
-                {
-                    spinner.setVisibility(View.VISIBLE);
-                    pricing.setVisibility(View.VISIBLE);
-                    product_name.setVisibility(View.VISIBLE);
-                    product_name.setHint("কি বিনিময় করবেন?");
-                    price.setHint("মূল্য");
-                    description.setHint("বিবরন");
-                    tution_detector = 0;
-                }
-
-                else if(position==2)
-                {
-                    spinner.setVisibility(View.VISIBLE);
-                    pricing.setVisibility(View.VISIBLE);
-                    product_name.setVisibility(View.VISIBLE);
-                    product_name.setHint("কি বিক্রয় করবেন?");
-                    price.setHint("মূল্য");
-                    tution_detector = 0;
-                    description.setHint("বিবরন");
-                }
-                else if(position==1)
-                {
-                    spinner.setVisibility(View.VISIBLE);
-                    pricing.setVisibility(View.VISIBLE);
-                    product_name.setVisibility(View.VISIBLE);
-                    product_name.setHint("কি ক্রয় করবেন?");
-                    price.setHint("মূল্য");
-                    description.setHint("বিবরন");
-                    tution_detector = 0;
-                }
-
-                else
-                {
-                    spinner.setVisibility(View.VISIBLE);
-                    pricing.setVisibility(View.VISIBLE);
-                    product_name.setVisibility(View.VISIBLE);
-                    tution_detector = 0;
-                    product_name.setHint("কি পন্য বিক্রয় করবেন?");
-                    description.setHint("পণ্যের বিবরন");
-                }
-
-
-
-                spinCounter1++;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                TextView text2 = (TextView)parent.getChildAt(0);
-                text2.setTextColor(ContextCompat.getColor(context,R.color.white));
-            }
-        });
-
-        negotiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    negotiable_check=1;
-                else
-                    negotiable_check=0;
-            }
-        });
-
-        screenSize= AppUtils.ScreenSize(this);
-
-        if(screenSize>6.5)
-            negotiable.setTextSize(20);
-        else
-            negotiable.setTextSize(14);
-
-
-
-
-        String number =SharedPreferencesHelper.getNumber(context);
-        String name = SharedPreferencesHelper.getUname(context);
-        phone.setText(number);
-        phone.setEnabled(false);
-        contact_person.setText(name);
-        contact_person.setEnabled(true);
-
-
-        //EditText change Listener
-        product_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    product_name.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        phone.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    phone.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-
-        address.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    address.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-
-        price.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    price.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-
-        description.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    description.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-        contact_person.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    contact_person.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-
-        contact.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count>0)
-                {
-                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                }
-                else
-                {
-                    contact.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.drak_yellow));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-
-
-
-        submit_bazar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try
-                {
-
-
-//           final BazarItem b = new BazarItem();
-//           b.description=description.getText().toString();
-//
-//           b.type = type_spinner.getSelectedItem().toString();
-//           b.phone = phone.getText().toString(); //MUST BE REGISTERED
-//           b.contact = contact.getText().toString();
-//           b.condition = spinner.getSelectedItem().toString();
-//           b.contact_person = contact_person.getText().toString();
-//           b.address= "address";
-//           Log.d("type Spinner","$$$$$$"+address.getText().toString());
-//           if(negotiable_check)
-//           {
-//               b.price = price.getText().toString()+ " (Negotiable)";
-//           }
-//           else {
-//               b.price = price.getText().toString();
-//           }
-//
-//           b.product_name= "product";
-
-
-                    //set default text in case of tution
-
-                 if(tution_detector==5)
-                    {
-                        spinner.setSelection(2);
-                        price.setText("1111");
-                    }
-                 else if(tution_detector==4)
-                    {
-                 spinner.setSelection(2);
-
-                    }
-
-
-
-
-                    final BazarItem b = new BazarItem();
-
-                    String number =SharedPreferencesHelper.getNumber(context);
-                    if(number.equals(""))
-                    {
-
-                    }
-                    else
-                    {
-                        if(spinner.getSelectedItem().toString().equals("কন্ডিশন"))
-                        {
-
-                            AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন","");
-//               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক কন্ডিশন ইনপুট দিন");
-
-                        }
-                        else
-                        {
-
-                   String conditions = spinner.getSelectedItem().toString();
-                            //convert bangla to English
-
-                   if(conditions.equals("নতুন"))
-                       b.condition = "New";
-                    else if(conditions.equals("ব্যবহৃত"))
-                       b.condition = "Refurbished";
-
-
-
-
-                            if(type_spinner.getSelectedItem().toString().equals("বিজ্ঞাপনের ধরন"))
-                            {
-                                AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন","");
-//                   ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিজ্ঞাপনের ধরন ইনপুট দিন");
-                            }
-                            else {
-                                // Get data from condition spinner
-                                String condition_selector = type_spinner.getSelectedItem().toString();
-
-                                if(condition_selector.equals("বিনিময়"))
-                                    b.type = "Exchange";
-                                else if(condition_selector.equals("বিক্রয়"))
-                                    b.type = "Sell";
-                                else if(condition_selector.equals("টিউশন"))
-                                    b.type = "Tution";
-                                else if(condition_selector.equals("ক্রয়"))
-                                    b.type = "Buy";
-                                else if(condition_selector.equals("টু লেট"))
-                                    b.type = "To_Let";
-//                       b.type = type_spinner.getSelectedItem().toString().replace(' ','+');
-                                if(product_name.getText().toString().equals(""))
-                                {
-//                       AlertMessage.showMessage(context,"","");
-                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন","");
-//                       ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পন্যের নাম ইনপুট দিন");
-                                }
-                                else {
-
-                                    b.product_name= product_name.getText().toString();
-                                    try {
-                                       pname=   URLEncoder.encode(b.product_name.replace(" ", "%20"), "utf-8");
-                                    } catch (UnsupportedEncodingException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if(phone.getText().toString().equals(""))
-                                    {
-                                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন","");
-//                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক ফোন নম্বর ইনপুট দিন");
-                                    }
-                                    else
-                                    {
-                                        b.phone = phone.getText().toString(); //MUST BE REGISTERED
-                               if(AppUtils.mobile_number_verification(contact.getText().toString())) {
-                                   AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক সঠিক ফোন নম্বর ইনপুট দিন","");
-//                               ToastMessageDisplay.setText(context, "অনুগ্রহ পূর্বক অন্য ফোন নম্বরটি ইনপুট দিন");
-                                        }
-                                        else {
-                                            b.contact = contact.getText().toString();
-                                            if(address.getText().toString().equals(""))
-                                            {
-                                                AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার ঠিকানা ইনপুট দিন","");
-//
-                                            }
-                                            else {
-                                                b.address= address.getText().toString();
-                                                try {
-                                                    paddress=   URLEncoder.encode( b.address.replace(" ", "%20"), "utf-8");
-                                                } catch (UnsupportedEncodingException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                if(contact_person.getText().toString().equals(""))
-                                                {
-//
-                                                    AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক আপনার নাম ইনপুট দিন","");
-                                                }
-                                                else
-                                                {
-                                                    b.contact_person = contact_person.getText().toString();
-                                                    try {
-                                                        powner=   URLEncoder.encode( b.contact_person.replace(" ", "%20"), "utf-8");
-                                                    } catch (UnsupportedEncodingException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if(price.getText().toString().equals("")&&negotiable_check==0)
-                                                    {
-//                                           ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন");
-                                                        AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক পণ্যের মূল্য ইনপুট দিন","");
-                                                    }
-                                                    else
-                                                    {
-                                                        Log.d("negotiable_check","=============="+negotiable_check);
-
-                                                        b.price = price.getText().toString() + negotiable_check;
-                                                        if(description.getText().toString().equals(""))
-                                                        {
-//                                               ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক বিস্তারিত তহত্য ইনপুট দিন");
-                                                            AlertMessage.showMessage(context,"অনুগ্রহ পূর্বক বিস্তারিত তথ্য ইনপুট দিন","");
-                                                        }
-                                                        else {
-                                                            b.description=description.getText().toString();
-                                                            try {
-                                                                pdescription=   URLEncoder.encode( b.description.replace(" ", "%20"), "utf-8");
-                                                            } catch (UnsupportedEncodingException e) {
-                                                                e.printStackTrace();
-                                                            }
-                                                            saveBazar(b,context);
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                        }
-
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-
-
-
-
-
-                    if(b.equals(""))
-                    {
-                        ToastMessageDisplay.setText(context,"অনুগ্রহ পূর্বক তথ্য ইনপুট দিন");
-                    }
-
-//           if()
-
-
-
-
-
-
-                }
-                catch (Exception e)
-                {
-
-                }
-
-            }
-        });
-
-
-
-
-
-    }
-
-
-                 //sendind bazar data to server
-    private void saveBazar(BazarItem b,final Context contexts){
-                 //check internet connection
-        if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
-        {
-            getRequest(contexts, "http://kolorob.net/demo/api/post_advertise?username=" + user +"&password="+ pass
-                            +"&description=" + pdescription +
-                            "&type=" + b.type +
-                            "&phone=" + b.phone +
-                            "&contact=" + b.contact +
-                            "&condition=" + b.condition +
-                            "&contact_person=" + powner +
-                            "&price=" + b.price+
-                            "&name=" + pname+
-                            "&adress=" + paddress,
-
-
-                    new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status,final String apiContent) {
-
-                            if (status == AppConstants.SUCCESS_CODE) {
-                                //tester. You may delete this portion
-
-                                if(apiContent.equals("true"))
-                                {
-
-                                    //if true then request has confirmed and sliding panel will be collapsed
-                                    DisplayMetrics displayMetrics = contexts.getResources().getDisplayMetrics();
-                                    height = displayMetrics.heightPixels;
-                                    width = displayMetrics.widthPixels;
-
-                                    LayoutInflater layoutInflater = LayoutInflater.from(contexts);
-                                    View promptView = layoutInflater.inflate(R.layout.default_alert, null);
-
-
-                                    final Dialog alertDialog = new Dialog(contexts);
-                                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                    alertDialog.setContentView(promptView);
-                                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                    alertDialog.show();
-
-
-                                    final TextView header = (TextView) promptView.findViewById(R.id.headers);
-                                    final TextView bodys = (TextView) promptView.findViewById(R.id.body);
-                                    final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
-
-                                    header.setText("আপনার বিজ্ঞাপন টি পাঠানো হয়েছে");
-                                    bodys.setText("কলরব থেকে বিজ্ঞাপন দেয়ার জন্য আপনাকে ধন্যবাদ");
-
-                                    product_name.setText("");
-                                    phone.setText("");
-                                    address.setText("");
-                                    price.setText("");
-                                    description.setText("");
-                                    contact_person.setText("");
-                                    contact.setText("");
-                                    negotiable.setChecked(false);
-                                    negotiable_check=0;
-
-                                    okay.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            alertDialog.cancel();
-                                            mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                                            loadBazar(PlaceDetailsActivityNewLayout.this);
-                                        }
-                                    });
-
-                                    alertDialog.setCancelable(true);
-
-                                    alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
-                                }
-                                //tester ends======
-                            }
-                        }
-                    }
-            );
-        }
-        else {
-            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
-
-        }
-        Log.d("Advertizement Type","=========="+b.type);
-
-
-
-
-    }
 
 
 //    public Boolean BazarPostValidation(Context c, String message, )
@@ -2215,7 +1419,7 @@ String pname,paddress,powner,pdescription;
                 filterclicked=true;
 
                 fholder.setVisibility(View.VISIBLE);
-                populatefilterwords(getFilcatid());
+                populatefilterwords(currentCategoryID);
 
             }
         });
@@ -2223,175 +1427,6 @@ String pname,paddress,powner,pdescription;
     }
 
 
-
-//this was for list.Now we are not showing service center list in app
-
-//    public void createData(int cat_id, String head,String placeChoice) {
-//        switch (cat_id) {
-//            case AppConstants.EDUCATION:
-//                SubCategoryTableNew subCategoryTable = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-//                //currentCategoryID = 5;
-//                EducationNewTable educationServiceProviderTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-//                ArrayList<String> print = null;
-//                groups.removeAllElements();
-//
-//               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
-//                // subCatItemList.setChildDivider(R.color.black);
-//
-//                print = subCategoryTable.getSubnameedu(5);
-//                Collections.sort(print);
-//                for (int j = 0; j < print.size(); j++) {
-//                    Group group = new Group(print.get(j));
-//                    printnames = null;
-//
-//                    printnames = educationServiceProviderTable.Edunames(print.get(j),placeChoice);
-//
-//
-//
-//                    //   printnames = educationServiceProviderTable.getAllSubCat();
-//                    for (int i = 0; i < printnames.size(); i++) {
-//                        group.children.add(i, printnames.get(i));
-//                    }
-//                    groups.add(j, group);
-//                }
-//                break;
-//            case AppConstants.ENTERTAINMENT:
-//
-//                //SubCategoryTable subCategoryTable2 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-//                SubCategoryTableNew subCategoryTableNewEnt=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-//               // subCatItemList.setChildDivider(getResources().getDrawable(R.color.entertainment_color));
-//                currentCategoryID = cat_id;
-//                EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-//                ArrayList<String> RefEnt = null;
-//                groups.removeAllElements();
-//                RefEnt=subCategoryTableNewEnt.getSubnameedu(14);
-//                Collections.sort(RefEnt);
-//
-//
-//
-//                for (int j = 0; j < RefEnt.size(); j++) {
-//                    Group group = new Group(RefEnt.get(j));
-//
-//                    printnamesent = null;
-//                    int refId=subCategoryTableNewEnt.getRefId(RefEnt.get(j));
-//                    printnamesent = entertainmentServiceProviderTableNew.EntNames(currentCategoryID, refId,RefEnt.get(j), placeChoice);
-//                  //  printnamesent = entertainmentServiceProviderTableNew.entertainmentServiceProviderItemNews();
-//
-//                    for (int i = 0; i < printnamesent.size(); i++) {
-//
-//
-//
-//                        group.childrenent.add(i, printnamesent.get(i));
-//                    }
-//                    groups.add(j, group);
-//                }
-//                break;
-//            case AppConstants.GOVERNMENT:
-//                SubCategoryTableNew subCategoryTableg = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-//                // currentCategoryID = 33;
-//                GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-//                ArrayList<String> printgov = null;
-//                groups.removeAllElements();
-//
-//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.education_color));
-//                // subCatItemList.setChildDivider(R.color.black);
-//
-//                printgov = subCategoryTableg.getSubnameedu(33);
-//                Collections.sort(printgov);
-//                for (int j = 0; j < printgov.size(); j++) {
-//                    Group group = new Group(printgov.get(j));
-//                    printgovs = null;
-//
-//                    printgovs = governmentNewTable.Govnames(printgov.get(j),placeChoice);
-//                    for (int i = 0; i < printgovs.size(); i++) {
-//                        group.childrengov.add(i, printgovs.get(i));
-//                    }
-//                    groups.add(j, group);
-//                }
-//                break;
-//            case AppConstants.HEALTH:
-//
-//                //SubCategoryTable subCategoryTable3 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-//                SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-//                String p="Diagonostic Centre";
-//
-//                currentCategoryID = cat_id;
-//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.health_color));
-//                HealthServiceProviderTableNew healthServiceProviderTableNew=new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-//
-//
-//                ArrayList<String> RefHealth=null;
-//
-//                groups.removeAllElements();
-//                RefHealth=subCategoryTableNew.getSubnameedu(1);
-//
-//                Collections.sort(RefHealth);
-//                for (int j = 0; j < RefHealth.size(); j++) {
-//                    Group group = new Group(RefHealth.get(j));
-//                    printnameshea = null;
-//                    int refId=subCategoryTableNew.getRefId(RefHealth.get(j));
-//
-//                    printnameshea = healthServiceProviderTableNew.Heanames(currentCategoryID, refId, RefHealth.get(j), placeChoice);
-//                    for (int i = 0; i <  printnameshea .size(); i++) {
-//                        group.childrenhea.add(i,printnameshea .get(i));
-//                    }
-//                    groups.add(j, group);
-//                }
-//                break;
-//            case AppConstants.FINANCIAL:
-//
-//                SubCategoryTableNew subCategoryTable4 = new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-//                // currentCategoryID = 11;
-//                FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-//                ArrayList<String> printfin = null;
-//
-//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.financial_color));
-//                groups.removeAllElements();
-//                printfin= subCategoryTable4.getSubnameedu(11);
-//                Collections.sort(printfin);
-//                for (int j = 0; j <  printfin.size(); j++) {
-//                    Group group = new Group(printfin.get(j));
-//                    printnamesfin = null;
-//                    printnamesfin= financialServiceProviderTable.Finnames(printfin.get(j),placeChoice);;
-//                    for (int i = 0; i < printnamesfin.size(); i++) {
-//                        group.childrenfin.add(i, printnamesfin.get(i));
-//                    }
-//                    groups.add(j, group);
-//                }
-//                break;
-//            case AppConstants.LEGAL:
-//                SubCategoryTableNew subCategoryTableNews=new SubCategoryTableNew(PlaceDetailsActivityNewLayout.this);
-//
-//                //   SubCategoryTable subCategoryTable5 = new SubCategoryTable(PlaceDetailsActivityNewLayout.this);
-//                currentCategoryID = cat_id;
-//                subCatItemList.setChildDivider(getResources().getDrawable(R.color.legal_aid_color));
-//                LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-//                //ArrayList<String> printleg = null;
-//                ArrayList<String> RefLegal = null;
-//                RefLegal=subCategoryTableNews.getSubnameedu(29);
-//                //("RefLegal","======"+RefLegal);
-//                Collections.sort(RefLegal);
-//
-//                groups.removeAllElements();
-//                // printleg = subCategoryTableNew.getSubnameedu(currentCategoryID, head);
-//                for (int j = 0; j < RefLegal.size(); j++) {
-//                    Group group = new Group(RefLegal.get(j));
-//                    int refId=subCategoryTableNews.getRefId(RefLegal.get(j));
-//
-//                    printnamesleg = null;
-//                    printnamesleg = legalAidServiceProviderTableNew.LegalInfo(currentCategoryID, refId, RefLegal.get(j), placeChoice);
-//                    //  printnamesleg = legalAidServiceProviderTableNew.getAllLegalAidSubCategoriesInfo(3);
-//
-//                    for (int i = 0; i < printnamesleg.size(); i++) {
-//                        group.childrenleg.add(i, printnamesleg.get(i));
-//                    }
-//                    groups.add(j, group);
-//                }
-//                break;
-//
-//
-//        }
-//    }
 
 /*
 * this populate filter keywords based on category id from db*/
@@ -2524,43 +1559,12 @@ String pname,paddress,powner,pdescription;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
-//        else if (id == R.id.info_change) {
-
-//            startActivity(em);
-//            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-//
-//        }else if (id == R.id.local_representative) {
-//
-//            // Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-//            AlertMessage.showMessage(con, "Representative", "It will be added in next version.");
-//
-//        } else if (id == R.id.adv_info) {
-//            //  Toast.makeText(con,"It will be added in next version.",Toast.LENGTH_LONG).show();
-//
-//            AlertMessage.showMessage(con,"Advertisement","It will be added in next version.");
-//        } else if (id == R.id.adv) {
-//            AlertMessage.showMessage(con,"Ads Information","It will be added in next version.");
-//        }
-
-//        else if (id == R.id.nav_share) {
-//
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
-
-
-
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem menuItem) {
-//        return false;
-//    }
-//
-//
-
 
 
 
@@ -2706,7 +1710,7 @@ String pname,paddress,powner,pdescription;
                         MediaPlayer mp_e = MediaPlayer.create(getApplicationContext(), R.raw.education);
                         mp_e.start();
 
-                        EDD.clear();
+                     //   EDD.clear();
                         educlicked=true;
                         helclicked=false;
                         entclicked=false;
@@ -2714,16 +1718,16 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        setFilcatid(5);
+                        setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
 
 
 
-                        ArrayList<EducationNewItem> educationServiceProvider;
-                        educationServiceProvider = constructEducationListItem();
+                        ArrayList<EduNewModel> educationServiceProvider;
+                    educationServiceProvider = constructEducationListItem();
                         mapcalledstatus=true;
-                        callMapFragmentWithEducation(-1, educationServiceProvider,true);
+                     callMapFragmentWithEducation(-1, educationServiceProvider,true);
 
 
                         ivIcon.setImageResource(R.drawable.education_selected);
@@ -2952,8 +1956,6 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=true;
-                        bazar_tool.setVisibility(View.GONE);
-
                         Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
                         startActivity(intentJ);
                         callMapFragmentWithFinancial(-1,null,true);
@@ -3160,11 +2162,11 @@ String pname,paddress,powner,pdescription;
 
     /*********************************************************methods for education**********************************************/
 
-    private ArrayList<EducationNewItem> constructEducationListItem()
+    private ArrayList<EduNewModel> constructEducationListItem()
     {
-        ArrayList<EducationNewItem> educationServiceProvider;
-        EducationNewTable educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo(getLocationNameEng());
+        ArrayList<EduNewModel> educationServiceProvider;
+        EduNewDBTableMain educationNewTable = new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
+        educationServiceProvider = educationNewTable.getAllEducationSubCategoriesInfo(wardId,Areakeyword);
         return educationServiceProvider;
     }
 
@@ -3172,7 +2174,7 @@ String pname,paddress,powner,pdescription;
 
 /*
 * call mapfragment functions load fragments of map. based on location */
-    private void callMapFragmentWithEducation(int edid,ArrayList<EducationNewItem> educationServiceProviderItems,boolean s)
+    private void callMapFragmentWithEducation(int edid,ArrayList<EduNewModel> educationServiceProviderItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
@@ -3234,7 +2236,7 @@ String pname,paddress,powner,pdescription;
                 if(currentCategoryID==1){
                     educlicked=false;
                     prev_fragment.setCategoryId(1);
-                    ArrayList<EducationNewItem> educationServiceProviderItems;
+                    ArrayList<EduNewModel> educationServiceProviderItems;
                     educationServiceProviderItems = constructEducationListItem();
                     prev_fragment.setEducationServiceProvider(educationServiceProviderItems);
                     prev_fragment.eduicons();
@@ -3520,148 +2522,6 @@ String pname,paddress,powner,pdescription;
     /**********************************************************Methods for Bazar Loading*****************************************************/
 
 
-    private void loadBazar(final Context context){
-        getRequest(PlaceDetailsActivityNewLayout.this, "http://kolorob.net/demo/api/getadvsql?username=" + user + "&password=" + pass + " ", new VolleyApiCallback() {
-                    @Override
-                    public void onResponse(int status, String apiContent) {
-
-                        if (status == AppConstants.SUCCESS_CODE) {
-                            //ge the db instance
-                            SQLiteDatabase db = DatabaseManager.getInstance(PlaceDetailsActivityNewLayout.this).openDatabase();
-                            //split into single sql queries
-                            String[] sql = apiContent.split("~");
-                            //run the sqls one by one
-                            for (int i = 0; i<sql.length;i++)
-                            {
-                               // Log.d("SQL[i]","%%%%%%"+sql[i]);
-                                db.execSQL(sql[i]);
-                            }
-                            //now reload the data taht has beed saved
-                            //get all data from db
-                            Cursor cursor =  db.rawQuery("select * from custom_advertisement", null);
-                            allBazar = new ArrayList<BazarItem>();
-                            int vf=0;
-                            while (cursor.moveToNext()) {
-                                allBazar.add(new BazarItem(cursor));
-                                vf++;
-                            }
-                           // Log.d("vvff","%%%%%%"+vf);
-                          cursor.close();
-                        }
-
-
-                        listDataHeader = new ArrayList<String>();
-                        listDataChild = new HashMap<String, ArrayList<String>>();
-                        bazar_data=new ArrayList<String>();
-                        bazar_data.clear();
-                        bazar_counter=0;
-                        myList = new ArrayList<ArrayList<String>>(allBazar.size()); //Hold all the bazar data
-                        int size= allBazar.size();
-                        for(BazarItem bazarItem: allBazar)
-                        {
-
-                            //concat all the bazar data in a single string
-
-                            String bazarData= "বিবরন: "+bazarItem.description+"@"+
-                                    bazarItem.price+"@"+
-                                    "তারিখ: "+bazarItem.date+"@"+
-                                    bazarItem.condition+"@"+
-                                    "এলাকা: "+bazarItem.address+"@"+
-                                    bazarItem.phone+"@"+
-                                    "যোগাযোগ নম্বর: "+bazarItem.contact+"@"+
-                                    "পোস্ট দিয়েছেন: "+bazarItem.contact_person+"@"+ "v"
-                                    ;
-
-                            String group_data= bazarItem.product_name+"@"+
-                                    bazarItem.type+"@"+"v";
-
-
-                            bazar_data.add(bazar_counter,bazarData); //insert all bazar data in arrayList
-                            listDataHeader.add(group_data);
-
-                            // myList.add(bazar_counter,bazar_data);
-                            // myList.get(bazar_counter).add(bazarData);
-                            //             myList.add(bazar_data);
-
-                        //    Log.d("myList","######"+myList);
-                            bazar_counter++;
-                        }
-                        ArrayList<String > temp= new ArrayList<String>();
-
-
-                        //insert all bazar data in multidimensional arrayList
-                        for(int k=0;k<bazar_counter;k++)
-                        {
-                            myList.add(k,bazar_data);
-                            // myList.get(0).set(k,bazar_data.get(k));
-                            //                      myList.add(k,temp);
-                            temp.clear();
-                        }
-                        for(int i=0;i<bazar_counter;i++)
-                        {
-                            listDataChild.put(listDataHeader.get(i),myList.get(i));
-
-                        }
-                        dialog.cancel();
-
-                        //insert data in expandable listview
-                        expListView = (ExpandableListView) findViewById(R.id.bazar_list);
-                        bazarToolAdapter = new BazarToolAdapter(context, listDataHeader, listDataChild);
-                        expListView.setAdapter(bazarToolAdapter);
-
-
-                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) expListView
-                                .getLayoutParams();
-                        layoutParams.setMargins(0, 0, 0, buttonHeights);//
-
-                        //if one item collapse then other's will be expanded
-                        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-                            @Override
-                            public void onGroupExpand(int groupPosition) {
-                                if (lastExpandedPosition != -1
-                                        && groupPosition != lastExpandedPosition) {
-                                    expListView.collapseGroup(lastExpandedPosition);
-                                }
-                                lastExpandedPosition = groupPosition;
-
-
-                            }
-                        });
-                        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-                            @Override
-                            public void onGroupCollapse(int groupPosition) {
-
-
-                            }
-                        });
-
-                        //works if child is clicked
-                        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-                            @Override
-                            public boolean onChildClick(ExpandableListView parent, View v,
-                                                        int groupPosition, int childPosition, long id) {
-                                // TODO Auto-generated method stub
-                                expListView.collapseGroup(lastExpandedPosition);
-
-                                return false;
-                            }
-                        });
-
-
-                        SlidingUpPanelLayout slidingUpPanelLayout;
-                        slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
-                        RelativeLayout.LayoutParams slidingp= (RelativeLayout.LayoutParams) slidingUpPanelLayout.getLayoutParams();
-
-
-                    }
-                }
-        );
-    }
-
-
 
 /*
 * load all the data in arraylist; then store all info in another adapter. This adapter is then set in search
@@ -3672,18 +2532,19 @@ String pname,paddress,powner,pdescription;
     {
         filterText = (EditText)findViewById(R.id.searchall);
         filterText.setTextColor(getResources().getColor(R.color.white));
-        EducationNewTable educationServiceProviderTable=new EducationNewTable(PlaceDetailsActivityNewLayout.this);
-        EntertainmentServiceProviderTableNew entertainmentServiceProviderTable=new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        FinancialServiceNewTable financialServiceProviderTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        GovernmentNewTable governmentNewTable=new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentSubCategoriesInfo(place);
-        fetchedfin=financialServiceProviderTable.getAllFinancialSubCategoriesInfo(place);
-        fetchedleg=legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch(place);
-        fetchedhel=healthServiceProviderTable.getAllHealthSubCategoriesInfosearch(place);
-        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(place);
-        fetchedgov=governmentNewTable.getAllGovSubCategoriesInfo(place);
+        EduNewDBTableMain educationServiceProviderTable=new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
+        EntNewDBTable entertainmentServiceProviderTable=new EntNewDBTable(PlaceDetailsActivityNewLayout.this);
+        HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
+        FinNewDBTable financialServiceProviderTable = new FinNewDBTable(PlaceDetailsActivityNewLayout.this);
+        GovNewDBTable governmentNewTable=new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
+        LegalAidNewDBTable legalAidServiceProviderTable = new LegalAidNewDBTable(PlaceDetailsActivityNewLayout.this);
+
+        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentinfo(wardId,Areakeyword);
+        fetchedfin=financialServiceProviderTable.getAllFinancial(wardId,Areakeyword);
+        fetchedleg=legalAidServiceProviderTable.getAllLegal(wardId,Areakeyword);
+        fetchedhel=healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
+        fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(wardId,Areakeyword);
+        fetchedgov=governmentNewTable.getAllGov(wardId,Areakeyword);
         String nameen;
         String namebn;
 
@@ -3697,7 +2558,7 @@ String pname,paddress,powner,pdescription;
             refname=fetchededu.get(i).getRefnumm();
             namebn=fetchededu.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,5);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,10000);
             allHolders.add(all);
         }
 
@@ -3705,12 +2566,12 @@ String pname,paddress,powner,pdescription;
         for (int i=0;i<fetchedhel.size();i++)
         {
 
-            nameen=fetchedhel.get(i).getNode_name();
-            node= Integer.parseInt(fetchedhel.get(i).getId());
-            refname=fetchedhel.get(i).getReferences();
-            namebn=fetchedhel.get(i).getNode_bn();
+            nameen=fetchedhel.get(i).getNameen();
+            node= fetchedhel.get(i).getHealthid();
+            refname=fetchedhel.get(i).getRefnumm();
+            namebn=fetchedhel.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,1);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,20000);
             allHolders.add(all);
         }
 
@@ -3718,34 +2579,34 @@ String pname,paddress,powner,pdescription;
         for (int i=0;i<fetchedleg.size();i++)
         {
 
-            nameen=fetchedleg.get(i).getLegalaidNameEng();
-            node= Integer.parseInt(fetchedleg.get(i).getIdentifierId());
-            refname=fetchedleg.get(i).getBreaktime2();
-            namebn=fetchedleg.get(i).getLegalaidNameBan();
+            nameen=fetchedleg.get(i).getNameen();
+            node= fetchedleg.get(i).getLegalid();
+            refname=fetchedleg.get(i).getRefnumm();
+            namebn=fetchedleg.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,29);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,50000);
             allHolders.add(all);
         }
         for (int i=0;i<fetchedent.size();i++)
         {
 
-            nameen=fetchedent.get(i).getNodeName();
-            node= Integer.parseInt(fetchedent.get(i).getNodeId());
-            refname=fetchedent.get(i).getNodeAdditional();
-            namebn=fetchedent.get(i).getNodeNameBn();
+            nameen=fetchedent.get(i).getNameen();
+            node= fetchedent.get(i).getEntid();
+            refname=fetchedent.get(i).getRefnumm();
+            namebn=fetchedent.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,14);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,30000);
             allHolders.add(all);
         }
         for (int i=0;i<fetchedfin.size();i++)
         {
 
             nameen=fetchedfin.get(i).getNameen();
-            node=fetchedfin.get(i).getFinId();
+            node=fetchedfin.get(i).getFinid();
             refname=fetchedfin.get(i).getRefnumm();
             namebn=fetchedfin.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,11);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,60000);
             allHolders.add(all);
 
 
@@ -3755,11 +2616,11 @@ String pname,paddress,powner,pdescription;
         {
 
             nameen=fetchedgov.get(i).getNameen();
-            node=fetchedgov.get(i).getFinId();
+            node=fetchedgov.get(i).getGovid();
             refname=fetchedgov.get(i).getRefnumm();
             namebn=fetchedgov.get(i).getNamebn();
 
-            AllHolder all=new AllHolder(node,refname,nameen,namebn,33);
+            AllHolder all=new AllHolder(node,refname,nameen,namebn,40000);
             allHolders.add(all);
 
 
@@ -3955,175 +2816,7 @@ String pname,paddress,powner,pdescription;
 
 
 
-    public void init(final Activity activity){
 
-        bazar_post_layout =(LinearLayout)findViewById(R.id.bazar_post_layout);
-        mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-
-        mLayout.setPanelHeight(pannl_height);
-        FrameLayout bazarPosting = (FrameLayout) findViewById(R.id.bazar_posting);
-        slider_part = (LinearLayout)findViewById(R.id.slider_part);
-//
-//        LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-//        sliding_parts.height=120;
-//        slider_part.setLayoutParams(sliding_parts);
-
-        mLayout.setTouchEnabled(true);  //only sliding panel will be touchable
-
-        bazarPosting.setEnabled(true);
-        bazar_post_layout.setFocusableInTouchMode(true);
-        bazar_post_layout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-
-       // Log.d("Panel States","******"+panelStates);
-
-        slider_part.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppUtils.hideKeyboard(activity);
-              //  Log.d("Panel works or not","*********");
-              //  Log.d("Panel States","******"+panelStates);
-                if(panelStates)
-                {
-                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-                    panelStates= false;
-                }
-                else
-                {
-                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-
-                    panelStates= true;
-                }
-            }
-        });
-//
-//        slider_part.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//
-////                if(mLayout.getPanelState().equals("EXPANDED"))
-////                {
-////
-////                }
-////                else
-////                mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-//                return true;
-//            }
-//        });
-
-
-        // mLayout.setTouchEnabled(false);
-        //   bazarPosting.setEnabled(true);
-        // bazarPosting.setClickable(true);
-
-
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bazar_tool.getLayoutParams();
-        layoutParams.setMargins(0,0,0,(smal*5)/4);
-        bazar_tool.setLayoutParams(layoutParams);
-
-
-
-
-
-    }
-
-    public void panelListener(final Context context){
-
-        mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-
-            // During the transition of expand and collapse onPanelSlide function will be called.
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-
-               // Log.d(">>>>","Slide Up");
-
-            }
-
-
-
-            // This method will be call after slide up layout
-            @Override
-            public void onPanelExpanded(View panel) {
-                //calls when panel is expanded
-
-                slider_part.setVisibility(View.VISIBLE);
-
-                LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                sliding_parts.setMargins(0,height/25,0,height/140);
-                slider_part.setLayoutParams(sliding_parts);
-                pannl_height = height/17;
-
-                int heights = footer.getHeight();
-            //    Log.d("footer height","================"+heights);
-                submit_bazar.setHeight(heights);
-                //set an ideal panel heights
-                if(pannl_height<70)
-                    pannl_height=70;
-                //submit_bazar.getLayoutParams.(pannl_height);
-             //   submit_bazar.getLayoutParams().height=pannl_height;
-
-
-
-                footer.setText("বিজ্ঞাপন দেখুন");  //sliding pannel texts
-
-                String number =SharedPreferencesHelper.getNumber(context);
-//                if(number.equals(""))
-//                {
-//                    AlertMessage.showAskToRegister(context,"অনুগ্রহ পূর্বক রেজিস্ট্রাতিওন করুন","");
-//                }
-//                else {
-                bazar_post_layout.setVisibility(View.VISIBLE);
-//                }
-
-
-
-
-
-                postbazar(context);
-
-            }
-
-            // This method will be called after slide down layout.
-            @Override
-            public void onPanelCollapsed(View panel) {
-                slider_part.setVisibility(View.VISIBLE);
-                LinearLayout.LayoutParams sliding_parts = (LinearLayout.LayoutParams) slider_part.getLayoutParams();
-                sliding_parts.setMargins(0,0,0,height/140); //set properties for sliding panel
-                slider_part.setLayoutParams(sliding_parts);
-                buttonh= footer.getHeight();
-                pannl_height = height/17;
-                if(pannl_height<70)
-                    pannl_height=70;
-               // submit_bazar.setHeight(pannl_height);
-              //  Log.d(">>>>","onPanelCollapsed");
-
-                footer.setText("বিজ্ঞাপন দিন");
-
-            }
-
-
-
-            @Override
-            public void onPanelAnchored(View panel) {
-                Log.e(TAG, "onPanelAnchored");
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-
-
-                mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-
-
-                Log.e(TAG, "onPanelHidden");
-            }
-        });
-    }
 
     public void fun2() {
         fgrp1.setOnCheckedChangeListener(null);
