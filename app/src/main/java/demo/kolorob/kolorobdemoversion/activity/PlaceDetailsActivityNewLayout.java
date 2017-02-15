@@ -939,10 +939,7 @@ String pname,paddress,powner,pdescription;
 
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
-                    dialog = new ProgressDialog(PlaceDetailsActivityNewLayout.this);
-                    dialog.setMessage("দয়া করে অপেক্ষা করুন");
-                    dialog.setCancelable(true);
-                    dialog.show();
+
                     spItems.setVisibility(View.VISIBLE);
                     uptext.setVisibility(View.VISIBLE);
                     SearchClicked=false;
@@ -978,7 +975,6 @@ String pname,paddress,powner,pdescription;
                                 .into(SearchButton);
                         params3.height=larg;
                         ListButton.setLayoutParams(params3);
-                        toggleButton.setVisibility(View.GONE);
                         params2.height=smal;
                         SearchButton.setLayoutParams(params2);
                         params.height=smal;
@@ -986,52 +982,18 @@ String pname,paddress,powner,pdescription;
                         params4.height=smal;
                         CompareButton.setLayoutParams(params4);
 
-                        map.setVisibility(View.GONE);
+                        map.setVisibility(View.VISIBLE);
                     }
 
-
-                    //  subCatItemList.setVisibility(View.VISIBLE);
-                    bazar_tool.setVisibility(View.VISIBLE);
                     searchviewholder.setVisibility(View.GONE);
                     compare_layout.setVisibility(View.GONE);
                     compare_layoutedu.setVisibility(View.GONE);
 
 
-                    svholder.setVisibility(View.GONE);
-                    sv.setVisibility(View.GONE);
-                    //  subCatItemList.setVisibility(View.VISIBLE);
-                    bazar_tool.setVisibility(View.VISIBLE);
-                    width=AppUtils.getScreenWidth(PlaceDetailsActivityNewLayout.this);
-//                    bazar_logo.getLayoutParams().width=50;
-//                    bazar_logo.getLayoutParams().height=50;
-                    init(PlaceDetailsActivityNewLayout.this); // initialize variables
 
-                    loadBazar(PlaceDetailsActivityNewLayout.this);  //load the bazar tool data
-                    panelListener(PlaceDetailsActivityNewLayout.this);  //call sliding panel listener
-                    wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.kolorob_color));
-
-                    setShowList(1);
-                    toolbar.setVisibility(View.GONE);
-                    toggleButton.setVisibility(View.GONE);
-
-                    //listOrMapDisplayText.setText("ম্যাপ দেখতে চাইলে এখানে চাপ দিন");
-//
-//                if(currentCategoryID<1)
-//                    categoryListBuildUp(1);
-//                else
-//                    categoryListBuildUp(currentCategoryID);
-
-//                else
-//                {
-//                    llSubCatListHolder.setVisibility(View.VISIBLE);
-//                    setShowList(0);
-//                    map.setVisibility(View.VISIBLE);
-//                    list_expand=false;
-//                    subCatItemList.setVisibility(View.GONE);
-//                   // listOrMapDisplayText.setText("লিস্ট দেখতে চাইলে এখানে চাপ দিন");
-//                    //constructCategoryList(categoryList);
-//
-//                }
+                    Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
+                    startActivity(intentJ);
+                  map.setVisibility(View.GONE);
                 }
 
                 else {
