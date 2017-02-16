@@ -37,7 +37,10 @@ public class EntertainmentNewDBModel implements Serializable {
     String subcat;
     String ratings;
 
-    public EntertainmentNewDBModel(int entid, String nameen, String namebn, String enttype, String servicetype, String lat, String lon, String houseno, String block, String area, String policestation, String node_email, String ward, String road, String node_contact, String otherinfo, String offday, String closetime, String openingtime, int categoryId, String refnumm, String subcat, String ratings) {
+    public EntertainmentNewDBModel(int entid, String nameen, String namebn, String enttype, String servicetype,
+                                   String lat, String lon, String houseno, String block, String area, String policestation,
+                                   String node_email, String ward, String road, String node_contact, String otherinfo,
+                                   String openingtime , String closetime, String offday, int categoryId, String refnumm, String subcat, String ratings) {
         this.entid = entid;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -286,6 +289,6 @@ public class EntertainmentNewDBModel implements Serializable {
         String _sref=ki.substring(1,ki.length()-1);
         return new EntertainmentNewDBModel(_entid,_nameen,_namebn,_enttype,_servicetypefreeornot,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
-                _offday,_closetime,_opentime,_catid,_refnumm,_sref,_rating);
+                _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
     }
 }

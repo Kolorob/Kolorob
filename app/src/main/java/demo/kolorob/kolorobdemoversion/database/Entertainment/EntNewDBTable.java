@@ -250,7 +250,26 @@ public class EntNewDBTable {
         closeDB();
         return subCatList;
     }
+    public EntertainmentNewDBModel getentNode2(int Node) {
 
+        SQLiteDatabase db = openDB();
+        EntertainmentNewDBModel entertainmentNewDBModel=null;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+KEY_IDENTIFIER_ID+"="+Node, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                entertainmentNewDBModel = new EntertainmentNewDBModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8),
+                        cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13),
+                        cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
+                        cursor.getInt(19), cursor.getString(20), cursor.getString(21), cursor.getString(22));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return entertainmentNewDBModel;
+    }
 
 
 
@@ -272,9 +291,9 @@ public class EntNewDBTable {
         String _road = cursor.getString(13);
         String _node_contact = cursor.getString(14);
         String _other = cursor.getString(15);
-        String _offday  = cursor.getString(16);
+        String _opentime   = cursor.getString(16);
         String _closetime = cursor.getString(17);
-        String  _opentime= cursor.getString(18);
+        String  _offday= cursor.getString(18);
         int _catid=cursor.getInt(19);
         String _refnumm=cursor.getString(20);
         String _rating=cursor.getString(21);
@@ -283,7 +302,7 @@ public class EntNewDBTable {
 
        return new EntertainmentNewDBModel(_entid,_nameen,_namebn,_enttype,_servicetypefreeornot,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
-                _offday,_closetime,_opentime,_catid,_refnumm,_sref,_rating);
+               _opentime  ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
 
