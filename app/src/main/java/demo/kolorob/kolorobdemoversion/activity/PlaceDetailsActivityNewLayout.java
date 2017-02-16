@@ -41,7 +41,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -59,15 +58,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
-
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.CompareAdapter;
-import demo.kolorob.kolorobdemoversion.adapters.Group;
 import demo.kolorob.kolorobdemoversion.adapters.ListViewAdapterAllCategories;
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
@@ -75,35 +70,28 @@ import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentOSM;
 import demo.kolorob.kolorobdemoversion.interfaces.KolorobSpinner;
-import demo.kolorob.kolorobdemoversion.model.BazarItem;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -112,7 +100,6 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
-import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 /**
  *
@@ -126,27 +113,20 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 * got changed multiple times so it would be wise to check which part is doing what using debug*/
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
-
+ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
+    ArrayList<StoredArea>storedAreas=new ArrayList<>();
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
     boolean mainedcalled=false;
-    private int compareHeight;
-    private ImageView close_button;
+
     int buttonHeights;
-    int negotiable_check=0;
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
-    TextView footer;
-String pname,paddress,powner,pdescription;
-    int pannl_height;
-    int position_type_spinner=0;
+
     LinearLayout wholeLayout;
-    private int spinCounter=0,spinCounter1=0;
     String[] right_part;
-    TextView submit_bazar;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
-    LinearLayout slider_part;
     ArrayList<EducationNewItem> secondDataSet;
     ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
     ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
@@ -161,64 +141,38 @@ String pname,paddress,powner,pdescription;
     private static boolean mapcalledstatus;
     private LinearLayout llCatListHolder,svholder;
     CategoryItem ci;
-    int tution_detector=0;
     private static final String TAG = PlaceDetailsActivityNewLayout.class.getSimpleName();
 
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
     private static FrameLayout map;
-    private KolorobSpinner spItems;
-    ArrayAdapter arrayAdapter;
-    ArrayList<HealthServiceProviderItemNew> healthServiceProvider;
-    List<String>listData=new ArrayList<String>();
+
     private int height;
+
+    private int spinCounter=0,spinCounter1=0;
     private int primaryIconWidth;
     private int locationNameId,subcategory;
     private String locationName;
-
-    private String locationNameEng;
     private String comapreData;
     ScrollView sv;
     ImageView compare_logo_image;
-
-
     String firstData="",SecondData="";
-    int checker=0;
     Boolean InCompare=false;
-
     private HealthServiceProviderTableNew healthServiceProviderTableNew;
-
     private LinearLayout compare_layout;
-
-
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
     LinearLayout compare_layoutedu;
-
     boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
     private Toolbar toolbar;
-    TextView health_name2,opening_time2,language_spoken2,service_type2,specialist_available2,clean_facilities2,privacy2,quality_equipment2;
-    TextView opening_time1,language_spoken1,service_type1,specialist_available1,clean_facilities1,privacy1,quality_equipment1,cost1,cost2,cost3;
-    TextView health_name3,opening_time3,language_spoken3,service_type3,specialist_available3,clean_facilities3,privacy3,quality_equipment3;
-    TextView edu_name_ban,edtype,hostel_facility,transport_facility,playground,total_students,total_classes,total_teachers,course_provided,shift,canteen_facility;
-    TextView edu_name_ban1,edtype1,hostel_facility1,transport_facility1,playground1,total_students1,total_classes1,total_teachers1,course_provided1,shift1,canteen_facility1;
-    TextView edu_name_ban22,edtype2,hostel_facility2,transport_facility2,playground2,total_students2,total_classes2,total_teachers2,course_provided2,shift2,canteen_facility2;
-    private LinearLayout firstLayout,secondLayout,thirdLayout, fourthLayout, fifthLayout, sixthLayout, seventhLayout, eighthLayout;
+    TextView health_name2,health_name3,edu_name_ban,edu_name_ban22;
+
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
-
-    ArrayList<EntertainmentServiceProviderItemNew> printnamesent;
-
-    ArrayList<LegalAidServiceProviderItemNew> printnamesleg;
-    ArrayList<HealthServiceProviderItemNew> printnameshea;
-    ArrayList<FinancialNewItem> printnamesfin;
 
     private DrawerLayout drawer;
 
     Context context;
     ArrayList <String>Headerholder=new ArrayList<>();
-    ArrayList<EducationNewItem> printnames;
-    ArrayList<GovernmentNewItem> printgovs;
+
 
     int[] flag2 =new int[15];
 
@@ -228,21 +182,15 @@ String pname,paddress,powner,pdescription;
 
     public static int currentCategoryID;
 
-
-    Vector<Group> groups = new Vector<Group>();
     TextView header;
     private String placeChoice;
 
     private ImageButton MapButton,ListButton,SearchButton,CompareButton;
 
     ArrayList<CategoryItem> categoryList;
-    ArrayList<CategoryItem> categoryList2=new ArrayList<>();
     Boolean SearchClicked=false,MapClicked=true,ListClicked=false,CompareClicked=false;
     private Context con;
 
-
-
-    public    RelativeLayout rlSubCatHolder;
     public String getPlaceChoice() {
         return placeChoice;
     }
@@ -261,13 +209,7 @@ String pname,paddress,powner,pdescription;
 
     int snumber=0;
 
-    public String getLocationNameEng() {
-        return locationNameEng;
-    }
 
-    public void setLocationNameEng(String locationNameEng) {
-        this.locationNameEng = locationNameEng;
-    }
 
     public int getSnumber() {
         return snumber;
@@ -320,21 +262,19 @@ String pname,paddress,powner,pdescription;
 
     int buttonWidth=0;
     String idx,idxx,idxxx,idxxxx;
-    ArrayList<HealthNewDBModelMain> HEL=new ArrayList<>();
-    ArrayList<LegalAidNewDBModel>LEG=new ArrayList<>();
-    ArrayList<EntertainmentNewDBModel>ENT =new ArrayList<>();
-    ArrayList<FinancialNewDBModel>FIN=new ArrayList<>();
-    ArrayList<GovernmentNewDBModel>GOV=new ArrayList<>();
+   // ArrayList<HealthNewDBModelMain> HEL=new ArrayList<>();
+    //ArrayList<LegalAidNewDBModel>LEG=new ArrayList<>();
+    //ArrayList<EntertainmentNewDBModel>ENT =new ArrayList<>();
+   // ArrayList<FinancialNewDBModel>FIN=new ArrayList<>();
+   // ArrayList<GovernmentNewDBModel>GOV=new ArrayList<>();
     TextView uptext;
     boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
 
-    String nodefromback;
-    int index;
     MapFragmentOSM mapFragment;
     CheckBox negotiable;
     int wardId;
-    String Areakeyword;
+    String Areakeyword,mergedLocation;
 
 
 
@@ -353,6 +293,9 @@ String pname,paddress,powner,pdescription;
         editor.apply();
         wardId=settings.getInt("ward",0);
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
+        storedAreas=RetriveLocation(wardId,Areakeyword);
+        mergedLocation=storedAreas.get(0).getLoc();
+
         NavigationCalled=false;
         NavigationCalledOnce=false;
 
@@ -516,41 +459,6 @@ String pname,paddress,powner,pdescription;
         wholeLayout=(LinearLayout)findViewById(R.id.wholeLayout);
 
 
-        final Intent intent;
-        intent = getIntent();
-        /*according to intent value we are setting area location and populating data accordingly*/
-        if (null != intent)
-        {
-            locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE,0);
-            if(locationNameId== AppConstants.PLACE_BAUNIABADH)
-            {
-                setPlaceChoice("Mirpur-11");
-                locationName = AppConstants.BAUNIABADH;
-                listData.add(AppConstants.BAUNIABADH);
-                listData.add(AppConstants.PARIS_ROAD);
-                listData.add(AppConstants.MIRPUR_TWELVE);
-                setLocationNameEng("Mirpur-11");
-            }
-            else if(locationNameId== AppConstants.PLACE_PARIS_ROAD)
-            {
-                setPlaceChoice("Mirpur-10");
-                locationName = AppConstants.PARIS_ROAD;
-                listData.add(AppConstants.PARIS_ROAD);
-                listData.add(AppConstants.BAUNIABADH);
-                listData.add(AppConstants.MIRPUR_TWELVE);
-                setLocationNameEng("Mirpur-10");
-            }
-            else if(locationNameId== AppConstants.PLACE_MIRPUR_12)
-            {
-                setPlaceChoice("Mirpur-12");
-                locationName = AppConstants.MIRPUR_TWELVE;
-                listData.add(AppConstants.MIRPUR_TWELVE);
-                listData.add(AppConstants.BAUNIABADH);
-                listData.add(AppConstants.PARIS_ROAD);
-                setLocationNameEng("Mirpur-12");
-            }
-        }
-
         health_name2=(TextView)findViewById(R.id.health_name3);
         health_name3=(TextView)findViewById(R.id.health_name2);
         edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
@@ -601,86 +509,10 @@ String pname,paddress,powner,pdescription;
         //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
 
-        spItems = (KolorobSpinner) findViewById(R.id.areaitems);
-        spItems.setVisibility(View.VISIBLE);
-        arrayAdapter = new ArrayAdapter(PlaceDetailsActivityNewLayout.this,R.layout.area_row_spinner, listData);
-        arrayAdapter.setDropDownViewResource(R.layout.area_row_spinners_dropdown);
-        spItems.setAdapter(arrayAdapter);
-
-
-        spItems.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                String imc_met=spItems.getSelectedItem().toString();
-                setPlaceChoice(imc_met);
-                if(imc_met==AppConstants.BAUNIABADH) {
-                    locationNameId = AppConstants.PLACE_BAUNIABADH;
-                    setPlaceChoice("Mirpur-11");
-                    setLocationNameEng("Mirpur-11");
-
-                    allHolders.clear();
-                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
-                    {
-                        Populateholder("Mirpur-11");
-                        calladapter(true);
-                    }
-                    else Populateholder("Mirpur-11");
-                    callMapFragment(locationNameId);
-
-                }
-                else if(imc_met==AppConstants.PARIS_ROAD)
-                {locationNameId=AppConstants.PLACE_PARIS_ROAD;
-                    setPlaceChoice("Mirpur-10");
-                    setLocationNameEng("Mirpur-10");
-
-                    allHolders.clear();
-                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
-                    {
-                        Populateholder("Mirpur-10");
-                        calladapter(true);
-                    }
-                    else Populateholder("Mirpur-10");
-                    callMapFragment(locationNameId);
-//                    createData(currentCategoryID,"","Mirpur-10");
-//                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-//                    subCatItemList.setAdapter(adapter);
-                }
-                else {
-                    locationNameId = AppConstants.PLACE_MIRPUR_12;
-                    setPlaceChoice("Mirpur-12");
-                    setLocationNameEng("Mirpur-12");
-
-                    allHolders.clear();
-                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true)
-                    {
-                        Populateholder("Mirpur-12");
-                        calladapter(true);
-                    }
-                    else Populateholder("Mirpur-12");
-                    callMapFragment(locationNameId);
-//                    createData(currentCategoryID,"","Mirpur-12");
-//                    ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(PlaceDetailsActivityNewLayout.this, groups, currentCategoryID);
-//                    subCatItemList.setAdapter(adapter);
-                }
-                if(mapcalledstatus){
-
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
         Populateholder(getPlaceChoice());
         try
         {
-            callMapFragment(locationNameId);
+            callMapFragment(mergedLocation);
         }
         catch (Exception e)
         {
@@ -777,12 +609,6 @@ String pname,paddress,powner,pdescription;
                 SearchClicked=false;
                 MapClicked=true;
                 ListClicked=false;
-
-                if(toggleButton.isChecked()&& educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
-                {
-
-                }
-                spItems.setVisibility(View.VISIBLE);
                 uptext.setVisibility(View.VISIBLE);
                 CompareClicked=false;
                 if(InCompare==false) {
@@ -847,7 +673,6 @@ String pname,paddress,powner,pdescription;
                 if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
                 {
 
-                    spItems.setVisibility(View.VISIBLE);
                     uptext.setVisibility(View.VISIBLE);
                     SearchClicked=false;
                     MapClicked=false;
@@ -1745,7 +1570,7 @@ String pname,paddress,powner,pdescription;
                     case AppConstants.HEALTH:
                         MediaPlayer mp_h = MediaPlayer.create(getApplicationContext(), R.raw.health);
                         mp_h.start();
-                        HEL.clear();
+                        //HEL.clear();
                         helclicked=true;
                         educlicked=false;
                         entclicked=false;
@@ -1783,7 +1608,7 @@ String pname,paddress,powner,pdescription;
 
                     case AppConstants.ENTERTAINMENT:
 
-                        ENT.clear();
+                     //   ENT.clear();
                         entclicked=true;
                         educlicked=false;
                         helclicked=false;
@@ -1791,7 +1616,7 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        setFilcatid(14);
+                        setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
                         if(SearchClicked)
@@ -1803,8 +1628,8 @@ String pname,paddress,powner,pdescription;
 
                         ivIcon.setImageResource(0);
 
-                        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProvider;
-                        entertainmentServiceProvider = constructEntertainmentListItem(ci.getId());
+                        ArrayList<EntertainmentNewDBModel> entertainmentServiceProvider;
+                        entertainmentServiceProvider = constructEntertainmentListItem();
                         mapcalledstatus=true;
                         callMapFragmentWithEntertainment(-1, entertainmentServiceProvider,true);
 
@@ -1829,7 +1654,7 @@ String pname,paddress,powner,pdescription;
                         MediaPlayer mp_g = MediaPlayer.create(getApplicationContext(), R.raw.government);
                         mp_g.start();
                         govclicked=true;
-                        GOV.clear();
+                     //   GOV.clear();
                         entclicked=false;
                         educlicked=false;
                         helclicked=false;
@@ -1837,7 +1662,7 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
 
                         jobclicked=false;
-                        setFilcatid(33);
+                        setFilcatid(currentCategoryID);
 
                         catstatus=true;
                         calladapter(catstatus);
@@ -1852,7 +1677,7 @@ String pname,paddress,powner,pdescription;
 
 
                         mapcalledstatus=true;
-                        ArrayList<GovernmentNewItem> governmentNewItems;
+                        ArrayList<GovernmentNewDBModel> governmentNewItems;
                         governmentNewItems = constructgovListItem();
                         callMapFragmentWithGovernment(-1, governmentNewItems,true);
 
@@ -1888,7 +1713,7 @@ String pname,paddress,powner,pdescription;
                     case AppConstants.LEGAL:
                         MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
                         mp_l.start();
-                        LEG.clear();
+                      //  LEG.clear();
                         legclicked=true;
                         entclicked=false;
                         educlicked=false;
@@ -1896,7 +1721,7 @@ String pname,paddress,powner,pdescription;
                         finclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        setFilcatid(29);
+                        setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
                         if(SearchClicked)
@@ -1911,15 +1736,15 @@ String pname,paddress,powner,pdescription;
 
 
 
-                        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
+                        ArrayList<LegalAidNewDBModel> legalaidServiceProvider;
                         mapcalledstatus=true;
-                        legalaidServiceProvider = constructlegalaidListItem(ci.getId());
+                        legalaidServiceProvider = constructlegalaidListItem();
                         callMapFragmentWithLegal(-1, legalaidServiceProvider,true);
                         break;
                     case AppConstants.FINANCIAL:
                         MediaPlayer mp_f = MediaPlayer.create(getApplicationContext(), R.raw.finance);
                         mp_f.start();
-                        FIN.clear();
+                     //   FIN.clear();
                         finclicked=true;
                         entclicked=false;
                         educlicked=false;
@@ -1927,7 +1752,7 @@ String pname,paddress,powner,pdescription;
                         legclicked=false;
                         govclicked=false;
                         jobclicked=false;
-                        setFilcatid(11);
+                        setFilcatid(currentCategoryID);
                         catstatus=true;
                         calladapter(catstatus);
                         if(SearchClicked)
@@ -1939,26 +1764,10 @@ String pname,paddress,powner,pdescription;
                         ivIcon.setImageResource(R.drawable.finance_selected);
 
 
-                        ArrayList<FinancialNewItem> financialNewItems;
+                        ArrayList<FinancialNewDBModel> financialNewItems;
                         financialNewItems = constructfinancialListItem();
                         callMapFragmentWithFinancial(-1,financialNewItems,true);
                         mapcalledstatus=true;
-                        break;
-                    case AppConstants.JOB:
-                        MediaPlayer mp_j = MediaPlayer.create(getApplicationContext(), R.raw.job);
-                        mp_j.start();
-                        entclicked=false;
-                        educlicked=false;
-                        helclicked=false;
-                        legclicked=false;
-                        finclicked=false;
-                        govclicked=false;
-                        jobclicked=true;
-                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
-                        startActivity(intentJ);
-                        callMapFragmentWithFinancial(-1,null,true);
-                        ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.job_selected);
                         break;
 
 
@@ -1966,24 +1775,6 @@ String pname,paddress,powner,pdescription;
                     default:
                         break;
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //AppConstants.CAT_LIST_LG_WIDTH_PERC);
             }
         });
 
@@ -2203,15 +1994,15 @@ String pname,paddress,powner,pdescription;
     }
     /*
     * this is the default map view based on intent location name.If user change from spinner; this is also called*/
-    private void callMapFragment(int locationNameId) {
+    private void callMapFragment(String location) {
 
         FragmentManager fragmentManager = getFragmentManager();
         if(mapfirst) {
 
 
             mapFragment = new MapFragmentOSM();
-            mapFragment.setLocationName(getPlaceChoice());
-            mapFragment.setLocationNameId(locationNameId);
+            mapFragment.setLocationName(Areakeyword);
+            mapFragment.setLOCATIONFROMMAP(location);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.map_fragment, mapFragment, "MAP");
             fragmentTransaction.addToBackStack("MAP");
@@ -2220,7 +2011,7 @@ String pname,paddress,powner,pdescription;
             mapfirst=false;
         }
 
-
+/*
         MapFragmentOSM prev_fragment = (MapFragmentOSM) getFragmentManager().findFragmentByTag("MAP");
         if(prev_fragment!=null&&prev_fragment.getMapViewController() != null)
         {
@@ -2253,8 +2044,8 @@ String pname,paddress,powner,pdescription;
                 else if(currentCategoryID==3){
                     entclicked=false;
                     mapFragment.setCategoryId(3);
-                    ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItems;
-                    entertainmentServiceProviderItems = constructEntertainmentListItem(3);
+                    ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItems;
+                    entertainmentServiceProviderItems = constructEntertainmentListItem();
                     mapFragment.setEntertainmentServiceProvider(entertainmentServiceProviderItems);
                     prev_fragment.enticons();
                     prev_fragment.enticons();
@@ -2308,7 +2099,7 @@ String pname,paddress,powner,pdescription;
                 ArrayList<SubCategoryItem> subCatList = getSubCategoryList(currentCategoryID);
               }
 
-        }
+        }*/
     }
 
     /***********************************************************Methods for Health*************************************************/
@@ -2352,15 +2143,15 @@ String pname,paddress,powner,pdescription;
 
     /**********************************************************Methods for entertainment*******************************************/
 
-    private ArrayList<EntertainmentServiceProviderItemNew> constructEntertainmentListItem(int cat_id)
+    private ArrayList<EntertainmentNewDBModel> constructEntertainmentListItem()
     {
-        ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews;
-        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.getAllEntertainmentSubCategoriesInfo(getLocationNameEng());
+        ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews;
+        EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(PlaceDetailsActivityNewLayout.this);
+        entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.getAllEntertainmentinfo(wardId,Areakeyword);
         return entertainmentServiceProviderItemNews;
     }
 
-    private void callMapFragmentWithEntertainment(int edid,ArrayList<EntertainmentServiceProviderItemNew> entertainmentServiceProviderItemNews,boolean s)
+    private void callMapFragmentWithEntertainment(int edid,ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
@@ -2394,15 +2185,15 @@ String pname,paddress,powner,pdescription;
 
     /**********************************************************Methods for government**********************************************/
 
-    private ArrayList<GovernmentNewItem> constructgovListItem()
+    private ArrayList<GovernmentNewDBModel> constructgovListItem()
     {
-        ArrayList<GovernmentNewItem> governmentNewItems;
-        GovernmentNewTable governmentNewTable = new GovernmentNewTable(PlaceDetailsActivityNewLayout.this);
-        governmentNewItems = governmentNewTable.getAllGovSubCategoriesInfo(getLocationNameEng());
+        ArrayList<GovernmentNewDBModel> governmentNewItems;
+        GovNewDBTable governmentNewTable = new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
+        governmentNewItems = governmentNewTable.getAllGov(wardId,Areakeyword);
         return governmentNewItems;
     }
 
-    private void callMapFragmentWithGovernment(int edid,ArrayList<GovernmentNewItem> governmentNewItems,boolean s)
+    private void callMapFragmentWithGovernment(int edid,ArrayList<GovernmentNewDBModel> governmentNewItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
@@ -2435,17 +2226,17 @@ String pname,paddress,powner,pdescription;
 
     /**********************************************************Methods for legal***************************************************/
 
-    private ArrayList<LegalAidServiceProviderItemNew> constructlegalaidListItem(int cat_id)
+    private ArrayList<LegalAidNewDBModel> constructlegalaidListItem()
     {
-        ArrayList<LegalAidServiceProviderItemNew> legalaidServiceProvider;
-        LegalAidServiceProviderTableNew legalAidServiceProviderTable = new LegalAidServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegalAidSubCategoriesInfosearch(getLocationNameEng());
+        ArrayList<LegalAidNewDBModel> legalaidServiceProvider;
+        LegalAidNewDBTable legalAidServiceProviderTable = new LegalAidNewDBTable(PlaceDetailsActivityNewLayout.this);
+        legalaidServiceProvider = legalAidServiceProviderTable.getAllLegal(wardId,Areakeyword);
 
 
         return legalaidServiceProvider;
     }
 
-    private void callMapFragmentWithLegal(int edid,ArrayList<LegalAidServiceProviderItemNew> legalAidServiceProviderItemNews,boolean s)
+    private void callMapFragmentWithLegal(int edid,ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
@@ -2477,14 +2268,14 @@ String pname,paddress,powner,pdescription;
 
 
     /**********************************************************Methods for financial**********************************************/
-    private ArrayList<FinancialNewItem> constructfinancialListItem()
+    private ArrayList<FinancialNewDBModel> constructfinancialListItem()
     {
-        ArrayList<FinancialNewItem> financialNewItems;
-        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(PlaceDetailsActivityNewLayout.this);
-        financialNewItems = financialServiceNewTable.getAllFinancialSubCategoriesInfo(getLocationNameEng());
+        ArrayList<FinancialNewDBModel> financialNewItems;
+        FinNewDBTable financialServiceNewTable = new FinNewDBTable(PlaceDetailsActivityNewLayout.this);
+        financialNewItems = financialServiceNewTable.getAllFinancial(wardId,Areakeyword);
         return financialNewItems;
     }
-    private void callMapFragmentWithFinancial(int edid,ArrayList<FinancialNewItem> financialNewItems,boolean s)
+    private void callMapFragmentWithFinancial(int edid,ArrayList<FinancialNewDBModel> financialNewItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
@@ -2871,7 +2662,6 @@ String pname,paddress,powner,pdescription;
         super.onResume();
 
         //   toggleButton.setVisibility(View.VISIBLE);
-        spItems.setVisibility(View.VISIBLE);
 
 //
 //            map.setVisibility(View.GONE);
@@ -2970,6 +2760,11 @@ String pname,paddress,powner,pdescription;
         super.onDestroy();
     }
 
-
+public ArrayList<StoredArea> RetriveLocation(int id,String keyword)
+{
+    StoredAreaTable storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
+    storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
+    return storedAreaArrayList;
+}
 
 }
