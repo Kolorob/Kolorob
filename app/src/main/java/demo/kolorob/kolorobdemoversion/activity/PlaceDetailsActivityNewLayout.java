@@ -778,16 +778,16 @@ GeoPoint location;
                         CompareClicked = true;
                         InCompare = true;
 
-                        if (currentCategoryID == 1 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 0) {
+                        if (currentCategoryID == 10000 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 0) {
                             AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                     "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
-                        } else if (currentCategoryID == 2 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 0) {
+                        } else if (currentCategoryID == 20000 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 0) {
                             AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                     "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
-                        } else if (currentCategoryID == 1 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 1) {
+                        } else if (currentCategoryID == 10000 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 1) {
                             AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                     "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
-                        } else if (currentCategoryID == 2 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 1) {
+                        } else if (currentCategoryID == 20000 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 1) {
                             AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
                                     "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
                         } else {
@@ -885,7 +885,7 @@ GeoPoint location;
 
     public void compareTool()
     {
-        if(currentCategoryID==1)
+        if(currentCategoryID==10000)
         { //compare_layout.setBackgroundColor(Color.parseColor("#2F7281"));
             comapreData = SharedPreferencesHelper.getComapreData(PlaceDetailsActivityNewLayout.this);
             String delims = "[,]";
