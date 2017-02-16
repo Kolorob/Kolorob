@@ -54,6 +54,7 @@ import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -85,7 +86,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     RatingBar ratingBar;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
-    LegalAidServiceProviderItemNew legalAidServiceProviderItemNew;
+    LegalAidNewDBModel legalAidServiceProviderItemNew;
     ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
 
 
@@ -113,7 +114,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
         if (null != intent) {
-            legalAidServiceProviderItemNew = (LegalAidServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
+            legalAidServiceProviderItemNew = (LegalAidNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_LEGAL);
 
         }
 
@@ -237,45 +238,32 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());
 
 
-        Log.d("identiId", "====" + legalAidServiceProviderItemNew.getIdentifierId());
-        final LegalAidDetailsTable legalAidDetailsTable= new LegalAidDetailsTable(DetailsInfoActivityLegalNew.this);
-        leagalAidDetailsItems=legalAidDetailsTable.getAllLegalAidSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
-        CheckConcate("Node Id", legalAidServiceProviderItemNew.getIdentifierId());
-        CheckConcate("ঠিকানা", legalAidServiceProviderItemNew.getAddress());
-        CheckConcate("রাস্তার নম্বর ", legalAidServiceProviderItemNew.getRoad());
-        CheckConcate("লাইন নম্বর", legalAidServiceProviderItemNew.getLine());
-        CheckConcate("এভিনিউ", legalAidServiceProviderItemNew.getAvenue());
-        CheckConcate("ব্লক", legalAidServiceProviderItemNew.getBlock());
-        CheckConcate("বাসার নাম", legalAidServiceProviderItemNew.getHouse_name());
-        CheckConcate("বাসার নম্বর", legalAidServiceProviderItemNew.getHouse_no());
-        CheckConcate("ফ্লোর ", legalAidServiceProviderItemNew.getFloor());
 
-        CheckConcate("পরিচিত স্থান", legalAidServiceProviderItemNew.getLandmark());
-        CheckConcate("পোস্ট অফিস", legalAidServiceProviderItemNew.getPolice_station());
+        CheckConcate("প্রতিষ্ঠানের  ধরণ",  legalAidServiceProviderItemNew.getServicetype());
 
+
+        CheckConcate("রাস্তা", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getRoad()));
+        CheckConcate("ব্লক", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getBlock()));
+        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getArea());
+        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getWard()));
+        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        CheckConcate("পুলিশ স্টেশন", legalAidServiceProviderItemNew.getPolicestation());
+
+        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getHouseno()));
+
+        CheckConcate("যোগাযোগ", legalAidServiceProviderItemNew.getNode_contact());
+
+        CheckConcate("ইমেইল", legalAidServiceProviderItemNew.getNode_email());
 
         timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
-        if(!legalAidServiceProviderItemNew.getBreaktime().equals("null")&&!legalAidServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", legalAidServiceProviderItemNew.getBreaktime());
-        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosingtime());
-        CheckConcate("সাপ্তাহিক ছুটির দিন", legalAidServiceProviderItemNew.getOff_day());
-        CheckConcate("রেজিস্ট্রেশনমাধ্যমে", legalAidServiceProviderItemNew.getRegisteredWith());
-        ups_text.setText(legalAidServiceProviderItemNew.getLegalaidNameBan());
+        timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosetime());
+
+        CheckConcate("কবে বন্ধ থাকে", legalAidServiceProviderItemNew.getOffday());
 
 
-        if(!leagalAidDetailsItems.equals(""))
-        {
+        CheckConcate("অন্যান্য তথ্য ", legalAidServiceProviderItemNew.getOtherinfo());
 
-            for (LeagalAidDetailsItem leagalAidDetailsItem:leagalAidDetailsItems)
-            {
-                CheckConcate("সেবার ধরন", leagalAidDetailsItem.getType());
 
-                CheckConcate("আইন পরামর্শ", leagalAidDetailsItem.getSub_type());
-                CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(leagalAidDetailsItem.getLagal_cost())+" টাকা");
-                CheckConcate("পরামরশদাতা", leagalAidDetailsItem.getLegal_responsible_person());
-            }
-
-        }
 
 
 
@@ -311,7 +299,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         CommentTable commentTable = new CommentTable(DetailsInfoActivityLegalNew.this);
 
 
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(legalAidServiceProviderItemNew.getIdentifierId());
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(legalAidServiceProviderItemNew.getLegalid()));
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
@@ -343,13 +331,13 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this,legalAidServiceProviderItemNew.getIdentifierId(),uname).equals("yes")||inc>0) {
-                    if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this, legalAidServiceProviderItemNew.getIdentifierId(), uname).equals("yes")&&inc==0) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this, String.valueOf(legalAidServiceProviderItemNew.getLegalid()),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this, String.valueOf(legalAidServiceProviderItemNew.getLegalid()), uname).equals("yes")&&inc==0) {
                         AlertMessage.showMessage(con, "দুঃখিত",
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
-                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this, legalAidServiceProviderItemNew.getIdentifierId(), uname).equals("yes") ) {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityLegalNew.this, String.valueOf(legalAidServiceProviderItemNew.getLegalid()), uname).equals("yes") ) {
                             ToastMessageDisplay.setText(con,
                                     "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
                             ToastMessageDisplay.showText(con);
@@ -374,7 +362,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                         final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                         try {
-                            int ratings = Integer.parseInt(legalAidServiceProviderItemNew.getRating());
+                            int ratings = Integer.parseInt(legalAidServiceProviderItemNew.getRatings());
 
                             if (ratings == 1) {
                                 ratingbarz.setBackgroundResource(R.drawable.one);
@@ -482,13 +470,13 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(legalAidServiceProviderItemNew.getEmailAddress().equals("null")||legalAidServiceProviderItemNew.getEmailAddress().equals(""))
+                if(legalAidServiceProviderItemNew.getNode_email().equals("null")||legalAidServiceProviderItemNew.getNode_email().equals(""))
                 {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
-                    Helpes.sendEmail(DetailsInfoActivityLegalNew.this, legalAidServiceProviderItemNew.getEmailAddress());
+                    Helpes.sendEmail(DetailsInfoActivityLegalNew.this, legalAidServiceProviderItemNew.getNode_email());
                 }
             }
         });
@@ -498,9 +486,9 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if(!legalAidServiceProviderItemNew.getWebsiteLink().equals(""))
+                if(!legalAidServiceProviderItemNew.getNode_contact().equals("null"))
                 {
-                    callIntent1.setData(Uri.parse("tel:" + legalAidServiceProviderItemNew.getContactNo()));
+                    callIntent1.setData(Uri.parse("tel:" + legalAidServiceProviderItemNew.getNode_contact()));
                     if(checkPermission())
                         startActivity(callIntent1);
                     else{
@@ -535,12 +523,12 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = legalAidServiceProviderItemNew.getLatitude().toString();
+                    String lat = legalAidServiceProviderItemNew.getLat().toString();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = legalAidServiceProviderItemNew.getLongitude().toString();
+                    String lon = legalAidServiceProviderItemNew.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
-                    String name= legalAidServiceProviderItemNew.getLegalaidNameBan().toString();
-                    String node=String.valueOf(legalAidServiceProviderItemNew.getIdentifierId());
+                    String name= legalAidServiceProviderItemNew.getNamebn().toString();
+                    String node=String.valueOf(legalAidServiceProviderItemNew.getLegalid());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -620,7 +608,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 //
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
         try {
-            ratingBar.setRating(Float.parseFloat(legalAidServiceProviderItemNew.getRating()));
+            ratingBar.setRating(Float.parseFloat(legalAidServiceProviderItemNew.getRatings()));
         }
         catch (Exception e)
         {
@@ -762,7 +750,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getIdentifierId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+legalAidServiceProviderItemNew.getLegalid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -774,7 +762,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityLegalNew.this,legalAidServiceProviderItemNew.getIdentifierId(),uname,"yes");
+                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityLegalNew.this, String.valueOf(legalAidServiceProviderItemNew.getLegalid()),uname,"yes");
 
                                 AlertMessage.showMessage(DetailsInfoActivityLegalNew.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ ");
