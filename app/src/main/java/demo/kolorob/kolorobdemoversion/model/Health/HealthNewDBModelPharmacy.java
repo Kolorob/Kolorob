@@ -13,6 +13,9 @@ public class HealthNewDBModelPharmacy {
     String speciality;
     String vaccineavailability;
 
+    public HealthNewDBModelPharmacy() {
+    }
+
     public HealthNewDBModelPharmacy(int servicecenterid, String docavailability, String speciality, String vaccineavailability) {
         this.servicecenterid = servicecenterid;
         this.docavailability = docavailability;

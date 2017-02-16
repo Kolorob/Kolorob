@@ -22,21 +22,29 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
+import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -50,10 +58,10 @@ public class MyInfoWindow extends InfoWindow {
     EducationServiceProviderItem nulledu;
     ArrayList<EduNewModel> nulledu2=new ArrayList<>();
     GovernmentNewDBModel nullgov;
-    HealthServiceProviderItemNew nullhel;
-    EntertainmentServiceProviderItemNew nullent;
-    FinancialNewItem nullfin;
-    LegalAidServiceProviderItemNew nullleg;
+    HealthNewDBModelMain nullhel;
+    EntertainmentNewDBModel nullent;
+    FinancialNewDBModel nullfin;
+    LegalAidNewDBModel nullleg;
     Activity con;
     GeoPoint pp;
     String user="kolorobapp";
@@ -125,8 +133,8 @@ public class MyInfoWindow extends InfoWindow {
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
                      //   Log.d("Value of N","======="+node);
-                        HealthServiceProviderTableNew healthServiceProviderTable = new HealthServiceProviderTableNew(MyInfoWindow.this.con);
-                        nullhel = healthServiceProviderTable.gethelNode2(Integer.valueOf(node));
+                        HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(MyInfoWindow.this.con);
+                        nullhel = healthServiceProviderTable.gethelNode2(n);
                         Intent iihel = new Intent(MyInfoWindow.this.con, DetailsInfoActivityHealthNew.class);
                         iihel.putExtra(AppConstants.KEY_DETAILS_HEALTH_NEW, nullhel);
                         MyInfoWindow.this.con.startActivity(iihel);
@@ -135,8 +143,8 @@ public class MyInfoWindow extends InfoWindow {
                     case AppConstants.ENTERTAINMENT:
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        EntertainmentServiceProviderTableNew entertainmentServiceProviderTableNew = new EntertainmentServiceProviderTableNew(MyInfoWindow.this.con);
-                        nullent = entertainmentServiceProviderTableNew.getentNode2(node);
+                        EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(MyInfoWindow.this.con);
+                        nullent = entertainmentServiceProviderTableNew.getentNode2(n);
                         Intent iientt = new Intent(MyInfoWindow.this.con, DetailsInfoActivityEntertainmentNew.class);
                         iientt.putExtra(AppConstants.KEY_DETAILS_ENT, nullent);
                         MyInfoWindow.this.con.startActivity(iientt);
@@ -145,8 +153,8 @@ public class MyInfoWindow extends InfoWindow {
                     case AppConstants.LEGAL:
                       //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        LegalAidServiceProviderTableNew legalAidServiceProviderTableNew = new LegalAidServiceProviderTableNew(MyInfoWindow.this.con);
-                        nullleg = legalAidServiceProviderTableNew.getlegNode2(node);
+                        LegalAidNewDBTable legalAidServiceProviderTableNew = new LegalAidNewDBTable(MyInfoWindow.this.con);
+                        nullleg = legalAidServiceProviderTableNew.getlegNode2(n);
                         Intent iileg = new Intent(MyInfoWindow.this.con, DetailsInfoActivityLegalNew.class);
                         iileg.putExtra(AppConstants.KEY_DETAILS_LEGAL, nullleg);
                         MyInfoWindow.this.con.startActivity(iileg);
@@ -155,7 +163,7 @@ public class MyInfoWindow extends InfoWindow {
                     case AppConstants.FINANCIAL:
                        // Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        FinancialServiceNewTable financialServiceNewTable = new FinancialServiceNewTable(MyInfoWindow.this.con);
+                        FinNewDBTable financialServiceNewTable = new FinNewDBTable(MyInfoWindow.this.con);
                         nullfin = financialServiceNewTable.getfinNode2(n);
                         Intent iifin = new Intent(MyInfoWindow.this.con, DetailsLayoutFinance.class);
                         iifin.putExtra(AppConstants.KEY_DETAILS_FINANCIALNEW, nullfin);

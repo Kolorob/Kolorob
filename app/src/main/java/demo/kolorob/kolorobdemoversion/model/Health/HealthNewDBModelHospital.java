@@ -19,6 +19,9 @@ public class HealthNewDBModelHospital implements Serializable {
     String maternitynumber;
     String maternityprivacy;
 
+    public HealthNewDBModelHospital() {
+    }
+
     public HealthNewDBModelHospital(int servicecenterid, String emergencyavailable, String emergencynumber, String ambulanceavailable, String ambulancenumber, String maternityavailable, String maternitynumber, String maternityprivacy) {
         this.servicecenterid = servicecenterid;
         this.emergencyavailable = emergencyavailable;
