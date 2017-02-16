@@ -53,6 +53,7 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetail
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -81,7 +82,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     String[] value;
     int increment=0;
     ListView alldata;
-    FinancialNewItem financialNewItem;
+    FinancialNewDBModel financialNewItem;
     EditText feedback_comment;
     ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
 
@@ -111,7 +112,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
         if (null != intent) {
-            financialNewItem = (FinancialNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIALNEW);
+            financialNewItem = (FinancialNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_FINANCIALNEW);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
@@ -160,47 +161,32 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         mlp.setMargins(width/100,0,width/990,width/8);
 
 
+        CheckConcate("প্রতিষ্ঠানের  ধরণ",  financialNewItem.getFintype());
 
-        CheckConcate("Node Id", String.valueOf(financialNewItem.getFinId()));
-        CheckConcate("ঠিকানা  ", financialNewItem.getAddress());
+        CheckConcate("সুবিধার ধরণ",  financialNewItem.getServicetype());
 
-        CheckConcate("রাস্তা  ", English_to_bengali_number_conversion(financialNewItem.getRoad()));
-        CheckConcate("লাইন  ", English_to_bengali_number_conversion(financialNewItem.getLine()));
-        CheckConcate("এভিনিউ  ", English_to_bengali_number_conversion(financialNewItem.getAvenue()));
-        CheckConcate("পোস্ট অফিস  ", financialNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন ", financialNewItem.getPolicestation());
+        CheckConcate("রাস্তা", English_to_bengali_number_conversion(financialNewItem.getRoad()));
+        CheckConcate("ব্লক", English_to_bengali_number_conversion(financialNewItem.getBlock()));
+        CheckConcate("এলাকা", financialNewItem.getArea());
+        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(financialNewItem.getWard()));
+        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        CheckConcate("পুলিশ স্টেশন", financialNewItem.getPolicestation());
 
-        CheckConcate("বাড়ির নাম  ", financialNewItem.getHousename());
-        CheckConcate("ফ্লোর  ", English_to_bengali_number_conversion(financialNewItem.getFloor()));
-        CheckConcate("পরিচিত স্থান  ", financialNewItem.getLandmark());
+        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(financialNewItem.getHouseno()));
 
-        CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ ", financialNewItem.getNode_contact2());
-        CheckConcate("ইমেইল  ", financialNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট  ", financialNewItem.getNode_website());
-        CheckConcate("ফেসবুক   ", financialNewItem.getNode_facebook());
-        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্ত ", financialNewItem.getNode_designation());
+        CheckConcate("যোগাযোগ", financialNewItem.getNode_contact());
+
+        CheckConcate("ইমেইল", financialNewItem.getNode_email());
+
+        timeProcessing("খোলার সময়", financialNewItem.getOpeningtime());
+        timeProcessing("বন্ধের সময়", financialNewItem.getClosetime());
+
+        CheckConcate("কবে বন্ধ থাকে", financialNewItem.getOffday());
 
 
-        timeProcessing("খোলার সময়  ", financialNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়  ", financialNewItem.getClosetime());
-        if(!financialNewItem.getBreaktime().equals("null")&&!financialNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়  ", financialNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন  ", financialNewItem.getOffday());
+        CheckConcate("অন্যান্য তথ্য ", financialNewItem.getOtherinfo());
 
-        CheckConcate("কাদের সাথে রেজিস্টার্ড   ", financialNewItem.getRegisteredwith());
 
-        financialServiceDetailsItems = financialServiceDetailsTable.getfinanceinfo(financialNewItem.getFinId());
-        int tuition_size = financialServiceDetailsItems.size();
-        if (tuition_size != 0) {
-            for (FinancialServiceDetailsItem financialServiceDetailsItem:   financialServiceDetailsItems) {
-                //result_concate="";
-                CheckConcate("সুবিধার ধরন  ", financialServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম  ", financialServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", financialServiceDetailsItem.getServicecost()+" টাকা");
-                CheckConcate("মন্তব্য  ", financialServiceDetailsItem.getServiceremark());
-            }
-        }
 
 
         SharedPreferences settings = DetailsLayoutFinance.this.getSharedPreferences("prefs", 0);
@@ -237,7 +223,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         CommentTable commentTable = new CommentTable(DetailsLayoutFinance.this);
 
 
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(financialNewItem.getFinId()));
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(financialNewItem.getFinid()));
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
@@ -269,13 +255,13 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinId()),uname).equals("yes")||inc>0) {
-                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinId()), uname).equals("yes")&&inc==0) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinid()),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinid()), uname).equals("yes")&&inc==0) {
                         AlertMessage.showMessage(con, "দুঃখিত",
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
-                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinId()), uname).equals("yes") ) {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutFinance.this, String.valueOf(financialNewItem.getFinid()), uname).equals("yes") ) {
                             ToastMessageDisplay.setText(con,
                                     "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
                             ToastMessageDisplay.showText(con);
@@ -300,7 +286,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                         final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                         try {
-                            int ratings = Integer.parseInt(financialNewItem.getRating());
+                            int ratings = Integer.parseInt(financialNewItem.getRatings());
 
                             if (ratings == 1) {
                                 ratingbarz.setBackgroundResource(R.drawable.one);
@@ -484,7 +470,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!financialNewItem.getNode_contact().equals("")) {
+                if (!financialNewItem.getNode_contact().equals("null")) {
                     callIntent1.setData(Uri.parse("tel:" + financialNewItem.getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
@@ -515,7 +501,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                     String lon = financialNewItem.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
                     String name= financialNewItem.getNamebn().toString();
-                    String node=String.valueOf(financialNewItem.getFinId());
+                    String node=String.valueOf(financialNewItem.getFinid());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -686,7 +672,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
 
         try {
-            float f= Float.parseFloat(financialNewItem.getRating());
+            float f= Float.parseFloat(financialNewItem.getRatings());
             ratingBar.setRating(f);
         }
         catch (Exception e)
@@ -739,7 +725,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+financialNewItem.getFinid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -751,7 +737,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutFinance.this,String.valueOf(financialNewItem.getFinId()),uname,"yes");
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutFinance.this,String.valueOf(financialNewItem.getFinid()),uname,"yes");
                                 AlertMessage.showMessage(DetailsLayoutFinance.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }

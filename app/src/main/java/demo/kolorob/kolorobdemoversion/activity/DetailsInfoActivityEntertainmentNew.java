@@ -53,6 +53,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTa
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -82,7 +83,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     String[] key;
     String[] value;
     int increment=0;
-    EntertainmentServiceProviderItemNew entertainmentServiceProviderItemNew;
+    EntertainmentNewDBModel entertainmentServiceProviderItemNew;
     ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
 
     private TextView ratingText;
@@ -108,7 +109,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         if (null != intent) {
             //Receive an arrayList of (EntertainmentServiceProviderItemNew) type from previous activity.
-            entertainmentServiceProviderItemNew = (EntertainmentServiceProviderItemNew) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
+            entertainmentServiceProviderItemNew = (EntertainmentNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
 
         }
 
@@ -197,58 +198,56 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         ratingText.setTextSize(23);
 
 
-              //build a Arraylist with a service display
-        EntertainmetTypeTable entertainmetTypeTable=new EntertainmetTypeTable(DetailsInfoActivityEntertainmentNew.this);
-        entertainmentTypeItems=entertainmetTypeTable.getEntTypeItem(entertainmentServiceProviderItemNew.getNodeId());
         result_concate ="";
         key = new String[600];
         value = new String[600];
 
+        CheckConcate("প্রতিষ্ঠানের  ধরণ",  entertainmentServiceProviderItemNew.getEnttype());
+
+       if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "আছে");
+
+        CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "নাই");
+        CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
+        CheckConcate("ব্লক", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getBlock()));
+        CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getArea());
+        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getWard()));
+        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());
+
+        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getHouseno()));
+
+        CheckConcate("যোগাযোগ", entertainmentServiceProviderItemNew.getNode_contact());
+
+        CheckConcate("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
+
+        timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
+        timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosetime());
+
+        CheckConcate("কবে বন্ধ থাকে", entertainmentServiceProviderItemNew.getOffday());
+
+
+        CheckConcate("অন্যান্য তথ্য ", entertainmentServiceProviderItemNew.getOtherinfo());
 
                //checkConcate method will check null data and concat
-        CheckConcate("Node Id", entertainmentServiceProviderItemNew.getNodeId());
-        CheckConcate("ঠিকানা", entertainmentServiceProviderItemNew.getAddress());
-        CheckConcate("রাস্তার নাম", entertainmentServiceProviderItemNew.getRoad());
-        CheckConcate("লাইন নম্বর", entertainmentServiceProviderItemNew.getLine());
-        CheckConcate("এভিনিউ", entertainmentServiceProviderItemNew.getAvenue());
-        CheckConcate("ব্লক", entertainmentServiceProviderItemNew.getBlock());
-        CheckConcate("পরিচিত স্থান", entertainmentServiceProviderItemNew.getLandmark());
-        CheckConcate("পোস্ট অফিস", entertainmentServiceProviderItemNew.getPost_office());
-        CheckConcate("বাসার নম্বর", entertainmentServiceProviderItemNew.getHouse_no());
-        CheckConcate("বাসার নাম", entertainmentServiceProviderItemNew.getHouse_name());
-        CheckConcate("ফ্লোর ", entertainmentServiceProviderItemNew.getFloor());
-              //timeprocessing method will convert time to details time formatt in bangla
-        timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
-        if(!entertainmentServiceProviderItemNew.getBreaktime().equals("null")&&!entertainmentServiceProviderItemNew.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", entertainmentServiceProviderItemNew.getBreaktime());
-        timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosingtime());
-        CheckConcate("ছুটির দিন", entertainmentServiceProviderItemNew.getOff_day());
-        service_name.setText(entertainmentServiceProviderItemNew.getNodeNameBn());
+
              // Default Adapter will show the details info of a service
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         service_data.setAdapter(defaultAdapter);
 
 
-                //retrieve corresponding service type data from database
-        for (EntertainmentTypeItem entertainmentTypeItem : entertainmentTypeItems) {
-            CheckConcate("প্রতিষ্ঠানের ধরন", entertainmentTypeItem.getType());
-            CheckConcate("সেবার ধরন", entertainmentTypeItem.getSub_type());
-            CheckConcate("সেবার খরচ", English_to_bengali_number_conversion(entertainmentTypeItem.getRecreation_price())+" টাকা");
-            CheckConcate("অন্যন্য তথ্য", entertainmentTypeItem.getRecreation_remarks());
-        }
 
         
                 
         email_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (entertainmentServiceProviderItemNew.getNodeWebsite().equals("null")||entertainmentServiceProviderItemNew.getNodeWebsite().equals("")) {
+                if (entertainmentServiceProviderItemNew.getNode_email().equals("null")||entertainmentServiceProviderItemNew.getNode_email().equals("")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
                      //Helpes method will be used to send Email
-                    Helpes.sendEmail(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeEmail());
+                    Helpes.sendEmail(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNode_email());
                 }
             }
         });
@@ -261,7 +260,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         CommentTable commentTable = new CommentTable(DetailsInfoActivityEntertainmentNew.this);
 
 
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(entertainmentServiceProviderItemNew.getNodeId());
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(entertainmentServiceProviderItemNew.getEntid()));
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
@@ -292,13 +291,13 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         comment_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname).equals("yes")||inc>0) {
-                    if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeId(), uname).equals("yes")&&inc==0) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, String.valueOf(entertainmentServiceProviderItemNew.getEntid()),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, String.valueOf(entertainmentServiceProviderItemNew.getEntid()), uname).equals("yes")&&inc==0) {
                         AlertMessage.showMessage(con, "দুঃখিত",
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
-                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNodeId(), uname).equals("yes") ) {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, String.valueOf(entertainmentServiceProviderItemNew.getEntid()), uname).equals("yes") ) {
                            ToastMessageDisplay.setText(con,
                                     "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
                            ToastMessageDisplay.showText(con);
@@ -317,7 +316,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                             try {
-                                int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRating());
+                                int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRatings());
                                 if (ratings == 1) {
                                     ratingbarz.setBackgroundResource(R.drawable.one);
                                 } else if (ratings == 2)
@@ -426,9 +425,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!entertainmentServiceProviderItemNew.getNodeContact().equals("null")&&!entertainmentServiceProviderItemNew.getNodeContact().equals("")) {
-                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNodeContact());
-                    callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItemNew.getNodeContact()));
+                if (!entertainmentServiceProviderItemNew.getNode_contact().equals("null")&&!entertainmentServiceProviderItemNew.getNode_contact().equals("")) {
+                    Log.d("Entertainment Parsing","......."+entertainmentServiceProviderItemNew.getNode_contact());
+                    callIntent1.setData(Uri.parse("tel:" + entertainmentServiceProviderItemNew.getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
@@ -459,12 +458,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = entertainmentServiceProviderItemNew.getLatitude().toString();
+                    String lat = entertainmentServiceProviderItemNew.getLat().toString();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = entertainmentServiceProviderItemNew.getLongitude().toString();
+                    String lon = entertainmentServiceProviderItemNew.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
-                    String name= entertainmentServiceProviderItemNew.getNodeNameBn().toString();
-                    String node=String.valueOf(entertainmentServiceProviderItemNew.getNodeId());
+                    String name= entertainmentServiceProviderItemNew.getNamebn().toString();
+                    String node=String.valueOf(entertainmentServiceProviderItemNew.getEntid());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -608,7 +607,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getNodeId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getEntid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -617,7 +616,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                         // Response is true or false
                         try {
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityEntertainmentNew.this,entertainmentServiceProviderItemNew.getNodeId(),uname,"yes");
+                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityEntertainmentNew.this,String.valueOf(entertainmentServiceProviderItemNew.getEntid()),uname,"yes");
                                 AlertMessage.showMessage(DetailsInfoActivityEntertainmentNew.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
                             }
@@ -657,7 +656,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     public void setRatingBar()
     {
         try {
-            float f= Float.parseFloat(entertainmentServiceProviderItemNew.getRating());
+            float f= Float.parseFloat(entertainmentServiceProviderItemNew.getRatings());
             ratingBar.setRating(f);
             ratingBar.setIsIndicator(true);
         }
