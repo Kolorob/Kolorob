@@ -4,11 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class LegalAidNewDBModel {
+public class LegalAidNewDBModel implements Serializable {
     int legalid;
     String nameen;
     String namebn;

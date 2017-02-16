@@ -24,6 +24,7 @@ import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
+import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
@@ -33,6 +34,7 @@ import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
@@ -47,7 +49,7 @@ public class MyInfoWindow extends InfoWindow {
     int n;
     EducationServiceProviderItem nulledu;
     ArrayList<EduNewModel> nulledu2=new ArrayList<>();
-    GovernmentNewItem nullgov;
+    GovernmentNewDBModel nullgov;
     HealthServiceProviderItemNew nullhel;
     EntertainmentServiceProviderItemNew nullent;
     FinancialNewItem nullfin;
@@ -111,7 +113,7 @@ public class MyInfoWindow extends InfoWindow {
                         // Override Marker's onClick behaviour here
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                        GovernmentNewTable governmentNewTable = new GovernmentNewTable(MyInfoWindow.this.con);
+                        GovNewDBTable governmentNewTable = new GovNewDBTable(MyInfoWindow.this.con);
 
                         nullgov = governmentNewTable.getgovNode2(n);
                         Intent iigov = new Intent(MyInfoWindow.this.con, DetailsLayoutGovernment.class);

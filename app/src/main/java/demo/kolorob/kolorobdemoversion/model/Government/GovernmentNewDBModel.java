@@ -4,11 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class GovernmentNewDBModel {
+public class GovernmentNewDBModel implements Serializable {
     int govid;
     String nameen;
     String namebn;
@@ -34,7 +36,11 @@ public class GovernmentNewDBModel {
     String subcat;
     String ratings;
 
-    public GovernmentNewDBModel(int govid, String nameen, String namebn, String servicename, String lat, String lon, String houseno, String block, String area, String policestation, String node_email, String ward, String road, String node_contact, String otherinfo, String offday, String closetime, String openingtime, int categoryId, String refnumm, String subcat, String ratings) {
+    public GovernmentNewDBModel(int govid, String nameen, String namebn, String servicename, String lat, String lon,
+                                String houseno, String block, String area, String policestation, String node_email,
+                                String ward, String road, String node_contact, String otherinfo,String openingtime ,
+                                String closetime, String offday, int categoryId, String refnumm, String subcat,
+                                String ratings) {
         this.govid = govid;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -270,6 +276,6 @@ public class GovernmentNewDBModel {
         String _sref=ki.substring(1,ki.length()-1);
         return new GovernmentNewDBModel(_govid,_nameen,_namebn,_service_name,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
-                _offday,_closetime,_opentime,_catid,_refnumm,_sref,_rating);
+                _opentime  ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
     }
 }

@@ -53,6 +53,7 @@ import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDeta
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -81,7 +82,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     String[] value;
     int increment=0;
     ListView alldata;
-    GovernmentNewItem governmentNewItem;
+    GovernmentNewDBModel governmentNewItem;
 
     String datevalue,datevaluebn;
     ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
@@ -114,7 +115,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
         if (null != intent) {
-            governmentNewItem = (GovernmentNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_GOV);
+            governmentNewItem = (GovernmentNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_GOV);
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
@@ -162,45 +163,30 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         setRatingBar();
 
-        CheckConcate("Node Id", String.valueOf(governmentNewItem.getFinId()));
-        CheckConcate("ঠিকানা  ", governmentNewItem.getAddress());
+          CheckConcate("সুবিধার ধরণ",  governmentNewItem.getServicename());
 
-        CheckConcate("রাস্তা   ", governmentNewItem.getRoad());
-        CheckConcate("লাইন    ", governmentNewItem.getLine());
-        CheckConcate("এভিনিউ  ", governmentNewItem.getAvenue());
-        CheckConcate("পোস্ট অফিস  ", governmentNewItem.getPostoffice());
-        CheckConcate("পুলিশ স্টেশন ", governmentNewItem.getPolicestation());
-        CheckConcate("পরিচিত স্থান  ", governmentNewItem.getLandmark());
+        CheckConcate("রাস্তা", English_to_bengali_number_conversion(governmentNewItem.getRoad()));
+        CheckConcate("ব্লক", English_to_bengali_number_conversion(governmentNewItem.getBlock()));
+        CheckConcate("এলাকা", governmentNewItem.getArea());
+        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(governmentNewItem.getWard()));
+        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        CheckConcate("পুলিশ স্টেশন", governmentNewItem.getPolicestation());
 
-        CheckConcate("বাড়ির নাম  ", governmentNewItem.getHousename());
-        CheckConcate("ফ্লোর  ", governmentNewItem.getFloor());
-        CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ  ", governmentNewItem.getNode_contact2());
-        CheckConcate("ইমেইল  ", governmentNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট  ", governmentNewItem.getNode_website());
-        CheckConcate("ফেসবুক  ", governmentNewItem.getNode_facebook());
-        CheckConcate("দায়িত্বপ্রাপ্ত ব্যাক্তি   ", governmentNewItem.getNode_designation());
+        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(governmentNewItem.getHouseno()));
+
+        CheckConcate("যোগাযোগ", governmentNewItem.getNode_contact());
+
+        CheckConcate("ইমেইল", governmentNewItem.getNode_email());
+
+        timeProcessing("খোলার সময়", governmentNewItem.getOpeningtime());
+        timeProcessing("বন্ধের সময়", governmentNewItem.getClosetime());
+
+        CheckConcate("কবে বন্ধ থাকে", governmentNewItem.getOffday());
 
 
-        timeProcessing("খোলার সময়  ", governmentNewItem.getOpeningtime());
-        timeProcessing("বন্ধে সময়  ", governmentNewItem.getClosetime());
-        if(!governmentNewItem.getBreaktime().equals("null")&&!governmentNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়  ", governmentNewItem.getBreaktime());
-        CheckConcate("বন্ধের দিন   ", governmentNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার ", governmentNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড   ", governmentNewItem.getRegisteredwith());
+        CheckConcate("অন্যান্য তথ্য ", governmentNewItem.getOtherinfo());
 
-        governmentServiceDetailsItems = governmentServiceDetailsTable.getgovinfo(governmentNewItem.getFinId());
-        int tuition_size = governmentServiceDetailsItems.size();
-        if (tuition_size != 0) {
-            for (GovernmentServiceDetailsItem governmentServiceDetailsItem : governmentServiceDetailsItems) {
-                //result_concate="";
-                CheckConcate("সুবিধার ধরন ", governmentServiceDetailsItem.getServicetype());
-                CheckConcate("সুবিধার নাম ", governmentServiceDetailsItem.getServicesubtype());
-                CheckConcate("খরচ  ", governmentServiceDetailsItem.getServicecost()+ "টাকা");
-                CheckConcate("মন্তব্য ", governmentServiceDetailsItem.getDetailstep());
-            }
-        }
+
 
 
 
@@ -309,7 +295,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         CommentTable commentTable = new CommentTable(DetailsLayoutGovernment.this);
 
 
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(governmentNewItem.getFinId()));
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(governmentNewItem.getGovid()));
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
@@ -342,13 +328,13 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutGovernment.this, String.valueOf(governmentNewItem.getFinId()),uname).equals("yes")||inc>0) {
-                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutGovernment.this, String.valueOf(governmentNewItem.getFinId()), uname).equals("yes")&&inc==0) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutGovernment.this, String.valueOf(governmentNewItem.getGovid()),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutGovernment.this, String.valueOf(governmentNewItem.getGovid()), uname).equals("yes")&&inc==0) {
                         AlertMessage.showMessage(con, "দুঃখিত",
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
-                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutGovernment.this, String.valueOf(governmentNewItem.getFinId()), uname).equals("yes") ) {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutGovernment.this, String.valueOf(governmentNewItem.getGovid()), uname).equals("yes") ) {
                             ToastMessageDisplay.setText(con,
                                     "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
                             ToastMessageDisplay.showText(con);
@@ -373,7 +359,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                         final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                         try {
-                            int ratings = Integer.parseInt(governmentNewItem.getRating());
+                            int ratings = Integer.parseInt(governmentNewItem.getRatings());
 
                             if (ratings == 1) {
                                 ratingbarz.setBackgroundResource(R.drawable.one);
@@ -484,7 +470,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!governmentNewItem.getNode_contact().equals("")) {
+                if (!governmentNewItem.getNode_contact().equals("null")) {
                     callIntent1.setData(Uri.parse("tel:" + governmentNewItem.getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
@@ -515,7 +501,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                     String lon = governmentNewItem.getLon().toString();
                     // double longitude = Double.parseDouble(lon);
                     String name= governmentNewItem.getNamebn().toString();
-                    String node=String.valueOf(governmentNewItem.getFinId());
+                    String node=String.valueOf(governmentNewItem.getGovid());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -692,7 +678,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getFinId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/demo/api/sp_rating/"+governmentNewItem.getGovid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -704,7 +690,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutGovernment.this,String.valueOf(governmentNewItem.getFinId()),uname,"yes");
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutGovernment.this,String.valueOf(governmentNewItem.getGovid()),uname,"yes");
 
                                 AlertMessage.showMessage(DetailsLayoutGovernment.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
@@ -815,7 +801,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 //                                {
 //                                    Log.d("$$$$$$", "size ");
         try {
-            ratingBar.setRating(Float.parseFloat(governmentNewItem.getRating()));
+            ratingBar.setRating(Float.parseFloat(governmentNewItem.getRatings()));
         }
         catch (Exception e)
         {

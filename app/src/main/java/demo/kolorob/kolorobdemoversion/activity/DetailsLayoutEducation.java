@@ -178,7 +178,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         CheckConcate("রাস্তা", EtoB(educationNewItem.get(0).getRoad()));
         CheckConcate("ব্লক", EtoB(educationNewItem.get(0).getBlock()));
-       // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        CheckConcate("এলাকা", educationNewItem.get(0).getArea());
+        CheckConcate("ওয়ার্ড", EtoB(educationNewItem.get(0).getWard()));
         CheckConcate("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", EtoB(educationNewItem.get(0).getHouseno()));

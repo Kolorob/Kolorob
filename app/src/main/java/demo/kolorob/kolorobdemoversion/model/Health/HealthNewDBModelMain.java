@@ -4,11 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class HealthNewDBModelMain {
+public class HealthNewDBModelMain implements Serializable {
     int healthid;
     String nameen;
     String namebn;

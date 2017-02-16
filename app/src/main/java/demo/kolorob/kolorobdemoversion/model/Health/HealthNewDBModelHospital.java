@@ -3,11 +3,13 @@ package demo.kolorob.kolorobdemoversion.model.Health;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by israt.jahan on 1/29/2017.
  */
 
-public class HealthNewDBModelHospital {
+public class HealthNewDBModelHospital implements Serializable {
     int servicecenterid;
     String emergencyavailable;
     String emergencynumber;
