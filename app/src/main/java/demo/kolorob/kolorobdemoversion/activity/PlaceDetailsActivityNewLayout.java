@@ -116,6 +116,7 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
 
 ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
+    ArrayList<StoredArea>storedAreaArrayListall=new ArrayList<>();
     ArrayList<StoredArea>storedAreas=new ArrayList<>();
     EducationNewTable educationNewTable;
     ArrayList<EducationNewItem> firstDataSet;
@@ -286,7 +287,15 @@ GeoPoint location;
     int wardId;
     String Areakeyword,mergedLocation;
 
+    public String getMergedLocation() {
+        return mergedLocation;
+    }
 
+    public void setMergedLocation(String mergedLocation) {
+        this.mergedLocation = mergedLocation;
+    }
+
+    StoredAreaTable storedAreaTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,585 +312,575 @@ GeoPoint location;
         editor.apply();
         wardId=settings.getInt("ward",0);
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
+ storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
+        storedAreaArrayListall= storedAreaTable.getAllstored();
         storedAreas=RetriveLocation(wardId,Areakeyword);
-        mergedLocation=storedAreas.get(0).getLoc();
-        String[] locsplit=mergedLocation.split(":");
-        setLocation(new GeoPoint(Double.parseDouble(locsplit[0]),Double.parseDouble(locsplit[1])));
-
-        NavigationCalled=false;
-        NavigationCalledOnce=false;
-
-        val = settings.getInt("KValue", 0);
-        Log.e("ASinplaceDetails",String.valueOf(val));
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-
-        width = displayMetrics.widthPixels;
-        height = displayMetrics.heightPixels;
-        setContentView(R.layout.activity_place_detailnew);
-        fholder=(LinearLayout)findViewById(R.id.LinearLayoutfilter);
-        con = this;
-        MapButton=(ImageButton)findViewById(R.id.mapbutton);
-        ListButton=(ImageButton)findViewById(R.id.listbutton);
-        SearchButton=(ImageButton)findViewById(R.id.searchbutton);
-        CompareButton=(ImageButton)findViewById(R.id.compare);
-        searchviewholder=(RelativeLayout)findViewById(R.id.searchholder);
+        if(storedAreaArrayListall.size()==0)
+        {
 
 
+            Intent em = new Intent(this, DataLoadingActivity.class);
+            startActivity(em);
+            finish();
+        }
+        else if (storedAreas.size()==0)
+        {
+            Intent em = new Intent(this, AreaUpgrade.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-        buttonWidth = width/4;
-        int buttonHeight = height/20;
-        allitemList=(ListView)findViewById(R.id.allitem);
-        checkBox=(CheckBox)findViewById(R.id.compared);
-        checkBox2=(CheckBox)findViewById(R.id.compared2);
-        health_compare_list = (ListView)findViewById(R.id.health_compare_list);
-        education_compare_list = (ListView)findViewById(R.id.education_compare_list);
+        }
+        else {
+            setMergedLocation(storedAreas.get(0).getLoc());
+            mergedLocation = storedAreas.get(0).getLoc();
+            String[] locsplit = mergedLocation.split(":");
+            setLocation(new GeoPoint(Double.parseDouble(locsplit[0]), Double.parseDouble(locsplit[1])));
+
+            NavigationCalled = false;
+            NavigationCalledOnce = false;
+
+            val = settings.getInt("KValue", 0);
+            Log.e("ASinplaceDetails", String.valueOf(val));
+            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+
+            width = displayMetrics.widthPixels;
+            height = displayMetrics.heightPixels;
+            setContentView(R.layout.activity_place_detailnew);
+            fholder = (LinearLayout) findViewById(R.id.LinearLayoutfilter);
+            con = this;
+            MapButton = (ImageButton) findViewById(R.id.mapbutton);
+            ListButton = (ImageButton) findViewById(R.id.listbutton);
+            SearchButton = (ImageButton) findViewById(R.id.searchbutton);
+            CompareButton = (ImageButton) findViewById(R.id.compare);
+            searchviewholder = (RelativeLayout) findViewById(R.id.searchholder);
 
 
-        checkLeft=(CheckBox)findViewById(R.id.checkLeft);
-        checkRight=(CheckBox)findViewById(R.id.checkRight);
+            buttonWidth = width / 4;
+            int buttonHeight = height / 20;
+            allitemList = (ListView) findViewById(R.id.allitem);
+            checkBox = (CheckBox) findViewById(R.id.compared);
+            checkBox2 = (CheckBox) findViewById(R.id.compared2);
+            health_compare_list = (ListView) findViewById(R.id.health_compare_list);
+            education_compare_list = (ListView) findViewById(R.id.education_compare_list);
 
-        // frameLayout.setClickable(false);
-        // frameLayouts.setEnabled(false);
 
-        // explist=(LinearLayout)findViewById(R.id.explist);
-        catholder=(RelativeLayout)findViewById(R.id.categoryfilterholder);
-        // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
-        //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
-        final  LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
-        params.weight = 1;
-        params.width=buttonWidth;
-        double d=buttonWidth*0.56;
-        double large=buttonWidth*0.69;
-        final int larg=(int)Math.round(large);
-        smal=(int)Math.round(d);
-        params.height=larg;
-        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
+            checkLeft = (CheckBox) findViewById(R.id.checkLeft);
+            checkRight = (CheckBox) findViewById(R.id.checkRight);
+
+            // frameLayout.setClickable(false);
+            // frameLayouts.setEnabled(false);
+
+            // explist=(LinearLayout)findViewById(R.id.explist);
+            catholder = (RelativeLayout) findViewById(R.id.categoryfilterholder);
+            // SearchButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
+            //  CompareButton.setLayoutParams(new RelativeLayout.LayoutParams(buttonWidth, buttonHeight));
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) MapButton.getLayoutParams();
+            params.weight = 1;
+            params.width = buttonWidth;
+            double d = buttonWidth * 0.56;
+            double large = buttonWidth * 0.69;
+            final int larg = (int) Math.round(large);
+            smal = (int) Math.round(d);
+            params.height = larg;
+            compare_layout = (LinearLayout) findViewById(R.id.compare_layout);
 
 //        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
-        ImageView compare_logo_imagex=(ImageView)findViewById(R.id.compare_logo_imagex);
-        compare_logo_imagex.getLayoutParams().width=width/20;
+            ImageView compare_logo_imagex = (ImageView) findViewById(R.id.compare_logo_imagex);
+            compare_logo_imagex.getLayoutParams().width = width / 20;
 
-        compare_logo_imagex.getLayoutParams().height=height/20;
-        compare_logo_image=(ImageView)findViewById(R.id.compare_logo_images);
-        compare_logo_image.getLayoutParams().width=width/20;
-        Log.d("Test width Height","=======");
-        compare_logo_image.getLayoutParams().height=height/20;
+            compare_logo_imagex.getLayoutParams().height = height / 20;
+            compare_logo_image = (ImageView) findViewById(R.id.compare_logo_images);
+            compare_logo_image.getLayoutParams().width = width / 20;
+            Log.d("Test width Height", "=======");
+            compare_logo_image.getLayoutParams().height = height / 20;
 //        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
 //        scrolling_partc.setMargins(0,0,0,smal);
 
 
+            LinearLayout.LayoutParams com_layout = (LinearLayout.LayoutParams) compare_layout.getLayoutParams();
+            com_layout.setMargins(0, 0, 0, smal);
 
-        LinearLayout.LayoutParams com_layout = (LinearLayout.LayoutParams) compare_layout.getLayoutParams();
-        com_layout.setMargins(0,0,0,smal);
-
-        compare_layout.setLayoutParams(com_layout);
-
+            compare_layout.setLayoutParams(com_layout);
 
 
-        MapButton.setLayoutParams(params);
+            MapButton.setLayoutParams(params);
 
-        final LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
-        params2.weight = 1;
-        params2.width=buttonWidth;
-        params2.height=(int)Math.round(d);
-        buttonHeights=(int)Math.round(d);
-        SearchButton.setLayoutParams(params2);
-        Picasso.with(this)
-                .load(R.drawable.search)
-                .resize(buttonWidth,smal)
-                .into(SearchButton);
-        final   LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
-        params3.weight = 1;
-        params3.width=buttonWidth;
-        params3.height=(int)Math.round(d);
-        ListButton.setLayoutParams(params3);
+            final LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) SearchButton.getLayoutParams();
+            params2.weight = 1;
+            params2.width = buttonWidth;
+            params2.height = (int) Math.round(d);
+            buttonHeights = (int) Math.round(d);
+            SearchButton.setLayoutParams(params2);
+            Picasso.with(this)
+                    .load(R.drawable.search)
+                    .resize(buttonWidth, smal)
+                    .into(SearchButton);
+            final LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) ListButton.getLayoutParams();
+            params3.weight = 1;
+            params3.width = buttonWidth;
+            params3.height = (int) Math.round(d);
+            ListButton.setLayoutParams(params3);
 
-        Picasso.with(this)
-                .load(R.drawable.job_unselectedtab)
-                .resize(buttonWidth,smal)
-                .into(ListButton);
-        ListButton.getHeight();
-        final LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
-        params4.weight = 1;
-        params4.width=buttonWidth;
-        params4.height=(int)Math.round(d);
-        CompareButton.setLayoutParams(params4);
+            Picasso.with(this)
+                    .load(R.drawable.job_unselectedtab)
+                    .resize(buttonWidth, smal)
+                    .into(ListButton);
+            ListButton.getHeight();
+            final LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams) CompareButton.getLayoutParams();
+            params4.weight = 1;
+            params4.width = buttonWidth;
+            params4.height = (int) Math.round(d);
+            CompareButton.setLayoutParams(params4);
 
-        Picasso.with(this)
-                .load(R.drawable.compare)
-                .resize(buttonWidth,smal)
-                .into(CompareButton);
-
-
-        mapcalledstatus=false;
-        toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
-        uptext=(TextView)findViewById(R.id.textView15);
-        SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this,"",0);
-        Searchall=(EditText)findViewById(R.id.searchall);
+            Picasso.with(this)
+                    .load(R.drawable.compare)
+                    .resize(buttonWidth, smal)
+                    .into(CompareButton);
 
 
-        filterholder=(RelativeLayout)findViewById(R.id.filterholder);
-
-        header=(TextView)findViewById(R.id.textView15);
-        // toolbar.setBackgroundResource(android.R.color.transparent);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                //  getSupportActionBar().setTitle("Navigation!");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                // getSupportActionBar().setTitle(mActivityTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        toggle.setDrawerIndicatorEnabled(true);
-        drawer.setDrawerListener(toggle);
-        //toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            mapcalledstatus = false;
+            toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
+            uptext = (TextView) findViewById(R.id.textView15);
+            SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this, "", 0);
+            Searchall = (EditText) findViewById(R.id.searchall);
 
 
-        svholder=(LinearLayout)findViewById(R.id.llCategoryListHolderback);
+            filterholder = (RelativeLayout) findViewById(R.id.filterholder);
 
-        svholder.setVisibility(View.VISIBLE);
+            header = (TextView) findViewById(R.id.textView15);
+            // toolbar.setBackgroundResource(android.R.color.transparent);
+            setSupportActionBar(toolbar);
+            ActionBar ab = getSupportActionBar();
+            ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+            ab.setDisplayHomeAsUpEnabled(true);
 
-        sv= (ScrollView)findViewById(R.id.svCategoryListHolder);
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
-        sv.setVisibility(View.VISIBLE);
-        screenSize = AppUtils.ScreenSize(PlaceDetailsActivityNewLayout.this);
+                /**
+                 * Called when a drawer has settled in a completely open state.
+                 */
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                    //  getSupportActionBar().setTitle("Navigation!");
+                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
+
+                /**
+                 * Called when a drawer has settled in a completely closed state.
+                 */
+                public void onDrawerClosed(View view) {
+                    super.onDrawerClosed(view);
+                    // getSupportActionBar().setTitle(mActivityTitle);
+                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
+            };
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            toggle.setDrawerIndicatorEnabled(true);
+            drawer.setDrawerListener(toggle);
+            //toggle.syncState();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+
+            svholder = (LinearLayout) findViewById(R.id.llCategoryListHolderback);
+
+            svholder.setVisibility(View.VISIBLE);
+
+            sv = (ScrollView) findViewById(R.id.svCategoryListHolder);
+
+            sv.setVisibility(View.VISIBLE);
+            screenSize = AppUtils.ScreenSize(PlaceDetailsActivityNewLayout.this);
 
 
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-        wholeLayout=(LinearLayout)findViewById(R.id.wholeLayout);
+            wholeLayout = (LinearLayout) findViewById(R.id.wholeLayout);
 
 
-        health_name2=(TextView)findViewById(R.id.health_name3);
-        health_name3=(TextView)findViewById(R.id.health_name2);
-        edu_name_ban=(TextView)findViewById(R.id.edu_name_ban3);
-        edu_name_ban22=(TextView)findViewById(R.id.edu_name_ban22);
-        int size_b=20;
-        int size_s=14;
-        if (screenSize > 6.5) {
-            health_name2.setTextSize(size_b);
-            edu_name_ban.setTextSize(size_b);
-            edu_name_ban22.setTextSize(size_b);
-            health_name3.setTextSize(size_b);
-        } else {
-            health_name2.setTextSize(size_s);
-            edu_name_ban.setTextSize(size_s);
-            edu_name_ban22.setTextSize(size_s);
-            health_name3.setTextSize(size_s);
-        }
-        compare_layout=(LinearLayout)findViewById(R.id.compare_layout);
-        compare_layoutedu=(LinearLayout) findViewById(R.id.compare_layoutedu);
-        map = (FrameLayout) findViewById(R.id.map_fragment);
-        map.setVisibility(View.VISIBLE);
-        VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
+            health_name2 = (TextView) findViewById(R.id.health_name3);
+            health_name3 = (TextView) findViewById(R.id.health_name2);
+            edu_name_ban = (TextView) findViewById(R.id.edu_name_ban3);
+            edu_name_ban22 = (TextView) findViewById(R.id.edu_name_ban22);
+            int size_b = 20;
+            int size_s = 14;
+            if (screenSize > 6.5) {
+                health_name2.setTextSize(size_b);
+                edu_name_ban.setTextSize(size_b);
+                edu_name_ban22.setTextSize(size_b);
+                health_name3.setTextSize(size_b);
+            } else {
+                health_name2.setTextSize(size_s);
+                edu_name_ban.setTextSize(size_s);
+                edu_name_ban22.setTextSize(size_s);
+                health_name3.setTextSize(size_s);
+            }
+            compare_layout = (LinearLayout) findViewById(R.id.compare_layout);
+            compare_layoutedu = (LinearLayout) findViewById(R.id.compare_layoutedu);
+            map = (FrameLayout) findViewById(R.id.map_fragment);
+            map.setVisibility(View.VISIBLE);
+            VIEW_WIDTH = AppUtils.getScreenWidth(this) * AppConstants.CAT_LIST_LG_WIDTH_PERC;
 
-        primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
+            primaryIconWidth = (int) Math.floor(VIEW_WIDTH * 0.97); // 80% of the view width
 
-        fleft=(LinearLayout)findViewById(R.id.linearLayout1);
-        fright=(LinearLayout)findViewById(R.id.linearLayout2) ;
+            fleft = (LinearLayout) findViewById(R.id.linearLayout1);
+            fright = (LinearLayout) findViewById(R.id.linearLayout2);
 
-        //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
-        llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
+            //  svCatList = (ScrollView) findViewById(R.id.svCategoryListHolder);
+            llCatListHolder = (LinearLayout) findViewById(R.id.llCategoryListHolder);
 
-        llCatListHolder.setVisibility(View.VISIBLE);
-        //rlSubCatHolder.setVisibility(View.VISIBLE);
+            llCatListHolder.setVisibility(View.VISIBLE);
+            //rlSubCatHolder.setVisibility(View.VISIBLE);
 
-        ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
+            ViewGroup.LayoutParams lp = llCatListHolder.getLayoutParams();
 
-        final int s=lp.width = (int) (VIEW_WIDTH);
-
-
-
-        /**
-         * constructing category list
-         **/
-        CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNewLayout.this);
-        categoryList=categoryTable.getAllCategories();
-        constructCategoryList(categoryList);
-        //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
-        //rlSubCatHolder.setVisibility(View.INVISIBLE);
+            final int s = lp.width = (int) (VIEW_WIDTH);
 
 
-        Populateholder(getPlaceChoice());
-        try
-        {
-            callMapFragment(mergedLocation);
-        }
-        catch (Exception e)
-        {
+            /**
+             * constructing category list
+             **/
+            CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNewLayout.this);
+            categoryList = categoryTable.getAllCategories();
+            constructCategoryList(categoryList);
+            //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
+            //rlSubCatHolder.setVisibility(View.INVISIBLE);
 
-        }
+
+            Populateholder(getPlaceChoice());
+            try {
+                callMapFragment(mergedLocation);
+            } catch (Exception e) {
+
+            }
 
 
         /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
         * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
         * shown if compare/bazar clicked(ListClicked)*/
-        MapButton.setBackgroundResource(R.drawable.map_selected);
+            MapButton.setBackgroundResource(R.drawable.map_selected);
 
-        Picasso.with(this)
-                .load(R.drawable.map_selected)
-                .resize(buttonWidth,larg)
-                .into(MapButton);
-
-
-        SearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchClicked=true;
-                MapClicked=false;
-                ListClicked=false;
-                CompareClicked=false;
-                InCompare=false;
-                wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
-                toolbar.setVisibility(View.VISIBLE);
+            Picasso.with(this)
+                    .load(R.drawable.map_selected)
+                    .resize(buttonWidth, larg)
+                    .into(MapButton);
 
 
-                populateSearch();
-                if (CompareClicked==false||MapClicked==false||ListClicked==false)
-                {
-
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.map)
-                            .resize(buttonWidth,smal)
-                            .into(MapButton);
-
-
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.compare)
-                            .resize(buttonWidth,smal)
-                            .into(CompareButton);
+            SearchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchClicked = true;
+                    MapClicked = false;
+                    ListClicked = false;
+                    CompareClicked = false;
+                    InCompare = false;
+                    wholeLayout.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this, R.color.white));
+                    toolbar.setVisibility(View.VISIBLE);
 
 
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.job_unselectedtab)
-                            .resize(buttonWidth,smal)
-                            .into(ListButton);
+                    populateSearch();
+                    if (CompareClicked == false || MapClicked == false || ListClicked == false) {
 
-
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.search_selected)
-                            .resize(buttonWidth,larg)
-                            .into(SearchButton);
-
-                    params2.height=larg;
-                    SearchButton.setLayoutParams(params2);
-                    params.height=smal;
-                    MapButton.setLayoutParams(params);
-                    params3.height=smal;
-                    ListButton.setLayoutParams(params3);
-                    params4.height=smal;
-                    CompareButton.setLayoutParams(params4);
-
-                    map.setVisibility(View.GONE);
-                    svholder.setVisibility(View.GONE);
-                    sv.setVisibility(View.GONE);
-
-                    toggleButton.setVisibility(View.VISIBLE);
-                    compare_layout.setVisibility(View.GONE);
-                    compare_layoutedu.setVisibility(View.GONE);
-                    searchviewholder.setVisibility(View.VISIBLE);
-                }
-                if(educlicked==true||helclicked==true||entclicked==true||legclicked==true||finclicked==true||govclicked==true)
-                {
-
-                    filterholder.setVisibility(View.VISIBLE);
-                    toggleButton.setVisibility(View.VISIBLE);
-                }
-                else{ filterholder.setVisibility(View.GONE);}
-                svholder.setVisibility(View.VISIBLE);
-                sv.setVisibility(View.VISIBLE);
-
-                llCatListHolder.setVisibility(View.VISIBLE);
-                toggleButton.setVisibility(View.VISIBLE);
-
-            }
-        });
-        MapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchClicked=false;
-                MapClicked=true;
-                ListClicked=false;
-                uptext.setVisibility(View.VISIBLE);
-                CompareClicked=false;
-                if(InCompare==false) {
-                    //  callMapFragment(locationNameId);
-
-                }
-
-                if (CompareClicked==false||SearchClicked==false||ListClicked==false)
-                {
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.map_selected)
-                            .resize(buttonWidth,larg)
-                            .into(MapButton);
-
-
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.compare)
-                            .resize(buttonWidth,smal)
-                            .into(CompareButton);
-
-
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.job_unselectedtab)
-                            .resize(buttonWidth,smal)
-                            .into(ListButton);
-
-
-                    Picasso.with(getApplicationContext())
-                            .load(R.drawable.search)
-                            .resize(buttonWidth,smal)
-                            .into(SearchButton);
-                    params.height=larg;
-                    MapButton.setLayoutParams(params);
-
-                    params2.height=smal;
-                    SearchButton.setLayoutParams(params2);
-                    params3.height=smal;
-                    ListButton.setLayoutParams(params3);
-                    params4.height=smal;
-                    CompareButton.setLayoutParams(params4);
-
-//                    subCatItemList.setVisibility(View.GONE);
-
-                    searchviewholder.setVisibility(View.GONE);
-                    compare_layout.setVisibility(View.GONE);
-                    compare_layoutedu.setVisibility(View.GONE);
-                }
-                toggleButton.setVisibility(View.VISIBLE);
-                map.setVisibility(View.VISIBLE);
-                toolbar.setVisibility(View.VISIBLE);
-
-
-
-            }
-        });
-
-        ListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED ))
-                {
-
-                    uptext.setVisibility(View.VISIBLE);
-                    SearchClicked=false;
-                    MapClicked=false;
-                    InCompare=false;
-                    ListClicked=true;
-                    CompareClicked=false;
-                    searchviewholder.setVisibility(View.GONE);
-                    llCatListHolder.setVisibility(View.VISIBLE);
-
-                    if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.map)
-                                .resize(buttonWidth,smal)
+                                .resize(buttonWidth, smal)
                                 .into(MapButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.compare)
-                                .resize(buttonWidth,smal)
-                                .into(CompareButton);
-
-
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.job_selectedtab)
-                                .resize(buttonWidth,larg)
-                                .into(ListButton);
-
-
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.search)
-                                .resize(buttonWidth,smal)
-                                .into(SearchButton);
-                        params3.height=larg;
-                        ListButton.setLayoutParams(params3);
-                        params2.height=smal;
-                        SearchButton.setLayoutParams(params2);
-                        params.height=smal;
-                        MapButton.setLayoutParams(params);
-                        params4.height=smal;
-                        CompareButton.setLayoutParams(params4);
-
-                        map.setVisibility(View.VISIBLE);
-                    }
-
-                    searchviewholder.setVisibility(View.GONE);
-                    compare_layout.setVisibility(View.GONE);
-                    compare_layoutedu.setVisibility(View.GONE);
-
-
-
-                    Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this,DisplayAllJobsActivity.class);
-                    startActivity(intentJ);
-                  map.setVisibility(View.GONE);
-                }
-
-                else {
-                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"আপনার ফোনে ইন্টারনেট সংযোগ নেই।","অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
-
-                }
-
-
-
-            }
-
-        });
-        CompareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(currentCategoryID==1||currentCategoryID==2)
-                {
-                    SearchClicked=false;
-                    MapClicked=false;
-                    ListClicked=false;
-                    CompareClicked=true;
-                    InCompare=true;
-
-                    if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==0)
-                    {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
-                    }
-                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==0)
-                    {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
-                    }
-                    else if(currentCategoryID==1&&SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this)==1)
-                    {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
-                    }
-                    else if(currentCategoryID==2&&SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this)==1)
-                    {
-                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                                "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
-                    }
-                    else {
-
-
-
-
-                        if(MapClicked==false||SearchClicked==false||ListClicked==false)
-                        {
-
-                            params4.height=larg;
-                            CompareButton.setLayoutParams(params4);
-
-                            params2.height=smal;
-                            SearchButton.setLayoutParams(params2);
-                            params.height=smal;
-                            MapButton.setLayoutParams(params);
-                            params.height=smal;
-                            ListButton.setLayoutParams(params);
-
-
-
-
-                        }
-                        toolbar.setVisibility(View.GONE);
-                        // compare_layout.setVisibility(View.VISIBLE);
-
-                        // @@@@arafat
-                        // need to add condition for health and add color code for health,
-                        // else educaton color code is okay
-                        toggleButton.setVisibility(View.GONE);
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.map)
-                                .resize(buttonWidth,smal)
-                                .into(MapButton);
-
-
-                        Picasso.with(getApplicationContext())
-                                .load(R.drawable.compare_selected)
-                                .resize(buttonWidth,larg)
+                                .resize(buttonWidth, smal)
                                 .into(CompareButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.job_unselectedtab)
-                                .resize(buttonWidth,smal)
+                                .resize(buttonWidth, smal)
+                                .into(ListButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.search_selected)
+                                .resize(buttonWidth, larg)
+                                .into(SearchButton);
+
+                        params2.height = larg;
+                        SearchButton.setLayoutParams(params2);
+                        params.height = smal;
+                        MapButton.setLayoutParams(params);
+                        params3.height = smal;
+                        ListButton.setLayoutParams(params3);
+                        params4.height = smal;
+                        CompareButton.setLayoutParams(params4);
+
+                        map.setVisibility(View.GONE);
+                        svholder.setVisibility(View.GONE);
+                        sv.setVisibility(View.GONE);
+
+                        toggleButton.setVisibility(View.VISIBLE);
+                        compare_layout.setVisibility(View.GONE);
+                        compare_layoutedu.setVisibility(View.GONE);
+                        searchviewholder.setVisibility(View.VISIBLE);
+                    }
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true) {
+
+                        filterholder.setVisibility(View.VISIBLE);
+                        toggleButton.setVisibility(View.VISIBLE);
+                    } else {
+                        filterholder.setVisibility(View.GONE);
+                    }
+                    svholder.setVisibility(View.VISIBLE);
+                    sv.setVisibility(View.VISIBLE);
+
+                    llCatListHolder.setVisibility(View.VISIBLE);
+                    toggleButton.setVisibility(View.VISIBLE);
+
+                }
+            });
+            MapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchClicked = false;
+                    MapClicked = true;
+                    ListClicked = false;
+                    uptext.setVisibility(View.VISIBLE);
+                    CompareClicked = false;
+                    if (InCompare == false) {
+                        //  callMapFragment(locationNameId);
+
+                    }
+
+                    if (CompareClicked == false || SearchClicked == false || ListClicked == false) {
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.map_selected)
+                                .resize(buttonWidth, larg)
+                                .into(MapButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.compare)
+                                .resize(buttonWidth, smal)
+                                .into(CompareButton);
+
+
+                        Picasso.with(getApplicationContext())
+                                .load(R.drawable.job_unselectedtab)
+                                .resize(buttonWidth, smal)
                                 .into(ListButton);
 
 
                         Picasso.with(getApplicationContext())
                                 .load(R.drawable.search)
-                                .resize(buttonWidth,smal)
+                                .resize(buttonWidth, smal)
                                 .into(SearchButton);
-                        map.setVisibility(View.GONE);
-                        llCatListHolder.setVisibility(View.GONE);
+                        params.height = larg;
+                        MapButton.setLayoutParams(params);
+
+                        params2.height = smal;
+                        SearchButton.setLayoutParams(params2);
+                        params3.height = smal;
+                        ListButton.setLayoutParams(params3);
+                        params4.height = smal;
+                        CompareButton.setLayoutParams(params4);
+
+//                    subCatItemList.setVisibility(View.GONE);
+
                         searchviewholder.setVisibility(View.GONE);
+                        compare_layout.setVisibility(View.GONE);
+                        compare_layoutedu.setVisibility(View.GONE);
+                    }
+                    toggleButton.setVisibility(View.VISIBLE);
+                    map.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(View.VISIBLE);
+
+
+                }
+            });
+
+            ListButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
+
+                        uptext.setVisibility(View.VISIBLE);
+                        SearchClicked = false;
+                        MapClicked = false;
+                        InCompare = false;
+                        ListClicked = true;
+                        CompareClicked = false;
+                        searchviewholder.setVisibility(View.GONE);
+                        llCatListHolder.setVisibility(View.VISIBLE);
+
+                        if (MapClicked == false || SearchClicked == false || CompareClicked == false) {
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.map)
+                                    .resize(buttonWidth, smal)
+                                    .into(MapButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.compare)
+                                    .resize(buttonWidth, smal)
+                                    .into(CompareButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.job_selectedtab)
+                                    .resize(buttonWidth, larg)
+                                    .into(ListButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.search)
+                                    .resize(buttonWidth, smal)
+                                    .into(SearchButton);
+                            params3.height = larg;
+                            ListButton.setLayoutParams(params3);
+                            params2.height = smal;
+                            SearchButton.setLayoutParams(params2);
+                            params.height = smal;
+                            MapButton.setLayoutParams(params);
+                            params4.height = smal;
+                            CompareButton.setLayoutParams(params4);
+
+                            map.setVisibility(View.VISIBLE);
+                        }
+
+                        searchviewholder.setVisibility(View.GONE);
+                        compare_layout.setVisibility(View.GONE);
+                        compare_layoutedu.setVisibility(View.GONE);
+
+
+                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this, DisplayAllJobsActivity.class);
+                        startActivity(intentJ);
+                        map.setVisibility(View.GONE);
+                    } else {
+                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই।", "অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+
+                    }
+
+
+                }
+
+            });
+            CompareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (currentCategoryID == 1 || currentCategoryID == 2) {
+                        SearchClicked = false;
+                        MapClicked = false;
+                        ListClicked = false;
+                        CompareClicked = true;
+                        InCompare = true;
+
+                        if (currentCategoryID == 1 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 0) {
+                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                    "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                        } else if (currentCategoryID == 2 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 0) {
+                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                    "আপনি কোন সেবা নির্বাচিত করেননি তুলনা করার জন্য");
+                        } else if (currentCategoryID == 1 && SharedPreferencesHelper.getComapreValueEdu(PlaceDetailsActivityNewLayout.this) == 1) {
+                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                    "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                        } else if (currentCategoryID == 2 && SharedPreferencesHelper.getComapreValueHealth(PlaceDetailsActivityNewLayout.this) == 1) {
+                            AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                    "আপনি একটি সেবা নির্বাচিত করেছেন। তুলনা করার জন্য দুটি সেবা নির্বাচন করুন");
+                        } else {
+
+
+                            if (MapClicked == false || SearchClicked == false || ListClicked == false) {
+
+                                params4.height = larg;
+                                CompareButton.setLayoutParams(params4);
+
+                                params2.height = smal;
+                                SearchButton.setLayoutParams(params2);
+                                params.height = smal;
+                                MapButton.setLayoutParams(params);
+                                params.height = smal;
+                                ListButton.setLayoutParams(params);
+
+
+                            }
+                            toolbar.setVisibility(View.GONE);
+                            // compare_layout.setVisibility(View.VISIBLE);
+
+                            // @@@@arafat
+                            // need to add condition for health and add color code for health,
+                            // else educaton color code is okay
+                            toggleButton.setVisibility(View.GONE);
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.map)
+                                    .resize(buttonWidth, smal)
+                                    .into(MapButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.compare_selected)
+                                    .resize(buttonWidth, larg)
+                                    .into(CompareButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.job_unselectedtab)
+                                    .resize(buttonWidth, smal)
+                                    .into(ListButton);
+
+
+                            Picasso.with(getApplicationContext())
+                                    .load(R.drawable.search)
+                                    .resize(buttonWidth, smal)
+                                    .into(SearchButton);
+                            map.setVisibility(View.GONE);
+                            llCatListHolder.setVisibility(View.GONE);
+                            searchviewholder.setVisibility(View.GONE);
+
+                            sv.setVisibility(View.GONE);
+                            svholder.setVisibility(View.GONE);
+                            spinCounter = 0;
+                            spinCounter1 = 0;
+                            compareTool();
+                        }
+                    } else
+                        AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
+                                "বর্তমান ক্যাটাগরির জন্য তুলনা সম্ভব নয়");
+
+
+                }
+            });
+
+            toggleButton = (ToggleButton) findViewById(R.id.toggle);
+            toggleButton.setVisibility(View.VISIBLE);
+            toggleButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    if (toggleButton.isChecked()) {
 
                         sv.setVisibility(View.GONE);
+
                         svholder.setVisibility(View.GONE);
-                        spinCounter=0;
-                        spinCounter1=0;
-                        compareTool();
+
+                        llCatListHolder.setVisibility(View.GONE);
+
+                    } else {
+
+                        sv.setVisibility(View.VISIBLE);
+                        svholder.setVisibility(View.VISIBLE);
+                        llCatListHolder.setVisibility(View.VISIBLE);
+
                     }
+
+                    //Button is OFF
+                    // Do Something
                 }
-
-                else
-                    AlertMessage.showMessage(con, "তুলনা করা সম্ভব হচ্ছে না",
-                            "বর্তমান ক্যাটাগরির জন্য তুলনা সম্ভব নয়");
-
-
-
-            }
-        });
-
-        toggleButton=(ToggleButton)findViewById(R.id.toggle);
-        toggleButton.setVisibility(View.VISIBLE);
-        toggleButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                if(toggleButton.isChecked()){
-
-                    sv.setVisibility(View.GONE);
-
-                    svholder.setVisibility(View.GONE);
-
-                    llCatListHolder.setVisibility(View.GONE);
-
-                }
-                else {
-
-                    sv.setVisibility(View.VISIBLE);
-                    svholder.setVisibility(View.VISIBLE);
-                    llCatListHolder.setVisibility(View.VISIBLE);
-
-                }
-
-                //Button is OFF
-                // Do Something
-            }
-        });
-
+            });
+        }
     }
 
     public void compareTool()
@@ -1360,6 +1359,20 @@ GeoPoint location;
 
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
             Intent em = new Intent(this, EmergencyActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+        else if (id == R.id.new_place) {
+
+            //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, DataLoadingActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
+        else if (id == R.id.old_place) {
+
+            //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
+            Intent em = new Intent(this, AreaUpgrade.class);
             startActivity(em);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
@@ -2616,6 +2629,7 @@ GeoPoint location;
     @Override
     protected void onResume() {
         super.onResume();
+       // callMapFragment(getMergedLocation());
 
         //   toggleButton.setVisibility(View.VISIBLE);
 
@@ -2637,37 +2651,8 @@ GeoPoint location;
 
 
 
-        if (NavigationCalledOnce==true)
-        {
-            //callMapFragment(locationNameId);
-        }
-        else {
-            Intent intent;
-            intent = getIntent();
-            if (null != intent) {
-                locationNameId = intent.getIntExtra(AppConstants.KEY_PLACE, 0);
-                if (locationNameId == AppConstants.PLACE_BAUNIABADH) {
-                    locationName = AppConstants.BAUNIABADH;
-                    setPlaceChoice(locationName);
-                } else if (locationNameId == AppConstants.PLACE_PARIS_ROAD) {
-                    locationName = AppConstants.PARIS_ROAD;
-                    setPlaceChoice(locationName);
-                }
-                else if (locationNameId == AppConstants.PLACE_MIRPUR_12) {
-                    locationName = AppConstants.MIRPUR_TWELVE;
-                    setPlaceChoice(locationName);
-                }
-                if(!ListClicked.equals(true))
-                    map.setVisibility(View.VISIBLE);
-                if(SearchClicked){
-                    map.setVisibility(View.GONE);
-                }
-            }
 
 
-
-
-        }
     }
 
 
@@ -2718,8 +2703,7 @@ GeoPoint location;
 
 public ArrayList<StoredArea> RetriveLocation(int id,String keyword)
 {
-    StoredAreaTable storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
-    storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
+ storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
     return storedAreaArrayList;
 }
 

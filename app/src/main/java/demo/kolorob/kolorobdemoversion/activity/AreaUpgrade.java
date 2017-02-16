@@ -2,6 +2,8 @@ package demo.kolorob.kolorobdemoversion.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -52,37 +54,46 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 public class AreaUpgrade extends AppCompatActivity {
 ArrayList<StoredArea>storedAreas=new ArrayList<>();
     RadioGroup rg;
-    Button update,delete;
+    Button update,delete,browse;
     int selectedId=-1;
     Context context;
+    LinearLayout linearLayout;
     ProgressDialog dialog,dialog2;
     ArrayList<HealthNewDBModelMain>healthNewDBModelMains=new ArrayList<>();
     JSONObject allData;
+    StoredAreaTable storedAreaTable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.areas);
- rg= (RadioGroup)findViewById(R.id.areagroup);
+
         update= (Button) findViewById(R.id.updatearea);
         delete= (Button) findViewById(R.id.deletearea);
-        StoredAreaTable storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
-        storedAreas=storedAreaTable.getAllstored();
+        browse= (Button) findViewById(R.id.browsearea);
+        linearLayout=(LinearLayout)findViewById(R.id.linearradio);
+ storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
+
 context=this;
+        rg= (RadioGroup)findViewById(R.id.areagroup);
         rg.setOrientation(RadioGroup.VERTICAL);
-        for(int i = 0; i < storedAreas.size(); i++) {
-            RadioButton ch = new RadioButton(this);
-            ch.setTextSize(30);
-            ch.setText(storedAreas.get(i).getAreaid().concat(",ward ").concat(storedAreas.get(i).getWardid()));
-            rg.addView(ch);
+     radiobuttonsetup();
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
 
-        }
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+              selectedId= rg.indexOfChild(findViewById(rg.getCheckedRadioButtonId()));
+
+
+            }
+        });
 delete.setOnClickListener(new View.OnClickListener() {
 
     @Override
     public void onClick(View v) {
-        selectedId = rg.getCheckedRadioButtonId() - 1;
-        if(selectedId ==-2)
+
+        if(selectedId ==-1)
         {
             ToastMessageDisplay.setText(AreaUpgrade.this,"please choose first");
             ToastMessageDisplay.showText(AreaUpgrade.this);
@@ -93,6 +104,7 @@ delete.setOnClickListener(new View.OnClickListener() {
             dialog2.setCancelable(true);
             dialog2.show();
            deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+
         }
     }}
 );
@@ -101,8 +113,8 @@ delete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                selectedId = rg.getCheckedRadioButtonId() - 1;
-                if(selectedId ==-2)
+
+                if(selectedId ==-1)
                 {
                     ToastMessageDisplay.setText(AreaUpgrade.this,"please choose first");
                     ToastMessageDisplay.showText(AreaUpgrade.this);
@@ -112,7 +124,6 @@ delete.setOnClickListener(new View.OnClickListener() {
                     dialog.setMessage("দয়া করে অপেক্ষা করুন");
                     dialog.setCancelable(true);
                     dialog.show();
-
                     Servercall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
                 }
             }}
@@ -123,14 +134,41 @@ delete.setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onRestart() {
         super.onRestart();
-        selectedId=-1;
+
     }
     @Override
     protected void onResume() {
-        super.onRestart();
-        selectedId=-1;
-    }
+        super.onResume();
 
+    }
+void radiobuttonsetup()
+{
+
+    storedAreas=storedAreaTable.getAllstored();
+    linearLayout.removeAllViews();
+    rg.clearCheck();
+    if(storedAreas.isEmpty()){
+        ToastMessageDisplay.setText(AreaUpgrade.this,"No area downloaded");
+        ToastMessageDisplay.showText(AreaUpgrade.this);
+        Intent em = new Intent(this, DataLoadingActivity.class);
+        startActivity(em);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+    } else {
+        for (int i = 0; i < storedAreas.size(); i++) {
+
+
+            RadioButton ch = new RadioButton(this);
+            ch.setTextSize(30);
+            ch.setText(storedAreas.get(i).getAreaBn());
+
+            rg.addView(ch);
+
+
+        }
+        linearLayout.addView(rg);
+    }
+}
     void Servercall(String ward, String area) {
 
 
@@ -166,8 +204,11 @@ delete.setOnClickListener(new View.OnClickListener() {
                         dialog.dismiss();
                         ToastMessageDisplay.setText(AreaUpgrade.this,"Data Updated");
                         ToastMessageDisplay.showText(AreaUpgrade.this);
-                        selectedId=-1;
-                        rg.clearCheck();
+                        SharedPreferences settings = getSharedPreferences("prefs", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putInt("ward", Integer.parseInt(storedAreas.get(selectedId).getWardid()));
+                        editor.putString("areakeyword", storedAreas.get(selectedId).getAreaid());
+                        editor.apply();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -354,11 +395,14 @@ delete.setOnClickListener(new View.OnClickListener() {
         finNewDBTable.delete(ward,area);
         govNewDBTable.delete(ward,area);
         storedAreaTable.delete(ward,area);
+
         rg.clearCheck();
-        selectedId=-1;
         dialog2.dismiss();
+        rg.removeAllViews();
+
         ToastMessageDisplay.setText(AreaUpgrade.this,"Data Deleted");
         ToastMessageDisplay.showText(AreaUpgrade.this);
+        radiobuttonsetup();
 
     }
 }

@@ -30,6 +30,10 @@
                 android:id="@+id/emergency_info"
                 android:icon="@drawable/emergency_icon"
                 android:title="জরুরী সেবা" />
+            <item
+                android:id="@+id/new_place"
+                android:icon="@drawable/advertisement"
+                android:title="নতুন এলাকার তথ্য নামান" />
             <!--<item-->
                 <!--android:id="@+id/nav_share"-->
                 <!--android:icon="@drawable/advertising_icon"-->
@@ -42,7 +46,10 @@
                 android:id="@+id/tutorial"
                 android:icon="@drawable/advertisement"
                 android:title="টিউটোরিয়াল" />
-
+            <item
+                android:id="@+id/old_place"
+                android:icon="@drawable/advertisement"
+                android:title="তথ্য আপডেট করুন" />
             <item
                 android:id="@+id/disclaimer"
                 android:icon="@drawable/advertisement"
