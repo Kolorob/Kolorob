@@ -374,7 +374,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
 
         }
         else {
-            roadOverlay = roadManager.buildRoadOverlay(road, Color.parseColor("FF9800"),5);
+            roadOverlay = roadManager.buildRoadOverlay(road, Color.parseColor("#FF9800"),5);
 
             roadlength = road.mLength;
             mapView.getOverlays().add(roadOverlay);
