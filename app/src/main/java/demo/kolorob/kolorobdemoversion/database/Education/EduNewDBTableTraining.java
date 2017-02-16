@@ -132,7 +132,22 @@ public class EduNewDBTableTraining {
         closeDB();
         return false;
     }
+    public ArrayList<EduTrainingModel> gettrainingInfo(int node_id) {
+        ArrayList<EduTrainingModel> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SERVICE_ID +" = "+node_id, null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
     private EduTrainingModel cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
         int _sproviderId = cursor.getInt(1);

@@ -51,12 +51,15 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTuitionDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationTrainingDetailsItem;
@@ -87,13 +90,12 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     ListView alldata;
 
     Context con;
-    EducationNewItem educationNewItem;
+    EduNewModel educationNewItem;
     RatingBar ratingBar;
     int compareValue;
     String previous_node;
-    ArrayList<EducationTuitionDetailsItem> educationTuitionDetailsItems;
-    ArrayList<EducationTrainingDetailsItem> educationTrainingDetailsItems;
-    ArrayList<EducationResultItemNew> educationResultItemNews;
+    ArrayList<EduTrainingModel> educationTrainingDetailsItems;
+
 
     String exams,Exam=null;
     private TextView ratingText;
@@ -120,16 +122,14 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         if (null != intent) {
-            educationNewItem = (EducationNewItem) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU); //here all the regarding information is being stored from intent
+            educationNewItem = (EduNewModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU); //here all the regarding information is being stored from intent
 
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
 
 
 
-        EducationTuitionDetailsTable educationTuitionDetailsTable = new EducationTuitionDetailsTable(DetailsLayoutEducation.this);
-        EducationTrainingDetailsTable educationTrainingDetailsTable = new EducationTrainingDetailsTable(DetailsLayoutEducation.this);
-        EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(DetailsLayoutEducation.this);
+        EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DetailsLayoutEducation.this);
 
 
 
@@ -168,73 +168,36 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        CheckConcate("Node Id", String.valueOf(educationNewItem.getEduId()));
-        CheckConcate("ঠিকানা", educationNewItem.getAddress());
+        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
+       // CheckConcate("ঠিকানা", educationNewItem.geta());
 
         CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));
-        CheckConcate("লাইন ", EtoB(educationNewItem.getLine()));
-        CheckConcate("এভিনিউ", EtoB(educationNewItem.getAvenue()));
-        CheckConcate("পোস্ট অফিস", educationNewItem.getPostoffice());
+       // CheckConcate("লাইন ", EtoB(educationNewItem.get()));
+        CheckConcate("এভিনিউ", EtoB(educationNewItem.getBlock()));
+       // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
 
-        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHousename()));
-        CheckConcate("ফ্লোর", EtoB(educationNewItem.getFloor()));
+        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHouseno()));
+
         CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact2());
+
         CheckConcate("ইমেইল", educationNewItem.getNode_email());
-        CheckConcate("ওয়েব সাইট", educationNewItem.getNode_website());
-        CheckConcate("ফেসবুক", educationNewItem.getNode_facebook());
-        CheckConcate("পরিচিত স্থান", educationNewItem.getLandmark());
+
         timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
         timeProcessing("বন্ধের সময়", educationNewItem.getClosetime());
-        if(!educationNewItem.getBreaktime().equals("null")&&!educationNewItem.getBreaktime().equals(""))
-            breakTimeProcessing("বিরতির সময়", educationNewItem.getBreaktime());
+
         CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
-        CheckConcate("রেজিস্ট্রেশন নাম্বার", educationNewItem.getRegisterednumber());
-        CheckConcate("কাদের সাথে রেজিস্টার্ড ", educationNewItem.getRegisteredwith());
-        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
+
         CheckConcate("শাখা", educationNewItem.getShift());
         CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno())+" জন");
         CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno())+" জন");
-        CheckConcate("ক্লাস সংখ্যা",  EtoB(educationNewItem.getClassno())+" টি");
-        CheckConcate("অন্যান্য তথ্য", educationNewItem.getAdditional());
-        CheckConcate("ছাত্র সংখ্যা",  EtoB(educationNewItem.getMalestudent())+" জন");
-        CheckConcate("ছাত্রী সংখ্যা",  EtoB(educationNewItem.getFemalestudent())+" জন");
+
+        CheckConcate("অন্যান্য তথ্য", educationNewItem.getOtherinfo());
+        CheckConcate("ছাত্র  ছাত্রীসংখ্যা",  EtoB(educationNewItem.getAveragestdperclass())+" জন");
 
 
 
 
-        educationResultItemNews = educationResultDetailsTable.getResultInfo(educationNewItem.getEduId());
-        int result_size = educationResultItemNews.size();
-
-        if (result_size != 0) {
-            for (EducationResultItemNew educationResultItemNew : educationResultItemNews) {
-                //result_concate="";
-               /* if (educationResultItemNew.getStudentno() != "") {
-                    int student_number = Integer.parseInt(educationResultItemNew.getStudentno());
-                    if (student_number > 0) {
-                    } else examname.add(educationResultItemNew.getExamname());
-                } else examname.add(educationResultItemNew.getExamname());
-*/              CheckConcate("পরীক্ষা নাম", educationResultItemNew.getExamname());
-                CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationResultItemNew.getStudentno())); //EtoB is for english to Bengali
-                CheckConcate("পাশ করেছে এমন ছাত্রছাত্রী", EtoB(educationResultItemNew.getPassed()));
-                CheckConcate("গোল্ডেন এ", EtoB(educationResultItemNew.getGoldena()));
-                CheckConcate("জিপিএ ৫", EtoB(educationResultItemNew.getAplus()));
-            }
-        }
-        for(int i=0;i<examname.size();i++) // Not used)
-        {
-            if(examname.size()==0)
-            {
-                Exam=examname.get(i);
-            }
-            else
-            {
-                exams=examname.get(i);
-                Exam.concat(exams+",");
-            }
-
-        }
 /*here date is being collected from shared preference and comparing with current date to check how many days before information got updated
 * and being shown in customized ToastMessageDisplay. Check activity if you want to modify text appearance*/
         SharedPreferences settings = DetailsLayoutEducation.this.getSharedPreferences("prefs", 0);
@@ -254,62 +217,24 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         //Exam.length();
 
 
-        educationTrainingDetailsItems = educationTrainingDetailsTable.gettrainingInfo(educationNewItem.getEduId());
+        educationTrainingDetailsItems = eduNewDBTableTraining.gettrainingInfo(educationNewItem.getEduId());
         int training_size = educationTrainingDetailsItems.size();
         if (training_size != 0) {
-            for (EducationTrainingDetailsItem educationTrainingDetailsItem : educationTrainingDetailsItems) {
+            for (EduTrainingModel eduTrainingModel : educationTrainingDetailsItems) {
 
 
-                CheckConcate("কত মাসের কোর্স", EtoB(educationTrainingDetailsItem.getCourseduration()));
-                CheckConcate("ভর্তি (মাস)", educationTrainingDetailsItem.getAdmissionmonth());
-                CheckConcate("খরচ", educationTrainingDetailsItem.getCost()+" টাকা");
-                CheckConcate("ধরন", educationTrainingDetailsItem.getTrainingnametype());
-                CheckConcate("ট্রেনিং এর নাম", educationTrainingDetailsItem.getTrainingnamesubtype());
+                CheckConcate("কত মাসের কোর্স", EtoB(eduTrainingModel.getCourseduration()));
+                CheckConcate("ভর্তি (মাস)", eduTrainingModel.getTrainingname());
+                CheckConcate("খরচ", eduTrainingModel.getCost()+" টাকা");
+                CheckConcate("ধরন", eduTrainingModel.getCoursename());
+
 
 
             }
         }
 
-        educationTuitionDetailsItems = educationTuitionDetailsTable.gettuitionInfo(educationNewItem.getEduId());
-        int tuition_size = educationTuitionDetailsItems.size();
-        if (tuition_size != 0) {
-            for (EducationTuitionDetailsItem educationTuitionDetailsItem : educationTuitionDetailsItems) {
-                //result_concate="";
-
-                CheckConcate("কোন ক্লাস পড়ান হয়", educationTuitionDetailsItem.getTuitionlevel());
-                boolean tuitioncost= Boolean.parseBoolean(educationTuitionDetailsItem.getTuitionfree());
-                if (tuitioncost)
-                {
-                    CheckConcate("বিনা বেতনে পড়ার সুযোগ", "আছে");
-                }
-                else {
-                    CheckConcate("বিনা বেতনে পড়ার সুযোগ", "নাই");
-                }
-
-                CheckConcate("বৃত্তি সুবিধা দান", educationTuitionDetailsItem.getTuitionstipendfacility());
-                CheckConcate("বৃত্তি সুবিধার ধরন", educationTuitionDetailsItem.getTuitionstipendtype());
-                CheckConcate("পড়া সম্পর্কিত তথ্যি", educationTuitionDetailsItem.getTuitiondetails());
-                CheckConcate("সর্বোচ্চ খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionmaxfee()));
-                CheckConcate("সর্বনিম্ন খরচ( ক্লাসের) ", EtoB(educationTuitionDetailsItem.getTuitionminfee()));
 
 
-                CheckConcate("সর্বনিম্ন খরচ( কোচিং) ", EtoB(educationTuitionDetailsItem.getTuitionmincoaching()));
-                CheckConcate("সর্বোচ্চ খরচ( কোচিং)", EtoB(educationTuitionDetailsItem.getTuitionmaxcoaching()));
-                CheckConcate("অন্যান্য তথ্য", educationTuitionDetailsItem.getTuitionadditional());
-
-
-            }
-
-
-        }
-        CheckConcate("বিশেষ সুবিধা", educationNewItem.getSpecialneeds());
-        CheckConcate("বাথরুম সংখ্যা",  EtoB((educationNewItem.getWashroom_no()))+" টি");
-        CheckConcate("ছেলেদের বাথরুম", EtoB( educationNewItem.getWashroom_male()));
-        CheckConcate("মেয়েদের বাথরুম ",  EtoB(educationNewItem.getWashroomfemale()));
-        CheckConcate("বাথরুমের অবস্থা", educationNewItem.getWashroomcleanliness());
-        CheckConcate("খাবার পানির অবস্থা", educationNewItem.getWatercondition());
-        CheckConcate("খাবার পানির উৎস", educationNewItem.getWatersource());
-        CheckConcate("গড় ছাত্রছাত্রী",  EtoB(educationNewItem.getAveragestudent()));
 
 
         close_button.setOnClickListener(new View.OnClickListener() {
@@ -420,7 +345,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                         final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                         try {
-                            int ratings = Integer.parseInt(educationNewItem.getRating());
+                            int ratings = Integer.parseInt(educationNewItem.getRatings());
 
                             if (ratings == 1) {
                                 ratingbarz.setBackgroundResource(R.drawable.one);
@@ -1026,7 +951,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 //                                        Float rating;
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
         try {
-            ratingBar.setRating(Float.parseFloat(educationNewItem.getRating()));
+            ratingBar.setRating(Float.parseFloat(educationNewItem.getRatings()));
         }
         catch (Exception e)
         {

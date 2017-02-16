@@ -55,6 +55,8 @@ import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
+import org.osmdroid.util.GeoPoint;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -172,7 +174,15 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
 
     Context context;
     ArrayList <String>Headerholder=new ArrayList<>();
+GeoPoint location;
 
+    public GeoPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(GeoPoint location) {
+        this.location = location;
+    }
 
     int[] flag2 =new int[15];
 
@@ -295,6 +305,8 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
         storedAreas=RetriveLocation(wardId,Areakeyword);
         mergedLocation=storedAreas.get(0).getLoc();
+        String[] locsplit=mergedLocation.split(":");
+        setLocation(new GeoPoint(Double.parseDouble(locsplit[0]),Double.parseDouble(locsplit[1])));
 
         NavigationCalled=false;
         NavigationCalledOnce=false;
@@ -1550,7 +1562,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
                         ArrayList<EduNewModel> educationServiceProvider;
                     educationServiceProvider = constructEducationListItem();
                         mapcalledstatus=true;
-                     callMapFragmentWithEducation(-1, educationServiceProvider,true);
+                     callMapFragmentWithEducation(educationServiceProvider,true);
 
 
                         ivIcon.setImageResource(R.drawable.education_selected);
@@ -1595,7 +1607,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
                         healthServiceProvider = constructHealthListItem();
                         mapcalledstatus=true;
 
-                        callMapFragmentWithHealth(-1,healthServiceProvider,true);
+                        callMapFragmentWithHealth(healthServiceProvider,true);
 
 
 
@@ -1631,7 +1643,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
                         ArrayList<EntertainmentNewDBModel> entertainmentServiceProvider;
                         entertainmentServiceProvider = constructEntertainmentListItem();
                         mapcalledstatus=true;
-                        callMapFragmentWithEntertainment(-1, entertainmentServiceProvider,true);
+                        callMapFragmentWithEntertainment(entertainmentServiceProvider,true);
 
                         ivIcon.setImageResource(R.drawable.entertainment_selected);
 
@@ -1679,7 +1691,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
                         mapcalledstatus=true;
                         ArrayList<GovernmentNewDBModel> governmentNewItems;
                         governmentNewItems = constructgovListItem();
-                        callMapFragmentWithGovernment(-1, governmentNewItems,true);
+                        callMapFragmentWithGovernment(governmentNewItems,true);
 
 
 
@@ -1739,7 +1751,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
                         ArrayList<LegalAidNewDBModel> legalaidServiceProvider;
                         mapcalledstatus=true;
                         legalaidServiceProvider = constructlegalaidListItem();
-                        callMapFragmentWithLegal(-1, legalaidServiceProvider,true);
+                        callMapFragmentWithLegal(legalaidServiceProvider,true);
                         break;
                     case AppConstants.FINANCIAL:
                         MediaPlayer mp_f = MediaPlayer.create(getApplicationContext(), R.raw.finance);
@@ -1766,7 +1778,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
 
                         ArrayList<FinancialNewDBModel> financialNewItems;
                         financialNewItems = constructfinancialListItem();
-                        callMapFragmentWithFinancial(-1,financialNewItems,true);
+                        callMapFragmentWithFinancial(financialNewItems,true);
                         mapcalledstatus=true;
                         break;
 
@@ -1963,33 +1975,33 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
 
 /*
 * call mapfragment functions load fragments of map. based on location */
-    private void callMapFragmentWithEducation(int edid,ArrayList<EduNewModel> educationServiceProviderItems,boolean s)
+    private void callMapFragmentWithEducation(ArrayList<EduNewModel> educationServiceProviderItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
+        /*if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
 
         else if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
+        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);*/
         fragment.getMapViewController().setZoom(16);
+          fragment.getMapViewController().setCenter(getLocation());
 
-        if(edid==-1)
-        {
-            fragment.setCategoryId(1);
+            fragment.setCategoryId(currentCategoryID);
+            fragment.Setsubcategories(currentCategoryID);
             fragment.setEducationServiceProvider(educationServiceProviderItems);
             fragment.eduicons();
-            fragment.Drawedu(edid,s);
+           // fragment.Drawedu(edid,s);
             mainedcalled=true;
-        }
 
-        else {
+
+      /*  else {
             if(mainedcalled)
             {
 
                 mainedcalled=false;
             }
             fragment.Drawedu(edid,s);
-        }
+        }*/
         // EDD.clear();
     }
     /*
@@ -2112,31 +2124,19 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
         return healthServiceProvider;
     }
 
-    private void callMapFragmentWithHealth(int helid,ArrayList<HealthNewDBModelMain> healthServiceProviderItemNews,boolean s)
+    private void callMapFragmentWithHealth(ArrayList<HealthNewDBModelMain> healthServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
+        fragment.getMapViewController().setCenter(getLocation());
         fragment.getMapViewController().setZoom(16);
-        if(helid==-1)
-        {
-            fragment.setCategoryId(2);
+        fragment.Setsubcategories(currentCategoryID);
+            fragment.setCategoryId(currentCategoryID);
             fragment.setHealthServiceProvider(healthServiceProviderItemNews);
             fragment.healthicons();
-            fragment.Drawhel(helid,s);
+
             mainedcalled=true;
-        }
 
-        else {
-            if(mainedcalled)
-            {
-
-                mainedcalled=false;
-            }
-            fragment.Drawhel(helid,s);
-        }
         // EDD.clear();
     }
 
@@ -2151,32 +2151,22 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
         return entertainmentServiceProviderItemNews;
     }
 
-    private void callMapFragmentWithEntertainment(int edid,ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews,boolean s)
+    private void callMapFragmentWithEntertainment(ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
-        fragment.getMapViewController().setZoom(16);
 
-        if(edid==-1)
-        {
-            fragment.setCategoryId(3);
+        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setCenter(getLocation());
+
+
+            fragment.setCategoryId(currentCategoryID);
+        fragment.Setsubcategories(currentCategoryID);
             fragment.setEntertainmentServiceProvider(entertainmentServiceProviderItemNews);
             fragment.enticons();
-            fragment.Drawent(edid,s);
+
             mainedcalled=true;
-        }
 
-        else {
-            if(mainedcalled)
-            {
-
-                mainedcalled=false;
-            }
-            fragment.Drawent(edid,s);
-        }
 
     }
 
@@ -2193,32 +2183,20 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
         return governmentNewItems;
     }
 
-    private void callMapFragmentWithGovernment(int edid,ArrayList<GovernmentNewDBModel> governmentNewItems,boolean s)
+    private void callMapFragmentWithGovernment(ArrayList<GovernmentNewDBModel> governmentNewItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
+        fragment.getMapViewController().setCenter(getLocation());
         fragment.getMapViewController().setZoom(16);
 
-        if(edid==-1)
-        {
-            fragment.setCategoryId(4);
+
+            fragment.setCategoryId(currentCategoryID);
             fragment.setGovernmentNewItems(governmentNewItems);
+        fragment.Setsubcategories(currentCategoryID);
             fragment.govicons();
-            fragment.Drawgov(edid,s);
             mainedcalled=true;
-        }
 
-        else {
-            if(mainedcalled)
-            {
-
-                mainedcalled=false;
-            }
-            fragment.Drawgov(edid,s);
-        }
 
     }
 
@@ -2236,31 +2214,21 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
         return legalaidServiceProvider;
     }
 
-    private void callMapFragmentWithLegal(int edid,ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews,boolean s)
+    private void callMapFragmentWithLegal(ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
+        fragment.getMapViewController().setCenter(getLocation());
         fragment.getMapViewController().setZoom(16);
 
-        if(edid==-1)
-        {
-            fragment.setCategoryId(5);
-            fragment.setLegalaidServiceProvider(legalAidServiceProviderItemNews);
-            fragment.legicons();
-            fragment.Drawleg(edid,s);
-            mainedcalled=true;
-        }
 
-        else {
-            if(mainedcalled)
-            {
-                mainedcalled=false;
-            }
-            fragment.Drawleg(edid,s);
-        }
+            fragment.setCategoryId(currentCategoryID);
+            fragment.setLegalaidServiceProvider(legalAidServiceProviderItemNews);
+        fragment.Setsubcategories(currentCategoryID);
+            fragment.legicons();
+
+            mainedcalled=true;
+
 
     }
 
@@ -2275,32 +2243,20 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
         financialNewItems = financialServiceNewTable.getAllFinancial(wardId,Areakeyword);
         return financialNewItems;
     }
-    private void callMapFragmentWithFinancial(int edid,ArrayList<FinancialNewDBModel> financialNewItems,boolean s)
+    private void callMapFragmentWithFinancial(ArrayList<FinancialNewDBModel> financialNewItems,boolean s)
     {
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if(locationNameId==1)  fragment.getMapViewController().setCenter(AppConstants.BAUNIA1);
-        else  if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
-        else fragment.getMapViewController().setCenter(AppConstants.TWELVE);
+        fragment.getMapViewController().setCenter(getLocation());
         fragment.getMapViewController().setZoom(16);
 
-        if(edid==-1)
-        {
-            fragment.setCategoryId(6);
+
+            fragment.setCategoryId(currentCategoryID);
+        fragment.Setsubcategories(currentCategoryID);
             fragment.setFinancialServiceProvider(financialNewItems);
             fragment.finicons();
-            fragment.Drawfin(edid,s);
+
             mainedcalled=true;
-        }
-
-        else {
-            if(mainedcalled)
-            {
-
-                mainedcalled=false;
-            }
-            fragment.Drawfin(edid,s);
-        }
 
     }
 

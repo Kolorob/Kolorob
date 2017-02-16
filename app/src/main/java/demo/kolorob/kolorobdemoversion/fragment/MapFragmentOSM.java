@@ -32,21 +32,17 @@ import java.util.concurrent.TimeUnit;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.helpers.MyInfoWindow;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.RatingModel;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 
@@ -61,7 +57,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     public String getLocationName() {
         return locationName;
     }
-
+String concatened;
     public void setLocationName(String locationName) {
         this.locationName = locationName;
     }
@@ -126,6 +122,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.governmentNewItems = governmentNewItems;
     }
 
+    ArrayList<SubCategoryItemNew>subCategoryItemNews=new ArrayList<>();
     ArrayAdapter arrayAdapter;
 String LOCATIONFROMMAP;
 
@@ -190,9 +187,9 @@ String LOCATIONFROMMAP;
     }
 
     LocationManager locationManager;
+    StringBuilder result;
 
-
-    String ratingavg,ratingavgbn;
+    String ratingavg,ratingavgbn,refid;
     public void setHealthServiceProvider(ArrayList<HealthNewDBModelMain> et) {
         this.healthServiceProvider = et;
     }
@@ -215,7 +212,7 @@ String LOCATIONFROMMAP;
         setMapView(mapView);
 
         mapView.setClickable(true);
-
+        concatened="";
 
         mapView.setBuiltInZoomControls(false);
         mapView.setMultiTouchControls(true);
@@ -256,8 +253,7 @@ String LOCATIONFROMMAP;
         mapViewController.setZoom(16);
         String[] partlocation = getLOCATIONFROMMAP().split(":");
         mapViewController.setCenter( new GeoPoint(Float.parseFloat(partlocation[0]), Float.parseFloat(partlocation[1])));
-
-
+       result = new StringBuilder();
 
 // get the time and make a date out of it
         Date date2 = new Date(settings.getLong("time", 0));
@@ -294,12 +290,19 @@ String LOCATIONFROMMAP;
             }
         });*/
 
-
+        SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(getActivity());
+        subCategoryItemNews= subCategoryTableNew.getAllSubCategories(categoryId);
 
 
         return rootView;
     }
+public void Setsubcategories(int id)
+{
+    SubCategoryTableNew subCategoryTableNew=new SubCategoryTableNew(getActivity());
+    subCategoryItemNews=subCategoryTableNew.getAllSubCat();
+    subCategoryItemNews= subCategoryTableNew.getAllSubCategories(id);
 
+}
 public void eduicons()
 {
    mapView.removeAllViewsInLayout();
@@ -317,8 +320,21 @@ mapView.getOverlays().clear();
             subcategotyId2 = et.getSubcat();
             latDouble = Double.parseDouble(et.getLat());
             ratingavg=et.getRatings();
-
-
+            refid=et.getRefnumm();
+            result.delete(0, result.length());
+            String[] references=refid.split(",");
+            for (int k=0;k<references.length;k++) {
+                for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                    int value= subCategoryItemNews.get(i).getRefId();
+                    if( value==Integer.parseInt(references[k]))
+                    {
+                        result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                        result.append(",");
+                    }
+                }
+            }
+            result.setLength(result.length() - 1);
+            String refid2= String.valueOf(result);
             if((ratingavg.equals("null"))||(ratingavg.equals("")))
             {
                 ratingavg="পাওয়া যায় নি";
@@ -331,7 +347,7 @@ mapView.getOverlays().clear();
             }
             longDouble = Double.parseDouble(et.getLon());
             GeoPoint point = new GeoPoint(latDouble, longDouble);
-            drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2);
+            drawMarkerEdu(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEduId(),subcategotyId2,refid2);
         }
     }
 
@@ -353,8 +369,21 @@ mapView.getOverlays().clear();
                 //Log.d("subcategotyId_Legal","=======");
 
                 ratingavg=et.getRatings();
-
-
+                refid=et.getRefnumm();
+                result.delete(0, result.length());
+                String[] references=refid.split(",");
+                for (int k=0;k<references.length;k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value= subCategoryItemNews.get(i).getRefId();
+                        if( value==Integer.parseInt(references[k]))
+                        {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                result.setLength(result.length() - 1);
+                String refid2= String.valueOf(result);
 
 
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
@@ -369,7 +398,7 @@ mapView.getOverlays().clear();
                 latDouble = Double.parseDouble(et.getLat());
                 longDouble = Double.parseDouble(et.getLon());
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerHealth(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getHealthid(), subcategotyId);
+                drawMarkerHealth(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getHealthid(), subcategotyId,refid2);
             }
         }
 
@@ -392,8 +421,21 @@ mapView.getOverlays().clear();
                 latDouble = Double.parseDouble(et.getLat());
                 longDouble = Double.parseDouble(et.getLon());
                 ratingavg=et.getRatings();
-
-
+                refid=et.getRefnumm();
+                result.delete(0, result.length());
+                String[] references=refid.split(",");
+                for (int k=0;k<references.length;k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value= subCategoryItemNews.get(i).getRefId();
+                        if( value==Integer.parseInt(references[k]))
+                        {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                result.setLength(result.length() - 1);
+                String refid2= String.valueOf(result);
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
                     ratingavg="পাওয়া যায় নি";
@@ -405,7 +447,7 @@ mapView.getOverlays().clear();
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerEnt(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEntid(), subcategotyId);
+                drawMarkerEnt(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getEntid(), subcategotyId,refid2);
             }
         }
 
@@ -428,7 +470,21 @@ public void govicons()
             latDouble = Double.parseDouble(et.getLat());
             longDouble = Double.parseDouble(et.getLon());
             ratingavg=et.getRatings();
-
+            refid=et.getRefnumm();
+            result.delete(0, result.length());
+            String[] references=refid.split(",");
+            for (int k=0;k<references.length;k++) {
+                for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                    int value= subCategoryItemNews.get(i).getRefId();
+                    if( value==Integer.parseInt(references[k]))
+                    {
+                        result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                        result.append(",");
+                    }
+                }
+            }
+            result.setLength(result.length() - 1);
+            String refid2= String.valueOf(result);
             if((ratingavg.equals("null"))||(ratingavg.equals("")))
             {
                 ratingavg="পাওয়া যায় নি";
@@ -440,7 +496,7 @@ public void govicons()
                 ratingavg=ratingavgbn.concat(datevalue);
             }
             GeoPoint point = new GeoPoint(latDouble, longDouble);
-            drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getGovid(),subcategotyId2);
+            drawMarkerGov(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getGovid(),subcategotyId2,refid2);
         }
     }
 
@@ -466,8 +522,21 @@ public void govicons()
                 latDouble = Double.parseDouble(et.getLat());
                 longDouble = Double.parseDouble(et.getLon());
                 ratingavg=et.getRatings();
-
-
+                refid=et.getRefnumm();
+                result.delete(0, result.length());
+                String[] references=refid.split(",");
+                for (int k=0;k<references.length;k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value= subCategoryItemNews.get(i).getRefId();
+                        if( value==Integer.parseInt(references[k]))
+                        {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                result.setLength(result.length() - 1);
+                String refid2= String.valueOf(result);
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
                     ratingavg="পাওয়া যায় নি";
@@ -479,7 +548,7 @@ public void govicons()
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerLeg(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getLegalid(), subcategotyId);
+                drawMarkerLeg(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getLegalid(), subcategotyId,refid2);
             }
         }
 
@@ -503,7 +572,21 @@ public void govicons()
                 latDouble = Double.parseDouble(et.getLat());
                 longDouble = Double.parseDouble(et.getLon());
                 ratingavg=et.getRatings();
-
+                refid=et.getRefnumm();
+                result.delete(0, result.length());
+                String[] references=refid.split(",");
+                for (int k=0;k<references.length;k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value= subCategoryItemNews.get(i).getRefId();
+                        if( value==Integer.parseInt(references[k]))
+                        {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                result.setLength(result.length() - 1);
+                String refid2= String.valueOf(result);
                 if((ratingavg.equals("null"))||(ratingavg.equals("")))
                 {
                     ratingavg="পাওয়া যায় নি";
@@ -515,7 +598,7 @@ public void govicons()
                     ratingavg=ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinid(), subcategotyId2);
+                drawMarkerFin(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getFinid(), subcategotyId2,refid2);
             }
         }
 
@@ -533,7 +616,7 @@ public void govicons()
         return false;
     }
 
-    private void drawMarkerEdu(GeoPoint point, String title, String add, String contact, int node, String subcategotyId2) {
+    private void drawMarkerEdu(GeoPoint point, String title, String add, String contact, int node, String subcategotyId2,String ref) {
 
 
         String delims = "[,]";
@@ -564,7 +647,7 @@ public void govicons()
 
             }
         }
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,add);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,add,ref);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -572,7 +655,7 @@ public void govicons()
 
     }
 
-    private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+    private void drawMarkerGov(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2,String ref) {
 
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
@@ -612,12 +695,12 @@ public void govicons()
 
             //marker.setTitle("Title of the marker");
         }
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address,ref);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
     }
-    private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+    private void drawMarkerHealth(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2,String ref) {
 
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
@@ -658,7 +741,7 @@ public void govicons()
 
         }
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address,ref);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -666,7 +749,7 @@ public void govicons()
 
     }
 
-    private void drawMarkerLeg(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+    private void drawMarkerLeg(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2,String ref) {
         Marker marker = new Marker(mapView);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         marker.setPosition(point);
@@ -691,13 +774,13 @@ public void govicons()
             }
         }
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address, ref);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
 
     }
-    private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+    private void drawMarkerEnt(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2,String ref) {
 
 
         Marker marker = new Marker(mapView);
@@ -733,7 +816,7 @@ public void govicons()
         }
 
 
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address, ref);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -742,7 +825,7 @@ public void govicons()
 
 
 
-    private void drawMarkerFin(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2) {
+    private void drawMarkerFin(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2,String ref) {
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
@@ -787,7 +870,7 @@ public void govicons()
 
             //marker.setTitle("Title of the marker");
         }
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId,address, ref);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
