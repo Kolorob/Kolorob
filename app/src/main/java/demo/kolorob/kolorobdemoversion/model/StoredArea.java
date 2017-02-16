@@ -46,6 +46,6 @@ public class StoredArea {
         this.wardid = wardid;
         this.areaid = areaid;
         this.areaBn = areaBn;
-        Loc = loc;
+        this.Loc = loc;
     }
 }

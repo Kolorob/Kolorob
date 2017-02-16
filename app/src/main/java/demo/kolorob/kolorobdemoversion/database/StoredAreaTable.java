@@ -142,6 +142,21 @@ public class StoredAreaTable {
         closeDB();
         return siList;
     }
+    public ArrayList<StoredArea> getstoredlocation(int id,String keyword) {
+        ArrayList<StoredArea> siList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = "+id+ " AND "+ AREANAME+" = '"+keyword+"'", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToSubCategory(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
     public void delete(String ward,String area)
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(StoredAreaTable.this.tContext);
@@ -171,8 +186,8 @@ public class StoredAreaTable {
 
        String wardid = cursor.getString(0);
        String areaname = cursor.getString(1);
-       String areanamebn = cursor.getString(0);
-       String loc = cursor.getString(1);
+       String areanamebn = cursor.getString(2);
+       String loc = cursor.getString(3);
        return new StoredArea(wardid,areaname,areanamebn,loc);
    }
     public void dropTable() {
