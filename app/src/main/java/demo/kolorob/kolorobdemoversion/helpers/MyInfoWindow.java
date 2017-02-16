@@ -11,6 +11,8 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
+import java.util.ArrayList;
+
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
@@ -18,12 +20,15 @@ import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationNewTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmentServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceNewTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovernmentNewTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidServiceProviderTableNew;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
@@ -31,6 +36,7 @@ import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
@@ -40,7 +46,7 @@ public class MyInfoWindow extends InfoWindow {
     String titlemarker,contact2,node,address;
     int n;
     EducationServiceProviderItem nulledu;
-    EducationNewItem nulledu2;
+    ArrayList<EduNewModel> nulledu2=new ArrayList<>();
     GovernmentNewItem nullgov;
     HealthServiceProviderItemNew nullhel;
     EntertainmentServiceProviderItemNew nullent;
@@ -52,17 +58,9 @@ public class MyInfoWindow extends InfoWindow {
     String pass="2Jm!4jFe3WgBZKEN";
 
     int catid;
-    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, String Node, int categoryid,String add) {
-        super(layoutResId, mapView);
-        this.con=con;
-        this.pp=point;
-        this.titlemarker=title;
-        this.contact2=contact;
-        this.node=Node;
-        this.catid=categoryid;
-        this.address=add;
-    }
-    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add) {
+    String referenceid;
+
+    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
         super(layoutResId, mapView);
         this.con=con;
         this.pp=point;
@@ -71,6 +69,7 @@ public class MyInfoWindow extends InfoWindow {
         this.n=Node;
         this.catid=categoryid;
         this.address=add;
+        this.referenceid=rid;
     }
     public void onClose() {
     }
@@ -85,9 +84,9 @@ public class MyInfoWindow extends InfoWindow {
         // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
         final TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
-
+        if(contact2==null||contact2.equals(" "))contact2="পাওয়া যায় নি";
         txtTitle.setText(titlemarker);
-        txtSubdescription.setText("রেটিং : " + address +"\n");
+        txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
         adddescription.setText("যোগাযোগ: " + contact2);
         // contact.setText(contact2);
 
@@ -100,7 +99,7 @@ public class MyInfoWindow extends InfoWindow {
                         // Override Marker's onClick behaviour here
                         //Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
                         layout.setVisibility(View.VISIBLE);
-                         EducationNewTable educationNewTable = new EducationNewTable(MyInfoWindow.this.con);
+                         EduNewDBTableMain educationNewTable = new EduNewDBTableMain(MyInfoWindow.this.con);
 
                         nulledu2 = educationNewTable.geteduNode2(n);
                         Intent iiedu = new Intent(MyInfoWindow.this.con, DetailsLayoutEducation.class);

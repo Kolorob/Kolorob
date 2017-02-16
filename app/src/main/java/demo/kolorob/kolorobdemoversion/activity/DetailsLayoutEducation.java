@@ -90,7 +90,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     ListView alldata;
 
     Context con;
-    EduNewModel educationNewItem;
+    ArrayList<EduNewModel> educationNewItem=new ArrayList<>();
     RatingBar ratingBar;
     int compareValue;
     String previous_node;
@@ -122,7 +122,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         if (null != intent) {
-            educationNewItem = (EduNewModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU); //here all the regarding information is being stored from intent
+            educationNewItem = (ArrayList<EduNewModel>) intent.getSerializableExtra(AppConstants.KEY_DETAILS_EDU); //here all the regarding information is being stored from intent
 
             // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
         }
@@ -168,32 +168,32 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.getEdtype());
-       // CheckConcate("ঠিকানা", educationNewItem.geta());
+        CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.get(0).getEdtype());
+        CheckConcate("শাখা", educationNewItem.get(0).getShift());
 
-        CheckConcate("রাস্তা", EtoB(educationNewItem.getRoad()));
-       // CheckConcate("লাইন ", EtoB(educationNewItem.get()));
-        CheckConcate("এভিনিউ", EtoB(educationNewItem.getBlock()));
+       if(!educationNewItem.get(0).getStudentno().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.get(0).getStudentno())+" জন");
+        if(!educationNewItem.get(0).getTeachersno().equals("null")) CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.get(0).getTeachersno())+" জন");
+        if(!educationNewItem.get(0).getAveragestdperclass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  EtoB(educationNewItem.get(0).getAveragestdperclass())+" জন");
+        CheckConcate("সুযোগ সুবিধা",  educationNewItem.get(0).getFacility());
+
+        CheckConcate("রাস্তা", EtoB(educationNewItem.get(0).getRoad()));
+        CheckConcate("ব্লক", EtoB(educationNewItem.get(0).getBlock()));
        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
-        CheckConcate("পুলিশ স্টেশন", educationNewItem.getPolicestation());
+        CheckConcate("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
 
-        CheckConcate("বাড়ির নাম", EtoB(educationNewItem.getHouseno()));
+        CheckConcate("বাড়ির নাম্বার", EtoB(educationNewItem.get(0).getHouseno()));
 
-        CheckConcate("যোগাযোগ", educationNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ", educationNewItem.get(0).getNode_contact());
 
-        CheckConcate("ইমেইল", educationNewItem.getNode_email());
+        CheckConcate("ইমেইল", educationNewItem.get(0).getNode_email());
 
-        timeProcessing("খোলার সময়", educationNewItem.getOpeningtime());
-        timeProcessing("বন্ধের সময়", educationNewItem.getClosetime());
+        timeProcessing("খোলার সময়", educationNewItem.get(0).getOpeningtime());
+        timeProcessing("বন্ধের সময়", educationNewItem.get(0).getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", educationNewItem.getOffday());
+        CheckConcate("কবে বন্ধ থাকে", educationNewItem.get(0).getOffday());
 
-        CheckConcate("শাখা", educationNewItem.getShift());
-        CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.getStudentno())+" জন");
-        CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.getTeachersno())+" জন");
 
-        CheckConcate("অন্যান্য তথ্য", educationNewItem.getOtherinfo());
-        CheckConcate("ছাত্র  ছাত্রীসংখ্যা",  EtoB(educationNewItem.getAveragestdperclass())+" জন");
+        CheckConcate("অন্যান্য তথ্য ", educationNewItem.get(0).getOtherinfo());
 
 
 
@@ -217,16 +217,16 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         //Exam.length();
 
 
-        educationTrainingDetailsItems = eduNewDBTableTraining.gettrainingInfo(educationNewItem.getEduId());
+        educationTrainingDetailsItems = eduNewDBTableTraining.gettrainingInfo(educationNewItem.get(0).getEduId());
         int training_size = educationTrainingDetailsItems.size();
         if (training_size != 0) {
             for (EduTrainingModel eduTrainingModel : educationTrainingDetailsItems) {
 
 
                 CheckConcate("কত মাসের কোর্স", EtoB(eduTrainingModel.getCourseduration()));
-                CheckConcate("ভর্তি (মাস)", eduTrainingModel.getTrainingname());
+                CheckConcate("ট্রেইনিংর নাম ", eduTrainingModel.getTrainingname());
                 CheckConcate("খরচ", eduTrainingModel.getCost()+" টাকা");
-                CheckConcate("ধরন", eduTrainingModel.getCoursename());
+                CheckConcate("কোর্সের নাম", eduTrainingModel.getCoursename());
 
 
 
@@ -247,12 +247,12 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (educationNewItem.getNode_email().equals("")||educationNewItem.getNode_email().equals("null")) {
+                if (educationNewItem.get(0).getNode_email().equals("")||educationNewItem.get(0).getNode_email().equals("null")) {
                     AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
-                    Helpes.sendEmail(DetailsLayoutEducation.this, educationNewItem.getNode_email());
+                    Helpes.sendEmail(DetailsLayoutEducation.this, educationNewItem.get(0).getNode_email());
                 }
             }
         });
@@ -262,12 +262,12 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this); //check function
         String multipule[]= previous_node.split(",");
 
-        if(compareValue==1&&previous_node.equals(String.valueOf(educationNewItem.getEduId())))
+        if(compareValue==1&&previous_node.equals(String.valueOf(educationNewItem.get(0).getEduId())))
         {
 
             checkBox.setChecked(true);
         }
-        else if(compareValue==2&&(multipule[0].equals(String.valueOf(educationNewItem.getEduId()))||multipule[1].equals(String.valueOf(educationNewItem.getEduId()))))
+        else if(compareValue==2&&(multipule[0].equals(String.valueOf(educationNewItem.get(0).getEduId()))||multipule[1].equals(String.valueOf(educationNewItem.get(0).getEduId()))))
         {
 
             checkBox.setChecked(true);
@@ -282,7 +282,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         CommentTable commentTable = new CommentTable(DetailsLayoutEducation.this);
 
 
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(educationNewItem.getEduId()));
+        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(educationNewItem.get(0).getEduId()));
         int size= commentItems.size();
         String[] phone = new String[size];
         String[] date = new String[size];
@@ -314,13 +314,13 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutEducation.this, String.valueOf(educationNewItem.getEduId()),uname).equals("yes")||inc>0) {
-                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutEducation.this, String.valueOf(educationNewItem.getEduId()), uname).equals("yes")&&inc==0) {
+                if(SharedPreferencesHelper.getifcommentedalready(DetailsLayoutEducation.this, String.valueOf(educationNewItem.get(0).getEduId()),uname).equals("yes")||inc>0) {
+                    if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutEducation.this, String.valueOf(educationNewItem.get(0).getEduId()), uname).equals("yes")&&inc==0) {
                         AlertMessage.showMessage(con, "দুঃখিত",
                                 "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
 
                     } else {
-                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutEducation.this, String.valueOf(educationNewItem.getEduId()), uname).equals("yes") ) {
+                        if (SharedPreferencesHelper.getifcommentedalready(DetailsLayoutEducation.this, String.valueOf(educationNewItem.get(0).getEduId()), uname).equals("yes") ) {
                             ToastMessageDisplay.setText(con,
                                     "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
                             ToastMessageDisplay.showText(con);
@@ -345,7 +345,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                         final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
                         try {
-                            int ratings = Integer.parseInt(educationNewItem.getRatings());
+                            int ratings = Integer.parseInt(educationNewItem.get(0).getRatings());
 
                             if (ratings == 1) {
                                 ratingbarz.setBackgroundResource(R.drawable.one);
@@ -458,7 +458,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                String node = String.valueOf(educationNewItem.getEduId());
+                String node = String.valueOf(educationNewItem.get(0).getEduId());
                 compareValue = SharedPreferencesHelper.getComapreValueEdu(DetailsLayoutEducation.this);
 //                if (compareValue >= 2)
 //                    AlertMessage.showMessage(con, "নতুন তথ্য নেয়া সম্ভব হচ্ছে না",
@@ -489,7 +489,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                         String compare_Data="";
                         compare_Data=SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
                         String multipule[]= compare_Data.split(",");
-                        compare_Data = multipule[1]+","+String.valueOf(educationNewItem.getEduId());
+                        compare_Data = multipule[1]+","+String.valueOf(educationNewItem.get(0).getEduId());
                         SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, compare_Data, 2);
                     }
                     else
@@ -505,7 +505,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 }
                 else if (compareValue == 0) {
                     if(isChecked)
-                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, String.valueOf(educationNewItem.getEduId()), 1);
+                        SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, String.valueOf(educationNewItem.get(0).getEduId()), 1);
 
                 }
                 else if (compareValue == 1) {
@@ -515,7 +515,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
                         String previous_node;
                         previous_node = SharedPreferencesHelper.getComapreData(DetailsLayoutEducation.this);
-                        previous_node = previous_node + "," + String.valueOf(educationNewItem.getEduId());
+                        previous_node = previous_node + "," + String.valueOf(educationNewItem.get(0).getEduId());
                         SharedPreferencesHelper.setComapareEdu(DetailsLayoutEducation.this, previous_node, 2);
 
                     }
@@ -587,7 +587,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         ups_text.setTextSize(23);
         ratingText.setTextSize(23);
-        ups_text.setText(educationNewItem.getNamebn());
+        ups_text.setText(educationNewItem.get(0).getNamebn());
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -601,8 +601,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!educationNewItem.getNode_contact().equals("")) {
-                    callIntent1.setData(Uri.parse("tel:" + educationNewItem.getNode_contact()));
+                if (!educationNewItem.get(0).getNode_contact().equals("null")) {
+                    callIntent1.setData(Uri.parse("tel:" + educationNewItem.get(0).getNode_contact()));
                     if (checkPermission())
                         startActivity(callIntent1);
                     else {
@@ -627,12 +627,12 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = educationNewItem.getLat().toString();
+                    String lat = educationNewItem.get(0).getLat().toString();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = educationNewItem.getLon().toString();
+                    String lon = educationNewItem.get(0).getLon().toString();
                     // double longitude = Double.parseDouble(lon);
-                    String name= educationNewItem.getNamebn().toString();
-                    String node=String.valueOf(educationNewItem.getEduId());
+                    String name= educationNewItem.get(0).getNamebn().toString();
+                    String node=String.valueOf(educationNewItem.get(0).getEduId());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -789,7 +789,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://kolorob.net/demo/api/sp_rating/"+educationNewItem.getEduId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/kolorob-live/api/sp_rating/"+educationNewItem.get(0).getEduId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -801,7 +801,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
                             if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.getEduId()) ,uname,"yes");
+                                SharedPreferencesHelper.setifcommentedalready(DetailsLayoutEducation.this,String.valueOf(educationNewItem.get(0).getEduId()) ,uname,"yes");
 
                                 AlertMessage.showMessage(DetailsLayoutEducation.this, "মতামতটি গ্রহন করা হয়েছে",
                                         "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
@@ -951,7 +951,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 //                                        Float rating;
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
         try {
-            ratingBar.setRating(Float.parseFloat(educationNewItem.getRatings()));
+            ratingBar.setRating(Float.parseFloat(educationNewItem.get(0).getRatings()));
         }
         catch (Exception e)
         {
