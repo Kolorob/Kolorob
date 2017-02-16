@@ -233,6 +233,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         ups_text = (TextView) findViewById(R.id.ups_text);
 
         ups_text.setTextSize(23);
+        ups_text.setText(legalAidServiceProviderItemNew.getNamebn());
         ratingText.setTextSize(23);
 
         //  ups_text.setText(educationServiceProviderItem.getEduNameBan());

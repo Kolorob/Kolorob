@@ -195,6 +195,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
               //set properties of service center name
         service_name = (TextView) findViewById(R.id.ups_text);
         service_name.setTextSize(27);
+        service_name.setText(entertainmentServiceProviderItemNew.getNamebn());
         ratingText.setTextSize(23);
 
 
@@ -458,11 +459,11 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
 
 
-                    String lat = entertainmentServiceProviderItemNew.getLat().toString();
+                    String lat = entertainmentServiceProviderItemNew.getLat();
                     // double latitude = Double.parseDouble(lat);
-                    String lon = entertainmentServiceProviderItemNew.getLon().toString();
+                    String lon = entertainmentServiceProviderItemNew.getLon();
                     // double longitude = Double.parseDouble(lon);
-                    String name= entertainmentServiceProviderItemNew.getNamebn().toString();
+                    String name= entertainmentServiceProviderItemNew.getNamebn();
                     String node=String.valueOf(entertainmentServiceProviderItemNew.getEntid());
                     boolean fromornot=true;
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
