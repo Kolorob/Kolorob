@@ -222,7 +222,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
 
         eduNewSchoolModels = eduNewDBTableSchool.getschoolInfo(educationNewItem.get(0).getEduId());
-        int schoolsize = educationTrainingDetailsItems.size();
+        int schoolsize = eduNewSchoolModels.size();
         if (schoolsize != 0) {
             for (EduNewSchoolModel eduNewSchoolModel : eduNewSchoolModels) {
 

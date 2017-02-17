@@ -1,6 +1,7 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -10,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,22 +24,28 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -48,20 +56,32 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import org.osmdroid.util.GeoPoint;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AllHolder;
 import demo.kolorob.kolorobdemoversion.adapters.CompareAdapter;
@@ -103,6 +123,12 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+import tourguide.tourguide.ChainTourGuide;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.ToolTip;
+
+import static demo.kolorob.kolorobdemoversion.R.id.comment;
 
 
 /**
@@ -172,7 +198,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
 
     //TODO Declare object array for each subcategory item. Different for each category. Depends on the database table.
 
-
+    Boolean Reviewgiven=false;
     private DrawerLayout drawer;
 
     Context context;
@@ -207,7 +233,8 @@ GeoPoint location;
     public String getPlaceChoice() {
         return placeChoice;
     }
-
+    String usernames = "kolorobapp";
+    String password = "2Jm!4jFe3WgBZKEN";
     public void setPlaceChoice(String placeChoice) {
         this.placeChoice = placeChoice;
     }
@@ -283,12 +310,13 @@ GeoPoint location;
     TextView uptext;
     boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
-
+    String comment = "";
     MapFragmentOSM mapFragment;
     CheckBox negotiable;
     int wardId;
     String Areakeyword,mergedLocation;
 
+    private Animation mEnterAnimation, mExitAnimation;
     public String getMergedLocation() {
         return mergedLocation;
     }
@@ -500,7 +528,13 @@ GeoPoint location;
 
 //        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
             wholeLayout = (LinearLayout) findViewById(R.id.wholeLayout);
+            mEnterAnimation = new AlphaAnimation(0f, 1f);
+            mEnterAnimation.setDuration(600);
+            mEnterAnimation.setFillAfter(true);
 
+            mExitAnimation = new AlphaAnimation(1f, 0f);
+            mExitAnimation.setDuration(600);
+            mExitAnimation.setFillAfter(true);
 
             health_name2 = (TextView) findViewById(R.id.health_name3);
             health_name3 = (TextView) findViewById(R.id.health_name2);
@@ -557,7 +591,7 @@ GeoPoint location;
             } catch (Exception e) {
 
             }
-
+        runOverlay_ContinueMethod();
 
         /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
         * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
@@ -897,7 +931,7 @@ GeoPoint location;
             compare_layout.setVisibility(View.GONE);
             compare_layoutedu.setVisibility(View.VISIBLE);
             compare_layoutedu.setBackgroundColor(Color.parseColor("#2F7281"));
-            //compareEducation();
+            compareEducation();
             }
 
         else {
@@ -1060,7 +1094,7 @@ GeoPoint location;
             if(!healthServiceProviderItemNew.getNamebn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNamebn().equals(""))
                 health_name3.setText(healthServiceProviderItemNew.getNamebn());
             else
-                health_name3.setText("শীঘ্রই আসছে");
+                health_name3.setText("তথ্য পাওয়া যায় নি ");
 
             String time2="";
             time2=timeConverter(healthServiceProviderItemNew.getOpeningtime());
@@ -1120,7 +1154,7 @@ GeoPoint location;
             if(!healthServiceProviderItemNewx.getNamebn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getNamebn().equals(""))
                 health_name2.setText(healthServiceProviderItemNewx.getNamebn());
             else
-                health_name2.setText("শীঘ্রই আসছে");
+                health_name2.setText("তথ্য পাওয়া যায় নি ");
 
 
 
@@ -1145,16 +1179,16 @@ GeoPoint location;
 
 //    public Boolean BazarPostValidation(Context c, String message, )
 
-/*
+
     public void compareEducation()
     {
         checkLeft.setChecked(true);
         checkRight.setChecked(true);
 
         educationNewTable = new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
-        firstDataSet=educationNewTable.getEducationData(String.valueOf(firstData));
-        secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
-        for (final EducationNewItem educationNewItem: firstDataSet)
+        firstDataSet=educationNewTable.geteduNode2(Integer.parseInt(firstData));
+        secondDataSet=educationNewTable.geteduNode2(Integer.parseInt(SecondData));
+        for (final EduNewModel educationNewItem: firstDataSet)
         {
             checkLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -1198,20 +1232,19 @@ GeoPoint location;
                 }
             });
 
-            health_header=new String []{"পড়াশুনার ধরণ", "প্রতিষ্ঠানের ধরন", "আশে পাশের পরিচিত স্থান", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখ্যা", "কয়টি ক্লাস রুম রয়েছে" ,"শিক্ষক সংখ্যা ","কাদের সাথে রেজিস্টার্ড","শাখা","সরবরাহকৃত পানির অবস্থা  "
+            health_header=new String []{ "প্রতিষ্ঠানের ধরন", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখ্যা","শিক্ষক সংখ্যা ","শাখা","রেটিং"
             };
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
-                edu_name_ban22.setText("শীঘ্রই আসছে ");
+                edu_name_ban22.setText("তথ্য পাওয়া যায় নি ");
             else
                 edu_name_ban22.setText(educationNewItem.getNamebn());
 
-            left_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
-                    educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
+            left_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getAveragestdperclass()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
-                    educationNewItem.getShift(),educationNewItem.getWatersource()};
+                    English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getShift(),
+                    educationNewItem.getRatings()};
         }
-        for ( final EducationNewItem educationNewItem: secondDataSet)
+        for ( final EduNewModel educationNewItem: secondDataSet)
         {
             checkRight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -1251,13 +1284,14 @@ GeoPoint location;
                     }
                 }
             });
-            right_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getFloor()),
-                    educationNewItem.getLandmark(),English_to_bengali_number_conversion(educationNewItem.getAveragestudent()),
+
+
+            right_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getAveragestdperclass()),
                     English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    English_to_bengali_number_conversion(educationNewItem.getClassno()),English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getWatercondition(),
-                    educationNewItem.getShift(),educationNewItem.getWatersource()};
+                    English_to_bengali_number_conversion(educationNewItem.getTeachersno()),
+                    educationNewItem.getShift(),educationNewItem.getRatings()};
             if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
-                edu_name_ban.setText("শীঘ্রই আসছে ");
+                edu_name_ban.setText("তথ্য পাওয়া যায় নি ");
             else
                 edu_name_ban.setText(educationNewItem.getNamebn());
         }
@@ -1269,7 +1303,7 @@ GeoPoint location;
         layoutParams.setMargins(0, 0, 0, smal);//
         education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.education_color));
     }
-*/
+
     public void populateSearch()
     {
 
@@ -1391,11 +1425,19 @@ GeoPoint location;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
         else if (id == R.id.new_place) {
+            storedAreaArrayListall=storedAreaTable.getAllstored();
+                if(storedAreaArrayListall.size()>=5)
+                {
+                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত","আপনি ৫টি এলাকার বেশি তথ্য একবারে নামাতে পারবেন না।");
 
+                }
+            else {
+                    Intent em = new Intent(this, DataLoadingActivity.class);
+                    startActivity(em);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                }
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
-            Intent em = new Intent(this, DataLoadingActivity.class);
-            startActivity(em);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
         }
         else if (id == R.id.old_place) {
 
@@ -1442,7 +1484,42 @@ GeoPoint location;
 
     }
 
+    private void runOverlay_ContinueMethod() {
+        // the return handler is used to manipulate the cleanup of all the tutorial elements
 
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("১ম ধাপ")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("১ম লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুজে নিন")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                // note that there is no Overlay here, so the default one will be used
+                .playLater(llCatListHolder);
+
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("২য় ধাপ")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("ওয়ার্ড অনুযায়ী এলাকার লিস্ট থেকে এলাকা খুজে নিচের 'জমা দিন' বাটনটি ক্লিক করুন।")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .playLater(ListButton);
+
+
+        Sequence sequence = new Sequence.SequenceBuilder()
+                .add(tourGuide1, tourGuide2)
+                .setDefaultOverlay(new Overlay()
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                .build();
+
+
+        ChainTourGuide.init(this).playInSequence(sequence);
+    }
 
 
 
@@ -1450,10 +1527,21 @@ GeoPoint location;
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
+
+
             super.onBackPressed();
             return;
         }
+        SharedPreferences settings = PlaceDetailsActivityNewLayout.this.getSharedPreferences("prefs", 0);
 
+   /*    if(settings.getBoolean("Reviewsent",false)==true && diffInDays>=30)
+       {
+           SharedPreferences.Editor editor = settings.edit();
+           editor.putBoolean("Reviewsent", false);
+           Reviewgiven=false;
+           editor.apply();
+       }*/
+        if (!settings.getBoolean("Reviewsent", false)) help();
         ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,"এখান থেকে বের হতে চাইলে আরেকবার চাপ দিন");
         ToastMessageDisplay.showText(this);
         Log.d("In on Back Pressed","==========");
@@ -1469,6 +1557,160 @@ GeoPoint location;
         }, 2000);
     }
 
+    public void help() {
+        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivityNewLayout.this);
+        View promptView = layoutInflater.inflate(R.layout.app_feedback_dialog, null);
+        //   final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PlaceSelectionActivity.this);
+        //  final AlertDialog alert = alertDialogBuilder.create();
+
+        //   alertDialogBuilder.setView(promptView);
+
+        final Dialog alertDialog = new Dialog(PlaceDetailsActivityNewLayout.this);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(promptView);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        alertDialog.getWindow().setLayout((width*4)/5, WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+
+
+        final RatingBar ratingBar = (RatingBar) promptView.findViewById(R.id.ratingBar);
+        final EditText submit_review = (EditText) promptView.findViewById(R.id.submit_review);
+        final Button btnSubmit = (Button) promptView.findViewById(R.id.btnSubmit);
+        final Button btnclose = (Button) promptView.findViewById(R.id.btnclose);
+//        Dialog mDialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+//        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+
+
+
+
+        ViewGroup.LayoutParams params = btnSubmit.getLayoutParams();
+//        params.height=width/9;
+//        params.width=width/9;
+        btnSubmit.setLayoutParams(params);
+
+        ViewGroup.LayoutParams params1 = btnSubmit.getLayoutParams();
+//        params1.height=width/9;
+//        params1.width=width/9;
+        btnclose.setLayoutParams(params1);
+
+
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
+                String testUser = SharedPreferencesHelper.getFeedback(PlaceDetailsActivityNewLayout.this);
+
+                Float  ratings;
+                ratings = ratingBar.getRating();
+                comment=submit_review.getText().toString();
+                if(ratings==0)ratings = (float) 0.0001;
+
+                sendDataToserver(ratings, comment);
+                SharedPreferences settings = PlaceDetailsActivityNewLayout.this.getSharedPreferences("prefs", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("Reviewsent", true);
+                editor.apply();
+                Reviewgiven=true;
+                alertDialog.cancel();
+                finish();
+                //   back();
+
+
+            }
+
+        });
+//        prebutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                PlaceDetailsActivityNewLayout.this.onBackPressed();
+//
+//            }
+//        });
+
+        btnclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        // setup a dialog window
+        alertDialog.setCancelable(false);
+
+        // create an alert dialog
+        alertDialog.show();
+        //   alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+//        alerts.getWindow().setLayout((height*3/7), (height*4/7));
+
+
+    }
+    public void sendDataToserver(Float rating, String comment) {
+        String username = SharedPreferencesHelper.getUser(PlaceDetailsActivityNewLayout.this);
+        SharedPreferencesHelper.setFeedback(PlaceDetailsActivityNewLayout.this, username);
+        String phone = SharedPreferencesHelper.getNumber(PlaceDetailsActivityNewLayout.this);
+        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+
+
+        if (phone.equals(""))phone.replace("","0");
+        else {
+            String comment2="";
+            try {
+                comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            String url = "http://kolorob.net/kolorob-live/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            //   ToastMessageDisplay.ShowToast(PlaceSelectionActivity.this,"ধন্যবাদ");
+
+
+                            try {
+                                ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,"ধন্যবাদ");
+                                ToastMessageDisplay.showText(PlaceDetailsActivityNewLayout.this);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            ToastMessageDisplay.setText(PlaceDetailsActivityNewLayout.this,error.toString());
+                            ToastMessageDisplay.showText(PlaceDetailsActivityNewLayout.this);
+                        }
+                    }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+
+                    Map<String, String> params = new HashMap<>();
+
+                    return params;
+                }
+
+            };
+
+// Adding request to request queue
+
+            RequestQueue requestQueue = Volley.newRequestQueue(PlaceDetailsActivityNewLayout.this);
+            requestQueue.add(stringRequest);
+
+
+        }
+
+
+    }
 
     @Override
     public void onClick(View v) {

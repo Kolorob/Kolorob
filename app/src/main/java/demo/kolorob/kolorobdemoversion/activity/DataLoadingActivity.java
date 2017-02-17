@@ -75,6 +75,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
@@ -292,16 +293,20 @@ ImageView rotateImage;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getPosAreaint() == -1) {
-                    ToastMessageDisplay.setText(DataLoadingActivity.this, "please choose area first");
-                    ToastMessageDisplay.showText(DataLoadingActivity.this);
-                } else {
-                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
-                    ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
-                    keyword = list2.get(getPosAreaint());
-                    setLocation(listloc.get(getPosAreaint()));;
-                    Servercall();
-                }
+
+
+                    if (getPosAreaint() == -1) {
+                        ToastMessageDisplay.setText(DataLoadingActivity.this, "please choose area first");
+                        ToastMessageDisplay.showText(DataLoadingActivity.this);
+                    } else {
+                        ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
+                        ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
+                        keyword = list2.get(getPosAreaint());
+                        setLocation(listloc.get(getPosAreaint()));
+
+                        Servercall();
+                    }
+
 
 
             }

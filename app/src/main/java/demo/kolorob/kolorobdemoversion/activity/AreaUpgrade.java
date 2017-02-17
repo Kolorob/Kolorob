@@ -145,10 +145,10 @@ void radiobuttonsetup()
 {
 
     storedAreas=storedAreaTable.getAllstored();
-    linearLayout.removeAllViews();
+
     rg.clearCheck();
     if(storedAreas.isEmpty()){
-        ToastMessageDisplay.setText(AreaUpgrade.this,"No area downloaded");
+        ToastMessageDisplay.setText(AreaUpgrade.this,"কোন এলাকার তথ্য নামানো নেই");
         ToastMessageDisplay.showText(AreaUpgrade.this);
         Intent em = new Intent(this, DataLoadingActivity.class);
         startActivity(em);
@@ -166,7 +166,7 @@ void radiobuttonsetup()
 
 
         }
-        linearLayout.addView(rg);
+
     }
 }
     void Servercall(String ward, String area) {
@@ -400,7 +400,7 @@ void radiobuttonsetup()
         dialog2.dismiss();
         rg.removeAllViews();
 
-        ToastMessageDisplay.setText(AreaUpgrade.this,"Data Deleted");
+        ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
         ToastMessageDisplay.showText(AreaUpgrade.this);
         radiobuttonsetup();
 
