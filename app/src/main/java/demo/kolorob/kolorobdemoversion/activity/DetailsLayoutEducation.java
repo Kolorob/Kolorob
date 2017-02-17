@@ -51,6 +51,7 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EducationTrainingDetailsTable;
@@ -59,6 +60,7 @@ import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationNewItem;
 import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
@@ -95,7 +97,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     int compareValue;
     String previous_node;
     ArrayList<EduTrainingModel> educationTrainingDetailsItems;
-
+ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
     String exams,Exam=null;
     private TextView ratingText;
@@ -130,6 +132,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
         EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DetailsLayoutEducation.this);
+        EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(DetailsLayoutEducation.this);
 
 
 
@@ -218,6 +221,21 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         //Exam.length();
 
 
+        eduNewSchoolModels = eduNewDBTableSchool.getschoolInfo(educationNewItem.get(0).getEduId());
+        int schoolsize = educationTrainingDetailsItems.size();
+        if (schoolsize != 0) {
+            for (EduNewSchoolModel eduNewSchoolModel : eduNewSchoolModels) {
+
+
+                CheckConcate("বৃত্তি সুবিধা", eduNewSchoolModel.getStipend());
+                CheckConcate("প্রাইমারী লেভেলের বেতন ", eduNewSchoolModel.getPrimary_fees());
+                CheckConcate("সেকেন্ডারি লেভেলের বেতন", eduNewSchoolModel.getSecondary_fees());
+                CheckConcate("কলেজের বেতন", eduNewSchoolModel.getCollage_fees());
+
+
+
+            }
+        }
         educationTrainingDetailsItems = eduNewDBTableTraining.gettrainingInfo(educationNewItem.get(0).getEduId());
         int training_size = educationTrainingDetailsItems.size();
         if (training_size != 0) {
@@ -233,7 +251,6 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
             }
         }
-
 
 
 
