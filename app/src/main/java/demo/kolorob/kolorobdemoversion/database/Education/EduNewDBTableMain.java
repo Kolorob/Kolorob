@@ -41,6 +41,7 @@ public class EduNewDBTableMain {
     private static final String KEY_ROAD = "_road"; //
     private static final String KEY_CONTACT_NO = "_node_contact"; //
     private static final String KEY_OTHER_INFO = "_other"; //
+    private static final String KEY_AREABN = "_areabn"; //
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
     private static final String KEY_OFF_DAY = "_offday";
@@ -85,6 +86,7 @@ public class EduNewDBTableMain {
                 + KEY_ROAD + " TEXT, "
                 + KEY_CONTACT_NO + " TEXT, "
                 + KEY_OTHER_INFO + " TEXT, "
+                + KEY_AREABN + " TEXT, "
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
@@ -109,7 +111,7 @@ public class EduNewDBTableMain {
                 eduNewModel.getEdtype(),eduNewModel.getShift(),eduNewModel.getStudentno(),eduNewModel.getTeachersno(),eduNewModel.getAveragestdperclass(),
                 eduNewModel.getFacility(),eduNewModel.getLat(),eduNewModel.getLon(),eduNewModel.getHouseno(),
                 eduNewModel.getBlock(),eduNewModel.getArea(),eduNewModel.getPolicestation(),eduNewModel.getNode_email(),
-                eduNewModel.getWard(),eduNewModel.getRoad(),eduNewModel.getNode_contact(),eduNewModel.getOtherinfo(),
+                eduNewModel.getWard(),eduNewModel.getRoad(),eduNewModel.getNode_contact(),eduNewModel.getOtherinfo(),eduNewModel.getArea_bn(),
                 eduNewModel.getOpeningtime(),eduNewModel.getClosetime(),eduNewModel.getOffday(),eduNewModel.getCategoryId(),
                 eduNewModel.getRefnumm(),eduNewModel.getRatings(),eduNewModel.getSubcat()
         );
@@ -121,7 +123,7 @@ public class EduNewDBTableMain {
     public long insertItem(int govid, String nameen, String namebn, String edutype,String shift,String stdno,String teacherno,String avgstd,
                            String facility,String lat,
                            String lon, String houseno, String block, String area, String policestation,
-                           String node_email, String ward, String road, String node_contact, String otherinfo,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
@@ -142,7 +144,7 @@ public class EduNewDBTableMain {
                     ward,
                     road,
                     node_contact,
-                    otherinfo,
+                    otherinfo,areabn,
                     openingtime,
                     closetime,
                     offday,categoryId,
@@ -174,6 +176,7 @@ public class EduNewDBTableMain {
         rowValue.put(KEY_ROAD, road);
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_AREABN, areabn);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -193,7 +196,7 @@ public class EduNewDBTableMain {
             int govid, String nameen, String namebn, String edutype,String shift,String stdno,String teacherno,String avgstd,
             String facility,String lat,
             String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,
+            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
             String subcat
     ) {
@@ -221,6 +224,7 @@ public class EduNewDBTableMain {
         rowValue.put(KEY_ROAD, road);
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_AREABN, areabn);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);

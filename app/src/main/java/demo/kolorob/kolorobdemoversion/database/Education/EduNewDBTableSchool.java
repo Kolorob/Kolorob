@@ -20,6 +20,7 @@ public class EduNewDBTableSchool {
     private static final String TAG = EduNewDBTableSchool.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_SCHOOL;
     private static final String KEY_NODE_ID = "_eduId";
+    private static final String KEY_SPID = "_sproviderId";
     private static final String KEY_STIPEND = "_stipend";
     private static final String KEY_PRIMARY_FEES = "_primary"; // 1 - text
     private static final String KEY_SECONDARY_FEES= "_secondary"; //
@@ -40,6 +41,7 @@ public class EduNewDBTableSchool {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_NODE_ID + " INTEGER , "
+                + KEY_SPID + " INTEGER , "
                 + KEY_STIPEND + " TEXT , "
                 + KEY_PRIMARY_FEES + "  TEXT  , " // 0 - int "
                 + KEY_SECONDARY_FEES + "  TEXT , "
@@ -58,17 +60,17 @@ public class EduNewDBTableSchool {
 
     public long insertItem(EduNewSchoolModel eduNewSchoolModel) {
         return insertItem(
-                eduNewSchoolModel.getId(),eduNewSchoolModel.getStipend(),
+                eduNewSchoolModel.getId(),eduNewSchoolModel.getSpid(),eduNewSchoolModel.getStipend(),
                 eduNewSchoolModel.getPrimary_fees(),eduNewSchoolModel.getSecondary_fees(),
                 eduNewSchoolModel.getCollage_fees()
         );
     }
 
-    public long insertItem(int eduId, String stipend, String primary, String secondary,
+    public long insertItem(int eduId,int spid, String stipend, String primary, String secondary,
                            String collage ) {
         if (isFieldExist(eduId)) {
             return updateItem(
-                    eduId,stipend,
+                    eduId,spid,stipend,
                     primary,
                     secondary,
                     collage);
@@ -76,6 +78,7 @@ public class EduNewDBTableSchool {
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SPID , spid);
         rowValue.put(KEY_STIPEND, stipend);
         rowValue.put(KEY_PRIMARY_FEES, primary);
         rowValue.put(KEY_SECONDARY_FEES, secondary);
@@ -90,11 +93,12 @@ public class EduNewDBTableSchool {
         return ret;}
 
 
-    private long updateItem(int eduId, String stipend, String primary, String secondary,
+    private long updateItem(int eduId, int spid,String stipend, String primary, String secondary,
                             String collage) {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SPID , spid);
         rowValue.put(KEY_STIPEND, stipend);
         rowValue.put(KEY_PRIMARY_FEES, primary);
         rowValue.put(KEY_SECONDARY_FEES, secondary);
@@ -135,7 +139,7 @@ public class EduNewDBTableSchool {
         ArrayList<EduNewSchoolModel> subCatList = new ArrayList<>();
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_NODE_ID +" = "+node_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SPID +" = "+node_id, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -149,10 +153,11 @@ public class EduNewDBTableSchool {
     }
     private EduNewSchoolModel cursorToSubCatList(Cursor cursor) {
         int _eduId = cursor.getInt(0);
-        String _stipend = cursor.getString(1);
-        String _primary= cursor.getString(2);
-        String _secondary = cursor.getString(3);
-        String _collage = cursor.getString(4);
+       int _spid = cursor.getInt(1);
+        String _stipend = cursor.getString(2);
+        String _primary= cursor.getString(3);
+        String _secondary = cursor.getString(4);
+        String _collage = cursor.getString(5);
 
 
 
@@ -160,7 +165,7 @@ public class EduNewDBTableSchool {
 
 
 
-        return new EduNewSchoolModel(_eduId,_stipend,
+        return new EduNewSchoolModel(_eduId,_spid,_stipend,
                 _primary,_secondary,_collage);
     }
 

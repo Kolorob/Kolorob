@@ -250,7 +250,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         HealthNewDBTablePharma healthNewDBTablePharma1 = new HealthNewDBTablePharma(DetailsInfoActivityHealthNew.this);
         healthNewDBModelPharmacies = healthNewDBTablePharma1.getHealthSpecialistData(healthServiceProviderItemNew.getHealthid());
         int healthVaccineSize = healthNewDBModelPharmacies.size();
-        if (specialist_size != 0) {
+        if (healthVaccineSize != 0) {
             for (HealthNewDBModelPharmacy healthNewDBModelPharmacy : healthNewDBModelPharmacies) {
 
                 //   result_concate = "";

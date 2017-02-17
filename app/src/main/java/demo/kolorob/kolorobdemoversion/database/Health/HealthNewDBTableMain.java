@@ -36,6 +36,7 @@ public class HealthNewDBTableMain {
     private static final String KEY_ROAD = "_road"; //
     private static final String KEY_CONTACT_NO = "_node_contact"; //
     private static final String KEY_OTHER_INFO = "_other"; //
+    private static final String KEY_AREABN = "_areabn"; //
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
     private static final String KEY_OFF_DAY = "_offday";
