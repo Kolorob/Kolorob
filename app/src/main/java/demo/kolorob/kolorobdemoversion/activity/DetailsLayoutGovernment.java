@@ -167,7 +167,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(governmentNewItem.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(governmentNewItem.getBlock()));
-        CheckConcate("এলাকা", governmentNewItem.getArea());
+        CheckConcate("এলাকা", governmentNewItem.getAreabn());
         CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(governmentNewItem.getWard()));
         // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", governmentNewItem.getPolicestation());

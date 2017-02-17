@@ -76,6 +76,7 @@ public class LegalAidNewDBTable {
                 + KEY_ROAD + " TEXT, "
                 + KEY_CONTACT_NO + " TEXT, "
                 + KEY_OTHER_INFO + " TEXT, "
+                + KEY_AREABN + " TEXT, "
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
@@ -99,7 +100,8 @@ public class LegalAidNewDBTable {
         return insertItem(legalAidNewDBModel.getLegalid(),legalAidNewDBModel.getNameen(),legalAidNewDBModel.getNamebn(),
                 legalAidNewDBModel.getServicetype(),legalAidNewDBModel.getLat(),legalAidNewDBModel.getLon(),legalAidNewDBModel.getHouseno(),
                 legalAidNewDBModel.getBlock(),legalAidNewDBModel.getArea(),legalAidNewDBModel.getPolicestation(),legalAidNewDBModel.getNode_email(),
-                legalAidNewDBModel.getWard(),legalAidNewDBModel.getRoad(),legalAidNewDBModel.getNode_contact(),legalAidNewDBModel.getOtherinfo(),
+                legalAidNewDBModel.getWard(),legalAidNewDBModel.getRoad(),
+                legalAidNewDBModel.getNode_contact(),legalAidNewDBModel.getOtherinfo(),legalAidNewDBModel.getAreabn(),
                 legalAidNewDBModel.getOpeningtime(),legalAidNewDBModel.getClosetime(),legalAidNewDBModel.getOffday(),legalAidNewDBModel.getCategoryId(),
                 legalAidNewDBModel.getRefnumm(),legalAidNewDBModel.getRatings(),legalAidNewDBModel.getSubcat()
         );
@@ -110,7 +112,7 @@ public class LegalAidNewDBTable {
 
     public long insertItem(int legalid, String nameen, String namebn, String servicetype, String lat,
                            String lon, String houseno, String block, String area, String policestation,
-                           String node_email, String ward, String road, String node_contact, String otherinfo,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
@@ -130,7 +132,7 @@ public class LegalAidNewDBTable {
                     ward,
                     road,
                     node_contact,
-                    otherinfo,
+                    otherinfo,areabn,
                     openingtime,
                     closetime,
                     offday,categoryId,
@@ -156,6 +158,7 @@ public class LegalAidNewDBTable {
         rowValue.put(KEY_ROAD, road);
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_AREABN, areabn);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -174,7 +177,7 @@ public class LegalAidNewDBTable {
     private long updateItem(
             int legalid, String nameen, String namebn, String servicetype, String lat,
             String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,
+            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
             String subcat
     ) {
@@ -196,6 +199,7 @@ public class LegalAidNewDBTable {
         rowValue.put(KEY_ROAD, road);
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_AREABN, areabn);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);

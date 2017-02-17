@@ -343,8 +343,8 @@ public class EduNewModel implements Serializable {
             String ki=sref2.toString();
             String _sref=ki.substring(1,ki.length()-1);
             return new EduNewModel(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_avgstdperclass,_facility,
-                    _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
-                    _opentime ,_closetime,_offday,_areabn,_catid,_refnumm,_sref,_rating);
+                    _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
+                    _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
         }
     }
 

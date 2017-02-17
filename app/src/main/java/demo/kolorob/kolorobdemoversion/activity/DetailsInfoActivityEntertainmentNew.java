@@ -210,7 +210,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "নাই");
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getBlock()));
-        CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getArea());
+        CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getAreabn());
         CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getWard()));
         // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());

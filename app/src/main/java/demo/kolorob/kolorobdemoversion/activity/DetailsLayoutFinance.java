@@ -167,7 +167,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(financialNewItem.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(financialNewItem.getBlock()));
-        CheckConcate("এলাকা", financialNewItem.getArea());
+        CheckConcate("এলাকা", financialNewItem.getAreabn());
         CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(financialNewItem.getWard()));
         // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", financialNewItem.getPolicestation());

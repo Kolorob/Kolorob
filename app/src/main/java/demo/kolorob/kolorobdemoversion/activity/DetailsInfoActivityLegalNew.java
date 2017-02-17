@@ -245,7 +245,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getBlock()));
-        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getArea());
+        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getAreabn());
         CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getWard()));
         // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", legalAidServiceProviderItemNew.getPolicestation());

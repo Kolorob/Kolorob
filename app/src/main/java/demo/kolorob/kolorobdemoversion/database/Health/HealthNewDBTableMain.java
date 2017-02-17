@@ -75,6 +75,7 @@ public class HealthNewDBTableMain {
                 + KEY_ROAD + " TEXT, "
                 + KEY_CONTACT_NO + " TEXT, "
                 + KEY_OTHER_INFO + " TEXT, "
+                + KEY_AREABN + " TEXT, "
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
@@ -98,7 +99,8 @@ public class HealthNewDBTableMain {
         return insertItem(healthNewDBModelMain.getHealthid(),healthNewDBModelMain.getNameen(),healthNewDBModelMain.getNamebn(),
                 healthNewDBModelMain.getCentertype(),healthNewDBModelMain.getLat(),healthNewDBModelMain.getLon(),healthNewDBModelMain.getHouseno(),
                 healthNewDBModelMain.getBlock(),healthNewDBModelMain.getArea(),healthNewDBModelMain.getPolicestation(),healthNewDBModelMain.getNode_email(),
-                healthNewDBModelMain.getWard(),healthNewDBModelMain.getRoad(),healthNewDBModelMain.getNode_contact(),healthNewDBModelMain.getOtherinfo(),
+                healthNewDBModelMain.getWard(),healthNewDBModelMain.getRoad(),healthNewDBModelMain.getNode_contact(),
+                healthNewDBModelMain.getOtherinfo(),healthNewDBModelMain.getAreabn(),
                 healthNewDBModelMain.getOpeningtime(),healthNewDBModelMain.getClosetime(),healthNewDBModelMain.getOffday(),healthNewDBModelMain.getCategoryId(),
                 healthNewDBModelMain.getRefnumm(),healthNewDBModelMain.getRatings(),healthNewDBModelMain.getSubcat()
         );
@@ -109,7 +111,7 @@ public class HealthNewDBTableMain {
 
     public long insertItem(int helid, String nameen, String namebn, String servicetype, String lat,
                            String lon, String houseno, String block, String area, String policestation,
-                           String node_email, String ward, String road, String node_contact, String otherinfo,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
@@ -129,7 +131,7 @@ public class HealthNewDBTableMain {
                     ward,
                     road,
                     node_contact,
-                    otherinfo,
+                    otherinfo,areabn,
                     openingtime,
                     closetime,
                     offday,categoryId,
@@ -155,6 +157,7 @@ public class HealthNewDBTableMain {
         rowValue.put(KEY_ROAD, road);
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_AREABN, areabn);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -173,7 +176,7 @@ public class HealthNewDBTableMain {
     private long updateItem(
             int helid, String nameen, String namebn, String servicetype, String lat,
             String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,
+            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
             String subcat
     ) {
@@ -195,6 +198,7 @@ public class HealthNewDBTableMain {
         rowValue.put(KEY_ROAD, road);
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
+        rowValue.put(KEY_AREABN, areabn);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);

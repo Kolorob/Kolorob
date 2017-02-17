@@ -194,7 +194,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(healthServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(healthServiceProviderItemNew.getBlock()));
-        CheckConcate("এলাকা", healthServiceProviderItemNew.getArea());
+        CheckConcate("এলাকা", healthServiceProviderItemNew.getAreabn());
         CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(healthServiceProviderItemNew.getWard()));
         // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
