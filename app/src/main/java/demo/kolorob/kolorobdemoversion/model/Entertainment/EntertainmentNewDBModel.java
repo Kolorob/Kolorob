@@ -27,6 +27,7 @@ public class EntertainmentNewDBModel implements Serializable {
     String road;
     String node_contact;
     String otherinfo;
+    String areabn;
 
     String offday;
     String closetime;
@@ -39,7 +40,7 @@ public class EntertainmentNewDBModel implements Serializable {
 
     public EntertainmentNewDBModel(int entid, String nameen, String namebn, String enttype, String servicetype,
                                    String lat, String lon, String houseno, String block, String area, String policestation,
-                                   String node_email, String ward, String road, String node_contact, String otherinfo,
+                                   String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
                                    String openingtime , String closetime, String offday, int categoryId, String refnumm, String subcat, String ratings) {
         this.entid = entid;
         this.nameen = nameen;
@@ -57,6 +58,7 @@ public class EntertainmentNewDBModel implements Serializable {
         this.road = road;
         this.node_contact = node_contact;
         this.otherinfo = otherinfo;
+        this.areabn=areabn;
         this.offday = offday;
         this.closetime = closetime;
         this.openingtime = openingtime;
@@ -134,6 +136,14 @@ public class EntertainmentNewDBModel implements Serializable {
 
     public String getBlock() {
         return block;
+    }
+
+    public String getAreabn() {
+        return areabn;
+    }
+
+    public void setAreabn(String areabn) {
+        this.areabn = areabn;
     }
 
     public void setBlock(String block) {
@@ -273,7 +283,8 @@ public class EntertainmentNewDBModel implements Serializable {
         String _road = jo.getJSONObject("contact_info").getString("road");
         String _node_contact = jo.getJSONObject("contact_info").getString("node_contact");
 
-        String _other=jo.getJSONObject("contact_info").getString("other");
+        String _other =jo.getJSONObject("contact_info").getString("other");
+        String _areabn =jo.getJSONObject("contact_info").getString("area_bn");
         String _opentime = jo.getJSONObject("timing_info").getString("opening_time");
         String _closetime = jo.getJSONObject("timing_info").getString("closing_time");
         String _offday = jo.getJSONObject("timing_info").getString("off_day");
@@ -288,7 +299,7 @@ public class EntertainmentNewDBModel implements Serializable {
         String ki=sref2.toString();
         String _sref=ki.substring(1,ki.length()-1);
         return new EntertainmentNewDBModel(_entid,_nameen,_namebn,_enttype,_servicetypefreeornot,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
                 _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
     }
 }
