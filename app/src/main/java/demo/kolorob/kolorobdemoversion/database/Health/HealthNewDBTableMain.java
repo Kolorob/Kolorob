@@ -273,8 +273,8 @@ public class HealthNewDBTableMain {
                         cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),
                         cursor.getString(8),cursor.getString(9),
                         cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),cursor.getString(14),cursor.getString(15),
-                        cursor.getString(16), cursor.getString(17),cursor.getInt(18),cursor.getString(19),cursor.getString(20),
-                        cursor.getString(21)
+                        cursor.getString(16), cursor.getString(17),cursor.getString(18),cursor.getInt(19),cursor.getString(20),
+                        cursor.getString(21),cursor.getString(22)
                         );
             } while (cursor.moveToNext());
         }
@@ -298,17 +298,18 @@ public class HealthNewDBTableMain {
         String _road = cursor.getString(12);
         String _node_contact = cursor.getString(13);
         String _other = cursor.getString(14);
-        String _opentime  = cursor.getString(15);
-        String _closetime = cursor.getString(16);
-        String  _offday= cursor.getString(17);
-        int _catid=cursor.getInt(18);
-        String _refnumm=cursor.getString(19);
-        String _rating=cursor.getString(20);
-        String _sref=cursor.getString(21);
+        String _areabn = cursor.getString(15);
+        String _opentime  = cursor.getString(16);
+        String _closetime = cursor.getString(17);
+        String  _offday= cursor.getString(18);
+        int _catid=cursor.getInt(19);
+        String _refnumm=cursor.getString(20);
+        String _rating=cursor.getString(21);
+        String _sref=cursor.getString(22);
 
 
         return new HealthNewDBModelMain(_healthid,_nameen,_namebn,_institutetype,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
                 _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
@@ -334,6 +335,24 @@ public class HealthNewDBTableMain {
                 //System.out.println("abc="+cursor.getString(4));
                 subCatList.add(cursorToSubCatList(cursor));
 
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return subCatList;
+    }
+
+
+    public ArrayList<HealthNewDBModelMain> getHealthData(int node_id) {
+        ArrayList<HealthNewDBModelMain> subCatList = new ArrayList<>();
+        //System.out.println(cat_id+"  "+sub_cat_id);
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_IDENTIFIER_ID +" = "+node_id, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                //System.out.println("abc="+cursor.getString(4));
+                subCatList.add(cursorToSubCatList(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
