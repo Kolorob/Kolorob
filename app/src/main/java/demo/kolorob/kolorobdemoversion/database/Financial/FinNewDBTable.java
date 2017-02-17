@@ -96,14 +96,26 @@ public class FinNewDBTable {
     }
 
     public long insertItem(FinancialNewDBModel financialNewDBModel) {
-        return insertItem(financialNewDBModel.getFinid(),financialNewDBModel.getNameen(),financialNewDBModel.getNamebn(),
-                financialNewDBModel.getFintype(),financialNewDBModel.getServicetype(),financialNewDBModel.getLat(),financialNewDBModel.getLon(),financialNewDBModel.getHouseno(),
-                financialNewDBModel.getBlock(),financialNewDBModel.getArea(),financialNewDBModel.getPolicestation(),financialNewDBModel.getNode_email(),
-                financialNewDBModel.getWard(),financialNewDBModel.getRoad(),
-                financialNewDBModel.getNode_contact(),financialNewDBModel.getOtherinfo(),financialNewDBModel.getAreabn(),
-                financialNewDBModel.getOpeningtime(),financialNewDBModel.getClosetime(),financialNewDBModel.getOffday(),financialNewDBModel.getCategoryId(),
-                financialNewDBModel.getRefnumm(),financialNewDBModel.getRatings(),financialNewDBModel.getSubcat()
-        );
+        if (!isFieldExist(financialNewDBModel.getFinid())) {
+            return insertItem(financialNewDBModel.getFinid(), financialNewDBModel.getNameen(), financialNewDBModel.getNamebn(),
+                    financialNewDBModel.getFintype(), financialNewDBModel.getServicetype(), financialNewDBModel.getLat(), financialNewDBModel.getLon(), financialNewDBModel.getHouseno(),
+                    financialNewDBModel.getBlock(), financialNewDBModel.getArea(), financialNewDBModel.getPolicestation(), financialNewDBModel.getNode_email(),
+                    financialNewDBModel.getWard(), financialNewDBModel.getRoad(),
+                    financialNewDBModel.getNode_contact(), financialNewDBModel.getOtherinfo(), financialNewDBModel.getAreabn(),
+                    financialNewDBModel.getOpeningtime(), financialNewDBModel.getClosetime(), financialNewDBModel.getOffday(), financialNewDBModel.getCategoryId(),
+                    financialNewDBModel.getRefnumm(), financialNewDBModel.getRatings(), financialNewDBModel.getSubcat()
+            );
+        }
+        else {
+            return updateItem(financialNewDBModel.getFinid(), financialNewDBModel.getNameen(), financialNewDBModel.getNamebn(),
+                    financialNewDBModel.getFintype(), financialNewDBModel.getServicetype(), financialNewDBModel.getLat(), financialNewDBModel.getLon(), financialNewDBModel.getHouseno(),
+                    financialNewDBModel.getBlock(), financialNewDBModel.getArea(), financialNewDBModel.getPolicestation(), financialNewDBModel.getNode_email(),
+                    financialNewDBModel.getWard(), financialNewDBModel.getRoad(),
+                    financialNewDBModel.getNode_contact(), financialNewDBModel.getOtherinfo(), financialNewDBModel.getAreabn(),
+                    financialNewDBModel.getOpeningtime(), financialNewDBModel.getClosetime(), financialNewDBModel.getOffday(), financialNewDBModel.getCategoryId(),
+                    financialNewDBModel.getRefnumm(), financialNewDBModel.getRatings(), financialNewDBModel.getSubcat()
+            );
+        }
     }
 
 

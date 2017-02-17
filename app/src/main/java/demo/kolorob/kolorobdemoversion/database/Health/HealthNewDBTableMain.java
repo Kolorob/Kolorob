@@ -96,14 +96,26 @@ public class HealthNewDBTableMain {
     }
 
     public long insertItem(HealthNewDBModelMain healthNewDBModelMain) {
-        return insertItem(healthNewDBModelMain.getHealthid(),healthNewDBModelMain.getNameen(),healthNewDBModelMain.getNamebn(),
-                healthNewDBModelMain.getCentertype(),healthNewDBModelMain.getLat(),healthNewDBModelMain.getLon(),healthNewDBModelMain.getHouseno(),
-                healthNewDBModelMain.getBlock(),healthNewDBModelMain.getArea(),healthNewDBModelMain.getPolicestation(),healthNewDBModelMain.getNode_email(),
-                healthNewDBModelMain.getWard(),healthNewDBModelMain.getRoad(),healthNewDBModelMain.getNode_contact(),
-                healthNewDBModelMain.getOtherinfo(),healthNewDBModelMain.getAreabn(),
-                healthNewDBModelMain.getOpeningtime(),healthNewDBModelMain.getClosetime(),healthNewDBModelMain.getOffday(),healthNewDBModelMain.getCategoryId(),
-                healthNewDBModelMain.getRefnumm(),healthNewDBModelMain.getRatings(),healthNewDBModelMain.getSubcat()
-        );
+        if (!isFieldExist(healthNewDBModelMain.getHealthid())) {
+            return insertItem(healthNewDBModelMain.getHealthid(), healthNewDBModelMain.getNameen(), healthNewDBModelMain.getNamebn(),
+                    healthNewDBModelMain.getCentertype(), healthNewDBModelMain.getLat(), healthNewDBModelMain.getLon(), healthNewDBModelMain.getHouseno(),
+                    healthNewDBModelMain.getBlock(), healthNewDBModelMain.getArea(), healthNewDBModelMain.getPolicestation(), healthNewDBModelMain.getNode_email(),
+                    healthNewDBModelMain.getWard(), healthNewDBModelMain.getRoad(), healthNewDBModelMain.getNode_contact(),
+                    healthNewDBModelMain.getOtherinfo(), healthNewDBModelMain.getAreabn(),
+                    healthNewDBModelMain.getOpeningtime(), healthNewDBModelMain.getClosetime(), healthNewDBModelMain.getOffday(), healthNewDBModelMain.getCategoryId(),
+                    healthNewDBModelMain.getRefnumm(), healthNewDBModelMain.getRatings(), healthNewDBModelMain.getSubcat()
+            );
+        }
+        else {
+            return updateItem(healthNewDBModelMain.getHealthid(), healthNewDBModelMain.getNameen(), healthNewDBModelMain.getNamebn(),
+                    healthNewDBModelMain.getCentertype(), healthNewDBModelMain.getLat(), healthNewDBModelMain.getLon(), healthNewDBModelMain.getHouseno(),
+                    healthNewDBModelMain.getBlock(), healthNewDBModelMain.getArea(), healthNewDBModelMain.getPolicestation(), healthNewDBModelMain.getNode_email(),
+                    healthNewDBModelMain.getWard(), healthNewDBModelMain.getRoad(), healthNewDBModelMain.getNode_contact(),
+                    healthNewDBModelMain.getOtherinfo(), healthNewDBModelMain.getAreabn(),
+                    healthNewDBModelMain.getOpeningtime(), healthNewDBModelMain.getClosetime(), healthNewDBModelMain.getOffday(), healthNewDBModelMain.getCategoryId(),
+                    healthNewDBModelMain.getRefnumm(), healthNewDBModelMain.getRatings(), healthNewDBModelMain.getSubcat()
+            );
+        }
     }
 
 

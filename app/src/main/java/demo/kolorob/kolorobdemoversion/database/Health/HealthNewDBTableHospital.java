@@ -63,12 +63,22 @@ public class HealthNewDBTableHospital {
     }
 
     public long insertItem(HealthNewDBModelHospital healthNewDBModelHospital) {
-        return insertItem(
-                healthNewDBModelHospital.getServicecenterid(),healthNewDBModelHospital.getEmergencyavailable(),
-                healthNewDBModelHospital.getEmergencynumber(),healthNewDBModelHospital.getAmbulanceavailable(),healthNewDBModelHospital.getAmbulancenumber(),
-                healthNewDBModelHospital.getMaternityavailable(),healthNewDBModelHospital.getMaternitynumber(),healthNewDBModelHospital.getMaternityprivacy()
+        if (!isFieldExist(healthNewDBModelHospital.getServicecenterid())) {
+            return insertItem(
+                    healthNewDBModelHospital.getServicecenterid(), healthNewDBModelHospital.getEmergencyavailable(),
+                    healthNewDBModelHospital.getEmergencynumber(), healthNewDBModelHospital.getAmbulanceavailable(), healthNewDBModelHospital.getAmbulancenumber(),
+                    healthNewDBModelHospital.getMaternityavailable(), healthNewDBModelHospital.getMaternitynumber(), healthNewDBModelHospital.getMaternityprivacy()
 
-        );
+            );
+        }
+        else {
+            return updateItem(
+                    healthNewDBModelHospital.getServicecenterid(), healthNewDBModelHospital.getEmergencyavailable(),
+                    healthNewDBModelHospital.getEmergencynumber(), healthNewDBModelHospital.getAmbulanceavailable(), healthNewDBModelHospital.getAmbulancenumber(),
+                    healthNewDBModelHospital.getMaternityavailable(), healthNewDBModelHospital.getMaternitynumber(), healthNewDBModelHospital.getMaternityprivacy()
+
+            );
+        }
     }
 
     public long insertItem(int serviceproviderId, String eavail, String enumber,String ambavail,String ambnumber,

@@ -97,14 +97,26 @@ public class LegalAidNewDBTable {
     }
 
     public long insertItem(LegalAidNewDBModel legalAidNewDBModel) {
-        return insertItem(legalAidNewDBModel.getLegalid(),legalAidNewDBModel.getNameen(),legalAidNewDBModel.getNamebn(),
-                legalAidNewDBModel.getServicetype(),legalAidNewDBModel.getLat(),legalAidNewDBModel.getLon(),legalAidNewDBModel.getHouseno(),
-                legalAidNewDBModel.getBlock(),legalAidNewDBModel.getArea(),legalAidNewDBModel.getPolicestation(),legalAidNewDBModel.getNode_email(),
-                legalAidNewDBModel.getWard(),legalAidNewDBModel.getRoad(),
-                legalAidNewDBModel.getNode_contact(),legalAidNewDBModel.getOtherinfo(),legalAidNewDBModel.getAreabn(),
-                legalAidNewDBModel.getOpeningtime(),legalAidNewDBModel.getClosetime(),legalAidNewDBModel.getOffday(),legalAidNewDBModel.getCategoryId(),
-                legalAidNewDBModel.getRefnumm(),legalAidNewDBModel.getRatings(),legalAidNewDBModel.getSubcat()
-        );
+        if (!isFieldExist(legalAidNewDBModel.getLegalid())) {
+            return insertItem(legalAidNewDBModel.getLegalid(), legalAidNewDBModel.getNameen(), legalAidNewDBModel.getNamebn(),
+                    legalAidNewDBModel.getServicetype(), legalAidNewDBModel.getLat(), legalAidNewDBModel.getLon(), legalAidNewDBModel.getHouseno(),
+                    legalAidNewDBModel.getBlock(), legalAidNewDBModel.getArea(), legalAidNewDBModel.getPolicestation(), legalAidNewDBModel.getNode_email(),
+                    legalAidNewDBModel.getWard(), legalAidNewDBModel.getRoad(),
+                    legalAidNewDBModel.getNode_contact(), legalAidNewDBModel.getOtherinfo(), legalAidNewDBModel.getAreabn(),
+                    legalAidNewDBModel.getOpeningtime(), legalAidNewDBModel.getClosetime(), legalAidNewDBModel.getOffday(), legalAidNewDBModel.getCategoryId(),
+                    legalAidNewDBModel.getRefnumm(), legalAidNewDBModel.getRatings(), legalAidNewDBModel.getSubcat()
+            );
+        }
+        else {
+            return updateItem(legalAidNewDBModel.getLegalid(), legalAidNewDBModel.getNameen(), legalAidNewDBModel.getNamebn(),
+                    legalAidNewDBModel.getServicetype(), legalAidNewDBModel.getLat(), legalAidNewDBModel.getLon(), legalAidNewDBModel.getHouseno(),
+                    legalAidNewDBModel.getBlock(), legalAidNewDBModel.getArea(), legalAidNewDBModel.getPolicestation(), legalAidNewDBModel.getNode_email(),
+                    legalAidNewDBModel.getWard(), legalAidNewDBModel.getRoad(),
+                    legalAidNewDBModel.getNode_contact(), legalAidNewDBModel.getOtherinfo(), legalAidNewDBModel.getAreabn(),
+                    legalAidNewDBModel.getOpeningtime(), legalAidNewDBModel.getClosetime(), legalAidNewDBModel.getOffday(), legalAidNewDBModel.getCategoryId(),
+                    legalAidNewDBModel.getRefnumm(), legalAidNewDBModel.getRatings(), legalAidNewDBModel.getSubcat()
+            );
+        }
     }
 
 

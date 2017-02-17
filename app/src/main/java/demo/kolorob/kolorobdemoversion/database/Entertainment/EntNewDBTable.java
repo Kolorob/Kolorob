@@ -96,14 +96,27 @@ public class EntNewDBTable {
     }
 
     public long insertItem(EntertainmentNewDBModel entertainmentNewDBModel) {
-        return insertItem(entertainmentNewDBModel.getEntid(),entertainmentNewDBModel.getNameen(),entertainmentNewDBModel.getNamebn(),
-                entertainmentNewDBModel.getEnttype(),entertainmentNewDBModel.getServicetype(),entertainmentNewDBModel.getLat(),entertainmentNewDBModel.getLon(),entertainmentNewDBModel.getHouseno(),
-                entertainmentNewDBModel.getBlock(),entertainmentNewDBModel.getArea(),entertainmentNewDBModel.getPolicestation(),entertainmentNewDBModel.getNode_email(),
-                entertainmentNewDBModel.getWard(),entertainmentNewDBModel.getRoad(),entertainmentNewDBModel.getNode_contact(),
-                entertainmentNewDBModel.getOtherinfo(),entertainmentNewDBModel.getAreabn(),
-                entertainmentNewDBModel.getOpeningtime(),entertainmentNewDBModel.getClosetime(),entertainmentNewDBModel.getOffday(),entertainmentNewDBModel.getCategoryId(),
-                entertainmentNewDBModel.getRefnumm(),entertainmentNewDBModel.getRatings(),entertainmentNewDBModel.getSubcat()
-        );
+        if (!isFieldExist(entertainmentNewDBModel.getEntid())) {
+
+            return insertItem(entertainmentNewDBModel.getEntid(), entertainmentNewDBModel.getNameen(), entertainmentNewDBModel.getNamebn(),
+                    entertainmentNewDBModel.getEnttype(), entertainmentNewDBModel.getServicetype(), entertainmentNewDBModel.getLat(), entertainmentNewDBModel.getLon(), entertainmentNewDBModel.getHouseno(),
+                    entertainmentNewDBModel.getBlock(), entertainmentNewDBModel.getArea(), entertainmentNewDBModel.getPolicestation(), entertainmentNewDBModel.getNode_email(),
+                    entertainmentNewDBModel.getWard(), entertainmentNewDBModel.getRoad(), entertainmentNewDBModel.getNode_contact(),
+                    entertainmentNewDBModel.getOtherinfo(), entertainmentNewDBModel.getAreabn(),
+                    entertainmentNewDBModel.getOpeningtime(), entertainmentNewDBModel.getClosetime(), entertainmentNewDBModel.getOffday(), entertainmentNewDBModel.getCategoryId(),
+                    entertainmentNewDBModel.getRefnumm(), entertainmentNewDBModel.getRatings(), entertainmentNewDBModel.getSubcat()
+            );
+        }
+        else {
+            return updateItem(entertainmentNewDBModel.getEntid(), entertainmentNewDBModel.getNameen(), entertainmentNewDBModel.getNamebn(),
+                    entertainmentNewDBModel.getEnttype(), entertainmentNewDBModel.getServicetype(), entertainmentNewDBModel.getLat(), entertainmentNewDBModel.getLon(), entertainmentNewDBModel.getHouseno(),
+                    entertainmentNewDBModel.getBlock(), entertainmentNewDBModel.getArea(), entertainmentNewDBModel.getPolicestation(), entertainmentNewDBModel.getNode_email(),
+                    entertainmentNewDBModel.getWard(), entertainmentNewDBModel.getRoad(), entertainmentNewDBModel.getNode_contact(),
+                    entertainmentNewDBModel.getOtherinfo(), entertainmentNewDBModel.getAreabn(),
+                    entertainmentNewDBModel.getOpeningtime(), entertainmentNewDBModel.getClosetime(), entertainmentNewDBModel.getOffday(), entertainmentNewDBModel.getCategoryId(),
+                    entertainmentNewDBModel.getRefnumm(), entertainmentNewDBModel.getRatings(), entertainmentNewDBModel.getSubcat()
+            );
+        }
     }
 
 

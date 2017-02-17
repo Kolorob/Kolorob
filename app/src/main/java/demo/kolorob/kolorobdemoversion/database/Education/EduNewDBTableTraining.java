@@ -58,10 +58,18 @@ public class EduNewDBTableTraining {
     }
 
     public long insertItem(EduTrainingModel eduTrainingModel) {
-        return insertItem(
-                eduTrainingModel.getEduid(),eduTrainingModel.getServiceproviderid(),eduTrainingModel.getCourseduration(),eduTrainingModel.getCost(),
-                eduTrainingModel.getTrainingname(),eduTrainingModel.getCoursename()
-        );
+        if (!isFieldExist(eduTrainingModel.getServiceproviderid())) {
+            return insertItem(
+                    eduTrainingModel.getEduid(), eduTrainingModel.getServiceproviderid(), eduTrainingModel.getCourseduration(), eduTrainingModel.getCost(),
+                    eduTrainingModel.getTrainingname(), eduTrainingModel.getCoursename()
+            );
+        }
+        else {
+            return updateItem(
+                    eduTrainingModel.getEduid(), eduTrainingModel.getServiceproviderid(), eduTrainingModel.getCourseduration(), eduTrainingModel.getCost(),
+                    eduTrainingModel.getTrainingname(), eduTrainingModel.getCoursename()
+            );
+        }
     }
 
     public long insertItem(int eduId, int serviceproviderId, String courseduration, String cost,

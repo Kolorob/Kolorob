@@ -55,11 +55,20 @@ public class HealthNewDBTablePharma {
     }
 
     public long insertItem(HealthNewDBModelPharmacy healthNewDBModelPharmacy) {
-        return insertItem(
-                healthNewDBModelPharmacy.getServicecenterid(),healthNewDBModelPharmacy.getDocavailability(),
-                healthNewDBModelPharmacy.getSpeciality(),healthNewDBModelPharmacy.getVaccineavailability()
+        if (!isFieldExist(healthNewDBModelPharmacy.getServicecenterid())) {
+            return insertItem(
+                    healthNewDBModelPharmacy.getServicecenterid(), healthNewDBModelPharmacy.getDocavailability(),
+                    healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
 
-        );
+            );
+        }
+        else {
+            return updateItem(
+                    healthNewDBModelPharmacy.getServicecenterid(), healthNewDBModelPharmacy.getDocavailability(),
+                    healthNewDBModelPharmacy.getSpeciality(), healthNewDBModelPharmacy.getVaccineavailability()
+
+            );
+        }
     }
 
     public long insertItem(int serviceproviderId, String docavail, String speciality,

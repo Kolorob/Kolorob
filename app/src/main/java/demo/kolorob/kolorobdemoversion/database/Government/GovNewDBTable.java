@@ -98,14 +98,26 @@ public class GovNewDBTable {
     }
 
     public long insertItem(GovernmentNewDBModel governmentNewDBModel) {
-        return insertItem(governmentNewDBModel.getGovid(),governmentNewDBModel.getNameen(),governmentNewDBModel.getNamebn(),
-                governmentNewDBModel.getServicename(),governmentNewDBModel.getLat(),governmentNewDBModel.getLon(),governmentNewDBModel.getHouseno(),
-                governmentNewDBModel.getBlock(),governmentNewDBModel.getArea(),governmentNewDBModel.getPolicestation(),governmentNewDBModel.getNode_email(),
-                governmentNewDBModel.getWard(),governmentNewDBModel.getRoad(),
-                governmentNewDBModel.getNode_contact(),governmentNewDBModel.getOtherinfo(),governmentNewDBModel.getAreabn(),
-                governmentNewDBModel.getOpeningtime(),governmentNewDBModel.getClosetime(),governmentNewDBModel.getOffday(),governmentNewDBModel.getCategoryId(),
-                governmentNewDBModel.getRefnumm(),governmentNewDBModel.getRatings(),governmentNewDBModel.getSubcat()
-        );
+        if (!isFieldExist(governmentNewDBModel.getGovid())) {
+            return insertItem(governmentNewDBModel.getGovid(), governmentNewDBModel.getNameen(), governmentNewDBModel.getNamebn(),
+                    governmentNewDBModel.getServicename(), governmentNewDBModel.getLat(), governmentNewDBModel.getLon(), governmentNewDBModel.getHouseno(),
+                    governmentNewDBModel.getBlock(), governmentNewDBModel.getArea(), governmentNewDBModel.getPolicestation(), governmentNewDBModel.getNode_email(),
+                    governmentNewDBModel.getWard(), governmentNewDBModel.getRoad(),
+                    governmentNewDBModel.getNode_contact(), governmentNewDBModel.getOtherinfo(), governmentNewDBModel.getAreabn(),
+                    governmentNewDBModel.getOpeningtime(), governmentNewDBModel.getClosetime(), governmentNewDBModel.getOffday(), governmentNewDBModel.getCategoryId(),
+                    governmentNewDBModel.getRefnumm(), governmentNewDBModel.getRatings(), governmentNewDBModel.getSubcat()
+            );
+        }
+        else {
+            return updateItem(governmentNewDBModel.getGovid(),governmentNewDBModel.getNameen(),governmentNewDBModel.getNamebn(),
+                    governmentNewDBModel.getServicename(),governmentNewDBModel.getLat(),governmentNewDBModel.getLon(),governmentNewDBModel.getHouseno(),
+                    governmentNewDBModel.getBlock(),governmentNewDBModel.getArea(),governmentNewDBModel.getPolicestation(),governmentNewDBModel.getNode_email(),
+                    governmentNewDBModel.getWard(),governmentNewDBModel.getRoad(),
+                    governmentNewDBModel.getNode_contact(),governmentNewDBModel.getOtherinfo(),governmentNewDBModel.getAreabn(),
+                    governmentNewDBModel.getOpeningtime(),governmentNewDBModel.getClosetime(),governmentNewDBModel.getOffday(),governmentNewDBModel.getCategoryId(),
+                    governmentNewDBModel.getRefnumm(),governmentNewDBModel.getRatings(),governmentNewDBModel.getSubcat()
+            );
+        }
     }
 
 

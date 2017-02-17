@@ -59,11 +59,20 @@ public class EduNewDBTableSchool {
     }
 
     public long insertItem(EduNewSchoolModel eduNewSchoolModel) {
-        return insertItem(
-                eduNewSchoolModel.getId(),eduNewSchoolModel.getSpid(),eduNewSchoolModel.getStipend(),
-                eduNewSchoolModel.getPrimary_fees(),eduNewSchoolModel.getSecondary_fees(),
-                eduNewSchoolModel.getCollage_fees()
-        );
+        if (!isFieldExist(eduNewSchoolModel.getSpid())) {
+            return insertItem(
+                    eduNewSchoolModel.getId(), eduNewSchoolModel.getSpid(), eduNewSchoolModel.getStipend(),
+                    eduNewSchoolModel.getPrimary_fees(), eduNewSchoolModel.getSecondary_fees(),
+                    eduNewSchoolModel.getCollage_fees()
+            );
+        }
+            else {
+                return updateItem(
+                        eduNewSchoolModel.getId(),eduNewSchoolModel.getSpid(),eduNewSchoolModel.getStipend(),
+                        eduNewSchoolModel.getPrimary_fees(),eduNewSchoolModel.getSecondary_fees(),
+                        eduNewSchoolModel.getCollage_fees()
+                );
+            }
     }
 
     public long insertItem(int eduId,int spid, String stipend, String primary, String secondary,
