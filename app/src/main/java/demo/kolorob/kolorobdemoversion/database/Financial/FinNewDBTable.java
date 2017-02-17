@@ -271,7 +271,7 @@ public class FinNewDBTable {
                         cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13),
                         cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
-                        cursor.getInt(19), cursor.getString(20), cursor.getString(21), cursor.getString(22));
+                        cursor.getString(19), cursor.getInt(20), cursor.getString(21), cursor.getString(22),cursor.getString(23));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -299,17 +299,18 @@ public class FinNewDBTable {
         String _road = cursor.getString(13);
         String _node_contact = cursor.getString(14);
         String _other = cursor.getString(15);
-        String _opentime   = cursor.getString(16);
-        String _closetime = cursor.getString(17);
-        String _offday = cursor.getString(18);
-        int _catid=cursor.getInt(19);
-        String _refnumm=cursor.getString(20);
-        String _rating=cursor.getString(21);
-        String _sref=cursor.getString(22);
+        String _areabn = cursor.getString(16);
+        String _opentime   = cursor.getString(17);
+        String _closetime = cursor.getString(18);
+        String _offday = cursor.getString(19);
+        int _catid=cursor.getInt(20);
+        String _refnumm=cursor.getString(21);
+        String _rating=cursor.getString(22);
+        String _sref=cursor.getString(23);
 
 
        return new FinancialNewDBModel(_finid,_nameen,_namebn,_service_fintype,_service_type,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
                _opentime  ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
