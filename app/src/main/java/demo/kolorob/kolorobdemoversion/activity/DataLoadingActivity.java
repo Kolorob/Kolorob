@@ -47,6 +47,7 @@ import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_Adapter;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
@@ -63,6 +64,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.DataModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
@@ -762,6 +764,7 @@ ImageView rotateImage;
             JSONArray Edu = jsonObjects[0];
             EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
             EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
+            EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(DataLoadingActivity.this);
 
             int Govcount = Edu.length();;
 
@@ -772,6 +775,7 @@ ImageView rotateImage;
                         EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
                         eduNewDBTableMain.insertItem(eduNewModel);
                         if (jsonObject2.has("training_details")) {
+
                             JSONArray edutrain = jsonObject2.getJSONArray("training_details");
                             int lenoftrain = edutrain.length();
                             for (int ii = 0; ii < lenoftrain; ii++) {
@@ -779,6 +783,11 @@ ImageView rotateImage;
                                 EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
                                 eduNewDBTableTraining.insertItem(eduTrainingModel);
                             }
+                        }
+                        else if (jsonObject2.has("education_school")) {
+                            JSONObject school = jsonObject2.getJSONObject("education_school");
+                            EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
+                            eduNewDBTableSchool.insertItem(eduNewSchoolModel);
                         }
                     }
 
@@ -800,7 +809,6 @@ ImageView rotateImage;
         protected Long doInBackground(JSONArray... jsonArrays) {
             JSONArray Ent = jsonArrays[0];
             EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
-
 
             int Entcount = Ent.length();
 
@@ -929,7 +937,6 @@ ImageView rotateImage;
             JSONArray Legal = jsonArrays[0];
             LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
 
-
             int Legalcount = Legal.length();
 
             for (int i = 0; i < Legalcount; i++) {
@@ -1056,6 +1063,7 @@ ImageView rotateImage;
             HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
             HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
             HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
+
             int Helcount = Hel.length();
             Log.d("HealthData","********"+Helcount);
 
