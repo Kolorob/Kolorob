@@ -75,6 +75,7 @@ import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
+import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthServiceProviderTableNew;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthSpecialistTableDetails;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
@@ -90,6 +91,7 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBMod
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthSpecialistItemDetails;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
@@ -118,8 +120,8 @@ public class PlaceDetailsActivityNewLayout extends AppCompatActivity implements 
 ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
     ArrayList<StoredArea>storedAreaArrayListall=new ArrayList<>();
     ArrayList<StoredArea>storedAreas=new ArrayList<>();
-    EducationNewTable educationNewTable;
-    ArrayList<EducationNewItem> firstDataSet;
+    EduNewDBTableMain educationNewTable;
+    ArrayList<EduNewModel> firstDataSet;
     boolean mainedcalled=false;
 
     int buttonHeights;
@@ -130,9 +132,9 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
     String[] right_part;
     String[] health_header;
     private ListView health_compare_list, education_compare_list;
-    ArrayList<EducationNewItem> secondDataSet;
-    ArrayList<HealthServiceProviderItemNew> firstDataSetHealth;
-    ArrayList<HealthServiceProviderItemNew> secondDataSetHealth;
+    ArrayList<EduNewModel> secondDataSet;
+    ArrayList<HealthNewDBModelMain> firstDataSetHealth;
+    ArrayList<HealthNewDBModelMain> secondDataSetHealth;
     ToggleButton toggleButton;
 
     ProgressDialog dialog;
@@ -159,7 +161,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
     ImageView compare_logo_image;
     String firstData="",SecondData="";
     Boolean InCompare=false;
-    private HealthServiceProviderTableNew healthServiceProviderTableNew;
+    private HealthNewDBTableMain healthServiceProviderTableNew;
     private LinearLayout compare_layout;
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
     LinearLayout compare_layoutedu;
@@ -771,7 +773,7 @@ GeoPoint location;
                 @Override
                 public void onClick(View v) {
 
-                    if (currentCategoryID == 1 || currentCategoryID == 2) {
+                    if (currentCategoryID == 10000 || currentCategoryID == 20000) {
                         SearchClicked = false;
                         MapClicked = false;
                         ListClicked = false;
@@ -895,7 +897,8 @@ GeoPoint location;
             compare_layout.setVisibility(View.GONE);
             compare_layoutedu.setVisibility(View.VISIBLE);
             compare_layoutedu.setBackgroundColor(Color.parseColor("#2F7281"));
-            compareEducation();}
+            //compareEducation();
+            }
 
         else {
             compare_layout.setVisibility(View.VISIBLE);
@@ -917,35 +920,80 @@ GeoPoint location;
         checkBox.setChecked(true);
         checkBox2.setChecked(true);
 
-        healthServiceProviderTableNew = new HealthServiceProviderTableNew(PlaceDetailsActivityNewLayout.this);
-        firstDataSetHealth = healthServiceProviderTableNew.getHealthData(firstData);
-        secondDataSetHealth = healthServiceProviderTableNew.getHealthData(SecondData);
-        health_header=new String[]{"খোলার সময়","প্রচলিত ভাষা","সেবার ধরন","বিশেষজ্ঞের ধরন","ফার্মেসি সেবা","গোপনীয়তা","সেবার মান এবং যন্ত্রপাতি","সেবার খরচ"};
-        HealthSpecialistTableDetails healthSpecialistTable = new HealthSpecialistTableDetails(PlaceDetailsActivityNewLayout.this);
-        ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses;
-        ArrayList<HealthSpecialistItemDetails> healthSpecialistItemDetailses2;
-        healthSpecialistItemDetailses = healthSpecialistTable.getHealthSpecialistData(firstData);
-        healthSpecialistItemDetailses2 = healthSpecialistTable.getHealthSpecialistData(SecondData);
+        healthServiceProviderTableNew = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
+        firstDataSetHealth = healthServiceProviderTableNew.getHealthData(Integer.parseInt(firstData));
+        secondDataSetHealth = healthServiceProviderTableNew.getHealthData(Integer.parseInt(SecondData));
+        health_header=new String[]{"খোলার সময়","সেবার ধরন","বন্ধের দিন","ডাক্তার আছে?","বিশেষত্ব","ভ্যাক্সিন সুবিধা"};
+        HealthNewDBTablePharma healthSpecialistTable = new HealthNewDBTablePharma(PlaceDetailsActivityNewLayout.this);
+        ArrayList<HealthNewDBModelPharmacy> healthSpecialistItemDetailses;
+        ArrayList<HealthNewDBModelPharmacy> healthSpecialistItemDetailses2;
+        healthSpecialistItemDetailses = healthSpecialistTable.getHealthSpecialistData(Integer.parseInt(firstData));
+        healthSpecialistItemDetailses2 = healthSpecialistTable.getHealthSpecialistData(Integer.parseInt(SecondData));
 
-        String firstSpecialistItem = "";
-        String secondSpecialistItem = "";
+        String firstSpecialistItemdoc = "";
+        String secondSpecialistItemdoc = "";
+        String firstSpecialistItemspe = "";
+        String secondSpecialistItemspe = "";
+        String firstSpecialistItemvac = "";
+        String secondSpecialistItemvac = "";
 
         if (!healthSpecialistItemDetailses.equals("")) {
-            for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses) {
-                firstSpecialistItem = firstSpecialistItem + healthSpecialistItemDetails.getSpecialisttype() + ", ";
+            for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
+                if(healthSpecialistItemDetails.getDocavailability().equals("false"))
+                {
+                    firstSpecialistItemdoc = firstSpecialistItemdoc + "ডাক্তার বসেন না";
+                }
+                else
+                firstSpecialistItemdoc = firstSpecialistItemdoc +  "ডাক্তার বসেন" ;
             }
         }
 
         if (!healthSpecialistItemDetailses2.equals("")){
-            for (HealthSpecialistItemDetails healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
-                secondSpecialistItem = secondSpecialistItem + healthSpecialistItemDetails.getSpecialisttype() + ", ";
+            for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
+                if(healthSpecialistItemDetails.getDocavailability().equals("false"))
+                {
+                    secondSpecialistItemdoc = secondSpecialistItemdoc + "ডাক্তার বসেন না";
+                }
+                else secondSpecialistItemdoc = secondSpecialistItemdoc + "ডাক্তার বসেন" ;
+            }
+        }
+
+        if (!healthSpecialistItemDetailses.equals("")) {
+            for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
+                firstSpecialistItemspe = firstSpecialistItemspe + healthSpecialistItemDetails.getSpeciality() ;
+            }
+        }
+
+        if (!healthSpecialistItemDetailses2.equals("")){
+            for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
+                secondSpecialistItemspe = secondSpecialistItemspe + healthSpecialistItemDetails.getSpeciality() ;
+            }
+        }
+
+        if (!healthSpecialistItemDetailses.equals("")) {
+            for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
+                if(healthSpecialistItemDetails.getVaccineavailability().equals("false"))
+                {
+                    firstSpecialistItemvac=firstSpecialistItemvac + "ভ্যাকসিন সুবিধা নাই ";
+                }
+                else firstSpecialistItemvac = firstSpecialistItemvac +  "ভ্যাকসিন সুবিধা আছে "  ;
+            }
+        }
+
+        if (!healthSpecialistItemDetailses2.equals("")){
+            for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
+                if(healthSpecialistItemDetails.getVaccineavailability().equals("false"))
+                {
+                    secondSpecialistItemvac=secondSpecialistItemvac + "ভ্যাকসিন সুবিধা নাই ";
+                }
+                secondSpecialistItemvac = secondSpecialistItemvac +  "ভ্যাকসিন সুবিধা আছে " ;
             }
         }
 
         String healthService1="";
         String health_service_data1="";
 
-        for (final HealthServiceProviderItemNew healthServiceProviderItemNew: firstDataSetHealth)
+        for (final HealthNewDBModelMain healthServiceProviderItemNew: firstDataSetHealth)
         {
 
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -982,7 +1030,7 @@ GeoPoint location;
 
                     else if (compareValue == 0) { /// if their no item for compare
                         if(isChecked)
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNew.getId(), 1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNew.getHealthid()), 1);
                     }
 
 
@@ -991,7 +1039,7 @@ GeoPoint location;
             });
 
 
-            healthService1=healthServiceProviderItemNew.getFamily_privacy();
+          /*  healthService1=healthServiceProviderItemNew.getFamily_privacy();
             if(!healthService1.equals(""))
             {
                 for (int i=0;i<healthService1.length();i++)
@@ -1008,26 +1056,24 @@ GeoPoint location;
                         health_service_data1=health_service_data1 +" Maternity Service";
 
                 }
-            }
-            if(!healthServiceProviderItemNew.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNode_bn().equals(""))
-                health_name3.setText(healthServiceProviderItemNew.getNode_bn());
+            }*/
+            if(!healthServiceProviderItemNew.getNamebn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNamebn().equals(""))
+                health_name3.setText(healthServiceProviderItemNew.getNamebn());
             else
                 health_name3.setText("শীঘ্রই আসছে");
 
             String time2="";
-            time2=timeConverter(healthServiceProviderItemNew.getOpening_time());
-            left_part=new String[]{time2,healthServiceProviderItemNew.getSpoken_lang(),
-                    health_service_data1,firstSpecialistItem,healthServiceProviderItemNew.getPharmacy_speciality(),
-                    String.valueOf(healthServiceProviderItemNew.getPharmacy_privacy()),healthServiceProviderItemNew.getQuality_equipments(),
-                    healthServiceProviderItemNew.getGeneral_cost()};
+            time2=timeConverter(healthServiceProviderItemNew.getOpeningtime());
+            left_part=new String[]{time2,healthServiceProviderItemNew.getCentertype()
+                    ,healthServiceProviderItemNew.getOffday(),firstSpecialistItemdoc,firstSpecialistItemspe,firstSpecialistItemvac
+                    };
         }
-
 
 
                                //this is for right side item
         String healthService2="";
         String health_service_data2="";
-        for (final HealthServiceProviderItemNew healthServiceProviderItemNewx: secondDataSetHealth)
+        for (final HealthNewDBModelMain healthServiceProviderItemNewx: secondDataSetHealth)
         {
             checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -1063,44 +1109,26 @@ GeoPoint location;
 
                     else if (compareValue == 0) {
                         if(isChecked)
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, healthServiceProviderItemNewx.getId(), 1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNewx.getHealthid()), 1);
                     }
                 }
             });
 
 
 
-            healthService2=healthServiceProviderItemNewx.getFamily_privacy();
-            if(!healthService2.equals(""))
-            {
-                for (int i=0;i<healthService2.length();i++)
-                {
-                    if(healthService2.charAt(i)=='1')
-                    {
-                        health_service_data2=health_service_data1+"Emergency Service, ";
-                    }
-                    else if(healthService2.charAt(i)=='2')
-                    {
-                        health_service_data2=health_service_data2+" Ambulance Service, ";
-                    }
-                    else
-                        health_service_data2=health_service_data2+" Maternity Service";
 
-                }
-            }
-            if(!healthServiceProviderItemNewx.getNode_bn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getNode_bn().equals(""))
-                health_name2.setText(healthServiceProviderItemNewx.getNode_bn());
+            if(!healthServiceProviderItemNewx.getNamebn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getNamebn().equals(""))
+                health_name2.setText(healthServiceProviderItemNewx.getNamebn());
             else
                 health_name2.setText("শীঘ্রই আসছে");
 
 
 
             String time1="";
-            time1=timeConverter(healthServiceProviderItemNewx.getOpening_time()); //convert the time
-            right_part=new String[]{time1,healthServiceProviderItemNewx.getSpoken_lang(),
-                    health_service_data1,secondSpecialistItem,healthServiceProviderItemNewx.getPharmacy_speciality(),
-                    healthServiceProviderItemNewx.getPharmacy_privacy(),healthServiceProviderItemNewx.getQuality_equipments(),
-                    healthServiceProviderItemNewx.getGeneral_cost()
+            time1=timeConverter(healthServiceProviderItemNewx.getOpeningtime()); //convert the time
+            right_part=new String[]{time1,healthServiceProviderItemNewx.getCentertype()
+                    ,healthServiceProviderItemNewx.getOffday(),secondSpecialistItemdoc,
+                    secondSpecialistItemspe,secondSpecialistItemvac
             };
         }
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
@@ -1117,13 +1145,13 @@ GeoPoint location;
 
 //    public Boolean BazarPostValidation(Context c, String message, )
 
-
+/*
     public void compareEducation()
     {
         checkLeft.setChecked(true);
         checkRight.setChecked(true);
 
-        educationNewTable = new EducationNewTable(PlaceDetailsActivityNewLayout.this);
+        educationNewTable = new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
         firstDataSet=educationNewTable.getEducationData(String.valueOf(firstData));
         secondDataSet=educationNewTable.getEducationData(String.valueOf(SecondData));
         for (final EducationNewItem educationNewItem: firstDataSet)
@@ -1241,7 +1269,7 @@ GeoPoint location;
         layoutParams.setMargins(0, 0, 0, smal);//
         education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.education_color));
     }
-
+*/
     public void populateSearch()
     {
 
