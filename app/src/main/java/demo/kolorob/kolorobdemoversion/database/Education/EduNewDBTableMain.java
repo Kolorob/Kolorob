@@ -107,14 +107,25 @@ public class EduNewDBTableMain {
     }
 
     public long insertItem(EduNewModel eduNewModel) {
-        return insertItem(eduNewModel.getEduId(),eduNewModel.getNameen(),eduNewModel.getNamebn(),
+        if (!isFieldExist(eduNewModel.getEduId()))
+        {
+            return insertItem(eduNewModel.getEduId(),eduNewModel.getNameen(),eduNewModel.getNamebn(),
+                    eduNewModel.getEdtype(),eduNewModel.getShift(),eduNewModel.getStudentno(),eduNewModel.getTeachersno(),eduNewModel.getAveragestdperclass(),
+                    eduNewModel.getFacility(),eduNewModel.getLat(),eduNewModel.getLon(),eduNewModel.getHouseno(),
+                    eduNewModel.getBlock(),eduNewModel.getArea(),eduNewModel.getPolicestation(),eduNewModel.getNode_email(),
+                    eduNewModel.getWard(),eduNewModel.getRoad(),eduNewModel.getNode_contact(),eduNewModel.getOtherinfo(),eduNewModel.getArea_bn(),
+                    eduNewModel.getOpeningtime(),eduNewModel.getClosetime(),eduNewModel.getOffday(),eduNewModel.getCategoryId(),
+                    eduNewModel.getRefnumm(),eduNewModel.getRatings(),eduNewModel.getSubcat()
+            );
+        }
+        else return updateItem(eduNewModel.getEduId(),eduNewModel.getNameen(),eduNewModel.getNamebn(),
                 eduNewModel.getEdtype(),eduNewModel.getShift(),eduNewModel.getStudentno(),eduNewModel.getTeachersno(),eduNewModel.getAveragestdperclass(),
                 eduNewModel.getFacility(),eduNewModel.getLat(),eduNewModel.getLon(),eduNewModel.getHouseno(),
                 eduNewModel.getBlock(),eduNewModel.getArea(),eduNewModel.getPolicestation(),eduNewModel.getNode_email(),
                 eduNewModel.getWard(),eduNewModel.getRoad(),eduNewModel.getNode_contact(),eduNewModel.getOtherinfo(),eduNewModel.getArea_bn(),
                 eduNewModel.getOpeningtime(),eduNewModel.getClosetime(),eduNewModel.getOffday(),eduNewModel.getCategoryId(),
-                eduNewModel.getRefnumm(),eduNewModel.getRatings(),eduNewModel.getSubcat()
-        );
+                eduNewModel.getRefnumm(),eduNewModel.getRatings(),eduNewModel.getSubcat());
+
     }
 
 
