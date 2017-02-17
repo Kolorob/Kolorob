@@ -149,11 +149,11 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
     EduNewDBTableMain educationNewTable;
     ArrayList<EduNewModel> firstDataSet;
     boolean mainedcalled=false;
-
+    TextView welcometext;
     int buttonHeights;
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
-
+    TextView uptext;
     LinearLayout wholeLayout;
     String[] right_part;
     String[] health_header;
@@ -221,7 +221,6 @@ GeoPoint location;
 
     public static int currentCategoryID;
 
-    TextView header;
     private String placeChoice;
 
     private ImageButton MapButton,ListButton,SearchButton,CompareButton;
@@ -307,7 +306,7 @@ GeoPoint location;
     //ArrayList<EntertainmentNewDBModel>ENT =new ArrayList<>();
    // ArrayList<FinancialNewDBModel>FIN=new ArrayList<>();
    // ArrayList<GovernmentNewDBModel>GOV=new ArrayList<>();
-    TextView uptext;
+   ActionBar ab;
     boolean mapfirst=true;
     ArrayList <String>clicked=new ArrayList<>();
     String comment = "";
@@ -315,6 +314,15 @@ GeoPoint location;
     CheckBox negotiable;
     int wardId;
     String Areakeyword,mergedLocation;
+String AreaName;
+    ActionBarDrawerToggle toggle;
+    public String getAreaName() {
+        return AreaName;
+    }
+
+    public void setAreaName(String areaName) {
+        AreaName = areaName;
+    }
 
     private Animation mEnterAnimation, mExitAnimation;
     public String getMergedLocation() {
@@ -363,6 +371,7 @@ GeoPoint location;
         else {
             setMergedLocation(storedAreas.get(0).getLoc());
             mergedLocation = storedAreas.get(0).getLoc();
+            setAreaName(storedAreas.get(0).getAreaBn());
             String[] locsplit = mergedLocation.split(":");
             setLocation(new GeoPoint(Double.parseDouble(locsplit[0]), Double.parseDouble(locsplit[1])));
 
@@ -470,27 +479,33 @@ GeoPoint location;
 
             mapcalledstatus = false;
             toolbar = (Toolbar) findViewById(R.id.categorytoolbar);
-            uptext = (TextView) findViewById(R.id.textView15);
+
+            welcometext=(TextView)findViewById(R.id.toptext);
             SharedPreferencesHelper.setCompareData(PlaceDetailsActivityNewLayout.this, "", 0);
             Searchall = (EditText) findViewById(R.id.searchall);
 
 
             filterholder = (RelativeLayout) findViewById(R.id.filterholder);
+            uptext=(TextView)findViewById(R.id.textView15);
+            uptext.setText("এডভান্সড মেনু");
 
-            header = (TextView) findViewById(R.id.textView15);
             // toolbar.setBackgroundResource(android.R.color.transparent);
             setSupportActionBar(toolbar);
-            ActionBar ab = getSupportActionBar();
-            ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-            ab.setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+         //    ab = getSupportActionBar();
+          //  ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+          //  ab.setDisplayHomeAsUpEnabled(true);
 
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+
+            toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            // toggle = new ActionBarDrawerToggle(
+               //     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
                 /**
                  * Called when a drawer has settled in a completely open state.
                  */
+
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
                     //  getSupportActionBar().setTitle("Navigation!");
@@ -506,9 +521,9 @@ GeoPoint location;
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
             };
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
             toggle.setDrawerIndicatorEnabled(true);
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            //getSupportActionBar().setHomeButtonEnabled(true);
             drawer.setDrawerListener(toggle);
             //toggle.syncState();
 
@@ -536,6 +551,7 @@ GeoPoint location;
             mExitAnimation.setDuration(600);
             mExitAnimation.setFillAfter(true);
 
+            welcometext.setText("আপনি এখন "+getAreaName()+ " এলাকার তথ্য  দেখছেন");
             health_name2 = (TextView) findViewById(R.id.health_name3);
             health_name3 = (TextView) findViewById(R.id.health_name2);
             edu_name_ban = (TextView) findViewById(R.id.edu_name_ban3);
@@ -681,7 +697,6 @@ GeoPoint location;
                     SearchClicked = false;
                     MapClicked = true;
                     ListClicked = false;
-                    uptext.setVisibility(View.VISIBLE);
                     CompareClicked = false;
                     if (InCompare == false) {
                         //  callMapFragment(locationNameId);
@@ -742,7 +757,6 @@ GeoPoint location;
 
                     if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
 
-                        uptext.setVisibility(View.VISIBLE);
                         SearchClicked = false;
                         MapClicked = false;
                         InCompare = false;
@@ -1489,9 +1503,9 @@ GeoPoint location;
 
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("১ম ধাপ")
+                        .setTitle("ক্যাটাগরি ")
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("১ম লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুজে নিন")
+                        .setDescription(" সেবার ধরণ অনুযায়ী তথ্য পেতে এখান থেকে সেবা নির্বাচন করুন")
                         .setGravity(Gravity.BOTTOM)
                 )
                 // note that there is no Overlay here, so the default one will be used
@@ -1499,16 +1513,43 @@ GeoPoint location;
 
         ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("২য় ধাপ")
+                        .setTitle("চাকরির তথ্য")
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("ওয়ার্ড অনুযায়ী এলাকার লিস্ট থেকে এলাকা খুজে নিচের 'জমা দিন' বাটনটি ক্লিক করুন।")
-                        .setGravity(Gravity.BOTTOM)
+                        .setDescription(" এলাকার চাকরির খবর পেতে এখানে ক্লিক করুন")
+                        .setGravity(Gravity.TOP)
                 )
                 .playLater(ListButton);
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("সেবা খুজুন")
+
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("আপনার পরিচিত সেবা প্রতিষ্ঠানের অথবা সকল প্রতিষ্ঠানের তথ্য  লিস্ট অনুসারে দেখতে ক্লিক করুন ")
+                        .setGravity(Gravity.TOP)
+                )
+                .playLater(SearchButton);
+        ChainTourGuide tourGuide4 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("তুলনা ")
+
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("শিক্ষার বিস্তারিত পেজ থেকে 'তুলনা করুন' নির্বাচন করে আপনি এখানে ক্লিক করে তুলনা করতে পারবেন")
+                        .setGravity(Gravity.TOP)
+                )
+                .playLater(CompareButton);
+        ChainTourGuide tourGuide5 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("এডভান্সড মেনু")
+
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("নতুন এলাকার তথ্য  নামাতে অথবা নামানো তথ্য  পাল্টানো সহ অন্যান্য মেনুর জন্য এখানে ক্লিক করুন")
+                        .setGravity(Gravity.RIGHT)
+                )
+                .playLater(uptext);
 
 
         Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuide1, tourGuide2)
+                .add(tourGuide1, tourGuide2,tourGuide3,tourGuide4,tourGuide5)
                 .setDefaultOverlay(new Overlay()
                         .setEnterAnimation(mEnterAnimation)
                         .setExitAnimation(mExitAnimation)
