@@ -42,6 +42,7 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
@@ -57,11 +58,15 @@ ArrayList<StoredArea>storedAreas=new ArrayList<>();
     Button update,delete,browse;
     int selectedId=-1;
     Context context;
+    Boolean deleted=false;
     LinearLayout linearLayout;
     ProgressDialog dialog,dialog2;
     ArrayList<HealthNewDBModelMain>healthNewDBModelMains=new ArrayList<>();
     JSONObject allData;
     StoredAreaTable storedAreaTable;
+    ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
+
+    ArrayList<StoredArea>storedAreaArrayList2=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +113,30 @@ delete.setOnClickListener(new View.OnClickListener() {
         }
     }}
 );
+        browse.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+
+                if(selectedId ==-1)
+                {
+                    ToastMessageDisplay.setText(AreaUpgrade.this,"please choose first");
+                    ToastMessageDisplay.showText(AreaUpgrade.this);
+                }
+                else {
+
+                   storedAreaArrayList2=RetriveLocation(Integer.parseInt(storedAreas.get(selectedId).getWardid()),storedAreas.get(selectedId).getAreaid());
+                    SharedPreferences settings = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("ward", Integer.parseInt(storedAreaArrayList2.get(0).getWardid()));
+                    editor.putString("areakeyword", storedAreaArrayList2.get(0).getAreaid());
+                    editor.apply();
+                    Intent a = new Intent(AreaUpgrade.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                    startActivity(a);
+                    finish();
+                }
+            }}
+        );
         update.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -130,7 +158,11 @@ delete.setOnClickListener(new View.OnClickListener() {
         );
 
     }
-
+    public ArrayList<StoredArea> RetriveLocation(int id,String keyword)
+    {
+        storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
+        return storedAreaArrayList;
+    }
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -402,7 +434,18 @@ void radiobuttonsetup()
 
         ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য ডিলিট করা হয়েছে");
         ToastMessageDisplay.showText(AreaUpgrade.this);
+        deleted=true;
         radiobuttonsetup();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(deleted)
+        {
+            AlertMessage.showMessage(AreaUpgrade.this,"দুঃখিত","দয়া করে যে এলাকার তথ্য দেখতে চান সেটি নির্বাচন করে 'এলাকার তথ্য দেখুন' বাটন টি চাপুন");
+        }
+        else
+        super.onBackPressed();
     }
 }
