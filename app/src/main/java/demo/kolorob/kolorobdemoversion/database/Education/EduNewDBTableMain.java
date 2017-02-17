@@ -328,17 +328,18 @@ public class EduNewDBTableMain {
         String _road = cursor.getString(17);
         String _node_contact = cursor.getString(18);
         String _other = cursor.getString(19);
-        String _opentime   = cursor.getString(20);
-        String _closetime = cursor.getString(21);
-        String  _offday= cursor.getString(22);
-        int _catid=cursor.getInt(23);
-        String _refnumm=cursor.getString(24);
-        String _rating=cursor.getString(25);
-        String _sref=cursor.getString(26);
+        String _areabn = cursor.getString(20);
+        String _opentime   = cursor.getString(21);
+        String _closetime = cursor.getString(22);
+        String  _offday= cursor.getString(23);
+        int _catid=cursor.getInt(24);
+        String _refnumm=cursor.getString(25);
+        String _rating=cursor.getString(26);
+        String _sref=cursor.getString(27);
 
 
        return new EduNewModel(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_avgstdperclass,_facility,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
                _opentime,  _closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
