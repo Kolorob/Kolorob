@@ -284,7 +284,7 @@ ImageView rotateImage;
         width = metrics.widthPixels;
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
-        firstRun = settings.getBoolean("firstRun", false);
+        firstRun = settings.getBoolean("firstRunUp", false);
 
 
 
@@ -789,7 +789,7 @@ ImageView rotateImage;
                                 eduNewDBTableTraining.insertItem(eduTrainingModel);
                             }
                         }
-                        else if (jsonObject2.has("education_school")) {
+                         if (jsonObject2.has("education_school")) {
                             JSONObject school = jsonObject2.getJSONObject("education_school");
                             EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
                             eduNewDBTableSchool.insertItem(eduNewSchoolModel);
@@ -1082,7 +1082,7 @@ ImageView rotateImage;
                             JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
                             HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
                             healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
-                        } else if (jsonObject2.has("health_hospital")) {
+                        } if (jsonObject2.has("health_hospital")) {
                             JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
                             HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
                             healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
