@@ -12,11 +12,9 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.fragment.TestFragment;
 
 public class TestFragmentAdapter extends FragmentPagerAdapter {
-    protected static final String[] CONTENT = new String[] { "This", "Is", "A", "Test", "hello"};
+    protected static final String[] CONTENT = new String[] {  "Test", "hello"};
     private int[] offerImages = {
-            R.drawable.user_manual_page1,
-            R.drawable.user_manual_page2,
-            R.drawable.user_manual_page3,
+
             R.drawable.user_manual_page4, R.drawable.user_manual_page5
     };
 
