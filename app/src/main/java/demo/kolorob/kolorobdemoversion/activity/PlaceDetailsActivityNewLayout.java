@@ -319,7 +319,7 @@ String AreaName;
     public String getAreaName() {
         return AreaName;
     }
-
+Boolean firstRun;
     public void setAreaName(String areaName) {
         AreaName = areaName;
     }
@@ -346,7 +346,7 @@ String AreaName;
 
         editor.putBoolean("Value", false);
         editor.putInt("ValueD", 23);
-
+        firstRun = settings.getBoolean("firstRunUp", false);
         editor.apply();
         wardId=settings.getInt("ward",0);
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
@@ -551,7 +551,7 @@ String AreaName;
             mExitAnimation.setDuration(600);
             mExitAnimation.setFillAfter(true);
 
-            welcometext.setText("আপনি এখন "+getAreaName()+ " এলাকার তথ্য  দেখছেন");
+            welcometext.setText(getAreaName());
             health_name2 = (TextView) findViewById(R.id.health_name3);
             health_name3 = (TextView) findViewById(R.id.health_name2);
             edu_name_ban = (TextView) findViewById(R.id.edu_name_ban3);
@@ -607,7 +607,7 @@ String AreaName;
             } catch (Exception e) {
 
             }
-        runOverlay_ContinueMethod();
+     if(firstRun==false)runOverlay_ContinueMethod();
 
         /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
         * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
@@ -1506,7 +1506,7 @@ String AreaName;
                         .setTitle("ক্যাটাগরি ")
                         .setBackgroundColor(Color.parseColor("#000000"))
                         .setDescription(" সেবার ধরণ অনুযায়ী তথ্য পেতে এখান থেকে সেবা নির্বাচন করুন")
-                        .setGravity(Gravity.BOTTOM)
+                        .setGravity(Gravity.RIGHT)
                 )
                 // note that there is no Overlay here, so the default one will be used
                 .playLater(llCatListHolder);
@@ -1571,7 +1571,12 @@ String AreaName;
 
 
             super.onBackPressed();
-            return;
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+            startActivity(intent);
+            finish();
+            System.exit(0);
         }
         SharedPreferences settings = PlaceDetailsActivityNewLayout.this.getSharedPreferences("prefs", 0);
 
@@ -2166,11 +2171,6 @@ String AreaName;
     private void categoryListBuildUp(int currentCategoryID)
     {
 
-
-//        createData(currentCategoryID,"",getLocationNameEng());
-//        subCatItemList = (ExpandableListView) findViewById(R.id.listView);
-//        ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
-//        subCatItemList.setAdapter(adapter);
 
     }
 
@@ -2946,12 +2946,6 @@ String AreaName;
 
 //
 //            map.setVisibility(View.GONE);
-//        if(showList==1)
-//        {
-//
-//            ServiceListDisplayAdapter adapter = new ServiceListDisplayAdapter(this, groups, currentCategoryID);
-//            subCatItemList.setAdapter(adapter);
-//        }
 
 
 

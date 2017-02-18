@@ -45,7 +45,7 @@ public class SplashActivityNew extends ActionBarActivity {
     long install=0;
     long install2=0;
     File filesDir;
-    Boolean  firstRun;
+    Boolean  firstRun,firstRunup;
     public int height,width;
     Boolean registered=false;
     @Override
@@ -61,6 +61,7 @@ public class SplashActivityNew extends ActionBarActivity {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         width=displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
+        dataload=(RelativeLayout)findViewById(R.id.splash);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Snackbar snackbar = Snackbar.make(dataload,"Please allow all the permission so that app works smoothly",Snackbar.LENGTH_LONG);
@@ -115,7 +116,7 @@ public class SplashActivityNew extends ActionBarActivity {
         {
 
         }
-        firstRun = settings.getBoolean("firstRun", false);
+        firstRun = settings.getBoolean("firstRunUp", false);
 
         if (firstRun==false)//if running for first time
         {
@@ -150,7 +151,7 @@ public class SplashActivityNew extends ActionBarActivity {
                         alertDialog.cancel();
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putBoolean("firstRun", false);
+                        editor.putBoolean("firstRunUp", false);
                         editor.apply();
                         finish();
                     }
@@ -179,8 +180,8 @@ public class SplashActivityNew extends ActionBarActivity {
                             System.gc();
                         }
                                 /* start the activity */
-                        if(registered==true) {
-
+                        if(registered) {
+                            //actually dataloadingactivity hobe
                             startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
                             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             finish();
