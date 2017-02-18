@@ -58,7 +58,7 @@ public class EduNewDBTableTraining {
     }
 
     public long insertItem(EduTrainingModel eduTrainingModel) {
-        if (!isFieldExist(eduTrainingModel.getServiceproviderid())) {
+        if (isFieldExist(eduTrainingModel.getServiceproviderid())) {
             return insertItem(
                     eduTrainingModel.getEduid(), eduTrainingModel.getServiceproviderid(), eduTrainingModel.getCourseduration(), eduTrainingModel.getCost(),
                     eduTrainingModel.getTrainingname(), eduTrainingModel.getCoursename()
