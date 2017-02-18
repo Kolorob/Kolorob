@@ -118,6 +118,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
+
         con = this;
 
         Intent intent = getIntent();

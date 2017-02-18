@@ -608,7 +608,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getEntid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/kolorob-live/api/sp_rating/"+entertainmentServiceProviderItemNew.getEntid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
