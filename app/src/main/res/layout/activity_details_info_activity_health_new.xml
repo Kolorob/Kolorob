@@ -339,7 +339,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="@dimen/icon_gaph"
                     android:background="@drawable/comments_view_icon"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/comments"/>
 
         </LinearLayout>
