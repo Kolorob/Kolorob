@@ -13,9 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Areas"
-        android:textColor="@color/orange"
-        android:textSize="44sp"
+        android:text="এলাকা সমুহ"
+        android:textColor="@color/white"
+        android:textSize="@dimen/offercounterbtn"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:id="@+id/feedback" />
@@ -24,30 +24,34 @@
     android:orientation="vertical"
     android:id="@+id/linearradio"
     android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 <RadioGroup
     android:layout_width="wrap_content"
     android:id="@+id/areagroup"
 
     android:layout_height="wrap_content"></RadioGroup>
+    </ScrollView>
 </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/updatearea"
         android:layout_gravity="center"
-        android:text="Update"/>
+        android:text="তথ্য আপডেট করুন"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/deletearea"
         android:layout_gravity="center"
-        android:text="Delete"/>
+        android:text="তথ্য ডিলিট করুন "/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/browsearea"
         android:layout_gravity="center"
-        android:text="Browse"/>
+        android:text="এলাকার তথ্য দেখুন "/>
 
 
 

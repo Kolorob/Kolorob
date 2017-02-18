@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Please wait"
+            android:text="দয়া করে অপেক্ষা করুন "
             android:textColor="@color/White"
 
 

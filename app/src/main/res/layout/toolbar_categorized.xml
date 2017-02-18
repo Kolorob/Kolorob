@@ -52,6 +52,9 @@
                   android:layout_margin="10dp"
                   android:text="Hello"
                   android:gravity="left"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:textColor="#ffffff"
+                  android:layout_centerVertical="true"
                   android:layout_alignParentRight="true"
                   android:layout_alignParentEnd="true" />
 
