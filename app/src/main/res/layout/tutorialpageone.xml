@@ -19,7 +19,7 @@
 
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:src="@drawable/user_manual_page1" />
+            android:src="@drawable/user_manual_page4" />
     </LinearLayout>
 
 </RelativeLayout>
