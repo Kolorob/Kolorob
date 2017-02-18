@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
+import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
@@ -33,6 +35,7 @@ import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
@@ -191,7 +194,6 @@ void radiobuttonsetup()
 
 
             RadioButton ch = new RadioButton(this);
-            ch.setTextSize(30);
             ch.setText(storedAreas.get(i).getAreaBn());
 
             rg.addView(ch);
@@ -234,7 +236,7 @@ void radiobuttonsetup()
                         int p= allData.length();
                         Log.d("Doneall",String.valueOf(p));
                         dialog.dismiss();
-                        ToastMessageDisplay.setText(AreaUpgrade.this,"Data Updated");
+                        ToastMessageDisplay.setText(AreaUpgrade.this,"তথ্য আপডেট হয়েছে");
                         ToastMessageDisplay.showText(AreaUpgrade.this);
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
@@ -254,7 +256,7 @@ void radiobuttonsetup()
         JSONArray Edu = jo;
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
         EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(AreaUpgrade.this);
-
+        EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(AreaUpgrade.this);
         int Govcount = Edu.length();
 
         for (int i = 0; i < Govcount; i++) {
@@ -274,6 +276,11 @@ void radiobuttonsetup()
                             eduNewDBTableTraining.insertItem(eduTrainingModel);
                         }
 
+                    }
+                     if (jsonObject2.has("education_school")) {
+                        JSONObject school = jsonObject2.getJSONObject("education_school");
+                        EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
+                        eduNewDBTableSchool.insertItem(eduNewSchoolModel);
                     }
 
                 }
@@ -392,7 +399,7 @@ void radiobuttonsetup()
                         healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
 
 
-                    } else if (jsonObject2.has("health_hospital")) {
+                    } if (jsonObject2.has("health_hospital")) {
                         JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
 
 
