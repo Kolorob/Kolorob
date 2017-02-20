@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -47,6 +48,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -150,6 +152,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
     ArrayList<EduNewModel> firstDataSet;
     boolean mainedcalled=false;
     TextView welcometext;
+    CheckedTextView ChangeArea;
     int buttonHeights;
     String[] left_part;
     boolean doubleBackToExitPressedOnce = false;
@@ -487,43 +490,46 @@ Boolean firstRun;
 
             filterholder = (RelativeLayout) findViewById(R.id.filterholder);
             uptext=(TextView)findViewById(R.id.textView15);
-            uptext.setText("এডভান্সড মেনু");
+            ChangeArea=(CheckedTextView)findViewById(R.id.changearea);
+            uptext.setText("<-এডভান্সড\nমেনু");
+            ChangeArea.setText("এলাকা\nপাল্টান");
+            ChangeArea.setOnClickListener(new View.OnClickListener() {
 
+                @Override
+                public void onClick(View arg0) {
+
+                    Intent em = new Intent(PlaceDetailsActivityNewLayout.this, AreaUpgrade.class);
+                    startActivity(em);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                }
+            });
             // toolbar.setBackgroundResource(android.R.color.transparent);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-         //    ab = getSupportActionBar();
-          //  ab.setHomeAsUpIndicator(R.drawable.menu_icon);
-          //  ab.setDisplayHomeAsUpEnabled(true);
+            ActionBar ab = getSupportActionBar();
+            ab.setHomeAsUpIndicator(R.drawable.menu_icon);
+            ab.setDisplayHomeAsUpEnabled(true);
 
             drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
-            toggle = new ActionBarDrawerToggle(this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
-            // toggle = new ActionBarDrawerToggle(
-               //     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-
-                /**
-                 * Called when a drawer has settled in a completely open state.
-                 */
-
+                /** Called when a drawer has settled in a completely open state. */
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
                     //  getSupportActionBar().setTitle("Navigation!");
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
 
-                /**
-                 * Called when a drawer has settled in a completely closed state.
-                 */
+                /** Called when a drawer has settled in a completely closed state. */
                 public void onDrawerClosed(View view) {
                     super.onDrawerClosed(view);
                     // getSupportActionBar().setTitle(mActivityTitle);
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
             };
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
             toggle.setDrawerIndicatorEnabled(true);
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //getSupportActionBar().setHomeButtonEnabled(true);
             drawer.setDrawerListener(toggle);
             //toggle.syncState();
 
@@ -1483,11 +1489,11 @@ Boolean firstRun;
         }
         else if (id == R.id.tutorial) {
 
-            int mapdetail=1;
-
-            Intent em = new Intent(this, ViewPagerDemo.class);
-            em.putExtra("YourValueKey", mapdetail);
-            startActivity(em);
+            Intent intent3 = new Intent();
+            intent3.setAction(Intent.ACTION_VIEW);
+            intent3.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent3.setData(Uri.parse("http://www.kolorob.info/learn-more/tutorial"));
+            startActivity(intent3);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
@@ -2307,7 +2313,7 @@ Boolean firstRun;
 
         else if(locationNameId==2) fragment.getMapViewController().setCenter(AppConstants.PARIS1);
         else fragment.getMapViewController().setCenter(AppConstants.TWELVE);*/
-        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(15);
           fragment.getMapViewController().setCenter(getLocation());
 
             fragment.setCategoryId(currentCategoryID);
@@ -2453,7 +2459,7 @@ Boolean firstRun;
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(15);
         fragment.Setsubcategories(currentCategoryID);
             fragment.setCategoryId(currentCategoryID);
             fragment.setHealthServiceProvider(healthServiceProviderItemNews);
@@ -2480,7 +2486,7 @@ Boolean firstRun;
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
 
-        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(15);
         fragment.getMapViewController().setCenter(getLocation());
 
 
@@ -2512,7 +2518,7 @@ Boolean firstRun;
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(15);
 
 
             fragment.setCategoryId(currentCategoryID);
@@ -2543,7 +2549,7 @@ Boolean firstRun;
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(15);
 
 
             fragment.setCategoryId(currentCategoryID);
@@ -2572,7 +2578,7 @@ Boolean firstRun;
 
         MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
         fragment.getMapViewController().setCenter(getLocation());
-        fragment.getMapViewController().setZoom(16);
+        fragment.getMapViewController().setZoom(15);
 
 
             fragment.setCategoryId(currentCategoryID);
