@@ -273,7 +273,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         // mMyLocationOverlay = new MyLocationOverlay(getActivity(), mapView);
         //    mapView.getOverlays().add(mMyLocationOverlay);
         mapViewController = mapView.getController();
-        mapViewController.setZoom(16);
+        mapViewController.setZoom(15);
         String[] partlocation = getLOCATIONFROMMAP().split(":");
         mapViewController.setCenter(new GeoPoint(Float.parseFloat(partlocation[0]), Float.parseFloat(partlocation[1])));
         result = new StringBuilder();
