@@ -98,7 +98,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             listData.add(AppConstants.BAUNIABADH);
         }
     }
-
+    String refid2;
     private ArrayList<HealthNewDBModelMain> healthServiceProvider = null;
     IMapController mapViewController;
     private ArrayList<EntertainmentNewDBModel> entertainmentServiceProvider = null;
@@ -447,8 +447,16 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         }
                     }
                 }
-                result.setLength(result.length() - 1);
-                String refid2 = String.valueOf(result);
+
+                try {
+
+                    result.setLength(result.length() - 1);
+                     refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                   refid2 = "পাওয়া যায় নি";
+                }
+
                 if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
                     ratingavg = "পাওয়া যায় নি";
 
