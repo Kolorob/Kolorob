@@ -178,7 +178,7 @@ ImageView rotateImage;
             "Mirpur_13:Mirpur_14:Baishteki",
             "Mirpur_11:Bauniabadh:Palashnagar",
             "Mirpur_6:Mirpur_7:Pallabi:Albodi:Duaripara:Eastern_Housing:Albodi_Rupnagar_Tinshed",
-            "Mirpur_2:Mirpur_6:_Rupnagar: সরকারী হাউজিং এষ্টেট",
+            "Mirpur_2:Mirpur_6:_Rupnagar:সরকারী হাউজিং এষ্টেট",
             "Mirpur_1:North_Bishil:Baksnagar:নবাবের বাগ :Botanical_Garden_Residential_Area:BISF_Staff_Quarter",
             "Bagbari:Harirampur:Jahurabad:Bazarpara:Bordhonbari:Golartek:Choto_Diabari:Coat_Bari:Anandanagar",
             "Gabtoli_Jamidarbari :Gabtoli_1st_Colony:Gabtoli_2nd_Colony:Gabtoli_3rd_Colony:Goidartek :Darus_Salam",
@@ -302,9 +302,14 @@ ImageView rotateImage;
                         ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
                         ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
                         keyword = list2.get(getPosAreaint());
-                        setLocation(listloc.get(getPosAreaint()));
+                        if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) {
+                            ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
+                            ToastMessageDisplay.showText(DataLoadingActivity.this);
+                        } else {
+                            setLocation(listloc.get(getPosAreaint()));
 
-                        Servercall();
+                            Servercall();
+                        }
                     }
 
 
@@ -368,7 +373,7 @@ ImageView rotateImage;
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                         setAreaNameBn(arrayList2.get(position).getTitle());
 
-                     
+
 
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
@@ -592,7 +597,7 @@ ImageView rotateImage;
                         frameAnimation.stop();
                     alertDialog.cancel();
                         startActivity(a);
-                        DataLoadingActivity.this.finish();
+                        return;
 
                 }
                 //Create a loop

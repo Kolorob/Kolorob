@@ -103,7 +103,7 @@ delete.setOnClickListener(new View.OnClickListener() {
 
         if(selectedId ==-1)
         {
-            ToastMessageDisplay.setText(AreaUpgrade.this,"please choose first");
+            ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
             ToastMessageDisplay.showText(AreaUpgrade.this);
         }
         else {
@@ -123,7 +123,7 @@ delete.setOnClickListener(new View.OnClickListener() {
 
                 if(selectedId ==-1)
                 {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"please choose first");
+                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
                     ToastMessageDisplay.showText(AreaUpgrade.this);
                 }
                 else {
@@ -147,7 +147,7 @@ delete.setOnClickListener(new View.OnClickListener() {
 
                 if(selectedId ==-1)
                 {
-                    ToastMessageDisplay.setText(AreaUpgrade.this,"please choose first");
+                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
                     ToastMessageDisplay.showText(AreaUpgrade.this);
                 }
                 else {
