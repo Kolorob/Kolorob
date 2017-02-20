@@ -94,7 +94,7 @@ public class MyInfoWindow extends InfoWindow {
         // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
         final TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
-        if(contact2==null||contact2.equals(" "))contact2="পাওয়া যায় নি";
+        if(contact2==null||contact2.equals(" ")||contact2.equals("null"))contact2="পাওয়া যায় নি";
         txtTitle.setText(titlemarker);
         txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
         adddescription.setText("যোগাযোগ: " + contact2);
