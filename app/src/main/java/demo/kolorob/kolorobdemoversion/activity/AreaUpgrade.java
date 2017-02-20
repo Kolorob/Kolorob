@@ -240,6 +240,7 @@ void radiobuttonsetup()
                         ToastMessageDisplay.showText(AreaUpgrade.this);
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
+                        settings.edit().putLong("time", System.currentTimeMillis()).apply();
                         editor.putInt("ward", Integer.parseInt(storedAreas.get(selectedId).getWardid()));
                         editor.putString("areakeyword", storedAreas.get(selectedId).getAreaid());
                         editor.apply();
