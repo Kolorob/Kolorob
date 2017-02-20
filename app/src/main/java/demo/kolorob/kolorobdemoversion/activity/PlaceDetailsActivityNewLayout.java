@@ -131,6 +131,7 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
 import static demo.kolorob.kolorobdemoversion.R.id.comment;
+import static demo.kolorob.kolorobdemoversion.R.id.new_place;
 
 
 /**
@@ -285,6 +286,7 @@ GeoPoint location;
     public ArrayList<GovernmentNewDBModel>fetchedgov;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
     RadioGroup fgrp1,fgrp2;
+    NavigationView navigationView;
     int va;
     ArrayList<String>filter=new ArrayList<>();
     ArrayList<String>filter2=new ArrayList<>();
@@ -316,6 +318,7 @@ GeoPoint location;
     MapFragmentOSM mapFragment;
     CheckBox negotiable;
     int wardId;
+    View view,view2;
     String Areakeyword,mergedLocation;
 String AreaName;
     ActionBarDrawerToggle toggle;
@@ -491,7 +494,7 @@ Boolean firstRun;
             filterholder = (RelativeLayout) findViewById(R.id.filterholder);
             uptext=(TextView)findViewById(R.id.textView15);
             ChangeArea=(CheckedTextView)findViewById(R.id.changearea);
-            uptext.setText("<-এডভান্সড\nমেনু");
+            uptext.setText("<-মেনু");
             ChangeArea.setText("এলাকা\nপাল্টান");
             ChangeArea.setOnClickListener(new View.OnClickListener() {
 
@@ -516,6 +519,9 @@ Boolean firstRun;
                 /** Called when a drawer has settled in a completely open state. */
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
+                 view=    navigationView.getTouchables().get(2);
+                     view2=    navigationView.getTouchables().get(4);
+                    if(firstRun==false)runOverlay_ContinueMethodnavigation();
                     //  getSupportActionBar().setTitle("Navigation!");
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
@@ -533,7 +539,7 @@ Boolean firstRun;
             drawer.setDrawerListener(toggle);
             //toggle.syncState();
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+             navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -556,8 +562,9 @@ Boolean firstRun;
             mExitAnimation = new AlphaAnimation(1f, 0f);
             mExitAnimation.setDuration(600);
             mExitAnimation.setFillAfter(true);
-
-            welcometext.setText(getAreaName());
+            String AREA=getAreaName();
+           AREA= AREA.replace(' ','\n');
+            welcometext.setText(AREA);
             health_name2 = (TextView) findViewById(R.id.health_name3);
             health_name3 = (TextView) findViewById(R.id.health_name2);
             edu_name_ban = (TextView) findViewById(R.id.edu_name_ban3);
@@ -1448,7 +1455,9 @@ Boolean firstRun;
             storedAreaArrayListall=storedAreaTable.getAllstored();
                 if(storedAreaArrayListall.size()>=5)
                 {
-                    AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত","আপনি ৫টি এলাকার বেশি তথ্য একবারে নামাতে পারবেন না।");
+
+                    AlertMessage.showMessagesize(PlaceDetailsActivityNewLayout.this,"দুঃখিত","আপনি ৫টি এলাকার বেশি তথ্য একবারে নামাতে পারবেন না। আগের এলাকা বাতিল করতে" +
+                            "'তথ্য আপডেট/ডিলিট করুন' অপশন টি ব্যাবহার করুন",20,15);
 
                 }
             else {
@@ -1545,17 +1554,25 @@ Boolean firstRun;
                 .playLater(CompareButton);
         ChainTourGuide tourGuide5 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("এডভান্সড মেনু")
+                        .setTitle("মেনু")
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("নতুন এলাকার তথ্য  নামাতে অথবা নামানো তথ্য  পাল্টানো সহ অন্যান্য মেনুর জন্য এখানে ক্লিক করুন")
+                        .setDescription("ইমারজেন্সি সুবিধা, টিউটোরিয়াল সহ অন্যান্য জানতে বায়ের মেনুতে ক্লিক করুন")
                         .setGravity(Gravity.RIGHT)
                 )
                 .playLater(uptext);
+        ChainTourGuide tourGuide6 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("এলাকা পাল্টান")
 
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription(" এখান থেকে আগে নামানো এলাকার তথ্য দেখতে পারবেন")
+                        .setGravity(Gravity.RIGHT)
+                )
+                .playLater(ChangeArea);
 
         Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuide1, tourGuide2,tourGuide3,tourGuide4,tourGuide5)
+                .add(tourGuide1, tourGuide2,tourGuide3,tourGuide4,tourGuide5,tourGuide6)
                 .setDefaultOverlay(new Overlay()
                         .setEnterAnimation(mEnterAnimation)
                         .setExitAnimation(mExitAnimation)
@@ -1568,6 +1585,43 @@ Boolean firstRun;
         ChainTourGuide.init(this).playInSequence(sequence);
     }
 
+    private void runOverlay_ContinueMethodnavigation() {
+        // the return handler is used to manipulate the cleanup of all the tutorial elements
+
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("নতুন এলাকার তথ্য")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("'নতুন এলাকার তথ্য নামান' থেকে আপনি অন্যান্য এলাকার তথ্য নামাতে পারবেন")
+                        .setGravity(Gravity.RIGHT)
+                )
+                // note that there is no Overlay here, so the default one will be used
+               .playLater( view);
+
+     ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("নামানো তথ্য পরিবর্তন")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("নামানো এলাকার তথ্য বাতিল অথবা আপডেট করতে ব্যাবহার করুন")
+                        .setGravity(Gravity.TOP)
+                )
+                .playLater(view2);
+
+
+
+        Sequence sequence2 = new Sequence.SequenceBuilder()
+                .add(tourGuide1,tourGuide2)
+                .setDefaultOverlay(new Overlay()
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                .build();
+
+
+        ChainTourGuide.init(this).playInSequence(sequence2);
+    }
 
 
 
