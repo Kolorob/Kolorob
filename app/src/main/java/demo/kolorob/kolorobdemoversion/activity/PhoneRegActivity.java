@@ -594,7 +594,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
             public void onClick(View v) {
                 if(from==1)
                 {
-                    Intent newIntent = new Intent(PhoneRegActivity.this, ViewPagerDemo.class);
+                    Intent newIntent = new Intent(PhoneRegActivity.this, DataLoadingActivity.class);
                     newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                     startActivity(newIntent);

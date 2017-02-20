@@ -368,8 +368,7 @@ ImageView rotateImage;
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
                         setAreaNameBn(arrayList2.get(position).getTitle());
 
-                        Toast.makeText(getApplicationContext(), arrayList2.get(position).getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
-
+                     
 
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
@@ -593,7 +592,7 @@ ImageView rotateImage;
                         frameAnimation.stop();
                     alertDialog.cancel();
                         startActivity(a);
-                        return;
+                        DataLoadingActivity.this.finish();
 
                 }
                 //Create a loop

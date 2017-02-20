@@ -143,8 +143,9 @@ public class SplashActivityNew extends ActionBarActivity {
                 final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
 
                 header.setText("ইন্টারনেট সংযোগ সচল নয়");
+                header.setTextColor(getResources().getColor(R.color.Black));
                 bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
-
+                bodys.setTextColor(getResources().getColor(R.color.Black));
                 okay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
