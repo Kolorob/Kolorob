@@ -519,7 +519,7 @@ Boolean firstRun;
                 /** Called when a drawer has settled in a completely open state. */
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
-                 view=    navigationView.getTouchables().get(2);
+                 view= navigationView.getTouchables().get(2);
                      view2=    navigationView.getTouchables().get(4);
                     if(firstRun==false)runOverlay_ContinueMethodnavigation();
                     //  getSupportActionBar().setTitle("Navigation!");
