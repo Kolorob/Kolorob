@@ -47,6 +47,7 @@ import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
@@ -155,7 +156,16 @@ delete.setOnClickListener(new View.OnClickListener() {
                     dialog.setMessage("দয়া করে অপেক্ষা করুন");
                     dialog.setCancelable(true);
                     dialog.show();
-                    Servercall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+                    if(AppUtils.isNetConnected(getApplicationContext()))
+                    {
+                        Servercall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+                    }
+                    else
+                    {
+                        AlertMessage.showMessage(AreaUpgrade.this, " দুঃখিত","আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
+                        dialog.cancel();
+                    }
+
                 }
             }}
         );

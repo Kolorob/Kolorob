@@ -77,6 +77,7 @@ import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
+import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 import tourguide.tourguide.ChainTourGuide;
@@ -296,7 +297,7 @@ ImageView rotateImage;
 
 
                     if (getPosAreaint() == -1) {
-                        ToastMessageDisplay.setText(DataLoadingActivity.this, "please choose area first");
+                        ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
                         ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
@@ -307,8 +308,15 @@ ImageView rotateImage;
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
                         } else {
                             setLocation(listloc.get(getPosAreaint()));
+                            if(AppUtils.isNetConnected(getApplicationContext()))
+                            {
+                                Servercall();
+                            }
+                            else
+                            {
+                                AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত","আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
+                            }
 
-                            Servercall();
                         }
                     }
 
@@ -663,7 +671,7 @@ ImageView rotateImage;
                         allData = new JSONObject(apiContent);
                         if (allData.length()==0)
                         {
-                            ToastMessageDisplay.setText(DataLoadingActivity.this,"No data found. Please select another area");
+                            ToastMessageDisplay.setText(DataLoadingActivity.this,"তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
                         }
                     else {
