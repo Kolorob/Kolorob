@@ -13,7 +13,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
-import android.media.MediaPlayer;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -1931,8 +1931,7 @@ Boolean firstRun;
                 for clicking in category panel of left*/
 
                     case AppConstants.EDUCATION:
-                        MediaPlayer mp_e = MediaPlayer.create(getApplicationContext(), R.raw.education);
-                        mp_e.start();
+
 
                      //   EDD.clear();
                         educlicked=true;
@@ -1969,8 +1968,7 @@ Boolean firstRun;
 
                         break;
                     case AppConstants.HEALTH:
-                        MediaPlayer mp_h = MediaPlayer.create(getApplicationContext(), R.raw.health);
-                        mp_h.start();
+
                         //HEL.clear();
                         helclicked=true;
                         educlicked=false;
@@ -2039,8 +2037,6 @@ Boolean firstRun;
 
 
 
-                        MediaPlayer mp_en = MediaPlayer.create(getApplicationContext(), R.raw.entertainment);
-                        mp_en.start();
 
 
 
@@ -2052,8 +2048,7 @@ Boolean firstRun;
                     //TODO write necessary codes for entertainment
 
                     case AppConstants.GOVERNMENT:
-                        MediaPlayer mp_g = MediaPlayer.create(getApplicationContext(), R.raw.government);
-                        mp_g.start();
+
                         govclicked=true;
                      //   GOV.clear();
                         entclicked=false;
@@ -2112,8 +2107,7 @@ Boolean firstRun;
                         }
                         break;
                     case AppConstants.LEGAL:
-                        MediaPlayer mp_l = MediaPlayer.create(getApplicationContext(), R.raw.legal);
-                        mp_l.start();
+
                       //  LEG.clear();
                         legclicked=true;
                         entclicked=false;
@@ -2143,8 +2137,7 @@ Boolean firstRun;
                         callMapFragmentWithLegal(legalaidServiceProvider,true);
                         break;
                     case AppConstants.FINANCIAL:
-                        MediaPlayer mp_f = MediaPlayer.create(getApplicationContext(), R.raw.finance);
-                        mp_f.start();
+
                      //   FIN.clear();
                         finclicked=true;
                         entclicked=false;
