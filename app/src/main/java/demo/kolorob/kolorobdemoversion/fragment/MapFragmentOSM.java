@@ -251,6 +251,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+
             mapView.setTileSource(TileSourceFactory.MAPNIK);
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("firstRunUp", true);
@@ -261,6 +262,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             mapView.setUseDataConnection(true);
             OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
             mapView.setTileSource(TileSourceFactory.MAPNIK);
+
             //mapView.setTileSource(TileSourceFactory.MAPNIK);
         }
       /*  mapView.setTilesScaledToDpi(true);
@@ -353,8 +355,15 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         }
                     }
                 }
-                result.setLength(result.length() - 1);
-                String refid2 = String.valueOf(result);
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                    refid2 = "পাওয়া যায় নি";
+                }
+
                 if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
                     ratingavg = "পাওয়া যায় নি";
 
@@ -399,8 +408,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         }
                     }
                 }
-                result.setLength(result.length() - 1);
-                String refid2 = String.valueOf(result);
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                    refid2 = "পাওয়া যায় নি";
+                }
 
 
                 if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
@@ -501,8 +516,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         }
                     }
                 }
-                result.setLength(result.length() - 1);
-                String refid2 = String.valueOf(result);
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                    refid2 = "পাওয়া যায় নি";
+                }
                 if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
                     ratingavg = "পাওয়া যায় নি";
 
@@ -549,8 +570,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         }
                     }
                 }
-                result.setLength(result.length() - 1);
-                String refid2 = String.valueOf(result);
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                    refid2 = "পাওয়া যায় নি";
+                }
                 if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
                     ratingavg = "পাওয়া যায় নি";
 
@@ -595,8 +622,14 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                         }
                     }
                 }
-                result.setLength(result.length() - 1);
-                String refid2 = String.valueOf(result);
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                }catch (StringIndexOutOfBoundsException  e)
+                {
+                    refid2 = "পাওয়া যায় নি";
+                }
                 if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
                     ratingavg = "পাওয়া যায় নি";
 
