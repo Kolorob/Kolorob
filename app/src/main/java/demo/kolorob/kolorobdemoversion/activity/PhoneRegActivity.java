@@ -227,7 +227,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
             //requestReadPhoneStatePermission();
         }
         if (!permissions.isEmpty()) {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             String[] params = permissions.toArray(new String[permissions.size()]);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
@@ -285,24 +285,23 @@ registered=settings.getBoolean("IFREGISTERED",false);
                     if(accessToken == null){
                         goToLogin(true);
                     }
-                    Toast.makeText(PhoneRegActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PhoneRegActivity.this, "Thanks for permission", Toast.LENGTH_SHORT).show();
                 } else if (location) {
-                    Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(this, "Storage permission is required to store map tiles to reduce data usage and for offline usage.", Toast.LENGTH_LONG).show();
                 } else if (storage) {
-                    Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(this, "Location permission is required to show the user's location on map.", Toast.LENGTH_LONG).show();
                 }
                 else if (phonestate) {
-                    Toast.makeText(this, "App requires device information to proceed further.", Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(this, "App requires device information to proceed further.", Toast.LENGTH_LONG).show();
                 }
                 else if (smsstate) {
-                    Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
+           //         Toast.makeText(this, "Reading SMS permission is required.", Toast.LENGTH_LONG).show();
                 }
                 else if (accountstate) {
-                    Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
+         //           Toast.makeText(this, "Account information is required", Toast.LENGTH_LONG).show();
                 }else { // !location && !storage case
                     // Permission Denied
-                    Toast.makeText(PhoneRegActivity.this, "Storage permission is required to store map tiles to reduce data usage and for offline usage." +
-                            "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
+                   //         "\nLocation permission is required to show the user's location on map."+"\nPhone state permission is required to show the user's location on map.", Toast.LENGTH_SHORT).show();
                 }
             }
             break;
@@ -643,7 +642,7 @@ registered=settings.getBoolean("IFREGISTERED",false);
     public static int randomBox() {
 
         Random rand = new Random();
-        int pickedNumber = rand.nextInt(100);
+        int pickedNumber = rand.nextInt(1000);
         return pickedNumber;
 
     }

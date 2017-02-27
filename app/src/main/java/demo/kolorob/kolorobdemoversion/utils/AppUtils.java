@@ -45,7 +45,6 @@ import java.util.Collections;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.activity.OpeningActivity;
 import demo.kolorob.kolorobdemoversion.helpers.AndroidUnicodedFontSupport;
 
 /**
@@ -55,7 +54,6 @@ import demo.kolorob.kolorobdemoversion.helpers.AndroidUnicodedFontSupport;
 public class AppUtils {
     public static int width;
     public static int height;
-    private static OpeningActivity open;
     private static Typeface bengaliFontNormalSolmn, bengaliFontBoldSolmn;
 
     public static void showMessage(final Context c, final String title,

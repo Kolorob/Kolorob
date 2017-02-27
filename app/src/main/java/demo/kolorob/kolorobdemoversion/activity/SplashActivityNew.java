@@ -1,16 +1,21 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -20,8 +25,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.BuildConfig;
 import demo.kolorob.kolorobdemoversion.R;
@@ -45,6 +53,7 @@ public class SplashActivityNew extends ActionBarActivity {
     long install=0;
     long install2=0;
     File filesDir;
+    public final static int PERM_REQUEST_CODE_DRAW_OVERLAYS = 1234;
     Boolean  firstRun,firstRunup;
     public int height,width;
     Boolean registered=false;
@@ -64,7 +73,7 @@ public class SplashActivityNew extends ActionBarActivity {
         dataload=(RelativeLayout)findViewById(R.id.splash);
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Snackbar snackbar = Snackbar.make(dataload,"Please allow all the permission so that app works smoothly",Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(dataload,"Please allow all the permission so that app works smoothly",Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
         String state = Environment.getExternalStorageState();
@@ -78,7 +87,14 @@ public class SplashActivityNew extends ActionBarActivity {
             // Load another directory, probably local memory
             filesDir = getFilesDir();
         }
+        try {
+            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+            SharedPreferencesHelper.setVersion(SplashActivityNew.this,app_ver);
+        } catch (PackageManager.NameNotFoundException e) {
+            // Log.e(tag, e.getMessage());
 
+
+        }
         try /*
         to fix issue with backward date device time in some version*/
         {
@@ -229,8 +245,40 @@ if(registered==true) {
 
 
         }
-
-
+    public void permissionToDrawOverlays() {
+        if (android.os.Build.VERSION.SDK_INT >= 23) {   //Android M Or Over
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, PERM_REQUEST_CODE_DRAW_OVERLAYS);
+            }
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PERM_REQUEST_CODE_DRAW_OVERLAYS) {
+            if (android.os.Build.VERSION.SDK_INT >= 23) {   //Android M Or Over
+                if (!Settings.canDrawOverlays(this)) {
+                    // ADD UI FOR USER TO KNOW THAT UI for SYSTEM_ALERT_WINDOW permission was not granted earlier...
+                }
+            }
+        }
+    }
+    private void checkPermissions() {
+        List<String> permissions = new ArrayList<>();
+        String message=null;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            permissions.add(Manifest.permission.GET_ACCOUNTS);
+            message += "\n access to read sms.";
+            //requestReadPhoneStatePermission();
+        }
+        if (!permissions.isEmpty()) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            String[] params = permissions.toArray(new String[permissions.size()]);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+            }
+        } // else: We already have permissions, so handle as normal
+    }
 
 
 

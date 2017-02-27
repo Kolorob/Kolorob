@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 /*
 this activity for showing kolorob details in app.Basically it has 4 buttons and different kind of actions ( check switch case)
@@ -85,19 +86,8 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btnphn:
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:+8801709954977"));   //Insert New Number of Arif Bhai
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                startActivity(callIntent);
+                AlertMessage.showMessage(AboutUs.this, "দুঃখিত",
+                        "ফোনে কল দেয়া সম্ভব হচ্ছে না");
                 break;
             default:break;
         }
