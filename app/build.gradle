@@ -8,8 +8,8 @@ android {
         applicationId "demo.kolorob.kolorobdemoversion"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 29
-        versionName "2.068"
+        versionCode 32
+        versionName "2.072"
         aaptOptions.setProperty("cruncherEnabled", false)
     }
     buildTypes {
