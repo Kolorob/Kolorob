@@ -55,7 +55,9 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 /**
  * Created by HP on 2/13/2017.
  */
-
+/*
+this activity is for area upgrade/delete/browse. This is almost similar to data loading activity.
+ */
 public class AreaUpgrade extends AppCompatActivity {
 ArrayList<StoredArea>storedAreas=new ArrayList<>();
     RadioGroup rg;
@@ -112,7 +114,7 @@ delete.setOnClickListener(new View.OnClickListener() {
             dialog2.setMessage("দয়া করে অপেক্ষা করুন");
             dialog2.setCancelable(true);
             dialog2.show();
-           deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+           deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid()); // to delete area stored in device
 
         }
     }}
@@ -132,7 +134,8 @@ delete.setOnClickListener(new View.OnClickListener() {
                    storedAreaArrayList2=RetriveLocation(Integer.parseInt(storedAreas.get(selectedId).getWardid()),storedAreas.get(selectedId).getAreaid());
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("ward", Integer.parseInt(storedAreaArrayList2.get(0).getWardid()));
+                    editor.putInt("ward", Integer.parseInt(storedAreaArrayList2.get(0).getWardid())); // store ward and area from stored area in pref
+                    //to use in next activity
                     editor.putString("areakeyword", storedAreaArrayList2.get(0).getAreaid());
                     editor.apply();
                     Intent a = new Intent(AreaUpgrade.this, PlaceDetailsActivityNewLayout.class); // Default Activity
@@ -171,7 +174,7 @@ delete.setOnClickListener(new View.OnClickListener() {
         );
 
     }
-    public ArrayList<StoredArea> RetriveLocation(int id,String keyword)
+    public ArrayList<StoredArea> RetriveLocation(int id,String keyword) //last existing location er jonno
     {
         storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
         return storedAreaArrayList;
@@ -186,7 +189,8 @@ delete.setOnClickListener(new View.OnClickListener() {
         super.onResume();
 
     }
-void radiobuttonsetup()
+void radiobuttonsetup() // database operation for getting information which areas are stored in devices and store those in an arraylist
+
 {
 
     storedAreas=storedAreaTable.getAllstored();
