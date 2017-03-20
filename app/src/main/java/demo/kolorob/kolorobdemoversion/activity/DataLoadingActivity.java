@@ -205,7 +205,10 @@ ImageView rotateImage;
             , "23.8115701:90.3906999+23.8422065:90.3846699+23.8061997:90.3894752+23.8026476:90.3900641+23.8181098:90.3926311+23.824347:90.3893504+23.8371166:90.3828885+23.8342118:90.3857033+23.83057505:90.3857026",
             "23.7955569:90.3835156+23.7894521:90.3849181"};
 
-
+/*
+It would be better in future to use model class to store all area/ward name lat and others . This time it was done like this since
+all info was provided part by part.
+ */
     int Pos, Posa = 0;
     ArrayList<StoredArea> storedAreas = new ArrayList<>();
 
@@ -303,7 +306,7 @@ ImageView rotateImage;
                         ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
                         ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
                         keyword = list2.get(getPosAreaint());
-                        if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) {
+                        if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) { //no data available for these two area so
                             ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
                         } else {
@@ -333,12 +336,12 @@ ImageView rotateImage;
         mExitAnimation = new AlphaAnimation(1f, 0f);
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
-        populatRecyclerView();
-        populatRecyclerView2();
-        if(firstRun==false)  runOverlay_ContinueMethod();
+        populatRecyclerView(); //ward
+        populatRecyclerView2();//area
+        if(firstRun==false)  runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
         Pos = 0;
-
+//first recyclerview for wards
         ItemClickSupport.addTo(recyclerView)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -361,7 +364,7 @@ ImageView rotateImage;
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+//area cards
         ItemClickSupport.addTo(recyclerViewarea)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -543,7 +546,9 @@ ImageView rotateImage;
     }
 
 
-
+/*
+this function runs data loading task in asynctask
+ */
     abstract class GenericSaveDBTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
         private Context ctx;
 
@@ -559,7 +564,7 @@ ImageView rotateImage;
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("KValue", countofDb);
                 editor.apply();
-                Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));
+                Log.d("tasks", "Tasks remaining: " + (NUMBER_OF_TASKS - countofDb));//number of tasks equivalent to how many api data is being stored
                 ToastMessageDisplay.setText(DataLoadingActivity.this.context, "তথ্য সংগ্রহ চলছে");
                 ToastMessageDisplay.showText(DataLoadingActivity.this.context);
             }
@@ -569,7 +574,7 @@ ImageView rotateImage;
 
     void Servercall() {
 
-        if ( firstRun==false)
+        if ( firstRun==false) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
             NUMBER_OF_TASKS=8;
         }
@@ -674,7 +679,7 @@ ImageView rotateImage;
                             ToastMessageDisplay.setText(DataLoadingActivity.this,"তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
                         }
-                    else {
+                    else { //checking category label and parsing in different threads so that parsing time get minimised
                             if (allData.has("Education"))
                             {
                                 new SavenewEduTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
@@ -741,37 +746,7 @@ ImageView rotateImage;
 
     }
 
-    void SavenewEdu(JSONArray jo) {
-        JSONArray Edu = jo;
-        EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
-        EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
-
-        int Govcount = Edu.length();
-
-        for (int i = 0; i < Govcount; i++) {
-            try {
-                if (!Edu.isNull(i)) {
-                    JSONObject jsonObject2 = Edu.getJSONObject(i);
-                    EduNewModel eduNewModel = EduNewModel.parseEduNewModel(jsonObject2);
-                    eduNewDBTableMain.insertItem(eduNewModel);
-                    if (jsonObject2.has("training_details")) {
-                        JSONArray edutrain = jsonObject2.getJSONArray("training_details");
-                        int lenoftrain = edutrain.length();
-                        for (int ii = 0; ii < lenoftrain; ii++) {
-                            JSONObject train = edutrain.getJSONObject(ii);
-                            EduTrainingModel eduTrainingModel = EduTrainingModel.parseEduTrainingModel(train);
-                            eduNewDBTableTraining.insertItem(eduTrainingModel);
-                        }
-                    }
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("educount", String.valueOf(i));
-        }
-    }
+   
     class SavenewEduTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SavenewEduTask(Context ctx) {
             super(ctx);
