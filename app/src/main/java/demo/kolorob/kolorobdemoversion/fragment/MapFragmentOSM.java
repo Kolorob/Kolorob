@@ -29,6 +29,7 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,9 @@ import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
 import demo.kolorob.kolorobdemoversion.model.RatingModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -107,6 +110,8 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     private ArrayList<FinancialNewDBModel> financialServiceProvider = null;
     private ArrayList<EduNewModel> educationServiceProvider = null;
     private ArrayList<GovernmentNewDBModel> governmentNewItems = null;
+    private ArrayList<NGONewDBModel> ngoServiceProvider = null;
+    private ArrayList<ReligiousNewDBModel> religiousServiceProvider = null;
     private ArrayList<AllHolder> allitems = null;
     MapView mapView, mapp;
     String datevalue, datevaluebn;
@@ -179,6 +184,15 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         this.legalaidServiceProvider = et;
     }
 
+    public void setNgoServiceProvider(ArrayList<NGONewDBModel> et) {
+        this.ngoServiceProvider = et;
+    }
+
+    public void setReligiousServiceProvider(ArrayList<ReligiousNewDBModel> et) {
+        this.religiousServiceProvider = et;
+    }
+
+
     byte[] bytes;
 
     public void setFinancialServiceProvider(ArrayList<FinancialNewDBModel> et) {
@@ -205,7 +219,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     LocationManager locationManager;
     StringBuilder result;
 
-    String ratingavg, ratingavgbn, refid;
+    String ratingavg, ratingavgbn, refid, service_type, religion;
 
     public void setHealthServiceProvider(ArrayList<HealthNewDBModelMain> et) {
         this.healthServiceProvider = et;
@@ -594,6 +608,122 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
     }
 
+    /////// NGO ////
+
+    public void ngoicons() {
+        mapView.removeAllViewsInLayout();
+        mapView.getOverlays().clear();
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+        mapView.invalidate();
+
+        if (ngoServiceProvider != null) {
+
+            for (NGONewDBModel et : ngoServiceProvider) {
+
+                //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                String subcategotyId = et.getSubcat();
+                Log.e("Sub Cat NGO", subcategotyId);
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefnumm();
+                service_type = et.getServicetype();
+                result.delete(0, result.length());
+                String[] references = refid.split(",");
+                for (int k = 0; k < references.length; k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value = subCategoryItemNews.get(i).getRefId();
+                        if (value == Integer.parseInt(references[k])) {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                } catch (StringIndexOutOfBoundsException e) {
+                    refid2 = "পাওয়া যায় নি";
+                }
+                if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
+                    ratingavg = "পাওয়া যায় নি";
+
+                } else {
+                    ratingavgbn = EtoBconversion(ratingavg);
+
+                    ratingavg = ratingavgbn.concat(datevalue);
+                }
+                GeoPoint point = new GeoPoint(latDouble, longDouble);
+                drawMarkerNGO(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getNgoid(), subcategotyId, refid2);
+            }
+        }
+
+
+    }
+
+    ///// NGO end ///
+
+
+    ///////  Religious ////////
+    public void religiousicons() {
+        mapView.removeAllViewsInLayout();
+        mapView.getOverlays().clear();
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(getActivity(), this);
+        mapView.getOverlays().add(0, mapEventsOverlay);
+        mapView.invalidate();
+
+        if (religiousServiceProvider != null) {
+
+            for (ReligiousNewDBModel et : religiousServiceProvider) {
+
+                //    LatLng location = new LatLng(Double.parseDouble(et.getLatitude()), Double.parseDouble(et.getLongitude()));
+                String subcategotyId = et.getSubcat();
+                Log.e("Sub Cat Religious", subcategotyId);
+                latDouble = Double.parseDouble(et.getLat());
+                longDouble = Double.parseDouble(et.getLon());
+                ratingavg = et.getRatings();
+                refid = et.getRefnumm();
+                religion = et.getRs_religion();
+                result.delete(0, result.length());
+                String[] references = refid.split(",");
+                for (int k = 0; k < references.length; k++) {
+                    for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                        int value = subCategoryItemNews.get(i).getRefId();
+                        if (value == Integer.parseInt(references[k])) {
+                            result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                            result.append(",");
+                        }
+                    }
+                }
+                try {
+
+                    result.setLength(result.length() - 1);
+                    refid2 = String.valueOf(result);
+                } catch (StringIndexOutOfBoundsException e) {
+                    refid2 = "পাওয়া যায় নি";
+                }
+                if ((ratingavg.equals("null")) || (ratingavg.equals(""))) {
+                    ratingavg = "পাওয়া যায় নি";
+
+                } else {
+                    ratingavgbn = EtoBconversion(ratingavg);
+
+                    ratingavg = ratingavgbn.concat(datevalue);
+                }
+                GeoPoint point = new GeoPoint(latDouble, longDouble);
+                drawMarkerReligious(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getReligousid(), subcategotyId, refid2);
+            }
+        }
+
+
+    }
+
+    //////// Religious ////////
+
+
+
     //for financial
     public void finicons() {
         mapView.removeAllViewsInLayout();
@@ -863,6 +993,90 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
         mapView.getOverlays().add(marker);
     }
+
+    private void drawMarkerNGO(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2, String ref) {
+        Marker marker = new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        ;
+        String delims = "[,]";
+        String[] tokens = subcategotyId2.split(delims);
+
+
+        /*for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i] == "") continue;
+            subcategotyId = Integer.parseInt(tokens[i]);*/
+        if (Arrays.asList(tokens).contains("70100")){
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+        } else if (Arrays.asList(tokens).contains("70200")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+        } else if (Arrays.asList(tokens).contains("70300")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+        } else if (Arrays.asList(tokens).contains("70400")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+        } else if (Arrays.asList(tokens).contains("70500")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+        } else if (Arrays.asList(tokens).contains("70900")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+        }
+        else{
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+        }
+
+
+        //marker.setTitle("Title of the marker");
+        //}
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, address, ref, service_type);
+        marker.setInfoWindow(infoWindow);
+
+        mapView.getOverlays().add(marker);
+    }
+
+
+    ////// religious////
+    private void drawMarkerReligious(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2, String ref) {
+        Marker marker = new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        ;
+        String delims = "[,]";
+        String[] tokens = subcategotyId2.split(delims);
+
+
+        /*for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i] == "") continue;
+            subcategotyId = Integer.parseInt(tokens[i]);*/
+
+        if (Arrays.asList(tokens).contains("80100")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+        } else if (Arrays.asList(tokens).contains("80200")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
+        } else if (Arrays.asList(tokens).contains("80300")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+        } else if (Arrays.asList(tokens).contains("80400")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+        } else if (Arrays.asList(tokens).contains("80500")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+        } else if (Arrays.asList(tokens).contains("80900")) {
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+        }
+        else{
+            marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+        }
+
+
+        //marker.setTitle("Title of the marker");
+
+        InfoWindow infoWindow = new MyInfoWindow(religion, R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, address, ref);
+        marker.setInfoWindow(infoWindow);
+
+        mapView.getOverlays().add(marker);
+    }
+
+    /////// religious end ////
+
+
+
 
 
     @Override

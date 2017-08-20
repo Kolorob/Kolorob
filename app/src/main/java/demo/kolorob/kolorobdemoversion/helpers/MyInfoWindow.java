@@ -17,6 +17,8 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityNGO;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityReligious;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
@@ -26,6 +28,8 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 //import demo.kolorob.kolorobdemoversion.model.Education.EducationServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
@@ -33,6 +37,8 @@ import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 /**
@@ -48,13 +54,15 @@ public class MyInfoWindow extends InfoWindow {
     EntertainmentNewDBModel nullent;
     FinancialNewDBModel nullfin;
     LegalAidNewDBModel nullleg;
+    NGONewDBModel nullngo;
+    ReligiousNewDBModel nullreligious;
     Activity con;
     GeoPoint pp;
     String user="kolorobapp";
     String pass="2Jm!4jFe3WgBZKEN";
 
     int catid;
-    String referenceid;
+    String referenceid, service_type, religion;;
 
     public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
         super(layoutResId, mapView);
@@ -67,6 +75,35 @@ public class MyInfoWindow extends InfoWindow {
         this.address=add;
         this.referenceid=rid;
     }
+
+    //  Overloaded constructors
+
+    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid, String service_type) {
+        super(layoutResId, mapView);
+        this.con=con;
+        this.pp=point;
+        this.titlemarker=title;
+        this.contact2=contact;
+        this.n=Node;
+        this.catid=categoryid;
+        this.address=add;
+        this.referenceid=rid;
+        this.service_type = service_type;
+    }
+    public MyInfoWindow(String religion, int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
+        super(layoutResId, mapView);
+        this.con=con;
+        this.pp=point;
+        this.titlemarker=title;
+        this.contact2=contact;
+        this.n=Node;
+        this.catid=categoryid;
+        this.address=add;
+        this.referenceid=rid;
+        this.religion = religion;
+    }
+
+
     public void onClose() {
     }
 
@@ -82,7 +119,18 @@ public class MyInfoWindow extends InfoWindow {
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
         if(contact2==null||contact2.equals(" ")||contact2.equals("null"))contact2="পাওয়া যায় নি";
         txtTitle.setText(titlemarker);
-        txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
+        //txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
+
+        if(service_type!=null) {
+            txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " + service_type);
+        }
+        else if(religion!=null){
+            txtSubdescription.setText("রেটিং : " + address +"\nধর্মঃ " + religion);
+        }
+        else{
+            txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
+        }
+
         adddescription.setText("যোগাযোগ: " + contact2);
         // contact.setText(contact2);
 
@@ -156,7 +204,35 @@ public class MyInfoWindow extends InfoWindow {
                         MyInfoWindow.this.con.startActivity(iifin);
 
                         break;
-                }
+
+
+                case AppConstants.NGO:
+                //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                layout.setVisibility(View.VISIBLE);
+                NGONewDBTable ngoServiceProviderTableNew = new NGONewDBTable(MyInfoWindow.this.con);
+                nullngo = ngoServiceProviderTableNew.getngoNode2(n);
+                Intent iingo = new Intent(MyInfoWindow.this.con, DetailsInfoActivityNGO.class);
+                iingo.putExtra(AppConstants.KEY_DETAILS_NGO, nullngo);
+                MyInfoWindow.this.con.startActivity(iingo);
+
+                break;
+
+
+
+                ////// Religious ///
+
+                case AppConstants.RELIGIOUS:
+                //  Toast.makeText(MyInfoWindow.this.con, "Tap on (" + pp.getLatitude() + "," + pp.getLongitude() + ")", Toast.LENGTH_SHORT).show();
+                layout.setVisibility(View.VISIBLE);
+                ReligiousNewDBTable religiousServiceProviderTableNew = new ReligiousNewDBTable(MyInfoWindow.this.con);
+                nullreligious = religiousServiceProviderTableNew.getreligiousNode2(n);
+                Intent iireligious = new Intent(MyInfoWindow.this.con, DetailsInfoActivityReligious.class);
+                iireligious.putExtra(AppConstants.KEY_DETAILS_RELIGIOUS, nullreligious);
+                MyInfoWindow.this.con.startActivity(iireligious);
+
+                break;
+
+            }
 
             }
         });

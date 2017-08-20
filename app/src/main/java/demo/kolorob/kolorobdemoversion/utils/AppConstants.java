@@ -12,9 +12,14 @@ public class AppConstants {
 
     public static final String API_URL = "http://kolorob.net/KolorobApi/api/";
 
-    public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.education, R.drawable.health,R.drawable.entertainment,
-            R.drawable.government,R.drawable.legal,  R.drawable.finance,R.drawable.job
+    public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.ic_education_selected, R.drawable.ic_health_selected,R.drawable.ic_entertainment_selected,
+            R.drawable.ic_government_selected,R.drawable.ic_legal_selected,  R.drawable.ic_finance_selected ,
+            R.drawable.ic_ngos_selected,R.drawable.ic_religious_shelter_selected
     };
+
+    /*public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.education, R.drawable.health,R.drawable.entertainment,
+            R.drawable.government,R.drawable.legal,  R.drawable.finance,R.drawable.job
+    };*/
 
 
     public static final int[] ALL_CAT_MARKER_ICONSBUTTON = {R.drawable.pin_1,R.drawable.pin_2,R.drawable.pin_3,
@@ -81,12 +86,18 @@ public class AppConstants {
     public static final String KEY_DETAILS_LEGAL = "legalaidprovider";
     public static final String KEY_DETAILS_FINANCIAL = "financialprovider";
     public static final String KEY_DETAILS_FINANCIALNEW = "financialprovider";
+    public static final String KEY_DETAILS_NGO = "ngoprovider";
+    public static final String KEY_DETAILS_RELIGIOUS = "religiousprovider";
+
     public static final int EDUCATION= 10000;
     public static final int HEALTH = 20000;
     public static final int ENTERTAINMENT = 30000;
     public static final int GOVERNMENT = 40000;
     public static final int LEGAL = 50000;
     public static final int FINANCIAL = 60000;
+
+    public static final int NGO = 70000;
+    public static final int RELIGIOUS = 80000;
     public static final int JOB = 7;
 
 }

@@ -20,6 +20,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final int DB_VERSION = 1;
 
     public static final String LEGALAIDNEWDBTABLE="legal_aid_main";
+    public static final String NGONEWDBTABLE="ngo_main";
+    public static final String RELIGIOUSNEWDBTABLE="religious_main";
     public static final String FINANCIAL_NEWDB="financial_providerr";
     public static final String GOV_NEW="gov_main_new";
     public static final String ENT_PROVIDER_TABLE_DBNEW= "ent_provider_newdb";

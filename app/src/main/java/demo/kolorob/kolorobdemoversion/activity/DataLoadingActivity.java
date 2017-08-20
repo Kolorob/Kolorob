@@ -56,6 +56,8 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
@@ -73,6 +75,8 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -396,6 +400,7 @@ all info was provided part by part.
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         setPos(position);
 
+
                         populatRecyclerView2();
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
@@ -718,6 +723,15 @@ this function runs data loading task in asynctask
                             {
                                // SavenewEntertainment(allData.getJSONArray("Entertainment"));
                                 new SaveEntertainmentDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
+                            }
+
+                            if (allData.has("NGO")) {
+                                new SaveNgoDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("NGO"));
+                                // SavenewGov(allData.getJSONArray("Government"));
+                            }
+                            if (allData.has("Religious Shelter")) {
+                                // SavenewEntertainment(allData.getJSONArray("Entertainment"));
+                                new SaveReligiousDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Religious Shelter"));
                             }
 
                         }
@@ -1082,6 +1096,68 @@ this function runs data loading task in asynctask
             }
             return new Long(0);
         }
+    }
+
+    class SaveNgoDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveNgoDataTask(Context ctx) {
+            super(ctx);
+        }
+
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Ngo = jsonArrays[0];
+            NGONewDBTable ngoNewDBTable = new NGONewDBTable(DataLoadingActivity.this);
+
+            int Ngocount = Ngo.length();
+            Log.d("NgoData", "********" + Ngocount);
+            for (int i = 0; i < Ngocount; i++) {
+                try {
+                    if (!Ngo.isNull(i)) {
+                        JSONObject jsonObject2 = Ngo.getJSONObject(i);
+                        NGONewDBModel ngoNewDBModel = NGONewDBModel.parseNgoNewDBModel(jsonObject2);
+                        ngoNewDBTable.insertItem(ngoNewDBModel);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+
+
+    }
+
+    class SaveReligiousDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveReligiousDataTask(Context ctx) {
+            super(ctx);
+        }
+
+        protected Long doInBackground(JSONArray... jsonArrays) {
+            JSONArray Religious = jsonArrays[0];
+            ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(DataLoadingActivity.this);
+
+            int Religiouscount = Religious.length();
+            Log.d("ReligiousData", "********" + Religiouscount);
+            for (int i = 0; i < Religiouscount; i++) {
+                try {
+                    if (!Religious.isNull(i)) {
+                        JSONObject jsonObject2 = Religious.getJSONObject(i);
+                        ReligiousNewDBModel religiousNewDBModel = ReligiousNewDBModel.parseReligiousNewDBModel(jsonObject2);
+                        religiousNewDBTable.insertItem(religiousNewDBModel);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+
+
     }
 
     class SaveCategoryListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {

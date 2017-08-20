@@ -72,6 +72,7 @@ import com.squareup.picasso.Picasso;
 
 import org.osmdroid.util.GeoPoint;
 
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -109,7 +110,11 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
+import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
+import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -183,7 +188,7 @@ ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
     private LinearLayout compare_layout;
     CheckBox checkBox,checkBox2,checkLeft,checkRight;
     LinearLayout compare_layoutedu;
-    boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,jobclicked=false;
+    boolean educlicked,helclicked,entclicked,finclicked,govclicked,legclicked,ngoclicked, jobclicked,religiousclicked=false;
     private Toolbar toolbar;
     TextView health_name2,health_name3,edu_name_ban,edu_name_ban22;
 
@@ -273,6 +278,10 @@ GeoPoint location;
     private ArrayList<HealthNewDBModelMain>fetchedhel;
     public ArrayList<GovernmentNewDBModel>fetchedgov;
     private ArrayList<Subcatholder>subholders=new ArrayList<>();
+    private ArrayList<NGONewDBModel> fetchedngo;
+    private ArrayList<ReligiousNewDBModel> fetchedreligious;
+
+
     RadioGroup fgrp1,fgrp2;
     NavigationView navigationView;
     int va;
@@ -677,7 +686,7 @@ Boolean firstRun;
                         compare_layoutedu.setVisibility(View.GONE);
                         searchviewholder.setVisibility(View.VISIBLE);
                     }
-                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true) {
+                    if (educlicked == true || helclicked == true || entclicked == true || legclicked == true || finclicked == true || govclicked == true || ngoclicked == true|| religiousclicked == true) {
 
                         filterholder.setVisibility(View.VISIBLE);
                         toggleButton.setVisibility(View.VISIBLE);
@@ -1935,7 +1944,7 @@ Boolean firstRun;
                      callMapFragmentWithEducation(educationServiceProvider,true);
 
 
-                        ivIcon.setImageResource(R.drawable.education_selected);
+                        ivIcon.setImageResource(R.drawable.ic_education);
 
 
                         if(SearchClicked)
@@ -1945,7 +1954,7 @@ Boolean firstRun;
                         }
 
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.education_selected);
+                        ivIcon.setImageResource(R.drawable.ic_education);
 
 
                         break;
@@ -1969,7 +1978,7 @@ Boolean firstRun;
                         }
 
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.health_selected);
+                        ivIcon.setImageResource(R.drawable.ic_health);
 
 
                         ArrayList<HealthNewDBModelMain> healthServiceProvider;
@@ -2014,7 +2023,7 @@ Boolean firstRun;
                         mapcalledstatus=true;
                         callMapFragmentWithEntertainment(entertainmentServiceProvider,true);
 
-                        ivIcon.setImageResource(R.drawable.entertainment_selected);
+                        ivIcon.setImageResource(R.drawable.ic_entertainment);
 
 
 
@@ -2051,7 +2060,7 @@ Boolean firstRun;
                         }
 
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.government_selected);
+                        ivIcon.setImageResource(R.drawable.ic_government);
 
 
                         mapcalledstatus=true;
@@ -2109,7 +2118,7 @@ Boolean firstRun;
 
 
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.legal_selected);
+                        ivIcon.setImageResource(R.drawable.ic_legal);
 
 
 
@@ -2137,7 +2146,7 @@ Boolean firstRun;
                             populatefilterwords(getFilcatid());
                         }
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.finance_selected);
+                        ivIcon.setImageResource(R.drawable.ic_finance);
 
 
                         ArrayList<FinancialNewDBModel> financialNewItems;
@@ -2145,6 +2154,70 @@ Boolean firstRun;
                         callMapFragmentWithFinancial(financialNewItems,true);
                         mapcalledstatus=true;
                         break;
+
+
+                    /////// NGO ////
+                    case AppConstants.NGO:
+
+                        //   FIN.clear();
+                        ngoclicked = true;
+                        entclicked = false;
+                        educlicked = false;
+                        helclicked = false;
+                        legclicked = false;
+                        govclicked = false;
+                        jobclicked = false;
+                        setFilcatid(currentCategoryID);
+                        catstatus = true;
+                        calladapter(catstatus);
+                        if (SearchClicked) {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.ic_ngos);
+
+
+                        ArrayList<NGONewDBModel> NGOServiceProviderItemNew;
+                        NGOServiceProviderItemNew = constructngoListItem();
+                        callMapFragmentWithNgo(NGOServiceProviderItemNew, true);
+                        mapcalledstatus = true;
+                        break;
+                    ///// Ngo///
+
+
+                    ////// Religious /////
+
+                    case AppConstants.RELIGIOUS:
+
+                        //   FIN.clear();
+                        religiousclicked= true;
+                        ngoclicked = false;
+                        entclicked = false;
+                        educlicked = false;
+                        helclicked = false;
+                        legclicked = false;
+                        govclicked = false;
+                        jobclicked = false;
+                        setFilcatid(currentCategoryID);
+                        catstatus = true;
+                        calladapter(catstatus);
+                        if (SearchClicked) {
+                            filterholder.setVisibility(View.VISIBLE);
+                            populatefilterwords(getFilcatid());
+                        }
+                        ivIcon.setImageResource(0);
+                        ivIcon.setImageResource(R.drawable.ic_religious_shelter);
+
+
+                        ArrayList<ReligiousNewDBModel> ReligiousServiceProviderItemNew;
+                        ReligiousServiceProviderItemNew = constructreligiousListItem();
+                        callMapFragmentWithReligious(ReligiousServiceProviderItemNew, true);
+                        mapcalledstatus = true;
+                        break;
+
+                    ////// Religious end /////
+
 
 
 
@@ -2620,6 +2693,65 @@ Boolean firstRun;
     }
 
 
+    /**********************************************************Methods for NGO***************************************************/
+
+    private ArrayList<NGONewDBModel> constructngoListItem() {
+        ArrayList<NGONewDBModel> ngoServiceProvider;
+        NGONewDBTable ngoServiceProviderTable = new NGONewDBTable(PlaceDetailsActivityNewLayout.this);
+        ngoServiceProvider = ngoServiceProviderTable.getAllNGO(wardId, Areakeyword);
+
+
+        return ngoServiceProvider;
+    }
+
+    private void callMapFragmentWithNgo(ArrayList<NGONewDBModel> ngoServiceProviderItemNews, boolean s) {
+
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        fragment.getMapViewController().setCenter(getLocation());
+        fragment.getMapViewController().setZoom(15);
+
+
+        fragment.setCategoryId(currentCategoryID);
+        fragment.setNgoServiceProvider(ngoServiceProviderItemNews);
+        fragment.Setsubcategories(currentCategoryID);
+        fragment.ngoicons();
+
+        mainedcalled = true;
+
+
+    }
+
+
+
+    /**********************************************************Methods for Religious***************************************************/
+
+    private ArrayList<ReligiousNewDBModel> constructreligiousListItem() {
+        ArrayList<ReligiousNewDBModel> religiousServiceProvider;
+        ReligiousNewDBTable religiousServiceProviderTable = new ReligiousNewDBTable(PlaceDetailsActivityNewLayout.this);
+        religiousServiceProvider = religiousServiceProviderTable.getAllReligious(wardId, Areakeyword);
+
+
+        return religiousServiceProvider;
+    }
+
+    private void callMapFragmentWithReligious(ArrayList<ReligiousNewDBModel> religiousServiceProviderItemNews, boolean s) {
+
+        MapFragmentOSM fragment = (MapFragmentOSM) getFragmentManager().findFragmentById(R.id.map_fragment);
+        fragment.getMapViewController().setCenter(getLocation());
+        fragment.getMapViewController().setZoom(15);
+
+
+        fragment.setCategoryId(currentCategoryID);
+        fragment.setReligiousServiceProvider(religiousServiceProviderItemNews);
+        fragment.Setsubcategories(currentCategoryID);
+        fragment.religiousicons();
+
+        mainedcalled = true;
+
+
+    }
+
+
 
 
 
@@ -2642,6 +2774,8 @@ Boolean firstRun;
         FinNewDBTable financialServiceProviderTable = new FinNewDBTable(PlaceDetailsActivityNewLayout.this);
         GovNewDBTable governmentNewTable=new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
         LegalAidNewDBTable legalAidServiceProviderTable = new LegalAidNewDBTable(PlaceDetailsActivityNewLayout.this);
+        NGONewDBTable ngoServiceProviderTable = new NGONewDBTable(PlaceDetailsActivityNewLayout.this);
+        ReligiousNewDBTable religiousServiceProviderTable = new ReligiousNewDBTable(PlaceDetailsActivityNewLayout.this);
 
         fetchedent=entertainmentServiceProviderTable.getAllEntertainmentinfo(wardId,Areakeyword);
         fetchedfin=financialServiceProviderTable.getAllFinancial(wardId,Areakeyword);
@@ -2649,6 +2783,10 @@ Boolean firstRun;
         fetchedhel=healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
         fetchededu=educationServiceProviderTable.getAllEducationSubCategoriesInfo(wardId,Areakeyword);
         fetchedgov=governmentNewTable.getAllGov(wardId,Areakeyword);
+        fetchedngo = ngoServiceProviderTable.getAllNGO(wardId, Areakeyword);
+        fetchedreligious = religiousServiceProviderTable.getAllReligious(wardId, Areakeyword);
+
+
         String nameen;
         String namebn;
 
@@ -2729,6 +2867,40 @@ Boolean firstRun;
 
 
         }
+
+        /////// ngo /////
+        for (int i = 0; i < fetchedngo.size(); i++) {
+
+            nameen = fetchedngo.get(i).getNameen();
+            node = fetchedngo.get(i).getNgoid();
+            refname = fetchedngo.get(i).getRefnumm();
+            namebn = fetchedngo.get(i).getNamebn();
+
+            AllHolder all = new AllHolder(node, refname, nameen, namebn, 70000);
+            allHolders.add(all);
+        }
+
+        /////// ngo /////
+
+
+
+
+        /////// religious /////
+        for (int i = 0; i < fetchedreligious.size(); i++) {
+
+            nameen = fetchedreligious.get(i).getNameen();
+            node = fetchedreligious.get(i).getReligousid();
+            refname = fetchedreligious.get(i).getRefnumm();
+            namebn = fetchedreligious.get(i).getNamebn();
+
+            AllHolder all = new AllHolder(node, refname, nameen, namebn, 80000);
+            allHolders.add(all);
+        }
+
+        /////// religious /////
+
+
+
         calladapter(false);
 
     }
