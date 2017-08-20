@@ -1752,7 +1752,7 @@ Boolean firstRun;
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            String url = "http://kolorob.net/kolorob-live/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
+            String url = "http://kolorob.net/kolorob-new-demo/api/app_rating?phone=" + phone + "&review=" + comment2 + "&rating=" + rating + "&username=" + this.usernames + "&password=" + this.password;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {

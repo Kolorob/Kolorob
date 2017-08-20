@@ -801,7 +801,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://kolorob.net/kolorob-live/api/sp_rating/"+educationNewItem.get(0).getEduId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"";
+        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating/"+educationNewItem.get(0).getEduId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

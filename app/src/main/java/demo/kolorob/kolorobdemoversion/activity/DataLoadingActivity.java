@@ -628,7 +628,7 @@ this function runs data loading task in asynctask
         frameAnimation.setOneShot(false);
         frameAnimation.start();
         if ( firstRun==false)   {
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/categories?", new VolleyApiCallback() {
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -646,7 +646,7 @@ this function runs data loading task in asynctask
                         }
                     }
             );
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/refs? ", new VolleyApiCallback() {
+            getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/refs? ", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
                             if (status == AppConstants.SUCCESS_CODE) {
@@ -666,7 +666,7 @@ this function runs data loading task in asynctask
                     }
             );
         }
-        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward=" + wardid[getPos()] + "&area=" + keyword, new VolleyApiCallback() {
+        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardid[getPos()] + "&area=" + keyword, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {

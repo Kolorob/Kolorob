@@ -221,7 +221,7 @@ void radiobuttonsetup() // database operation for getting information which area
 
 
 
-        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-live/api/getspbyarea?ward="+ward+"&area="+area, new VolleyApiCallback() {
+        getRequest(AreaUpgrade.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward="+ward+"&area="+area, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
