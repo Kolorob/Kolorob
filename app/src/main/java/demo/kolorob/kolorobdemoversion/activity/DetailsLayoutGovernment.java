@@ -49,13 +49,10 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
-import demo.kolorob.kolorobdemoversion.database.Government.GovernmentServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewItem;
-import demo.kolorob.kolorobdemoversion.model.Government.GovernmentServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -85,7 +82,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     GovernmentNewDBModel governmentNewItem;
 
     String datevalue,datevaluebn;
-    ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
+    //ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
 
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
@@ -120,7 +117,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         }
 
 
-        final GovernmentServiceDetailsTable governmentServiceDetailsTable = new GovernmentServiceDetailsTable(DetailsLayoutGovernment.this);
+        //final GovernmentServiceDetailsTable governmentServiceDetailsTable = new GovernmentServiceDetailsTable(DetailsLayoutGovernment.this);
 
 
         upperHand = (LinearLayout) findViewById(R.id.upper_part);

@@ -1,20 +1,15 @@
 package demo.kolorob.kolorobdemoversion.database.Government;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**

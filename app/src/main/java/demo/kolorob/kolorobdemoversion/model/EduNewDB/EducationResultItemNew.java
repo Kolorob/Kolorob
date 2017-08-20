@@ -1,4 +1,4 @@
-package demo.kolorob.kolorobdemoversion.model.Education;
+package demo.kolorob.kolorobdemoversion.model.EduNewDB;
 
 import org.json.JSONException;
 import org.json.JSONObject;

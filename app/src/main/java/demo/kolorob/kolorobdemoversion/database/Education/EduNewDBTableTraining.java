@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
+//import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**

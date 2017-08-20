@@ -49,13 +49,10 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewItem;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialServiceDetailsItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -84,7 +81,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     ListView alldata;
     FinancialNewDBModel financialNewItem;
     EditText feedback_comment;
-    ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
+    //ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
 
     private TextView ratingText;
 
@@ -117,7 +114,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         }
 
 
-        FinancialServiceDetailsTable financialServiceDetailsTable = new FinancialServiceDetailsTable(DetailsLayoutFinance.this);
+        //FinancialServiceDetailsTable financialServiceDetailsTable = new FinancialServiceDetailsTable(DetailsLayoutFinance.this);
 
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
         if(width<=400)

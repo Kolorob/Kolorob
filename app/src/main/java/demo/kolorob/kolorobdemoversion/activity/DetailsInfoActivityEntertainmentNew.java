@@ -49,13 +49,10 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntertainmetTypeTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentServiceProviderItemNew;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentTypeItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -84,7 +81,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     String[] value;
     int increment=0;
     EntertainmentNewDBModel entertainmentServiceProviderItemNew;
-    ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
+    //ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
 
     private TextView ratingText;
     private ImageView routing_icon,feedback,service_logo,cross;

@@ -49,13 +49,10 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LeagalAidDetailsItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -87,7 +84,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     LegalAidNewDBModel legalAidServiceProviderItemNew;
-    ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
+    //ArrayList<LeagalAidDetailsItem> leagalAidDetailsItems;
 
 
     private TextView ratingText;

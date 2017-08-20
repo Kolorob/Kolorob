@@ -36,7 +36,6 @@ import com.google.android.gms.location.LocationServices;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.routing.KOLOROBRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
-import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -52,11 +51,8 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -95,7 +91,7 @@ public class MapFragmentRouteOSM extends Activity implements View.OnClickListene
     double roadlength;
 
 
-    private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
+    //private ArrayList<HealthServiceProviderItem> healthServiceProvider = null;
     GeoPoint markerlocation, userlocation;
     Marker usermarker;
 

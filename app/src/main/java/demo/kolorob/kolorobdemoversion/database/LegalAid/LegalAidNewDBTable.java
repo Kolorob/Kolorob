@@ -1,11 +1,9 @@
 package demo.kolorob.kolorobdemoversion.database.LegalAid;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -13,7 +11,6 @@ import java.util.Vector;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidServiceProviderItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
@@ -226,7 +223,7 @@ public class LegalAidNewDBTable {
         return ret;
     }
 
-    public LegalAidServiceProviderItemNew getlegNode2(String Node) {
+    /*public LegalAidServiceProviderItemNew getlegNode2(String Node) {
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + "=" + Node, null);
@@ -246,7 +243,7 @@ public class LegalAidNewDBTable {
         cursor.close();
         closeDB();
         return legalAidServiceProviderItem;
-    }
+    }*/
 /*
     public ArrayList<LegalAidServiceProviderItemNew> LegalInfo(int cat_id,int refId,String a,String place) {
         String subcatnames=null;
