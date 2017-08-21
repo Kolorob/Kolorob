@@ -11,14 +11,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,6 +39,7 @@ import java.util.Arrays;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.AreaHolder;
+import demo.kolorob.kolorobdemoversion.adapters.RecycleView_AdapterWardArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_Adapter;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
@@ -65,6 +62,7 @@ import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.DataModel;
+import demo.kolorob.kolorobdemoversion.model.DataModel2;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -97,7 +95,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private static int NUMBER_OF_TASKS = 6;
     View view = null;
     Button submit;
-    Boolean  firstRun;
+    Boolean firstRun;
     //user and pass
     String user = "kolorobapp";
     String pass = "2Jm!4jFe3WgBZKEN";
@@ -105,6 +103,16 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     int countofDb = 0;
     JSONObject allData;
     String AreaNameBn;
+    String CityCorName;
+
+
+    public View getCityview() {
+        return cityview;
+    }
+
+    public void setCityview(View cityview) {
+        this.cityview = cityview;
+    }
 
     public View getAreaview() {
         return areaview;
@@ -122,14 +130,18 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         this.wardview = wardview;
     }
 
-    View areaview, wardview;
-    private static RecyclerView recyclerView, recyclerViewarea;
+    View areaview, wardview, cityview;
+    private static RecyclerView recyclerView, recyclerView1, recyclerViewarea, recyclerViewCity;
 
     private Animation mEnterAnimation, mExitAnimation;
+
+
     //String and Integer array for Recycler View Items
-    public static final String[] TITLES = {"ওয়ার্ড ২", "ওয়ার্ড ৩", "ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬", "ওয়ার্ড ৭", "ওয়ার্ড ৮", "ওয়ার্ড ৯", "ওয়ার্ড ১০", "ওয়ার্ড ১১", "ওয়ার্ড ১২", "ওয়ার্ড ১৩", "ওয়ার্ড ১৪", "ওয়ার্ড ১৫",
-            "ওয়ার্ড ১৬"};
-    public static final int[] wardid = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+
+    public static final String[] CCORPORATION = {"উত্তর"};
+
+    public static final String[] TITLES = {"ওয়ার্ড ২", "ওয়ার্ড ৩", "ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬", "ওয়ার্ড ৭", "ওয়ার্ড ৮", "ওয়ার্ড ৯", "ওয়ার্ড ১০", "ওয়ার্ড ১১", "ওয়ার্ড ১২", "ওয়ার্ড ১৩", "ওয়ার্ড ১৪", "ওয়ার্ড ১৫", "ওয়ার্ড ১৬", "ওয়ার্ড ৩০", "ওয়ার্ড ২০", "ওয়ার্ড ২২", "ওয়ার্ড ২৪", "ওয়ার্ড ২৫", "ওয়ার্ড ৩৬"};
+    public static final int[] wardid = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 30, 20, 22, 24, 25, 36};
     public static final String[] AREANAMES = {"Mirpur 12:Mirpur DOHS",
             "Mirpur 10:Mirpur 11",
             "Mirpur 13:Mirpur 14:Baishteki",
@@ -144,7 +156,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             "Borobag:Pirer Bag:Monipur",
             "Kazi para:Shewrapara:Senpara Parbata"
             , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
-            "Ibrahimpur:Kafrul"};
+            "Ibrahimpur:Kafrul",
+            "Adabor",
+            "Dakshinpara:D.P.H.Icddrb Hospital:G.P.Gha:G.P.Chha/Cha:G.P.Ka:I.D.Hospital:Mohakhali Bazar:Nekatan:Mohakhali Wireless:T. B. Hospital:Rasulbagh",
+            "Bagichar Tek:Mahanagar Project:Paschim Rampura:Paschim Hajipara:Purba Rampura:Uttar Banasree",
+            "Begunbari:Central Tejgaon Ind.Elaka:D.Paschim Tejgaon Ind.Elaka:Kuni Para:Paschim Tejgaon Ind.Elaka",
+            "Paschim Nakhal Para:Uttar Paschim Nakhalpara:Purba Nakhal Para",
+            "Madhubagh:Malibagh Baganbari:Nayatola:Wireless"
+    };
+
 
     public String getAreaNameBn() {
         return AreaNameBn;
@@ -153,7 +173,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     public void setAreaNameBn(String areaNameBn) {
         AreaNameBn = areaNameBn;
     }
-String Location;
+
+    String Location;
 
     public String getLocation() {
         return Location;
@@ -162,7 +183,9 @@ String Location;
     public void setLocation(String location) {
         Location = location;
     }
-ImageView rotateImage;
+
+    ImageView rotateImage;
+
     public static final String[] AREANAMESBN = {"মিরপুর ১২:মিরপুর ডিওএইচএস",
             "মিরপুর ১০:মিরপুর ১১",
             "মিরপুর ১৩:মিরপুর ১৪:বাইশটেকি",
@@ -177,7 +200,15 @@ ImageView rotateImage;
             "বড় বাগ:পীরের বাগ:মনীপুর",
             "কাজী পাড়া:শেওড়া পাড়া:সেনপাড়া পর্বতা"
             , "ভাসান টেক:আলবদিরটেক:দামালকোট:লালাসরাই:মাটি কাটা:মানিকদি:বালুঘাট:বাইগারটেক:বারনটেক",
-            "ইব্রাহীমপুর:কাফরুল"};
+            "ইব্রাহীমপুর:কাফরুল",
+            "আদাবর",
+            "দক্ষিনপাড়া:ডি পি এইচ আইসিডিডিআরবি হাসপাতাল:জিপি ঘ:জিপি চ:জিপি ক:আইডি হাসপাতাল:মহাখালী বাজার:নিকেতন:মহাখালী ওয়্যারলেস:টিবি হাসপাতাল:রসুলবাগ",
+            "বাগিচার টেক:মহানগর প্রোজেক্ট:পশ্চিম রামপুরা:পশ্চিম হাজীপাড়া:পূর্ব রামপুরা:উত্তর বনশ্রী",
+            "বেগুনবাড়ি:সেন্ট্রাল তেজগাঁও এলাকা:ডি পশ্চিম তেজগাঁও এলাকা:কুনি পাড়া:পশ্চিম তেজগাঁও এলাকা",
+            "পশ্চিম নাখালপাড়া:উত্তর পশ্চিম নাখালপাড়া:পূর্ব নাখালপাড়া",
+            "মধুবাগ:মালিবাগ বাগানবাড়ি:নয়াটোলা:ওয়্যারলেস"
+
+    };
     public static final String[] AREAKEYWORDS = {"Mirpur_12:Mirpur_DOHS",
             "Mirpur_10:Mirpur_11",
             "Mirpur_13:Mirpur_14:Baishteki",
@@ -192,7 +223,18 @@ ImageView rotateImage;
             "Borobag:Pirer_Bag:Monipur",
             "Kazi_para:Shewrapara:Senpara_Parbata"
             , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
-            "Ibrahimpur:Kafrul"};
+            "Ibrahimpur:Kafrul",
+            "Adabor",
+            "Dakshinpara:D_P_H_Icddrb_Hospital:G_P_Gha:G_P_Cha:G_P_Ka:I_D_Hospital:Mohakhali_Bazar:Nekatan:Mohakhali_Wireless:T_B_Hospital:Rasulbagh",
+            "Bagichar_Tek:Mahanagar_Project:Paschim_Rampura:Paschim_Hajipara:Purba_Rampura:Uttar_Banasree",
+            "Begunbari:Central_Tejgaon_Ind_Elaka:D_Paschim_Tejgaon_Ind_Elaka:Kuni_Para:Paschim_Tejgaon_Ind_Elaka",
+            "Paschim_Nakhal_Para:Uttar_Paschim_Nakhalpara:Purba_Nakhal_Para",
+            "Madhubagh:Malibagh_Baganbari:Nayatola:Wireless"
+
+
+    };
+
+
     public static final String[] AREALATLONG = {"23.8251885:90.3706654+23.8366512:90.3700301",
             "23.8109961:90.3732765+23.8157519:90.3727312",
             "23.8072355:90.3785576+23.8026728:90.3826218+23.8105393:90.3805192",
@@ -205,21 +247,32 @@ ImageView rotateImage;
             "23.7808527:90.3610078+23.7883853:90.3605831",
             "23.7935661:90.3596364+23.7943261:90.3519489+23.7974009:90.3574086+23.7983914:90.3546318+23.7868775:90.3546712+23.7979001:90.3528053+23.7890024:90.3513554+23.7871371:90.3514986",
             "23.801074:90.3630677+23.7887431:90.3671132+23.7966124:90.3668374",
-            "23.7984577:90.3744075+23.7925622:90.3740769+23.80343:90.3697905"
-            , "23.8115701:90.3906999+23.8422065:90.3846699+23.8061997:90.3894752+23.8026476:90.3900641+23.8181098:90.3926311+23.824347:90.3893504+23.8371166:90.3828885+23.8342118:90.3857033+23.83057505:90.3857026",
-            "23.7955569:90.3835156+23.7894521:90.3849181"};
+            "23.7984577:90.3744075+23.7925622:90.3740769+23.80343:90.3697905",
+            "23.8115701:90.3906999+23.8422065:90.3846699+23.8061997:90.3894752+23.8026476:90.3900641+23.8181098:90.3926311+23.824347:90.3893504+23.8371166:90.3828885+23.8342118:90.3857033+23.83057505:90.3857026",
+            "23.7955569:90.3835156+23.7894521:90.3849181",
+            "23.7711108:90.35403746",
+            "23.78230773:90.40582535+23.77717725:90.39850247+23.78088594:90.40187083+23.77958719:90.40487115+23.77508512:90.40352133+23.77496992:90.40602262+23.78040706:90.40086081+23.77278456:90.4095368+23.78048506:90.40577312+23.77619232:90.40619051+23.77517403:90.39822767",
+            "23.70195083:90.41742569+23.76447562:90.41468605+23.76366484:90.41831015+23.75797041:90.41654211+23.76116193:90.42381041+23.76369617:90.428437",
+            "23.75895493:90.40363563+23.76524006:90.40271093+23.75950164:90.39966462+23.76600637:90.40908177+23.76078574:90.39791946",
+            "23.76964819:90.39449499+23.77385567:90.39399527+23.77072276:90.3979912",
+            "23.75758076:90.41170947+23.75107525:90.41304646+23.7574167:90.41287197+23.75078485:90.40951467"
 
-/*
-It would be better in future to use model class to store all area/ward name lat and others . This time it was done like this since
-all info was provided part by part.
- */
+    };
+
+
+
+    /*
+    It would be better in future to use model class to store all area/ward name lat and others . This time it was done like this since
+    all info was provided part by part.
+     */
     int Pos, Posa = 0;
     ArrayList<StoredArea> storedAreas = new ArrayList<>();
 
     public int getPosa() {
         return Posa;
     }
-    ArrayList<SubCategoryItemNew>si3=new ArrayList<>();
+
+    ArrayList<SubCategoryItemNew> si3 = new ArrayList<>();
     RadioButton radioButton;
 
     public void setPosa(int posa) {
@@ -237,8 +290,10 @@ all info was provided part by part.
     }
 
     String posArea = null;
-    TextView ward, area;
+    TextView ward, area, city;
     ArrayList<DataModel> arrayList2 = new ArrayList<>();
+    ArrayList<DataModel2> arrayList3 = new ArrayList<>();
+
     RecyclerViewHolder holder2;
 
     public int getPos() {
@@ -267,6 +322,7 @@ all info was provided part by part.
 
     String keyword;
     private AnimationDrawable frameAnimation;
+
     public void setPosAreaint(int posAreaint) {
         PosAreaint = posAreaint;
     }
@@ -284,7 +340,13 @@ all info was provided part by part.
         setContentView(R.layout.place_selection_activity);
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
+
+        city = (TextView) findViewById(R.id.ccorporation);
+
         submit = (Button) findViewById(R.id.submittoserverarea);
+
+        //submit1 = (Button) findViewById(R.id.submittoserverarea);
+
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -295,42 +357,73 @@ all info was provided part by part.
         firstRun = settings.getBoolean("firstRunUp", false);
 
 
-
-
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                    if (getPosAreaint() == -1) {
-                        ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
+                if (getPosAreaint() == -1) {
+                    ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.showText(DataLoadingActivity.this);
+                } else {
+
+                    // ToastMessageDisplay.setText(DataLoadingActivity.this, "submit22222 test");
+                    //ToastMessageDisplay.showText(DataLoadingActivity.this);
+                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
+                    ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
+                    keyword = list2.get(getPosAreaint());
+                    if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) { //no data available for these two area so
+                        ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
-                        ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
-                        ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
-                        keyword = list2.get(getPosAreaint());
-                        if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) { //no data available for these two area so
-                            ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
-                            ToastMessageDisplay.showText(DataLoadingActivity.this);
+                        setLocation(listloc.get(getPosAreaint()));
+                        if (AppUtils.isNetConnected(getApplicationContext())) {
+                            Servercall();
                         } else {
-                            setLocation(listloc.get(getPosAreaint()));
-                            if(AppUtils.isNetConnected(getApplicationContext()))
-                            {
-                                Servercall();
-                            }
-                            else
-                            {
-                                AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত","আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
-                            }
-
+                            AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
                         }
-                    }
 
+                    }
+                }
 
 
             }
         });
+
+
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                if (getPosAreaint() == -1) {
+//                    ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
+//                    ToastMessageDisplay.showText(DataLoadingActivity.this);
+//                } else {
+//
+////                    ToastMessageDisplay.setText(DataLoadingActivity.this, "submit1 test");
+////                    ToastMessageDisplay.showText(DataLoadingActivity.this);
+//                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
+//                    ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
+//                    keyword = list2.get(getPosAreaint());
+//                    if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) { //no data available for these two area so
+//                        ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
+//                        ToastMessageDisplay.showText(DataLoadingActivity.this);
+//                    } else {
+//                        setLocation(listloc.get(getPosAreaint()));
+//                        if (AppUtils.isNetConnected(getApplicationContext())) {
+//                            Servercall();
+//                        } else {
+//                            AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
+//                        }
+//
+//                    }
+//                }
+//
+//
+//            }
+//        });
+
 
         initViews();
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -340,11 +433,55 @@ all info was provided part by part.
         mExitAnimation = new AlphaAnimation(1f, 0f);
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
-        populatRecyclerView(); //ward
-        populatRecyclerView2();//area
-        if(firstRun==false)  runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
+        //populatRecyclerView(); //ward
+        //populatRecyclerView2();//area
+        populatRecyclerViewforcity(); // city
+        populatRecyclerView();
+        populatRecyclerView2();
+
+
+        if (firstRun == false)
+            runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
         Pos = 0;
+
+
+        //first recyclerview for city
+        ItemClickSupport.addTo(recyclerViewCity)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerViewCity, int position, View v) {
+                        setPos(position);
+
+                        Log.d("tasks", "position: " + position);
+                        ///populatRecyclerView();
+
+
+                        if (position == 0) {
+                            populatRecyclerView();
+                        }
+
+
+//
+
+                        // ((CardView)v).setCardBackgroundColor(Color.WHITE);
+                        // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
+                        if (getCityview() == null) {
+                            setCityview(v);
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        } else if (getCityview() != v) {
+                            ((CardView) getCityview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                            setCityview(v);
+                        } else
+                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+                        Toast.makeText(DataLoadingActivity.this, "Existing areas are : " + AREANAMESBN[position].replace(':', ','), Toast.LENGTH_SHORT).show();
+                    }
+                });
+//area cards
+
+
 //first recyclerview for wards
         ItemClickSupport.addTo(recyclerView)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -352,7 +489,13 @@ all info was provided part by part.
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         setPos(position);
 
+
                         populatRecyclerView2();
+
+                        //populatRecyclerView2dscc();
+
+
+                        Log.d("tasks", "position of ward: " + position);
                         // ((CardView)v).setCardBackgroundColor(Color.WHITE);
                         // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
                         if (getWardview() == null) {
@@ -368,11 +511,55 @@ all info was provided part by part.
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
+        ///////// dscc////
+
+//        ItemClickSupport.addTo(recyclerView1)
+//                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClicked(RecyclerView recyclerView1, int position, View v) {
+//                        setPos(position);
+//
+//
+//
+//                       // populatRecyclerView2();
+//                        Toast.makeText(DataLoadingActivity.this, "functiontest for recycle",
+//                                Toast.LENGTH_LONG).show();
+//
+//                         populatRecyclerView2dscc();
+//                        Toast.makeText(DataLoadingActivity.this, "functiontest for dscc ",
+//                                Toast.LENGTH_LONG).show();
+//
+//
+//
+//
+//                        Log.d("tasks", "position of ward: " + position);
+//                        // ((CardView)v).setCardBackgroundColor(Color.WHITE);
+//                        // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
+//                        if (getWardview() == null) {
+//                            setWardview(v);
+//                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+//                        } else if (getWardview() != v) {
+//                            ((CardView) getWardview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
+//
+//                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+//                            setWardview(v);
+//                        } else
+//                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
+//                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+        ////// end ////
+
+
 //area cards
         ItemClickSupport.addTo(recyclerViewarea)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        Log.d("tasks", "position: " + position);
 
                         ((CardView) v).setCardBackgroundColor(Color.WHITE);
                         setPosAreaint(position);
@@ -386,8 +573,7 @@ all info was provided part by part.
                             setAreaview(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        setAreaNameBn(arrayList2.get(position).getTitle());
-
+                        setAreaNameBn(arrayList3.get(position).getWardarea());
 
 
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
@@ -399,7 +585,6 @@ all info was provided part by part.
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         setPos(position);
-
 
                         populatRecyclerView2();
                         //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
@@ -444,15 +629,21 @@ all info was provided part by part.
 
         recyclerView = (RecyclerView)
                 findViewById(R.id.recycler_view);
+
+        recyclerView1 = (RecyclerView)
+                findViewById(R.id.recycler_view);
+
         recyclerViewarea = (RecyclerView)
                 findViewById(R.id.recycler_view2);
+
+        recyclerViewCity = (RecyclerView)
+                findViewById(R.id.cityrecycler_view);
 
 
         //Set RecyclerView type according to intent value
         lLayout = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(lLayout);
-
+        recyclerViewCity.setHasFixedSize(true);
+        recyclerViewCity.setLayoutManager(lLayout);
 
 
     }
@@ -496,14 +687,20 @@ all info was provided part by part.
 
 
     // populate the list view by adding data to arraylist
-    private void populatRecyclerView() {
+
+    private void populatRecyclerViewforcity() {
+
+
         ArrayList<AreaHolder> arrayList = new ArrayList<>();
-        for (int i = 0; i < TITLES.length; i++) {
-            AreaHolder areaHolder1 = new AreaHolder(wardid[i], TITLES[i], AREANAMES[i], AREANAMESBN[i]);
+        for (int i = 0; i < CCORPORATION.length; i++) {
+
+            AreaHolder areaHolder1 = new AreaHolder(wardid[i], TITLES[i], AREANAMES[i], AREANAMESBN[i], CCORPORATION[i]);
             arrayList.add(areaHolder1);
+            Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
+
         }
         RecyclerView_Adapter adapter = new RecyclerView_Adapter(DataLoadingActivity.this, arrayList);
-        recyclerView.setAdapter(adapter);// set adapter on recyclerview
+        recyclerViewCity.setAdapter(adapter);// set adapter on recyclerViewCity
 
 
         adapter.notifyDataSetChanged();// Notify the adapter
@@ -511,11 +708,12 @@ all info was provided part by part.
 
     }
 
-    private void populatRecyclerView2() {
 
+    private void populatRecyclerView() {
         arrayList2.clear();
 
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(TITLES));
         for (int i = 0; i < list.size(); i++) {
             DataModel areaHolder1 = new DataModel(list.get(i));
             arrayList2.add(areaHolder1);
@@ -525,15 +723,135 @@ all info was provided part by part.
         } else {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
         }
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(lLayout2);
+        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
+        recyclerView.setAdapter(adapter2);// set adapter on recyclerview
+
+
+        adapter2.notifyDataSetChanged();// Notify the adapter
+
+
+    }
+
+
+    private void populatRecyclerView2() {
+
+
+        //Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
+
+
+        arrayList3.clear();
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
+
+        for (int j = 0; j < list.size(); j++) {
+            DataModel2 areaHolder1 = new DataModel2(list.get(j));
+            arrayList3.add(areaHolder1);
+        }
+
+
+        if (arrayList3.size() >= 4) {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+        } else {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+        }
         recyclerViewarea.setHasFixedSize(false);
         recyclerViewarea.setLayoutManager(lLayout2);
-        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
+        RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
         recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
 
 
         adapter2.notifyDataSetChanged();// Notify the adapter
 
+        //populatRecyclerView2();
+        // Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
+
+
+//                arrayList3.clear();
+//
+//                ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBNDSCC[getPos()].split(":")));
+//
+//                for (int j = 0; j < list.size(); j++) {
+//                    DataModel2 areaHolder1 = new DataModel2(list.get(j));
+//                    arrayList3.add(areaHolder1);
+//                }
+//
+//
+//                if (arrayList3.size() >= 4) {
+//                    lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+//                } else {
+//                    lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+//                }
+//                recyclerViewarea.setHasFixedSize(false);
+//                recyclerViewarea.setLayoutManager(lLayout2);
+//                RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
+//                recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
+//
+//
+//                adapter2.notifyDataSetChanged();// Notify the adapter
+//
+
+
+//        arrayList3.clear();
+//
+//        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            DataModel2 areaHolder1 = new DataModel2(list.get(i));
+//            arrayList3.add(areaHolder1);
+//        }
+//
+//
+//        if (arrayList3.size() >= 4) {
+//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+//        } else {
+//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+//        }
+//        recyclerViewarea.setHasFixedSize(false);
+//        recyclerViewarea.setLayoutManager(lLayout2);
+//        RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
+//        recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
+//
+//
+//        adapter2.notifyDataSetChanged();// Notify the adapter
+
     }
+
+
+    //////// DSCC /////
+
+
+
+
+    private void populatRecyclerView3() {
+
+
+        arrayList3.clear();
+
+
+//        ArrayList<String> list = new ArrayList<String>(Arrays.asList(CCORPORATION));
+//        for (int i = 0; i < list.size(); i++) {
+//            DataModel areaHolder1 = new DataModel(list.get(i));
+//            arrayList2.add(areaHolder1);
+//        }
+//        if (arrayList2.size() >= 4) {
+//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+//        } else {
+//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+//        }
+//        recyclerView.setHasFixedSize(false);
+//        recyclerView.setLayoutManager(lLayout2);
+//        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
+//        recyclerView.setAdapter(adapter2);// set adapter on recyclerview
+//
+//
+//        adapter2.notifyDataSetChanged();// Notify the adapter
+//
+
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -551,9 +869,9 @@ all info was provided part by part.
     }
 
 
-/*
-this function runs data loading task in asynctask
- */
+    /*
+    this function runs data loading task in asynctask
+     */
     abstract class GenericSaveDBTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
         private Context ctx;
 
@@ -579,9 +897,9 @@ this function runs data loading task in asynctask
 
     void Servercall() {
 
-        if ( firstRun==false) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
+        if (firstRun == false) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
-            NUMBER_OF_TASKS=8;
+            NUMBER_OF_TASKS = 8;
         }
         LayoutInflater layoutInflater = LayoutInflater.from(DataLoadingActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.activity_waiting, null);
@@ -595,27 +913,26 @@ this function runs data loading task in asynctask
         final Handler handler = new Handler();
         Runnable runner = new Runnable() {
             int timeCounter = 0;
+
             @Override
             public void run() {
-
-
 
 
                 if (DataLoadingActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
                     overridePendingTransition(0, 0);
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                  //  editor.putString("First", first);
+                    //SharedPreferences.Editor editor = settings.edit();
+                    //  editor.putString("First", first);
 
-                  //  editor.apply();
+                    //  editor.apply();
                     handler.removeCallbacks(this);
-                        SharedPreferencesHelper.setifcommentedalready(DataLoadingActivity.this,null,SharedPreferencesHelper.getUname(DataLoadingActivity.this),"no");
-                        Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
+                    SharedPreferencesHelper.setifcommentedalready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
+                    Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
 
-                        frameAnimation.stop();
+                    frameAnimation.stop();
                     alertDialog.cancel();
-                        startActivity(a);
-                        return;
+                    startActivity(a);
+                    return;
 
                 }
                 //Create a loop
@@ -632,7 +949,7 @@ this function runs data loading task in asynctask
         frameAnimation = (AnimationDrawable) rotateImage.getBackground();
         frameAnimation.setOneShot(false);
         frameAnimation.start();
-        if ( firstRun==false)   {
+        if (firstRun == false) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -641,6 +958,8 @@ this function runs data loading task in asynctask
                                 try {
 
                                     JSONArray jo = new JSONArray(apiContent);
+
+                                    Log.d("Category", "********" + apiContent);
 
                                     new SaveCategoryListTask(DataLoadingActivity.this).execute(jo);
 
@@ -659,7 +978,7 @@ this function runs data loading task in asynctask
 
                                 try {
                                     JSONArray jo = new JSONArray(apiContent);
-
+                                    Log.d("AllData", "********" + jo);
                                     new SaveSubCategoryNewListTask(DataLoadingActivity.this).execute(jo);
 
 
@@ -679,74 +998,71 @@ this function runs data loading task in asynctask
                     try {
 
                         allData = new JSONObject(apiContent);
-                        if (allData.length()==0)
-                        {
-                            ToastMessageDisplay.setText(DataLoadingActivity.this,"তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
+                        Log.d("AllData", "********" + allData);
+                        if (allData.length() == 0) {
+                            ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য নেই. দয়া করে অন্য  এলাকা নির্বাচন করুন");
                             ToastMessageDisplay.showText(DataLoadingActivity.this);
-                        }
-                    else { //checking category label and parsing in different threads so that parsing time get minimised
-                            if (allData.has("Education"))
-                            {
+                        } else { //checking category label and parsing in different threads so that parsing time get minimised
+                            if (allData.has("Education")) {
                                 new SavenewEduTask(DataLoadingActivity.this).execute(allData.getJSONArray("Education"));
                                 //   SavenewEdu(allData.getJSONArray("Education"));
                             }
 
-                            if (allData.has("Finance"))
-                            {
+                            if (allData.has("Finance")) {
                                 new SavenewFinanceTask(DataLoadingActivity.this).execute(allData.getJSONArray("Finance"));
                                 //SavenewFin(allData.getJSONArray("Finance"));
 
                             }
 
-                            if (allData.has("Health"))
-                            {
-                                new  SaveHealthtDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Health"));
+                            if (allData.has("Health")) {
+                                new SaveHealthtDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Health"));
                                 //SavenewHealth(allData.getJSONArray("Health"));
 
                             }
 
-                            if (allData.has("Legal"))
-                            {
+                            if (allData.has("Legal")) {
                                 new SaveLegalDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Legal"));
                                 // SavenewLegal(allData.getJSONArray("Legal"));
                             }
 
 
-                            if (allData.has("Government"))
-                            {
+                            if (allData.has("Government")) {
                                 new SavenewGovTask(DataLoadingActivity.this).execute(allData.getJSONArray("Government"));
                                 // SavenewGov(allData.getJSONArray("Government"));
                             }
 
 
-                            if (allData.has("Entertainment"))
-                            {
-                               // SavenewEntertainment(allData.getJSONArray("Entertainment"));
-                                new SaveEntertainmentDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
-                            }
-
                             if (allData.has("NGO")) {
                                 new SaveNgoDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("NGO"));
                                 // SavenewGov(allData.getJSONArray("Government"));
                             }
+
+
+                            if (allData.has("Entertainment")) {
+                                // SavenewEntertainment(allData.getJSONArray("Entertainment"));
+                                new SaveEntertainmentDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Entertainment"));
+                            }
+
+
                             if (allData.has("Religious Shelter")) {
                                 // SavenewEntertainment(allData.getJSONArray("Entertainment"));
                                 new SaveReligiousDataTask(DataLoadingActivity.this).execute(allData.getJSONArray("Religious Shelter"));
                             }
 
                         }
-                            int p = allData.length();
-                            Log.d("Doneall", String.valueOf(p));
-                            StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
-                            String A = getAreaNameBn();
-                            String LOC = getLocation();
-                            storedAreaTable.insertItem(String.valueOf(wardid[getPos()]), keyword, A, LOC);
-                            Log.e("ward area ", String.valueOf(wardid[getPos()]));
-                            SharedPreferences settings = getSharedPreferences("prefs", 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putInt("ward", wardid[getPos()]);
-                            editor.putString("areakeyword", keyword);
-                            editor.apply();
+                        int p = allData.length();
+                        Log.d("Doneall", String.valueOf(p));
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+                        String A = getAreaNameBn();
+                        Log.e("Get Area Name with Data", A);
+                        String LOC = getLocation();
+                        storedAreaTable.insertItem(String.valueOf(wardid[getPos()]), keyword, A, LOC);
+                        Log.e("ward area ", String.valueOf(wardid[getPos()]));
+                        SharedPreferences settings = getSharedPreferences("prefs", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putInt("ward", wardid[getPos()]);
+                        editor.putString("areakeyword", keyword);
+                        editor.apply();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -760,7 +1076,7 @@ this function runs data loading task in asynctask
 
     }
 
-   
+
     class SavenewEduTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SavenewEduTask(Context ctx) {
             super(ctx);
@@ -770,9 +1086,10 @@ this function runs data loading task in asynctask
             JSONArray Edu = jsonObjects[0];
             EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
             EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
-            EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(DataLoadingActivity.this);
+            EduNewDBTableSchool eduNewDBTableSchool = new EduNewDBTableSchool(DataLoadingActivity.this);
 
-            int Govcount = Edu.length();;
+            int Govcount = Edu.length();
+
 
             for (int i = 0; i < Govcount; i++) {
                 try {
@@ -790,7 +1107,7 @@ this function runs data loading task in asynctask
                                 eduNewDBTableTraining.insertItem(eduTrainingModel);
                             }
                         }
-                         if (jsonObject2.has("education_school")) {
+                        if (jsonObject2.has("education_school")) {
                             JSONObject school = jsonObject2.getJSONObject("education_school");
                             EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
                             eduNewDBTableSchool.insertItem(eduNewSchoolModel);
@@ -806,6 +1123,7 @@ this function runs data loading task in asynctask
             return new Long(0);
         }
     }
+
     class SaveEntertainmentDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveEntertainmentDataTask(Context ctx) {
             super(ctx);
@@ -838,6 +1156,7 @@ this function runs data loading task in asynctask
 
 
     }
+
     /*void SavenewEntertainment(JSONArray jo) {
         JSONArray Ent = jo;
         EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
@@ -872,7 +1191,7 @@ this function runs data loading task in asynctask
 
 
             int Govcount = Gov.length();
-
+            Log.d("GovData", "********" + Govcount);
             for (int i = 0; i < Govcount; i++) {
                 try {
                     if (!Gov.isNull(i)) {
@@ -889,6 +1208,7 @@ this function runs data loading task in asynctask
             return new Long(0);
         }
     }
+
     /*
     void SavenewGov(JSONArray jo) {
         JSONArray Gov = jo;
@@ -944,7 +1264,7 @@ this function runs data loading task in asynctask
             LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
 
             int Legalcount = Legal.length();
-
+            Log.d("LegalData", "********" + Legalcount);
             for (int i = 0; i < Legalcount; i++) {
                 try {
                     if (!Legal.isNull(i)) {
@@ -954,8 +1274,7 @@ this function runs data loading task in asynctask
                     }
 
 
-                } catch (JSONException e)
-                {
+                } catch (JSONException e) {
                     e.printStackTrace();
                     return new Long(-1);
                 }
@@ -977,8 +1296,7 @@ this function runs data loading task in asynctask
 
 
             int Fincount = Fin.length();
-
-
+            Log.d("FinData", "********" + Fincount);
 
             for (int i = 0; i < Fincount; i++) {
                 try {
@@ -996,6 +1314,7 @@ this function runs data loading task in asynctask
             return new Long(0);
         }
     }
+
     /*
     void SavenewFin(JSONArray jo) {
         JSONArray Fin = jo;
@@ -1071,7 +1390,7 @@ this function runs data loading task in asynctask
             HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
 
             int Helcount = Hel.length();
-            Log.d("HealthData","********"+Helcount);
+            Log.d("HealthData", "********" + Helcount);
 
             for (int i = 0; i < Helcount; i++) {
                 try {
@@ -1083,7 +1402,8 @@ this function runs data loading task in asynctask
                             JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
                             HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
                             healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
-                        } if (jsonObject2.has("health_hospital")) {
+                        }
+                        if (jsonObject2.has("health_hospital")) {
                             JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
                             HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
                             healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
@@ -1097,6 +1417,10 @@ this function runs data loading task in asynctask
             return new Long(0);
         }
     }
+
+
+    ///////// NGO/////
+
 
     class SaveNgoDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveNgoDataTask(Context ctx) {
@@ -1129,6 +1453,11 @@ this function runs data loading task in asynctask
 
     }
 
+    ////// NGO end /////
+
+
+    ////////// Religious ////////
+
     class SaveReligiousDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveReligiousDataTask(Context ctx) {
             super(ctx);
@@ -1160,6 +1489,10 @@ this function runs data loading task in asynctask
 
     }
 
+
+    ////// Religious end /////
+
+
     class SaveCategoryListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveCategoryListTask(Context ctx) {
             super(ctx);
@@ -1184,6 +1517,7 @@ this function runs data loading task in asynctask
             return new Long(0);
         }
     }
+
     class SaveSubCategoryNewListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveSubCategoryNewListTask(Context ctx) {
             super(ctx);

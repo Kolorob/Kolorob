@@ -5,18 +5,30 @@ package demo.kolorob.kolorobdemoversion.adapters;
  */
 
 public class AreaHolder {
+
     int wardid;
     String wardname;
   String areaname;
     String areanamebn;
+    String cityname;
 
-    public AreaHolder(int wardid, String wardname, String areaname, String areanamebn) {
+
+    public AreaHolder(int wardid, String wardname, String areaname, String areanamebn, String cityname) {
         this.wardid = wardid;
         this.wardname = wardname;
         this.areaname = areaname;
         this.areanamebn = areanamebn;
+        this.cityname = cityname;
+
     }
 
+    public String getCityname() {
+        return cityname;
+    }
+
+    public void setCityname(String cityname) {
+        this.cityname = cityname;
+    }
 
     public String getAreanamebn() {
         return areanamebn;

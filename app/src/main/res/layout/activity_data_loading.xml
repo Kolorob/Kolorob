@@ -7,10 +7,15 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:padding="2dp"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    >
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/WhiteSmoke"
         android:orientation="vertical"
@@ -19,18 +24,12 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_gravity="center"
-    android:padding="@dimen/defaultpadding"
+    android:padding="25dp"
     android:background="@color/transparent"
     android:layout_height="wrap_content">
+    </RelativeLayout>
 
-    <ImageView
-        android:layout_width="@dimen/logoforplace"
-        android:layout_height="@dimen/logoforplace"
 
-        android:background="@drawable/kolorob_logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
     <LinearLayout
 
         android:layout_weight="2"
@@ -39,6 +38,29 @@
         android:padding="@dimen/paddingforplacetext"
         android:gravity="top|center"
         android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:paddingBottom="@dimen/paddingforplacetext"
+            android:id="@+id/ccorporation"
+            android:textSize="@dimen/offercounterbtn"
+            android:text=" সিটি কর্পোরেশন নির্বাচন করুন"/>
+        <View
+            android:background="#000000"
+            android:padding="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/cityrecycler_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,14 +69,15 @@
             android:id="@+id/chooseward"
             android:textSize="@dimen/offercounterbtn"
             android:text=" ওয়ার্ড নির্বাচন করুন"/>
+
         <View
             android:background="#000000"
             android:padding="3dp"
             android:layout_width="match_parent"
             android:layout_height="4dp"/>
 
+
         <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recycler_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -62,9 +85,10 @@
 
         <View
             android:background="#000000"
-            android:layout_width="match_parent"
             android:padding="3dp"
+            android:layout_width="match_parent"
             android:layout_height="4dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,30 +109,37 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none" />
+
+
+
         <View
             android:background="#000000"
-            android:padding="3dp"
             android:layout_width="match_parent"
+            android:padding="3dp"
             android:layout_height="4dp"/>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:gravity="bottom"
             android:padding="@dimen/defaultpadding"
             android:layout_height="wrap_content">
-        <Button
+            <Button
 
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/regsubbtn"
-            android:id="@+id/submittoserverarea"
-            android:text=" জমা দিন "
-            android:textColor="@color/White"
-            android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/regsubbtn"
+                android:id="@+id/submittoserverarea"
+                android:text=" জমা দিন "
+                android:textColor="@color/White"
+                android:layout_height="wrap_content"
 
-            android:layout_centerInParent="true"
-            android:layout_alignParentBottom="true"
-            android:textSize="@dimen/offercounterbtn"
-            android:layout_width="wrap_content" />
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/offercounterbtn"
+                android:layout_width="wrap_content" />
         </RelativeLayout>
     </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
+
+
