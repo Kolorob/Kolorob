@@ -42,7 +42,7 @@ public class ReligiousNewDBTable {
     private static final String KEY_OTHER_INFO = "_other"; //
     private static final String KEY_AREABN = "_areabn"; //
 
-    private static final String KEY_PARENT_AREA = "__parentarea";//
+    private static final String KEY_PARENT_AREA = "_parentarea";//
 
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
@@ -470,7 +470,7 @@ public class ReligiousNewDBTable {
         String _other = cursor.getString(18);
         String _areabn = cursor.getString(19);
 
-        String __parentarea = cursor.getString(20);
+        String _parentarea = cursor.getString(20);
         String _opentime  = cursor.getString(21);
         String _closetime = cursor.getString(22);
         String  _offday= cursor.getString(23);
@@ -481,7 +481,7 @@ public class ReligiousNewDBTable {
 
 
         return new ReligiousNewDBModel(_religiousid,_nameen,_namebn, _rs_religion, _rs_services_for, _other_religion, _rs_time, _rs_fee,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,__parentarea,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
                 _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
@@ -517,7 +517,7 @@ public class ReligiousNewDBTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(ReligiousNewDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
+        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
         database.close();
     }
 }

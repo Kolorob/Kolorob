@@ -34,6 +34,7 @@ public class GovNewDBTable {
     private static final String KEY_CONTACT_NO = "_node_contact"; //
     private static final String KEY_OTHER_INFO = "_other"; //
     private static final String KEY_AREABN = "_areabn"; //
+    private static final String KEY_PARENT_AREA = "_parentarea";//
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
     private static final String KEY_OFF_DAY = "_offday";
@@ -73,6 +74,7 @@ public class GovNewDBTable {
                 + KEY_CONTACT_NO + " TEXT, "
                 + KEY_OTHER_INFO + " TEXT, "
                 + KEY_AREABN + " TEXT, "
+                + KEY_PARENT_AREA + " TEXT, "
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
@@ -98,7 +100,7 @@ public class GovNewDBTable {
                     governmentNewDBModel.getServicename(), governmentNewDBModel.getLat(), governmentNewDBModel.getLon(), governmentNewDBModel.getHouseno(),
                     governmentNewDBModel.getBlock(), governmentNewDBModel.getArea(), governmentNewDBModel.getPolicestation(), governmentNewDBModel.getNode_email(),
                     governmentNewDBModel.getWard(), governmentNewDBModel.getRoad(),
-                    governmentNewDBModel.getNode_contact(), governmentNewDBModel.getOtherinfo(), governmentNewDBModel.getAreabn(),
+                    governmentNewDBModel.getNode_contact(), governmentNewDBModel.getOtherinfo(), governmentNewDBModel.getAreabn(), governmentNewDBModel.getParent_area(),
                     governmentNewDBModel.getOpeningtime(), governmentNewDBModel.getClosetime(), governmentNewDBModel.getOffday(), governmentNewDBModel.getCategoryId(),
                     governmentNewDBModel.getRefnumm(), governmentNewDBModel.getRatings(), governmentNewDBModel.getSubcat()
             );
@@ -108,7 +110,7 @@ public class GovNewDBTable {
                     governmentNewDBModel.getServicename(),governmentNewDBModel.getLat(),governmentNewDBModel.getLon(),governmentNewDBModel.getHouseno(),
                     governmentNewDBModel.getBlock(),governmentNewDBModel.getArea(),governmentNewDBModel.getPolicestation(),governmentNewDBModel.getNode_email(),
                     governmentNewDBModel.getWard(),governmentNewDBModel.getRoad(),
-                    governmentNewDBModel.getNode_contact(),governmentNewDBModel.getOtherinfo(),governmentNewDBModel.getAreabn(),
+                    governmentNewDBModel.getNode_contact(),governmentNewDBModel.getOtherinfo(),governmentNewDBModel.getAreabn(), governmentNewDBModel.getParent_area(),
                     governmentNewDBModel.getOpeningtime(),governmentNewDBModel.getClosetime(),governmentNewDBModel.getOffday(),governmentNewDBModel.getCategoryId(),
                     governmentNewDBModel.getRefnumm(),governmentNewDBModel.getRatings(),governmentNewDBModel.getSubcat()
             );
@@ -120,7 +122,7 @@ public class GovNewDBTable {
 
     public long insertItem(int govid, String nameen, String namebn, String servicename, String lat,
                            String lon, String houseno, String block, String area, String policestation,
-                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parentarea,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
@@ -140,7 +142,7 @@ public class GovNewDBTable {
                     ward,
                     road,
                     node_contact,
-                    otherinfo,areabn,
+                    otherinfo,areabn, parentarea,
                     openingtime,
                     closetime,
                     offday,categoryId,
@@ -167,6 +169,7 @@ public class GovNewDBTable {
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
         rowValue.put(KEY_AREABN, areabn);
+        rowValue.put(KEY_PARENT_AREA, parentarea);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -185,7 +188,7 @@ public class GovNewDBTable {
     private long updateItem(
             int govid, String nameen, String namebn, String servicename, String lat,
             String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
+            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parentarea,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
             String subcat
     ) {
@@ -208,6 +211,7 @@ public class GovNewDBTable {
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
         rowValue.put(KEY_AREABN, areabn);
+        rowValue.put(KEY_PARENT_AREA, parentarea);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -257,9 +261,9 @@ public class GovNewDBTable {
                 governmentNewItem=new GovernmentNewDBModel(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),
                         cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11),cursor.getString(12),cursor.getString(13),
-                        cursor.getString(14),cursor.getString(15),cursor.getString(16),cursor.getString(17),cursor.getString(18),
-                        cursor.getInt(19),cursor.getString(20),cursor.getString(21),cursor.getString(22));
-            } while (cursor.moveToNext());
+                        cursor.getString(14),cursor.getString(15),cursor.getString(16),cursor.getString(17),cursor.getString(18),cursor.getString(19),
+                        cursor.getInt(20),cursor.getString(21),cursor.getString(22),cursor.getString(23));
+            }  while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
@@ -283,17 +287,18 @@ public class GovNewDBTable {
         String _node_contact = cursor.getString(13);
         String _other = cursor.getString(14);
         String _areabn = cursor.getString(15);
-        String _opentime = cursor.getString(16);
-        String _closetime = cursor.getString(17);
-        String _offday  = cursor.getString(18);
-        int _catid=cursor.getInt(19);
-        String _refnumm=cursor.getString(20);
-        String _rating=cursor.getString(21);
-        String _sref=cursor.getString(22);
+        String _parentarea = cursor.getString(16);
+        String _opentime = cursor.getString(17);
+        String _closetime = cursor.getString(18);
+        String _offday  = cursor.getString(19);
+        int _catid=cursor.getInt(20);
+        String _refnumm=cursor.getString(21);
+        String _rating=cursor.getString(22);
+        String _sref=cursor.getString(23);
 
 
        return new GovernmentNewDBModel(_govid,_nameen,_namebn,_service_name,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn, _parentarea,
                _opentime,  _closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
@@ -310,7 +315,7 @@ public class GovNewDBTable {
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_WARD+ " = "+id+ " AND "+ KEY_AREA+" = '"+place+"'  ORDER BY " +KEY_NAME_ENG,null);;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = "+ id + " AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -330,7 +335,7 @@ public class GovNewDBTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(GovNewDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
+        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
         database.close();
     }
 }

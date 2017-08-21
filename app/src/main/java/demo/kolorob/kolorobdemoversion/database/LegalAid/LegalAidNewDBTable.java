@@ -35,6 +35,7 @@ public class LegalAidNewDBTable {
     private static final String KEY_CONTACT_NO = "_node_contact"; //
     private static final String KEY_OTHER_INFO = "_other"; //
     private static final String KEY_AREABN = "_areabn"; //
+    private static final String KEY_PARENT_AREA = "_parentarea";//
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
     private static final String KEY_OFF_DAY = "_offday";
@@ -74,6 +75,7 @@ public class LegalAidNewDBTable {
                 + KEY_CONTACT_NO + " TEXT, "
                 + KEY_OTHER_INFO + " TEXT, "
                 + KEY_AREABN + " TEXT, "
+                + KEY_PARENT_AREA + " TEXT, "
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
@@ -99,7 +101,7 @@ public class LegalAidNewDBTable {
                     legalAidNewDBModel.getServicetype(), legalAidNewDBModel.getLat(), legalAidNewDBModel.getLon(), legalAidNewDBModel.getHouseno(),
                     legalAidNewDBModel.getBlock(), legalAidNewDBModel.getArea(), legalAidNewDBModel.getPolicestation(), legalAidNewDBModel.getNode_email(),
                     legalAidNewDBModel.getWard(), legalAidNewDBModel.getRoad(),
-                    legalAidNewDBModel.getNode_contact(), legalAidNewDBModel.getOtherinfo(), legalAidNewDBModel.getAreabn(),
+                    legalAidNewDBModel.getNode_contact(), legalAidNewDBModel.getOtherinfo(), legalAidNewDBModel.getAreabn(), legalAidNewDBModel.getParent_area(),
                     legalAidNewDBModel.getOpeningtime(), legalAidNewDBModel.getClosetime(), legalAidNewDBModel.getOffday(), legalAidNewDBModel.getCategoryId(),
                     legalAidNewDBModel.getRefnumm(), legalAidNewDBModel.getRatings(), legalAidNewDBModel.getSubcat()
             );
@@ -109,7 +111,7 @@ public class LegalAidNewDBTable {
                     legalAidNewDBModel.getServicetype(), legalAidNewDBModel.getLat(), legalAidNewDBModel.getLon(), legalAidNewDBModel.getHouseno(),
                     legalAidNewDBModel.getBlock(), legalAidNewDBModel.getArea(), legalAidNewDBModel.getPolicestation(), legalAidNewDBModel.getNode_email(),
                     legalAidNewDBModel.getWard(), legalAidNewDBModel.getRoad(),
-                    legalAidNewDBModel.getNode_contact(), legalAidNewDBModel.getOtherinfo(), legalAidNewDBModel.getAreabn(),
+                    legalAidNewDBModel.getNode_contact(), legalAidNewDBModel.getOtherinfo(), legalAidNewDBModel.getAreabn(), legalAidNewDBModel.getParent_area(),
                     legalAidNewDBModel.getOpeningtime(), legalAidNewDBModel.getClosetime(), legalAidNewDBModel.getOffday(), legalAidNewDBModel.getCategoryId(),
                     legalAidNewDBModel.getRefnumm(), legalAidNewDBModel.getRatings(), legalAidNewDBModel.getSubcat()
             );
@@ -121,7 +123,7 @@ public class LegalAidNewDBTable {
 
     public long insertItem(int legalid, String nameen, String namebn, String servicetype, String lat,
                            String lon, String houseno, String block, String area, String policestation,
-                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parentarea,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
@@ -141,7 +143,7 @@ public class LegalAidNewDBTable {
                     ward,
                     road,
                     node_contact,
-                    otherinfo,areabn,
+                    otherinfo,areabn,parentarea,
                     openingtime,
                     closetime,
                     offday,categoryId,
@@ -168,6 +170,7 @@ public class LegalAidNewDBTable {
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
         rowValue.put(KEY_AREABN, areabn);
+        rowValue.put(KEY_PARENT_AREA, parentarea);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -186,7 +189,7 @@ public class LegalAidNewDBTable {
     private long updateItem(
             int legalid, String nameen, String namebn, String servicetype, String lat,
             String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
+            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parentarea,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
             String subcat
     ) {
@@ -209,6 +212,7 @@ public class LegalAidNewDBTable {
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
         rowValue.put(KEY_AREABN, areabn);
+        rowValue.put(KEY_PARENT_AREA, parentarea);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -363,8 +367,8 @@ public class LegalAidNewDBTable {
                 legalAidNewDBModel = new LegalAidNewDBModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
                         cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13),
-                        cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
-                        cursor.getInt(19), cursor.getString(20), cursor.getString(21), cursor.getString(22));
+                        cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),cursor.getString(19),
+                        cursor.getInt(20), cursor.getString(21), cursor.getString(22), cursor.getString(23));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -392,17 +396,20 @@ public class LegalAidNewDBTable {
         String _node_contact = cursor.getString(13);
         String _other = cursor.getString(14);
         String _areabn = cursor.getString(15);
-        String _opentime  = cursor.getString(16);
-        String _closetime = cursor.getString(17);
-        String  _offday= cursor.getString(18);
-        int _catid=cursor.getInt(19);
-        String _refnumm=cursor.getString(20);
-        String _rating=cursor.getString(21);
-        String _sref=cursor.getString(22);
+        String _parentarea = cursor.getString(16);
+        String _opentime  = cursor.getString(17);
+        String _closetime = cursor.getString(18);
+        String  _offday= cursor.getString(19);
+        int _catid=cursor.getInt(20);
+        String _refnumm=cursor.getString(21);
+        String _rating=cursor.getString(22);
+        String _sref=cursor.getString(23);
+
+
 
 
         return new LegalAidNewDBModel(_legid,_nameen,_namebn,_servicetype,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn, _parentarea,
                 _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
@@ -419,7 +426,7 @@ public class LegalAidNewDBTable {
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_WARD+ " = "+id+ " AND "+ KEY_AREA+" = '"+place+"'  ORDER BY " +KEY_LEGAL_AID_NAME_ENG,null);;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = "+ id + " AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
@@ -36,6 +37,7 @@ public class EntNewDBTable {
     private static final String KEY_CONTACT_NO = "_node_contact"; //
     private static final String KEY_OTHER_INFO = "_other"; //
     private static final String KEY_AREABN = "_areabn"; //
+    private static final String KEY_PARENT_AREA = "_parentarea";//
     private static final String KEY_OPENTIME = "_opentime"; //
     private static final String KEY_CLOSEATIME = "_closetime"; //
     private static final String KEY_OFF_DAY = "_offday";
@@ -76,6 +78,7 @@ public class EntNewDBTable {
                 + KEY_CONTACT_NO + " TEXT, "
                 + KEY_OTHER_INFO + " TEXT, "
                 + KEY_AREABN + " TEXT, "
+                + KEY_PARENT_AREA + " TEXT, " /// parent area
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
                 + KEY_OFF_DAY + " TEXT, "
@@ -102,7 +105,7 @@ public class EntNewDBTable {
                     entertainmentNewDBModel.getEnttype(), entertainmentNewDBModel.getServicetype(), entertainmentNewDBModel.getLat(), entertainmentNewDBModel.getLon(), entertainmentNewDBModel.getHouseno(),
                     entertainmentNewDBModel.getBlock(), entertainmentNewDBModel.getArea(), entertainmentNewDBModel.getPolicestation(), entertainmentNewDBModel.getNode_email(),
                     entertainmentNewDBModel.getWard(), entertainmentNewDBModel.getRoad(), entertainmentNewDBModel.getNode_contact(),
-                    entertainmentNewDBModel.getOtherinfo(), entertainmentNewDBModel.getAreabn(),
+                    entertainmentNewDBModel.getOtherinfo(), entertainmentNewDBModel.getAreabn(), entertainmentNewDBModel.getParent_area(),
                     entertainmentNewDBModel.getOpeningtime(), entertainmentNewDBModel.getClosetime(), entertainmentNewDBModel.getOffday(), entertainmentNewDBModel.getCategoryId(),
                     entertainmentNewDBModel.getRefnumm(), entertainmentNewDBModel.getRatings(), entertainmentNewDBModel.getSubcat()
             );
@@ -112,7 +115,7 @@ public class EntNewDBTable {
                     entertainmentNewDBModel.getEnttype(), entertainmentNewDBModel.getServicetype(), entertainmentNewDBModel.getLat(), entertainmentNewDBModel.getLon(), entertainmentNewDBModel.getHouseno(),
                     entertainmentNewDBModel.getBlock(), entertainmentNewDBModel.getArea(), entertainmentNewDBModel.getPolicestation(), entertainmentNewDBModel.getNode_email(),
                     entertainmentNewDBModel.getWard(), entertainmentNewDBModel.getRoad(), entertainmentNewDBModel.getNode_contact(),
-                    entertainmentNewDBModel.getOtherinfo(), entertainmentNewDBModel.getAreabn(),
+                    entertainmentNewDBModel.getOtherinfo(), entertainmentNewDBModel.getAreabn(), entertainmentNewDBModel.getParent_area(),
                     entertainmentNewDBModel.getOpeningtime(), entertainmentNewDBModel.getClosetime(), entertainmentNewDBModel.getOffday(), entertainmentNewDBModel.getCategoryId(),
                     entertainmentNewDBModel.getRefnumm(), entertainmentNewDBModel.getRatings(), entertainmentNewDBModel.getSubcat()
             );
@@ -124,7 +127,7 @@ public class EntNewDBTable {
 
     public long insertItem(int govid, String nameen, String namebn,String enttype, String servicetype, String lat,
                            String lon, String houseno, String block, String area, String policestation,
-                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
+                           String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parentarea,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
@@ -146,7 +149,7 @@ public class EntNewDBTable {
                     road,
                     node_contact,
                     otherinfo,
-                    openingtime, areabn,
+                    openingtime, areabn, parentarea,
                     closetime,
                     offday,categoryId,
                     refnumm,
@@ -173,6 +176,7 @@ public class EntNewDBTable {
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
         rowValue.put(KEY_AREABN, areabn);
+        rowValue.put(KEY_PARENT_AREA, parentarea);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -191,7 +195,7 @@ public class EntNewDBTable {
     private long updateItem(
             int govid, String nameen, String namebn,String enttype, String servicetype, String lat,
             String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,
+            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parentarea,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
             String subcat
     ) {
@@ -215,6 +219,7 @@ public class EntNewDBTable {
         rowValue.put(KEY_CONTACT_NO, node_contact);
         rowValue.put(KEY_OTHER_INFO, otherinfo);
         rowValue.put(KEY_AREABN, areabn);
+        rowValue.put(KEY_PARENT_AREA, parentarea);
         rowValue.put(KEY_OPENTIME, openingtime);
         rowValue.put(KEY_CLOSEATIME, closetime);
         rowValue.put(KEY_OFF_DAY, offday);
@@ -253,7 +258,7 @@ public class EntNewDBTable {
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_WARD+ " = "+id+ " AND "+ KEY_AREA+" = '"+place+"'  ORDER BY " +KEY_NAME_ENG,null);;
+        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = "+ id + " AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -281,7 +286,7 @@ public class EntNewDBTable {
                         cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8),
                         cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12), cursor.getString(13),
                         cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
-                        cursor.getString(19), cursor.getInt(20),cursor.getString(21), cursor.getString(22), cursor.getString(23));
+                        cursor.getString(19),cursor.getString(20), cursor.getInt(21), cursor.getString(22), cursor.getString(23),cursor.getString(24));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -310,17 +315,19 @@ public class EntNewDBTable {
         String _node_contact = cursor.getString(14);
         String _other = cursor.getString(15);
         String _areabn   = cursor.getString(16);
-        String _opentime   = cursor.getString(17);
-        String _closetime = cursor.getString(18);
-        String  _offday= cursor.getString(19);
-        int _catid=cursor.getInt(20);
-        String _refnumm=cursor.getString(21);
-        String _rating=cursor.getString(22);
-        String _sref=cursor.getString(23);
+        String __parenarea = cursor.getString(17);
+        String _opentime   = cursor.getString(18);
+        String _closetime = cursor.getString(19);
+        String  _offday= cursor.getString(20);
+        int _catid=cursor.getInt(21);
+        String _refnumm=cursor.getString(22);
+        String _rating=cursor.getString(23);
+        String _sref=cursor.getString(24);
 
 
-       return new EntertainmentNewDBModel(_entid,_nameen,_namebn,_enttype,_servicetypefreeornot,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
+
+        return new EntertainmentNewDBModel(_entid,_nameen,_namebn,_enttype,_servicetypefreeornot,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn, __parenarea,
                _opentime  ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
     }
@@ -336,7 +343,8 @@ public class EntNewDBTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(EntNewDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " and " + KEY_AREA + "= '"+ area +"'", null);
+        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
+
         database.close();
     }
 }

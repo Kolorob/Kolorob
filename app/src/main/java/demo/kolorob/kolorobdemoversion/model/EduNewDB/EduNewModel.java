@@ -32,6 +32,7 @@ public class EduNewModel implements Serializable {
     String node_contact;
     String otherinfo;
     String area_bn;
+    String parent_area;
 
     String offday;
     String closetime;
@@ -266,10 +267,14 @@ public class EduNewModel implements Serializable {
         this.area_bn = area_bn;
     }
 
+    public String getParent_area() { return  parent_area; }
+
+    public void setParent_area(String parent_area) { this.parent_area = parent_area; }
+
     public EduNewModel(int eduId, String nameen, String namebn, String edtype, String shift, String studentno, String teachersno,
                        String averagestdperclass, String facility, String lat, String lon, String houseno, String block,
                        String area, String policestation, String node_email, String ward, String road, String node_contact,
-                       String otherinfo, String area_bn, String openingtime , String closetime, String offday, int categoryId, String refnumm,
+                       String otherinfo, String area_bn, String parent_area,String openingtime , String closetime, String offday, int categoryId, String refnumm,
                        String subcat, String ratings) {
         this.eduId = eduId;
         this.nameen = nameen;
@@ -292,6 +297,7 @@ public class EduNewModel implements Serializable {
         this.node_contact = node_contact;
         this.otherinfo = otherinfo;
         this.area_bn=area_bn;
+        this.parent_area = parent_area;
         this.offday = offday;
         this.closetime = closetime;
         this.openingtime = openingtime;
@@ -328,7 +334,8 @@ public class EduNewModel implements Serializable {
             String _node_contact = jo.getJSONObject("contact_info").getString("node_contact");
 
             String _other=jo.getJSONObject("contact_info").getString("other");
-        String _areabn=jo.getJSONObject("contact_info").getString("area_bn");
+            String _areabn=jo.getJSONObject("contact_info").getString("area_bn");
+            String _parentarea = jo.getJSONObject("contact_info").getString("parent_area");
             String _opentime = jo.getJSONObject("timing_info").getString("opening_time");
             String _closetime = jo.getJSONObject("timing_info").getString("closing_time");
             String _offday = jo.getJSONObject("timing_info").getString("off_day");
@@ -343,7 +350,7 @@ public class EduNewModel implements Serializable {
             String ki=sref2.toString();
             String _sref=ki.substring(1,ki.length()-1);
             return new EduNewModel(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_avgstdperclass,_facility,
-                    _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,
+                    _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn, _parentarea,
                     _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
         }
     }
