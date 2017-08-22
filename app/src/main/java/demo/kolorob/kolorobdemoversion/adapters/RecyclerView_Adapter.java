@@ -48,7 +48,7 @@ public class RecyclerView_Adapter extends
         RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
         // setting title
 
-        mainHolder.title.setText(model.getCityname());
+        mainHolder.title.setText(model.getWardname());
     /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

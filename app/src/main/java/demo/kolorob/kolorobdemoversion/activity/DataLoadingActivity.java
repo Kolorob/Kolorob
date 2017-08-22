@@ -260,6 +260,42 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     };
 
 
+    ///////// DSCC //////
+
+
+    public static final String[] TITLESDSCC = {"ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬"};
+
+    public static final int[] wardiddscc = {4, 5, 6};
+
+    public static final String[] AREANAMESDSCC = {"MChaya Bithi Housing:Dakshin Basabo:Dakshin Madartek:Maddhya Basabo:Purba Madartek:Purba Basabo:Uttar Madartek:Uttar Basabo:Paschim Madartek",
+            "Ahmedbagh:Kadamtala:Mayakanon (Thakur para):Rajarbagh:Sabujbagh:Sabuj Kanon",
+            "Dakshin Mugda Para:Uttar Mugda Para",
+            ""
+
+
+    };
+
+    public static final String[] AREANAMESBNDSCC = {"ছায়াবীথি হাউজিং:দক্ষিণ বাসাবো:দক্ষিণ মাদারটেক:মধ্য বাসাবো:পূর্ব মাদারটেক:পূর্ব বাসাবো:উত্তর মাদারটেক:উত্তর বাসাবো:পশ্চিম মাদারটেক",
+            "আহমেদবাগ:কদমতলা:মায়াকানন:রাজারবাগ:সবুজবাগ:সবুজ কানন",
+            "দক্ষিণ মুগদাপাড়া:উত্তর মুগদাপাড়া",
+
+
+    };
+    public static final String[] AREAKEYWORDSDSCC = {"Chaya_Bithi_Housing:Dakshin_Basabo:Dakshin_Madartek:Maddhya_Basabo:Purba_Madartek:Purba_Basabo:Uttar_Madartek:Uttar_Basabo:Paschim_Madartek",
+            "Ahmedbagh:Kadamtala:Mayakanon:Rajarbagh:Sabujbagh:Sabuj_Kanon",
+            "Dakshin_Mugda_Para:Uttar_Mugda_Para",
+
+
+    };
+
+
+    public static final String[] AREALATLONGDSCC = {"23.7417867:90.43456674+23.73906447:90.43117113+23.7424221:90.44091543+23.74104616:90.43208975+23.74363298:90.44126685+23.7395813:90.4371986+23.74460268:90.43938678+23.74273752:90.43078098+23.74453082:90.43788007",
+            "23.73523983:90.43132756+23.73795186:90.43761325+23.73616764:90.42709581+23.73764341:90.44183697+23.73757301:90.43357505+23.73333034:90.42985878",
+            "23.72826593:90.43156698+23.73102395:90.43254728"
+    };
+
+    ////////// end //////
+
 
     /*
     It would be better in future to use model class to store all area/ward name lat and others . This time it was done like this since
@@ -291,6 +327,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     String posArea = null;
     TextView ward, area, city;
+    ArrayList<DataModel> arrayList1 = new ArrayList<>();
     ArrayList<DataModel> arrayList2 = new ArrayList<>();
     ArrayList<DataModel2> arrayList3 = new ArrayList<>();
 
@@ -436,8 +473,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         //populatRecyclerView(); //ward
         //populatRecyclerView2();//area
         populatRecyclerViewforcity(); // city
-        populatRecyclerView();
-        populatRecyclerView2();
 
 
         if (firstRun == false)
@@ -460,6 +495,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         if (position == 0) {
                             populatRecyclerView();
                         }
+                        if (position == 1) {
+                            populatRecyclerViewdscc();
+                        }
 
 
 //
@@ -476,7 +514,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             setCityview(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        Toast.makeText(DataLoadingActivity.this, "Existing areas are : " + AREANAMESBN[position].replace(':', ','), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(DataLoadingActivity.this, ", Toast.LENGTH_SHORT).show();
                     }
                 });
 //area cards
@@ -621,7 +659,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         context = this;
 
 
-        //  setsongName();
+
     }
 
     private void initViews() {
@@ -691,19 +729,22 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void populatRecyclerViewforcity() {
 
 
-        ArrayList<AreaHolder> arrayList = new ArrayList<>();
-        for (int i = 0; i < CCORPORATION.length; i++) {
+        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(CCORPORATION));
+        for (int i = 0; i < arrayList.size(); i++) {
 
-            AreaHolder areaHolder1 = new AreaHolder(wardid[i], TITLES[i], AREANAMES[i], AREANAMESBN[i], CCORPORATION[i]);
-            arrayList.add(areaHolder1);
+            DataModel cityHolder = new DataModel(arrayList.get(i));
+            arrayList1.add(cityHolder);
             Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
+            Toast.makeText(DataLoadingActivity.this, "CC: " + CCORPORATION[i], Toast.LENGTH_LONG).show();
 
         }
-        RecyclerView_Adapter adapter = new RecyclerView_Adapter(DataLoadingActivity.this, arrayList);
+        RecyclerView_AdapterArea adapter = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList1);
         recyclerViewCity.setAdapter(adapter);// set adapter on recyclerViewCity
 
 
         adapter.notifyDataSetChanged();// Notify the adapter
+
+
 
 
     }
@@ -821,7 +862,57 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     //////// DSCC /////
 
+    private void populatRecyclerViewdscc() {
+        arrayList2.clear();
 
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(TITLESDSCC));
+        for (int i = 0; i < list.size(); i++) {
+            DataModel areaHolder1 = new DataModel(list.get(i));
+            arrayList2.add(areaHolder1);
+        }
+        if (arrayList2.size() >= 4) {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+        } else {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+        }
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(lLayout2);
+        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
+        recyclerView.setAdapter(adapter2);// set adapter on recyclerview
+
+
+        adapter2.notifyDataSetChanged();// Notify the adapter
+        //populatRecyclerView2dscc();
+
+    }
+
+
+    private void populatRecyclerView2dscc() {
+
+        arrayList3.clear();
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBNDSCC[getPos()].split(":")));
+        for (int i = 0; i < list.size(); i++) {
+            DataModel2 areaHolder1 = new DataModel2(list.get(i));
+            arrayList3.add(areaHolder1);
+        }
+        if (arrayList3.size() >= 4) {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
+        } else {
+            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+        }
+        recyclerViewarea.setHasFixedSize(false);
+        recyclerViewarea.setLayoutManager(lLayout2);
+        RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
+        recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
+
+
+        adapter2.notifyDataSetChanged();// Notify the adapter
+
+    }
+
+    ////// end //////
 
 
     private void populatRecyclerView3() {
