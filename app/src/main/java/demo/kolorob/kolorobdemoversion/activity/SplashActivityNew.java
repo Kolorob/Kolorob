@@ -17,6 +17,7 @@ import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,24 +38,20 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 
 
-public class SplashActivityNew extends ActionBarActivity {
+public class SplashActivityNew extends AppCompatActivity {
 
     Context context;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 175;
     View view=null;
-    String IMEINumber=null;
-    //user and pass
-    String user="kolorobapp";
-    String pass="2Jm!4jFe3WgBZKEN";
+
     RelativeLayout dataload;
-    Boolean location=false,storage=false,smsstate=false,phonestate=false,accountstate=false,permission=false;
+    Boolean permission=false;
     String app_ver="";
-    Boolean drop=false;
     long install=0;
     long install2=0;
     File filesDir;
     public final static int PERM_REQUEST_CODE_DRAW_OVERLAYS = 1234;
-    Boolean  firstRun,firstRunup;
+    Boolean  firstRun;
     public int height,width;
     Boolean registered=false;
     @Override
@@ -103,7 +100,7 @@ public class SplashActivityNew extends ActionBarActivity {
             Float currentVersion= Float.parseFloat(app_ver);
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(SplashActivityNew.this));
             //Float previousVersion=Float.parseFloat("2.03");
-            if(currentVersion >previousVersion)
+            if(currentVersion > previousVersion)
             {
                 SharedPreferences.Editor editor = settings.edit();
 
@@ -124,6 +121,11 @@ public class SplashActivityNew extends ActionBarActivity {
                     if(!check2.equals("2")) {
                         settings.edit().putString("timesfirstinstall", check2).apply();
                     }
+                }
+                else if(previousVersion.floatValue() < Float.parseFloat("2.1"))
+                {
+
+                    editor.putBoolean("new_categories_on_update", true).apply();
                 }
 
             }
@@ -222,15 +224,15 @@ public class SplashActivityNew extends ActionBarActivity {
                         System.gc();
                     }
                                 /* start the activity */
-if(registered==true) {
-    startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
-    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    finish();
-}
+                    if(registered==true) {
+                        startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        finish();
+                    }
                     else {
-    startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
-    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    finish();
+                        startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        finish();
                     }
                     //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     //overridePendingTransition(0, 0);
@@ -241,10 +243,10 @@ if(registered==true) {
 
 
 
-                }
-
-
         }
+
+
+    }
     public void permissionToDrawOverlays() {
         if (android.os.Build.VERSION.SDK_INT >= 23) {   //Android M Or Over
             if (!Settings.canDrawOverlays(this)) {
@@ -282,8 +284,8 @@ if(registered==true) {
 
 
 
-            //  setsongName();
-        }
+    //  setsongName();
+}
 
 
 

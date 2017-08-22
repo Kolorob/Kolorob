@@ -95,7 +95,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private static int NUMBER_OF_TASKS = 6;
     View view = null;
     Button submit;
-    Boolean firstRun;
+    Boolean firstRun, new_categories_on_update;
     //user and pass
     String user = "kolorobapp";
     String pass = "2Jm!4jFe3WgBZKEN";
@@ -392,6 +392,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         firstRun = settings.getBoolean("firstRunUp", false);
+        new_categories_on_update = settings.getBoolean("new_categories_on_update", true);
+
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -475,7 +477,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         populatRecyclerViewforcity(); // city
 
 
-        if (firstRun == false)
+        if (firstRun == false || new_categories_on_update == true)
             runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
         Pos = 0;
@@ -988,7 +990,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     void Servercall() {
 
-        if (firstRun == false) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
+        if (firstRun == false || new_categories_on_update == true) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
             NUMBER_OF_TASKS = 8;
         }
@@ -1040,7 +1042,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         frameAnimation = (AnimationDrawable) rotateImage.getBackground();
         frameAnimation.setOneShot(false);
         frameAnimation.start();
-        if (firstRun == false) {
+        if (firstRun == false || new_categories_on_update == true) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -1080,6 +1082,14 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         }
                     }
             );
+
+
+
+            if(new_categories_on_update == true){
+                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("new_categories_on_update", false).apply();
+            }
         }
         getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardid[getPos()] + "&area=" + keyword, new VolleyApiCallback() {
             @Override
