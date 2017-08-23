@@ -90,19 +90,19 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     int compareValue;
     String previous_node;
     ArrayList<EduTrainingModel> educationTrainingDetailsItems;
-ArrayList<EduNewSchoolModel>eduNewSchoolModels;
+    ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
     String exams,Exam=null;
     private TextView ratingText;
 
-    private ImageView close_button, distance_left, feedback, top_logo;
+    private ImageView distance_left, feedback;
     RadioGroup feedRadio;
     RadioButton rb1;
     String status = "", phone_num = "", registered = "",uname="";
 
     private CheckBox checkBox;
     EditText feedback_comment;
-    ArrayList<String>examname=new ArrayList<>();
+
     String datevalue,datevaluebn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +142,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
         ratingText = (TextView) findViewById(R.id.ratingText);
 
-        close_button = (ImageView) findViewById(R.id.cross_jb);
+        //close_button = (ImageView) findViewById(R.id.cross_jb);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
         key = new String[600];
         setRatingBar();
@@ -154,10 +154,6 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
         mlp.setMargins(width/100,0,width/990,width/8);
 
-        top_logo = (ImageView) findViewById(R.id.top_logo);
-
-
-
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
         email_btn = (ImageView) findViewById(R.id.right_side_email);
@@ -168,7 +164,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
         CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.get(0).getEdtype());
         CheckConcate("শাখা", educationNewItem.get(0).getShift());
 
-       if(!educationNewItem.get(0).getStudentno().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.get(0).getStudentno())+" জন");
+        if(!educationNewItem.get(0).getStudentno().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.get(0).getStudentno())+" জন");
         if(!educationNewItem.get(0).getTeachersno().equals("null")) CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.get(0).getTeachersno())+" জন");
         if(!educationNewItem.get(0).getAveragestdperclass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  EtoB(educationNewItem.get(0).getAveragestdperclass())+" জন");
         CheckConcate("সুযোগ সুবিধা",  educationNewItem.get(0).getFacility());
@@ -237,7 +233,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
 
                 CheckConcate("কত মাসের কোর্স", EtoB(eduTrainingModel.getCourseduration()));
-                CheckConcate("ট্রেইনিংর নাম ", eduTrainingModel.getTrainingname());
+                CheckConcate("ট্রেইনিং এর নাম ", eduTrainingModel.getTrainingname());
                 CheckConcate("খরচ", eduTrainingModel.getCost()+" টাকা");
                 CheckConcate("কোর্সের নাম", eduTrainingModel.getCoursename());
 
@@ -247,14 +243,6 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
         }
 
 
-
-
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -377,7 +365,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
                         }
 
 
-                            review.setText(EtoB(Integer.toString(inc)) + " রিভিউ");
+                        review.setText(EtoB(Integer.toString(inc)) + " রিভিউ");
 
                         Double screenSize = AppUtils.ScreenSize(DetailsLayoutEducation.this);
                         if (screenSize > 6.5) {
@@ -555,25 +543,12 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
-
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
-
-
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
 
-        close_button.getLayoutParams().height = width / 13;
-        close_button.getLayoutParams().width = width / 13;
+//        close_button.getLayoutParams().height = width / 13;
+//        close_button.getLayoutParams().width = width / 13;
 
         right_image.getLayoutParams().height = width / 8;
         right_image.getLayoutParams().width = width / 8;
@@ -583,17 +558,6 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
 
 
 
-
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int vx = params_middle_phone.height = (height * 3) / 24;
-        params_middle_phone.width = width / 3;
-        middle_phone.setLayoutParams(params_middle_phone);
-
-
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
 
@@ -686,16 +650,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
                     AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
                             "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
 
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutEducation.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
+
 
                 }
 
@@ -1029,12 +984,12 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
                 timeInBengali = "বিকেল " + EtoB(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + EtoB(String.valueOf(hour - 12));
-            else if (hour > 20)
+            else if (hour > 20 && hour < 24)
                 timeInBengali = "রাত " + EtoB(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + EtoB(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {
@@ -1100,7 +1055,7 @@ ArrayList<EduNewSchoolModel>eduNewSchoolModels;
     {
 
         if(status.equals(getString(R.string.feedback1)))
-           return 1;
+            return 1;
         else if(status.equals(getString(R.string.feedback2)))
             return 2;
         else if(status.equals(getString(R.string.feedback3)))

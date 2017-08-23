@@ -81,10 +81,10 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     String[] value;
     int increment=0;
     EntertainmentNewDBModel entertainmentServiceProviderItemNew;
-    //ArrayList<EntertainmentTypeItem> entertainmentTypeItems;
+
 
     private TextView ratingText;
-    private ImageView routing_icon,feedback,service_logo,cross;
+    private ImageView routing_icon,feedback;
     RadioGroup feedRadio;
     RadioButton rb1;
     String status="",phone_num="",uname="";
@@ -105,7 +105,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
         if (null != intent) {
-            //Receive an arrayList of (EntertainmentServiceProviderItemNew) type from previous activity.
+
             entertainmentServiceProviderItemNew = (EntertainmentNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_ENT);
 
         }
@@ -125,8 +125,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data
                 .getLayoutParams();
         mlp.setMargins(width/100,0,width/990,width/8); //set margin in main info block
-        service_logo=(ImageView)findViewById(R.id.top_logo);
-        cross=(ImageView)findViewById(R.id.cross_jb); // cross icon in the right-top section
+
         routing_icon = (ImageView) findViewById(R.id.distance_left); //routing icon
         email_btn = (ImageView) findViewById(R.id.right_side_email);  //email icon
         feedback = (ImageView) findViewById(R.id.feedback);          //feedback icon
@@ -136,35 +135,18 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         setRatingBar();
 
 
-            // set width and height of the LinearLayouts programetically
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        upperHand.setLayoutParams(params2);
+
         LinearLayout.LayoutParams params_service_center_name = (LinearLayout.LayoutParams) service_center_name.getLayoutParams();
         service_center_name.setLayoutParams(params_service_center_name);
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
+
         SharedPreferences settings = DetailsInfoActivityEntertainmentNew.this.getSharedPreferences("prefs", 0);
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        params_middle_phone.height = (height * 3) / 24;
-        params_middle_phone.width = width / 3;
-        middle_phone.setLayoutParams(params_middle_phone);
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
+
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
         feedbacks.width = width / 8;
         feedback.setLayoutParams(feedbacks);
 
 
-            // set height and width of the icons
-        service_logo.getLayoutParams().height = width / 8;
-        service_logo.getLayoutParams().width = width / 8;
-        cross.getLayoutParams().height=width/13;
-        cross.getLayoutParams().width=width/13;
         phone_icon.getLayoutParams().height=width/8;
         phone_icon.getLayoutParams().width=width/8;
         email_icon.getLayoutParams().height = width/8;
@@ -175,7 +157,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
 
-            // Last date of updating data will be displayed here via toast message
+        // Last date of updating data will be displayed here via toast message
         Date date2 = new Date(settings.getLong("time", 0));
         Date today=new Date();
         long diffInMillisec = today.getTime() - date2.getTime();
@@ -189,7 +171,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         ToastMessageDisplay.setText(this,datevalue);
         ToastMessageDisplay.showText(this);
 
-              //set properties of service center name
+        //set properties of service center name
         service_name = (TextView) findViewById(R.id.ups_text);
         service_name.setTextSize(27);
         service_name.setText(entertainmentServiceProviderItemNew.getNamebn());
@@ -202,14 +184,14 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  entertainmentServiceProviderItemNew.getEnttype());
 
-       if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "আছে");
+        if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য");
 
-        CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "নাই");
+        CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "প্রযোজ্য নয়");
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getAreabn());
         CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getWard()));
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getHouseno()));
@@ -226,16 +208,16 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         CheckConcate("অন্যান্য তথ্য ", entertainmentServiceProviderItemNew.getOtherinfo());
 
-               //checkConcate method will check null data and concat
+        //checkConcate method will check null data and concat
 
-             // Default Adapter will show the details info of a service
+        // Default Adapter will show the details info of a service
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         service_data.setAdapter(defaultAdapter);
 
 
 
-        
-                
+
+
         email_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,7 +226,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                             "ই মেইল আই ডি পাওয়া যায়নি");
                 }
                 else{
-                     //Helpes method will be used to send Email
+                    //Helpes method will be used to send Email
                     Helpes.sendEmail(DetailsInfoActivityEntertainmentNew.this, entertainmentServiceProviderItemNew.getNode_email());
                 }
             }
@@ -296,71 +278,71 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
                     } else {
                         if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityEntertainmentNew.this, String.valueOf(entertainmentServiceProviderItemNew.getEntid()), uname).equals("yes") ) {
-                           ToastMessageDisplay.setText(con,
+                            ToastMessageDisplay.setText(con,
                                     "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
-                           ToastMessageDisplay.showText(con);
+                            ToastMessageDisplay.showText(con);
                         }
-                            LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
-                            final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                            final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
-                            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            alertDialog.setContentView(promptView);
-                            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            alertDialog.show();
-                        
-                            final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
-                            final ImageView close_icon = (ImageView) promptView.findViewById(R.id.closex);
-                            final TextView review = (TextView) promptView.findViewById(R.id.review);
-                            final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
+                        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
+                        final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
+                        final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
+                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        alertDialog.setContentView(promptView);
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        alertDialog.show();
 
-                            try {
-                                int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRatings());
-                                if (ratings == 1) {
-                                    ratingbarz.setBackgroundResource(R.drawable.one);
-                                } else if (ratings == 2)
-                                    ratingbarz.setBackgroundResource(R.drawable.two);
+                        final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
+                        final ImageView close_icon = (ImageView) promptView.findViewById(R.id.closex);
+                        final TextView review = (TextView) promptView.findViewById(R.id.review);
+                        final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
 
-                                else if (ratings == 3)
-                                    ratingbarz.setBackgroundResource(R.drawable.three);
+                        try {
+                            int ratings = Integer.parseInt(entertainmentServiceProviderItemNew.getRatings());
+                            if (ratings == 1) {
+                                ratingbarz.setBackgroundResource(R.drawable.one);
+                            } else if (ratings == 2)
+                                ratingbarz.setBackgroundResource(R.drawable.two);
 
-                                else if (ratings == 4)
-                                    ratingbarz.setBackgroundResource(R.drawable.four);
+                            else if (ratings == 3)
+                                ratingbarz.setBackgroundResource(R.drawable.three);
 
-                                else if (ratings == 5)
-                                    ratingbarz.setBackgroundResource(R.drawable.five);
-                            } catch (Exception e) {
+                            else if (ratings == 4)
+                                ratingbarz.setBackgroundResource(R.drawable.four);
 
-                            }
+                            else if (ratings == 5)
+                                ratingbarz.setBackgroundResource(R.drawable.five);
+                        } catch (Exception e) {
+
+                        }
 
 
-                            review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
-                            Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityEntertainmentNew.this);
+                        review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
+                        Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityEntertainmentNew.this);
                         //Check ScreenSize
-                            if (screenSize > 6.5) {
-                                review.setTextSize(20);
-                            } else {
-                                review.setTextSize(16);
+                        if (screenSize > 6.5) {
+                            review.setTextSize(20);
+                        } else {
+                            review.setTextSize(16);
+                        }
+
+
+                        listView.setAdapter(comment_layout_adapter);
+                        alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
+
+                        close_icon.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
                             }
+                        });
 
 
-                            listView.setAdapter(comment_layout_adapter);
-                            alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
-
-                            close_icon.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    alertDialog.dismiss();
-                                }
-                            });
-
-
-                            alertDialog.setCancelable(false);
-                            alertDialog.show();
+                        alertDialog.setCancelable(false);
+                        alertDialog.show();
 
 
                     }
                 }
-               else if(inc==0)  //if inc= o means no one commented
+                else if(inc==0)  //if inc= o means no one commented
                 {
                     LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
                     View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
@@ -443,13 +425,6 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         });
 
 
-        cross.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         routing_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -501,7 +476,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         });
 
     }
-             //encode breaktime in details format
+    //encode breaktime in details format
     private void breakTimeProcessing(String value1, String value2) {
         if (!value2.equals("null") || !value2.equals(", ")) {
             String timeInBengali = "";
@@ -521,7 +496,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
     }
 
-            //clicked from xml
+    //clicked from xml
     public void verifyRegistration(View v) {
 
         String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
@@ -563,15 +538,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 rb1 = (RadioButton)promptView.findViewById(selected);
                 status = rb1.getText().toString();
                 //  declareRadiobutton();
-               if(AppUtils.isNetConnected(getApplicationContext()))
-               {
-                   sendReviewToServer();
-                   alertDialog.cancel();
-               }
+                if(AppUtils.isNetConnected(getApplicationContext()))
+                {
+                    sendReviewToServer();
+                    alertDialog.cancel();
+                }
                 else {
-                   ToastMessageDisplay.setText(DetailsInfoActivityEntertainmentNew.this,"দয়া করে ইন্টারনেট চালু করুন।");
-                   ToastMessageDisplay.showText(DetailsInfoActivityEntertainmentNew.this);
-               }
+                    ToastMessageDisplay.setText(DetailsInfoActivityEntertainmentNew.this,"দয়া করে ইন্টারনেট চালু করুন।");
+                    ToastMessageDisplay.showText(DetailsInfoActivityEntertainmentNew.this);
+                }
 
 
 
@@ -786,12 +761,12 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20)
+            else if (hour > 20 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {
@@ -800,7 +775,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         return timeInBengali;
 
     }
-            // check null and concat
+    // check null and concat
     private void CheckConcate(String value1, String value2) {
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
             key[increment] = value1;

@@ -82,13 +82,13 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     GovernmentNewDBModel governmentNewItem;
 
     String datevalue,datevaluebn;
-    //ArrayList<GovernmentServiceDetailsItem> governmentServiceDetailsItems;
+
 
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     private TextView ratingText;
 
-    private ImageView close_button, distance_left, feedback, top_logo;
+    private ImageView distance_left, feedback;
     RadioGroup feedRadio;
     RadioButton rb1;
     String status = "", phone_num = "",uname="";
@@ -113,11 +113,10 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         if (null != intent) {
             governmentNewItem = (GovernmentNewDBModel) intent.getSerializableExtra(AppConstants.KEY_DETAILS_GOV);
-            // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
+
         }
 
 
-        //final GovernmentServiceDetailsTable governmentServiceDetailsTable = new GovernmentServiceDetailsTable(DetailsLayoutGovernment.this);
 
 
         upperHand = (LinearLayout) findViewById(R.id.upper_part);
@@ -133,10 +132,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         ratingText = (TextView) findViewById(R.id.ratingText);
 
-        close_button = (ImageView) findViewById(R.id.close_buttonc);
 
-
-        top_logo = (ImageView) findViewById(R.id.top_logo);
 
 
 
@@ -160,7 +156,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         setRatingBar();
 
-          CheckConcate("সুবিধার ধরণ",  governmentNewItem.getServicename());
+        CheckConcate("সুবিধার ধরণ",  governmentNewItem.getServicename());
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(governmentNewItem.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(governmentNewItem.getBlock()));
@@ -190,12 +186,6 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
 
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         right_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,24 +208,11 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
 
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
-
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
 
-        close_button.getLayoutParams().height = width / 13;
-        close_button.getLayoutParams().width = width / 13;
 
         right_image.getLayoutParams().height = width / 8;
         right_image.getLayoutParams().width = width / 8;
@@ -259,19 +236,6 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         ToastMessageDisplay.setText(this,datevalue);
         ToastMessageDisplay.showText(this);
-
-
-
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int vx = params_middle_phone.height = (height * 3) / 24;
-        params_middle_phone.width = width / 3;
-        middle_phone.setLayoutParams(params_middle_phone);
-
-
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
 
@@ -539,16 +503,6 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                     AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
                             "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
 
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutGovernment.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
 
                 }
 
@@ -780,23 +734,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 //
     public void setRatingBar()
     {
-//    getRequest(DetailsLayoutGovernment.this, "http://kolorob.net/demo/api/get_sp_rating/government?username=kolorobapp&password=2Jm!4jFe3WgBZKEN", new VolleyApiCallback() {
-//                @Override
-//                public void onResponse(int status, String apiContent) {
-//                    if (status == AppConstants.SUCCESS_CODE) {
-//                        try {
-//                            JSONArray jo = new JSONArray(apiContent);
-//                            int size= jo.length();
-//                            Log.d("$$$$$$", "size " + size);
-//                            for(int i=0;i<size;i++)
-//                            {
-//                                JSONObject ratingH=jo.getJSONObject(i);
-//                                String id= ratingH.getString("id");
-//                                Log.d("$$$$$$", "getFinId " + governmentNewItem.getFinId());
-//                                Log.d("$$$$$$", "id " + id);
-//                                if(id.equals(String.valueOf(governmentNewItem.getFinId())))
-//                                {
-//                                    Log.d("$$$$$$", "size ");
+
         try {
             ratingBar.setRating(Float.parseFloat(governmentNewItem.getRatings()));
         }
@@ -804,25 +742,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         {
 
         }
-//                                    ratingBar.setRating(rating);
-//                                    break;
-//
-//                                }
-//
-//
-//                            }
-//
-//
-//
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            }
-//    );
+
     }
 
 
@@ -896,12 +816,12 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20)
+            else if (hour > 20 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

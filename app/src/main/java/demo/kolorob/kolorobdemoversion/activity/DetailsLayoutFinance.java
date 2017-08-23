@@ -49,10 +49,12 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
+//import demo.kolorob.kolorobdemoversion.database.Financial.FinancialServiceDetailsTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
+
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -81,7 +83,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     ListView alldata;
     FinancialNewDBModel financialNewItem;
     EditText feedback_comment;
-    //ArrayList<FinancialServiceDetailsItem> financialServiceDetailsItems;
+
 
     private TextView ratingText;
 
@@ -132,13 +134,6 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         right_image = (ImageView) findViewById(R.id.right_side_email);
 
         ratingText = (TextView) findViewById(R.id.ratingText);
-
-
-        close_button = (ImageView) findViewById(R.id.close_buttonc);
-
-
-        top_logo = (ImageView) findViewById(R.id.top_logo);
-
 
 
 
@@ -201,12 +196,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         ToastMessageDisplay.setText(this,datevalue);
         ToastMessageDisplay.showText(this);
 
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
         comments = (ImageView)findViewById(R.id.comments);
 
@@ -410,25 +400,13 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         upperHand.setLayoutParams(params2);
 
 
-//        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
-//        upperText.setLayoutParams(params_upperText);
 
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
-
-
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
 
-        close_button.getLayoutParams().height = width / 13;
-        close_button.getLayoutParams().width = width / 13;
+//        close_button.getLayoutParams().height = width / 13;
+//        close_button.getLayoutParams().width = width / 13;
 
         right_image.getLayoutParams().height = width / 8;
         right_image.getLayoutParams().width = width / 8;
@@ -437,18 +415,6 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         left_image.getLayoutParams().width = width / 8;
 
 
-
-
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int vx = params_middle_phone.height = (height * 3) / 24;
-        params_middle_phone.width = width / 3;
-        middle_phone.setLayoutParams(params_middle_phone);
-
-
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
 
@@ -536,16 +502,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 {
                     AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
                             "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
-//                    AlertDialog alertDialog = new AlertDialog.Builder(DetailsLayoutFinance.this, AlertDialog.THEME_HOLO_LIGHT).create();
-//                    alertDialog.setTitle("ইন্টারনেট সংযোগ বিচ্চিন্ন ");
-//                    alertDialog.setMessage(" দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়। \n পথ দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি সচল করুন।  ");
-//                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                    alertDialog.show();
+
 
                 }
 
@@ -906,12 +863,12 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20)
+            else if (hour > 20 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {
@@ -928,7 +885,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
                 try {
-                    String timeInBengali = "";
+
                     value2 = value2 + ",";
 
                     String[] breakTIme = value2.split(",");

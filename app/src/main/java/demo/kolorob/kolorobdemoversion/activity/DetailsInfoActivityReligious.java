@@ -1,5 +1,12 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import demo.kolorob.kolorobdemoversion.R;
+
+
+
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,9 +16,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,19 +50,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import demo.kolorob.kolorobdemoversion.R;
+
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
 
 
 public class DetailsInfoActivityReligious extends AppCompatActivity {
@@ -98,7 +105,9 @@ public class DetailsInfoActivityReligious extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("", "after onCreate");
         setContentView(R.layout.activity_details_info_religious);
+        Log.e("", "After layout");
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
@@ -185,8 +194,11 @@ public class DetailsInfoActivityReligious extends AppCompatActivity {
         //int right_img = params_left_way.width = width / 3;
         //left_way.setLayoutParams(params_left_way);
 
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
+        //int upperhad_height=params2.height = height/6;
 
-       // top_logo.getLayoutParams().height = width / 8;
+        upperHand.setLayoutParams(params2);
+        // top_logo.getLayoutParams().height = width / 8;
         //top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height = width / 8;
@@ -202,13 +214,13 @@ public class DetailsInfoActivityReligious extends AppCompatActivity {
         left_image.getLayoutParams().width = width / 8;
 
 
-       // LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
+        // LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
         //int vx = params_middle_phone.height = (height * 3) / 24;
         //params_middle_phone.width = width / 3;
-       // middle_phone.setLayoutParams(params_middle_phone);
+        // middle_phone.setLayoutParams(params_middle_phone);
 
 
-       // LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
+        // LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
         //int vc = params_right_email.height = (height * 3) / 24;
         //params_right_email.width = width / 3;
         //right_email.setLayoutParams(params_right_email);

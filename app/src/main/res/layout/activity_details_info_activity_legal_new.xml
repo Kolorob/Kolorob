@@ -13,116 +13,67 @@
 
 
 
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/legal_aid_color"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:layout_height="match_parent"
-                android:gravity="center">
-
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.6"
-                android:gravity="center"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:id="@+id/top_logo"
-                    android:background="@drawable/legal_white"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.25"
-                android:gravity="right"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/cross_jb"
-                    android:background="@drawable/cross_icon"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:background="@color/legal_aid_color"
-            android:layout_height="wrap_content">
-
-
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
 
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="0.75"
-
                 android:id="@+id/upper_part"
-                android:background="@color/legal_aid_color"
-                android:layout_height="wrap_content">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="0.75"
+                android:background="@color/white"
+                android:orientation="vertical">
 
 
                 <LinearLayout
+                    android:id="@+id/upperText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginLeft="2dp"
-                    android:id="@+id/upperText"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_marginLeft="30dp"
+                    android:gravity="left"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/ups_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="left"
                         android:text="ব্র্যাক ডেলিভারি সেন্টার"
-                        android:textSize="18dp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-
-                        android:id="@+id/ups_text"
+                        android:textColor="@color/black"
+                        android:textSize="33sp"
 
                         />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="4dp"
-                        android:gravity="center">
+                        android:layout_marginLeft="0dp"
+                        android:gravity="left"
+                        android:orientation="horizontal">
+
                         <TextView
+                            android:id="@+id/ratingText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="23sp"
-                            android:id="@+id/ratingText"
-                            android:text="রেটিং: "/>
+                            android:layout_marginTop="10dp"
+                            android:text="রেটিং: "
+                            android:textColor="@color/black"
+                            android:textSize="23sp" />
 
                         <RatingBar
                             android:id="@+id/ratingBar"
-                            style="?android:attr/ratingBarStyleIndicator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignLeft="@+id/artist"
@@ -135,120 +86,113 @@
                     </LinearLayout>
 
 
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dp"
                         android:id="@+id/left_go_process"
-                        android:layout_weight="0.3"
-                        android:orientation="vertical"
-                        android:gravity="right|center">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="55dp"
-                            android:layout_height="55dp"
                             android:id="@+id/distance_left"
-                            android:background="@drawable/direction_icon"/>
-
-
-
-
-
-
-                    </LinearLayout>
-
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="0.2"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/middle_phone"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
                             android:layout_width="55dp"
                             android:layout_height="55dp"
-                            android:id="@+id/phone_middl"
-                            android:background="@drawable/phone_icon"/>
-
-
-
-
+                            android:background="@drawable/ic_direction_icon" />
 
                     </LinearLayout>
-
-
 
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="0.3"
-                        android:orientation="vertical"
-                        android:id="@+id/right_email"
-
+                        android:id="@+id/middle_phone"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="left|center">
+                        android:layout_marginLeft="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/right_side_email"
-                            android:background="@drawable/email_icon"/>
-
-
-
+                            android:id="@+id/phone_middl"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/ic_phone_icon" />
 
                     </LinearLayout>
 
 
+                    <LinearLayout
+                        android:id="@+id/right_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/right_side_email"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/ic_email_icon" />
 
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/right_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/feedback"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:background="@drawable/ic_feedback_icon"
+                            android:onClick="verifyRegistration" />
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/kolorob_color">
 
-
-
-
+                </LinearLayout>
 
 
             </LinearLayout>
 
 
-
-
         </LinearLayout>
-
-
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
 
 
                 <!--<TextView-->
@@ -261,113 +205,68 @@
 
 
                 <ListView
-                    android:layout_width="wrap_content"
-                    android:gravity="left"
-                    android:fadeScrollbars="false"
-                    android:scrollbarStyle="outsideInset"
-                    android:paddingRight="5dp"
+                    android:id="@+id/allData"
                     style="@style/scrollbar_shape_style"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/allData" />
+                    android:divider="#181402"
+                    android:fadeScrollbars="false"
+                    android:gravity="left"
+                    android:paddingRight="5dp"
+                    android:scrollbarStyle="outsideInset" />
 
 
             </LinearLayout>
 
 
-
         </LinearLayout>
-
-
-
-
-
-
-
-
-
-
 
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-
-        android:layout_height="wrap_content"
-        android:background="@color/legal_aid_color"
         android:id="@+id/bottom_bar"
-
-        android:gravity="center_vertical">
-
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/kolorob_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
             android:gravity="center">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/compare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:gravity="center_vertical"
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                android:text="@string/compare"
+                android:textColor="@color/white"
+                android:textSize="29sp" />
+
+
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-
-
-                android:background="@drawable/feedback_icon"
-                android:onClick="verifyRegistration"
-
-
-
-
-                android:id="@+id/feedback"/>
-
-            <ImageView
+                android:id="@+id/comments"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/icon_gaph"
                 android:background="@drawable/comments_view_icon"
-                android:visibility="gone"
-                android:id="@+id/comments"/>
+                android:visibility="gone" />
         </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </LinearLayout>
-
-
 
 </RelativeLayout>

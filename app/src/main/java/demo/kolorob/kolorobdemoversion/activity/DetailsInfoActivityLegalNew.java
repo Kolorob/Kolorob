@@ -150,8 +150,8 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         // close_button=(ImageView)findViewById(R.id.close_button);
 
-        top_logo=(ImageView)findViewById(R.id.top_logo);
-        cross=(ImageView)findViewById(R.id.cross_jb);
+        //top_logo=(ImageView)findViewById(R.id.top_logo);
+        //cross=(ImageView)findViewById(R.id.cross_jb);
 
 
         SharedPreferences settings = DetailsInfoActivityLegalNew.this.getSharedPreferences("prefs", 0);
@@ -187,22 +187,22 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 //        // params_upperText.width = width;
 //        upperText.setLayoutParams(params_upperText);
 
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
+//        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
+//        int lett_img = params_left_way.height = (height * 3) / 24;
+//        int right_img = params_left_way.width = width / 3;
+//        left_way.setLayoutParams(params_left_way);
 
 
 
 
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
+//        top_logo.getLayoutParams().height = width / 8;
+//        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height=width/8;
         middle_image.getLayoutParams().width=width/8;
 
-        cross.getLayoutParams().height=width/13;
-        cross.getLayoutParams().width=width/13;
+//        cross.getLayoutParams().height=width/13;
+//        cross.getLayoutParams().width=width/13;
 
         right_image.getLayoutParams().height = width/8;
         right_image.getLayoutParams().width = width/8;
@@ -213,19 +213,19 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
 
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int vx = params_middle_phone.height = (height * 3) / 24;
-        params_middle_phone.width = width / 3;
-        middle_phone.setLayoutParams(params_middle_phone);
+//        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
+//        int vx = params_middle_phone.height = (height * 3) / 24;
+//        params_middle_phone.width = width / 3;
+//        middle_phone.setLayoutParams(params_middle_phone);
 
 
 
 
 
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
+//        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
+//        int vc = params_right_email.height = (height * 3) / 24;
+//        params_right_email.width = width / 3;
+//        right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
 
@@ -509,12 +509,12 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 //        }
 
-        cross.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        cross.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -925,12 +925,12 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20)
+            else if (hour > 20 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {

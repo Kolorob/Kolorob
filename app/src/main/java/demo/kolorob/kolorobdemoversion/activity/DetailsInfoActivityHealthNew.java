@@ -83,8 +83,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     String[] key;
     String[] value;
     String username="kolorobapp";
-    String password="2Jm!4jFe3WgBZKEN";
-    Float rating;
+    String password="2Jm!4jFe3WgB";
+
     HealthNewDBModelMain healthServiceProviderItemNew;
 
     ArrayList<HealthNewDBModelPharmacy> healthNewDBModelPharmacies;
@@ -92,7 +92,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
     private TextView ratingText;
 
-    private ImageView close_button, distance_left, feedback, top_logo;
+    private ImageView distance_left, feedback;
     private RadioGroup feedRadio;
     RadioButton rb1;
     String status = "", phone_num = "", registered = "",uname="";
@@ -106,7 +106,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private Double screenSize;
     ArrayList<CommentItem> commentItems;
     ImageView comments;
-    RatingBar ratingBars;
+
     int inc=0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -149,7 +149,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         value = new String[600];
         final HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DetailsInfoActivityHealthNew.this);
-        final HealthNewDBTablePharma healthNewDBTablePharma= new HealthNewDBTablePharma(DetailsInfoActivityHealthNew.this);
+
 
         upperHand = (LinearLayout) findViewById(R.id.upper_part);
         upperText = (LinearLayout) findViewById(R.id.upperText);
@@ -163,14 +163,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         ratingText = (TextView) findViewById(R.id.ratingText);
 
-        close_button = (ImageView) findViewById(R.id.close_buttonc);
 
-
-
-
-        top_logo = (ImageView) findViewById(R.id.top_logo);
-        //cross=(ImageView)findViewById(R.id.cross_jb);
-//        school_logo_default = (ImageView) findViewById(R.id.service_logo);
 
 
         distance_left = (ImageView) findViewById(R.id.distance_left);
@@ -215,23 +208,22 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         if (specialist_size != 0) {
             for (HealthNewDBModelHospital healthNewDBModelHospital : healthNewDBModelHospitals) {
 
-                //   result_concate = "";
-                //    specialist.setVisibility(View.VISIBLE);
-               if(healthNewDBModelHospital.getEmergencyavailable().equals(false))
-               {
-                   CheckConcate("ইমারজেন্সি সুবিধা", "নাই");
-               }
+
+                if(healthNewDBModelHospital.getEmergencyavailable().equals(false))
+                {
+                    CheckConcate("ইমারজেন্সি সুবিধা", "নেই");
+                }
                 else CheckConcate("ইমারজেন্সি সুবিধা", "আছে");
                 CheckConcate("ইমারজেন্সি নাম্বার", healthNewDBModelHospital.getEmergencynumber());
                 if(healthNewDBModelHospital.getAmbulanceavailable().equals(false))
                 {
-                    CheckConcate("এ্যাম্বুলেন্স সুবিধা", "নাই");
+                    CheckConcate("এ্যাম্বুলেন্স সুবিধা", "নেই");
                 }
                 else CheckConcate("এ্যাম্বুলেন্স সুবিধা", "আছে");
                 CheckConcate("এ্যাম্বুলেন্স নাম্বার", healthNewDBModelHospital.getAmbulancenumber());
                 if(healthNewDBModelHospital.getMaternityavailable().equals(false))
                 {
-                    CheckConcate("মাতৃত্বজনিত সুবিধা", "নাই");
+                    CheckConcate("মাতৃত্বজনিত সুবিধা", "নেই");
                 }
                 else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
                 CheckConcate("মাতৃত্ব জনিত নাম্বার", healthNewDBModelHospital.getMaternitynumber());
@@ -248,17 +240,15 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         if (healthVaccineSize != 0) {
             for (HealthNewDBModelPharmacy healthNewDBModelPharmacy : healthNewDBModelPharmacies) {
 
-                //   result_concate = "";
-                //    specialist.setVisibility(View.VISIBLE);
                 if(healthNewDBModelPharmacy.getDocavailability().equals(false))
                 {
-                    CheckConcate("ডাক্তার থাকে কি না", "নাই");
+                    CheckConcate("ডাক্তারের সুবিধা", "নেই");
                 }
-                else CheckConcate("ডাক্তার থাকে কি না", "আছে");
+                else CheckConcate("ডাক্তারের সুবিধা", "আছে");
                 CheckConcate("বিশেষত্ব ", healthNewDBModelPharmacy.getSpeciality());
                 if(healthNewDBModelPharmacy.getVaccineavailability().equals(false))
                 {
-                    CheckConcate("ভ্যাক্সিন সুবিধা ", "নাই");
+                    CheckConcate("ভ্যাক্সিন সুবিধা ", "নেই");
                 }
                 else CheckConcate("ভ্যাক্সিন সুবিধা ", "আছে");
 
@@ -269,15 +259,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         }
 
-
-
-
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
 
         compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
@@ -499,11 +480,11 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                         textAsk.setTextSize(23);
                     else
                         textAsk.setTextSize(17);
-                  //  alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    //  alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
                     yes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                          alertDialog.cancel();
+                            alertDialog.cancel();
                             String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
                             phone_num=register;
 
@@ -530,7 +511,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
 
-                   // AlertMessage.showMessage(DetailsInfoActivityHealthNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
+                    // AlertMessage.showMessage(DetailsInfoActivityHealthNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
                 }
 
 
@@ -549,24 +530,11 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-//        // int  vd=params_upperText.height = height/24;
-//        // params_upperText.width = width;
         upperText.setLayoutParams(params_upperText);
 
-        LinearLayout.LayoutParams params_left_way = (LinearLayout.LayoutParams) left_way.getLayoutParams();
-        int lett_img = params_left_way.height = (height * 3) / 24;
-        int right_img = params_left_way.width = width / 3;
-        left_way.setLayoutParams(params_left_way);
-
-
-        top_logo.getLayoutParams().height = width / 8;
-        top_logo.getLayoutParams().width = width / 8;
 
         middle_image.getLayoutParams().height = width / 8;
         middle_image.getLayoutParams().width = width / 8;
-
-        close_button.getLayoutParams().height = width / 13;
-        close_button.getLayoutParams().width = width / 13;
 
         right_image.getLayoutParams().height = width / 8;
         right_image.getLayoutParams().width = width / 8;
@@ -574,8 +542,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         left_image.getLayoutParams().height = width / 8;
         left_image.getLayoutParams().width = width / 8;
 
-//        school_logo_default.getLayoutParams().height = width / 5;
-//        school_logo_default.getLayoutParams().width = width / 5;
+
         SharedPreferences settings = DetailsInfoActivityHealthNew.this.getSharedPreferences("prefs", 0);
         Date date2 = new Date(settings.getLong("time", 0));
         Date today=new Date();
@@ -591,16 +558,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         ToastMessageDisplay.setText(this,datevalue);
         ToastMessageDisplay.showText(this);
 
-        LinearLayout.LayoutParams params_middle_phone = (LinearLayout.LayoutParams) middle_phone.getLayoutParams();
-        int vx = params_middle_phone.height = (height * 3) / 24;
-        params_middle_phone.width = width / 3;
-        middle_phone.setLayoutParams(params_middle_phone);
-
-
-        LinearLayout.LayoutParams params_right_email = (LinearLayout.LayoutParams) right_email.getLayoutParams();
-        int vc = params_right_email.height = (height * 3) / 24;
-        params_right_email.width = width / 3;
-        right_email.setLayoutParams(params_right_email);
 
         ups_text = (TextView) findViewById(R.id.ups_text);
         ups_text.setTextSize(25);
@@ -781,12 +738,12 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
 
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
+//        close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                alertDialog.dismiss();
+//            }
+//        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -976,7 +933,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         return concatResult;
     }
 
+    /*
     public Boolean RegisteredOrNot() {
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         // editor.putString("registered", lat);
@@ -987,7 +946,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             return true;
         else
             return true;
-    }
+    }*/
 
     private String timeConverter(String time) {
 
@@ -1015,12 +974,12 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20)
+            else if (hour > 20 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " টা";
+                timeInBengali = timeInBengali + " ";
         }
         catch (Exception e)
         {
@@ -1030,7 +989,10 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         return timeInBengali;
 
     }
+
+   /*
     private void breakTimeProcessing(String value1, String value2) {
+
         if (!value2.equals("null") || !value2.equals(", ")) {
 
             String timeInBengali = "";
@@ -1053,7 +1015,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         }
     }
-
+*/
 
     private void timeProcessing(String value1, String value2) {
         if (!value2.equals("null") || value2.equals("")) {

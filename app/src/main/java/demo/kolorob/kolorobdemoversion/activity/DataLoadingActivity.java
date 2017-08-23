@@ -737,7 +737,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             DataModel cityHolder = new DataModel(arrayList.get(i));
             arrayList1.add(cityHolder);
             Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
-            Toast.makeText(DataLoadingActivity.this, "CC: " + CCORPORATION[i], Toast.LENGTH_LONG).show();
+            //Toast.makeText(DataLoadingActivity.this, "CC: " + CCORPORATION[i], Toast.LENGTH_LONG).show();
 
         }
         RecyclerView_AdapterArea adapter = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList1);

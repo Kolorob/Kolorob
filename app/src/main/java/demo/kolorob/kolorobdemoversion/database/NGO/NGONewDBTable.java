@@ -20,15 +20,18 @@ public class NGONewDBTable {
     private static final String TAG = NGONewDBTable.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.NGONEWDBTABLE;
     private static final String KEY_IDENTIFIER_ID = "_ngoid"; // 0 -integer
+
+    private static final String KEY_NGO_SERVICES_FOR = "_services_for";
+    private static final String KEY_NGO_SERVICES = "_services"; // text
+    private static final String KEY_NGO_SERVICES_OTHERS = "_services_others";
+    private static final String KEY_DROP_TIME = "_drop_time";
+    private static final String KEY_NGO_FEE = "_ngo_fee";
     private static final String KEY_NGO_NAME_ENG = "_nameen"; //
     private static final String KEY_NGO_NAME_BAN = "_namebn"; //
 
     private static final String KEY_SERVICE_TYPE = "_servicetype"; // 1 - text
-    private static final String KEY_NGO_SERVICES = "_services"; // text
-    private static final String KEY_NGO_SERVICES_FOR = "_services_for";
-    private static final String KEY_NGO_SERVICES_OTHERS = "_services_others";
-    private static final String KEY_DROP_TIME = "_drop_time";
-    private static final String KEY_NGO_FEE = "_ngo_fee";
+
+
 
     private static final String KEY_LATITUDE = "_lat"; //
     private static final String KEY_LONGITUDE = "_lon"; //
@@ -69,20 +72,21 @@ public class NGONewDBTable {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_IDENTIFIER_ID + "  INTEGER , " // 0 - int
+                + KEY_NGO_SERVICES_FOR + " TEXT, "
+                + KEY_NGO_SERVICES + " TEXT, "
+
+                + KEY_NGO_SERVICES_OTHERS + " TEXT, "
+                + KEY_DROP_TIME + " TEXT, "
+                + KEY_NGO_FEE + " TEXT, "
                 + KEY_NGO_NAME_ENG + "  TEXT, "              // 1 - text
                 + KEY_NGO_NAME_BAN + " TEXT, "
 
 
-                + KEY_NGO_SERVICES + " TEXT, "
-                + KEY_NGO_SERVICES_FOR + " TEXT, "
-                + KEY_NGO_SERVICES_OTHERS + " TEXT, "
-                + KEY_DROP_TIME + " TEXT, "
-                + KEY_NGO_FEE + " TEXT, "
+
+
 
                 + KEY_SERVICE_TYPE + " TEXT, "// 2 - text
 
-                + KEY_LATITUDE + " TEXT, "
-                + KEY_LONGITUDE + " TEXT, "
                 + KEY_HOUSE_NO + " TEXT, "
                 + KEY_BLOCK + " TEXT, "
                 + KEY_AREA + " TEXT, "
@@ -94,15 +98,20 @@ public class NGONewDBTable {
                 + KEY_OTHER_INFO + " TEXT, "
                 + KEY_AREABN + " TEXT, "
 
-                + KEY_PARENT_AREA + " TEXT, " /// parent area add
+                + KEY_PARENT_AREA + " TEXT, " /// parent area
 
-                + KEY_OPENTIME + " TEXT, "
-                + KEY_CLOSEATIME + " TEXT, "
+                + KEY_LONGITUDE + " TEXT, "
+                + KEY_LATITUDE + " TEXT, "
+
                 + KEY_OFF_DAY + " TEXT, "
+                + KEY_CLOSEATIME + " TEXT, "
+                + KEY_OPENTIME + " TEXT, "
+
+
                 + KEY_CATEGORY_ID + " INTEGER, "
                 + KEY_NGO_REFERENCE+ " TEXT, "
-                + KEY_NGO_RATINGS + " TEXT, "
-                + KEY_NGO_SUBCATEGORY_ID + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
+                + KEY_NGO_SUBCATEGORY_ID + " TEXT, "
+                + KEY_NGO_RATINGS + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
       /*  boolean newVersion = false;
         String new_column = KEY_PARENT_AREA;
@@ -134,24 +143,21 @@ public class NGONewDBTable {
 
     public long insertItem(NGONewDBModel ngoNewDBModel) {
         if (!isFieldExist(ngoNewDBModel.getNgoid())) {
-            return insertItem(ngoNewDBModel.getNgoid(), ngoNewDBModel.getNameen(), ngoNewDBModel.getNamebn(), ngoNewDBModel.getServices(),
-                    ngoNewDBModel.getServices_for(), ngoNewDBModel.getServices_others(), ngoNewDBModel.getDrop_time(), ngoNewDBModel.getNgo_fee(),
-                    ngoNewDBModel.getServicetype(), ngoNewDBModel.getLat(), ngoNewDBModel.getLon(), ngoNewDBModel.getHouseno(),
-                    ngoNewDBModel.getBlock(), ngoNewDBModel.getArea(), ngoNewDBModel.getPolicestation(), ngoNewDBModel.getNode_email(),
-                    ngoNewDBModel.getWard(), ngoNewDBModel.getRoad(), ngoNewDBModel.getNode_contact(), ngoNewDBModel.getOtherinfo(), ngoNewDBModel.getAreabn(),
-                    ngoNewDBModel.getParentarea(), ngoNewDBModel.getOpeningtime(), ngoNewDBModel.getClosetime(), ngoNewDBModel.getOffday(), ngoNewDBModel.getCategoryId(),
-                    ngoNewDBModel.getRefnumm(), ngoNewDBModel.getRatings(), ngoNewDBModel.getSubcat()
+            return insertItem(ngoNewDBModel.getNgoid(), ngoNewDBModel.getServices_for(), ngoNewDBModel.getServices(), ngoNewDBModel.getServices_others(),
+                    ngoNewDBModel.getDrop_time(), ngoNewDBModel.getNgo_fee(), ngoNewDBModel.getNameen(), ngoNewDBModel.getNamebn(), ngoNewDBModel.getServicetype(),
+                    ngoNewDBModel.getHouseno(), ngoNewDBModel.getBlock(), ngoNewDBModel.getArea(), ngoNewDBModel.getPolicestation(), ngoNewDBModel.getNode_email(), ngoNewDBModel.getWard(), ngoNewDBModel.getRoad(),ngoNewDBModel.getNode_contact(),
+                    ngoNewDBModel.getOtherinfo(), ngoNewDBModel.getAreabn(), ngoNewDBModel.getParentarea(), ngoNewDBModel.getLon(), ngoNewDBModel.getLat(),
+                    ngoNewDBModel.getOffday(), ngoNewDBModel.getClosetime(), ngoNewDBModel.getOpeningtime(), ngoNewDBModel.getCategoryId(), ngoNewDBModel.getRefnumm(), ngoNewDBModel.getSubcat(), ngoNewDBModel.getRatings()
+
             );
         }
         else {
-            return updateItem(ngoNewDBModel.getNgoid(), ngoNewDBModel.getNameen(), ngoNewDBModel.getNamebn(),
-                    ngoNewDBModel.getServices(), ngoNewDBModel.getServices_for(), ngoNewDBModel.getServices_others(), ngoNewDBModel.getDrop_time(), ngoNewDBModel.getNgo_fee(),
-                    ngoNewDBModel.getServicetype(), ngoNewDBModel.getLat(), ngoNewDBModel.getLon(), ngoNewDBModel.getHouseno(),
-                    ngoNewDBModel.getBlock(), ngoNewDBModel.getArea(), ngoNewDBModel.getPolicestation(), ngoNewDBModel.getNode_email(),
-                    ngoNewDBModel.getWard(), ngoNewDBModel.getRoad(),
-                    ngoNewDBModel.getNode_contact(), ngoNewDBModel.getOtherinfo(), ngoNewDBModel.getAreabn(),ngoNewDBModel.getParentarea(),
-                    ngoNewDBModel.getOpeningtime(), ngoNewDBModel.getClosetime(), ngoNewDBModel.getOffday(), ngoNewDBModel.getCategoryId(),
-                    ngoNewDBModel.getRefnumm(), ngoNewDBModel.getRatings(), ngoNewDBModel.getSubcat()
+            return updateItem(ngoNewDBModel.getNgoid(), ngoNewDBModel.getServices_for(), ngoNewDBModel.getServices(), ngoNewDBModel.getServices_others(),
+                    ngoNewDBModel.getDrop_time(), ngoNewDBModel.getNgo_fee(), ngoNewDBModel.getNameen(), ngoNewDBModel.getNamebn(), ngoNewDBModel.getServicetype(),
+                    ngoNewDBModel.getHouseno(), ngoNewDBModel.getBlock(), ngoNewDBModel.getArea(), ngoNewDBModel.getPolicestation(), ngoNewDBModel.getNode_email(), ngoNewDBModel.getWard(), ngoNewDBModel.getRoad(),ngoNewDBModel.getNode_contact(),
+                    ngoNewDBModel.getOtherinfo(), ngoNewDBModel.getAreabn(), ngoNewDBModel.getParentarea(), ngoNewDBModel.getLon(), ngoNewDBModel.getLat(),
+                    ngoNewDBModel.getOffday(), ngoNewDBModel.getClosetime(), ngoNewDBModel.getOpeningtime(), ngoNewDBModel.getCategoryId(), ngoNewDBModel.getRefnumm(), ngoNewDBModel.getSubcat(), ngoNewDBModel.getRatings()
+
             );
         }
     }
@@ -159,25 +165,21 @@ public class NGONewDBTable {
 
 
 
-    public long insertItem(int ngoid, String nameen, String namebn, String services, String services_for, String services_others, String drop_time, String fee, String servicetype, String lat,
-                           String lon, String houseno, String block, String area, String policestation,
+    public long insertItem(int ngoid, String services_for, String services, String services_others, String drop_time, String fee, String nameen, String namebn,  String servicetype,
+                           String houseno, String block, String area, String policestation,
                            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,String parentarea,
-                           String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
-                           String subcat
-    ) {
+                           String lon, String lat, String offday, String closetime, String openingtime, int categoryId, String refnumm, String subcat, String ratings) {
         if (isFieldExist(ngoid)) {
             return updateItem(
                     ngoid,
-                    nameen,
-                    namebn,
-                    services,
                     services_for,
+                    services,
                     services_others,
                     drop_time,
                     fee,
+                    nameen,
+                    namebn,
                     servicetype,
-                    lat,
-                    lon,
                     houseno,
                     block,
                     area,
@@ -191,12 +193,17 @@ public class NGONewDBTable {
 
                     parentarea,
 
-                    openingtime,
+                    lon,
+                    lat,
+
+                    offday,
                     closetime,
-                    offday,categoryId,
+                    openingtime,
+                    categoryId,
                     refnumm,
-                    ratings,
-                    subcat
+
+                    subcat,
+                    ratings
                     );
         }
         ContentValues rowValue = new ContentValues();
@@ -236,11 +243,11 @@ public class NGONewDBTable {
         return ret;
     }
     private long updateItem(
-            int ngoid, String nameen, String namebn, String services, String services_for, String services_others, String drop_time, String fee, String servicetype, String lat,
-            String lon, String houseno, String block, String area, String policestation,
-            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,String parentarea,
-            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
-            String subcat
+            int ngoid, String services_for, String services, String services_others, String drop_time, String fee,
+            String nameen, String namebn, String servicetype,
+            String houseno, String block, String area, String policestation, String node_email, String ward, String road, String node_contact,
+            String otherinfo, String areabn, String parentarea, String lon, String lat, String offday, String closetime, String openingtime,
+            int categoryId, String refnumm, String subcat, String ratings
     ) {
 
         ContentValues rowValue = new ContentValues();
@@ -440,40 +447,44 @@ public class NGONewDBTable {
 
     private NGONewDBModel cursorToSubCatList(Cursor cursor) {
         int _ngoid = cursor.getInt(0);
-        String _nameen = cursor.getString(1);
-        String _namebn = cursor.getString(2);
-        String _services = cursor.getString(3);
-        String _services_for = cursor.getString(4);
-        String _services_others = cursor.getString(5);
-        String _drop_time = cursor.getString(6);
-        String _fee = cursor.getString(7);
+        String _services_for = cursor.getString(1);
+        String _services = cursor.getString(2);
+        String _services_others = cursor.getString(3);
+        String _drop_time = cursor.getString(4);
+        String _fee = cursor.getString(5);
+        String _nameen = cursor.getString(6);
+        String _namebn = cursor.getString(7);
         String _servicetype = cursor.getString(8);
-        String _lat = cursor.getString(9);
-        String _lon = cursor.getString(10);
-        String _houseno = cursor.getString(11);
-        String _block = cursor.getString(12);
-        String _area = cursor.getString(13);
-        String _policestation = cursor.getString(14);
-        String _node_email = cursor.getString(15);
-        String _ward = cursor.getString(16);
-        String _road = cursor.getString(17);
-        String _node_contact = cursor.getString(18);
-        String _other = cursor.getString(19);
-        String _areabn = cursor.getString(20);
 
-        String _parentarea = cursor.getString(21);
-        String _opentime  = cursor.getString(22);
+        String _houseno = cursor.getString(9);
+        String _block = cursor.getString(10);
+        String _area = cursor.getString(11);
+        String _policestation = cursor.getString(12);
+        String _node_email = cursor.getString(13);
+        String _ward = cursor.getString(14);
+        String _road = cursor.getString(15);
+        String _node_contact = cursor.getString(16);
+        String _other = cursor.getString(17);
+        String _areabn = cursor.getString(18);
+        String _parentarea = cursor.getString(19);
+
+        String _lon = cursor.getString(20);
+        String _lat = cursor.getString(21);
+
+        String  _offday= cursor.getString(22);
         String _closetime = cursor.getString(23);
-        String  _offday= cursor.getString(24);
+        String _opentime  = cursor.getString(24);
+
         int _catid=cursor.getInt(25);
         String _refnumm=cursor.getString(26);
-        String _rating=cursor.getString(27);
-        String _sref=cursor.getString(28);
+        String _sref=cursor.getString(27);
+        String _rating=cursor.getString(28);
 
 
-        return new NGONewDBModel(_ngoid,_nameen,_namebn, _services, _services_for, _services_others, _drop_time, _fee, _servicetype,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
-                _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
+
+        return new NGONewDBModel(_ngoid, _services_for, _services, _services_others, _drop_time, _fee, _nameen, _namebn, _servicetype,
+                _houseno, _block, _area, _policestation, _node_email, _ward, _road, _node_contact, _other, _areabn, _parentarea,
+                _lon, _lat, _offday, _closetime, _opentime, _catid, _refnumm, _sref, _rating);
 
     }
 

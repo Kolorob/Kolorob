@@ -9,9 +9,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +58,10 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
+/**
+ * Created by zahidul.islam
+ */
 
 public class DetailsInfoActivityNGO extends AppCompatActivity {
 
@@ -817,6 +821,7 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
     private void CheckConcate(String value1, String value2) {
 
 
+        Log.e("","Value1: "+value1+" Value2: "+value2);
         if (!value2.equals("null") && !value2.equals("") && !value2.equals(" টাকা") && !value2.equals(" ০")) {
             key[increment] = value1;
             value[increment] = value2;
