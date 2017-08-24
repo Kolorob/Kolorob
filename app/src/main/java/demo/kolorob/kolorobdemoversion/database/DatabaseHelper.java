@@ -33,9 +33,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "kolorobupdatedv2.db";
 
     public static  String DB_PATH ;
-    public static final int DB_VERSION = 3;   // changed here
+    public static final int DB_VERSION = 4;   // changed here
 
-    public static final String AREASTORED= "areas";
+    public static final String AREASTORED= "areastored";
 
     public static final String EDU_NEW_DB_MAIN= "edu_ndb_main";
     public static final String EDU_NEW_DB_SCHOOL= "edu_ndb_school";
@@ -58,6 +58,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String SERVICE_CATEGORY = "service_category";
     public static final String SUB_CATEGORY_NEW = "sub_category_new";
+    public static final String AREAS = "areas";
+    public static final String WARDS = "wards";
+    public static final String CITYCORPORATIONS = "city_corporations";
 
 
 
@@ -143,6 +146,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + RELIGIOUSNEWDBTABLE);
             db.execSQL("DROP TABLE IF EXISTS " + AREASTORED);
             db.execSQL("DROP TABLE IF EXISTS " + SERVICE_CATEGORY);
+            db.execSQL("DROP TABLE IF EXISTS " + AREAS);
+            db.execSQL("DROP TABLE IF EXISTS " + WARDS);
+            db.execSQL("DROP TABLE IF EXISTS " + CITYCORPORATIONS);
             db.execSQL("DROP TABLE IF EXISTS " + SUB_CATEGORY_NEW);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_MAIN);
 

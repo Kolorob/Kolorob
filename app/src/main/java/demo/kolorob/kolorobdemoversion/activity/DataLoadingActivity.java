@@ -104,6 +104,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     JSONObject allData;
     String AreaNameBn;
     String CityCorName;
+    View areaview, wardview, cityview;
+    private static RecyclerView recyclerView, recyclerView1, recyclerViewarea, recyclerViewCity;
+
+    private Animation mEnterAnimation, mExitAnimation;
 
 
     public View getCityview() {
@@ -130,10 +134,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         this.wardview = wardview;
     }
 
-    View areaview, wardview, cityview;
-    private static RecyclerView recyclerView, recyclerView1, recyclerViewarea, recyclerViewCity;
 
-    private Animation mEnterAnimation, mExitAnimation;
 
 
     //String and Integer array for Recycler View Items
@@ -301,6 +302,8 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     It would be better in future to use model class to store all area/ward name lat and others . This time it was done like this since
     all info was provided part by part.
      */
+
+
     int Pos, Posa = 0;
     ArrayList<StoredArea> storedAreas = new ArrayList<>();
 

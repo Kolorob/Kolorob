@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,9 +17,9 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -28,14 +29,29 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import demo.kolorob.kolorobdemoversion.BuildConfig;
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.AreaTable;
+import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
+import demo.kolorob.kolorobdemoversion.database.WardTable;
+import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.Area;
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
+import demo.kolorob.kolorobdemoversion.model.Ward;
+import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
+import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
+
+import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 
 
 public class SplashActivityNew extends AppCompatActivity {
@@ -54,12 +70,12 @@ public class SplashActivityNew extends AppCompatActivity {
     Boolean  firstRun;
     public int height,width;
     Boolean registered=false;
+    JSONObject areaData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        //start download now
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashnew);
 
@@ -95,11 +111,52 @@ public class SplashActivityNew extends AppCompatActivity {
         try /*
         to fix issue with backward date device time in some version*/
         {
+
             app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+
 
             Float currentVersion= Float.parseFloat(app_ver);
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(SplashActivityNew.this));
             //Float previousVersion=Float.parseFloat("2.03");
+            firstRun = settings.getBoolean("firstRunUp", false);
+
+            if((currentVersion > previousVersion) || (firstRun == false)){
+                getRequest(SplashActivityNew.this, "http://kolorob.net/kolorob-new-demo/api/getAreaList?", new VolleyApiCallback() {
+                    @Override
+                    public void onResponse(int status, String apiContent) {
+
+
+                        if (status == AppConstants.SUCCESS_CODE) {
+
+                            try {
+
+                                areaData = new JSONObject(apiContent);
+                                Log.d("Data", "********" + areaData);
+                                if (areaData.length() == 0) {
+                                    ToastMessageDisplay.setText(SplashActivityNew.this, "ERROR Occured");
+
+                                }
+                                else {
+
+                                    if (areaData.has("city_corporation")) {
+                                        new SaveCCTask(SplashActivityNew.this).execute(areaData.getJSONArray("city_corporation"));
+                                    }
+
+                                    if (areaData.has("ward")) {
+                                        new SaveWardTask(SplashActivityNew.this).execute(areaData.getJSONArray("ward"));
+                                    }
+                                    if (areaData.has("areas")) {
+                                        new SaveAreaTask(SplashActivityNew.this).execute(areaData.getJSONArray("areas"));
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                });
+            }
             if(currentVersion > previousVersion)
             {
                 SharedPreferences.Editor editor = settings.edit();
@@ -115,26 +172,28 @@ public class SplashActivityNew extends AppCompatActivity {
                         settings.edit().putString("timesfirstinstall",  String.valueOf(install)).apply();
                     }
                 }
-                else if(previousVersion.floatValue()==Float.parseFloat("2.03"))
-                {
-                    String check2=settings.getString("timefirstinstall","2");
-                    if(!check2.equals("2")) {
+                else if (previousVersion.floatValue() == Float.parseFloat("2.03")) {
+                    String check2 = settings.getString("timefirstinstall", "2");
+                    if (!check2.equals("2")) {
                         settings.edit().putString("timesfirstinstall", check2).apply();
                     }
-                }
-                else if(previousVersion.floatValue() < Float.parseFloat("2.1"))
-                {
+                } else {
+                    if (previousVersion.floatValue() < Float.parseFloat("2.1")) {
 
-                    editor.putBoolean("new_categories_on_update", true).apply();
-                }
+                        editor.putBoolean("new_categories_on_update", true).apply();
 
+
+                    }
+                }
             }
         }
+
+
         catch (Exception e)
         {
 
         }
-        firstRun = settings.getBoolean("firstRunUp", false);
+
 
         if (firstRun==false)//if running for first time
         {
@@ -177,13 +236,11 @@ public class SplashActivityNew extends AppCompatActivity {
                 });
 
                 alertDialog.setCancelable(false);
-//		if(SharedPreferencesHelper.isTabletDevice(c))
-//			textAsk.setTextSize(23);
+
                 WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
                 lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
                 alertDialog.getWindow().setAttributes(lp);
-//		else
-//			textAsk.setTextSize(17);
+
                 alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
 
             }
@@ -200,7 +257,7 @@ public class SplashActivityNew extends AppCompatActivity {
                         }
                                 /* start the activity */
                         if(registered) {
-                            //actually dataloadingactivity hobe
+
                             startActivity(new Intent(SplashActivityNew.this, DataLoadingActivity.class));
                             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             finish();
@@ -234,8 +291,7 @@ public class SplashActivityNew extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         finish();
                     }
-                    //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    //overridePendingTransition(0, 0);
+
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     finish();
                 }
@@ -247,6 +303,9 @@ public class SplashActivityNew extends AppCompatActivity {
 
 
     }
+
+
+
     public void permissionToDrawOverlays() {
         if (android.os.Build.VERSION.SDK_INT >= 23) {   //Android M Or Over
             if (!Settings.canDrawOverlays(this)) {
@@ -282,9 +341,100 @@ public class SplashActivityNew extends AppCompatActivity {
         } // else: We already have permissions, so handle as normal
     }
 
+    abstract class GenericSaveDBTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+        private Context ctx;
+
+        public GenericSaveDBTask(Context ctx) {
+            this.ctx = ctx;
+        }
+
+        @Override
+        protected void onPostExecute(Result result) {
+
+        }
+
+    }
+
+    class SaveCCTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveCCTask(Context ctx) {
+            super(ctx);
+        }
+
+        @Override
+        protected Long doInBackground(JSONArray... ccArrays) {
+            JSONArray ccArray = ccArrays[0];
+            CityCorporationTable ccTable = new CityCorporationTable(SplashActivityNew.this);
+            ccTable.dropTable();
+            int count = ccArray.length();
+            for (int i = 0; i < count; i++) {
+                try {
+                    JSONObject jo = ccArray.getJSONObject(i);
+                    CityCorporation cc = CityCorporation.parseCityCorporation(jo);
+                    ccTable.insertItem(cc);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+
+    class SaveWardTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveWardTask(Context ctx) {
+            super(ctx);
+        }
+
+        @Override
+        protected Long doInBackground(JSONArray... wardArrays) {
+            JSONArray wardArray = wardArrays[0];
+            WardTable wardTable = new WardTable(SplashActivityNew.this);
+            wardTable.dropTable();
+            int count = wardArray.length();
+            for (int i = 0; i < count; i++) {
+                try {
+                    JSONObject jo = wardArray.getJSONObject(i);
+                    Ward ward = Ward.parseWard(jo);
+                    wardTable.insertItem(ward);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
+
+    class SaveAreaTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
+        public SaveAreaTask(Context ctx) {
+            super(ctx);
+        }
+
+        @Override
+        protected Long doInBackground(JSONArray... areaArrays) {
+            JSONArray areaArray = areaArrays[0];
+            AreaTable areaTable = new AreaTable(SplashActivityNew.this);
+            areaTable.dropTable();
+            int count = areaArray.length();
+            for (int i = 0; i < count; i++) {
+                try {
+                    JSONObject jo = areaArray.getJSONObject(i);
+                    Area area = Area.parseArea(jo);
+                    areaTable.insertItem(area);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return new Long(-1);
+                }
+            }
+            return new Long(0);
+        }
+    }
 
 
-    //  setsongName();
+
+
+
+
 }
 
 

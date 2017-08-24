@@ -107,7 +107,7 @@ Boolean registered;
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         IMEI=settings.getString("IMEI",null);
         PHN=settings.getString("PHN",null);
-registered=settings.getBoolean("IFREGISTERED",false);
+        registered=settings.getBoolean("IFREGISTERED",false);
         accessToken = AccountKit.getCurrentAccessToken();
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
             if(IMEI==null)checkPermissions();
