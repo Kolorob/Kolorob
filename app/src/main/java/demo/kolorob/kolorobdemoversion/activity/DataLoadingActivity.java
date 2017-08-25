@@ -367,19 +367,28 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private void runOverlay_ContinueMethod() {
         // the return handler is used to manipulate the cleanup of all the tutorial elements
 
-        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuideCity = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("১ম ধাপ")
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("১ম লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুজে নিন")
+                        .setDescription("১ম লিস্ট থেকে আপনার সিটি কর্পোরেশন খুঁজে নিন")
                         .setGravity(Gravity.BOTTOM)
                 )
                 // note that there is no Overlay here, so the default one will be used
-                .playLater(ward);
+                .playLater(city);
 
-        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuideWard = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("২য় ধাপ")
+                        .setBackgroundColor(Color.parseColor("#000000"))
+                        .setDescription("২য় লিস্টকে ডানে/বায়ে সরিয়ে আপনার ওয়ার্ড খুঁজে নিন")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .playLater(ward);
+
+        ChainTourGuide tourGuideArea = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("৩য় ধাপ")
                         .setBackgroundColor(Color.parseColor("#000000"))
                         .setDescription("ওয়ার্ড অনুযায়ী এলাকার লিস্ট থেকে এলাকা খুজে নিচের 'জমা দিন' বাটনটি ক্লিক করুন।")
                         .setGravity(Gravity.BOTTOM)
@@ -388,7 +397,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
         Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuide1, tourGuide2)
+                .add(tourGuideCity, tourGuideWard, tourGuideArea)
                 .setDefaultOverlay(new Overlay()
                         .setEnterAnimation(mEnterAnimation)
                         .setExitAnimation(mExitAnimation)
