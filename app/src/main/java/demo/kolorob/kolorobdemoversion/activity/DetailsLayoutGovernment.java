@@ -161,8 +161,20 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(governmentNewItem.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(governmentNewItem.getBlock()));
         CheckConcate("এলাকা", governmentNewItem.getAreabn());
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(governmentNewItem.getWard()));
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+
+        if(governmentNewItem.getWard().contains("_")){
+            String[] ward = governmentNewItem.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(governmentNewItem.getWard()));
+        }
+
         CheckConcate("পুলিশ স্টেশন", governmentNewItem.getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(governmentNewItem.getHouseno()));

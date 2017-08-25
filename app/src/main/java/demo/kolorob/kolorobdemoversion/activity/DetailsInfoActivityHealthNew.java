@@ -183,8 +183,19 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(healthServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(healthServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", healthServiceProviderItemNew.getAreabn());
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(healthServiceProviderItemNew.getWard()));
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        if(healthServiceProviderItemNew.getWard().contains("_")){
+            String[] ward = healthServiceProviderItemNew.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(healthServiceProviderItemNew.getWard()));
+        }
+
         CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(healthServiceProviderItemNew.getHouseno()));

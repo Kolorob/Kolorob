@@ -204,8 +204,19 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", ngoServiceProviderItemNew.getAreabn());
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getWard()));
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+        if(ngoServiceProviderItemNew.getWard().contains("_")){
+            String[] ward = ngoServiceProviderItemNew.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getWard()));
+        }
+
         CheckConcate("পুলিশ স্টেশন", ngoServiceProviderItemNew.getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getHouseno()));

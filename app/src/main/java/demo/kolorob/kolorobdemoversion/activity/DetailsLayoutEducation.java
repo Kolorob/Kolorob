@@ -172,7 +172,20 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         CheckConcate("রাস্তা", EtoB(educationNewItem.get(0).getRoad()));
         CheckConcate("ব্লক", EtoB(educationNewItem.get(0).getBlock()));
         CheckConcate("এলাকা", educationNewItem.get(0).getArea_bn());
-        CheckConcate("ওয়ার্ড", EtoB(educationNewItem.get(0).getWard()));
+
+        if(educationNewItem.get(0).getWard().contains("_")){
+            String[] ward = educationNewItem.get(0).getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", EtoB(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", EtoB(educationNewItem.get(0).getWard()));
+        }
+
         CheckConcate("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", EtoB(educationNewItem.get(0).getHouseno()));

@@ -244,8 +244,20 @@ public class DetailsInfoActivityReligious extends AppCompatActivity {
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(religiousServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(religiousServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", religiousServiceProviderItemNew.getAreabn());
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(religiousServiceProviderItemNew.getWard()));
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+
+        if(religiousServiceProviderItemNew.getWard().contains("_")){
+            String[] ward = religiousServiceProviderItemNew.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(religiousServiceProviderItemNew.getWard()));
+        }
+
         CheckConcate("পুলিশ স্টেশন", religiousServiceProviderItemNew.getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(religiousServiceProviderItemNew.getHouseno()));

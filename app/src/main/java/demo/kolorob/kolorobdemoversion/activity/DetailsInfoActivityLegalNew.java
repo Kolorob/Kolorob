@@ -243,7 +243,19 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", legalAidServiceProviderItemNew.getAreabn());
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getWard()));
+        if(legalAidServiceProviderItemNew.getWard().contains("_")){
+            String[] ward = legalAidServiceProviderItemNew.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getWard()));
+        }
+
         // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
         CheckConcate("পুলিশ স্টেশন", legalAidServiceProviderItemNew.getPolicestation());
 

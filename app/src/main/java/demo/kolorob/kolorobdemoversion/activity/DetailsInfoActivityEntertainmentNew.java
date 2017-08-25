@@ -186,12 +186,26 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য");
 
-        CheckConcate("সার্ভিস চার্জ আছে কিনা ",  "প্রযোজ্য নয়");
+        CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য নয়");
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getAreabn());
 
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getWard()));
+
+        if(entertainmentServiceProviderItemNew.getWard().contains("_")){
+            String[] ward = entertainmentServiceProviderItemNew.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getWard()));
+        }
+
+
 
         CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());
 

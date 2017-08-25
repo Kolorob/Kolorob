@@ -160,8 +160,20 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(financialNewItem.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(financialNewItem.getBlock()));
         CheckConcate("এলাকা", financialNewItem.getAreabn());
-        CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(financialNewItem.getWard()));
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
+
+        if(financialNewItem.getWard().contains("_")){
+            String[] ward = financialNewItem.getWard().split("_");
+            if(ward[1].equals("dakshinkhan")){
+                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+            }
+            else{
+                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+            }
+        }
+        else{
+            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(financialNewItem.getWard()));
+        }
+
         CheckConcate("পুলিশ স্টেশন", financialNewItem.getPolicestation());
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(financialNewItem.getHouseno()));
