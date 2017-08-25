@@ -9,46 +9,42 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
-import demo.kolorob.kolorobdemoversion.model.DataModel;
+import demo.kolorob.kolorobdemoversion.model.Ward;
 
 /**
  * Created by israt.jahan on 1/31/2017.
  */
 
-public class RecyclerView_Adapter extends
-        RecyclerView.Adapter<RecyclerViewHolder>  {// Recyclerview will extend to
-    // recyclerview adapter
-    private ArrayList<AreaHolder> arrayList;
-    private ArrayList<DataModel> arrayList2;
+public class RecyclerView_AdapterWard extends RecyclerView.Adapter<RecyclerViewHolder>  {
+
+    private ArrayList<Ward> wardList;
     private Context context;
-    int selected_position = 0;
-   // private ChildItemClickListener listener;
-    public RecyclerView_Adapter(Context context,
-                                ArrayList<AreaHolder> arrayList) {
+
+    public RecyclerView_AdapterWard(Context context,
+                                    ArrayList<Ward> arrayList) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.wardList = arrayList;
 
     }
 
 
     @Override
     public int getItemCount() {
-        return (null != arrayList ? arrayList.size() : 0);
+        return (null != wardList ? wardList.size() : 0);
 
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
-        final AreaHolder model = arrayList.get(position);
+        final Ward ward = wardList.get(position);
 
-
+        RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
 
 
         // bitmap
-        RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
-        // setting title
 
-        mainHolder.title.setText(model.getWardname());
+        // setting title
+        mainHolder.title.setText(ward.getWard_bn());
     /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +64,7 @@ public class RecyclerView_Adapter extends
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
 
         ViewGroup mainGroup = (ViewGroup) mInflater.inflate(
-                R.layout.data_loading_item, viewGroup, false);
+                R.layout.data_loading_area, viewGroup, false);
         RecyclerViewHolder listHolder = new RecyclerViewHolder(mainGroup);
         return listHolder;
 

@@ -38,11 +38,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.AreaHolder;
-import demo.kolorob.kolorobdemoversion.adapters.RecycleView_AdapterWardArea;
-import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_Adapter;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
+import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
+import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterWard;
+import demo.kolorob.kolorobdemoversion.database.AreaTable;
 import demo.kolorob.kolorobdemoversion.database.CategoryTable;
+import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
@@ -57,12 +58,13 @@ import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
+import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
-import demo.kolorob.kolorobdemoversion.model.DataModel;
-import demo.kolorob.kolorobdemoversion.model.DataModel2;
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -77,6 +79,7 @@ import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
+import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -93,22 +96,43 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     Context context;
     private static int NUMBER_OF_TASKS = 6;
-    View view = null;
+    View view = null, areaview, wardview, cityview;;
     Button submit;
-    Boolean firstRun, new_categories_on_update;
-    //user and pass
-    String user = "kolorobapp";
-    String pass = "2Jm!4jFe3WgBZKEN";
-    Boolean location = false, storage = false, smsstate = false, phonestate = false, accountstate = false, permission = false;
+    Boolean firstRun, new_categories_on_update, permission = false;
     int countofDb = 0;
     JSONObject allData;
-    String AreaNameBn;
-    String CityCorName;
-    View areaview, wardview, cityview;
-    private static RecyclerView recyclerView, recyclerView1, recyclerViewarea, recyclerViewCity;
-
+    String AreaNameBn, Location, keyword;
+    private static RecyclerView recyclerViewWard, recyclerViewArea, recyclerViewCity;
+    ImageView rotateImage;
+    TextView ward, area, city;
+    private GridLayoutManager lLayout, lLayout2;
+    ArrayList<SubCategoryItemNew> si3 = new ArrayList<>();
     private Animation mEnterAnimation, mExitAnimation;
+    private int height, width, pos, posAreaInt = -1;
 
+    ArrayList <CityCorporation> ccList = new ArrayList<>();
+    ArrayList <Ward> wardList = new ArrayList<>();
+    ArrayList <Area> areaList = new ArrayList<>();
+
+    String cityClicked, wardClicked, areaClicked;
+
+
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public int getPosAreaInt() {
+        return posAreaInt;
+    }
+
+    public void setPosAreaInt(int posAreaInt) {
+        this.posAreaInt = posAreaInt;
+    }
 
     public View getCityview() {
         return cityview;
@@ -135,38 +159,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     }
 
 
-
-
-    //String and Integer array for Recycler View Items
-
-    public static final String[] CCORPORATION = {"উত্তর"};
-
-    public static final String[] TITLES = {"ওয়ার্ড ২", "ওয়ার্ড ৩", "ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬", "ওয়ার্ড ৭", "ওয়ার্ড ৮", "ওয়ার্ড ৯", "ওয়ার্ড ১০", "ওয়ার্ড ১১", "ওয়ার্ড ১২", "ওয়ার্ড ১৩", "ওয়ার্ড ১৪", "ওয়ার্ড ১৫", "ওয়ার্ড ১৬", "ওয়ার্ড ৩০", "ওয়ার্ড ২০", "ওয়ার্ড ২২", "ওয়ার্ড ২৪", "ওয়ার্ড ২৫", "ওয়ার্ড ৩৬"};
-    public static final int[] wardid = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 30, 20, 22, 24, 25, 36};
-    public static final String[] AREANAMES = {"Mirpur 12:Mirpur DOHS",
-            "Mirpur 10:Mirpur 11",
-            "Mirpur 13:Mirpur 14:Baishteki",
-            "Mirpur 11:Bauniabadh:Palashnagar",
-            "Mirpur 6:Mirpur 7:Eastern Housing:Albodi:Pallabi:Albodi Rupnagar Tinshed:Duaripara",
-            "Mirpur 2:Mirpur 6:Rupnagar:Government Housing Estate",
-            "Mirpur 1:North Bishil:Baksnagar:Nobabaer Bag:BISF Staff Quarter:Botanical Garden Residential Area",
-            "Bagbari:Harirampur:Jahurabad:Bazarpara:Bordhonbari:Golartek:Choto Diabari:Coat Bari:Anandanagar",
-            "Gabtoli Jamidarbari:Gabtoli 1st Colony:Gabtoli 2nd Colony:Gabtoli 3rd Colony:Goidartek:Darus Salam",
-            "Kallyanpur:Paikpara",
-            "Ahammed Nagar:South Bishil:Shah Ali Bag:Kalwala Para:Paikpara Staff Quarter:Educatiob Board Staff Quarter:Tolarbag:BADC Staff Quarter",
-            "Borobag:Pirer Bag:Monipur",
-            "Kazi para:Shewrapara:Senpara Parbata"
-            , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
-            "Ibrahimpur:Kafrul",
-            "Adabor",
-            "Dakshinpara:D.P.H.Icddrb Hospital:G.P.Gha:G.P.Chha/Cha:G.P.Ka:I.D.Hospital:Mohakhali Bazar:Nekatan:Mohakhali Wireless:T. B. Hospital:Rasulbagh",
-            "Bagichar Tek:Mahanagar Project:Paschim Rampura:Paschim Hajipara:Purba Rampura:Uttar Banasree",
-            "Begunbari:Central Tejgaon Ind.Elaka:D.Paschim Tejgaon Ind.Elaka:Kuni Para:Paschim Tejgaon Ind.Elaka",
-            "Paschim Nakhal Para:Uttar Paschim Nakhalpara:Purba Nakhal Para",
-            "Madhubagh:Malibagh Baganbari:Nayatola:Wireless"
-    };
-
-
     public String getAreaNameBn() {
         return AreaNameBn;
     }
@@ -175,7 +167,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         AreaNameBn = areaNameBn;
     }
 
-    String Location;
 
     public String getLocation() {
         return Location;
@@ -185,189 +176,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         Location = location;
     }
 
-    ImageView rotateImage;
-
-    public static final String[] AREANAMESBN = {"মিরপুর ১২:মিরপুর ডিওএইচএস",
-            "মিরপুর ১০:মিরপুর ১১",
-            "মিরপুর ১৩:মিরপুর ১৪:বাইশটেকি",
-            "মিরপুর ১১:বাউনিয়াবাঁধ:পলাশ নগর",
-            "মিরপুর ৬:মিরপুর ৭:পল্লবী:আলবদী:দুয়ারী পাড়া:ইস্টার্ন হাউজিং:আলবদী রূপনগর টিনশেড",
-            "মিরপুর ২:মিরপুর ৬:রূপনগর:সরকারী হাউজিং এষ্টেট",
-            "মিরপুর ১:উত্তর বিশিল:বকস নগর:নবাবের বাগ :বোটনিক্যাল গার্ডেন আবাসিক এলাকা:বিআইএসএফ ষ্টাফ কোয়ার্টার ",
-            "বাগবাড়ী:হরিরামপুর:জহরাবাদ:বাজার পাড়া:বর্ধনবাড়ী:গোলারটেক:ছোটদিয়াবাড়ী:কোটবাড়ী:আনন্দ নগর",
-            "গাবতলী জমিদারবাড়ী :গাবতলী ১ম কলোনী:গাবতলী ২য় কলোনী:গাবতলী ৩য় কলোনী:গৈদারটেক:দারুস সালাম",
-            "কল্যাণপুর:পাইক পাড়া",
-            "আহম্মেদ নগর:দক্ষিণ বিশিল:শাহআলী বাগ:কালওয়ালা পাড়া:পাইকপাড়া ষ্টাফ কোয়ার্টার:শিক্ষা বোর্ড ষ্টাফ কোয়ার্টার:টোলারবাগ:বিএডিসি ষ্টাফ কোয়ার্টার",
-            "বড় বাগ:পীরের বাগ:মনীপুর",
-            "কাজী পাড়া:শেওড়া পাড়া:সেনপাড়া পর্বতা"
-            , "ভাসান টেক:আলবদিরটেক:দামালকোট:লালাসরাই:মাটি কাটা:মানিকদি:বালুঘাট:বাইগারটেক:বারনটেক",
-            "ইব্রাহীমপুর:কাফরুল",
-            "আদাবর",
-            "দক্ষিনপাড়া:ডি পি এইচ আইসিডিডিআরবি হাসপাতাল:জিপি ঘ:জিপি চ:জিপি ক:আইডি হাসপাতাল:মহাখালী বাজার:নিকেতন:মহাখালী ওয়্যারলেস:টিবি হাসপাতাল:রসুলবাগ",
-            "বাগিচার টেক:মহানগর প্রোজেক্ট:পশ্চিম রামপুরা:পশ্চিম হাজীপাড়া:পূর্ব রামপুরা:উত্তর বনশ্রী",
-            "বেগুনবাড়ি:সেন্ট্রাল তেজগাঁও এলাকা:ডি পশ্চিম তেজগাঁও এলাকা:কুনি পাড়া:পশ্চিম তেজগাঁও এলাকা",
-            "পশ্চিম নাখালপাড়া:উত্তর পশ্চিম নাখালপাড়া:পূর্ব নাখালপাড়া",
-            "মধুবাগ:মালিবাগ বাগানবাড়ি:নয়াটোলা:ওয়্যারলেস"
-
-    };
-    public static final String[] AREAKEYWORDS = {"Mirpur_12:Mirpur_DOHS",
-            "Mirpur_10:Mirpur_11",
-            "Mirpur_13:Mirpur_14:Baishteki",
-            "Mirpur_11:Bauniabadh:Palashnagar",
-            "Mirpur_6:Mirpur_7:Pallabi:Albodi:Duaripara:Eastern_Housing:Albodi_Rupnagar_Tinshed",
-            "Mirpur_2:Mirpur_6:_Rupnagar:সরকারী হাউজিং এষ্টেট",
-            "Mirpur_1:North_Bishil:Baksnagar:নবাবের বাগ :Botanical_Garden_Residential_Area:BISF_Staff_Quarter",
-            "Bagbari:Harirampur:Jahurabad:Bazarpara:Bordhonbari:Golartek:Choto_Diabari:Coat_Bari:Anandanagar",
-            "Gabtoli_Jamidarbari :Gabtoli_1st_Colony:Gabtoli_2nd_Colony:Gabtoli_3rd_Colony:Goidartek :Darus_Salam",
-            "Kallyanpur:Paikpara",
-            "Admmed_Nagar:South_Bishil:Shah_Ali_Bag:Kalwala_Para:Paikpara_Staff_Quarter:Education_Board_Staff_Quarter:Tolarbag:BADC_Staff_Quarter",
-            "Borobag:Pirer_Bag:Monipur",
-            "Kazi_para:Shewrapara:Senpara_Parbata"
-            , "Vashantek:Albodortek:Damalkot:Lalasorai:Matikata:Manikdi:Balughat:Baigertek:Barontek",
-            "Ibrahimpur:Kafrul",
-            "Adabor",
-            "Dakshinpara:D_P_H_Icddrb_Hospital:G_P_Gha:G_P_Cha:G_P_Ka:I_D_Hospital:Mohakhali_Bazar:Nekatan:Mohakhali_Wireless:T_B_Hospital:Rasulbagh",
-            "Bagichar_Tek:Mahanagar_Project:Paschim_Rampura:Paschim_Hajipara:Purba_Rampura:Uttar_Banasree",
-            "Begunbari:Central_Tejgaon_Ind_Elaka:D_Paschim_Tejgaon_Ind_Elaka:Kuni_Para:Paschim_Tejgaon_Ind_Elaka",
-            "Paschim_Nakhal_Para:Uttar_Paschim_Nakhalpara:Purba_Nakhal_Para",
-            "Madhubagh:Malibagh_Baganbari:Nayatola:Wireless"
 
 
-    };
 
 
-    public static final String[] AREALATLONG = {"23.8251885:90.3706654+23.8366512:90.3700301",
-            "23.8109961:90.3732765+23.8157519:90.3727312",
-            "23.8072355:90.3785576+23.8026728:90.3826218+23.8105393:90.3805192",
-            "23.8196417:90.3719654+23.8198672:90.3804651+23.8145179:90.3815702",
-            "23.8103775:90.3645049+23.8181435:90.3633515+23.8250932:90.3611905+23.8354873:90.3527534+23.8250272:90.3560691+23.8261571:90.3536465+23.8215757:90.3582057",
-            "23.8050564:90.3582204+23.8101316:90.3568877+23.8164594:90.3548548+23.8071084:90.3583686",
-            "23.802316:90.3493793+23.7991725:90.3475983+23.8118352:90.3494097+23.810164:90.3409325+23.8101261:90.3470047+23.8097218:90.3510667",
-            "23.7784712:90.3403535+23.7895259:90.3411475+23.7954947:90.3427568+23.7871501:90.3403964+23.7913519:90.3438082+23.7934331:90.3417483+23.7970457:90.3418556+23.7846565:90.3386369+23.7879748:90.3432718",
-            "23.7827653:90.3465265+23.7865822:90.3474692+23.7927179:90.3489757+23.7889376:90.3455917+23.7787714:90.3473288+23.7793119:90.3547852",
-            "23.7808527:90.3610078+23.7883853:90.3605831",
-            "23.7935661:90.3596364+23.7943261:90.3519489+23.7974009:90.3574086+23.7983914:90.3546318+23.7868775:90.3546712+23.7979001:90.3528053+23.7890024:90.3513554+23.7871371:90.3514986",
-            "23.801074:90.3630677+23.7887431:90.3671132+23.7966124:90.3668374",
-            "23.7984577:90.3744075+23.7925622:90.3740769+23.80343:90.3697905",
-            "23.8115701:90.3906999+23.8422065:90.3846699+23.8061997:90.3894752+23.8026476:90.3900641+23.8181098:90.3926311+23.824347:90.3893504+23.8371166:90.3828885+23.8342118:90.3857033+23.83057505:90.3857026",
-            "23.7955569:90.3835156+23.7894521:90.3849181",
-            "23.7711108:90.35403746",
-            "23.78230773:90.40582535+23.77717725:90.39850247+23.78088594:90.40187083+23.77958719:90.40487115+23.77508512:90.40352133+23.77496992:90.40602262+23.78040706:90.40086081+23.77278456:90.4095368+23.78048506:90.40577312+23.77619232:90.40619051+23.77517403:90.39822767",
-            "23.70195083:90.41742569+23.76447562:90.41468605+23.76366484:90.41831015+23.75797041:90.41654211+23.76116193:90.42381041+23.76369617:90.428437",
-            "23.75895493:90.40363563+23.76524006:90.40271093+23.75950164:90.39966462+23.76600637:90.40908177+23.76078574:90.39791946",
-            "23.76964819:90.39449499+23.77385567:90.39399527+23.77072276:90.3979912",
-            "23.75758076:90.41170947+23.75107525:90.41304646+23.7574167:90.41287197+23.75078485:90.40951467"
-
-    };
-
-
-    ///////// DSCC //////
-
-
-    public static final String[] TITLESDSCC = {"ওয়ার্ড ৪", "ওয়ার্ড ৫", "ওয়ার্ড ৬"};
-
-    public static final int[] wardiddscc = {4, 5, 6};
-
-    public static final String[] AREANAMESDSCC = {"MChaya Bithi Housing:Dakshin Basabo:Dakshin Madartek:Maddhya Basabo:Purba Madartek:Purba Basabo:Uttar Madartek:Uttar Basabo:Paschim Madartek",
-            "Ahmedbagh:Kadamtala:Mayakanon (Thakur para):Rajarbagh:Sabujbagh:Sabuj Kanon",
-            "Dakshin Mugda Para:Uttar Mugda Para",
-            ""
-
-
-    };
-
-    public static final String[] AREANAMESBNDSCC = {"ছায়াবীথি হাউজিং:দক্ষিণ বাসাবো:দক্ষিণ মাদারটেক:মধ্য বাসাবো:পূর্ব মাদারটেক:পূর্ব বাসাবো:উত্তর মাদারটেক:উত্তর বাসাবো:পশ্চিম মাদারটেক",
-            "আহমেদবাগ:কদমতলা:মায়াকানন:রাজারবাগ:সবুজবাগ:সবুজ কানন",
-            "দক্ষিণ মুগদাপাড়া:উত্তর মুগদাপাড়া",
-
-
-    };
-    public static final String[] AREAKEYWORDSDSCC = {"Chaya_Bithi_Housing:Dakshin_Basabo:Dakshin_Madartek:Maddhya_Basabo:Purba_Madartek:Purba_Basabo:Uttar_Madartek:Uttar_Basabo:Paschim_Madartek",
-            "Ahmedbagh:Kadamtala:Mayakanon:Rajarbagh:Sabujbagh:Sabuj_Kanon",
-            "Dakshin_Mugda_Para:Uttar_Mugda_Para",
-
-
-    };
-
-
-    public static final String[] AREALATLONGDSCC = {"23.7417867:90.43456674+23.73906447:90.43117113+23.7424221:90.44091543+23.74104616:90.43208975+23.74363298:90.44126685+23.7395813:90.4371986+23.74460268:90.43938678+23.74273752:90.43078098+23.74453082:90.43788007",
-            "23.73523983:90.43132756+23.73795186:90.43761325+23.73616764:90.42709581+23.73764341:90.44183697+23.73757301:90.43357505+23.73333034:90.42985878",
-            "23.72826593:90.43156698+23.73102395:90.43254728"
-    };
-
-    ////////// end //////
-
-
-    /*
-    It would be better in future to use model class to store all area/ward name lat and others . This time it was done like this since
-    all info was provided part by part.
-     */
-
-
-    int Pos, Posa = 0;
-    ArrayList<StoredArea> storedAreas = new ArrayList<>();
-
-    public int getPosa() {
-        return Posa;
-    }
-
-    ArrayList<SubCategoryItemNew> si3 = new ArrayList<>();
-    RadioButton radioButton;
-
-    public void setPosa(int posa) {
-        Posa = posa;
-    }
-
-    String posWard = null;
-
-    public String getPosWard() {
-        return posWard;
-    }
-
-    public void setPosWard(String posWard) {
-        this.posWard = posWard;
-    }
-
-    String posArea = null;
-    TextView ward, area, city;
-    ArrayList<DataModel> arrayList1 = new ArrayList<>();
-    ArrayList<DataModel> arrayList2 = new ArrayList<>();
-    ArrayList<DataModel2> arrayList3 = new ArrayList<>();
-
-    RecyclerViewHolder holder2;
-
-    public int getPos() {
-        return Pos;
-    }
-
-    public void setPos(int pos) {
-        Pos = pos;
-    }
-
-    public String getPosArea() {
-        return posArea;
-    }
-
-    public void setPosArea(String posArea) {
-        this.posArea = posArea;
-    }
-
-    int PosAreaint = -1;
-    private int height;
-    private int width;
-
-    public int getPosAreaint() {
-        return PosAreaint;
-    }
-
-    String keyword;
     private AnimationDrawable frameAnimation;
 
-    public void setPosAreaint(int posAreaint) {
-        PosAreaint = posAreaint;
-    }
 
-    private GridLayoutManager lLayout, lLayout2;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -380,9 +197,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         setContentView(R.layout.place_selection_activity);
         ward = (TextView) findViewById(R.id.chooseward);
         area = (TextView) findViewById(R.id.choosearea);
-
         city = (TextView) findViewById(R.id.ccorporation);
-
         submit = (Button) findViewById(R.id.submittoserverarea);
 
         //submit1 = (Button) findViewById(R.id.submittoserverarea);
@@ -404,21 +219,19 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             public void onClick(View v) {
 
 
-                if (getPosAreaint() == -1) {
+                if (getPosAreaInt() == -1) {
                     ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
                     ToastMessageDisplay.showText(DataLoadingActivity.this);
                 } else {
 
-                    // ToastMessageDisplay.setText(DataLoadingActivity.this, "submit22222 test");
-                    //ToastMessageDisplay.showText(DataLoadingActivity.this);
-                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
-                    ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
-                    keyword = list2.get(getPosAreaint());
-                    if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) { //no data available for these two area so
+                    keyword = areaList.get(getPosAreaInt()).getArea_keyword();
+                    String lat = areaList.get(getPosAreaInt()).getLat();
+
+                    if (lat.equals(null) || keyword.equals(null)) { //no data available for these two area so
                         ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
-                        setLocation(listloc.get(getPosAreaint()));
+                        //setLocation(areaList.get(getPosAreaInt()).getLat() + ":" + areaList.get(getPosAreaInt()).getLon());
                         if (AppUtils.isNetConnected(getApplicationContext())) {
                             Servercall();
                         } else {
@@ -431,42 +244,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
             }
         });
-
-
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                if (getPosAreaint() == -1) {
-//                    ToastMessageDisplay.setText(DataLoadingActivity.this, "এলাকা নির্বাচন করুন");
-//                    ToastMessageDisplay.showText(DataLoadingActivity.this);
-//                } else {
-//
-////                    ToastMessageDisplay.setText(DataLoadingActivity.this, "submit1 test");
-////                    ToastMessageDisplay.showText(DataLoadingActivity.this);
-//                    ArrayList<String> list2 = new ArrayList<String>(Arrays.asList(AREAKEYWORDS[getPos()].split(":")));
-//                    ArrayList<String> listloc = new ArrayList<String>(Arrays.asList(AREALATLONG[getPos()].split("\\+")));
-//                    keyword = list2.get(getPosAreaint());
-//                    if (keyword.equals("সরকারী হাউজিং এষ্টেট") || keyword.equals("নবাবের বাগ")) { //no data available for these two area so
-//                        ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
-//                        ToastMessageDisplay.showText(DataLoadingActivity.this);
-//                    } else {
-//                        setLocation(listloc.get(getPosAreaint()));
-//                        if (AppUtils.isNetConnected(getApplicationContext())) {
-//                            Servercall();
-//                        } else {
-//                            AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
-//                        }
-//
-//                    }
-//                }
-//
-//
-//            }
-//        });
-
-
         initViews();
         mEnterAnimation = new AlphaAnimation(0f, 1f);
         mEnterAnimation.setDuration(600);
@@ -475,40 +252,30 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         mExitAnimation = new AlphaAnimation(1f, 0f);
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
-        //populatRecyclerView(); //ward
-        //populatRecyclerView2();//area
-        populatRecyclerViewforcity(); // city
+
+        populatRecyclerViewCity();  // city
+        populatRecyclerViewWard(1); // ward
+        populatRecyclerViewArea(1); // area
 
 
         if (firstRun == false || new_categories_on_update == true)
             runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
-        Pos = 0;
+        pos = 0;
 
 
         //first recyclerview for city
+
         ItemClickSupport.addTo(recyclerViewCity)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerViewCity, int position, View v) {
-                        setPos(position);
+                         cityClicked = ccList.get(position).getCityCorporation_keyword();
+                         recyclerViewArea.setAdapter(null);
+                         Log.d("tasks", "position: " + position);
 
-                        Log.d("tasks", "position: " + position);
-                        ///populatRecyclerView();
+                         populatRecyclerViewWard(ccList.get(position).getId());
 
-
-                        if (position == 0) {
-                            populatRecyclerView();
-                        }
-                        if (position == 1) {
-                            populatRecyclerViewdscc();
-                        }
-
-
-//
-
-                        // ((CardView)v).setCardBackgroundColor(Color.WHITE);
-                        // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
                         if (getCityview() == null) {
                             setCityview(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
@@ -519,28 +286,23 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             setCityview(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        //Toast.makeText(DataLoadingActivity.this, ", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 //area cards
 
 
 //first recyclerview for wards
-        ItemClickSupport.addTo(recyclerView)
+        ItemClickSupport.addTo(recyclerViewWard)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                        wardClicked = wardList.get(position).getWard_keyword();
                         setPos(position);
 
+                        populatRecyclerViewArea(wardList.get(position).getId());
 
-                        populatRecyclerView2();
-
-                        //populatRecyclerView2dscc();
-
-
-                        Log.d("tasks", "position of ward: " + position);
-                        // ((CardView)v).setCardBackgroundColor(Color.WHITE);
-                        // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
                         if (getWardview() == null) {
                             setWardview(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
@@ -551,61 +313,20 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             setWardview(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
-
-        ///////// dscc////
-
-//        ItemClickSupport.addTo(recyclerView1)
-//                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClicked(RecyclerView recyclerView1, int position, View v) {
-//                        setPos(position);
-//
-//
-//
-//                       // populatRecyclerView2();
-//                        Toast.makeText(DataLoadingActivity.this, "functiontest for recycle",
-//                                Toast.LENGTH_LONG).show();
-//
-//                         populatRecyclerView2dscc();
-//                        Toast.makeText(DataLoadingActivity.this, "functiontest for dscc ",
-//                                Toast.LENGTH_LONG).show();
-//
-//
-//
-//
-//                        Log.d("tasks", "position of ward: " + position);
-//                        // ((CardView)v).setCardBackgroundColor(Color.WHITE);
-//                        // ((TextView)v).setBackgroundColor(Color.parseColor("#ff8800"));
-//                        if (getWardview() == null) {
-//                            setWardview(v);
-//                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-//                        } else if (getWardview() != v) {
-//                            ((CardView) getWardview()).setCardBackgroundColor(Color.parseColor("#7f000000"));
-//
-//                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-//                            setWardview(v);
-//                        } else
-//                            ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-//                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-        ////// end ////
-
-
 //area cards
-        ItemClickSupport.addTo(recyclerViewarea)
+        ItemClickSupport.addTo(recyclerViewArea)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        Log.d("tasks", "position: " + position);
 
                         ((CardView) v).setCardBackgroundColor(Color.WHITE);
-                        setPosAreaint(position);
+                        setPosAreaInt(position);
+                        areaClicked = areaList.get(position).getArea_keyword();
+
                         if (getAreaview() == null) {
                             setAreaview(v);
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
@@ -616,71 +337,23 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             setAreaview(v);
                         } else
                             ((CardView) v).setCardBackgroundColor(Color.parseColor("#FF9800"));
-                        setAreaNameBn(arrayList3.get(position).getWardarea());
 
-
-                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
-                    }
+                }
                 });
-        /*
-         ItemClickSupport.addTo(recyclerView)
-                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-                    @Override
-                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        setPos(position);
-
-                        populatRecyclerView2();
-                        //Toast.makeText(DataLoadingActivity.this,"Existing areas are : "+AREANAMESBN[position].replace(':',','), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        //now make the early request just in case
-       if ((AppUtils.isNetConnected(getApplicationContext()) )&&(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED )) {
-            getRequest(DataLoadingActivity.this, "http://kolorob.net/NewStructure.json" , new VolleyApiCallback() {
-                        @Override
-                        public void onResponse(int status, String apiContent) {
-                            if (status == AppConstants.SUCCESS_CODE) {
-
-                                try {
-
-                                   allData = new JSONObject(apiContent);
-
-
-                                    //                                          frameAnimation.stop();
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                if(allData.has("Finance"))
-                                    new SaveDataArrayFinance(DataLoadingActivity.this).execute(allData);
-                            }
-                        }
-                    }
-            );
-        }
-*/
-
-
         context = this;
-
-
 
     }
 
     private void initViews() {
 
-
-        recyclerView = (RecyclerView)
-                findViewById(R.id.recycler_view);
-
-        recyclerView1 = (RecyclerView)
-                findViewById(R.id.recycler_view);
-
-        recyclerViewarea = (RecyclerView)
-                findViewById(R.id.recycler_view2);
-
         recyclerViewCity = (RecyclerView)
                 findViewById(R.id.cityrecycler_view);
+
+        recyclerViewWard = (RecyclerView)
+                findViewById(R.id.recycler_view);
+
+        recyclerViewArea = (RecyclerView)
+                findViewById(R.id.recycler_view2);
 
 
         //Set RecyclerView type according to intent value
@@ -731,223 +404,59 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     // populate the list view by adding data to arraylist
 
-    private void populatRecyclerViewforcity() {
+    private void populatRecyclerViewCity() {
 
 
-        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(CCORPORATION));
-        for (int i = 0; i < arrayList.size(); i++) {
+        CityCorporationTable ccTable = new CityCorporationTable();
+        ccList = ccTable.getAllCCs();
 
-            DataModel cityHolder = new DataModel(arrayList.get(i));
-            arrayList1.add(cityHolder);
-            Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
-            //Toast.makeText(DataLoadingActivity.this, "CC: " + CCORPORATION[i], Toast.LENGTH_LONG).show();
+        RecyclerView_AdapterCityCorporation adapter = new RecyclerView_AdapterCityCorporation(DataLoadingActivity.this, ccList);
+        recyclerViewCity.setAdapter(adapter);
 
-        }
-        RecyclerView_AdapterArea adapter = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList1);
-        recyclerViewCity.setAdapter(adapter);// set adapter on recyclerViewCity
-
-
-        adapter.notifyDataSetChanged();// Notify the adapter
-
-
-
+        adapter.notifyDataSetChanged();
 
     }
 
-
-    private void populatRecyclerView() {
-        arrayList2.clear();
+    private void populatRecyclerViewWard(int cc_id) {
 
 
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(TITLES));
-        for (int i = 0; i < list.size(); i++) {
-            DataModel areaHolder1 = new DataModel(list.get(i));
-            arrayList2.add(areaHolder1);
-        }
-        if (arrayList2.size() >= 4) {
+        WardTable wardTable = new WardTable();
+        wardList = wardTable.getAllWards(cc_id);
+
+        if (wardList.size() >= 4) {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
         } else {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
         }
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(lLayout2);
-        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
-        recyclerView.setAdapter(adapter2);// set adapter on recyclerview
+        recyclerViewWard.setHasFixedSize(false);
+        recyclerViewWard.setLayoutManager(lLayout2);
+        RecyclerView_AdapterWard adapter = new RecyclerView_AdapterWard(DataLoadingActivity.this, wardList);
+        recyclerViewWard.setAdapter(adapter);
 
-
-        adapter2.notifyDataSetChanged();// Notify the adapter
-
+        adapter.notifyDataSetChanged();
 
     }
 
-
-    private void populatRecyclerView2() {
-
-
-        //Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
+    private void populatRecyclerViewArea(int ward_id) {
 
 
-        arrayList3.clear();
 
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
+        AreaTable areaTable = new AreaTable();
+        areaList = areaTable.getAllAreas(ward_id);
 
-        for (int j = 0; j < list.size(); j++) {
-            DataModel2 areaHolder1 = new DataModel2(list.get(j));
-            arrayList3.add(areaHolder1);
-        }
-
-
-        if (arrayList3.size() >= 4) {
+        if (areaList.size() >= 4) {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
         } else {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
         }
-        recyclerViewarea.setHasFixedSize(false);
-        recyclerViewarea.setLayoutManager(lLayout2);
-        RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
-        recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
+        recyclerViewArea.setHasFixedSize(false);
+        recyclerViewArea.setLayoutManager(lLayout2);
+        RecyclerView_AdapterArea adapter = new RecyclerView_AdapterArea(DataLoadingActivity.this, areaList);
+        recyclerViewArea.setAdapter(adapter);
 
 
-        adapter2.notifyDataSetChanged();// Notify the adapter
-
-        //populatRecyclerView2();
-        // Log.d("tasks", "Tasks remaining City corporation: " + (CCORPORATION[i]));
-
-
-//                arrayList3.clear();
-//
-//                ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBNDSCC[getPos()].split(":")));
-//
-//                for (int j = 0; j < list.size(); j++) {
-//                    DataModel2 areaHolder1 = new DataModel2(list.get(j));
-//                    arrayList3.add(areaHolder1);
-//                }
-//
-//
-//                if (arrayList3.size() >= 4) {
-//                    lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
-//                } else {
-//                    lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-//                }
-//                recyclerViewarea.setHasFixedSize(false);
-//                recyclerViewarea.setLayoutManager(lLayout2);
-//                RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
-//                recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
-//
-//
-//                adapter2.notifyDataSetChanged();// Notify the adapter
-//
-
-
-//        arrayList3.clear();
-//
-//        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBN[getPos()].split(":")));
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            DataModel2 areaHolder1 = new DataModel2(list.get(i));
-//            arrayList3.add(areaHolder1);
-//        }
-//
-//
-//        if (arrayList3.size() >= 4) {
-//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
-//        } else {
-//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-//        }
-//        recyclerViewarea.setHasFixedSize(false);
-//        recyclerViewarea.setLayoutManager(lLayout2);
-//        RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
-//        recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
-//
-//
-//        adapter2.notifyDataSetChanged();// Notify the adapter
-
+        adapter.notifyDataSetChanged();
     }
-
-
-    //////// DSCC /////
-
-    private void populatRecyclerViewdscc() {
-        arrayList2.clear();
-
-
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(TITLESDSCC));
-        for (int i = 0; i < list.size(); i++) {
-            DataModel areaHolder1 = new DataModel(list.get(i));
-            arrayList2.add(areaHolder1);
-        }
-        if (arrayList2.size() >= 4) {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
-        } else {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-        }
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(lLayout2);
-        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
-        recyclerView.setAdapter(adapter2);// set adapter on recyclerview
-
-
-        adapter2.notifyDataSetChanged();// Notify the adapter
-        //populatRecyclerView2dscc();
-
-    }
-
-
-    private void populatRecyclerView2dscc() {
-
-        arrayList3.clear();
-
-        ArrayList<String> list = new ArrayList<String>(Arrays.asList(AREANAMESBNDSCC[getPos()].split(":")));
-        for (int i = 0; i < list.size(); i++) {
-            DataModel2 areaHolder1 = new DataModel2(list.get(i));
-            arrayList3.add(areaHolder1);
-        }
-        if (arrayList3.size() >= 4) {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
-        } else {
-            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-        }
-        recyclerViewarea.setHasFixedSize(false);
-        recyclerViewarea.setLayoutManager(lLayout2);
-        RecycleView_AdapterWardArea adapter2 = new RecycleView_AdapterWardArea(DataLoadingActivity.this, arrayList3);
-        recyclerViewarea.setAdapter(adapter2);// set adapter on recyclerview
-
-
-        adapter2.notifyDataSetChanged();// Notify the adapter
-
-    }
-
-    ////// end //////
-
-
-    private void populatRecyclerView3() {
-
-
-        arrayList3.clear();
-
-
-//        ArrayList<String> list = new ArrayList<String>(Arrays.asList(CCORPORATION));
-//        for (int i = 0; i < list.size(); i++) {
-//            DataModel areaHolder1 = new DataModel(list.get(i));
-//            arrayList2.add(areaHolder1);
-//        }
-//        if (arrayList2.size() >= 4) {
-//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
-//        } else {
-//            lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-//        }
-//        recyclerView.setHasFixedSize(false);
-//        recyclerView.setLayoutManager(lLayout2);
-//        RecyclerView_AdapterArea adapter2 = new RecyclerView_AdapterArea(DataLoadingActivity.this, arrayList2);
-//        recyclerView.setAdapter(adapter2);// set adapter on recyclerview
-//
-//
-//        adapter2.notifyDataSetChanged();// Notify the adapter
-//
-
-
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -1094,7 +603,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 editor.putBoolean("new_categories_on_update", false).apply();
             }
         }
-        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardid[getPos()] + "&area=" + keyword, new VolleyApiCallback() {
+        getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
             @Override
             public void onResponse(int status, String apiContent) {
                 if (status == AppConstants.SUCCESS_CODE) {
@@ -1157,15 +666,15 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         int p = allData.length();
                         Log.d("Doneall", String.valueOf(p));
                         StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
-                        String A = getAreaNameBn();
-                        Log.e("Get Area Name with Data", A);
-                        String LOC = getLocation();
-                        storedAreaTable.insertItem(String.valueOf(wardid[getPos()]), keyword, A, LOC);
-                        Log.e("ward area ", String.valueOf(wardid[getPos()]));
+                        String A = areaList.get(posAreaInt).getArea_bn();
+         //               Log.e("Get Area Name with Data", A);
+                        //String LOC = getLocation();
+                        storedAreaTable.insertItem(wardClicked, keyword, A, areaList.get(getPosAreaInt()).getLat(), areaList.get(getPosAreaInt()).getLon());
+
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putInt("ward", wardid[getPos()]);
-                        editor.putString("areakeyword", keyword);
+                        editor.putString("ward", wardClicked);
+                        editor.putString("areakeyword", areaClicked);
                         editor.apply();
 
                     } catch (JSONException e) {
@@ -1261,29 +770,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
-    /*void SavenewEntertainment(JSONArray jo) {
-        JSONArray Ent = jo;
-        EntNewDBTable entNewDBTable = new EntNewDBTable(DataLoadingActivity.this);
-
-
-        int Entcount = Ent.length();
-
-        for (int i = 0; i < Entcount; i++) {
-            try {
-                if (!Ent.isNull(i)) {
-                    JSONObject jsonObject2 = Ent.getJSONObject(i);
-                    EntertainmentNewDBModel entertainmentNewDBModel = EntertainmentNewDBModel.parseEntertainmentNewDBModel(jsonObject2);
-                    entNewDBTable.insertItem(entertainmentNewDBModel);
-
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("entcount", String.valueOf(i));
-        }
-    }*/
     class SavenewGovTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SavenewGovTask(Context ctx) {
             super(ctx);
@@ -1313,51 +799,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    /*
-    void SavenewGov(JSONArray jo) {
-        JSONArray Gov = jo;
-        GovNewDBTable govNewDBTable = new GovNewDBTable(DataLoadingActivity.this);
-
-
-        int Govcount = Gov.length();
-
-        for (int i = 0; i < Govcount; i++) {
-            try {
-                if (!Gov.isNull(i)) {
-                    JSONObject jsonObject2 = Gov.getJSONObject(i);
-                    GovernmentNewDBModel governmentNewDBModel = GovernmentNewDBModel.parseGovernmentNewDBModel(jsonObject2);
-                    govNewDBTable.insertItem(governmentNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("govcount", String.valueOf(i));
-        }
-    }
-
-    void SavenewLegal(JSONArray jo) {
-        JSONArray Legal = jo;
-        LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(DataLoadingActivity.this);
-
-
-        int Legalcount = Legal.length();
-
-        for (int i = 0; i < Legalcount; i++) {
-            try {
-                if (!Legal.isNull(i)) {
-                    JSONObject jsonObject2 = Legal.getJSONObject(i);
-                    LegalAidNewDBModel legalAidNewDBModel = LegalAidNewDBModel.parseLegalAidNewDBModel(jsonObject2);
-                    legalAidNewDBTable.insertItem(legalAidNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("legalcount", String.valueOf(i));
-        }
-    }
-*/
     class SaveLegalDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveLegalDataTask(Context ctx) {
             super(ctx);
@@ -1419,68 +860,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-    /*
-    void SavenewFin(JSONArray jo) {
-        JSONArray Fin = jo;
-        FinNewDBTable finNewDBTable = new FinNewDBTable(DataLoadingActivity.this);
-
-
-        int Fincount = Fin.length();
-
-        for (int i = 0; i < Fincount; i++) {
-            try {
-                if (!Fin.isNull(i)) {
-                    JSONObject jsonObject2 = Fin.getJSONObject(i);
-                    FinancialNewDBModel financialNewDBModel = FinancialNewDBModel.parseFinancialNewDBModel(jsonObject2);
-                    finNewDBTable.insertItem(financialNewDBModel);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("fcount", String.valueOf(i));
-        }
-    }
-
-    /*void SavenewHealth(JSONArray jo) {
-        JSONArray Hel = jo;
-        HealthNewDBTableMain govNewDBTable = new HealthNewDBTableMain(DataLoadingActivity.this);
-        HealthNewDBTablePharma healthNewDBTablePharma = new HealthNewDBTablePharma(DataLoadingActivity.this);
-        HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DataLoadingActivity.this);
-        int Helcount = Hel.length();
-
-        for (int i = 0; i < Helcount; i++) {
-            try {
-                if (!Hel.isNull(i)) {
-                    JSONObject jsonObject2 = Hel.getJSONObject(i);
-                    HealthNewDBModelMain healthNewDBModelMain = HealthNewDBModelMain.parseHealthNewDBModelMain(jsonObject2);
-                    govNewDBTable.insertItem(healthNewDBModelMain);
-                    if (jsonObject2.has("health_pharmacy")) {
-                        JSONObject pharmacy = jsonObject2.getJSONObject("health_pharmacy");
-
-
-                        HealthNewDBModelPharmacy healthNewDBModelPharmacy = HealthNewDBModelPharmacy.parseHealthNewDBModelPharmacy(pharmacy, jsonObject2.getInt("id"));
-                        healthNewDBTablePharma.insertItem(healthNewDBModelPharmacy);
-
-
-                    } else if (jsonObject2.has("health_hospital")) {
-                        JSONObject hospital = jsonObject2.getJSONObject("health_hospital");
-
-
-                        HealthNewDBModelHospital healthNewDBModelHospital = HealthNewDBModelHospital.parseHealthNewDBModelHospital(hospital, jsonObject2.getInt("id"));
-                        healthNewDBTableHospital.insertItem(healthNewDBModelHospital);
-
-
-                    }
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-
-            }
-            Log.d("hcount", String.valueOf(i));
-        }
-    }*/
     class SaveHealthtDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveHealthtDataTask(Context ctx) {
             super(ctx);
@@ -1522,10 +901,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
     }
 
-
-    ///////// NGO/////
-
-
     class SaveNgoDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveNgoDataTask(Context ctx) {
             super(ctx);
@@ -1557,11 +932,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
-    ////// NGO end /////
-
-
-    ////////// Religious ////////
-
     class SaveReligiousDataTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveReligiousDataTask(Context ctx) {
             super(ctx);
@@ -1592,10 +962,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
 
     }
-
-
-    ////// Religious end /////
-
 
     class SaveCategoryListTask extends GenericSaveDBTask<JSONArray, Integer, Long> {
         public SaveCategoryListTask(Context ctx) {
@@ -1652,7 +1018,3 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         }
     }
 }
-
-
-
-

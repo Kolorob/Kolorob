@@ -21,7 +21,8 @@ public class StoredAreaTable {
     private static final String WARDID = "_ward_id"; // 0 -integer
     private static final String AREANAME = "_area_name"; // 1 - text
     private static final String AREANAMEBN = "_area_nameBn"; // 1 - text
-    private static final String LOCATION = "_location"; // 1 - text
+    private static final String LAT = "_lat";
+    private static final String LON = "_lon";
 
     // : But boolean value,
     // for simplicity of the local table
@@ -41,7 +42,9 @@ public class StoredAreaTable {
                 + WARDID + " TEXT, " // 0 - int
                 + AREANAME + " TEXT, "
                 + AREANAMEBN + " TEXT, "
-                + LOCATION + " TEXT, " // 1 - tex// 2 - text
+                + LAT + " TEXT, " // 1 - tex// 2 - text
+                + LON + " TEXT, "
+
                 + " PRIMARY KEY("+WARDID+","+AREANAME+"))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
@@ -58,20 +61,21 @@ public class StoredAreaTable {
     public long insertItem(StoredArea categoryItem){
         return insertItem(
                 categoryItem.getWardid(),
-                categoryItem.getAreaid(),categoryItem.getAreaBn(),categoryItem.getLoc()
+                categoryItem.getAreaid(),categoryItem.getAreaBn(),categoryItem.getLat(),categoryItem.getLon()
 
         );
     }
 
-    public long insertItem(String id, String name,String areabn,String loc) {
+    public long insertItem(String id, String name,String areabn,String lat, String lon) {
         if (isFieldExist(id,name)) {
-            return updateItem(id, name,areabn,loc);
+            return updateItem(id, name, areabn, lat, lon);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(WARDID, id);
         rowValue.put(AREANAME, name);
         rowValue.put(AREANAMEBN, areabn);
-        rowValue.put(LOCATION, loc);
+        rowValue.put(LAT, lat);
+        rowValue.put(LON, lon);
 
         SQLiteDatabase db = openDB();
         long ret = db.insert(TABLE_NAME, null, rowValue);
@@ -114,12 +118,13 @@ public class StoredAreaTable {
         return false;
     }
 
-    private long updateItem(String id, String name,String areabn,String loc) {
+    private long updateItem(String id, String name,String areabn,String lat, String lon) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(WARDID, id);
         rowValue.put(AREANAME, name);
         rowValue.put(AREANAMEBN, areabn);
-        rowValue.put(LOCATION, loc);
+        rowValue.put(LAT, lat);
+        rowValue.put(LON, lon);
 
         SQLiteDatabase db = openDB();
         long ret = db.update(TABLE_NAME, rowValue, WARDID + " = ? AND "+AREANAME+ " =?",
@@ -135,22 +140,22 @@ public class StoredAreaTable {
 
         if (cursor.moveToFirst()) {
             do {
-                siList.add(cursorToSubCategory(cursor));
+                siList.add(cursorToArea(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
         return siList;
     }
-    public ArrayList<StoredArea> getstoredlocation(int id,String keyword) {
+    public ArrayList<StoredArea> getstoredlocation(String ward,String area) {
         ArrayList<StoredArea> siList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = "+id+ " AND "+ AREANAME+" = '"+keyword+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = '" + ward + "'" + " AND "+ AREANAME+" = '"+area+"'", null);
 
         if (cursor.moveToFirst()) {
             do {
-                siList.add(cursorToSubCategory(cursor));
+                siList.add(cursorToArea(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -161,7 +166,7 @@ public class StoredAreaTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(StoredAreaTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, WARDID + "=" + ward + " and " + AREANAME + "= '"+ area +"'", null);
+        database.delete(TABLE_NAME, WARDID + " = '" + ward + "' and " + AREANAME + "= '"+ area +"'", null);
         database.close();
     }
    /* public ArrayList<CategoryItem> getAllCategories() {
@@ -182,13 +187,14 @@ public class StoredAreaTable {
     }
 
     */
-   private StoredArea cursorToSubCategory(Cursor cursor) {
+   private StoredArea cursorToArea(Cursor cursor) {
 
        String wardid = cursor.getString(0);
        String areaname = cursor.getString(1);
        String areanamebn = cursor.getString(2);
-       String loc = cursor.getString(3);
-       return new StoredArea(wardid,areaname,areanamebn,loc);
+       String lat = cursor.getString(3);
+       String lon = cursor.getString(4);
+       return new StoredArea(wardid,areaname,areanamebn,lat,lon);
    }
     public void dropTable() {
         SQLiteDatabase db = openDB();

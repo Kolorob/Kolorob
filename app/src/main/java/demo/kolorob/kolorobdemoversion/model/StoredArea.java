@@ -8,7 +8,8 @@ public class StoredArea {
     String wardid;
     String areaid;
     String areaBn;
-    String Loc;
+    String Lat;
+    String Lon;
 
     public String getAreaBn() {
         return areaBn;
@@ -18,12 +19,20 @@ public class StoredArea {
         this.areaBn = areaBn;
     }
 
-    public String getLoc() {
-        return Loc;
+    public String getLat() {
+        return Lat;
     }
 
-    public void setLoc(String loc) {
-        Loc = loc;
+    public void setLat(String lat) {
+        Lat = lat;
+    }
+
+    public String getLon() {
+        return Lon;
+    }
+
+    public void setLon(String lon) {
+        Lon = lon;
     }
 
     public String getWardid() {
@@ -42,10 +51,11 @@ public class StoredArea {
         this.areaid = areaid;
     }
 
-    public StoredArea(String wardid, String areaid, String areaBn, String loc) {
+    public StoredArea(String wardid, String areaid, String areaBn, String lat, String lon) {
         this.wardid = wardid;
         this.areaid = areaid;
         this.areaBn = areaBn;
-        this.Loc = loc;
+        this.Lat = lat;
+        this.Lon = lon;
     }
 }

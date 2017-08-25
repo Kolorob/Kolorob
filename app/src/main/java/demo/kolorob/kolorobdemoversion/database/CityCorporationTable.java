@@ -34,6 +34,10 @@ public class CityCorporationTable {
         createTable();
     }
 
+    public CityCorporationTable() {
+
+    }
+
     private void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME

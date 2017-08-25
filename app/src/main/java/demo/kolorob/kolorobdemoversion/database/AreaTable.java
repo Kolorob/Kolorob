@@ -37,6 +37,10 @@ public class AreaTable {
         createTable();
     }
 
+    public AreaTable() {
+
+    }
+
     private void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -97,7 +101,7 @@ public class AreaTable {
         ArrayList<String> area_bn_list = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + "WHERE ward_id = " + ward_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ward_id = " + ward_id, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -149,7 +153,7 @@ public class AreaTable {
         ArrayList<Area> areaList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + "WHERE ward_id = " + ward_id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ward_id = " + ward_id, null);
 
         if (cursor.moveToFirst()) {
             do {

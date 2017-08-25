@@ -314,29 +314,55 @@ GeoPoint location;
     String comment = "";
     MapFragmentOSM mapFragment;
     CheckBox negotiable;
-    int wardId;
+    String wardId;
     View view,view2;
-    String Areakeyword,mergedLocation;
-String AreaName;
+    String Areakeyword;
+    String lat, lon;
+    String AreaName;
     ActionBarDrawerToggle toggle;
+    Boolean firstRun;
+    StoredAreaTable storedAreaTable;
+
     public String getAreaName() {
         return AreaName;
     }
-Boolean firstRun;
+
     public void setAreaName(String areaName) {
         AreaName = areaName;
     }
 
     private Animation mEnterAnimation, mExitAnimation;
-    public String getMergedLocation() {
+    /*public String getMergedLocation() {
         return mergedLocation;
     }
 
     public void setMergedLocation(String mergedLocation) {
         this.mergedLocation = mergedLocation;
+    }*/
+
+    public ArrayList<StoredArea> getStoredAreaArrayList() {
+        return storedAreaArrayList;
     }
 
-    StoredAreaTable storedAreaTable;
+    public void setStoredAreaArrayList(ArrayList<StoredArea> storedAreaArrayList) {
+        this.storedAreaArrayList = storedAreaArrayList;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -351,11 +377,14 @@ Boolean firstRun;
         editor.putInt("ValueD", 23);
         firstRun = settings.getBoolean("firstRunUp", false);
         editor.apply();
-        wardId=settings.getInt("ward",0);
+        wardId=settings.getString("ward",null);
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
- storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
+        storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
         storedAreaArrayListall= storedAreaTable.getAllstored();
-        storedAreas=RetriveLocation(wardId,Areakeyword);
+
+        storedAreas = RetriveLocation(wardId,Areakeyword);
+        setLat(storedAreas.get(0).getLat());
+        setLon(storedAreas.get(0).getLon());
         if(storedAreaArrayListall.size()==0)
         {
 
@@ -372,11 +401,10 @@ Boolean firstRun;
 
         }
         else {
-            setMergedLocation(storedAreas.get(0).getLoc());
-            mergedLocation = storedAreas.get(0).getLoc();
+
             setAreaName(storedAreas.get(0).getAreaBn());
-            String[] locsplit = mergedLocation.split(":");
-            setLocation(new GeoPoint(Double.parseDouble(locsplit[0]), Double.parseDouble(locsplit[1])));
+            //String[] locsplit = mergedLocation.split(":");
+            setLocation(new GeoPoint(Double.parseDouble(storedAreas.get(0).getLat()), Double.parseDouble(storedAreas.get(0).getLon())));
 
             NavigationCalled = false;
             NavigationCalledOnce = false;
@@ -491,8 +519,8 @@ Boolean firstRun;
             filterholder = (RelativeLayout) findViewById(R.id.filterholder);
             uptext=(TextView)findViewById(R.id.textView15);
             ChangeArea=(CheckedTextView)findViewById(R.id.changearea);
-            uptext.setText("<-মেনু");
-            ChangeArea.setText("এলাকা\nপাল্টান");
+            uptext.setText(" মেনু");
+            ChangeArea.setText("এলাকা পাল্টান");
             ChangeArea.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -613,7 +641,7 @@ Boolean firstRun;
 
             Populateholder(getPlaceChoice());
             try {
-                callMapFragment(mergedLocation);
+                callMapFragment(lat, lon);
             } catch (Exception e) {
 
             }
@@ -2438,7 +2466,7 @@ Boolean firstRun;
     }
     /*
     * this is the default map view based on intent location name.If user change from spinner; this is also called*/
-    private void callMapFragment(String location) {
+    private void callMapFragment(String lat, String lon) {
 
         FragmentManager fragmentManager = getFragmentManager();
         if(mapfirst) {
@@ -2446,7 +2474,8 @@ Boolean firstRun;
 
             mapFragment = new MapFragmentOSM();
             mapFragment.setLocationName(Areakeyword);
-            mapFragment.setLOCATIONFROMMAP(location);
+            mapFragment.setLat(lat);
+            mapFragment.setLon(lon);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.map_fragment, mapFragment, "MAP");
             fragmentTransaction.addToBackStack("MAP");
@@ -3213,9 +3242,9 @@ Boolean firstRun;
         super.onDestroy();
     }
 
-public ArrayList<StoredArea> RetriveLocation(int id,String keyword)
+public ArrayList<StoredArea> RetriveLocation(String ward,String area)
 {
- storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
+ storedAreaArrayList=storedAreaTable.getstoredlocation(ward,area);
     return storedAreaArrayList;
 }
 

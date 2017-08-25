@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "kolorobupdatedv2.db";
 
     public static  String DB_PATH ;
-    public static final int DB_VERSION = 4;   // changed here
+    public static final int DB_VERSION = 5;   // changed here
 
     public static final String AREASTORED= "areastored";
 

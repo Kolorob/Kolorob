@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.R;
 
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
-import demo.kolorob.kolorobdemoversion.model.DataModel;
+import demo.kolorob.kolorobdemoversion.model.Area;
 
 /**
  * Created by israt.jahan on 1/31/2017.
@@ -20,26 +20,26 @@ public class RecyclerView_AdapterArea extends
         RecyclerView.Adapter<RecyclerViewHolder>  {// Recyclerview will extend to
     // recyclerview adapter
 
-    private ArrayList<DataModel> arrayList2;
+    private ArrayList<Area> areaList;
     private Context context;
   //  private ChildItemClickListener listener;
     public RecyclerView_AdapterArea(Context context,
-                                    ArrayList<DataModel> arrayList) {
+                                    ArrayList<Area> arrayList) {
         this.context = context;
-        this.arrayList2 = arrayList;
+        this.areaList = arrayList;
 
     }
 
 
     @Override
     public int getItemCount() {
-        return (null != arrayList2 ? arrayList2.size() : 0);
+        return (null != areaList ? areaList.size() : 0);
 
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
-        final DataModel model = arrayList2.get(position);
+        final Area area = areaList.get(position);
 
         RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
 
@@ -47,7 +47,7 @@ public class RecyclerView_AdapterArea extends
         // bitmap
 
         // setting title
-        mainHolder.title.setText(model.getTitle());
+        mainHolder.title.setText(area.getArea_bn());
     /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

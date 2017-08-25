@@ -4,56 +4,42 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
-import demo.kolorob.kolorobdemoversion.model.DataModel2;
+import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 
 /**
- * Created by israt.jahan on 1/31/2017.
+ * Created by shamima.yasmin on 8/24/2017.
  */
 
-public class RecycleView_AdapterWardArea extends RecyclerView.Adapter<RecyclerViewHolder>  {
+public class RecyclerView_AdapterCityCorporation extends RecyclerView.Adapter<RecyclerViewHolder> {
 
-    private ArrayList<DataModel2> arrayList;
+    private ArrayList<CityCorporation> ccList;
     private Context context;
 
-    public RecycleView_AdapterWardArea(Context context,
-                                       ArrayList<DataModel2> arrayList) {
+    public RecyclerView_AdapterCityCorporation(Context context,
+                                               ArrayList<CityCorporation> arrayList) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.ccList = arrayList;
 
     }
 
 
     @Override
     public int getItemCount() {
-        return (null != arrayList ? arrayList.size() : 0);
+        return (null != ccList ? ccList.size() : 0);
 
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
-        final DataModel2 model = arrayList.get(position);
+        final CityCorporation cc = ccList.get(position);
 
         RecyclerViewHolder mainHolder = (RecyclerViewHolder) holder;// holder
 
-
-        // bitmap
-
-        // setting title
-        mainHolder.title.setText(model.getWardarea());
-    /*    mainHolder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Initialize a new Intent
-                Toast.makeText(context,"title " +model.getAreanamebn(),Toast.LENGTH_LONG).show();
-            }
-        });
-*/
-
+        mainHolder.title.setText(cc.getCityCorporation_bn());
 
     }
 
@@ -69,6 +55,4 @@ public class RecycleView_AdapterWardArea extends RecyclerView.Adapter<RecyclerVi
         return listHolder;
 
     }
-
-
 }

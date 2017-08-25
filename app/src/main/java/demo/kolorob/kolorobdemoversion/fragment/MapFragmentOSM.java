@@ -64,22 +64,56 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
     List<String> listData = new ArrayList<String>();
-
-    public String getLocationName() {
-        return locationName;
-    }
-
     String concatened;
-
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
-    }
-
     private String locationName;
     private int locationNameId;
     private static double VIEW_WIDTH;
     private int primaryIconWidth;
     boolean firstRun;
+    String refid2;
+    private ArrayList<HealthNewDBModelMain> healthServiceProvider = null;
+    IMapController mapViewController;
+    private ArrayList<EntertainmentNewDBModel> entertainmentServiceProvider = null;
+    private ArrayList<LegalAidNewDBModel> legalaidServiceProvider = null;
+    private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
+    private ArrayList<FinancialNewDBModel> financialServiceProvider = null;
+    private ArrayList<EduNewModel> educationServiceProvider = null;
+    private ArrayList<GovernmentNewDBModel> governmentNewItems = null;
+    private ArrayList<NGONewDBModel> ngoServiceProvider = null;
+    private ArrayList<ReligiousNewDBModel> religiousServiceProvider = null;
+    private ArrayList<AllHolder> allitems = null;
+    MapView mapView;
+    String datevalue, datevaluebn;
+    private int categoryId;
+    String first;
+    private Animation mEnterAnimation, mExitAnimation;
+    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
+    ArrayAdapter arrayAdapter;
+    String lat, lon;
+    double latDouble, longDouble;
+    int i = 0;
+    Date today = Calendar.getInstance().getTime();
+    int subcategotyId;
+    String subcategotyId2;
+    View rootView;
+    LocationManager locationManager;
+    StringBuilder result;
+
+    String ratingavg, ratingavgbn, refid, service_type, religion;
+
+
+
+
+
+
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
 
     public int getLocationNameId() {
         return locationNameId;
@@ -101,55 +135,47 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             listData.add(AppConstants.BAUNIABADH);
         }
     }
-    String refid2;
-    private ArrayList<HealthNewDBModelMain> healthServiceProvider = null;
-    IMapController mapViewController;
-    private ArrayList<EntertainmentNewDBModel> entertainmentServiceProvider = null;
-    private ArrayList<LegalAidNewDBModel> legalaidServiceProvider = null;
-    private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
-    private ArrayList<FinancialNewDBModel> financialServiceProvider = null;
-    private ArrayList<EduNewModel> educationServiceProvider = null;
-    private ArrayList<GovernmentNewDBModel> governmentNewItems = null;
-    private ArrayList<NGONewDBModel> ngoServiceProvider = null;
-    private ArrayList<ReligiousNewDBModel> religiousServiceProvider = null;
-    private ArrayList<AllHolder> allitems = null;
-    MapView mapView, mapp;
-    String datevalue, datevaluebn;
-    private int categoryId;
-    String user = "kolorobapp";
-    String pass = "2Jm!4jFe3WgBZKEN";
-    String first;
-    final ArrayList<Marker> items = new ArrayList<Marker>();
-    final ArrayList<Marker> items1 = new ArrayList<Marker>();
-    final ArrayList<Marker> items2 = new ArrayList<Marker>();
-    final ArrayList<Marker> items3 = new ArrayList<Marker>();
-    final ArrayList<Marker> items4 = new ArrayList<Marker>();
-    final ArrayList<Marker> items5 = new ArrayList<Marker>();
-    final ArrayList<Marker> items6 = new ArrayList<Marker>();
-    final ArrayList<Marker> items7 = new ArrayList<Marker>();
-    final ArrayList<Marker> items8 = new ArrayList<Marker>();
-    ArrayList<RatingModel> rating = new ArrayList<>();
 
     public ArrayList<GovernmentNewDBModel> getGovernmentNewItems() {
         return governmentNewItems;
     }
 
-    private Animation mEnterAnimation, mExitAnimation;
 
     public void setGovernmentNewItems(ArrayList<GovernmentNewDBModel> governmentNewItems) {
         this.governmentNewItems = governmentNewItems;
     }
 
-    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
-    ArrayAdapter arrayAdapter;
-    String LOCATIONFROMMAP;
 
-    public String getLOCATIONFROMMAP() {
+    /*public String getLOCATIONFROMMAP() {
         return LOCATIONFROMMAP;
     }
 
     public void setLOCATIONFROMMAP(String LOCATIONFROMMAP) {
         this.LOCATIONFROMMAP = LOCATIONFROMMAP;
+    }*/
+
+    public List<String> getListData() {
+        return listData;
+    }
+
+    public void setListData(List<String> listData) {
+        this.listData = listData;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
     }
 
     public ArrayList<AllHolder> getAllitems() {
@@ -205,21 +231,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         educationServiceProvider = et;
     }
 
-    double latDouble, longDouble;
-    int i = 0;
-    Date today = Calendar.getInstance().getTime();
-    int subcategotyId;
-    String subcategotyId2;
-    View rootView;
 
     public MapFragmentOSM() {
 
     }
 
-    LocationManager locationManager;
-    StringBuilder result;
-
-    String ratingavg, ratingavgbn, refid, service_type, religion;
 
     public void setHealthServiceProvider(ArrayList<HealthNewDBModelMain> et) {
         this.healthServiceProvider = et;
@@ -290,8 +306,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         //    mapView.getOverlays().add(mMyLocationOverlay);
         mapViewController = mapView.getController();
         mapViewController.setZoom(15);
-        String[] partlocation = getLOCATIONFROMMAP().split(":");
-        mapViewController.setCenter(new GeoPoint(Float.parseFloat(partlocation[0]), Float.parseFloat(partlocation[1])));
+        //String[] partlocation = getLOCATIONFROMMAP().split(":");
+        Log.e("", "Lat: " + getLat() +" " + "Lon: " + getLon());
+        mapViewController.setCenter(new GeoPoint(Float.parseFloat(getLat()), Float.parseFloat(getLon())));
         result = new StringBuilder();
 
 // get the time and make a date out of it
