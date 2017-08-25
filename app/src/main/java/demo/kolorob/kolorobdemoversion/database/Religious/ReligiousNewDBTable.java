@@ -493,12 +493,12 @@ public class ReligiousNewDBTable {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
-    public ArrayList<ReligiousNewDBModel> getAllReligious(int id, String place) {
+    public ArrayList<ReligiousNewDBModel> getAllReligious(String ward, String place) {
         ArrayList<ReligiousNewDBModel> subCatList = new ArrayList<>();
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = "+ id + " AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = '"+ ward + "' AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -517,7 +517,7 @@ public class ReligiousNewDBTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(ReligiousNewDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
+        database.delete(TABLE_NAME, KEY_WARD + " = '" + ward + "' AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
         database.close();
     }
 }

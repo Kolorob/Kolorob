@@ -495,12 +495,12 @@ public class NGONewDBTable {
         Lg.d(TAG, "Table dropped and recreated.");
         closeDB();
     }
-    public ArrayList<NGONewDBModel> getAllNGO(int id, String place) {
+    public ArrayList<NGONewDBModel> getAllNGO(String ward, String place) {
         ArrayList<NGONewDBModel> subCatList = new ArrayList<>();
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = "+ id + " AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = '"+ ward + "' AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -519,7 +519,7 @@ public class NGONewDBTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(NGONewDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
+        database.delete(TABLE_NAME, KEY_WARD + " = '" + ward + "' AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
         database.close();
     }
 }

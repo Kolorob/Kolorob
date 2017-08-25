@@ -32,6 +32,8 @@ import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
@@ -131,10 +133,10 @@ delete.setOnClickListener(new View.OnClickListener() {
                 }
                 else {
 
-                   storedAreaArrayList2=RetriveLocation(Integer.parseInt(storedAreas.get(selectedId).getWardid()),storedAreas.get(selectedId).getAreaid());
+                   storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("ward", Integer.parseInt(storedAreaArrayList2.get(0).getWardid())); // store ward and area from stored area in pref
+                    editor.putString("ward", storedAreaArrayList2.get(0).getWardid()); // store ward and area from stored area in pref
                     //to use in next activity
                     editor.putString("areakeyword", storedAreaArrayList2.get(0).getAreaid());
                     editor.apply();
@@ -174,9 +176,9 @@ delete.setOnClickListener(new View.OnClickListener() {
         );
 
     }
-    public ArrayList<StoredArea> RetriveLocation(int id,String keyword) //last existing location er jonno
+    public ArrayList<StoredArea> RetriveLocation(String ward,String area) //last existing location er jonno
     {
-        storedAreaArrayList=storedAreaTable.getstoredlocation(id,keyword);
+        storedAreaArrayList=storedAreaTable.getstoredlocation(ward,area);
         return storedAreaArrayList;
     }
     @Override
@@ -255,7 +257,7 @@ void radiobuttonsetup() // database operation for getting information which area
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         settings.edit().putLong("time", System.currentTimeMillis()).apply();
-                        editor.putInt("ward", Integer.parseInt(storedAreas.get(selectedId).getWardid()));
+                        editor.putString("ward", storedAreas.get(selectedId).getWardid());
                         editor.putString("areakeyword", storedAreas.get(selectedId).getAreaid());
                         editor.apply();
                     } catch (JSONException e) {
@@ -440,6 +442,8 @@ void radiobuttonsetup() // database operation for getting information which area
         GovNewDBTable govNewDBTable = new GovNewDBTable(AreaUpgrade.this);
         EntNewDBTable entNewDBTable = new EntNewDBTable(AreaUpgrade.this);
         EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
+        NGONewDBTable ngoNewDBTable = new NGONewDBTable(AreaUpgrade.this);
+        ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(AreaUpgrade.this);
         StoredAreaTable storedAreaTable=new StoredAreaTable(AreaUpgrade.this);
 
         healthNewDBTableMain.delete(ward,area);
@@ -448,6 +452,8 @@ void radiobuttonsetup() // database operation for getting information which area
         legalAidNewDBTable.delete(ward,area);
         finNewDBTable.delete(ward,area);
         govNewDBTable.delete(ward,area);
+        ngoNewDBTable.delete(ward,area);
+        religiousNewDBTable.delete(ward,area);
         storedAreaTable.delete(ward,area);
 
         rg.clearCheck();

@@ -252,12 +252,12 @@ public class FinNewDBTable {
         closeDB();
         return false;
     }
-    public ArrayList<FinancialNewDBModel> getAllFinancial(int id, String place) {
+    public ArrayList<FinancialNewDBModel> getAllFinancial(String ward, String place) {
         ArrayList<FinancialNewDBModel> subCatList = new ArrayList<>();
 
         //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = "+ id + " AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = '"+ ward + "' AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -276,7 +276,7 @@ public class FinNewDBTable {
     {
         DatabaseHelper databaseHelper=new DatabaseHelper(FinNewDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + "=" + ward + " AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
+        database.delete(TABLE_NAME, KEY_WARD + " = '" + ward + "' AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
 
         database.close();
     }
