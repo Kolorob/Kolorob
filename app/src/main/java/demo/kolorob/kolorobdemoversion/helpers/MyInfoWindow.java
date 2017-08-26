@@ -115,6 +115,7 @@ public class MyInfoWindow extends InfoWindow {
         Button btnMoreInfo = (Button) mView.findViewById(R.id.bubble_moreinfo);
         final TextView txtTitle = (TextView) mView.findViewById(R.id.bubble_title);
         txtTitle.setTextSize(20);
+
         // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
         final TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);

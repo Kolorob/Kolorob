@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "kolorobupdatedv2.db";
 
     public static  String DB_PATH ;
-    public static final int DB_VERSION = 5;   // changed here
+    public static final int DB_VERSION = 4;   // changed here
 
     public static final String AREASTORED= "areastored";
 
@@ -127,7 +127,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 
-        if(oldVersion == 1 && newVersion > 1) {
+        //if(newVersion > 3) {
+
+            Log.e("", "NEW version: " + newVersion + "old: " +oldVersion);
+
+
 
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_SCHOOL);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_TRAINING);
@@ -163,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             db.execSQL(getAlterQuery(ENT_PROVIDER_TABLE_DBNEW, "__parentarea"));*/
 
 
-        }
+       // }
 
 
 
