@@ -794,7 +794,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private void CheckConcate(String value1, String value2) {
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = value2 + "\n";
             increment++;
         }
     }

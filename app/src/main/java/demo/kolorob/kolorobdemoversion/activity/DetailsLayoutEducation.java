@@ -1054,7 +1054,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টি")&& !value2.equals(" জন")&& !value2.equals(" টাকা") && !value2.equals("No") && !value2.equals("0")&& !value2.equals("০")&& !value2.equals("০ টি")&& !value2.equals("০ জন")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = value2 + "\n";
             increment++;
 
         }

@@ -193,10 +193,10 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
 
 
 
-        CheckConcate("প্রতিষ্ঠানের  ধরণ", ngoServiceProviderItemNew.getServicetype());
-        CheckConcate("সেবাসমূহ", ngoServiceProviderItemNew.getServices());
-        CheckConcate("যাদের জন্য প্রযোজ্য", ngoServiceProviderItemNew.getServices_for());
-        CheckConcate("অন্যান্য সেবা", ngoServiceProviderItemNew.getServices_others());
+        CheckConcate("প্রতিষ্ঠানের ধরণ", ngoServiceProviderItemNew.getNgo_service_type());
+        CheckConcate("সেবাসমূহ", ngoServiceProviderItemNew.getNgo_services());
+        CheckConcate("যাদের জন্য প্রযোজ্য", ngoServiceProviderItemNew.getNgo_services_for());
+        CheckConcate("অন্যান্য সেবা", ngoServiceProviderItemNew.getNgo_services_other());
         CheckConcate("অবস্থানের সময়", ngoServiceProviderItemNew.getDrop_time());
         CheckConcate("ফি", ngoServiceProviderItemNew.getNgo_fee());
 
@@ -835,7 +835,7 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
         Log.e("","Value1: "+value1+" Value2: "+value2);
         if (!value2.equals("null") && !value2.equals("") && !value2.equals(" টাকা") && !value2.equals(" ০")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = value2+"\n";
             increment++;
 
         }
