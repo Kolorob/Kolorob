@@ -63,7 +63,7 @@ public class MyInfoWindow extends InfoWindow {
     String pass="2Jm!4jFe3WgBZKEN";
 
     int catid;
-    String referenceid, service_type, religion;;
+    String referenceid, service_type, services, religion;
 
     public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
         super(layoutResId, mapView);
@@ -79,7 +79,7 @@ public class MyInfoWindow extends InfoWindow {
 
     //  Overloaded constructors
 
-    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid, String service_type) {
+    public MyInfoWindow(int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid, String service_type, String services) {
         super(layoutResId, mapView);
         this.con=con;
         this.pp=point;
@@ -90,6 +90,7 @@ public class MyInfoWindow extends InfoWindow {
         this.address=add;
         this.referenceid=rid;
         this.service_type = service_type;
+        this.services = services;
     }
     public MyInfoWindow(String religion, int layoutResId, MapView mapView, Activity con, GeoPoint point, String title, String contact, int Node, int categoryid,String add,String rid) {
         super(layoutResId, mapView);
@@ -123,8 +124,18 @@ public class MyInfoWindow extends InfoWindow {
         txtTitle.setText(titlemarker);
         //txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
 
-        if(service_type!=null) {
-            txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " + service_type);
+        if(service_type!=null || services!=null) {
+            String[] subServices = new String[20];
+            if(services.contains(",")){
+                subServices = services.split(",");
+            }
+            if(subServices.length <= 3 || !services.contains(",")){
+                txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " + services);
+            }
+            else{
+                txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " + service_type);
+            }
+
         }
         else if(religion!=null){
             txtSubdescription.setText("রেটিং : " + address +"\nধর্মঃ " + religion);

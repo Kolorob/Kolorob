@@ -618,7 +618,12 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 //
 //                                        rating=Float.parseFloat(ratingH.getString("avg"));
         try {
-            ratingBar.setRating(Float.parseFloat(legalAidServiceProviderItemNew.getRatings()));
+            if(legalAidServiceProviderItemNew.getRatings()!=null){
+                ratingBar.setRating(Float.parseFloat(legalAidServiceProviderItemNew.getRatings()));
+            }
+            else{
+                ratingBar.setRating(0.0f);
+            }
         }
         catch (Exception e)
         {

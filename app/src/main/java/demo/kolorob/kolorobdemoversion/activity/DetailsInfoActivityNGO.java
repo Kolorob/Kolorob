@@ -190,10 +190,22 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
         ups_text.setText(ngoServiceProviderItemNew.getNamebn());
         ratingText.setTextSize(23);
 
+        String services = ngoServiceProviderItemNew.getNgo_services();
 
 
+        if(services!=null) {
+            String[] subServices = new String[20];
+            if(services.contains(",")){
+                subServices = services.split(",");
+            }
+            if(subServices.length <= 3 || !services.contains(",")){
+                CheckConcate("প্রতিষ্ঠানের ধরণ", ngoServiceProviderItemNew.getNgo_services());
+            }
+            else{
+                CheckConcate("প্রতিষ্ঠানের ধরণ", ngoServiceProviderItemNew.getNgo_service_type());
+            }
 
-        CheckConcate("প্রতিষ্ঠানের ধরণ", ngoServiceProviderItemNew.getNgo_service_type());
+        }
         CheckConcate("সেবাসমূহ", ngoServiceProviderItemNew.getNgo_services());
         CheckConcate("যাদের জন্য প্রযোজ্য", ngoServiceProviderItemNew.getNgo_services_for());
         CheckConcate("অন্যান্য সেবা", ngoServiceProviderItemNew.getNgo_services_other());
