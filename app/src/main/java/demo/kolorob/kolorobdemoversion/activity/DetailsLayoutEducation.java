@@ -231,9 +231,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
                 CheckConcate("বৃত্তি সুবিধা", eduNewSchoolModel.getStipend());
-                CheckConcate("প্রাইমারী লেভেলের বেতন ", eduNewSchoolModel.getPrimary_fees());
-                CheckConcate("সেকেন্ডারি লেভেলের বেতন", eduNewSchoolModel.getSecondary_fees());
-                CheckConcate("কলেজের বেতন", eduNewSchoolModel.getCollage_fees());
+                CheckConcate("প্রাইমারী লেভেলের বেতন ", formatPayment(eduNewSchoolModel.getPrimary_fees()));
+                CheckConcate("সেকেন্ডারি লেভেলের বেতন", formatPayment(eduNewSchoolModel.getSecondary_fees()));
+                CheckConcate("কলেজের বেতন", formatPayment(eduNewSchoolModel.getCollage_fees()));
 
 
 
@@ -994,15 +994,15 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             else if (hour > 12 && hour < 16)
                 timeInBengali = "দুপুর  " + EtoB(String.valueOf(hour - 12));
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + EtoB(String.valueOf(hour - 12));
+                timeInBengali = "বিকাল " + EtoB(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + EtoB(String.valueOf(hour - 12));
-            else if (hour > 20 && hour < 24)
+            else if (hour > 19 && hour < 24)
                 timeInBengali = "রাত " + EtoB(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + EtoB(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " ";
+                timeInBengali = timeInBengali + "টা";
         }
         catch (Exception e)
         {
@@ -1046,6 +1046,46 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             CheckConcate(value1, GetTime);
 
         }
+    }
+
+    private String formatPayment(String payment){
+
+        String payment_bn = "";
+
+        if(payment!=null){
+            for(int i=0; i<payment.length(); i++){
+                switch(payment.charAt(i)){
+                    case '0': payment_bn += "০";
+                        break;
+                    case '1': payment_bn += "১";
+                        break;
+                    case '2': payment_bn += "২";
+                        break;
+                    case '3': payment_bn += "৩";
+                        break;
+                    case '4': payment_bn += "৪";
+                        break;
+                    case '5': payment_bn += "৫";
+                        break;
+                    case '6': payment_bn += "৬";
+                        break;
+                    case '7': payment_bn += "৭";
+                        break;
+                    case '8': payment_bn += "৮";
+                        break;
+                    case '9': payment_bn += "৯";
+                        break;
+                    case '.': payment_bn += "।";
+                        break;
+                    case ',': payment_bn += ",";
+                        break;
+                    case '-': payment_bn += "-";
+                        break;
+
+                }
+            }
+        }
+        return payment_bn;
     }
 
 

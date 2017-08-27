@@ -939,15 +939,15 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             else if (hour > 12 && hour < 16)
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+                timeInBengali = "বিকাল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20 && hour < 24)
+            else if (hour > 19 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " ";
+                timeInBengali = timeInBengali + "টা";
         }
         catch (Exception e)
         {

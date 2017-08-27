@@ -863,24 +863,24 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
 
-            if (hour ==0 && times==0)
+            if (hour == 0 && times == 0)  // 00:00 => রাত ১২টা
                 timeInBengali = "রাত ১২";
-            else if (hour >= 6 && hour < 12)
+            else if (hour >= 6 && hour < 12)  // 6 - 11 =>  সকাল ৬ টা - সকাল ১১টা
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
-            else if (hour == 12)
+            else if (hour == 12)  // 12  =>  দুপুর ১২টা
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
-            else if (hour > 12 && hour < 16)
+            else if (hour > 12 && hour < 16) //  13 - 15  =>  দুপুর ১টা - দুপুর ৩টা
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকেল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 17 && hour < 20)
+            else if (hour > 15 && hour < 18) //  16 - 17 =>  বিকাল ৪টা - বিকাল ৫টা
+                timeInBengali = "বিকাল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
+            else if (hour > 17 && hour < 20)  // 18 - 19 => সন্ধ্যা ৬টা - সন্ধ্যা ৭টা
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 20 && hour < 24)
+            else if (hour > 19 && hour < 24)  // 21 - 23 => রাত ৯টা - রাত ১১টা
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
             else
-                timeInBengali = timeInBengali + " ";
+                timeInBengali = timeInBengali + "টা";
         }
         catch (Exception e)
         {
