@@ -99,7 +99,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     LocationManager locationManager;
     StringBuilder result;
 
-    String ratingavg, ratingavgbn, refid, service_type, religion;
+    String ratingavg, ratingavgbn, refid, service_type, religion, services;
 
 
 
@@ -646,6 +646,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 ratingavg = et.getRatings();
                 refid = et.getRefnumm();
                 service_type = et.getNgo_service_type();
+                services = et.getNgo_services();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -730,7 +731,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                     ratingavg = ratingavgbn.concat(datevalue);
                 }
                 GeoPoint point = new GeoPoint(latDouble, longDouble);
-                drawMarkerReligious(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getReligousid(), subcategotyId, refid2);
+                drawMarkerReligious(point, et.getNamebn(), ratingavg, et.getNode_contact(), et.getReligousid(), subcategotyId, refid2, et.getRs_religion());
             }
         }
 
@@ -1015,7 +1016,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        ;
+
         String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
 
@@ -1043,7 +1044,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
         //marker.setTitle("Title of the marker");
         //}
-        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, address, ref, service_type);
+        InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, address, ref, service_type, services);
         marker.setInfoWindow(infoWindow);
 
         mapView.getOverlays().add(marker);
@@ -1051,18 +1052,16 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
 
 
     ////// religious////
-    private void drawMarkerReligious(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2, String ref) {
+    private void drawMarkerReligious(GeoPoint point, String title, String address, String contact, int node, String subcategotyId2, String ref, String rs_religion) {
         Marker marker = new Marker(mapView);
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        ;
-        String delims = "[,]";
+
+        /*String delims = "[,]";
         String[] tokens = subcategotyId2.split(delims);
 
 
-        /*for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i] == "") continue;
-            subcategotyId = Integer.parseInt(tokens[i]);*/
+
 
         if (Arrays.asList(tokens).contains("80100")) {
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
@@ -1081,8 +1080,26 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
         }
 
+        */
 
-        //marker.setTitle("Title of the marker");
+        switch(rs_religion){
+            case "ইসলাম": marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+                break;
+            case "হিন্দু": marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+                break;
+            case "খ্রিস্টান": marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
+                break;
+            case "বৌদ্ধ": marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+                break;
+            case "জৈন": marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+                break;
+            default: marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
+                break;
+
+        }
+
+
+
 
         InfoWindow infoWindow = new MyInfoWindow(religion, R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, address, ref);
         marker.setInfoWindow(infoWindow);
