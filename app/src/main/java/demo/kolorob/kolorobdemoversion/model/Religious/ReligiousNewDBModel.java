@@ -17,6 +17,7 @@ public class ReligiousNewDBModel implements Serializable {
 
     String rs_religion;
     String rs_services_for;
+    String rs_services_for_religion;
     String other_religion;
     String rs_time;
     String rs_fee;
@@ -45,7 +46,7 @@ public class ReligiousNewDBModel implements Serializable {
     String subcat;
     String ratings;
 
-    public ReligiousNewDBModel(int religousid, String nameen, String namebn, String rs_religion, String rs_services_for, String other_religion, String rs_time, String rs_fee, String lat, String lon, String houseno,
+    public ReligiousNewDBModel(int religousid, String nameen, String namebn, String rs_religion, String rs_services_for, String rs_services_for_religion, String other_religion, String rs_time, String rs_fee, String lat, String lon, String houseno,
                                String block, String area, String policestation, String node_email, String ward, String road,
                                String node_contact, String otherinfo, String areabn, String parentarea, String openingtime , String closetime, String offday,
                                int categoryId, String refnumm, String subcat, String ratings) {
@@ -55,6 +56,7 @@ public class ReligiousNewDBModel implements Serializable {
 
         this.rs_religion = rs_religion;
         this.rs_services_for = rs_services_for;
+        this.rs_services_for_religion = rs_services_for_religion;
         this.other_religion = other_religion;
         this.rs_time = rs_time;
         this.rs_fee = rs_fee;
@@ -140,6 +142,14 @@ public class ReligiousNewDBModel implements Serializable {
 
     public void setRs_services_for(String rs_services_for) {
         this.rs_services_for = rs_services_for;
+    }
+
+    public String getRs_services_for_religion() {
+        return rs_services_for_religion;
+    }
+
+    public void setRs_services_for_religion(String rs_services_for_religion) {
+        this.rs_services_for_religion = rs_services_for_religion;
     }
 
     public String getOther_religion() {
@@ -317,6 +327,7 @@ public class ReligiousNewDBModel implements Serializable {
 
         String _rs_religion = jo.getString("rs_religion");
         String _rs_services_for = jo.getString("rs_services_for");
+        String _rs_services_for_religion = jo.getString("rs_access");
         String _other_religion = jo.getString("other_religion");
         String _rs_time = jo.getString("rs_time");
         String _rs_fee = jo.getString("rs_fee");
@@ -336,7 +347,7 @@ public class ReligiousNewDBModel implements Serializable {
         String _other=jo.getJSONObject("contact_info").getString("other");
         String _areabn=jo.getJSONObject("contact_info").getString("area_bn");
 
-        String __parentarea =jo.getJSONObject("contact_info").getString("parent_area");
+        String _parentarea =jo.getJSONObject("contact_info").getString("parent_area");
 
         String _opentime = jo.getJSONObject("timing_info").getString("opening_time");
         String _closetime = jo.getJSONObject("timing_info").getString("closing_time");
@@ -351,8 +362,8 @@ public class ReligiousNewDBModel implements Serializable {
 
         String ki=sref2.toString();
         String _sref=ki.substring(1,ki.length()-1);
-        return new ReligiousNewDBModel(_religiousid,_nameen,_namebn,_rs_religion, _rs_services_for, _other_religion, _rs_time, _rs_fee,
-                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,__parentarea,
+        return new ReligiousNewDBModel(_religiousid,_nameen,_namebn,_rs_religion, _rs_services_for, _rs_services_for_religion, _other_religion, _rs_time, _rs_fee,
+                _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
                 _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
     }
 }

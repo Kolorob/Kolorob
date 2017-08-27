@@ -236,6 +236,8 @@ public class DetailsInfoActivityReligious extends AppCompatActivity {
 
         CheckConcate("ধর্ম", religiousServiceProviderItemNew.getRs_religion());
         CheckConcate("যাদের জন্য প্রযোজ্য", religiousServiceProviderItemNew.getRs_services_for());
+        CheckConcate("যেসব ধর্মের জন্য প্রযোজ্য", religiousServiceProviderItemNew.getRs_services_for_religion());
+
         CheckConcate("অন্যান্য ধর্ম", religiousServiceProviderItemNew.getOther_religion());
         CheckConcate("অবস্থানের সময়সীমা", religiousServiceProviderItemNew.getRs_time());
         CheckConcate("ফি", religiousServiceProviderItemNew.getRs_fee());

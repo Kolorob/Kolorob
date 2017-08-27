@@ -25,6 +25,7 @@ public class ReligiousNewDBTable {
 
     private static final String KEY_RS_RELIGION = "_rs_religion";
     private static final String KEY_RS_SERVICES_FOR = "_rs_services_for";
+    private static final String KEY_RS_SERVICES_FOR_RELIGION = "_rs_services_for_religion";
     private static final String KEY_OTHER_RELIGION = "_other_religion";
     private static final String KEY_RS_TIME = "_rs_time";
     private static final String KEY_RS_FEE = "_rs_fee";
@@ -73,6 +74,7 @@ public class ReligiousNewDBTable {
 
                 + KEY_RS_RELIGION + " TEXT, "
                 + KEY_RS_SERVICES_FOR + " TEXT, "
+                + KEY_RS_SERVICES_FOR_RELIGION + " TEXT, "
                 + KEY_OTHER_RELIGION + " TEXT, "
                 + KEY_RS_TIME + " TEXT, "
                 + KEY_RS_FEE + " TEXT, "
@@ -90,7 +92,7 @@ public class ReligiousNewDBTable {
                 + KEY_OTHER_INFO + " TEXT, "
                 + KEY_AREABN + " TEXT, "
 
-                + KEY_PARENT_AREA + " TEXT, " /// parent area add
+                + KEY_PARENT_AREA + " TEXT, "
 
                 + KEY_OPENTIME + " TEXT, "
                 + KEY_CLOSEATIME + " TEXT, "
@@ -135,7 +137,7 @@ public class ReligiousNewDBTable {
     public long insertItem(ReligiousNewDBModel religiousNewDBModel) {
         if (!isFieldExist(religiousNewDBModel.getReligousid())) {
             return insertItem(religiousNewDBModel.getReligousid(), religiousNewDBModel.getNameen(), religiousNewDBModel.getNamebn(),
-                    religiousNewDBModel.getRs_religion(), religiousNewDBModel.getRs_services_for(), religiousNewDBModel.getOther_religion(), religiousNewDBModel.getRs_time(), religiousNewDBModel.getRs_fee(), religiousNewDBModel.getLat(), religiousNewDBModel.getLon(), religiousNewDBModel.getHouseno(),
+                    religiousNewDBModel.getRs_religion(), religiousNewDBModel.getRs_services_for(), religiousNewDBModel.getRs_services_for_religion(), religiousNewDBModel.getOther_religion(), religiousNewDBModel.getRs_time(), religiousNewDBModel.getRs_fee(), religiousNewDBModel.getLat(), religiousNewDBModel.getLon(), religiousNewDBModel.getHouseno(),
                     religiousNewDBModel.getBlock(), religiousNewDBModel.getArea(), religiousNewDBModel.getPolicestation(), religiousNewDBModel.getNode_email(),
                     religiousNewDBModel.getWard(), religiousNewDBModel.getRoad(),
                     religiousNewDBModel.getNode_contact(), religiousNewDBModel.getOtherinfo(), religiousNewDBModel.getAreabn(),religiousNewDBModel.getParentarea(),
@@ -145,7 +147,7 @@ public class ReligiousNewDBTable {
         }
         else {
             return updateItem(religiousNewDBModel.getReligousid(), religiousNewDBModel.getNameen(), religiousNewDBModel.getNamebn(),
-                    religiousNewDBModel.getRs_religion(), religiousNewDBModel.getRs_services_for(), religiousNewDBModel.getOther_religion(), religiousNewDBModel.getRs_time(), religiousNewDBModel.getRs_fee(), religiousNewDBModel.getLat(), religiousNewDBModel.getLon(), religiousNewDBModel.getHouseno(),
+                    religiousNewDBModel.getRs_religion(), religiousNewDBModel.getRs_services_for(), religiousNewDBModel.getRs_services_for_religion(), religiousNewDBModel.getOther_religion(), religiousNewDBModel.getRs_time(), religiousNewDBModel.getRs_fee(), religiousNewDBModel.getLat(), religiousNewDBModel.getLon(), religiousNewDBModel.getHouseno(),
                     religiousNewDBModel.getBlock(), religiousNewDBModel.getArea(), religiousNewDBModel.getPolicestation(), religiousNewDBModel.getNode_email(),
                     religiousNewDBModel.getWard(), religiousNewDBModel.getRoad(),
                     religiousNewDBModel.getNode_contact(), religiousNewDBModel.getOtherinfo(), religiousNewDBModel.getAreabn(),religiousNewDBModel.getParentarea(),
@@ -158,7 +160,7 @@ public class ReligiousNewDBTable {
 
 
 
-    public long insertItem(int religiousid, String nameen, String namebn, String rs_religion, String rs_services_for, String other_religion, String rs_time, String rs_fee, String lat,
+    public long insertItem(int religiousid, String nameen, String namebn, String rs_religion, String rs_services_for, String rs_services_for_religion, String other_religion, String rs_time, String rs_fee, String lat,
                            String lon, String houseno, String block, String area, String policestation,
                            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,String parentarea,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
@@ -172,6 +174,7 @@ public class ReligiousNewDBTable {
 
                     rs_religion,
                     rs_services_for,
+                    rs_services_for_religion,
                     other_religion,
                     rs_time,
                     rs_fee,
@@ -206,6 +209,7 @@ public class ReligiousNewDBTable {
 
         rowValue.put(KEY_RS_RELIGION, rs_religion);
         rowValue.put(KEY_RS_SERVICES_FOR, rs_services_for);
+        rowValue.put(KEY_RS_SERVICES_FOR_RELIGION, rs_services_for_religion);
         rowValue.put(KEY_OTHER_RELIGION, other_religion);
         rowValue.put(KEY_RS_TIME, rs_time);
         rowValue.put(KEY_RS_FEE, rs_fee);
@@ -242,7 +246,7 @@ public class ReligiousNewDBTable {
         return ret;
     }
     private long updateItem(
-            int religiousid, String nameen, String namebn, String rs_religion, String rs_services_for, String other_religion, String rs_time, String rs_fee, String lat,
+            int religiousid, String nameen, String namebn, String rs_religion, String rs_services_for, String rs_services_for_religion, String other_religion, String rs_time, String rs_fee, String lat,
             String lon, String houseno, String block, String area, String policestation,
             String node_email, String ward, String road, String node_contact, String otherinfo,String areabn,String parentarea,
             String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
@@ -256,6 +260,7 @@ public class ReligiousNewDBTable {
 
         rowValue.put(KEY_RS_RELIGION, rs_religion);
         rowValue.put(KEY_RS_SERVICES_FOR, rs_services_for);
+        rowValue.put(KEY_RS_SERVICES_FOR_RELIGION, rs_services_for_religion);
         rowValue.put(KEY_OTHER_RELIGION, other_religion);
         rowValue.put(KEY_RS_TIME, rs_time);
         rowValue.put(KEY_RS_FEE, rs_fee);
@@ -435,7 +440,7 @@ public class ReligiousNewDBTable {
                         cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                         cursor.getString(13), cursor.getString(14), cursor.getString(15), cursor.getString(16), cursor.getString(17), cursor.getString(18),
                         cursor.getString(19), cursor.getString(20), cursor.getString(21), cursor.getString(22), cursor.getString(23),
-                        cursor.getInt(24), cursor.getString(25), cursor.getString(26), cursor.getString(27));
+                        cursor.getString(24), cursor.getInt(25), cursor.getString(26), cursor.getString(27), cursor.getString(28));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -453,34 +458,35 @@ public class ReligiousNewDBTable {
 
         String _rs_religion = cursor.getString(3);
         String _rs_services_for = cursor.getString(4);
-        String _other_religion = cursor.getString(5);
-        String _rs_time = cursor.getString(6);
-        String _rs_fee = cursor.getString(7);
+        String _rs_services_for_religion = cursor.getString(5);
+        String _other_religion = cursor.getString(6);
+        String _rs_time = cursor.getString(7);
+        String _rs_fee = cursor.getString(8);
 
-        String _lat = cursor.getString(8);
-        String _lon = cursor.getString(9);
-        String _houseno = cursor.getString(10);
-        String _block = cursor.getString(11);
-        String _area = cursor.getString(12);
-        String _policestation = cursor.getString(13);
-        String _node_email = cursor.getString(14);
-        String _ward = cursor.getString(15);
-        String _road = cursor.getString(16);
-        String _node_contact = cursor.getString(17);
-        String _other = cursor.getString(18);
-        String _areabn = cursor.getString(19);
+        String _lat = cursor.getString(9);
+        String _lon = cursor.getString(10);
+        String _houseno = cursor.getString(11);
+        String _block = cursor.getString(12);
+        String _area = cursor.getString(13);
+        String _policestation = cursor.getString(14);
+        String _node_email = cursor.getString(15);
+        String _ward = cursor.getString(16);
+        String _road = cursor.getString(17);
+        String _node_contact = cursor.getString(18);
+        String _other = cursor.getString(19);
+        String _areabn = cursor.getString(20);
 
-        String _parentarea = cursor.getString(20);
-        String _opentime  = cursor.getString(21);
-        String _closetime = cursor.getString(22);
-        String  _offday= cursor.getString(23);
-        int _catid=cursor.getInt(24);
-        String _refnumm=cursor.getString(25);
-        String _rating=cursor.getString(26);
-        String _sref=cursor.getString(27);
+        String _parentarea = cursor.getString(21);
+        String _opentime  = cursor.getString(22);
+        String _closetime = cursor.getString(23);
+        String  _offday= cursor.getString(24);
+        int _catid=cursor.getInt(25);
+        String _refnumm=cursor.getString(26);
+        String _rating=cursor.getString(27);
+        String _sref=cursor.getString(28);
 
 
-        return new ReligiousNewDBModel(_religiousid,_nameen,_namebn, _rs_religion, _rs_services_for, _other_religion, _rs_time, _rs_fee,
+        return new ReligiousNewDBModel(_religiousid,_nameen,_namebn, _rs_religion, _rs_services_for, _rs_services_for_religion, _other_religion, _rs_time, _rs_fee,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
                 _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
 
