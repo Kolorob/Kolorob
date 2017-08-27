@@ -645,7 +645,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 longDouble = Double.parseDouble(et.getLon());
                 ratingavg = et.getRatings();
                 refid = et.getRefnumm();
-                service_type = et.getServicetype();
+                service_type = et.getNgo_service_type();
                 result.delete(0, result.length());
                 String[] references = refid.split(",");
                 for (int k = 0; k < references.length; k++) {
@@ -993,11 +993,11 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             } else if (subcategotyId == 60400) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
             } else if (subcategotyId == 60500) {
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
             } else if (subcategotyId == 60100) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
             } else if (subcategotyId == 60200) {
-                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
             } else if (subcategotyId == 69900) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
             }

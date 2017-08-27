@@ -375,9 +375,10 @@ GeoPoint location;
 
         editor.putBoolean("Value", false);
         editor.putInt("ValueD", 23);
-        firstRun = settings.getBoolean("firstRunUp", false);
         editor.apply();
-        wardId=settings.getString("ward",null);
+        firstRun = settings.getBoolean("firstRunUp", false);
+
+        wardId = settings.getString("ward", Integer.toString(2));
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
         storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
         storedAreaArrayListall= storedAreaTable.getAllstored();
@@ -519,16 +520,24 @@ GeoPoint location;
             filterholder = (RelativeLayout) findViewById(R.id.filterholder);
             uptext=(TextView)findViewById(R.id.textView15);
             ChangeArea=(CheckedTextView)findViewById(R.id.changearea);
-            uptext.setText(" মেনু");
+            uptext.setText("মেনু");
             ChangeArea.setText("এলাকা পাল্টান");
             ChangeArea.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
 
-                    Intent em = new Intent(PlaceDetailsActivityNewLayout.this, AreaUpgrade.class);
+                    /*Intent em = new Intent(PlaceDetailsActivityNewLayout.this, AreaUpgrade.class);
+                    startActivity(em);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);*/
+
+                    storedAreaArrayListall=storedAreaTable.getAllstored();
+
+                    Intent em = new Intent(PlaceDetailsActivityNewLayout.this, DataLoadingActivity.class);
                     startActivity(em);
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    //}
+                    //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
                 }
             });
             // toolbar.setBackgroundResource(android.R.color.transparent);
@@ -842,10 +851,43 @@ GeoPoint location;
                         compare_layout.setVisibility(View.GONE);
                         compare_layoutedu.setVisibility(View.GONE);
 
+                        LayoutInflater layoutInflater = LayoutInflater.from(PlaceDetailsActivityNewLayout.this);
+                        View promptView = layoutInflater.inflate(R.layout.default_alert, null);
 
-                        Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this, DisplayAllJobsActivity.class);
-                        startActivity(intentJ);
-                        map.setVisibility(View.GONE);
+
+                        final Dialog alertDialog = new Dialog(PlaceDetailsActivityNewLayout.this);
+                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        alertDialog.setContentView(promptView);
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        alertDialog.show();
+
+
+                        final TextView header = (TextView) promptView.findViewById(R.id.headers);
+                        final TextView bodys = (TextView) promptView.findViewById(R.id.body);
+                        final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
+
+                        header.setText("Not available yet");
+                        header.setTextColor(getResources().getColor(R.color.Black));
+                        bodys.setText("Kolorob Job Portal is under construction\nStay tuned..");
+                        bodys.setTextColor(getResources().getColor(R.color.Black));
+                        okay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.cancel();
+                            }
+                        });
+
+                        //alertDialog.setCancelable(false);
+
+                        WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+                        lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                        alertDialog.getWindow().setAttributes(lp);
+
+                        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                       // Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this, DisplayAllJobsActivity.class);
+                       // startActivity(intentJ);
+                      //  map.setVisibility(View.GONE);
                     } else {
                         AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই।", "অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
 
@@ -1478,18 +1520,18 @@ GeoPoint location;
         }
         else if (id == R.id.new_place) {
             storedAreaArrayListall=storedAreaTable.getAllstored();
-                if(storedAreaArrayListall.size()>=5)
+                /*if(storedAreaArrayListall.size()>=5)
                 {
 
                     AlertMessage.showMessagesize(PlaceDetailsActivityNewLayout.this,"দুঃখিত","আপনি ৫টি এলাকার বেশি তথ্য একবারে নামাতে পারবেন না। আগের এলাকা বাতিল করতে" +
                             "'তথ্য আপডেট/ডিলিট করুন' অপশন টি ব্যাবহার করুন",20,15);
 
-                }
-            else {
+                }*/
+            //else {
                     Intent em = new Intent(this, DataLoadingActivity.class);
                     startActivity(em);
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                }
+               //}
             //  Toast.makeText(con,"emergency",Toast.LENGTH_LONG).show();
 
         }
