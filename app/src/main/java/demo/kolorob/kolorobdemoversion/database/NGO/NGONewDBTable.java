@@ -432,7 +432,7 @@ public class NGONewDBTable {
 
         return new NGONewDBModel(_ngoid,_nameen,_namebn, _ngo_services, _ngo_services_for, _ngo_services_other, _ngo_service_type, _drop_time, _ngo_fee,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
-                _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
+                _opentime ,_closetime,_offday,_catid,_refnumm,_rating,_sref);
 
     }
 

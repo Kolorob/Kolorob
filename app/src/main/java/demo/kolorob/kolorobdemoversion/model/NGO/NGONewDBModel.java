@@ -43,13 +43,14 @@ public class NGONewDBModel implements Serializable {
     int categoryId;
 
     String refnumm;
-    String subcat;
+
     String ratings;
+    String subcat;
 
     public NGONewDBModel(int ngoid, String nameen, String namebn, String ngo_services, String ngo_services_for, String ngo_services_other, String ngo_service_type, String drop_time, String ngo_fee, String lat, String lon, String houseno,
                                String block, String area, String policestation, String node_email, String ward, String road,
                                String node_contact, String otherinfo, String areabn, String parentarea, String openingtime , String closetime, String offday,
-                               int categoryId, String refnumm, String subcat, String ratings) {
+                               int categoryId, String refnumm, String ratings, String subcat) {
         this.ngoid = ngoid;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -366,6 +367,6 @@ public class NGONewDBModel implements Serializable {
         String _sref=ki.substring(1,ki.length()-1);
         return new NGONewDBModel(_ngoid,_nameen,_namebn,_ngo_sevices, _ngo_services_for, _ngo_services_other, _ngo_service_type, _drop_time, _ngo_fee,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
-                _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
+                _opentime ,_closetime,_offday,_catid,_refnumm,_rating,_sref);
     }
 }

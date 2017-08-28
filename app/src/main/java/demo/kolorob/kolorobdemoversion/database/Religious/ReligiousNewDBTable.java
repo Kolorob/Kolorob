@@ -488,7 +488,7 @@ public class ReligiousNewDBTable {
 
         return new ReligiousNewDBModel(_religiousid,_nameen,_namebn, _rs_religion, _rs_services_for, _rs_services_for_religion, _other_religion, _rs_time, _rs_fee,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
-                _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
+                _opentime ,_closetime,_offday,_catid,_refnumm,_rating,_sref);
 
     }
 

@@ -382,7 +382,7 @@ public class EduNewDBTableMain {
 
        return new EduNewModel(_eduId,_nameen,_namebn,_edtype,_shift,_studentno,_teachersno,_avgstdperclass,_facility,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn, _parentarea,
-               _opentime,  _closetime,_offday,_catid,_refnumm,_sref,_rating);
+               _opentime,  _closetime,_offday,_catid,_refnumm,_rating, _sref);
 
     }
 

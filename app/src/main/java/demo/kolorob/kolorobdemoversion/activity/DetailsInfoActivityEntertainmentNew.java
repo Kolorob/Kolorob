@@ -130,8 +130,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         email_btn = (ImageView) findViewById(R.id.right_side_email);  //email icon
         feedback = (ImageView) findViewById(R.id.feedback);          //feedback icon
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        if(width<=400)
+        /*if(width<=400)
             ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);// if ratingBar's height less than 400 then style will be different
+        */
         setRatingBar();
 
 
@@ -648,6 +649,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                  ratingBar.setRating(Float.parseFloat(entertainmentServiceProviderItemNew.getRatings()));
             else
                 ratingBar.setRating(0.0f);
+
+            Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Rating: " + entertainmentServiceProviderItemNew.getRatings(), Toast.LENGTH_LONG).sh
         }
         catch (Exception e)
         {

@@ -34,13 +34,14 @@ public class HealthNewDBModelMain implements Serializable {
     int categoryId;
 
     String refnumm;
-    String subcat;
     String ratings;
+    String subcat;
+
 
     public HealthNewDBModelMain(int healthid, String nameen, String namebn, String centertype, String lat, String lon,
                                 String houseno, String block, String area, String policestation, String node_email,
                                 String ward, String road, String node_contact, String otherinfo,String areabn, String parent_area, String openingtime , String closetime,
-                                String offday, int categoryId, String refnumm, String subcat, String ratings) {
+                                String offday, int categoryId, String refnumm, String ratings, String subcat) {
         this.healthid = healthid;
         this.nameen = nameen;
         this.namebn = namebn;
@@ -298,6 +299,6 @@ public class HealthNewDBModelMain implements Serializable {
         String _sref=ki.substring(1,ki.length()-1);
         return new HealthNewDBModelMain(_healthid,_nameen,_namebn,_institutetype,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn,_parentarea,
-                _opentime ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
+                _opentime ,_closetime,_offday,_catid,_refnumm,_rating,_sref);
     }
 }

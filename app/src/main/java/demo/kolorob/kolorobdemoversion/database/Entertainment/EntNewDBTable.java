@@ -328,7 +328,7 @@ public class EntNewDBTable {
 
         return new EntertainmentNewDBModel(_entid,_nameen,_namebn,_enttype,_servicetypefreeornot,
                 _lat, _lon,_houseno,_block,_area,_policestation,_node_email,_ward,_road,_node_contact,_other,_areabn, __parenarea,
-               _opentime  ,_closetime,_offday,_catid,_refnumm,_sref,_rating);
+               _opentime  ,_closetime,_offday,_catid,_refnumm,_rating, _sref);
 
     }
 
