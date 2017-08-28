@@ -60,15 +60,22 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#000000"
+                    android:padding="3dp" />
 
                 <TextView
                     android:id="@+id/chooseward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|top"
-                    android:paddingBottom="@dimen/paddingforplacetext"
+                    android:padding="@dimen/paddingforplacetext"
                     android:text=" ওয়ার্ড নির্বাচন করুন"
                     android:textSize="@dimen/offercounterbtn" />
+
+
 
                 <View
                     android:layout_width="match_parent"
