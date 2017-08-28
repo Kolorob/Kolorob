@@ -797,6 +797,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
     public String English_to_bengali_number_conversion(String english_number) {
+
         if(english_number.equals("null")||english_number.equals(""))
             return english_number;
         int v = english_number.length();

@@ -67,7 +67,7 @@ public class SplashActivityNew extends AppCompatActivity {
     long install2=0;
     File filesDir;
     public final static int PERM_REQUEST_CODE_DRAW_OVERLAYS = 1234;
-    Boolean  firstRun;
+    Boolean  firstRun, firstRunUpdate = false;
     public int height,width;
     Boolean registered=false;
     JSONObject areaData;
@@ -118,9 +118,16 @@ public class SplashActivityNew extends AppCompatActivity {
             Float currentVersion= Float.parseFloat(app_ver);
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(SplashActivityNew.this));
             //Float previousVersion=Float.parseFloat("2.03");
-            firstRun = settings.getBoolean("firstRunUp", false);
 
-            if((currentVersion > previousVersion) || (firstRun == false)){
+            firstRun = settings.getBoolean("firstRunUp", false);
+            if(isInstallFromUpdate()){
+                firstRunUpdate = settings.getBoolean("new_update_first_run", true);
+            }
+
+            //Toast.makeText(SplashActivityNew.this, "firstRun: " + (firstRun==false) + "first run update: " + firstRunUpdate + "firstInstall: " + isFirstInstall() + "fromUpdate: " + isInstallFromUpdate(), Toast.LENGTH_LONG).show();
+
+
+            if(firstRun == false || firstRunUpdate == true){
                 getRequest(SplashActivityNew.this, "http://kolorob.net/kolorob-new-demo/api/getAreaList?", new VolleyApiCallback() {
                     @Override
                     public void onResponse(int status, String apiContent) {
@@ -156,10 +163,12 @@ public class SplashActivityNew extends AppCompatActivity {
                         }
                     }
                 });
+
+
             }
             if(currentVersion > previousVersion)
             {
-                SharedPreferences.Editor editor = settings.edit();
+                //SharedPreferences.Editor editor = settings.edit();
 
                 if(previousVersion.floatValue() < Float.parseFloat("2.03")) {
                     long check=settings.getLong("timefirstinstall",Long.valueOf(2));
@@ -177,14 +186,11 @@ public class SplashActivityNew extends AppCompatActivity {
                     if (!check2.equals("2")) {
                         settings.edit().putString("timesfirstinstall", check2).apply();
                     }
-                } else {
-                    if (previousVersion.floatValue() < Float.parseFloat("2.1")) {
-
-                        editor.putBoolean("new_categories_on_update", true).apply();
-
-
-                    }
                 }
+                /*if (firstRun == false) {
+                    editor.putBoolean("new_categories_on_update", true).apply();
+                    editor.putBoolean("new_areas_on_update", true).apply();
+                }*/
             }
         }
 
@@ -195,9 +201,9 @@ public class SplashActivityNew extends AppCompatActivity {
         }
 
 
-        if (firstRun==false)//if running for first time
+        if (firstRun==false || firstRunUpdate==true)//if running for first time
         {
-            SharedPreferences.Editor editor = settings.edit();
+            //SharedPreferences.Editor editor = settings.edit();
 
 
 
@@ -221,7 +227,12 @@ public class SplashActivityNew extends AppCompatActivity {
 
                 header.setText("ইন্টারনেট সংযোগ সচল নয়");
                 header.setTextColor(getResources().getColor(R.color.Black));
-                bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+
+                if(firstRun == false)
+                    bodys.setText(" কলরব প্রথমবারের মত শুরু হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+                else if(firstRunUpdate == true)
+                    bodys.setText(" কলরব আপডেট হতে যাচ্ছে। অনুগ্রহ পূর্বক ইন্টারনেট সংযোগটি চালু করুন ।  ");
+
                 bodys.setTextColor(getResources().getColor(R.color.Black));
                 okay.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -230,6 +241,9 @@ public class SplashActivityNew extends AppCompatActivity {
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putBoolean("firstRunUp", false);
+                        if(isInstallFromUpdate()){
+                            editor.putBoolean("new_update_first_run", true);
+                        }
                         editor.apply();
                         finish();
                     }
@@ -281,7 +295,7 @@ public class SplashActivityNew extends AppCompatActivity {
                         System.gc();
                     }
                                 /* start the activity */
-                    if(registered==true) {
+                    if(registered==true ) {
                         startActivity(new Intent(SplashActivityNew.this, PlaceDetailsActivityNewLayout.class));
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         finish();
@@ -302,6 +316,30 @@ public class SplashActivityNew extends AppCompatActivity {
         }
 
 
+    }
+
+    public boolean isFirstInstall() {
+        try {
+            long firstInstallTime =   this.getPackageManager().getPackageInfo(getPackageName(), 0).firstInstallTime;
+            long lastUpdateTime = this.getPackageManager().getPackageInfo(getPackageName(), 0).lastUpdateTime;
+            return firstInstallTime == lastUpdateTime;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+    public boolean isInstallFromUpdate() {
+        try {
+            long firstInstallTime =   this.getPackageManager().getPackageInfo(getPackageName(), 0).firstInstallTime;
+            long lastUpdateTime = this.getPackageManager().getPackageInfo(getPackageName(), 0).lastUpdateTime;
+            return firstInstallTime != lastUpdateTime;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

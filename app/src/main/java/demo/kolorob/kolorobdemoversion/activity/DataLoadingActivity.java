@@ -98,7 +98,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     private static int NUMBER_OF_TASKS = 6;
     View view = null, areaview, wardview, cityview;;
     Button submit;
-    Boolean firstRun, new_categories_on_update, permission = false;
+    Boolean firstRun, firstRunUpdate, permission = false;
     int countofDb = 0;
     JSONObject allData;
     String AreaNameBn, Location, keyword;
@@ -210,7 +210,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         firstRun = settings.getBoolean("firstRunUp", false);
-        new_categories_on_update = settings.getBoolean("new_categories_on_update", true);
+        firstRunUpdate = settings.getBoolean("new_update_first_run", true);
 
 
 
@@ -226,8 +226,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     keyword = areaList.get(getPosAreaInt()).getArea_keyword();
                     String lat = areaList.get(getPosAreaInt()).getLat();
+                    Log.e("", "Keyword: " + keyword + "Lat: " +lat);
 
-                    if (lat.equals(null) || keyword.equals(null)) { //no data available for these two area so
+                    if (lat.length()<1 || keyword.length()<1) { //no data available for these areas
                         ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
@@ -235,7 +236,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         if (AppUtils.isNetConnected(getApplicationContext())) {
                             Servercall();
                         } else {
-                            AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
+                            AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপনার ডিভাইসের ইন্টারনেট চালু করুন");
                         }
 
                     }
@@ -254,11 +255,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         mExitAnimation.setFillAfter(true);
 
         populatRecyclerViewCity();  // city
-        populatRecyclerViewWard(1); // ward
-        populatRecyclerViewArea(1); // area
+        populatRecyclerViewWard(1); // initially, populating wards for DNCC
+        populatRecyclerViewArea(1); // initially, populating areas of first ward of DNCC
 
 
-        if (firstRun == false || new_categories_on_update == true)
+        if (firstRun == false || firstRunUpdate == true)
             runOverlay_ContinueMethod(); //run tutorial only if user is using the app for first time
 
         pos = 0;
@@ -511,7 +512,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     void Servercall() {
 
-        if (firstRun == false || new_categories_on_update == true) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
+        if (firstRun == false || firstRunUpdate == true) //we store category and and subcategories only for first time. Thus number_of_tasks been incremented when firstRun is false
         {
             NUMBER_OF_TASKS = 8;
         }
@@ -563,7 +564,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         frameAnimation = (AnimationDrawable) rotateImage.getBackground();
         frameAnimation.setOneShot(false);
         frameAnimation.start();
-        if (firstRun == false || new_categories_on_update == true) {
+        if (firstRun == false || firstRunUpdate == true) {
             getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/categories?", new VolleyApiCallback() {
                         @Override
                         public void onResponse(int status, String apiContent) {
@@ -605,11 +606,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             );
 
 
-
-            if(new_categories_on_update == true){
+            if(firstRunUpdate == true){
                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("new_categories_on_update", false).apply();
+                editor.putBoolean("new_update_first_run", false).apply();
             }
         }
         getRequest(DataLoadingActivity.this, "http://kolorob.net/kolorob-new-demo/api/getspbyarea?ward=" + wardClicked + "&area=" + areaClicked, new VolleyApiCallback() {
@@ -682,7 +682,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("ward", wardClicked);
+                        editor.putString("_ward", wardClicked);
                         editor.putString("areakeyword", areaClicked);
                         editor.apply();
 

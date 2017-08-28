@@ -320,7 +320,7 @@ GeoPoint location;
     String lat, lon;
     String AreaName;
     ActionBarDrawerToggle toggle;
-    Boolean firstRun;
+    Boolean firstRun, firstRunUpdate;
     StoredAreaTable storedAreaTable;
 
     public String getAreaName() {
@@ -377,9 +377,11 @@ GeoPoint location;
         editor.putInt("ValueD", 23);
         editor.apply();
         firstRun = settings.getBoolean("firstRunUp", false);
+        firstRunUpdate = settings.getBoolean("new_update_first_run", true);
 
-        wardId = settings.getString("ward", Integer.toString(2));
+        wardId = settings.getString("_ward", Integer.toString(2));
         Areakeyword=settings.getString("areakeyword","Mirpur_12");
+        Log.e("","Ward ID: " + wardId + "Area: " + Areakeyword);
         storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
         storedAreaArrayListall= storedAreaTable.getAllstored();
 
@@ -555,7 +557,7 @@ GeoPoint location;
                     super.onDrawerOpened(drawerView);
                  view= navigationView.getTouchables().get(2);
                      view2=    navigationView.getTouchables().get(4);
-                    if(firstRun==false)runOverlay_ContinueMethodnavigation();
+                    if(firstRun==false || firstRunUpdate==true)runOverlay_ContinueMethodnavigation();
                     //  getSupportActionBar().setTitle("Navigation!");
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
@@ -654,7 +656,7 @@ GeoPoint location;
             } catch (Exception e) {
 
             }
-     if(firstRun==false)runOverlay_ContinueMethod();
+     if(firstRun==false || firstRunUpdate == true)runOverlay_ContinueMethod();
 
         /*Lower four buttons action are here. Since selected buttons size changes so others been marked not clicked one been marked clicked
         * and so on. Please DEBUG. Subcategory panels wont be visible in case of SearchButton Clicked.Category/subcategory/toggle wont be
@@ -1597,10 +1599,10 @@ GeoPoint location;
                 .playLater(ListButton);
         ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
-                        .setTitle("সেবা খুজুন")
+                        .setTitle("সেবা খুঁজুন")
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("আপনার পরিচিত সেবা প্রতিষ্ঠানের অথবা সকল প্রতিষ্ঠানের তথ্য  লিস্ট অনুসারে দেখতে ক্লিক করুন ")
+                        .setDescription("আপনার পরিচিত সেবা প্রতিষ্ঠানের অথবা সকল প্রতিষ্ঠানের তথ্য লিস্ট অনুসারে দেখতে ক্লিক করুন ")
                         .setGravity(Gravity.TOP)
                 )
                 .playLater(SearchButton);
@@ -1618,7 +1620,7 @@ GeoPoint location;
                         .setTitle("মেনু")
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("ইমারজেন্সি সুবিধা, টিউটোরিয়াল সহ অন্যান্য জানতে বায়ের মেনুতে ক্লিক করুন")
+                        .setDescription("ইমারজেন্সি সুবিধা, টিউটোরিয়াল সহ অন্যান্য বিষয় জানতে বাঁয়ের মেনুতে ক্লিক করুন")
                         .setGravity(Gravity.RIGHT)
                 )
                 .playLater(uptext);

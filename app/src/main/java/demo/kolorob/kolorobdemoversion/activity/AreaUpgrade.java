@@ -136,7 +136,7 @@ delete.setOnClickListener(new View.OnClickListener() {
                    storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("ward", storedAreaArrayList2.get(0).getWardid()); // store ward and area from stored area in pref
+                    editor.putString("_ward", storedAreaArrayList2.get(0).getWardid()); // store ward and area from stored area in pref
                     //to use in next activity
                     editor.putString("areakeyword", storedAreaArrayList2.get(0).getAreaid());
                     editor.apply();
@@ -167,7 +167,7 @@ delete.setOnClickListener(new View.OnClickListener() {
                     }
                     else
                     {
-                        AlertMessage.showMessage(AreaUpgrade.this, " দুঃখিত","আপ্নার ডিভাইসের ইন্টারনেট চালু করুন");
+                        AlertMessage.showMessage(AreaUpgrade.this, " দুঃখিত","আপনার ডিভাইসের ইন্টারনেট চালু করুন");
                         dialog.cancel();
                     }
 
@@ -257,7 +257,7 @@ void radiobuttonsetup() // database operation for getting information which area
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         settings.edit().putLong("time", System.currentTimeMillis()).apply();
-                        editor.putString("ward", storedAreas.get(selectedId).getWardid());
+                        editor.putString("_ward", storedAreas.get(selectedId).getWardid());
                         editor.putString("areakeyword", storedAreas.get(selectedId).getAreaid());
                         editor.apply();
                     } catch (JSONException e) {
