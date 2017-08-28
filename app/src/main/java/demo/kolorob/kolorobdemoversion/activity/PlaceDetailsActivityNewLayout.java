@@ -1627,7 +1627,7 @@ GeoPoint location;
                         .setTitle("এলাকা পাল্টান")
 
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription(" এখান থেকে আগে নামানো এলাকার তথ্য দেখতে পারবেন")
+                        .setDescription(" এখান থেকে নতুন এলাকার তথ্য নামাতে পারবেন")
                         .setGravity(Gravity.RIGHT)
                 )
                 .playLater(ChangeArea);
@@ -1663,7 +1663,7 @@ GeoPoint location;
                 .setToolTip(new ToolTip()
                         .setTitle("নামানো তথ্য পরিবর্তন")
                         .setBackgroundColor(Color.parseColor("#000000"))
-                        .setDescription("নামানো এলাকার তথ্য বাতিল অথবা আপডেট করতে ব্যাবহার করুন")
+                        .setDescription("নামানো এলাকার তথ্য বাতিল অথবা আপডেট করতে ব্যবহার করুন")
                         .setGravity(Gravity.TOP)
                 )
                 .playLater(view2);
