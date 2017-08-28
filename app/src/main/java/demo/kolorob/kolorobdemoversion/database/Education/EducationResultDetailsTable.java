@@ -110,6 +110,7 @@ public class EducationResultDetailsTable {
 
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_NODE_ID , eduId);
+        rowValue.put(KEY_SERVICE_ID, serviceproviderId);
         rowValue.put(KEY_EXAM_NAME, examname);
         rowValue.put(KEY_STUDENT_NO, studentno);
         rowValue.put(KEY_PASSED, passed);

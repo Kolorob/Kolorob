@@ -133,16 +133,16 @@ public class EduNewDBTableMain {
 
 
 
-    public long insertItem(int govid, String nameen, String namebn, String edutype,String shift,String stdno,String teacherno,String avgstd,
+    public long insertItem(int eduid, String nameen, String namebn, String edutype,String shift,String stdno,String teacherno,String avgstd,
                            String facility,String lat,
                            String lon, String houseno, String block, String area, String policestation,
                            String node_email, String ward, String road, String node_contact, String otherinfo,String areabn, String parent_area,
                            String openingtime, String closetime, String offday, int categoryId, String refnumm, String ratings,
                            String subcat
     ) {
-        if (isFieldExist(govid)) {
+        if (isFieldExist(eduid)) {
             return updateItem(
-                    govid,
+                    eduid,
                     nameen,
                     namebn,
                      edutype, shift, stdno, teacherno, avgstd,
@@ -167,7 +167,7 @@ public class EduNewDBTableMain {
                     );
         }
         ContentValues rowValue = new ContentValues();
-        rowValue.put(KEY_IDENTIFIER_ID, govid);
+        rowValue.put(KEY_IDENTIFIER_ID, eduid);
         rowValue.put(KEY_NAME_ENG, nameen);
         rowValue.put(KEY_NAME_BAN, namebn);
         rowValue.put(KEY_EDU_TYPE, edutype);
@@ -369,8 +369,8 @@ public class EduNewDBTableMain {
         String _road = cursor.getString(17);
         String _node_contact = cursor.getString(18);
         String _other = cursor.getString(19);
-        String _areabn = cursor.getString(20);
-        String _parentarea = cursor.getString(21);
+        String _parentarea = cursor.getString(20);
+        String _areabn = cursor.getString(21);
         String _opentime = cursor.getString(22);
         String _closetime = cursor.getString(23);
         String _offday = cursor.getString(24);

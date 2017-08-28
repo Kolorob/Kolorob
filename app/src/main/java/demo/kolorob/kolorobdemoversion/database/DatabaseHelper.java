@@ -9,21 +9,6 @@ import android.util.Log;
 
 import java.io.File;
 
-import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
-import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
-import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
-import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
-import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
-import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
-import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
-import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
-import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
-import demo.kolorob.kolorobdemoversion.model.StoredArea;
-
 /**
  * Created by touhid on 12/26/15.
  * @author touhid
