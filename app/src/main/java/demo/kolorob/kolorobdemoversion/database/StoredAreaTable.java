@@ -118,6 +118,24 @@ public class StoredAreaTable {
         return false;
     }
 
+    public boolean isAreaStored(String ward, String area){
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = '" + ward + "'" + " AND "+ AREANAME+" = '"+area+"'", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if (ward.equals(cursor.getString(0)) && area.equals(cursor.getString(1))) {
+                    cursor.close();
+                    closeDB();
+                    return true;
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return false;
+    }
+
     private long updateItem(String id, String name,String areabn,String lat, String lon) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(WARDID, id);

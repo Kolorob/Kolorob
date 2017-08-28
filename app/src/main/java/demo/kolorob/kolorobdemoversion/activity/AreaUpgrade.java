@@ -133,7 +133,7 @@ delete.setOnClickListener(new View.OnClickListener() {
                 }
                 else {
 
-                   storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+                    storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("_ward", storedAreaArrayList2.get(0).getWardid()); // store ward and area from stored area in pref

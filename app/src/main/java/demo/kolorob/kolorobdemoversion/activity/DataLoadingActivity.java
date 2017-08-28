@@ -233,12 +233,30 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
                         //setLocation(areaList.get(getPosAreaInt()).getLat() + ":" + areaList.get(getPosAreaInt()).getLon());
-                        if (AppUtils.isNetConnected(getApplicationContext())) {
-                            Servercall();
-                        } else {
-                            AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপনার ডিভাইসের ইন্টারনেট চালু করুন");
-                        }
 
+                        StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
+                        // ArrayList <StoredArea> storedAreas;
+
+                        if(storedAreaTable.isAreaStored(wardClicked, areaClicked)){
+
+                            //storedAreas = storedAreaTable.getstoredlocation(wardClicked, areaClicked);
+                            SharedPreferences settings = getSharedPreferences("prefs", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("_ward", wardClicked); // store ward and area from stored area in pref
+                            //to use in next activity
+                            editor.putString("areakeyword", areaClicked);
+                            editor.apply();
+                            Intent intent = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else {
+                            if (AppUtils.isNetConnected(getApplicationContext())) {
+                                Servercall();
+                            } else {
+                                AlertMessage.showMessage(DataLoadingActivity.this, " দুঃখিত", "আপনার ডিভাইসের ইন্টারনেট চালু করুন");
+                            }
+                        }
                     }
                 }
 
