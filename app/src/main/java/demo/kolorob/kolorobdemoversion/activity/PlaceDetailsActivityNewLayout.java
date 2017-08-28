@@ -804,7 +804,7 @@ GeoPoint location;
                 public void onClick(View v) {
 
 
-                    if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
+                    //if ((AppUtils.isNetConnected(getApplicationContext())) && (ContextCompat.checkSelfPermission(PlaceDetailsActivityNewLayout.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED)) {
 
                         SearchClicked = false;
                         MapClicked = false;
@@ -890,10 +890,10 @@ GeoPoint location;
                        // Intent intentJ = new Intent(PlaceDetailsActivityNewLayout.this, DisplayAllJobsActivity.class);
                        // startActivity(intentJ);
                       //  map.setVisibility(View.GONE);
-                    } else {
-                        AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই।", "অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
+                   // } else {
+                     //   AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই।", "অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...");
 
-                    }
+                  //  }
 
 
                 }
@@ -1765,6 +1765,14 @@ GeoPoint location;
         btnclose.setLayoutParams(params1);
 
 
+        btnclose.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                alertDialog.cancel();
+            }
+        });
+
+
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2153,21 +2161,20 @@ GeoPoint location;
 
 
 //                        toolbar.setVisibility(View.VISIBLE);
-                        if (governmentNewItems.size()==0) {
+                       // if (governmentNewItems.size()==0) {
 
-                            AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
+                          //  AlertMessage.showMessage(PlaceDetailsActivityNewLayout.this,"দুঃখিত! তথ্য পাওয়া যায় নি","");
 //                            final android.app.AlertDialog alertDialog2 = new android.app.AlertDialog.Builder(PlaceDetailsActivityNewLayout.this).create();
 //
 //                            alertDialog2.setMessage("");
 //                            alertDialog2.setButton(android.app.AlertDialog.BUTTON_NEUTRAL, "ঠিক আছে",
 //                                    new DialogInterface.OnClickListener() {
 //                                        public void onClick(DialogInterface dialog, int which) {
-//                                            alertDialog2.dismiss();
+//                                       alertDialog2.dismiss();
 //                                        }
 //                                    });
 //                            alertDialog2.getWindow().setLayout(200, 300);
-//                            alertDialog2.show();
-                        }
+//                            alertDialog2.show();তঃ//////
                         break;
                     case AppConstants.LEGAL:
 

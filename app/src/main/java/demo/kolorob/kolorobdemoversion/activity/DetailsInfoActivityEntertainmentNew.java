@@ -650,7 +650,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             else
                 ratingBar.setRating(0.0f);
 
-            //Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Rating: " + entertainmentServiceProviderItemNew.getRatings(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Rating: " + entertainmentServiceProviderItemNew.getRatings(), Toast.LENGTH_LONG).sh
         }
         catch (Exception e)
         {
@@ -721,7 +721,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
     private String English_to_bengali_number_conversion(String english_number) {
-        //Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Eng number: " + english_number, Toast.LENGTH_LONG).show();
+        //Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Eng number: " + english_number, To)
         if(english_number.equals("null")||english_number.equals(""))
             return english_number;
         int v = english_number.length();
@@ -769,7 +769,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
 
-           // Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Hour: " + hour, Toast.LENGTH_LONG).show();
+            Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Hour: " + hour, Toast.LENGTH_LONG).show();
 
             if (hour ==0 && times==0)
                 timeInBengali = "রাত ১২";
@@ -787,7 +787,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 timeInBengali = "বিকাল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 19 && hour < 24)
+            else if (hour > 29 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
