@@ -975,7 +975,12 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
             if (hour ==0 && times==0)
                 timeInBengali = "রাত ১২";
+            else if (hour > 0 && hour < 4)
+                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour > 3 && hour < 6)
+                timeInBengali = "ভোর " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour >= 6 && hour < 12)
+
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour == 12)
                 timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));

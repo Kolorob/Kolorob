@@ -987,6 +987,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
             if (hour ==0 && times==0)
                 timeInBengali = "রাত ১২";
+            else if (hour > 0 && hour < 4)
+                timeInBengali = "রাত " + EtoB(String.valueOf(hour));
+            else if (hour > 3 && hour < 6)
+                timeInBengali = "ভোর " + EtoB(String.valueOf(hour));
+
             else if (hour >= 6 && hour < 12)
                 timeInBengali = "সকাল " + EtoB(String.valueOf(hour));
             else if (hour == 12)

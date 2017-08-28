@@ -865,6 +865,10 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
             if (hour == 0 && times == 0)  // 00:00 => রাত ১২টা
                 timeInBengali = "রাত ১২";
+            else if (hour > 0 && hour < 4)  // 1 - 3 => রাত ১টা - রাত ৩টা
+                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour));
+            else if (hour > 3 && hour < 6)  // 4 - 5 => ভোর ৪টা - ভোর ৫টা
+                timeInBengali = "ভোর " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour >= 6 && hour < 12)  // 6 - 11 =>  সকাল ৬ টা - সকাল ১১টা
                 timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
             else if (hour == 12)  // 12  =>  দুপুর ১২টা
