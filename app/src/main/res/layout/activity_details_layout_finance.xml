@@ -244,17 +244,7 @@
             android:layout_weight="0.5"
             android:gravity="center">
 
-            <android.support.v7.widget.AppCompatCheckBox
-                android:id="@+id/compare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white"
-                android:gravity="center_vertical"
-                android:scaleX="1.0"
-                android:scaleY="1.0"
-                android:text="@string/compare"
-                android:textColor="@color/white"
-                android:textSize="29sp" />
+
 
 
             <ImageView

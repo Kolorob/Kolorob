@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
 
 
     <TextView
@@ -10,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Name of Comparison"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:id="@+id/compare_header" />
 
     <View
@@ -37,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Left part"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:id="@+id/left_part" />
         </LinearLayout>
 
@@ -45,7 +47,7 @@
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_weight="0.01"
-            android:background="@color/white"
+            android:background="@color/kolorob_color"
             android:layout_height="match_parent"></LinearLayout>
 
         <LinearLayout
@@ -59,7 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Right Part"
                 android:id="@+id/right_part" />

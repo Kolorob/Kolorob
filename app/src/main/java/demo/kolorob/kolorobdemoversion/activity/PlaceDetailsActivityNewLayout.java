@@ -433,12 +433,14 @@ GeoPoint location;
             allitemList = (ListView) findViewById(R.id.allitem);
             checkBox = (CheckBox) findViewById(R.id.compared);
             checkBox2 = (CheckBox) findViewById(R.id.compared2);
+
             health_compare_list = (ListView) findViewById(R.id.health_compare_list);
             education_compare_list = (ListView) findViewById(R.id.education_compare_list);
 
 
             checkLeft = (CheckBox) findViewById(R.id.checkLeft);
             checkRight = (CheckBox) findViewById(R.id.checkRight);
+
 
             // frameLayout.setClickable(false);
             // frameLayouts.setEnabled(false);
@@ -458,14 +460,14 @@ GeoPoint location;
             compare_layout = (LinearLayout) findViewById(R.id.compare_layout);
 
 //        scrolling_part=(ScrollView)findViewById(R.id.scrolling_part);
-            ImageView compare_logo_imagex = (ImageView) findViewById(R.id.compare_logo_imagex);
+ /*           ImageView compare_logo_imagex = (ImageView) findViewById(R.id.compare_logo_imagex);
             compare_logo_imagex.getLayoutParams().width = width / 20;
 
             compare_logo_imagex.getLayoutParams().height = height / 20;
             compare_logo_image = (ImageView) findViewById(R.id.compare_logo_images);
             compare_logo_image.getLayoutParams().width = width / 20;
             Log.d("Test width Height", "=======");
-            compare_logo_image.getLayoutParams().height = height / 20;
+            compare_logo_image.getLayoutParams().height = height / 20;*/
 //        LinearLayout.LayoutParams scrolling_partc= (LinearLayout.LayoutParams) scrolling_part.getLayoutParams();
 //        scrolling_partc.setMargins(0,0,0,smal);
 
@@ -599,7 +601,7 @@ GeoPoint location;
             mExitAnimation.setDuration(600);
             mExitAnimation.setFillAfter(true);
             String AREA=getAreaName();
-           AREA= AREA.replace(' ','\n');
+            AREA= AREA.replace(' ','\n');
             welcometext.setText(AREA);
             health_name2 = (TextView) findViewById(R.id.health_name3);
             health_name3 = (TextView) findViewById(R.id.health_name2);
@@ -1026,7 +1028,7 @@ GeoPoint location;
             SecondData=tokens[1];
             compare_layout.setVisibility(View.GONE);
             compare_layoutedu.setVisibility(View.VISIBLE);
-            compare_layoutedu.setBackgroundColor(Color.parseColor("#2F7281"));
+            compare_layoutedu.setBackgroundColor(Color.parseColor("#FFFFFF"));
             compareEducation();
             }
 
@@ -1104,7 +1106,7 @@ GeoPoint location;
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses) {
                 if(healthSpecialistItemDetails.getVaccineavailability().equals("false"))
                 {
-                    firstSpecialistItemvac=firstSpecialistItemvac + "ভ্যাকসিন সুবিধা নাই ";
+                    firstSpecialistItemvac=firstSpecialistItemvac + "ভ্যাকসিন সুবিধা নেই ";
                 }
                 else firstSpecialistItemvac = firstSpecialistItemvac +  "ভ্যাকসিন সুবিধা আছে "  ;
             }
@@ -1114,9 +1116,9 @@ GeoPoint location;
             for (HealthNewDBModelPharmacy healthSpecialistItemDetails : healthSpecialistItemDetailses2) {
                 if(healthSpecialistItemDetails.getVaccineavailability().equals("false"))
                 {
-                    secondSpecialistItemvac=secondSpecialistItemvac + "ভ্যাকসিন সুবিধা নাই ";
+                    secondSpecialistItemvac=secondSpecialistItemvac + "ভ্যাকসিন সুবিধা নেই ";
                 }
-                secondSpecialistItemvac = secondSpecialistItemvac +  "ভ্যাকসিন সুবিধা আছে " ;
+                else secondSpecialistItemvac = secondSpecialistItemvac +  "ভ্যাকসিন সুবিধা আছে " ;
             }
         }
 
@@ -1397,7 +1399,7 @@ GeoPoint location;
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) education_compare_list
                 .getLayoutParams();
         layoutParams.setMargins(0, 0, 0, smal);//
-        education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.education_color));
+        education_compare_list.setBackgroundColor(ContextCompat.getColor(PlaceDetailsActivityNewLayout.this,R.color.white));
     }
 
     public void populateSearch()

@@ -233,7 +233,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("বৃত্তি সুবিধা", eduNewSchoolModel.getStipend());
                 CheckConcate("প্রাইমারী লেভেলের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getPrimary_fees()));
                 CheckConcate("সেকেন্ডারি লেভেলের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getSecondary_fees()));
-                CheckConcate("কলেজের বেতন", formatPayment(eduNewSchoolModel.getCollage_fees()));
+                CheckConcate("কলেজের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getCollage_fees()));
 
 
 

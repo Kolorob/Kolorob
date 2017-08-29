@@ -203,7 +203,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
 
         CheckConcate("ইমেইল", healthServiceProviderItemNew.getNode_email());
-
         timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpeningtime());
         timeProcessing("বন্ধের সময়", healthServiceProviderItemNew.getClosetime());
 
@@ -251,13 +250,13 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         if (healthVaccineSize != 0) {
             for (HealthNewDBModelPharmacy healthNewDBModelPharmacy : healthNewDBModelPharmacies) {
 
-                if(healthNewDBModelPharmacy.getDocavailability().equals(false))
+                if(healthNewDBModelPharmacy.getDocavailability().equals("false"))
                 {
                     CheckConcate("ডাক্তারের সুবিধা", "নেই");
                 }
                 else CheckConcate("ডাক্তারের সুবিধা", "আছে");
                 CheckConcate("বিশেষত্ব ", healthNewDBModelPharmacy.getSpeciality());
-                if(healthNewDBModelPharmacy.getVaccineavailability().equals(false))
+                if(healthNewDBModelPharmacy.getVaccineavailability().equals("false"))
                 {
                     CheckConcate("ভ্যাক্সিন সুবিধা ", "নেই");
                 }

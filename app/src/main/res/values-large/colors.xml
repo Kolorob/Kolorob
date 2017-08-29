@@ -6,7 +6,7 @@
     <color name="colorSecondaryText">#757575</color>
 
 
-    <color name="white">#FFffFF</color>
+    <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="red">#FF0000</color>
@@ -16,18 +16,12 @@
     <color name="line_draw">#1E91DB</color>
     <color name="semi_transparent">#7f000000</color>
     <color name="orange">#FF8040</color>
-    <color name="education_color">#2F7281 </color>
-    <color name="entertainment_color">#43446E </color>
-    <color name="health_color">#832D27 </color>
-    <color name="financial_color">#5F621C </color>
-    <color name="legal_aid_color">#895E3D </color>
+
     <color name="job_portal">#63486f  </color>
     <color name="feedback_color">#fbf3d3</color>
     <color name="kolorob_color">#F7941E </color>
     <color name="light_orange">#ffdb99</color>
 
-
-    <color name="government_color">#FF135402 </color>
 
 
     93A037
