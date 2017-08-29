@@ -233,7 +233,7 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getHouseno()));
 
-        CheckConcate("যোগাযোগ", ngoServiceProviderItemNew.getNode_contact());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getNode_contact()));
 
         CheckConcate("ইমেইল", ngoServiceProviderItemNew.getNode_email());
 
@@ -782,6 +782,9 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if (english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }

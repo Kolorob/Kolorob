@@ -120,6 +120,7 @@ public class MyInfoWindow extends InfoWindow {
         // TextView contact=(TextView) mView.findViewById(R.id.contact_no);
         final TextView adddescription = (TextView) mView.findViewById(R.id.bubble_description);
         final TextView txtSubdescription = (TextView) mView.findViewById(R.id.bubble_subdescription);
+        contact2 = English_to_bengali_number_conversion(contact2);
         if(contact2==null||contact2.equals(" ")||contact2.equals("null"))contact2="পাওয়া যায় নি";
         txtTitle.setText(titlemarker);
         //txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
@@ -256,6 +257,50 @@ public class MyInfoWindow extends InfoWindow {
 
             }
         });
+    }
+
+    private String English_to_bengali_number_conversion(String english_number) {
+        //Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Eng number: " + english_number, To)
+        if(english_number.equals("null")||english_number.equals(""))
+            return english_number;
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '.')
+                concatResult = concatResult + ".";
+            else if(english_number.charAt(i) == '/')
+                concatResult = concatResult + "/";
+            else if(english_number.charAt(i) == '-')
+                concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
+            else {
+                return english_number;
+            }
+
+        }
+        return concatResult;
     }
 
 }

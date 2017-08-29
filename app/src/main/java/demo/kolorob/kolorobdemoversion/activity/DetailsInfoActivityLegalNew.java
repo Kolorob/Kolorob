@@ -261,7 +261,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getHouseno()));
 
-        CheckConcate("যোগাযোগ", legalAidServiceProviderItemNew.getNode_contact());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getNode_contact()));
 
         CheckConcate("ইমেইল", legalAidServiceProviderItemNew.getNode_email());
 
@@ -909,6 +909,9 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if(english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }

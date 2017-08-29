@@ -190,7 +190,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", EtoB(educationNewItem.get(0).getHouseno()));
 
-        CheckConcate("যোগাযোগ", educationNewItem.get(0).getNode_contact());
+        CheckConcate("যোগাযোগ", EtoB(educationNewItem.get(0).getNode_contact()));
 
         CheckConcate("ইমেইল", educationNewItem.get(0).getNode_email());
 
@@ -231,8 +231,8 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
                 CheckConcate("বৃত্তি সুবিধা", eduNewSchoolModel.getStipend());
-                CheckConcate("প্রাইমারী লেভেলের বেতন ", formatPayment(eduNewSchoolModel.getPrimary_fees()));
-                CheckConcate("সেকেন্ডারি লেভেলের বেতন", formatPayment(eduNewSchoolModel.getSecondary_fees()));
+                CheckConcate("প্রাইমারী লেভেলের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getPrimary_fees()));
+                CheckConcate("সেকেন্ডারি লেভেলের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getSecondary_fees()));
                 CheckConcate("কলেজের বেতন", formatPayment(eduNewSchoolModel.getCollage_fees()));
 
 
@@ -903,6 +903,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if (english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }

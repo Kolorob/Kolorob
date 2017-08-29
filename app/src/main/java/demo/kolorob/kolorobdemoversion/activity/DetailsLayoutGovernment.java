@@ -179,7 +179,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(governmentNewItem.getHouseno()));
 
-        CheckConcate("যোগাযোগ", governmentNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(governmentNewItem.getNode_contact()));
 
         CheckConcate("ইমেইল", governmentNewItem.getNode_email());
 
@@ -791,6 +791,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if(english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }

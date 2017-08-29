@@ -185,9 +185,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  entertainmentServiceProviderItemNew.getEnttype());
 
-        if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য");
+        if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
 
-        CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য নয়");
+        //CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য নয়");
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getAreabn());
@@ -212,7 +212,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getHouseno()));
 
-        CheckConcate("যোগাযোগ", entertainmentServiceProviderItemNew.getNode_contact());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
 
         CheckConcate("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
 
@@ -753,6 +753,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if(english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }
@@ -769,7 +772,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             int hour = Integer.valueOf(separated[0]);
             int times = Integer.valueOf(separated[1]);
 
-            Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Hour: " + hour, Toast.LENGTH_LONG).show();
+            //Toast.makeText(DetailsInfoActivityEntertainmentNew.this, "Hour: " + hour, Toast.LENGTH_LONG).show();
 
             if (hour ==0 && times==0)
                 timeInBengali = "রাত ১২";
@@ -787,7 +790,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
                 timeInBengali = "বিকাল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             else if (hour > 17 && hour < 20)
                 timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 29 && hour < 24)
+            else if (hour > 19 && hour < 24)
                 timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
             if (times != 0)
                 timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";

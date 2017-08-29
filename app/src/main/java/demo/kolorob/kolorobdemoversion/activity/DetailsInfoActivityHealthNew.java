@@ -200,7 +200,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(healthServiceProviderItemNew.getHouseno()));
 
-        CheckConcate("যোগাযোগ", healthServiceProviderItemNew.getNode_contact());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
 
         CheckConcate("ইমেইল", healthServiceProviderItemNew.getNode_email());
 
@@ -936,6 +936,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if(english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }

@@ -178,7 +178,7 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(financialNewItem.getHouseno()));
 
-        CheckConcate("যোগাযোগ", financialNewItem.getNode_contact());
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(financialNewItem.getNode_contact()));
 
         CheckConcate("ইমেইল", financialNewItem.getNode_email());
 
@@ -829,6 +829,9 @@ public class DetailsLayoutFinance extends AppCompatActivity {
                 concatResult = concatResult + "/";
             else if(english_number.charAt(i) == '-')
                 concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
             else {
                 return english_number;
             }
