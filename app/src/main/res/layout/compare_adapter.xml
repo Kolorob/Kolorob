@@ -5,15 +5,16 @@
     >
 
 
-
     <TextView
+        android:id="@+id/compare_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Name of Comparison"
+        android:background="@color/white"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:id="@+id/compare_header" />
+        android:text="Name of Comparison"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+
+        android:textColor="@color/black" />
 
     <View
         android:layout_width="match_parent"
@@ -46,7 +47,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
-            android:layout_weight="0.01"
+            android:layout_weight="0.005"
             android:background="@color/kolorob_color"
             android:layout_height="match_parent"></LinearLayout>
 
