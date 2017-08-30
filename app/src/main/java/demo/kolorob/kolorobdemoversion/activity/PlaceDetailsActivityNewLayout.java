@@ -870,9 +870,9 @@ GeoPoint location;
                         final TextView bodys = (TextView) promptView.findViewById(R.id.body);
                         final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
 
-                        header.setText("দুঃখিত, এখনও প্রস্তুত হয়নি");
+                        header.setText("দুঃখিত, এই অপশনটি এখনও প্রস্তুত হয়নি");
                         header.setTextColor(getResources().getColor(R.color.Black));
-                        bodys.setText("কলরব জব পোর্টাল নতুন রূপে নিরমাণাধীন" + "\n" + "আমাদের সাথেই থাকুন");
+                        bodys.setText("কলরব জব পোর্টাল নতুন রূপে নির্মাণাধীন");
                         bodys.setTextColor(getResources().getColor(R.color.Black));
                         okay.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -2766,7 +2766,7 @@ GeoPoint location;
 
 
             fragment.setCategoryId(currentCategoryID);
-        fragment.Setsubcategories(currentCategoryID);
+            fragment.Setsubcategories(currentCategoryID);
             fragment.setFinancialServiceProvider(financialNewItems);
             fragment.finicons();
 

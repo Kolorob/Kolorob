@@ -54,12 +54,15 @@ import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -86,6 +89,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     String password="2Jm!4jFe3WgB";
 
     HealthNewDBModelMain healthServiceProviderItemNew;
+
+    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
 
     ArrayList<HealthNewDBModelPharmacy> healthNewDBModelPharmacies;
     ArrayList<HealthNewDBModelHospital> healthNewDBModelHospitals;
@@ -178,6 +183,10 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         setRatingBar();
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  healthServiceProviderItemNew.getCentertype());
+
+        if(!healthServiceProviderItemNew.getCentertype().equals(getReferences(healthServiceProviderItemNew))){
+            CheckConcate("বিশেষত্ব", getReferences(healthServiceProviderItemNew));
+        }
 
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(healthServiceProviderItemNew.getRoad()));
@@ -1053,5 +1062,52 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             increment++;
         }
     }
+
+    private String getReferences(HealthNewDBModelMain et){
+        String ref;
+        StringBuilder result = new StringBuilder();
+
+        setSubcategories(20000);
+
+        String refid = et.getRefnumm();
+        result.delete(0, result.length());
+        String[] references = refid.split(",");
+        for (int k = 0; k < references.length; k++) {
+            for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                int value = subCategoryItemNews.get(i).getRefId();
+                if (value == Integer.parseInt(references[k])) {
+                    result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                    result.append(",");
+                }
+            }
+        }
+        try {
+
+            result.setLength(result.length() - 1);
+            ref = String.valueOf(result);
+        }catch (StringIndexOutOfBoundsException  e)
+        {
+            ref = "পাওয়া যায় নি";
+        }
+
+        return ref;
+
+    }
+
+
+
+
+    public void setSubcategories(int id) {
+
+        SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
+        subCategoryItemNews = subCategoryTableNew.getAllSubCat();
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
+    }
+
+
+
 
 }

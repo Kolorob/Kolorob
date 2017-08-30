@@ -53,12 +53,14 @@ import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -86,6 +88,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
     Context con;
     ArrayList<EduNewModel> educationNewItem=new ArrayList<>();
+    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
     RatingBar ratingBar;
     int compareValue;
     String previous_node;
@@ -161,7 +164,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         checkBox = (CheckBox) findViewById(R.id.compare);
 
 
+
         CheckConcate("প্রতিষ্ঠানের ধরণ ", educationNewItem.get(0).getEdtype());
+        if(!educationNewItem.get(0).getEdtype().equals(getReferences(educationNewItem.get(0)))){
+            CheckConcate("বিশেষত্ব", getReferences(educationNewItem.get(0)));
+        }
         CheckConcate("শাখা", educationNewItem.get(0).getShift());
 
         if(!educationNewItem.get(0).getStudentno().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা", EtoB(educationNewItem.get(0).getStudentno())+" জন");
@@ -1125,5 +1132,49 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             return 4;
         else
             return 5;
+    }
+
+    private String getReferences(EduNewModel et){
+        String ref;
+        StringBuilder result = new StringBuilder();
+
+        setSubcategories(10000);
+
+        String refid = et.getRefnumm();
+        result.delete(0, result.length());
+        String[] references = refid.split(",");
+        for (int k = 0; k < references.length; k++) {
+            for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                int value = subCategoryItemNews.get(i).getRefId();
+                if (value == Integer.parseInt(references[k])) {
+                    result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                    result.append(",");
+                }
+            }
+        }
+        try {
+
+            result.setLength(result.length() - 1);
+            ref = String.valueOf(result);
+        }catch (StringIndexOutOfBoundsException  e)
+        {
+            ref = "পাওয়া যায় নি";
+        }
+
+        return ref;
+
+    }
+
+
+
+
+    public void setSubcategories(int id) {
+
+        SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
+        subCategoryItemNews = subCategoryTableNew.getAllSubCat();
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
     }
 }

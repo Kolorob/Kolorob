@@ -49,10 +49,13 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -69,6 +72,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     ImageView route_icon,phone_icon,email_icon,email_btn;
     ImageView comment_icon;
     ArrayList<CommentItem> commentItems;
+    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
     int inc;
     int width,height;
     String datevalue,datevaluebn;
@@ -184,7 +188,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         value = new String[600];
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  entertainmentServiceProviderItemNew.getEnttype());
-
+        if(!entertainmentServiceProviderItemNew.getEnttype().equals(getReferences(entertainmentServiceProviderItemNew))){
+            CheckConcate("বিশেষত্ব", getReferences(entertainmentServiceProviderItemNew));
+        }
         if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
 
         //CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য নয়");
@@ -820,6 +826,49 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         } else {
             return false;
         }
+
+    }
+
+    private String getReferences(EntertainmentNewDBModel et){
+        String ref;
+        StringBuilder result = new StringBuilder();
+
+        setSubcategories(30000);
+
+        String refid = et.getRefnumm();
+        result.delete(0, result.length());
+        String[] references = refid.split(",");
+        for (int k = 0; k < references.length; k++) {
+            for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                int value = subCategoryItemNews.get(i).getRefId();
+                if (value == Integer.parseInt(references[k])) {
+                    result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                    result.append(",");
+                }
+            }
+        }
+        try {
+
+            result.setLength(result.length() - 1);
+            ref = String.valueOf(result);
+        }catch (StringIndexOutOfBoundsException  e)
+        {
+            ref = "পাওয়া যায় নি";
+        }
+
+        return ref;
+
+    }
+
+
+
+    public void setSubcategories(int id) {
+
+        SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
+        subCategoryItemNews = subCategoryTableNew.getAllSubCat();
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
 
     }
 

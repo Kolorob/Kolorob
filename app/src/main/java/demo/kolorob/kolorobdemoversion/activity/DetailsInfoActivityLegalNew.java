@@ -49,10 +49,13 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
+import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
 import demo.kolorob.kolorobdemoversion.model.CommentItem;
+import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 import demo.kolorob.kolorobdemoversion.utils.AppUtils;
@@ -68,6 +71,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
     LinearLayout upperHand,upperText,left_way,middle_phone,right_email,bottom_bar;
     ImageView left_image,middle_image,right_image,email_btn;
     ArrayList<CommentItem> commentItems;
+    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
     ImageView comments;
     int inc;
 
@@ -238,7 +242,9 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  legalAidServiceProviderItemNew.getServicetype());
-
+        if(!legalAidServiceProviderItemNew.getServicetype().equals(getReferences(legalAidServiceProviderItemNew))){
+            CheckConcate("বিশেষত্ব", getReferences(legalAidServiceProviderItemNew));
+        }
 
         CheckConcate("রাস্তা", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getBlock()));
@@ -1013,6 +1019,53 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
     }
+
+    private String getReferences(LegalAidNewDBModel et){
+        String ref;
+        StringBuilder result = new StringBuilder();
+
+        setSubcategories(50000);
+
+        String refid = et.getRefnumm();
+        result.delete(0, result.length());
+        String[] references = refid.split(",");
+        for (int k = 0; k < references.length; k++) {
+            for (int i = 0; i < subCategoryItemNews.size(); i++) {
+                int value = subCategoryItemNews.get(i).getRefId();
+                if (value == Integer.parseInt(references[k])) {
+                    result.append(subCategoryItemNews.get(i).getRefLabelBn());
+                    result.append(",");
+                }
+            }
+        }
+        try {
+
+            result.setLength(result.length() - 1);
+            ref = String.valueOf(result);
+        }catch (StringIndexOutOfBoundsException  e)
+        {
+            ref = "পাওয়া যায় নি";
+        }
+
+        return ref;
+
+    }
+
+
+
+
+    public void setSubcategories(int id) {
+
+        SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
+        subCategoryItemNews = subCategoryTableNew.getAllSubCat();
+        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
+
+    }
+
+
+
 
 
 }
