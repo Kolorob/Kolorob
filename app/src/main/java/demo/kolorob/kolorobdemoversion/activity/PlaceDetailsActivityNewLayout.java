@@ -870,9 +870,9 @@ GeoPoint location;
                         final TextView bodys = (TextView) promptView.findViewById(R.id.body);
                         final ImageView okay=(ImageView)promptView.findViewById(R.id.okay);
 
-                        header.setText("Not available yet");
+                        header.setText("দুঃখিত, এখনও প্রস্তুত হয়নি");
                         header.setTextColor(getResources().getColor(R.color.Black));
-                        bodys.setText("Kolorob Job Portal is under construction\nStay tuned..");
+                        bodys.setText("কলরব জব পোর্টাল নতুন রূপে নিরমাণাধীন" + "\n" + "আমাদের সাথেই থাকুন");
                         bodys.setTextColor(getResources().getColor(R.color.Black));
                         okay.setOnClickListener(new View.OnClickListener() {
                             @Override
