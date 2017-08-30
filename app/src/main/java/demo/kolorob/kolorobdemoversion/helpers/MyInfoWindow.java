@@ -125,7 +125,7 @@ public class MyInfoWindow extends InfoWindow {
         txtTitle.setText(titlemarker);
         //txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
 
-        if(service_type!=null || services!=null) {
+        /*if(service_type!=null || services!=null) {
             String[] subServices = new String[20];
             if(services.contains(",")){
                 subServices = services.split(",");
@@ -143,8 +143,8 @@ public class MyInfoWindow extends InfoWindow {
         }
         else{
             txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
-        }
-
+        }*/
+        txtSubdescription.setText("রেটিং : " + address + "\n\n" + "বিস্তারিত জানতে ক্লিক করুন");
         adddescription.setText("যোগাযোগ: " + contact2);
         // contact.setText(contact2);
 
