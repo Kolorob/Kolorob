@@ -834,6 +834,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
 
             }
+            else{
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
+            }
         }
         InfoWindow infoWindow = new MyInfoWindow(R.layout.bonuspack_bubble_black, mapView, MapFragmentOSM.this.getActivity(), point, title, contact, node, categoryId, add, ref);
         marker.setInfoWindow(infoWindow);
@@ -868,6 +871,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
             } else if (subcategotyId == 49900) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
             }
+            else{
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
+            }
 
 
             //marker.setTitle("Title of the marker");
@@ -891,9 +897,7 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i] == "") continue;
             subcategotyId = Integer.parseInt(tokens[i]);
-            if (subcategotyId == 20100)
-
-            {
+            if (subcategotyId == 20100) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_1));
             } else if (subcategotyId == 20200) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
@@ -903,6 +907,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
             } else if (subcategotyId == 29900) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            }
+            else{
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
             }
 
 
@@ -931,6 +938,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_2));
             } else if (subcategotyId == 59900) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            }
+            else{
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_3));
             }
         }
 
@@ -963,6 +973,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_4));
             } else if (subcategotyId == 39900) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            }
+            else{
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
             }
 
         }
@@ -1001,6 +1014,9 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_5));
             } else if (subcategotyId == 69900) {
                 marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_6));
+            }
+            else{
+                marker.setIcon(this.getResources().getDrawable(R.drawable.pin_map_8));
             }
 
 
