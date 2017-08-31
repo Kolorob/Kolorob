@@ -379,8 +379,8 @@ GeoPoint location;
         firstRun = settings.getBoolean("firstRunUp", false);
         firstRunUpdate = settings.getBoolean("new_update_first_run", true);
 
-        wardId = settings.getString("_ward", Integer.toString(2));
-        Areakeyword=settings.getString("areakeyword","Mirpur_12");
+        wardId = settings.getString("_ward", null);
+        Areakeyword=settings.getString("areakeyword",null);
         Log.e("","Ward ID: " + wardId + "Area: " + Areakeyword);
         storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
         storedAreaArrayListall= storedAreaTable.getAllstored();

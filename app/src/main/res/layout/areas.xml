@@ -26,12 +26,8 @@
     android:layout_height="wrap_content">
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        style="@style/scrollbar_shape_style"
-        android:fadeScrollbars="false"
-        android:scrollbarStyle="insideInset"
-
-        android:scrollIndicators="right">
+        android:layout_height="100dp"
+       >
 
 
 <RadioGroup
