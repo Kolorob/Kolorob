@@ -140,7 +140,7 @@
                         android:background="@color/colorPrimary"
 
                         android:padding="@dimen/regsubbtn"
-                        android:text=" জমা দিন "
+                        android:text=" এলাকার তথ্য নামান "
                         android:textColor="@color/White"
                         android:textSize="@dimen/offercounterbtn" />
                 </RelativeLayout>

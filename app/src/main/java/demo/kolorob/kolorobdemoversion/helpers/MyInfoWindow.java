@@ -144,7 +144,7 @@ public class MyInfoWindow extends InfoWindow {
         else{
             txtSubdescription.setText("রেটিং : " + address +"\nপ্রতিষ্ঠানের ধরনঃ " +referenceid);
         }*/
-        txtSubdescription.setText("রেটিং : " + address + "\n" + "বিস্তারিত জানতে ক্লিক করুন");
+        txtSubdescription.setText("রেটিং : " + address);
         adddescription.setText("যোগাযোগ: " + contact2);
         // contact.setText(contact2);
 

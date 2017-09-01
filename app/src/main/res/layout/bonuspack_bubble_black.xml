@@ -68,6 +68,18 @@
 			android:paddingTop="5dp"
 			android:layout_marginLeft="10dp"
 			android:paddingRight="10dp" />
+		<TextView android:id="@+id/click_for_details"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/Maroon"
+			android:textSize="15dp"
+			android:maxEms="17"
+			android:text="বিস্তারিত জানতে ক্লিক করুন"
+			android:paddingLeft="5dp"
+			android:paddingTop="10dp"
+
+			android:layout_marginLeft="10dp"
+			android:paddingRight="10dp" />
 
 	</LinearLayout>
 </LinearLayout>
