@@ -86,7 +86,7 @@ public class PhoneRegActivity extends Activity {
     //TODO Declare object for each subcategory item. Different for each category. Depends on the database table.
     String gotname;
     TextView helname;
-Boolean registered;
+    Boolean registered;
     private Context con;
     String IMEINumber,IMEI=null,PHN=null;
     FButton Submit;
@@ -347,7 +347,7 @@ Boolean registered;
 
         RequestQueue requestQueue = Volley.newRequestQueue(PhoneRegActivity.this);
         // http://192.168.43.57/demo/api/customer_reg?phone=01711310912
-        String url = "http://kolorob.net/kolorob-new-demo/api/customer_reg3?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
+        String url = "http://kolorob.net/kolorob-new-demo/api/customer_reg4?username="+username+"&password="+password+"/"+"&phone="+phone+"&name="+gotname+"&deviceid="+IMEINumber+"" ;
         //  String url = "http://kolorob.net/demo/api/customer_reg?username="+username+"&password="+password+"/" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -388,8 +388,6 @@ Boolean registered;
                             }
 
 
-
-
                             else if(response.equals("\"Invalid Phone Number\""))
                             {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত আপনার ফোন নম্বরটি সঠিক নয়",
@@ -398,46 +396,57 @@ Boolean registered;
                             {
                                 showMessageExisting(PhoneRegActivity.this, "দুঃখিত",
                                         " আপনার ডিভাইস আইডি সংগ্রহের অনুমতি দিন",4);
-
-
-
                             }
+
+                            else if(response.contains("already registered")) {
+
+                                List<String> responses = Arrays.asList(response.split(","));
+                                String serverusername= responses.get(3);
+                                String serverusernamechanged = StringEscapeUtils.unescapeJava(serverusername).replace("%20"," " );
+
+                                SharedPreferences settings = getSharedPreferences("prefs", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+
+                                SharedPreferencesHelper.setNumber(con, phoneNumber);
+                                SharedPreferencesHelper.setUname(con, serverusernamechanged);
+
+
+                                editor.putBoolean("IFREGISTERED", true);
+                                editor.apply();
+
+
+                                showMessageExisting(PhoneRegActivity.this,
+                                        " এই নাম্বার টি আগেই নিবন্ধিত হয়েছে", "আপনার ইউজার নেম " + serverusernamechanged + " এবং নাম্বারঃ " + phoneNumber, 2);
+                            }
+
                             else if(response.contains("EXISTING")) /*if user is already in our db; then we are replacing new number and user name in application*/
                             {
                                 List<String> responses = Arrays.asList(response.split(","));
+                                String thisdate=responses.get(10);
 
                                 String serverusername= responses.get(3);
-                                String thisdate=responses.get(10);
                                 String serverusernamechanged = StringEscapeUtils.unescapeJava(serverusername).replace("%20"," " );
 
-                                String serverphonenumber=responses.get(2);
-                                SharedPreferencesHelper.setNumber(con,serverphonenumber);
 
-                                SharedPreferencesHelper.setUname(con,serverusernamechanged);
                                 SharedPreferences settings = getSharedPreferences("prefs", 0);
                                 SharedPreferences.Editor editor = settings.edit();
+
+                                SharedPreferencesHelper.setNumber(con, phoneNumber);
+                                SharedPreferencesHelper.setUname(con, serverusernamechanged);
                                 String check=settings.getString("timesfirstinstall","2");
                                 if(check.equals("2")) {
                                     settings.edit().putString("timesfirstinstall", thisdate).apply();
                                 }
+
                                 editor.putBoolean("IFREGISTERED", true);
                                 editor.apply();
-                                showMessageExisting(PhoneRegActivity.this, "দুঃখিত! আপনার ডিভাইস থেকে আগেই কলরব সেটআপ হয়েছে",
-                                        "আপনার ইউজার নেম  " +serverusernamechanged +" এবং ফোন নাম্বার  "+serverphonenumber,2);
 
-                            }
-                            else if(response.equals("\"already registered\""))
-
-                            {
-                                showMessageExisting(PhoneRegActivity.this, "দুঃখিত",
-                                        " এই নাম্বার টি আগেই নিবন্ধিত হয়েছে",3);
-
+                                showMessageExisting(PhoneRegActivity.this, "আপনার ডিভাইসে নতুন করে কলরব সেটআপ হয়েছে",
+                                        "আপনার ইউজার নেম  " + serverusernamechanged + " এবং ফোন নাম্বার  " + phoneNumber, 2);
 
                             }
 
-                            else
-
-                            {
+                            else {
                                 AlertMessage.showMessage(PhoneRegActivity.this, "দুঃখিত",
                                         "দয়া করে পরে চেষ্টা করুন");
                             }
