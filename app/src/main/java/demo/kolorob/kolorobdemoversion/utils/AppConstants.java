@@ -14,7 +14,7 @@ public class AppConstants {
 
     public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.ic_education_selected, R.drawable.ic_health_selected,R.drawable.ic_entertainment_selected,
             R.drawable.ic_government_selected,R.drawable.ic_legal_selected,  R.drawable.ic_finance_selected ,
-            R.drawable.ic_ngos_selected,R.drawable.ic_religious_shelter_selected
+            R.drawable.ic_ngos_selected,R.drawable.shelter_selected
     };
 
     /*public static final int[] ALL_CAT_ICONS_NEW = {R.drawable.education, R.drawable.health,R.drawable.entertainment,

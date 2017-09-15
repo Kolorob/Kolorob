@@ -2289,7 +2289,7 @@ GeoPoint location;
                             populatefilterwords(getFilcatid());
                         }
                         ivIcon.setImageResource(0);
-                        ivIcon.setImageResource(R.drawable.ic_religious_shelter);
+                        ivIcon.setImageResource(R.drawable.shelter);
 
 
                         ArrayList<ReligiousNewDBModel> ReligiousServiceProviderItemNew;
