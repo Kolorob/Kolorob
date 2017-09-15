@@ -40,5 +40,13 @@
 
     <!-- Default screen margins, per the Android Design guidelines. -->
 
+    <dimen name="title_marginBottom">10dp</dimen>
+    <dimen name="title_marginTop">40dp</dimen>
+    <dimen name="title_paddingTop">10dp</dimen>
+    <dimen name="title_paddingBottom">2dp</dimen>
+    <dimen name="title_paddingLeft">30dp</dimen>
+    <dimen name="title_textSize">30sp</dimen>
+    <dimen name="titlebar_marginBottom">40dp</dimen>
+
 
 </resources>

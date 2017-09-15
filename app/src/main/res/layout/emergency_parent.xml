@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
+        android:id="@+id/emergency_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:padding="7dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="0.11"
+        android:gravity="left|center_vertical"
+        android:padding="30dp"
         android:text="Large Text"
-        android:id="@+id/emergency_name" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 </LinearLayout>

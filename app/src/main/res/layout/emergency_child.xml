@@ -5,21 +5,28 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Phone"
-        android:textColor="@color/white"
-
+        android:paddingLeft="30dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:id="@+id/phone" />
 
     <TextView
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:textColor="@color/white"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/black"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Address"
+        android:textSize="20sp"
         android:id="@+id/address" />
 
 
@@ -40,10 +47,11 @@
             android:gravity="right|center_vertical">
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
                 android:id="@+id/distance_left"
-                android:background="@drawable/direction_icon"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_direction_icon"
+                android:backgroundTint="@color/kolorob_color" />
 
 
 
@@ -65,10 +73,11 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
                 android:id="@+id/phone_call"
-                android:background="@drawable/phone_icon"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_phone_icon"
+                android:backgroundTint="@color/kolorob_color" />
 
 
 
@@ -89,18 +98,21 @@
             android:gravity="left|center_vertical">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:id="@+id/right_side_email"
-                android:background="@drawable/email_icon"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_email_icon"
+                android:backgroundTint="@color/kolorob_color"
+                android:backgroundTintMode="src_over" />
 
 
 
         </LinearLayout>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="4dp"/>
+        android:layout_height="2dp"
+        android:background="@color/kolorob_color" />
 </LinearLayout>

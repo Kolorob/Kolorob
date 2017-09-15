@@ -35,13 +35,6 @@ public class EmergencyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
         expListView = (ExpandableListView)findViewById(R.id.lvExp);
-        close_button=(ImageView)findViewById(R.id.iv_close);
-        close_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         context =this;
         name_bangla = new String[] { "বাংলাদেশ ফায়ার সার্ভিস অ্যান্ড সিভিল ডিফেন্স ",
@@ -142,7 +135,7 @@ public class EmergencyActivity extends AppCompatActivity {
         {
             for(int j=0;j<1;j++)
             {
-                String temp="ফোন নম্বর: "+phone_no[i]+"#"+"ঠিকানা: "+address_bangla[i]+"#"+location[i]+"#"+email[i]+"#"+"v";
+                String temp="ফোন নম্বর: "+English_to_bengali_number_conversion(phone_no[i])+"#"+"ঠিকানা: "+address_bangla[i]+"#"+location[i]+"#"+email[i]+"#"+"v";
                 temps.add(i,temp);
             }
             listDataChild.put(name_bangla[i], temps);
@@ -171,4 +164,48 @@ public class EmergencyActivity extends AppCompatActivity {
         }
 
     }
+
+    private String English_to_bengali_number_conversion(String english_number) {
+        if (english_number.equals("null") || english_number.equals(""))
+            return english_number;
+        int v = english_number.length();
+        String concatResult = "";
+        for (int i = 0; i < v; i++) {
+            if (english_number.charAt(i) == '1')
+                concatResult = concatResult + "১";
+            else if (english_number.charAt(i) == '2')
+                concatResult = concatResult + "২";
+            else if (english_number.charAt(i) == '3')
+                concatResult = concatResult + "৩";
+            else if (english_number.charAt(i) == '4')
+                concatResult = concatResult + "৪";
+            else if (english_number.charAt(i) == '5')
+                concatResult = concatResult + "৫";
+            else if (english_number.charAt(i) == '6')
+                concatResult = concatResult + "৬";
+            else if (english_number.charAt(i) == '7')
+                concatResult = concatResult + "৭";
+            else if (english_number.charAt(i) == '8')
+                concatResult = concatResult + "৮";
+            else if (english_number.charAt(i) == '9')
+                concatResult = concatResult + "৯";
+            else if (english_number.charAt(i) == '0')
+                concatResult = concatResult + "০";
+            else if (english_number.charAt(i) == '.')
+                concatResult = concatResult + ".";
+            else if (english_number.charAt(i) == '/')
+                concatResult = concatResult + "/";
+            else if (english_number.charAt(i) == '-')
+                concatResult = concatResult + "-";
+            else if(english_number.charAt(i)== '+'){
+                concatResult = concatResult + "+";
+            }
+            else {
+                return english_number;
+            }
+
+        }
+        return concatResult;
+    }
 }
+
