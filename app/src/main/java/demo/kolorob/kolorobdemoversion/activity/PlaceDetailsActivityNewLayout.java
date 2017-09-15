@@ -1943,7 +1943,8 @@ GeoPoint location;
         final ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIconCatList);
 
 
-        //TextView tvName = (TextView) v.findViewById(R.id.tvNameCatList);
+        TextView tvName = (TextView) v.findViewById(R.id.cat_name);
+
 
 
 
@@ -1955,8 +1956,8 @@ GeoPoint location;
         lpIv.width = (int) (primaryIconWidth * dwPercentage);
         ivIcon.setLayoutParams(lpIv);
 
-        //   tvName.setText(ci.getCatName());
-        //   tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
+           tvName.setText(translateCategory(ci.getCatName()));
+           tvName.setTextSize((float) (VIEW_WIDTH * .10 * dwPercentage));
 
 /**************************
  *
@@ -3055,6 +3056,31 @@ GeoPoint location;
                 concatResult = concatResult + "০";
         }
         return concatResult;
+    }
+
+    private static String translateCategory(String catName){
+        String banglaName = "";
+        switch(catName){
+            case "Education": banglaName += "শিক্ষা";
+                break;
+            case "Health": banglaName += "স্বাস্থ্য";
+                break;
+            case "Entertainment": banglaName += "বিনোদন";
+                break;
+            case "Government": banglaName += "সরকারী সেবা";
+                break;
+            case "Legal": banglaName += "আইনী";
+                break;
+            case "Finance" : banglaName += "অর্থনৈতিক";
+                break;
+            case "NGO": banglaName += "এনজিও";
+                break;
+            case "Religious Shelter": banglaName += "আশ্রয়কেন্দ্র";
+                break;
+            default: banglaName += "অন্যান্য";
+        }
+
+        return banglaName;
     }
 
     public static boolean moreThanOnce(ArrayList<Integer> list, int searched) {

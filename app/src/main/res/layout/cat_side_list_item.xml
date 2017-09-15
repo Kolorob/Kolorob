@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
 
 
+    android:gravity="center_horizontal|center"
     android:orientation="vertical"
-
     android:weightSum="1">
 
 
@@ -16,28 +16,42 @@
         android:layout_height="@dimen/catbuttonheight"
 
 
-        android:contentDescription="@string/txt_cd_icon_cat"
-        android:layout_gravity="center|top" />
+        android:layout_gravity="center|top"
+        android:contentDescription="@string/txt_cd_icon_cat" />
+
+    <TextView
+        android:id="@+id/cat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/ivIconCatList"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Health"
+
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
 
     <!--<TextView-->
-        <!--android:id="@+id/tvNameCatList"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="3dp"-->
-        <!--android:text="Health"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="16dp"-->
-        <!--tools:ignore="HardcodedText"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:layout_below="@+id/ivIconCatList"-->
-        <!--android:layout_alignLeft="@+id/ivIconCatList"-->
-        <!--android:layout_alignStart="@+id/ivIconCatList"-->
-        <!--android:layout_alignRight="@+id/ivIconCatList"-->
-        <!--android:layout_alignEnd="@+id/ivIconCatList" />-->
+    <!--android:id="@+id/tvNameCatList"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="3dp"-->
+    <!--android:text="Health"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="16dp"-->
+    <!--tools:ignore="HardcodedText"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--android:layout_below="@+id/ivIconCatList"-->
+    <!--android:layout_alignLeft="@+id/ivIconCatList"-->
+    <!--android:layout_alignStart="@+id/ivIconCatList"-->
+    <!--android:layout_alignRight="@+id/ivIconCatList"-->
+    <!--android:layout_alignEnd="@+id/ivIconCatList" />-->
 
     <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="@android:color/darker_gray" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@android:color/darker_gray" />-->
 
 </LinearLayout>
