@@ -44,7 +44,6 @@ import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBMod
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
-import demo.kolorob.kolorobdemoversion.model.Job.JobServiceProviderItem;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
 import demo.kolorob.kolorobdemoversion.model.RatingModel;
@@ -75,7 +74,6 @@ public class MapFragmentOSM extends Fragment implements View.OnClickListener, Ma
     IMapController mapViewController;
     private ArrayList<EntertainmentNewDBModel> entertainmentServiceProvider = null;
     private ArrayList<LegalAidNewDBModel> legalaidServiceProvider = null;
-    private ArrayList<JobServiceProviderItem> jobServiceProvider = null;
     private ArrayList<FinancialNewDBModel> financialServiceProvider = null;
     private ArrayList<EduNewModel> educationServiceProvider = null;
     private ArrayList<GovernmentNewDBModel> governmentNewItems = null;
