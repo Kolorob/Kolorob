@@ -67,6 +67,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
+import static demo.kolorob.kolorobdemoversion.R.id.comment;
+
 /**
  * Created by israt.jahan on 7/17/2016.
  */
@@ -104,7 +106,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     String status = "", phone_num = "", registered = "",uname="";
 
     private CheckBox checkBox;
-    EditText feedback_comment;
+    // EditText feedback_comment;
 
     String datevalue,datevaluebn;
     @Override
@@ -737,7 +739,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                //feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
                 feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
                 int selected = feedRadio.getCheckedRadioButtonId();
                 rb1 = (RadioButton)promptView.findViewById(selected);
@@ -769,14 +771,14 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     {
         int rating= getRating(status);;
 
-        String comment="",comment2="";
-        comment=feedback_comment.getText().toString().trim(); /*encoding been done for bangla input*/
-        try {
+        /*String comment="",comment2="";
+        comment=feedback_comment.getText().toString().trim(); *//*encoding been done for bangla input*/
+        /*try {
             comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
-        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating/"+educationNewItem.get(0).getEduId()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"";
+        }*/
+        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating2/"+educationNewItem.get(0).getEduId()+"?"+"phone=" +phone_num +"&name=" +uname + "&rating="+rating+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
