@@ -62,6 +62,8 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
+import static demo.kolorob.kolorobdemoversion.R.id.comment;
+
 /**
  * Created by arafat on 28/05/2016.
  */
@@ -93,7 +95,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     RadioButton rb1;
     String status="",phone_num="",uname="";
     String result_concate="";
-    EditText feedback_comment;
+    //EditText feedback_comment;
     RatingBar ratingBar;
     ListView service_data;
 
@@ -554,7 +556,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
+                //feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
                 feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
                 int selected = feedRadio.getCheckedRadioButtonId();
                 rb1 = (RadioButton)promptView.findViewById(selected);
@@ -594,15 +596,15 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         else
             rating= 5;
 
-        String comment="",comment2="";
-        comment=feedback_comment.getText().toString().trim();
-        try {
+        //String comment="",comment2="";
+        //comment=feedback_comment.getText().toString().trim();
+        /*try {
             comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
+        }*/
         Log.d("status ","======"+status);
-        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating/"+entertainmentServiceProviderItemNew.getEntid()+"?"+"phone=" +phone_num +"&name=" +uname +"&review=" +comment2+ "&rating="+rating+"&username="+username+"&password="+password+"";
+        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating2/"+entertainmentServiceProviderItemNew.getEntid()+"?"+"phone=" +phone_num +"&name=" +uname + "&rating="+rating+"&username="+username+"&password="+password+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
