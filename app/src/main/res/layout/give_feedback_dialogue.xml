@@ -98,7 +98,7 @@
         android:gravity="center">
 
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -107,11 +107,11 @@
 
 
             android:textSize="@dimen/feedbackalltext"
-            />
+            />-->
 
 
 
-        <EditText
+        <!--<EditText
             android:id="@+id/feedback_comment"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -121,7 +121,7 @@
             android:gravity="center"
             android:background="@color/white"
             android:lines="4"
-            />
+            />-->
     </LinearLayout>
 
     <LinearLayout
