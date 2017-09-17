@@ -191,25 +191,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         }
 
 
-        CheckConcate("রাস্তা", English_to_bengali_number_conversion(healthServiceProviderItemNew.getRoad()));
-        CheckConcate("ব্লক", English_to_bengali_number_conversion(healthServiceProviderItemNew.getBlock()));
-        CheckConcate("এলাকা", healthServiceProviderItemNew.getAreabn());
-        if(healthServiceProviderItemNew.getWard().contains("_")){
-            String[] ward = healthServiceProviderItemNew.getWard().split("_");
-            if(ward[1].equals("dakshinkhan")){
-                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
-            }
-            else{
-                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
-            }
-        }
-        else{
-            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(healthServiceProviderItemNew.getWard()));
-        }
-
-        CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
-
-        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(healthServiceProviderItemNew.getHouseno()));
+        CheckConcate("ঠিকানা", concatenateAddress(healthServiceProviderItemNew.getHouseno(), healthServiceProviderItemNew.getRoad(), healthServiceProviderItemNew.getBlock(), healthServiceProviderItemNew.getAreabn(), healthServiceProviderItemNew.getWard(), healthServiceProviderItemNew.getPolicestation()));
 
         CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
 
@@ -246,9 +228,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 {
                     CheckConcate("মাতৃত্বজনিত সুবিধা", "নেই");
                 }
-                else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
-                CheckConcate("মাতৃত্ব জনিত নাম্বার", healthNewDBModelHospital.getMaternitynumber());
-                CheckConcate("নিরাপত্তা ", healthNewDBModelHospital.getMaternityprivacy());
+                //else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
+                CheckConcate("মাতৃসেবার জন্য যোগাযোগ", healthNewDBModelHospital.getMaternitynumber());
+                CheckConcate("মাতৃত্বজনিত সুবিধা", healthNewDBModelHospital.getMaternityprivacy());
 
 
             }
@@ -1063,6 +1045,52 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             value[increment] = value2 + "\n";
             increment++;
         }
+    }
+
+    private boolean checkValue(String value){
+        return !value.equals("null") && !value.equals("");
+    }
+
+    private String concatenateAddress(String house, String block, String road, String areaBn, String ward, String policeStation){
+
+        String address = "";
+
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
+            }
+            else{
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
+            }
+        }
+        else{
+            ward = English_to_bengali_number_conversion(ward);
+        }
+
+        if(checkValue(house)){
+            address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
+        }
+        if(checkValue(road)){
+            address += " রাস্তা : " + English_to_bengali_number_conversion(road) + ",";
+        }
+        if(checkValue(block)){
+            address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
+        }
+        if(checkValue(areaBn)){
+            address += " এলাকা : " + areaBn + ",";
+        }
+        if(checkValue(ward)){
+            address += " ওয়ার্ড : " + ward + ",";
+        }
+        if(checkValue(policeStation)){
+            address += " পুলিশ স্টেশন : " + policeStation + ",";
+        }
+
+        char[] addressArray = address.toCharArray();
+        addressArray[addressArray.length-1] = ' ';
+
+        return String.valueOf(addressArray);
     }
 
     private String getReferences(HealthNewDBModelMain et){

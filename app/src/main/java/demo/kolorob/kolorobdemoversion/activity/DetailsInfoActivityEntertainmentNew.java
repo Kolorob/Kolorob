@@ -196,7 +196,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
         if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
 
-  
+
 
         CheckConcate("ঠিকানা", concatenateAddress(entertainmentServiceProviderItemNew.getHouseno(), entertainmentServiceProviderItemNew.getRoad(), entertainmentServiceProviderItemNew.getBlock(), entertainmentServiceProviderItemNew.getAreabn(), entertainmentServiceProviderItemNew.getWard(), entertainmentServiceProviderItemNew.getPolicestation()));
         CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
