@@ -62,6 +62,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
+import static demo.kolorob.kolorobdemoversion.R.id.add;
 import static demo.kolorob.kolorobdemoversion.R.id.comment;
 
 /**
@@ -196,7 +197,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
 
         //CheckConcate("সার্ভিস চার্জ",  "প্রযোজ্য নয়");
-        CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
+        /*CheckConcate("রাস্তা", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getRoad()));
         CheckConcate("ব্লক", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getBlock()));
         CheckConcate("এলাকা", entertainmentServiceProviderItemNew.getAreabn());
 
@@ -220,6 +221,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
         CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getHouseno()));
 
+        */
+
+        CheckConcate("ঠিকানা", concatenateAddress(entertainmentServiceProviderItemNew.getHouseno(), entertainmentServiceProviderItemNew.getRoad(), entertainmentServiceProviderItemNew.getBlock(), entertainmentServiceProviderItemNew.getAreabn(), entertainmentServiceProviderItemNew.getWard(), entertainmentServiceProviderItemNew.getPolicestation()));
         CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
 
         CheckConcate("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
@@ -819,6 +823,52 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             value[increment] = value2 + "\n";
             increment++;
         }
+    }
+
+    private boolean checkValue(String value){
+        return !value.equals("null") && !value.equals("");
+    }
+
+    private String concatenateAddress(String house, String block, String road, String areaBn, String ward, String policeStation){
+
+        String address = "";
+
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
+            }
+            else{
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
+            }
+        }
+        else{
+            ward = English_to_bengali_number_conversion(ward);
+        }
+
+        if(checkValue(house)){
+            address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
+        }
+        if(checkValue(road)){
+            address += " রাস্তা : " + English_to_bengali_number_conversion(road) + ",";
+        }
+        if(checkValue(block)){
+            address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
+        }
+        if(checkValue(areaBn)){
+            address += " এলাকা : " + areaBn + ",";
+        }
+        if(checkValue(ward)){
+            address += " ওয়ার্ড : " + ward + ",";
+        }
+        if(checkValue(policeStation)){
+            address += " পুলিশ স্টেশন : " + policeStation + ",";
+        }
+
+        char[] addressArray = address.toCharArray();
+        addressArray[addressArray.length-1] = ' ';
+
+        return String.valueOf(addressArray);
     }
 
     private boolean checkPermission() {
