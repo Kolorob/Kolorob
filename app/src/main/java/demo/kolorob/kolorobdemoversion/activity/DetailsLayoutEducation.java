@@ -212,7 +212,6 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         CheckConcateContact("সাপ্তাহিক বন্ধ", educationNewItem.get(0).getOffday());
 
-
         CheckConcateContact("অন্যান্য তথ্য ", educationNewItem.get(0).getOtherinfo());
 
 
@@ -1078,7 +1077,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")&&!value2.equals(" ০")) {
             key[increment] = value1;
-            value[increment] = value2 + "\n";
+            value[increment] = value2;
             increment++;
 
         }
@@ -1089,7 +1088,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     private void CheckConcateContact(String key, String value) {
         if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
             keyContact[incrementContact] = key;
-            valueContact[incrementContact] = value + "\n";
+            valueContact[incrementContact] = value;
             incrementContact++;
         }
     }

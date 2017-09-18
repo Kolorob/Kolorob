@@ -198,7 +198,6 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
         CheckConcateContact("অন্যান্য তথ্য ", governmentNewItem.getOtherinfo());
 
-
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
 
