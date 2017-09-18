@@ -83,10 +83,10 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     int inc;
     int width, height;
     TextView ups_text;
-    String[] key;
-    String[] value;
-    int increment=0;
-    ListView alldata;
+    String[] key, value, keyContact, valueContact;
+    int increment = 0, incrementContact = 0;
+
+    ListView alldata, contact_data;
 
     Context con;
     ArrayList<EduNewModel> educationNewItem=new ArrayList<>();
@@ -149,10 +149,16 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         //close_button = (ImageView) findViewById(R.id.cross_jb);
         ratingBar=(RatingBar)findViewById(R.id.ratingBar);
-        key = new String[600];
+
         setRatingBar();
+
+        key = new String[600];
         value = new String[600];
+        keyContact = new String[600];
+        valueContact = new String[600];
+
         alldata=(ListView)findViewById(R.id.allData);
+        contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -178,38 +184,36 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         if(!educationNewItem.get(0).getAveragestdperclass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  EtoB(educationNewItem.get(0).getAveragestdperclass())+" জন");
         CheckConcate("সুযোগ সুবিধা",  educationNewItem.get(0).getFacility());
 
-        CheckConcate("রাস্তা", EtoB(educationNewItem.get(0).getRoad()));
-        CheckConcate("ব্লক", EtoB(educationNewItem.get(0).getBlock()));
-        CheckConcate("এলাকা", educationNewItem.get(0).getArea_bn());
-
-        if(educationNewItem.get(0).getWard().contains("_")){
-            String[] ward = educationNewItem.get(0).getWard().split("_");
-            if(ward[1].equals("dakshinkhan")){
-                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+        CheckConcateContact("ঠিকানা", concatenateAddress(educationNewItem.get(0).getHouseno(), educationNewItem.get(0).getRoad(), educationNewItem.get(0).getBlock(), educationNewItem.get(0).getArea_bn()));
+        String ward = educationNewItem.get(0).getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
             }
             else{
-                CheckConcate("ওয়ার্ড", EtoB(ward[1]));
+                ward = EtoB(wardSplitted[1]);
             }
         }
         else{
-            CheckConcate("ওয়ার্ড", EtoB(educationNewItem.get(0).getWard()));
+            ward = EtoB(ward);
         }
 
-        CheckConcate("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
+        CheckConcateContact("ওয়ার্ড", ward);
 
-        CheckConcate("বাড়ির নাম্বার", EtoB(educationNewItem.get(0).getHouseno()));
+        CheckConcateContact("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
 
-        CheckConcate("যোগাযোগ", EtoB(educationNewItem.get(0).getNode_contact()));
+        CheckConcateContact("যোগাযোগ", EtoB(educationNewItem.get(0).getNode_contact()));
 
-        CheckConcate("ইমেইল", educationNewItem.get(0).getNode_email());
+        CheckConcateContact("ইমেইল", educationNewItem.get(0).getNode_email());
 
         timeProcessing("খোলার সময়", educationNewItem.get(0).getOpeningtime());
         timeProcessing("বন্ধের সময়", educationNewItem.get(0).getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", educationNewItem.get(0).getOffday());
+        CheckConcateContact("সাপ্তাহিক বন্ধ", educationNewItem.get(0).getOffday());
 
 
-        CheckConcate("অন্যান্য তথ্য ", educationNewItem.get(0).getOtherinfo());
+        CheckConcateContact("অন্যান্য তথ্য ", educationNewItem.get(0).getOtherinfo());
 
 
 
@@ -595,6 +599,10 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
+
+        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+        contact_data.setAdapter(defaultAdapterContact);
+
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1058,45 +1066,107 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
 
     private void timeProcessing(String value1, String value2) {
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") || value2.equals("")) {
+
             String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
+            CheckConcateContact(value1, GetTime);
 
         }
     }
 
-    private String formatPayment(String payment){
+    private void CheckConcate(String value1, String value2) {
+
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")&&!value2.equals(" ০")) {
+            key[increment] = value1;
+            value[increment] = value2 + "\n";
+            increment++;
+
+        }
+
+
+    }
+
+    private void CheckConcateContact(String key, String value) {
+        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
+            keyContact[incrementContact] = key;
+            valueContact[incrementContact] = value + "\n";
+            incrementContact++;
+        }
+    }
+
+    private boolean checkValue(String value){
+        return !value.equals("null") && !value.equals("");
+    }
+
+    private String concatenateAddress(String house, String block, String road, String areaBn){
+        String address = "";
+
+        if(checkValue(house)){
+            address += " বাড়ির নাম্বার : " + EtoB(house) + ",";
+        }
+        if(checkValue(road)){
+            address += " রাস্তা : " + EtoB(road) + ",";
+        }
+        if(checkValue(block)){
+            address += " ব্লক : " + EtoB(block) + ",";
+        }
+        if(checkValue(areaBn)){
+            address += " এলাকা : " + areaBn + ",";
+        }
+
+
+        char[] addressArray = address.toCharArray();
+        addressArray[addressArray.length-1] = ' ';
+
+        return String.valueOf(addressArray);
+    }
+
+
+    private String formatPayment(String payment) {
 
         String payment_bn = "";
 
-        if(payment!=null){
-            for(int i=0; i<payment.length(); i++){
-                switch(payment.charAt(i)){
-                    case '0': payment_bn += "০";
+        if (payment != null) {
+            for (int i = 0; i < payment.length(); i++) {
+                switch (payment.charAt(i)) {
+                    case '0':
+                        payment_bn += "০";
                         break;
-                    case '1': payment_bn += "১";
+                    case '1':
+                        payment_bn += "১";
                         break;
-                    case '2': payment_bn += "২";
+                    case '2':
+                        payment_bn += "২";
                         break;
-                    case '3': payment_bn += "৩";
+                    case '3':
+                        payment_bn += "৩";
                         break;
-                    case '4': payment_bn += "৪";
+                    case '4':
+                        payment_bn += "৪";
                         break;
-                    case '5': payment_bn += "৫";
+                    case '5':
+                        payment_bn += "৫";
                         break;
-                    case '6': payment_bn += "৬";
+                    case '6':
+                        payment_bn += "৬";
                         break;
-                    case '7': payment_bn += "৭";
+                    case '7':
+                        payment_bn += "৭";
                         break;
-                    case '8': payment_bn += "৮";
+                    case '8':
+                        payment_bn += "৮";
                         break;
-                    case '9': payment_bn += "৯";
+                    case '9':
+                        payment_bn += "৯";
                         break;
-                    case '.': payment_bn += "।";
+                    case '.':
+                        payment_bn += "।";
                         break;
-                    case ',': payment_bn += ",";
+                    case ',':
+                        payment_bn += ",";
                         break;
-                    case '-': payment_bn += "-";
+                    case '-':
+                        payment_bn += "-";
                         break;
 
                 }
@@ -1106,21 +1176,6 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     }
 
 
-    private void CheckConcate(String value1,String value2){
-
-
-        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টি")&& !value2.equals(" জন")&& !value2.equals(" টাকা") && !value2.equals("No") && !value2.equals("0")&& !value2.equals("০")&& !value2.equals("০ টি")&& !value2.equals("০ জন")) {
-            key[increment] = value1;
-            value[increment] = value2 + "\n";
-            increment++;
-
-        }
-
-
-
-
-
-    }
     public int getRating(String status)
     {
 
