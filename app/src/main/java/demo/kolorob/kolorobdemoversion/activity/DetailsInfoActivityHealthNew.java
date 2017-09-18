@@ -84,9 +84,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     TextView ups_text;
 
     Context con;
-    int increment=0;
-    String[] key;
-    String[] value;
+    String[] key, value, keyContact, valueContact;
+    int increment = 0, incrementContact = 0;
+
     String username="kolorobapp";
     String password="2Jm!4jFe3WgB";
 
@@ -106,7 +106,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
     private CheckBox checkBox;
     //EditText feedback_comment;
-    ListView alldata;
+    ListView alldata, contact_data;
     RatingBar ratingBar;
     private String compare_Data="";
     int compareValue;
@@ -153,8 +153,11 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         key = new String[600];
-
         value = new String[600];
+        keyContact = new String[600];
+        valueContact = new String[600];
+
+
         final HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DetailsInfoActivityHealthNew.this);
 
 
@@ -191,18 +194,34 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         }
 
 
-        CheckConcate("ঠিকানা", concatenateAddress(healthServiceProviderItemNew.getHouseno(), healthServiceProviderItemNew.getRoad(), healthServiceProviderItemNew.getBlock(), healthServiceProviderItemNew.getAreabn(), healthServiceProviderItemNew.getWard(), healthServiceProviderItemNew.getPolicestation()));
+        CheckConcateContact("ঠিকানা", concatenateAddress(healthServiceProviderItemNew.getHouseno(), healthServiceProviderItemNew.getRoad(), healthServiceProviderItemNew.getBlock(), healthServiceProviderItemNew.getAreabn()));
+        String ward = healthServiceProviderItemNew.getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
+            }
+            else{
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
+            }
+        }
+        else{
+            ward = English_to_bengali_number_conversion(ward);
+        }
 
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
+        CheckConcateContact("ওয়ার্ড", ward);
+        CheckConcateContact("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
 
-        CheckConcate("ইমেইল", healthServiceProviderItemNew.getNode_email());
+        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
+
+        CheckConcateContact("ইমেইল", healthServiceProviderItemNew.getNode_email());
         timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpeningtime());
         timeProcessing("বন্ধের সময়", healthServiceProviderItemNew.getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", healthServiceProviderItemNew.getOffday());
+        CheckConcateContact("সাপ্তাহিক বন্ধ", healthServiceProviderItemNew.getOffday());
 
 
-        CheckConcate("অন্যান্য তথ্য ", healthServiceProviderItemNew.getOtherinfo());
+        CheckConcateContact("অন্যান্য তথ্য ", healthServiceProviderItemNew.getOtherinfo());
 
 
         healthNewDBModelHospitals = healthNewDBTableHospital.getHealthSpecialistData(healthServiceProviderItemNew.getHealthid());
@@ -228,9 +247,9 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                 {
                     CheckConcate("মাতৃত্বজনিত সুবিধা", "নেই");
                 }
-                //else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
+                else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
                 CheckConcate("মাতৃসেবার জন্য যোগাযোগ", healthNewDBModelHospital.getMaternitynumber());
-                CheckConcate("মাতৃত্বজনিত সুবিধা", healthNewDBModelHospital.getMaternityprivacy());
+                CheckConcate("মাতৃসেবার বিশেষ ব্যবস্থা", healthNewDBModelHospital.getMaternityprivacy());
 
 
             }
@@ -588,6 +607,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //            }
 //        });
         alldata=(ListView)findViewById(R.id.allData);
+        contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -632,6 +652,10 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
+
+        DefaultAdapter contactAdapter = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+        contact_data.setAdapter(contactAdapter);
+
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1031,7 +1055,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private void timeProcessing(String value1, String value2) {
         if (!value2.equals("null") || value2.equals("")) {
             String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
+            CheckConcateContact(value1, GetTime);
 
         }
     }
@@ -1047,26 +1071,20 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         }
     }
 
+    private void CheckConcateContact(String key, String value) {
+        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
+            keyContact[incrementContact] = key;
+            valueContact[incrementContact] = value + "\n";
+            incrementContact++;
+        }
+    }
+
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");
     }
 
-    private String concatenateAddress(String house, String block, String road, String areaBn, String ward, String policeStation){
-
+    private String concatenateAddress(String house, String block, String road, String areaBn){
         String address = "";
-
-        if(ward.contains("_")){
-            String[] wardSplitted = ward.split("_");
-            if(wardSplitted[1].equals("dakshinkhan")){
-                ward = "দক্ষিণখান";
-            }
-            else{
-                ward = English_to_bengali_number_conversion(wardSplitted[1]);
-            }
-        }
-        else{
-            ward = English_to_bengali_number_conversion(ward);
-        }
 
         if(checkValue(house)){
             address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
@@ -1080,12 +1098,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         if(checkValue(areaBn)){
             address += " এলাকা : " + areaBn + ",";
         }
-        if(checkValue(ward)){
-            address += " ওয়ার্ড : " + ward + ",";
-        }
-        if(checkValue(policeStation)){
-            address += " পুলিশ স্টেশন : " + policeStation + ",";
-        }
+
 
         char[] addressArray = address.toCharArray();
         addressArray[addressArray.length-1] = ' ';
