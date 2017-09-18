@@ -83,10 +83,10 @@ public class DetailsLayoutFinance extends AppCompatActivity {
     TextView ups_text;
 
     Context con;
-    String[] key;
-    String[] value;
-    int increment=0;
-    ListView alldata;
+    String[] key, value, keyContact, valueContact;
+    int increment = 0, incrementContact = 0;
+
+    ListView alldata, contact_data;
     FinancialNewDBModel financialNewItem;
     EditText feedback_comment;
 
@@ -149,9 +149,12 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
         key = new String[600];
-
         value = new String[600];
+        keyContact = new String[600];
+        valueContact = new String[600];
+
         alldata=(ListView)findViewById(R.id.allData);
+        contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -164,39 +167,35 @@ public class DetailsLayoutFinance extends AppCompatActivity {
             CheckConcate("বিশেষত্ব", getReferences(financialNewItem));
         }
         CheckConcate("সুবিধার ধরণ",  financialNewItem.getServicetype());
-
-        CheckConcate("রাস্তা", English_to_bengali_number_conversion(financialNewItem.getRoad()));
-        CheckConcate("ব্লক", English_to_bengali_number_conversion(financialNewItem.getBlock()));
-        CheckConcate("এলাকা", financialNewItem.getAreabn());
-
-        if(financialNewItem.getWard().contains("_")){
-            String[] ward = financialNewItem.getWard().split("_");
-            if(ward[1].equals("dakshinkhan")){
-                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+        CheckConcateContact("ঠিকানা", concatenateAddress(financialNewItem.getHouseno(), financialNewItem.getRoad(), financialNewItem.getBlock(), financialNewItem.getAreabn()));
+        String ward = financialNewItem.getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
             }
             else{
-                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
             }
         }
         else{
-            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(financialNewItem.getWard()));
+            ward = English_to_bengali_number_conversion(ward);
         }
 
-        CheckConcate("পুলিশ স্টেশন", financialNewItem.getPolicestation());
+        CheckConcateContact("ওয়ার্ড", ward);
+        CheckConcateContact("পুলিশ স্টেশন", financialNewItem.getPolicestation());
 
-        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(financialNewItem.getHouseno()));
+        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(financialNewItem.getNode_contact()));
 
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(financialNewItem.getNode_contact()));
-
-        CheckConcate("ইমেইল", financialNewItem.getNode_email());
+        CheckConcateContact("ইমেইল", financialNewItem.getNode_email());
 
         timeProcessing("খোলার সময়", financialNewItem.getOpeningtime());
         timeProcessing("বন্ধের সময়", financialNewItem.getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", financialNewItem.getOffday());
+        CheckConcateContact("সাপ্তাহিক বন্ধ", financialNewItem.getOffday());
 
 
-        CheckConcate("অন্যান্য তথ্য ", financialNewItem.getOtherinfo());
+        CheckConcateContact("অন্যান্য তথ্য ", financialNewItem.getOtherinfo());
 
 
 
@@ -449,6 +448,10 @@ public class DetailsLayoutFinance extends AppCompatActivity {
         //  feedbacks.setMargins(0, 0, width / 30, 0);
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
+
+        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+        contact_data.setAdapter(defaultAdapterContact);
+
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -935,27 +938,63 @@ public class DetailsLayoutFinance extends AppCompatActivity {
 
 
     private void timeProcessing(String value1, String value2) {
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") || value2.equals("")) {
+
             String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
+            CheckConcateContact(value1, GetTime);
 
         }
     }
 
-
-    private void CheckConcate(String value1,String value2){
-
+    private void CheckConcate(String value1, String value2) {
 
 
 
-        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")) {
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")&&!value2.equals(" ০")) {
             key[increment] = value1;
             value[increment] = value2 + "\n";
             increment++;
 
         }
 
+
     }
+
+    private void CheckConcateContact(String key, String value) {
+        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
+            keyContact[incrementContact] = key;
+            valueContact[incrementContact] = value + "\n";
+            incrementContact++;
+        }
+    }
+
+    private boolean checkValue(String value){
+        return !value.equals("null") && !value.equals("");
+    }
+
+    private String concatenateAddress(String house, String block, String road, String areaBn){
+        String address = "";
+
+        if(checkValue(house)){
+            address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
+        }
+        if(checkValue(road)){
+            address += " রাস্তা : " + English_to_bengali_number_conversion(road) + ",";
+        }
+        if(checkValue(block)){
+            address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
+        }
+        if(checkValue(areaBn)){
+            address += " এলাকা : " + areaBn + ",";
+        }
+
+
+        char[] addressArray = address.toCharArray();
+        addressArray[addressArray.length-1] = ' ';
+
+        return String.valueOf(addressArray);
+    }
+
 
     private String getReferences(FinancialNewDBModel et){
         String ref;
