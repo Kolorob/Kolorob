@@ -100,7 +100,11 @@ public class DefaultAdapter extends BaseAdapter
         }
         else
         {
-            holder.key.setText(key[position] + ":");
+            if(key[position].equals("\n")) {
+                holder.key.setText(key[position] + "................");
+            }
+            else holder.key.setText(key[position] + ":");
+
             holder.value.setText(value[position]);
         }
 

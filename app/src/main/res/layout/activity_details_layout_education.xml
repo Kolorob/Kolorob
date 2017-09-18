@@ -213,24 +213,13 @@
                     android:divider="#181402"
                     android:gravity="left" />
 
-                <View
+                <!--<View
                     android:layout_width="200dp"
                     android:layout_height="1dp"
                     android:layout_alignBottom="@+id/allData"
                     android:layout_marginBottom="5dp"
                     android:layout_gravity="center"
-                    android:background="@color/kolorob_color" />
-
-                <ListView
-
-                    android:id="@+id/contactData"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop= "20dp"
-                    android:layout_alignEnd="@+id/allData"
-                    android:layout_alignRight="@+id/allData"
-                    android:divider="#181402"
-                    android:gravity="left" />
+                    android:background="@color/kolorob_color" />-->
 
 
             </LinearLayout>

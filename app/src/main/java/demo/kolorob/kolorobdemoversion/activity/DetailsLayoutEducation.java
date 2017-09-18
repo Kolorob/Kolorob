@@ -83,10 +83,10 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     int inc;
     int width, height;
     TextView ups_text;
-    String[] key, value, keyContact, valueContact;
-    int increment = 0, incrementContact = 0;
+    String[] key, value;
+    int increment = 0;
 
-    ListView alldata, contact_data;
+    ListView alldata;
 
     Context con;
     ArrayList<EduNewModel> educationNewItem=new ArrayList<>();
@@ -154,11 +154,11 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         key = new String[600];
         value = new String[600];
-        keyContact = new String[600];
-        valueContact = new String[600];
+//        keyContact = new String[600];
+//        valueContact = new String[600];
 
         alldata=(ListView)findViewById(R.id.allData);
-        contact_data = (ListView)findViewById(R.id.contactData);
+       // contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -183,37 +183,6 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         if(!educationNewItem.get(0).getTeachersno().equals("null")) CheckConcate("শিক্ষক সংখ্যা",  EtoB(educationNewItem.get(0).getTeachersno())+" জন");
         if(!educationNewItem.get(0).getAveragestdperclass().equals("null")) CheckConcate("ছাত্রছাত্রী সংখ্যা (গড়)",  EtoB(educationNewItem.get(0).getAveragestdperclass())+" জন");
         CheckConcate("সুযোগ সুবিধা",  educationNewItem.get(0).getFacility());
-
-        CheckConcateContact("ঠিকানা", concatenateAddress(educationNewItem.get(0).getHouseno(), educationNewItem.get(0).getRoad(), educationNewItem.get(0).getBlock(), educationNewItem.get(0).getArea_bn()));
-        String ward = educationNewItem.get(0).getWard();
-        if(ward.contains("_")){
-            String[] wardSplitted = ward.split("_");
-            if(wardSplitted[1].equals("dakshinkhan")){
-                ward = "দক্ষিণখান";
-            }
-            else{
-                ward = EtoB(wardSplitted[1]);
-            }
-        }
-        else{
-            ward = EtoB(ward);
-        }
-
-        CheckConcateContact("ওয়ার্ড", ward);
-
-        CheckConcateContact("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
-
-        CheckConcateContact("যোগাযোগ", EtoB(educationNewItem.get(0).getNode_contact()));
-
-        CheckConcateContact("ইমেইল", educationNewItem.get(0).getNode_email());
-
-        timeProcessing("খোলার সময়", educationNewItem.get(0).getOpeningtime());
-        timeProcessing("বন্ধের সময়", educationNewItem.get(0).getClosetime());
-
-        CheckConcateContact("সাপ্তাহিক বন্ধ", educationNewItem.get(0).getOffday());
-
-        CheckConcateContact("অন্যান্য তথ্য ", educationNewItem.get(0).getOtherinfo());
-
 
 
 
@@ -266,6 +235,39 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
             }
         }
+
+        CheckConcate("\n", "\n");
+        CheckConcate("ঠিকানা", concatenateAddress(educationNewItem.get(0).getHouseno(), educationNewItem.get(0).getRoad(), educationNewItem.get(0).getBlock(), educationNewItem.get(0).getArea_bn()));
+        String ward = educationNewItem.get(0).getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
+            }
+            else{
+                ward = EtoB(wardSplitted[1]);
+            }
+        }
+        else{
+            ward = EtoB(ward);
+        }
+
+        CheckConcate("ওয়ার্ড", ward);
+
+        CheckConcate("পুলিশ স্টেশন", educationNewItem.get(0).getPolicestation());
+
+        CheckConcate("যোগাযোগ", EtoB(educationNewItem.get(0).getNode_contact()));
+
+        CheckConcate("ইমেইল", educationNewItem.get(0).getNode_email());
+
+        timeProcessing("খোলার সময়", educationNewItem.get(0).getOpeningtime());
+        timeProcessing("বন্ধের সময়", educationNewItem.get(0).getClosetime());
+
+        CheckConcate("সাপ্তাহিক বন্ধ", educationNewItem.get(0).getOffday());
+
+        CheckConcate("অন্যান্য তথ্য ", educationNewItem.get(0).getOtherinfo());
+
+
 
 
 
@@ -599,9 +601,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
 
-        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+       /* DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
         contact_data.setAdapter(defaultAdapterContact);
-
+        */
         middle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1068,7 +1070,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
         if (!value2.equals("null") || value2.equals("")) {
 
             String GetTime = timeConverter(value2);
-            CheckConcateContact(value1, GetTime);
+            CheckConcate(value1, GetTime);
 
         }
     }
@@ -1077,7 +1079,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")&&!value2.equals(" ০")) {
             key[increment] = value1;
-            value[increment] = value2;
+            value[increment] = value2 + "\n";
             increment++;
 
         }
@@ -1085,13 +1087,13 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
     }
 
-    private void CheckConcateContact(String key, String value) {
+    /*private void CheckConcateContact(String key, String value) {
         if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
             keyContact[incrementContact] = key;
             valueContact[incrementContact] = value;
             incrementContact++;
         }
-    }
+    }*/
 
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");
