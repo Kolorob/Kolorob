@@ -86,9 +86,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Context con;
-    String[] key, value, keyContact, valueContact;
+    String[] key, value;
 
-    int increment = 0, incrementContact = 0;
+    int increment = 0;
     EntertainmentNewDBModel entertainmentServiceProviderItemNew;
 
 
@@ -193,8 +193,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         result_concate ="";
         key = new String[600];
         value = new String[600];
-        keyContact = new String[600];
-        valueContact = new String[600];
+
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  entertainmentServiceProviderItemNew.getEnttype());
         if(!entertainmentServiceProviderItemNew.getEnttype().equals(getReferences(entertainmentServiceProviderItemNew))){
@@ -203,8 +202,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         if(entertainmentServiceProviderItemNew.getServicetype().equals(true)) CheckConcate("প্রবেশ মূল্য",  "প্রযোজ্য");
 
 
-
-        CheckConcateContact("ঠিকানা", concatenateAddress(entertainmentServiceProviderItemNew.getHouseno(), entertainmentServiceProviderItemNew.getRoad(), entertainmentServiceProviderItemNew.getBlock(), entertainmentServiceProviderItemNew.getAreabn()));
+        CheckConcate("\n", "\n");
+        CheckConcate("ঠিকানা", concatenateAddress(entertainmentServiceProviderItemNew.getHouseno(), entertainmentServiceProviderItemNew.getRoad(), entertainmentServiceProviderItemNew.getBlock(), entertainmentServiceProviderItemNew.getAreabn()));
         String ward = entertainmentServiceProviderItemNew.getWard();
         if(ward.contains("_")){
             String[] wardSplitted = ward.split("_");
@@ -219,33 +218,27 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
             ward = English_to_bengali_number_conversion(ward);
         }
 
-        CheckConcateContact("ওয়ার্ড", ward);
-        CheckConcateContact("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());
+        CheckConcate("ওয়ার্ড", ward);
+        CheckConcate("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());
 
 
-        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
 
-        CheckConcateContact("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
+        CheckConcate("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
 
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosetime());
 
-        CheckConcateContact("সাপ্তাহিক বন্ধ", entertainmentServiceProviderItemNew.getOffday());
+        CheckConcate("সাপ্তাহিক বন্ধ", entertainmentServiceProviderItemNew.getOffday());
 
 
-        CheckConcateContact("অন্যান্য তথ্য ", entertainmentServiceProviderItemNew.getOtherinfo());
+        CheckConcate("অন্যান্য তথ্য ", entertainmentServiceProviderItemNew.getOtherinfo());
 
         //checkConcate method will check null data and concat
 
         // Default Adapter will show the details info of a service
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         service_data.setAdapter(defaultAdapter);
-
-        DefaultAdapter contactAdapter = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
-        contact_data.setAdapter(contactAdapter);
-
-
-
 
 
         email_icon.setOnClickListener(new View.OnClickListener() {
@@ -727,7 +720,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private void timeProcessing(String value1, String value2) {
         if (!value2.equals("null") || value2.equals("")) {
             String GetTime = timeConverter(value2);
-            CheckConcateContact(value1, GetTime);
+            CheckConcate(value1, GetTime);
 
         }
     }
@@ -827,13 +820,13 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
     }
 
-    private void CheckConcateContact(String key, String value) {
+    /*private void CheckConcateContact(String key, String value) {
         if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
             keyContact[incrementContact] = key;
             valueContact[incrementContact] = value + "\n";
             incrementContact++;
         }
-    }
+    }*/
 
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");
