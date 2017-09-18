@@ -62,7 +62,9 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 import static demo.kolorob.kolorobdemoversion.R.id.add;
+import static demo.kolorob.kolorobdemoversion.R.id.address;
 import static demo.kolorob.kolorobdemoversion.R.id.comment;
 
 /**
@@ -84,9 +86,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
     Context con;
-    String[] key;
-    String[] value;
-    int increment=0;
+    String[] key, value, keyContact, valueContact;
+
+    int increment = 0, incrementContact = 0;
     EntertainmentNewDBModel entertainmentServiceProviderItemNew;
 
 
@@ -98,7 +100,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     String result_concate="";
     //EditText feedback_comment;
     RatingBar ratingBar;
-    ListView service_data;
+    ListView service_data, contact_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         route_icon = (ImageView) findViewById(R.id.distance_left);
         ratingText=(TextView)findViewById(R.id.ratingText);
         service_data=(ListView)findViewById(R.id.allData); //service_data will hold the main information of a service center
+        contact_data = (ListView)findViewById(R.id.contactData);
+
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data
                 .getLayoutParams();
         mlp.setMargins(width/100,0,width/990,width/8); //set margin in main info block
@@ -189,6 +193,8 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         result_concate ="";
         key = new String[600];
         value = new String[600];
+        keyContact = new String[600];
+        valueContact = new String[600];
 
         CheckConcate("প্রতিষ্ঠানের  ধরণ",  entertainmentServiceProviderItemNew.getEnttype());
         if(!entertainmentServiceProviderItemNew.getEnttype().equals(getReferences(entertainmentServiceProviderItemNew))){
@@ -198,24 +204,45 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
 
 
 
-        CheckConcate("ঠিকানা", concatenateAddress(entertainmentServiceProviderItemNew.getHouseno(), entertainmentServiceProviderItemNew.getRoad(), entertainmentServiceProviderItemNew.getBlock(), entertainmentServiceProviderItemNew.getAreabn(), entertainmentServiceProviderItemNew.getWard(), entertainmentServiceProviderItemNew.getPolicestation()));
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
+        CheckConcateContact("ঠিকানা", concatenateAddress(entertainmentServiceProviderItemNew.getHouseno(), entertainmentServiceProviderItemNew.getRoad(), entertainmentServiceProviderItemNew.getBlock(), entertainmentServiceProviderItemNew.getAreabn()));
+        String ward = entertainmentServiceProviderItemNew.getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
+            }
+            else{
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
+            }
+        }
+        else{
+            ward = English_to_bengali_number_conversion(ward);
+        }
 
-        CheckConcate("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
+        CheckConcateContact("ওয়ার্ড", ward);
+        CheckConcateContact("পুলিশ স্টেশন", entertainmentServiceProviderItemNew.getPolicestation());
+
+
+        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(entertainmentServiceProviderItemNew.getNode_contact()));
+
+        CheckConcateContact("ইমেইল", entertainmentServiceProviderItemNew.getNode_email());
 
         timeProcessing("খোলার সময়", entertainmentServiceProviderItemNew.getOpeningtime());
         timeProcessing("বন্ধের সময়", entertainmentServiceProviderItemNew.getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", entertainmentServiceProviderItemNew.getOffday());
+        CheckConcateContact("সাপ্তাহিক বন্ধ", entertainmentServiceProviderItemNew.getOffday());
 
 
-        CheckConcate("অন্যান্য তথ্য ", entertainmentServiceProviderItemNew.getOtherinfo());
+        CheckConcateContact("অন্যান্য তথ্য ", entertainmentServiceProviderItemNew.getOtherinfo());
 
         //checkConcate method will check null data and concat
 
         // Default Adapter will show the details info of a service
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         service_data.setAdapter(defaultAdapter);
+
+        DefaultAdapter contactAdapter = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+        contact_data.setAdapter(contactAdapter);
 
 
 
@@ -700,7 +727,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
     private void timeProcessing(String value1, String value2) {
         if (!value2.equals("null") || value2.equals("")) {
             String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
+            CheckConcateContact(value1, GetTime);
 
         }
     }
@@ -800,26 +827,20 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
     }
 
+    private void CheckConcateContact(String key, String value) {
+        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
+            keyContact[incrementContact] = key;
+            valueContact[incrementContact] = value + "\n";
+            incrementContact++;
+        }
+    }
+
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");
     }
 
-    private String concatenateAddress(String house, String block, String road, String areaBn, String ward, String policeStation){
-
+    private String concatenateAddress(String house, String block, String road, String areaBn){
         String address = "";
-
-        if(ward.contains("_")){
-            String[] wardSplitted = ward.split("_");
-            if(wardSplitted[1].equals("dakshinkhan")){
-                ward = "দক্ষিণখান";
-            }
-            else{
-                ward = English_to_bengali_number_conversion(wardSplitted[1]);
-            }
-        }
-        else{
-            ward = English_to_bengali_number_conversion(ward);
-        }
 
         if(checkValue(house)){
             address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
@@ -833,12 +854,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         if(checkValue(areaBn)){
             address += " এলাকা : " + areaBn + ",";
         }
-        if(checkValue(ward)){
-            address += " ওয়ার্ড : " + ward + ",";
-        }
-        if(checkValue(policeStation)){
-            address += " পুলিশ স্টেশন : " + policeStation + ",";
-        }
+
 
         char[] addressArray = address.toCharArray();
         addressArray[addressArray.length-1] = ' ';
