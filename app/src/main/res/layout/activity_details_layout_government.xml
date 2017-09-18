@@ -79,6 +79,7 @@
                             android:layout_below="@+id/artist"
                             android:numStars="5"
                             android:rating="0.0"
+                            android:isIndicator="true"
                             android:stepSize="0.1" />
 
 
