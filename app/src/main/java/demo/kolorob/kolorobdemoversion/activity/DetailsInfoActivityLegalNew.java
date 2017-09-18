@@ -82,10 +82,10 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
     Context con;
 
-    String[] key;
-    String[] value;
-    int increment=0;
-    ListView alldata;
+    String[] key, value, keyContact, valueContact;
+    int increment = 0, incrementContact = 0;
+
+    ListView alldata, contact_data;
     RatingBar ratingBar;
     String username="kolorobapp";
     String password="2Jm!4jFe3WgBZKEN";
@@ -139,9 +139,12 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         feedback = (ImageView) findViewById(R.id.feedback);
 
         key = new String[600];
-
         value = new String[600];
+        keyContact = new String[600];
+        valueContact = new String[600];
+
         alldata=(ListView)findViewById(R.id.allData);
+        contact_data = (ListView)findViewById(R.id.contactData);
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         int fh=feedbacks.height = width / 8;
@@ -248,38 +251,39 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
             CheckConcate("বিশেষত্ব", getReferences(legalAidServiceProviderItemNew));
         }
 
-        CheckConcate("রাস্তা", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getRoad()));
-        CheckConcate("ব্লক", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getBlock()));
-        CheckConcate("এলাকা", legalAidServiceProviderItemNew.getAreabn());
-        if(legalAidServiceProviderItemNew.getWard().contains("_")){
-            String[] ward = legalAidServiceProviderItemNew.getWard().split("_");
-            if(ward[1].equals("dakshinkhan")){
-                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+        CheckConcateContact("ঠিকানা", concatenateAddress(legalAidServiceProviderItemNew.getHouseno(), legalAidServiceProviderItemNew.getRoad(), legalAidServiceProviderItemNew.getBlock(), legalAidServiceProviderItemNew.getAreabn()));
+        String ward = legalAidServiceProviderItemNew.getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
             }
             else{
-                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
             }
         }
         else{
-            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getWard()));
+            ward = English_to_bengali_number_conversion(ward);
         }
 
-        // CheckConcate("পোস্ট অফিস", educationNewItem.getp());
-        CheckConcate("পুলিশ স্টেশন", legalAidServiceProviderItemNew.getPolicestation());
+        CheckConcateContact("ওয়ার্ড", ward);
 
-        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getHouseno()));
 
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getNode_contact()));
+        CheckConcateContact("পুলিশ স্টেশন", legalAidServiceProviderItemNew.getPolicestation());
 
-        CheckConcate("ইমেইল", legalAidServiceProviderItemNew.getNode_email());
+
+
+        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(legalAidServiceProviderItemNew.getNode_contact()));
+
+        CheckConcateContact("ইমেইল", legalAidServiceProviderItemNew.getNode_email());
 
         timeProcessing("খোলার সময়", legalAidServiceProviderItemNew.getOpeningtime());
         timeProcessing("বন্ধের সময়", legalAidServiceProviderItemNew.getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", legalAidServiceProviderItemNew.getOffday());
+        CheckConcateContact("সাপ্তাহিক বন্ধ", legalAidServiceProviderItemNew.getOffday());
 
 
-        CheckConcate("অন্যান্য তথ্য ", legalAidServiceProviderItemNew.getOtherinfo());
+        CheckConcateContact("অন্যান্য তথ্য ", legalAidServiceProviderItemNew.getOtherinfo());
 
 
 
@@ -291,6 +295,9 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
+
+        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+        contact_data.setAdapter(defaultAdapterContact);
 
 
 
@@ -1003,7 +1010,7 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
         if (!value2.equals("null") || value2.equals("")) {
 
             String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
+            CheckConcateContact(value1, GetTime);
 
         }
     }
@@ -1021,6 +1028,42 @@ public class DetailsInfoActivityLegalNew extends AppCompatActivity {
 
 
     }
+
+    private void CheckConcateContact(String key, String value) {
+        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
+            keyContact[incrementContact] = key;
+            valueContact[incrementContact] = value + "\n";
+            incrementContact++;
+        }
+    }
+
+    private boolean checkValue(String value){
+        return !value.equals("null") && !value.equals("");
+    }
+
+    private String concatenateAddress(String house, String block, String road, String areaBn){
+        String address = "";
+
+        if(checkValue(house)){
+            address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
+        }
+        if(checkValue(road)){
+            address += " রাস্তা : " + English_to_bengali_number_conversion(road) + ",";
+        }
+        if(checkValue(block)){
+            address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
+        }
+        if(checkValue(areaBn)){
+            address += " এলাকা : " + areaBn + ",";
+        }
+
+
+        char[] addressArray = address.toCharArray();
+        addressArray[addressArray.length-1] = ' ';
+
+        return String.valueOf(addressArray);
+    }
+
 
     private String getReferences(LegalAidNewDBModel et){
         String ref;
