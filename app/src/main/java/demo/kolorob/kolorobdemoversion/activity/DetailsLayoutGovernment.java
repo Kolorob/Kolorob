@@ -81,10 +81,10 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     int inc;
 
     Context con;
-    String[] key;
-    String[] value;
-    int increment=0;
-    ListView alldata;
+    String[] key, value, keyContact, valueContact;
+    int increment = 0, incrementContact = 0;
+
+    ListView alldata, contact_data;
     GovernmentNewDBModel governmentNewItem;
 
     String datevalue,datevaluebn;
@@ -137,15 +137,13 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
         ratingText = (TextView) findViewById(R.id.ratingText);
-
-
-
-
-
         key = new String[600];
-
         value = new String[600];
+        keyContact = new String[600];
+        valueContact = new String[600];
+
         alldata=(ListView)findViewById(R.id.allData);
+        contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -168,45 +166,44 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         }
         Log.e("Gov: ",governmentNewItem.getServicename()+" "+getReferences(governmentNewItem));
 
-        CheckConcate("রাস্তা", English_to_bengali_number_conversion(governmentNewItem.getRoad()));
-        CheckConcate("ব্লক", English_to_bengali_number_conversion(governmentNewItem.getBlock()));
-        CheckConcate("এলাকা", governmentNewItem.getAreabn());
-
-        if(governmentNewItem.getWard().contains("_")){
-            String[] ward = governmentNewItem.getWard().split("_");
-            if(ward[1].equals("dakshinkhan")){
-                CheckConcate("ওয়ার্ড", "দক্ষিণখান");
+        CheckConcateContact("ঠিকানা", concatenateAddress(governmentNewItem.getHouseno(), governmentNewItem.getRoad(), governmentNewItem.getBlock(), governmentNewItem.getAreabn()));
+        String ward = governmentNewItem.getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
             }
             else{
-                CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(ward[1]));
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
             }
         }
         else{
-            CheckConcate("ওয়ার্ড", English_to_bengali_number_conversion(governmentNewItem.getWard()));
+            ward = English_to_bengali_number_conversion(ward);
         }
 
-        CheckConcate("পুলিশ স্টেশন", governmentNewItem.getPolicestation());
+        CheckConcateContact("ওয়ার্ড", ward);
 
-        CheckConcate("বাড়ির নাম্বার", English_to_bengali_number_conversion(governmentNewItem.getHouseno()));
+        CheckConcateContact("পুলিশ স্টেশন", governmentNewItem.getPolicestation());
 
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(governmentNewItem.getNode_contact()));
 
-        CheckConcate("ইমেইল", governmentNewItem.getNode_email());
+        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(governmentNewItem.getNode_contact()));
+
+        CheckConcateContact("ইমেইল", governmentNewItem.getNode_email());
 
         timeProcessing("খোলার সময়", governmentNewItem.getOpeningtime());
         timeProcessing("বন্ধের সময়", governmentNewItem.getClosetime());
 
-        CheckConcate("কবে বন্ধ থাকে", governmentNewItem.getOffday());
+        CheckConcateContact("সাপ্তাহিক বন্ধ", governmentNewItem.getOffday());
 
 
-        CheckConcate("অন্যান্য তথ্য ", governmentNewItem.getOtherinfo());
-
-
-
+        CheckConcateContact("অন্যান্য তথ্য ", governmentNewItem.getOtherinfo());
 
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
+
+        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
+        contact_data.setAdapter(defaultAdapterContact);
 
 
         right_image.setOnClickListener(new View.OnClickListener() {
@@ -888,19 +885,19 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
     private void timeProcessing(String value1, String value2) {
-        if (!value2.equals("null") && !value2.equals("")) {
+        if (!value2.equals("null") || value2.equals("")) {
+
             String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
+            CheckConcateContact(value1, GetTime);
 
         }
     }
 
-
-    private void CheckConcate(String value1,String value2){
-
+    private void CheckConcate(String value1, String value2) {
 
 
-        if (!value2.equals("null") && !value2.equals("") &&!value2.equals(" টাকা")) {
+
+        if (!value2.equals("null") && !value2.equals("")&& !value2.equals(" টাকা")&&!value2.equals(" ০")) {
             key[increment] = value1;
             value[increment] = value2 + "\n";
             increment++;
@@ -909,6 +906,42 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
 
     }
+
+    private void CheckConcateContact(String key, String value) {
+        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
+            keyContact[incrementContact] = key;
+            valueContact[incrementContact] = value + "\n";
+            incrementContact++;
+        }
+    }
+
+    private boolean checkValue(String value){
+        return !value.equals("null") && !value.equals("");
+    }
+
+    private String concatenateAddress(String house, String block, String road, String areaBn){
+        String address = "";
+
+        if(checkValue(house)){
+            address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
+        }
+        if(checkValue(road)){
+            address += " রাস্তা : " + English_to_bengali_number_conversion(road) + ",";
+        }
+        if(checkValue(block)){
+            address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
+        }
+        if(checkValue(areaBn)){
+            address += " এলাকা : " + areaBn + ",";
+        }
+
+
+        char[] addressArray = address.toCharArray();
+        addressArray[addressArray.length-1] = ' ';
+
+        return String.valueOf(addressArray);
+    }
+
 
     private String getReferences(GovernmentNewDBModel et){
         String ref;
