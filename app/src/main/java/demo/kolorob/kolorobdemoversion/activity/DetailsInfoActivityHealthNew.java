@@ -606,7 +606,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 //            }
 //        });
         alldata=(ListView)findViewById(R.id.allData);
-        contact_data = (ListView)findViewById(R.id.contactData);
+        //contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();

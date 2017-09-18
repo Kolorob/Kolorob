@@ -81,10 +81,10 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
     int inc;
 
     Context con;
-    String[] key, value, keyContact, valueContact;
-    int increment = 0, incrementContact = 0;
+    String[] key, value;
+    int increment = 0;
 
-    ListView alldata, contact_data;
+    ListView alldata;
     GovernmentNewDBModel governmentNewItem;
 
     String datevalue,datevaluebn;
@@ -139,11 +139,10 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         ratingText = (TextView) findViewById(R.id.ratingText);
         key = new String[600];
         value = new String[600];
-        keyContact = new String[600];
-        valueContact = new String[600];
+
 
         alldata=(ListView)findViewById(R.id.allData);
-        contact_data = (ListView)findViewById(R.id.contactData);
+
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
                 .getLayoutParams();
@@ -166,7 +165,9 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         }
         Log.e("Gov: ",governmentNewItem.getServicename()+" "+getReferences(governmentNewItem));
 
-        CheckConcateContact("ঠিকানা", concatenateAddress(governmentNewItem.getHouseno(), governmentNewItem.getRoad(), governmentNewItem.getBlock(), governmentNewItem.getAreabn()));
+        CheckConcate("\n", "\n");
+
+        CheckConcate("ঠিকানা", concatenateAddress(governmentNewItem.getHouseno(), governmentNewItem.getRoad(), governmentNewItem.getBlock(), governmentNewItem.getAreabn()));
         String ward = governmentNewItem.getWard();
         if(ward.contains("_")){
             String[] wardSplitted = ward.split("_");
@@ -181,28 +182,25 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
             ward = English_to_bengali_number_conversion(ward);
         }
 
-        CheckConcateContact("ওয়ার্ড", ward);
+        CheckConcate("ওয়ার্ড", ward);
 
-        CheckConcateContact("পুলিশ স্টেশন", governmentNewItem.getPolicestation());
+        CheckConcate("পুলিশ স্টেশন", governmentNewItem.getPolicestation());
 
 
-        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(governmentNewItem.getNode_contact()));
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(governmentNewItem.getNode_contact()));
 
-        CheckConcateContact("ইমেইল", governmentNewItem.getNode_email());
+        CheckConcate("ইমেইল", governmentNewItem.getNode_email());
 
         timeProcessing("খোলার সময়", governmentNewItem.getOpeningtime());
         timeProcessing("বন্ধের সময়", governmentNewItem.getClosetime());
 
-        CheckConcateContact("সাপ্তাহিক বন্ধ", governmentNewItem.getOffday());
+        CheckConcate("সাপ্তাহিক বন্ধ", governmentNewItem.getOffday());
 
 
-        CheckConcateContact("অন্যান্য তথ্য ", governmentNewItem.getOtherinfo());
+        CheckConcate("অন্যান্য তথ্য ", governmentNewItem.getOtherinfo());
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
-
-        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
-        contact_data.setAdapter(defaultAdapterContact);
 
 
         right_image.setOnClickListener(new View.OnClickListener() {
@@ -887,7 +885,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
         if (!value2.equals("null") || value2.equals("")) {
 
             String GetTime = timeConverter(value2);
-            CheckConcateContact(value1, GetTime);
+            CheckConcate(value1, GetTime);
 
         }
     }
@@ -906,13 +904,7 @@ public class DetailsLayoutGovernment extends AppCompatActivity {
 
     }
 
-    private void CheckConcateContact(String key, String value) {
-        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
-            keyContact[incrementContact] = key;
-            valueContact[incrementContact] = value + "\n";
-            incrementContact++;
-        }
-    }
+
 
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");

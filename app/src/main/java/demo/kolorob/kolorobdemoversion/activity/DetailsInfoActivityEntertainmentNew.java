@@ -131,7 +131,7 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         route_icon = (ImageView) findViewById(R.id.distance_left);
         ratingText=(TextView)findViewById(R.id.ratingText);
         service_data=(ListView)findViewById(R.id.allData); //service_data will hold the main information of a service center
-        contact_data = (ListView)findViewById(R.id.contactData);
+        //contact_data = (ListView)findViewById(R.id.contactData);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data
                 .getLayoutParams();
