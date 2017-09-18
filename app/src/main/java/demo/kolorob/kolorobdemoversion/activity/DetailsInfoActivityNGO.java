@@ -79,10 +79,10 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
 
     Context con;
 
-    String[] key, value, keyContact, valueContact;
-    int increment = 0, incrementContact = 0;
+    String[] key, value;
+    int increment = 0;
 
-    ListView alldata, contact_data;
+    ListView alldata;
     RatingBar ratingBar;
     String username = "kolorobapp";
     String password = "2Jm!4jFe3WgBZKEN";
@@ -134,12 +134,9 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
 
         key = new String[600];
         value = new String[600];
-        keyContact = new String[600];
-        valueContact = new String[600];
+
 
         alldata=(ListView)findViewById(R.id.allData);
-        contact_data = (ListView)findViewById(R.id.contactData);
-
 
         LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
         feedbacks.height = width / 8;
@@ -218,7 +215,9 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
         CheckConcate("অবস্থানের সময়", ngoServiceProviderItemNew.getDrop_time());
         CheckConcate("ফি", ngoServiceProviderItemNew.getNgo_fee());
 
-        CheckConcateContact("ঠিকানা", concatenateAddress(ngoServiceProviderItemNew.getHouseno(), ngoServiceProviderItemNew.getRoad(), ngoServiceProviderItemNew.getBlock(), ngoServiceProviderItemNew.getAreabn()));
+        CheckConcate("\n", "\n");
+
+        CheckConcate("ঠিকানা", concatenateAddress(ngoServiceProviderItemNew.getHouseno(), ngoServiceProviderItemNew.getRoad(), ngoServiceProviderItemNew.getBlock(), ngoServiceProviderItemNew.getAreabn()));
         String ward = ngoServiceProviderItemNew.getWard();
         if(ward.contains("_")){
             String[] wardSplitted = ward.split("_");
@@ -233,19 +232,19 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
             ward = English_to_bengali_number_conversion(ward);
         }
 
-        CheckConcateContact("ওয়ার্ড", ward);
+        CheckConcate("ওয়ার্ড", ward);
 
-        CheckConcateContact("পুলিশ স্টেশন", ngoServiceProviderItemNew.getPolicestation());
+        CheckConcate("পুলিশ স্টেশন", ngoServiceProviderItemNew.getPolicestation());
 
 
-        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getNode_contact()));
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(ngoServiceProviderItemNew.getNode_contact()));
 
-        CheckConcateContact("ইমেইল", ngoServiceProviderItemNew.getNode_email());
+        CheckConcate("ইমেইল", ngoServiceProviderItemNew.getNode_email());
 
         timeProcessing("খোলার সময়", ngoServiceProviderItemNew.getOpeningtime());
         timeProcessing("বন্ধের সময়", ngoServiceProviderItemNew.getClosetime());
 
-        CheckConcateContact("সাপ্তাহিক বন্ধ", ngoServiceProviderItemNew.getOffday());
+        CheckConcate("সাপ্তাহিক বন্ধ", ngoServiceProviderItemNew.getOffday());
 
 
         CheckConcate("অন্যান্য তথ্য ", ngoServiceProviderItemNew.getOtherinfo());
@@ -253,9 +252,6 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
 
         DefaultAdapter defaultAdapter = new DefaultAdapter(this, key, value, increment);
         alldata.setAdapter(defaultAdapter);
-        DefaultAdapter defaultAdapterContact = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
-        contact_data.setAdapter(defaultAdapterContact);
-
 
         comments = (ImageView) findViewById(R.id.comments);
 
@@ -847,7 +843,7 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
         if (!value2.equals("null") || value2.equals("")) {
 
             String GetTime = timeConverter(value2);
-            CheckConcateContact(value1, GetTime);
+            CheckConcate(value1, GetTime);
 
         }
     }
@@ -866,13 +862,13 @@ public class DetailsInfoActivityNGO extends AppCompatActivity {
 
     }
 
-    private void CheckConcateContact(String key, String value) {
+    /*private void CheckConcateContact(String key, String value) {
         if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
             keyContact[incrementContact] = key;
             valueContact[incrementContact] = value + "\n";
             incrementContact++;
         }
-    }
+    }*/
 
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");
