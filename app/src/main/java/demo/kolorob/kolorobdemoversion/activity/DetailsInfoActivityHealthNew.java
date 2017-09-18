@@ -84,8 +84,8 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     TextView ups_text;
 
     Context con;
-    String[] key, value, keyContact, valueContact;
-    int increment = 0, incrementContact = 0;
+    String[] key, value;
+    int increment = 0;
 
     String username="kolorobapp";
     String password="2Jm!4jFe3WgB";
@@ -154,8 +154,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         key = new String[600];
         value = new String[600];
-        keyContact = new String[600];
-        valueContact = new String[600];
 
 
         final HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DetailsInfoActivityHealthNew.this);
@@ -194,35 +192,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         }
 
 
-        CheckConcateContact("ঠিকানা", concatenateAddress(healthServiceProviderItemNew.getHouseno(), healthServiceProviderItemNew.getRoad(), healthServiceProviderItemNew.getBlock(), healthServiceProviderItemNew.getAreabn()));
-        String ward = healthServiceProviderItemNew.getWard();
-        if(ward.contains("_")){
-            String[] wardSplitted = ward.split("_");
-            if(wardSplitted[1].equals("dakshinkhan")){
-                ward = "দক্ষিণখান";
-            }
-            else{
-                ward = English_to_bengali_number_conversion(wardSplitted[1]);
-            }
-        }
-        else{
-            ward = English_to_bengali_number_conversion(ward);
-        }
-
-        CheckConcateContact("ওয়ার্ড", ward);
-        CheckConcateContact("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
-
-        CheckConcateContact("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
-
-        CheckConcateContact("ইমেইল", healthServiceProviderItemNew.getNode_email());
-        timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpeningtime());
-        timeProcessing("বন্ধের সময়", healthServiceProviderItemNew.getClosetime());
-
-        CheckConcateContact("সাপ্তাহিক বন্ধ", healthServiceProviderItemNew.getOffday());
-
-
-        CheckConcateContact("অন্যান্য তথ্য ", healthServiceProviderItemNew.getOtherinfo());
-
 
         healthNewDBModelHospitals = healthNewDBTableHospital.getHealthSpecialistData(healthServiceProviderItemNew.getHealthid());
         int specialist_size = healthNewDBModelHospitals.size();
@@ -236,19 +205,19 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
                     CheckConcate("ইমারজেন্সি সুবিধা", "নেই");
                 }
                 else CheckConcate("ইমারজেন্সি সুবিধা", "আছে");
-                CheckConcate("ইমারজেন্সি নাম্বার", healthNewDBModelHospital.getEmergencynumber());
+                CheckConcate("ইমারজেন্সি নাম্বার", English_to_bengali_number_conversion(healthNewDBModelHospital.getEmergencynumber()));
                 if(healthNewDBModelHospital.getAmbulanceavailable().equals(false))
                 {
                     CheckConcate("এ্যাম্বুলেন্স সুবিধা", "নেই");
                 }
                 else CheckConcate("এ্যাম্বুলেন্স সুবিধা", "আছে");
-                CheckConcate("এ্যাম্বুলেন্স নাম্বার", healthNewDBModelHospital.getAmbulancenumber());
+                CheckConcate("এ্যাম্বুলেন্স নাম্বার", English_to_bengali_number_conversion(healthNewDBModelHospital.getAmbulancenumber()));
                 if(healthNewDBModelHospital.getMaternityavailable().equals(false))
                 {
                     CheckConcate("মাতৃত্বজনিত সুবিধা", "নেই");
                 }
                 else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
-                CheckConcate("মাতৃসেবার জন্য যোগাযোগ", healthNewDBModelHospital.getMaternitynumber());
+                CheckConcate("মাতৃসেবাসমূহ", healthNewDBModelHospital.getMaternitynumber());
                 CheckConcate("মাতৃসেবার বিশেষ ব্যবস্থা", healthNewDBModelHospital.getMaternityprivacy());
 
 
@@ -280,6 +249,36 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
 
         }
+        CheckConcate("\n", "\n");
+        CheckConcate("ঠিকানা", concatenateAddress(healthServiceProviderItemNew.getHouseno(), healthServiceProviderItemNew.getRoad(), healthServiceProviderItemNew.getBlock(), healthServiceProviderItemNew.getAreabn()));
+        String ward = healthServiceProviderItemNew.getWard();
+        if(ward.contains("_")){
+            String[] wardSplitted = ward.split("_");
+            if(wardSplitted[1].equals("dakshinkhan")){
+                ward = "দক্ষিণখান";
+            }
+            else{
+                ward = English_to_bengali_number_conversion(wardSplitted[1]);
+            }
+        }
+        else{
+            ward = English_to_bengali_number_conversion(ward);
+        }
+
+        CheckConcate("ওয়ার্ড", ward);
+        CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
+
+        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
+
+        CheckConcate("ইমেইল", healthServiceProviderItemNew.getNode_email());
+        timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpeningtime());
+        timeProcessing("বন্ধের সময়", healthServiceProviderItemNew.getClosetime());
+
+        CheckConcate("সাপ্তাহিক বন্ধ", healthServiceProviderItemNew.getOffday());
+
+
+        CheckConcate("অন্যান্য তথ্য ", healthServiceProviderItemNew.getOtherinfo());
+
 
 
 
@@ -652,9 +651,6 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
 
         DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
         alldata.setAdapter(defaultAdapter);
-
-        DefaultAdapter contactAdapter = new DefaultAdapter(this, keyContact, valueContact, incrementContact);
-        contact_data.setAdapter(contactAdapter);
 
         distance_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1055,7 +1051,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
     private void timeProcessing(String value1, String value2) {
         if (!value2.equals("null") || value2.equals("")) {
             String GetTime = timeConverter(value2);
-            CheckConcateContact(value1, GetTime);
+            CheckConcate(value1, GetTime);
 
         }
     }
@@ -1071,13 +1067,13 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
         }
     }
 
-    private void CheckConcateContact(String key, String value) {
+    /*private void CheckConcateContact(String key, String value) {
         if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
             keyContact[incrementContact] = key;
             valueContact[incrementContact] = value + "\n";
             incrementContact++;
         }
-    }
+    }*/
 
     private boolean checkValue(String value){
         return !value.equals("null") && !value.equals("");
