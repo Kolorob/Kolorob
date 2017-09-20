@@ -19,6 +19,8 @@ import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityEntertainmentNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityHealthNew;
 import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityLegalNew;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityNGO;
+import demo.kolorob.kolorobdemoversion.activity.DetailsInfoActivityReligious;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutEducation;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutFinance;
 import demo.kolorob.kolorobdemoversion.activity.DetailsLayoutGovernment;
@@ -28,12 +30,16 @@ import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.LegalAid.LegalAidNewDBTable;
+import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
+import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
+import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
 
 public class ListViewAdapterAllCategories extends BaseAdapter {
@@ -45,12 +51,14 @@ public class ListViewAdapterAllCategories extends BaseAdapter {
 	Activity activity;
 	private List<AllHolder> worldpopulationlist = null;
 	private ArrayList<AllHolder> arraylist;
-FinancialNewDBModel nullfin;
+	FinancialNewDBModel nullfin;
 	ArrayList<EduNewModel> nulledu=new ArrayList<>();
 	EntertainmentNewDBModel nullent;
 	LegalAidNewDBModel nullleg;
 	HealthNewDBModelMain nullhel;
-GovernmentNewDBModel nullgov;
+	GovernmentNewDBModel nullgov;
+	NGONewDBModel nullNgo;
+	ReligiousNewDBModel nullReligious;
 
 	public ListViewAdapterAllCategories(Activity act, List<AllHolder> worldpopulationlist) {
 		this.activity = act;
@@ -154,6 +162,23 @@ int catt=worldpopulationlist.get(position).getCatid();
 					iient.putExtra(AppConstants.KEY_DETAILS_GOV, nullgov);
 					activity.startActivity(iient);
 				}
+
+				else if (catt == 70000) {
+					NGONewDBTable ngoNewDBTable = new NGONewDBTable(ListViewAdapterAllCategories.this.mContext);
+					nullNgo = ngoNewDBTable.getngoNode2(worldpopulationlist.get(position).getNodeid());
+					Intent iient = new Intent(getActivity(), DetailsInfoActivityNGO.class);
+					iient.putExtra(AppConstants.KEY_DETAILS_NGO, nullNgo);
+					activity.startActivity(iient);
+				}
+
+				else if (catt == 80000) {
+					ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(ListViewAdapterAllCategories.this.mContext);
+					nullReligious = religiousNewDBTable.getreligiousNode2(worldpopulationlist.get(position).getNodeid());
+					Intent iient = new Intent(getActivity(), DetailsInfoActivityReligious.class);
+					iient.putExtra(AppConstants.KEY_DETAILS_RELIGIOUS, nullReligious);
+					activity.startActivity(iient);
+				}
+
 				SharedPreferences pref = getActivity().getSharedPreferences("MyPref", mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = pref.edit();
 				editor.putBoolean("Search", true);

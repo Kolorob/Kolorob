@@ -1411,7 +1411,6 @@ GeoPoint location;
             @Override
             public void onClick(View v) {
                 filterclicked=true;
-
                 fholder.setVisibility(View.VISIBLE);
                 populatefilterwords(currentCategoryID);
 

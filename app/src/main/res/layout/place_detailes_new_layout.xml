@@ -36,7 +36,10 @@
 
 
             <include layout="@layout/compare_screen_education" />
-            <include layout="@layout/health_compare_tool"/>
+            <include layout="@layout/health_compare_tool"
+                android:layout_below="@+id/searchholder"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
 
 
