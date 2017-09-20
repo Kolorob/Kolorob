@@ -118,9 +118,10 @@ public class SplashActivityNew extends AppCompatActivity {
             Float currentVersion= Float.parseFloat(app_ver);
             Float previousVersion=Float.parseFloat(SharedPreferencesHelper.getVersion(SplashActivityNew.this));
             //Float previousVersion=Float.parseFloat("2.03");
+            //Toast.makeText(SplashActivityNew.this, "previous: " + previousVersion +" Current: " + currentVersion, Toast.LENGTH_LONG).show();
 
             firstRun = settings.getBoolean("firstRunUp", false);
-            if(isInstallFromUpdate()){
+            if(isInstallFromUpdate() && !(previousVersion == Float.parseFloat("2.2") && currentVersion == Float.parseFloat("2.22"))){
                 firstRunUpdate = settings.getBoolean("new_update_first_run", true);
             }
 
