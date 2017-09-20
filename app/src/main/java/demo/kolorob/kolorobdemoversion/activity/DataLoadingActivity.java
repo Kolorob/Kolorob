@@ -742,16 +742,26 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                                 eduNewDBTableTraining.insertItem(eduTrainingModel);
                             }
                         }
+                        if (jsonObject2.has("result_details")) {
+
+                            JSONArray eduResult = jsonObject2.getJSONArray("result_details");
+                            int lenofresult = eduResult.length();
+                            for (int ii = 0; ii < lenofresult; ii++) {
+                                JSONObject result = eduResult.getJSONObject(ii);
+                                EducationResultItemNew educationResultItemNew = EducationResultItemNew.parseEducationResultItemNew(result);
+                                resultDetailsTable.insertItem(educationResultItemNew);
+                            }
+                        }
                         if (jsonObject2.has("education_school")) {
                             JSONObject school = jsonObject2.getJSONObject("education_school");
                             EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
                             eduNewDBTableSchool.insertItem(eduNewSchoolModel);
                         }
-                        if(jsonObject2.has("result_details")){
+                        /*if(jsonObject2.has("result_details")){
                             JSONObject result = jsonObject2.getJSONObject("result_details");
                             EducationResultItemNew educationResultItemNew = EducationResultItemNew.parseEducationResultItemNew(result);
                             resultDetailsTable.insertItem(educationResultItemNew);
-                        }
+                        }*/
                     }
 
 
