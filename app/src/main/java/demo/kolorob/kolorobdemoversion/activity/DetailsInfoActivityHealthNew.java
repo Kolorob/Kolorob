@@ -1092,7 +1092,7 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
         }
         if(checkValue(areaBn)){
-            address += " এলাকা : " + areaBn + ",";
+            address += " " + areaBn + ",";
         }
 
 

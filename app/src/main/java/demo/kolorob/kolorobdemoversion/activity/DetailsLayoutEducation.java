@@ -1123,7 +1123,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
             address += " ব্লক : " + EtoB(block) + ",";
         }
         if(checkValue(areaBn)){
-            address += " এলাকা : " + areaBn + ",";
+            address += " " + areaBn + ",";
         }
 
 
