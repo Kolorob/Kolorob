@@ -26,17 +26,11 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import demo.kolorob.kolorobdemoversion.R;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterArea;
 import demo.kolorob.kolorobdemoversion.adapters.RecyclerView_AdapterCityCorporation;
@@ -47,6 +41,7 @@ import demo.kolorob.kolorobdemoversion.database.CityCorporationTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
@@ -60,7 +55,6 @@ import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.database.WardTable;
 import demo.kolorob.kolorobdemoversion.interfaces.ItemClickSupport;
-import demo.kolorob.kolorobdemoversion.interfaces.RecyclerViewHolder;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
@@ -68,6 +62,7 @@ import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
@@ -77,7 +72,6 @@ import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
 import demo.kolorob.kolorobdemoversion.model.LegalAid.LegalAidNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.NGO.NGONewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
-import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.model.Ward;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -96,7 +90,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     Context context;
     private static int NUMBER_OF_TASKS = 6;
-    View view = null, areaview, wardview, cityview;;
+    View view = null, areaview, wardview, cityview;
     Button submit;
     Boolean firstRun, firstRunUpdate, permission = false;
     int countofDb = 0;
@@ -727,11 +721,12 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
             EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(DataLoadingActivity.this);
             EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DataLoadingActivity.this);
             EduNewDBTableSchool eduNewDBTableSchool = new EduNewDBTableSchool(DataLoadingActivity.this);
+            EducationResultDetailsTable resultDetailsTable = new EducationResultDetailsTable(DataLoadingActivity.this);
 
-            int Govcount = Edu.length();
+            int eduCount = Edu.length();
 
 
-            for (int i = 0; i < Govcount; i++) {
+            for (int i = 0; i < eduCount; i++) {
                 try {
                     if (!Edu.isNull(i)) {
                         JSONObject jsonObject2 = Edu.getJSONObject(i);
@@ -751,6 +746,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                             JSONObject school = jsonObject2.getJSONObject("education_school");
                             EduNewSchoolModel eduNewSchoolModel = EduNewSchoolModel.parseEduNewSchoolModel(school, jsonObject2.getInt("id"));
                             eduNewDBTableSchool.insertItem(eduNewSchoolModel);
+                        }
+                        if(jsonObject2.has("result_details")){
+                            JSONObject result = jsonObject2.getJSONObject("result_details");
+                            EducationResultItemNew educationResultItemNew = EducationResultItemNew.parseEducationResultItemNew(result);
+                            resultDetailsTable.insertItem(educationResultItemNew);
                         }
                     }
 

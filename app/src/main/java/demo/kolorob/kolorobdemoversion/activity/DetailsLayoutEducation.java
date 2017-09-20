@@ -53,6 +53,7 @@ import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
@@ -60,6 +61,7 @@ import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
@@ -95,9 +97,9 @@ public class DetailsLayoutEducation extends AppCompatActivity {
     int compareValue;
     String previous_node;
     ArrayList<EduTrainingModel> educationTrainingDetailsItems;
-    ArrayList<EduNewSchoolModel>eduNewSchoolModels;
+    ArrayList<EduNewSchoolModel> eduNewSchoolModels;
+    ArrayList<EducationResultItemNew> educationResultItemNew;
 
-    String exams,Exam=null;
     private TextView ratingText;
 
     private ImageView distance_left, feedback;
@@ -132,6 +134,7 @@ public class DetailsLayoutEducation extends AppCompatActivity {
 
         EduNewDBTableTraining eduNewDBTableTraining = new EduNewDBTableTraining(DetailsLayoutEducation.this);
         EduNewDBTableSchool eduNewDBTableSchool=new EduNewDBTableSchool(DetailsLayoutEducation.this);
+        EducationResultDetailsTable educationResultDetailsTable = new EducationResultDetailsTable(DetailsLayoutEducation.this);
 
 
 
@@ -215,9 +218,17 @@ public class DetailsLayoutEducation extends AppCompatActivity {
                 CheckConcate("প্রাইমারী লেভেলের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getPrimary_fees()));
                 CheckConcate("সেকেন্ডারি লেভেলের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getSecondary_fees()));
                 CheckConcate("কলেজের বেতন (বার্ষিক) ", formatPayment(eduNewSchoolModel.getCollage_fees()));
+            }
+        }
 
-
-
+        educationResultItemNew = educationResultDetailsTable.getResultInfo(educationNewItem.get(0).getEduId());
+        int resultSize = eduNewSchoolModels.size();
+        if (resultSize != 0) {
+            for (EducationResultItemNew eduResult : educationResultItemNew)  {
+                CheckConcate(eduResult.getExamname() + " পরীক্ষায় অংশগ্রহণকারী শিক্ষার্থীর সংখ্যা", EtoB(eduResult.getStudentno()));
+                CheckConcate("উত্তীর্ণ শিক্ষার্থীর সংখ্যা", EtoB(eduResult.getPassed()));
+                CheckConcate("জিপিএ ৫ এর সংখ্যা", EtoB(eduResult.getAplus()));
+                CheckConcate("গোল্ডেন জিপিএ ৫ এর সংখ্যা", EtoB(eduResult.getGoldena()));
             }
         }
         educationTrainingDetailsItems = eduNewDBTableTraining.gettrainingInfo(educationNewItem.get(0).getEduId());
