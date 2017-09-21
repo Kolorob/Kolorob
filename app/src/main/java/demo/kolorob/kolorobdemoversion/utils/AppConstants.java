@@ -95,9 +95,7 @@ public class AppConstants {
     public static final int GOVERNMENT = 40000;
     public static final int LEGAL = 50000;
     public static final int FINANCIAL = 60000;
-
     public static final int NGO = 70000;
     public static final int RELIGIOUS = 80000;
-    public static final int JOB = 7;
 
 }

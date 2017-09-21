@@ -1,6 +1,5 @@
 package demo.kolorob.kolorobdemoversion.model.Entertainment;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +13,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 public class EntertainmentNewDBModel implements Serializable {
     int entId;
-    CommonModel commonId;
+    CommonModel commonModel;
     String entType, entryFee;
 
     public int getEntid() {
@@ -25,12 +24,12 @@ public class EntertainmentNewDBModel implements Serializable {
         this.entId = entId;
     }
 
-    public CommonModel getCommonId() {
-        return commonId;
+    public CommonModel getCommonModel() {
+        return commonModel;
     }
 
-    public void setCommonId(CommonModel commonId) {
-        this.commonId = commonId;
+    public void setCommonModel(CommonModel commonModel) {
+        this.commonModel = commonModel;
     }
 
     public String getEntType() {
@@ -49,9 +48,9 @@ public class EntertainmentNewDBModel implements Serializable {
         this.entryFee = entryFee;
     }
 
-    public EntertainmentNewDBModel(int entId, CommonModel commonId, String entType, String entryFee) {
+    public EntertainmentNewDBModel(int entId, CommonModel commonModel, String entType, String entryFee) {
         this.entId = entId;
-        this.commonId = commonId;
+        this.commonModel = commonModel;
         this.entType = entType;
         this.entryFee = entryFee;
     }
