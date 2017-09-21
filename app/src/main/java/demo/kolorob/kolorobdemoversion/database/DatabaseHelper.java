@@ -118,29 +118,37 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             Log.e("", "NEW version: " + newVersion + "old: " +oldVersion);
 
 
+            db.execSQL("DROP TABLE IF EXISTS " + COMMON_DB);
 
+            db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_MAIN);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_SCHOOL);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_TRAINING);
             db.execSQL("DROP TABLE IF EXISTS " + EDU_PROVIDER_RESULT_TABLE);
+
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_MAIN);
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_HOS);
+            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_PHARMA);
+
             db.execSQL("DROP TABLE IF EXISTS " + ENT_PROVIDER_TABLE_DBNEW);
             db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_NEWDB);
             db.execSQL("DROP TABLE IF EXISTS " + GOV_NEW);
-            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_HOS);
-            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_MAIN);
-            db.execSQL("DROP TABLE IF EXISTS " + HEALTH_NEW_DB_PHARMA);
-            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_ADVERTISEMENT_TABLE);
-            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TABLE);
-            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TYPE);
             db.execSQL("DROP TABLE IF EXISTS " + LEGALAIDNEWDBTABLE);
             db.execSQL("DROP TABLE IF EXISTS " + NGONEWDBTABLE);
             db.execSQL("DROP TABLE IF EXISTS " + RELIGIOUSNEWDBTABLE);
-            db.execSQL("DROP TABLE IF EXISTS " + AREASTORED);
+
+
+            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_ADVERTISEMENT_TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + JOB_SERVICE_PROVIDER_TYPE);
+
             db.execSQL("DROP TABLE IF EXISTS " + SERVICE_CATEGORY);
-            db.execSQL("DROP TABLE IF EXISTS " + AREAS);
-            db.execSQL("DROP TABLE IF EXISTS " + WARDS);
-            db.execSQL("DROP TABLE IF EXISTS " + CITYCORPORATIONS);
             db.execSQL("DROP TABLE IF EXISTS " + SUB_CATEGORY_NEW);
-            db.execSQL("DROP TABLE IF EXISTS " + EDU_NEW_DB_MAIN);
+
+            db.execSQL("DROP TABLE IF EXISTS " + CITYCORPORATIONS);
+            db.execSQL("DROP TABLE IF EXISTS " + WARDS);
+            db.execSQL("DROP TABLE IF EXISTS " + AREAS);
+            db.execSQL("DROP TABLE IF EXISTS " + AREASTORED);
+
 
 
             //  db.execSQL("DROP TABLE IF EXISTS " + FINANCIAL_SERVICE_PROVIDER_TABLE);
