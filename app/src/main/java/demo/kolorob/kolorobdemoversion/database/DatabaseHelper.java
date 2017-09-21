@@ -22,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final String AREASTORED= "areastored";
 
+    public static final String COMMON_DB = "common";
     public static final String EDU_NEW_DB_MAIN= "edu_ndb_main";
     public static final String EDU_NEW_DB_SCHOOL= "edu_ndb_school";
     public static final String EDU_NEW_DB_TRAINING= "edu_ndb_train";
