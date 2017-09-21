@@ -58,10 +58,6 @@ public class CommonDBTable {
     private static final String KEY_RATINGS = "_rating";
 
 
-
-
-
-
     private Context tContext;
 
     public CommonDBTable(Context context) {
