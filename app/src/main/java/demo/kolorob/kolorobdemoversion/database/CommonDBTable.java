@@ -267,7 +267,7 @@ public class CommonDBTable {
         return false;
     }
 
-    public ArrayList<CommonModel> getAllSubCategoriesInfo(String ward, String place) {
+    public ArrayList<CommonModel> getAllCommonByArea(String ward, String place) {
 
         ArrayList<CommonModel> subCatList = new ArrayList<>();
 
@@ -287,30 +287,14 @@ public class CommonDBTable {
         return subCatList;
     }
 
-    public ArrayList<CommonModel> getNodeInfo(int Node) {
 
-        ArrayList<CommonModel> subCatList = new ArrayList<>();
-        SQLiteDatabase db = openDB();
-        CommonModel commonModel = null;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+KEY_IDENTIFIER_ID + "=" + Node , null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                subCatList.add(cursorToSubCatList(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return subCatList;
-    }
+    public CommonModel getNodeInfo(int Node) {
 
-    public CommonModel getNodeInfo2(int Node) {
-
-        ArrayList<CommonModel> subCatList = new ArrayList<>();
         SQLiteDatabase db = openDB();
         CommonModel commonModel = null;
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + "=" + Node , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + Node , null);
 
         if (cursor.moveToFirst()) {
             do {

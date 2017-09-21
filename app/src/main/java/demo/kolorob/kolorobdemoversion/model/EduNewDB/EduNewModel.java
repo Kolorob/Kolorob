@@ -1,6 +1,5 @@
 package demo.kolorob.kolorobdemoversion.model.EduNewDB;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +14,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 public class EduNewModel implements Serializable {
 
     int eduId;
-    CommonModel commonId;
+    CommonModel commonModel;
 
     String educationType, shift, studentNo, teachersNo, averageStudentPerClass, facility;
 
@@ -28,12 +27,12 @@ public class EduNewModel implements Serializable {
         this.eduId = eduId;
     }
 
-    public CommonModel getCommonId() {
-        return commonId;
+    public CommonModel getCommonModel() {
+        return commonModel;
     }
 
-    public void setCommonId(CommonModel commonId) {
-        this.commonId = commonId;
+    public void setCommonModel(CommonModel commonModel) {
+        this.commonModel = commonModel;
     }
 
     public String getEducationType() {
@@ -84,9 +83,9 @@ public class EduNewModel implements Serializable {
         this.facility = facility;
     }
 
-    public EduNewModel(int eduId, CommonModel commonId, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
+    public EduNewModel(int eduId, CommonModel commonModel, String educationType, String shift, String studentNo, String teachersNo, String averageStudentPerClass, String facility) {
         this.eduId = eduId;
-        this.commonId = commonId;
+        this.commonModel = commonModel;
         this.educationType = educationType;
         this.shift = shift;
         this.studentNo = studentNo;
