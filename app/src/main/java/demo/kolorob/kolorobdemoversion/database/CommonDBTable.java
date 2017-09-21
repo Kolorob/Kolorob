@@ -241,6 +241,14 @@ public class CommonDBTable {
         database.close();
     }
 
+    public void delete(int id){
+        DatabaseHelper databaseHelper = new DatabaseHelper(CommonDBTable.this.tContext);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.delete(TABLE_NAME, KEY_IDENTIFIER_ID + " = " + id , null);
+
+        database.close();
+    }
+
     public boolean isFieldExist(int id) {
         //Lg.d(TAG, "isFieldExist : inside, id=" + id);
         SQLiteDatabase db = openDB();
