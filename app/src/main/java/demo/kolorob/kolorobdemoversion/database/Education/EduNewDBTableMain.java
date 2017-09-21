@@ -19,9 +19,9 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
 public class EduNewDBTableMain {
     private static final String TAG = EduNewDBTableMain.class.getSimpleName();
     private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_MAIN;
+
     private static final String KEY_IDENTIFIER_ID = "_eduId"; // 0 -integer
-    private static final String KEY_NAME_ENG = "_nameen"; //
-    private static final String KEY_NAME_BAN = "_namebn"; //
+    private static final String KEY_COMMON_ID = "_commonId";
 
     private static final String KEY_EDU_TYPE = "_edtype"; // 1 - text
     private static final String KEY_SHIFT = "_shift"; // 1 - text
@@ -29,28 +29,6 @@ public class EduNewDBTableMain {
     private static final String KEY_TEACHER_NO = "_teachersno"; // 1 - text
     private static final String KEY_AVG_STD = "_avgstdperclass"; // 1 - text
     private static final String KEY_FACILITY = "_facility"; // 1 - text
-
-    private static final String KEY_LATITUDE = "_lat"; //
-    private static final String KEY_LONGITUDE = "_lon"; //
-    private static final String KEY_HOUSE_NO = "_houseno"; //
-    private static final String KEY_BLOCK = "_block"; //
-    private static final String KEY_AREA = "_area"; //
-    private static final String KEY_POLICE_STATION = "_policestation"; //
-    private static final String KEY_EMAIL_ADDRESS = "_node_email"; //
-    private static final String KEY_WARD = "_ward";
-    private static final String KEY_ROAD = "_road"; //
-    private static final String KEY_CONTACT_NO = "_node_contact"; //
-    private static final String KEY_OTHER_INFO = "_other"; //
-    private static final String KEY_AREABN = "_areabn"; //
-    private static final String KEY_PARENT_AREA = "_parentarea";//
-    private static final String KEY_OPENTIME = "_opentime"; //
-    private static final String KEY_CLOSEATIME = "_closetime"; //
-    private static final String KEY_OFF_DAY = "_offday";
-    private static final String KEY_CATEGORY_ID = "_catid";
-    private static final String KEY_REFERENCE = "_refnumm"; // 2 - text*/
-    private static final String KEY_RATINGS = "_rating"; // 2 - text*/
-    private static final String KEY_SUBCATEGORY_ID = "_sref"; // 2 - text*/
-
 
 
 
@@ -67,35 +45,15 @@ public class EduNewDBTableMain {
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
                 + KEY_IDENTIFIER_ID + "  INTEGER , " // 0 - int
-                + KEY_NAME_ENG + "  TEXT, "              // 1 - text
-                + KEY_NAME_BAN + " TEXT, "
+                + KEY_COMMON_ID + "  INTEGER, "              // 1 - text
+
                 + KEY_EDU_TYPE + " TEXT, "// 2 -
                 + KEY_SHIFT + " TEXT, "// 2 - text
                 + KEY_STUDENT_NO + " TEXT, "// 2 - text
                 + KEY_TEACHER_NO + " TEXT, "// 2 - text
                 + KEY_AVG_STD + " TEXT, "// 2 - text
-                + KEY_FACILITY + " TEXT, "// 2 - text
+                + KEY_FACILITY + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
 
-                + KEY_LATITUDE + " TEXT, "
-                + KEY_LONGITUDE + " TEXT, "
-                + KEY_HOUSE_NO + " TEXT, "
-                + KEY_BLOCK + " TEXT, "
-                + KEY_AREA + " TEXT, "
-                + KEY_POLICE_STATION + " TEXT, "
-                + KEY_EMAIL_ADDRESS + " TEXT, "
-                + KEY_WARD + " TEXT, "
-                + KEY_ROAD + " TEXT, "
-                + KEY_CONTACT_NO + " TEXT, "
-                + KEY_OTHER_INFO + " TEXT, "
-                + KEY_PARENT_AREA + " TEXT, " /// parent area
-                + KEY_AREABN + " TEXT, "
-                + KEY_OPENTIME + " TEXT, "
-                + KEY_CLOSEATIME + " TEXT, "
-                + KEY_OFF_DAY + " TEXT, "
-                + KEY_CATEGORY_ID + " INTEGER, "
-                + KEY_REFERENCE+ " TEXT, "
-                + KEY_RATINGS + " TEXT, "
-                + KEY_SUBCATEGORY_ID + " TEXT, PRIMARY KEY(" + KEY_IDENTIFIER_ID + "))";
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
