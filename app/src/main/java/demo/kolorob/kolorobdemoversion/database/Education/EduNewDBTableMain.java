@@ -70,12 +70,12 @@ public class EduNewDBTableMain {
     public long insertItem(EduNewModel eduNewModel) {
         if (!isFieldExist(eduNewModel.getEduId()))
         {
-            return insertItem(eduNewModel.getEduId(), eduNewModel.getCommonModel(),
+            return insertItem(eduNewModel.getEduId(), eduNewModel.getCommonModel().getId(),
                     eduNewModel.getEducationType(), eduNewModel.getShift(),
                     eduNewModel.getStudentNo(), eduNewModel.getTeachersNo(),
                     eduNewModel.getAverageStudentPerClass(), eduNewModel.getFacility());
         }
-        else return updateItem(eduNewModel.getEduId(), eduNewModel.getCommonModel(),
+        else return updateItem(eduNewModel.getEduId(), eduNewModel.getCommonModel().getId(),
                 eduNewModel.getEducationType(), eduNewModel.getShift(),
                 eduNewModel.getStudentNo(), eduNewModel.getTeachersNo(),
                 eduNewModel.getAverageStudentPerClass(), eduNewModel.getFacility());
@@ -83,7 +83,7 @@ public class EduNewDBTableMain {
     }
 
 
-    public long insertItem(int eduId, CommonModel commonId, String educationType, String shift,
+    public long insertItem(int eduId, int commonId, String educationType, String shift,
                            String studentNo, String teacherNo, String avgStudentPerClass, String facility
     ) {
         if (isFieldExist(eduId)) {
@@ -93,7 +93,7 @@ public class EduNewDBTableMain {
         ContentValues rowValue = new ContentValues();
 
         rowValue.put(KEY_IDENTIFIER_ID, eduId);
-        rowValue.put(KEY_COMMON_ID, commonId.getId());
+        rowValue.put(KEY_COMMON_ID, commonId);
         rowValue.put(KEY_EDU_TYPE, educationType);
         rowValue.put(KEY_SHIFT, shift);
         rowValue.put(KEY_STUDENT_NO, studentNo);
@@ -109,14 +109,14 @@ public class EduNewDBTableMain {
         return insertedId;
     }
     private long updateItem(
-            int eduId, CommonModel commonId, String educationType, String shift,
+            int eduId, int commonId, String educationType, String shift,
             String studentNo, String teacherNo, String avgStudentPerClass, String facility
     ) {
 
         ContentValues rowValue = new ContentValues();
 
         rowValue.put(KEY_IDENTIFIER_ID, eduId);
-        rowValue.put(KEY_COMMON_ID, commonId.getId());
+        rowValue.put(KEY_COMMON_ID, commonId);
         rowValue.put(KEY_EDU_TYPE, educationType);
         rowValue.put(KEY_SHIFT, shift);
         rowValue.put(KEY_STUDENT_NO, studentNo);
@@ -135,12 +135,14 @@ public class EduNewDBTableMain {
     {
         CommonDBTable commonDBTable = new CommonDBTable(tContext);
         commonDBTable.delete(ward, area);
-        DatabaseHelper databaseHelper = new DatabaseHelper(EduNewDBTableMain.this.tContext);
+        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         database.delete(TABLE_NAME, KEY_COMMON_ID + " = " + commonModel.getId(), null);
 
         database.close();
     }
+
+
     public boolean isFieldExist(int id) {
 
         SQLiteDatabase db = openDB();
@@ -158,7 +160,9 @@ public class EduNewDBTableMain {
         closeDB();
         return false;
     }
-    public ArrayList<EduNewModel> getAllEducationByArea(int commonId) {     // getAllEducationSubCategoriesInfo
+
+
+    public ArrayList<EduNewModel> getAllEducationByCommonId(int commonId) {     // getAllEducationSubCategoriesInfo
 
         ArrayList<EduNewModel> educationList = new ArrayList<>();
 
