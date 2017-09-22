@@ -135,7 +135,9 @@ public class FinNewDBTable {
         cursor.close();
         closeDB();
         return finList;
+
     }
+
     public void delete(String ward, String area, CommonModel commonModel)
     {
         CommonDBTable commonDBTable = new CommonDBTable(tContext);
