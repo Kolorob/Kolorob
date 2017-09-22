@@ -55,15 +55,15 @@ public class EntertainmentNewDBModel implements Serializable {
         this.entryFee = entryFee;
     }
 
-    public static EntertainmentNewDBModel parseEntertainmentNewDBModel (JSONObject jo, CommonModel commonId) throws JSONException {
+    public static EntertainmentNewDBModel parseEntertainmentNewDBModel (JSONObject jo) throws JSONException {
+
+        CommonModel _commonModel = CommonModel.parseCommonModel(jo);
 
         int _entid = jo.getInt("id");
-        CommonModel _commonId = commonId;
-
         String _entType = jo.getString("type");
         String _entryFee = jo.getString("entry_fee");
 
 
-        return new EntertainmentNewDBModel(_entid, _commonId, _entType, _entryFee);
+        return new EntertainmentNewDBModel(_entid, _commonModel, _entType, _entryFee);
     }
 }

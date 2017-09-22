@@ -94,18 +94,17 @@ public class EduNewModel implements Serializable {
         this.facility = facility;
     }
 
-    public static EduNewModel parseEduNewModel (JSONObject jo, CommonModel commonId) throws JSONException {
+    public static EduNewModel parseEduNewModel (JSONObject jo) throws JSONException {
 
-            int _eduId = jo.getInt("id");
-            CommonModel _commonId = commonId;
+        CommonModel _commonModel = CommonModel.parseCommonModel(jo);
+        int _eduId = jo.getInt("id");
+        String _educationType = jo.getString("education_type");
+        String _shift = jo.getString("shift");
+        String _studentNo = jo.getString("no_of_students");
+        String _teachersNo = jo.getString("no_of_teachers");
+        String _avgStudentPerClass = jo.getString("class_size");
+        String _facility = jo.getString("facility");
 
-            String _educationType = jo.getString("education_type");
-            String _shift = jo.getString("shift");
-            String _studentNo = jo.getString("no_of_students");
-            String _teachersNo = jo.getString("no_of_teachers");
-            String _avgStudentPerClass = jo.getString("class_size");
-            String _facility = jo.getString("facility");
-
-            return new EduNewModel(_eduId, _commonId, _educationType, _shift, _studentNo, _teachersNo, _avgStudentPerClass, _facility);
-        }
+        return new EduNewModel(_eduId, _commonModel, _educationType, _shift, _studentNo, _teachersNo, _avgStudentPerClass, _facility);
     }
+}
