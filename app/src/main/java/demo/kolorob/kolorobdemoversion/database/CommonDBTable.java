@@ -12,7 +12,7 @@ import demo.kolorob.kolorobdemoversion.utils.Lg;
  * Created by shamima.yasmin on 9/21/2017.
  */
 
-public class CommonDBTable {
+public class CommonDBTable extends BaseDBTable <CommonModel> {
 
     //  DB configuration
 
@@ -58,14 +58,13 @@ public class CommonDBTable {
     private static final String KEY_RATINGS = "_rating";
 
 
-    private Context tContext;
 
     public CommonDBTable(Context context) {
         tContext = context;
         createTable();
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -102,13 +101,6 @@ public class CommonDBTable {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(CommonModel commonModel) {
         if (!isFieldExist(commonModel.getId())) {
@@ -250,28 +242,13 @@ public class CommonDBTable {
     }
 
     public boolean isFieldExist(int id) {
-        //Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (id==cursor.getInt(0)) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+       return super.isFieldExist(id, TABLE_NAME);
     }
 
     public ArrayList<CommonModel> getAllCommonByArea(String ward, String place) {
 
         ArrayList<CommonModel> subCatList = new ArrayList<>();
 
-        //System.out.println(cat_id+"  "+sub_cat_id);
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery ("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = '"+ ward + "' AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
 
@@ -311,7 +288,7 @@ public class CommonDBTable {
     }
 
 
-    private CommonModel cursorToSubCatList(Cursor cursor) {
+    public CommonModel cursorToSubCatList(Cursor cursor) {
 
         int _id = cursor.getInt(0);
         String _nameEn = cursor.getString(1);
@@ -351,10 +328,6 @@ public class CommonDBTable {
     }
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 }
