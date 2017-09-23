@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
-import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
+
 
 /**
  * Created by israt.jahan on 2/9/2017.
