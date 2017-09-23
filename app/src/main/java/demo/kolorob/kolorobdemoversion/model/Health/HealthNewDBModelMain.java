@@ -1,12 +1,9 @@
 package demo.kolorob.kolorobdemoversion.model.Health;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-
-import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
