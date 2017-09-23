@@ -76,8 +76,7 @@ public class EntNewDBTable {
     }
 
 
-    public long insertItem(int entId, int commonId, String entType, String entryFee
-    ) {
+    public long insertItem(int entId, int commonId, String entType, String entryFee) {
         if (isFieldExist(entId)) {
             return updateItem(entId, commonId, entType, entryFee);
         }

@@ -7,23 +7,21 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 2/9/2017.
  */
-public class EduNewDBTableMain {
-    private static final String TAG = EduNewDBTableMain.class.getSimpleName();
-    private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_MAIN;
 
+
+public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
+
+    private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_MAIN;
     private static final String KEY_IDENTIFIER_ID = "_eduId"; // 0 -integer
     private static final String KEY_COMMON_ID = "_commonId";
-
     private static final String KEY_EDU_TYPE = "_eduType"; // 1 - text
     private static final String KEY_SHIFT = "_shift"; // 1 - text
     private static final String KEY_STUDENT_NO = "_studentNo"; // 1 - text
@@ -32,15 +30,12 @@ public class EduNewDBTableMain {
     private static final String KEY_FACILITY = "_facility"; // 1 - text
 
 
-
-    private Context tContext;
-
     public EduNewDBTableMain(Context context) {
         tContext = context;
         createTable();
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -59,13 +54,6 @@ public class EduNewDBTableMain {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(EduNewModel eduNewModel) {
         if (!isFieldExist(eduNewModel.getEduId()))
@@ -131,64 +119,27 @@ public class EduNewDBTableMain {
         return updatedId;
     }
 
-    public void delete(String ward, String area, CommonModel commonModel)
-    {
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        commonDBTable.delete(ward, area);
-        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
-        SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_COMMON_ID + " = " + commonModel.getId(), null);
-
-        database.close();
+    public void delete(String ward, String area, CommonModel commonModel) {
+        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
     }
 
 
     public boolean isFieldExist(int id) {
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (id == cursor.getInt(0)) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
 
-    public ArrayList<EduNewModel> getAllEducationByCommonId(int commonId) {     // getAllEducationSubCategoriesInfo
-
-        ArrayList<EduNewModel> educationList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery ("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + commonId, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-               educationList.add(cursorToSubCatList(cursor));
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return educationList;
+    public ArrayList <EduNewModel> getDetailsByCommonId(int commonId) {     // getAllEducationSubCategoriesInfo
+        return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
 
 
     public EduNewModel getNodeInfo(int node) {
 
-        SQLiteDatabase db = openDB();
+        CommonModel commonModel = getCommonModelFromId(node);
         EduNewModel eduNewModel = null;
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        CommonModel commonModel = commonDBTable.getNodeInfo(node);
+        SQLiteDatabase db = openDB();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + node , null);
 
@@ -204,7 +155,7 @@ public class EduNewDBTableMain {
     }
 
 
-    private EduNewModel cursorToSubCatList(Cursor cursor) {
+    public EduNewModel cursorToSubCatList(Cursor cursor) {
 
         int _eduId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);
@@ -216,18 +167,13 @@ public class EduNewDBTableMain {
         String _avgStdPerClass = cursor.getString(6);
         String _facility = cursor.getString(7);
 
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        CommonModel _commonModel = commonDBTable.getNodeInfo(_commonId);
+        CommonModel _commonModel = getCommonModelFromId(_commonId);
 
        return new EduNewModel(_eduId, _commonModel, _eduType, _shift, _studentNo, _teachersNo, _avgStdPerClass, _facility);
 
     }
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 }
