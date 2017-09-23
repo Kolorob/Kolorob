@@ -5,34 +5,31 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
-import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
+
 
 /**
  * Created by israt.jahan on 2/9/2017.
  */
 
 
-public class FinNewDBTable {
-    private static final String TAG = FinNewDBTable.class.getSimpleName();
+public class FinNewDBTable extends BaseDBTable <FinancialNewDBModel> {
+
     private static final String TABLE_NAME = DatabaseHelper.FINANCIAL_NEWDB;
     private static final String KEY_IDENTIFIER_ID = "_finid"; // 0 -integer
     private static final String KEY_COMMON_ID = "_commonId";
     private static final String KEY_TYPE = "_type";
     private static final String KEY_SERVICE = "_service"; // 1 - text
 
-    private Context tContext;
-
     public FinNewDBTable(Context context) {
         tContext = context;
         createTable();
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -46,13 +43,6 @@ public class FinNewDBTable {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(FinancialNewDBModel financialNewDBModel) {
         if (!isFieldExist(financialNewDBModel.getFinId())) {
@@ -100,61 +90,23 @@ public class FinNewDBTable {
 
 
     public boolean isFieldExist(int id) {
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (id == cursor.getInt(0)) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
 
-    public ArrayList <FinancialNewDBModel> getFinancialByCommonId(int commonId) {
-
-        ArrayList <FinancialNewDBModel> finList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery ("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + commonId, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                finList.add(cursorToSubCatList(cursor));
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return finList;
-
+    public ArrayList <FinancialNewDBModel> getDetailsByCommonId(int commonId) {
+        return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
-    public void delete(String ward, String area, CommonModel commonModel)
-    {
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        commonDBTable.delete(ward, area);
-        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
-        SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_COMMON_ID + " = " + commonModel.getId(), null);
-
-        database.close();
+    public void delete(String ward, String area, CommonModel commonModel) {
+        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
     }
 
     public FinancialNewDBModel getNodeInfo(int node) {
 
+        CommonModel commonModel = getCommonModelFromId(node);
         SQLiteDatabase db = openDB();
         FinancialNewDBModel financialNewDBModel = null;
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        CommonModel commonModel = commonDBTable.getNodeInfo(node);
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + node , null);
 
@@ -169,26 +121,19 @@ public class FinNewDBTable {
     }
 
 
-
-    private FinancialNewDBModel cursorToSubCatList(Cursor cursor) {
+    public FinancialNewDBModel cursorToSubCatList(Cursor cursor) {
 
         int _finId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);
         String _type = cursor.getString(2);
         String _service = cursor.getString(3);
 
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        CommonModel _commonModel = commonDBTable.getNodeInfo(_commonId);
-
+        CommonModel _commonModel = getCommonModelFromId(_commonId);
         return new FinancialNewDBModel(_finId, _commonModel, _type, _service);
-
     }
 
+
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 }
