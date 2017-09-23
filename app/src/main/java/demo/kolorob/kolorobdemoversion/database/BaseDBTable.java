@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
+import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 
 /**
  * Created by shamima.yasmin on 9/22/2017.
@@ -85,6 +86,24 @@ public abstract class BaseDBTable <ModelType>  {
         closeDB();
         return list;
     }
+
+    public ArrayList <ModelType> getDataFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID) {
+
+        ArrayList <ModelType> list = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + nodeId, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                list.add(cursorToSubCatList(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return list;
+    }
+
 
 
     public void dropTable(String TABLE_NAME) {
