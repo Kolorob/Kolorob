@@ -9,20 +9,22 @@ import java.io.Serializable;
  * Created by touhid on 10/30/15.
  * @author touhid
  */
-public class CategoryItem implements Serializable,Comparable<CategoryItem>{
+public class CategoryItem implements Serializable, Comparable<CategoryItem>{
     private int id;
-    private String catName;
+    private String nameEn, nameBn;
     private boolean catActive;
 
-    public CategoryItem(int id, String catName, boolean catActive) {
+    public CategoryItem(int id, String nameEn, String nameBn, boolean catActive) {
         this.id = id;
-        this.catName = catName;
+        this.nameEn = nameEn;
+        this.nameBn = nameBn;
         this.catActive = catActive;
     }
 
-    public CategoryItem(int id, String catName) {
+    public CategoryItem(int id, String nameEn, String nameBn) {
         this.id = id;
-        this.catName = catName;
+        this.nameEn = nameEn;
+        this.nameBn = nameBn;
     }
 
     public int getId() {
@@ -33,12 +35,20 @@ public class CategoryItem implements Serializable,Comparable<CategoryItem>{
         this.id = id;
     }
 
-    public String getCatName() {
-        return catName;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setCatName(String catName) {
-        this.catName = catName;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
+    }
+
+    public String getNameBn() {
+        return nameBn;
+    }
+
+    public void setNameBn(String nameBn) {
+        this.nameBn = nameBn;
     }
 
     public boolean isCatActive() {
@@ -53,7 +63,7 @@ public class CategoryItem implements Serializable,Comparable<CategoryItem>{
     public String toString() {
         return "CategoryItem{" +
                 "id=" + id +
-                ", catName='" + catName + '\'' +
+                ", catName='" + nameEn + '\'' +
                 ", catActive=" + catActive +
                 '}';
     }
@@ -61,9 +71,10 @@ public class CategoryItem implements Serializable,Comparable<CategoryItem>{
     public static CategoryItem parseCategoryItem(JSONObject jo) throws JSONException {
         int id = jo.getInt("id");
         String name = jo.getString("name");
+        String nameBn = jo.getString("nameBn");
         boolean isActive = jo.getBoolean("active");
 
-        return new CategoryItem(id, name, isActive);
+        return new CategoryItem(id, name, nameBn, isActive);
     }
 
     @Override
