@@ -5,11 +5,9 @@ package demo.kolorob.kolorobdemoversion.model;
  */
 
 public class StoredArea {
-    String wardid;
-    String areaid;
-    String areaBn;
-    String Lat;
-    String Lon;
+    int id;
+    String ward, area, parentArea, areaBn;
+    String Lat, Lon;
 
     public String getAreaBn() {
         return areaBn;
@@ -35,27 +33,45 @@ public class StoredArea {
         Lon = lon;
     }
 
-    public String getWardid() {
-        return wardid;
+    public int getId() {
+        return id;
     }
 
-    public void setWardid(String wardid) {
-        this.wardid = wardid;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAreaid() {
-        return areaid;
+    public String getWard() {
+        return ward;
     }
 
-    public void setAreaid(String areaid) {
-        this.areaid = areaid;
+    public void setWard(String ward) {
+        this.ward = ward;
     }
 
-    public StoredArea(String wardid, String areaid, String areaBn, String lat, String lon) {
-        this.wardid = wardid;
-        this.areaid = areaid;
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getParentArea() {
+        return parentArea;
+    }
+
+    public void setParentArea(String parentArea) {
+        this.parentArea = parentArea;
+    }
+
+    public StoredArea(int id, String ward, String area, String areaBn, String parentArea, String lat, String lon) {
+        this.id = id;
+        this.ward = ward;
+        this.area = area;
+        this.parentArea = parentArea;
         this.areaBn = areaBn;
-        this.Lat = lat;
-        this.Lon = lon;
+        Lat = lat;
+        Lon = lon;
     }
 }
