@@ -8,14 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.model.Area;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
+import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 
 /**
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class AreaTable {
-
-    private static final String TAG = AreaTable.class.getSimpleName();
+public class AreaTable extends BaseDBTable <Area>{
 
     private static final String TABLE_NAME = DatabaseHelper.AREAS;
 
@@ -28,10 +28,6 @@ public class AreaTable {
     private static final String KEY_LON = "lon";
 
 
-
-
-    private Context tContext;
-
     public AreaTable(Context context) {
         tContext = context;
         createTable();
@@ -41,7 +37,7 @@ public class AreaTable {
 
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
@@ -58,13 +54,6 @@ public class AreaTable {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(Area area){
         return insertItem(
@@ -97,6 +86,7 @@ public class AreaTable {
         closeDB();
         return ret;
     }
+
     public ArrayList<String> getAllAreaNameBN(int ward_id) {
         ArrayList<String> area_bn_list = new ArrayList<>();
 
@@ -115,21 +105,7 @@ public class AreaTable {
     }
 
     public boolean isFieldExist(int id) {
-        // Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (Integer.parseInt(cursor.getString(0)) == id) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     private long updateItem(int id, String area_en, String area_bn, String area_keyword, String lat, String lon, int ward_id) {
@@ -157,8 +133,7 @@ public class AreaTable {
 
         if (cursor.moveToFirst()) {
             do {
-
-                areaList.add(cursorToArea(cursor));
+                areaList.add(cursorToModel(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -166,7 +141,7 @@ public class AreaTable {
         return areaList;
     }
 
-    private Area cursorToArea(Cursor cursor) {
+    public Area cursorToModel(Cursor cursor) {
         int id = cursor.getInt(0);
         String area_en = cursor.getString(1);
         String area_bn = cursor.getString(2);
@@ -178,10 +153,23 @@ public class AreaTable {
     }
 
     public void dropTable() {
+        super.dropTable(TABLE_NAME);
+    }
+
+    public Area getNodeInfo(int node) {
+
         SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        //Lg.d(TAG, "Table dropped and recreated.");
+        Area area = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + node , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                area = new Area(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         closeDB();
+        return area;
     }
 }

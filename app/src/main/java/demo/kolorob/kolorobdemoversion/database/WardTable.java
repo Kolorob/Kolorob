@@ -14,9 +14,8 @@ import demo.kolorob.kolorobdemoversion.model.Ward;
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class WardTable {
+public class WardTable extends BaseDBTable <Ward>{
 
-    private static final String TAG = WardTable.class.getSimpleName();
 
     private static final String TABLE_NAME = DatabaseHelper.WARDS;
 
@@ -27,9 +26,6 @@ public class WardTable {
     private static final String KEY_WARD_CCID = "cc_id";
 
 
-
-    private Context tContext;
-
     public WardTable(Context context) {
         tContext = context;
         createTable();
@@ -39,7 +35,7 @@ public class WardTable {
 
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
@@ -53,13 +49,6 @@ public class WardTable {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(Ward ward){
         return insertItem(
@@ -88,39 +77,10 @@ public class WardTable {
         closeDB();
         return ret;
     }
-    public ArrayList<String> getAllWardNameBN() {
-        ArrayList<String> ward_bn_list = new ArrayList<>();
 
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String ward_bn = cursor.getString(2);
-                ward_bn_list.add(ward_bn);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return ward_bn_list;
-    }
 
     public boolean isFieldExist(int id) {
-        // Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (Integer.parseInt(cursor.getString(0)) == id) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     private long updateItem(int id, String ward_en, String ward_bn, String ward_keyword, int cc_id) {
@@ -148,7 +108,7 @@ public class WardTable {
         if (cursor.moveToFirst()) {
             do {
 
-                wardList.add(cursorToWard(cursor));
+                wardList.add(cursorToModel(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -156,7 +116,7 @@ public class WardTable {
         return wardList;
     }
 
-    private Ward cursorToWard(Cursor cursor) {
+    public Ward cursorToModel(Cursor cursor) {
         int id = cursor.getInt(0);
         String ward_en = cursor.getString(1);
         String ward_bn = cursor.getString(2);
@@ -165,11 +125,24 @@ public class WardTable {
         return new Ward(id, ward_en, ward_bn, ward_keyword, cc_id);
     }
 
-    public void dropTable() {
+    public Ward getNodeInfo(int node) {
+
         SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        //Lg.d(TAG, "Table dropped and recreated.");
+        Ward ward = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + node , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ward = new Ward(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         closeDB();
+        return ward;
+    }
+
+    public void dropTable() {
+       super.dropTable(TABLE_NAME);
     }
 }

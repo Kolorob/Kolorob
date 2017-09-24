@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
 
 
@@ -14,20 +15,15 @@ import demo.kolorob.kolorobdemoversion.model.CityCorporation;
  * Created by shamima.yasmin on 8/23/2017.
  */
 
-public class CityCorporationTable {
+public class CityCorporationTable extends BaseDBTable <CityCorporation> {
 
-    private static final String TAG = CityCorporationTable.class.getSimpleName();
 
     private static final String TABLE_NAME = DatabaseHelper.CITYCORPORATIONS;
-
     private static final String KEY_ID = "id"; // 0 -integer
     private static final String KEY_CC_EN = "cc_en";
     private static final String KEY_CC_BN = "cc_bn";
     private static final String KEY_CC_KEYWORD = "cc_keyword";
 
-
-
-    private Context tContext;
 
     public CityCorporationTable(Context context) {
         tContext = context;
@@ -38,7 +34,7 @@ public class CityCorporationTable {
 
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
@@ -51,13 +47,6 @@ public class CityCorporationTable {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(CityCorporation cityCorporation){
         return insertItem(
@@ -84,39 +73,10 @@ public class CityCorporationTable {
         closeDB();
         return ret;
     }
-    public ArrayList<String> getAllCCNameBN() {
-        ArrayList<String> cc_bn_list = new ArrayList<>();
 
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String cc_bn = cursor.getString(2);
-                cc_bn_list.add(cc_bn);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return cc_bn_list;
-    }
 
     public boolean isFieldExist(int id) {
-        // Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
-            do {
-                if (Integer.parseInt(cursor.getString(0)) == id) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
     private long updateItem(int id, String cc_en, String cc_bn, String cc_keyword) {
@@ -134,24 +94,25 @@ public class CityCorporationTable {
         return ret;
     }
 
-    public ArrayList<CityCorporation> getAllCCs() {
-        ArrayList<CityCorporation> ccList = new ArrayList<>();
+    public CityCorporation getNodeInfo(int node) {
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        CityCorporation cityCorporation = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_ID + " = " + node , null);
 
         if (cursor.moveToFirst()) {
             do {
-
-                ccList.add(cursorToCC(cursor));
+                cityCorporation = new CityCorporation(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return ccList;
+        return cityCorporation;
     }
 
-    private CityCorporation cursorToCC(Cursor cursor) {
+
+    public CityCorporation cursorToModel(Cursor cursor) {
         int id = cursor.getInt(0);
         String cc_en = cursor.getString(1);
         String cc_bn = cursor.getString(2);
@@ -161,10 +122,6 @@ public class CityCorporationTable {
     }
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        //Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 }
