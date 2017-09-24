@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by shamima.yasmin on 9/21/2017.
@@ -255,7 +254,7 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
         if (cursor.moveToFirst()) {
             do {
 
-                subCatList.add(cursorToSubCatList(cursor));
+                subCatList.add(cursorToModel(cursor));
 
             } while (cursor.moveToNext());
         }
@@ -288,7 +287,7 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
     }
 
 
-    public CommonModel cursorToSubCatList(Cursor cursor) {
+    public CommonModel cursorToModel(Cursor cursor) {
 
         int _id = cursor.getInt(0);
         String _nameEn = cursor.getString(1);

@@ -131,7 +131,7 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
     }
 
 
-    public EntertainmentNewDBModel cursorToSubCatList(Cursor cursor) {
+    public EntertainmentNewDBModel cursorToModel(Cursor cursor) {
 
         int _entId = cursor.getInt(0);
         int _commonId = cursor. getInt(1);

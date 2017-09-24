@@ -10,7 +10,6 @@ import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.Religious.ReligiousNewDBModel;
 
-
 /**
  * Created by zahid on 2/8/2017.
  */
@@ -117,7 +116,7 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
         return updatedId;
     }
 
-    public ReligiousNewDBModel cursorToSubCatList(Cursor cursor) {
+    public ReligiousNewDBModel cursorToModel(Cursor cursor) {
         int _shelterId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);
         String _rsReligion = cursor.getString(2);

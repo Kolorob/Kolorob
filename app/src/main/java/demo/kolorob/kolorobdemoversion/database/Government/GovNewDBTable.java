@@ -106,7 +106,7 @@ public class GovNewDBTable extends BaseDBTable <GovernmentNewDBModel> {
         return governmentNewDBModel;
     }
 
-    public GovernmentNewDBModel cursorToSubCatList(Cursor cursor) {
+    public GovernmentNewDBModel cursorToModel(Cursor cursor) {
 
         int _govId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);

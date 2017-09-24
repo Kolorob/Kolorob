@@ -87,7 +87,7 @@ public class LegalAidNewDBTable extends BaseDBTable <LegalAidNewDBModel> {
     }
 
 
-    public LegalAidNewDBModel cursorToSubCatList(Cursor cursor) {
+    public LegalAidNewDBModel cursorToModel(Cursor cursor) {
         int _legalId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);
         String _serviceType = cursor.getString(2);

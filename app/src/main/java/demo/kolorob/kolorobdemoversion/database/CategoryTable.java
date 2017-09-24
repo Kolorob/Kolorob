@@ -68,22 +68,6 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
         return insertedId;
     }
 
-    public ArrayList <String> getAllCatNames() {
-        ArrayList<String> ciList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(1);
-                ciList.add(name);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return ciList;
-    }
 
     public boolean isFieldExist(int id) {
        return super.isFieldExist(id, TABLE_NAME);

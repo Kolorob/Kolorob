@@ -110,7 +110,7 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
     }
 
 
-    public HealthNewDBModelMain cursorToSubCatList(Cursor cursor) {
+    public HealthNewDBModelMain cursorToModel(Cursor cursor) {
         int _healthId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);
         String _instituteType = cursor.getString(2);

@@ -121,7 +121,7 @@ public class FinNewDBTable extends BaseDBTable <FinancialNewDBModel> {
     }
 
 
-    public FinancialNewDBModel cursorToSubCatList(Cursor cursor) {
+    public FinancialNewDBModel cursorToModel(Cursor cursor) {
 
         int _finId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);

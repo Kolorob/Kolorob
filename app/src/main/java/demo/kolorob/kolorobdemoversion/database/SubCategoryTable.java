@@ -8,14 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.adapters.Subcatholder;
+import demo.kolorob.kolorobdemoversion.model.StoredArea;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItem;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by Yeakub Hassan Rafi on 26-Dec-15.
  */
-public class SubCategoryTable {
-    private static final String TAG = SubCategoryTable.class.getSimpleName();
+public class SubCategoryTable extends BaseDBTable <SubCategoryItem>{
 
     private static final String TABLE_NAME = DatabaseHelper.SUB_CATEGORY;
 
@@ -29,7 +29,6 @@ public class SubCategoryTable {
     // for simplicity of the local table
     // structure it's kept as string.
 
-    private Context tContext;
 
     public SubCategoryTable(Context context) {
         tContext = context;
@@ -40,7 +39,7 @@ public class SubCategoryTable {
 
     }
 
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
                 + "( "
@@ -55,13 +54,6 @@ public class SubCategoryTable {
         closeDB();
     }
 
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(SubCategoryItem subCategoryItem){
         return insertItem(
@@ -123,6 +115,7 @@ public class SubCategoryTable {
         closeDB();
         return ret;
     }
+
     public ArrayList<Subcatholder> getcatSubCategories(int id) {
 
 
@@ -151,53 +144,15 @@ public class SubCategoryTable {
 
         if (cursor.moveToFirst()) {
             do {
-                siList.add(cursorToSubCategory(cursor));
+                siList.add(cursorToModel(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
         return siList;
     }
-    public ArrayList<String> getSubnameedu(int id,String head) {
-        ArrayList<String> siList=new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
 
 
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(2);
-                int subid=cursor.getInt(5);
-                siList.add(subid,name);
-                i++;
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList;
-    }
-   /* public ArrayList<Integer> getSubid(int id,String head) {
-        ArrayList<Integer> siList2=new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_HEADER+" = '"+head+"'", null);
-
-
-        if (cursor.moveToFirst()) {
-            do {
-               ;
-                int subid=cursor.getInt(1);
-                siList2.add(i,subid);
-                i++;
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList2;
-    }*/
     public ArrayList<SubCategoryItem> getAllSubCategoriesHeader(int id,String head) {
         ArrayList<SubCategoryItem> siList = new ArrayList<>();
 
@@ -206,7 +161,7 @@ public class SubCategoryTable {
 
         if (cursor.moveToFirst()) {
             do {
-                siList.add(cursorToSubCategory(cursor));
+                siList.add(cursorToModel(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -214,7 +169,7 @@ public class SubCategoryTable {
         return siList;
     }
 
-    private SubCategoryItem cursorToSubCategory(Cursor cursor) {
+    public SubCategoryItem cursorToModel(Cursor cursor) {
         int cat_id = cursor.getInt(0);
         int id = cursor.getInt(1);
         String name = cursor.getString(2);
@@ -224,11 +179,24 @@ public class SubCategoryTable {
         return new SubCategoryItem(cat_id,id, name,head,namebn,headbn);
     }
 
-    public void dropTable() {
+    public SubCategoryItem getNodeInfo(int node) {
+
         SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
+        SubCategoryItem subCategoryItem = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + node , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                subCategoryItem = new SubCategoryItem(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         closeDB();
+        return subCategoryItem;
+    }
+
+    public void dropTable() {
+        super.dropTable(TABLE_NAME);
     }
 }

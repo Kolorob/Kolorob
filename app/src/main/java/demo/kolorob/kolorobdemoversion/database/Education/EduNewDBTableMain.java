@@ -155,7 +155,7 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
     }
 
 
-    public EduNewModel cursorToSubCatList(Cursor cursor) {
+    public EduNewModel cursorToModel(Cursor cursor) {
 
         int _eduId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);

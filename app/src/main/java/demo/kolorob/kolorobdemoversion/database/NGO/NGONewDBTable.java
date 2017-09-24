@@ -130,7 +130,7 @@ public class NGONewDBTable extends BaseDBTable <NGONewDBModel> {
     }
 
 
-    public NGONewDBModel cursorToSubCatList(Cursor cursor) {
+    public NGONewDBModel cursorToModel(Cursor cursor) {
         int _ngoId = cursor.getInt(0);
         int _commonId = cursor.getInt(1);
         String _ngoServices = cursor.getString(2);
