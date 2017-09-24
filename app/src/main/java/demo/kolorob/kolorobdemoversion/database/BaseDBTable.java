@@ -5,8 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+
+import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 
 /**
  * Created by shamima.yasmin on 9/22/2017.
@@ -21,7 +22,7 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract void createTable();
     public abstract long insertItem(ModelType modelType);
     public abstract ModelType getNodeInfo(int node);
-    public abstract ModelType cursorToSubCatList(Cursor cursor);
+    public abstract ModelType cursorToModel(Cursor cursor);
 
 
     public SQLiteDatabase openDB() {
@@ -78,7 +79,7 @@ public abstract class BaseDBTable <ModelType>  {
 
         if (cursor.moveToFirst()) {
             do {
-                list.add(cursorToSubCatList(cursor));
+                list.add(cursorToModel(cursor));
 
             } while (cursor.moveToNext());
         }
@@ -96,7 +97,24 @@ public abstract class BaseDBTable <ModelType>  {
 
         if (cursor.moveToFirst()) {
             do {
-                list.add(cursorToSubCatList(cursor));
+                list.add(cursorToModel(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return list;
+    }
+
+    public ArrayList <ModelType> getAllData(String TABLE_NAME) {
+
+        ArrayList <ModelType> list = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                list.add(cursorToModel(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
