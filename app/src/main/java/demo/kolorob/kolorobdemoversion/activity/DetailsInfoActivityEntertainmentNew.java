@@ -71,39 +71,13 @@ import static demo.kolorob.kolorobdemoversion.R.id.comment;
  * Created by arafat on 28/05/2016.
  */
 
-public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
-    Dialog dialog;
-    LinearLayout upperHand,service_center_name,left_way,middle_phone,right_email,bottom_bar;
-    ImageView route_icon,phone_icon,email_icon,email_btn;
-    ImageView comment_icon;
-    ArrayList<CommentItem> commentItems;
-    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
-    int inc;
-    int width,height;
-    String datevalue,datevaluebn;
+public class DetailsInfoActivityEntertainmentNew extends BaseActivity <EntertainmentNewDBModel>{
 
-    TextView service_name;
-    String username="kolorobapp";
-    String password="2Jm!4jFe3WgBZKEN";
-    Context con;
-    String[] key, value;
-
-    int increment = 0;
     EntertainmentNewDBModel entertainmentServiceProviderItemNew;
-
-
-    private TextView ratingText;
-    private ImageView routing_icon,feedback;
-    RadioGroup feedRadio;
-    RadioButton rb1;
-    String status="",phone_num="",uname="";
-    String result_concate="";
-    //EditText feedback_comment;
-    RatingBar ratingBar;
-    ListView service_data, contact_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_info_activity_entertainment_new);
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
@@ -519,17 +493,9 @@ public class DetailsInfoActivityEntertainmentNew extends AppCompatActivity {
         }
     }
 
-    //clicked from xml
+
     public void verifyRegistration(View v) {
-
-        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
-        phone_num=register;
-        if (register.equals("")) {
-            requestToRegister();
-        } else {
-
-            feedBackAlert();
-        }
+        super.verifyRegistration(v, DetailsInfoActivityEntertainmentNew.this);
     }
 
     public void feedBackAlert() {
