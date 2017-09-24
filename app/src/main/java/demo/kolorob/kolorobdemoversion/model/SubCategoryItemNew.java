@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 public class SubCategoryItemNew implements Serializable {
 
+    private int id;
     private int catId;
     private String CatLabel;
     private int subCatId;
@@ -20,7 +21,8 @@ public class SubCategoryItemNew implements Serializable {
     private String refLabel;
     private String refLabelBn;
 
-    public SubCategoryItemNew(int catId, String catLabel, int subCatId, String subCatLabel, String subCatLabelBn, int refId, String refLabel, String refLabelBn) {
+    public SubCategoryItemNew(int id, int catId, String catLabel, int subCatId, String subCatLabel, String subCatLabelBn, int refId, String refLabel, String refLabelBn) {
+        this.id = id;
         this.catId = catId;
         CatLabel = catLabel;
         this.subCatId = subCatId;
@@ -29,6 +31,14 @@ public class SubCategoryItemNew implements Serializable {
         this.refId = refId;
         this.refLabel = refLabel;
         this.refLabelBn = refLabelBn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCatId() {
@@ -96,6 +106,7 @@ public class SubCategoryItemNew implements Serializable {
     }
 
     public static SubCategoryItemNew parseSubCategoryItem(JSONObject jo) throws JSONException {
+        int _id = jo.getInt("ref_id");
         int cat_id = jo.getInt("cat_id");
         String catname=jo.getString("cat_label");
 
@@ -105,6 +116,6 @@ public class SubCategoryItemNew implements Serializable {
         int refId = jo.getInt("ref_id");
         String refname= jo.getString("ref_label");
         String refnamebn = jo.getString("ref_label_bn");
-        return new SubCategoryItemNew(cat_id,catname,subcatid, subcatLabele,subcatLabelB,refId,refname,refnamebn);
+        return new SubCategoryItemNew(_id, cat_id,catname,subcatid, subcatLabele,subcatLabelB,refId,refname,refnamebn);
     }
 }
