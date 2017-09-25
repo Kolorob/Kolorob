@@ -4,20 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
+
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
-public class HealthNewDBTableHospital {
-    private static final String TAG = HealthNewDBTableHospital.class.getSimpleName();
+public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospital> {
+
     private static final String TABLE_NAME = DatabaseHelper.HEALTH_NEW_DB_HOS;
     private static final String KEY_SERVICE_ID = "_servicecenterid";
     private static final String KEY_EMERGENCY_AVAIL = "_eavailable";
@@ -29,15 +26,11 @@ public class HealthNewDBTableHospital {
     private static final String KEY_MATER_PRIVACY= "_mtrprivacy"; //
 
 
-
-
-    private Context tContext;
-
     public HealthNewDBTableHospital(Context context) {
         tContext = context;
         createTable();
     }
-    private void createTable() {
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -53,13 +46,6 @@ public class HealthNewDBTableHospital {
 
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
-    }
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
-
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
     public long insertItem(HealthNewDBModelHospital healthNewDBModelHospital) {
@@ -136,45 +122,16 @@ public class HealthNewDBTableHospital {
 
     }
 
-    public ArrayList<HealthNewDBModelHospital> getHealthSpecialistData(int node_id) {
-        ArrayList<HealthNewDBModelHospital> subCatList = new ArrayList<>();
-        //System.out.println(cat_id+"  "+sub_cat_id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SERVICE_ID +" = "+node_id, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                //System.out.println("abc="+cursor.getString(4));
-                subCatList.add(cursorToSubCatList(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return subCatList;
+    public ArrayList <HealthNewDBModelHospital> getDataFromId(int id) {
+        return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
     }
 
 
-
-    public boolean isFieldExist(int nodeid) {
-        //Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        int s=cursor.getCount();
-        if (cursor.moveToFirst()) {
-            do {
-                if (cursor.getInt(0) == nodeid ) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+    public boolean isFieldExist(int id) {
+        return super.isFieldExist(id, TABLE_NAME);
     }
 
-    private HealthNewDBModelHospital cursorToSubCatList(Cursor cursor) {
+    public HealthNewDBModelHospital cursorToModel(Cursor cursor) {
         int _servicecenterid = cursor.getInt(0);
         String _eavailable = cursor.getString(1);
         String _enumber= cursor.getString(2);
@@ -184,21 +141,30 @@ public class HealthNewDBTableHospital {
         String _mtrnum = cursor.getString(6);
         String _mtrprivacy = cursor.getString(7);
 
-
-
-
-
         return new HealthNewDBModelHospital(_servicecenterid,_eavailable,_enumber,
                 _ambavailable,_ambnumber,_mtravailable,_mtrnum,_mtrprivacy);
     }
 
+    public HealthNewDBModelHospital getNodeInfo(int node) {
+
+        SQLiteDatabase db = openDB();
+        HealthNewDBModelHospital healthNewDBModelHospital = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_SERVICE_ID + " = " + node , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                healthNewDBModelHospital = new HealthNewDBModelHospital(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return healthNewDBModelHospital;
+    }
+
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 
 }
