@@ -553,7 +553,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     //  editor.apply();
                     handler.removeCallbacks(this);
-                    SharedPreferencesHelper.setifcommentedalready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
+                    SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
                     Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
 
                     frameAnimation.stop();

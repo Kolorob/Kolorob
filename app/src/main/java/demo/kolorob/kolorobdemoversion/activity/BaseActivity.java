@@ -469,7 +469,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
 
-    private String English_to_bengali_number_conversion(String english_number) {
+    protected String English_to_bengali_number_conversion(String english_number) {
 
         if(english_number.equals("null") || english_number.equals(""))
             return english_number;
@@ -515,7 +515,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         return concatResult;
     }
 
-    private String timeConverter(String time) {
+    protected String timeConverter(String time) {
         String timeInBengali = "";
 
         try {
