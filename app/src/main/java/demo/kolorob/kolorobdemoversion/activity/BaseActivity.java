@@ -199,6 +199,13 @@ public abstract class BaseActivity <ModelType> extends AppCompatActivity{
         service_data.setAdapter(defaultAdapter);
 
 
+
+        comment_icon = (ImageView)findViewById(R.id.comments); //this icon will be used to show comment_icon
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
+        lp.setMargins(width/26, 0, 0, 0);
+        comment_icon.setLayoutParams(lp);
+        
+
         email_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,177 +219,6 @@ public abstract class BaseActivity <ModelType> extends AppCompatActivity{
                 }
             }
         });
-
-
-        comment_icon = (ImageView)findViewById(R.id.comments); //this icon will be used to show comment_icon
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
-        lp.setMargins(width/26, 0, 0, 0);
-        comment_icon.setLayoutParams(lp);
-
-        /*
-        CommentTable commentTable = new CommentTable(context);
-
-
-        commentItems = commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(entertainmentServiceProviderItemNew.getEntid()));
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        final String[] comment = new String[size];
-        final String[] rating = new String[size];
-
-
-
-        for (CommentItem commentItem:commentItems)
-        {
-            if(!commentItem.getRating().equals(""))
-            {
-                phone[inc]= commentItem.getUser_name();
-                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি ";
-                else {date[inc]= commentItem.getComment();}
-                comment[inc]= English_to_bengali_number_conversion(commentItem.getDate());
-                rating[inc]= commentItem.getRating();
-                inc++;
-            }
-
-        }
-
-
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
-
-
-        comment_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            if(SharedPreferencesHelper.getIfCommentedAlready(context, String.valueOf(commonModel.getId()), uname).equals("yes") || inc > 0) {
-                if (SharedPreferencesHelper.getIfCommentedAlready(context, String.valueOf(commonModel.getId()), uname).equals("yes") && inc == 0) {
-                    AlertMessage.showMessage(context, "দুঃখিত",
-                            "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
-
-                } else {
-                    if (SharedPreferencesHelper.getIfCommentedAlready(context, String.valueOf(commonModel.getId()), uname).equals("yes") ) {
-                        ToastMessageDisplay.setText(context,
-                                "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
-                        ToastMessageDisplay.showText(context);
-                    }
-
-                    LayoutInflater layoutInflater = LayoutInflater.from(context);
-                    final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                    final Dialog alertDialog = new Dialog(context);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-
-                    /*final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
-                    final ImageView close_icon = (ImageView) promptView.findViewById(R.id.closex);
-                    final TextView review = (TextView) promptView.findViewById(R.id.review);
-                    final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
-
-                    try {
-                        int ratings = Integer.parseInt(commonModel.getRatings());
-                        if (ratings == 1)
-                            ratingbarz.setBackgroundResource(R.drawable.one);
-                        else if (ratings == 2)
-                            ratingbarz.setBackgroundResource(R.drawable.two);
-                        else if (ratings == 3)
-                            ratingbarz.setBackgroundResource(R.drawable.three);
-                        else if (ratings == 4)
-                            ratingbarz.setBackgroundResource(R.drawable.four);
-                        else if (ratings == 5)
-                            ratingbarz.setBackgroundResource(R.drawable.five);
-                    } catch (Exception e) {
-
-                    }
-
-
-                    review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
-                    Double screenSize = AppUtils.ScreenSize(context);
-                    //Check ScreenSize
-                    if (screenSize > 6.5) {
-                        review.setTextSize(20);
-                    } else {
-                        review.setTextSize(16);
-                    }
-
-
-                    listView.setAdapter(comment_layout_adapter);
-                    alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
-
-                    close_icon.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                        }
-                    });
-
-
-
-
-                    alertDialog.setCancelable(false);
-                    alertDialog.show();
-
-
-                }
-            }
-
-            else if(inc == 0)  //if inc= o means no one commented
-            {
-                LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityEntertainmentNew.this);
-                View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-                final Dialog alertDialog = new Dialog(DetailsInfoActivityEntertainmentNew.this);
-                alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                alertDialog.setContentView(promptView);
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                alertDialog.show();
-                final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
-                final ImageView no = (ImageView) promptView.findViewById(R.id.no);
-                final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-                String text="এই সেবা সম্পর্কে কেউ এখনো মন্তব্য করেনি "+"\n"+"আপনি কি আপনার মতামত জানাতে চান?";
-                textAsk.setText(text);
-                alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
-
-                if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityEntertainmentNew.this))
-                    textAsk.setTextSize(23);
-                else
-                    textAsk.setTextSize(17);
-                //  alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.cancel();
-                        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityEntertainmentNew.this);
-                        phone_num=register;
-                        //if no number is set it will request to register
-                        if (register.equals("")) {
-                            requestToRegister();
-                        } else {
-
-                            feedBackAlert();
-                        }
-
-                    }
-                });
-                no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.cancel();
-                    }
-                });
-                alertDialog.setCancelable(false);
-                alertDialog.show();
-
-            }
-
-
-
-
-            }
-        });*/
-
-
-
-
 
 
         phone_icon.setOnClickListener(new View.OnClickListener() {
