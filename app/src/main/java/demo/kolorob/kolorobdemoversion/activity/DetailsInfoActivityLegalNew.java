@@ -11,7 +11,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by arafat on 28/05/2016.
  */
 
-public class DetailsInfoActivityLegalNew extends BaseActivity <LegalAidNewDBModel> {
+public class DetailsInfoActivityLegalNew extends BaseActivity  {
 
     LegalAidNewDBModel legal;
 

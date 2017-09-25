@@ -10,7 +10,7 @@ import demo.kolorob.kolorobdemoversion.utils.AppConstants;
  * Created by zahidul.islam
  */
 
-public class DetailsInfoActivityNGO extends BaseActivity <NGONewDBModel> {
+public class DetailsInfoActivityNGO extends BaseActivity {
 
     NGONewDBModel ngo;
 
@@ -32,7 +32,7 @@ public class DetailsInfoActivityNGO extends BaseActivity <NGONewDBModel> {
 
 
     public void displayUniqueProperties(){
-        
+
         String services = ngo.getNgoServices();
 
         if(services != null) {

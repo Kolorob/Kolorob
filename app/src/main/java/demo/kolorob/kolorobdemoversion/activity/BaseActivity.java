@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,24 +27,19 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
 import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
@@ -57,36 +51,26 @@ import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
 import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
-import static demo.kolorob.kolorobdemoversion.R.id.review;
 
-
-public abstract class BaseActivity <ModelType> extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity{
 
     Dialog dialog;
     LinearLayout upperHand, service_center_name, left_way, middle_phone, right_email, bottom_bar;
     ImageView route_icon, phone_icon, email_icon, comment_icon, email_btn;
-    ArrayList <CommentItem> commentItems;
     ArrayList <SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
-    int inc;
     int width, height;
     String dateValue, dateValueBn;
-
     TextView service_name;
-    String username = "kolorobapp";
-    String password = "2Jm!4jFe3WgBZKEN";
+    String username = "kolorobapp", password = "2Jm!4jFe3WgBZKEN";
     Context context;
-
     int increment = 0;
-
     TextView ratingText;
     ImageView routing_icon,feedback;
     RadioGroup feedRadio;
     RadioButton rb1;
     String status = "", phone_num = "", uname = "";
-    String result_concate = "";
-    //EditText feedback_comment;
     RatingBar ratingBar;
-    ListView service_data, contact_data;
+    ListView service_data;
 
     String[] key = new String[600];
     String[] value = new String[600];
@@ -204,7 +188,7 @@ public abstract class BaseActivity <ModelType> extends AppCompatActivity{
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
         lp.setMargins(width/26, 0, 0, 0);
         comment_icon.setLayoutParams(lp);
-        
+
 
         email_icon.setOnClickListener(new View.OnClickListener() {
             @Override
