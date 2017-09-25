@@ -7,17 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
 //import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
-public class EduNewDBTableTraining {
-    private static final String TAG = EduNewDBTableTraining.class.getSimpleName();
+public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
+
     private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_TRAINING;
     private static final String KEY_NODE_ID = "_eduId";
     private static final String KEY_SERVICE_ID = "_sproviderid";
@@ -27,14 +29,12 @@ public class EduNewDBTableTraining {
     private static final String KEY_COURSE_NAME = "_coursename"; // 1 - text
 
 
-
-    private Context tContext;
-
     public EduNewDBTableTraining(Context context) {
         tContext = context;
         createTable();
     }
-    private void createTable() {
+
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -49,13 +49,7 @@ public class EduNewDBTableTraining {
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
 
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(EduTrainingModel eduTrainingModel) {
         if (isFieldExist(eduTrainingModel.getServiceproviderid())) {
@@ -120,43 +114,16 @@ public class EduNewDBTableTraining {
 
     }
 
-
-
-    public boolean isFieldExist(int nodeid) {
-        //Lg.d(TAG, "isFieldExist : inside, id=" + id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        int s=cursor.getCount();
-        if (cursor.moveToFirst()) {
-            do {
-                if (cursor.getInt(0) == nodeid ) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return false;
+    public boolean isFieldExist(int id) {
+        return super.isFieldExist(id, TABLE_NAME);
     }
-    public ArrayList<EduTrainingModel> gettrainingInfo(int node_id) {
-        ArrayList<EduTrainingModel> subCatList = new ArrayList<>();
-        //System.out.println(cat_id+"  "+sub_cat_id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_SERVICE_ID +" = "+node_id, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                //System.out.println("abc="+cursor.getString(4));
-                subCatList.add(cursorToSubCatList(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return subCatList;
+
+    public ArrayList <EduTrainingModel> getDataFromId (int id) {
+        return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
-    private EduTrainingModel cursorToSubCatList(Cursor cursor) {
+
+    public EduTrainingModel cursorToModel(Cursor cursor) {
         int _eduId = cursor.getInt(0);
         int _sproviderId = cursor.getInt(1);
         String _courseduration= cursor.getString(2);
@@ -164,22 +131,29 @@ public class EduNewDBTableTraining {
         String _trainingname = cursor.getString(4);
         String _coursename = cursor.getString(5);
 
-
-
-
-
-
         return new EduTrainingModel(_eduId,_sproviderId,
                 _courseduration,_cost,_trainingname,_coursename);
     }
 
+    public EduTrainingModel getNodeInfo(int node){
+        SQLiteDatabase db = openDB();
+        EduTrainingModel eduTrainingModel = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_SERVICE_ID + " = " + node , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                eduTrainingModel = new EduTrainingModel(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return eduTrainingModel;
+    }
+
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 
 }
