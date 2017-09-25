@@ -106,6 +106,9 @@ public abstract class BaseActivity extends AppCompatActivity{
         feedback = (ImageView) findViewById(R.id.feedback);          //feedback icon
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
+        if(width < 500)
+            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
+
         setRatingBar(commonModel);
 
 
