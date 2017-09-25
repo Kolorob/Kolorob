@@ -7,17 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
-public class EduNewDBTableSchool {
-    private static final String TAG = EduNewDBTableSchool.class.getSimpleName();
+public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
+
     private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_SCHOOL;
     private static final String KEY_NODE_ID = "_eduId";
     private static final String KEY_SPID = "_sproviderId";
@@ -27,15 +29,12 @@ public class EduNewDBTableSchool {
     private static final String KEY_COLLEGE_FEES = "_collage"; // 0 -integer
 
 
-
-
-    private Context tContext;
-
     public EduNewDBTableSchool(Context context) {
         tContext = context;
         createTable();
     }
-    private void createTable() {
+
+    public void createTable() {
         SQLiteDatabase db = openDB();
 
         String CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
@@ -50,13 +49,7 @@ public class EduNewDBTableSchool {
         db.execSQL(CREATE_TABLE_SQL);
         closeDB();
     }
-    private SQLiteDatabase openDB() {
-        return DatabaseManager.getInstance(tContext).openDatabase();
-    }
 
-    private void closeDB() {
-        DatabaseManager.getInstance(tContext).closeDatabase();
-    }
 
     public long insertItem(EduNewSchoolModel eduNewSchoolModel) {
         if (!isFieldExist(eduNewSchoolModel.getSpid())) {
@@ -66,13 +59,13 @@ public class EduNewDBTableSchool {
                     eduNewSchoolModel.getCollage_fees()
             );
         }
-            else {
-                return updateItem(
-                        eduNewSchoolModel.getId(),eduNewSchoolModel.getSpid(),eduNewSchoolModel.getStipend(),
-                        eduNewSchoolModel.getPrimary_fees(),eduNewSchoolModel.getSecondary_fees(),
-                        eduNewSchoolModel.getCollage_fees()
-                );
-            }
+        else {
+            return updateItem(
+                    eduNewSchoolModel.getId(),eduNewSchoolModel.getSpid(),eduNewSchoolModel.getStipend(),
+                    eduNewSchoolModel.getPrimary_fees(),eduNewSchoolModel.getSecondary_fees(),
+                    eduNewSchoolModel.getCollage_fees()
+            );
+        }
     }
 
     public long insertItem(int eduId,int spid, String stipend, String primary, String secondary,
@@ -124,55 +117,40 @@ public class EduNewDBTableSchool {
 
     }
 
-
-
-    public boolean isFieldExist(int nodeid) {
-        //Lg.d(TAG, "isFieldExist : inside, id=" + id);
+    public EduNewSchoolModel getNodeInfo(int node){
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        int s=cursor.getCount();
+        EduNewSchoolModel eduNewSchoolModel = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_NODE_ID + " = " + node , null);
+
         if (cursor.moveToFirst()) {
             do {
-                if (cursor.getInt(0) == nodeid ) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
+                eduNewSchoolModel = new EduNewSchoolModel(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return false;
+        return eduNewSchoolModel;
     }
-    public ArrayList<EduNewSchoolModel> getschoolInfo(int node_id) {
-        ArrayList<EduNewSchoolModel> subCatList = new ArrayList<>();
-        //System.out.println(cat_id+"  "+sub_cat_id);
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ KEY_NODE_ID +" = "+node_id, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                //System.out.println("abc="+cursor.getString(4));
-                subCatList.add(cursorToSubCatList(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return subCatList;
+
+
+    public boolean isFieldExist(int id) {
+        return super.isFieldExist(id, TABLE_NAME);
     }
-    private EduNewSchoolModel cursorToSubCatList(Cursor cursor) {
+
+    public ArrayList <EduNewSchoolModel> getDataFromId(int id) {
+        return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
+    }
+
+
+    public EduNewSchoolModel cursorToModel(Cursor cursor) {
         int _eduId = cursor.getInt(0);
-       int _spid = cursor.getInt(1);
+        int _spid = cursor.getInt(1);
         String _stipend = cursor.getString(2);
         String _primary= cursor.getString(3);
         String _secondary = cursor.getString(4);
         String _collage = cursor.getString(5);
-
-
-
-
-
-
 
         return new EduNewSchoolModel(_eduId,_spid,_stipend,
                 _primary,_secondary,_collage);
@@ -180,11 +158,7 @@ public class EduNewDBTableSchool {
 
 
     public void dropTable() {
-        SQLiteDatabase db = openDB();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        createTable();
-        Lg.d(TAG, "Table dropped and recreated.");
-        closeDB();
+        super.dropTable(TABLE_NAME);
     }
 
 }
