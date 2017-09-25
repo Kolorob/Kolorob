@@ -1,300 +1,137 @@
 package demo.kolorob.kolorobdemoversion.activity;
 
-import android.Manifest;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 import demo.kolorob.kolorobdemoversion.R;
-import demo.kolorob.kolorobdemoversion.adapters.Comment_layout_adapter;
-import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
-import demo.kolorob.kolorobdemoversion.database.CommentTable;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTableHospital;
 import demo.kolorob.kolorobdemoversion.database.Health.HealthNewDBTablePharma;
-import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
-import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
-import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
-import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelMain;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
-import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
 import demo.kolorob.kolorobdemoversion.utils.AppConstants;
-import demo.kolorob.kolorobdemoversion.utils.AppUtils;
 import demo.kolorob.kolorobdemoversion.utils.SharedPreferencesHelper;
-import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
-import static demo.kolorob.kolorobdemoversion.R.id.comment;
 
 /**
  * Created by arafat on 28/05/2016.
  */
 
-public class DetailsInfoActivityHealthNew extends AppCompatActivity {
-    Dialog dialog;
-    LinearLayout upperHand, upperText, left_way, middle_phone, right_email, bottom_bar;
-    ImageView left_image, middle_image, right_image, email_btn;
 
-    int width, height;
-    TextView ups_text;
+public class DetailsInfoActivityHealthNew extends BaseActivity {
 
-    Context con;
-    String[] key, value;
-    int increment = 0;
-
-    String username="kolorobapp";
-    String password="2Jm!4jFe3WgB";
-
-    HealthNewDBModelMain healthServiceProviderItemNew;
-
-    ArrayList<SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
-
-    ArrayList<HealthNewDBModelPharmacy> healthNewDBModelPharmacies;
-    ArrayList<HealthNewDBModelHospital> healthNewDBModelHospitals;
-
-    private TextView ratingText;
-
-    private ImageView distance_left, feedback;
-    private RadioGroup feedRadio;
-    RadioButton rb1;
-    String status = "", phone_num = "", registered = "",uname="";
-
-    private CheckBox checkBox;
-    //EditText feedback_comment;
-    ListView alldata, contact_data;
-    RatingBar ratingBar;
-    private String compare_Data="";
+    HealthNewDBModelMain health;
+    ArrayList <HealthNewDBModelPharmacy> pharmacies;
+    ArrayList <HealthNewDBModelHospital> hospitals;
+    private CheckBox checkBox = null;
+    private String compare_Data = "";
     int compareValue;
-    private Double screenSize;
-    ArrayList<CommentItem> commentItems;
-    ImageView comments;
-
-    int inc=0;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client2;
-    String datevalue,datevaluebn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_info_activity_health_new);
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        height = displayMetrics.heightPixels;
-        width = displayMetrics.widthPixels;
-
-        con = this;
-
-        screenSize = AppUtils.ScreenSize(this);
-
-        Log.d("Screen Size ", "&&&&&&" + screenSize);
-
-
+        context = this;
         Intent intent = getIntent();
-        //  declareRadiobutton();
-
         if (null != intent) {
-            healthServiceProviderItemNew = (HealthNewDBModelMain) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
-            // Log.d("CheckDetailsHealth","======"+healthServiceProviderItemNew);
+            health = (HealthNewDBModelMain) intent.getSerializableExtra(AppConstants.KEY_DETAILS_HEALTH_NEW);
         }
 
-
-        key = new String[600];
-        value = new String[600];
-
-
-        final HealthNewDBTableHospital healthNewDBTableHospital = new HealthNewDBTableHospital(DetailsInfoActivityHealthNew.this);
-
-
-        upperHand = (LinearLayout) findViewById(R.id.upper_part);
-        upperText = (LinearLayout) findViewById(R.id.upperText);
-        left_way = (LinearLayout) findViewById(R.id.left_go_process);
-        middle_phone = (LinearLayout) findViewById(R.id.middle_phone);
-        right_email = (LinearLayout) findViewById(R.id.right_email);
-        left_image = (ImageView) findViewById(R.id.distance_left);
-        bottom_bar = (LinearLayout) findViewById(R.id.bottom_bar);
-        middle_image = (ImageView) findViewById(R.id.phone_middl);
-        right_image = (ImageView) findViewById(R.id.right_side_email);
-
-        ratingText = (TextView) findViewById(R.id.ratingText);
+        viewBaseLayout(health.getCommonModel());
+        displayUniqueProperties();
+        displayCommonProperties(health.getCommonModel());
+        compare();
+    }
 
 
+    public void displayUniqueProperties(){
 
 
-        distance_left = (ImageView) findViewById(R.id.distance_left);
-        email_btn = (ImageView) findViewById(R.id.right_side_email);
-        feedback = (ImageView) findViewById(R.id.feedback);
-        checkBox = (CheckBox) findViewById(R.id.compare);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        if(width<500)
-            ratingBar = new RatingBar(this, null, android.R.attr.ratingBarStyleSmall);
-        float k=ratingBar.getRating();
-//        RatingBar ratingBar = new RatingBar(context, null, android.R.attr.ratingBarStyleSmall);
+        final HealthNewDBTableHospital hospitalDB = new HealthNewDBTableHospital(context);
 
-        setRatingBar();
-        CheckConcate("প্রতিষ্ঠানের  ধরণ",  healthServiceProviderItemNew.getCentertype());
+        CheckConcate("প্রতিষ্ঠানের ধরণ",  health.getInstituteType());
 
-        if(!healthServiceProviderItemNew.getCentertype().equals(getReferences(healthServiceProviderItemNew))){
-            CheckConcate("বিশেষত্ব", getReferences(healthServiceProviderItemNew));
+        if(!health.getInstituteType().equals(getReferences(health.getCommonModel()))){
+            CheckConcate("বিশেষত্ব", getReferences(health.getCommonModel()));
         }
 
+        hospitals = hospitalDB.getDataFromId(health.getCommonModel().getId());
+        int hospitalSize = hospitals.size();
 
+        if (hospitalSize != 0) {
 
-        healthNewDBModelHospitals = healthNewDBTableHospital.getHealthSpecialistData(healthServiceProviderItemNew.getHealthid());
-        int specialist_size = healthNewDBModelHospitals.size();
+            for (HealthNewDBModelHospital hospital : hospitals) {
 
-        if (specialist_size != 0) {
-            for (HealthNewDBModelHospital healthNewDBModelHospital : healthNewDBModelHospitals) {
-
-
-                if(healthNewDBModelHospital.getEmergencyavailable().equals(false))
-                {
+                if(hospital.getEmergencyavailable().equals(false)) {
                     CheckConcate("ইমারজেন্সি সুবিধা", "নেই");
                 }
+
                 else CheckConcate("ইমারজেন্সি সুবিধা", "আছে");
-                CheckConcate("ইমারজেন্সি নাম্বার", English_to_bengali_number_conversion(healthNewDBModelHospital.getEmergencynumber()));
-                if(healthNewDBModelHospital.getAmbulanceavailable().equals(false))
-                {
+
+                CheckConcate("ইমারজেন্সি নাম্বার", English_to_bengali_number_conversion(hospital.getEmergencynumber()));
+
+                if(hospital.getAmbulanceavailable().equals(false)) {
                     CheckConcate("এ্যাম্বুলেন্স সুবিধা", "নেই");
                 }
+
                 else CheckConcate("এ্যাম্বুলেন্স সুবিধা", "আছে");
-                CheckConcate("এ্যাম্বুলেন্স নাম্বার", English_to_bengali_number_conversion(healthNewDBModelHospital.getAmbulancenumber()));
-                if(healthNewDBModelHospital.getMaternityavailable().equals(false))
-                {
+
+
+                CheckConcate("এ্যাম্বুলেন্স নাম্বার", English_to_bengali_number_conversion(hospital.getAmbulancenumber()));
+
+                if(hospital.getMaternityavailable().equals(false)) {
                     CheckConcate("মাতৃত্বজনিত সুবিধা", "নেই");
                 }
-                else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
-                CheckConcate("মাতৃসেবাসমূহ", healthNewDBModelHospital.getMaternitynumber());
-                CheckConcate("মাতৃসেবার বিশেষ ব্যবস্থা", healthNewDBModelHospital.getMaternityprivacy());
 
+                else CheckConcate("মাতৃত্বজনিত সুবিধা", "আছে");
+
+                CheckConcate("মাতৃসেবাসমূহ", hospital.getMaternitynumber());
+                CheckConcate("মাতৃসেবার বিশেষ ব্যবস্থা", hospital.getMaternityprivacy());
 
             }
-
-
         }
-        HealthNewDBTablePharma healthNewDBTablePharma1 = new HealthNewDBTablePharma(DetailsInfoActivityHealthNew.this);
-        healthNewDBModelPharmacies = healthNewDBTablePharma1.getHealthSpecialistData(healthServiceProviderItemNew.getHealthid());
-        int healthVaccineSize = healthNewDBModelPharmacies.size();
-        if (healthVaccineSize != 0) {
-            for (HealthNewDBModelPharmacy healthNewDBModelPharmacy : healthNewDBModelPharmacies) {
 
-                if(healthNewDBModelPharmacy.getDocavailability().equals("false"))
-                {
+
+        HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(context);
+        pharmacies = pharmacyDB.getDataFromId(health.getCommonModel().getId());
+
+        int pharmacySize = pharmacies.size();
+
+        if (pharmacySize != 0) {
+            for (HealthNewDBModelPharmacy pharmacy : pharmacies) {
+
+                if(pharmacy.getDocavailability().equals("false")) {
                     CheckConcate("ডাক্তারের সুবিধা", "নেই");
                 }
                 else CheckConcate("ডাক্তারের সুবিধা", "আছে");
-                CheckConcate("বিশেষত্ব ", healthNewDBModelPharmacy.getSpeciality());
-                if(healthNewDBModelPharmacy.getVaccineavailability().equals("false"))
-                {
+
+                CheckConcate("বিশেষত্ব ", pharmacy.getSpeciality());
+
+                if(pharmacy.getVaccineavailability().equals("false")) {
                     CheckConcate("ভ্যাক্সিন সুবিধা ", "নেই");
                 }
                 else CheckConcate("ভ্যাক্সিন সুবিধা ", "আছে");
 
-
-
-            }
-
-
-        }
-        CheckConcate("\n", "\n");
-        CheckConcate("ঠিকানা", concatenateAddress(healthServiceProviderItemNew.getHouseno(), healthServiceProviderItemNew.getRoad(), healthServiceProviderItemNew.getBlock(), healthServiceProviderItemNew.getAreabn()));
-        String ward = healthServiceProviderItemNew.getWard();
-        if(ward.contains("_")){
-            String[] wardSplitted = ward.split("_");
-            if(wardSplitted[1].equals("dakshinkhan")){
-                ward = "দক্ষিণখান";
-            }
-            else{
-                ward = English_to_bengali_number_conversion(wardSplitted[1]);
             }
         }
-        else{
-            ward = English_to_bengali_number_conversion(ward);
-        }
-
-        CheckConcate("ওয়ার্ড", ward);
-        CheckConcate("পুলিশ স্টেশন", healthServiceProviderItemNew.getPolicestation());
-
-        CheckConcate("যোগাযোগ", English_to_bengali_number_conversion(healthServiceProviderItemNew.getNode_contact()));
-
-        CheckConcate("ইমেইল", healthServiceProviderItemNew.getNode_email());
-        timeProcessing("খোলার সময়", healthServiceProviderItemNew.getOpeningtime());
-        timeProcessing("বন্ধের সময়", healthServiceProviderItemNew.getClosetime());
-
-        CheckConcate("সাপ্তাহিক বন্ধ", healthServiceProviderItemNew.getOffday());
+    }
 
 
-        CheckConcate("অন্যান্য তথ্য ", healthServiceProviderItemNew.getOtherinfo());
+    public void compare(){
 
+        compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
+        compareValue = SharedPreferencesHelper.getComapreValueHealth(context);
 
+        String multipule[] = compare_Data.split(",");
 
-
-        compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-        compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
-        String multipule[]= compare_Data.split(",");
-
-
-        if(compareValue==1&&compare_Data.equals(healthServiceProviderItemNew.getHealthid()))
-        {
-
+        if(compareValue == 1 && compare_Data.equals(health.getCommonModel().getId())) {
             checkBox.setChecked(true);
         }
-        else if(compareValue==2&&(multipule[0].equals(healthServiceProviderItemNew.getHealthid())||multipule[1].equals(healthServiceProviderItemNew.getHealthid())))
-        {
 
+        else if(compareValue == 2 && (multipule[0].equals(health.getCommonModel().getId()) || multipule[1].equals(health.getCommonModel().getId()))) {
             checkBox.setChecked(true);
         }
 
@@ -302,851 +139,54 @@ public class DetailsInfoActivityHealthNew extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
+            compareValue = SharedPreferencesHelper.getComapreValueHealth(DetailsInfoActivityHealthNew.this);
 
+            if (compareValue >= 2) {
 
+                if(isChecked) {
 
-                if (compareValue >= 2)
-                {
-                    if(isChecked)
-                    {
-
-                        String new_compare_Data="";
-                        compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                        String multipule[]= compare_Data.split(",");
-                        new_compare_Data = multipule[1]+","+healthServiceProviderItemNew.getHealthid();
-                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 2);
-                    }
-                    else
-                    {
-                        String compare_Data="";
-                        String new_compare_Data="";
-                        compare_Data=SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                        String multipule[]= compare_Data.split(",");
-                        new_compare_Data = multipule[0];
-                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, new_compare_Data, 1);
-                    }
-
-                }
-                else if (compareValue == 0) {
-                    if(isChecked)
-                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, String.valueOf(healthServiceProviderItemNew.getHealthid()), 1);
-
-                }
-                else if (compareValue == 1) {
-
-                    if(isChecked)
-                    {
-                        Log.d("Delete in 1 value","$$$$$$"+compareValue);
-                        String previous_node;
-                        previous_node = SharedPreferencesHelper.getComapreDataHealth(DetailsInfoActivityHealthNew.this);
-                        previous_node = previous_node + "," + healthServiceProviderItemNew.getHealthid();
-                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, previous_node, 2);
-
-                    }
-                    else
-                    {
-                        Log.d("Delete in 1 value","$$$$$$"+compareValue);
-                        SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this,"",0);
-
-                    }
-
-                }
-
-
-            }
-        });
-
-
-
-        comments = (ImageView)findViewById(R.id.comments);
-
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width/8, width/8);
-        lp.setMargins(width/24, 0, 0, 0);
-        comments.setLayoutParams(lp);
-        CommentTable commentTable = new CommentTable(DetailsInfoActivityHealthNew.this);
-
-        Log.d("Node Id","======="+healthServiceProviderItemNew.getHealthid());
-        commentItems=commentTable.getAllFinancialSubCategoriesInfo(String.valueOf(healthServiceProviderItemNew.getHealthid()));
-        int size= commentItems.size();
-        String[] phone = new String[size];
-        String[] date = new String[size];
-        String[] comment = new String[size];
-        final String[] rating = new String[size];
-
-
-        for (CommentItem commentItem:commentItems)
-        {
-            Log.d("Rating","$$$$$$"+commentItem.getRating());
-
-            if(!commentItem.getRating().equals(""))
-            {
-                phone[inc]= commentItem.getUser_name();
-                if(commentItem.getComment().equals(""))date[inc]="কমেন্ট করা হয় নি ";
-                else {date[inc]= commentItem.getComment();}
-                comment[inc]= English_to_bengali_number_conversion(commentItem.getDate());
-                rating[inc]= commentItem.getRating();
-                inc++;
-            }
-
-        }
-
-
-
-        final Comment_layout_adapter comment_layout_adapter = new Comment_layout_adapter(this,phone,date,comment,rating);
-
-
-        comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityHealthNew.this, String.valueOf(healthServiceProviderItemNew.getHealthid()),uname).equals("yes")||inc>0) {
-                    if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityHealthNew.this, String.valueOf(healthServiceProviderItemNew.getHealthid()), uname).equals("yes")&&inc==0) {
-                        AlertMessage.showMessage(con, "দুঃখিত",
-                                "কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
-
-                    } else {
-                        if (SharedPreferencesHelper.getifcommentedalready(DetailsInfoActivityHealthNew.this, String.valueOf(healthServiceProviderItemNew.getHealthid()), uname).equals("yes") ) {
-                            ToastMessageDisplay.setText(con,
-                                    "আপনার করা কমেন্ট দেখতে দয়া করে তথ্য আপডেট করুন");
-                            ToastMessageDisplay.showText(con);
-                        }
-                        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-                        final View promptView = layoutInflater.inflate(R.layout.comment_popup, null);
-                        final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
-                        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        alertDialog.setContentView(promptView);
-                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        alertDialog.show();
-                        Log.d("Value of Inc1", "======");
-
-
-//                    final TextView textView=(TextView)promptView.findViewById(R.id.header);
-                        final ListView listView = (ListView) promptView.findViewById(R.id.comment_list);
-
-                        final ImageView close = (ImageView) promptView.findViewById(R.id.closex);
-                        // ratingBars = (RatingBar)promptView.findViewById(R.id.ratingBar_dialogue);
-                        final TextView review = (TextView) promptView.findViewById(R.id.review);
-
-                        final ImageView ratingbarz = (ImageView) promptView.findViewById(R.id.ratingBarz);
-
-                        try {
-                            int ratings = Integer.parseInt(healthServiceProviderItemNew.getRatings());
-
-                            if (ratings == 1) {
-                                ratingbarz.setBackgroundResource(R.drawable.one);
-                            } else if (ratings == 2)
-                                ratingbarz.setBackgroundResource(R.drawable.two);
-
-                            else if (ratings == 3)
-                                ratingbarz.setBackgroundResource(R.drawable.three);
-
-                            else if (ratings == 4)
-                                ratingbarz.setBackgroundResource(R.drawable.four);
-
-                            else if (ratings == 5)
-                                ratingbarz.setBackgroundResource(R.drawable.five);
-                        } catch (Exception e) {
-
-                        }
-
-
-                        review.setText(English_to_bengali_number_conversion(Integer.toString(inc)) + " রিভিউ");
-                        Double screenSize = AppUtils.ScreenSize(DetailsInfoActivityHealthNew.this);
-                        if (screenSize > 6.5) {
-                            review.setTextSize(20);
-                        } else {
-                            review.setTextSize(16);
-
-
-                        }
-
-
-                        listView.setAdapter(comment_layout_adapter);
-//                    textView.setVisibility(View.GONE);
-
-                        alertDialog.getWindow().setLayout((width * 5) / 6, (height * 2) / 3);
-
-                        close.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                            }
-                        });
-
-
-                        alertDialog.setCancelable(false);
-
-
-                        alertDialog.show();
-
-                    }
-                }
-                else if(inc==0)
-                {
-                    LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-                    View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-                    final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    alertDialog.setContentView(promptView);
-                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    alertDialog.show();
-                    final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
-                    final ImageView no = (ImageView) promptView.findViewById(R.id.no);
-                    final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-                    String text="এই সেবা সম্পর্কে কেউ এখনো মন্তব্য করেনি "+"\n"+"আপনি কি আপনার মতামত জানাতে চান?";
-                    textAsk.setText(text);
-                    alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
-
-                    if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityHealthNew.this))
-                        textAsk.setTextSize(23);
-                    else
-                        textAsk.setTextSize(17);
-                    //  alertDialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    yes.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.cancel();
-                            String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
-                            phone_num=register;
-
-                            if (register.equals("")) {
-                                requestToRegister();
-                            } else {
-
-                                feedBackAlert();
-                                //  sendReviewToServer();
-                            }
-
-                        }
-                    });
-                    no.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.cancel();
-                        }
-                    });
-                    //   setup a dialog window
-                    alertDialog.setCancelable(false);
-                    alertDialog.show();
-
-
-
-
-                    // AlertMessage.showMessage(DetailsInfoActivityHealthNew.this,"দুঃখিত কমেন্ট দেখানো সম্ভব হচ্ছে না","এখন পর্যন্ত কেউ কমেন্ট করে নি");
-                }
-
-
-
-            }
-        });
-
-
-
-
-
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) upperHand.getLayoutParams();
-        //int upperhad_height=params2.height = height/6;
-
-        upperHand.setLayoutParams(params2);
-
-
-        LinearLayout.LayoutParams params_upperText = (LinearLayout.LayoutParams) upperText.getLayoutParams();
-        upperText.setLayoutParams(params_upperText);
-
-
-        middle_image.getLayoutParams().height = width / 8;
-        middle_image.getLayoutParams().width = width / 8;
-
-        right_image.getLayoutParams().height = width / 8;
-        right_image.getLayoutParams().width = width / 8;
-
-        left_image.getLayoutParams().height = width / 8;
-        left_image.getLayoutParams().width = width / 8;
-
-
-        SharedPreferences settings = DetailsInfoActivityHealthNew.this.getSharedPreferences("prefs", 0);
-        Date date2 = new Date(settings.getLong("time", 0));
-        Date today=new Date();
-        long diffInMillisec = today.getTime() - date2.getTime();
-
-        long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillisec);
-        if (diffInDays==0) datevalue=" আজকের তথ্য";
-        else
-        {
-            datevaluebn=English_to_bengali_number_conversion(String.valueOf(diffInDays));
-            datevalue=""+ datevaluebn + " দিন আগের তথ্য";
-        }
-        ToastMessageDisplay.setText(this,datevalue);
-        ToastMessageDisplay.showText(this);
-
-
-        ups_text = (TextView) findViewById(R.id.ups_text);
-        ups_text.setTextSize(25);
-        ratingText.setTextSize(23);
-        ups_text.setText(healthServiceProviderItemNew.getNamebn());
-
-        LinearLayout.LayoutParams feedbacks = (LinearLayout.LayoutParams) feedback.getLayoutParams();
-        feedbacks.height = width / 8;
-        feedbacks.width = width / 8;
-        feedback.setLayoutParams(feedbacks);
-
-
-        checkBox.setTextSize(width/25);
-
-//        feedback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent feedIntent = new Intent(DetailsInfoActivityEducation.this,FeedBackActivityNew.class);
-//                feedIntent.putExtra("id",educationServiceProviderItem.getIdentifierId());
-//                feedIntent.putExtra("categoryId","1");
-//                Log.d(">>>>","Button is clicked1 " +educationServiceProviderItem.getIdentifierId());
-//
-//                startActivity(feedIntent);
-//
-//            }
-//        });
-        alldata=(ListView)findViewById(R.id.allData);
-        //contact_data = (ListView)findViewById(R.id.contactData);
-
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) alldata
-                .getLayoutParams();
-
-        mlp.setMargins(width/100,0,width/990,width/8);
-
-        right_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (healthServiceProviderItemNew.getNode_email().equals("")) {
-                    AlertMessage.showMessage(con, "ই মেইল করা সম্ভব হচ্ছে না",
-                            "ই মেইল আই ডি পাওয়া যায়নি");
-                }
-                else{
-                    Helpes.sendEmail(DetailsInfoActivityHealthNew.this, healthServiceProviderItemNew.getNode_email());
-                }
-            }
-        });
-
-        middle_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callIntent1 = new Intent(Intent.ACTION_CALL);
-                if (!healthServiceProviderItemNew.getNode_contact().equals("")) {
-                    callIntent1.setData(Uri.parse("tel:" + healthServiceProviderItemNew.getNode_contact()));
-                    if (checkPermission())
-                        startActivity(callIntent1);
-                    else {
-                        AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                                "ফোন নম্বর পাওয়া যায়নি");
-
-                    }
-                } else {
-
-                    AlertMessage.showMessage(con, "ফোনে কল দেয়া সম্ভব হচ্ছে না",
-                            "ফোন নম্বর পাওয়া যায়নি");
-
-                }
-            }
-        });
-
-
-        DefaultAdapter defaultAdapter= new DefaultAdapter(this,key,value,increment);
-        alldata.setAdapter(defaultAdapter);
-
-        distance_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(AppUtils.isNetConnected(getApplicationContext())  && AppUtils.displayGpsStatus(getApplicationContext())) {
-
-
-                    String lat = healthServiceProviderItemNew.getLat().toString();
-                    // double latitude = Double.parseDouble(lat);
-                    String lon = healthServiceProviderItemNew.getLon().toString();
-                    // double longitude = Double.parseDouble(lon);
-                    String name= healthServiceProviderItemNew.getNamebn().toString();
-                    String node=String.valueOf(healthServiceProviderItemNew.getHealthid());
-                    boolean fromornot=true;
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("Latitude", lat);
-                    editor.putString("Longitude", lon);
-                    editor.putString("Name", name);
-                    editor.putBoolean("Value", fromornot);
-                    editor.putString("nValue", node);
-
-                    editor.commit();
-
-
-                    String Longitude = pref.getString("Longitude", null);
-                    String Latitude = pref.getString("Latitude", null);
-
-                    if (Latitude != null && Longitude != null) {
-                        Double Lon = Double.parseDouble(Longitude);
-                        Double Lat = Double.parseDouble(Latitude);
-                        // implementFragment();
-                        //username and password are present, do your stuff
-                    }
-
-
-                    Intent intentJ = new Intent(DetailsInfoActivityHealthNew.this,MapFragmentRouteOSM.class);
-                    startActivity(intentJ);
-
-                }
-                else if(!AppUtils.displayGpsStatus(getApplicationContext())){
-
-                    AppUtils.showMessage(con, "জিপিএস বন্ধ করা রয়েছে!",
-                            "আপনি কি আপনার মোবাইলের জিপিএস টি চালু করতে চান?");
-
-                }
-
-                else
-                {
-
-                    AlertMessage.showMessage(con, "দুঃখিত আপনার ইন্টারনেট সংযোগটি সচল নয়।",
-                            "দিকনির্দেশনা দেখতে চাইলে অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন।  ");
-
-
-                }
-
-
-            }
-        });
-
-
-    }
-
-
-    public void setRatingBar()
-    {
-
-        try {
-            ratingBar.setRating(Float.parseFloat(healthServiceProviderItemNew.getRatings()));
-        }
-        catch (Exception e)
-        {
-
-        }
-
-    }
-
-    public void verifyRegistration(View v) {
-
-        String  register = SharedPreferencesHelper.getNumber(DetailsInfoActivityHealthNew.this);
-        phone_num=register;
-
-        if (register.equals("")) {
-            requestToRegister();
-        } else {
-
-            feedBackAlert();
-            //  sendReviewToServer();
-        }
-
-
-    }
-
-    public void feedBackAlert() {
-
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-        final View promptView = layoutInflater.inflate(R.layout.give_feedback_dialogue, null);
-        final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        alertDialog.setContentView(promptView);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.show();
-
-
-
-        final Button submit = (Button) promptView.findViewById(R.id.submit);
-        final Button close = (Button) promptView.findViewById(R.id.btnclose);
-
-
-
-//        close.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//            }
-//        });
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //feedback_comment=(EditText)promptView.findViewById(R.id.feedback_comment);
-                feedRadio=(RadioGroup)promptView.findViewById(R.id.feedRadio);
-                int selected = feedRadio.getCheckedRadioButtonId();
-                rb1 = (RadioButton)promptView.findViewById(selected);
-                status = rb1.getText().toString();
-                if(AppUtils.isNetConnected(getApplicationContext()))
-                {
-                    sendReviewToServer();
-                    alertDialog.cancel();
+                    String new_compare_Data = "";
+                    compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
+                    String multipule[] = compare_Data.split(",");
+                    new_compare_Data = multipule[1] + "," + health.getCommonModel().getId();
+                    SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 2);
                 }
                 else {
-                    ToastMessageDisplay.setText(DetailsInfoActivityHealthNew.this,"দয়া করে ইন্টারনেট চালু করুন।");
-//                    Toast.makeText(this, "আপনার ফোনে ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক ইন্টারনেট সংযোগটি চালু করুন। ...",
-//                            Toast.LENGTH_LONG).show();
-                    ToastMessageDisplay.showText(DetailsInfoActivityHealthNew.this);
+                    String compare_Data = "";
+                    String new_compare_Data="";
+                    compare_Data = SharedPreferencesHelper.getComapreDataHealth(context);
+                    String multipule[] = compare_Data.split(",");
+                    new_compare_Data = multipule[0];
+                    SharedPreferencesHelper.setCompareDataHealth(context, new_compare_Data, 1);
                 }
-            }
-        });
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-    }
-
-
-    public void sendReviewToServer() {
-
-        int rating;
-        if(status.equals(getString(R.string.feedback1)))
-            rating= 1;
-        else if(status.equals(getString(R.string.feedback2)))
-            rating=  2;
-        else if(status.equals(getString(R.string.feedback3)))
-            rating= 3;
-        else if(status.equals(getString(R.string.feedback4)))
-            rating=  4;
-        else
-            rating= 5;
-
-
-        //String comment="",comment2="";
-        String  uname2 = SharedPreferencesHelper.getUname(DetailsInfoActivityHealthNew.this);
-        uname=uname2.replace(' ','+');
-
-        /*comment=feedback_comment.getText().toString().trim();
-        try {
-            comment2=   URLEncoder.encode(comment.replace(" ", "%20"), "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
-        String url = "http://kolorob.net/kolorob-new-demo/api/sp_rating2/"+healthServiceProviderItemNew.getHealthid()+"?"+"phone=" +phone_num +"&name=" +uname +"&rating="+rating+"&username="+username+"&password="+password+"";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d("========", "status " + response);
-                        try {
-
-
-                            if (response.equals("true")) {
-                                SharedPreferencesHelper.setifcommentedalready(DetailsInfoActivityHealthNew.this, String.valueOf(healthServiceProviderItemNew.getHealthid()),uname,"yes");
-                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয়েছে",
-                                        "মতামত প্রদান করার জন্য আপনাকে ধন্যবাদ");
-                            } else
-                                AlertMessage.showMessage(DetailsInfoActivityHealthNew.this, "মতামতটি গ্রহন করা হয় নি",
-                                        "অনুগ্রহ পূর্বক পুনরায় চেস্টা করুন।");
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DetailsInfoActivityHealthNew.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-
-        };
-
-
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailsInfoActivityHealthNew.this);
-        requestQueue.add(stringRequest);
-    }
-
-    public void requestToRegister() {
-        LayoutInflater layoutInflater = LayoutInflater.from(DetailsInfoActivityHealthNew.this);
-        View promptView = layoutInflater.inflate(R.layout.verify_reg_dialog, null);
-        final Dialog alertDialog = new Dialog(DetailsInfoActivityHealthNew.this);
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        alertDialog.setContentView(promptView);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.show();
-        final ImageView yes = (ImageView) promptView.findViewById(R.id.yes);
-        final ImageView no = (ImageView) promptView.findViewById(R.id.no);
-        final TextView textAsk=(TextView)promptView.findViewById(R.id.textAsk);
-        String text="  মতামত দেয়ার আগে আপনাকে"+"\n"+"       রেজিস্ট্রেশন করতে হবে"+"\n"+"আপনি কি রেজিস্ট্রেশন করতে চান?";
-        textAsk.setText(text);
-        if(SharedPreferencesHelper.isTabletDevice(DetailsInfoActivityHealthNew.this))
-            textAsk.setTextSize(23);
-        else
-            textAsk.setTextSize(17);
-        alertDialog.getWindow().setLayout((width*5)/6, WindowManager.LayoutParams.WRAP_CONTENT);
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intentPhoneRegistration = new Intent(DetailsInfoActivityHealthNew.this, PhoneRegActivity.class);
-                alertDialog.cancel();
-                startActivity(intentPhoneRegistration);
 
             }
-        });
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.cancel();
+
+            else if (compareValue == 0) {
+                if(isChecked)
+                    SharedPreferencesHelper.setCompareDataHealth(DetailsInfoActivityHealthNew.this, String.valueOf(health.getCommonModel().getId()), 1);
+
             }
-        });
-        //   setup a dialog window
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-    }
+            else if (compareValue == 1) {
 
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
+                if(isChecked) {
 
-    }
+                    String previous_node;
+                    previous_node = SharedPreferencesHelper.getComapreDataHealth(context);
+                    previous_node = previous_node + "," + health.getCommonModel().getId();
+                    SharedPreferencesHelper.setCompareDataHealth(context, previous_node, 2);
 
-    public String English_to_bengali_number_conversion(String english_number) {
-        if(english_number.equals("null")||english_number.equals(""))
-            return english_number;
-        int v = english_number.length();
-        String concatResult = "";
-        for (int i = 0; i < v; i++) {
-            if (english_number.charAt(i) == '1')
-                concatResult = concatResult + "১";
-            else if (english_number.charAt(i) == '2')
-                concatResult = concatResult + "২";
-            else if (english_number.charAt(i) == '3')
-                concatResult = concatResult + "৩";
-            else if (english_number.charAt(i) == '4')
-                concatResult = concatResult + "৪";
-            else if (english_number.charAt(i) == '5')
-                concatResult = concatResult + "৫";
-            else if (english_number.charAt(i) == '6')
-                concatResult = concatResult + "৬";
-            else if (english_number.charAt(i) == '7')
-                concatResult = concatResult + "৭";
-            else if (english_number.charAt(i) == '8')
-                concatResult = concatResult + "৮";
-            else if (english_number.charAt(i) == '9')
-                concatResult = concatResult + "৯";
-            else if (english_number.charAt(i) == '0')
-                concatResult = concatResult + "০";
-            else if (english_number.charAt(i) == '.')
-                concatResult = concatResult + ".";
-            else if(english_number.charAt(i) == '/')
-                concatResult = concatResult + "/";
-            else if(english_number.charAt(i) == '-')
-                concatResult = concatResult + "-";
-            else if(english_number.charAt(i)== '+'){
-                concatResult = concatResult + "+";
-            }
-            else {
-                return english_number;
-            }
-
-        }
-        return concatResult;
-    }
-
-    /*
-    public Boolean RegisteredOrNot() {
-
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        // editor.putString("registered", lat);
-        registered = pref.getString("registered", null);
-        // phone_num = pref.getString("phone", null);
-        editor.commit();
-        if (registered.equals("yes"))
-            return true;
-        else
-            return true;
-    }*/
-
-    private String timeConverter(String time) {
-
-
-        String timeInBengali = "";
-
-        try
-        {
-
-            String[] separated = time.split(":");
-
-
-            int hour = Integer.valueOf(separated[0]);
-            int times = Integer.valueOf(separated[1]);
-
-            if (hour ==0 && times==0)
-                timeInBengali = "রাত ১২";
-            else if (hour > 0 && hour < 4)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour));
-            else if (hour > 3 && hour < 6)
-                timeInBengali = "ভোর " + English_to_bengali_number_conversion(String.valueOf(hour));
-            else if (hour >= 6 && hour < 12)
-
-                timeInBengali = "সকাল " + English_to_bengali_number_conversion(String.valueOf(hour));
-            else if (hour == 12)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour));
-            else if (hour > 12 && hour < 16)
-                timeInBengali = "দুপুর  " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 15 && hour < 18)
-                timeInBengali = "বিকাল " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 17 && hour < 20)
-                timeInBengali = "সন্ধ্যা " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            else if (hour > 19 && hour < 24)
-                timeInBengali = "রাত " + English_to_bengali_number_conversion(String.valueOf(hour - 12));
-            if (times != 0)
-                timeInBengali = timeInBengali + " টা " + English_to_bengali_number_conversion(String.valueOf(times)) + " মিনিট";
-            else
-                timeInBengali = timeInBengali + "টা";
-        }
-        catch (Exception e)
-        {
-
-        }
-
-        return timeInBengali;
-
-    }
-
-   /*
-    private void breakTimeProcessing(String value1, String value2) {
-
-        if (!value2.equals("null") || !value2.equals(", ")) {
-
-            String timeInBengali = "";
-            try {
-                value2 = value2 + ",";
-
-                String[] breakTIme = value2.split(",");
-
-
-                String[] realTIme = breakTIme[0].split("-");
-
-
-                value2 = timeConverter(realTIme[0]) + " থেকে " + timeConverter(realTIme[1]);
-                CheckConcate(value1, value2);
-            }
-            catch (Exception e)
-            {
-                //result_concate="n/a";
-            }
-
-        }
-    }
-*/
-
-    private void timeProcessing(String value1, String value2) {
-        if (!value2.equals("null") || value2.equals("")) {
-            String GetTime = timeConverter(value2);
-            CheckConcate(value1, GetTime);
-
-        }
-    }
-
-    private void CheckConcate(String value1, String value2) {
-
-
-
-        if (!value2.equals("null") && !value2.equals("")&&!value2.equals(" টাকা")&&!value2.equals(" টা")) {
-            key[increment] = value1;
-            value[increment] = value2 + "\n";
-            increment++;
-        }
-    }
-
-    /*private void CheckConcateContact(String key, String value) {
-        if (!value.equals("null") && !value.equals("")&& !value.equals(" টাকা")) {
-            keyContact[incrementContact] = key;
-            valueContact[incrementContact] = value + "\n";
-            incrementContact++;
-        }
-    }*/
-
-    private boolean checkValue(String value){
-        return !value.equals("null") && !value.equals("");
-    }
-
-    private String concatenateAddress(String house, String block, String road, String areaBn){
-        String address = "";
-
-        if(checkValue(house)){
-            address += " বাড়ির নাম্বার : " + English_to_bengali_number_conversion(house) + ",";
-        }
-        if(checkValue(road)){
-            address += " রাস্তা : " + English_to_bengali_number_conversion(road) + ",";
-        }
-        if(checkValue(block)){
-            address += " ব্লক : " + English_to_bengali_number_conversion(block) + ",";
-        }
-        if(checkValue(areaBn)){
-            address += " " + areaBn + ",";
-        }
-
-
-        char[] addressArray = address.toCharArray();
-        addressArray[addressArray.length-1] = ' ';
-
-        return String.valueOf(addressArray);
-    }
-
-    private String getReferences(HealthNewDBModelMain et){
-        String ref;
-        StringBuilder result = new StringBuilder();
-
-        setSubcategories(20000);
-
-        String refid = et.getRefnumm();
-        result.delete(0, result.length());
-        String[] references = refid.split(",");
-        for (int k = 0; k < references.length; k++) {
-            for (int i = 0; i < subCategoryItemNews.size(); i++) {
-                int value = subCategoryItemNews.get(i).getRefId();
-                if (value == Integer.parseInt(references[k])) {
-                    result.append(subCategoryItemNews.get(i).getRefLabelBn());
-                    result.append(",");
                 }
+                else {
+                    SharedPreferencesHelper.setCompareDataHealth(context, "", 0);
+                }
+
             }
-        }
-        try {
 
-            result.setLength(result.length() - 1);
-            ref = String.valueOf(result);
-        }catch (StringIndexOutOfBoundsException  e)
-        {
-            ref = "পাওয়া যায় নি";
-        }
 
-        return ref;
+            }
+        });
 
     }
-
-
-
-
-    public void setSubcategories(int id) {
-
-        SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
-        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
-
-        subCategoryItemNews = subCategoryTableNew.getAllSubCat();
-        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
-
-    }
-
-
-
 
 }
