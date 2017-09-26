@@ -13,7 +13,7 @@ public class EduNewSchoolModel {
     String stipend;
     String primary_fees;
     String secondary_fees;
-    String collage_fees;
+    String college_fees;
 
     public int getId() {
         return id;
@@ -55,21 +55,21 @@ public class EduNewSchoolModel {
         this.secondary_fees = secondary_fees;
     }
 
-    public String getCollage_fees() {
-        return collage_fees;
+    public String getCollege_fees() {
+        return college_fees;
     }
 
-    public void setCollage_fees(String collage_fees) {
-        this.collage_fees = collage_fees;
+    public void setCollege_fees(String college_fees) {
+        this.college_fees = college_fees;
     }
 
-    public EduNewSchoolModel(int id, int spid,String stipend, String primary_fees, String secondary_fees, String collage_fees) {
+    public EduNewSchoolModel(int id, int spid,String stipend, String primary_fees, String secondary_fees, String college_fees) {
         this.id = id;
         this.id=spid;
         this.stipend = stipend;
         this.primary_fees = primary_fees;
         this.secondary_fees = secondary_fees;
-        this.collage_fees = collage_fees;
+        this.college_fees = college_fees;
     }
 
     public static EduNewSchoolModel parseEduNewSchoolModel(JSONObject jo,int sproviderkey) throws JSONException {
@@ -79,8 +79,8 @@ public class EduNewSchoolModel {
         String _primary = jo.getString("primary_fees");
 
         String _secondary = jo.getString("secondary_fees");
-        String _collage = jo.getString("collage_fees");
+        String _college = jo.getString("collage_fees");
         return new EduNewSchoolModel(_eduId,_sproviderId,_stipend,
-                _primary,_secondary,_collage);
+                _primary,_secondary,_college);
     }
 }
