@@ -94,6 +94,10 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
         return ret;
     }
 
+    public ArrayList <CityCorporation> getAllData() {
+        return super.getAllData(TABLE_NAME);
+    }
+
     public CityCorporation getNodeInfo(int node) {
 
         SQLiteDatabase db = openDB();
