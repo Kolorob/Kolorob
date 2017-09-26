@@ -133,7 +133,7 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
         super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
-    public void dropTable() {
+    public void dropTable(){
         super.dropTable(TABLE_NAME);
     }
 }

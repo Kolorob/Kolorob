@@ -383,7 +383,7 @@ GeoPoint location;
         Areakeyword=settings.getString("areakeyword",null);
         Log.e("","Ward ID: " + wardId + "Area: " + Areakeyword);
         storedAreaTable=new StoredAreaTable(PlaceDetailsActivityNewLayout.this);
-        storedAreaArrayListall= storedAreaTable.getAllstored();
+        storedAreaArrayListall= storedAreaTable.getAllData();
 
         storedAreas = RetriveLocation(wardId,Areakeyword);
         setLat(storedAreas.get(0).getLat());
@@ -535,7 +535,7 @@ GeoPoint location;
                     startActivity(em);
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);*/
 
-                    storedAreaArrayListall=storedAreaTable.getAllstored();
+                    storedAreaArrayListall=storedAreaTable.getAllData();
 
                     Intent em = new Intent(PlaceDetailsActivityNewLayout.this, DataLoadingActivity.class);
                     startActivity(em);
@@ -1053,14 +1053,14 @@ GeoPoint location;
         checkBox2.setChecked(true);
 
         healthServiceProviderTableNew = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
-        firstDataSetHealth = healthServiceProviderTableNew.getHealthData(Integer.parseInt(firstData));
-        secondDataSetHealth = healthServiceProviderTableNew.getHealthData(Integer.parseInt(SecondData));
+        firstDataSetHealth = healthServiceProviderTableNew.getDataFromId(Integer.parseInt(firstData));
+        secondDataSetHealth = healthServiceProviderTableNew.getDataFromId(Integer.parseInt(SecondData));
         health_header=new String[]{"খোলার সময়","সেবার ধরন","বন্ধের দিন","ডাক্তার আছে?","বিশেষত্ব","ভ্যাক্সিন সুবিধা"};
         HealthNewDBTablePharma healthSpecialistTable = new HealthNewDBTablePharma(PlaceDetailsActivityNewLayout.this);
         ArrayList<HealthNewDBModelPharmacy> healthSpecialistItemDetailses;
         ArrayList<HealthNewDBModelPharmacy> healthSpecialistItemDetailses2;
-        healthSpecialistItemDetailses = healthSpecialistTable.getHealthSpecialistData(Integer.parseInt(firstData));
-        healthSpecialistItemDetailses2 = healthSpecialistTable.getHealthSpecialistData(Integer.parseInt(SecondData));
+        healthSpecialistItemDetailses = healthSpecialistTable.getDataFromId((Integer.parseInt(firstData));
+        healthSpecialistItemDetailses2 = healthSpecialistTable.getDataFromId(Integer.parseInt(SecondData));
 
         String firstSpecialistItemdoc = "";
         String secondSpecialistItemdoc = "";
@@ -1189,15 +1189,15 @@ GeoPoint location;
 
                 }
             }*/
-            if(!healthServiceProviderItemNew.getNamebn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getNamebn().equals(""))
-                health_name3.setText(healthServiceProviderItemNew.getNamebn());
+            if(!healthServiceProviderItemNew.getCommonModel().getNameBn().equalsIgnoreCase("null")&&!healthServiceProviderItemNew.getCommonModel().getNameBn().equals(""))
+                health_name3.setText(healthServiceProviderItemNew.getCommonModel().getNameBn());
             else
                 health_name3.setText("তথ্য পাওয়া যায় নি ");
 
             String time2="";
-            time2=timeConverter(healthServiceProviderItemNew.getOpeningtime());
-            left_part=new String[]{time2,healthServiceProviderItemNew.getCentertype()
-                    ,healthServiceProviderItemNew.getOffday(),firstSpecialistItemdoc,firstSpecialistItemspe,firstSpecialistItemvac
+            time2=timeConverter(healthServiceProviderItemNew.getCommonModel().getOpeningTime());
+            left_part=new String[]{time2,healthServiceProviderItemNew.getInstituteType()
+                    ,healthServiceProviderItemNew.getCommonModel().getOffDay(),firstSpecialistItemdoc,firstSpecialistItemspe,firstSpecialistItemvac
                     };
         }
 
@@ -1241,7 +1241,7 @@ GeoPoint location;
 
                     else if (compareValue == 0) {
                         if(isChecked)
-                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNewx.getHealthid()), 1);
+                            SharedPreferencesHelper.setCompareDataHealth(PlaceDetailsActivityNewLayout.this, String.valueOf(healthServiceProviderItemNewx.getCommonModel().getId()), 1);
                     }
                 }
             });
@@ -1249,17 +1249,17 @@ GeoPoint location;
 
 
 
-            if(!healthServiceProviderItemNewx.getNamebn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getNamebn().equals(""))
-                health_name2.setText(healthServiceProviderItemNewx.getNamebn());
+            if(!healthServiceProviderItemNewx.getCommonModel().getNameBn().equalsIgnoreCase("null")&&!healthServiceProviderItemNewx.getCommonModel().getNameBn().equals(""))
+                health_name2.setText(healthServiceProviderItemNewx.getCommonModel().getNameBn());
             else
                 health_name2.setText("তথ্য পাওয়া যায় নি ");
 
 
 
             String time1="";
-            time1=timeConverter(healthServiceProviderItemNewx.getOpeningtime()); //convert the time
-            right_part=new String[]{time1,healthServiceProviderItemNewx.getCentertype()
-                    ,healthServiceProviderItemNewx.getOffday(),secondSpecialistItemdoc,
+            time1=timeConverter(healthServiceProviderItemNewx.getCommonModel().getOpeningTime()); //convert the time
+            right_part=new String[]{time1,healthServiceProviderItemNewx.getInstituteType()
+                    ,healthServiceProviderItemNewx.getCommonModel().getOffDay(),secondSpecialistItemdoc,
                     secondSpecialistItemspe,secondSpecialistItemvac
             };
         }
@@ -1284,8 +1284,8 @@ GeoPoint location;
         checkRight.setChecked(true);
 
         educationNewTable = new EduNewDBTableMain(PlaceDetailsActivityNewLayout.this);
-        firstDataSet=educationNewTable.geteduNode2(Integer.parseInt(firstData));
-        secondDataSet=educationNewTable.geteduNode2(Integer.parseInt(SecondData));
+        firstDataSet=educationNewTable.getDataFromId(Integer.parseInt(firstData));
+        secondDataSet=educationNewTable.getDataFromId(Integer.parseInt(SecondData));
         for (final EduNewModel educationNewItem: firstDataSet)
         {
             checkLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -1332,15 +1332,15 @@ GeoPoint location;
 
             health_header=new String []{ "প্রতিষ্ঠানের ধরন", "গড় ছাত্র ছাত্রী সংখ্যা ","ছাত্র ছাত্রী সংখ্যা","শিক্ষক সংখ্যা ","শাখা","রেটিং"
             };
-            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
+            if(educationNewItem.getCommonModel().getNameBn()==null || educationNewItem.getCommonModel().getNameBn().equalsIgnoreCase("null")|| educationNewItem.getCommonModel().getNameBn().equals(""))
                 edu_name_ban22.setText("তথ্য পাওয়া যায় নি ");
             else
-                edu_name_ban22.setText(educationNewItem.getNamebn());
+                edu_name_ban22.setText(educationNewItem.getCommonModel().getNameBn());
 
-            left_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getAveragestdperclass()),
-                    English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    English_to_bengali_number_conversion(educationNewItem.getTeachersno()),educationNewItem.getShift(),
-                    educationNewItem.getRatings()};
+            left_part = new String []{educationNewItem.getEducationType(),English_to_bengali_number_conversion(educationNewItem.getAverageStudentPerClass()),
+                    English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentNo())),
+                    English_to_bengali_number_conversion(educationNewItem.getTeachersNo()),educationNewItem.getShift(),
+                    educationNewItem.getCommonModel().getRatings()};
         }
         for ( final EduNewModel educationNewItem: secondDataSet)
         {
@@ -1384,14 +1384,14 @@ GeoPoint location;
             });
 
 
-            right_part = new String []{educationNewItem.getEdtype(),English_to_bengali_number_conversion(educationNewItem.getAveragestdperclass()),
-                    English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentno())),
-                    English_to_bengali_number_conversion(educationNewItem.getTeachersno()),
-                    educationNewItem.getShift(),educationNewItem.getRatings()};
-            if(educationNewItem.getNamebn()==null || educationNewItem.getNamebn().equalsIgnoreCase("null")|| educationNewItem.getNamebn().equals(""))
+            right_part = new String []{educationNewItem.getEducationType(),English_to_bengali_number_conversion(educationNewItem.getAverageStudentPerClass())),
+                    English_to_bengali_number_conversion(String.valueOf(educationNewItem.getStudentNo())),
+                    English_to_bengali_number_conversion(educationNewItem.getTeachersNo()),
+                    educationNewItem.getShift(),educationNewItem.getCommonModel().getRatings()};
+            if(educationNewItem.getCommonModel().getNameBn()==null || educationNewItem.getCommonModel().getNameBn().equalsIgnoreCase("null")|| educationNewItem.getCommonModel().getNameBn().equals(""))
                 edu_name_ban.setText("তথ্য পাওয়া যায় নি ");
             else
-                edu_name_ban.setText(educationNewItem.getNamebn());
+                edu_name_ban.setText(educationNewItem.getCommonModel().getNameBn());
         }
 
         CompareAdapter compareAdapter= new CompareAdapter(this,left_part,right_part,health_header);
@@ -1522,7 +1522,7 @@ GeoPoint location;
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
         else if (id == R.id.new_place) {
-            storedAreaArrayListall=storedAreaTable.getAllstored();
+            storedAreaArrayListall=storedAreaTable.getAllData();
                 /*if(storedAreaArrayListall.size()>=5)
                 {
 
@@ -2476,6 +2476,8 @@ GeoPoint location;
 
     /*********************************************************methods for education**********************************************/
 
+
+    //  need to fix later
     private ArrayList<EduNewModel> constructEducationListItem()
     {
         ArrayList<EduNewModel> educationServiceProvider;
@@ -2630,12 +2632,15 @@ GeoPoint location;
 
     /***********************************************************Methods for Health*************************************************/
 
-    private ArrayList<HealthNewDBModelMain> constructHealthListItem()
+    // need to fix later
+    //
+     private ArrayList<HealthNewDBModelMain> constructHealthListItem()
     {
-        ArrayList<HealthNewDBModelMain> healthServiceProvider;
+        /*ArrayList<HealthNewDBModelMain> healthServiceProvider;
         HealthNewDBTableMain healthServiceProviderTable = new HealthNewDBTableMain(PlaceDetailsActivityNewLayout.this);
         healthServiceProvider = healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
-        return healthServiceProvider;
+        return healthServiceProvider; */
+        return null;
     }
 
     private void callMapFragmentWithHealth(ArrayList<HealthNewDBModelMain> healthServiceProviderItemNews,boolean s)
@@ -2659,10 +2664,11 @@ GeoPoint location;
 
     private ArrayList<EntertainmentNewDBModel> constructEntertainmentListItem()
     {
-        ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews;
+        /*ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews;
         EntNewDBTable entertainmentServiceProviderTableNew = new EntNewDBTable(PlaceDetailsActivityNewLayout.this);
         entertainmentServiceProviderItemNews = entertainmentServiceProviderTableNew.getAllEntertainmentinfo(wardId,Areakeyword);
-        return entertainmentServiceProviderItemNews;
+        return entertainmentServiceProviderItemNews;*/
+        return null;
     }
 
     private void callMapFragmentWithEntertainment(ArrayList<EntertainmentNewDBModel> entertainmentServiceProviderItemNews,boolean s)
@@ -2691,10 +2697,11 @@ GeoPoint location;
 
     private ArrayList<GovernmentNewDBModel> constructgovListItem()
     {
-        ArrayList<GovernmentNewDBModel> governmentNewItems;
+        /*ArrayList<GovernmentNewDBModel> governmentNewItems;
         GovNewDBTable governmentNewTable = new GovNewDBTable(PlaceDetailsActivityNewLayout.this);
         governmentNewItems = governmentNewTable.getAllGov(wardId,Areakeyword);
-        return governmentNewItems;
+        return governmentNewItems;*/
+        return null;
     }
 
     private void callMapFragmentWithGovernment(ArrayList<GovernmentNewDBModel> governmentNewItems,boolean s)
@@ -2720,12 +2727,13 @@ GeoPoint location;
 
     private ArrayList<LegalAidNewDBModel> constructlegalaidListItem()
     {
-        ArrayList<LegalAidNewDBModel> legalaidServiceProvider;
+        /*ArrayList<LegalAidNewDBModel> legalaidServiceProvider;
         LegalAidNewDBTable legalAidServiceProviderTable = new LegalAidNewDBTable(PlaceDetailsActivityNewLayout.this);
         legalaidServiceProvider = legalAidServiceProviderTable.getAllLegal(wardId,Areakeyword);
 
 
-        return legalaidServiceProvider;
+        return legalaidServiceProvider;*/
+        return null;
     }
 
     private void callMapFragmentWithLegal(ArrayList<LegalAidNewDBModel> legalAidServiceProviderItemNews,boolean s)
@@ -2752,10 +2760,11 @@ GeoPoint location;
     /**********************************************************Methods for financial**********************************************/
     private ArrayList<FinancialNewDBModel> constructfinancialListItem()
     {
-        ArrayList<FinancialNewDBModel> financialNewItems;
+        /*ArrayList<FinancialNewDBModel> financialNewItems;
         FinNewDBTable financialServiceNewTable = new FinNewDBTable(PlaceDetailsActivityNewLayout.this);
         financialNewItems = financialServiceNewTable.getAllFinancial(wardId,Areakeyword);
-        return financialNewItems;
+        return financialNewItems;*/
+        return null;
     }
     private void callMapFragmentWithFinancial(ArrayList<FinancialNewDBModel> financialNewItems,boolean s)
     {
@@ -2778,12 +2787,12 @@ GeoPoint location;
     /**********************************************************Methods for NGO***************************************************/
 
     private ArrayList<NGONewDBModel> constructngoListItem() {
-        ArrayList<NGONewDBModel> ngoServiceProvider;
+        /*ArrayList<NGONewDBModel> ngoServiceProvider;
         NGONewDBTable ngoServiceProviderTable = new NGONewDBTable(PlaceDetailsActivityNewLayout.this);
         ngoServiceProvider = ngoServiceProviderTable.getAllNGO(wardId, Areakeyword);
 
 
-        return ngoServiceProvider;
+        return ngoServiceProvider;*/
     }
 
     private void callMapFragmentWithNgo(ArrayList<NGONewDBModel> ngoServiceProviderItemNews, boolean s) {
@@ -2808,12 +2817,12 @@ GeoPoint location;
     /**********************************************************Methods for Religious***************************************************/
 
     private ArrayList<ReligiousNewDBModel> constructreligiousListItem() {
-        ArrayList<ReligiousNewDBModel> religiousServiceProvider;
+        /*ArrayList<ReligiousNewDBModel> religiousServiceProvider;
         ReligiousNewDBTable religiousServiceProviderTable = new ReligiousNewDBTable(PlaceDetailsActivityNewLayout.this);
         religiousServiceProvider = religiousServiceProviderTable.getAllReligious(wardId, Areakeyword);
 
 
-        return religiousServiceProvider;
+        return religiousServiceProvider;*/
     }
 
     private void callMapFragmentWithReligious(ArrayList<ReligiousNewDBModel> religiousServiceProviderItemNews, boolean s) {
@@ -2859,7 +2868,9 @@ GeoPoint location;
         NGONewDBTable ngoServiceProviderTable = new NGONewDBTable(PlaceDetailsActivityNewLayout.this);
         ReligiousNewDBTable religiousServiceProviderTable = new ReligiousNewDBTable(PlaceDetailsActivityNewLayout.this);
 
-        fetchedent=entertainmentServiceProviderTable.getAllEntertainmentinfo(wardId,Areakeyword);
+        //  need to fix later
+
+        /*fetchedent=entertainmentServiceProviderTable.getAllEntertainmentinfo(wardId,Areakeyword);
         fetchedfin=financialServiceProviderTable.getAllFinancial(wardId,Areakeyword);
         fetchedleg=legalAidServiceProviderTable.getAllLegal(wardId,Areakeyword);
         fetchedhel=healthServiceProviderTable.getAllHealth(wardId,Areakeyword);
@@ -2868,12 +2879,16 @@ GeoPoint location;
         fetchedngo = ngoServiceProviderTable.getAllNGO(wardId, Areakeyword);
         fetchedreligious = religiousServiceProviderTable.getAllReligious(wardId, Areakeyword);
 
-
+        */
         String nameen;
         String namebn;
 
         int node;
         String refname;
+
+        // need to fix later
+
+        /*
         for (int i=0;i<fetchededu.size();i++)
         {
 
@@ -2977,7 +2992,7 @@ GeoPoint location;
 
             AllHolder all = new AllHolder(node, refname, nameen, namebn, 80000);
             allHolders.add(all);
-        }
+        }*/
 
         /////// religious /////
 
