@@ -143,8 +143,12 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         return educationResultItemNew;
     }
 
-    public ArrayList<EducationResultItemNew> getDataFromId(int id) {
+    public ArrayList <EducationResultItemNew> getDataFromId(int id) {
         return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
+    }
+
+    public ArrayList <EducationResultItemNew> getDataFromForeignKey(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
     }
 
     public void dropTable() {

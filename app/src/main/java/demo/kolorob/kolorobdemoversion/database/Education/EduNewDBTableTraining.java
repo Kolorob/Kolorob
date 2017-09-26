@@ -123,6 +123,10 @@ public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
         return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
 
+    public ArrayList <EduTrainingModel> getDataFromForeignKey(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
     public EduTrainingModel cursorToModel(Cursor cursor) {
         int _eduId = cursor.getInt(0);
         int _sproviderId = cursor.getInt(1);

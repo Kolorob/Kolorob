@@ -143,6 +143,11 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
         return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
 
+    public ArrayList <EduNewSchoolModel> getDataFromForeignKey(int id) {
+        return super.getDataFromId(id, TABLE_NAME, KEY_SPID);
+    }
+
+
 
     public EduNewSchoolModel cursorToModel(Cursor cursor) {
         int _eduId = cursor.getInt(0);
