@@ -145,6 +145,10 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
     }
 
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
     public void dropTable() {
         super.dropTable(TABLE_NAME);
     }

@@ -56,14 +56,14 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
             return insertItem(
                     eduNewSchoolModel.getId(), eduNewSchoolModel.getSpid(), eduNewSchoolModel.getStipend(),
                     eduNewSchoolModel.getPrimary_fees(), eduNewSchoolModel.getSecondary_fees(),
-                    eduNewSchoolModel.getCollage_fees()
+                    eduNewSchoolModel.getCollege_fees()
             );
         }
         else {
             return updateItem(
                     eduNewSchoolModel.getId(),eduNewSchoolModel.getSpid(),eduNewSchoolModel.getStipend(),
                     eduNewSchoolModel.getPrimary_fees(),eduNewSchoolModel.getSecondary_fees(),
-                    eduNewSchoolModel.getCollage_fees()
+                    eduNewSchoolModel.getCollege_fees()
             );
         }
     }
@@ -133,6 +133,9 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
         return eduNewSchoolModel;
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_NODE_ID);
+    }
 
 
     public boolean isFieldExist(int id) {

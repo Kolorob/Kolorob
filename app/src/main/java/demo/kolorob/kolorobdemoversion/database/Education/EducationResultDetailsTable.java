@@ -113,6 +113,10 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         return super.isFieldExist(id, TABLE_NAME);
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_NODE_ID);
+    }
+
     public EducationResultItemNew cursorToModel(Cursor cursor) {
         int _eduId = cursor.getInt(0);
         int _sproviderId = cursor.getInt(1);

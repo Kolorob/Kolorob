@@ -79,6 +79,22 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
         return ret;
     }
 
+    public ArrayList<StoredArea> getstoredlocation(String id,String keyword) {
+        ArrayList<StoredArea> siList = new ArrayList<>();
+
+        SQLiteDatabase db = openDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = '"+id+ "' AND "+ AREANAME+" = '"+keyword+"'", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                siList.add(cursorToModel(cursor));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        closeDB();
+        return siList;
+    }
+
 
     public boolean isFieldExist(int id) {
         return super.isFieldExist(id, TABLE_NAME);

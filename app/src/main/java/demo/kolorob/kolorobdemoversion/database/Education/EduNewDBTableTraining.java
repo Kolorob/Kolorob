@@ -155,6 +155,10 @@ public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
         return eduTrainingModel;
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_NODE_ID);
+    }
+
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);
