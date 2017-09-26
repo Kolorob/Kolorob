@@ -646,7 +646,7 @@ GeoPoint location;
              * constructing category list
              **/
             CategoryTable categoryTable = new CategoryTable(PlaceDetailsActivityNewLayout.this);
-            categoryList = categoryTable.getAllCategories();
+            categoryList = categoryTable.getAllData();
             constructCategoryList(categoryList);
             //rlSubCatHolder = (RelativeLayout) findViewById(R.id.rlSubCatHolder);
             //rlSubCatHolder.setVisibility(View.INVISIBLE);

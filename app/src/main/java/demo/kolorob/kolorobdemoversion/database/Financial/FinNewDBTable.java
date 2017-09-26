@@ -117,6 +117,10 @@ public class FinNewDBTable extends BaseDBTable <FinancialNewDBModel> {
         return financialNewDBModel;
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
 
     public FinancialNewDBModel cursorToModel(Cursor cursor) {
 

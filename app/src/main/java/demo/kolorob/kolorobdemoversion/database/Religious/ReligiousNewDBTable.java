@@ -154,6 +154,10 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
         super.dropTable(TABLE_NAME);
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
 
     public ArrayList <ReligiousNewDBModel> getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);

@@ -227,26 +227,22 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
     {
         DatabaseHelper databaseHelper = new DatabaseHelper(CommonDBTable.this.tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_WARD + " = '" + ward + "' AND "+"("+KEY_AREA +"  = '"+ area + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ area + "')", null);
+        database.delete(TABLE_NAME, KEY_WARD + " = '" + ward + "' AND " + "(" + KEY_AREA + " = '" + area + "')" + " OR " + "(" + KEY_PARENT_AREA + "  =  '" + area + "')", null);
 
         database.close();
     }
 
     public void delete(int id){
-        DatabaseHelper databaseHelper = new DatabaseHelper(CommonDBTable.this.tContext);
-        SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_IDENTIFIER_ID + " = " + id , null);
-
-        database.close();
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
     public boolean isFieldExist(int id) {
        return super.isFieldExist(id, TABLE_NAME);
     }
 
-    public ArrayList<CommonModel> getAllCommonByArea(String ward, String place) {
+    public ArrayList <CommonModel> getAllCommonByArea(String ward, String place) {
 
-        ArrayList<CommonModel> subCatList = new ArrayList<>();
+        ArrayList<CommonModel> list = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery ("SELECT * FROM " +  TABLE_NAME + " WHERE " + KEY_WARD + " = '"+ ward + "' AND " + "(" + KEY_AREA + "  = '" + place + "')" + " OR " + "(" + KEY_PARENT_AREA + "  =  '" + place + "')", null);
@@ -254,13 +250,13 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
         if (cursor.moveToFirst()) {
             do {
 
-                subCatList.add(cursorToModel(cursor));
+                list.add(cursorToModel(cursor));
 
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return subCatList;
+        return list;
     }
 
 

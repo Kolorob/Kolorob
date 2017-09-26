@@ -155,7 +155,9 @@ public class NGONewDBTable extends BaseDBTable <NGONewDBModel> {
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
     public void dropTable() {
        super.dropTable(TABLE_NAME);

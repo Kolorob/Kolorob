@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.R;
+import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
@@ -36,6 +37,7 @@ import demo.kolorob.kolorobdemoversion.database.NGO.NGONewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Religious.ReligiousNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.StoredAreaTable;
 import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
+import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -61,7 +63,7 @@ import static demo.kolorob.kolorobdemoversion.parser.VolleyApiParser.getRequest;
 this activity is for area upgrade/delete/browse. This is almost similar to data loading activity.
  */
 public class AreaUpgrade extends AppCompatActivity {
-ArrayList<StoredArea>storedAreas=new ArrayList<>();
+    ArrayList<StoredArea>storedAreas=new ArrayList<>();
     RadioGroup rg;
     Button update,delete,browse;
     int selectedId=-1;
@@ -75,6 +77,7 @@ ArrayList<StoredArea>storedAreas=new ArrayList<>();
     ArrayList<StoredArea>storedAreaArrayList=new ArrayList<>();
 
     ArrayList<StoredArea>storedAreaArrayList2=new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +87,12 @@ ArrayList<StoredArea>storedAreas=new ArrayList<>();
         delete= (Button) findViewById(R.id.deletearea);
         browse= (Button) findViewById(R.id.browsearea);
         linearLayout=(LinearLayout)findViewById(R.id.linearradio);
- storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
+        storedAreaTable = new StoredAreaTable(AreaUpgrade.this);
 
-context=this;
+        context=this;
         rg= (RadioGroup)findViewById(R.id.areagroup);
         rg.setOrientation(RadioGroup.VERTICAL);
-     radiobuttonsetup();
+        radiobuttonsetup();
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
 
@@ -101,26 +104,28 @@ context=this;
 
             }
         });
-delete.setOnClickListener(new View.OnClickListener() {
 
-    @Override
-    public void onClick(View v) {
+        delete.setOnClickListener(new View.OnClickListener() {
 
-        if(selectedId ==-1)
-        {
-            ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
-            ToastMessageDisplay.showText(AreaUpgrade.this);
-        }
-        else {
-            dialog2 = new ProgressDialog(AreaUpgrade.this);
-            dialog2.setMessage("দয়া করে অপেক্ষা করুন");
-            dialog2.setCancelable(true);
-            dialog2.show();
-           deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid()); // to delete area stored in device
+            @Override
+            public void onClick(View v) {
 
-        }
-    }}
-);
+                if(selectedId ==-1)
+                {
+                    ToastMessageDisplay.setText(AreaUpgrade.this,"প্রথমে এলাকা নির্বাচন করুন");
+                    ToastMessageDisplay.showText(AreaUpgrade.this);
+                }
+                else {
+                    dialog2 = new ProgressDialog(AreaUpgrade.this);
+                    dialog2.setMessage("দয়া করে অপেক্ষা করুন");
+                    dialog2.setCancelable(true);
+                    dialog2.show();
+                    deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid()); // to delete area stored in device
+
+                }
+            }
+        });
+
         browse.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -144,8 +149,10 @@ delete.setOnClickListener(new View.OnClickListener() {
                     startActivity(a);
                     finish();
                 }
-            }}
-        );
+            }
+        });
+
+
         update.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -176,9 +183,10 @@ delete.setOnClickListener(new View.OnClickListener() {
         );
 
     }
+
     public ArrayList<StoredArea> RetriveLocation(String ward,String area) //last existing location er jonno
     {
-        storedAreaArrayList=storedAreaTable.getstoredlocation(ward,area);
+        storedAreaArrayList = storedAreaTable.getstoredlocation(ward,area);
         return storedAreaArrayList;
     }
     @Override
@@ -191,34 +199,36 @@ delete.setOnClickListener(new View.OnClickListener() {
         super.onResume();
 
     }
-void radiobuttonsetup() // database operation for getting information which areas are stored in devices and store those in an arraylist
+    void radiobuttonsetup() // database operation for getting information which areas are stored in devices and store those in an arraylist
 
-{
+    {
 
-    storedAreas=storedAreaTable.getAllstored();
+        storedAreas=storedAreaTable.getAllstored();
 
-    rg.clearCheck();
-    if(storedAreas.isEmpty()){
-        ToastMessageDisplay.setText(AreaUpgrade.this,"কোন এলাকার তথ্য নামানো নেই");
-        ToastMessageDisplay.showText(AreaUpgrade.this);
-        Intent em = new Intent(this, DataLoadingActivity.class);
-        startActivity(em);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        rg.clearCheck();
+        if(storedAreas.isEmpty()){
+            ToastMessageDisplay.setText(AreaUpgrade.this,"কোন এলাকার তথ্য নামানো নেই");
+            ToastMessageDisplay.showText(AreaUpgrade.this);
+            Intent em = new Intent(this, DataLoadingActivity.class);
+            startActivity(em);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-    } else {
-        for (int i = 0; i < storedAreas.size(); i++) {
+        } else {
+            for (int i = 0; i < storedAreas.size(); i++) {
 
 
-            RadioButton ch = new RadioButton(this);
-            ch.setText(storedAreas.get(i).getAreaBn());
+                RadioButton ch = new RadioButton(this);
+                ch.setText(storedAreas.get(i).getAreaBn());
 
-            rg.addView(ch);
+                rg.addView(ch);
 
+
+            }
 
         }
-
     }
-}
+
+
     void Servercall(String ward, String area) {
 
 
@@ -257,8 +267,8 @@ void radiobuttonsetup() // database operation for getting information which area
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
                         settings.edit().putLong("time", System.currentTimeMillis()).apply();
-                        editor.putString("_ward", storedAreas.get(selectedId).getWardid());
-                        editor.putString("areakeyword", storedAreas.get(selectedId).getAreaid());
+                        editor.putString("_ward", storedAreas.get(selectedId).getWard());
+                        editor.putString("areakeyword", storedAreas.get(selectedId).getArea());
                         editor.apply();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -436,6 +446,7 @@ void radiobuttonsetup() // database operation for getting information which area
     }
     public void deleteall(String ward,String area)
     {
+        CommonDBTable commonDBTable = new CommonDBTable(AreaUpgrade.this);
         HealthNewDBTableMain healthNewDBTableMain = new HealthNewDBTableMain(AreaUpgrade.this);
         FinNewDBTable finNewDBTable = new FinNewDBTable(AreaUpgrade.this);
         LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(AreaUpgrade.this);
@@ -445,6 +456,9 @@ void radiobuttonsetup() // database operation for getting information which area
         NGONewDBTable ngoNewDBTable = new NGONewDBTable(AreaUpgrade.this);
         ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(AreaUpgrade.this);
         StoredAreaTable storedAreaTable=new StoredAreaTable(AreaUpgrade.this);
+
+
+
 
         healthNewDBTableMain.delete(ward,area);
         eduNewDBTableMain.delete(ward,area);

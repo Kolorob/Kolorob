@@ -106,6 +106,10 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
 
 
     public EntertainmentNewDBModel getNodeInfo(int node) {

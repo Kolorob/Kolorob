@@ -120,6 +120,10 @@ public class LegalAidNewDBTable extends BaseDBTable <LegalAidNewDBModel> {
         super.dropTable(TABLE_NAME);
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
 
     public ArrayList <LegalAidNewDBModel> getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);

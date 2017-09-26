@@ -116,6 +116,10 @@ public class GovNewDBTable extends BaseDBTable <GovernmentNewDBModel> {
         return new GovernmentNewDBModel(_govId, _commonModel, _serviceName);
     }
 
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
     public void dropTable() {
        super.dropTable(TABLE_NAME);
     }

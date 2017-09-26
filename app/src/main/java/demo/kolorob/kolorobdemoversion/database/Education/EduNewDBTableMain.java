@@ -129,7 +129,9 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
-
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
     public EduNewModel getNodeInfo(int node) {
 
