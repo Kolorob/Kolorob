@@ -152,6 +152,10 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
         return eduNewModel;
     }
 
+    public ArrayList <EduNewModel> getDataFromId(int nodeId) {
+        return super.getDataFromId(nodeId, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
 
     public EduNewModel cursorToModel(Cursor cursor) {
 
