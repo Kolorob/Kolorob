@@ -4,11 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,6 +24,7 @@ import demo.kolorob.kolorobdemoversion.database.CommonDBTable;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableMain;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableSchool;
 import demo.kolorob.kolorobdemoversion.database.Education.EduNewDBTableTraining;
+import demo.kolorob.kolorobdemoversion.database.Education.EducationResultDetailsTable;
 import demo.kolorob.kolorobdemoversion.database.Entertainment.EntNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Financial.FinNewDBTable;
 import demo.kolorob.kolorobdemoversion.database.Government.GovNewDBTable;
@@ -41,6 +40,7 @@ import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
 import demo.kolorob.kolorobdemoversion.model.Entertainment.EntertainmentNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Financial.FinancialNewDBModel;
 import demo.kolorob.kolorobdemoversion.model.Government.GovernmentNewDBModel;
@@ -120,7 +120,7 @@ public class AreaUpgrade extends AppCompatActivity {
                     dialog2.setMessage("দয়া করে অপেক্ষা করুন");
                     dialog2.setCancelable(true);
                     dialog2.show();
-                    deleteall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid()); // to delete area stored in device
+                    deleteAll(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea()); // to delete area stored in device
 
                 }
             }
@@ -138,12 +138,12 @@ public class AreaUpgrade extends AppCompatActivity {
                 }
                 else {
 
-                    storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+                    storedAreaArrayList2=RetriveLocation(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea());
                     SharedPreferences settings = getSharedPreferences("prefs", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("_ward", storedAreaArrayList2.get(0).getWardid()); // store ward and area from stored area in pref
+                    editor.putString("_ward", storedAreaArrayList2.get(0).getWard()); // store ward and area from stored area in pref
                     //to use in next activity
-                    editor.putString("areakeyword", storedAreaArrayList2.get(0).getAreaid());
+                    editor.putString("areakeyword", storedAreaArrayList2.get(0).getArea());
                     editor.apply();
                     Intent a = new Intent(AreaUpgrade.this, PlaceDetailsActivityNewLayout.class); // Default Activity
                     startActivity(a);
@@ -170,7 +170,7 @@ public class AreaUpgrade extends AppCompatActivity {
                     dialog.show();
                     if(AppUtils.isNetConnected(getApplicationContext()))
                     {
-                        Servercall(storedAreas.get(selectedId).getWardid(),storedAreas.get(selectedId).getAreaid());
+                        Servercall(storedAreas.get(selectedId).getWard(),storedAreas.get(selectedId).getArea());
                     }
                     else
                     {
@@ -203,7 +203,7 @@ public class AreaUpgrade extends AppCompatActivity {
 
     {
 
-        storedAreas=storedAreaTable.getAllstored();
+        storedAreas=storedAreaTable.getAllData();
 
         rg.clearCheck();
         if(storedAreas.isEmpty()){
@@ -444,31 +444,102 @@ public class AreaUpgrade extends AppCompatActivity {
             Log.d("hcount", String.valueOf(i));
         }
     }
-    public void deleteall(String ward,String area)
+
+    public void deleteAll (String ward, String area)
     {
-        CommonDBTable commonDBTable = new CommonDBTable(AreaUpgrade.this);
-        HealthNewDBTableMain healthNewDBTableMain = new HealthNewDBTableMain(AreaUpgrade.this);
-        FinNewDBTable finNewDBTable = new FinNewDBTable(AreaUpgrade.this);
-        LegalAidNewDBTable legalAidNewDBTable = new LegalAidNewDBTable(AreaUpgrade.this);
-        GovNewDBTable govNewDBTable = new GovNewDBTable(AreaUpgrade.this);
-        EntNewDBTable entNewDBTable = new EntNewDBTable(AreaUpgrade.this);
-        EduNewDBTableMain eduNewDBTableMain = new EduNewDBTableMain(AreaUpgrade.this);
-        NGONewDBTable ngoNewDBTable = new NGONewDBTable(AreaUpgrade.this);
-        ReligiousNewDBTable religiousNewDBTable = new ReligiousNewDBTable(AreaUpgrade.this);
-        StoredAreaTable storedAreaTable=new StoredAreaTable(AreaUpgrade.this);
+
+        CommonDBTable commonDB = new CommonDBTable(AreaUpgrade.this);
+
+        EduNewDBTableMain educationDB = new EduNewDBTableMain(AreaUpgrade.this);
+        EduNewDBTableSchool schoolDB = new EduNewDBTableSchool(AreaUpgrade.this);
+        EducationResultDetailsTable resultDB = new EducationResultDetailsTable(AreaUpgrade.this);
+        EduNewDBTableTraining trainingDB = new EduNewDBTableTraining(AreaUpgrade.this);
+
+        HealthNewDBTableMain healthDB = new HealthNewDBTableMain(AreaUpgrade.this);
+        HealthNewDBTableHospital hospitalDB = new HealthNewDBTableHospital(AreaUpgrade.this);
+        HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(AreaUpgrade.this);
+
+        EntNewDBTable entertainmentDB = new EntNewDBTable(AreaUpgrade.this);
+        FinNewDBTable financeDB = new FinNewDBTable(AreaUpgrade.this);
+        GovNewDBTable governmentDB = new GovNewDBTable(AreaUpgrade.this);
+        LegalAidNewDBTable legalDB = new LegalAidNewDBTable(AreaUpgrade.this);
+        NGONewDBTable ngoDB = new NGONewDBTable(AreaUpgrade.this);
+        ReligiousNewDBTable shelterDB = new ReligiousNewDBTable(AreaUpgrade.this);
+
+        StoredAreaTable storedAreaDB = new StoredAreaTable(AreaUpgrade.this);
 
 
 
+        ArrayList <CommonModel> commonModels = commonDB.getAllCommonByArea(ward, area);
 
-        healthNewDBTableMain.delete(ward,area);
-        eduNewDBTableMain.delete(ward,area);
-        entNewDBTable.delete(ward,area);
-        legalAidNewDBTable.delete(ward,area);
-        finNewDBTable.delete(ward,area);
-        govNewDBTable.delete(ward,area);
-        ngoNewDBTable.delete(ward,area);
-        religiousNewDBTable.delete(ward,area);
-        storedAreaTable.delete(ward,area);
+        for(CommonModel commonModel : commonModels){
+
+            int id = commonModel.getId();
+
+            if(educationDB.isFieldExist(id)){
+
+                ArrayList <EduNewSchoolModel> schools = schoolDB.getDataFromForeignKey(id);
+                ArrayList <EducationResultItemNew> results = resultDB.getDataFromForeignKey(id);
+                ArrayList <EduTrainingModel> trainings = trainingDB.getDataFromForeignKey(id);
+
+                if(schools != null){
+                    for(EduNewSchoolModel school : schools){
+                        schoolDB.delete(school.getId());
+                    }
+                }
+                if(results != null){
+                    for(EducationResultItemNew result : results){
+                        resultDB.delete(result.getEduId());
+                    }
+                }
+                if(trainings != null){
+                    for(EduTrainingModel training : trainings){
+                        trainingDB.delete(training.getEduid());
+                    }
+                }
+                educationDB.delete(id);
+            }
+            else if(healthDB.isFieldExist(id)){
+
+                ArrayList <HealthNewDBModelHospital> hospitals = new ArrayList<>();
+                ArrayList <HealthNewDBModelPharmacy> pharmacies = new ArrayList<>();
+
+                if(hospitals != null){
+                    for(HealthNewDBModelHospital hospital : hospitals){
+                        hospitalDB.delete(hospital.getServicecenterid());
+                    }
+                }
+                if(pharmacies != null){
+                    for(HealthNewDBModelPharmacy pharmacy : pharmacies){
+                        pharmacyDB.delete(pharmacy.getServicecenterid());
+                    }
+                }
+                healthDB.delete(id);
+            }
+            else if(entertainmentDB.isFieldExist(id)){
+                entertainmentDB.delete(id);
+            }
+            else if (financeDB.isFieldExist(id)){
+                financeDB.delete(id);
+            }
+            else if(governmentDB.isFieldExist(id)){
+                governmentDB.delete(id);
+            }
+            else if(legalDB.isFieldExist(id)){
+                legalDB.delete(id);
+            }
+            else if(ngoDB.isFieldExist(id)){
+                ngoDB.delete(id);
+            }
+            else if(shelterDB.isFieldExist(id)){
+                shelterDB.delete(id);
+            }
+            commonDB.delete(id);
+        }
+
+        storedAreaDB.delete(storedAreaDB.getNodeInfo(ward, area).getId());
+
+
 
         rg.clearCheck();
         dialog2.dismiss();
