@@ -249,7 +249,7 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
         ArrayList<CommonModel> subCatList = new ArrayList<>();
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery ("SELECT * FROM "+  TABLE_NAME + " WHERE "+KEY_WARD + " = '"+ ward + "' AND "+"("+KEY_AREA +"  = '"+ place + "')"+" OR "+"("+KEY_PARENT_AREA +"  =  '"+ place + "')", null);
+        Cursor cursor = db.rawQuery ("SELECT * FROM " +  TABLE_NAME + " WHERE " + KEY_WARD + " = '"+ ward + "' AND " + "(" + KEY_AREA + "  = '" + place + "')" + " OR " + "(" + KEY_PARENT_AREA + "  =  '" + place + "')", null);
 
         if (cursor.moveToFirst()) {
             do {

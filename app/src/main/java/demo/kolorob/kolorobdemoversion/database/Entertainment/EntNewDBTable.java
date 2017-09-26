@@ -95,9 +95,6 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
         return updatedId;
     }
 
-    public void delete(String ward, String area, CommonModel commonModel) {
-        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
-    }
 
 
     public boolean isFieldExist(int id) {

@@ -120,9 +120,6 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
 
     }
 
-    public void delete(String ward, String area, CommonModel commonModel) {
-        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
-    }
 
     public ArrayList <HealthNewDBModelMain> getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);

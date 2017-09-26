@@ -61,17 +61,6 @@ public abstract class BaseDBTable <ModelType>  {
     }
 
 
-
-    public void delete(String ward, String area, CommonModel commonModel, String TABLE_NAME, String KEY_COMMON_ID){
-        CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        commonDBTable.delete(ward, area);
-        DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
-        SQLiteDatabase database = databaseHelper.getWritableDatabase();
-        database.delete(TABLE_NAME, KEY_COMMON_ID + " = " + commonModel.getId(), null);
-
-        database.close();
-    }
-
     public CommonModel getCommonModelFromId(int commonId){
         CommonDBTable commonDBTable = new CommonDBTable(tContext);
         CommonModel commonModel = commonDBTable.getNodeInfo(commonId);

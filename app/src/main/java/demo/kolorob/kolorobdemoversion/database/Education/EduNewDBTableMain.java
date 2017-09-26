@@ -119,10 +119,6 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
         return updatedId;
     }
 
-    public void delete(String ward, String area, CommonModel commonModel) {
-        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
-    }
-
 
     public boolean isFieldExist(int id) {
         return super.isFieldExist(id, TABLE_NAME);

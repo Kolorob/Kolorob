@@ -125,7 +125,5 @@ public class GovNewDBTable extends BaseDBTable <GovernmentNewDBModel> {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
-    public void delete(String ward,String area, CommonModel commonModel) {
-        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
-    }
+
 }

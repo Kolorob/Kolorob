@@ -165,8 +165,4 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
     }
 
 
-
-    public void delete(String ward, String area, CommonModel commonModel) {
-        super.delete(ward, area, commonModel, TABLE_NAME, KEY_COMMON_ID);
-    }
 }
