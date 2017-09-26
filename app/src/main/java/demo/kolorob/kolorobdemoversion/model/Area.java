@@ -12,14 +12,15 @@ import java.util.Comparator;
 
 public class Area implements Serializable{
 
-    private String area_name, area_bn, area_keyword, lat, lon;
+    private String area_name, area_bn, area_keyword, parentArea, lat, lon;
     private int id, ward_id;
 
-    public Area(int id, String area_name, String area_bn, String area_keyword, String lat, String lon, int ward_id) {
+    public Area(int id, String area_name, String area_bn, String area_keyword, String parentArea, String lat, String lon, int ward_id) {
         this.id = id;
         this.area_name = area_name;
         this.area_bn = area_bn;
         this.area_keyword = area_keyword;
+        this.parentArea = parentArea;
         this.lat = lat;
         this.lon = lon;
         this.ward_id = ward_id;
@@ -49,6 +50,14 @@ public class Area implements Serializable{
         this.area_name = area_name;
     }
 
+    public String getParentArea() {
+        return parentArea;
+    }
+
+    public void setParentArea(String parentArea) {
+        this.parentArea = parentArea;
+    }
+
     public String getArea_bn() {
         return area_bn;
     }
@@ -56,6 +65,8 @@ public class Area implements Serializable{
     public void setArea_bn(String area_bn) {
         this.area_bn = area_bn;
     }
+
+
 
     public String getLat() {
         return lat;
@@ -86,11 +97,12 @@ public class Area implements Serializable{
         String area_en = jo.getString("area_en");
         String area_bn = jo.getString("area_bn");
         String area_keyword = jo.getString("area_keyword");
+        String parent_area = jo.getString("parent_area");
         int ward_id = jo.getInt("_ward");
         String lat = jo.getString("lat");
         String lon = jo.getString("lon");
 
-        return new Area(id, area_en, area_bn, area_keyword, lat, lon, ward_id);
+        return new Area(id, area_en, area_bn, area_keyword, parent_area, lat, lon, ward_id);
     }
 }
 

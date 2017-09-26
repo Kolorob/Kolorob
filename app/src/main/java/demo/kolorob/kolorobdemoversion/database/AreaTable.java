@@ -23,6 +23,7 @@ public class AreaTable extends BaseDBTable <Area>{
     private static final String KEY_AREA_EN = "area_en"; // 1 - text
     private static final String KEY_AREA_BN = "area_bn"; // 2 - text
     private static final String KEY_AREA_KEYWORD = "area_keyword";
+    private static final String KEY_PARENT_AREA = "parent_area";
     private static final String KEY_AREA_WARDID = "ward_id";
     private static final String KEY_LAT = "lat";
     private static final String KEY_LON = "lon";
@@ -45,6 +46,7 @@ public class AreaTable extends BaseDBTable <Area>{
                 + KEY_AREA_EN + " TEXT, "              // 1 - text
                 + KEY_AREA_BN + " TEXT, "
                 + KEY_AREA_KEYWORD + " TEXT, "
+                + KEY_PARENT_AREA + " TEXT, "
                 + KEY_LAT + " TEXT, "
                 + KEY_LON + " TEXT, "
                 + KEY_AREA_WARDID + " INTEGER "
@@ -61,21 +63,23 @@ public class AreaTable extends BaseDBTable <Area>{
                 area.getArea_name(),
                 area.getArea_bn(),
                 area.getArea_keyword(),
+                area.getParentArea(),
                 area.getLat(),
                 area.getLon(),
                 area.getWard_id()
         );
     }
 
-    public long insertItem(int id, String area_name, String area_bn, String area_keyword, String lat, String lon, int ward_id) {
+    public long insertItem(int id, String area_name, String area_bn, String area_keyword, String parent_area, String lat, String lon, int ward_id) {
         if (isFieldExist(id)) {
-            return updateItem(id, area_name, area_bn, area_keyword, lat, lon, ward_id);
+            return updateItem(id, area_name, area_bn, area_keyword, parent_area, lat, lon, ward_id);
         }
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_ID, id);
         rowValue.put(KEY_AREA_EN, area_name);
         rowValue.put(KEY_AREA_BN, area_bn);
         rowValue.put(KEY_AREA_KEYWORD, area_keyword);
+        rowValue.put(KEY_PARENT_AREA, parent_area);
         rowValue.put(KEY_LAT, lat);
         rowValue.put(KEY_LON, lon);
         rowValue.put(KEY_AREA_WARDID, ward_id);
@@ -108,12 +112,13 @@ public class AreaTable extends BaseDBTable <Area>{
         return super.isFieldExist(id, TABLE_NAME);
     }
 
-    private long updateItem(int id, String area_en, String area_bn, String area_keyword, String lat, String lon, int ward_id) {
+    private long updateItem(int id, String area_en, String area_bn, String area_keyword, String parent_area, String lat, String lon, int ward_id) {
         ContentValues rowValue = new ContentValues();
         rowValue.put(KEY_ID, id);
         rowValue.put(KEY_AREA_EN, area_en);
         rowValue.put(KEY_AREA_BN, area_bn);
         rowValue.put(KEY_AREA_KEYWORD, area_keyword);
+        rowValue.put(KEY_PARENT_AREA, parent_area);
         rowValue.put(KEY_LAT, lat);
         rowValue.put(KEY_LON, lon);
         rowValue.put(KEY_AREA_WARDID, ward_id);
@@ -146,10 +151,11 @@ public class AreaTable extends BaseDBTable <Area>{
         String area_en = cursor.getString(1);
         String area_bn = cursor.getString(2);
         String area_keyword = cursor.getString(3);
-        String lat = cursor.getString(4);
-        String lon = cursor.getString(5);
-        int ward_id = cursor.getInt(6);
-        return new Area(id, area_en, area_bn, area_keyword, lat, lon, ward_id);
+        String parent_area = cursor.getString(4);
+        String lat = cursor.getString(5);
+        String lon = cursor.getString(6);
+        int ward_id = cursor.getInt(7);
+        return new Area(id, area_en, area_bn, area_keyword, parent_area, lat, lon, ward_id);
     }
 
     public void dropTable() {
@@ -165,7 +171,7 @@ public class AreaTable extends BaseDBTable <Area>{
 
         if (cursor.moveToFirst()) {
             do {
-                area = new Area(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6));
+                area = new Area(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(6));
             } while (cursor.moveToNext());
         }
         cursor.close();
