@@ -83,7 +83,7 @@ public class LegalAidNewDBTable extends BaseDBTable <LegalAidNewDBModel> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
@@ -113,6 +113,18 @@ public class LegalAidNewDBTable extends BaseDBTable <LegalAidNewDBModel> {
         cursor.close();
         closeDB();
         return legalAidNewDBModel;
+    }
+
+    public ArrayList <LegalAidNewDBModel> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <LegalAidNewDBModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
+    public LegalAidNewDBModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
