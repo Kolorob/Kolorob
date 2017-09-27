@@ -85,10 +85,20 @@ public class GovNewDBTable extends BaseDBTable <GovernmentNewDBModel> {
 
 
     public boolean isFieldExist(int id ) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
+    public ArrayList <GovernmentNewDBModel> getDataListFromId(int node){
+        return super.getDataListFromId(node, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
+    public GovernmentNewDBModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <GovernmentNewDBModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
 
     public GovernmentNewDBModel getNodeInfo(int node) {
 
