@@ -9,11 +9,7 @@ import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
@@ -139,15 +135,23 @@ public class EduNewDBTableSchool extends BaseDBTable <EduNewSchoolModel> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_NODE_ID);
     }
 
-    public ArrayList <EduNewSchoolModel> getDataFromId(int id) {
+    public ArrayList <EduNewSchoolModel> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_NODE_ID);
+    }
+
+    public EduNewSchoolModel getDataFromId(int id){
         return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
 
+    public ArrayList <EduNewSchoolModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
     public ArrayList <EduNewSchoolModel> getDataFromForeignKey(int id) {
-        return super.getDataFromId(id, TABLE_NAME, KEY_SPID);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SPID);
     }
 
 

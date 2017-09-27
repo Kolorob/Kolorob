@@ -4,19 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
+
 public class EducationResultDetailsTable extends BaseDBTable <EducationResultItemNew> {
 
     private static final String TABLE_NAME = DatabaseHelper.EDU_PROVIDER_RESULT_TABLE;
@@ -110,7 +106,7 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
     }
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_NODE_ID);
     }
 
     public void delete(int id){
@@ -135,7 +131,7 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         SQLiteDatabase db = openDB();
         EducationResultItemNew educationResultItemNew = null;
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_SERVICE_ID + " = " + node , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_NODE_ID + " = " + node , null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -147,12 +143,20 @@ public class EducationResultDetailsTable extends BaseDBTable <EducationResultIte
         return educationResultItemNew;
     }
 
-    public ArrayList <EducationResultItemNew> getDataFromId(int id) {
-        return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
+    public ArrayList <EducationResultItemNew> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
+    public ArrayList <EducationResultItemNew> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
 
     public ArrayList <EducationResultItemNew> getDataFromForeignKey(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
+    public EducationResultItemNew getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
 
     public void dropTable() {

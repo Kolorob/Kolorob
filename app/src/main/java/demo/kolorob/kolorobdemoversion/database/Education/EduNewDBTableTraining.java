@@ -4,20 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-//import demo.kolorob.kolorobdemoversion.model.Education.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EducationResultItemNew;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
+
 
 /**
  * Created by israt.jahan on 6/27/2016.
  */
+
+
 public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
 
     private static final String TABLE_NAME = DatabaseHelper.EDU_NEW_DB_TRAINING;
@@ -115,16 +112,24 @@ public class EduNewDBTableTraining extends BaseDBTable <EduTrainingModel> {
     }
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_NODE_ID);
     }
 
 
-    public ArrayList <EduTrainingModel> getDataFromId (int id) {
+    public ArrayList <EduTrainingModel> getDataListFromId (int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_NODE_ID);
+    }
+
+    public EduTrainingModel getDataFromId(int id){
         return super.getDataFromId(id, TABLE_NAME, KEY_NODE_ID);
     }
 
+    public ArrayList <EduTrainingModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
     public ArrayList <EduTrainingModel> getDataFromForeignKey(int id){
-        return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
     }
 
     public EduTrainingModel cursorToModel(Cursor cursor) {

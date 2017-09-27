@@ -4,9 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
-
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
@@ -121,7 +119,7 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
@@ -152,8 +150,16 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
         return eduNewModel;
     }
 
-    public ArrayList <EduNewModel> getDataFromId(int nodeId) {
-        return super.getDataFromId(nodeId, TABLE_NAME, KEY_IDENTIFIER_ID);
+    public ArrayList <EduNewModel> getDataListFromId(int nodeId) {
+        return super.getDataListFromId(nodeId, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public EduNewModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <EduNewModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
     }
 
 
@@ -179,24 +185,4 @@ public class EduNewDBTableMain extends BaseDBTable <EduNewModel> {
         super.dropTable(TABLE_NAME);
     }
 
-    public ArrayList<EduNewModel> getAllEducationSubCategoriesInfo(String ward,String place) {
-        ArrayList<EduNewModel> subCatList = new ArrayList<>();
-
-        //System.out.println(cat_id+"  "+sub_cat_id);
-        /*SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ KEY_AREA+" = '"+place+"' ORDER BY " +KEY_NAME_EN,null);;
-
-        if (cursor.moveToFirst()) {
-            do {
-
-
-                //System.out.println("abc="+cursor.getString(4));
-                subCatList.add(cursorToSubCatList(cursor));
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();*/
-        return subCatList;
-    }
 }
