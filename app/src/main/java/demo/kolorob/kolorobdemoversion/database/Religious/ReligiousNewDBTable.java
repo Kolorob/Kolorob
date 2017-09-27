@@ -149,6 +149,18 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
         return religiousNewDBModel;
     }
 
+    public ArrayList <ReligiousNewDBModel> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ReligiousNewDBModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <ReligiousNewDBModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
 
     public void dropTable() {
         super.dropTable(TABLE_NAME);
@@ -165,7 +177,7 @@ public class ReligiousNewDBTable extends BaseDBTable <ReligiousNewDBModel>{
 
 
     public boolean isFieldExist(int id) {
-       return super.isFieldExist(id, TABLE_NAME);
+       return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
