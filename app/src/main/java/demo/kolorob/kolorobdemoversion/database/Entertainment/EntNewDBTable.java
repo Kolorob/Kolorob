@@ -98,7 +98,7 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
@@ -110,6 +110,17 @@ public class EntNewDBTable extends BaseDBTable <EntertainmentNewDBModel> {
         super.delete(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
+    public ArrayList <EntertainmentNewDBModel> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public EntertainmentNewDBModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <EntertainmentNewDBModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
 
 
     public EntertainmentNewDBModel getNodeInfo(int node) {
