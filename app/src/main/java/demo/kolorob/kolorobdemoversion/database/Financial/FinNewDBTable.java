@@ -90,12 +90,24 @@ public class FinNewDBTable extends BaseDBTable <FinancialNewDBModel> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
     public ArrayList <FinancialNewDBModel> getDetailsByCommonId(int commonId) {
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
+    }
+
+    public ArrayList <FinancialNewDBModel> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public FinancialNewDBModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <FinancialNewDBModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
     }
 
 
