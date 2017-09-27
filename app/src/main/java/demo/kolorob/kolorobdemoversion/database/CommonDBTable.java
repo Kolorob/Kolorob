@@ -237,7 +237,7 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
     }
 
     public boolean isFieldExist(int id) {
-       return super.isFieldExist(id, TABLE_NAME);
+       return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
     public ArrayList <CommonModel> getAllCommonByArea(String ward, String place) {
@@ -259,6 +259,17 @@ public class CommonDBTable extends BaseDBTable <CommonModel> {
         return list;
     }
 
+    public ArrayList <CommonModel> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <CommonModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
+    public CommonModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
 
 
     public CommonModel getNodeInfo(int Node) {
