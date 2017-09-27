@@ -3,10 +3,9 @@ package demo.kolorob.kolorobdemoversion.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.PorterDuff;
 
 import java.util.ArrayList;
-
-import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
 /**
@@ -25,26 +24,24 @@ public abstract class BaseDBTable <ModelType>  {
     public abstract ModelType cursorToModel(Cursor cursor);
 
 
-    public SQLiteDatabase openDB() {
+    protected SQLiteDatabase openDB() {
         return DatabaseManager.getInstance(tContext).openDatabase();
     }
 
-    public void closeDB() {
+    protected void closeDB() {
         DatabaseManager.getInstance(tContext).closeDatabase();
     }
 
 
-    public boolean isFieldExist(int id, String TABLE_NAME) {
+    protected boolean isFieldExist(int id, String TABLE_NAME, String KEY_IDENTIFIER_ID) {
 
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        if (cursor.moveToFirst()) {
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + id, null);
+        if (cursor != null && cursor.moveToFirst()) {
             do {
-                if (id == cursor.getInt(0)) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
+                cursor.close();
+                closeDB();
+                return true;
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -52,7 +49,7 @@ public abstract class BaseDBTable <ModelType>  {
         return false;
     }
 
-    public void delete(int id, String TABLE_NAME, String KEY_ID){
+    protected void delete(int id, String TABLE_NAME, String KEY_ID){
         DatabaseHelper databaseHelper = new DatabaseHelper(tContext);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         database.delete(TABLE_NAME, KEY_ID + " = " + id, null);
@@ -61,32 +58,38 @@ public abstract class BaseDBTable <ModelType>  {
     }
 
 
-    public CommonModel getCommonModelFromId(int commonId){
+    protected CommonModel getCommonModelFromId(int commonId){
         CommonDBTable commonDBTable = new CommonDBTable(tContext);
-        CommonModel commonModel = commonDBTable.getNodeInfo(commonId);
+        return commonDBTable.getNodeInfo(commonId);
 
-        return commonModel;
     }
 
-    public ArrayList <ModelType> getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID){
+    protected ArrayList <ModelType> getDetailsByCommonId(int commonId, String TABLE_NAME, String KEY_COMMON_ID){
 
-        ArrayList <ModelType> list = new ArrayList<>();
+        return getDataListFromId(commonId, TABLE_NAME, KEY_COMMON_ID);
+    }
 
+
+    protected ModelType getDataFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID){
+
+
+        ModelType model = null;
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery ("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_COMMON_ID + " = " + commonId, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + nodeId, null);
 
         if (cursor.moveToFirst()) {
             do {
-                list.add(cursorToModel(cursor));
-
+                model = cursorToModel(cursor);
             } while (cursor.moveToNext());
         }
         cursor.close();
         closeDB();
-        return list;
+        return model;
     }
 
-    public ArrayList <ModelType> getDataFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID) {
+
+
+    protected ArrayList <ModelType> getDataListFromId(int nodeId, String TABLE_NAME, String KEY_IDENTIFIER_ID) {
 
         ArrayList <ModelType> list = new ArrayList<>();
 
@@ -103,7 +106,7 @@ public abstract class BaseDBTable <ModelType>  {
         return list;
     }
 
-    public ArrayList <ModelType> getAllData(String TABLE_NAME) {
+    private ArrayList <ModelType> getAllData(String TABLE_NAME) {
 
         ArrayList <ModelType> list = new ArrayList<>();
 
@@ -121,8 +124,7 @@ public abstract class BaseDBTable <ModelType>  {
     }
 
 
-
-    public void dropTable(String TABLE_NAME) {
+    protected void dropTable(String TABLE_NAME) {
         SQLiteDatabase db = openDB();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         createTable();
