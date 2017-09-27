@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
 
 
@@ -122,13 +123,21 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
 
     }
 
-    public ArrayList <HealthNewDBModelHospital> getDataFromId(int id) {
+    public ArrayList <HealthNewDBModelHospital> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
+    public HealthNewDBModelHospital getDataFromId(int id){
         return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
+    public ArrayList <HealthNewDBModelHospital> getAllData(){
+        return super.getAllData(TABLE_NAME);
     }
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_SERVICE_ID);
     }
 
     public HealthNewDBModelHospital cursorToModel(Cursor cursor) {
@@ -160,6 +169,10 @@ public class HealthNewDBTableHospital extends BaseDBTable <HealthNewDBModelHospi
         cursor.close();
         closeDB();
         return healthNewDBModelHospital;
+    }
+
+    public ArrayList <HealthNewDBModelHospital> getDataFromForeignKey(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
     }
 
     public void delete(int id){

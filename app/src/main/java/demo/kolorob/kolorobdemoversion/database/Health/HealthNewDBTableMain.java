@@ -88,7 +88,7 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
 
@@ -125,8 +125,12 @@ public class HealthNewDBTableMain extends BaseDBTable <HealthNewDBModelMain>{
         return super.getDetailsByCommonId(commonId, TABLE_NAME, KEY_COMMON_ID);
     }
 
-    public ArrayList <HealthNewDBModelMain> getDataFromId(int nodeId){
-        return super.getDataFromId(nodeId, TABLE_NAME, KEY_IDENTIFIER_ID);
+    public ArrayList <HealthNewDBModelMain> getDataListFromId(int nodeId){
+        return super.getDataListFromId(nodeId, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public HealthNewDBModelMain getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
     public void delete(int id){

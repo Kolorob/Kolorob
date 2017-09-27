@@ -5,15 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import demo.kolorob.kolorobdemoversion.database.BaseDBTable;
 import demo.kolorob.kolorobdemoversion.database.DatabaseHelper;
-import demo.kolorob.kolorobdemoversion.database.DatabaseManager;
-import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
-import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelHospital;
+import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.Health.HealthNewDBModelPharmacy;
-import demo.kolorob.kolorobdemoversion.utils.Lg;
 
 /**
  * Created by israt.jahan on 6/27/2016.
@@ -107,6 +105,10 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
     }
 
+    public ArrayList <HealthNewDBModelPharmacy> getDataFromForeignKey(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
 
     public HealthNewDBModelPharmacy getNodeInfo(int node){
         SQLiteDatabase db = openDB();
@@ -127,11 +129,19 @@ public class HealthNewDBTablePharma extends BaseDBTable <HealthNewDBModelPharmac
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_SERVICE_ID);
     }
 
-    public ArrayList <HealthNewDBModelPharmacy> getDataFromId(int id) {
+    public ArrayList <HealthNewDBModelPharmacy> getDataListFromId(int id) {
+        return super.getDataListFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
+    public HealthNewDBModelPharmacy getDataFromId(int id){
         return super.getDataFromId(id, TABLE_NAME, KEY_SERVICE_ID);
+    }
+
+    public ArrayList <HealthNewDBModelPharmacy> getAllData(){
+        return super.getAllData(TABLE_NAME);
     }
 
     public HealthNewDBModelPharmacy cursorToModel(Cursor cursor) {
