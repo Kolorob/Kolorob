@@ -3,8 +3,6 @@ package demo.kolorob.kolorobdemoversion.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.PorterDuff;
-
 import java.util.ArrayList;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 
@@ -37,16 +35,11 @@ public abstract class BaseDBTable <ModelType>  {
 
         SQLiteDatabase db = openDB();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_IDENTIFIER_ID + " = " + id, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                cursor.close();
-                closeDB();
-                return true;
-            } while (cursor.moveToNext());
-        }
+        boolean exists = cursor.moveToFirst();
         cursor.close();
         closeDB();
-        return false;
+
+        return exists;
     }
 
     protected void delete(int id, String TABLE_NAME, String KEY_ID){
@@ -106,7 +99,7 @@ public abstract class BaseDBTable <ModelType>  {
         return list;
     }
 
-    private ArrayList <ModelType> getAllData(String TABLE_NAME) {
+    protected ArrayList <ModelType> getAllData(String TABLE_NAME) {
 
         ArrayList <ModelType> list = new ArrayList<>();
 
