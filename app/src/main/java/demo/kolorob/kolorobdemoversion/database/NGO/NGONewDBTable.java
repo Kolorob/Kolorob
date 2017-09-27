@@ -129,6 +129,18 @@ public class NGONewDBTable extends BaseDBTable <NGONewDBModel> {
         return ngoNewDBModel;
     }
 
+    public ArrayList <NGONewDBModel> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public NGONewDBModel getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_IDENTIFIER_ID);
+    }
+
+    public ArrayList <NGONewDBModel> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
 
     public NGONewDBModel cursorToModel(Cursor cursor) {
         int _ngoId = cursor.getInt(0);
@@ -152,7 +164,7 @@ public class NGONewDBTable extends BaseDBTable <NGONewDBModel> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_IDENTIFIER_ID);
     }
 
     public void delete(int id){
