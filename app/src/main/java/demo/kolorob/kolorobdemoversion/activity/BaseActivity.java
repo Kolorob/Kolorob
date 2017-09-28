@@ -43,7 +43,6 @@ import demo.kolorob.kolorobdemoversion.adapters.DefaultAdapter;
 import demo.kolorob.kolorobdemoversion.database.SubCategoryTableNew;
 import demo.kolorob.kolorobdemoversion.fragment.MapFragmentRouteOSM;
 import demo.kolorob.kolorobdemoversion.helpers.Helpes;
-import demo.kolorob.kolorobdemoversion.model.CommentItem;
 import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.SubCategoryItemNew;
 import demo.kolorob.kolorobdemoversion.utils.AlertMessage;
@@ -54,7 +53,6 @@ import demo.kolorob.kolorobdemoversion.utils.ToastMessageDisplay;
 
 public abstract class BaseActivity extends AppCompatActivity{
 
-    Dialog dialog;
     LinearLayout upperHand, service_center_name, left_way, middle_phone, right_email, bottom_bar;
     ImageView route_icon, phone_icon, email_icon, comment_icon, email_btn;
     ArrayList <SubCategoryItemNew> subCategoryItemNews = new ArrayList<>();
@@ -85,8 +83,8 @@ public abstract class BaseActivity extends AppCompatActivity{
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
 
-        upperHand = (LinearLayout) findViewById(R.id.upper_part); //service center name and icon set will be here
-        service_center_name = (LinearLayout) findViewById(R.id.upperText);// service center name will be here
+        upperHand = (LinearLayout) findViewById(R.id.upper_part);      //service center name and icon set will be here
+        service_center_name = (LinearLayout) findViewById(R.id.upperText);    // service center name will be here
         left_way = (LinearLayout) findViewById(R.id.left_go_process);
         middle_phone = (LinearLayout) findViewById(R.id.middle_phone);
         right_email = (LinearLayout) findViewById(R.id.right_email);
@@ -97,8 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         ratingText = (TextView) findViewById(R.id.ratingText);
         service_data = (ListView) findViewById(R.id.allData);
 
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data
-                .getLayoutParams();
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) service_data.getLayoutParams();
         mlp.setMargins(width / 100, 0, width / 990, width / 8); //set margin in main info block
 
         routing_icon = (ImageView) findViewById(R.id.distance_left); //routing icon
@@ -640,11 +637,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     public void setSubcategories(int id) {
 
         SubCategoryTableNew subCategoryTableNew = new SubCategoryTableNew(this);
-        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
-
-        subCategoryItemNews = subCategoryTableNew.getAllData();
-        subCategoryItemNews = subCategoryTableNew.getAllSubCategories(id);
-
+        subCategoryItemNews = subCategoryTableNew.getDataFromForeignKey(id);
     }
 
 }
