@@ -20,7 +20,7 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
     private static final String TABLE_NAME = DatabaseHelper.AREASTORED;
 
     private static final String KEY_ID = "_id";
-    private static final String WARDID = "_ward_id"; // 0 -integer
+    private static final String WARDID = "_ward_id";
     private static final String AREANAME = "_area_name"; // 1 - text
     private static final String AREANAMEBN = "_area_nameBn"; // 1 - text
     private static final String PARENTAREA = "_parent_area";
@@ -97,7 +97,7 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_ID);
     }
 
     public boolean isAreaStored(String ward, String area){
@@ -191,6 +191,14 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
 
     public ArrayList <StoredArea> getAllData() {
         return super.getAllData(TABLE_NAME);
+    }
+
+    public StoredArea getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
+    }
+
+    public ArrayList <StoredArea> getDataListFromId(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_ID);
     }
 
     public void dropTable() {

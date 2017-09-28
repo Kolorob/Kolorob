@@ -86,7 +86,7 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
     }
 
     public boolean isFieldExist(int id) {
-       return super.isFieldExist(id, TABLE_NAME);
+       return super.isFieldExist(id, TABLE_NAME, KEY_ID);
     }
 
     private long updateItem(int id, int catId, String catName, int subCatId, String subCatLabelNameEn, String subCatLabelNameBn, int refId, String refLabelEn, String refLabelBn) {
@@ -106,7 +106,9 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
         closeDB();
         return ret;
     }
-    public ArrayList<Subcatholder> getcatSubCategories(int id) {
+
+
+    public ArrayList <Subcatholder> getcatSubCategories(int id) {
 
 
         ArrayList<Subcatholder> siList = new ArrayList<Subcatholder>();
@@ -130,105 +132,15 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
         return super.getAllData(TABLE_NAME);
     }
 
-    public ArrayList <SubCategoryItemNew> getAllSubCategories(int id) {
-        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_CAT_ID + " = " + id, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                siList.add(cursorToModel(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList;
+    public ArrayList <SubCategoryItemNew> getDataFromForeignKey(int id) {
+       return super.getDataListFromId(id, TABLE_NAME, KEY_CAT_ID);
     }
 
-    public ArrayList<String> getSubnameedu(int id) {
-        ArrayList<String> siList=new ArrayList<>();
-
-//        Log.d("CategoryId","======="+id);
-
-        SQLiteDatabase db = openDB();
-        int i=0;
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(7);
-                siList.add(i,name);
-                i++;
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList;
-    }
-
-    public int  getRefId(String name) {
-        int ids=0;
-
-
-        SQLiteDatabase db = openDB();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_REF_NAME_BN+" = '"+name+"'", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                ids = cursor.getInt(5);
-
-            } while (cursor.moveToNext());
-        }
-
-
-
-
-        cursor.close();
-        closeDB();
-        return ids;
-    }
-    public int  getSubcategoryId(String name) {
-        int ids=0;
-        Log.d("Ent Name","######"+name);
-
-        SQLiteDatabase db = openDB();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_SUB_CAT_LABEL_BN+" = '"+name+"'", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                ids = cursor.getInt(2);
-                Log.d("cursor","######"+ids);
-            } while (cursor.moveToNext());
-        }
-
-
-
-
-        cursor.close();
-        closeDB();
-        return ids;
+    public SubCategoryItemNew getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
     }
 
 
-
-    public ArrayList<SubCategoryItemNew> getAllSubCategoriesHeader(int id,String head) {
-        ArrayList<SubCategoryItemNew> siList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME+" WHERE "+KEY_CAT_ID+" = "+ id +" AND "+KEY_SUB_CAT_LABEL_EN+" = '"+head+"'", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                siList.add(cursorToModel(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return siList;
-    }
 
     public SubCategoryItemNew cursorToModel(Cursor cursor) {
         int id = cursor.getInt(0);
@@ -262,5 +174,9 @@ public class SubCategoryTableNew extends BaseDBTable <SubCategoryItemNew> {
         cursor.close();
         closeDB();
         return subCategoryItemNew;
+    }
+
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_ID);
     }
 }

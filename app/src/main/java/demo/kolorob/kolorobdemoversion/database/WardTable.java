@@ -80,7 +80,7 @@ public class WardTable extends BaseDBTable <Ward>{
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_ID);
     }
 
     private long updateItem(int id, String ward_en, String ward_bn, String ward_keyword, int cc_id) {
@@ -114,6 +114,14 @@ public class WardTable extends BaseDBTable <Ward>{
         cursor.close();
         closeDB();
         return wardList;
+    }
+
+    public ArrayList <Ward> getDataFromForeignKey(int id){
+        return super.getDataListFromId(id, TABLE_NAME, KEY_WARD_CCID);
+    }
+
+    public Ward getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
     }
 
     public Ward cursorToModel(Cursor cursor) {

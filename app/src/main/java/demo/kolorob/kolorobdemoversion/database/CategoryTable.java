@@ -70,7 +70,7 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
 
 
     public boolean isFieldExist(int id) {
-       return super.isFieldExist(id, TABLE_NAME);
+       return super.isFieldExist(id, TABLE_NAME, KEY_ID);
     }
 
     private long updateItem(int id, String name, String nameBn, boolean isActive) {
@@ -97,6 +97,10 @@ public class CategoryTable extends BaseDBTable <CategoryItem> {
         String nameBn = cursor.getString(2);
         boolean isActive = cursor.getString(3).equals("true");
         return new CategoryItem(id, name, nameBn, isActive);
+    }
+
+    public CategoryItem getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
     }
 
     public void dropTable() {

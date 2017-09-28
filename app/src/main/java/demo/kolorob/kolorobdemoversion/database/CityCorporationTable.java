@@ -76,7 +76,7 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
 
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_ID);
     }
 
     private long updateItem(int id, String cc_en, String cc_bn, String cc_keyword) {
@@ -96,6 +96,10 @@ public class CityCorporationTable extends BaseDBTable <CityCorporation> {
 
     public ArrayList <CityCorporation> getAllData() {
         return super.getAllData(TABLE_NAME);
+    }
+
+    public CityCorporation getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
     }
 
     public CityCorporation getNodeInfo(int node) {

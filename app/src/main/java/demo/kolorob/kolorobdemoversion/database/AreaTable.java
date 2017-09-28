@@ -109,7 +109,7 @@ public class AreaTable extends BaseDBTable <Area>{
     }
 
     public boolean isFieldExist(int id) {
-        return super.isFieldExist(id, TABLE_NAME);
+        return super.isFieldExist(id, TABLE_NAME, KEY_ID);
     }
 
     private long updateItem(int id, String area_en, String area_bn, String area_keyword, String parent_area, String lat, String lon, int ward_id) {
@@ -178,4 +178,22 @@ public class AreaTable extends BaseDBTable <Area>{
         closeDB();
         return area;
     }
+
+    public Area getDataFromId(int id){
+        return super.getDataFromId(id, TABLE_NAME, KEY_ID);
+    }
+
+    public ArrayList <Area> getAllData(){
+        return super.getAllData(TABLE_NAME);
+    }
+
+    public ArrayList <Area> getDataFromForeignKey(int ward){
+        return super.getDataListFromId(ward, TABLE_NAME, KEY_AREA_WARDID);
+    }
+
+    public void delete(int id){
+        super.delete(id, TABLE_NAME, KEY_ID);
+    }
+
+
 }
