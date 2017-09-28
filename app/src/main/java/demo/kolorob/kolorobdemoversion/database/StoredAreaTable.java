@@ -102,20 +102,13 @@ public class StoredAreaTable extends BaseDBTable <StoredArea> {
 
     public boolean isAreaStored(String ward, String area){
         SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE "+ WARDID+ " = '" + ward + "'" + " AND "+ AREANAME+" = '"+area+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + WARDID + " = '" + ward + "'" + " AND " + AREANAME + " = '" + area + "'", null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                if (ward.equals(cursor.getString(0)) && area.equals(cursor.getString(1))) {
-                    cursor.close();
-                    closeDB();
-                    return true;
-                }
-            } while (cursor.moveToNext());
-        }
+        boolean stored = cursor.moveToFirst();
+
         cursor.close();
         closeDB();
-        return false;
+        return stored;
     }
 
     private long updateItem(int id, String ward, String area, String areaBn, String parentArea, String lat, String lon) {

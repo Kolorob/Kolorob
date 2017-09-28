@@ -130,21 +130,6 @@ public class AreaTable extends BaseDBTable <Area>{
         return ret;
     }
 
-    public ArrayList<Area> getAllAreas(int ward_id) {
-        ArrayList<Area> areaList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ward_id = " + ward_id, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                areaList.add(cursorToModel(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return areaList;
-    }
 
     public Area cursorToModel(Cursor cursor) {
         int id = cursor.getInt(0);

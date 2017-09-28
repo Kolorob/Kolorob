@@ -99,23 +99,6 @@ public class WardTable extends BaseDBTable <Ward>{
         return ret;
     }
 
-    public ArrayList<Ward> getAllWards(int cc_id) {
-        ArrayList<Ward> wardList = new ArrayList<>();
-
-        SQLiteDatabase db = openDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE cc_id = " + cc_id, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                wardList.add(cursorToModel(cursor));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        closeDB();
-        return wardList;
-    }
-
     public ArrayList <Ward> getDataFromForeignKey(int id){
         return super.getDataListFromId(id, TABLE_NAME, KEY_WARD_CCID);
     }
