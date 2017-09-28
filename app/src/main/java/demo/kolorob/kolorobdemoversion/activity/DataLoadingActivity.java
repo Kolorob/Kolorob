@@ -60,7 +60,6 @@ import demo.kolorob.kolorobdemoversion.interfaces.VolleyApiCallback;
 import demo.kolorob.kolorobdemoversion.model.Area;
 import demo.kolorob.kolorobdemoversion.model.CategoryItem;
 import demo.kolorob.kolorobdemoversion.model.CityCorporation;
-import demo.kolorob.kolorobdemoversion.model.CommonModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduNewSchoolModel;
 import demo.kolorob.kolorobdemoversion.model.EduNewDB.EduTrainingModel;
@@ -102,9 +101,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
     ImageView rotateImage;
     TextView ward, area, city;
     private GridLayoutManager lLayout, lLayout2;
-    ArrayList<SubCategoryItemNew> si3 = new ArrayList<>();
+
     private Animation mEnterAnimation, mExitAnimation;
-    private int height, width, pos, posAreaInt = -1;
+    private int pos, posAreaInt = -1;
 
     ArrayList <CityCorporation> ccList = new ArrayList<>();
     ArrayList <Ward> wardList = new ArrayList<>();
@@ -188,7 +187,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         //start download now
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_selection_activity);
         ward = (TextView) findViewById(R.id.chooseward);
@@ -196,13 +195,10 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         city = (TextView) findViewById(R.id.ccorporation);
         submit = (Button) findViewById(R.id.submittoserverarea);
 
-        //submit1 = (Button) findViewById(R.id.submittoserverarea);
-
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        height = metrics.heightPixels;
-        width = metrics.widthPixels;
+
 
         SharedPreferences settings = getSharedPreferences("prefs", 0);
         firstRun = settings.getBoolean("firstRunUp", false);
@@ -222,20 +218,18 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                     keyword = areaList.get(getPosAreaInt()).getArea_keyword();
                     String lat = areaList.get(getPosAreaInt()).getLat();
+
                     Log.e("", "Keyword: " + keyword + "Lat: " +lat);
 
-                    if (lat.length()<1 || keyword.length()<1) { //no data available for these areas
+                    if (lat.length() < 1 || keyword.length() < 1) { //no data available for these areas
                         ToastMessageDisplay.setText(DataLoadingActivity.this, "তথ্য পাওয়া যায় নি");
                         ToastMessageDisplay.showText(DataLoadingActivity.this);
                     } else {
-                        //setLocation(areaList.get(getPosAreaInt()).getLat() + ":" + areaList.get(getPosAreaInt()).getLon());
 
                         StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
-                        // ArrayList <StoredArea> storedAreas;
 
                         if(storedAreaTable.isAreaStored(wardClicked, areaClicked)){
 
-                            //storedAreas = storedAreaTable.getstoredlocation(wardClicked, areaClicked);
                             SharedPreferences settings = getSharedPreferences("prefs", 0);
                             SharedPreferences.Editor editor = settings.edit();
                             editor.putString("_ward", wardClicked); // store ward and area from stored area in pref
@@ -268,9 +262,9 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
 
-        populatRecyclerViewCity();  // city
-        populatRecyclerViewWard(1); // initially, populating wards for DNCC
-        populatRecyclerViewArea(1); // initially, populating areas of first ward of DNCC
+        populateRecyclerViewCity();  // city
+        populateRecyclerViewWard(1); // initially, populating wards for DNCC
+        populateRecyclerViewArea(1); // initially, populating areas of first ward of DNCC
 
 
         if (firstRun == false || firstRunUpdate == true)
@@ -289,7 +283,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                          recyclerViewArea.setAdapter(null);
                          Log.d("tasks", "position: " + position);
 
-                         populatRecyclerViewWard(ccList.get(position).getId());
+                         populateRecyclerViewWard(ccList.get(position).getId());
 
                         if (getCityview() == null) {
                             setCityview(v);
@@ -316,7 +310,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         wardClicked = wardList.get(position).getWard_keyword();
                         setPos(position);
 
-                        populatRecyclerViewArea(wardList.get(position).getId());
+                        populateRecyclerViewArea(wardList.get(position).getId());
 
                         if (getWardview() == null) {
                             setWardview(v);
@@ -428,7 +422,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     // populate the list view by adding data to arraylist
 
-    private void populatRecyclerViewCity() {
+    private void populateRecyclerViewCity() {
 
 
         CityCorporationTable ccTable = new CityCorporationTable();
@@ -441,11 +435,11 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
-    private void populatRecyclerViewWard(int cc_id) {
+    private void populateRecyclerViewWard(int cc_id) {
 
 
         WardTable wardTable = new WardTable();
-        wardList = wardTable.getAllWards(cc_id);
+        wardList = wardTable.getDataFromForeignKey(cc_id);
 
         if (wardList.size() >= 4) {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
@@ -461,12 +455,12 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
     }
 
-    private void populatRecyclerViewArea(int ward_id) {
+    private void populateRecyclerViewArea(int ward_id) {
 
 
 
         AreaTable areaTable = new AreaTable();
-        areaList = areaTable.getAllAreas(ward_id);
+        areaList = areaTable.getDataFromForeignKey(ward_id);
 
         if (areaList.size() >= 4) {
             lLayout2 = new GridLayoutManager(DataLoadingActivity.this, 2, GridLayoutManager.HORIZONTAL, false);
@@ -550,11 +544,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
 
                 if (DataLoadingActivity.this.countofDb >= NUMBER_OF_TASKS || timeCounter > 120000) {
                     overridePendingTransition(0, 0);
-                    SharedPreferences settings = getSharedPreferences("prefs", 0);
-                    //SharedPreferences.Editor editor = settings.edit();
-                    //  editor.putString("First", first);
 
-                    //  editor.apply();
                     handler.removeCallbacks(this);
                     SharedPreferencesHelper.setIfCommentedAlready(DataLoadingActivity.this, null, SharedPreferencesHelper.getUname(DataLoadingActivity.this), "no");
                     Intent a = new Intent(DataLoadingActivity.this, PlaceDetailsActivityNewLayout.class); // Default Activity
@@ -687,9 +677,7 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                         StoredAreaTable storedAreaTable = new StoredAreaTable(DataLoadingActivity.this);
                         WardTable wardTable = new WardTable(DataLoadingActivity.this);
                         Area area  = areaList.get(posAreaInt);
-         //               Log.e("Get Area Name with Data", A);
-                        //String LOC = getLocation();
-                        //storedAreaTable.insertItem(wardClicked, keyword, A, areaList.get(getPosAreaInt()).getLat(), areaList.get(getPosAreaInt()).getLon());
+
                         storedAreaTable.insertItem(area.getId(), wardTable.getNodeInfo(area.getWard_id()).getWard_keyword(), area.getArea_keyword(), area.getArea_bn(), area.getParentArea(), area.getLat(), area.getLon());
                         SharedPreferences settings = getSharedPreferences("prefs", 0);
                         SharedPreferences.Editor editor = settings.edit();
@@ -1062,8 +1050,6 @@ public class DataLoadingActivity extends AppCompatActivity implements Navigation
                 }
             }
 
-            si3 = subCategoryTableNew.getAllData();
-            si3.size();
 
             return new Long(0);
         }
