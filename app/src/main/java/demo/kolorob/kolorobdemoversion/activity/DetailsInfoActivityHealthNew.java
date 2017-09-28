@@ -33,7 +33,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_info_activity_health_new);
+        setContentView(R.layout.activity_details_layout_comparison_tool);
         context = this;
         Intent intent = getIntent();
         if (null != intent) {

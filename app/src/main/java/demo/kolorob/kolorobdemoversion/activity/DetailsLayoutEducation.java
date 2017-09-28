@@ -39,7 +39,7 @@ public class DetailsLayoutEducation extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_layout_education);
+        setContentView(R.layout.activity_details_layout_comparison_tool);
         context = this;
         Intent intent = getIntent();
         if (null != intent) {
