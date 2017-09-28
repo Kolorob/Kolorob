@@ -17,7 +17,7 @@ public class DetailsLayoutFinance extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_layout_finance);
+        setContentView(R.layout.activity_details_layout);
         context = this;
         Intent intent = getIntent();
         if (null != intent) {

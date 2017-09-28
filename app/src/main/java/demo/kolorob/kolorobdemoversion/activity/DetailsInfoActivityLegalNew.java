@@ -18,7 +18,7 @@ public class DetailsInfoActivityLegalNew extends BaseActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_info_activity_legal_new);
+        setContentView(R.layout.activity_details_layout);
         context = this;
         Intent intent = getIntent();
         if (null != intent) {

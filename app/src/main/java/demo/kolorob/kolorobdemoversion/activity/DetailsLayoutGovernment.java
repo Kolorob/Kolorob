@@ -18,7 +18,7 @@ public class DetailsLayoutGovernment extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_layout_government);
+        setContentView(R.layout.activity_details_layout);
         context = this;
         Intent intent = getIntent();
         if (null != intent) {

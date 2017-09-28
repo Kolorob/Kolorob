@@ -18,7 +18,7 @@ public class DetailsInfoActivityNGO extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_info_ngo);
+        setContentView(R.layout.activity_details_layout);
         context = this;
         Intent intent = getIntent();
         if (null != intent) {
