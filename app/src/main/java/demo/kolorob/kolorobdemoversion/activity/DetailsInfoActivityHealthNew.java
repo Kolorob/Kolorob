@@ -58,7 +58,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
             CheckConcate("বিশেষত্ব", getReferences(health.getCommonModel()));
         }
 
-        hospitals = hospitalDB.getDataFromId(health.getCommonModel().getId());
+        hospitals = hospitalDB.getDataListFromId(health.getCommonModel().getId());
         int hospitalSize = hospitals.size();
 
         if (hospitalSize != 0) {
@@ -96,7 +96,7 @@ public class DetailsInfoActivityHealthNew extends BaseActivity {
 
 
         HealthNewDBTablePharma pharmacyDB = new HealthNewDBTablePharma(context);
-        pharmacies = pharmacyDB.getDataFromId(health.getCommonModel().getId());
+        pharmacies = pharmacyDB.getDataListFromId(health.getCommonModel().getId());
 
         int pharmacySize = pharmacies.size();
 
