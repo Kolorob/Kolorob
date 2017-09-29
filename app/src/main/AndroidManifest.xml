@@ -70,9 +70,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".activity.DisplayAllJobsActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activity.DetailsInfoActivityEntertainmentNew"
             android:screenOrientation="portrait"
@@ -132,10 +130,7 @@
             android:name=".activity.AboutUs"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.OfferActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".activity.Disclaimer"
             android:screenOrientation="portrait"
